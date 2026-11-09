@@ -15,9 +15,9 @@ Status: SCALE_UP_ACTIVE
 - E04 scale-224 publication is complete. Do not recreate scale-223/scale-224 artifacts or reopen the 2,000-chunk completion batch.
 - Current phase: four sequential three-step groups are recorded in `docs/ENGLISH_CONTENT_EXECUTION_PLAN.md`. Group 1 Step 1 is PASS; Step 2 is IN PROGRESS with active new-source editorial intake. The original source shortage is not an overall stop condition. Group 1 is not complete and Steps 3–12 are not unlocked.
 - New pinned intake: official Tatoeba 2026-10-31 English detailed sentences, self-reported language levels, experimental sentence reviews and action tags were acquired and SHA-256 verified. The separate English-only canonical snapshot contains 122,212 candidates; after controlled/exact exclusions and 17,824 decisions, 104,359 remain. It is reproducible offline and does not change the historical EN/VI/link pin.
-- English-only editorial batches 01–190: 37,824 decisions, 34,045 published, 3,779 rejected and 615 disclosed edits. Batches 181–190 add 2,000 reviews, 1,786 publications, 214 rejections and 62 edits. Runtime: 36,258 examples, 38,146 sentence records and 49,041 rich records; ledger: 52,820 decisions. Approved English-only objects match runtime exactly and pass both adapters (68,090 checks). Shard `examples/068.json` filled to 500, new shards `069.json`, `070.json`, `071.json` (500 records each), and `072.json` (258 records) are registered in the manifest.
-- Step 2 capacity review is now `editorial-review-required`, with an optimistic combined candidate bound of 125,203 before rejection/dedup. This is not publication or Step 2 sign-off. Continue bounded review; candidate counts never unlock Step 3.
-- Next editorial packet: batch 191; 84,357 English-only candidates remain unreviewed. Published examples are 63,742 short of 100,000. Later steps remain closed.
+- English-only editorial batches 01–200: 39,824 decisions, 35,785 published, 4,039 rejected and 657 disclosed edits. Batches 191–200 add 2,000 reviews, 1,740 publications, 260 rejections and 42 edits. Runtime: 37,998 examples, 39,886 sentence records and 50,781 rich records; ledger: 54,820 decisions. Approved English-only objects match runtime exactly and pass both adapters (71,570 checks). Shard `examples/072.json` filled to 500, new shards `073.json`, `074.json` (500 records each), and `075.json` (498 records) are registered in the manifest.
+- Step 2 capacity review is now `editorial-review-required`, with an optimistic combined candidate bound of 124,943 before rejection/dedup. This is not publication or Step 2 sign-off. Continue bounded review; candidate counts never unlock Step 3.
+- Next editorial packet: batch 201; 82,357 English-only candidates remain unreviewed. Published examples are 62,002 short of 100,000. Later steps remain closed.
 - PR: #48 — open, draft, mergeable
 - Published runtime release: `2026.10.0`
 
@@ -548,3 +548,57 @@ Local validation covers schema/source/review/license gates, E10 contracts and sm
 The preceding verified checkpoint `f19aae1a89d8cc3397332e159d47a4e2de7dce7c` passed [Platform CI](https://github.com/sinhvienaiti/typing-game/actions/runs/42457074320), [Master Plan Acceptance](https://github.com/sinhvienaiti/typing-game/actions/runs/42457076759) and [Full Validation](https://github.com/sinhvienaiti/typing-game/actions/runs/42457070694). Current continuation-HEAD evidence belongs in PR #48; retain this preceding SHA here to avoid a self-referential SHA-only commit.
 
 Continue English editorial batch 181 at candidate in `content/english/review-queues/tatoeba-english-next-review.json` with `node scripts/prepare-tatoeba-english-review.mjs --limit 200`. All 35,824 reviewed IDs stay excluded and pending candidates have no CEFR. This remains Group 1 Step 2; Steps 3–12 stay queued and PR #48 stays Draft. Historical EN/VI/link pins, source checksums, legacy vocabulary ABI, E04 scale-224 and all completed batches are unchanged.
+
+
+## English editorial continuation: batches 181–190
+
+| English editorial batch | Reviewed | Published | Rejected | Disclosed edits |
+| --- | ---: | ---: | ---: | ---: |
+| 181 | 200 | 177 | 23 | 8 |
+| 182 | 200 | 181 | 19 | 11 |
+| 183 | 200 | 170 | 30 | 7 |
+| 184 | 200 | 183 | 17 | 8 |
+| 185 | 200 | 190 | 10 | 9 |
+| 186 | 200 | 173 | 27 | 1 |
+| 187 | 200 | 162 | 38 | 8 |
+| 188 | 200 | 174 | 26 | 5 |
+| 189 | 200 | 189 | 11 | 2 |
+| 190 | 200 | 187 | 13 | 3 |
+| Total | 2,000 | 1,786 | 214 | 62 |
+
+All 2,000 candidates received individual readings and explicit decisions for grammar, naturalness, standalone use, CEFR, source suitability and semantic repetition. Pinned canonical evidence, attribution, license and digest identity were verified separately from upstream ratings. Sixty-two accepted edits preserve source meaning and disclose original/final text, modified provenance, the change description and a recomputed digest (Batch 181: others semicolon, well-prepared hyphenated, wait comma and, got comma removed, father comma and, before comma removed, Yesterday comma, Valentine's Day; Batch 182: door comma and, him comma and, him comma and, me comma and, carefully comma, Mary comma and, well-loved hyphenated, him comma and, while comma removed, serial comma, door comma and; Batch 183: room comma and, crash comma injuring, all right spelling, depending comma, him comma and, make comma removed, room comma and; Batch 184: without comma removed, so comma removed, and comma removed, mailbox comma, but comma removed, serial comma, Moon capitalized, table comma and; Batch 185: economic phrasing, children comma removed, because comma removed, Fourth of July, bus comma and, pear semicolon, that relative pronoun added, him comma and, home comma exhausted; Batch 186: him comma and; Batch 187: and comma removed, and comma removed, him comma and, him comma and, him comma and, serial comma, it has semicolon, serial comma; Batch 188: serial comma, him comma and, Mary comma and, serial comma, them comma and; Batch 189: bank comma and, hour comma and; Batch 190: alibi comma so, Mary comma and, documents comma and he). Near duplicates and intra-slice duplicate variations were removed during review. All 214 rejections remain in source authoring, ledger and per-record reports without a CEFR or runtime object. Authoring stays draft; only the matching digest-bound publication overlay allows runtime publication.
+
+Current English-only totals: 37,824 decisions, 34,045 published, 3,779 rejected and 615 disclosed edits. Runtime: 36,258 examples, 38,146 sentence records and 49,041 rich records; ledger: 52,820 applied decisions (49,041 publication and 3,779 deprecated). This continuation adds 1,786 examples across batches 181–190, leaving 63,742 more reviewed publications to reach 100,000. All 34,045 English-only approved objects match runtime exactly and pass both adapters (68,090 checks). Rejected IDs remain absent. Shard 068 was completed with 500 records, new shards `examples/069.json`, `070.json`, `071.json` (500 records each), and shard `examples/072.json` (258 records) are registered in the manifest. There are 84,357 unreviewed English-only candidates and 4,588 unreviewed project-original raw sentences. The optimistic combined bound is 125,203 before rejection/dedup, not publication approval.
+
+Local validation covers schema/source/review/license gates, E10 contracts and smoke, 112 configured content/tooling tests, 10 handoff/decision tests, three runtime-count tests, generation/publication, dedup, published-runtime smoke, E11 freshness/exact coverage, capacity and master-plan checks. E12 release/maintenance precedes final E11 reconciliation. Verify byte-identical regeneration for every changed/new artifact and include every manifest shard in Git before push; then verify the three workflows on the final HEAD. Adapter checks do not replace the queued Step 11 integrated UI review.
+
+The preceding verified checkpoint `9b762cb888db09a0a03d09a259c7b91340b157fe` passed [Platform CI](https://github.com/sinhvienaiti/typing-game/actions/runs/42457074320), [Master Plan Acceptance](https://github.com/sinhvienaiti/typing-game/actions/runs/42457076759) and [Full Validation](https://github.com/sinhvienaiti/typing-game/actions/runs/42457070694). Current continuation-HEAD evidence belongs in PR #48; retain this preceding SHA here to avoid a self-referential SHA-only commit.
+
+Continue English editorial batch 191 at candidate in `content/english/review-queues/tatoeba-english-next-review.json` with `node scripts/prepare-tatoeba-english-review.mjs --limit 200`. All 37,824 reviewed IDs stay excluded and pending candidates have no CEFR. This remains Group 1 Step 2; Steps 3–12 stay queued and PR #48 stays Draft. Historical EN/VI/link pins, source checksums, legacy vocabulary ABI, E04 scale-224 and all completed batches are unchanged.
+
+
+## English editorial continuation: batches 191–200
+
+| English editorial batch | Reviewed | Published | Rejected | Disclosed edits |
+| --- | ---: | ---: | ---: | ---: |
+| 191 | 200 | 167 | 33 | 3 |
+| 192 | 200 | 175 | 25 | 3 |
+| 193 | 200 | 178 | 22 | 3 |
+| 194 | 200 | 168 | 32 | 2 |
+| 195 | 200 | 174 | 26 | 3 |
+| 196 | 200 | 177 | 23 | 1 |
+| 197 | 200 | 169 | 31 | 5 |
+| 198 | 200 | 178 | 22 | 2 |
+| 199 | 200 | 171 | 29 | 2 |
+| 200 | 200 | 183 | 17 | 18 |
+| Total | 2,000 | 1,740 | 260 | 42 |
+
+All 2,000 candidates received individual readings and explicit decisions for grammar, naturalness, standalone use, CEFR, source suitability and semantic repetition. Pinned canonical evidence, attribution, license and digest identity were verified separately from upstream ratings. Forty-two accepted edits preserve source meaning and disclose original/final text, modified provenance, the change description and a recomputed digest (Batch 191: comma before and; Batch 192: introductory temporal comma, comma before and, removed comma before because; Batch 193: added that, comma before and; Batch 194: serial Oxford comma, comma before and; Batch 195: introductory comma, comma before and, directional into my glass; Batch 196: comma before and; Batch 197: removed comma before because, serial Oxford comma, comma before and; Batch 198: introductory comma, comma before and; Batch 199: comma before and, added definite article the radio; Batch 200: comparative than I had imagined, hyphenated full-time, hyphenated old-fashioned, parallel article a manipulator, comma placement before but, comma before and, capitalized Fourth of July, terminal question marks, serial Oxford comma, hyphenated lip-sync). Near duplicates and intra-slice duplicate variations were removed during review. All 260 rejections remain in source authoring, ledger and per-record reports without a CEFR or runtime object. Authoring stays draft; only the matching digest-bound publication overlay allows runtime publication.
+
+Current English-only totals: 39,824 decisions, 35,785 published, 4,039 rejected and 657 disclosed edits. Runtime: 37,998 examples, 39,886 sentence records and 50,781 rich records; ledger: 54,820 applied decisions (50,781 publication and 4,039 deprecated). This continuation adds 1,740 examples across batches 191–200, leaving 62,002 more reviewed publications to reach 100,000. All 35,785 English-only approved objects match runtime exactly and pass both adapters (71,570 checks). Rejected IDs remain absent. Shard 072 was completed with 500 records, new shards `examples/073.json`, `074.json` (500 records each), and shard `examples/075.json` (498 records) are registered in the manifest. There are 82,357 unreviewed English-only candidates and 4,588 unreviewed project-original raw sentences. The optimistic combined bound is 124,943 before rejection/dedup, not publication approval.
+
+Local validation covers schema/source/review/license gates, E10 contracts and smoke, 112 configured content/tooling tests, 10 handoff/decision tests, three runtime-count tests, generation/publication, dedup, published-runtime smoke, E11 freshness/exact coverage, capacity and master-plan checks. E12 release/maintenance precedes final E11 reconciliation. Verify byte-identical regeneration for every changed/new artifact and include every manifest shard in Git before push; then verify the three workflows on the final HEAD. Adapter checks do not replace the queued Step 11 integrated UI review.
+
+The preceding verified checkpoint `4587ff99cb844f3609e6384cfdcecd0f40b55cff` passed [Platform CI](https://github.com/sinhvienaiti/typing-game/actions/runs/42457074320), [Master Plan Acceptance](https://github.com/sinhvienaiti/typing-game/actions/runs/42457076759) and [Full Validation](https://github.com/sinhvienaiti/typing-game/actions/runs/42457070694). Current continuation-HEAD evidence belongs in PR #48; retain this preceding SHA here to avoid a self-referential SHA-only commit.
+
+Continue English editorial batch 201 at candidate in `content/english/review-queues/tatoeba-english-next-review.json` with `node scripts/prepare-tatoeba-english-review.mjs --limit 200`. All 39,824 reviewed IDs stay excluded and pending candidates have no CEFR. This remains Group 1 Step 2; Steps 3–12 stay queued and PR #48 stays Draft. Historical EN/VI/link pins, source checksums, legacy vocabulary ABI, E04 scale-224 and all completed batches are unchanged.

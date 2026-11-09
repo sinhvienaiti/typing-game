@@ -1,0 +1,5010 @@
+{
+  "schemaVersion": 1,
+  "sourceSnapshot": "english-only-weekly-2026-10-31-observed-2026-11-07-v1",
+  "reviewed": 200,
+  "published": 171,
+  "rejected": 29,
+  "edited": 2,
+  "records": [
+    {
+      "id": "sent.tatoeba.3536408",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "Life has been hard on Tom.",
+      "finalText": "Life has been hard on Tom.",
+      "intakeSourceDigest": "b201b79a300730f3eb9ea1d92cb4b3642eb846b62941b269957fff6c4a3452a8",
+      "controlledSourceDigest": "b86499d48cd0a9e907d23e6edcc3747d620576b1f839e9d00a475d155f78d562",
+      "maximumTokenJaccard": 0.3333,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.1885893",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.3120813",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.680073",
+          "score": 0.3333333333333333
+        }
+      ],
+      "rationale": "Adversity idiom with present perfect 'Life has been hard on Tom' (B1)."
+    },
+    {
+      "id": "sent.tatoeba.3536409",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "I was kind of hard on Tom.",
+      "finalText": "I was kind of hard on Tom.",
+      "intakeSourceDigest": "59a01c1595b7feb71fa1f03f4a24bf7ff5d2797a5e8ecf95889b336681fb23d0",
+      "controlledSourceDigest": "06081d926f100657c19d19008b51fc033df742c4a5a15bb93084c108d7a0314b",
+      "maximumTokenJaccard": 0.3636,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3536412",
+          "score": 0.36363636363636365
+        },
+        {
+          "id": "sent.tatoeba.1166738",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.2309213",
+          "score": 0.3333333333333333
+        }
+      ],
+      "rationale": "Interpersonal sternness idiom with hedge 'kind of hard on Tom' (A2)."
+    },
+    {
+      "id": "sent.tatoeba.3536411",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "Weren't you a little hard on Tom?",
+      "finalText": "Weren't you a little hard on Tom?",
+      "intakeSourceDigest": "ee35a5d8028a0c4e0caa7e318af79ec56766dd8c085b8cfc447e7715bdea4c35",
+      "controlledSourceDigest": "afc79a2061f9f6d96431dfdff4734e680109e6ad70b6fde20b3735495da78dd3",
+      "maximumTokenJaccard": 0.5455,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3536413",
+          "score": 0.5454545454545454
+        },
+        {
+          "id": "sent.tatoeba.2681842",
+          "score": 0.4
+        },
+        {
+          "id": "sent.tatoeba.3110254",
+          "score": 0.3333333333333333
+        }
+      ],
+      "rationale": "Intra-batch near duplicate of sent.tatoeba.3536409."
+    },
+    {
+      "id": "sent.tatoeba.3536412",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "I think you're being too hard on Tom.",
+      "finalText": "I think you're being too hard on Tom.",
+      "intakeSourceDigest": "77ce475df58f4844b211db45f2e56b51bad7c03f871a41b045d486c9de3c495c",
+      "controlledSourceDigest": "deb6d930e26ab29961e2dc45614c7a132e831de047fad45f8b8324bf1e2b0a5c",
+      "maximumTokenJaccard": 0.5,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2789166",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.3536413",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.3059193",
+          "score": 0.4444444444444444
+        }
+      ],
+      "rationale": "Critique opinion statement with continuous aspect 'being too hard on Tom' (B1)."
+    },
+    {
+      "id": "sent.tatoeba.3536413",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "Don't you think you're being a little hard on Tom?",
+      "finalText": "Don't you think you're being a little hard on Tom?",
+      "intakeSourceDigest": "41408f0e19d0f75d40a61516556943ad057e520fe81721a4939532728ad1b3bc",
+      "controlledSourceDigest": "f3ca1940d82ecdacd77b74ac74dade8c60e9b2f3fddc46955c8aaa8e8c04c8b2",
+      "maximumTokenJaccard": 0.6364,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2944239",
+          "score": 0.6363636363636364
+        },
+        {
+          "id": "sent.tatoeba.3536411",
+          "score": 0.5454545454545454
+        },
+        {
+          "id": "sent.tatoeba.2334959",
+          "score": 0.5
+        }
+      ],
+      "rationale": "Intra-batch question variant duplicate of sent.tatoeba.3536412."
+    },
+    {
+      "id": "sent.tatoeba.3536471",
+      "outcome": "publish",
+      "cefr": "B2",
+      "originalText": "A \"renovator's dream\" in real estate parlance generally means that the place is a real dump.",
+      "finalText": "A \"renovator's dream\" in real estate parlance generally means that the place is a real dump.",
+      "intakeSourceDigest": "1b14477691b760ccfa24095fd640fcfc2ea874d1cc552de837e4ff5545d9e561",
+      "controlledSourceDigest": "6060071e6f68cfc9bdfaaa85a7af0ff7c0ad98df4d58ab1a1f3ccefa94ce74ef",
+      "maximumTokenJaccard": 0.2778,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2238965",
+          "score": 0.2777777777777778
+        },
+        {
+          "id": "sent.tatoeba.13905864",
+          "score": 0.2631578947368421
+        },
+        {
+          "id": "sent.tatoeba.1499310",
+          "score": 0.25
+        }
+      ],
+      "rationale": "Real estate industry jargon and colloquial euphemism 'renovator's dream... real dump' (B2)."
+    },
+    {
+      "id": "sent.tatoeba.3538210",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "I don't know what they know.",
+      "finalText": "I don't know what they know.",
+      "intakeSourceDigest": "7626c1e027258e81178b885465baf90b4e709fae23e51953e50d3be54a0f457e",
+      "controlledSourceDigest": "3e73dcec9c79ce393ce4ae3e0feff2a4ffa4f045588f5bb37f1458eeec7b44a7",
+      "maximumTokenJaccard": 0.6667,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.1785015",
+          "score": 0.6666666666666666
+        },
+        {
+          "id": "sent.tatoeba.1672900",
+          "score": 0.5714285714285714
+        },
+        {
+          "id": "sent.tatoeba.1782667",
+          "score": 0.5714285714285714
+        }
+      ],
+      "rationale": "Information asymmetry statement with nominal relative 'what they know' (A2)."
+    },
+    {
+      "id": "sent.tatoeba.3538217",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "You're not going to like what I'm about to say.",
+      "finalText": "You're not going to like what I'm about to say.",
+      "intakeSourceDigest": "2f9ad475da1e8a0b615b9c06605deb99a5fcb2169bd997ed4a8547c1d8aecb76",
+      "controlledSourceDigest": "0d8cf2f49256080bbae6a17f6aac047a60ca7f922f5e2f5dead78f842c76ba31",
+      "maximumTokenJaccard": 0.8889,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3538219",
+          "score": 0.8888888888888888
+        },
+        {
+          "id": "sent.tatoeba.2929263",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.1348913",
+          "score": 0.4166666666666667
+        }
+      ],
+      "rationale": "Imminent communication warning with aspectual idiom 'about to say' (B1)."
+    },
+    {
+      "id": "sent.tatoeba.3538219",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "You're not going to like what I'm going to say.",
+      "finalText": "You're not going to like what I'm going to say.",
+      "intakeSourceDigest": "e04e71a6c0feb9c146927ba06d8fde22e015dea2d5654edac2fd416cca183dad",
+      "controlledSourceDigest": "b0d884bb70fd2100e6b7e44e4684311b3eb44272c3c28b992581cf0fec4bbfff",
+      "maximumTokenJaccard": 0.8889,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3538217",
+          "score": 0.8888888888888888
+        },
+        {
+          "id": "sent.tatoeba.2929263",
+          "score": 0.5555555555555556
+        },
+        {
+          "id": "sent.tatoeba.1348913",
+          "score": 0.45454545454545453
+        }
+      ],
+      "rationale": "Intra-batch near duplicate of sent.tatoeba.3538217."
+    },
+    {
+      "id": "sent.tatoeba.3538223",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "They made me swear not to say anything.",
+      "finalText": "They made me swear not to say anything.",
+      "intakeSourceDigest": "78bc8b5a500ae9715e3eb037fbe38533270be868c5929a15690cdf744bef2b54",
+      "controlledSourceDigest": "bd4e7ba05362f34d372cef7c085f4f46e1c8c62a7097292a8d828f80710fd44a",
+      "maximumTokenJaccard": 0.7778,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3538224",
+          "score": 0.7777777777777778
+        },
+        {
+          "id": "sent.tatoeba.3539235",
+          "score": 0.45454545454545453
+        },
+        {
+          "id": "sent.tatoeba.1517417",
+          "score": 0.4
+        }
+      ],
+      "rationale": "Confidentiality oath past narrative with causative 'made me swear not to say anything' (B1)."
+    },
+    {
+      "id": "sent.tatoeba.3538224",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "Tom made me swear not to say anything.",
+      "finalText": "Tom made me swear not to say anything.",
+      "intakeSourceDigest": "615d4d343e85b1fc19c27612bb8d906815d1b85871a1e6270eba112b146a232d",
+      "controlledSourceDigest": "7e3ddf45651e463e111363b65e46ae8dbd27bb37a8b0ac685d2a1cf2f228436a",
+      "maximumTokenJaccard": 0.7778,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3538223",
+          "score": 0.7777777777777778
+        },
+        {
+          "id": "sent.tatoeba.3539235",
+          "score": 0.6
+        },
+        {
+          "id": "sent.tatoeba.2822147",
+          "score": 0.4
+        }
+      ],
+      "rationale": "Intra-batch pronoun variant duplicate of sent.tatoeba.3538223."
+    },
+    {
+      "id": "sent.tatoeba.3538232",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "I really shouldn't tell you.",
+      "finalText": "I really shouldn't tell you.",
+      "intakeSourceDigest": "cc711128779c6b3918d000f08c28b2416823b502b7fd6061f23a7db1bf68b282",
+      "controlledSourceDigest": "9a93644ccde6f66a0c281be94e9c7982bec42ee34ec7bd9dbad15fbd828bf505",
+      "maximumTokenJaccard": 0.4286,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.1493507",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.tatoeba.2246713",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.tatoeba.2889293",
+          "score": 0.4
+        }
+      ],
+      "rationale": "Discretion reluctance modal statement with 'really shouldn't tell you' (A2)."
+    },
+    {
+      "id": "sent.tatoeba.3538308",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "If Tom finds out I told you this, he'll be very angry.",
+      "finalText": "If Tom finds out I told you this, he'll be very angry.",
+      "intakeSourceDigest": "6b44160f57e41d1412859e211d57da8f617c2e8c80c7574d61f3774badb41938",
+      "controlledSourceDigest": "2cf22439f90c025fcc9745aa2eab5b96ba57a08f8f0440992d8c1c4daeae38ad",
+      "maximumTokenJaccard": 0.4,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.284564",
+          "score": 0.4
+        },
+        {
+          "id": "sent.tatoeba.70939",
+          "score": 0.3125
+        },
+        {
+          "id": "sent.tatoeba.716479",
+          "score": 0.29411764705882354
+        }
+      ],
+      "rationale": "First conditional consequence sentence with 'If Tom finds out... he'll be very angry' (B1)."
+    },
+    {
+      "id": "sent.tatoeba.3538337",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "I don't know how, but you did it.",
+      "finalText": "I don't know how, but you did it.",
+      "intakeSourceDigest": "985f146c20200614705f72afeb37f9af7ecb1fa41526a210f437dea12a144aba",
+      "controlledSourceDigest": "cdf20a792586fe4687a7800a5a8d5135b5a449eefc074a7b6f89c3d64ace7b95",
+      "maximumTokenJaccard": 0.875,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3539471",
+          "score": 0.875
+        },
+        {
+          "id": "sent.tatoeba.2635931",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.385727",
+          "score": 0.5
+        }
+      ],
+      "rationale": "Admiration contrast compound sentence with 'don't know how, but you did it' (A2)."
+    },
+    {
+      "id": "sent.tatoeba.3539211",
+      "outcome": "publish",
+      "cefr": "B2",
+      "originalText": "No sooner had Mary broken up with Tom than John was at her front door with a bunch of roses.",
+      "finalText": "No sooner had Mary broken up with Tom than John was at her front door with a bunch of roses.",
+      "intakeSourceDigest": "eea2060f4ad3f5bab945ced23459878f35fbcebf21bac6a2a97aa9b1dc7d86a2",
+      "controlledSourceDigest": "416ae422b6293293a6e79ba1996f0de286d9cd1c48d32fe39bd385d0af20c2f2",
+      "maximumTokenJaccard": 0.5238,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3539220",
+          "score": 0.5238095238095238
+        },
+        {
+          "id": "sent.tatoeba.2776520",
+          "score": 0.24
+        },
+        {
+          "id": "sent.tatoeba.239516",
+          "score": 0.22727272727272727
+        }
+      ],
+      "rationale": "Temporal correlative inversion with 'No sooner had Mary broken up... than' (B2)."
+    },
+    {
+      "id": "sent.tatoeba.3539220",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "No sooner had Mary broken up with Tom than John asked her out.",
+      "finalText": "No sooner had Mary broken up with Tom than John asked her out.",
+      "intakeSourceDigest": "ad6d623013f62cfdb941bd26a35cef3105af4188707d404dd188a8c2327b39e8",
+      "controlledSourceDigest": "ff0b83455c9f4c7efed2e69b4ee8c713ead5dccd1338b9c320d95131de9e391d",
+      "maximumTokenJaccard": 0.5238,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3539211",
+          "score": 0.5238095238095238
+        },
+        {
+          "id": "sent.tatoeba.316204",
+          "score": 0.2631578947368421
+        },
+        {
+          "id": "sent.tatoeba.246996",
+          "score": 0.25
+        }
+      ],
+      "rationale": "Intra-batch near duplicate inversion structure of sent.tatoeba.3539211."
+    },
+    {
+      "id": "sent.tatoeba.3539230",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "Things were never the same after that.",
+      "finalText": "Things were never the same after that.",
+      "intakeSourceDigest": "ee4d3400eadc64811bd28247342fac7860ce49bf7fe3885143167dd31e05e8bf",
+      "controlledSourceDigest": "fa1ba120ac1e0083b46d71bb35b9b6b1adc841ba98a314f72230b5c004e84552",
+      "maximumTokenJaccard": 0.875,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3539232",
+          "score": 0.875
+        },
+        {
+          "id": "sent.tatoeba.314681",
+          "score": 0.36363636363636365
+        },
+        {
+          "id": "sent.tatoeba.248189",
+          "score": 0.3333333333333333
+        }
+      ],
+      "rationale": "Permanent change narrative with temporal idiom 'never the same after that' (B1)."
+    },
+    {
+      "id": "sent.tatoeba.3539232",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "Things were never quite the same after that.",
+      "finalText": "Things were never quite the same after that.",
+      "intakeSourceDigest": "fce500537e42cc15d7dd8ca7ac5ec93c27ace92b5ec5ec8aa6bf5b1bffc505b2",
+      "controlledSourceDigest": "993c0089280ed15864ba120b4fe1c1d5f82543af96f0c3e028d739f4eaf354ec",
+      "maximumTokenJaccard": 0.875,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3539230",
+          "score": 0.875
+        },
+        {
+          "id": "sent.tatoeba.314681",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.248189",
+          "score": 0.3076923076923077
+        }
+      ],
+      "rationale": "Intra-batch near duplicate of sent.tatoeba.3539230."
+    },
+    {
+      "id": "sent.tatoeba.3539235",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "Tom made me swear not to tell Mary.",
+      "finalText": "Tom made me swear not to tell Mary.",
+      "intakeSourceDigest": "b7ad96555c5e2e70560ec8f7c3015c0c8718b71f61c1f09911e43ada5aec9d79",
+      "controlledSourceDigest": "308cbb54351549835439441e881a22c3c93b09980532dac6495eddb606e37ff1",
+      "maximumTokenJaccard": 0.6,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3538224",
+          "score": 0.6
+        },
+        {
+          "id": "sent.tatoeba.3538223",
+          "score": 0.45454545454545453
+        },
+        {
+          "id": "sent.tatoeba.43900",
+          "score": 0.36363636363636365
+        }
+      ],
+      "rationale": "Intra-batch oath variant duplicate of sent.tatoeba.3538223."
+    },
+    {
+      "id": "sent.tatoeba.3539237",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "It was sort of fun.",
+      "finalText": "It was sort of fun.",
+      "intakeSourceDigest": "11922cdb4e24fa4b7c23afbbca00ebf5190f4c338918061c5b6fd54ba8c40115",
+      "controlledSourceDigest": "320f039d743741d2034e8df25c86d39aed27beb7bb1338568c0dbbc6573d559f",
+      "maximumTokenJaccard": 0.6667,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2309213",
+          "score": 0.6666666666666666
+        },
+        {
+          "id": "sent.tatoeba.2169236",
+          "score": 0.375
+        },
+        {
+          "id": "sent.tatoeba.2258968",
+          "score": 0.375
+        }
+      ],
+      "rationale": "Mild enjoyment assessment with hedge 'sort of fun' (A2)."
+    },
+    {
+      "id": "sent.tatoeba.3539239",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "I have some stuff to do at home.",
+      "finalText": "I have some stuff to do at home.",
+      "intakeSourceDigest": "e59158c51ff2b0d47cfc24ffd81252b07523e4d5b905d115acb278ae6ba6675d",
+      "controlledSourceDigest": "2260c4fa21063c973cb6e67d1d6c341b3b2254c390bc99c1416e738571591eab",
+      "maximumTokenJaccard": 0.5,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.11759711",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.1211180",
+          "score": 0.4
+        },
+        {
+          "id": "sent.tatoeba.1744784",
+          "score": 0.4
+        }
+      ],
+      "rationale": "Domestic errands informal statement with non-count noun 'stuff to do at home' (A2)."
+    },
+    {
+      "id": "sent.tatoeba.3539242",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "It was a perfect moment.",
+      "finalText": "It was a perfect moment.",
+      "intakeSourceDigest": "f4fd7ffe91bd940999a9a3dd5732d8e0d2d29f1427eeb7df430166572d9961c4",
+      "controlledSourceDigest": "be29d3c8480df926300608e1cf5a3dc4ffb609bdf429e42b318240f38d213505",
+      "maximumTokenJaccard": 0.6667,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2679027",
+          "score": 0.6666666666666666
+        },
+        {
+          "id": "sent.tatoeba.319823",
+          "score": 0.6666666666666666
+        },
+        {
+          "id": "sent.tatoeba.42391",
+          "score": 0.5
+        }
+      ],
+      "rationale": "Evaluation simple past statement with descriptive adjective 'perfect moment' (A1)."
+    },
+    {
+      "id": "sent.tatoeba.3539244",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "Could you keep your eye out for my car keys?",
+      "finalText": "Could you keep your eye out for my car keys?",
+      "intakeSourceDigest": "8db1face592b157c0d25c2a558fadf7544f3c34fe7fd71e7b3839e7dcfac90a0",
+      "controlledSourceDigest": "eabbd03ca5f652b0ca4c12c0a8ca204815fb0c6680507ba6a01f6a84ef37686b",
+      "maximumTokenJaccard": 0.2857,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.250949",
+          "score": 0.2857142857142857
+        },
+        {
+          "id": "sent.tatoeba.17337",
+          "score": 0.26666666666666666
+        },
+        {
+          "id": "sent.tatoeba.2852703",
+          "score": 0.26666666666666666
+        }
+      ],
+      "rationale": "Vigilance request polite modal idiom 'keep your eye out for my car keys' (B1)."
+    },
+    {
+      "id": "sent.tatoeba.3539245",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Everyone felt sorry for Tom.",
+      "finalText": "Everyone felt sorry for Tom.",
+      "intakeSourceDigest": "2cb8f42ad213fb14a5b742382333373a26e2a6ee5941816eec5baa915c4edc1f",
+      "controlledSourceDigest": "88141fe7e07b3c808162a798616600cf0c180c128245ce5f335eef98240e5817",
+      "maximumTokenJaccard": 0.5714,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3539246",
+          "score": 0.5714285714285714
+        },
+        {
+          "id": "sent.tatoeba.2259957",
+          "score": 0.25
+        },
+        {
+          "id": "sent.tatoeba.2307097",
+          "score": 0.25
+        }
+      ],
+      "rationale": "Sympathy past narrative with generalized subject 'Everyone felt sorry for Tom' (A2)."
+    },
+    {
+      "id": "sent.tatoeba.3539246",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "We all felt sorry for Tom.",
+      "finalText": "We all felt sorry for Tom.",
+      "intakeSourceDigest": "dd54895ce7058e1053317faeeb5bf6ab6dccf81581cf9018770a1d35a69fde50",
+      "controlledSourceDigest": "a43b8c0531e6746c3a29a6ae2c68ab0bdbdbf8a43090129b69990cfa01b5a092",
+      "maximumTokenJaccard": 0.5714,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3539245",
+          "score": 0.5714285714285714
+        },
+        {
+          "id": "sent.tatoeba.2320372",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.2847810",
+          "score": 0.3
+        }
+      ],
+      "rationale": "Intra-batch subject variant duplicate of sent.tatoeba.3539245."
+    },
+    {
+      "id": "sent.tatoeba.3539249",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "I haven't finished speaking yet.",
+      "finalText": "I haven't finished speaking yet.",
+      "intakeSourceDigest": "9442758c3c655b0774dff40d1efb5f3ecf19965cebfc92643d8b83a12847e0d5",
+      "controlledSourceDigest": "3d19ad199a38cc21f2f1bf7f4b27b88846c31a6bfbdba42ee2ac1426545a8cf2",
+      "maximumTokenJaccard": 0.375,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.1454606",
+          "score": 0.375
+        },
+        {
+          "id": "sent.tatoeba.1632071",
+          "score": 0.375
+        },
+        {
+          "id": "sent.tatoeba.2819296",
+          "score": 0.375
+        }
+      ],
+      "rationale": "Interruption boundary present perfect with aspect adverb 'haven't finished speaking yet' (A2)."
+    },
+    {
+      "id": "sent.tatoeba.3539259",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "There's hardly any wind today.",
+      "finalText": "There's hardly any wind today.",
+      "intakeSourceDigest": "bb8ec3dac954ed071b3d142bbdbade7c6694e95a61f494201349fc2b93f81842",
+      "controlledSourceDigest": "f1e9a9a44ba4029118b02e830092016b529d654f4762a563b1f7a1e3aaedcebf",
+      "maximumTokenJaccard": 0.375,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.1127862",
+          "score": 0.375
+        },
+        {
+          "id": "sent.tatoeba.622391",
+          "score": 0.375
+        },
+        {
+          "id": "sent.tatoeba.2259501",
+          "score": 0.2222222222222222
+        }
+      ],
+      "rationale": "Weather calm observation with negative adverb 'hardly any wind today' (A2)."
+    },
+    {
+      "id": "sent.tatoeba.3539317",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "You don't have to be so sarcastic.",
+      "finalText": "You don't have to be so sarcastic.",
+      "intakeSourceDigest": "6f7d69ee504a48a6197bae3a5331f0f3c894ef1c1d64ca6cdb30d346eb3b87e8",
+      "controlledSourceDigest": "3b91ba44dc9fb90a86ff02f7bee6c7fdee0de150cfbcd9d1a4dd89a1950a3582",
+      "maximumTokenJaccard": 0.75,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2216935",
+          "score": 0.75
+        },
+        {
+          "id": "sent.gra2.04.03.2",
+          "score": 0.4444444444444444
+        },
+        {
+          "id": "sent.tatoeba.1199450",
+          "score": 0.4444444444444444
+        }
+      ],
+      "rationale": "Behavior critique negative necessity with adjective 'so sarcastic' (B1)."
+    },
+    {
+      "id": "sent.tatoeba.3539330",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "Tom sat on a log.",
+      "finalText": "Tom sat on a log.",
+      "intakeSourceDigest": "1cd8a598c49f1730f8b08b6e7fdc7c196deaf33d9ea082701f6b1f2efd584ea3",
+      "controlledSourceDigest": "7700623b19a94161fb3c0fad803f2c8207f3953dd85ecfb6dde3ef2b1dc40c84",
+      "maximumTokenJaccard": 0.375,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.1819256",
+          "score": 0.375
+        },
+        {
+          "id": "sent.tatoeba.2401199",
+          "score": 0.375
+        },
+        {
+          "id": "sent.tatoeba.2724252",
+          "score": 0.375
+        }
+      ],
+      "rationale": "Outdoor posture simple past narrative with noun 'log' (A1)."
+    },
+    {
+      "id": "sent.tatoeba.3539339",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "All you do is party.",
+      "finalText": "All you do is party.",
+      "intakeSourceDigest": "64c64f523ec01f37a541dfd96095b30f57df9225f324ec531ced56affd19dbd5",
+      "controlledSourceDigest": "031f77e99999086923407e2e5445b6f6185bcd1021b2ddf6d1745a814a8702fd",
+      "maximumTokenJaccard": 0.6667,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.1190151",
+          "score": 0.6666666666666666
+        },
+        {
+          "id": "sent.tatoeba.17544",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.2079034",
+          "score": 0.5
+        }
+      ],
+      "rationale": "Hedonism critique cleft sentence with bare infinitive 'All you do is party' (A2)."
+    },
+    {
+      "id": "sent.tatoeba.3539348",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Tom smiled at Mary and she smiled back.",
+      "finalText": "Tom smiled at Mary, and she smiled back.",
+      "intakeSourceDigest": "b91469df29975d9efb61d1fdb5f0cf846bb71d20fcfbbd7a641bf66e8b67b66b",
+      "controlledSourceDigest": "65a218914b730e50f1d7c3abca2f9fb4542245545b40ad52ffccf92cd99ca698",
+      "maximumTokenJaccard": 0.3636,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.315975",
+          "score": 0.36363636363636365
+        },
+        {
+          "id": "sent.tatoeba.1662919",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.2818946",
+          "score": 0.3333333333333333
+        }
+      ],
+      "rationale": "Added comma before coordinating conjunction 'and' connecting independent clauses (A2)."
+    },
+    {
+      "id": "sent.tatoeba.3539352",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Tom doesn't think about others.",
+      "finalText": "Tom doesn't think about others.",
+      "intakeSourceDigest": "f04d788da5570c1dbdc4ef820ab0dbabe1493ca3ae5887bc9663326283846cce",
+      "controlledSourceDigest": "603654284edd002e3dcadb87bff7c86224e59c3e83857818e6d5f2a3d7aa777e",
+      "maximumTokenJaccard": 0.4286,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3539354",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.tatoeba.1813921",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.2821959",
+          "score": 0.3
+        }
+      ],
+      "rationale": "Selfishness critique habitual statement with prepositional verb 'think about others' (A2)."
+    },
+    {
+      "id": "sent.tatoeba.3539354",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "Tom never thinks about others.",
+      "finalText": "Tom never thinks about others.",
+      "intakeSourceDigest": "3e63e7d97ee6bc66660881829b0a96aa26270194a702343f7c25b9abebb6453c",
+      "controlledSourceDigest": "bd9eece0e49728da60ce0c40b3834f3aa49854dfa83849ac233cdc8945afab78",
+      "maximumTokenJaccard": 0.4286,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3539352",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.tatoeba.2199349",
+          "score": 0.25
+        },
+        {
+          "id": "sent.tatoeba.2292309",
+          "score": 0.25
+        }
+      ],
+      "rationale": "Intra-batch frequency variant duplicate of sent.tatoeba.3539352."
+    },
+    {
+      "id": "sent.tatoeba.3539363",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Tom loves charts and graphs.",
+      "finalText": "Tom loves charts and graphs.",
+      "intakeSourceDigest": "4caa7a6fccf26386cb203a4e89eaeee6d16390b26a13b17f07c893eacba436bc",
+      "controlledSourceDigest": "357c8957cdf0538502a6575b706f30e48e5765145e2034c6d9f1a18b9606939a",
+      "maximumTokenJaccard": 0.25,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.1692631",
+          "score": 0.25
+        },
+        {
+          "id": "sent.tatoeba.2548321",
+          "score": 0.25
+        },
+        {
+          "id": "sent.tatoeba.2724095",
+          "score": 0.25
+        }
+      ],
+      "rationale": "Data visualization preference statement with plural nouns 'charts and graphs' (A2)."
+    },
+    {
+      "id": "sent.tatoeba.3539377",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "Tom has a six-figure salary.",
+      "finalText": "Tom has a six-figure salary.",
+      "intakeSourceDigest": "115c93aaecc01943abd913b928a6059b147008452e0f2aaf68ec615778981ad1",
+      "controlledSourceDigest": "b46f44947347ea138734b7c104465a1f19c4a594cd8e212fc0c427e4128b1af7",
+      "maximumTokenJaccard": 0.4286,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.1730016",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.tatoeba.2774931",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.tatoeba.2776519",
+          "score": 0.42857142857142855
+        }
+      ],
+      "rationale": "High income description with compound modifier 'six-figure salary' (B1)."
+    },
+    {
+      "id": "sent.tatoeba.3539419",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Tom took me to a nice restaurant.",
+      "finalText": "Tom took me to a nice restaurant.",
+      "intakeSourceDigest": "056462fbd7311118330c594db6bec88c13b07dc22cff99055366b8c0f9c98ba8",
+      "controlledSourceDigest": "7dfbdab28393138dbf804ce8be86f28a7eda139d169afbc75d6d5ae88baf3915",
+      "maximumTokenJaccard": 0.4,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2961161",
+          "score": 0.4
+        },
+        {
+          "id": "sent.tatoeba.13138007",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.2499041",
+          "score": 0.3333333333333333
+        }
+      ],
+      "rationale": "Hospitality outing simple past narrative with 'took me to a nice restaurant' (A2)."
+    },
+    {
+      "id": "sent.tatoeba.3539425",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Tom admitted that he was scared.",
+      "finalText": "Tom admitted that he was scared.",
+      "intakeSourceDigest": "179d864274fa8626680d463f7d06448a69964d7309cb96f3297024ce5cf87b8c",
+      "controlledSourceDigest": "6b64c778af634eefd1d5748d012fe8cc9ebbabfc55683361b552c53ddb2ce59f",
+      "maximumTokenJaccard": 0.4444,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.680207",
+          "score": 0.4444444444444444
+        },
+        {
+          "id": "sent.tatoeba.3093826",
+          "score": 0.4
+        },
+        {
+          "id": "sent.tatoeba.1829118",
+          "score": 0.375
+        }
+      ],
+      "rationale": "Vulnerability confession past statement with complement clause 'admitted that he was scared' (A2)."
+    },
+    {
+      "id": "sent.tatoeba.3539432",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "I'm sorry if this is a stupid question.",
+      "finalText": "I'm sorry if this is a stupid question.",
+      "intakeSourceDigest": "d1fbc234b8f9bca724761e5ae3608323c868fbc03f0eec088a4514746a473a17",
+      "controlledSourceDigest": "272a4422258c8e9a35468b1cf7e827dd8af55fb8d7c690b2b79b4e66af7d2a06",
+      "maximumTokenJaccard": 0.5556,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3001030",
+          "score": 0.5555555555555556
+        },
+        {
+          "id": "sent.tatoeba.1934483",
+          "score": 0.4444444444444444
+        },
+        {
+          "id": "sent.tatoeba.2480204",
+          "score": 0.36363636363636365
+        }
+      ],
+      "rationale": "Polite self-effacing hedge with conditional 'sorry if this is a stupid question' (A2)."
+    },
+    {
+      "id": "sent.tatoeba.3539434",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Why did you keep it a secret?",
+      "finalText": "Why did you keep it a secret?",
+      "intakeSourceDigest": "302867f81f77383fdd8ef3e2813c1553042edd3439565548f087a379fcea6140",
+      "controlledSourceDigest": "8de787d7469ba85988e687eeaee4055d1692b90510b597cb86eb315804e92b34",
+      "maximumTokenJaccard": 0.75,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3539435",
+          "score": 0.75
+        },
+        {
+          "id": "sent.tatoeba.401785",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.13155888",
+          "score": 0.4444444444444444
+        }
+      ],
+      "rationale": "Concealment inquiry past question with collocation 'keep it a secret' (A2)."
+    },
+    {
+      "id": "sent.tatoeba.3539435",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "Why did you keep that a secret?",
+      "finalText": "Why did you keep that a secret?",
+      "intakeSourceDigest": "dcd015977047b912aa16d60ba13572ff55792c882bdb3a872011807519ed940f",
+      "controlledSourceDigest": "c7fb7dd11646cd8a9b80a52f3ae988c132e2a9ace24cadd5d028d2e96a51d2f6",
+      "maximumTokenJaccard": 0.75,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3539434",
+          "score": 0.75
+        },
+        {
+          "id": "sent.tatoeba.1673218",
+          "score": 0.4444444444444444
+        },
+        {
+          "id": "sent.tatoeba.1761126",
+          "score": 0.4444444444444444
+        }
+      ],
+      "rationale": "Intra-batch pronoun variant duplicate of sent.tatoeba.3539434."
+    },
+    {
+      "id": "sent.tatoeba.3539453",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "Tom is totally into you.",
+      "finalText": "Tom is totally into you.",
+      "intakeSourceDigest": "0c7d3fa841fb8fe8d4d22d16f43af7c65a960cfddb0e4f578d7c75a67e191610",
+      "controlledSourceDigest": "1a9a2aa06fc40e057d9e497f4bee39c40b3092731ed7573e8c1d20b83ea9f6eb",
+      "maximumTokenJaccard": 0.4286,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3002672",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.tatoeba.2700758",
+          "score": 0.375
+        },
+        {
+          "id": "sent.tatoeba.11112193",
+          "score": 0.3333333333333333
+        }
+      ],
+      "rationale": "Romantic attraction informal idiom with intensifier 'totally into you' (B1)."
+    },
+    {
+      "id": "sent.tatoeba.3539457",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "Are you sure that Tom is behind this?",
+      "finalText": "Are you sure that Tom is behind this?",
+      "intakeSourceDigest": "4cde4872c1a9e50379395abadb0ff974d57319a1d69bcd420bc9359a68117573",
+      "controlledSourceDigest": "6f10c88989b17d03737adde3dac71ce8c1f867d4b789bcc5ff9c3e7b87c03ca9",
+      "maximumTokenJaccard": 0.4545,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2240445",
+          "score": 0.45454545454545453
+        },
+        {
+          "id": "sent.tatoeba.1180911",
+          "score": 0.4
+        },
+        {
+          "id": "sent.tatoeba.1180913",
+          "score": 0.4
+        }
+      ],
+      "rationale": "Responsibility suspicion question with prepositional idiom 'behind this' (B1)."
+    },
+    {
+      "id": "sent.tatoeba.3539471",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "I don't know how, but I did it.",
+      "finalText": "I don't know how, but I did it.",
+      "intakeSourceDigest": "b7b528f4f8c38d85737e5cdff96e7003312c4efa8a69f618b595942559daabba",
+      "controlledSourceDigest": "8fea98e10276776d81b9881cd919b7bf37ef1f6988fb4bfe9816c869303c7a42",
+      "maximumTokenJaccard": 0.875,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3538337",
+          "score": 0.875
+        },
+        {
+          "id": "sent.tatoeba.2258750",
+          "score": 0.45454545454545453
+        },
+        {
+          "id": "sent.tatoeba.1490693",
+          "score": 0.4
+        }
+      ],
+      "rationale": "Intra-batch pronoun variant duplicate of sent.tatoeba.3538337."
+    },
+    {
+      "id": "sent.tatoeba.3539481",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Is there a problem with your hearing?",
+      "finalText": "Is there a problem with your hearing?",
+      "intakeSourceDigest": "3868128c799b8e92f9ccda0b75e6c37d97470c19037c090f305ebe9d067069b1",
+      "controlledSourceDigest": "b66e5c3f54aafa6b130ccf076b8d3d10ed8c587c8bc7690b6da1c672ba68de34",
+      "maximumTokenJaccard": 0.4,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.18089",
+          "score": 0.4
+        },
+        {
+          "id": "sent.tatoeba.1238470",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.18551",
+          "score": 0.3333333333333333
+        }
+      ],
+      "rationale": "Sensory health inquiry with gerund noun 'problem with your hearing' (A2)."
+    },
+    {
+      "id": "sent.tatoeba.3539483",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Mary wanted to know if Tom had a girlfriend.",
+      "finalText": "Mary wanted to know if Tom had a girlfriend.",
+      "intakeSourceDigest": "962ad454c7140e3d3cca0e7dd892549aa98bc070d5d791fac1b0c48093b73a85",
+      "controlledSourceDigest": "11858dd4d0922fc65dfe3a915f905d525af5f083cd257d0c95e74e5ba5a5b2c1",
+      "maximumTokenJaccard": 0.8,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3539484",
+          "score": 0.8
+        },
+        {
+          "id": "sent.tatoeba.2981808",
+          "score": 0.36363636363636365
+        },
+        {
+          "id": "sent.tatoeba.3220496",
+          "score": 0.3333333333333333
+        }
+      ],
+      "rationale": "Romantic status indirect question report with 'wanted to know if Tom had a girlfriend' (A2)."
+    },
+    {
+      "id": "sent.tatoeba.3539484",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "Tom wanted to know if Mary had a boyfriend.",
+      "finalText": "Tom wanted to know if Mary had a boyfriend.",
+      "intakeSourceDigest": "39e13180f655d553db1a1fa7483284df1fbf19293c67de0a9cae73c64472c5e7",
+      "controlledSourceDigest": "83eadd70ebfce52959e859ab239faba52cec4f3f97494adfba49e4da6e487ca1",
+      "maximumTokenJaccard": 0.8,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3539483",
+          "score": 0.8
+        },
+        {
+          "id": "sent.tatoeba.2981808",
+          "score": 0.36363636363636365
+        },
+        {
+          "id": "sent.tatoeba.3220496",
+          "score": 0.3333333333333333
+        }
+      ],
+      "rationale": "Intra-batch gender variant duplicate of sent.tatoeba.3539483."
+    },
+    {
+      "id": "sent.tatoeba.3539485",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Don't you just love it here?",
+      "finalText": "Don't you just love it here?",
+      "intakeSourceDigest": "069adbb69fe04a42cc52bb009ae386dc4a84371101a1cde46e2090e3d0dda8ce",
+      "controlledSourceDigest": "407404b8d728253abce262509d6c0e87ddf971cc7f87c16f507a042abf9d8f8e",
+      "maximumTokenJaccard": 0.4444,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.1121825",
+          "score": 0.4444444444444444
+        },
+        {
+          "id": "sent.tatoeba.2260393",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.tatoeba.3040320",
+          "score": 0.375
+        }
+      ],
+      "rationale": "Enthusiastic confirmation negative question with focus adverb 'just love it here' (A2)."
+    },
+    {
+      "id": "sent.tatoeba.3539486",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Tom came out of the bathroom with only a towel on.",
+      "finalText": "Tom came out of the bathroom with only a towel on.",
+      "intakeSourceDigest": "9c289ce822e288d6d683fde37528abe8f13751f6cfbfebc51ba2e646d04a8a95",
+      "controlledSourceDigest": "f4af83e37bde72710696c7a8b5a08c0943894d83534ecbedeb3ea46d0bc92bf1",
+      "maximumTokenJaccard": 0.8333,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3539487",
+          "score": 0.8333333333333334
+        },
+        {
+          "id": "sent.tatoeba.2258489",
+          "score": 0.35294117647058826
+        },
+        {
+          "id": "sent.tatoeba.3089853",
+          "score": 0.3333333333333333
+        }
+      ],
+      "rationale": "Domestic post-bath narrative with prepositional phrase 'with only a towel on' (A2)."
+    },
+    {
+      "id": "sent.tatoeba.3539487",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "Mary came out of the bathroom with only a towel on.",
+      "finalText": "Mary came out of the bathroom with only a towel on.",
+      "intakeSourceDigest": "56151bbb85c1cb65053efcf97acd7aa4d7ffede239ae3a2d82b21112a5a35fca",
+      "controlledSourceDigest": "15b0b4ba60f21a02770fd5e60dd936c27476999d89a5e9411bdca19cc1370c51",
+      "maximumTokenJaccard": 0.8333,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3539486",
+          "score": 0.8333333333333334
+        },
+        {
+          "id": "sent.tatoeba.2258489",
+          "score": 0.35294117647058826
+        },
+        {
+          "id": "sent.tatoeba.803314",
+          "score": 0.29411764705882354
+        }
+      ],
+      "rationale": "Intra-batch gender variant duplicate of sent.tatoeba.3539486."
+    },
+    {
+      "id": "sent.tatoeba.3539507",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "Why do our schools look like prisons?",
+      "finalText": "Why do our schools look like prisons?",
+      "intakeSourceDigest": "69441203639084b70ed149200a1d2dd3c9998b66fc33e0bdb509d208e7040212",
+      "controlledSourceDigest": "86457a368a3a6cd10936b6baa5c6e6a2befb0a57e057bd30cdc82bb960e68fb1",
+      "maximumTokenJaccard": 0.3333,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2760967",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.3133165",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.3241826",
+          "score": 0.3
+        }
+      ],
+      "rationale": "Institutional architecture critique question with simile 'look like prisons' (B1)."
+    },
+    {
+      "id": "sent.tatoeba.3539509",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "May I show you something?",
+      "finalText": "May I show you something?",
+      "intakeSourceDigest": "cf1a96065b32cb52761fc997ac29bd7286cf276afb68cc1d3d616d7e39f19448",
+      "controlledSourceDigest": "f8e134dc396611ee850debbef1c84f66da0db91a8e25df818b4a2f73b3269b22",
+      "maximumTokenJaccard": 0.5714,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.1643202",
+          "score": 0.5714285714285714
+        },
+        {
+          "id": "sent.tatoeba.1493411",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.3222634",
+          "score": 0.4444444444444444
+        }
+      ],
+      "rationale": "Formal permission polite modal question with 'May I show you something' (A2)."
+    },
+    {
+      "id": "sent.tatoeba.3540950",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Soccer is the world's most popular sport.",
+      "finalText": "Soccer is the world's most popular sport.",
+      "intakeSourceDigest": "0e3d8ae19f75657bb3f7321502b37ef4cecd17f3cda7011691fdaafac2f138ce",
+      "controlledSourceDigest": "f8251433823a2739373eb73f04502d5969fcf8ddad4a98e2ea5c3516830353f6",
+      "maximumTokenJaccard": 0.4444,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2626946",
+          "score": 0.4444444444444444
+        },
+        {
+          "id": "sent.tatoeba.1481754",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.3291471",
+          "score": 0.3
+        }
+      ],
+      "rationale": "Athletic superlative statement with 'world's most popular sport' (A2)."
+    },
+    {
+      "id": "sent.tatoeba.3541792",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "I have a feeling I've met her somewhere before.",
+      "finalText": "I have a feeling I've met her somewhere before.",
+      "intakeSourceDigest": "273e99d601bfb712d65871b08f6f4bdc62e3b268281b052348acc43004f42e3e",
+      "controlledSourceDigest": "4b625cb51c3b0f48969814554fdbced10fcb4e7af3d9e37d4f64f6f5145695f4",
+      "maximumTokenJaccard": 0.4,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2253466",
+          "score": 0.4
+        },
+        {
+          "id": "sent.tatoeba.2267252",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.308999",
+          "score": 0.3076923076923077
+        }
+      ],
+      "rationale": "Recognition intuition idiom with complement clause 'have a feeling I've met her' (B1)."
+    },
+    {
+      "id": "sent.tatoeba.3541793",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "Sometimes I wonder whether or not there's a point to all of this.",
+      "finalText": "Sometimes I wonder whether or not there's a point to all of this.",
+      "intakeSourceDigest": "d6f26a5c6e2bd98359901ae0a8a4269c511b3807ae965f431c7bf31d5610ef75",
+      "controlledSourceDigest": "7f8e37e86594f9cccb1e7288cc34274a000cb3cff07883b6e9ee86ce5af08025",
+      "maximumTokenJaccard": 0.3529,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3541794",
+          "score": 0.35294117647058826
+        },
+        {
+          "id": "sent.tatoeba.241089",
+          "score": 0.3125
+        },
+        {
+          "id": "sent.tatoeba.2902589",
+          "score": 0.3125
+        }
+      ],
+      "rationale": "Intra-batch near duplicate of sent.tatoeba.3541794."
+    },
+    {
+      "id": "sent.tatoeba.3541794",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "Sometimes I wonder whether or not I made the right decision.",
+      "finalText": "Sometimes I wonder whether or not I made the right decision.",
+      "intakeSourceDigest": "d193b375a927bf23c9cc00af991b0d6098cc74209c501017d254e09b09582770",
+      "controlledSourceDigest": "a20d80685b08548abeb5c125b6c3e000b63df3262ef78202ca31681db81b4189",
+      "maximumTokenJaccard": 0.3846,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.1921840",
+          "score": 0.38461538461538464
+        },
+        {
+          "id": "sent.tatoeba.3541793",
+          "score": 0.35294117647058826
+        },
+        {
+          "id": "sent.tatoeba.259330",
+          "score": 0.3125
+        }
+      ],
+      "rationale": "Self-doubt reflection with whether-or-not clause 'made the right decision' (B1)."
+    },
+    {
+      "id": "sent.tatoeba.3541803",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "I wasn't really doing much of anything, so I decided it'd be a good idea to walk down to the cafe.",
+      "finalText": "I wasn't really doing much of anything, so I decided it'd be a good idea to walk down to the cafe.",
+      "intakeSourceDigest": "ec61e2e7af8101e06be699dd182c7b8de053a43d73b6cd7bb9fb1dbe56f6432b",
+      "controlledSourceDigest": "891620b13e0782be9a616d8d79a160ff24a3ac9272513d6a24963e3ea10c9159",
+      "maximumTokenJaccard": 0.2857,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2051816",
+          "score": 0.2857142857142857
+        },
+        {
+          "id": "sent.tatoeba.254295",
+          "score": 0.24
+        },
+        {
+          "id": "sent.tatoeba.30362",
+          "score": 0.23076923076923078
+        }
+      ],
+      "rationale": "Leisure outing decision narrative with colloquial clause 'wasn't really doing much of anything' (B1)."
+    },
+    {
+      "id": "sent.tatoeba.3541808",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "I'm so drunk that I can't feel my face anymore.",
+      "finalText": "I'm so drunk that I can't feel my face anymore.",
+      "intakeSourceDigest": "e8c257604c46b514a9081d33f68e9039e8481386e5a0a7b231e40bf4981a8e16",
+      "controlledSourceDigest": "5171e56ce70084aaf7e50b71b7ae5b4e989245cee401602d5265c607630b1306",
+      "maximumTokenJaccard": 0.3077,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2635415",
+          "score": 0.3076923076923077
+        },
+        {
+          "id": "sent.tatoeba.3173286",
+          "score": 0.3076923076923077
+        },
+        {
+          "id": "sent.grb1.01.03.1",
+          "score": 0.2857142857142857
+        }
+      ],
+      "rationale": "Unsuitable crude / excessive intoxication expression ('so drunk that I can't feel my face')."
+    },
+    {
+      "id": "sent.tatoeba.3541838",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "Tom rang home to see if anyone needed anything at the shop.",
+      "finalText": "Tom rang home to see if anyone needed anything at the shop.",
+      "intakeSourceDigest": "38b220b01627d77e0d6c20829e2d7b1c97eab2a1b2ce3c756a14cdf151d23986",
+      "controlledSourceDigest": "1694c743686f6b05a6f362fa3463793a53dde46bc49dd9d00311d6679761dff1",
+      "maximumTokenJaccard": 0.2941,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.1635281",
+          "score": 0.29411764705882354
+        },
+        {
+          "id": "sent.tatoeba.9811946",
+          "score": 0.2777777777777778
+        },
+        {
+          "id": "sent.tatoeba.2561394",
+          "score": 0.26666666666666666
+        }
+      ],
+      "rationale": "Domestic errand narrative with UK verb 'rang home to see if' (B1)."
+    },
+    {
+      "id": "sent.tatoeba.3541856",
+      "outcome": "publish",
+      "cefr": "B2",
+      "originalText": "Tom didn't know if it would be worth his while applying for the job.",
+      "finalText": "Tom didn't know if it would be worth his while applying for the job.",
+      "intakeSourceDigest": "f9f4ce832f9be365711c1bcabd52fbd9aea7fe167d6293b877f1b4e42eab45e1",
+      "controlledSourceDigest": "0295b267721982e6eb7622233755a6802502886da05e2e9623fa54f0dcef3e00",
+      "maximumTokenJaccard": 0.3158,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2915791",
+          "score": 0.3157894736842105
+        },
+        {
+          "id": "sent.tatoeba.8952471",
+          "score": 0.3125
+        },
+        {
+          "id": "sent.tatoeba.275329",
+          "score": 0.2857142857142857
+        }
+      ],
+      "rationale": "Employment application deliberation idiom 'worth his while applying' (B2)."
+    },
+    {
+      "id": "sent.tatoeba.3543579",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "I wanted to save this for a special occasion.",
+      "finalText": "I wanted to save this for a special occasion.",
+      "intakeSourceDigest": "b833ace1e745bd7485573d5a83b59ab0da3cac9e289b9806998d0fcedfcd48ae",
+      "controlledSourceDigest": "5734915974023fbeb7c5160475131341947d164a562dacc874624d19fd2ef714",
+      "maximumTokenJaccard": 0.3333,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2674125",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.3062219",
+          "score": 0.3076923076923077
+        },
+        {
+          "id": "sent.tatoeba.2169033",
+          "score": 0.2857142857142857
+        }
+      ],
+      "rationale": "Celebratory preservation past narrative with 'save this for a special occasion' (A2)."
+    },
+    {
+      "id": "sent.tatoeba.3543599",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "That's all I have to know.",
+      "finalText": "That's all I have to know.",
+      "intakeSourceDigest": "272975ea157d71aae5d93d897d0e4ddabc52ce436987b3d545ee3ecdb8e4e232",
+      "controlledSourceDigest": "3004e61bb40f6e7bb97ac7b3b00e1f962774c18dfe3788d4113fa300ed709cc3",
+      "maximumTokenJaccard": 0.4,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2586617",
+          "score": 0.4
+        },
+        {
+          "id": "sent.tatoeba.807227",
+          "score": 0.4
+        },
+        {
+          "id": "sent.tatoeba.1650044",
+          "score": 0.375
+        }
+      ],
+      "rationale": "Knowledge sufficiency statement with restrictive relative 'All I have to know' (A2)."
+    },
+    {
+      "id": "sent.tatoeba.3543634",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "I'm old enough to make my own decisions.",
+      "finalText": "I'm old enough to make my own decisions.",
+      "intakeSourceDigest": "ec18e28feb291128d49344fcfa466f63f6bfe72b54d23a1a3ea4ac26a780305d",
+      "controlledSourceDigest": "f50c692cd281960f65cb12cae8c3b9789c8983a12050cbbc0a09416d78730e94",
+      "maximumTokenJaccard": 0.3333,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.1387175",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.2252828",
+          "score": 0.3076923076923077
+        },
+        {
+          "id": "sent.tatoeba.257495",
+          "score": 0.3076923076923077
+        }
+      ],
+      "rationale": "Maturity autonomy statement with adjective-infinitive 'old enough to make my own decisions' (B1)."
+    },
+    {
+      "id": "sent.tatoeba.3543639",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "Mary bought a new dress for the party.",
+      "finalText": "Mary bought a new dress for the party.",
+      "intakeSourceDigest": "39dd29df5fba69a61e8e12366c09ebf4b4b19ba8f209411ec13bf08e80248dc4",
+      "controlledSourceDigest": "5dc868be3ac0ea7ed8f85cf96e5e32b6014b933b80d72a6534009afc4bdd52ee",
+      "maximumTokenJaccard": 0.4444,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3120574",
+          "score": 0.4444444444444444
+        },
+        {
+          "id": "sent.tatoeba.260717",
+          "score": 0.38461538461538464
+        },
+        {
+          "id": "sent.tatoeba.2253239",
+          "score": 0.3333333333333333
+        }
+      ],
+      "rationale": "Apparel purchase simple past narrative with destination 'for the party' (A1)."
+    },
+    {
+      "id": "sent.tatoeba.3543649",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Mary bought a fake Gucci handbag.",
+      "finalText": "Mary bought a fake Gucci handbag.",
+      "intakeSourceDigest": "25b742b1a0229162e2a80724036623bc35d81370e937f4520e8b753acf7fc0ab",
+      "controlledSourceDigest": "94246788ee27fb91b4830b5ffe1ad050be8cb39b8360ba931668e461318a5b8d",
+      "maximumTokenJaccard": 0.375,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2321291",
+          "score": 0.375
+        },
+        {
+          "id": "sent.tatoeba.3150606",
+          "score": 0.375
+        },
+        {
+          "id": "sent.tatoeba.3543639",
+          "score": 0.2727272727272727
+        }
+      ],
+      "rationale": "Counterfeit fashion purchase narrative with noun phrase 'fake Gucci handbag' (A2)."
+    },
+    {
+      "id": "sent.tatoeba.3543674",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "Tom's girlfriend threatened to leave him.",
+      "finalText": "Tom's girlfriend threatened to leave him.",
+      "intakeSourceDigest": "b32baa35f292af86d4f51f4679adc0637eb4c1931689d49312c7e5f2ed29d8fe",
+      "controlledSourceDigest": "90683f478695c0a32c59e63d8bf2654fee5f64389e91d3c698a4cf27bfd65f93",
+      "maximumTokenJaccard": 0.25,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.286197",
+          "score": 0.25
+        },
+        {
+          "id": "sent.tatoeba.1651787",
+          "score": 0.23076923076923078
+        },
+        {
+          "id": "sent.tatoeba.429777",
+          "score": 0.23076923076923078
+        }
+      ],
+      "rationale": "Relationship ultimatum past narrative with verb + infinitive 'threatened to leave him' (B1)."
+    },
+    {
+      "id": "sent.tatoeba.3543690",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "Tom washed his hands and face.",
+      "finalText": "Tom washed his hands and face.",
+      "intakeSourceDigest": "276d564fe86521b7443775a3d1aab6f6e5a9041382e53a67502546db67913c2e",
+      "controlledSourceDigest": "2404c7b5c5713c157bc34178a44c72662d561536a9ba386d4e962fdd8d50bb3c",
+      "maximumTokenJaccard": 0.3333,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.1415605",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.2775971",
+          "score": 0.3
+        },
+        {
+          "id": "sent.tatoeba.3000244",
+          "score": 0.3
+        }
+      ],
+      "rationale": "Personal hygiene simple past narrative with coordinate nouns 'hands and face' (A1)."
+    },
+    {
+      "id": "sent.tatoeba.3543737",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "What are you and Tom doing tomorrow?",
+      "finalText": "What are you and Tom doing tomorrow?",
+      "intakeSourceDigest": "e4f7e5a7626a00810f79f14ed2f72e84e65a2593065abdb3ce393e6074e66e9a",
+      "controlledSourceDigest": "cab53721ef0ce4c46add8d54627133b720c43b94ab20a8ba80434d0d188f80b8",
+      "maximumTokenJaccard": 0.5,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2724667",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.3143754",
+          "score": 0.45454545454545453
+        },
+        {
+          "id": "sent.tatoeba.1635312",
+          "score": 0.4444444444444444
+        }
+      ],
+      "rationale": "Joint future plans present continuous question with temporal adverb 'tomorrow' (A1)."
+    },
+    {
+      "id": "sent.tatoeba.3543815",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "Mary usually gives Tom the silent treatment after they've had an argument.",
+      "finalText": "Mary usually gives Tom the silent treatment after they've had an argument.",
+      "intakeSourceDigest": "97bf190ac18b4a9cb49a12e015786ec66e7d43405bd4f74326354d5b5183b2b4",
+      "controlledSourceDigest": "a5f91a684f0528f51bd2d674bdf356eaf8f24526401b4508cc14d4b6a6280df5",
+      "maximumTokenJaccard": 0.25,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3165748",
+          "score": 0.25
+        },
+        {
+          "id": "sent.tatoeba.3186759",
+          "score": 0.25
+        },
+        {
+          "id": "sent.tatoeba.3160247",
+          "score": 0.2222222222222222
+        }
+      ],
+      "rationale": "Interpersonal conflict habit idiom 'gives Tom the silent treatment' (B1)."
+    },
+    {
+      "id": "sent.tatoeba.3543832",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "Tom washed the lenses of his glasses with warm, soapy water and dried them on a cloth.",
+      "finalText": "Tom washed the lenses of his glasses with warm, soapy water and dried them on a cloth.",
+      "intakeSourceDigest": "c3c70217dbf687e132542129a3b93f96c9814009a2d4ef4b0badc1e9640b8112",
+      "controlledSourceDigest": "c41b93fe8968133575a1a10a48a037d4775a227015fe57c07c5bc0f9406e436a",
+      "maximumTokenJaccard": 0.2727,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3292494",
+          "score": 0.2727272727272727
+        },
+        {
+          "id": "sent.tatoeba.3539486",
+          "score": 0.2727272727272727
+        },
+        {
+          "id": "sent.tatoeba.3244910",
+          "score": 0.26666666666666666
+        }
+      ],
+      "rationale": "Eyewear maintenance narrative with coordinated adjectives 'warm, soapy water' (B1)."
+    },
+    {
+      "id": "sent.tatoeba.3546616",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "I don't know who knows.",
+      "finalText": "I don't know who knows.",
+      "intakeSourceDigest": "94632fff102e4319abdce336d30861e72f59f6963aa73c501e43968d070ae0ea",
+      "controlledSourceDigest": "a2484997b5870fdd4147df307fa594959095315cf39e76f82243b043db2846e9",
+      "maximumTokenJaccard": 0.5714,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.1824628",
+          "score": 0.5714285714285714
+        },
+        {
+          "id": "sent.tatoeba.2807642",
+          "score": 0.5714285714285714
+        },
+        {
+          "id": "sent.tatoeba.1499580",
+          "score": 0.5
+        }
+      ],
+      "rationale": "Epistemic ignorance statement with indirect question 'don't know who knows' (A2)."
+    },
+    {
+      "id": "sent.tatoeba.3547291",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Could you clear the table, please?",
+      "finalText": "Could you clear the table, please?",
+      "intakeSourceDigest": "b7a680aa12845122e16a06ddb5d07be3416a5f8856d4ae62edf72750163365b7",
+      "controlledSourceDigest": "c1d3419b2ffde5153649763ce4c54b56c6773707528f1bed72a7d31caa72dfd1",
+      "maximumTokenJaccard": 0.5,
+      "nearest": [
+        {
+          "id": "sent.gra2.04.06.1",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.6043",
+          "score": 0.4444444444444444
+        },
+        {
+          "id": "sent.tatoeba.984114",
+          "score": 0.4444444444444444
+        }
+      ],
+      "rationale": "Dining chore polite modal request with collocation 'clear the table' (A2)."
+    },
+    {
+      "id": "sent.tatoeba.3547469",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "Why are textbooks so expensive?",
+      "finalText": "Why are textbooks so expensive?",
+      "intakeSourceDigest": "1537a3d0590f30c74a393eb81b4db66bcb5b992df2faf73451b3cbc7de37e7b8",
+      "controlledSourceDigest": "989fcdc67d082082ad1b653e7f6bd0270520d6fb4796a49bffdb12c968a0db05",
+      "maximumTokenJaccard": 0.4286,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.1387185",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.tatoeba.2254619",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.tatoeba.2259912",
+          "score": 0.42857142857142855
+        }
+      ],
+      "rationale": "Academic expense question with plural subject 'textbooks so expensive' (A1)."
+    },
+    {
+      "id": "sent.tatoeba.3547470",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "There are many different kinds of beauty.",
+      "finalText": "There are many different kinds of beauty.",
+      "intakeSourceDigest": "c7af7827ed2111b1119f9fe8b31fe30188601ff8240ee28ed882e5b84b32f818",
+      "controlledSourceDigest": "121acffb39c54989abac2b6496e36519cbffcf93a5465628a26d57a867e9e59d",
+      "maximumTokenJaccard": 0.625,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.680345",
+          "score": 0.625
+        },
+        {
+          "id": "sent.tatoeba.68772",
+          "score": 0.4444444444444444
+        },
+        {
+          "id": "sent.tatoeba.1164076",
+          "score": 0.3333333333333333
+        }
+      ],
+      "rationale": "Aesthetic philosophy existential statement with 'different kinds of beauty' (A2)."
+    },
+    {
+      "id": "sent.tatoeba.3547475",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "How much money do you spend on textbooks per semester?",
+      "finalText": "How much money do you spend on textbooks per semester?",
+      "intakeSourceDigest": "d1e14e7ec392a6c5e65df2d03b631ddc20b915429a3a1292086311f27ff6046b",
+      "controlledSourceDigest": "3f9aef202c9aa0a76054e45dce8e4a0a66be3d2445a8a9db5388b1cf633ab4b9",
+      "maximumTokenJaccard": 0.4167,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2266874",
+          "score": 0.4166666666666667
+        },
+        {
+          "id": "sent.tatoeba.17841",
+          "score": 0.38461538461538464
+        },
+        {
+          "id": "sent.tatoeba.1999855",
+          "score": 0.38461538461538464
+        }
+      ],
+      "rationale": "Academic budget question with rate preposition 'per semester' (A2)."
+    },
+    {
+      "id": "sent.tatoeba.3547481",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "I have no idea how to do that.",
+      "finalText": "I have no idea how to do that.",
+      "intakeSourceDigest": "e858072dfced4f0f493c7517a849c0b37dcf9cf91aa5dbd08480c810dbb8a2c1",
+      "controlledSourceDigest": "005673eeb676de2d18dc5fb448383fff5797d4569d7bf1402695de3b42cbb8f0",
+      "maximumTokenJaccard": 0.6,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.714389",
+          "score": 0.6
+        },
+        {
+          "id": "sent.tatoeba.246631",
+          "score": 0.5454545454545454
+        },
+        {
+          "id": "sent.tatoeba.2247244",
+          "score": 0.5
+        }
+      ],
+      "rationale": "Incompetence idiom statement with 'have no idea how to do that' (A2)."
+    },
+    {
+      "id": "sent.tatoeba.3547482",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Today's show is a rerun.",
+      "finalText": "Today's show is a rerun.",
+      "intakeSourceDigest": "bdb24c34c476ad2a377689dab999bab4fe4d8bde4e88d45a595b5aea081ede7e",
+      "controlledSourceDigest": "2b8d9448031dbb870df3d7ab208f9bb80153e4cca30807f563bf66b96ee362c1",
+      "maximumTokenJaccard": 0.3333,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2236635",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.13550298",
+          "score": 0.2857142857142857
+        },
+        {
+          "id": "sent.tatoeba.299465",
+          "score": 0.2857142857142857
+        }
+      ],
+      "rationale": "Television broadcast noun description with 'show is a rerun' (A2)."
+    },
+    {
+      "id": "sent.tatoeba.3547486",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Our family has lived here for generations.",
+      "finalText": "Our family has lived here for generations.",
+      "intakeSourceDigest": "7d6ed2590bb8d5177231a2d8bf77583a17fcc64afaaf8a5bae67a05c87f7e60b",
+      "controlledSourceDigest": "ef19ce7428b3b1d75050b42c29860b921eb52b70cf592c5a80ebf3887a1910a5",
+      "maximumTokenJaccard": 0.3077,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.59609",
+          "score": 0.3076923076923077
+        },
+        {
+          "id": "sent.gra2.02.02.1",
+          "score": 0.3
+        },
+        {
+          "id": "sent.tatoeba.65539",
+          "score": 0.3
+        }
+      ],
+      "rationale": "Generational ancestry present perfect with duration 'for generations' (A2)."
+    },
+    {
+      "id": "sent.tatoeba.3547487",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "Tom threw a rock at the tree.",
+      "finalText": "Tom threw a rock at the tree.",
+      "intakeSourceDigest": "0f4b921f3a5ccc3eaae79d0c51c9367e87526e24d40aaff7752be845a9d0b8b8",
+      "controlledSourceDigest": "b5cce1bc0de522badb845d289981e5123b1870660f5e78122b4423f4baf5314a",
+      "maximumTokenJaccard": 0.3636,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2246729",
+          "score": 0.36363636363636365
+        },
+        {
+          "id": "sent.tatoeba.681118",
+          "score": 0.36363636363636365
+        },
+        {
+          "id": "sent.tatoeba.1662295",
+          "score": 0.3333333333333333
+        }
+      ],
+      "rationale": "Playful propulsion simple past narrative with 'threw a rock at the tree' (A1)."
+    },
+    {
+      "id": "sent.tatoeba.3547488",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "Mary has a huge crush on Tom, but she's too shy to talk to him.",
+      "finalText": "Mary has a huge crush on Tom, but she's too shy to talk to him.",
+      "intakeSourceDigest": "0e55919987ccf2db2a552da1eb22fe5657c4fe882722c2ed596bd71fe5b8b728",
+      "controlledSourceDigest": "6eb8ede6f427e887bc59bebaf1e5dd2bb8ec603cfcd19c43f3aee72dbaea1414",
+      "maximumTokenJaccard": 0.5,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2960839",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.2630294",
+          "score": 0.25
+        },
+        {
+          "id": "sent.tatoeba.3158404",
+          "score": 0.23809523809523808
+        }
+      ],
+      "rationale": "Romantic shyness compound sentence with degree idiom 'too shy to talk to him' (B1)."
+    },
+    {
+      "id": "sent.tatoeba.3547489",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Married people are happier than unmarried people.",
+      "finalText": "Married people are happier than unmarried people.",
+      "intakeSourceDigest": "5dfb0e79c558d26fa77a704b427a3ae46cb167cc1bf40829bfca766f4321abb7",
+      "controlledSourceDigest": "07203139a28676cec84d2703e20da65f006a6ec2d495df473a41f2bed359704f",
+      "maximumTokenJaccard": 0.2727,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.246225",
+          "score": 0.2727272727272727
+        },
+        {
+          "id": "sent.tatoeba.2358574",
+          "score": 0.25
+        },
+        {
+          "id": "sent.tatoeba.318302",
+          "score": 0.23076923076923078
+        }
+      ],
+      "rationale": "Demographic comparative statement with prefix 'unmarried people' (A2)."
+    },
+    {
+      "id": "sent.tatoeba.3547508",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Stop acting like such a fool.",
+      "finalText": "Stop acting like such a fool.",
+      "intakeSourceDigest": "b6a3e00724bef17c8ccb90affcf2103096aec8dc5a015c56d54601ead9cdaa38",
+      "controlledSourceDigest": "46b89f3bbcd7cf0b88ce7f98ea53dc8e6f8eeab4d26b91fa3adb89b955a88793",
+      "maximumTokenJaccard": 0.5,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2626859",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.1399755",
+          "score": 0.375
+        },
+        {
+          "id": "sent.tatoeba.2246817",
+          "score": 0.375
+        }
+      ],
+      "rationale": "Behavioral reprimand imperative with prepositional phrase 'acting like such a fool' (A2)."
+    },
+    {
+      "id": "sent.tatoeba.3547610",
+      "outcome": "publish",
+      "cefr": "B2",
+      "originalText": "Tom will be eligible for parole in five years.",
+      "finalText": "Tom will be eligible for parole in five years.",
+      "intakeSourceDigest": "78dd61a5dab9133646628fa7970001980ff628120b27013686910b11eb6b7e3d",
+      "controlledSourceDigest": "4d8bdae2a4d891ad3a7cec0b7f84c137125b05aaf965411cd09d0218dc0408c8",
+      "maximumTokenJaccard": 0.3077,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.1343395",
+          "score": 0.3076923076923077
+        },
+        {
+          "id": "sent.tatoeba.306701",
+          "score": 0.2857142857142857
+        },
+        {
+          "id": "sent.tatoeba.2882063",
+          "score": 0.2727272727272727
+        }
+      ],
+      "rationale": "Penal legal system statement with formal collocation 'eligible for parole' (B2)."
+    },
+    {
+      "id": "sent.tatoeba.3547611",
+      "outcome": "publish",
+      "cefr": "B2",
+      "originalText": "Tom has no recollection of how he got his black eye.",
+      "finalText": "Tom has no recollection of how he got his black eye.",
+      "intakeSourceDigest": "9ef8ce008b58e8c8844b07bb6c2436de1b072499ad6d4f6a9abcc372505402f0",
+      "controlledSourceDigest": "fa824cc39a0262568c2bc6da127df748490805c8463d01bb8ab0016ba67d538b",
+      "maximumTokenJaccard": 0.3333,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.297053",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.284799",
+          "score": 0.26666666666666666
+        },
+        {
+          "id": "sent.tatoeba.298618",
+          "score": 0.26666666666666666
+        }
+      ],
+      "rationale": "Memory lapse narrative with formal noun 'recollection' and idiom 'black eye' (B2)."
+    },
+    {
+      "id": "sent.tatoeba.3547614",
+      "outcome": "publish",
+      "cefr": "B2",
+      "originalText": "Tom bad-mouthed Mary to all his friends and family after their breakup.",
+      "finalText": "Tom bad-mouthed Mary to all his friends and family after their breakup.",
+      "intakeSourceDigest": "cd54e0320df55a89a67c9141b8cdbdb69568a621893bc21c01bdc1ddd483ebff",
+      "controlledSourceDigest": "2197876e5916946a8e561fb9c13b67bcd380ac739a6844d4dc51f09caf1b647a",
+      "maximumTokenJaccard": 0.2857,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3108882",
+          "score": 0.2857142857142857
+        },
+        {
+          "id": "sent.tatoeba.3222772",
+          "score": 0.2857142857142857
+        },
+        {
+          "id": "sent.tatoeba.3222793",
+          "score": 0.2857142857142857
+        }
+      ],
+      "rationale": "Post-breakup slander narrative with compound verb 'bad-mouthed Mary' (B2)."
+    },
+    {
+      "id": "sent.tatoeba.3548232",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "Tom followed in his father's footsteps and became a lawyer.",
+      "finalText": "Tom followed in his father's footsteps and became a lawyer.",
+      "intakeSourceDigest": "4c0f87050fd2ddc4dfab080e696d9d4153aece28933ba4da6d904e3f4916c517",
+      "controlledSourceDigest": "7b357842440505ca50b09abc1513751acaaf4304c44eca75d3fc9bf512051999",
+      "maximumTokenJaccard": 0.3077,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.680887",
+          "score": 0.3076923076923077
+        },
+        {
+          "id": "sent.tatoeba.2966837",
+          "score": 0.2857142857142857
+        },
+        {
+          "id": "sent.tatoeba.1686674",
+          "score": 0.26666666666666666
+        }
+      ],
+      "rationale": "Career lineage idiom narrative with 'followed in his father's footsteps' (B1)."
+    },
+    {
+      "id": "sent.tatoeba.3548234",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "Tom takes after his father in a lot of ways.",
+      "finalText": "Tom takes after his father in a lot of ways.",
+      "intakeSourceDigest": "25237102c18a340e30ef07e1ff61d516469b32e78b1f63f602c8b292b4f40d50",
+      "controlledSourceDigest": "4e057b3ab596075c3017a6e5941995d96030e3c9deabcca04184ac65d7a10f84",
+      "maximumTokenJaccard": 0.3333,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.1095465",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.2496751",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.251694",
+          "score": 0.3333333333333333
+        }
+      ],
+      "rationale": "Hereditary resemblance phrasal verb 'takes after his father' (B1)."
+    },
+    {
+      "id": "sent.tatoeba.3549348",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Tom admired his father and wanted to be like him when he grew up.",
+      "finalText": "Tom admired his father and wanted to be like him when he grew up.",
+      "intakeSourceDigest": "f39608b54ee82dd8bdcd12de951cf8c5233eb20811085dd9e88d3ce727d4965e",
+      "controlledSourceDigest": "0c7a910594529b30e2da841b74eaa9b20a4d637ee5033449b580092e1393b475",
+      "maximumTokenJaccard": 0.4211,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2810587",
+          "score": 0.42105263157894735
+        },
+        {
+          "id": "sent.tatoeba.287434",
+          "score": 0.35294117647058826
+        },
+        {
+          "id": "sent.tatoeba.73670",
+          "score": 0.3333333333333333
+        }
+      ],
+      "rationale": "Parental admiration childhood past narrative with 'wanted to be like him' (A2)."
+    },
+    {
+      "id": "sent.tatoeba.3549365",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "After a big night out, Tom looked in the mirror and was shocked to see he had a black eye.",
+      "finalText": "After a big night out, Tom looked in the mirror and was shocked to see he had a black eye.",
+      "intakeSourceDigest": "ec1687d0e75e57953b33bb3d7667e45927cba49ed76de64dff9947e056859f98",
+      "controlledSourceDigest": "f0308bfdefa92b0ee8447c13dc3fc9dd6d9f38c7485474de30f1b5d89d8f83df",
+      "maximumTokenJaccard": 0.2903,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3072320",
+          "score": 0.2903225806451613
+        },
+        {
+          "id": "sent.tatoeba.680964",
+          "score": 0.28
+        },
+        {
+          "id": "sent.tatoeba.300956",
+          "score": 0.2727272727272727
+        }
+      ],
+      "rationale": "Nightlife aftermath narrative with collocation 'black eye' and participle clause (B1)."
+    },
+    {
+      "id": "sent.tatoeba.3549400",
+      "outcome": "publish",
+      "cefr": "B2",
+      "originalText": "Nearly all men can stand adversity, but if you want to test a man's character, give him power.",
+      "finalText": "Nearly all men can stand adversity, but if you want to test a man's character, give him power.",
+      "intakeSourceDigest": "6b253bc4fc927d64463cbbf787ca52816af17a42ee87622622c826fab23d4f5f",
+      "controlledSourceDigest": "8301937ea0121957ca45f426862728c50d9c2b844db5e97dde8c5bcbc851ae66",
+      "maximumTokenJaccard": 0.2273,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.15839",
+          "score": 0.22727272727272727
+        },
+        {
+          "id": "sent.tatoeba.2799525",
+          "score": 0.20833333333333334
+        },
+        {
+          "id": "sent.tatoeba.6038",
+          "score": 0.20833333333333334
+        }
+      ],
+      "rationale": "Leadership aphorism complex sentence with parallel contrast 'stand adversity... give him power' (B2)."
+    },
+    {
+      "id": "sent.tatoeba.3549401",
+      "outcome": "publish",
+      "cefr": "B2",
+      "originalText": "Creditors have better memories than debtors.",
+      "finalText": "Creditors have better memories than debtors.",
+      "intakeSourceDigest": "cc662288ea0307173ddb1951682a037b3cefe1c0458718760907b5603269f001",
+      "controlledSourceDigest": "87b32aa0bcff79a7d624d6bf7f43f2e516e92cff500a5c9df5b278b8558e2a48",
+      "maximumTokenJaccard": 0.2308,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.56932",
+          "score": 0.23076923076923078
+        },
+        {
+          "id": "sent.tatoeba.1137965",
+          "score": 0.2222222222222222
+        },
+        {
+          "id": "sent.tatoeba.2177165",
+          "score": 0.2222222222222222
+        }
+      ],
+      "rationale": "Financial proverb comparative with economic terms 'Creditors have better memories than debtors' (B2)."
+    },
+    {
+      "id": "sent.tatoeba.3549610",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "Excuse me, where's the exit?",
+      "finalText": "Excuse me, where's the exit?",
+      "intakeSourceDigest": "0588d116dd0e0809ae43e54f9219a85bd281d25339ca8ef3c07c4c2e2ec1102f",
+      "controlledSourceDigest": "f24809b4ccecc1a0124f357f0fdf024e5daa92f0d5695a0bd22c2100cb85ff9c",
+      "maximumTokenJaccard": 0.6667,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2890097",
+          "score": 0.6666666666666666
+        },
+        {
+          "id": "sent.tatoeba.3122299",
+          "score": 0.6666666666666666
+        },
+        {
+          "id": "sent.tatoeba.1230782",
+          "score": 0.375
+        }
+      ],
+      "rationale": "Wayfinding polite question with courtesy formula 'where's the exit' (A1)."
+    },
+    {
+      "id": "sent.tatoeba.3549645",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "Tom was just about to leave as I arrived.",
+      "finalText": "Tom was just about to leave as I arrived.",
+      "intakeSourceDigest": "4c0635e986f8eba0151a56320179bd2f7ec2c9c8349a09729ee2547a963d32e5",
+      "controlledSourceDigest": "9cc7a3cefe23f82381f5688171ee43c84e540b2306dc92cc55cf0a4b310e20a4",
+      "maximumTokenJaccard": 0.4615,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2952598",
+          "score": 0.46153846153846156
+        },
+        {
+          "id": "sent.tatoeba.1529092",
+          "score": 0.4
+        },
+        {
+          "id": "sent.tatoeba.308923",
+          "score": 0.4
+        }
+      ],
+      "rationale": "Coincidental departure past narrative with idiom 'just about to leave as I arrived' (B1)."
+    },
+    {
+      "id": "sent.tatoeba.3551122",
+      "outcome": "publish",
+      "cefr": "B2",
+      "originalText": "Tom looked very bedraggled after being caught in a heavy downpour during his run.",
+      "finalText": "Tom looked very bedraggled after being caught in a heavy downpour during his run.",
+      "intakeSourceDigest": "c9c4173ebbb9f345830aa4e7879213a1bd5af46ac41bd2db0938446015493654",
+      "controlledSourceDigest": "188dcea1e293aa7ea0960b256d7e461bd22764cfefaf30b262b13078aa9948e8",
+      "maximumTokenJaccard": 0.2632,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3548234",
+          "score": 0.2631578947368421
+        },
+        {
+          "id": "sent.tatoeba.680887",
+          "score": 0.23529411764705882
+        },
+        {
+          "id": "sent.tatoeba.2966837",
+          "score": 0.2222222222222222
+        }
+      ],
+      "rationale": "Weather dishevelment narrative with sophisticated adjective 'bedraggled' and noun 'downpour' (B2)."
+    },
+    {
+      "id": "sent.tatoeba.3551296",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Tom went on a road trip with his friends.",
+      "finalText": "Tom went on a road trip with his friends.",
+      "intakeSourceDigest": "26766128153d76f5196c185e4a6c37a3e97a6c1a0e545021c5c4c1053dcd05e7",
+      "controlledSourceDigest": "ea879c8be446f3c0eb20b5bfa3caf1b8251eb480188d106f5e766cfae52fc23d",
+      "maximumTokenJaccard": 0.4167,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3165922",
+          "score": 0.4166666666666667
+        },
+        {
+          "id": "sent.tatoeba.2266297",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.2515301",
+          "score": 0.3333333333333333
+        }
+      ],
+      "rationale": "Travel leisure past narrative with compound noun 'road trip' (A2)."
+    },
+    {
+      "id": "sent.tatoeba.3551299",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "No one wants to fail. Everyone wants to succeed.",
+      "finalText": "No one wants to fail. Everyone wants to succeed.",
+      "intakeSourceDigest": "a04c6b2294764a26cac8d7b7a95c9a386cb4c5ccaa22fc5db009b4ef2bb586f5",
+      "controlledSourceDigest": "dded02dfd44ee7ef7b6b7299f791f918df7ae9c38465e8c2a3a4f42f1045df0d",
+      "maximumTokenJaccard": 0.3333,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2173692",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.805304",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.266503",
+          "score": 0.3
+        }
+      ],
+      "rationale": "Unsuitable multi-sentence candidate containing two independent utterances."
+    },
+    {
+      "id": "sent.tatoeba.3551300",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "I've never ever seen one before.",
+      "finalText": "I've never ever seen one before.",
+      "intakeSourceDigest": "7b595430a5d17445ade81ede9886475151265354d17ba10c6dda161761df7c21",
+      "controlledSourceDigest": "97d502589e136e629c0ec3caac6e47fa97f16d58562814705b3cb283675ff1ff",
+      "maximumTokenJaccard": 0.4444,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.13155892",
+          "score": 0.4444444444444444
+        },
+        {
+          "id": "sent.tatoeba.2220313",
+          "score": 0.375
+        },
+        {
+          "id": "sent.tatoeba.1072629",
+          "score": 0.3333333333333333
+        }
+      ],
+      "rationale": "Novelty exclamation present perfect with emphatic adverb 'never ever seen one before' (A2)."
+    },
+    {
+      "id": "sent.tatoeba.3551303",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "It's a great little car.",
+      "finalText": "It's a great little car.",
+      "intakeSourceDigest": "0c6d7db89bf30c82057ca1a224366b3a505f828d2db81d8c3e9797503c482e95",
+      "controlledSourceDigest": "e1ee445d6868fdd1988d202af1508bb0ba502199c78bdfc6645f5fc06fde523e",
+      "maximumTokenJaccard": 0.375,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.1120375",
+          "score": 0.375
+        },
+        {
+          "id": "sent.tatoeba.873173",
+          "score": 0.375
+        },
+        {
+          "id": "sent.tatoeba.1209508",
+          "score": 0.3333333333333333
+        }
+      ],
+      "rationale": "Vehicle admiration simple present with coordinate modifiers 'great little car' (A1)."
+    },
+    {
+      "id": "sent.tatoeba.3551304",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Tom and Mary both have drinks in their hands.",
+      "finalText": "Tom and Mary both have drinks in their hands.",
+      "intakeSourceDigest": "e9901f5706a07cad546a1afad8d39115da08ff224944600a7ba65f167afd34ce",
+      "controlledSourceDigest": "b3dd580890ea9414957b70b0787df8a8ca17c67ab389bf4a626fff2b2015bac4",
+      "maximumTokenJaccard": 0.5,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3240655",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.1548409",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.2961204",
+          "score": 0.2857142857142857
+        }
+      ],
+      "rationale": "Social beverage description with dual pronoun 'both have drinks in their hands' (A2)."
+    },
+    {
+      "id": "sent.tatoeba.3551306",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Many Italian-Americans can't speak Italian.",
+      "finalText": "Many Italian-Americans can't speak Italian.",
+      "intakeSourceDigest": "e3a4158cc3589a6caae6471abee39d1a7a0f1b5ef1933e4d0e6f62141592b3ba",
+      "controlledSourceDigest": "35f228b799bc36bb0a57ca32c66a017350e04f2364b5ba414747b643ef502b74",
+      "maximumTokenJaccard": 0.2222,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.1531151",
+          "score": 0.2222222222222222
+        },
+        {
+          "id": "sent.tatoeba.1782694",
+          "score": 0.2222222222222222
+        },
+        {
+          "id": "sent.tatoeba.256186",
+          "score": 0.2
+        }
+      ],
+      "rationale": "Heritage linguistic ability statement with proper nationality compound 'Italian-Americans' (A2)."
+    },
+    {
+      "id": "sent.tatoeba.3551308",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "Tom parked his car nearby.",
+      "finalText": "Tom parked his car nearby.",
+      "intakeSourceDigest": "b24a071070fba0d9ee0816aad0bf0ab02abff8c28553e17525eaeb922884ca4a",
+      "controlledSourceDigest": "f21fd021b033f0ed78b330d5e35bc8f60c4436870ae00bdc8024d904bb959f25",
+      "maximumTokenJaccard": 0.4286,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.1660865",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.tatoeba.1660880",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.tatoeba.1660937",
+          "score": 0.42857142857142855
+        }
+      ],
+      "rationale": "Vehicle parking simple past narrative with locational adverb 'nearby' (A1)."
+    },
+    {
+      "id": "sent.tatoeba.3551312",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "Tom spent a decade as an apprentice.",
+      "finalText": "Tom spent a decade as an apprentice.",
+      "intakeSourceDigest": "b71cc5c8cd4b78efe0e43c938db063403bfed1f3139984477f7bc3fa5a124def",
+      "controlledSourceDigest": "e541429de535275228868436d4471c79279b1f867d48063297c1d0fdcaa885b8",
+      "maximumTokenJaccard": 0.3,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3555035",
+          "score": 0.3
+        },
+        {
+          "id": "sent.tatoeba.680260",
+          "score": 0.3
+        },
+        {
+          "id": "sent.tatoeba.682220",
+          "score": 0.3
+        }
+      ],
+      "rationale": "Vocational training past narrative with historical noun 'apprentice' (B1)."
+    },
+    {
+      "id": "sent.tatoeba.3551372",
+      "outcome": "publish",
+      "cefr": "B2",
+      "originalText": "Tom was given a six-month suspended sentence.",
+      "finalText": "Tom was given a six-month suspended sentence.",
+      "intakeSourceDigest": "fb9951eff28ccac29b3fde4d428b5eff1136be01e67cc44a73c33466703b9779",
+      "controlledSourceDigest": "47be15091c361270b10166f4ac99dcda7cae3008532f527bb72110c4b6a0ea23",
+      "maximumTokenJaccard": 0.3333,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2644283",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.2966836",
+          "score": 0.3
+        },
+        {
+          "id": "sent.tatoeba.682220",
+          "score": 0.3
+        }
+      ],
+      "rationale": "Judicial sentencing passive narrative with legal term 'six-month suspended sentence' (B2)."
+    },
+    {
+      "id": "sent.tatoeba.3551513",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Do I look like an idiot?",
+      "finalText": "Do I look like an idiot?",
+      "intakeSourceDigest": "533e79744677245d90ee5a0d0e59bc5d9f73a8953b93ec3712e93e618a3cc35f",
+      "controlledSourceDigest": "a3bf32147b44bc6483045ddfbf5ee7e6ed8b87316e2e320f44ca2f85a2c4095c",
+      "maximumTokenJaccard": 0.375,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2716915",
+          "score": 0.375
+        },
+        {
+          "id": "sent.tatoeba.1762587",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.2258792",
+          "score": 0.3333333333333333
+        }
+      ],
+      "rationale": "Indignation rhetorical question with prepositional simile 'look like an idiot' (A2)."
+    },
+    {
+      "id": "sent.tatoeba.3551517",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "I want to do everything.",
+      "finalText": "I want to do everything.",
+      "intakeSourceDigest": "8a69f80c9b827a7bfd2d7da9f7809ce90dfef8e56d3096c715712560b3145fde",
+      "controlledSourceDigest": "5d3c233604d53a1a2fa853f41871f68bc33f4dcd64031ebaf860215e599b8168",
+      "maximumTokenJaccard": 0.5714,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2664665",
+          "score": 0.5714285714285714
+        },
+        {
+          "id": "sent.tatoeba.1446107",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.257421",
+          "score": 0.5
+        }
+      ],
+      "rationale": "Ambitious volition simple present with universal pronoun 'do everything' (A1)."
+    },
+    {
+      "id": "sent.tatoeba.3551534",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "It seemed like a dream to me.",
+      "finalText": "It seemed like a dream to me.",
+      "intakeSourceDigest": "21e0abe046a94b5ccc9334dde61285c8c4b7096db1d7c9f78d24ef8166588625",
+      "controlledSourceDigest": "a015073240907ff6e48d23f2c14d1e63ddd18426b30b57fc6a6eb204a49acaec",
+      "maximumTokenJaccard": 0.5,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2721906",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.2185160",
+          "score": 0.4
+        },
+        {
+          "id": "sent.tatoeba.249745",
+          "score": 0.4
+        }
+      ],
+      "rationale": "Unreality sensation past narrative with linking verb 'seemed like a dream' (A2)."
+    },
+    {
+      "id": "sent.tatoeba.3551543",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "I want to be an actress.",
+      "finalText": "I want to be an actress.",
+      "intakeSourceDigest": "2f0a91f16d96b386423b908098674a7bdb9eae9ba38e2a85a20844cb9788ec8f",
+      "controlledSourceDigest": "b63b238b7564f04d8a849a70136ddc957af83e1ac83e62f1f699a18a49016bc7",
+      "maximumTokenJaccard": 0.7143,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2175947",
+          "score": 0.7142857142857143
+        },
+        {
+          "id": "sent.tatoeba.3012489",
+          "score": 0.5714285714285714
+        },
+        {
+          "id": "sent.tatoeba.1064083",
+          "score": 0.5
+        }
+      ],
+      "rationale": "Career aspiration simple present with profession noun 'an actress' (A1)."
+    },
+    {
+      "id": "sent.tatoeba.3551552",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "It's obvious that you like him.",
+      "finalText": "It's obvious that you like him.",
+      "intakeSourceDigest": "493f30859c346da04b27e8284f914b3fd429f76c63d724ace5d0deee1f431c81",
+      "controlledSourceDigest": "95cce881d410ae6ba5e8e5d83fc7fe5ab3e8ebc510ba0eff30024ffd5e3ebc9a",
+      "maximumTokenJaccard": 0.4,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.1634961",
+          "score": 0.4
+        },
+        {
+          "id": "sent.tatoeba.307734",
+          "score": 0.4
+        },
+        {
+          "id": "sent.tatoeba.2213908",
+          "score": 0.375
+        }
+      ],
+      "rationale": "Romantic observation with preparatory it 'obvious that you like him' (A2)."
+    },
+    {
+      "id": "sent.tatoeba.3552258",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "I just want to say hello.",
+      "finalText": "I just want to say hello.",
+      "intakeSourceDigest": "6d13abb5c1ad1fb4db012230178cd315de6b95f86410c061433835b520be4e79",
+      "controlledSourceDigest": "e42ad36780bfc516bd11685fe3895eee37f97b5596b7f13b9af4ec85925f2565",
+      "maximumTokenJaccard": 0.5714,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.1769360",
+          "score": 0.5714285714285714
+        },
+        {
+          "id": "sent.tatoeba.2342587",
+          "score": 0.5714285714285714
+        },
+        {
+          "id": "sent.tatoeba.2182838",
+          "score": 0.5
+        }
+      ],
+      "rationale": "Friendly greeting intention simple present with 'just want to say hello' (A1)."
+    },
+    {
+      "id": "sent.tatoeba.3552618",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "This show's main character is a talking squirrel.",
+      "finalText": "This show's main character is a talking squirrel.",
+      "intakeSourceDigest": "97173dbe69993de30b16a4f8252762ba3cea2441634bf49bfe10343cef1ebad3",
+      "controlledSourceDigest": "b8a86181e11704b54412328c9e7af3a1cbe49d6226b8dad96d00915c36e4f404",
+      "maximumTokenJaccard": 0.3,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.1419976",
+          "score": 0.3
+        },
+        {
+          "id": "sent.tatoeba.1538686",
+          "score": 0.3
+        },
+        {
+          "id": "sent.tatoeba.1559806",
+          "score": 0.3
+        }
+      ],
+      "rationale": "Animation plot description with participle modifier 'talking squirrel' (A2)."
+    },
+    {
+      "id": "sent.tatoeba.3552652",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "Tom works in a pasta factory.",
+      "finalText": "Tom works in a pasta factory.",
+      "intakeSourceDigest": "ea03ac24cafd71c0c01ed04d5ed640b78eca8f36fcb75a0daaea923f7dff1d55",
+      "controlledSourceDigest": "34f3d3e7fe7f012386e9aa3f1a4eccd02f97932944a83af7b7978e5db3f8134b",
+      "maximumTokenJaccard": 0.3636,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.680928",
+          "score": 0.36363636363636365
+        },
+        {
+          "id": "sent.tatoeba.11321626",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.2724252",
+          "score": 0.3333333333333333
+        }
+      ],
+      "rationale": "Manufacturing occupation simple present with workplace noun 'pasta factory' (A1)."
+    },
+    {
+      "id": "sent.tatoeba.3553030",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "My bike was stolen last week.",
+      "finalText": "My bike was stolen last week.",
+      "intakeSourceDigest": "419fcc4ecf9023015cc10aff852fddb30cdc04e81e7eddd64e3df961f2a1cd31",
+      "controlledSourceDigest": "47e2324d2148e80daa672cdeb97d98ac2d740284d4f6dfb3ec84d15834960ae0",
+      "maximumTokenJaccard": 0.7143,
+      "nearest": [
+        {
+          "id": "sent.grb1.04.06.1",
+          "score": 0.7142857142857143
+        },
+        {
+          "id": "sent.tatoeba.2638725",
+          "score": 0.375
+        },
+        {
+          "id": "sent.tatoeba.680249",
+          "score": 0.3333333333333333
+        }
+      ],
+      "rationale": "Bicycle theft passive past narrative with temporal phrase 'last week' (A2)."
+    },
+    {
+      "id": "sent.tatoeba.3553032",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "Tom's bike was stolen by a drug addict.",
+      "finalText": "Tom's bike was stolen by a drug addict.",
+      "intakeSourceDigest": "7df666c30727c97351968d335d5447380aab23ec44a197df3e6e6054c4949fb0",
+      "controlledSourceDigest": "5d2cb7951171cce41d5d9170009000b53988aeb4c4824b756d986d7e3344da68",
+      "maximumTokenJaccard": 0.3636,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.5540472",
+          "score": 0.36363636363636365
+        },
+        {
+          "id": "sent.tatoeba.3130089",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.grb1.04.06.1",
+          "score": 0.2727272727272727
+        }
+      ],
+      "rationale": "Unsuitable stigmatizing / drug addiction crime trope."
+    },
+    {
+      "id": "sent.tatoeba.3553088",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Boy bands were very popular at that time.",
+      "finalText": "Boy bands were very popular at that time.",
+      "intakeSourceDigest": "74455e0c103d9fcef17b0b38c822df2ea692243bb356c958bdd0f49c6c646711",
+      "controlledSourceDigest": "61a2a983bda55798a37eeb037c33a490e58dcc5f20d7f73789b7944b671d8b19",
+      "maximumTokenJaccard": 0.3636,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2269012",
+          "score": 0.36363636363636365
+        },
+        {
+          "id": "sent.tatoeba.807587",
+          "score": 0.3076923076923077
+        },
+        {
+          "id": "sent.tatoeba.807641",
+          "score": 0.3076923076923077
+        }
+      ],
+      "rationale": "Pop music history past statement with compound noun 'Boy bands' (A2)."
+    },
+    {
+      "id": "sent.tatoeba.3553090",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "The children are playing with blocks.",
+      "finalText": "The children are playing with blocks.",
+      "intakeSourceDigest": "291930085dd66cf9b3002610846d8862b0b0f4cd229914e12c4d4bf8fa25dcc0",
+      "controlledSourceDigest": "3401802383cd8a680cf23864b88ab42d62d1fa32687fec72d200c7d7e66350af",
+      "maximumTokenJaccard": 0.5714,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2446809",
+          "score": 0.5714285714285714
+        },
+        {
+          "id": "sent.tatoeba.3174723",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.271039",
+          "score": 0.4444444444444444
+        }
+      ],
+      "rationale": "Childhood play present continuous narrative with toy noun 'blocks' (A1)."
+    },
+    {
+      "id": "sent.tatoeba.3553117",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Tom put his bedroom in order.",
+      "finalText": "Tom put his bedroom in order.",
+      "intakeSourceDigest": "90a3744c1171adebe85fe0c1694ad4e4890b34188ce908ba11e368dbfeba4f6f",
+      "controlledSourceDigest": "976fb54d69e0e0deaac7ff6f9e8137da5c7faf470a6e98709fa240b653cd14ec",
+      "maximumTokenJaccard": 0.4444,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.680339",
+          "score": 0.4444444444444444
+        },
+        {
+          "id": "sent.tatoeba.264790",
+          "score": 0.375
+        },
+        {
+          "id": "sent.tatoeba.2982356",
+          "score": 0.375
+        }
+      ],
+      "rationale": "Tidying narrative simple past with idiom 'put his bedroom in order' (A2)."
+    },
+    {
+      "id": "sent.tatoeba.3554549",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Do you have any problems with that?",
+      "finalText": "Do you have any problems with that?",
+      "intakeSourceDigest": "bda18be5d12fcc1e1e46eba46e092c0895a003f0b077f3b1d3d0af8255a00b04",
+      "controlledSourceDigest": "d4e016fa4c5006d9df9e511e6a88eb5b8780f8c9620a9ce9e5301013cf74306f",
+      "maximumTokenJaccard": 0.5,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.1561530",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.2258156",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.2260653",
+          "score": 0.5
+        }
+      ],
+      "rationale": "Objection inquiry simple present question with 'any problems with that' (A2)."
+    },
+    {
+      "id": "sent.tatoeba.3554561",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "I really, really want this.",
+      "finalText": "I really, really want this.",
+      "intakeSourceDigest": "a674a4645c85a0b7d77acbec508782e1affede105f9d35e1707fa5d26f3e41c2",
+      "controlledSourceDigest": "f95ea8185a6054c894d7530d34b7d6eff4c7c4e702babebc2e65c998a26a8752",
+      "maximumTokenJaccard": 0.5,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2011484",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.2510756",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.2510774",
+          "score": 0.5
+        }
+      ],
+      "rationale": "Intense desire simple present with reduplicated adverb 'really, really want this' (A1)."
+    },
+    {
+      "id": "sent.tatoeba.3554576",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "The airline asked some passengers to give up their seats because the plane was overbooked.",
+      "finalText": "The airline asked some passengers to give up their seats because the plane was overbooked.",
+      "intakeSourceDigest": "6017997e20fadf83c475e90863431cfe1827dac7a70bc5c85108f400ef65ff02",
+      "controlledSourceDigest": "c33fe0a285540067a17ad4e7208d01b906d528daddd79c1fe20308ce511a92c0",
+      "maximumTokenJaccard": 0.2941,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.302652",
+          "score": 0.29411764705882354
+        },
+        {
+          "id": "sent.tatoeba.28236",
+          "score": 0.25
+        },
+        {
+          "id": "sent.tatoeba.238672",
+          "score": 0.23809523809523808
+        }
+      ],
+      "rationale": "Aviation travel narrative with technical adjective 'plane was overbooked' (B1)."
+    },
+    {
+      "id": "sent.tatoeba.3554684",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "The kids traded baseball cards.",
+      "finalText": "The kids traded baseball cards.",
+      "intakeSourceDigest": "cad8a602962088f963e578db894a04db54c4cfe0e5443281fe49463b65b9fb64",
+      "controlledSourceDigest": "0244b877a260e094e8930824070e7626ffa27607475c1ce8270ea1ab9b5ac678",
+      "maximumTokenJaccard": 0.25,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3057779",
+          "score": 0.25
+        },
+        {
+          "id": "sent.tatoeba.2446800",
+          "score": 0.2222222222222222
+        },
+        {
+          "id": "sent.tatoeba.246051",
+          "score": 0.2
+        }
+      ],
+      "rationale": "Childhood collectible trading simple past with compound noun 'baseball cards' (A2)."
+    },
+    {
+      "id": "sent.tatoeba.3554817",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "My dream is to become a famous singer.",
+      "finalText": "My dream is to become a famous singer.",
+      "intakeSourceDigest": "b7acdbb47ba3d5bcf1d7d8daecbe45f2df4a990cad2a71b8ddc8da15b2e682f2",
+      "controlledSourceDigest": "310fa99dd85b5401388e2902c98bc75e42cd666bd2fca32f6f69e755b723f7d7",
+      "maximumTokenJaccard": 0.5,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.251935",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.251942",
+          "score": 0.45454545454545453
+        },
+        {
+          "id": "sent.tatoeba.250717",
+          "score": 0.3076923076923077
+        }
+      ],
+      "rationale": "Aspiration equative statement with infinitive 'become a famous singer' (A2)."
+    },
+    {
+      "id": "sent.tatoeba.3554846",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "There are still many things left to learn about the human brain.",
+      "finalText": "There are still many things left to learn about the human brain.",
+      "intakeSourceDigest": "68dadb07de318e5f894ae592b8621c7cf1699d7a09cb9f5f3bb3bceefcbb3082",
+      "controlledSourceDigest": "392e546b9f31e845445a85f8c6ff34df9ef050ffac5755abbb7a08cc16b8a6fa",
+      "maximumTokenJaccard": 0.3333,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3272298",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.1557602",
+          "score": 0.29411764705882354
+        },
+        {
+          "id": "sent.tatoeba.2182477",
+          "score": 0.2857142857142857
+        }
+      ],
+      "rationale": "Neuroscience mystery existential statement with passive participle 'left to learn' (B1)."
+    },
+    {
+      "id": "sent.tatoeba.3554876",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Tom's team is the worst team in the league.",
+      "finalText": "Tom's team is the worst team in the league.",
+      "intakeSourceDigest": "e84a74fb2f20458f86e3b8ca58b07140d75f1a0d562fc5b2e283bd6ee9c0badb",
+      "controlledSourceDigest": "acd5e86e26d1c6d39c2ede3fc2b80e63ef58f41525842359fb13d24a9f95c32c",
+      "maximumTokenJaccard": 0.4444,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2542735",
+          "score": 0.4444444444444444
+        },
+        {
+          "id": "sent.tatoeba.3120613",
+          "score": 0.4444444444444444
+        },
+        {
+          "id": "sent.tatoeba.3222920",
+          "score": 0.4
+        }
+      ],
+      "rationale": "Sports standing superlative statement with 'worst team in the league' (A2)."
+    },
+    {
+      "id": "sent.tatoeba.3555035",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "Tom works as a forklift operator.",
+      "finalText": "Tom works as a forklift operator.",
+      "intakeSourceDigest": "853aaae4cd99432c90ab55e06d27624d22fac3ff0ec015f934c5fe9f84d9f2ca",
+      "controlledSourceDigest": "752fa75c1ff0e57b1138f41c15bb4ff0319cc491b008d2553c65502dc1407303",
+      "maximumTokenJaccard": 0.375,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.681641",
+          "score": 0.375
+        },
+        {
+          "id": "sent.tatoeba.2724252",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.2876704",
+          "score": 0.3333333333333333
+        }
+      ],
+      "rationale": "Industrial machinery occupation with compound title 'forklift operator' (B1)."
+    },
+    {
+      "id": "sent.tatoeba.3555074",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "They can't both be right.",
+      "finalText": "They can't both be right.",
+      "intakeSourceDigest": "446e8a832e41924c03a9d26ae10af010f45468243d22601cdd51e3da7161d5ce",
+      "controlledSourceDigest": "384b17706d96699fda3ab594cdb8823953c747f338616a64132997a67bee761e",
+      "maximumTokenJaccard": 0.2857,
+      "nearest": [
+        {
+          "id": "sent.grb1.05.08.3",
+          "score": 0.2857142857142857
+        },
+        {
+          "id": "sent.tatoeba.1055414",
+          "score": 0.25
+        },
+        {
+          "id": "sent.tatoeba.1121807",
+          "score": 0.25
+        }
+      ],
+      "rationale": "Logical mutual exclusion modal statement with 'can't both be right' (A2)."
+    },
+    {
+      "id": "sent.tatoeba.3555082",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "A fire broke out inside the movie theater.",
+      "finalText": "A fire broke out inside the movie theater.",
+      "intakeSourceDigest": "0ee1e3bafada4ed1203dcd02909333312bf430a7f6eebe1d0035795d6d988252",
+      "controlledSourceDigest": "0d95d7766d1f152234c8ef1d69c935af3c0d8af80f05539fa058d62c4fc87549",
+      "maximumTokenJaccard": 0.4167,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.245086",
+          "score": 0.4166666666666667
+        },
+        {
+          "id": "sent.tatoeba.44635",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.2258978",
+          "score": 0.3
+        }
+      ],
+      "rationale": "Emergency incident past narrative with phrasal verb 'fire broke out' (B1)."
+    },
+    {
+      "id": "sent.tatoeba.3555103",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "Asians eat a lot of rice.",
+      "finalText": "Asians eat a lot of rice.",
+      "intakeSourceDigest": "10ce74ce02648a3ad8b85a1b0f25a418385cf116530e18bd2205428dd891596f",
+      "controlledSourceDigest": "a923e34e58e8c0b61e00c901d51cab368a7c02b8ac7d2e8fa8d3afd7149491e3",
+      "maximumTokenJaccard": 0.375,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2206502",
+          "score": 0.375
+        },
+        {
+          "id": "sent.tatoeba.2568772",
+          "score": 0.375
+        },
+        {
+          "id": "sent.tatoeba.275104",
+          "score": 0.375
+        }
+      ],
+      "rationale": "Unsuitable broad racial / cultural dietary stereotype."
+    },
+    {
+      "id": "sent.tatoeba.3555578",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "Why are boys so stupid?",
+      "finalText": "Why are boys so stupid?",
+      "intakeSourceDigest": "de1d13eac6e02082ed9407fa8351e37a2a236f8b9c2a227c722d81fa23979360",
+      "controlledSourceDigest": "0b663ddbb6821613f48e5bae18d25bf4940a435bb72704f5aa543e995a48abe2",
+      "maximumTokenJaccard": 0.6667,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3555579",
+          "score": 0.6666666666666666
+        },
+        {
+          "id": "sent.tatoeba.1387185",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.tatoeba.2254619",
+          "score": 0.42857142857142855
+        }
+      ],
+      "rationale": "Unsuitable derogatory gender insult ('Why are boys so stupid?')."
+    },
+    {
+      "id": "sent.tatoeba.3555579",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "Why are boys so dumb?",
+      "finalText": "Why are boys so dumb?",
+      "intakeSourceDigest": "4435c1da23cefdd9c82381cd9f6f533128d6c76bf1c4efd6b7b0c4a8157edc97",
+      "controlledSourceDigest": "6253effac23c21e1f8a1b3b7cf8d41e194be1b8c3dd5bb832377c484091ee1f5",
+      "maximumTokenJaccard": 0.6667,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3555578",
+          "score": 0.6666666666666666
+        },
+        {
+          "id": "sent.tatoeba.1387185",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.tatoeba.2254619",
+          "score": 0.42857142857142855
+        }
+      ],
+      "rationale": "Unsuitable derogatory gender insult ('Why are boys so dumb?')."
+    },
+    {
+      "id": "sent.tatoeba.3555585",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "How many times do I have to say it?",
+      "finalText": "How many times do I have to say it?",
+      "intakeSourceDigest": "7fe0d7f053603a694413c32e85ffa1626921e6f5b2c5a7414fe2dc06c1f7d5ca",
+      "controlledSourceDigest": "36ef3a323b41acaf7752c66eb4a7117bad60aab7b9d069e8cc09c0e08c220d97",
+      "maximumTokenJaccard": 0.6364,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.516605",
+          "score": 0.6363636363636364
+        },
+        {
+          "id": "sent.tatoeba.1588607",
+          "score": 0.4666666666666667
+        },
+        {
+          "id": "sent.tatoeba.3216714",
+          "score": 0.45454545454545453
+        }
+      ],
+      "rationale": "Exasperation repetition question with modal obligation 'How many times do I have to say it' (A2)."
+    },
+    {
+      "id": "sent.tatoeba.3555586",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "That was one of the biggest mistakes in my life.",
+      "finalText": "That was one of the biggest mistakes in my life.",
+      "intakeSourceDigest": "d1843dde09ef8c2c040145ad82101383b501dbcfd457a20d413f98cb5c49179a",
+      "controlledSourceDigest": "bcf2299072a15d7ad83d1c149cf3ed839030b5b3c78482c6769b8ee354c04a1e",
+      "maximumTokenJaccard": 0.4286,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2149113",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.tatoeba.251982",
+          "score": 0.36363636363636365
+        },
+        {
+          "id": "sent.tatoeba.1120641",
+          "score": 0.35714285714285715
+        }
+      ],
+      "rationale": "Regret superlative past statement with 'one of the biggest mistakes' (A2)."
+    },
+    {
+      "id": "sent.tatoeba.3555589",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "I might be drunk, but I'm not crazy.",
+      "finalText": "I might be drunk, but I'm not crazy.",
+      "intakeSourceDigest": "9ddc340da8fe0d5cc4d1efabdff3b57c397c193c83529bae3195f885521a599c",
+      "controlledSourceDigest": "d2b9cf0c934f0f4e2c2b2384022473e7ed171b5c43de424ab60a12b2559983b4",
+      "maximumTokenJaccard": 0.6,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2239900",
+          "score": 0.6
+        },
+        {
+          "id": "sent.tatoeba.259010",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.256973",
+          "score": 0.3076923076923077
+        }
+      ],
+      "rationale": "Self-defense concession compound sentence with modal 'might be drunk, but I'm not crazy' (B1)."
+    },
+    {
+      "id": "sent.tatoeba.3555615",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "It's not quite as simple as that.",
+      "finalText": "It's not quite as simple as that.",
+      "intakeSourceDigest": "9a9c31455905861cbc2386cffc8c76d2c966c1783e00afcd033bf29d3335107e",
+      "controlledSourceDigest": "5961a265bc7268a4b66db3550b65bcf5f28414b9f6aab7ed004fdeb73a448699",
+      "maximumTokenJaccard": 0.375,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.1517272",
+          "score": 0.375
+        },
+        {
+          "id": "sent.tatoeba.1370",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.42589",
+          "score": 0.3
+        }
+      ],
+      "rationale": "Nuance distinction with comparative negative 'not quite as simple as that' (B1)."
+    },
+    {
+      "id": "sent.tatoeba.3555629",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "I hated you at first.",
+      "finalText": "I hated you at first.",
+      "intakeSourceDigest": "b29084ce39b5633716b364800f0e7fcc4e5d66daa46f6f6872028f11a647a8a8",
+      "controlledSourceDigest": "1df5eeb6b701ef36b649bd8bb5c74efa56b620ad3bc1843665e3eaf41e830587",
+      "maximumTokenJaccard": 0.4286,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2162647",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.tatoeba.2194945",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.tatoeba.2230250",
+          "score": 0.42857142857142855
+        }
+      ],
+      "rationale": "Initial impression past narrative with temporal idiom 'at first' (A2)."
+    },
+    {
+      "id": "sent.tatoeba.3555640",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "I'll come back. I promise.",
+      "finalText": "I'll come back. I promise.",
+      "intakeSourceDigest": "58c230315ddf2decdd0fd30cd400dd1a5e41f91c42a1661c12372d9bc357c0ca",
+      "controlledSourceDigest": "93f4525b64cf8befcf6cefaa121195f83443efd495fa8d7ec6683479054e674a",
+      "maximumTokenJaccard": 0.4286,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2199673",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.tatoeba.463874",
+          "score": 0.375
+        },
+        {
+          "id": "sent.tatoeba.2800445",
+          "score": 0.3333333333333333
+        }
+      ],
+      "rationale": "Unsuitable multi-sentence candidate containing two independent utterances."
+    },
+    {
+      "id": "sent.tatoeba.3556998",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "Why are there stars in the sky?",
+      "finalText": "Why are there stars in the sky?",
+      "intakeSourceDigest": "c0e59349d76873a937afa58387cd34576d25256ede071abfe83cfc20362a7ff2",
+      "controlledSourceDigest": "5afabf6f63be12da38da1681935ddf5889f4cefa7c0310030f7a45f9556f3450",
+      "maximumTokenJaccard": 0.625,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.271520",
+          "score": 0.625
+        },
+        {
+          "id": "sent.tatoeba.806995",
+          "score": 0.625
+        },
+        {
+          "id": "sent.tatoeba.682265",
+          "score": 0.5
+        }
+      ],
+      "rationale": "Astronomical wonder question with existential 'Why are there stars in the sky' (A1)."
+    },
+    {
+      "id": "sent.tatoeba.3557005",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Why did God create the universe?",
+      "finalText": "Why did God create the universe?",
+      "intakeSourceDigest": "d617c76bbb8311a6ac073f9e45157ed8bead40e546e01c542438b3ae118cf4f1",
+      "controlledSourceDigest": "ad3aa6b2cecc6920445ae17e553141c963855c9b4a808b5c186cd6bedee5a04e",
+      "maximumTokenJaccard": 0.3333,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.807111",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.807613",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.1632219",
+          "score": 0.25
+        }
+      ],
+      "rationale": "Theological inquiry past question with proper noun 'God create the universe' (A2)."
+    },
+    {
+      "id": "sent.tatoeba.3557318",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "You should play with your cat more often.",
+      "finalText": "You should play with your cat more often.",
+      "intakeSourceDigest": "f8f16cf3bbfd82358311ed0757b4ed311b007e4b9eae506f36dfd96955dfaf89",
+      "controlledSourceDigest": "4e0158c486e231581727476dd0d8ffa950c30e2351c5eff6a8954d3e80959e0e",
+      "maximumTokenJaccard": 0.3636,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2219782",
+          "score": 0.36363636363636365
+        },
+        {
+          "id": "sent.tatoeba.2776280",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.354724",
+          "score": 0.3076923076923077
+        }
+      ],
+      "rationale": "Pet welfare modal recommendation with comparative adverb 'more often' (A2)."
+    },
+    {
+      "id": "sent.tatoeba.3557348",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "I'm running out of closet space.",
+      "finalText": "I'm running out of closet space.",
+      "intakeSourceDigest": "2660e82941b64020b3cdb49929333f8340750d52bb60a704d6de5c535a069d0f",
+      "controlledSourceDigest": "97e79db2af98ae428707103654b49b727ccf9a27e4a22ce0af782456c3013dfe",
+      "maximumTokenJaccard": 0.375,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.20409",
+          "score": 0.375
+        },
+        {
+          "id": "sent.tatoeba.275209",
+          "score": 0.375
+        },
+        {
+          "id": "sent.tatoeba.2770646",
+          "score": 0.375
+        }
+      ],
+      "rationale": "Storage limitation phrasal verb with 'running out of closet space' (B1)."
+    },
+    {
+      "id": "sent.tatoeba.3557374",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "You should help your friends.",
+      "finalText": "You should help your friends.",
+      "intakeSourceDigest": "867fe19702150fe2569a3c9b2059a47464ba6efb0919689789d889f9da194bdc",
+      "controlledSourceDigest": "4417a63a554c1bc7d50ac1c6372571564f32fcf143d082a49f5647124d34b52c",
+      "maximumTokenJaccard": 0.4286,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2514116",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.tatoeba.2734819",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.tatoeba.325684",
+          "score": 0.42857142857142855
+        }
+      ],
+      "rationale": "Friendship duty modal recommendation with 'should help your friends' (A1)."
+    },
+    {
+      "id": "sent.tatoeba.3557399",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "They aren't the kind of people you should want to be friends with.",
+      "finalText": "They aren't the kind of people you should want to be friends with.",
+      "intakeSourceDigest": "27531dbd2d1d608f6217adb0cd3cafaef0de76ab2c145733f78c18fdc5a98f9d",
+      "controlledSourceDigest": "54797de9e9ec5dda0c6b7936f362be60aeb0c9ba7aeb2c7735f79cf64da796e5",
+      "maximumTokenJaccard": 0.4,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3062190",
+          "score": 0.4
+        },
+        {
+          "id": "sent.tatoeba.305786",
+          "score": 0.3125
+        },
+        {
+          "id": "sent.tatoeba.2033614",
+          "score": 0.29411764705882354
+        }
+      ],
+      "rationale": "Peer selection advice complex sentence with preposition stranding 'friends with' (B1)."
+    },
+    {
+      "id": "sent.tatoeba.3557406",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "Pay attention to what others around you are doing.",
+      "finalText": "Pay attention to what others around you are doing.",
+      "intakeSourceDigest": "9ac49542e9c3a11d4e420913ee1aa3f3e0743c7da17b2945a44601beb0a3f01e",
+      "controlledSourceDigest": "9e2403cd18f8da4f48e5d5f7d280aa4e6902e373223b499e0bf6ead8143ff827",
+      "maximumTokenJaccard": 0.5,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2175860",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.2835881",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.2259078",
+          "score": 0.4166666666666667
+        }
+      ],
+      "rationale": "Situational awareness imperative with collocation 'Pay attention to what others' (B1)."
+    },
+    {
+      "id": "sent.tatoeba.3557409",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Mary likes to dress up on special occasions.",
+      "finalText": "Mary likes to dress up on special occasions.",
+      "intakeSourceDigest": "7ed12cc7721c1462513eb503bedda3a2839986c8f4b3abf079917f5f2f578a87",
+      "controlledSourceDigest": "775bb97bd668e44d69978e2e5a10d62c15a7d03cd6620ff5b15e234725a0f0a6",
+      "maximumTokenJaccard": 0.2727,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.680460",
+          "score": 0.2727272727272727
+        },
+        {
+          "id": "sent.tatoeba.1744919",
+          "score": 0.25
+        },
+        {
+          "id": "sent.tatoeba.2206531",
+          "score": 0.25
+        }
+      ],
+      "rationale": "Formal fashion habit with phrasal verb 'dress up on special occasions' (A2)."
+    },
+    {
+      "id": "sent.tatoeba.3557413",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Where do you get your hair done?",
+      "finalText": "Where do you get your hair done?",
+      "intakeSourceDigest": "0e47b6e7ebe5b6f0d6697ec3745a19ede8109a1552ecaee54b3e99de168551f6",
+      "controlledSourceDigest": "6bc59f8412728d292cd4b227a1beb80d3360f5f74d1485cfb5e6e86bcd7df16b",
+      "maximumTokenJaccard": 0.75,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3557415",
+          "score": 0.75
+        },
+        {
+          "id": "sent.tatoeba.2134178",
+          "score": 0.5555555555555556
+        },
+        {
+          "id": "sent.tatoeba.2209687",
+          "score": 0.5
+        }
+      ],
+      "rationale": "Hairstyling routine inquiry with causative 'get your hair done' (A2)."
+    },
+    {
+      "id": "sent.tatoeba.3557415",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "Where did you get your hair done?",
+      "finalText": "Where did you get your hair done?",
+      "intakeSourceDigest": "f25c5f4a87d1d78bece8b2b859e977c77a421f32a4916751a6c7168d98a915ef",
+      "controlledSourceDigest": "d21ac5f339c2c23da21273a1810c66f523bda7fd54c303150924d035184f0080",
+      "maximumTokenJaccard": 0.75,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3557413",
+          "score": 0.75
+        },
+        {
+          "id": "sent.tatoeba.1635376",
+          "score": 0.4444444444444444
+        },
+        {
+          "id": "sent.tatoeba.1645704",
+          "score": 0.4444444444444444
+        }
+      ],
+      "rationale": "Intra-batch tense duplicate of sent.tatoeba.3557413."
+    },
+    {
+      "id": "sent.tatoeba.3557418",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "How many times a week do you eat out?",
+      "finalText": "How many times a week do you eat out?",
+      "intakeSourceDigest": "0054b7244454204f757a45a08ab2ea8b60781d74c27cb483794e945361fb56aa",
+      "controlledSourceDigest": "69c455915f270783c74052327f3dea99d5599acbfd834620e641230f807c5d38",
+      "maximumTokenJaccard": 0.5,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.16176",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.3109946",
+          "score": 0.46153846153846156
+        },
+        {
+          "id": "sent.tatoeba.35881",
+          "score": 0.42857142857142855
+        }
+      ],
+      "rationale": "Dining frequency question with phrasal verb 'eat out' and rate phrase (A2)."
+    },
+    {
+      "id": "sent.tatoeba.3557423",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "Nobody is going to know where you purchased your clothes.",
+      "finalText": "Nobody is going to know where you purchased your clothes.",
+      "intakeSourceDigest": "75233fd907473c820a935f49c8f6a17935fffd6c50d25ab197aa97db97393b39",
+      "controlledSourceDigest": "c80bcea911a22e970f948ef6f90ac4911bccd5200e1a14783f1bbe8c5af76c34",
+      "maximumTokenJaccard": 0.3333,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.1180906",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.1472302",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.1840615",
+          "score": 0.3076923076923077
+        }
+      ],
+      "rationale": "Anonymity reassurance future statement with formal verb 'purchased your clothes' (B1)."
+    },
+    {
+      "id": "sent.tatoeba.3559022",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "The employees are all unionized.",
+      "finalText": "The employees are all unionized.",
+      "intakeSourceDigest": "3d9df48be2f34e43a0be6bff7bd643b0c29c733715dc2786dfc184c35372d9f4",
+      "controlledSourceDigest": "34528ceba0126f0a46cde397b7a093779a293f7e33b83caf9b0755f092eeba0b",
+      "maximumTokenJaccard": 0.4286,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.1491180",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.tatoeba.2125120",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.tatoeba.2258106",
+          "score": 0.42857142857142855
+        }
+      ],
+      "rationale": "Labor relations passive description with adjective 'unionized' (B1)."
+    },
+    {
+      "id": "sent.tatoeba.3559023",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "I don't like office politics.",
+      "finalText": "I don't like office politics.",
+      "intakeSourceDigest": "ae5e17508e214f83af538d4a1083753e5284e44d876edee814fd7d232525aaa8",
+      "controlledSourceDigest": "c43bc1dad82af4d6eb8d21aafaff7f80d6a71e9712c4aa0fcde14aca23236a69",
+      "maximumTokenJaccard": 0.4286,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.1016963",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.tatoeba.1116884",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.tatoeba.1294796",
+          "score": 0.42857142857142855
+        }
+      ],
+      "rationale": "Workplace culture dislike with compound noun 'office politics' (B1)."
+    },
+    {
+      "id": "sent.tatoeba.3559029",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Mary was so happy that she started dancing.",
+      "finalText": "Mary was so happy that she started dancing.",
+      "intakeSourceDigest": "c3fe39f992cde4e5446cf4350fa0a7535832fe369ac6007bfce0962c95e735a3",
+      "controlledSourceDigest": "d43c21401c31638fb2c54d84f9b77dacb2d0538656fd0a1a478a097ae98bc9b1",
+      "maximumTokenJaccard": 0.3333,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.1490281",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.309653",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.313564",
+          "score": 0.3333333333333333
+        }
+      ],
+      "rationale": "Consecutive joy narrative with 'so happy that she started dancing' (A2)."
+    },
+    {
+      "id": "sent.tatoeba.3559040",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "You're too young to remember the nineties.",
+      "finalText": "You're too young to remember the nineties.",
+      "intakeSourceDigest": "5befbfd3c2b092f12f88b5826446fd8c25b988b75cbd173f401aaf89d36ae306",
+      "controlledSourceDigest": "a845a4f8cdb2a31534c2a7a8c6597b366ee542895ec80f55d93e3db737858f91",
+      "maximumTokenJaccard": 0.5,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2216551",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.2259961",
+          "score": 0.36363636363636365
+        },
+        {
+          "id": "sent.grb1.03.08.1",
+          "score": 0.3333333333333333
+        }
+      ],
+      "rationale": "Generational memory evaluation with degree adjective 'too young to remember' (A2)."
+    },
+    {
+      "id": "sent.tatoeba.3559081",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Many young people don't listen to radio anymore.",
+      "finalText": "Many young people don't listen to the radio anymore.",
+      "intakeSourceDigest": "609d03270ff3b633b2556d4eb8d23da855698c899615f888a539a1c801b241c9",
+      "controlledSourceDigest": "b6d7a3fb18eaa33783f4daa1f575a98f93c0b6d85ad1d7525be64003b565f67c",
+      "maximumTokenJaccard": 0.3077,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.274861",
+          "score": 0.3076923076923077
+        },
+        {
+          "id": "sent.tatoeba.2841195",
+          "score": 0.3076923076923077
+        },
+        {
+          "id": "sent.tatoeba.275828",
+          "score": 0.2857142857142857
+        }
+      ],
+      "rationale": "Added required definite article 'the' before broadcast medium noun 'radio' (A2)."
+    },
+    {
+      "id": "sent.tatoeba.3559562",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Peel the bananas and mash them with a fork.",
+      "finalText": "Peel the bananas and mash them with a fork.",
+      "intakeSourceDigest": "4d7f4d11d05ce38ffca046b5b2c898731cf6e467b4cec9f7cc3cc713e86974fa",
+      "controlledSourceDigest": "fa46cc3806f860c21d06ded40368259b05d98045d55cffb5d0b7f575d9161f65",
+      "maximumTokenJaccard": 0.3077,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2267643",
+          "score": 0.3076923076923077
+        },
+        {
+          "id": "sent.tatoeba.1474620",
+          "score": 0.29411764705882354
+        },
+        {
+          "id": "sent.tatoeba.249333",
+          "score": 0.2857142857142857
+        }
+      ],
+      "rationale": "Culinary instructional imperative with coordinated verbs 'Peel the bananas and mash them' (A2)."
+    },
+    {
+      "id": "sent.tatoeba.3559594",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Put the margarine in a bowl and mix until creamy.",
+      "finalText": "Put the margarine in a bowl and mix until creamy.",
+      "intakeSourceDigest": "9417742b89d9b0d9f34efdd1f30727c4baff312f2a7191143ee8257d4673042c",
+      "controlledSourceDigest": "c56456b1fa9687c848a8f6c7749757e5f5b5347daefa29a388ecf3917c63a12c",
+      "maximumTokenJaccard": 0.3077,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2752039",
+          "score": 0.3076923076923077
+        },
+        {
+          "id": "sent.tatoeba.682149",
+          "score": 0.3076923076923077
+        },
+        {
+          "id": "sent.tatoeba.36545",
+          "score": 0.2857142857142857
+        }
+      ],
+      "rationale": "Baking instructional imperative with temporal clause 'mix until creamy' (A2)."
+    },
+    {
+      "id": "sent.tatoeba.3559595",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Add the sugar and eggs, and beat well.",
+      "finalText": "Add the sugar and eggs, and beat well.",
+      "intakeSourceDigest": "66cde367de9b5e38469d21e6c516cfc4298a732f6567161f624d9733fdc229f9",
+      "controlledSourceDigest": "b4ff61276edf8c24c1a0ffa21ac862ce98c44b12c8dc42fac3b25e894b67408d",
+      "maximumTokenJaccard": 0.3333,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.240973",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.325209",
+          "score": 0.25
+        },
+        {
+          "id": "sent.tatoeba.680579",
+          "score": 0.25
+        }
+      ],
+      "rationale": "Recipe procedural imperative with serial comma and manner adverb 'beat well' (A2)."
+    },
+    {
+      "id": "sent.tatoeba.3560003",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "That's not what I said at all.",
+      "finalText": "That's not what I said at all.",
+      "intakeSourceDigest": "e530c7e359c3c51ff7641fe13113e688647cbcb9888792e2adb590adfddda672",
+      "controlledSourceDigest": "187aa3a6982d3f9eb16e7f954be1b9e4113dbb7b8782f32ba8ff055b5f5ea61c",
+      "maximumTokenJaccard": 0.7143,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2440022",
+          "score": 0.7142857142857143
+        },
+        {
+          "id": "sent.tatoeba.2668578",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.3024011",
+          "score": 0.5
+        }
+      ],
+      "rationale": "Cross-corpus duplicate of sent.tatoeba.2440022 ('That's not what I said.')."
+    },
+    {
+      "id": "sent.tatoeba.3560005",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "That isn't what I was saying at all.",
+      "finalText": "That isn't what I was saying at all.",
+      "intakeSourceDigest": "219001fbbbfe665af3f6ba49ddc40f3a28dfd5c4c9af28b78ca3e8bf4468c796",
+      "controlledSourceDigest": "d650ad02d16bf2674d60d3d7376ca19dfa07f6b2a1c836dda1915736a190b5c4",
+      "maximumTokenJaccard": 0.4444,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2570911",
+          "score": 0.4444444444444444
+        },
+        {
+          "id": "sent.tatoeba.2213975",
+          "score": 0.4
+        },
+        {
+          "id": "sent.tatoeba.2207214",
+          "score": 0.36363636363636365
+        }
+      ],
+      "rationale": "Intra-batch near duplicate of sent.tatoeba.3560003."
+    },
+    {
+      "id": "sent.tatoeba.3560009",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "We might as well get this over with.",
+      "finalText": "We might as well get this over with.",
+      "intakeSourceDigest": "d93dc09f99525dbe1260582502573ff5ed5e5766801d8e0f0645e66d713038e7",
+      "controlledSourceDigest": "9975b375a2dacf34e53ff2e2f821145045366e608495d7350071dc39e1f366f0",
+      "maximumTokenJaccard": 0.3,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.33577",
+          "score": 0.3
+        },
+        {
+          "id": "sent.tatoeba.551154",
+          "score": 0.3
+        },
+        {
+          "id": "sent.tatoeba.54266",
+          "score": 0.2857142857142857
+        }
+      ],
+      "rationale": "Resigned action idiom with modal 'might as well get this over with' (B1)."
+    },
+    {
+      "id": "sent.tatoeba.3560891",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "Tom has a little mustache.",
+      "finalText": "Tom has a little mustache.",
+      "intakeSourceDigest": "39d6275174fdb54b5a0fe4c5933b969475ff7087084fa333eaa59d8e96fe7101",
+      "controlledSourceDigest": "3fb2ffdbb9e5c605c0b8d8eb15b9e6dc9f4b252692830169cd57204ec13d9cce",
+      "maximumTokenJaccard": 0.4286,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.1730016",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.tatoeba.2774931",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.tatoeba.2776519",
+          "score": 0.42857142857142855
+        }
+      ],
+      "rationale": "Facial hair simple present description with noun 'mustache' (A1)."
+    },
+    {
+      "id": "sent.tatoeba.3560903",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Mary wore a flowery skirt.",
+      "finalText": "Mary wore a flowery skirt.",
+      "intakeSourceDigest": "34d841336c5fc58662a872104307abb2c699f1bf7049e88652c303ea5f090db0",
+      "controlledSourceDigest": "326ac29027d132339ad3c5a7327ad9bb56ecfdfd874100a0c2bd5984ca4154e1",
+      "maximumTokenJaccard": 0.25,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.1662191",
+          "score": 0.25
+        },
+        {
+          "id": "sent.tatoeba.1663782",
+          "score": 0.25
+        },
+        {
+          "id": "sent.tatoeba.2612086",
+          "score": 0.25
+        }
+      ],
+      "rationale": "Apparel simple past narrative with descriptive adjective 'flowery skirt' (A2)."
+    },
+    {
+      "id": "sent.tatoeba.3560907",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Everyone looked at him like he was crazy.",
+      "finalText": "Everyone looked at him like he was crazy.",
+      "intakeSourceDigest": "9e5e99f7ab344b21f9ce4ef1ae14b12d50c1ed0dbffe6505ea9ba1d63cbac24a",
+      "controlledSourceDigest": "5ca263f134ee4fe84aba6a602e7cb3dbaee1242ab60942b4c3411dc7a72bd870",
+      "maximumTokenJaccard": 0.4167,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.307803",
+          "score": 0.4166666666666667
+        },
+        {
+          "id": "sent.tatoeba.1982812",
+          "score": 0.4
+        },
+        {
+          "id": "sent.tatoeba.1462068",
+          "score": 0.3
+        }
+      ],
+      "rationale": "Bizarre impression narrative with comparative clause 'like he was crazy' (A2)."
+    },
+    {
+      "id": "sent.tatoeba.3560912",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Mary often has to take care of her younger siblings.",
+      "finalText": "Mary often has to take care of her younger siblings.",
+      "intakeSourceDigest": "8089cb74794ef5de3a471603920d9172c9489a7ee40f37de79fbe18a65427881",
+      "controlledSourceDigest": "95a64ac9edb4ae8160bfb5b411752499829d9a2ba965060b4ec948d8606ff547",
+      "maximumTokenJaccard": 0.3846,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.309321",
+          "score": 0.38461538461538464
+        },
+        {
+          "id": "sent.tatoeba.680325",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.1635372",
+          "score": 0.2857142857142857
+        }
+      ],
+      "rationale": "Caregiving obligation habit with formal noun 'younger siblings' (A2)."
+    },
+    {
+      "id": "sent.tatoeba.3560917",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "All I think about is you.",
+      "finalText": "All I think about is you.",
+      "intakeSourceDigest": "522067788587a51fdd3fd1f4bab92e2af7ba75a851f9b0b90aee185aee8cb6e2",
+      "controlledSourceDigest": "2be74f0d4ba4c629c268f8748635412211afa1c3ab57e02a4f7aa0a4753ce8b0",
+      "maximumTokenJaccard": 0.7143,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3562555",
+          "score": 0.7142857142857143
+        },
+        {
+          "id": "sent.tatoeba.2074209",
+          "score": 0.5714285714285714
+        },
+        {
+          "id": "sent.tatoeba.2629010",
+          "score": 0.5
+        }
+      ],
+      "rationale": "Devotion cleft sentence simple present 'All I think about is you' (A1)."
+    },
+    {
+      "id": "sent.tatoeba.3560923",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Your father got a promotion.",
+      "finalText": "Your father got a promotion.",
+      "intakeSourceDigest": "af600f9d4543181ac8e4762962d7df02e4f82b57610b88fc6a0de65f354dcb95",
+      "controlledSourceDigest": "070294d12829dc0855b78c567943b5416a810815c8d0b2aec64d205854d677f1",
+      "maximumTokenJaccard": 0.4286,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2240395",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.tatoeba.1112734",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.64091",
+          "score": 0.3333333333333333
+        }
+      ],
+      "rationale": "Career advancement simple past narrative with noun 'promotion' (A2)."
+    },
+    {
+      "id": "sent.tatoeba.3560924",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "When was the last time you got a manicure?",
+      "finalText": "When was the last time you got a manicure?",
+      "intakeSourceDigest": "49de96e6798445d7d86b5d87973a7fb2cfdaa534afb66aee79822e60b63b9ff2",
+      "controlledSourceDigest": "d96b66670a47ebfa181ffaa4a310cd237bb2df6329352b1a0e4a293cfc5bbb48",
+      "maximumTokenJaccard": 0.8,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3560925",
+          "score": 0.8
+        },
+        {
+          "id": "sent.tatoeba.1747522",
+          "score": 0.6363636363636364
+        },
+        {
+          "id": "sent.tatoeba.1747556",
+          "score": 0.6363636363636364
+        }
+      ],
+      "rationale": "Personal grooming inquiry past question with noun 'manicure' (A2)."
+    },
+    {
+      "id": "sent.tatoeba.3560925",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "When was the last time you got a pedicure?",
+      "finalText": "When was the last time you got a pedicure?",
+      "intakeSourceDigest": "75ec1eb57ada2bf05dbdf955bf3697722341304db516efaa4ab2ef79e73e05a7",
+      "controlledSourceDigest": "abc6dcaacdf69210cc332823391ab1b7ccb476ca8c48daaf523d241936025a29",
+      "maximumTokenJaccard": 0.8,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3560924",
+          "score": 0.8
+        },
+        {
+          "id": "sent.tatoeba.1747522",
+          "score": 0.6363636363636364
+        },
+        {
+          "id": "sent.tatoeba.1747556",
+          "score": 0.6363636363636364
+        }
+      ],
+      "rationale": "Intra-batch near duplicate of sent.tatoeba.3560924."
+    },
+    {
+      "id": "sent.tatoeba.3560941",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "I have some extra tickets for the concert.",
+      "finalText": "I have some extra tickets for the concert.",
+      "intakeSourceDigest": "fd657352e7f8d81b51fe9fb9760e741d222ff8a3a6fe8ae0daff694d439a4feb",
+      "controlledSourceDigest": "1935f7c431479bce9d3dad3d4a8a68dc5a1c437077c2600f69d33e82af6c9ce4",
+      "maximumTokenJaccard": 0.3636,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2246648",
+          "score": 0.36363636363636365
+        },
+        {
+          "id": "sent.tatoeba.2246649",
+          "score": 0.36363636363636365
+        },
+        {
+          "id": "sent.tatoeba.63826",
+          "score": 0.3333333333333333
+        }
+      ],
+      "rationale": "Event access simple present with adjective modifier 'extra tickets for the concert' (A2)."
+    },
+    {
+      "id": "sent.tatoeba.3560942",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "All of the students have to wear the same uniform.",
+      "finalText": "All of the students have to wear the same uniform.",
+      "intakeSourceDigest": "8ce1b89d3c741324b2bb1f171573d16f55aa2cec531df0c4af14b513e9990656",
+      "controlledSourceDigest": "5529695be8367ee2d4b30156e4427cfaf7fa57c2872cca7da054c28559bce3ff",
+      "maximumTokenJaccard": 0.5,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.45506",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.680333",
+          "score": 0.4166666666666667
+        },
+        {
+          "id": "sent.tatoeba.32574",
+          "score": 0.3125
+        }
+      ],
+      "rationale": "Dress code obligation modal statement with 'wear the same uniform' (A2)."
+    },
+    {
+      "id": "sent.tatoeba.3560943",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "How do you know I'm not from here?",
+      "finalText": "How do you know I'm not from here?",
+      "intakeSourceDigest": "48ef26ae12621feb9bca146fbefb852618076abde06732729ae3f07e40ad9c56",
+      "controlledSourceDigest": "e6ca1d64b78af51e11d20666d10c415c14c912e34ef6b3a97aee5343fa0c4571",
+      "maximumTokenJaccard": 0.4444,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2545346",
+          "score": 0.4444444444444444
+        },
+        {
+          "id": "sent.tatoeba.1634914",
+          "score": 0.4
+        },
+        {
+          "id": "sent.tatoeba.2182814",
+          "score": 0.4
+        }
+      ],
+      "rationale": "Origin perception question with negative clause 'how do you know I'm not from here' (A2)."
+    },
+    {
+      "id": "sent.tatoeba.3560948",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "I was so afraid that no one would ask me to dance.",
+      "finalText": "I was so afraid that no one would ask me to dance.",
+      "intakeSourceDigest": "95cab045f1f2dbfeb685d4f7209adb7b3b1ffc65377cccad02ad631d80a136c4",
+      "controlledSourceDigest": "5353b1646ec60d3172427d0a385226ef45a5c59da1eb14edc5f1fb7ece93ed1e",
+      "maximumTokenJaccard": 0.6429,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3560956",
+          "score": 0.6428571428571429
+        },
+        {
+          "id": "sent.tatoeba.2721949",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.2220253",
+          "score": 0.3157894736842105
+        }
+      ],
+      "rationale": "Social anxiety past narrative with complement clause 'no one would ask me to dance' (B1)."
+    },
+    {
+      "id": "sent.tatoeba.3560952",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "Tom didn't want to dance with me.",
+      "finalText": "Tom didn't want to dance with me.",
+      "intakeSourceDigest": "ac19f46b3ac8db936475915f304b2c64f468eea84f19e563034ca6d82d73216f",
+      "controlledSourceDigest": "ef0390ed2f4ac0c22178f08d2583532160afb44c483f88322808093d0d2de9bf",
+      "maximumTokenJaccard": 0.4,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2173134",
+          "score": 0.4
+        },
+        {
+          "id": "sent.tatoeba.2631839",
+          "score": 0.4
+        },
+        {
+          "id": "sent.tatoeba.2706673",
+          "score": 0.4
+        }
+      ],
+      "rationale": "Social dance refusal simple past with negative volition 'didn't want to dance with me' (A1)."
+    },
+    {
+      "id": "sent.tatoeba.3560956",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "Mary was afraid that no one would ask her to dance.",
+      "finalText": "Mary was afraid that no one would ask her to dance.",
+      "intakeSourceDigest": "1aa89cd903ad01e97ed3dabd6f087e67c7fc3b63693a4562880e6016e3e9ea5f",
+      "controlledSourceDigest": "e66c6b4a39ed1984259c37b34d0d4684153cfc4577b92e5fbcd92a759defefa0",
+      "maximumTokenJaccard": 0.6429,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3560948",
+          "score": 0.6428571428571429
+        },
+        {
+          "id": "sent.tatoeba.309474",
+          "score": 0.26666666666666666
+        },
+        {
+          "id": "sent.tatoeba.309732",
+          "score": 0.26666666666666666
+        }
+      ],
+      "rationale": "Intra-batch subject variant duplicate of sent.tatoeba.3560948."
+    },
+    {
+      "id": "sent.tatoeba.3560957",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "All of my friends got asked to dance except me.",
+      "finalText": "All of my friends got asked to dance except me.",
+      "intakeSourceDigest": "2c08d675c32425d2265d84fa4a5ebcee8255b76e8ed6f2f71e5eefa85b6a49ec",
+      "controlledSourceDigest": "4979b91e86ed0368d7d709bb633d28c0a0710250bbb20fe612d05e98c9ccf68a",
+      "maximumTokenJaccard": 0.2857,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.1392623",
+          "score": 0.2857142857142857
+        },
+        {
+          "id": "sent.tatoeba.2267625",
+          "score": 0.2857142857142857
+        },
+        {
+          "id": "sent.tatoeba.319210",
+          "score": 0.2857142857142857
+        }
+      ],
+      "rationale": "Social exclusion past passive narrative with preposition 'except me' (B1)."
+    },
+    {
+      "id": "sent.tatoeba.3560981",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "Mary twirled her hair between her fingers.",
+      "finalText": "Mary twirled her hair between her fingers.",
+      "intakeSourceDigest": "07826b265b66b12e55a03c27f1728b2a3ab0638d50346d6f7746d49cac6ef428",
+      "controlledSourceDigest": "01cb0c995675e6ab033fa63e3082d9ac7e800196ef1c6bea5dc166ca0e13b0a9",
+      "maximumTokenJaccard": 0.2727,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3054941",
+          "score": 0.2727272727272727
+        },
+        {
+          "id": "sent.tatoeba.1662209",
+          "score": 0.2222222222222222
+        },
+        {
+          "id": "sent.tatoeba.1665760",
+          "score": 0.2222222222222222
+        }
+      ],
+      "rationale": "Nervous habit past narrative with descriptive verb 'twirled her hair between her fingers' (B1)."
+    },
+    {
+      "id": "sent.tatoeba.3560982",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Mary wrote her number on a piece of paper and handed it to Tom.",
+      "finalText": "Mary wrote her number on a piece of paper and handed it to Tom.",
+      "intakeSourceDigest": "26dda2d523791a45c2e49f3b3ba41477c69fea11d687da76f46c5aba4c746da4",
+      "controlledSourceDigest": "a09cac8cd44b6d458b520ab42ca14624e1b7e703da54892158a6263e7ba47071",
+      "maximumTokenJaccard": 0.3,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3093835",
+          "score": 0.3
+        },
+        {
+          "id": "sent.tatoeba.3165922",
+          "score": 0.29411764705882354
+        },
+        {
+          "id": "sent.tatoeba.316019",
+          "score": 0.2857142857142857
+        }
+      ],
+      "rationale": "Contact sharing compound past narrative with 'handed it to Tom' (A2)."
+    },
+    {
+      "id": "sent.tatoeba.3561002",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "There are no other options.",
+      "finalText": "There are no other options.",
+      "intakeSourceDigest": "5925ea46cefb23eda6bb18be215965d86fc8719e6f9e1f182032db93124c32fc",
+      "controlledSourceDigest": "eeb1e9ea4e6b8e45e99cc48f0f66581fdc8f7cce6383b749d735b45d336f088a",
+      "maximumTokenJaccard": 0.4286,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2247285",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.tatoeba.2740411",
+          "score": 0.375
+        },
+        {
+          "id": "sent.tatoeba.2969223",
+          "score": 0.375
+        }
+      ],
+      "rationale": "Inescapable situation statement with negative existential 'no other options' (A2)."
+    },
+    {
+      "id": "sent.tatoeba.3561899",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "I knew you'd be talking about me.",
+      "finalText": "I knew you'd be talking about me.",
+      "intakeSourceDigest": "4e56b965e950507c2f8f139808df8a09fe8cc083e36f2104665d9ad04ca160dc",
+      "controlledSourceDigest": "5844f38535011ee311190335da9c264e95e9e075f5d2cc4ff634dec0632754ee",
+      "maximumTokenJaccard": 0.4,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3239856",
+          "score": 0.4
+        },
+        {
+          "id": "sent.tatoeba.1561939",
+          "score": 0.2727272727272727
+        },
+        {
+          "id": "sent.tatoeba.1638378",
+          "score": 0.2727272727272727
+        }
+      ],
+      "rationale": "Anticipated discussion past statement with future in the past 'talking about me' (A2)."
+    },
+    {
+      "id": "sent.tatoeba.3562543",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "The boys played in the mud.",
+      "finalText": "The boys played in the mud.",
+      "intakeSourceDigest": "02a362544fc094603dafc5c92a2e94d9b448bb48df77584b9380be6f452d94e4",
+      "controlledSourceDigest": "246295080be3cf447ed104e9bad00a89c8c2ea521b77f3011c46cab10b29e168",
+      "maximumTokenJaccard": 0.5,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2478818",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.3562544",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.tatoeba.1334976",
+          "score": 0.3333333333333333
+        }
+      ],
+      "rationale": "Recreational play simple past narrative with noun 'mud' (A1)."
+    },
+    {
+      "id": "sent.tatoeba.3562544",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "The boys swam in the river.",
+      "finalText": "The boys swam in the river.",
+      "intakeSourceDigest": "c67086a39802d961c75e893e2cae7db509d9d8340eed4d70dff9a25479f9424e",
+      "controlledSourceDigest": "bdacda8f615857a1549845cc90595ad11f61e8bd68a1fddee48974d7672f6074",
+      "maximumTokenJaccard": 0.4286,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3562543",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.tatoeba.674463",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.tatoeba.273217",
+          "score": 0.375
+        }
+      ],
+      "rationale": "Aquatic recreation simple past narrative with prepositional phrase 'in the river' (A1)."
+    },
+    {
+      "id": "sent.tatoeba.3562551",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "I'll try to fix it later.",
+      "finalText": "I'll try to fix it later.",
+      "intakeSourceDigest": "8006b2a8b7df40622c1a9603d703da83014a1f22de60396a2673a1e6e7bc92ef",
+      "controlledSourceDigest": "a5df5a6d4d9732c57f6d140fe0f825f0e7799945113292c4e88a15a0d99979b1",
+      "maximumTokenJaccard": 0.4444,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2267168",
+          "score": 0.4444444444444444
+        },
+        {
+          "id": "sent.tatoeba.11119898",
+          "score": 0.375
+        },
+        {
+          "id": "sent.tatoeba.1201478",
+          "score": 0.375
+        }
+      ],
+      "rationale": "Repair promise future statement with temporal adverb 'fix it later' (A1)."
+    },
+    {
+      "id": "sent.tatoeba.3562552",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Digital music is becoming more and more popular.",
+      "finalText": "Digital music is becoming more and more popular.",
+      "intakeSourceDigest": "2cedfe4ff087f5871fb5fdb3c8d463978782a493dbdca6d6f9ec489f6f99be49",
+      "controlledSourceDigest": "13be91bc1ee633e830c26ad177288331c7b1e7eaa9de86be53cc4f3ef6612083",
+      "maximumTokenJaccard": 0.4444,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3133087",
+          "score": 0.4444444444444444
+        },
+        {
+          "id": "sent.tatoeba.3145315",
+          "score": 0.23076923076923078
+        },
+        {
+          "id": "sent.tatoeba.46942",
+          "score": 0.23076923076923078
+        }
+      ],
+      "rationale": "Technological trend progressive with double comparative 'more and more popular' (A2)."
+    },
+    {
+      "id": "sent.tatoeba.3562555",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Is that all you think about?",
+      "finalText": "Is that all you think about?",
+      "intakeSourceDigest": "3d1c9fa55e0b2a603023ba6c6064345e9015fa68b8c4f63ad3374d8ffd8d6573",
+      "controlledSourceDigest": "d3667a3b9af8060348581630df7a50ff3b2db5d929d4e43c2c5007161ba2f9c5",
+      "maximumTokenJaccard": 0.7143,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3560917",
+          "score": 0.7142857142857143
+        },
+        {
+          "id": "sent.tatoeba.1744630",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.17981",
+          "score": 0.4
+        }
+      ],
+      "rationale": "Single-mindedness critique question with restrictive pronoun 'all you think about' (A2)."
+    },
+    {
+      "id": "sent.tatoeba.3562558",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "Tom returned to his hometown to visit his parents during the summer break.",
+      "finalText": "Tom returned to his hometown to visit his parents during the summer break.",
+      "intakeSourceDigest": "db54233e26dc7670a4a1924b3e7115c7e42521523facd87c6deb94b3e504ee23",
+      "controlledSourceDigest": "0002a233706ef74a3bc7daad6c9bf188912471ceda4431fb4f8af2f8fed19474",
+      "maximumTokenJaccard": 0.3333,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.37156",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.681866",
+          "score": 0.26666666666666666
+        },
+        {
+          "id": "sent.tatoeba.24323",
+          "score": 0.25
+        }
+      ],
+      "rationale": "Holiday journey narrative with compound noun 'hometown' and 'summer break' (B1)."
+    },
+    {
+      "id": "sent.tatoeba.3562563",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "I promised your mother I'd look after you.",
+      "finalText": "I promised your mother I'd look after you.",
+      "intakeSourceDigest": "5aa5afa41069cf35fbbb34b17a4b3201600a362c45b4704ab7d3c460362bbdf0",
+      "controlledSourceDigest": "f3604cdabbb08f3bb8f88e0b6cee098cc62e6842021bf4217698d38359c515a3",
+      "maximumTokenJaccard": 0.7778,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3562564",
+          "score": 0.7777777777777778
+        },
+        {
+          "id": "sent.tatoeba.3562565",
+          "score": 0.6666666666666666
+        },
+        {
+          "id": "sent.tatoeba.2266922",
+          "score": 0.3076923076923077
+        }
+      ],
+      "rationale": "Guardian promise reported narrative with phrasal verb 'look after you' (A2)."
+    },
+    {
+      "id": "sent.tatoeba.3562564",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "I promised your father I'd look after you.",
+      "finalText": "I promised your father I'd look after you.",
+      "intakeSourceDigest": "00789e7c2ce66790a171757f910abb0ef76e47852fcffeac3c4c89f5fef48051",
+      "controlledSourceDigest": "b6c756f7aff22200cbd8765a73f9b72d969fb69accb16f03935da9c43e34a324",
+      "maximumTokenJaccard": 0.7778,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3562563",
+          "score": 0.7777777777777778
+        },
+        {
+          "id": "sent.tatoeba.3562565",
+          "score": 0.6666666666666666
+        },
+        {
+          "id": "sent.tatoeba.17185",
+          "score": 0.3
+        }
+      ],
+      "rationale": "Intra-batch family variant duplicate of sent.tatoeba.3562563."
+    },
+    {
+      "id": "sent.tatoeba.3562565",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "I promised Tom I'd look after you.",
+      "finalText": "I promised Tom I'd look after you.",
+      "intakeSourceDigest": "9f8983a1dbd3472337370e43eac349798de2cb2e2c61c3a9dd8b2b44df800459",
+      "controlledSourceDigest": "fa8d45328b0f95d35a2b90c06832959962552554158354e911a479ffde892bfa",
+      "maximumTokenJaccard": 0.6667,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3562563",
+          "score": 0.6666666666666666
+        },
+        {
+          "id": "sent.tatoeba.3562564",
+          "score": 0.6666666666666666
+        },
+        {
+          "id": "sent.tatoeba.325481",
+          "score": 0.3076923076923077
+        }
+      ],
+      "rationale": "Intra-batch name variant duplicate of sent.tatoeba.3562563."
+    },
+    {
+      "id": "sent.tatoeba.3562573",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "I think we're going on vacation in June.",
+      "finalText": "I think we're going on vacation in June.",
+      "intakeSourceDigest": "f913e240fdfe765e967fa855542dfe12983174eed5904e338f872b8313b19403",
+      "controlledSourceDigest": "844dac008ab6a275ff3ef038495ee8a8866c6b908e93fa7abc2109d2fad60a14",
+      "maximumTokenJaccard": 0.3333,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2258816",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.2978203",
+          "score": 0.3076923076923077
+        },
+        {
+          "id": "sent.tatoeba.7227957",
+          "score": 0.3076923076923077
+        }
+      ],
+      "rationale": "Vacation schedule opinion with future progressive 'going on vacation in June' (A1)."
+    },
+    {
+      "id": "sent.tatoeba.3563606",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "I didn't realize you felt so strongly about this.",
+      "finalText": "I didn't realize you felt so strongly about this.",
+      "intakeSourceDigest": "8e96ce724b8493bbd770922ba99c788fb542f78c79eaebe25f547b80e35d0cd2",
+      "controlledSourceDigest": "afa6ae0c621733c03cbc6bf9661e6e0cdf3b7c03ee175c45836129d2ca890ccb",
+      "maximumTokenJaccard": 0.4,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2999701",
+          "score": 0.4
+        },
+        {
+          "id": "sent.tatoeba.2282105",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.2960459",
+          "score": 0.3333333333333333
+        }
+      ],
+      "rationale": "Conviction perception past statement with manner adverb 'felt so strongly about this' (B1)."
+    },
+    {
+      "id": "sent.tatoeba.3563918",
+      "outcome": "publish",
+      "cefr": "B2",
+      "originalText": "Tom has an insatiable appetite.",
+      "finalText": "Tom has an insatiable appetite.",
+      "intakeSourceDigest": "ddec958e07863be47c19abfe3c4cbca7359b0977c9f8b464733263c1d7273c33",
+      "controlledSourceDigest": "0ed12ffa319b390c4c73fd1249e1ea18930ceae442c38b1340e43e559f57496e",
+      "maximumTokenJaccard": 0.4286,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3069619",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.tatoeba.3070578",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.680860",
+          "score": 0.3
+        }
+      ],
+      "rationale": "Biological appetite description with advanced adjective 'insatiable appetite' (B2)."
+    },
+    {
+      "id": "sent.tatoeba.3563997",
+      "outcome": "publish",
+      "cefr": "B2",
+      "originalText": "Had I known you'd be here, I wouldn't have come.",
+      "finalText": "Had I known you'd be here, I wouldn't have come.",
+      "intakeSourceDigest": "2655a3909b0a2493ccda481cb6ebeb74100d353154d17fe665c65de80be3e8da",
+      "controlledSourceDigest": "b86c76522797a5c9544427ae5bc75c2030af79d937ef6ab0766f212e5f08b936",
+      "maximumTokenJaccard": 0.3077,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2391316",
+          "score": 0.3076923076923077
+        },
+        {
+          "id": "sent.tatoeba.276977",
+          "score": 0.3076923076923077
+        },
+        {
+          "id": "sent.tatoeba.30808",
+          "score": 0.2857142857142857
+        }
+      ],
+      "rationale": "Past counterfactual conditional with inverted auxiliary 'Had I known you'd be here' (B2)."
+    },
+    {
+      "id": "sent.tatoeba.3564346",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "We'll see each other again someday.",
+      "finalText": "We'll see each other again someday.",
+      "intakeSourceDigest": "393daf746cc78867d4551e2cdc2c67bbfac6c71765f891580d4556e6be0a7e17",
+      "controlledSourceDigest": "575b0da5c5e7d77a809665b3668c6fc5f8a0b7858570b997cefd14105ad65588",
+      "maximumTokenJaccard": 0.8333,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2908859",
+          "score": 0.8333333333333334
+        },
+        {
+          "id": "sent.tatoeba.749304",
+          "score": 0.5714285714285714
+        },
+        {
+          "id": "sent.tatoeba.2258112",
+          "score": 0.5
+        }
+      ],
+      "rationale": "Cross-corpus duplicate of sent.tatoeba.2908859 ('We'll see each other again.')."
+    },
+    {
+      "id": "sent.tatoeba.3564974",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "I need you to leave now.",
+      "finalText": "I need you to leave now.",
+      "intakeSourceDigest": "eb9899e17184bb908f6a19daa071836a5fe1546872716e49d6fad5f58eb53c79",
+      "controlledSourceDigest": "087d1bc68f89e57d8069743f63987c9320f7b9ae65c3fb8bd25cc5080c43b93f",
+      "maximumTokenJaccard": 0.5714,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3290766",
+          "score": 0.5714285714285714
+        },
+        {
+          "id": "sent.tatoeba.2864031",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.3163294",
+          "score": 0.4444444444444444
+        }
+      ],
+      "rationale": "Firm dismissal statement with verb + object + infinitive 'need you to leave now' (A2)."
+    },
+    {
+      "id": "sent.tatoeba.3565552",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "Isn't it the other way around?",
+      "finalText": "Isn't it the other way around?",
+      "intakeSourceDigest": "239c5a1a7a7b4c531576107c699ca99d246121d10605d6940975083a8627a0b7",
+      "controlledSourceDigest": "c9e484f037b2681f00ecf2e3c98bd1f2fc3752c8366722ddf735b0bd761a99a3",
+      "maximumTokenJaccard": 0.3333,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.1221354",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.2051981",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.318712",
+          "score": 0.3125
+        }
+      ],
+      "rationale": "Inversion clarification idiom with negative question 'the other way around' (B1)."
+    },
+    {
+      "id": "sent.tatoeba.3567214",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "Do you really want to lead this kind of life?",
+      "finalText": "Do you really want to lead this kind of life?",
+      "intakeSourceDigest": "21fe94bb41fd1480781bac756d1b480b14253b3d939f4756f00308efa64bf04b",
+      "controlledSourceDigest": "41d4e96c67a5fbc2b99e051775aa1bb234076b164ea0c56a34c9f5ba3a85f103",
+      "maximumTokenJaccard": 0.4545,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2156322",
+          "score": 0.45454545454545453
+        },
+        {
+          "id": "sent.tatoeba.2162929",
+          "score": 0.45454545454545453
+        },
+        {
+          "id": "sent.tatoeba.2265795",
+          "score": 0.4166666666666667
+        }
+      ],
+      "rationale": "Lifestyle evaluation question with collocation 'lead this kind of life' (B1)."
+    },
+    {
+      "id": "sent.tatoeba.3568284",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "I got this as a wedding gift, but I've never used it.",
+      "finalText": "I got this as a wedding gift, but I've never used it.",
+      "intakeSourceDigest": "6a3bffe693efc51f4eb150ee9d62a6dba3e79bc04077152dcf9d506507ecdb90",
+      "controlledSourceDigest": "22f5c1d8d687dd78c4416028999ae4b6cce5a24d3f1eb86114c0b0c63e58e5c3",
+      "maximumTokenJaccard": 0.3333,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2722186",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.265133",
+          "score": 0.3125
+        },
+        {
+          "id": "sent.tatoeba.3044434",
+          "score": 0.3125
+        }
+      ],
+      "rationale": "Gift receipt compound narrative with contrastive present perfect 'never used it' (A2)."
+    },
+    {
+      "id": "sent.tatoeba.3568443",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "I'm going to call Tom later.",
+      "finalText": "I'm going to call Tom later.",
+      "intakeSourceDigest": "fa9607deef8dd537ca297ca5da797a4d94730aa7af049efd7b65e6164c407b3c",
+      "controlledSourceDigest": "4af31811886b6571fea37230d92943d6eec23797d023090e065749a30c7cddd4",
+      "maximumTokenJaccard": 0.4444,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2718144",
+          "score": 0.4444444444444444
+        },
+        {
+          "id": "sent.tatoeba.1370756",
+          "score": 0.375
+        },
+        {
+          "id": "sent.tatoeba.1809371",
+          "score": 0.375
+        }
+      ],
+      "rationale": "Telephone intention future statement with temporal adverb 'call Tom later' (A1)."
+    },
+    {
+      "id": "sent.tatoeba.3568837",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Tom kissed Mary on the tip of her nose.",
+      "finalText": "Tom kissed Mary on the tip of her nose.",
+      "intakeSourceDigest": "3cdffc22b93503cf432780c285c8c0e519248debcaa7145998566fb1916c455a",
+      "controlledSourceDigest": "4b564fdea60eeea91075cd16cbabd0d1ad58fdb66c63b57b32175c10a1f729fc",
+      "maximumTokenJaccard": 0.3333,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3170481",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.320813",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.2776665",
+          "score": 0.2857142857142857
+        }
+      ],
+      "rationale": "Affectionate gesture simple past narrative with 'tip of her nose' (A2)."
+    },
+    {
+      "id": "sent.tatoeba.3569031",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "Everybody falls in love at least once in their lives.",
+      "finalText": "Everybody falls in love at least once in their lives.",
+      "intakeSourceDigest": "2dd873a90ad90526aa83e267e5c71c0e9d736114008d1a79f2533deef86ddf5d",
+      "controlledSourceDigest": "9caf855e784f9b6d2b146c062dcc0d1fc3dc108cb73be7002bc3124b12e2219b",
+      "maximumTokenJaccard": 0.2857,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.305228",
+          "score": 0.2857142857142857
+        },
+        {
+          "id": "sent.tatoeba.316473",
+          "score": 0.23076923076923078
+        },
+        {
+          "id": "sent.tatoeba.32189",
+          "score": 0.23076923076923078
+        }
+      ],
+      "rationale": "Universal romantic aphorism with frequency idiom 'at least once in their lives' (B1)."
+    },
+    {
+      "id": "sent.tatoeba.3569135",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "I feel like someone is watching me.",
+      "finalText": "I feel like someone is watching me.",
+      "intakeSourceDigest": "90d066a43f5abe77a0430b41948c3b6a01c6dfe97ef4cf46c3e2d9c7689b7931",
+      "controlledSourceDigest": "c630815b7f90778aa69f5751c02939b5aeadc974b6eda7039b823a2604388b21",
+      "maximumTokenJaccard": 0.5556,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3281801",
+          "score": 0.5555555555555556
+        },
+        {
+          "id": "sent.tatoeba.1343422",
+          "score": 0.4
+        },
+        {
+          "id": "sent.tatoeba.1116884",
+          "score": 0.3333333333333333
+        }
+      ],
+      "rationale": "Paranoia sensation statement with present continuous 'someone is watching me' (A2)."
+    },
+    {
+      "id": "sent.tatoeba.3569249",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "How could you say such a thing?",
+      "finalText": "How could you say such a thing?",
+      "intakeSourceDigest": "8a1abc64623efa44d6ccc78a4f06eb4cc82fd57e57c89796f84ec35bb56adb42",
+      "controlledSourceDigest": "7395ec2403d144294cec8c76bee95ed34b4bd02a6c24ff8f0383bbb5b5617a84",
+      "maximumTokenJaccard": 0.75,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.29973",
+          "score": 0.75
+        },
+        {
+          "id": "sent.tatoeba.3279728",
+          "score": 0.6666666666666666
+        },
+        {
+          "id": "sent.tatoeba.2745237",
+          "score": 0.6
+        }
+      ],
+      "rationale": "Reproach modal question with determiner phrase 'such a thing' (A2)."
+    },
+    {
+      "id": "sent.tatoeba.3570345",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Baking a cake takes more time than frying an egg.",
+      "finalText": "Baking a cake takes more time than frying an egg.",
+      "intakeSourceDigest": "6f7011027d8498886ce6dc68443fd2e6dd7e4f3ff2174eb31cb3af468214b6fa",
+      "controlledSourceDigest": "a2fff51c68ba8e9ea8baded7a0f5d88e03f96e6be095258752624a398d6fda97",
+      "maximumTokenJaccard": 0.2857,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.308599",
+          "score": 0.2857142857142857
+        },
+        {
+          "id": "sent.tatoeba.1662191",
+          "score": 0.25
+        },
+        {
+          "id": "sent.tatoeba.1662454",
+          "score": 0.25
+        }
+      ],
+      "rationale": "Culinary duration comparative statement with gerund subjects 'Baking a cake... frying an egg' (A2)."
+    }
+  ]
+}
