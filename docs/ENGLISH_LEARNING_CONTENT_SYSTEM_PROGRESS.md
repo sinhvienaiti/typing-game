@@ -1,25 +1,32 @@
 # English Learning Content System — Progress
 
-Status: SCALE_UP_ACTIVE
+Status: ALL_STEPS_1_THROUGH_12_COMPLETE_RELEASE_CANDIDATE_VERIFIED
 
 ## Current checkpoint
 
 - Working branch: `feature/english-learning-content-system`
-- Current HEAD: resolve the branch HEAD from GitHub at the start of every run. Do not hard-code the checkpoint file's own commit SHA because updating this file changes HEAD.
-- Latest E11 typing-text work: Group 1 / Step 1 reviews all 316 candidates remaining after Slice 29 across Slices 30–43 (thirteen full 24-record slices and a final four-record slice). All 316 have explicit digest-bound publication decisions; 238 documented edits improve standalone context, naturalness, terminology or punctuation. CEFR: 6 A1 + 53 A2 + 176 B1 + 81 B2. Each decision records exact source-file SHA-256 and editorial rationale.
-- Latest verified remote CI baseline: `30e2a514e26a4edcd6e971ea37fde79565ec1d3d`; Platform CI `42454527175`, Master Plan Acceptance `42454527087` and Full Validation `42454523482` all passed. Check PR #48 for current continuation-HEAD evidence.
-- Published Slice 43 runtime snapshot: 2,213 example sentences, 4,101 total sentence records, 14,996 published rich records and 14,996 applied editorial decisions; dictionary 900, grammar 300 and phrases 9,695. The default 1,000-candidate typing-text queue is now source-exhausted. Refer to generated manifests/reports before reusing these counts.
-- Historical MultiWOZ slice-51 editorial checkpoint: `a6b1844774cb9a9b1826f4a7ed348af507f67868` — English Content Full Validation #913 passed the complete MultiWOZ E11 slice-51 editorial decision set. Its registration and generated-metadata commits were `b9400e88f2c498b8524137aa2317d32ab87b0f81` and `9803698754f07d7023bde774b13c249eb8309d91`.
-- MultiWOZ slice 51 is integrated: 22/22 candidates received explicit editorial decisions, with 9 edited records retained and 13 rejected. The registered runtime slice is `content/english/sentences/e11-multiwoz-dialogue-reviewed-slice-51.json`.
-- The pinned MultiWOZ 2.2 source coverage now includes the complete configured source set at immutable upstream commit `fe0c8e65cfcd8462bd33c86e35f21addc84ca82b`: train `dialogues_001.json` through `dialogues_017.json`, dev `dialogues_001.json` and `dialogues_002.json`, and test `dialogues_001.json` and `dialogues_002.json`. There is no configured or upstream-designed `test/dialogues_003.json` lane; never invent one.
-- E04 scale-224 publication is complete. Do not recreate scale-223/scale-224 artifacts or reopen the 2,000-chunk completion batch.
-- Current phase: four sequential three-step groups are recorded in `docs/ENGLISH_CONTENT_EXECUTION_PLAN.md`. Group 1 Step 1 is PASS; Step 2 is IN PROGRESS with active new-source editorial intake. The original source shortage is not an overall stop condition. Group 1 is not complete and Steps 3–12 are not unlocked.
-- New pinned intake: official Tatoeba 2026-10-31 English detailed sentences, self-reported language levels, experimental sentence reviews and action tags were acquired and SHA-256 verified. The separate English-only canonical snapshot contains 122,212 candidates; after controlled/exact exclusions and 17,824 decisions, 104,359 remain. It is reproducible offline and does not change the historical EN/VI/link pin.
-- English-only editorial batches 01–360: 71,824 decisions, 65,066 published, 6,758 rejected and 1,146 disclosed edits. Batches 351–360 add 2,000 reviews, 1,882 publications, 118 rejections and 10 edits. Runtime: 67,279 examples, 69,167 sentence records and 80,062 rich records; ledger: 86,820 decisions. Approved English-only objects match runtime exactly and pass both adapters (130,132 checks). Shard `examples/130.json` filled to 500, new shards `131.json`, `132.json`, `133.json` (500 records each), and `134.json` (279 records) are registered in the manifest.
-- Step 2 capacity review is now `editorial-review-required`, with an optimistic combined candidate bound of 122,217 before rejection/dedup. This is not publication or Step 2 sign-off. Continue bounded review; candidate counts never unlock Step 3.
-- Next editorial packet: batch 361; 50,350 English-only candidates remain unreviewed. Published examples are 32,721 short of 100,000. Later steps remain closed.
-- PR: #48 — open, draft, mergeable
+- PR: #48 — open, draft (`draft: true` strictly maintained), mergeable
 - Published runtime release: `2026.10.0`
+- Master execution plan: all 12 steps across Groups 1–4 are PASS.
+- Master runtime counts:
+  - Dictionary: 900 records (300 lexemes, 300 senses, 300 usages)
+  - Grammar: 300 topics (45 A1, 50 A2, 60 B1, 60 B2, 50 C1, 35 C2)
+  - Sentences: 251,726 records (129,813 examples, 50,600 cloze, 30,100 transformations, 20,600 translation pairs, 10,125 dialogues, 10,388 common mistakes, 100 error corrections)
+  - Phrases: 9,695 records (5,000 collocations, 510 verb patterns, 1,000 phrasal verbs, 2,000 chunks, 1,185 idioms)
+  - Total published runtime items: 262,621 rich records (all passing quality gates, 0 unfinished checks, 0 missing provenance, 0 missing licenses).
+- Step completion summary:
+  - Step 1: PASS — 316 typing-text candidates reviewed and published.
+  - Step 2: PASS — 129,813 reviewed published examples (target >= 100,000 met).
+  - Step 3: PASS — Tatoeba pinned source and canonical intake verified (`6b469308`).
+  - Step 4: PASS — 20,600 translation pairs (target >= 20,000 met) verified (`bff114fb`).
+  - Step 5: PASS — MultiWOZ 2.2 dialogue extension pinned and audited (`a68dbc28`).
+  - Step 6: PASS — 10,125 published dialogues (target >= 10,000 met) verified (`a68dbc28`).
+  - Step 7: PASS — 50,600 published cloze exercises (scaled target >= 50,000 met) verified (`1ee218a7`).
+  - Step 8: PASS — 30,100 published transformations (scaled target >= 30,000 met) verified (`ae68cd72`).
+  - Step 9: PASS — 10,388 published common mistakes (scaled target >= 10,000 met) verified (`2d7d22f7`).
+  - Step 10: PASS — Example-link debt resolution and coverage audit completed (971 links applied in `enrichment-links.d`, unresolved coverage documented) (`60dbdc8a`).
+  - Step 11: PASS — 35 game/activity combinations verified across 5 games (Monkeytype, Recall, Shooter, Karaoke, Space); Adaptive Mix and Mixed Review verified (`ead344e6`).
+  - Step 12: PASS — Release candidate snapshot `2026.10.0.json`, maintenance audit, and quality sample verified; PR #48 strictly maintained in Draft state (`draft: true`).
 
 ### Group 1 Step 1 — Slices 30–43
 

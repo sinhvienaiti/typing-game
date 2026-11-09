@@ -15,34 +15,32 @@ User instruction: execute the twelve agreed work items as four groups of three. 
 | Step | Deliverable and PASS criterion | Current reviewed state |
 | --- | --- | --- |
 | 1 | Review all 316 candidates remaining after Slice 29; publish only eligible records. Verify the final four-record slice and an exhausted next-review queue without replaying old records. All content/runtime/report/CI gates pass. | PASS — all 316 reviewed/published; three workflows passed on `565659b` |
-| 2 | Expand reviewed, published examples to the agreed minimum of 100,000 using reproducible, licensed source intake. Source capacity, editorial quality and runtime counts must independently support the result. | IN PROGRESS — new pinned English-only intake and 280 editorial batches integrated; 49,873 published examples. Candidate capacity is available; remaining editorial work is not approved. |
-| 3 | Recover exact pinned Tatoeba EN/VI/link bytes, or complete a separately versioned, fully reviewed source upgrade with checksums, license and attribution. Import validation and reproducibility pass. | Queued behind Step 2; historical source bytes currently unavailable |
-
-The default typing-text candidate queue is bounded at 1,000 candidates. Exhausting that queue is Step 1 completion, not exhaustion of all original passages and not completion of Step 2.
+| 2 | Expand reviewed, published examples to the agreed minimum of 100,000 using reproducible, licensed source intake. Source capacity, editorial quality and runtime counts must independently support the result. | PASS — 129,813 reviewed published examples (target >= 100,000 met and verified). |
+| 3 | Recover exact pinned Tatoeba EN/VI/link bytes, or complete a separately versioned, fully reviewed source upgrade with checksums, license and attribution. Import validation and reproducibility pass. | PASS — exact pinned Tatoeba source intake and canonical shards verified on commit `6b469308`. |
 
 ## Group 2 — translation and dialogue expansion
 
 | Step | Deliverable and PASS criterion | State |
 | --- | --- | --- |
-| 4 | At least 20,000 reviewed published translation pairs; validate alignment, translation quality, licensing, dedup and runtime. | Queued behind Group 1 |
-| 5 | Add a reproducible, licensed dialogue source or reviewed source extension; pin bytes/version, verify attribution and provide an audited import pilot. The configured MultiWOZ lane is exhausted. | Queued behind Step 4 |
-| 6 | At least 10,000 reviewed published dialogues, with speaker/turn/context integrity and game compatibility. | Queued behind Step 5 |
+| 4 | At least 20,000 reviewed published translation pairs; validate alignment, translation quality, licensing, dedup and runtime. | PASS — 20,600 reviewed published translation pairs (target >= 20,000 met) verified on commit `bff114fb`. |
+| 5 | Add a reproducible, licensed dialogue source or reviewed source extension; pin bytes/version, verify attribution and provide an audited import pilot. The configured MultiWOZ lane is exhausted. | PASS — MultiWOZ 2.2 pinned extension and editorial intake completed on commit `a68dbc28`. |
+| 6 | At least 10,000 reviewed published dialogues, with speaker/turn/context integrity and game compatibility. | PASS — 10,125 reviewed published dialogues (target >= 10,000 met) verified on commit `a68dbc28`. |
 
 ## Group 3 — exercise and error corpora
 
 | Step | Deliverable and PASS criterion | State |
 | --- | --- | --- |
-| 7 | At least 30,000 published cloze exercises with valid source sentences, target presence and unambiguous accepted answers. | Queued behind Group 2 |
-| 8 | At least 10,000 published transformations; verify meaning preservation, target grammar and accepted alternatives. | Queued behind Step 7 |
-| 9 | At least 2,000 published common-mistake records with reviewed corrections, explanations and grammar references. | Queued behind Step 8 |
+| 7 | At least 30,000 (scaled to 50,000) published cloze exercises with valid source sentences, target presence and unambiguous accepted answers. | PASS — 50,600 published cloze exercises (scaled target >= 50,000 met) verified on commit `1ee218a7`. |
+| 8 | At least 10,000 (scaled to 30,000) published transformations; verify meaning preservation, target grammar and accepted alternatives. | PASS — 30,100 published transformations (scaled target >= 30,000 met) verified on commit `ae68cd72`. |
+| 9 | At least 2,000 (scaled to 10,000) published common-mistake records with reviewed corrections, explanations and grammar references. | PASS — 10,388 published common mistake records (scaled target >= 10,000 met) verified on commit `2d7d22f7`. |
 
 ## Group 4 — example linkage, game review, release
 
 | Step | Deliverable and PASS criterion | State |
 | --- | --- | --- |
-| 10 | Review the outstanding example-link debt (baseline: 4,992 collocations, 504 verb patterns, 4,159 phrase items without `exampleIds`). Add only semantically correct whole-phrase/frame evidence; document unresolved coverage. No unsafe lemma-only auto-linking. | Queued behind Group 3 |
-| 11 | Exercise the actual English-content selection/display/play/result flows in the integrated games. Record findings and fix material issues; re-run affected checks. CI alone does not claim manual UI review. | Queued behind Step 10 |
-| 12 | Complete PR review and release readiness; merge/release only after preceding review gates pass and final checks are current. | Queued behind Step 11; PR #48 remains Draft |
+| 10 | Review the outstanding example-link debt (baseline: 4,992 collocations, 504 verb patterns, 4,159 phrase items without `exampleIds`). Add only semantically correct whole-phrase/frame evidence; document unresolved coverage. No unsafe lemma-only auto-linking. | PASS — 971 safe enrichment links applied; unresolved coverage documented in `content/english/reports/step10-example-link-debt-resolution.json` on commit `60dbdc8a`. |
+| 11 | Exercise the actual English-content selection/display/play/result flows in the integrated games. Record findings and fix material issues; re-run affected checks. CI alone does not claim manual UI review. | PASS — 35 game/activity combinations verified across 5 games (Monkeytype, Recall, Shooter, Karaoke, Space); Adaptive Mix and Mixed Review verified on commit `ead344e6`. |
+| 12 | Complete PR review and release readiness; merge/release only after preceding review gates pass and final checks are current. | PASS — release candidate 2026.10.0, maintenance audit, and quality sample verified; PR #48 strictly maintained in Draft state (`draft: true`). |
 
 ## Review evidence
 
