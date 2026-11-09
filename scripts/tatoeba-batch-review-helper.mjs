@@ -56,12 +56,12 @@ export function computeNearestAndJaccard(targetId, targetText, corpus, intraSlic
   for (const item of corpus) {
     if (item.id === targetId) continue;
     const score = fastJaccard(targetTokens, getTokens(item));
-    scores.push({ id: item.id, score });
+    if (score > 0) scores.push({ id: item.id, score });
   }
   for (const item of intraSlice) {
     if (item.id === targetId) continue;
     const score = fastJaccard(targetTokens, getTokens(item));
-    scores.push({ id: item.id, score });
+    if (score > 0) scores.push({ id: item.id, score });
   }
   scores.sort((a, b) => b.score - a.score || a.id.localeCompare(b.id, "en"));
   const maxScore = scores.length > 0 ? scores[0].score : 0;
