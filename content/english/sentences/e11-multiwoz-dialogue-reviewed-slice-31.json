@@ -1,0 +1,120 @@
+{
+  "schemaVersion": 1,
+  "records": [
+    {
+      "schemaVersion": 1,
+      "id": "dlg.multiwoz.woz20263.json",
+      "scenario": "Switching from unavailable Danish food to an international restaurant and getting its phone number and postcode",
+      "cefr": "B1",
+      "turns": [
+        {
+          "speaker": "Learner",
+          "text": "Hello. I'm looking for a restaurant that serves Danish food."
+        },
+        {
+          "speaker": "Assistant",
+          "text": "I'm sorry, but there are no Danish restaurants listed. Would you like a different type of food?"
+        },
+        {
+          "speaker": "Learner",
+          "text": "How about international food?"
+        },
+        {
+          "speaker": "Assistant",
+          "text": "There are three international restaurants. Do you have a preferred price range?"
+        },
+        {
+          "speaker": "Learner",
+          "text": "No, I don't have a price preference."
+        },
+        {
+          "speaker": "Assistant",
+          "text": "Bloomsbury Restaurant is a moderately priced international restaurant in the centre."
+        },
+        {
+          "speaker": "Learner",
+          "text": "Could I have the phone number and postcode, please?"
+        },
+        {
+          "speaker": "Assistant",
+          "text": "The phone number is 0871 942 9180, and the postcode is CB2 3DT."
+        },
+        {
+          "speaker": "Learner",
+          "text": "Thank you. Goodbye."
+        },
+        {
+          "speaker": "Assistant",
+          "text": "You're welcome. Goodbye."
+        }
+      ],
+      "quality": {
+        "state": "draft",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          },
+          "sourcePin": {
+            "status": "pass",
+            "method": "multiwoz-git-blob-pin-v1"
+          },
+          "dialogueStructure": {
+            "status": "pass",
+            "method": "editorial-alternating-dialogue-v1"
+          },
+          "identifierSafety": {
+            "status": "pass",
+            "method": "editorial-identifier-safety-v1"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          },
+          "translation": {
+            "status": "not-applicable",
+            "method": "english-only-dialogue"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          },
+          "targetStructure": {
+            "status": "not-applicable",
+            "method": "dialogue-free-production"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          },
+          "license": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "multiwoz",
+            "sourceId": "WOZ20263.json",
+            "sourceUrl": "https://github.com/budzianowski/multiwoz/blob/fe0c8e65cfcd8462bd33c86e35f21addc84ca82b/data/MultiWOZ_2.2/train/dialogues_012.json",
+            "snapshot": "fe0c8e65cfcd8462bd33c86e35f21addc84ca82b",
+            "license": "MIT",
+            "attribution": "MultiWOZ 2.2 · Paweł Budzianowski and contributors",
+            "modified": true
+          }
+        ],
+        "note": "Editorially normalized from the pinned MultiWOZ 2.2 dialogue during the E11 controlled review intake; immutable source identity is retained."
+      }
+    }
+  ]
+}

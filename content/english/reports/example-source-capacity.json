@@ -1,0 +1,170 @@
+{
+  "schemaVersion": 2,
+  "scope": "group-1-step-2-configured-example-intake-capacity",
+  "reviewState": "target-count-met-full-review-required",
+  "target": {
+    "id": "example-sentences",
+    "minimum": 100000,
+    "published": 114727,
+    "remainingPublishedDeficit": 0
+  },
+  "currentBoundedQueue": {
+    "candidates": 1000,
+    "remainingUnreviewed": 0,
+    "state": "source-exhausted"
+  },
+  "currentProjectOriginalLane": {
+    "levels": 20,
+    "passages": 300,
+    "eligibleUniqueRawSentences": 5588,
+    "unreviewedRawSentences": 4588,
+    "optimisticPublishedUpperBound": 119315,
+    "minimumAdditionalSourceGapEvenIfEveryRemainingRawSentencePasses": 0,
+    "caveat": "Upper bound for this configured project-original lane only; ignores future QA rejection and cross-source dedup. Other upstream sources require their own reproducible intake and review; their potential size is not credited as published content."
+  },
+  "additionalPinnedLanes": [
+    {
+      "source": "tatoeba",
+      "snapshot": "english-only-weekly-2026-10-31-observed-2026-11-07-v1",
+      "license": "CC-BY-2.0-FR",
+      "pinPath": "content/english/sources/tatoeba-english-2026-10-31.json",
+      "pinSha256": "a7ec53264d152778ba085af583e2d57e9cff1833ee91044121278b7ae300d6cd",
+      "canonicalShards": [
+        {
+          "path": "content/english/sources/tatoeba-english-2026-10-31/000.jsonl.gz.b64",
+          "sha256": "d8acf47f4bb6fb522642e4f4acb13e7e9da6b05f7cd3d47c8773e59b39492e4c"
+        },
+        {
+          "path": "content/english/sources/tatoeba-english-2026-10-31/001.jsonl.gz.b64",
+          "sha256": "845795255ab7922e7a6daeecd636623fe90739abf7bd99dd9f70d799e639a4cf"
+        },
+        {
+          "path": "content/english/sources/tatoeba-english-2026-10-31/002.jsonl.gz.b64",
+          "sha256": "97f9f5c98eb5c9f30a9540b6ebcd9abb2a8dfa0bbd9ddefa9189bb3337f82230"
+        },
+        {
+          "path": "content/english/sources/tatoeba-english-2026-10-31/003.jsonl.gz.b64",
+          "sha256": "4658be312dd9e687ccd7435ea6aba6cc8bd474f34cbd457b4b7c02b8aeb833c1"
+        },
+        {
+          "path": "content/english/sources/tatoeba-english-2026-10-31/004.jsonl.gz.b64",
+          "sha256": "a2deb5f85c4ae953e141b6443f52714495cfc249edddb0d1123403dbf9facc90"
+        }
+      ],
+      "sourceEvidenceCandidates": 122212,
+      "availableAfterControlledExclusions": 2350,
+      "editorialDecisions": 119824,
+      "publishedExamples": 112514,
+      "rejected": 7310,
+      "approval": "candidate-evidence-only-unless-explicitly-reviewed"
+    }
+  ],
+  "combinedCapacity": {
+    "optimisticPublishedUpperBound": 121665,
+    "minimumAdditionalSourceGap": 0,
+    "caveat": "Includes pinned but unreviewed candidates, before further editorial rejection and cross-source near dedup. This is potential intake capacity, not published content or step approval."
+  },
+  "source": {
+    "id": "project-original",
+    "snapshot": "2026-10",
+    "license": "LicenseRef-Project-Original",
+    "publishAllowed": true
+  },
+  "sourceFiles": [
+    {
+      "path": "shared/typing-texts/levels/001.json",
+      "sha256": "6904d5f8b49dc2168313b9b8ec95f02bff8832f7f5f11e2822e6fa17a8c802aa"
+    },
+    {
+      "path": "shared/typing-texts/levels/002.json",
+      "sha256": "0368c157056967a6e6883cdf2747f8fb0333305815e367d181dfe8c8790b94e9"
+    },
+    {
+      "path": "shared/typing-texts/levels/003.json",
+      "sha256": "e1cb512098e4dff16fcded7f84428f924b98b3440c2a700a593799cf6daeed6c"
+    },
+    {
+      "path": "shared/typing-texts/levels/004.json",
+      "sha256": "1398c9bae033a88c131d06e66497005524dd093dedcd9950c34db2467835a194"
+    },
+    {
+      "path": "shared/typing-texts/levels/005.json",
+      "sha256": "1aba33dbeb17b0af26686f95b1ca52010aafd13f7474694bfd30dc15de59b966"
+    },
+    {
+      "path": "shared/typing-texts/levels/006.json",
+      "sha256": "1bf8aa290db6f768f313c0c155555e0bdb187bbf114d235edd667c6a75488898"
+    },
+    {
+      "path": "shared/typing-texts/levels/007.json",
+      "sha256": "9f826399c3e03ecba3770abed145638469b54304f1e208a4870a12726087d023"
+    },
+    {
+      "path": "shared/typing-texts/levels/008.json",
+      "sha256": "d15165e937da470277e989939a291e77fe8d3a2329903ace6231369a76a9b3ac"
+    },
+    {
+      "path": "shared/typing-texts/levels/009.json",
+      "sha256": "b332d8d676bacedd5d928267fbb760f64cb654d4e8f9dd1e3a83385ca5b6e79e"
+    },
+    {
+      "path": "shared/typing-texts/levels/010.json",
+      "sha256": "e6a2834e82e9532c7e6a254d9cc5f4f7668d1d384210b9291de0eb7fe412cd34"
+    },
+    {
+      "path": "shared/typing-texts/levels/011.json",
+      "sha256": "47b4f48c55404e5d96313f472394174439d8ce57ecbc634fa08150b324e1e5fa"
+    },
+    {
+      "path": "shared/typing-texts/levels/012.json",
+      "sha256": "089f97cde5b95d271b0d46296d790a164b05a67e1b3a479aab348aa0804cba1e"
+    },
+    {
+      "path": "shared/typing-texts/levels/013.json",
+      "sha256": "6bea10b180e1143e09afd4ef55acad43583ef57724247eb23a1dfa7b2a2eb4c9"
+    },
+    {
+      "path": "shared/typing-texts/levels/014.json",
+      "sha256": "bbe001efa2cb63c96c2312cff407303776c7724fb6dbad6b41b9cc6676041d9b"
+    },
+    {
+      "path": "shared/typing-texts/levels/015.json",
+      "sha256": "5993d3058d151bf1cb69e703a1646644fa9a6709168b09038d6cbf2d859c4208"
+    },
+    {
+      "path": "shared/typing-texts/levels/016.json",
+      "sha256": "8096db134c1e1b0fd2ff34bca1197359608bc37bc5ac7637d0ee1d68ef0c0701"
+    },
+    {
+      "path": "shared/typing-texts/levels/017.json",
+      "sha256": "23ea254a016e88a589a732e6cf1aae8371c985e38aabddd65368aa97d8a9c972"
+    },
+    {
+      "path": "shared/typing-texts/levels/018.json",
+      "sha256": "baa93970af39c0251ef790c64f6777ac4376eb1ceace418dac9069288e3aef7d"
+    },
+    {
+      "path": "shared/typing-texts/levels/019.json",
+      "sha256": "f5461617a852f5cf4b80338b10b6cdf85f78015b1c2fc83cac4f1f52a7836a30"
+    },
+    {
+      "path": "shared/typing-texts/levels/020.json",
+      "sha256": "dfbd20d22de89b82f0336b9af5f2955211cc00f4699376b801de77ab940d11ea"
+    }
+  ],
+  "currentEvidence": {
+    "sentenceManifestSha256": "452f4d9d95d2d98f46cc94546886111baf2c9adfdb2dd8cfb58adb30406c5296",
+    "reviewLedgerReportSha256": "9ad3a1e11077551a1999ef2079a779e7ff3a59d807f0912c7511d406bf1cbc33"
+  },
+  "transition": {
+    "step2Pass": false,
+    "step3Unlocked": false,
+    "group2Unlocked": false,
+    "reason": "A capacity audit or a partial corpus expansion does not satisfy the agreed 100,000-reviewed-published-example requirement."
+  },
+  "remainingWork": [
+    "Review remaining local raw candidates only through bounded digest-bound batches; none are approved by this report.",
+    "Continue explicit bounded editorial review of the new pinned English-only source; experimental upstream ratings never auto-approve grammar, suitability or CEFR.",
+    "Preserve Tatoeba source-pin and completed MultiWOZ gates; do not silently substitute mutable exports."
+  ]
+}

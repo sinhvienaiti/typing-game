@@ -1,0 +1,209 @@
+{
+  "schemaVersion": 1,
+  "step": 10,
+  "title": "Step 10 Example-Link Debt Resolution and Coverage Audit",
+  "reviewedAt": "2026-11-10T03:00:00Z",
+  "reviewedBy": "Antigravity Step 10 Debt Resolution Agent",
+  "scope": {
+    "scannedPublishedExamples": 129813,
+    "constraints": [
+      "Add only semantically correct whole-phrase/frame evidence",
+      "Reject unsafe lemma-only auto-linking",
+      "Document unresolved coverage truthfully"
+    ]
+  },
+  "baseline": {
+    "collocationsWithoutExamples": 4992,
+    "verbPatternsWithoutExamples": 504,
+    "phraseItemsWithoutExamples": 4159
+  },
+  "resolved": {
+    "collocationsLinked": 162,
+    "collocationTargetItems": 103,
+    "phraseItemsLinked": 553,
+    "phraseTargetItems": 335,
+    "verbPatternsLinked": 250,
+    "verbPatternTargetItems": 250
+  },
+  "unresolvedCoverage": {
+    "collocations": {
+      "count": 4889,
+      "reason": "No whole-phrase match in published 129,813 examples; lemma-only fallback strictly forbidden per Step 10 specification",
+      "sampleUnresolved": [
+        {
+          "id": "col.00000002",
+          "text": "make a mistake",
+          "reason": "No whole-phrase match found in published 129,813 sentences corpus; unsafe lemma-only matching rejected per plan specification"
+        },
+        {
+          "id": "col.00000005",
+          "text": "make a plan",
+          "reason": "No whole-phrase match found in published 129,813 sentences corpus; unsafe lemma-only matching rejected per plan specification"
+        },
+        {
+          "id": "col.00000007",
+          "text": "make a complaint",
+          "reason": "No whole-phrase match found in published 129,813 sentences corpus; unsafe lemma-only matching rejected per plan specification"
+        },
+        {
+          "id": "col.00000008",
+          "text": "make a difference",
+          "reason": "No whole-phrase match found in published 129,813 sentences corpus; unsafe lemma-only matching rejected per plan specification"
+        },
+        {
+          "id": "col.00000018",
+          "text": "take a risk",
+          "reason": "No whole-phrase match found in published 129,813 sentences corpus; unsafe lemma-only matching rejected per plan specification"
+        },
+        {
+          "id": "col.00000019",
+          "text": "take time",
+          "reason": "No whole-phrase match found in published 129,813 sentences corpus; unsafe lemma-only matching rejected per plan specification"
+        },
+        {
+          "id": "col.00000030",
+          "text": "have experience",
+          "reason": "No whole-phrase match found in published 129,813 sentences corpus; unsafe lemma-only matching rejected per plan specification"
+        },
+        {
+          "id": "col.00000031",
+          "text": "do homework",
+          "reason": "No whole-phrase match found in published 129,813 sentences corpus; unsafe lemma-only matching rejected per plan specification"
+        },
+        {
+          "id": "col.00000032",
+          "text": "do housework",
+          "reason": "No whole-phrase match found in published 129,813 sentences corpus; unsafe lemma-only matching rejected per plan specification"
+        },
+        {
+          "id": "col.00000033",
+          "text": "do exercise",
+          "reason": "No whole-phrase match found in published 129,813 sentences corpus; unsafe lemma-only matching rejected per plan specification"
+        }
+      ]
+    },
+    "phraseItems": {
+      "count": 3824,
+      "reason": "No whole-phrase match in published 129,813 examples; lemma-only fallback strictly forbidden per Step 10 specification",
+      "sampleUnresolved": [
+        {
+          "id": "pv.00000039",
+          "text": "hand out",
+          "reason": "No whole-phrase match found in published 129,813 sentences corpus; unsafe lemma-only matching rejected per plan specification"
+        },
+        {
+          "id": "chunk.00000011",
+          "text": "as far as I know",
+          "reason": "No whole-phrase match found in published 129,813 sentences corpus; unsafe lemma-only matching rejected per plan specification"
+        },
+        {
+          "id": "chunk.00000028",
+          "text": "as usual",
+          "reason": "No whole-phrase match found in published 129,813 sentences corpus; unsafe lemma-only matching rejected per plan specification"
+        },
+        {
+          "id": "chunk.00000031",
+          "text": "from time to time",
+          "reason": "No whole-phrase match found in published 129,813 sentences corpus; unsafe lemma-only matching rejected per plan specification"
+        },
+        {
+          "id": "idiom.00000001",
+          "text": "break the ice",
+          "reason": "No whole-phrase match found in published 129,813 sentences corpus; unsafe lemma-only matching rejected per plan specification"
+        },
+        {
+          "id": "idiom.00000002",
+          "text": "hit the road",
+          "reason": "No whole-phrase match found in published 129,813 sentences corpus; unsafe lemma-only matching rejected per plan specification"
+        },
+        {
+          "id": "idiom.00000003",
+          "text": "under the weather",
+          "reason": "No whole-phrase match found in published 129,813 sentences corpus; unsafe lemma-only matching rejected per plan specification"
+        },
+        {
+          "id": "idiom.00000005",
+          "text": "once in a blue moon",
+          "reason": "No whole-phrase match found in published 129,813 sentences corpus; unsafe lemma-only matching rejected per plan specification"
+        },
+        {
+          "id": "idiom.00000006",
+          "text": "cost an arm and a leg",
+          "reason": "No whole-phrase match found in published 129,813 sentences corpus; unsafe lemma-only matching rejected per plan specification"
+        },
+        {
+          "id": "idiom.00000007",
+          "text": "get the ball rolling",
+          "reason": "No whole-phrase match found in published 129,813 sentences corpus; unsafe lemma-only matching rejected per plan specification"
+        }
+      ]
+    },
+    "verbPatterns": {
+      "count": 254,
+      "reason": "No direct syntactic frame realization in published sentences; lemma-only fallback strictly forbidden per Step 10 specification",
+      "sampleUnresolved": [
+        {
+          "id": "pat.00000021",
+          "lemma": "make",
+          "frame": "verb + object + bare infinitive",
+          "reason": "No direct syntactic frame realization found in published sentences corpus; unsafe lemma-only auto-linking rejected per plan specification"
+        },
+        {
+          "id": "pat.00000022",
+          "lemma": "let",
+          "frame": "verb + object + bare infinitive",
+          "reason": "No direct syntactic frame realization found in published sentences corpus; unsafe lemma-only auto-linking rejected per plan specification"
+        },
+        {
+          "id": "pat.00000023",
+          "lemma": "help",
+          "frame": "verb + object + (to) infinitive",
+          "reason": "No direct syntactic frame realization found in published sentences corpus; unsafe lemma-only auto-linking rejected per plan specification"
+        },
+        {
+          "id": "pat.00000046",
+          "lemma": "thank",
+          "frame": "verb + object + for + noun/-ing",
+          "reason": "No direct syntactic frame realization found in published sentences corpus; unsafe lemma-only auto-linking rejected per plan specification"
+        },
+        {
+          "id": "pat.00000047",
+          "lemma": "accuse",
+          "frame": "verb + object + of + -ing",
+          "reason": "No direct syntactic frame realization found in published sentences corpus; unsafe lemma-only auto-linking rejected per plan specification"
+        },
+        {
+          "id": "pat.00000048",
+          "lemma": "prevent",
+          "frame": "verb + object + from + -ing",
+          "reason": "No direct syntactic frame realization found in published sentences corpus; unsafe lemma-only auto-linking rejected per plan specification"
+        },
+        {
+          "id": "pat.00000065",
+          "lemma": "warn",
+          "frame": "verb + object + (not) to-infinitive",
+          "reason": "No direct syntactic frame realization found in published sentences corpus; unsafe lemma-only auto-linking rejected per plan specification"
+        },
+        {
+          "id": "pat.00000069",
+          "lemma": "offer",
+          "frame": "verb + indirect object + direct object",
+          "reason": "No direct syntactic frame realization found in published sentences corpus; unsafe lemma-only auto-linking rejected per plan specification"
+        },
+        {
+          "id": "pat.00000070",
+          "lemma": "consider",
+          "frame": "verb + object + (to be) + complement",
+          "reason": "No direct syntactic frame realization found in published sentences corpus; unsafe lemma-only auto-linking rejected per plan specification"
+        },
+        {
+          "id": "pat.00000086",
+          "lemma": "tolerate",
+          "frame": "verb + -ing",
+          "reason": "No direct syntactic frame realization found in published sentences corpus; unsafe lemma-only auto-linking rejected per plan specification"
+        }
+      ]
+    }
+  }
+}
+

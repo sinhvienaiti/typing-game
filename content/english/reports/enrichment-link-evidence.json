@@ -1,0 +1,537 @@
+{
+  "schemaVersion": 1,
+  "contentVersion": "2026.10.0",
+  "method": {
+    "lexemeAndSense": "explicit published sentence.lexicalIds only",
+    "fallbackFormEvidence": "whole-form boundary match for manual sense review only; includes inflected forms",
+    "collocationAndPhrase": "normalized whole-phrase boundary match against published examples",
+    "verbPattern": "lemma-only candidate discovery; NOT safe for automatic linking without frame review"
+  },
+  "examplesScanned": 129813,
+  "lexemes": {
+    "total": 300,
+    "withCandidates": 300,
+    "withoutCandidates": 0,
+    "coverage": 1,
+    "sampleMatched": [
+      {
+        "id": "lex.en.00000101",
+        "exampleIds": [
+          "sent.tt.l001-p005.009",
+          "sent.tt.l001-p005.021",
+          "sent.tt.l001-p005.011"
+        ]
+      },
+      {
+        "id": "lex.en.00000156",
+        "exampleIds": [
+          "sent.tt.l002-p001.007"
+        ]
+      },
+      {
+        "id": "lex.en.00000159",
+        "exampleIds": [
+          "sent.tt.l002-p001.013"
+        ]
+      },
+      {
+        "id": "lex.en.00000245",
+        "exampleIds": [
+          "sent.tt.l002-p005.011"
+        ]
+      },
+      {
+        "id": "lex.en.00000246",
+        "exampleIds": [
+          "sent.tt.l002-p005.013"
+        ]
+      },
+      {
+        "id": "lex.en.00000268",
+        "exampleIds": [
+          "sent.tt.l002-p006.017"
+        ]
+      },
+      {
+        "id": "lex.en.00000131",
+        "exampleIds": [
+          "sent.tt.l001-p006.006"
+        ]
+      },
+      {
+        "id": "lex.en.00000149",
+        "exampleIds": [
+          "sent.tt.l001-p007.011"
+        ]
+      },
+      {
+        "id": "lex.en.00000154",
+        "exampleIds": [
+          "sent.tt.l002-p001.016"
+        ]
+      },
+      {
+        "id": "lex.en.00000181",
+        "exampleIds": [
+          "sent.tt.l002-p002.016"
+        ]
+      }
+    ],
+    "sampleMissing": []
+  },
+  "senses": {
+    "total": 300,
+    "withCandidates": 300,
+    "withoutCandidates": 0,
+    "coverage": 1,
+    "sampleMatched": [
+      {
+        "id": "sense.00000001",
+        "exampleIds": [
+          "sent.tt.l001-p005.009",
+          "sent.tt.l001-p005.021",
+          "sent.tt.l001-p005.011"
+        ]
+      },
+      {
+        "id": "sense.00000002",
+        "exampleIds": [
+          "sent.tt.l002-p001.007"
+        ]
+      },
+      {
+        "id": "sense.00000003",
+        "exampleIds": [
+          "sent.tt.l002-p001.013"
+        ]
+      },
+      {
+        "id": "sense.00000004",
+        "exampleIds": [
+          "sent.tt.l002-p005.011"
+        ]
+      },
+      {
+        "id": "sense.00000005",
+        "exampleIds": [
+          "sent.tt.l002-p005.013"
+        ]
+      },
+      {
+        "id": "sense.00000006",
+        "exampleIds": [
+          "sent.tt.l002-p006.017"
+        ]
+      },
+      {
+        "id": "sense.00000007",
+        "exampleIds": [
+          "sent.tt.l001-p006.006"
+        ]
+      },
+      {
+        "id": "sense.00000008",
+        "exampleIds": [
+          "sent.tt.l001-p007.011"
+        ]
+      },
+      {
+        "id": "sense.00000009",
+        "exampleIds": [
+          "sent.tt.l002-p001.016"
+        ]
+      },
+      {
+        "id": "sense.00000010",
+        "exampleIds": [
+          "sent.tt.l002-p002.016"
+        ]
+      }
+    ],
+    "sampleMissing": []
+  },
+  "e03FallbackFormEvidence": [],
+  "collocations": {
+    "total": 5000,
+    "withCandidates": 111,
+    "withoutCandidates": 4889,
+    "coverage": 0.0222,
+    "sampleMatched": [
+      {
+        "id": "col.00000001",
+        "exampleIds": [
+          "sent.tatoeba.17786",
+          "sent.tatoeba.29107",
+          "sent.tatoeba.2802889",
+          "sent.tatoeba.6392868"
+        ]
+      },
+      {
+        "id": "col.00000003",
+        "exampleIds": [
+          "sent.tatoeba.807437"
+        ]
+      },
+      {
+        "id": "col.00000004",
+        "exampleIds": [
+          "sent.tatoeba.13887004",
+          "sent.tatoeba.16202",
+          "sent.tatoeba.269787",
+          "sent.tatoeba.2267178"
+        ]
+      },
+      {
+        "id": "col.00000006",
+        "exampleIds": [
+          "sent.tatoeba.11450693",
+          "sent.tatoeba.273612"
+        ]
+      },
+      {
+        "id": "col.00000009",
+        "exampleIds": [
+          "sent.tatoeba.1855"
+        ]
+      },
+      {
+        "id": "col.00000010",
+        "exampleIds": [
+          "sent.tatoeba.13224630",
+          "sent.tatoeba.13627794",
+          "sent.tatoeba.16509",
+          "sent.tatoeba.266767",
+          "sent.tatoeba.3024075"
+        ]
+      },
+      {
+        "id": "col.00000011",
+        "exampleIds": [
+          "sent.tatoeba.2298173",
+          "sent.tatoeba.4600089",
+          "sent.tatoeba.7130084"
+        ]
+      },
+      {
+        "id": "col.00000012",
+        "exampleIds": [
+          "sent.tatoeba.240593",
+          "sent.tatoeba.5725221",
+          "sent.tatoeba.10117545",
+          "sent.tatoeba.11695220"
+        ]
+      },
+      {
+        "id": "col.00000013",
+        "exampleIds": [
+          "sent.tatoeba.2190",
+          "sent.tatoeba.1740676",
+          "sent.tatoeba.1762536",
+          "sent.tatoeba.7842169",
+          "sent.tatoeba.10908692"
+        ]
+      },
+      {
+        "id": "col.00000014",
+        "exampleIds": [
+          "sent.tt.l003-p002.002",
+          "sent.tatoeba.2562135",
+          "sent.tatoeba.2966113",
+          "sent.tatoeba.5617634"
+        ]
+      }
+    ],
+    "sampleMissing": [
+      "col.00000002",
+      "col.00000005",
+      "col.00000007",
+      "col.00000008",
+      "col.00000018",
+      "col.00000019",
+      "col.00000030",
+      "col.00000031",
+      "col.00000032",
+      "col.00000033",
+      "col.00000035",
+      "col.00000037",
+      "col.00000048",
+      "col.00000049",
+      "col.00000050",
+      "col.00000051",
+      "col.00000053",
+      "col.00000054",
+      "col.00000055",
+      "col.00000056",
+      "col.00000058",
+      "col.00000059",
+      "col.00000060",
+      "col.00000061",
+      "col.00000066"
+    ]
+  },
+  "phraseItems": {
+    "total": 4185,
+    "withCandidates": 361,
+    "withoutCandidates": 3824,
+    "coverage": 0.0863,
+    "sampleMatched": [
+      {
+        "id": "pv.00000001",
+        "exampleIds": [
+          "sent.tatoeba.2387444",
+          "sent.tatoeba.12184486",
+          "sent.tatoeba.13594616",
+          "sent.tatoeba.1439850",
+          "sent.tatoeba.1461054"
+        ]
+      },
+      {
+        "id": "pv.00000002",
+        "exampleIds": [
+          "sent.tatoeba.11362807",
+          "sent.tatoeba.13724156",
+          "sent.tatoeba.13854144",
+          "sent.tatoeba.1725",
+          "sent.tatoeba.261501"
+        ]
+      },
+      {
+        "id": "pv.00000003",
+        "exampleIds": [
+          "sent.tatoeba.6630944",
+          "sent.tatoeba.6803603",
+          "sent.tt.l002-p006.003",
+          "sent.tatoeba.6043",
+          "sent.tatoeba.34104"
+        ]
+      },
+      {
+        "id": "pv.00000004",
+        "exampleIds": [
+          "sent.gra1.02.01.2",
+          "sent.tatoeba.13563391",
+          "sent.tatoeba.13787326",
+          "sent.tatoeba.1552231",
+          "sent.tatoeba.31221"
+        ]
+      },
+      {
+        "id": "pv.00000005",
+        "exampleIds": [
+          "sent.tatoeba.11333213",
+          "sent.tatoeba.11333218",
+          "sent.tatoeba.11333223",
+          "sent.tatoeba.13855408",
+          "sent.tatoeba.2537365"
+        ]
+      },
+      {
+        "id": "pv.00000006",
+        "exampleIds": [
+          "sent.tatoeba.3537668",
+          "sent.tatoeba.7471749",
+          "sent.tatoeba.33891",
+          "sent.tatoeba.61905",
+          "sent.tatoeba.947442"
+        ]
+      },
+      {
+        "id": "pv.00000007",
+        "exampleIds": [
+          "sent.tatoeba.13709963",
+          "sent.tatoeba.1617642",
+          "sent.tt.l002-p005.009",
+          "sent.tt.l001-p008.010",
+          "sent.tt.l002-p001.012"
+        ]
+      },
+      {
+        "id": "pv.00000008",
+        "exampleIds": [
+          "sent.tatoeba.3825760",
+          "sent.tatoeba.6507892",
+          "sent.tatoeba.16064",
+          "sent.tatoeba.25330",
+          "sent.tatoeba.240433"
+        ]
+      },
+      {
+        "id": "pv.00000009",
+        "exampleIds": [
+          "sent.tatoeba.29255",
+          "sent.tatoeba.262822",
+          "sent.tatoeba.269143",
+          "sent.tatoeba.273716",
+          "sent.tatoeba.274547"
+        ]
+      },
+      {
+        "id": "pv.00000010",
+        "exampleIds": [
+          "sent.tatoeba.11267979",
+          "sent.tatoeba.2014690",
+          "sent.tatoeba.2042636",
+          "sent.tatoeba.2408444",
+          "sent.tatoeba.2408633"
+        ]
+      }
+    ],
+    "sampleMissing": [
+      "pv.00000039",
+      "chunk.00000011",
+      "chunk.00000028",
+      "chunk.00000031",
+      "idiom.00000001",
+      "idiom.00000002",
+      "idiom.00000003",
+      "idiom.00000005",
+      "idiom.00000006",
+      "idiom.00000007",
+      "idiom.00000010",
+      "chunk.00000041",
+      "chunk.00000042",
+      "chunk.00000045",
+      "idiom.00000012",
+      "idiom.00000013",
+      "idiom.00000014",
+      "pv.00000066",
+      "chunk.00000047",
+      "idiom.00000016",
+      "idiom.00000017",
+      "idiom.00000018",
+      "idiom.00000019",
+      "idiom.00000020",
+      "chunk.00000051"
+    ]
+  },
+  "verbPatternsLemmaEvidence": {
+    "total": 510,
+    "withCandidates": 490,
+    "withoutCandidates": 20,
+    "coverage": 0.9608,
+    "sampleMatched": [
+      {
+        "id": "pat.00000001",
+        "exampleIds": [
+          "sent.e03.00000154",
+          "sent.gra1.04.02.1",
+          "sent.gra1.04.02.3",
+          "sent.gra2.05.02.1",
+          "sent.tatoeba.1891"
+        ]
+      },
+      {
+        "id": "pat.00000002",
+        "exampleIds": [
+          "sent.gra1.02.03.2",
+          "sent.gra1.03.02.3",
+          "sent.gra1.03.06.3",
+          "sent.gra2.06.01.3",
+          "sent.gra2.06.02.1"
+        ]
+      },
+      {
+        "id": "pat.00000003",
+        "exampleIds": [
+          "sent.e03.00000209",
+          "sent.grb1.03.01.1",
+          "sent.grb1.03.01.3",
+          "sent.tatoeba.10167377",
+          "sent.tatoeba.10276635"
+        ]
+      },
+      {
+        "id": "pat.00000004",
+        "exampleIds": [
+          "sent.grb2.04.05.1",
+          "sent.grb2.07.02.1",
+          "sent.tatoeba.10257548",
+          "sent.tatoeba.11326795",
+          "sent.tatoeba.11356266"
+        ]
+      },
+      {
+        "id": "pat.00000005",
+        "exampleIds": [
+          "sent.grc1.01.03.2",
+          "sent.tatoeba.11373457",
+          "sent.tatoeba.11373506",
+          "sent.tatoeba.11392726",
+          "sent.tatoeba.1948395"
+        ]
+      },
+      {
+        "id": "pat.00000006",
+        "exampleIds": [
+          "sent.tatoeba.11291205",
+          "sent.tatoeba.2541560",
+          "sent.tatoeba.4107583",
+          "sent.tatoeba.5403060",
+          "sent.tatoeba.6108851"
+        ]
+      },
+      {
+        "id": "pat.00000007",
+        "exampleIds": [
+          "sent.tatoeba.13875667",
+          "sent.tatoeba.2323924",
+          "sent.tatoeba.2644246",
+          "sent.tatoeba.318661",
+          "sent.tatoeba.321994"
+        ]
+      },
+      {
+        "id": "pat.00000008",
+        "exampleIds": [
+          "sent.tatoeba.254450",
+          "sent.tatoeba.309457",
+          "sent.tatoeba.542922",
+          "sent.tatoeba.681878",
+          "sent.tatoeba.803341"
+        ]
+      },
+      {
+        "id": "pat.00000009",
+        "exampleIds": [
+          "sent.tatoeba.13493058",
+          "sent.tt.l005-p001.008",
+          "sent.tatoeba.18469",
+          "sent.tatoeba.24915",
+          "sent.tatoeba.249331"
+        ]
+      },
+      {
+        "id": "pat.00000010",
+        "exampleIds": [
+          "sent.grc1.01.02.1",
+          "sent.tatoeba.2109",
+          "sent.tatoeba.30608",
+          "sent.tatoeba.40732",
+          "sent.tatoeba.240606"
+        ]
+      }
+    ],
+    "sampleMissing": [
+      "pat.00000252",
+      "pat.00000256",
+      "pat.00000265",
+      "pat.00000266",
+      "pat.00000269",
+      "pat.00000271",
+      "pat.00000283",
+      "pat.00000286",
+      "pat.00000292",
+      "pat.00000293",
+      "pat.00000296",
+      "pat.00000315",
+      "pat.00000363",
+      "pat.00000364",
+      "pat.00000431",
+      "pat.00000437",
+      "pat.00000495",
+      "pat.00000497",
+      "pat.00000499",
+      "pat.00000510"
+    ]
+  }
+}

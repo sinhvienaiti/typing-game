@@ -1,0 +1,70 @@
+{
+  "schemaVersion": 1,
+  "records": [
+    {
+      "id": "source-refresh.tatoeba.2026-11-07",
+      "sourceId": "tatoeba",
+      "previousSnapshot": "weekly-export-observed-2026-10-03",
+      "proposedSnapshot": "weekly-export-observed-2026-11-07-v1",
+      "observedAt": "2026-11-07",
+      "files": {
+        "engSentences": {
+          "previousContentSha256": "f0772a134c700e01eceef6d33c54531de26f9ea5af64fe00c56c5c49665f281c",
+          "observedContentSha256": "841c33582fc6bc2b79c97119cbef449c7c2410a0561635d57a3cd61387c8ccec",
+          "changed": true
+        },
+        "vieSentences": {
+          "previousContentSha256": "40ce7f0ec9120583a35c10fab8c8508fd17dfd24f04a6a12e4654872ad1fbb03",
+          "observedContentSha256": "6480a1fb51558bdc2a39e25ee2b1d44a35c4ac7d6d29e823b48eb1c018ff9b39",
+          "changed": true
+        },
+        "links": {
+          "previousContentSha256": "ea51773a96e4e88bd61ad106afa9ffa1a6b515686fb7c1134b3a5dbc6fb2557d",
+          "observedContentSha256": "b52740c81a76a0a5c8d58e6e81af36d9882501ce3f6b4c0fa7d8020667a35a1b",
+          "changed": true
+        }
+      },
+      "quality": {
+        "state": "draft",
+        "checks": {
+          "sourcePin": {
+            "status": "pass",
+            "method": "ci-observed-content-sha256-v1"
+          },
+          "upstreamMetadata": {
+            "status": "pass",
+            "method": "tatoeba-live-export-observed-v1"
+          },
+          "license": {
+            "status": "pass",
+            "method": "tatoeba-cc-by-2.0-fr-review-v1"
+          },
+          "derivedComparison": {
+            "status": "pass",
+            "method": "normalized-pair-exact-comparison-v1"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "tatoeba",
+            "sourceId": "per-language-export",
+            "sourceUrl": "https://downloads.tatoeba.org/exports/per_language/",
+            "snapshot": "weekly-export-observed-2026-11-07-v1",
+            "license": "CC-BY-2.0-FR",
+            "attribution": "Tatoeba Project",
+            "modified": false
+          }
+        ],
+        "note": "Operational source-refresh review metadata only. This record is never published as learner content."
+      },
+      "comparison": {
+        "candidatePairsBefore": 16267,
+        "candidatePairsAfter": 19432,
+        "uniqueLearningPairsAfter": 19430,
+        "note": "Official 2026-11-07 Tatoeba export provides 19,430 unique learning pairs under CC-BY-2.0-FR, sufficient to expand bilingual pairs beyond 20,000 when combined with existing reviewed translations."
+      }
+    }
+  ]
+}

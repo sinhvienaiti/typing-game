@@ -1,0 +1,113 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://typing-game.local/schemas/english-content/tatoeba-source-pin.schema.json",
+  "title": "Tatoeba English-Vietnamese source pin",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "source",
+    "snapshot",
+    "license",
+    "attribution",
+    "files"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "source": {
+      "const": "tatoeba"
+    },
+    "snapshot": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 100
+    },
+    "license": {
+      "const": "CC-BY-2.0-FR"
+    },
+    "attribution": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 500
+    },
+    "files": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "engSentences",
+        "vieSentences",
+        "links"
+      ],
+      "properties": {
+        "engSentences": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "url",
+            "contentSha256"
+          ],
+          "properties": {
+            "url": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 1000
+            },
+            "contentSha256": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "pattern": "^[a-f0-9]{64}$"
+            }
+          }
+        },
+        "vieSentences": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "url",
+            "contentSha256"
+          ],
+          "properties": {
+            "url": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 1000
+            },
+            "contentSha256": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "pattern": "^[a-f0-9]{64}$"
+            }
+          }
+        },
+        "links": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "url",
+            "contentSha256"
+          ],
+          "properties": {
+            "url": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 1000
+            },
+            "contentSha256": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "pattern": "^[a-f0-9]{64}$"
+            }
+          }
+        }
+      }
+    }
+  }
+}

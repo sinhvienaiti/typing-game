@@ -1,0 +1,5010 @@
+{
+  "schemaVersion": 1,
+  "sourceSnapshot": "english-only-weekly-2026-10-31-observed-2026-11-07-v1",
+  "reviewed": 200,
+  "published": 143,
+  "rejected": 57,
+  "edited": 2,
+  "records": [
+    {
+      "id": "sent.tatoeba.37338",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "Tom is the most handsome actor in the world.",
+      "finalText": "Tom is the most handsome actor in the world.",
+      "intakeSourceDigest": "a461cad682694dd19a1ead6abe7bc469f11b3cb9ca216ad0d1a59efdd9f47384",
+      "controlledSourceDigest": "e800517a48a4d8ef34ca7de578c0a2accd6def25c7708f2801391be5891017aa",
+      "maximumTokenJaccard": 0.4545,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.37298",
+          "score": 0.45454545454545453
+        },
+        {
+          "id": "sent.tatoeba.11755060",
+          "score": 0.36363636363636365
+        },
+        {
+          "id": "sent.gra2.02.08.1",
+          "score": 0.3333333333333333
+        }
+      ],
+      "rationale": "The world-wide actor superlative is an unbounded ranking with no speaker or comparison basis."
+    },
+    {
+      "id": "sent.tatoeba.37341",
+      "outcome": "publish",
+      "cefr": "B2",
+      "originalText": "Tom attributed his failure in the exam to illness.",
+      "finalText": "Tom attributed his failure in the exam to illness.",
+      "intakeSourceDigest": "1c7aadf3f5f687fb0f27a9209860003617f4d076de5da7a4363cf631c2fb25df",
+      "controlledSourceDigest": "af69975bc8e45366907d810396565828cbf5c9cf1a5c6fe7a6e76e53706b20c8",
+      "maximumTokenJaccard": 0.2857,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.14026211",
+          "score": 0.2857142857142857
+        },
+        {
+          "id": "sent.tatoeba.37156",
+          "score": 0.2857142857142857
+        },
+        {
+          "id": "sent.tatoeba.37164",
+          "score": 0.2857142857142857
+        }
+      ],
+      "rationale": "Attributed his failure to illness is a natural reporting collocation for one exam outcome."
+    },
+    {
+      "id": "sent.tatoeba.37348",
+      "outcome": "publish",
+      "cefr": "B2",
+      "originalText": "Tom's report leaves much to be desired.",
+      "finalText": "Tom's report leaves much to be desired.",
+      "intakeSourceDigest": "753ec608d2205889abac5d4eb28c46cef9acfaec834e23f3779a7edfc49f7d68",
+      "controlledSourceDigest": "ce11055c9cf74b98c8ff05d9eb103dba9d6268e224c0b49d1da47dadaf7605d7",
+      "maximumTokenJaccard": 0.2,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.11229235",
+          "score": 0.2
+        },
+        {
+          "id": "sent.tatoeba.7117402",
+          "score": 0.2
+        },
+        {
+          "id": "sent.tatoeba.10302687",
+          "score": 0.2
+        }
+      ],
+      "rationale": "Leaves much to be desired is a conventional idiom evaluating a particular report."
+    },
+    {
+      "id": "sent.tatoeba.37354",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "All but Tom were present.",
+      "finalText": "All but Tom were present.",
+      "intakeSourceDigest": "eedbd4c72bdc4ba7a4c0d044bbd96d2fbfb052268e4a53b9a1f9d82de87ffdd2",
+      "controlledSourceDigest": "61e36316766eaa6d90765b303f14ab5642e4ebfa70ce5674a3b4de79ace346a7",
+      "maximumTokenJaccard": 0.6667,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.27610",
+          "score": 0.6666666666666666
+        },
+        {
+          "id": "sent.tatoeba.6514519",
+          "score": 0.3
+        },
+        {
+          "id": "sent.tatoeba.28279",
+          "score": 0.25
+        }
+      ],
+      "rationale": "Pragmatic repeat of the published all-but-one-were-present example; Tom merely identifies the missing attendee."
+    },
+    {
+      "id": "sent.tatoeba.37356",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Tom's hobby is collecting photos of cars.",
+      "finalText": "Tom's hobby is collecting photos of cars.",
+      "intakeSourceDigest": "b62db0a480b4891e0830dac9c9fa5cc90444d571eda367123665775aa4ac28b5",
+      "controlledSourceDigest": "f830992f5d638468699e4c17ab68479b5f63ca34b595a47fdf2e5de509577b63",
+      "maximumTokenJaccard": 0.1818,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.12896187",
+          "score": 0.18181818181818182
+        },
+        {
+          "id": "sent.tt.l001-p009.009",
+          "score": 0.18181818181818182
+        },
+        {
+          "id": "sent.tatoeba.12005201",
+          "score": 0.18181818181818182
+        }
+      ],
+      "rationale": "The collecting-photos gerund phrase naturally names a specific person's hobby."
+    },
+    {
+      "id": "sent.tatoeba.37359",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "A good student like Tom brings honor to our class.",
+      "finalText": "A good student like Tom brings honor to our class.",
+      "intakeSourceDigest": "d1d49b1be5fd2863f7fd61a1b3033bc22cc2cf729ccebd4660e6ad0f990a62c7",
+      "controlledSourceDigest": "ae3614d5e4e8a2d5ab7e493b31682b8c784c0ccc47a899e3ff6c6ce5342aaa97",
+      "maximumTokenJaccard": 0.2143,
+      "nearest": [
+        {
+          "id": "sent.gra1.01.01.1",
+          "score": 0.21428571428571427
+        },
+        {
+          "id": "sent.tatoeba.2686468",
+          "score": 0.21428571428571427
+        },
+        {
+          "id": "sent.tatoeba.11119951",
+          "score": 0.21428571428571427
+        }
+      ],
+      "rationale": "Brings honor to our class is a grammatical situated evaluation, without a group-wide generalization."
+    },
+    {
+      "id": "sent.tatoeba.37364",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "I got Tom to mend my shoes.",
+      "finalText": "I got Tom to mend my shoes.",
+      "intakeSourceDigest": "4e021692a304b25d55222aea48030f0fa859d3324e3340a122a86206966ebcf6",
+      "controlledSourceDigest": "d3e8806c3ac24cc69728b922858920b5097d4b7e86f2b46a00ee6004a147a27a",
+      "maximumTokenJaccard": 0.4,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.13525107",
+          "score": 0.4
+        },
+        {
+          "id": "sent.tatoeba.1852287",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.13874465",
+          "score": 0.3
+        }
+      ],
+      "rationale": "Got Tom to mend uses a correct object-plus-infinitive causative with a concrete repair task."
+    },
+    {
+      "id": "sent.tatoeba.37368",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "It is Tom's ambition to go to the moon.",
+      "finalText": "It is Tom's ambition to go to the moon.",
+      "intakeSourceDigest": "18ee95d25558e0d1a800007a442a9c0e34f982e05231488c5aacf0d8111cb000",
+      "controlledSourceDigest": "e0f11c1a3e242d3605a475e5ca6c3f0d707dfc055aeefc79cafa1211ccdd4762",
+      "maximumTokenJaccard": 0.3571,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.17859",
+          "score": 0.35714285714285715
+        },
+        {
+          "id": "sent.tatoeba.11373432",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.31666",
+          "score": 0.3333333333333333
+        }
+      ],
+      "rationale": "The anticipatory-it construction and moon-travel ambition are coherent and clearly personal."
+    },
+    {
+      "id": "sent.tatoeba.37398",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "Please give my best regards to Tom.",
+      "finalText": "Please give my best regards to Tom.",
+      "intakeSourceDigest": "6323aa67ad8625fed8056cc857478732585d29c4803194831a96a6059f0b4dfe",
+      "controlledSourceDigest": "d8104d871165d9e2585f80cd9352671bd8786aaff18f7bc56288e4df90b50487",
+      "maximumTokenJaccard": 0.7143,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.1852287",
+          "score": 0.7142857142857143
+        },
+        {
+          "id": "sent.tatoeba.25784",
+          "score": 0.2727272727272727
+        },
+        {
+          "id": "sent.tatoeba.37364",
+          "score": 0.2727272727272727
+        }
+      ],
+      "rationale": "Repeats the published give-my-regards-to-Tom message, adding only please and best."
+    },
+    {
+      "id": "sent.tatoeba.37404",
+      "outcome": "publish",
+      "cefr": "B2",
+      "originalText": "There is little, if any, hope that Tom will win the election.",
+      "finalText": "There is little, if any, hope that Tom will win the election.",
+      "intakeSourceDigest": "209476d26f026f8d09c87bf39dc3d598179a7c52a664a1634fc9f3079c339517",
+      "controlledSourceDigest": "4b8d593cbe33870c2ecc7423df4c17549f0d6b3b25f1fd60ec9af921f2841dab",
+      "maximumTokenJaccard": 0.2667,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.35476",
+          "score": 0.26666666666666666
+        },
+        {
+          "id": "sent.tatoeba.6866354",
+          "score": 0.23529411764705882
+        },
+        {
+          "id": "sent.tatoeba.38382",
+          "score": 0.2222222222222222
+        }
+      ],
+      "rationale": "Little if any appropriately qualifies hope within a complete election prediction."
+    },
+    {
+      "id": "sent.tatoeba.37414",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "When Tom lost his wallet, he was out of luck.",
+      "finalText": "When Tom lost his wallet, he was out of luck.",
+      "intakeSourceDigest": "f25084de5ce54783f627686aaaa9c3154c5e8bfe901e80a4ad140e29eab7991e",
+      "controlledSourceDigest": "f25b5cfd5ec061af08a83e5c1a7491fd8a22d7d51280651f44a3f3fa5c6e0781",
+      "maximumTokenJaccard": 0.2727,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.417024",
+          "score": 0.2727272727272727
+        },
+        {
+          "id": "sent.tatoeba.11119885",
+          "score": 0.23529411764705882
+        },
+        {
+          "id": "sent.tatoeba.6297914",
+          "score": 0.21428571428571427
+        }
+      ],
+      "rationale": "The wallet-loss frame anchors the idiomatic out of luck expression in a specific event."
+    },
+    {
+      "id": "sent.tatoeba.37415",
+      "outcome": "publish",
+      "cefr": "B2",
+      "originalText": "Tom owes what he is today to his wife.",
+      "finalText": "Tom owes what he is today to his wife.",
+      "intakeSourceDigest": "4b8fe69fb44afe115f8974c8e5c7542eb8eaf650fa1656f7d7e3435b6fe92bae",
+      "controlledSourceDigest": "50dec08b8f921555e7d6ceceab6095572d9bfb6e02707efc6400d0d38124f5e0",
+      "maximumTokenJaccard": 0.2941,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3124695",
+          "score": 0.29411764705882354
+        },
+        {
+          "id": "sent.tt.l001-p007.011",
+          "score": 0.2857142857142857
+        },
+        {
+          "id": "sent.tatoeba.37156",
+          "score": 0.2857142857142857
+        }
+      ],
+      "rationale": "Owes what he is today to is a valid embedded-clause expression of personal gratitude."
+    },
+    {
+      "id": "sent.tatoeba.37416",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Tom is at the door. Please ask him in.",
+      "finalText": "Tom is at the door. Please ask him in.",
+      "intakeSourceDigest": "cfd5034d185028a4fb8f15519ebf34b95e33790d21a9444df1144bc18de1b1c6",
+      "controlledSourceDigest": "832182bdd6e30fd382073986a05e9cb3e20b9da9b7c2372c4bd76ae1015dc703",
+      "maximumTokenJaccard": 0.5833,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.39064",
+          "score": 0.5833333333333334
+        },
+        {
+          "id": "sent.gra2.02.06.1",
+          "score": 0.4
+        },
+        {
+          "id": "sent.tatoeba.3722985",
+          "score": 0.3076923076923077
+        }
+      ],
+      "rationale": "The door location and ask-him-in request form a complete and coherent short utterance."
+    },
+    {
+      "id": "sent.tatoeba.37420",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "Tom ran and ran, until at last he saw the telephone booth.",
+      "finalText": "Tom ran and ran, until at last he saw the telephone booth.",
+      "intakeSourceDigest": "34ea2c128a2e9985fe93b8849a2f4b7cd4094df3fee4c5a98655f191671a5612",
+      "controlledSourceDigest": "e80f8a845d9a6c2fdd0bdeae0f0ea4006e813c371b6f6c0ed529e0e3fdf92706",
+      "maximumTokenJaccard": 0.2941,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.29460",
+          "score": 0.29411764705882354
+        },
+        {
+          "id": "sent.tatoeba.6434004",
+          "score": 0.25
+        },
+        {
+          "id": "sent.tt.l002-p003.002",
+          "score": 0.2222222222222222
+        }
+      ],
+      "rationale": "Repeated ran emphasizes continued effort; the until clause supplies the endpoint naturally."
+    },
+    {
+      "id": "sent.tatoeba.37436",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "Give me your passport, Tom. I'll keep it in my safe.",
+      "finalText": "Give me your passport, Tom. I'll keep it in my safe.",
+      "intakeSourceDigest": "806178dfced9638cfe6e38adb554991410b8c2b3fad85242e5aec424bc724f64",
+      "controlledSourceDigest": "cd2010f9932643fbe793cdc163ef9b3d688dcf7f2b201cc14785a57c4cbf13d1",
+      "maximumTokenJaccard": 0.2857,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.17082",
+          "score": 0.2857142857142857
+        },
+        {
+          "id": "sent.tatoeba.17337",
+          "score": 0.25
+        },
+        {
+          "id": "sent.tatoeba.1852287",
+          "score": 0.23076923076923078
+        }
+      ],
+      "rationale": "The direct passport request and promise of storage form a coherent personal safekeeping offer."
+    },
+    {
+      "id": "sent.tatoeba.37440",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Tommy couldn't answer the last question.",
+      "finalText": "Tommy couldn't answer the last question.",
+      "intakeSourceDigest": "427bfbd118a2a2e232ca087bbca25deba8c899cdd64d2754c2ec143ad0e431ca",
+      "controlledSourceDigest": "63213ebc513677fce17630902b34b98d04fc18d6a4c06cedd479ccf59bfac1d4",
+      "maximumTokenJaccard": 0.3,
+      "nearest": [
+        {
+          "id": "sent.gra1.02.07.2",
+          "score": 0.3
+        },
+        {
+          "id": "sent.tatoeba.11325031",
+          "score": 0.3
+        },
+        {
+          "id": "sent.grb1.02.04.1",
+          "score": 0.25
+        }
+      ],
+      "rationale": "Could not answer and the final question identify a clear past inability."
+    },
+    {
+      "id": "sent.tatoeba.37442",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "The tomato is a vegetable, not a fruit.",
+      "finalText": "The tomato is a vegetable, not a fruit.",
+      "intakeSourceDigest": "69e10f7beb6a53eb32406706ed93c2914c9b25f460561dbf692937018a553849",
+      "controlledSourceDigest": "c2614d46f31bcf17e936b1831a82701623c2abf27b945374431f79b1b9c0b619",
+      "maximumTokenJaccard": 0.3333,
+      "nearest": [
+        {
+          "id": "sent.tt.l002-p001.009",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.2298",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tt.l001-p009.014",
+          "score": 0.3076923076923077
+        }
+      ],
+      "rationale": "The vegetable-not-fruit assertion confuses culinary and botanical categories without specifying either."
+    },
+    {
+      "id": "sent.tatoeba.37470",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "What train goes to the center of town?",
+      "finalText": "What train goes to the center of town?",
+      "intakeSourceDigest": "84479648d3273795ffb4efa24fe0da5c8ed707f55f015df2d633c24c8e3edab0",
+      "controlledSourceDigest": "1b25f9c671937969903f97dc6814ffb6fb744cffe36c5adac41b3ccfd6d947f6",
+      "maximumTokenJaccard": 0.2857,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.29816",
+          "score": 0.2857142857142857
+        },
+        {
+          "id": "sent.grb1.05.04.3",
+          "score": 0.25
+        },
+        {
+          "id": "sent.tt.l003-p002.006",
+          "score": 0.23529411764705882
+        }
+      ],
+      "rationale": "The transport question identifies the destination and is natural as a route enquiry."
+    },
+    {
+      "id": "sent.tatoeba.37475",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "What subway goes to the center of town?",
+      "finalText": "What subway goes to the center of town?",
+      "intakeSourceDigest": "af325eaabafa5edb554bc91cc9063c22939e2d9c56a088903eec6f6cab8571ff",
+      "controlledSourceDigest": "5dd59d15f9521dce55ce7bd7e7884b3cbd5cc11a02e64974ddaa061704775475",
+      "maximumTokenJaccard": 0.7778,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.37470",
+          "score": 0.7777777777777778
+        },
+        {
+          "id": "sent.tt.l001-p006.015",
+          "score": 0.23076923076923078
+        },
+        {
+          "id": "sent.tatoeba.11119838",
+          "score": 0.23076923076923078
+        }
+      ],
+      "rationale": "Repeats 37470's town-center transport enquiry with subway substituted for train."
+    },
+    {
+      "id": "sent.tatoeba.37476",
+      "outcome": "publish",
+      "cefr": "B2",
+      "originalText": "Ask whichever of the boys you see first.",
+      "finalText": "Ask whichever of the boys you see first.",
+      "intakeSourceDigest": "15fb501bdd84bae6e985c57d3199e0727073dfa5b978f6bdaf525b9995017f0c",
+      "controlledSourceDigest": "f56c3c42952165c50ab1029de5c48a43969bc2d10c35581744bd8ce3c723fb6e",
+      "maximumTokenJaccard": 0.2667,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.32760",
+          "score": 0.26666666666666666
+        },
+        {
+          "id": "sent.tatoeba.37329",
+          "score": 0.25
+        },
+        {
+          "id": "sent.tt.l006-p002.005",
+          "score": 0.23076923076923078
+        }
+      ],
+      "rationale": "Whichever of the boys you see first provides a clear selection condition in a complete request."
+    },
+    {
+      "id": "sent.tatoeba.37477",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "Sales have dropped off at every big department store.",
+      "finalText": "Sales have dropped off at every big department store.",
+      "intakeSourceDigest": "c487d1fc62955c88e2d06a050643cf8c5af4a74f94b2772250900a1c298e70f2",
+      "controlledSourceDigest": "b2fc4623598112adf36e8bbb8d76731766dd0ea082b7d8ca4cd77c6d7d42cd3a",
+      "maximumTokenJaccard": 0.1429,
+      "nearest": [
+        {
+          "id": "sent.gra1.02.07.3",
+          "score": 0.14285714285714285
+        },
+        {
+          "id": "sent.gra1.06.03.3",
+          "score": 0.14285714285714285
+        },
+        {
+          "id": "sent.gra2.04.02.2",
+          "score": 0.14285714285714285
+        }
+      ],
+      "rationale": "Every big department store is an unbounded sales assertion without a market or time scope."
+    },
+    {
+      "id": "sent.tatoeba.37478",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "It matters very little what college you graduated from.",
+      "finalText": "It matters very little what college you graduated from.",
+      "intakeSourceDigest": "42e71002fc44fdc497e0fbc7064a63eca2402d6fbe3d9dad8561b2fe7ec7607e",
+      "controlledSourceDigest": "f1e7a0617213735cb281faa11a3132f0aba772e7f67715547208c3de984f326a",
+      "maximumTokenJaccard": 0.3333,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.38110",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.8276171",
+          "score": 0.2727272727272727
+        },
+        {
+          "id": "sent.tatoeba.8245913",
+          "score": 0.25
+        }
+      ],
+      "rationale": "The importance of college origin is a sweeping value judgment without a stated decision context."
+    },
+    {
+      "id": "sent.tatoeba.37481",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "I'm thinking about which college might be best for me.",
+      "finalText": "I'm thinking about which college might be best for me.",
+      "intakeSourceDigest": "9cd715c63c13515300ea03967d730b5c99d4d04bd510614e31663dfe754c31c3",
+      "controlledSourceDigest": "522f4b0433e6780597a7afe3f8cb0c527983dd15dc82dc80f96568903ac09e85",
+      "maximumTokenJaccard": 0.2308,
+      "nearest": [
+        {
+          "id": "sent.grb2.03.06.3",
+          "score": 0.23076923076923078
+        },
+        {
+          "id": "sent.tatoeba.11112225",
+          "score": 0.19047619047619047
+        },
+        {
+          "id": "sent.tatoeba.32869",
+          "score": 0.17647058823529413
+        }
+      ],
+      "rationale": "The deliberative statement uses an embedded which clause naturally and remains personal."
+    },
+    {
+      "id": "sent.tatoeba.37496",
+      "outcome": "publish",
+      "cefr": "B2",
+      "originalText": "A full description of him has been circulated in every newspaper.",
+      "finalText": "A full description of him has been circulated in every newspaper.",
+      "intakeSourceDigest": "5bd6bc2e94232f583a2fc787ec86f02ecf24579585f84f14465238488314487b",
+      "controlledSourceDigest": "a5ec701dcae10e99f281387200718087f7ea0154dbcd05dea6077b11c4676bec",
+      "maximumTokenJaccard": 0.2353,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.18678",
+          "score": 0.23529411764705882
+        },
+        {
+          "id": "sent.grb1.07.01.2",
+          "score": 0.23076923076923078
+        },
+        {
+          "id": "sent.tt.l001-p003.008",
+          "score": 0.22727272727272727
+        }
+      ],
+      "rationale": "The present-perfect passive describes circulation of one description; every newspaper is contextual narrative scope."
+    },
+    {
+      "id": "sent.tatoeba.37505",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "Every girl cannot be a ballerina.",
+      "finalText": "Every girl cannot be a ballerina.",
+      "intakeSourceDigest": "705a199e1e1b66835bb1aefffd48eb0f16277b8618d1a1ab9c30b34266f88cbd",
+      "controlledSourceDigest": "dbd8051e8acca86c9b3fb7dbe9b4c82bb8526eadbc63dc3d2645fb38c7c650bb",
+      "maximumTokenJaccard": 0.2222,
+      "nearest": [
+        {
+          "id": "sent.grb1.07.01.2",
+          "score": 0.2222222222222222
+        },
+        {
+          "id": "sent.tatoeba.5754565",
+          "score": 0.2222222222222222
+        },
+        {
+          "id": "sent.tatoeba.3901976",
+          "score": 0.2
+        }
+      ],
+      "rationale": "Every girl cannot is scope-ambiguous between none and not all; fixing it would require choosing the source meaning."
+    },
+    {
+      "id": "sent.tatoeba.37529",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "There is an exception to every rule.",
+      "finalText": "There is an exception to every rule.",
+      "intakeSourceDigest": "1c806b4e20d63e18f31888f52a03ece32727f02219deca751ccfb355382e7a71",
+      "controlledSourceDigest": "710a95672cfffc1236f781842d6a49b40ca6b894b475faed018ff220a0ab97fb",
+      "maximumTokenJaccard": 0.2727,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.311061",
+          "score": 0.2727272727272727
+        },
+        {
+          "id": "sent.tatoeba.33614",
+          "score": 0.2727272727272727
+        },
+        {
+          "id": "sent.tatoeba.18038",
+          "score": 0.23076923076923078
+        }
+      ],
+      "rationale": "The exception-to-every-rule maxim is an unframed universal and logical overgeneralization."
+    },
+    {
+      "id": "sent.tatoeba.37547",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "How do you want them?",
+      "finalText": "How do you want them?",
+      "intakeSourceDigest": "ab9e39f9beff1f5d2ed6469cf1fb9bae9a2471a66f8dda39d9211d788a043c48",
+      "controlledSourceDigest": "16d98e9ff3db921905f112fa7def3e14a1f4ce98fdef6afe2618cd3bf76ac238",
+      "maximumTokenJaccard": 0.4286,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.274613",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.tatoeba.11119893",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.gra2.02.04.1",
+          "score": 0.375
+        }
+      ],
+      "rationale": "Them lacks any item or preparation anchor, leaving an entirely context-dependent question."
+    },
+    {
+      "id": "sent.tatoeba.37556",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "How do you think I learned to speak English?",
+      "finalText": "How do you think I learned to speak English?",
+      "intakeSourceDigest": "77eb1735127c30850d42b98e2bc3ffd625aeafb557cd03b06e74036a15027c35",
+      "controlledSourceDigest": "782723754da1411165b34381a324e86cac84a1f1846452cb63d97a6ac09c6337",
+      "maximumTokenJaccard": 0.3636,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.1735111",
+          "score": 0.36363636363636365
+        },
+        {
+          "id": "sent.tatoeba.36262",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.57517",
+          "score": 0.3076923076923077
+        }
+      ],
+      "rationale": "The how-do-you-think question correctly embeds a statement-order clause about language learning."
+    },
+    {
+      "id": "sent.tatoeba.37557",
+      "outcome": "publish",
+      "cefr": "B2",
+      "originalText": "How did you come by an admission ticket for the auto show free of charge?",
+      "finalText": "How did you come by an admission ticket for the auto show free of charge?",
+      "intakeSourceDigest": "89f54139e708607d270a11eb723639a0404d978c69355ced6701c1505740a5d7",
+      "controlledSourceDigest": "76143a0ac8e9e44fbd0776fffd2b88476e7564d2ac08a0b1bdcfd8c298c9a75c",
+      "maximumTokenJaccard": 0.2778,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.38755",
+          "score": 0.2777777777777778
+        },
+        {
+          "id": "sent.tatoeba.38052",
+          "score": 0.23809523809523808
+        },
+        {
+          "id": "sent.tatoeba.38790",
+          "score": 0.2222222222222222
+        }
+      ],
+      "rationale": "Come by and free of charge are natural expressions in a complete ticket-acquisition question."
+    },
+    {
+      "id": "sent.tatoeba.37565",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "How can you tell an Englishman from an American?",
+      "finalText": "How can you tell an Englishman from an American?",
+      "intakeSourceDigest": "dc99b2abcd3352b82cf7d7a0ff33a458e02229be8f1e7382c91dc531a427861e",
+      "controlledSourceDigest": "65060a1176f88f6fc55cc1dabf3a1ab3af466ca8c68b352a173eea0e3ca37e53",
+      "maximumTokenJaccard": 0.3,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.12199549",
+          "score": 0.3
+        },
+        {
+          "id": "sent.tatoeba.11889667",
+          "score": 0.25
+        },
+        {
+          "id": "sent.tatoeba.3991505",
+          "score": 0.25
+        }
+      ],
+      "rationale": "The nationality-identification question presupposes reliable group markers without any linguistic or contextual framing."
+    },
+    {
+      "id": "sent.tatoeba.37577",
+      "outcome": "publish",
+      "cefr": "B2",
+      "originalText": "What sports do you go in for?",
+      "finalText": "What sports do you go in for?",
+      "intakeSourceDigest": "48a977da9c2f294c2bce022077b467dc3b91413e97ef2e7920aaaa56b7799fbf",
+      "controlledSourceDigest": "d77586b7316ac93d436274bfcc9593d7d0d508210c5f3b46064b1f8580c5a58e",
+      "maximumTokenJaccard": 0.4444,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.24858",
+          "score": 0.4444444444444444
+        },
+        {
+          "id": "sent.tatoeba.15992",
+          "score": 0.36363636363636365
+        },
+        {
+          "id": "sent.tatoeba.274613",
+          "score": 0.3333333333333333
+        }
+      ],
+      "rationale": "Go in for is a valid British expression for participating in sports."
+    },
+    {
+      "id": "sent.tatoeba.37580",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "Which platform is it on?",
+      "finalText": "Which platform is it on?",
+      "intakeSourceDigest": "0c1f23bf410316982db110eceb02a7e6fd970beeebddf17d197a3dc4ebd130b6",
+      "controlledSourceDigest": "92db3b700614dcf5be24814c1e02f426eb1d6d88f7e7b4f6ff41d0292fcb62b3",
+      "maximumTokenJaccard": 0.3,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.21997",
+          "score": 0.3
+        },
+        {
+          "id": "sent.grb1.07.06.1",
+          "score": 0.25
+        },
+        {
+          "id": "sent.tatoeba.1333",
+          "score": 0.25
+        }
+      ],
+      "rationale": "The platform question leaves it without a named train or service, weakening independent usefulness."
+    },
+    {
+      "id": "sent.tatoeba.37593",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "Which concert did you choose to attend?",
+      "finalText": "Which concert did you choose to attend?",
+      "intakeSourceDigest": "ace2a793dbfb89fe8728da6dc2decaedf2fe33645163bae4bc9a5d67417da989",
+      "controlledSourceDigest": "95c8e35846bf36dd00555ac044f60192a173ac2ca5a1a82a1a887714ad55ca22",
+      "maximumTokenJaccard": 0.3,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.13155899",
+          "score": 0.3
+        },
+        {
+          "id": "sent.tatoeba.5270000",
+          "score": 0.2727272727272727
+        },
+        {
+          "id": "sent.tatoeba.5975",
+          "score": 0.25
+        }
+      ],
+      "rationale": "Choose to attend is a natural verb-infinitive pattern in a complete concert question."
+    },
+    {
+      "id": "sent.tatoeba.37595",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "What gate do I board at?",
+      "finalText": "What gate do I board at?",
+      "intakeSourceDigest": "2b1052c1bd28073e828ca8714c15e541f4c7fcc6b304d44cff41bc1ed1c449af",
+      "controlledSourceDigest": "5dc9eb3b1b872b0e17e75aca8e45dd3084d862e7f6100b0f12abbeec6b607e95",
+      "maximumTokenJaccard": 0.3333,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.1449",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.1443",
+          "score": 0.3
+        },
+        {
+          "id": "sent.tatoeba.7279",
+          "score": 0.3
+        }
+      ],
+      "rationale": "Board at a gate is natural airport usage and the question supplies the required location type."
+    },
+    {
+      "id": "sent.tatoeba.37601",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "How long have you been ill?",
+      "finalText": "How long have you been ill?",
+      "intakeSourceDigest": "16a01787a147bec35ab24c7003227a93691d669e29acf23e1cd32324e76e79e7",
+      "controlledSourceDigest": "95eb1c73872e636d4b4791947f4207420ef45049c26465f02649705da62209ad",
+      "maximumTokenJaccard": 0.4545,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.31552",
+          "score": 0.45454545454545453
+        },
+        {
+          "id": "sent.tatoeba.5753436",
+          "score": 0.375
+        },
+        {
+          "id": "sent.gra2.02.04.1",
+          "score": 0.3333333333333333
+        }
+      ],
+      "rationale": "The present-perfect duration question about one person's illness is grammatical and offers no clinical advice."
+    },
+    {
+      "id": "sent.tatoeba.37628",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "How soon can I get to Tokyo?",
+      "finalText": "How soon can I get to Tokyo?",
+      "intakeSourceDigest": "79b60d08e5654961dd2b8a89c80e33f2c6bde04e16ee12eef134239a50a942a2",
+      "controlledSourceDigest": "07b8ddffc7c44f697b0f0b2e82e4c2d3decbb3c1df1e4540b23fac4bbd299257",
+      "maximumTokenJaccard": 0.3,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.1735111",
+          "score": 0.3
+        },
+        {
+          "id": "sent.tatoeba.38370",
+          "score": 0.3
+        },
+        {
+          "id": "sent.tatoeba.2387444",
+          "score": 0.2857142857142857
+        }
+      ],
+      "rationale": "How soon correctly asks the earliest arrival time at a named destination."
+    },
+    {
+      "id": "sent.tatoeba.37629",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "How long will it take to get well?",
+      "finalText": "How long will it take to get well?",
+      "intakeSourceDigest": "ff55de6ab8f168d9595601c0f890f87c9b061cbaa50a5ffb363d233834f42ed2",
+      "controlledSourceDigest": "0c433d4713771e161b039a9bbb61264992800a91f6a78cf3ca21f0f26ffb3bb1",
+      "maximumTokenJaccard": 0.3,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.5753436",
+          "score": 0.3
+        },
+        {
+          "id": "sent.tatoeba.1735111",
+          "score": 0.2727272727272727
+        },
+        {
+          "id": "sent.grb1.03.06.3",
+          "score": 0.25
+        }
+      ],
+      "rationale": "The recovery-time question makes no unverified prediction and is complete direct speech."
+    },
+    {
+      "id": "sent.tatoeba.37630",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "How soon will this laundry be ready?",
+      "finalText": "How soon will this laundry be ready?",
+      "intakeSourceDigest": "dc1243633a9569bc38e8881e58d7a64a0ba14e53bce8b2ff9510704cb993603c",
+      "controlledSourceDigest": "b1abe50897570860d50642016ed4f6c91e0e1dc8aa416b39d392d425c7f76a4b",
+      "maximumTokenJaccard": 0.25,
+      "nearest": [
+        {
+          "id": "sent.grb2.01.04.2",
+          "score": 0.25
+        },
+        {
+          "id": "sent.tatoeba.16648",
+          "score": 0.25
+        },
+        {
+          "id": "sent.tatoeba.16654",
+          "score": 0.25
+        }
+      ],
+      "rationale": "The how-soon question about laundry readiness is natural service-counter speech."
+    },
+    {
+      "id": "sent.tatoeba.37647",
+      "outcome": "publish",
+      "cefr": "B2",
+      "originalText": "Anyway, I gave it my best shot.",
+      "finalText": "Anyway, I gave it my best shot.",
+      "intakeSourceDigest": "6a7ec75a88b1852b171dd459fd29efe07831b06e81bb88d6ed715eb1dfa6c45e",
+      "controlledSourceDigest": "86d77c2a6b48b293434a28f2bdd25d536bad980a24e6722e7025a9c86b2ef0b4",
+      "maximumTokenJaccard": 0.25,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.37663",
+          "score": 0.25
+        },
+        {
+          "id": "sent.tatoeba.1357",
+          "score": 0.23076923076923078
+        },
+        {
+          "id": "sent.tatoeba.38392",
+          "score": 0.2222222222222222
+        }
+      ],
+      "rationale": "Gave it my best shot is a complete idiomatic report of effort, though the activity remains implicit."
+    },
+    {
+      "id": "sent.tatoeba.37652",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "In any case, I won't change my mind.",
+      "finalText": "In any case, I won't change my mind.",
+      "intakeSourceDigest": "e5103d2d4461d5e4e6da4afc3f8bf54249c8fa86efb9300570a8213b3270d598",
+      "controlledSourceDigest": "1eac9bc86adcea8950802459e67c04402da3c5afdc364e665b1bdc46b5df05bb",
+      "maximumTokenJaccard": 0.3,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.1987940",
+          "score": 0.3
+        },
+        {
+          "id": "sent.tatoeba.6441724",
+          "score": 0.3
+        },
+        {
+          "id": "sent.tatoeba.11119846",
+          "score": 0.2727272727272727
+        }
+      ],
+      "rationale": "Repeats the established refusal-to-change-one's-mind proposition, changing only the person and discourse marker."
+    },
+    {
+      "id": "sent.tatoeba.37663",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "At any rate, I will do my best.",
+      "finalText": "At any rate, I will do my best.",
+      "intakeSourceDigest": "7ddae82eec1b8d9d604524a58c39100189d2d8b9539fc523312f70d6df2c9cd5",
+      "controlledSourceDigest": "1ab9e2ad54dba74c0350baf25190db16f90a3801c108d8ebe19787826d43de7e",
+      "maximumTokenJaccard": 0.2857,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.31101",
+          "score": 0.2857142857142857
+        },
+        {
+          "id": "sent.tatoeba.37595",
+          "score": 0.2727272727272727
+        },
+        {
+          "id": "sent.e03.00000154",
+          "score": 0.25
+        }
+      ],
+      "rationale": "At any rate and do my best form a complete personal commitment naturally."
+    },
+    {
+      "id": "sent.tatoeba.37673",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "Anyhow, I'm relieved the test is over.",
+      "finalText": "Anyhow, I'm relieved the test is over.",
+      "intakeSourceDigest": "18e8124eaa147c5fef313af79f8819035c8e57a9bf25f205f6ef6cdc8b4b8dd4",
+      "controlledSourceDigest": "c55dc62320154d3261029ed7757aba1b32abaf51ebce4b25db1a107f1e55a732",
+      "maximumTokenJaccard": 0.2222,
+      "nearest": [
+        {
+          "id": "sent.gra1.04.06.2",
+          "score": 0.2222222222222222
+        },
+        {
+          "id": "sent.gra1.04.03.3",
+          "score": 0.2
+        },
+        {
+          "id": "sent.gra1.04.04.1",
+          "score": 0.2
+        }
+      ],
+      "rationale": "Relieved the test is over gives an explicit reason for the speaker's current feeling."
+    },
+    {
+      "id": "sent.tatoeba.37677",
+      "outcome": "publish",
+      "cefr": "C1",
+      "originalText": "Anyway, I'm glad you were able to broach this difficult subject.",
+      "finalText": "Anyway, I'm glad you were able to broach this difficult subject.",
+      "intakeSourceDigest": "ee3b8a572a1b185e9becca6faaec246f1fba893a0e80db2e96049dc1cf87d655",
+      "controlledSourceDigest": "bcd58397b391dfb0d51b4aaf8b9f5448722d35f25d81894618fac8933bbb798d",
+      "maximumTokenJaccard": 0.2143,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.11112638",
+          "score": 0.21428571428571427
+        },
+        {
+          "id": "sent.tatoeba.17800",
+          "score": 0.21428571428571427
+        },
+        {
+          "id": "sent.tatoeba.17802",
+          "score": 0.2
+        }
+      ],
+      "rationale": "Broach this difficult subject is a natural advanced collocation in a complete gratitude statement."
+    },
+    {
+      "id": "sent.tatoeba.37726",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Tom liked his job very much.",
+      "finalText": "Tom liked his job very much.",
+      "intakeSourceDigest": "f97a733ec7196194eabdd0db6c75aa7820bc18633109b15277e02c82412cedfd",
+      "controlledSourceDigest": "2c030814a42cf9ff4b50ea388227a7d8bbc58c4a9f6ceb1565d68cea872a0903",
+      "maximumTokenJaccard": 0.25,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.417024",
+          "score": 0.25
+        },
+        {
+          "id": "sent.tatoeba.3052928",
+          "score": 0.2222222222222222
+        },
+        {
+          "id": "sent.tatoeba.28989",
+          "score": 0.2222222222222222
+        }
+      ],
+      "rationale": "Liked his job very much is a complete and natural specific past attitude."
+    },
+    {
+      "id": "sent.tatoeba.37750",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "It was such a fine day that we decided to have a picnic.",
+      "finalText": "It was such a fine day that we decided to have a picnic.",
+      "intakeSourceDigest": "0c4be30dd168dc4090c437a709b6f079e4afc3517ece90cc4e6f66daa7e58159",
+      "controlledSourceDigest": "5956a22056732098cd3bbcbcdc6ec24ea100c2c58a2027dd6962ce91549a0925",
+      "maximumTokenJaccard": 0.3333,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.37773",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.grb1.06.05.2",
+          "score": 0.29411764705882354
+        },
+        {
+          "id": "sent.tatoeba.68607",
+          "score": 0.29411764705882354
+        }
+      ],
+      "rationale": "Such a fine day that naturally links weather and a particular picnic decision."
+    },
+    {
+      "id": "sent.tatoeba.37764",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "Being very tired, I went to bed early.",
+      "finalText": "Being very tired, I went to bed early.",
+      "intakeSourceDigest": "fc0c9bd747bd2012c74e83fd3a533a7a492005ee23fd0f845ea4274a4e74d8b6",
+      "controlledSourceDigest": "069fb2a3d94e456f72cb5ae5aa53c5ac82b3bf95622a7e5b08017505e9e4c974",
+      "maximumTokenJaccard": 0.2727,
+      "nearest": [
+        {
+          "id": "sent.grb1.03.07.2",
+          "score": 0.2727272727272727
+        },
+        {
+          "id": "sent.tatoeba.18524",
+          "score": 0.2727272727272727
+        },
+        {
+          "id": "sent.tatoeba.6781619",
+          "score": 0.26666666666666666
+        }
+      ],
+      "rationale": "The participial reason clause shares its subject correctly with the main early-bedtime clause."
+    },
+    {
+      "id": "sent.tatoeba.37771",
+      "outcome": "publish",
+      "cefr": "B2",
+      "originalText": "There wasn't anything like enough light to read by.",
+      "finalText": "There wasn't anything like enough light to read by.",
+      "intakeSourceDigest": "174239c929967ffecb051206950a3545da54deee6596c5f8320e62f94bfc560b",
+      "controlledSourceDigest": "c8411cbd18a32b8f32d1b976d319eefb60c822e1088bbda83362953ccad44a3a",
+      "maximumTokenJaccard": 0.25,
+      "nearest": [
+        {
+          "id": "sent.grb1.03.07.2",
+          "score": 0.25
+        },
+        {
+          "id": "sent.tatoeba.25229",
+          "score": 0.25
+        },
+        {
+          "id": "sent.tatoeba.4826262",
+          "score": 0.2
+        }
+      ],
+      "rationale": "Not anything like enough is a valid emphatic quantity expression with a clear reading purpose."
+    },
+    {
+      "id": "sent.tatoeba.37777",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "Though it was very late, he went on working.",
+      "finalText": "Though it was very late, he went on working.",
+      "intakeSourceDigest": "11a9a9da91851325faf9511ece8104248588223841ed6ad80ade60002be56674",
+      "controlledSourceDigest": "36e2c4d6cc2f2c949506af588a86317d383abd7a175370772be1a5bd721b0e03",
+      "maximumTokenJaccard": 0.3,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3434325",
+          "score": 0.3
+        },
+        {
+          "id": "sent.grb1.07.08.1",
+          "score": 0.23076923076923078
+        },
+        {
+          "id": "sent.tatoeba.32427",
+          "score": 0.21428571428571427
+        }
+      ],
+      "rationale": "Though it was late and went on working express a coherent time concession."
+    },
+    {
+      "id": "sent.tatoeba.37794",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "It was such a hot night that I could not sleep till midnight.",
+      "finalText": "It was such a hot night that I could not sleep till midnight.",
+      "intakeSourceDigest": "7a83e4ab6329bf321bfb57f73c759fe455403d72925c5a277f68e8c0dc78edc3",
+      "controlledSourceDigest": "21bc49f7b82768fe708f46e01864f17b138cff2732bcc7392c063cb507e83b1a",
+      "maximumTokenJaccard": 0.3529,
+      "nearest": [
+        {
+          "id": "sent.grb1.06.05.2",
+          "score": 0.35294117647058826
+        },
+        {
+          "id": "sent.tatoeba.37773",
+          "score": 0.25
+        },
+        {
+          "id": "sent.tatoeba.5270133",
+          "score": 0.25
+        }
+      ],
+      "rationale": "Such a hot night that links a specific temperature experience and delayed sleep."
+    },
+    {
+      "id": "sent.tatoeba.37800",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "You're not fit to be seen.",
+      "finalText": "You're not fit to be seen.",
+      "intakeSourceDigest": "a494edfe5ddddd0e50936977a59d95263c147556b4dc6cc41efde2a12504b3c6",
+      "controlledSourceDigest": "11010a4281f7ea88aa1f975949a09d9a8540a5b05badbab6439ff1e15dcb87b0",
+      "maximumTokenJaccard": 0.4444,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.26508",
+          "score": 0.4444444444444444
+        },
+        {
+          "id": "sent.grb2.03.03.3",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.2304477",
+          "score": 0.3333333333333333
+        }
+      ],
+      "rationale": "The harsh appearance judgment lacks a concrete setting and offers little suitable independent learning value."
+    },
+    {
+      "id": "sent.tatoeba.37804",
+      "outcome": "publish",
+      "cefr": "B2",
+      "originalText": "Much to my surprise, the door opened noiselessly.",
+      "finalText": "Much to my surprise, the door opened noiselessly.",
+      "intakeSourceDigest": "3439c7b5eba296e42f2dc1948b4a83bc76ca10bb594c0e84bb04560eb4744d3b",
+      "controlledSourceDigest": "3a497c6fb1c549f4a66ebf6c724a89b5fc081fb0bba54925f07717ee575ee1b9",
+      "maximumTokenJaccard": 0.3636,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.18897",
+          "score": 0.36363636363636365
+        },
+        {
+          "id": "sent.tatoeba.18912",
+          "score": 0.36363636363636365
+        },
+        {
+          "id": "sent.grb1.03.08.1",
+          "score": 0.3
+        }
+      ],
+      "rationale": "Much to my surprise and noiselessly form a natural report of an unexpected door opening."
+    },
+    {
+      "id": "sent.tatoeba.37811",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "It was very cold, and what was worse, it began to rain.",
+      "finalText": "It was very cold, and what was worse, it began to rain.",
+      "intakeSourceDigest": "f7e33fc6bf56b638304ff28f2d0efb00080ebe80dbe60613b3dfd8cf7800f016",
+      "controlledSourceDigest": "bf85d8dbc761f621cc1e59905bae2e91a9c6a79d25b1856f52e1a0b06adea86c",
+      "maximumTokenJaccard": 0.5714,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.28439",
+          "score": 0.5714285714285714
+        },
+        {
+          "id": "sent.tatoeba.3434325",
+          "score": 0.2727272727272727
+        },
+        {
+          "id": "sent.tatoeba.13132803",
+          "score": 0.25
+        }
+      ],
+      "rationale": "Pragmatic repeat of the published worsening-weather-then-rain account; cold replaces dark in the same rhetorical scenario."
+    },
+    {
+      "id": "sent.tatoeba.37827",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "It's so cold that the river has frozen over.",
+      "finalText": "It's so cold that the river has frozen over.",
+      "intakeSourceDigest": "69f65cd694d35ceea5da1d292119f7d508ffb250d14294754ba36c4ec6991a7b",
+      "controlledSourceDigest": "56d649c1772d88a500cc142cd16e3df3258588401f700c61d6aef17383d55bbe",
+      "maximumTokenJaccard": 0.25,
+      "nearest": [
+        {
+          "id": "sent.grb2.05.08.3",
+          "score": 0.25
+        },
+        {
+          "id": "sent.tatoeba.11102015",
+          "score": 0.21428571428571427
+        },
+        {
+          "id": "sent.tatoeba.26681",
+          "score": 0.2
+        }
+      ],
+      "rationale": "So cold that expresses a situated causal observation and frozen over is idiomatic."
+    },
+    {
+      "id": "sent.tatoeba.37831",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "I was having a very good time, when the sad news came.",
+      "finalText": "I was having a very good time when the sad news came.",
+      "intakeSourceDigest": "cea3845a0b2dd9c3aac4de58efd66d82f032eac20321b31ac0478ae71cc2e1f5",
+      "controlledSourceDigest": "201e1f93c929cda5b1174cd9381925fca5d1bd5de0d5182ad2ac8031a2ef5d51",
+      "maximumTokenJaccard": 0.4,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.246987",
+          "score": 0.4
+        },
+        {
+          "id": "sent.gra2.06.01.1",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.gra2.01.03.1",
+          "score": 0.26666666666666666
+        }
+      ],
+      "rationale": "Remove the unnecessary comma before the interrupting when clause; retain the ongoing enjoyment and arrival of sad news."
+    },
+    {
+      "id": "sent.tatoeba.37845",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "A very handsome prince met an exceptionally beautiful princess.",
+      "finalText": "A very handsome prince met an exceptionally beautiful princess.",
+      "intakeSourceDigest": "031ba3949bc21e893e6beea1e00a191f9e446049a703ffc41c152efc878908de",
+      "controlledSourceDigest": "ed91a3a2f79751c4b462a68725341ac9c7b50c3b97e4d306bf8fe2ca98b868d9",
+      "maximumTokenJaccard": 0.1667,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.282388",
+          "score": 0.16666666666666666
+        },
+        {
+          "id": "sent.tatoeba.11731910",
+          "score": 0.16666666666666666
+        },
+        {
+          "id": "sent.tatoeba.1375",
+          "score": 0.16666666666666666
+        }
+      ],
+      "rationale": "The prince and princess meeting is a coherent fictional-style past event with degree modification."
+    },
+    {
+      "id": "sent.tatoeba.37878",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "The Doppler effect is also observed with light and with radiant energy in general.",
+      "finalText": "The Doppler effect is also observed with light and with radiant energy in general.",
+      "intakeSourceDigest": "15c843e464a4508f262cb7e21464f118cf66c60a5e82cd759a672de659f44fcb",
+      "controlledSourceDigest": "b646d910917cf6fb79e31d79b471ea546a28659b39e95b7edd3028d20db416c4",
+      "maximumTokenJaccard": 0.2105,
+      "nearest": [
+        {
+          "id": "sent.tt.l019-p001.012",
+          "score": 0.21052631578947367
+        },
+        {
+          "id": "sent.gra1.04.03.3",
+          "score": 0.2
+        },
+        {
+          "id": "sent.gra1.04.04.1",
+          "score": 0.2
+        }
+      ],
+      "rationale": "The technical Doppler assertion includes also and in general without its scientific context or verification."
+    },
+    {
+      "id": "sent.tatoeba.37883",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "Whichever you choose, you will be satisfied.",
+      "finalText": "Whichever you choose, you will be satisfied.",
+      "intakeSourceDigest": "cd9346f5a196f6f78bb07f1b96223193e3c992d451b58a6b1e0eab384ffcb781",
+      "controlledSourceDigest": "b6b4b8f044f391a08b5875fa9af1e90050123e11b0892ef25d8d395c5f4cf3ab",
+      "maximumTokenJaccard": 0.2727,
+      "nearest": [
+        {
+          "id": "sent.grb2.01.04.2",
+          "score": 0.2727272727272727
+        },
+        {
+          "id": "sent.tatoeba.16648",
+          "score": 0.2727272727272727
+        },
+        {
+          "id": "sent.tatoeba.17888",
+          "score": 0.2727272727272727
+        }
+      ],
+      "rationale": "Whichever you choose leaves both the options and satisfaction domain absent."
+    },
+    {
+      "id": "sent.tatoeba.37916",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "Please tell me which to take.",
+      "finalText": "Please tell me which to take.",
+      "intakeSourceDigest": "c8b1d3995143da61c168f379d8283ffc834219c68079c91517e669cf29439881",
+      "controlledSourceDigest": "ac25b6a9d2ec7ce7df70514b853bd9336c514effec67a23f77e1b34727f1a850",
+      "maximumTokenJaccard": 0.4,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.13155917",
+          "score": 0.4
+        },
+        {
+          "id": "sent.tatoeba.18220",
+          "score": 0.38461538461538464
+        },
+        {
+          "id": "sent.tatoeba.13138007",
+          "score": 0.375
+        }
+      ],
+      "rationale": "Which to take lacks an item set, route or medicine context needed to interpret the request safely and independently."
+    },
+    {
+      "id": "sent.tatoeba.37920",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Which way should I go?",
+      "finalText": "Which way should I go?",
+      "intakeSourceDigest": "6452b484da6e197309980153fc53d6530aa1676c0d30e28a425ea7f002ce43ee",
+      "controlledSourceDigest": "399df0935326ad392aa2a861186cb66a28abeca664e85acef861ed90c7e6132e",
+      "maximumTokenJaccard": 0.375,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.9589886",
+          "score": 0.375
+        },
+        {
+          "id": "sent.tatoeba.18213",
+          "score": 0.3
+        },
+        {
+          "id": "sent.tatoeba.37930",
+          "score": 0.3
+        }
+      ],
+      "rationale": "The short wayfinding question is a natural complete request for direction."
+    },
+    {
+      "id": "sent.tatoeba.37930",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "I could not decide which way to choose.",
+      "finalText": "I could not decide which way to choose.",
+      "intakeSourceDigest": "baa9de5b7196dd5b3b391a8a45d53f605b111821bb5b5e5e06ef59847cc0c895",
+      "controlledSourceDigest": "c918cd07bf9e2a73882e11c980b0e5671c3873523be258d1b9c60293205193b7",
+      "maximumTokenJaccard": 0.3,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.37920",
+          "score": 0.3
+        },
+        {
+          "id": "sent.tatoeba.5841789",
+          "score": 0.25
+        },
+        {
+          "id": "sent.tatoeba.33508",
+          "score": 0.25
+        }
+      ],
+      "rationale": "Could not decide which way to choose is grammatical deliberation about a route."
+    },
+    {
+      "id": "sent.tatoeba.37936",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "Which highway leads to the football stadium?",
+      "finalText": "Which highway leads to the football stadium?",
+      "intakeSourceDigest": "7b3b7eff34142b1046bea4c448f212f5e7d230a4e55a2d6f506b5f4406158a3b",
+      "controlledSourceDigest": "f896f41bed7e0044d192a3a8a74bab5e3c32733c06ccc0e97e92a61d4ccacdcf",
+      "maximumTokenJaccard": 0.3636,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.33383",
+          "score": 0.36363636363636365
+        },
+        {
+          "id": "sent.tatoeba.37965",
+          "score": 0.25
+        },
+        {
+          "id": "sent.grb1.03.08.1",
+          "score": 0.2
+        }
+      ],
+      "rationale": "The highway question supplies a concrete destination and a natural leads-to collocation."
+    },
+    {
+      "id": "sent.tatoeba.37943",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "You had better ask him which way to take.",
+      "finalText": "You had better ask him which way to take.",
+      "intakeSourceDigest": "6c27eeb967dd8ec463e08b52dad88f45b602e9bc1a49f905017c0239429c169b",
+      "controlledSourceDigest": "6436cf0fd5a25d8575a1ad7d83ebc061c070849020b4ba649c3aca564cbc8171",
+      "maximumTokenJaccard": 0.3529,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.36046",
+          "score": 0.35294117647058826
+        },
+        {
+          "id": "sent.tatoeba.15833",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.15843",
+          "score": 0.3076923076923077
+        }
+      ],
+      "rationale": "Had better ask him plus an embedded which-way clause gives a complete recommendation."
+    },
+    {
+      "id": "sent.tatoeba.37952",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "Which way is the nearest?",
+      "finalText": "Which way is the nearest?",
+      "intakeSourceDigest": "0cdb093e4b9f17d52e23dcbb5f7c5c2ae5b2bc1670ef93595e9c42371a837138",
+      "controlledSourceDigest": "3bd9087bbd4ce59061a24e6af1818c721a4b8f9c5b84f3d7c4bea203626e935f",
+      "maximumTokenJaccard": 0.3333,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2961393",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.38059",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.grb2.03.08.3",
+          "score": 0.3
+        }
+      ],
+      "rationale": "Nearest requires a destination or reference point, neither of which is supplied."
+    },
+    {
+      "id": "sent.tatoeba.37965",
+      "outcome": "publish",
+      "cefr": "B2",
+      "originalText": "Which prince is the legitimate heir to the throne?",
+      "finalText": "Which prince is the legitimate heir to the throne?",
+      "intakeSourceDigest": "49a3212b1b4497991762ee190d3d11aa471f6a7ed43a0898abccec63ea74379c",
+      "controlledSourceDigest": "5b7391e9f8f34e7becc1c8d7ff6d5efd8da0c18758f3a0d0446bb366d7530319",
+      "maximumTokenJaccard": 0.3333,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.33383",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.gra1.04.04.3",
+          "score": 0.2727272727272727
+        },
+        {
+          "id": "sent.tt.l002-p004.016",
+          "score": 0.2727272727272727
+        }
+      ],
+      "rationale": "Legitimate heir to the throne is a natural noun phrase in an open question rather than an asserted dynastic fact."
+    },
+    {
+      "id": "sent.tatoeba.37969",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "Which team is likely to win?",
+      "finalText": "Which team is likely to win?",
+      "intakeSourceDigest": "9ae79c9cbc1ec42dc6c0bd669fe8469bd82a451794e5b5532528290d8acf1192",
+      "controlledSourceDigest": "c55ba6f135fa993ecc7474f04924d4277cbddf34acff592a122b0ba3743da1e8",
+      "maximumTokenJaccard": 0.2727,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.33383",
+          "score": 0.2727272727272727
+        },
+        {
+          "id": "sent.tatoeba.37965",
+          "score": 0.2727272727272727
+        },
+        {
+          "id": "sent.tt.l002-p003.005",
+          "score": 0.25
+        }
+      ],
+      "rationale": "Likely to win is a natural prediction question about a contextually bounded team competition."
+    },
+    {
+      "id": "sent.tatoeba.37991",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "Take the one you like best, whichever it is.",
+      "finalText": "Take the one you like best, whichever it is.",
+      "intakeSourceDigest": "51b07d28df19f90a56232c7f3e1eb4cd93825ec535e562d80daca7c9ea589e4c",
+      "controlledSourceDigest": "08132baa253d84525ba51481fded4445c98d19c6d164575c84931edc63576aca",
+      "maximumTokenJaccard": 0.3077,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7795949",
+          "score": 0.3076923076923077
+        },
+        {
+          "id": "sent.tatoeba.17768",
+          "score": 0.3076923076923077
+        },
+        {
+          "id": "sent.tatoeba.34099",
+          "score": 0.2857142857142857
+        }
+      ],
+      "rationale": "The one and whichever it is leave the entire choice set unspecified."
+    },
+    {
+      "id": "sent.tatoeba.38005",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "I asked the teacher which was the better.",
+      "finalText": "I asked the teacher which was the better.",
+      "intakeSourceDigest": "78de2c9258f6a21922b40cf000d671d5e4a4a695044abf19adb2f1cb67536054",
+      "controlledSourceDigest": "f962dc1548de965c9c0748dd62e03ef65a31ed4abb5189fa76ba19d8f91d145a",
+      "maximumTokenJaccard": 0.3,
+      "nearest": [
+        {
+          "id": "sent.gra1.05.04.1",
+          "score": 0.3
+        },
+        {
+          "id": "sent.grb1.05.04.2",
+          "score": 0.3
+        },
+        {
+          "id": "sent.tatoeba.28996",
+          "score": 0.3
+        }
+      ],
+      "rationale": "Which was the better lacks the compared objects and depends on missing classroom context."
+    },
+    {
+      "id": "sent.tatoeba.38014",
+      "outcome": "publish",
+      "cefr": "B2",
+      "originalText": "If anything, my father seems happier than before.",
+      "finalText": "If anything, my father seems happier than before.",
+      "intakeSourceDigest": "0755efcc00d30e6bb0b2acc1145ad585bbee1a68e3ce824ad2990c86709898cc",
+      "controlledSourceDigest": "07913dd9eb7e5da3589ac57f9964bd14bbd6c6c68a526a848618e89299c42689",
+      "maximumTokenJaccard": 0.1667,
+      "nearest": [
+        {
+          "id": "sent.gra2.02.07.2",
+          "score": 0.16666666666666666
+        },
+        {
+          "id": "sent.tatoeba.3615698",
+          "score": 0.16666666666666666
+        },
+        {
+          "id": "sent.tatoeba.17077",
+          "score": 0.16666666666666666
+        }
+      ],
+      "rationale": "If anything naturally qualifies a comparison of a specific father's happiness with an earlier state."
+    },
+    {
+      "id": "sent.tatoeba.38024",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "One way is not better than the other.",
+      "finalText": "One way is not better than the other.",
+      "intakeSourceDigest": "5893a07ca7b98b2cbcfe855f612391824283074f15f5b674268cd73671d07c5f",
+      "controlledSourceDigest": "5a77c88be288940dc42eae8c487633dc705d910a7cadf31a6f516bc3d279839d",
+      "maximumTokenJaccard": 0.3333,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2030168",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.grb1.06.02.2",
+          "score": 0.3076923076923077
+        },
+        {
+          "id": "sent.tatoeba.744506",
+          "score": 0.2727272727272727
+        }
+      ],
+      "rationale": "One way and the other provide no actual alternatives, leaving a context-only comparison."
+    },
+    {
+      "id": "sent.tatoeba.38027",
+      "outcome": "publish",
+      "cefr": "B2",
+      "originalText": "Words failed me at the last minute.",
+      "finalText": "Words failed me at the last minute.",
+      "intakeSourceDigest": "e3c72b77b641c27e5242616036b2b786fafb5d3e192a18672def2c0c2dd2b4ec",
+      "controlledSourceDigest": "3671bfb01a349c36262e636da9d66d3904aad3d43c2f95404f97fca4cf326e1e",
+      "maximumTokenJaccard": 0.2727,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.30237",
+          "score": 0.2727272727272727
+        },
+        {
+          "id": "sent.tatoeba.18215",
+          "score": 0.25
+        },
+        {
+          "id": "sent.tatoeba.26098",
+          "score": 0.25
+        }
+      ],
+      "rationale": "Words failed me is an idiomatic inability-to-speak account with a time anchor."
+    },
+    {
+      "id": "sent.tatoeba.38029",
+      "outcome": "publish",
+      "cefr": "B2",
+      "originalText": "The Dodgers were annihilated by the Giants.",
+      "finalText": "The Dodgers were annihilated by the Giants.",
+      "intakeSourceDigest": "567767776affcabd4d1d3ca6948cf0730a8eebc6e216eb63b756a4bc6a897d71",
+      "controlledSourceDigest": "1e3bde5e7a6d7b67df79aa3ea250a989fcbe1c0a13cc1fd1d58addaad0cfb148",
+      "maximumTokenJaccard": 0.3,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.26514",
+          "score": 0.3
+        },
+        {
+          "id": "sent.tt.l006-p002.014",
+          "score": 0.21428571428571427
+        },
+        {
+          "id": "sent.gra1.05.04.2",
+          "score": 0.2
+        }
+      ],
+      "rationale": "Annihilated is a recognized sports metaphor and both named teams identify the defeat as sporting language."
+    },
+    {
+      "id": "sent.tatoeba.38035",
+      "outcome": "publish",
+      "cefr": "B2",
+      "originalText": "No matter where you may travel, be sure to phone me once a week.",
+      "finalText": "No matter where you may travel, be sure to phone me once a week.",
+      "intakeSourceDigest": "2d93c8663534901d8e0caa03df698ebff1c74f1b9cbd8bdcfcd81298ce3edcca",
+      "controlledSourceDigest": "b96a254180ec40f6e71efc5908744db2c9d04388d38340f5be9255843abc6757",
+      "maximumTokenJaccard": 0.3889,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.17976",
+          "score": 0.3888888888888889
+        },
+        {
+          "id": "sent.tatoeba.11112225",
+          "score": 0.2608695652173913
+        },
+        {
+          "id": "sent.tatoeba.32868",
+          "score": 0.23809523809523808
+        }
+      ],
+      "rationale": "No matter where you may travel introduces a coherent concessive weekly-contact request."
+    },
+    {
+      "id": "sent.tatoeba.38039",
+      "outcome": "publish",
+      "cefr": "B2",
+      "originalText": "There are isolated rain showers.",
+      "finalText": "There are isolated rain showers.",
+      "intakeSourceDigest": "0faa55bfafb91fd73bf3b9db168861f9b5077f4bf9312818d62d72391b6e2c42",
+      "controlledSourceDigest": "352dce2ee161b9e50b46e4fa450a87ab2a7a3ff7d7c2485e25a8391fc118d1ed",
+      "maximumTokenJaccard": 0.25,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.10871516",
+          "score": 0.25
+        },
+        {
+          "id": "sent.gra2.02.04.3",
+          "score": 0.2
+        },
+        {
+          "id": "sent.tatoeba.9337294",
+          "score": 0.2
+        }
+      ],
+      "rationale": "Isolated rain showers is natural forecast vocabulary; this is a bounded weather utterance rather than enduring data."
+    },
+    {
+      "id": "sent.tatoeba.38040",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "By the way, are you free this afternoon?",
+      "finalText": "By the way, are you free this afternoon?",
+      "intakeSourceDigest": "3774c500ef7ee712340ab774e4763119a643cc26d776f5d12c2744d2eccae198",
+      "controlledSourceDigest": "9a2b1160c7f1cd33d992c77b4add57da0ffd865e2b403f1f3ca1d9d474b0a8d3",
+      "maximumTokenJaccard": 0.5,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.38050",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.38074",
+          "score": 0.4
+        },
+        {
+          "id": "sent.tatoeba.38052",
+          "score": 0.35714285714285715
+        }
+      ],
+      "rationale": "The afternoon availability question is complete and by the way functions naturally as a topic marker."
+    },
+    {
+      "id": "sent.tatoeba.38050",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "By the way, where are you from?",
+      "finalText": "By the way, where are you from?",
+      "intakeSourceDigest": "ce4f8327ff69f65ae77ab917594dafa9ce254d6460400b09af51e079340da14f",
+      "controlledSourceDigest": "4c6f7fc1f36b26881cfc08f57fdbe11a3ccc70e6c45e22409c41bc82157453aa",
+      "maximumTokenJaccard": 0.5,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.38040",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.38074",
+          "score": 0.4444444444444444
+        },
+        {
+          "id": "sent.tatoeba.38052",
+          "score": 0.38461538461538464
+        }
+      ],
+      "rationale": "The origin question is ordinary conversational English; by the way adds a natural introductory marker."
+    },
+    {
+      "id": "sent.tatoeba.38051",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "By the way, do you have any spare batteries?",
+      "finalText": "By the way, do you have any spare batteries?",
+      "intakeSourceDigest": "6ac12692abb535552d5b6295e6e4c638b586bc94b1cb96b40c5af53d7c4d3374",
+      "controlledSourceDigest": "8bc067616b673bc41e5788fa9525904970e018f01cd3e6027a0c49a7004a80af",
+      "maximumTokenJaccard": 0.5,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.38074",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.38069",
+          "score": 0.4117647058823529
+        },
+        {
+          "id": "sent.tatoeba.2960902",
+          "score": 0.4
+        }
+      ],
+      "rationale": "Spare batteries is a concrete noun phrase in a complete possession question."
+    },
+    {
+      "id": "sent.tatoeba.38052",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "By the way, how many of you are keeping a diary?",
+      "finalText": "By the way, how many of you are keeping a diary?",
+      "intakeSourceDigest": "94fcbd425fc24cbc9670789f6000cc311ba4e6f8c49b7b081747368ab3c2acb9",
+      "controlledSourceDigest": "e6347586797df5ea0ab77080f92fb9dfc49d26dd4bf7407dc2aa30123f20e41f",
+      "maximumTokenJaccard": 0.4615,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.38062",
+          "score": 0.46153846153846156
+        },
+        {
+          "id": "sent.tatoeba.38050",
+          "score": 0.38461538461538464
+        },
+        {
+          "id": "sent.tatoeba.38040",
+          "score": 0.35714285714285715
+        }
+      ],
+      "rationale": "Keeping a diary is a natural activity phrase and the question asks a specific group's current participation."
+    },
+    {
+      "id": "sent.tatoeba.38053",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "By the way, what is the matter with him?",
+      "finalText": "By the way, what is the matter with him?",
+      "intakeSourceDigest": "e9790fc44d5ddb4eacafa7938c878c0b8a43b5927b26bb71a5d59b12affa84e5",
+      "controlledSourceDigest": "9e3dd90fa8aa626ae573deda4a24c012e0eae84dbaa0689171af9da39977c3cd",
+      "maximumTokenJaccard": 0.5,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.38059",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.38074",
+          "score": 0.4
+        },
+        {
+          "id": "sent.tatoeba.38060",
+          "score": 0.2857142857142857
+        }
+      ],
+      "rationale": "What is the matter with him is a conventional question about a person's difficulty, without diagnosis."
+    },
+    {
+      "id": "sent.tatoeba.38059",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "By the way, what is your address?",
+      "finalText": "By the way, what is your address?",
+      "intakeSourceDigest": "1fdd895c8d5860430f33b2ed3f103ea24936f95d7372ac836b80bea6cafe3584",
+      "controlledSourceDigest": "e8ceacb599dbccd2fa84c18a8baa1bd7429ddd3412d2078585705de891eaa706",
+      "maximumTokenJaccard": 0.5,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.38053",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.38074",
+          "score": 0.4444444444444444
+        },
+        {
+          "id": "sent.tatoeba.11278012",
+          "score": 0.3333333333333333
+        }
+      ],
+      "rationale": "The address question is grammatical ordinary direct speech without any actual personal information."
+    },
+    {
+      "id": "sent.tatoeba.38060",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "By the way, what happened to the money I lent you?",
+      "finalText": "By the way, what happened to the money I lent you?",
+      "intakeSourceDigest": "3412ece0d587128965672094798dd1ea41a11c2382ea8ffc95069869e771b730",
+      "controlledSourceDigest": "5da84b7bce2fde63333f4a8efd6ba685ff0352ed23861d85dc10636cf8410a92",
+      "maximumTokenJaccard": 0.4545,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.38074",
+          "score": 0.45454545454545453
+        },
+        {
+          "id": "sent.tatoeba.22173",
+          "score": 0.3125
+        },
+        {
+          "id": "sent.tatoeba.5841789",
+          "score": 0.3076923076923077
+        }
+      ],
+      "rationale": "The relative clause identifies a particular loan in a complete enquiry about the money."
+    },
+    {
+      "id": "sent.tatoeba.38062",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "By the way, how many kids are going?",
+      "finalText": "By the way, how many kids are going?",
+      "intakeSourceDigest": "03e4df7344c0ab1aac640be2ebf88ef395f2a42aec638d76f2eb7da8c492f7d2",
+      "controlledSourceDigest": "2262e76fc025f010fbe7156e2827722dfcf6840a12bf92e61a47398456217fc9",
+      "maximumTokenJaccard": 0.4615,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.38052",
+          "score": 0.46153846153846156
+        },
+        {
+          "id": "sent.tatoeba.38050",
+          "score": 0.36363636363636365
+        },
+        {
+          "id": "sent.tatoeba.3212860",
+          "score": 0.3333333333333333
+        }
+      ],
+      "rationale": "How many kids are going is a complete participation question despite the destination being conversationally implicit."
+    },
+    {
+      "id": "sent.tatoeba.38063",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "By the way, what time will you go there?",
+      "finalText": "By the way, what time will you go there?",
+      "intakeSourceDigest": "5e3f090ac858dc31a81c5375f388c8b36bb379f2c3ac84f5621b4794d5bafea5",
+      "controlledSourceDigest": "8dd7c327cc3d80002090b53d645408de1c71a2bd308c1913309f293cd055358c",
+      "maximumTokenJaccard": 0.5,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.38074",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.38069",
+          "score": 0.4117647058823529
+        },
+        {
+          "id": "sent.grb2.01.03.2",
+          "score": 0.38461538461538464
+        }
+      ],
+      "rationale": "There leaves the journey destination absent; the topic marker adds no independent context."
+    },
+    {
+      "id": "sent.tatoeba.38069",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "By the way, did you have any spare time to go sightseeing while you were there?",
+      "finalText": "By the way, did you have any spare time to go sightseeing while you were there?",
+      "intakeSourceDigest": "8da2d6c7af6566a7b0f7b113c1cedb375b7296ea96ddc1c35717edbb30659d2d",
+      "controlledSourceDigest": "991c67a725db73164a5a69f647004edb275b4b24d6ef4f17737e3b93b0edbc76",
+      "maximumTokenJaccard": 0.4118,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.38051",
+          "score": 0.4117647058823529
+        },
+        {
+          "id": "sent.grb2.01.03.2",
+          "score": 0.2631578947368421
+        },
+        {
+          "id": "sent.tatoeba.36976",
+          "score": 0.2631578947368421
+        }
+      ],
+      "rationale": "The leisure-time and sightseeing enquiry is grammatical, though the travel location remains conversationally implicit."
+    },
+    {
+      "id": "sent.tatoeba.38074",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "By the way, what do you do?",
+      "finalText": "By the way, what do you do?",
+      "intakeSourceDigest": "2de2fd57b4e7cbf1877e025468a81ad18bb90a2d0f50784d9d4d1aee0efbd765",
+      "controlledSourceDigest": "ab9f0a8eb6b769952c24ac3cf5dc30700141f3a0e726ec486d0bd1f54b3025f5",
+      "maximumTokenJaccard": 0.5,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.38051",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.38060",
+          "score": 0.45454545454545453
+        },
+        {
+          "id": "sent.tatoeba.38050",
+          "score": 0.4444444444444444
+        }
+      ],
+      "rationale": "What do you do is a conventional occupation enquiry within natural direct speech."
+    },
+    {
+      "id": "sent.tatoeba.38076",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "As it is, I can do nothing.",
+      "finalText": "As it is, I can do nothing.",
+      "intakeSourceDigest": "f6020c3da3dba7a1b81f6d55f4b5c8bef129606903490c1d1466b126da22bca6",
+      "controlledSourceDigest": "9314f5c331bea091f0895a84ed4b65fb521590d813fa0882983bf4cc2312dfea",
+      "maximumTokenJaccard": 0.375,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.5840511",
+          "score": 0.375
+        },
+        {
+          "id": "sent.tatoeba.28706",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.20831",
+          "score": 0.3
+        }
+      ],
+      "rationale": "As it is relies on an unstated situation, making the inability claim too context-poor."
+    },
+    {
+      "id": "sent.tatoeba.38085",
+      "outcome": "publish",
+      "cefr": "B2",
+      "originalText": "Wherever he may go, he is sure to make friends.",
+      "finalText": "Wherever he may go, he is sure to make friends.",
+      "intakeSourceDigest": "4c49e8305fa725bd5fae03ec0c6f29992afc32a6c77c35b72d461c1e75ddf46f",
+      "controlledSourceDigest": "166bab275c1414e3368325293870819119340cab3af7e3a778d3a08cadd80bb9",
+      "maximumTokenJaccard": 0.25,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.33389",
+          "score": 0.25
+        },
+        {
+          "id": "sent.tatoeba.18490",
+          "score": 0.23076923076923078
+        },
+        {
+          "id": "sent.tatoeba.38088",
+          "score": 0.23076923076923078
+        }
+      ],
+      "rationale": "Wherever he may go introduces a complete personal prediction about making friends."
+    },
+    {
+      "id": "sent.tatoeba.38088",
+      "outcome": "publish",
+      "cefr": "B2",
+      "originalText": "Wherever you may go, you'll be welcomed.",
+      "finalText": "Wherever you may go, you'll be welcomed.",
+      "intakeSourceDigest": "2c879522e675ab997aba710a546c2767c33973df507faf5ea9f4785da8d5c2a7",
+      "controlledSourceDigest": "9f55547ef11f75d1144adc9e4598a32c0e1301cf6e3852d3b0b1f59610046c93",
+      "maximumTokenJaccard": 0.3333,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.16640",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.grb2.04.06.3",
+          "score": 0.3
+        },
+        {
+          "id": "sent.tatoeba.17823",
+          "score": 0.3
+        }
+      ],
+      "rationale": "The free-choice place clause and future passive form a coherent hospitable promise."
+    },
+    {
+      "id": "sent.tatoeba.38096",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "Even if you go away, I'll still passionately love you.",
+      "finalText": "Even if you go away, I'll still passionately love you.",
+      "intakeSourceDigest": "498a38aba02caade709a9664dec93300f9f59b8a6cbd2c230833530eb621fa45",
+      "controlledSourceDigest": "8480469c17aa98582e5ee8baec502628ec8230ec7bc930a49118923855b7355d",
+      "maximumTokenJaccard": 0.2727,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.1816774",
+          "score": 0.2727272727272727
+        },
+        {
+          "id": "sent.tatoeba.11119252",
+          "score": 0.25
+        },
+        {
+          "id": "sent.tatoeba.20671",
+          "score": 0.2
+        }
+      ],
+      "rationale": "Even if expresses a coherent hypothetical separation and a specific continuing affection."
+    },
+    {
+      "id": "sent.tatoeba.38099",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "Where can I obtain a map of Europe?",
+      "finalText": "Where can I obtain a map of Europe?",
+      "intakeSourceDigest": "d8f07e8f805ba827b76160c06ef046fcc8c3a46c531b8e8fe1ec10b61ed5612c",
+      "controlledSourceDigest": "f7889c3116d22c709121c424911388a707e6f9931020ec6db7fccc879bfb118d",
+      "maximumTokenJaccard": 0.3846,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.38235",
+          "score": 0.38461538461538464
+        },
+        {
+          "id": "sent.gra2.05.08.2",
+          "score": 0.3076923076923077
+        },
+        {
+          "id": "sent.tatoeba.27796",
+          "score": 0.3
+        }
+      ],
+      "rationale": "Obtain a map of Europe is a natural travel-related acquisition question."
+    },
+    {
+      "id": "sent.tatoeba.38110",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "It matters little where he is from.",
+      "finalText": "It matters little where he is from.",
+      "intakeSourceDigest": "6d5b0890854d858b9007eabed85cff61139d1ad0e502b0050a733693afbaee49",
+      "controlledSourceDigest": "6a8086f5adde53a3a9928317dc5a6026ef74b19520885b80358c33802c8a7cf2",
+      "maximumTokenJaccard": 0.25,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.36225",
+          "score": 0.25
+        },
+        {
+          "id": "sent.tatoeba.1025041",
+          "score": 0.2222222222222222
+        },
+        {
+          "id": "sent.tt.l001-p006.012",
+          "score": 0.21428571428571427
+        }
+      ],
+      "rationale": "It matters little plus an embedded where clause expresses a clear personal-origin evaluation."
+    },
+    {
+      "id": "sent.tatoeba.38149",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "Where can we exchange yen into dollars?",
+      "finalText": "Where can we exchange yen into dollars?",
+      "intakeSourceDigest": "c1d109c8b0137bf8b99591316d7768d3579e5513392c276d468d62ed97753dd9",
+      "controlledSourceDigest": "3a82b5fd99c4b940f51128fda0e395b93c4178d38b5dda382b8cfc06f39dfcec",
+      "maximumTokenJaccard": 0.4,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.25956",
+          "score": 0.4
+        },
+        {
+          "id": "sent.tatoeba.2953566",
+          "score": 0.2222222222222222
+        },
+        {
+          "id": "sent.tatoeba.34323",
+          "score": 0.2
+        }
+      ],
+      "rationale": "After correcting the currency preposition, this repeats the published enquiry about exchanging yen for dollars here."
+    },
+    {
+      "id": "sent.tatoeba.38173",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "We haven't decided where to take a rest.",
+      "finalText": "We haven't decided where to take a rest.",
+      "intakeSourceDigest": "2eb064b318ee89f75d5b3cb36332e0aa79944cbc42ae09e79fe781e3a5c84dda",
+      "controlledSourceDigest": "a18246d82f9bb100614e762c514a171fa325a4167db05c6cc765000e2678e0a9",
+      "maximumTokenJaccard": 0.3,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.13138007",
+          "score": 0.3
+        },
+        {
+          "id": "sent.gra2.01.05.3",
+          "score": 0.25
+        },
+        {
+          "id": "sent.grb1.07.05.2",
+          "score": 0.25
+        }
+      ],
+      "rationale": "The present-perfect negative correctly expresses an undecided resting location."
+    },
+    {
+      "id": "sent.tatoeba.38188",
+      "outcome": "publish",
+      "cefr": "B2",
+      "originalText": "Not knowing where to get off the bus, I asked the driver.",
+      "finalText": "Not knowing where to get off the bus, I asked the driver.",
+      "intakeSourceDigest": "87ba0b66328af3a0bde13178f7621752f3fb47ad9a7427e0830a3f410868bb29",
+      "controlledSourceDigest": "039ca8b11c4838106350c80c213debc4542cb8ef89ec8bb56d2e7644b22772ee",
+      "maximumTokenJaccard": 0.375,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.38607",
+          "score": 0.375
+        },
+        {
+          "id": "sent.tatoeba.36008",
+          "score": 0.26666666666666666
+        },
+        {
+          "id": "sent.tatoeba.36039",
+          "score": 0.26666666666666666
+        }
+      ],
+      "rationale": "The participial reason clause and driver enquiry share the same subject and a concrete bus context."
+    },
+    {
+      "id": "sent.tatoeba.38191",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "Where can dollars be exchanged for pounds?",
+      "finalText": "Where can dollars be exchanged for pounds?",
+      "intakeSourceDigest": "a9d44a67462d5bd4dff93865821247c0e1bef25babe08ce49ba5cd8809cb2e35",
+      "controlledSourceDigest": "56165894b07d51ef62e6cd16222bf56aff00bff98d5b4775a63d71c00ad401e7",
+      "maximumTokenJaccard": 0.2727,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.25956",
+          "score": 0.2727272727272727
+        },
+        {
+          "id": "sent.gra2.06.02.3",
+          "score": 0.2222222222222222
+        },
+        {
+          "id": "sent.grb1.04.05.2",
+          "score": 0.2
+        }
+      ],
+      "rationale": "Repeats 38149's currency-exchange-location question with different currencies and passive voice."
+    },
+    {
+      "id": "sent.tatoeba.38199",
+      "outcome": "publish",
+      "cefr": "B2",
+      "originalText": "Where did you procure the information?",
+      "finalText": "Where did you procure the information?",
+      "intakeSourceDigest": "e29fcd3b06e55bd4f07626c20bc88be6d742c1394623edc3275079b093d192c2",
+      "controlledSourceDigest": "95f7949b1adbd9142496bbcc6a83882e0f46bbcd3f31d8ec6465d5d126c1fbcc",
+      "maximumTokenJaccard": 0.375,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.12468897",
+          "score": 0.375
+        },
+        {
+          "id": "sent.tatoeba.26456",
+          "score": 0.375
+        },
+        {
+          "id": "sent.tatoeba.3737765",
+          "score": 0.3
+        }
+      ],
+      "rationale": "Procure is formal but appropriate in a grammatical information-source question."
+    },
+    {
+      "id": "sent.tatoeba.38213",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "Before we go anywhere, we should exchange some money.",
+      "finalText": "Before we go anywhere, we should exchange some money.",
+      "intakeSourceDigest": "6f4a9ba4510f638021f94fbdd3b52fec6323af91469092011f814716a04e1e8d",
+      "controlledSourceDigest": "e8ca787d7d75fb6368c5abaeb077141e53dbb65ba9031bc8c0f8579f4044d203",
+      "maximumTokenJaccard": 0.2727,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.31123",
+          "score": 0.2727272727272727
+        },
+        {
+          "id": "sent.tatoeba.11115298",
+          "score": 0.2
+        },
+        {
+          "id": "sent.grb1.03.03.1",
+          "score": 0.18181818181818182
+        }
+      ],
+      "rationale": "The before clause and should recommendation are a coherent travel-preparation utterance, without financial forecasting."
+    },
+    {
+      "id": "sent.tatoeba.38216",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "Something must be wrong with the machinery.",
+      "finalText": "Something must be wrong with the machinery.",
+      "intakeSourceDigest": "098417324267b2beedce15bb4214476282bad94ef22dd1627914ada12c707831",
+      "controlledSourceDigest": "2885cf0e0bb6a1cd86e93949b370108b7e0ac59a909c03abb257707e84236fae",
+      "maximumTokenJaccard": 0.3636,
+      "nearest": [
+        {
+          "id": "sent.00000031",
+          "score": 0.36363636363636365
+        },
+        {
+          "id": "sent.grb1.04.05.1",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.38382",
+          "score": 0.3076923076923077
+        }
+      ],
+      "rationale": "Must be expresses an epistemic deduction about specified machinery rather than a factual technical diagnosis."
+    },
+    {
+      "id": "sent.tatoeba.38235",
+      "outcome": "publish",
+      "cefr": "B2",
+      "originalText": "Where can I get hold of a good tax lawyer?",
+      "finalText": "Where can I get hold of a good tax lawyer?",
+      "intakeSourceDigest": "4e1695b5b6a842fc06bb8cadfe93a0ef001f8d0e72e4a61fdfed0fdc35e29e99",
+      "controlledSourceDigest": "030f26868fd17a9affeb6f2ed2358425823dddf999db4b4748ab502385eb8864",
+      "maximumTokenJaccard": 0.3846,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.38099",
+          "score": 0.38461538461538464
+        },
+        {
+          "id": "sent.gra2.05.08.2",
+          "score": 0.26666666666666666
+        },
+        {
+          "id": "sent.tatoeba.27796",
+          "score": 0.25
+        }
+      ],
+      "rationale": "Get hold of naturally asks where to locate a professional; no legal advice or endorsement is supplied."
+    },
+    {
+      "id": "sent.tatoeba.38263",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "Do you hear from your son from time to time?",
+      "finalText": "Do you hear from your son from time to time?",
+      "intakeSourceDigest": "79a1cfae4f4bef275fd1ed0e478a46d32b5ff0b69b48bb2cc05a293393dd81c4",
+      "controlledSourceDigest": "77fb85f1305158a1af35c8b66c86c4325dac3813fcae9fa51bec4ed145bfe65c",
+      "maximumTokenJaccard": 0.3333,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.11119902",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.16064",
+          "score": 0.3076923076923077
+        },
+        {
+          "id": "sent.tatoeba.2210817",
+          "score": 0.3
+        }
+      ],
+      "rationale": "Hear from and from time to time form a natural enquiry about intermittent family contact."
+    },
+    {
+      "id": "sent.tatoeba.38272",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "Every now and then, I play tennis for recreation.",
+      "finalText": "Every now and then, I play tennis for recreation.",
+      "intakeSourceDigest": "76ff96ed6ada29079e04654aef36fb1c83468f9b5417c2a2d53e725460731a84",
+      "controlledSourceDigest": "c791722b499b33012a4c46d2dc58bbcf644dd5dfe14095d7ec08b703ac760972",
+      "maximumTokenJaccard": 0.2857,
+      "nearest": [
+        {
+          "id": "sent.gra1.05.03.3",
+          "score": 0.2857142857142857
+        },
+        {
+          "id": "sent.00000004",
+          "score": 0.23076923076923078
+        },
+        {
+          "id": "sent.tatoeba.28978",
+          "score": 0.2
+        }
+      ],
+      "rationale": "Every now and then naturally expresses frequency in a personal recreational habit."
+    },
+    {
+      "id": "sent.tatoeba.38273",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "Now and then, we go to London on business.",
+      "finalText": "Now and then, we go to London on business.",
+      "intakeSourceDigest": "2c50d5f8aeb382ffc602770f98438a8693010e24c05600234bf0742626fc69f3",
+      "controlledSourceDigest": "c72e382f80d7a39abf56d740153afea30abdf60b23702318b81165b6e54bdce1",
+      "maximumTokenJaccard": 0.2857,
+      "nearest": [
+        {
+          "id": "sent.gra1.05.03.3",
+          "score": 0.2857142857142857
+        },
+        {
+          "id": "sent.tatoeba.22787",
+          "score": 0.25
+        },
+        {
+          "id": "sent.tatoeba.31123",
+          "score": 0.25
+        }
+      ],
+      "rationale": "Now and then marks an intermittent named-destination business trip, distinct from the tennis habit."
+    },
+    {
+      "id": "sent.tatoeba.38299",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Give me five tokens, please.",
+      "finalText": "Give me five tokens, please.",
+      "intakeSourceDigest": "b557d03f28481a1d6f1a1864d3cb1c6ba35992ada64b04a84a9888e1959bd970",
+      "controlledSourceDigest": "61c8bdd85eb36945a7fb5c041eb1cb9b663ca0edbe2d520dae4ae2766ef07e9d",
+      "maximumTokenJaccard": 0.3333,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.27372",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.18215",
+          "score": 0.3
+        },
+        {
+          "id": "sent.tatoeba.2649035",
+          "score": 0.2857142857142857
+        }
+      ],
+      "rationale": "The polite five-token request is grammatical and gives a definite object and quantity."
+    },
+    {
+      "id": "sent.tatoeba.38301",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "What do you make of it?",
+      "finalText": "What do you make of it?",
+      "intakeSourceDigest": "dae919b1dadb43152e2c3de3fdf8206f106216a7290117fd7c475a9b462f67f3",
+      "controlledSourceDigest": "ad4cf9f35bb1d1047837bc2b5b88f0a1b8636b6c9b4f9280158be4b6e934aac2",
+      "maximumTokenJaccard": 0.5714,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.8276171",
+          "score": 0.5714285714285714
+        },
+        {
+          "id": "sent.tatoeba.29525",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.8765019",
+          "score": 0.4444444444444444
+        }
+      ],
+      "rationale": "Make of it lacks the object to interpret and depends entirely on prior discourse."
+    },
+    {
+      "id": "sent.tatoeba.38303",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "A fierce dog attacked the girl.",
+      "finalText": "A fierce dog attacked the girl.",
+      "intakeSourceDigest": "00cb2b4296b7aab94939ab2e2c97ebc958e3502b45a60e15a9dd2bfecc1c0193",
+      "controlledSourceDigest": "a47519e24325b746c649d287294efdefb0a813fcb6e8a713ef68b49a428ab8eb",
+      "maximumTokenJaccard": 0.2727,
+      "nearest": [
+        {
+          "id": "sent.gra2.06.01.1",
+          "score": 0.2727272727272727
+        },
+        {
+          "id": "sent.tatoeba.378503",
+          "score": 0.25
+        },
+        {
+          "id": "sent.tatoeba.250765",
+          "score": 0.2
+        }
+      ],
+      "rationale": "The specific dog-attack report is grammatical and non-graphic, with no harmful instruction."
+    },
+    {
+      "id": "sent.tatoeba.38304",
+      "outcome": "publish",
+      "cefr": "B2",
+      "originalText": "There's no way I can make it up to you.",
+      "finalText": "There's no way I can make it up to you.",
+      "intakeSourceDigest": "7110bfde15352de6e705e83e2feb09c0ac052835873052a29ca97730ffd690bb",
+      "controlledSourceDigest": "5352a1ce367d89f1a32dcd4259f8e4849ec1185f2abd81ebf7aa28a2ff917633",
+      "maximumTokenJaccard": 0.3333,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.11115136",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.7227957",
+          "score": 0.26666666666666666
+        },
+        {
+          "id": "sent.tatoeba.68607",
+          "score": 0.25
+        }
+      ],
+      "rationale": "Make it up to you is a conventional expression of inability to compensate a particular listener."
+    },
+    {
+      "id": "sent.tatoeba.38312",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "Now, what do you think?",
+      "finalText": "Now, what do you think?",
+      "intakeSourceDigest": "b27e5f5145f5befd51410333458ab9f11e4a57c4cb58513853d0939f8861a3e9",
+      "controlledSourceDigest": "847b8c2f8117213ce1e5e3740bdf593d5f4b5336f86301da9a777f2a592d90c5",
+      "maximumTokenJaccard": 0.5714,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.29525",
+          "score": 0.5714285714285714
+        },
+        {
+          "id": "sent.tatoeba.274613",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.tatoeba.780871",
+          "score": 0.42857142857142855
+        }
+      ],
+      "rationale": "Now what do you think is a pure discourse prompt without a proposition to assess."
+    },
+    {
+      "id": "sent.tatoeba.38320",
+      "outcome": "publish",
+      "cefr": "B2",
+      "originalText": "To all appearances, they are a happy couple.",
+      "finalText": "To all appearances, they are a happy couple.",
+      "intakeSourceDigest": "e97d6e51e11ed815ac80ecc31fce75557e121a43e59d1f013e7a83c424343aed",
+      "controlledSourceDigest": "8d13331a276e63c8e7e132bd5f3e0ab02356393a271f008c507d9cb6a265b615",
+      "maximumTokenJaccard": 0.2727,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.305482",
+          "score": 0.2727272727272727
+        },
+        {
+          "id": "sent.tatoeba.1818921",
+          "score": 0.2727272727272727
+        },
+        {
+          "id": "sent.gra2.03.06.3",
+          "score": 0.25
+        }
+      ],
+      "rationale": "To all appearances explicitly frames the happy-couple description as an impression."
+    },
+    {
+      "id": "sent.tatoeba.38333",
+      "outcome": "publish",
+      "cefr": "B2",
+      "originalText": "He seems to have been ill for a long time.",
+      "finalText": "He seems to have been ill for a long time.",
+      "intakeSourceDigest": "79ebc23d673c8e1a866efbfeea394e8c106acc1e323d19f877e7294c309e4271",
+      "controlledSourceDigest": "ebb5270d57792e4cdda54bdccb980763665022567791246fef5cf35936cf74dd",
+      "maximumTokenJaccard": 0.3333,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.37601",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.gra2.02.02.3",
+          "score": 0.2857142857142857
+        },
+        {
+          "id": "sent.tatoeba.30344",
+          "score": 0.26666666666666666
+        }
+      ],
+      "rationale": "Seems to have been uses a correct perfect infinitive to express uncertainty about a personal condition."
+    },
+    {
+      "id": "sent.tatoeba.38344",
+      "outcome": "publish",
+      "cefr": "B2",
+      "originalText": "How can you break the news to her?",
+      "finalText": "How can you break the news to her?",
+      "intakeSourceDigest": "45cfc4417cbb4459af20e6065a3c486991e348d73edc430bba367c54aa25fdbc",
+      "controlledSourceDigest": "56d783a8bbb89f73f7a7c5d08b1c88ce78e17e2e688ed5221d518f556b2f3e37",
+      "maximumTokenJaccard": 0.3636,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.38790",
+          "score": 0.36363636363636365
+        },
+        {
+          "id": "sent.grb1.03.01.3",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.18469",
+          "score": 0.3076923076923077
+        }
+      ],
+      "rationale": "Break the news is a natural idiomatic question about delivering information to a specific person."
+    },
+    {
+      "id": "sent.tatoeba.38352",
+      "outcome": "publish",
+      "cefr": "B2",
+      "originalText": "How can we kill time?",
+      "finalText": "How can we kill time?",
+      "intakeSourceDigest": "4de8b7d2fe4a7e1decc1cba7c3beb83b499bbd580b80b8340f3ad82a283b9f40",
+      "controlledSourceDigest": "0f7047e52586ce82e6406cd72342a334aa3efd584351f07ffee6eb28160e08b9",
+      "maximumTokenJaccard": 0.3,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7127501",
+          "score": 0.3
+        },
+        {
+          "id": "sent.tatoeba.2953566",
+          "score": 0.2857142857142857
+        },
+        {
+          "id": "sent.gra2.02.04.2",
+          "score": 0.25
+        }
+      ],
+      "rationale": "Kill time is a conventional harmless idiom within a complete leisure-planning question."
+    },
+    {
+      "id": "sent.tatoeba.38354",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "How did you find my house?",
+      "finalText": "How did you find my house?",
+      "intakeSourceDigest": "c1f8e2c912d5389d028213124b37681bca5fd0c0e40be29baa13a5f276ea8acd",
+      "controlledSourceDigest": "e28b6e91f23401b9b4d9383d9f2782406f6cbe24c50c6835a6b7628e496d8ffd",
+      "maximumTokenJaccard": 0.3333,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.38369",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.5270000",
+          "score": 0.3
+        },
+        {
+          "id": "sent.tatoeba.38695",
+          "score": 0.3
+        }
+      ],
+      "rationale": "The house-finding question is natural direct speech and identifies the destination clearly."
+    },
+    {
+      "id": "sent.tatoeba.38358",
+      "outcome": "publish",
+      "cefr": "B2",
+      "originalText": "How can you justify your rude behavior?",
+      "finalText": "How can you justify your rude behavior?",
+      "intakeSourceDigest": "6ce00259fe1015e7c27312b59940ea0426241c55003e446b7d4ca7d5ade7bda3",
+      "controlledSourceDigest": "d141a8435cbeed150d8dbd521ebaffff1f6cf7c23f2308b9508f7b18f37fdc91",
+      "maximumTokenJaccard": 0.4,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.29998",
+          "score": 0.4
+        },
+        {
+          "id": "sent.tatoeba.36863",
+          "score": 0.4
+        },
+        {
+          "id": "sent.tatoeba.16180",
+          "score": 0.2727272727272727
+        }
+      ],
+      "rationale": "Justify your rude behavior is a natural evaluative question about a listener's specific conduct."
+    },
+    {
+      "id": "sent.tatoeba.38369",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "How did you obtain this painting?",
+      "finalText": "How did you obtain this painting?",
+      "intakeSourceDigest": "4a299d7929a471153a2d48be9122c785d109a707a3f76a908b82402dd1ea6a20",
+      "controlledSourceDigest": "8f68c6a1e3e47266b92382fffebfb59d04eaa7fe229317d862132ee297d2e222",
+      "maximumTokenJaccard": 0.3333,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.13155899",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.38354",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.38765",
+          "score": 0.3333333333333333
+        }
+      ],
+      "rationale": "The painting-acquisition question supplies a concrete object and correct past interrogative syntax."
+    },
+    {
+      "id": "sent.tatoeba.38370",
+      "outcome": "publish",
+      "cefr": "B2",
+      "originalText": "How can I meet this quota?",
+      "finalText": "How can I meet this quota?",
+      "intakeSourceDigest": "9529fd5a52a292f72de972c0d552040d134b11b6a82e8cc5d5e9bc11737ef5bc",
+      "controlledSourceDigest": "aecb4fa3723d38a732ce671a2e43561bff91b2323ea1df9b25518baa68946077",
+      "maximumTokenJaccard": 0.3,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.37628",
+          "score": 0.3
+        },
+        {
+          "id": "sent.gra2.04.06.3",
+          "score": 0.25
+        },
+        {
+          "id": "sent.tatoeba.38769",
+          "score": 0.25
+        }
+      ],
+      "rationale": "Meet this quota is a natural work-related collocation in a complete question."
+    },
+    {
+      "id": "sent.tatoeba.38376",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "I'm afraid I caught a cold.",
+      "finalText": "I'm afraid I caught a cold.",
+      "intakeSourceDigest": "4c4ddcebf9fd360bab329953038a465cc25a28c850f0c98283770d7a83cefc47",
+      "controlledSourceDigest": "3c7bc4119a79ae288261b0f1711ef3a2efc56fa1c3d0c82e461ed0c064d7b702",
+      "maximumTokenJaccard": 0.375,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.28914",
+          "score": 0.375
+        },
+        {
+          "id": "sent.tatoeba.20838",
+          "score": 0.2727272727272727
+        },
+        {
+          "id": "sent.tatoeba.38714",
+          "score": 0.2727272727272727
+        }
+      ],
+      "rationale": "Repeats the published personal cold report; I am afraid adds only a hedge."
+    },
+    {
+      "id": "sent.tatoeba.38382",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "It seems that there is something wrong with the telephone.",
+      "finalText": "It seems that there is something wrong with the telephone.",
+      "intakeSourceDigest": "6907c3b1a458456ccce6a2a006f8f118d22920c147c667518ab3ad277d764f58",
+      "controlledSourceDigest": "f8b8fecf3c58b39e94d8e73452f8425f71f287d1f1f69aa98719144feb87d2b0",
+      "maximumTokenJaccard": 0.3077,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.28735",
+          "score": 0.3076923076923077
+        },
+        {
+          "id": "sent.tatoeba.38216",
+          "score": 0.3076923076923077
+        },
+        {
+          "id": "sent.tatoeba.17768",
+          "score": 0.2857142857142857
+        }
+      ],
+      "rationale": "It seems that correctly frames a tentative telephone malfunction assessment."
+    },
+    {
+      "id": "sent.tatoeba.38395",
+      "outcome": "publish",
+      "cefr": "B2",
+      "originalText": "I get the feeling you still have an axe to grind. If you've got something to say come on out and say it.",
+      "finalText": "I get the feeling you still have an axe to grind. If you've got something to say, come on out and say it.",
+      "intakeSourceDigest": "7e9dfe882fa74c09471401da7ad8d26f52b508e26f778961044ae4b99ca1eb40",
+      "controlledSourceDigest": "faab061e40abcc9b2676b4212e4365c3e6f55600a725dd38a266b5bf593666ce",
+      "maximumTokenJaccard": 0.2692,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.28156",
+          "score": 0.2692307692307692
+        },
+        {
+          "id": "sent.tatoeba.35920",
+          "score": 0.25
+        },
+        {
+          "id": "sent.tatoeba.3729191",
+          "score": 0.24
+        }
+      ],
+      "rationale": "Insert the comma after the introductory conditional clause; retain both the grievance idiom and invitation to speak."
+    },
+    {
+      "id": "sent.tatoeba.38397",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "I'm afraid it will rain.",
+      "finalText": "I'm afraid it will rain.",
+      "intakeSourceDigest": "3bb088e41137b14787594b44cb636febd913d4cc8408b031bfa06a97ed37ad65",
+      "controlledSourceDigest": "c88abd29c1a32f72f25bb85572ca21cceb6777f7dc4dc30a22ca8cff90ffe774",
+      "maximumTokenJaccard": 0.375,
+      "nearest": [
+        {
+          "id": "sent.gra2.03.04.2",
+          "score": 0.375
+        },
+        {
+          "id": "sent.gra2.04.05.1",
+          "score": 0.2857142857142857
+        },
+        {
+          "id": "sent.tatoeba.264395",
+          "score": 0.25
+        }
+      ],
+      "rationale": "Repeats the published uncertain rain forecast; I am afraid adds only a subjective hedge."
+    },
+    {
+      "id": "sent.tatoeba.38411",
+      "outcome": "publish",
+      "cefr": "B2",
+      "originalText": "We gained access to the house through the window.",
+      "finalText": "We gained access to the house through the window.",
+      "intakeSourceDigest": "27c37be7c2f596469c601893a5381ff83cf768e0f62ef26ad0eb110e209865c7",
+      "controlledSourceDigest": "b9ba61908b6ef02b2dc89ac858ba223a18a150073731976e3b14b567da9d270e",
+      "maximumTokenJaccard": 0.2727,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.24143",
+          "score": 0.2727272727272727
+        },
+        {
+          "id": "sent.tatoeba.31123",
+          "score": 0.2727272727272727
+        },
+        {
+          "id": "sent.gra1.04.02.3",
+          "score": 0.25
+        }
+      ],
+      "rationale": "Gained access through the window is a coherent past account; no unauthorized motive or method is instructed."
+    },
+    {
+      "id": "sent.tatoeba.38417",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "At last, she hit on a good idea.",
+      "finalText": "At last, she hit on a good idea.",
+      "intakeSourceDigest": "b9a3d64bdb94ec7ce74d73311999dbc72893e4ca0ccc8116c45e540279b806b9",
+      "controlledSourceDigest": "9fd8342445ee7c59a13feac8f073abe9798334af519429d6e636cd7bf5849801",
+      "maximumTokenJaccard": 0.2727,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.30075",
+          "score": 0.2727272727272727
+        },
+        {
+          "id": "sent.gra1.01.08.1",
+          "score": 0.25
+        },
+        {
+          "id": "sent.gra2.06.01.2",
+          "score": 0.23076923076923078
+        }
+      ],
+      "rationale": "The good-idea discovery repeats the published good-idea-crossed-my-mind proposition with person and idiom changes."
+    },
+    {
+      "id": "sent.tatoeba.38424",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "He was put to death finally.",
+      "finalText": "He was put to death finally.",
+      "intakeSourceDigest": "3d6db24918e424864e0110e0ee2128d1df66631eb5a7e1d4a0344e66d58b1984",
+      "controlledSourceDigest": "a79c3d9b470e15c897b1c3da787cee5655db080661feecb9f6511a1ab3b57399",
+      "maximumTokenJaccard": 0.3,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.30208",
+          "score": 0.3
+        },
+        {
+          "id": "sent.grb2.01.05.3",
+          "score": 0.25
+        },
+        {
+          "id": "sent.tatoeba.10933389",
+          "score": 0.25
+        }
+      ],
+      "rationale": "The unexplained execution statement is unsuitable as an unframed general learner typing example."
+    },
+    {
+      "id": "sent.tatoeba.38444",
+      "outcome": "publish",
+      "cefr": "B2",
+      "originalText": "Eventually the salesman persuaded me to buy the expensive machine.",
+      "finalText": "Eventually the salesman persuaded me to buy the expensive machine.",
+      "intakeSourceDigest": "545fbd86560578c36e6bc00f83eca9289cb97d378edb4552010cb2cdf6aeab9a",
+      "controlledSourceDigest": "3c543dae71719f08fd9067dbce08e9051e8ac7c112f600f8394de241fadb41da",
+      "maximumTokenJaccard": 0.25,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.28497",
+          "score": 0.25
+        },
+        {
+          "id": "sent.gra2.05.01.1",
+          "score": 0.23076923076923078
+        },
+        {
+          "id": "sent.grb2.03.07.1",
+          "score": 0.23076923076923078
+        }
+      ],
+      "rationale": "Persuaded me to buy correctly takes an object and infinitive in a complete purchasing account."
+    },
+    {
+      "id": "sent.tatoeba.38448",
+      "outcome": "publish",
+      "cefr": "B2",
+      "originalText": "In the end, because of the disease, he became unable to walk and had to use a motorized wheelchair to get around.",
+      "finalText": "In the end, because of the disease, he became unable to walk and had to use a motorized wheelchair to get around.",
+      "intakeSourceDigest": "50cdd0a3eff7e376317e76cfd8b5ca3da383a02d633407625d3cd24b7412afe9",
+      "controlledSourceDigest": "3e46a94cbd8ca06d8f70192e59af13aa8d746c26c4fb189f370f4257e340faf9",
+      "maximumTokenJaccard": 0.28,
+      "nearest": [
+        {
+          "id": "sent.tt.l003-p001.011",
+          "score": 0.28
+        },
+        {
+          "id": "sent.tatoeba.30362",
+          "score": 0.23076923076923078
+        },
+        {
+          "id": "sent.tt.l001-p006.006",
+          "score": 0.21428571428571427
+        }
+      ],
+      "rationale": "The mobility account concerns one person's illness, with coherent past causality and neutral wheelchair wording."
+    },
+    {
+      "id": "sent.tatoeba.38451",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Sing the song once more, please.",
+      "finalText": "Sing the song once more, please.",
+      "intakeSourceDigest": "e356bea3802597c9c34d6902759c5f556ffdf0c2dd0d7a28d5c95b5351cc509a",
+      "controlledSourceDigest": "234aa8f1ff5e0c0767366cd86ccb7a5f1dde946725b6321a5d83e5b83fc1db2b",
+      "maximumTokenJaccard": 0.2222,
+      "nearest": [
+        {
+          "id": "sent.gra1.03.07.1",
+          "score": 0.2222222222222222
+        },
+        {
+          "id": "sent.gra2.05.06.1",
+          "score": 0.2222222222222222
+        },
+        {
+          "id": "sent.grb1.07.07.1",
+          "score": 0.2222222222222222
+        }
+      ],
+      "rationale": "Once more naturally modifies a complete polite request to repeat a song."
+    },
+    {
+      "id": "sent.tatoeba.38473",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "Please go on with your dinner.",
+      "finalText": "Please go on with your dinner.",
+      "intakeSourceDigest": "90eb583c4c8ef4b9b1e20412313a9fb8b6d23239707656fee46bb6ee02db281a",
+      "controlledSourceDigest": "79e3a306d5c12f54d4895da61e21fc459dcdec10966742545e17b4e5d3946491",
+      "maximumTokenJaccard": 0.3636,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.18091",
+          "score": 0.36363636363636365
+        },
+        {
+          "id": "sent.tatoeba.19819",
+          "score": 0.2727272727272727
+        },
+        {
+          "id": "sent.tatoeba.20447",
+          "score": 0.23076923076923078
+        }
+      ],
+      "rationale": "Go on with your dinner is a valid request to continue the meal."
+    },
+    {
+      "id": "sent.tatoeba.38487",
+      "outcome": "publish",
+      "cefr": "B2",
+      "originalText": "Please bring your plan up at the meeting.",
+      "finalText": "Please bring your plan up at the meeting.",
+      "intakeSourceDigest": "5b43b5e90da3f6bb6cef9823d6b8d21cc1754418b820e2657725fdee9ea45c29",
+      "controlledSourceDigest": "e925c7b9726444e31436da0cdad06f761ce167f3d632865a70dbb05076929933",
+      "maximumTokenJaccard": 0.3333,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.18215",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.20155",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.grb2.01.06.1",
+          "score": 0.2727272727272727
+        }
+      ],
+      "rationale": "Bring your plan up is a naturally separated phrasal verb with an explicit meeting context."
+    },
+    {
+      "id": "sent.tatoeba.38488",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "Please give your mother my best regards.",
+      "finalText": "Please give your mother my best regards.",
+      "intakeSourceDigest": "931e403d97ff44924a32d210320dd6f734b96d7077128a0b11e0bed7853a031e",
+      "controlledSourceDigest": "c57abc89ee7f2fa8041ed44c067f662a11178eded2e2637d7116f1e0eaff7279",
+      "maximumTokenJaccard": 0.3333,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.1852287",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.17337",
+          "score": 0.23076923076923078
+        },
+        {
+          "id": "sent.tatoeba.20447",
+          "score": 0.21428571428571427
+        }
+      ],
+      "rationale": "Repeats the existing published give-my-regards message request, changing only the recipient to the listener's mother."
+    },
+    {
+      "id": "sent.tatoeba.38520",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "Pass me the butter, will you please?",
+      "finalText": "Pass me the butter, will you please?",
+      "intakeSourceDigest": "7d7514d1669d27251823798daf497e9e7c4051927f1d9e654f503112580afdc9",
+      "controlledSourceDigest": "5b924b40a6b526a3faee14bef75ff7d2ea7eb09160f36477fd4b4efff43d16f8",
+      "maximumTokenJaccard": 0.5,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3717634",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.25742",
+          "score": 0.4444444444444444
+        },
+        {
+          "id": "sent.tatoeba.29756",
+          "score": 0.4
+        }
+      ],
+      "rationale": "Pragmatic repeat of the published pass-me-the-jam request; changing the table condiment adds little content."
+    },
+    {
+      "id": "sent.tatoeba.38528",
+      "outcome": "publish",
+      "cefr": "B2",
+      "originalText": "Please see that the job is finished.",
+      "finalText": "Please see that the job is finished.",
+      "intakeSourceDigest": "ebba970ad7b9320e6858f9fdbadaa1e33c2360b438c9e5070b4ce54d253995af",
+      "controlledSourceDigest": "faf7c306538cd3c74b0392ba6050e3dfb805e58bcb9b6751ec1f4f1b9b5591bd",
+      "maximumTokenJaccard": 0.2727,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.13971635",
+          "score": 0.2727272727272727
+        },
+        {
+          "id": "sent.tatoeba.28735",
+          "score": 0.2727272727272727
+        },
+        {
+          "id": "sent.gra2.05.07.2",
+          "score": 0.25
+        }
+      ],
+      "rationale": "See that plus a passive clause is a conventional instruction to ensure task completion."
+    },
+    {
+      "id": "sent.tatoeba.38606",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "I am at a loss what to do.",
+      "finalText": "I am at a loss what to do.",
+      "intakeSourceDigest": "1fb12332e1e0637fc73ab5ab844f1ec711af94b52d33d20c7bc65fb7d4dde435",
+      "controlledSourceDigest": "ec1d4049c6b1b9e73f5c4273b43bc37291e2254c95f2cb612d51c41d24196d4b",
+      "maximumTokenJaccard": 0.5455,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.24944",
+          "score": 0.5454545454545454
+        },
+        {
+          "id": "sent.tatoeba.37595",
+          "score": 0.4
+        },
+        {
+          "id": "sent.tatoeba.27481",
+          "score": 0.38461538461538464
+        }
+      ],
+      "rationale": "Repeats the published at-a-loss-what-to-say uncertainty expression with a less specific action complement."
+    },
+    {
+      "id": "sent.tatoeba.38607",
+      "outcome": "publish",
+      "cefr": "B2",
+      "originalText": "Not knowing what to do, I asked the teacher for advice.",
+      "finalText": "Not knowing what to do, I asked the teacher for advice.",
+      "intakeSourceDigest": "9603f452acd304a02413fa066323c519c792f80303404e748c02a5cb14aea174",
+      "controlledSourceDigest": "ecf37c919748827e8635972a78f14336669d9e4e52b02f07247f7595abdc8e2c",
+      "maximumTokenJaccard": 0.4286,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.38776",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.tatoeba.38188",
+          "score": 0.375
+        },
+        {
+          "id": "sent.tatoeba.36008",
+          "score": 0.35714285714285715
+        }
+      ],
+      "rationale": "The participial reason clause shares the main subject and teacher-advice supplies a complete response."
+    },
+    {
+      "id": "sent.tatoeba.38613",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "I can't start up my computer. What am I supposed to do?",
+      "finalText": "I can't start up my computer. What am I supposed to do?",
+      "intakeSourceDigest": "37c3e5df1dff8b64637044a2ad409e2c051a2db26ed4c6685ca0def3bed1a9d9",
+      "controlledSourceDigest": "00dad920418b42fd02c35f36c6699e64d22d70169143d0678ec16c44a6b2c333",
+      "maximumTokenJaccard": 0.3125,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.30804",
+          "score": 0.3125
+        },
+        {
+          "id": "sent.tatoeba.5270000",
+          "score": 0.2857142857142857
+        },
+        {
+          "id": "sent.tatoeba.1443",
+          "score": 0.2857142857142857
+        }
+      ],
+      "rationale": "Start up my computer and the follow-up action question form a coherent troubleshooting utterance."
+    },
+    {
+      "id": "sent.tatoeba.38614",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "Not knowing what to do, I asked him for help.",
+      "finalText": "Not knowing what to do, I asked him for help.",
+      "intakeSourceDigest": "953b48c8b42448b18801515f28ecf22955c7fdfc755991b7527e71e8ea0cf00c",
+      "controlledSourceDigest": "3314455a84cdfdb96b08a18dc88c0284d358c2ec05eb3564fd56eebcf635726f",
+      "maximumTokenJaccard": 0.6154,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.38607",
+          "score": 0.6153846153846154
+        },
+        {
+          "id": "sent.tatoeba.36008",
+          "score": 0.38461538461538464
+        },
+        {
+          "id": "sent.tatoeba.38776",
+          "score": 0.35714285714285715
+        }
+      ],
+      "rationale": "Repeats 38607's not-knowing-what-to-do request for assistance with a less specific helper."
+    },
+    {
+      "id": "sent.tatoeba.38618",
+      "outcome": "publish",
+      "cefr": "B2",
+      "originalText": "How come she hung up on you?",
+      "finalText": "How come she hung up on you?",
+      "intakeSourceDigest": "5b09af3230874ee96ca0d76e0bd8a9bec58ea50c5cab530c7b26bb7a5e90f10e",
+      "controlledSourceDigest": "6e13ed700312ec3348f8292ab46110f9d05560bf2101ba3daefe56c98db6d607",
+      "maximumTokenJaccard": 0.2727,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.38790",
+          "score": 0.2727272727272727
+        },
+        {
+          "id": "sent.tatoeba.21579",
+          "score": 0.25
+        },
+        {
+          "id": "sent.tatoeba.38755",
+          "score": 0.25
+        }
+      ],
+      "rationale": "How come correctly uses statement order and hung up on specifies the telephone action."
+    },
+    {
+      "id": "sent.tatoeba.38620",
+      "outcome": "publish",
+      "cefr": "B2",
+      "originalText": "How did she get mixed up with such unpleasant people?",
+      "finalText": "How did she get mixed up with such unpleasant people?",
+      "intakeSourceDigest": "62dabd6bc19a2429dbafe1389e897bbfa489a9d80f05022b3cba1a48c504f8a6",
+      "controlledSourceDigest": "5ac1529976fd805fea5f6080ead00acb577ae1d7e27caefb7370ecb5038e6e51",
+      "maximumTokenJaccard": 0.2143,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.38618",
+          "score": 0.21428571428571427
+        },
+        {
+          "id": "sent.tatoeba.36684",
+          "score": 0.2
+        },
+        {
+          "id": "sent.tatoeba.38740",
+          "score": 0.2
+        }
+      ],
+      "rationale": "Get mixed up with is a natural idiom for becoming involved with particular people."
+    },
+    {
+      "id": "sent.tatoeba.38624",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "Will you tell me why you like her?",
+      "finalText": "Will you tell me why you like her?",
+      "intakeSourceDigest": "12a45866d53add35d364159289da932b8fa74d1e0250f50dae0c52231bf18a73",
+      "controlledSourceDigest": "70cb9d79ea5cb70ec091a45a8b9e2eeaec2b6c5009121c1ffce9d70db90dd6aa",
+      "maximumTokenJaccard": 0.3333,
+      "nearest": [
+        {
+          "id": "sent.grb1.02.06.3",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.36336",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.32632",
+          "score": 0.3
+        }
+      ],
+      "rationale": "The indirect why clause has correct statement order inside a polite request."
+    },
+    {
+      "id": "sent.tatoeba.38633",
+      "outcome": "publish",
+      "cefr": "B2",
+      "originalText": "Why is he looking at me as though he knows me?",
+      "finalText": "Why is he looking at me as though he knows me?",
+      "intakeSourceDigest": "d5e37752feb26339f087670ac853b3b2606eeea82df72805597f15900584e84f",
+      "controlledSourceDigest": "ea5e354789bc5daeba90d6a3d1f35b1a94b0fb6df3742fb0055188f2f90b4da2",
+      "maximumTokenJaccard": 0.25,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.8991665",
+          "score": 0.25
+        },
+        {
+          "id": "sent.tatoeba.297659",
+          "score": 0.25
+        },
+        {
+          "id": "sent.tatoeba.23359",
+          "score": 0.23076923076923078
+        }
+      ],
+      "rationale": "As though he knows me grammatically frames a perceived recognition rather than asserting it."
+    },
+    {
+      "id": "sent.tatoeba.38634",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "I wonder what has made him change his mind.",
+      "finalText": "I wonder what has made him change his mind.",
+      "intakeSourceDigest": "7d82c25e7c80d6a1ef22e121698fb3be03030b63da130d1ecd1318e29cd8f970",
+      "controlledSourceDigest": "05e99a95adc6dde06c4814bc75b1fe27ac38e2aa04d375383813ba2ca0a4ee3b",
+      "maximumTokenJaccard": 0.4167,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.38639",
+          "score": 0.4166666666666667
+        },
+        {
+          "id": "sent.tatoeba.11119846",
+          "score": 0.25
+        },
+        {
+          "id": "sent.tatoeba.17855",
+          "score": 0.23076923076923078
+        }
+      ],
+      "rationale": "The embedded what clause naturally identifies uncertainty about a person's changed decision."
+    },
+    {
+      "id": "sent.tatoeba.38639",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "What made him so angry then, I wonder?",
+      "finalText": "What made him so angry then, I wonder?",
+      "intakeSourceDigest": "431485107c1ea80c2fc0bdd6ef5316a9af506170ce063e42fe9f5036aa05f181",
+      "controlledSourceDigest": "446038e721bd43d94f3d0e2c8cbd2e0272291e51fda2df31d127df0536e31b63",
+      "maximumTokenJaccard": 0.4167,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.38634",
+          "score": 0.4166666666666667
+        },
+        {
+          "id": "sent.tatoeba.24953",
+          "score": 0.3
+        },
+        {
+          "id": "sent.tatoeba.7279",
+          "score": 0.25
+        }
+      ],
+      "rationale": "The past causative anger question and parenthetical I wonder form natural speech."
+    },
+    {
+      "id": "sent.tatoeba.38640",
+      "outcome": "publish",
+      "cefr": "B2",
+      "originalText": "How did they come by all that wealth?",
+      "finalText": "How did they come by all that wealth?",
+      "intakeSourceDigest": "2557fe61b8e0ac83287c07be2c63d831a0d3002e0016a4c193255a2188036ce8",
+      "controlledSourceDigest": "5487127628c101e2f4d285a70d9ea27b7ab31176e5f6b9f90cbc1ab032f9543c",
+      "maximumTokenJaccard": 0.2308,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.36684",
+          "score": 0.23076923076923078
+        },
+        {
+          "id": "sent.tatoeba.38755",
+          "score": 0.23076923076923078
+        },
+        {
+          "id": "sent.tatoeba.37557",
+          "score": 0.21052631578947367
+        }
+      ],
+      "rationale": "Come by all that wealth is idiomatic acquisition language within an open question."
+    },
+    {
+      "id": "sent.tatoeba.38648",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "And why do you think that is?",
+      "finalText": "And why do you think that is?",
+      "intakeSourceDigest": "380fc1150e642061c87aaf89af2e03e580ef8147db177377fa1c6c043c498056",
+      "controlledSourceDigest": "8e5e626b44ddb98ed58edb99c189486fde7bd970b7f83773b421b9715daf206b",
+      "maximumTokenJaccard": 0.3636,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.17981",
+          "score": 0.36363636363636365
+        },
+        {
+          "id": "sent.tatoeba.780871",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.13886675",
+          "score": 0.3333333333333333
+        }
+      ],
+      "rationale": "And and that both depend on a missing preceding explanation or proposition."
+    },
+    {
+      "id": "sent.tatoeba.38649",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "Why has Japan let pollution get so bad?",
+      "finalText": "Why has Japan let pollution get so bad?",
+      "intakeSourceDigest": "e4312a15094d09bdee5b1233f9d8c21339ffc686d0a61d6c26d5383407c75ede",
+      "controlledSourceDigest": "19f2bd50c6eb66ab3e70178ad16f5664e3ffb2e1ac78343f876799e1da535400",
+      "maximumTokenJaccard": 0.2143,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.36477",
+          "score": 0.21428571428571427
+        },
+        {
+          "id": "sent.tatoeba.1825398",
+          "score": 0.18181818181818182
+        },
+        {
+          "id": "sent.grb1.01.04.1",
+          "score": 0.16666666666666666
+        }
+      ],
+      "rationale": "The country-wide pollution question presupposes an unspecified historical deterioration and cause."
+    },
+    {
+      "id": "sent.tatoeba.38655",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "Why has the birthrate declined so sharply?",
+      "finalText": "Why has the birthrate declined so sharply?",
+      "intakeSourceDigest": "416c6b6f2412bb3c434283e2b2e8ec03e991bace7780fb3e900d68aeedd59bbd",
+      "controlledSourceDigest": "01ec3d6e3d750009f0da882410e1cea1c2af66411a386dec5d38863bccd97a7a",
+      "maximumTokenJaccard": 0.2308,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.37827",
+          "score": 0.23076923076923078
+        },
+        {
+          "id": "sent.00000015",
+          "score": 0.2
+        },
+        {
+          "id": "sent.gra2.02.01.2",
+          "score": 0.2
+        }
+      ],
+      "rationale": "The birthrate question presupposes a steep decline without any population or time frame."
+    },
+    {
+      "id": "sent.tatoeba.38668",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "What makes you think that I'm against that?",
+      "finalText": "What makes you think that I'm against that?",
+      "intakeSourceDigest": "711c9dd0dea510690bba86c68dfa0164ebfc3497dbc72d4744df21863f46245e",
+      "controlledSourceDigest": "2f50cd744946bf370ac95a8a6dc930c2274ddcb35e76b09cbad5474d9314f9dc",
+      "maximumTokenJaccard": 0.5,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.17981",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.780871",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.36332",
+          "score": 0.3333333333333333
+        }
+      ],
+      "rationale": "Both occurrences of that lack referents, leaving the opposition question without independent content."
+    },
+    {
+      "id": "sent.tatoeba.38676",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "Why don't you ever say it?",
+      "finalText": "Why don't you ever say it?",
+      "intakeSourceDigest": "310afd97116fe3e24e4bd69efe8eca338e051c7ef8602646736f7bb72b1c9da5",
+      "controlledSourceDigest": "6fbef591dad4a14167cfe1a67ba0aefa83918426acb9d994c43a758690090ce4",
+      "maximumTokenJaccard": 0.3333,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.13155888",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.28659",
+          "score": 0.3
+        },
+        {
+          "id": "sent.tatoeba.32512",
+          "score": 0.2727272727272727
+        }
+      ],
+      "rationale": "Say it has no message referent and the habitual reproach depends on prior dialogue."
+    },
+    {
+      "id": "sent.tatoeba.38689",
+      "outcome": "publish",
+      "cefr": "C1",
+      "originalText": "I can't understand how your father managed to see through that man.",
+      "finalText": "I can't understand how your father managed to see through that man.",
+      "intakeSourceDigest": "d04f45a85cffac3ec9d7e3e9a2915eecf5a7ca4796bb736cbabca2ba36d4f408",
+      "controlledSourceDigest": "76ae793b97a3ba201794130f1ca0b7ce9837e00a1cd7c1610016e591cdbb95c1",
+      "maximumTokenJaccard": 0.25,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.11450681",
+          "score": 0.25
+        },
+        {
+          "id": "sent.grb2.04.04.1",
+          "score": 0.21428571428571427
+        },
+        {
+          "id": "sent.tatoeba.5350447",
+          "score": 0.21428571428571427
+        }
+      ],
+      "rationale": "See through that man is an established idiom; the nested clauses remain grammatical and coherent."
+    },
+    {
+      "id": "sent.tatoeba.38695",
+      "outcome": "publish",
+      "cefr": "B2",
+      "originalText": "Why did you part with your house?",
+      "finalText": "Why did you part with your house?",
+      "intakeSourceDigest": "3eb3d768bd0dc7a28489f79da57c7af2b17c68c698da43708716ac5791248a37",
+      "controlledSourceDigest": "3dabd9213d1f19d97da2b29224ce73e1adcd52de8ac4afa4515f12225c2473b5",
+      "maximumTokenJaccard": 0.3,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.13155888",
+          "score": 0.3
+        },
+        {
+          "id": "sent.tatoeba.13155899",
+          "score": 0.3
+        },
+        {
+          "id": "sent.tatoeba.38354",
+          "score": 0.3
+        }
+      ],
+      "rationale": "Part with your house is idiomatic disposal language in a concrete past question."
+    },
+    {
+      "id": "sent.tatoeba.38700",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "Not knowing what to do, I asked for help.",
+      "finalText": "Not knowing what to do, I asked for help.",
+      "intakeSourceDigest": "0c20e34b85cf5a5f3cf524b07a5679998d9b64004ae5c34a8ac7332fd72d49c8",
+      "controlledSourceDigest": "fe3ac28dbd5e50d688b654305f4483539a73d9496f1c2dfe09feb1387320861b",
+      "maximumTokenJaccard": 0.6667,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.38607",
+          "score": 0.6666666666666666
+        },
+        {
+          "id": "sent.tatoeba.36008",
+          "score": 0.4166666666666667
+        },
+        {
+          "id": "sent.tatoeba.38776",
+          "score": 0.38461538461538464
+        }
+      ],
+      "rationale": "Repeats 38607's uncertainty-followed-by-help request while omitting the helper."
+    },
+    {
+      "id": "sent.tatoeba.38706",
+      "outcome": "publish",
+      "cefr": "B2",
+      "originalText": "I can't for the life of me remember her phone number.",
+      "finalText": "I can't for the life of me remember her phone number.",
+      "intakeSourceDigest": "47f5b11bcf8c0d869767a1a5232eb7ca05d44bbb084ab05afb76fc55b64eced1",
+      "controlledSourceDigest": "71006f44dfe5675bbfcbfe3682bd184ca1a99b0491742aca4edcdfff6fdc4bc8",
+      "maximumTokenJaccard": 0.2667,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.27453",
+          "score": 0.26666666666666666
+        },
+        {
+          "id": "sent.tatoeba.33361",
+          "score": 0.23529411764705882
+        },
+        {
+          "id": "sent.grb2.06.08.3",
+          "score": 0.2222222222222222
+        }
+      ],
+      "rationale": "For the life of me is a conventional idiomatic emphasis on failing to recall a phone number."
+    },
+    {
+      "id": "sent.tatoeba.38708",
+      "outcome": "publish",
+      "cefr": "B2",
+      "originalText": "I couldn't bring myself to tell her the truth.",
+      "finalText": "I couldn't bring myself to tell her the truth.",
+      "intakeSourceDigest": "d0c58b391bb52470f28195d671adb7b789aedff62cb8759ef3da961d80bb3e84",
+      "controlledSourceDigest": "5241843b321af17352e14e1602afc474429a4f2128ef42f6c40663aa6ac502bb",
+      "maximumTokenJaccard": 0.3636,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.24851",
+          "score": 0.36363636363636365
+        },
+        {
+          "id": "sent.tatoeba.30954",
+          "score": 0.3125
+        },
+        {
+          "id": "sent.tatoeba.5656501",
+          "score": 0.25
+        }
+      ],
+      "rationale": "Could not bring myself to plus infinitive naturally expresses reluctance to tell the truth."
+    },
+    {
+      "id": "sent.tatoeba.38711",
+      "outcome": "publish",
+      "cefr": "B2",
+      "originalText": "For some reason or other I cannot bring myself to work.",
+      "finalText": "For some reason or other I cannot bring myself to work.",
+      "intakeSourceDigest": "8b4f8a033fe7e22a2bc15d1e34b8633fe5e3e6ef7fd19f02443f4d558ed75b9d",
+      "controlledSourceDigest": "df8be844b91cd870d935bd7ac144b0a758641358a04a2fc514d21d14ba983817",
+      "maximumTokenJaccard": 0.25,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.36046",
+          "score": 0.25
+        },
+        {
+          "id": "sent.tatoeba.38708",
+          "score": 0.25
+        },
+        {
+          "id": "sent.grb1.02.08.1",
+          "score": 0.21428571428571427
+        }
+      ],
+      "rationale": "For some reason or other and bring myself to work form a coherent report of unexplained reluctance."
+    },
+    {
+      "id": "sent.tatoeba.38714",
+      "outcome": "publish",
+      "cefr": "B2",
+      "originalText": "I'm just a creature of habit, I guess.",
+      "finalText": "I'm just a creature of habit, I guess.",
+      "intakeSourceDigest": "746cb069c7485bd4f2cc89f9718a653ccd5d897115a6764f9de16fa55b387b5e",
+      "controlledSourceDigest": "b88566a664c3d36ddef6ab996dbd3f123768d81f455ae3b636e14db3a4220adf",
+      "maximumTokenJaccard": 0.2778,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.18022",
+          "score": 0.2777777777777778
+        },
+        {
+          "id": "sent.tatoeba.1665046",
+          "score": 0.25
+        },
+        {
+          "id": "sent.gra1.06.02.1",
+          "score": 0.23076923076923078
+        }
+      ],
+      "rationale": "Creature of habit is an idiomatic self-description, appropriately hedged by I guess."
+    },
+    {
+      "id": "sent.tatoeba.38716",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "For the life of me, I couldn't remember his name.",
+      "finalText": "For the life of me, I couldn't remember his name.",
+      "intakeSourceDigest": "ce614bcd7b3a357dea8ca9641025793ad683c111b741ba6b42c67d4c4c0ec67b",
+      "controlledSourceDigest": "e22dddfd277af0401ec5a90d5c7c0f625e0a9f3a2edceab1ced12b97c56d6fc3",
+      "maximumTokenJaccard": 0.5,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.38706",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.33361",
+          "score": 0.25
+        },
+        {
+          "id": "sent.tatoeba.27843",
+          "score": 0.2222222222222222
+        }
+      ],
+      "rationale": "Repeats 38706's for-the-life-of-me failure of recall with only the remembered item changed."
+    },
+    {
+      "id": "sent.tatoeba.38726",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "I cannot for the life of me remember where it was.",
+      "finalText": "I cannot for the life of me remember where it was.",
+      "intakeSourceDigest": "757b980aeb5296d10693101d7036ef4478b549052225b0b1d8754b308865eb8d",
+      "controlledSourceDigest": "6eddc04b22d96348ea7823d59038e7e97ff5bd5ac939723d98303c60fc756a06",
+      "maximumTokenJaccard": 0.4667,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.38706",
+          "score": 0.4666666666666667
+        },
+        {
+          "id": "sent.tatoeba.63747",
+          "score": 0.3125
+        },
+        {
+          "id": "sent.tatoeba.33361",
+          "score": 0.3125
+        }
+      ],
+      "rationale": "Another for-the-life-of-me memory failure repeats 38706 while leaving the location referent vague."
+    },
+    {
+      "id": "sent.tatoeba.38727",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "I simply cannot get rid of this bad cold of mine.",
+      "finalText": "I simply cannot get rid of this bad cold of mine.",
+      "intakeSourceDigest": "ecc5845fd5f7102d06c94c7142b89b08223efeecf960a49ed9f482d506553dc5",
+      "controlledSourceDigest": "6854b899b8d57e380f42066e228b8144804a1e627c01731453cb294f6a15e4b5",
+      "maximumTokenJaccard": 0.3571,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.1449750",
+          "score": 0.35714285714285715
+        },
+        {
+          "id": "sent.tatoeba.32777",
+          "score": 0.21428571428571427
+        },
+        {
+          "id": "sent.tatoeba.32779",
+          "score": 0.21428571428571427
+        }
+      ],
+      "rationale": "Same unresolved-cold complaint as the published I-have-not-got-rid-of-my-bad-cold-yet example."
+    },
+    {
+      "id": "sent.tatoeba.38736",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "Why do they call New York the Big Apple?",
+      "finalText": "Why do they call New York the Big Apple?",
+      "intakeSourceDigest": "1190944f1f448e992f6b6e9cc0718f1f713309c8afc0f939877e124a18b5f83d",
+      "controlledSourceDigest": "642b3f5d4613f52ea2d3a787036034a509601185df0afdd1f3459b1d6dbca76b",
+      "maximumTokenJaccard": 0.25,
+      "nearest": [
+        {
+          "id": "sent.00000005",
+          "score": 0.25
+        },
+        {
+          "id": "sent.tatoeba.18340",
+          "score": 0.2
+        },
+        {
+          "id": "sent.tatoeba.35938",
+          "score": 0.2
+        }
+      ],
+      "rationale": "The question about a city's nickname is complete and makes no origin assertion."
+    },
+    {
+      "id": "sent.tatoeba.38737",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "What makes you think that way?",
+      "finalText": "What makes you think that way?",
+      "intakeSourceDigest": "a2c98f95f0f362911c466e860da49e4f3a2ad87e5ffbe8de06753cda59de1418",
+      "controlledSourceDigest": "dd1a30565b5cbd54fd9d8e1f9179d3b583836e3e859ede2fe3d8ac14d056019b",
+      "maximumTokenJaccard": 0.75,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.17981",
+          "score": 0.75
+        },
+        {
+          "id": "sent.tatoeba.11800827",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.29525",
+          "score": 0.3333333333333333
+        }
+      ],
+      "rationale": "Pragmatic repeat of the already-published what-is-it-that-makes-you-think-that-way question."
+    },
+    {
+      "id": "sent.tatoeba.38740",
+      "outcome": "publish",
+      "cefr": "B2",
+      "originalText": "How did you arrive at such a conclusion?",
+      "finalText": "How did you arrive at such a conclusion?",
+      "intakeSourceDigest": "5d8ac8dfbc2731cfff9ae3b2bf2b1f0cb95fa16b4c16f2abeb32720f4af6c78c",
+      "controlledSourceDigest": "1c9d43db0a92270d945b4cde00fd6aeb4301fe50ab9b41d9aa065c7290240f7d",
+      "maximumTokenJaccard": 0.3636,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.29973",
+          "score": 0.36363636363636365
+        },
+        {
+          "id": "sent.tatoeba.38741",
+          "score": 0.36363636363636365
+        },
+        {
+          "id": "sent.tatoeba.36684",
+          "score": 0.3333333333333333
+        }
+      ],
+      "rationale": "Arrive at such a conclusion is a natural reasoning collocation in a complete question."
+    },
+    {
+      "id": "sent.tatoeba.38741",
+      "outcome": "publish",
+      "cefr": "B2",
+      "originalText": "How can you bear such a humiliation?",
+      "finalText": "How can you bear such a humiliation?",
+      "intakeSourceDigest": "13ead8b4a7382dd7464b983c9754be293f21465d894a8a3b3bf04a49499594fd",
+      "controlledSourceDigest": "addf011aa81fa3891fd792e0e89aa671c19cd5000a7455658ffca80a75a27767",
+      "maximumTokenJaccard": 0.4,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.29973",
+          "score": 0.4
+        },
+        {
+          "id": "sent.tatoeba.38740",
+          "score": 0.36363636363636365
+        },
+        {
+          "id": "sent.tatoeba.29998",
+          "score": 0.2727272727272727
+        }
+      ],
+      "rationale": "Bear such a humiliation is a grammatical question about tolerating a particular experience."
+    },
+    {
+      "id": "sent.tatoeba.38747",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "How can you be so passive? Why don't you retaliate?",
+      "finalText": "How can you be so passive? Why don't you retaliate?",
+      "intakeSourceDigest": "b233fa61a101c10c9fc8db01ead2194123863371a432c999415311391532edd8",
+      "controlledSourceDigest": "8c0e41e2e5258af9d10eaad38a767ec0198d4d7971bf9d4ed2e68e087a4192fa",
+      "maximumTokenJaccard": 0.25,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.36487",
+          "score": 0.25
+        },
+        {
+          "id": "sent.tatoeba.29998",
+          "score": 0.23076923076923078
+        },
+        {
+          "id": "sent.tatoeba.36333",
+          "score": 0.23076923076923078
+        }
+      ],
+      "rationale": "The unframed demand to retaliate is unsuitable as general learner advice and supplies no conflict context."
+    },
+    {
+      "id": "sent.tatoeba.38750",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "What do you want such an old car for?",
+      "finalText": "What do you want such an old car for?",
+      "intakeSourceDigest": "acbf5f3cbd020e157e5317fca1007e1d34a362ec5bf39a5e3117d5ee06d6889d",
+      "controlledSourceDigest": "3a6de480d99c4a6c77f080450342f127c21ab30177265819916934b5edd273df",
+      "maximumTokenJaccard": 0.4,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.274613",
+          "score": 0.4
+        },
+        {
+          "id": "sent.tatoeba.6398229",
+          "score": 0.36363636363636365
+        },
+        {
+          "id": "sent.tatoeba.24858",
+          "score": 0.36363636363636365
+        }
+      ],
+      "rationale": "What do you want an old car for is natural colloquial questioning with a clear object."
+    },
+    {
+      "id": "sent.tatoeba.38751",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "Why does that require an apology?",
+      "finalText": "Why does that require an apology?",
+      "intakeSourceDigest": "8781ce70f5188d12ee055b8eeb0a570bc43367d4cf86e7de0a9fe5ff8e2e9fd0",
+      "controlledSourceDigest": "18a8fb554597f5aa38265a13e04bcde8d981936e849d41d7a43bc3d02a6d2676",
+      "maximumTokenJaccard": 0.2,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.11822385",
+          "score": 0.2
+        },
+        {
+          "id": "sent.tt.l002-p004.018",
+          "score": 0.16666666666666666
+        },
+        {
+          "id": "sent.tt.l014-p001.013",
+          "score": 0.16666666666666666
+        }
+      ],
+      "rationale": "Require an apology is a natural complete question about whether an act warrants one."
+    },
+    {
+      "id": "sent.tatoeba.38753",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "How did such a thing come about?",
+      "finalText": "How did such a thing come about?",
+      "intakeSourceDigest": "8fd87733a0181397849e081cf1c29a8fad187f1c6be45b34a7f01990a40d187c",
+      "controlledSourceDigest": "0e8e01efe3451817a09e7373038c67dfa7674ad01132c0869739256d58d5af10",
+      "maximumTokenJaccard": 0.875,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.36684",
+          "score": 0.875
+        },
+        {
+          "id": "sent.tatoeba.29973",
+          "score": 0.4
+        },
+        {
+          "id": "sent.tatoeba.38740",
+          "score": 0.36363636363636365
+        }
+      ],
+      "rationale": "Repeats the how-did-a-strange-thing-come-about question accepted in 36684."
+    },
+    {
+      "id": "sent.tatoeba.38755",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "How did you come to hear of it?",
+      "finalText": "How did you come to hear of it?",
+      "intakeSourceDigest": "8fae61027ee4fe511af4d0039bfeed798087ae5a8f55d097f48cd54b187558e4",
+      "controlledSourceDigest": "0691e520c5095e5912885874054f6f7eb66c736527f13221c1de6548ae9c8e95",
+      "maximumTokenJaccard": 0.3636,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.38790",
+          "score": 0.36363636363636365
+        },
+        {
+          "id": "sent.tatoeba.17950",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.17751",
+          "score": 0.3076923076923077
+        }
+      ],
+      "rationale": "Come to hear of is a natural discovery expression in a grammatically complete question."
+    },
+    {
+      "id": "sent.tatoeba.38759",
+      "outcome": "publish",
+      "cefr": "B2",
+      "originalText": "What put such an idea into your head?",
+      "finalText": "What put such an idea into your head?",
+      "intakeSourceDigest": "1acf0b64a7408eb75af3212cc01a1bc1c544cd3648af082ac428aea6c890d64e",
+      "controlledSourceDigest": "87e15feb6bb45afa93cf833eee73ed5e4ab380830c27826e2680efb9087ebd3a",
+      "maximumTokenJaccard": 0.2857,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.17326",
+          "score": 0.2857142857142857
+        },
+        {
+          "id": "sent.tatoeba.311061",
+          "score": 0.25
+        },
+        {
+          "id": "sent.tatoeba.38750",
+          "score": 0.21428571428571427
+        }
+      ],
+      "rationale": "Put an idea into your head is an established figurative expression in a coherent question."
+    },
+    {
+      "id": "sent.tatoeba.38765",
+      "outcome": "publish",
+      "cefr": "B2",
+      "originalText": "How did this misunderstanding ever arise?",
+      "finalText": "How did this misunderstanding ever arise?",
+      "intakeSourceDigest": "90a9a71a24cd7979bc9efef6edb50282f01908f275c488351c248491c72f1ac8",
+      "controlledSourceDigest": "b23382a9c2b41f6469c98bcf55d8b0b577e80e93c6d0c5da8585144c47629b06",
+      "maximumTokenJaccard": 0.3333,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.38369",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.60391",
+          "score": 0.2
+        },
+        {
+          "id": "sent.tatoeba.13155899",
+          "score": 0.2
+        }
+      ],
+      "rationale": "Arise is correctly intransitive and this misunderstanding supplies an explicit event anchor."
+    },
+    {
+      "id": "sent.tatoeba.38767",
+      "outcome": "publish",
+      "cefr": "B2",
+      "originalText": "Why did you call me at this unearthly hour?",
+      "finalText": "Why did you call me at this unearthly hour?",
+      "intakeSourceDigest": "8cb711e5169240f95ba1a09b3e3f627ef1d8bbd9a8aa98af710b6a32db97bf7f",
+      "controlledSourceDigest": "7fca1397e4ce401db98af9a2fc5c8ddf13b489389d3e692d0098401e9feadff0",
+      "maximumTokenJaccard": 0.3636,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.13155899",
+          "score": 0.36363636363636365
+        },
+        {
+          "id": "sent.tatoeba.36477",
+          "score": 0.2857142857142857
+        },
+        {
+          "id": "sent.gra1.05.07.2",
+          "score": 0.2727272727272727
+        }
+      ],
+      "rationale": "Unearthly hour is an idiomatic complaint anchored by a specific telephone call."
+    },
+    {
+      "id": "sent.tatoeba.38769",
+      "outcome": "publish",
+      "cefr": "B2",
+      "originalText": "How is it that you can speak this language?",
+      "finalText": "How is it that you can speak this language?",
+      "intakeSourceDigest": "7b4a8835a5a64ec55eb42707c366b4e703cdd14f7101c2e6c8e5dd85a8157c10",
+      "controlledSourceDigest": "735defd06840397780e69919ab35db28e67667c767ce358b76a94d5d8e508306",
+      "maximumTokenJaccard": 0.3333,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.29998",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.17768",
+          "score": 0.3076923076923077
+        },
+        {
+          "id": "sent.tatoeba.17981",
+          "score": 0.3076923076923077
+        }
+      ],
+      "rationale": "How is it that correctly introduces a complete question about a listener's language ability."
+    },
+    {
+      "id": "sent.tatoeba.38775",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "Not knowing what to do, he asked me for help.",
+      "finalText": "Not knowing what to do, he asked me for help.",
+      "intakeSourceDigest": "5233c1ca10497491501d45621c8d335e5a2a0962c08a2bf4c819fe0a7432dbf2",
+      "controlledSourceDigest": "59dc4a175c132fca85f86cceac578107674ef472df462104ba0d3217e4b7a9e1",
+      "maximumTokenJaccard": 0.5,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.38607",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.38776",
+          "score": 0.35714285714285715
+        },
+        {
+          "id": "sent.tatoeba.34669",
+          "score": 0.29411764705882354
+        }
+      ],
+      "rationale": "Repeats 38607's uncertainty-leading-to-a-help-request scenario with pronoun substitutions."
+    },
+    {
+      "id": "sent.tatoeba.38776",
+      "outcome": "publish",
+      "cefr": "B2",
+      "originalText": "Not knowing what to do, we telephoned the police.",
+      "finalText": "Not knowing what to do, we telephoned the police.",
+      "intakeSourceDigest": "a641e4af5a69a85b70c756b86d34cd27b002575e218496664760ef42ae66414f",
+      "controlledSourceDigest": "0add737af495249baea36620748b9ffe30ac82e8d4ba188dcd9266e1402990ae",
+      "maximumTokenJaccard": 0.4286,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.38607",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.tatoeba.15992",
+          "score": 0.3076923076923077
+        },
+        {
+          "id": "sent.tatoeba.36008",
+          "score": 0.3076923076923077
+        }
+      ],
+      "rationale": "Calling the police is a distinct concrete response to uncertainty; the participial subject correctly matches we."
+    },
+    {
+      "id": "sent.tatoeba.38783",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "What made you do a silly thing like that?",
+      "finalText": "What made you do a silly thing like that?",
+      "intakeSourceDigest": "f9d7c8110274c120709f3f229a37a3ae7af405102174235baf1834d03b6bad1b",
+      "controlledSourceDigest": "1586b818d0d9430a473d14f31c1324e81e195d4e091f995798c7554868213658",
+      "maximumTokenJaccard": 0.4615,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.30834",
+          "score": 0.46153846153846156
+        },
+        {
+          "id": "sent.tatoeba.11119955",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.31394",
+          "score": 0.3125
+        }
+      ],
+      "rationale": "Make you do uses a correct bare infinitive in a natural question about a listener's action."
+    },
+    {
+      "id": "sent.tatoeba.38790",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "How come you didn't come to the party?",
+      "finalText": "How come you didn't come to the party?",
+      "intakeSourceDigest": "12e008c15e72cdfb1e503c4a11e09eb48bc8d189df8d1cb546c2b6f3504ec02a",
+      "controlledSourceDigest": "0676ff29de0446f9e0c16687fe7a623bb671f754d5a53231f2352d02b46e4d14",
+      "maximumTokenJaccard": 0.5,
+      "nearest": [
+        {
+          "id": "sent.grb1.03.01.3",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.38344",
+          "score": 0.36363636363636365
+        },
+        {
+          "id": "sent.tatoeba.38755",
+          "score": 0.36363636363636365
+        }
+      ],
+      "rationale": "How come with didn't uses natural colloquial statement order in a party-absence enquiry."
+    },
+    {
+      "id": "sent.tatoeba.38791",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "What happened? The car's slowing down.",
+      "finalText": "What happened? The car's slowing down.",
+      "intakeSourceDigest": "6dfa5fa0c63457c119a5aca70ad4b1e7d5872339e14a312e7fa58660864932b6",
+      "controlledSourceDigest": "010c7860c834717a879720390da81837e6d8a60520bef1e52d7f424af9589496",
+      "maximumTokenJaccard": 0.2308,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.38060",
+          "score": 0.23076923076923078
+        },
+        {
+          "id": "sent.tatoeba.18564",
+          "score": 0.2222222222222222
+        },
+        {
+          "id": "sent.tatoeba.20785",
+          "score": 0.2222222222222222
+        }
+      ],
+      "rationale": "The event question and car-slowing observation form a complete coherent utterance."
+    },
+    {
+      "id": "sent.tatoeba.38796",
+      "outcome": "publish",
+      "cefr": "B2",
+      "originalText": "I don't know how to satisfy his need for constant attention.",
+      "finalText": "I don't know how to satisfy his need for constant attention.",
+      "intakeSourceDigest": "65770baff418c805913b68347c4ee4564d2db87f39178b67495c01f2de8f4fef",
+      "controlledSourceDigest": "e5926f79d8e047d1aacee4b636307cf605f37d57a5524cf089dc0dcefcb0cc59",
+      "maximumTokenJaccard": 0.2857,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.1443",
+          "score": 0.2857142857142857
+        },
+        {
+          "id": "sent.tatoeba.29205",
+          "score": 0.25
+        },
+        {
+          "id": "sent.tatoeba.3729191",
+          "score": 0.23529411764705882
+        }
+      ],
+      "rationale": "Satisfy his need for constant attention is a natural complement inside a correct embedded how clause."
+    },
+    {
+      "id": "sent.tatoeba.38806",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "Not knowing what to do, she remained silent.",
+      "finalText": "Not knowing what to do, she remained silent.",
+      "intakeSourceDigest": "5a3920a261b5b3479269de0b440b9ed1a10c74ebfeb93f66d4b6817aae76faee",
+      "controlledSourceDigest": "1831a1fadb639e3b67944f9e78bad1c933ba495bae1dd1428ceefb3bd36b76f5",
+      "maximumTokenJaccard": 0.4545,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.36008",
+          "score": 0.45454545454545453
+        },
+        {
+          "id": "sent.tatoeba.38776",
+          "score": 0.4166666666666667
+        },
+        {
+          "id": "sent.tatoeba.38607",
+          "score": 0.35714285714285715
+        }
+      ],
+      "rationale": "Repeats the not-knowing-and-remaining-silent scenario accepted in 36008 with only the person varied."
+    },
+    {
+      "id": "sent.tatoeba.38818",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "Please let me make it up to you.",
+      "finalText": "Please let me make it up to you.",
+      "intakeSourceDigest": "9a2b8485a6927fbd1d5daef3c82a6c0cccb578a70e020f3b9620ae27cab011df",
+      "controlledSourceDigest": "2731e33494460d2811bbb034a1b286feccf1bc5c5859f83bcd0dab73cbeed5a1",
+      "maximumTokenJaccard": 0.3846,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.38304",
+          "score": 0.38461538461538464
+        },
+        {
+          "id": "sent.tatoeba.13155917",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.17205",
+          "score": 0.3333333333333333
+        }
+      ],
+      "rationale": "Repeats 38304's listener-compensation idiom as a request rather than an inability statement."
+    },
+    {
+      "id": "sent.tatoeba.38868",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "Please turn the television on.",
+      "finalText": "Please turn the television on.",
+      "intakeSourceDigest": "1fe332db7e087df1aab4022d82f772b4bbd10ca394c1bfce06728dc15426ab06",
+      "controlledSourceDigest": "41c0ec65d8f687c823774ef46f1eb6e14e946d80704704326b7319c48f39ffa8",
+      "maximumTokenJaccard": 0.5,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.6043",
+          "score": 0.5
+        },
+        {
+          "id": "sent.gra2.05.06.1",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.grb1.07.07.1",
+          "score": 0.42857142857142855
+        }
+      ],
+      "rationale": "Turn the television on is natural separable phrasal-verb use in a clear request."
+    },
+    {
+      "id": "sent.tatoeba.38880",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "Please keep me informed of what is happening there.",
+      "finalText": "Please keep me informed of what is happening there.",
+      "intakeSourceDigest": "cf7db323301d9c9124819b88dac6dbe37bdb8b8fba33f79823847ff281e1cca7",
+      "controlledSourceDigest": "f686c93fa633232b4abeb6f3e98e62f31da3628ab2d9b90c8496898eb9823fc2",
+      "maximumTokenJaccard": 0.25,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.36771",
+          "score": 0.25
+        },
+        {
+          "id": "sent.tatoeba.27372",
+          "score": 0.23076923076923078
+        },
+        {
+          "id": "sent.tatoeba.36675",
+          "score": 0.23076923076923078
+        }
+      ],
+      "rationale": "Keep me informed plus an embedded event clause forms a complete communication request."
+    },
+    {
+      "id": "sent.tatoeba.38900",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "Please write about your real experience.",
+      "finalText": "Please write about your real experience.",
+      "intakeSourceDigest": "4e0cd3a89a5b7807bd7c5b283e9c94cace7dac4114ede65cf915059446e98ec9",
+      "controlledSourceDigest": "a5b24efa3a630373226f1e1a7d44d2af2048947da89649b376289ab547980093",
+      "maximumTokenJaccard": 0.25,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.456631",
+          "score": 0.25
+        },
+        {
+          "id": "sent.tatoeba.33806",
+          "score": 0.2222222222222222
+        },
+        {
+          "id": "sent.tatoeba.13245309",
+          "score": 0.2
+        }
+      ],
+      "rationale": "Real experience is a grammatical noun phrase asking for a personally experienced account."
+    },
+    {
+      "id": "sent.tatoeba.38934",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "The toilet was outside, in the yard.",
+      "finalText": "The toilet was outside, in the yard.",
+      "intakeSourceDigest": "9d5e048f4452c670682a3b0c9f942a70290846d62df51972478c589c6d38274b",
+      "controlledSourceDigest": "bd129cc94db72daa2949365acff992d3add2c9f69ed8c13afa73b828d66cdf2d",
+      "maximumTokenJaccard": 0.3333,
+      "nearest": [
+        {
+          "id": "sent.grb1.04.04.2",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.22480",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.29514",
+          "score": 0.3333333333333333
+        }
+      ],
+      "rationale": "The past toilet-location statement has a clear outdoor location and is independently understandable."
+    },
+    {
+      "id": "sent.tatoeba.38950",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "The argument presented in Doyle's study was first published as a white paper on drug-related crimes.",
+      "finalText": "The argument presented in Doyle's study was first published as a white paper on drug-related crimes.",
+      "intakeSourceDigest": "c76a5919b0878ca9fa25ca01e0305ee67f68c50e1d706943dc0d55ea682a97d8",
+      "controlledSourceDigest": "f2851d13b4b5cdb01bca5e4f85cb3c530025ca0afe7a16ad090d65a9397780e4",
+      "maximumTokenJaccard": 0.2105,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.35435",
+          "score": 0.21052631578947367
+        },
+        {
+          "id": "sent.tatoeba.28421",
+          "score": 0.2
+        },
+        {
+          "id": "sent.tatoeba.33671",
+          "score": 0.2
+        }
+      ],
+      "rationale": "Doyle's study and the publication sequence are specific bibliographic claims without enough identifying source evidence."
+    },
+    {
+      "id": "sent.tatoeba.38971",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "Germany was allied with Italy in World War II.",
+      "finalText": "Germany was allied with Italy in World War II.",
+      "intakeSourceDigest": "4ae9c68cd866b2e971ac804449e50c438906fe8d6b0f9d9e87e169873d952896",
+      "controlledSourceDigest": "cd32b253ca48ba5eb3bcef64e9d14000a119a59274e1c12d6fb635ba5fc67cd2",
+      "maximumTokenJaccard": 0.1667,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.34671",
+          "score": 0.16666666666666666
+        },
+        {
+          "id": "sent.tatoeba.30020",
+          "score": 0.15789473684210525
+        },
+        {
+          "id": "sent.grb1.04.04.2",
+          "score": 0.15384615384615385
+        }
+      ],
+      "rationale": "The named countries and World War II form a stable, conventional historical alliance statement."
+    },
+    {
+      "id": "sent.tatoeba.38975",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "As we thought, she had gone abroad.",
+      "finalText": "As we thought, she had gone abroad.",
+      "intakeSourceDigest": "e2d0672d8133cbe32e444715d8197bcb8f6fdae92ff9e779dad05515d45557f8",
+      "controlledSourceDigest": "7ab9b2d9e2094013f0966f3b64f3d8a125745fed8d26f96ef435ebbbc261e8ed",
+      "maximumTokenJaccard": 0.2727,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.28781",
+          "score": 0.2727272727272727
+        },
+        {
+          "id": "sent.tatoeba.28403",
+          "score": 0.25
+        },
+        {
+          "id": "sent.gra2.04.02.3",
+          "score": 0.2
+        }
+      ],
+      "rationale": "The past-perfect travel event naturally precedes the retrospective as-we-thought evaluation."
+    },
+    {
+      "id": "sent.tatoeba.38983",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Shall I close the door?",
+      "finalText": "Shall I close the door?",
+      "intakeSourceDigest": "c13e94fef25179b3aa5f8010880f8d5ada318026a7414da220b1ef5bb792c3f4",
+      "controlledSourceDigest": "0c91ed7b36c7209a3756ccfa13d3143c3dc2e839aff16dd21dd2b651d6d4483a",
+      "maximumTokenJaccard": 0.4286,
+      "nearest": [
+        {
+          "id": "sent.gra1.03.07.1",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.tatoeba.8555505",
+          "score": 0.2857142857142857
+        },
+        {
+          "id": "sent.gra1.03.03.3",
+          "score": 0.25
+        }
+      ],
+      "rationale": "Shall I close the door is a natural complete offer to perform a household action."
+    },
+    {
+      "id": "sent.tatoeba.39017",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "It is very careless of you to leave the door open.",
+      "finalText": "It is very careless of you to leave the door open.",
+      "intakeSourceDigest": "ee5be8b4402b1a8f5021874146d7f43d97e3380f3a50d7b60d41529a0727970e",
+      "controlledSourceDigest": "696e0026ea56e9c4cc676c11adc421a7233c31b0bcad82b9220dba4a80457bd7",
+      "maximumTokenJaccard": 0.4,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.63747",
+          "score": 0.4
+        },
+        {
+          "id": "sent.tatoeba.17989",
+          "score": 0.3125
+        },
+        {
+          "id": "sent.tatoeba.17859",
+          "score": 0.29411764705882354
+        }
+      ],
+      "rationale": "Careless of you to leave correctly uses the adjective-person-infinitive evaluative construction."
+    },
+    {
+      "id": "sent.tatoeba.39064",
+      "outcome": "publish",
+      "cefr": "B2",
+      "originalText": "Whoever is at the door, please ask him to wait.",
+      "finalText": "Whoever is at the door, please ask him to wait.",
+      "intakeSourceDigest": "4cf00820dca8f2d45527daec23d8c20614922978a8854ae4c56bad7d39636949",
+      "controlledSourceDigest": "9e2581a943dab6829ba4452117899b6b9b01995befd0a7e6e57c462813e5ef8a",
+      "maximumTokenJaccard": 0.5833,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.37416",
+          "score": 0.5833333333333334
+        },
+        {
+          "id": "sent.gra2.02.06.1",
+          "score": 0.36363636363636365
+        },
+        {
+          "id": "sent.gra1.03.07.1",
+          "score": 0.25
+        }
+      ],
+      "rationale": "Whoever is at the door supplies an indefinite person and the polite waiting request follows coherently."
+    },
+    {
+      "id": "sent.tatoeba.39082",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "There was a big gold star on the door.",
+      "finalText": "There was a big gold star on the door.",
+      "intakeSourceDigest": "76f118cc0babf035729b4857ea08ddabb59711985388747167b4ad649807d3d1",
+      "controlledSourceDigest": "2e59913459911d56afc20efd7f42c982257adb7d7a9bfc4f3873ca913521aaa0",
+      "maximumTokenJaccard": 0.3333,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.35435",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.33671",
+          "score": 0.3076923076923077
+        },
+        {
+          "id": "sent.tatoeba.33672",
+          "score": 0.3076923076923077
+        }
+      ],
+      "rationale": "The existential past description specifies a visible door decoration naturally."
+    },
+    {
+      "id": "sent.tatoeba.39083",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "How careless he was to pinch his fingers in the door!",
+      "finalText": "How careless he was to pinch his fingers in the door!",
+      "intakeSourceDigest": "16b82aa9161b49fa74d64032efab9b77adb946d5befa610e3f40114a43585da0",
+      "controlledSourceDigest": "5fe1e8725916f8fe2b7002f2417d7e2c4cac50cd7e946bbca1a8fbf2d7c435b1",
+      "maximumTokenJaccard": 0.2857,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.1762309",
+          "score": 0.2857142857142857
+        },
+        {
+          "id": "sent.tatoeba.30208",
+          "score": 0.2857142857142857
+        },
+        {
+          "id": "sent.grb2.01.05.3",
+          "score": 0.25
+        }
+      ],
+      "rationale": "The past exclamation about fingers caught in a door is grammatical and a non-graphic household mishap."
+    },
+    {
+      "id": "sent.tatoeba.39101",
+      "outcome": "publish",
+      "cefr": "B2",
+      "originalText": "If a door doesn't fit the casing, we must plane it carefully until it does.",
+      "finalText": "If a door doesn't fit the casing, we must plane it carefully until it does.",
+      "intakeSourceDigest": "d69ebab4e91610dbe23d6a1c98a84fcdc8a244fb377afadb8edafbd3feb2f7f3",
+      "controlledSourceDigest": "1841b44f13a45045e76608d8d904580c42ab0a491226a65aff2e085b9d9af55c",
+      "maximumTokenJaccard": 0.2222,
+      "nearest": [
+        {
+          "id": "sent.00000010",
+          "score": 0.2222222222222222
+        },
+        {
+          "id": "sent.tatoeba.30733",
+          "score": 0.2
+        },
+        {
+          "id": "sent.00000012",
+          "score": 0.19047619047619047
+        }
+      ],
+      "rationale": "The conditional describes fitting a wooden door and plane is a valid verb; it makes no unverified technical guarantee."
+    },
+    {
+      "id": "sent.tatoeba.39109",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "When the door slammed unexpectedly, it startled me.",
+      "finalText": "When the door slammed unexpectedly, it startled me.",
+      "intakeSourceDigest": "6342f761fbf99184c1a867b9508db9b392e328d70890c5ab406ec04747ad22d4",
+      "controlledSourceDigest": "ae984986c733ac1c341690a89d6eec6fb61e9eb22a5e189c1d602a712439baaa",
+      "maximumTokenJaccard": 0.25,
+      "nearest": [
+        {
+          "id": "sent.grb2.03.07.1",
+          "score": 0.25
+        },
+        {
+          "id": "sent.tatoeba.6246680",
+          "score": 0.23076923076923078
+        },
+        {
+          "id": "sent.tatoeba.17998",
+          "score": 0.23076923076923078
+        }
+      ],
+      "rationale": "The unexpected door slam and startle result form a coherent specific past event."
+    },
+    {
+      "id": "sent.tatoeba.39113",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "As soon as the door opened, they ran away.",
+      "finalText": "As soon as the door opened, they ran away.",
+      "intakeSourceDigest": "3fc05c9f84240e536b0c793ee5723c2b1a82925128aec7310c5ff72cd88c7b2f",
+      "controlledSourceDigest": "ac34062e886f82bd17a723a764d4f429da2b5569d95a7fa474836f69fe169c68",
+      "maximumTokenJaccard": 0.2308,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.37804",
+          "score": 0.23076923076923078
+        },
+        {
+          "id": "sent.tt.l005-p002.002",
+          "score": 0.2222222222222222
+        },
+        {
+          "id": "sent.grc1.05.04.2",
+          "score": 0.21428571428571427
+        }
+      ],
+      "rationale": "As soon as correctly links the door opening and immediate departure."
+    },
+    {
+      "id": "sent.tatoeba.39135",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Some TV programs are interesting, and others are not.",
+      "finalText": "Some TV programs are interesting, and others are not.",
+      "intakeSourceDigest": "98bcf12b032a9e0a6fdc8700f23a77fe6c549f459bd18a43f83b8f6b3f6f4b85",
+      "controlledSourceDigest": "13f317eec522bea73d8a1acf44c979ee8f94fd3467091c381f9bdf09555c9ee5",
+      "maximumTokenJaccard": 0.2308,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.35384",
+          "score": 0.23076923076923078
+        },
+        {
+          "id": "sent.grc1.04.04.2",
+          "score": 0.21428571428571427
+        },
+        {
+          "id": "sent.tatoeba.11314604",
+          "score": 0.21428571428571427
+        }
+      ],
+      "rationale": "Some and others form a balanced subjective comparison of television programs."
+    },
+    {
+      "id": "sent.tatoeba.39136",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "TV programs have a bad influence on children.",
+      "finalText": "TV programs have a bad influence on children.",
+      "intakeSourceDigest": "1fb7e4486e7f72b61fc130345e30f6ea714ff0b7ed35e808836bc3df9b263c87",
+      "controlledSourceDigest": "9ea8c9fee6e1665d0f5a5baf493591a644d4a988ba74308219f8d4bf4c1e3f8b",
+      "maximumTokenJaccard": 0.2143,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.28544",
+          "score": 0.21428571428571427
+        },
+        {
+          "id": "sent.tatoeba.28553",
+          "score": 0.2
+        },
+        {
+          "id": "sent.gra1.02.05.1",
+          "score": 0.18181818181818182
+        }
+      ],
+      "rationale": "The blanket claim that TV programs harm children lacks qualification or evidence."
+    },
+    {
+      "id": "sent.tatoeba.39152",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "It cost me ten thousand yen to have my television set repaired.",
+      "finalText": "It cost me ten thousand yen to have my television set repaired.",
+      "intakeSourceDigest": "8a342dba3549e0a38a858ce6693d2f3e2aad50805d097f31bf0f84d19021c0a5",
+      "controlledSourceDigest": "16a7d4a219ea5a7cc1a0e477b27c6927755ae4bc9f842982a7f73b1aec29c03a",
+      "maximumTokenJaccard": 0.2222,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.31052",
+          "score": 0.2222222222222222
+        },
+        {
+          "id": "sent.tatoeba.11119938",
+          "score": 0.2
+        },
+        {
+          "id": "sent.tatoeba.32574",
+          "score": 0.2
+        }
+      ],
+      "rationale": "The cost-me and have-something-repaired constructions describe a specific past bill rather than a current market price."
+    },
+    {
+      "id": "sent.tatoeba.39168",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Play outside instead of watching TV.",
+      "finalText": "Play outside instead of watching TV.",
+      "intakeSourceDigest": "385cdf03d54e6c88c7f0723ed7fdc06f37a529b65143c52ebf2d694340a48f89",
+      "controlledSourceDigest": "127f01d3164bfa4bed030f93d7a1ecf5027f5154b9b2e63a8bbf75655f6f5cd2",
+      "maximumTokenJaccard": 0.1538,
+      "nearest": [
+        {
+          "id": "sent.tt.l018-p001.005",
+          "score": 0.15384615384615385
+        },
+        {
+          "id": "sent.tt.l019-p002.009",
+          "score": 0.14285714285714285
+        },
+        {
+          "id": "sent.tatoeba.31984",
+          "score": 0.14285714285714285
+        }
+      ],
+      "rationale": "The everyday invitation to play outside uses instead of plus a gerund correctly."
+    },
+    {
+      "id": "sent.tatoeba.39176",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "When you watch television or listen to the radio, the music which you hear is often African in origin.",
+      "finalText": "When you watch television or listen to the radio, the music which you hear is often African in origin.",
+      "intakeSourceDigest": "9a87fc3f61ee7f6b3f414521ff67e46bf921b099a080ecbf2ef55b7de164c3e8",
+      "controlledSourceDigest": "0e1a8f202d7dc13bc850c5edd7a3f087b86f2ffd9b9d6d06fb2558a4918d90d6",
+      "maximumTokenJaccard": 0.1905,
+      "nearest": [
+        {
+          "id": "sent.gra2.03.02.2",
+          "score": 0.19047619047619047
+        },
+        {
+          "id": "sent.tatoeba.5975",
+          "score": 0.19047619047619047
+        },
+        {
+          "id": "sent.tatoeba.15992",
+          "score": 0.19047619047619047
+        }
+      ],
+      "rationale": "The frequency and origin claim about broadcast music is broad, time-dependent and unsupported by sentence provenance."
+    },
+    {
+      "id": "sent.tatoeba.39196",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "Television enlightens the viewers as well as entertains them.",
+      "finalText": "Television enlightens the viewers as well as entertains them.",
+      "intakeSourceDigest": "4bef64d0e21805068d4cd44b786c54ab08b1bdc3bbdd3a7176c169d13d8858ad",
+      "controlledSourceDigest": "b49a769d4948ada6f20e2d924f2fc417e585e2188b93d6babc296e7a0cd67b96",
+      "maximumTokenJaccard": 0.1818,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.33577",
+          "score": 0.18181818181818182
+        },
+        {
+          "id": "sent.tatoeba.38868",
+          "score": 0.18181818181818182
+        },
+        {
+          "id": "sent.tatoeba.17823",
+          "score": 0.16666666666666666
+        }
+      ],
+      "rationale": "The blanket claim that television enlightens and entertains viewers lacks program or audience scope."
+    },
+    {
+      "id": "sent.tatoeba.39210",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "The invention of TV caused a drastic change in our daily life.",
+      "finalText": "The invention of TV caused a drastic change in our daily life.",
+      "intakeSourceDigest": "6ea979d3ef19c361180e65e6e276cee760f01ca5b8487d35e5c08d769fb8ad8a",
+      "controlledSourceDigest": "dcebde11af70d7f842d9f0417d05e43833edefe96f57b4decd8d64a43170f1ce",
+      "maximumTokenJaccard": 0.2381,
+      "nearest": [
+        {
+          "id": "sent.tt.l001-p009.002",
+          "score": 0.23809523809523808
+        },
+        {
+          "id": "sent.tatoeba.36949",
+          "score": 0.23529411764705882
+        },
+        {
+          "id": "sent.tatoeba.247491",
+          "score": 0.2222222222222222
+        }
+      ],
+      "rationale": "The sweeping invention-caused-life-change statement needs historical framing and a defined population."
+    },
+    {
+      "id": "sent.tatoeba.39232",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "Television enables us to learn about foreign manners and customs.",
+      "finalText": "Television enables us to learn about foreign manners and customs.",
+      "intakeSourceDigest": "890bd598ab5429c9cf67ef8ca63c654a4e4b163b5562dadb12576bea432356cf",
+      "controlledSourceDigest": "2384b341911a05612da4256a52f8446d965e6f204f8089d2dd92f84d21436956",
+      "maximumTokenJaccard": 0.2308,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.22787",
+          "score": 0.23076923076923078
+        },
+        {
+          "id": "sent.tatoeba.17902",
+          "score": 0.17647058823529413
+        },
+        {
+          "id": "sent.gra2.05.02.1",
+          "score": 0.15384615384615385
+        }
+      ],
+      "rationale": "Enables us to learn expresses a reasonable media capability rather than a universal outcome for all viewing."
+    },
+    {
+      "id": "sent.tatoeba.39235",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "What is shown on television is, as it were, a reflection of what society is like.",
+      "finalText": "What is shown on television is, as it were, a reflection of what society is like.",
+      "intakeSourceDigest": "2f52d5894af8b4f93c65f2015602e59125033565fbe6d0d3a8c8c927b0497778",
+      "controlledSourceDigest": "6d7c72b3804d80c3c9bd2551e0f86e2ce5f180410c4d41ba343be4f494488a59",
+      "maximumTokenJaccard": 0.2778,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.32323",
+          "score": 0.2777777777777778
+        },
+        {
+          "id": "sent.tatoeba.36080",
+          "score": 0.26666666666666666
+        },
+        {
+          "id": "sent.tatoeba.36675",
+          "score": 0.25
+        }
+      ],
+      "rationale": "The sociological generalization about television reflecting society lacks a stated viewpoint or bounded context."
+    }
+  ]
+}

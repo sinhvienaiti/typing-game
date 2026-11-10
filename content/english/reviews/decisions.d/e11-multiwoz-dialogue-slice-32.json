@@ -1,0 +1,95 @@
+{
+  "schemaVersion": 1,
+  "decisions": [
+    {
+      "id": "review.e11.dialogue-multiwoz-reviewed-slice-32.dlg-multiwoz-woz20548-json",
+      "batchId": "e11.dialogue-multiwoz-reviewed-slice-32",
+      "recordSetId": "reviewed-dialogues",
+      "recordId": "dlg.multiwoz.woz20548.json",
+      "sourceDigest": "bd80173ef8d6187fd0e0b49c6d5166adee489b4c36502287267ef74fe195a91d",
+      "targetState": "published",
+      "checks": {
+        "exactDuplicate": {
+          "status": "pass",
+          "method": "normalized-dialogue-exact-dedup-review-v2"
+        },
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "dialogue-near-dedup-review-v2"
+        },
+        "grammar": {
+          "status": "pass",
+          "method": "editorial-grammar-review-v2"
+        },
+        "translation": {
+          "status": "not-applicable",
+          "method": "english-only-dialogue"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "editorial-naturalness-review-v2"
+        },
+        "targetStructure": {
+          "status": "not-applicable",
+          "method": "dialogue-free-production"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "cefr-editorial-review-v2"
+        },
+        "license": {
+          "status": "pass",
+          "method": "multiwoz-license-review-v2"
+        }
+      },
+      "reviewedAt": "2026-11-09T00:00:00Z",
+      "reviewedBy": "MultiWOZ dialogue expansion editorial review",
+      "note": "Reviewed MultiWOZ dialogue for dialogue structure, alternating turns, grammar, CEFR, and Karaoke learning suitability."
+    },
+    {
+      "id": "review.e11.dialogue-multiwoz-reviewed-slice-32.dlg-multiwoz-woz20670-json",
+      "batchId": "e11.dialogue-multiwoz-reviewed-slice-32",
+      "recordSetId": "reviewed-dialogues",
+      "recordId": "dlg.multiwoz.woz20670.json",
+      "sourceDigest": "9ff836244fe2e14c03818fb220e24d0b2efffd3e6b4ca270306125bc76ed14fa",
+      "targetState": "published",
+      "checks": {
+        "exactDuplicate": {
+          "status": "pass",
+          "method": "normalized-dialogue-exact-dedup-review-v2"
+        },
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "dialogue-near-dedup-review-v2"
+        },
+        "grammar": {
+          "status": "pass",
+          "method": "editorial-grammar-review-v2"
+        },
+        "translation": {
+          "status": "not-applicable",
+          "method": "english-only-dialogue"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "editorial-naturalness-review-v2"
+        },
+        "targetStructure": {
+          "status": "not-applicable",
+          "method": "dialogue-free-production"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "cefr-editorial-review-v2"
+        },
+        "license": {
+          "status": "pass",
+          "method": "multiwoz-license-review-v2"
+        }
+      },
+      "reviewedAt": "2026-11-09T00:00:00Z",
+      "reviewedBy": "MultiWOZ dialogue expansion editorial review",
+      "note": "Reviewed MultiWOZ dialogue for dialogue structure, alternating turns, grammar, CEFR, and Karaoke learning suitability."
+    }
+  ]
+}
