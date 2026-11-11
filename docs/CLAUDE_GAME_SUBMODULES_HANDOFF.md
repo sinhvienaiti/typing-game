@@ -18,9 +18,9 @@ Each modified game needs a commit/branch in its own submodule repository first, 
 
 ## 1. Priority 1 — `games/monkeytype` (High Impact)
 
-### 1.1 Replace the 463-shard sequential crawler in `rich-content.ts`
+### 1.1 Replace the 474-shard sequential crawler in `rich-content.ts`
 - **File:** `games/monkeytype/frontend/src/ts/learning/rich-content.ts` (`createRichEnglishContentClient`, `loadByPrefix`, `loadPublishedPracticeExercises`, `loadPublishedContextClozeExercises`, `loadPublishedSentenceBuilderExercise`)
-- **Problem:** Currently `loadByPrefix` loops sequentially (`for (const shard of shards) await loadShard(...)`). Calling `loadPublishedContextClozeExercises` fetches **both** all `exercises-*` (~245 MB, 203 shards) **and** all `examples-*` (~275 MB, 260 shards) sequentially (~520 MB, 463 HTTP requests) just to slice `<= 40` items. Furthermore `shardCache` has no eviction cap.
+- **Problem:** Currently `loadByPrefix` loops sequentially (`for (const shard of shards) await loadShard(...)`). Calling `loadPublishedContextClozeExercises` fetches **both** all `exercises-*` (214 shards after v2 expansion) **and** all `examples-*` (260 shards) sequentially (474 HTTP requests) just to slice `<= 40` items. Furthermore `shardCache` has no eviction cap.
 - **Required Fix:**
   1. Read `https://typing-game.local/english-content/indexes/availability.json` and `indexes/activities/{activity}.json` instead of scanning all shards.
   2. Pick shard subset by `cefr` and randomized seed/cursor, then resolve linked `sourceSentenceIds` via `indexes/by-id/{bucket}.json` (256-bucket SHA-256 hash prefix).

@@ -89,7 +89,7 @@ Phần còn lại giao cho Claude gồm **3 nhóm việc chính** (từ bắt bu
 *(Chi tiết tên file/hàm ở repo con xem thêm trong `docs/CLAUDE_GAME_SUBMODULES_HANDOFF.md`)*
 
 1. **Ưu tiên 1 — `games/monkeytype` (`sinhvienaiti/monkeytype`, gitlink hiện tại `eee4a246`):**
-   - **Thay thế bộ crawler tuần tự 463 shards (`~520 MB` HTTP requests):** trong `games/monkeytype/frontend/src/ts/learning/rich-content.ts` (`createRichEnglishContentClient`, `loadByPrefix`, `loadPublishedPracticeExercises`, `loadPublishedContextClozeExercises`, `loadPublishedSentenceBuilderExercise`), chuyển sang đọc `shared/indexes/availability.json`, `indexes/activities/{activity}.json`, và giải `sourceSentenceIds` qua `indexes/by-id/{00..ff}.json`; thêm `maxConcurrency` (4–6), bounded LRU shard/bucket cache, pin 1 `contentVersion` xuyên phiên và verify `bytes`/`sha256` từ `manifest.json`.
+   - **Thay thế bộ crawler tuần tự 474 shards (`214` `exercises-*` + `260` `examples-*`):** trong `games/monkeytype/frontend/src/ts/learning/rich-content.ts` (`createRichEnglishContentClient`, `loadByPrefix`, `loadPublishedPracticeExercises`, `loadPublishedContextClozeExercises`, `loadPublishedSentenceBuilderExercise`), chuyển sang đọc `shared/indexes/availability.json`, `indexes/activities/{activity}.json`, và giải `sourceSentenceIds` qua `indexes/by-id/{00..ff}.json`; thêm `maxConcurrency` (4–6), bounded LRU shard/bucket cache, pin 1 `contentVersion` xuyên phiên và verify `bytes`/`sha256` từ `manifest.json`.
    - **Nâng cấp chấm điểm & feedback UI:** trong `rich-practice.ts`, `rich-practice-ui.ts`, `context-cloze.ts`, áp dụng logic chấm đa đáp án chuẩn hóa v2 (`acceptedAnswers[]`, `gradingMode`, contraction equivalence `can't` / `cannot`), hỗ trợ kết quả 3 trạng thái `"correct" | "incorrect" | "needs-review"`. **Tuyệt đối không gửi `result: "wrong"` vào `typing-game:learning:v1:attempt` khi kết quả là `needs-review` / `guided-self-check`**; UI phân biệt rõ lỗi sai ngữ pháp vs lệch ngữ cảnh vs câu cần tự đối chiếu.
    - **Chặn làm nhiễu Grammar Mastery:** trong `buildRichPracticeLearningEvents`, ngừng phát event `entityType: "grammar"` cho mọi `gr.*` khi `targetConfidence === "unverified-rotational"` hoặc với `ex.cloze.e11.*` / `ex.transformation.e11.*`.
    - **Nhận dataset & Topic Pack từ Portal `/english`:** bổ sung listener cho `typing-game:english-content:v1:activity-dataset` trong `review-dataset.ts` / launcher để hỗ trợ `acceptedAnswers[]`, `gradingMode`, `packId`, `learningFocus`.
@@ -112,10 +112,10 @@ Phần còn lại giao cho Claude gồm **3 nhóm việc chính** (từ bắt bu
    - Hiện Antigravity giữ mini **Topic Pack & Guided Multi-Answer Practice Runner** ngay trong `portal/src/english-content/page.ts` + `activity-session.ts` để test nội dung v2 mà chưa cần sửa `games/*`.
    - Sau khi Claude nâng cấp xong `games/monkeytype` (và các game khác), thống nhất với người dùng xem nên **giữ** Practice Runner trong Portal như chế độ luyện nhanh hay **tinh gọn Portal** về chỉ lọc CEFR/pack và đẩy thẳng sang iframe games.
 2. **Dọn workspace, cập nhật Benchmark sau mở rộng x5 & Test E2E trên trình duyệt:**
-   - Khi commit `feature/english-learning-content-v2`, tiếp tục giữ ngoài commit (`git status` không stage) các file queue tạm trong `content/english/review-queues/*.json` nếu vẫn còn trên máy (`scratch/`, `pnpm-lock.yaml`, `portal/pnpm-lock.yaml` đã được dọn xóa sạch).
-   - Chạy `bash scripts/setup-nginx.sh dev` (hoặc `play`) để Nginx local nạp route mới `/english-content/indexes/`.
+   - Toàn bộ công việc v2 đã được commit trên `feature/english-learning-content-v2`; 5 file queue tạm trong `content/english/review-queues/*.json` tiếp tục được giữ ngoài commit theo quy ước repo (`scratch/`, `pnpm-lock.yaml`, `portal/pnpm-lock.yaml` đã được xóa sạch).
+   - Chạy `bash scripts/setup-nginx.sh dev` (hoặc `play`, cần quyền `sudo`) để Nginx local nạp route mới `/english-content/indexes/`.
    - Chạy lại `node scripts/benchmark-english-content-v1.mjs` để cập nhật số đo benchmark trên corpus `268,121` bản ghi (bản lưu hiện tại đo ở `2026-11-10T16:57:13Z` trước khi chốt rà sửa Mục 1–5).
-   - Test E2E trên trình duyệt thật / DevTools throttling (mobile cold/hot p95 latency, peak heap, shard requests, offline cache/release rollback, IndexedDB `evidence-v2` + `profile v1`) và đóng tiêu chí định lượng `GO / ITERATE / STOP` theo mục `P1-06` & `P2-01` trong `docs/ENGLISH_LEARNING_CONTENT_V2_PLAN.md`.
+   - Test E2E trên trình duyệt thật / DevTools throttling (mobile cold/hot p95 latency, peak heap, shard requests, offline cache/release rollback, IndexedDB `evidence-v2` + `profile v1`) và chốt tiêu chí định lượng `GO / ITERATE / STOP` cùng người dùng trước khi release (chưa định nghĩa sẵn trong `docs/ENGLISH_LEARNING_CONTENT_V2_PLAN.md`).
 
 ---
 
@@ -162,6 +162,7 @@ pnpm english-content:test
 pnpm learning:check && pnpm learning:test
 pnpm english-content:e10
 pnpm english-content:e11 && pnpm english-content:e11:runtime && pnpm english-content:e11:records
-pnpm english-content:runtime:smoke && pnpm english-content:e11:games
+pnpm english-content:runtime:smoke
+pnpm english-content:e11:games # lưu ý: cập nhật timestamp trong content/english/reports/step11-game-integration-verification.json
 pnpm build:portal
 ```
