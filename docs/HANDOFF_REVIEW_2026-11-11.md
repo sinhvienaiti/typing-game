@@ -71,3 +71,45 @@ Tổng: 25 khẳng định kiểm, 21 đúng, 1 sai (#21), 1 lệch nhẹ (#20),
 - "463 shard" là số cũ; nay 474 vì có 11 shard exercises mới (#20).
 - Liệt kê `e11:games` trong "lệnh verify" nhưng lệnh này ghi lại report (#25).
 - "PR #48 draft" không kiểm được từ máy này (#24).
+
+## 6. Phân loại file chưa commit (bổ sung 12/11 00:30)
+
+Trạng thái mới: lúc 00:20 ngày 12/11 (sau commit `80c7e565` của tôi) commit `b7c6d681` (tác giả toandx, 1.094 file: 614 thêm, 480 sửa, ~529 MB JSON) và `867cb168` (sửa 2 file bàn giao theo bảng kiểm) đã đưa toàn bộ việc v2 vào nhánh. Con số 538 trong `git status` trước đó gộp thư mục `shared/indexes/` (547 file) và các thư mục mới khác thành một dòng. Bảng dưới phân loại nội dung `b7c6d681` để anh quyết giữ nguyên hay tách lại; working tree hiện chỉ còn 5 file `review-queues` chưa track.
+
+### Nhóm 1 — File v2 mới do Gemini tạo (614 file, ~34 MB): nên commit, đã nằm trong `b7c6d681`
+- Nội dung nguồn: 15 packs, `e14-sense-pilot.json`, 4 bộ `v2-*-exercises.json` + 4 ledger `decisions.d/v2-*`, `e13-morphological-links.json`, schema `topic-pack`.
+- Mã: 10 script mới, `grading.*`, `index-bucket.*`, 5 file `shared/learning/evidence-v2*` và `browser-evidence-store*`, 3 test mới.
+- Sản phẩm publish: `shared/indexes/**` (547 file, ~24 MB), 11 shard `shared/sentences/exercises/203..213`.
+- Báo cáo: 6 report mới (`e13-*`, `e14-*`, `v2-phase0/1-*`), 3 file docs.
+
+### Nhóm 2 — File có sẵn Gemini sửa (480 file, ~495 MB): đề xuất giữ toàn bộ
+| File | Diff một dòng | Ý kiến |
+|---|---|---|
+| `package.json` | thêm `english-content:indexes`, mở rộng `learning:check` | Giữ |
+| `infra/nginx/*.conf` (2) | thêm route `/english-content/indexes/` + CORS | Giữ |
+| `scripts/publish-english-content.mjs` | thêm `bytes`/`sha256` cho shard, gọi sinh indexes, gom `v2-*` | Giữ |
+| `scripts/validate-english-content.mjs`, `smoke-published-english-content.mjs` | thêm schema topic-pack, validate và đếm bộ `v2-*` | Giữ |
+| `scripts/build-e11-cloze-expansion.mjs` | viết lại thành validator không ghi đè (+136/−222) | Giữ |
+| `scripts/build-e11-mistake-expansion.mjs` | loại homograph "read" khỏi cờ lỗi ngôi 3 | Giữ |
+| `shared/english-content/*.mjs` + `.d.mts` + test (11) | runtime-loader LRU/pin version/by-id; activity-source đếm O(1), CEFR, `maxAnswerLength`; adapters thêm `acceptedAnswers`, `gradingMode`, `hasVerifiedTargetAttribution`; format lại code | Giữ (120 test qua) |
+| `portal/src/**` (4) | Practice Runner, Topic Pack, Evidence v2, CSS | Giữ (build qua) |
+| `shared/{dictionary,grammar,phrases,sentences}/manifest.json` | thêm `bytes`/`sha256`, count 251.726 → 257.226 | Giữ (sản phẩm publish) |
+| `shared/sentences/exercises/*` (140), `mistakes/*` (7), `phrases/items/*` (7), `collocations/*` (2) | publish lại: 5.500 bài mới, 9 mistake "read", example links E13 | Giữ (sản phẩm publish) |
+| `content/english/sentences/e11-cloze-slice-*` (98) + `decisions.d` (98) | rà tay chỗ trống danh từ riêng, cập nhật `sourceDigest` | Giữ (dữ liệu rà tay) |
+| `content/english/sentences/e11-translation-slice-*` (40) + `decisions.d` (40) | dịch 1.002 placeholder, thêm biến thể, sửa 8 ID trùng | Giữ |
+| `content/english/sentences/e11-mistake-slice-*` (6) + `decisions.d` (6) | thay 9 bản ghi "read" | Giữ |
+| `content/english/batches/manifest.json`, `releases/2026.10.0.json` | thêm 4 batch v2, count mới | Giữ |
+| `content/english/reports/*` (7 sửa) | số liệu publish mới; `e11-readiness.json` vẫn nhúng nguyên văn file (kiểu cũ) | Giữ |
+
+### Nhóm 3 — Không nên vào Git
+- Trong `b7c6d681` không có media, cache hay file tạm (chỉ json/mjs/mts/ts/css/md/conf).
+- 5 file `content/english/review-queues/{grammar-e06-common-mistakes,grammar-e06-corrections,grammar-e06-transformations,tatoeba-e11-translation-next-review,typing-text-e06-exercises}.json` (1,1 MB) chưa track, đúng ý bàn giao; 4 queue tương tự đã có trong `.gitignore` nhưng 5 file này **chưa**: đề xuất thêm 5 dòng vào `.gitignore` (chờ anh).
+- `scratch/`, lockfile: không tồn tại trên đĩa.
+
+### Nhóm 4 — Không chắc
+- `shared/indexes/**` (547 file, 24 MB): sinh ra từ publish, nhưng repo vốn track mọi sản phẩm publish trong `shared/*`; nếu anh muốn giảm dung lượng thì ignore và sinh lúc deploy.
+- `content/english/reports/v2-phase0-runtime-baseline.json`, `v2-phase1-runtime-benchmark.json`: số đo phụ thuộc máy, sẽ bị ghi đè khi chạy lại benchmark.
+- `content/english/reports/step11-game-integration-verification.json`: mỗi lần `e11:games` lại đổi timestamp, gây diff nhiễu.
+- `docs/HANDOFF_*.md` (2 file): tài liệu bàn giao tạm, có thể xoá sau khi xong Nhóm A.
+
+Việc chờ anh: giữ `b7c6d681` nguyên khối, hay tách thành 4 commit (mã / nội dung nguồn / sản phẩm publish / docs+reports) bằng `git reset --soft` rồi commit lại (không mất file); và có thêm 5 queue vào `.gitignore` không.
