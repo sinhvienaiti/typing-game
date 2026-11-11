@@ -11,6 +11,7 @@
 | 07/11 | 50,7 M | 2,8 M (6 %) | 0 | 0,7 M (1 %) | 0 | 1,2 M (2 %) | ~46 M (91 %) | điều phối 46,8 M + phiên phụ 3,9 M; việc chuyển sang Codex: 160 lượt, 277,5 M đầu vào (114,6 M trước reset 05:30 + 162,9 M sau), hết hạn mức tuần 17:54, mở lại 14/11; không hết giới hạn phiên |
 | 08–09/11 | 2,5 M | 0 | 0 | 0 | 0 | 0 | ~2,5 M (100 %) | điều phối 2,3 M (worktree tiếng Anh, prompt Gemini, rà soát) + phiên phụ EVKey 0,2 M; Codex 0 lượt (hết hạn mức tới 14/11); Gemini làm nhánh tiếng Anh (không đo được); bản rà soát 08/11 không chạy |
 | 10/11 | 14,0 M | 3,6 M (26 %) | 0 | 0 | 0 | 0 | ~10,4 M (74 %) | Bash 8 M (chờ Firefly, dựng so sánh); Firefly làm lại 35 việc (70 bản) rồi bị tạm giới hạn tốc độ từ 13:49; Codex 0 lượt; Gemini 28 commit nhánh tiếng Anh (không đo được) |
+| 11/11 | 16,5 M | 3,7 M (23 %) | 0 | 0 | 0 | 0 | ~12,8 M (77 %) | Bash 8,1 M (chờ Firefly, dựng tấm so sánh); Firefly 68 bản lưu rồi bị chặn dùng thử từ 22:03 ("come back tomorrow"); Codex 8 phiếu ảnh 331–338, ~10,7 M token đầu vào, ~30 ảnh, cửa sổ 5 giờ dùng 24 %; 2 phiên lab phụ không đo |
 
 ## Theo lần hỏi trợ lý (từ 05/11)
 | Ngày giờ | Trợ lý | Chủ đề | Bước | Token | Claude tự làm (ước) | Báo anh? |
