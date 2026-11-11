@@ -1,0 +1,93 @@
+{
+  "schemaVersion": 1,
+  "phase": "Phase 0 Unindexed Baseline",
+  "generatedAt": "2026-11-10T16:57:13.667Z",
+  "scenarios": {
+    "resolve_10_ids_batch_cold": {
+      "label": "resolve_10_ids_batch_cold",
+      "elapsedMs": 5247.71,
+      "requests": 1831,
+      "shardRequests": 1827,
+      "indexRequests": 0,
+      "bytesRead": 2072042628,
+      "mbRead": 2072.0426,
+      "summary": {
+        "found": 7,
+        "usedIndex": false
+      }
+    },
+    "activity_cloze_20": {
+      "label": "activity_cloze_20",
+      "elapsedMs": 623.05,
+      "requests": 215,
+      "shardRequests": 214,
+      "indexRequests": 0,
+      "bytesRead": 256142480,
+      "mbRead": 256.1425,
+      "summary": {
+        "count": 20
+      }
+    },
+    "activity_translation_20": {
+      "label": "activity_translation_20",
+      "elapsedMs": 640.66,
+      "requests": 215,
+      "shardRequests": 214,
+      "indexRequests": 0,
+      "bytesRead": 256142480,
+      "mbRead": 256.1425,
+      "summary": {
+        "count": 20
+      }
+    },
+    "activity_example-typing_20": {
+      "label": "activity_example-typing_20",
+      "elapsedMs": 577.68,
+      "requests": 261,
+      "shardRequests": 260,
+      "indexRequests": 0,
+      "bytesRead": 274728499,
+      "mbRead": 274.7285,
+      "summary": {
+        "count": 20
+      }
+    },
+    "activity_collocation_20": {
+      "label": "activity_collocation_20",
+      "elapsedMs": 39.27,
+      "requests": 11,
+      "shardRequests": 10,
+      "indexRequests": 0,
+      "bytesRead": 10179627,
+      "mbRead": 10.1796,
+      "summary": {
+        "count": 20
+      }
+    },
+    "availability_monkeytype": {
+      "label": "availability_monkeytype",
+      "elapsedMs": 2200.8,
+      "requests": 780,
+      "shardRequests": 777,
+      "indexRequests": 0,
+      "bytesRead": 852885971,
+      "mbRead": 852.886,
+      "summary": {
+        "grammar-topic": 300,
+        "example-typing": 129813,
+        "translation": 20600,
+        "cloze": 50600,
+        "error-correction": 10488,
+        "sentence-building": 2500,
+        "transformation": 30100,
+        "listening-typing": 130813,
+        "contextual-usage": 2000,
+        "collocation": 5000,
+        "verb-pattern": 510,
+        "phrasal-verb": 1000,
+        "idiom": 1185,
+        "chunk": 2000
+      }
+    }
+  }
+}

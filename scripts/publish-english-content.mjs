@@ -1,3 +1,4 @@
+import crypto from "node:crypto";
 import fs from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -6,6 +7,7 @@ import { overlayEnglishReviewDecisions, readEnglishReviewLedger } from "./englis
 import { applyEnglishExampleLinks, readEnglishExampleLinkLedger } from "./english-example-link-core.mjs";
 import { readE11TypingTextReviewShards } from "./english-typing-text-shards.mjs";
 import { readReviewedTatoebaEnglish } from "./english-tatoeba-reviewed.mjs";
+import { generateEnglishContentIndexes } from "./english-indexes-core.mjs";
 
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),"..");
 const [batchManifest,reviewLedger,exampleLinkLedger]=await Promise.all([
@@ -67,8 +69,11 @@ async function publishDataset({dataset,baseDir,groups}) {
       const slice=records.slice(offset,offset+shardSize);
       const shardNo=String(Math.floor(offset/shardSize)).padStart(3,"0");
       const file=shardNo+".json";
-      await fs.writeFile(path.join(dir,file),stableJson({schemaVersion:1,records:slice}),"utf8");
-      shards.push({id:group.id+"-"+shardNo,path:group.dir+"/"+file,count:slice.length});
+      const shardText=stableJson({schemaVersion:1,records:slice});
+      await fs.writeFile(path.join(dir,file),shardText,"utf8");
+      const shardBytes=Buffer.byteLength(shardText,"utf8");
+      const shardSha256=crypto.createHash("sha256").update(shardText,"utf8").digest("hex");
+      shards.push({id:group.id+"-"+shardNo,path:group.dir+"/"+file,count:slice.length,bytes:shardBytes,sha256:shardSha256});
     }
   }
   await fs.writeFile(path.join(root,baseDir,"manifest.json"),stableJson({schemaVersion:1,contentVersion,dataset,count,shards}),"utf8");
@@ -157,6 +162,13 @@ const e11Mistakes=[];
 for (const f of e11MistakeSliceFiles) {
   e11Mistakes.push(...await loadRecords(path.join("content/english/sentences",f)));
 }
+const v2ExerciseFiles=sentenceDirFiles
+  .filter(f=>/^v2-[a-z0-9._-]+\.json$/.test(f))
+  .sort((a,b)=>a.localeCompare(b,"en"));
+const v2Exercises=[];
+for (const f of v2ExerciseFiles) {
+  v2Exercises.push(...await loadRecords(path.join("content/english/sentences",f)));
+}
 const e04Collocations=[];
 const e04VerbPatterns=[];
 const e04Phrases=[];
@@ -201,7 +213,7 @@ results.push(await publishDataset({dataset:"dictionary",baseDir:"shared/dictiona
 results.push(await publishDataset({dataset:"grammar",baseDir:"shared/grammar",groups:[{id:"topics",dir:"topics",records:[...topics,...grammarScaleTopics]}]}));
 results.push(await publishDataset({dataset:"sentences",baseDir:"shared/sentences",groups:[
   {id:"examples",dir:"examples",records:allPublishedExamples},
-  {id:"exercises",dir:"exercises",records:[...exercises,...grammarScaleExercises,...reviewedE06Exercises,...reviewedTranslations,...e11Translations,...reviewedCloze,...e11Cloze,...e11Transformations]},
+  {id:"exercises",dir:"exercises",records:[...exercises,...grammarScaleExercises,...reviewedE06Exercises,...reviewedTranslations,...e11Translations,...reviewedCloze,...e11Cloze,...e11Transformations,...v2Exercises]},
   {id:"dialogues",dir:"dialogues",records:allDialogueRecords},
   {id:"mistakes",dir:"mistakes",records:[...reviewedCommonMistakes,...grammarScaleMistakes,...e11Mistakes]}
 ]}));
@@ -213,3 +225,5 @@ results.push(await publishDataset({dataset:"phrases",baseDir:"shared/phrases",gr
 
 console.log("Published English content:",results.map(result=>result.dataset+"="+result.count).join(", "));
 console.log("Applied reviewed E04 example links:",appliedExampleLinks);
+const indexManifest=await generateEnglishContentIndexes(root);
+console.log("Generated English content indexes:",JSON.stringify(indexManifest.totals));

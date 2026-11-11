@@ -1,0 +1,206 @@
+{
+  "schemaVersion": 1,
+  "contentVersion": "2026.10.0",
+  "pack": {
+    "schemaVersion": 1,
+    "id": "pack.travel-booking-a2",
+    "title": "Travel & Booking Essentials (A2)",
+    "titleVi": "Giao tiếp Du lịch & Đặt chỗ (A2)",
+    "description": "Domain-led sequence covering booking hotels, catching trains, handling travel contingencies with the First Conditional, and avoiding common Vietnamese L1 verb-collocation traps.",
+    "cefr": [
+      "A1",
+      "A2",
+      "B1"
+    ],
+    "estimatedMinutes": 12,
+    "quality": {
+      "state": "published",
+      "checks": {
+        "schema": {
+          "status": "pass",
+          "method": "e15-pack-schema-v2"
+        },
+        "referentialIntegrity": {
+          "status": "pass",
+          "method": "e15-pack-ref-v2"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "e15-pack-naturalness-v2"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "e15-pack-cefr-v2"
+        },
+        "license": {
+          "status": "pass",
+          "method": "e15-pack-license-v2"
+        }
+      }
+    },
+    "provenance": {
+      "sources": [
+        {
+          "dataset": "project-original",
+          "license": "LicenseRef-Project-Original",
+          "modified": false
+        }
+      ],
+      "note": "E15 Topic Pack assembling MultiWOZ travel dialogues, curated A2 grammar, E13 collocations, E16 contrast items, and v2 sentence-building drills."
+    },
+    "objectives": [
+      "Book a hotel room and inquire politely about train schedules.",
+      "Distinguish collocations such as miss a flight, make a reservation, and pay by card.",
+      "Build natural Conditional Type 1 contingency sentences under time pressure."
+    ],
+    "items": [
+      {
+        "contentId": "ex.context.v2.contrast.005",
+        "stage": "pre-check",
+        "activity": "contextual-usage",
+        "learningFocus": "usage-discrimination",
+        "noteVi": "Kiểm tra nhanh lỗi hay nhầm 'miss' vs 'lose' với chuyến bay/tàu."
+      },
+      {
+        "contentId": "ex.cloze.00000002",
+        "stage": "pre-check",
+        "activity": "cloze",
+        "learningFocus": "recall",
+        "noteVi": "Ôn nhanh Hiện tại tiếp diễn cho hành động đang diễn ra ở ga tàu."
+      },
+      {
+        "contentId": "dlg.multiwoz.sng0312.json",
+        "stage": "input",
+        "activity": "dialogue",
+        "learningFocus": "comprehension",
+        "noteVi": "Hội thoại mẫu hỏi giờ tàu đi Cambridge và đặt vé."
+      },
+      {
+        "contentId": "dlg.multiwoz.sng0828.json",
+        "stage": "input",
+        "activity": "dialogue",
+        "learningFocus": "comprehension",
+        "noteVi": "Hội thoại mẫu tìm khách sạn 3 sao khu trung tâm."
+      },
+      {
+        "contentId": "dlg.multiwoz.pmul1932.json",
+        "stage": "input",
+        "activity": "dialogue",
+        "learningFocus": "comprehension",
+        "noteVi": "Hội thoại yêu cầu chỗ ở mức giá vừa phải kèm tiện ích cụ thể."
+      },
+      {
+        "contentId": "gr.a2.first-conditional",
+        "stage": "input",
+        "activity": "grammar-topic",
+        "learningFocus": "recognition",
+        "noteVi": "Nắm khung câu Điều kiện loại 1 để xử lý tình huống phát sinh khi di chuyển."
+      },
+      {
+        "contentId": "col.00000006",
+        "stage": "input",
+        "activity": "collocation",
+        "learningFocus": "recognition",
+        "noteVi": "Cụm cốt lõi khi đặt bàn/đặt phòng: make a reservation."
+      },
+      {
+        "contentId": "col.00000069",
+        "stage": "input",
+        "activity": "collocation",
+        "learningFocus": "recognition",
+        "noteVi": "Cụm cố định: miss a flight."
+      },
+      {
+        "contentId": "ex.building.v2.004",
+        "stage": "practice",
+        "activity": "sentence-building",
+        "learningFocus": "production",
+        "noteVi": "Sắp xếp trật tự từ diễn tả việc đang đợi tàu."
+      },
+      {
+        "contentId": "ex.building.v2.006",
+        "stage": "practice",
+        "activity": "sentence-building",
+        "learningFocus": "production",
+        "noteVi": "Sắp xếp câu miêu tả việc chuẩn bị hành lý."
+      },
+      {
+        "contentId": "ex.building.v2.009",
+        "stage": "practice",
+        "activity": "sentence-building",
+        "learningFocus": "production",
+        "noteVi": "Sắp xếp câu Hiện tại hoàn thành với 'never missed a flight'."
+      },
+      {
+        "contentId": "ex.building.v2.010",
+        "stage": "practice",
+        "activity": "sentence-building",
+        "learningFocus": "production",
+        "noteVi": "Lắp ghép câu Điều kiện loại 1: nếu trời mưa sẽ bắt taxi."
+      },
+      {
+        "contentId": "ex.context.v2.006",
+        "stage": "practice",
+        "activity": "contextual-usage",
+        "learningFocus": "recall",
+        "noteVi": "Điền đúng cụm 'make a reservation' (đặt chỗ trước) trong ngữ cảnh thực tế."
+      },
+      {
+        "contentId": "ex.cloze.00000004",
+        "stage": "practice",
+        "activity": "cloze",
+        "learningFocus": "recall",
+        "noteVi": "Luyện phản xạ vế chính với 'will take' trong Điều kiện loại 1."
+      },
+      {
+        "contentId": "ex.context.v2.contrast.008",
+        "stage": "contrast",
+        "activity": "contextual-usage",
+        "learningFocus": "usage-discrimination",
+        "noteVi": "Phân biệt 'pay by card' (phương thức) vs 'pay with'."
+      },
+      {
+        "contentId": "ex.context.v2.contrast.016",
+        "stage": "contrast",
+        "activity": "contextual-usage",
+        "learningFocus": "usage-discrimination",
+        "noteVi": "Dùng đúng cụm lịch sự 'make a complaint' tại quầy lễ tân."
+      },
+      {
+        "contentId": "err.e06.009",
+        "stage": "contrast",
+        "activity": "error-correction",
+        "learningFocus": "usage-discrimination",
+        "noteVi": "Sửa lỗi thiếu trợ động từ trong Hiện tại tiếp diễn."
+      },
+      {
+        "contentId": "ex.correction.e06.00000004.01",
+        "stage": "contrast",
+        "activity": "error-correction",
+        "learningFocus": "usage-discrimination",
+        "noteVi": "Phân biệt 'I am waiting' với lỗi lược mất 'am'."
+      },
+      {
+        "contentId": "ex.translation.00000002",
+        "stage": "post-check",
+        "activity": "translation",
+        "learningFocus": "production",
+        "noteVi": "Kiểm tra đầu ra song ngữ: nói về việc đang đợi tàu."
+      },
+      {
+        "contentId": "ex.translation.00000004",
+        "stage": "post-check",
+        "activity": "translation",
+        "learningFocus": "production",
+        "noteVi": "Kiểm tra đầu ra song ngữ với Điều kiện loại 1."
+      },
+      {
+        "contentId": "ex.building.v2.014",
+        "stage": "post-check",
+        "activity": "sentence-building",
+        "learningFocus": "production",
+        "noteVi": "Thử thách nâng cao (B1): xử lý tình huống chuyến bay bị hủy."
+      }
+    ]
+  }
+}

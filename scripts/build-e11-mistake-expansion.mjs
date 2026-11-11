@@ -87,12 +87,14 @@ const MISTAKE_GENERATORS = [
   },
 
   // Rule 3: 3rd person singular missing -s ("He work" -> "He works")
+  // Exclude invariant base/past homographs like "read" so valid Past Simple is never flagged as wrong.
   (text) => {
     const m = text.match(/^(He|She|It)\s+([a-z]+)s\b/);
     if (!m) return null;
     const subj = m[1];
     const verbWithS = m[2] + "s";
     const base = m[2];
+    if (base.toLowerCase() === "read") return null;
     if (COMMON_BASE_VERBS.includes(base.toLowerCase())) {
       const regex = new RegExp(`^${subj}\\s+${verbWithS}\\b`);
       const incorrect = text.replace(regex, `${subj} ${base}`);

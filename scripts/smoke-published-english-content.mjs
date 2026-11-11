@@ -77,10 +77,17 @@ for (const f of e11MistakeFiles) {
   e11MistakesCount+=doc.records?.length??0;
 }
 
-const expectedExerciseCount=1400+e11TranslationsCount+e11ClozeCount+e11TransformationsCount;
+const v2ExerciseFiles=sentenceDirFiles.filter(f=>/^v2-[a-z0-9._-]+\.json$/.test(f));
+let v2ExercisesCount=0;
+for (const f of v2ExerciseFiles) {
+  const doc=await readJson(path.join(root,"content","english","sentences",f));
+  v2ExercisesCount+=doc.records?.length??0;
+}
+
+const expectedExerciseCount=1400+e11TranslationsCount+e11ClozeCount+e11TransformationsCount+v2ExercisesCount;
 const expectedExampleCount=1513+e11TypingTextExpansionCount+tatoebaEnglishPublished.length+e11TranslationSentencesCount;
 const expectedMistakesCount=388+e11MistakesCount;
-const expectedSentenceManifestCount=3401+e11TypingTextExpansionCount+tatoebaEnglishPublished.length+e11TranslationSentencesCount+e11TranslationsCount+e11DialoguesCount+e11ClozeCount+e11TransformationsCount+e11MistakesCount;
+const expectedSentenceManifestCount=3401+e11TypingTextExpansionCount+tatoebaEnglishPublished.length+e11TranslationSentencesCount+e11TranslationsCount+e11DialoguesCount+e11ClozeCount+e11TransformationsCount+e11MistakesCount+v2ExercisesCount;
 const errors=[];
 
 const fileRuntimeLoader={
@@ -354,10 +361,16 @@ try {
   const phrasalVerbCount=await countPublishedEnglishActivityRecords(fileRuntimeLoader,"phrasal-verb");
   const chunkCount=await countPublishedEnglishActivityRecords(fileRuntimeLoader,"chunk");
   const idiomCount=await countPublishedEnglishActivityRecords(fileRuntimeLoader,"idiom");
+  const sentenceBuildingCount=await countPublishedEnglishActivityRecords(fileRuntimeLoader,"sentence-building");
+  const contextualUsageCount=await countPublishedEnglishActivityRecords(fileRuntimeLoader,"contextual-usage");
+  const listeningExerciseCount=exercises.filter((r)=>r?.type==="listening-typing").length;
   if(verbPatternCount!==510) errors.push("published verb-pattern activity must expose 510 reviewed records");
   if(phrasalVerbCount!==1000) errors.push("published phrasal-verb activity must expose 1000 reviewed records");
   if(chunkCount!==2000) errors.push("published chunk activity must expose 2000 reviewed records");
   if(idiomCount!==1185) errors.push("published idiom activity must expose 1185 reviewed records");
+  if(sentenceBuildingCount<2500) errors.push("published sentence-building activity must expose >= 2500 reviewed records");
+  if(contextualUsageCount<2000) errors.push("published contextual-usage activity must expose >= 2000 reviewed records");
+  if(listeningExerciseCount<1000) errors.push("published listening-typing exercises must expose >= 1000 reviewed records");
 } catch (error) {
   errors.push("published activity source routing smoke failed: "+error.message);
 }
@@ -397,6 +410,9 @@ const report={
     phrasalVerbs:280,
     chunks:155,
     idioms:125,
+    sentenceBuilding:2500,
+    contextualUsage:2000,
+    listeningTypingExercises:1000,
   },
 };
 console.log(JSON.stringify(report,null,2));

@@ -1,0 +1,1695 @@
+{
+  "schemaVersion": 1,
+  "phase": "Phase 0 / E13 Causal Gap Classification",
+  "generatedAt": "2026-11-10T15:02:06.222Z",
+  "corpusScanned": {
+    "publishedExamples": 129813,
+    "collocations": 5000,
+    "verbPatterns": 510,
+    "phrasalVerbs": 1000,
+    "chunks": 2000,
+    "idioms": 1185,
+    "e03Lexemes": 300,
+    "legacyVocabularyUniqueKeys": 18000,
+    "e03OverlapWithLegacyVocab": 300
+  },
+  "families": {
+    "collocations": {
+      "counts": {
+        "total": 5000,
+        "already-linked": 111,
+        "matcher-false-negative": 111,
+        "pending-editorial-review": 61,
+        "unsupported-frame": 0,
+        "true-absence": 4717
+      },
+      "eligibleWithoutExamples": 4889,
+      "recoverableCandidates": 172,
+      "recoverableShareOfMissingPct": 3.52,
+      "samples": {
+        "matcher-false-negative": [
+          {
+            "id": "col.00000002",
+            "text": "make a mistake",
+            "type": "collocations",
+            "hitCount": 93,
+            "sampleId": "sent.tatoeba.13855320",
+            "sampleText": "They just admitted to making a mistake."
+          },
+          {
+            "id": "col.00000005",
+            "text": "make a plan",
+            "type": "collocations",
+            "hitCount": 4,
+            "sampleId": "sent.tatoeba.8777311",
+            "sampleText": "Don't go off willy-nilly. Let's make a plan."
+          },
+          {
+            "id": "col.00000007",
+            "text": "make a complaint",
+            "type": "collocations",
+            "hitCount": 3,
+            "sampleId": "sent.tatoeba.10018285",
+            "sampleText": "I'd like to make a complaint."
+          },
+          {
+            "id": "col.00000008",
+            "text": "make a difference",
+            "type": "collocations",
+            "hitCount": 31,
+            "sampleId": "sent.tatoeba.13934975",
+            "sampleText": "Even the little things can make a difference."
+          },
+          {
+            "id": "col.00000018",
+            "text": "take a risk",
+            "type": "collocations",
+            "hitCount": 7,
+            "sampleId": "sent.tatoeba.681951",
+            "sampleText": "I took a risk when I made the investment."
+          },
+          {
+            "id": "col.00000019",
+            "text": "take time",
+            "type": "collocations",
+            "hitCount": 58,
+            "sampleId": "sent.tatoeba.1896",
+            "sampleText": "Be patient please. It takes time."
+          },
+          {
+            "id": "col.00000030",
+            "text": "have experience",
+            "type": "collocations",
+            "hitCount": 59,
+            "sampleId": "sent.grb2.05.06.2",
+            "sampleText": "Hardly any applicants had experience with the new platform."
+          },
+          {
+            "id": "col.00000031",
+            "text": "do homework",
+            "type": "collocations",
+            "hitCount": 96,
+            "sampleId": "sent.tatoeba.10566754",
+            "sampleText": "I hate doing homework."
+          },
+          {
+            "id": "col.00000033",
+            "text": "do exercise",
+            "type": "collocations",
+            "hitCount": 14,
+            "sampleId": "sent.tatoeba.2266928",
+            "sampleText": "I do exercises in the morning."
+          },
+          {
+            "id": "col.00000035",
+            "text": "do research",
+            "type": "collocations",
+            "hitCount": 7,
+            "sampleId": "sent.tatoeba.4538536",
+            "sampleText": "What's stopping you from doing research?"
+          },
+          {
+            "id": "col.00000048",
+            "text": "catch a bus",
+            "type": "collocations",
+            "hitCount": 11,
+            "sampleId": "sent.tatoeba.39513",
+            "sampleText": "Running as fast as she could, she still failed to catch the bus."
+          },
+          {
+            "id": "col.00000049",
+            "text": "catch a train",
+            "type": "collocations",
+            "hitCount": 22,
+            "sampleId": "sent.00000019",
+            "sampleText": "If we had left earlier, we would have caught the train."
+          },
+          {
+            "id": "col.00000050",
+            "text": "catch a cold",
+            "type": "collocations",
+            "hitCount": 21,
+            "sampleId": "sent.tatoeba.11325040",
+            "sampleText": "I have a cough because I caught a cold."
+          },
+          {
+            "id": "col.00000051",
+            "text": "catch someone's attention",
+            "type": "collocations",
+            "hitCount": 1,
+            "sampleId": "sent.tatoeba.3725725",
+            "sampleText": "I can see why that caught your attention."
+          },
+          {
+            "id": "col.00000053",
+            "text": "pay a bill",
+            "type": "collocations",
+            "hitCount": 27,
+            "sampleId": "sent.tatoeba.7390321",
+            "sampleText": "She paid her bill late."
+          },
+          {
+            "id": "col.00000054",
+            "text": "pay by card",
+            "type": "collocations",
+            "hitCount": 2,
+            "sampleId": "sent.tatoeba.11344723",
+            "sampleText": "I have no cash so I have to pay by card."
+          },
+          {
+            "id": "col.00000056",
+            "text": "keep calm",
+            "type": "collocations",
+            "hitCount": 5,
+            "sampleId": "sent.tatoeba.51180",
+            "sampleText": "He kept calm in the face of the danger."
+          },
+          {
+            "id": "col.00000058",
+            "text": "keep a promise",
+            "type": "collocations",
+            "hitCount": 19,
+            "sampleId": "sent.tatoeba.1025824",
+            "sampleText": "Tom failed to keep his promise."
+          },
+          {
+            "id": "col.00000059",
+            "text": "keep a secret",
+            "type": "collocations",
+            "hitCount": 21,
+            "sampleId": "sent.tatoeba.4823829",
+            "sampleText": "He asked me to keep the secret."
+          },
+          {
+            "id": "col.00000061",
+            "text": "save time",
+            "type": "collocations",
+            "hitCount": 8,
+            "sampleId": "sent.grb2.04.07.1",
+            "sampleText": "Working from home saves time."
+          }
+        ],
+        "pending-editorial-review": [
+          {
+            "id": "col.00000032",
+            "text": "do housework",
+            "type": "collocations",
+            "hitCount": 2,
+            "sampleId": "sent.tatoeba.719323",
+            "sampleText": "I don't mind doing the housework."
+          },
+          {
+            "id": "col.00000037",
+            "text": "do damage",
+            "type": "collocations",
+            "hitCount": 2,
+            "sampleId": "sent.tatoeba.281141",
+            "sampleText": "The drought did severe damage to the harvest."
+          },
+          {
+            "id": "col.00000055",
+            "text": "pay cash",
+            "type": "collocations",
+            "hitCount": 8,
+            "sampleId": "sent.tatoeba.296068",
+            "sampleText": "He didn't say anything as to whether he was going to pay in cash or by check."
+          },
+          {
+            "id": "col.00000060",
+            "text": "keep records",
+            "type": "collocations",
+            "hitCount": 1,
+            "sampleId": "sent.tatoeba.803257",
+            "sampleText": "He would learn how to keep financial records."
+          },
+          {
+            "id": "col.00000103",
+            "text": "make changes",
+            "type": "collocations",
+            "hitCount": 8,
+            "sampleId": "sent.tatoeba.13839804",
+            "sampleText": "We need to make some changes to the project."
+          },
+          {
+            "id": "col.00000111",
+            "text": "reach a conclusion",
+            "type": "collocations",
+            "hitCount": 1,
+            "sampleId": "sent.tatoeba.3516149",
+            "sampleText": "How did you reach such an interesting conclusion?"
+          },
+          {
+            "id": "col.00000122",
+            "text": "give permission",
+            "type": "collocations",
+            "hitCount": 5,
+            "sampleId": "sent.tatoeba.2956766",
+            "sampleText": "Tom gave us permission to leave."
+          },
+          {
+            "id": "col.00000129",
+            "text": "set an example",
+            "type": "collocations",
+            "hitCount": 5,
+            "sampleId": "sent.tatoeba.55386",
+            "sampleText": "This will set a good example."
+          },
+          {
+            "id": "col.00000131",
+            "text": "meet expectations",
+            "type": "collocations",
+            "hitCount": 4,
+            "sampleId": "sent.tatoeba.318238",
+            "sampleText": "I'll never fail to meet your expectations."
+          },
+          {
+            "id": "col.00000132",
+            "text": "meet demand",
+            "type": "collocations",
+            "hitCount": 5,
+            "sampleId": "sent.tatoeba.260862",
+            "sampleText": "I cannot meet their demands."
+          },
+          {
+            "id": "col.00000138",
+            "text": "gain knowledge",
+            "type": "collocations",
+            "hitCount": 2,
+            "sampleId": "sent.tatoeba.681314",
+            "sampleText": "Tom needs to gain more knowledge."
+          },
+          {
+            "id": "col.00000177",
+            "text": "hold a position",
+            "type": "collocations",
+            "hitCount": 1,
+            "sampleId": "sent.tatoeba.10176864",
+            "sampleText": "Tom is prohibited from holding a leadership position."
+          },
+          {
+            "id": "col.00000183",
+            "text": "launch a campaign",
+            "type": "collocations",
+            "hitCount": 1,
+            "sampleId": "sent.tatoeba.807692",
+            "sampleText": "The Communists launched a major military campaign."
+          },
+          {
+            "id": "col.00000186",
+            "text": "take precautions",
+            "type": "collocations",
+            "hitCount": 1,
+            "sampleId": "sent.tatoeba.10891184",
+            "sampleText": "We need to take some precautions against fire."
+          },
+          {
+            "id": "col.00000187",
+            "text": "make a commitment",
+            "type": "collocations",
+            "hitCount": 1,
+            "sampleId": "sent.tatoeba.7113163",
+            "sampleText": "We made a big commitment to Tom."
+          },
+          {
+            "id": "col.00000225",
+            "text": "reach a milestone",
+            "type": "collocations",
+            "hitCount": 1,
+            "sampleId": "sent.tatoeba.12169798",
+            "sampleText": "We have reached an important milestone."
+          },
+          {
+            "id": "col.00000228",
+            "text": "conduct an experiment",
+            "type": "collocations",
+            "hitCount": 1,
+            "sampleId": "sent.tatoeba.13709683",
+            "sampleText": "This country successfully conducted a nuclear experiment."
+          },
+          {
+            "id": "col.00000229",
+            "text": "face a dilemma",
+            "type": "collocations",
+            "hitCount": 1,
+            "sampleId": "sent.tatoeba.5738566",
+            "sampleText": "Tom is faced with a dilemma."
+          },
+          {
+            "id": "col.00000230",
+            "text": "face pressure",
+            "type": "collocations",
+            "hitCount": 1,
+            "sampleId": "sent.tatoeba.8907290",
+            "sampleText": "Belize faces continued pressure from rising sovereign debt and a growing trade imbalance."
+          },
+          {
+            "id": "col.00000233",
+            "text": "raise expectations",
+            "type": "collocations",
+            "hitCount": 1,
+            "sampleId": "sent.tatoeba.297392",
+            "sampleText": "He raised our expectations only to disappoint us."
+          }
+        ],
+        "unsupported-frame": [],
+        "true-absence": [
+          {
+            "id": "col.00000073",
+            "text": "strong coffee",
+            "type": "collocations"
+          },
+          {
+            "id": "col.00000074",
+            "text": "strong evidence",
+            "type": "collocations"
+          },
+          {
+            "id": "col.00000078",
+            "text": "low risk",
+            "type": "collocations"
+          },
+          {
+            "id": "col.00000082",
+            "text": "hard choice",
+            "type": "collocations"
+          },
+          {
+            "id": "col.00000084",
+            "text": "fast learner",
+            "type": "collocations"
+          },
+          {
+            "id": "col.00000096",
+            "text": "career path",
+            "type": "collocations"
+          },
+          {
+            "id": "col.00000110",
+            "text": "gain experience",
+            "type": "collocations"
+          },
+          {
+            "id": "col.00000112",
+            "text": "raise awareness",
+            "type": "collocations"
+          },
+          {
+            "id": "col.00000123",
+            "text": "give feedback",
+            "type": "collocations"
+          },
+          {
+            "id": "col.00000126",
+            "text": "hold a conversation",
+            "type": "collocations"
+          },
+          {
+            "id": "col.00000127",
+            "text": "set a goal",
+            "type": "collocations"
+          },
+          {
+            "id": "col.00000128",
+            "text": "set a deadline",
+            "type": "collocations"
+          },
+          {
+            "id": "col.00000136",
+            "text": "raise standards",
+            "type": "collocations"
+          },
+          {
+            "id": "col.00000137",
+            "text": "gain confidence",
+            "type": "collocations"
+          },
+          {
+            "id": "col.00000140",
+            "text": "high demand",
+            "type": "collocations"
+          },
+          {
+            "id": "col.00000142",
+            "text": "draw a distinction",
+            "type": "collocations"
+          },
+          {
+            "id": "col.00000145",
+            "text": "provide access",
+            "type": "collocations"
+          },
+          {
+            "id": "col.00000146",
+            "text": "offer support",
+            "type": "collocations"
+          },
+          {
+            "id": "col.00000147",
+            "text": "offer advice",
+            "type": "collocations"
+          },
+          {
+            "id": "col.00000148",
+            "text": "meet a challenge",
+            "type": "collocations"
+          }
+        ]
+      }
+    },
+    "phrasalVerbs": {
+      "counts": {
+        "total": 1000,
+        "already-linked": 239,
+        "matcher-false-negative": 65,
+        "pending-editorial-review": 26,
+        "unsupported-frame": 0,
+        "true-absence": 670
+      },
+      "eligibleWithoutExamples": 761,
+      "recoverableCandidates": 91,
+      "recoverableShareOfMissingPct": 11.96,
+      "samples": {
+        "matcher-false-negative": [
+          {
+            "id": "pv.00000039",
+            "text": "hand out",
+            "type": "phrasal-verb",
+            "hitCount": 2,
+            "sampleId": "sent.tatoeba.3460364",
+            "sampleText": "Take your hands out of your pockets."
+          },
+          {
+            "id": "pv.00000082",
+            "text": "come down with",
+            "type": "phrasal-verb",
+            "hitCount": 7,
+            "sampleId": "sent.tatoeba.256579",
+            "sampleText": "I didn't have time to recover before I came down with another horrible cold."
+          },
+          {
+            "id": "pv.00000102",
+            "text": "come forward",
+            "type": "phrasal-verb",
+            "hitCount": 3,
+            "sampleId": "sent.tatoeba.13865297",
+            "sampleText": "If anyone witnessed the accident, please come forward."
+          },
+          {
+            "id": "pv.00000116",
+            "text": "get across",
+            "type": "phrasal-verb",
+            "hitCount": 4,
+            "sampleId": "sent.tatoeba.1682401",
+            "sampleText": "Tom is getting across the river."
+          },
+          {
+            "id": "pv.00000122",
+            "text": "break off",
+            "type": "phrasal-verb",
+            "hitCount": 5,
+            "sampleId": "sent.tatoeba.294113",
+            "sampleText": "He was making a speech, but he broke off when he heard a strange noise."
+          },
+          {
+            "id": "pv.00000129",
+            "text": "hold up",
+            "type": "phrasal-verb",
+            "hitCount": 17,
+            "sampleId": "sent.tatoeba.2644406",
+            "sampleText": "Tom held up three fingers."
+          },
+          {
+            "id": "pv.00000138",
+            "text": "crack down on",
+            "type": "phrasal-verb",
+            "hitCount": 2,
+            "sampleId": "sent.tatoeba.246122",
+            "sampleText": "The city is cracking down on drunk drivers and giving them fines."
+          },
+          {
+            "id": "pv.00000140",
+            "text": "fall through",
+            "type": "phrasal-verb",
+            "hitCount": 3,
+            "sampleId": "sent.tatoeba.269079",
+            "sampleText": "The project to build a new sports center has fallen through for lack of adequate funds."
+          },
+          {
+            "id": "pv.00000142",
+            "text": "come under",
+            "type": "phrasal-verb",
+            "hitCount": 7,
+            "sampleId": "sent.tatoeba.55792",
+            "sampleText": "What heading does this come under?"
+          },
+          {
+            "id": "pv.00000144",
+            "text": "fill in for",
+            "type": "phrasal-verb",
+            "hitCount": 1,
+            "sampleId": "sent.tatoeba.3271020",
+            "sampleText": "Tom left step-by-step instructions for the person who would be filling in for him while he was on leave."
+          },
+          {
+            "id": "pv.00000147",
+            "text": "head off",
+            "type": "phrasal-verb",
+            "hitCount": 6,
+            "sampleId": "sent.tatoeba.5734610",
+            "sampleText": "We headed off to the airport."
+          },
+          {
+            "id": "pv.00000152",
+            "text": "drift apart",
+            "type": "phrasal-verb",
+            "hitCount": 2,
+            "sampleId": "sent.tatoeba.10244135",
+            "sampleText": "We started to drift apart."
+          },
+          {
+            "id": "pv.00000154",
+            "text": "gear up for",
+            "type": "phrasal-verb",
+            "hitCount": 1,
+            "sampleId": "sent.tatoeba.47855",
+            "sampleText": "The country was gearing up for war."
+          },
+          {
+            "id": "pv.00000161",
+            "text": "come across as",
+            "type": "phrasal-verb",
+            "hitCount": 1,
+            "sampleId": "sent.tatoeba.3122548",
+            "sampleText": "Tom came across as being an extremely intelligent man."
+          },
+          {
+            "id": "pv.00000162",
+            "text": "draw on",
+            "type": "phrasal-verb",
+            "hitCount": 4,
+            "sampleId": "sent.tatoeba.31599",
+            "sampleText": "Winter is drawing on."
+          },
+          {
+            "id": "pv.00000168",
+            "text": "write off",
+            "type": "phrasal-verb",
+            "hitCount": 2,
+            "sampleId": "sent.tatoeba.10849744",
+            "sampleText": "Can this be written off as a business expense?"
+          },
+          {
+            "id": "pv.00000171",
+            "text": "roll out",
+            "type": "phrasal-verb",
+            "hitCount": 3,
+            "sampleId": "sent.tatoeba.326219",
+            "sampleText": "The train rolled out of the station."
+          },
+          {
+            "id": "pv.00000173",
+            "text": "step down",
+            "type": "phrasal-verb",
+            "hitCount": 6,
+            "sampleId": "sent.tatoeba.295876",
+            "sampleText": "He finally had to step down."
+          },
+          {
+            "id": "pv.00000182",
+            "text": "wrap up",
+            "type": "phrasal-verb",
+            "hitCount": 5,
+            "sampleId": "sent.tatoeba.5744503",
+            "sampleText": "The party is wrapping up."
+          },
+          {
+            "id": "pv.00000183",
+            "text": "lock in",
+            "type": "phrasal-verb",
+            "hitCount": 14,
+            "sampleId": "sent.tatoeba.4132618",
+            "sampleText": "Help! I've been locked in!"
+          }
+        ],
+        "pending-editorial-review": [
+          {
+            "id": "pv.00000066",
+            "text": "show around",
+            "type": "phrasal-verb",
+            "hitCount": 6,
+            "sampleId": "sent.tatoeba.321314",
+            "sampleText": "How about my showing you around the town?"
+          },
+          {
+            "id": "pv.00000094",
+            "text": "boil down to",
+            "type": "phrasal-verb",
+            "hitCount": 1,
+            "sampleId": "sent.tatoeba.10372342",
+            "sampleText": "Boil the syrup down to a jelly and pour it over the apples."
+          },
+          {
+            "id": "pv.00000123",
+            "text": "carry over",
+            "type": "phrasal-verb",
+            "hitCount": 2,
+            "sampleId": "sent.tatoeba.309506",
+            "sampleText": "Her voice did not carry well over the noise."
+          },
+          {
+            "id": "pv.00000130",
+            "text": "take apart",
+            "type": "phrasal-verb",
+            "hitCount": 5,
+            "sampleId": "sent.tatoeba.45409",
+            "sampleText": "The boy took the radio apart."
+          },
+          {
+            "id": "pv.00000165",
+            "text": "stand in for",
+            "type": "phrasal-verb",
+            "hitCount": 3,
+            "sampleId": "sent.tatoeba.681366",
+            "sampleText": "Tom stood in line for an hour."
+          },
+          {
+            "id": "pv.00000218",
+            "text": "put through",
+            "type": "phrasal-verb",
+            "hitCount": 6,
+            "sampleId": "sent.tatoeba.11260607",
+            "sampleText": "Can you put me through to extension 5678 please?"
+          },
+          {
+            "id": "pv.00000262",
+            "text": "bring along",
+            "type": "phrasal-verb",
+            "hitCount": 2,
+            "sampleId": "sent.tatoeba.680164",
+            "sampleText": "After dinner, bring your guitar along and we'll sing."
+          },
+          {
+            "id": "pv.00000271",
+            "text": "bring on",
+            "type": "phrasal-verb",
+            "hitCount": 4,
+            "sampleId": "sent.tatoeba.306778",
+            "sampleText": "They brought trouble on themselves."
+          },
+          {
+            "id": "pv.00000286",
+            "text": "roll back",
+            "type": "phrasal-verb",
+            "hitCount": 1,
+            "sampleId": "sent.tatoeba.7413928",
+            "sampleText": "The dog rolled on his back."
+          },
+          {
+            "id": "pv.00000294",
+            "text": "weed out",
+            "type": "phrasal-verb",
+            "hitCount": 1,
+            "sampleId": "sent.tatoeba.9203620",
+            "sampleText": "If you're going to pull weeds, pull them out by the roots."
+          },
+          {
+            "id": "pv.00000295",
+            "text": "pare down",
+            "type": "phrasal-verb",
+            "hitCount": 1,
+            "sampleId": "sent.tatoeba.274803",
+            "sampleText": "A lot of companies have pared their staff down to a minimum."
+          },
+          {
+            "id": "pv.00000321",
+            "text": "bottle out",
+            "type": "phrasal-verb",
+            "hitCount": 2,
+            "sampleId": "sent.tatoeba.10795670",
+            "sampleText": "Tom opened the bottle and poured out the contents."
+          },
+          {
+            "id": "pv.00000330",
+            "text": "sound out",
+            "type": "phrasal-verb",
+            "hitCount": 1,
+            "sampleId": "sent.tatoeba.48361",
+            "sampleText": "You should sound him out about the matter."
+          },
+          {
+            "id": "pv.00000334",
+            "text": "mull over",
+            "type": "phrasal-verb",
+            "hitCount": 1,
+            "sampleId": "sent.tatoeba.257423",
+            "sampleText": "I need time to mull things over before I decide what to do."
+          },
+          {
+            "id": "pv.00000388",
+            "text": "wheel out",
+            "type": "phrasal-verb",
+            "hitCount": 1,
+            "sampleId": "sent.tatoeba.3726762",
+            "sampleText": "Tom wheeled his bike out the front door."
+          },
+          {
+            "id": "pv.00000407",
+            "text": "jack in",
+            "type": "phrasal-verb",
+            "hitCount": 1,
+            "sampleId": "sent.tatoeba.5565115",
+            "sampleText": "Tom put a jack-o'-lantern in the window."
+          },
+          {
+            "id": "pv.00000416",
+            "text": "rain off",
+            "type": "phrasal-verb",
+            "hitCount": 3,
+            "sampleId": "sent.tatoeba.242160",
+            "sampleText": "It has been raining on and off since this morning."
+          },
+          {
+            "id": "pv.00000423",
+            "text": "grass up",
+            "type": "phrasal-verb",
+            "hitCount": 1,
+            "sampleId": "sent.tatoeba.6973308",
+            "sampleText": "Tom lay down in the grass and looked up at the sky, with his hands behind his head."
+          },
+          {
+            "id": "pv.00000443",
+            "text": "bottle out of",
+            "type": "phrasal-verb",
+            "hitCount": 1,
+            "sampleId": "sent.tatoeba.11027757",
+            "sampleText": "Tom took two bottles of beer out of the fridge, one for himself and one for John, and put them on the table."
+          },
+          {
+            "id": "pv.00000463",
+            "text": "buckle down to",
+            "type": "phrasal-verb",
+            "hitCount": 1,
+            "sampleId": "sent.tatoeba.30505",
+            "sampleText": "Buckle down and get to work. Do you think we're on a Sunday picnic here?"
+          }
+        ],
+        "unsupported-frame": [],
+        "true-absence": [
+          {
+            "id": "pv.00000101",
+            "text": "bring forward",
+            "type": "phrasal-verb"
+          },
+          {
+            "id": "pv.00000145",
+            "text": "follow through",
+            "type": "phrasal-verb"
+          },
+          {
+            "id": "pv.00000149",
+            "text": "phase out",
+            "type": "phrasal-verb"
+          },
+          {
+            "id": "pv.00000150",
+            "text": "play down",
+            "type": "phrasal-verb"
+          },
+          {
+            "id": "pv.00000151",
+            "text": "clamp down on",
+            "type": "phrasal-verb"
+          },
+          {
+            "id": "pv.00000153",
+            "text": "ease off",
+            "type": "phrasal-verb"
+          },
+          {
+            "id": "pv.00000157",
+            "text": "opt out of",
+            "type": "phrasal-verb"
+          },
+          {
+            "id": "pv.00000158",
+            "text": "phase in",
+            "type": "phrasal-verb"
+          },
+          {
+            "id": "pv.00000159",
+            "text": "press ahead with",
+            "type": "phrasal-verb"
+          },
+          {
+            "id": "pv.00000160",
+            "text": "scale back",
+            "type": "phrasal-verb"
+          },
+          {
+            "id": "pv.00000166",
+            "text": "weigh up",
+            "type": "phrasal-verb"
+          },
+          {
+            "id": "pv.00000170",
+            "text": "break away from",
+            "type": "phrasal-verb"
+          },
+          {
+            "id": "pv.00000172",
+            "text": "scale up",
+            "type": "phrasal-verb"
+          },
+          {
+            "id": "pv.00000174",
+            "text": "filter out",
+            "type": "phrasal-verb"
+          },
+          {
+            "id": "pv.00000177",
+            "text": "opt out",
+            "type": "phrasal-verb"
+          },
+          {
+            "id": "pv.00000178",
+            "text": "spin off",
+            "type": "phrasal-verb"
+          },
+          {
+            "id": "pv.00000187",
+            "text": "double down",
+            "type": "phrasal-verb"
+          },
+          {
+            "id": "pv.00000188",
+            "text": "drill down",
+            "type": "phrasal-verb"
+          },
+          {
+            "id": "pv.00000227",
+            "text": "hold off",
+            "type": "phrasal-verb"
+          },
+          {
+            "id": "pv.00000232",
+            "text": "carry through",
+            "type": "phrasal-verb"
+          }
+        ]
+      }
+    },
+    "chunks": {
+      "counts": {
+        "total": 2000,
+        "already-linked": 97,
+        "matcher-false-negative": 36,
+        "pending-editorial-review": 3,
+        "unsupported-frame": 0,
+        "true-absence": 1864
+      },
+      "eligibleWithoutExamples": 1903,
+      "recoverableCandidates": 39,
+      "recoverableShareOfMissingPct": 2.05,
+      "samples": {
+        "matcher-false-negative": [
+          {
+            "id": "chunk.00000011",
+            "text": "as far as I know",
+            "type": "chunk",
+            "hitCount": 11,
+            "sampleId": "sent.tatoeba.471218",
+            "sampleText": "As far as I know, there are no good books on the theory."
+          },
+          {
+            "id": "chunk.00000028",
+            "text": "as usual",
+            "type": "chunk",
+            "hitCount": 14,
+            "sampleId": "sent.tatoeba.239685",
+            "sampleText": "Needless to say, he was late for school as usual."
+          },
+          {
+            "id": "chunk.00000031",
+            "text": "from time to time",
+            "type": "chunk",
+            "hitCount": 14,
+            "sampleId": "sent.tatoeba.264128",
+            "sampleText": "She comes to see me from time to time."
+          },
+          {
+            "id": "chunk.00000041",
+            "text": "as a matter of fact",
+            "type": "chunk",
+            "hitCount": 13,
+            "sampleId": "sent.tatoeba.265101",
+            "sampleText": "As a matter of fact, I did it."
+          },
+          {
+            "id": "chunk.00000042",
+            "text": "for the time being",
+            "type": "chunk",
+            "hitCount": 11,
+            "sampleId": "sent.tatoeba.32978",
+            "sampleText": "Well, it'll do for the time being."
+          },
+          {
+            "id": "chunk.00000045",
+            "text": "in the meantime",
+            "type": "chunk",
+            "hitCount": 6,
+            "sampleId": "sent.tatoeba.3415281",
+            "sampleText": "What should I do in the meantime?"
+          },
+          {
+            "id": "chunk.00000047",
+            "text": "for now",
+            "type": "chunk",
+            "hitCount": 60,
+            "sampleId": "sent.tatoeba.13779691",
+            "sampleText": "For now, everything's fine."
+          },
+          {
+            "id": "chunk.00000051",
+            "text": "in the long run",
+            "type": "chunk",
+            "hitCount": 8,
+            "sampleId": "sent.tatoeba.13245975",
+            "sampleText": "Patience pays off in the long run."
+          },
+          {
+            "id": "chunk.00000053",
+            "text": "at first glance",
+            "type": "chunk",
+            "hitCount": 5,
+            "sampleId": "sent.tatoeba.4255363",
+            "sampleText": "He disliked her at first glance."
+          },
+          {
+            "id": "chunk.00000060",
+            "text": "to a certain extent",
+            "type": "chunk",
+            "hitCount": 4,
+            "sampleId": "sent.tatoeba.50647",
+            "sampleText": "I found the rumor to be true to a certain extent."
+          },
+          {
+            "id": "chunk.00000111",
+            "text": "as a rule",
+            "type": "chunk",
+            "hitCount": 5,
+            "sampleId": "sent.tatoeba.21814",
+            "sampleText": "As a rule, he arrives at the office at about nine-thirty in the morning."
+          },
+          {
+            "id": "chunk.00000114",
+            "text": "in principle",
+            "type": "chunk",
+            "hitCount": 1,
+            "sampleId": "sent.tatoeba.48548",
+            "sampleText": "Would you agree to the plan in principle?"
+          },
+          {
+            "id": "chunk.00000116",
+            "text": "all in all",
+            "type": "chunk",
+            "hitCount": 7,
+            "sampleId": "sent.tatoeba.240265",
+            "sampleText": "There are some misprints, but all in all, it's a good book."
+          },
+          {
+            "id": "chunk.00000117",
+            "text": "at any rate",
+            "type": "chunk",
+            "hitCount": 3,
+            "sampleId": "sent.tatoeba.37663",
+            "sampleText": "At any rate, I will do my best."
+          },
+          {
+            "id": "chunk.00000118",
+            "text": "by and large",
+            "type": "chunk",
+            "hitCount": 1,
+            "sampleId": "sent.tatoeba.273802",
+            "sampleText": "By and large, your idea is a good one."
+          },
+          {
+            "id": "chunk.00000119",
+            "text": "in the first place",
+            "type": "chunk",
+            "hitCount": 10,
+            "sampleId": "sent.tatoeba.32758",
+            "sampleText": "In the first place, we have to decide on the name."
+          },
+          {
+            "id": "chunk.00000123",
+            "text": "in practice",
+            "type": "chunk",
+            "hitCount": 5,
+            "sampleId": "sent.tatoeba.1854",
+            "sampleText": "In theory, there is no difference between theory and practice. But, in practice, there is."
+          },
+          {
+            "id": "chunk.00000126",
+            "text": "from my point of view",
+            "type": "chunk",
+            "hitCount": 2,
+            "sampleId": "sent.tatoeba.250787",
+            "sampleText": "From my point of view, it would be better to wait a little longer."
+          },
+          {
+            "id": "chunk.00000128",
+            "text": "in any case",
+            "type": "chunk",
+            "hitCount": 9,
+            "sampleId": "sent.tatoeba.36793",
+            "sampleText": "He isn't going to be forgotten in any case."
+          },
+          {
+            "id": "chunk.00000129",
+            "text": "to begin with",
+            "type": "chunk",
+            "hitCount": 5,
+            "sampleId": "sent.tatoeba.32750",
+            "sampleText": "To begin with, you have no right to be here."
+          }
+        ],
+        "pending-editorial-review": [
+          {
+            "id": "chunk.00000070",
+            "text": "for the purpose of",
+            "type": "chunk",
+            "hitCount": 1,
+            "sampleId": "sent.tatoeba.256974",
+            "sampleText": "I went there for the express purpose of earning money."
+          },
+          {
+            "id": "chunk.00000071",
+            "text": "in light of",
+            "type": "chunk",
+            "hitCount": 3,
+            "sampleId": "sent.tatoeba.237674",
+            "sampleText": "You must make decisions about your responsibility in the light of your conscience."
+          },
+          {
+            "id": "chunk.00000134",
+            "text": "in my experience",
+            "type": "chunk",
+            "hitCount": 1,
+            "sampleId": "sent.tatoeba.376881",
+            "sampleText": "Part of this conviction is rooted in my own experience."
+          }
+        ],
+        "unsupported-frame": [],
+        "true-absence": [
+          {
+            "id": "chunk.00000073",
+            "text": "by comparison",
+            "type": "chunk"
+          },
+          {
+            "id": "chunk.00000083",
+            "text": "in keeping with",
+            "type": "chunk"
+          },
+          {
+            "id": "chunk.00000093",
+            "text": "in anticipation of",
+            "type": "chunk"
+          },
+          {
+            "id": "chunk.00000094",
+            "text": "under the terms of",
+            "type": "chunk"
+          },
+          {
+            "id": "chunk.00000097",
+            "text": "in conjunction with",
+            "type": "chunk"
+          },
+          {
+            "id": "chunk.00000098",
+            "text": "in the wake of",
+            "type": "chunk"
+          },
+          {
+            "id": "chunk.00000099",
+            "text": "in recognition of",
+            "type": "chunk"
+          },
+          {
+            "id": "chunk.00000100",
+            "text": "in compliance with",
+            "type": "chunk"
+          },
+          {
+            "id": "chunk.00000103",
+            "text": "pursuant to",
+            "type": "chunk"
+          },
+          {
+            "id": "chunk.00000106",
+            "text": "for the duration of",
+            "type": "chunk"
+          },
+          {
+            "id": "chunk.00000108",
+            "text": "in lieu of",
+            "type": "chunk"
+          },
+          {
+            "id": "chunk.00000113",
+            "text": "in due course",
+            "type": "chunk"
+          },
+          {
+            "id": "chunk.00000120",
+            "text": "on balance",
+            "type": "chunk"
+          },
+          {
+            "id": "chunk.00000121",
+            "text": "at short notice",
+            "type": "chunk"
+          },
+          {
+            "id": "chunk.00000125",
+            "text": "to some degree",
+            "type": "chunk"
+          },
+          {
+            "id": "chunk.00000138",
+            "text": "in the short term",
+            "type": "chunk"
+          },
+          {
+            "id": "chunk.00000141",
+            "text": "as things stand",
+            "type": "chunk"
+          },
+          {
+            "id": "chunk.00000145",
+            "text": "in the first instance",
+            "type": "chunk"
+          },
+          {
+            "id": "chunk.00000149",
+            "text": "on second thought",
+            "type": "chunk"
+          },
+          {
+            "id": "chunk.00000150",
+            "text": "to put it another way",
+            "type": "chunk"
+          }
+        ]
+      }
+    },
+    "idioms": {
+      "counts": {
+        "total": 1185,
+        "already-linked": 25,
+        "matcher-false-negative": 93,
+        "pending-editorial-review": 10,
+        "unsupported-frame": 0,
+        "true-absence": 1057
+      },
+      "eligibleWithoutExamples": 1160,
+      "recoverableCandidates": 103,
+      "recoverableShareOfMissingPct": 8.88,
+      "samples": {
+        "matcher-false-negative": [
+          {
+            "id": "idiom.00000001",
+            "text": "break the ice",
+            "type": "idiom",
+            "hitCount": 5,
+            "sampleId": "sent.tatoeba.62787",
+            "sampleText": "When all the group members are silent, somebody must break the ice."
+          },
+          {
+            "id": "idiom.00000003",
+            "text": "under the weather",
+            "type": "idiom",
+            "hitCount": 1,
+            "sampleId": "sent.tatoeba.6781982",
+            "sampleText": "Tom is a bit under the weather."
+          },
+          {
+            "id": "idiom.00000005",
+            "text": "once in a blue moon",
+            "type": "idiom",
+            "hitCount": 4,
+            "sampleId": "sent.tatoeba.322176",
+            "sampleText": "I only come once in a blue moon."
+          },
+          {
+            "id": "idiom.00000006",
+            "text": "cost an arm and a leg",
+            "type": "idiom",
+            "hitCount": 3,
+            "sampleId": "sent.tatoeba.2247",
+            "sampleText": "It costs an arm and a leg."
+          },
+          {
+            "id": "idiom.00000007",
+            "text": "get the ball rolling",
+            "type": "idiom",
+            "hitCount": 2,
+            "sampleId": "sent.tatoeba.5729535",
+            "sampleText": "I can help get the ball rolling."
+          },
+          {
+            "id": "idiom.00000013",
+            "text": "pull someone's leg",
+            "type": "idiom",
+            "hitCount": 2,
+            "sampleId": "sent.tatoeba.677088",
+            "sampleText": "Are you pulling my leg?"
+          },
+          {
+            "id": "idiom.00000014",
+            "text": "get out of hand",
+            "type": "idiom",
+            "hitCount": 8,
+            "sampleId": "sent.tatoeba.65443",
+            "sampleText": "The group of noisy boys was getting out of hand."
+          },
+          {
+            "id": "idiom.00000016",
+            "text": "get cold feet",
+            "type": "idiom",
+            "hitCount": 3,
+            "sampleId": "sent.tatoeba.303271",
+            "sampleText": "He's getting cold feet."
+          },
+          {
+            "id": "idiom.00000018",
+            "text": "hit the nail on the head",
+            "type": "idiom",
+            "hitCount": 4,
+            "sampleId": "sent.tatoeba.2264703",
+            "sampleText": "At last, you've hit the nail on the head!"
+          },
+          {
+            "id": "idiom.00000019",
+            "text": "a blessing in disguise",
+            "type": "idiom",
+            "hitCount": 4,
+            "sampleId": "sent.tatoeba.5790534",
+            "sampleText": "Tom's divorce was a blessing in disguise."
+          },
+          {
+            "id": "idiom.00000020",
+            "text": "back to square one",
+            "type": "idiom",
+            "hitCount": 4,
+            "sampleId": "sent.tatoeba.269051",
+            "sampleText": "We were back to square one."
+          },
+          {
+            "id": "idiom.00000027",
+            "text": "get something off your chest",
+            "type": "idiom",
+            "hitCount": 1,
+            "sampleId": "sent.tatoeba.3728780",
+            "sampleText": "Get it off your chest."
+          },
+          {
+            "id": "idiom.00000028",
+            "text": "go back to the drawing board",
+            "type": "idiom",
+            "hitCount": 2,
+            "sampleId": "sent.tatoeba.5332104",
+            "sampleText": "We need to go back to the drawing board."
+          },
+          {
+            "id": "idiom.00000031",
+            "text": "add fuel to the fire",
+            "type": "idiom",
+            "hitCount": 2,
+            "sampleId": "sent.tatoeba.10750371",
+            "sampleText": "Don't add fuel to the fire."
+          },
+          {
+            "id": "idiom.00000032",
+            "text": "get straight to the point",
+            "type": "idiom",
+            "hitCount": 3,
+            "sampleId": "sent.tatoeba.1064124",
+            "sampleText": "Could you just get straight to the point?"
+          },
+          {
+            "id": "idiom.00000034",
+            "text": "put all your eggs in one basket",
+            "type": "idiom",
+            "hitCount": 1,
+            "sampleId": "sent.tatoeba.354740",
+            "sampleText": "Don't put all your eggs in one basket."
+          },
+          {
+            "id": "idiom.00000036",
+            "text": "hit the books",
+            "type": "idiom",
+            "hitCount": 1,
+            "sampleId": "sent.tatoeba.54271",
+            "sampleText": "It's time to hit the books."
+          },
+          {
+            "id": "idiom.00000037",
+            "text": "keep something under your hat",
+            "type": "idiom",
+            "hitCount": 1,
+            "sampleId": "sent.tatoeba.1734719",
+            "sampleText": "Please keep it under your hat."
+          },
+          {
+            "id": "idiom.00000039",
+            "text": "take the bull by the horns",
+            "type": "idiom",
+            "hitCount": 1,
+            "sampleId": "sent.tatoeba.267465",
+            "sampleText": "The general took the bull by the horns and saved his army from disaster."
+          },
+          {
+            "id": "idiom.00000041",
+            "text": "hit the sack",
+            "type": "idiom",
+            "hitCount": 1,
+            "sampleId": "sent.tatoeba.31224",
+            "sampleText": "I will hit the sack."
+          }
+        ],
+        "pending-editorial-review": [
+          {
+            "id": "idiom.00000086",
+            "text": "a drop in the ocean",
+            "type": "idiom",
+            "hitCount": 1,
+            "sampleId": "sent.tatoeba.3650059",
+            "sampleText": "It's a mere drop in the ocean."
+          },
+          {
+            "id": "idiom.00000133",
+            "text": "read the room",
+            "type": "idiom",
+            "hitCount": 1,
+            "sampleId": "sent.tatoeba.2464",
+            "sampleText": "When I was a child, I would spend hours reading alone in my room."
+          },
+          {
+            "id": "idiom.00000307",
+            "text": "have kittens",
+            "type": "idiom",
+            "hitCount": 1,
+            "sampleId": "sent.tatoeba.5797675",
+            "sampleText": "Tom's cat had nine kittens."
+          },
+          {
+            "id": "idiom.00000411",
+            "text": "gone to the pack",
+            "type": "idiom",
+            "hitCount": 1,
+            "sampleId": "sent.tatoeba.2258866",
+            "sampleText": "I'm going to buy a pack of cigarettes."
+          },
+          {
+            "id": "idiom.00000531",
+            "text": "go to the wall",
+            "type": "idiom",
+            "hitCount": 2,
+            "sampleId": "sent.tatoeba.6499007",
+            "sampleText": "Tom and Mary are going to build a wall around their house."
+          },
+          {
+            "id": "idiom.00000682",
+            "text": "make a blue",
+            "type": "idiom",
+            "hitCount": 1,
+            "sampleId": "sent.tatoeba.11021674",
+            "sampleText": "What makes a flame blue?"
+          },
+          {
+            "id": "idiom.00000746",
+            "text": "on the huh",
+            "type": "idiom",
+            "hitCount": 1,
+            "sampleId": "sent.tatoeba.7132022",
+            "sampleText": "First day on the job, huh?"
+          },
+          {
+            "id": "idiom.00000991",
+            "text": "keep the lights on",
+            "type": "idiom",
+            "hitCount": 1,
+            "sampleId": "sent.tt.l002-p006.006",
+            "sampleText": "After sunset, stored energy may keep a few important lights on."
+          },
+          {
+            "id": "idiom.00001064",
+            "text": "throw something over the wall",
+            "type": "idiom",
+            "hitCount": 1,
+            "sampleId": "sent.tatoeba.9159993",
+            "sampleText": "I threw a brick over the wall."
+          },
+          {
+            "id": "idiom.00001127",
+            "text": "give the office",
+            "type": "idiom",
+            "hitCount": 1,
+            "sampleId": "sent.tatoeba.3722096",
+            "sampleText": "I gave at the office."
+          }
+        ],
+        "unsupported-frame": [],
+        "true-absence": [
+          {
+            "id": "idiom.00000002",
+            "text": "hit the road",
+            "type": "idiom"
+          },
+          {
+            "id": "idiom.00000010",
+            "text": "learn the ropes",
+            "type": "idiom"
+          },
+          {
+            "id": "idiom.00000012",
+            "text": "miss the boat",
+            "type": "idiom"
+          },
+          {
+            "id": "idiom.00000017",
+            "text": "go the extra mile",
+            "type": "idiom"
+          },
+          {
+            "id": "idiom.00000022",
+            "text": "the ball is in your court",
+            "type": "idiom"
+          },
+          {
+            "id": "idiom.00000023",
+            "text": "bite the bullet",
+            "type": "idiom"
+          },
+          {
+            "id": "idiom.00000024",
+            "text": "take it with a grain of salt",
+            "type": "idiom"
+          },
+          {
+            "id": "idiom.00000029",
+            "text": "keep your fingers crossed",
+            "type": "idiom"
+          },
+          {
+            "id": "idiom.00000045",
+            "text": "speak of the devil",
+            "type": "idiom"
+          },
+          {
+            "id": "idiom.00000047",
+            "text": "bite off more than you can chew",
+            "type": "idiom"
+          },
+          {
+            "id": "idiom.00000050",
+            "text": "keep your chin up",
+            "type": "idiom"
+          },
+          {
+            "id": "idiom.00000051",
+            "text": "bend over backwards",
+            "type": "idiom"
+          },
+          {
+            "id": "idiom.00000053",
+            "text": "go down in flames",
+            "type": "idiom"
+          },
+          {
+            "id": "idiom.00000056",
+            "text": "when pigs fly",
+            "type": "idiom"
+          },
+          {
+            "id": "idiom.00000057",
+            "text": "a storm in a teacup",
+            "type": "idiom"
+          },
+          {
+            "id": "idiom.00000060",
+            "text": "no pain no gain",
+            "type": "idiom"
+          },
+          {
+            "id": "idiom.00000062",
+            "text": "jump on the bandwagon",
+            "type": "idiom"
+          },
+          {
+            "id": "idiom.00000063",
+            "text": "through thick and thin",
+            "type": "idiom"
+          },
+          {
+            "id": "idiom.00000066",
+            "text": "cross that bridge when you come to it",
+            "type": "idiom"
+          },
+          {
+            "id": "idiom.00000069",
+            "text": "get a second wind",
+            "type": "idiom"
+          }
+        ]
+      }
+    },
+    "verbPatterns": {
+      "counts": {
+        "total": 510,
+        "already-linked": 256,
+        "matcher-false-negative": 0,
+        "pending-editorial-review": 0,
+        "unsupported-frame": 254,
+        "true-absence": 0
+      },
+      "eligibleWithoutExamples": 254,
+      "recoverableCandidates": 0,
+      "recoverableShareOfMissingPct": 0,
+      "samples": {
+        "matcher-false-negative": [],
+        "pending-editorial-review": [],
+        "unsupported-frame": [
+          {
+            "id": "pat.00000021",
+            "lemma": "make",
+            "frame": "verb + object + bare infinitive",
+            "lemmaHitsInCorpus": 3003,
+            "sampleSentence": "They made the cake themselves."
+          },
+          {
+            "id": "pat.00000022",
+            "lemma": "let",
+            "frame": "verb + object + bare infinitive",
+            "lemmaHitsInCorpus": 1317,
+            "sampleSentence": "My parents let me stay out late."
+          },
+          {
+            "id": "pat.00000023",
+            "lemma": "help",
+            "frame": "verb + object + (to) infinitive",
+            "lemmaHitsInCorpus": 1224,
+            "sampleSentence": "She said thanks after I helped her."
+          },
+          {
+            "id": "pat.00000046",
+            "lemma": "thank",
+            "frame": "verb + object + for + noun/-ing",
+            "lemmaHitsInCorpus": 356,
+            "sampleSentence": "She said thanks after I helped her."
+          },
+          {
+            "id": "pat.00000047",
+            "lemma": "accuse",
+            "frame": "verb + object + of + -ing",
+            "lemmaHitsInCorpus": 55,
+            "sampleSentence": "They accused him of lying."
+          },
+          {
+            "id": "pat.00000048",
+            "lemma": "prevent",
+            "frame": "verb + object + from + -ing",
+            "lemmaHitsInCorpus": 89,
+            "sampleSentence": "A second pump could have prevented the basement from flooding."
+          },
+          {
+            "id": "pat.00000065",
+            "lemma": "warn",
+            "frame": "verb + object + (not) to-infinitive",
+            "lemmaHitsInCorpus": 81,
+            "sampleSentence": "The guide warned us not to touch the plants."
+          },
+          {
+            "id": "pat.00000069",
+            "lemma": "offer",
+            "frame": "verb + indirect object + direct object",
+            "lemmaHitsInCorpus": 182,
+            "sampleSentence": "If they offered me the job, I would accept it."
+          },
+          {
+            "id": "pat.00000070",
+            "lemma": "consider",
+            "frame": "verb + object + (to be) + complement",
+            "lemmaHitsInCorpus": 167,
+            "sampleSentence": "Applications received after the deadline will be considered only if places remain."
+          },
+          {
+            "id": "pat.00000086",
+            "lemma": "tolerate",
+            "frame": "verb + -ing",
+            "lemmaHitsInCorpus": 18,
+            "sampleSentence": "Discrimination on grounds of race will not be tolerated."
+          },
+          {
+            "id": "pat.00000091",
+            "lemma": "prefer",
+            "frame": "verb + -ing + to + -ing",
+            "lemmaHitsInCorpus": 178,
+            "sampleSentence": "I prefer the earlier design, and the client does too."
+          },
+          {
+            "id": "pat.00000102",
+            "lemma": "advise",
+            "frame": "verb + -ing",
+            "lemmaHitsInCorpus": 54,
+            "sampleSentence": "The doctor advised him to rest."
+          },
+          {
+            "id": "pat.00000103",
+            "lemma": "permit",
+            "frame": "verb + -ing",
+            "lemmaHitsInCorpus": 37,
+            "sampleSentence": "I think they'll permit you to do that."
+          },
+          {
+            "id": "pat.00000104",
+            "lemma": "forbid",
+            "frame": "verb + -ing",
+            "lemmaHitsInCorpus": 6,
+            "sampleSentence": "Company policy forbids us from dating clients."
+          },
+          {
+            "id": "pat.00000105",
+            "lemma": "prohibit",
+            "frame": "verb + object + from + -ing",
+            "lemmaHitsInCorpus": 15,
+            "sampleSentence": "Commercial use of these materials is prohibited."
+          }
+        ],
+        "true-absence": []
+      }
+    }
+  }
+}

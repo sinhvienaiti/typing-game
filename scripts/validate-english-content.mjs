@@ -12,7 +12,7 @@ const schemas=await Promise.all(schemaNames.map(name=>readJson(path.join(schemaD
 const schemaByName=new Map(schemaNames.map((name,index)=>[name,schemas[index]]));
 const {validate}=createSchemaValidator(schemas);
 const errors=[];
-const expectedSchemas=["common.schema.json","provenance.schema.json","source-manifest.schema.json","runtime-manifest.schema.json","topic-catalog.schema.json","curriculum.schema.json","grammar-topic.schema.json","lexeme.schema.json","sense.schema.json","sense-set.schema.json","morphology.schema.json","usage.schema.json","usage-set.schema.json","collocation.schema.json","verb-pattern.schema.json","phrase.schema.json","sentence.schema.json","translation-pair.schema.json","dialogue.schema.json","exercise.schema.json","common-mistake.schema.json","lexeme-set.schema.json","grammar-topic-set.schema.json","sentence-set.schema.json","exercise-set.schema.json","oewn-review-queue.schema.json","collocation-set.schema.json","verb-pattern-set.schema.json","phrase-set.schema.json","oewn-pinned-pilot.schema.json","viwiktionary-review-queue.schema.json","tatoeba-source-pin.schema.json","tatoeba-source-report.schema.json","dialogue-set.schema.json","multiwoz-source-pin.schema.json","multiwoz-source-report.schema.json","e03-sense-review.schema.json","batch-manifest.schema.json","long-term-targets.schema.json","deprecation-map.schema.json","content-release.schema.json","common-mistake-set.schema.json","wiktextract-enrichment.schema.json","review-ledger.schema.json"];
+const expectedSchemas=["common.schema.json","provenance.schema.json","source-manifest.schema.json","runtime-manifest.schema.json","topic-catalog.schema.json","curriculum.schema.json","grammar-topic.schema.json","lexeme.schema.json","sense.schema.json","sense-set.schema.json","morphology.schema.json","usage.schema.json","usage-set.schema.json","collocation.schema.json","verb-pattern.schema.json","phrase.schema.json","sentence.schema.json","translation-pair.schema.json","dialogue.schema.json","exercise.schema.json","common-mistake.schema.json","lexeme-set.schema.json","grammar-topic-set.schema.json","sentence-set.schema.json","exercise-set.schema.json","oewn-review-queue.schema.json","collocation-set.schema.json","verb-pattern-set.schema.json","phrase-set.schema.json","oewn-pinned-pilot.schema.json","viwiktionary-review-queue.schema.json","tatoeba-source-pin.schema.json","tatoeba-source-report.schema.json","dialogue-set.schema.json","multiwoz-source-pin.schema.json","multiwoz-source-report.schema.json","e03-sense-review.schema.json","batch-manifest.schema.json","long-term-targets.schema.json","deprecation-map.schema.json","content-release.schema.json","common-mistake-set.schema.json","wiktextract-enrichment.schema.json","review-ledger.schema.json","topic-pack.schema.json"];
 for (const name of expectedSchemas) {
   const schema=schemaByName.get(name);
   if (!schema) errors.push("missing schema: "+name);
@@ -2200,6 +2200,28 @@ try {
   }
   validateTatoebaControlledSource(controlled,rows,pin);
 } catch (error) { errors.push("Pinned English-only Tatoeba validation failed: "+error.message); }
+
+try {
+  const sentenceNames = (await fs.readdir(path.join(root, "content", "english", "sentences")))
+    .filter((name) => /^v2-[a-z0-9._-]+\.json$/u.test(name))
+    .sort((a, b) => a.localeCompare(b, "en"));
+  for (const name of sentenceNames) {
+    await validateFile("content/english/sentences/" + name, "exercise-set.schema.json");
+  }
+} catch (error) {
+  if (error?.code !== "ENOENT") errors.push("v2 sentence set validation failed: " + error.message);
+}
+
+try {
+  const packNames = (await fs.readdir(path.join(root, "content", "english", "packs")))
+    .filter((name) => name.endsWith(".json"))
+    .sort((a, b) => a.localeCompare(b, "en"));
+  for (const name of packNames) {
+    await validateFile("content/english/packs/" + name, "topic-pack.schema.json");
+  }
+} catch (error) {
+  if (error?.code !== "ENOENT") errors.push("topic pack validation failed: " + error.message);
+}
 
 if (errors.length) { console.error(errors.join("\n")); process.exitCode=1; }
 else console.log("English content PASS: "+expectedSchemas.length+" schemas, 300 curriculum topics, legacy vocabulary ABI preserved.");

@@ -46,6 +46,8 @@ import {
   cancelMixedReviewSegmentStart,
   recordMixedLearningEvent,
 } from "./review/mixed";
+import { BrowserLearningEvidenceStore } from "../../shared/learning/browser-evidence-store.mjs";
+import { defaultEvidenceDimensionForActivity } from "../../shared/learning/evidence-v2.mjs";
 import type { LearningEvent } from "../../shared/learning/core.mjs";
 import type { ReviewPlan } from "../../shared/learning/review-session.mjs";
 import {
@@ -108,7 +110,29 @@ const navButtons = new Map<string, HTMLButtonElement>();
 let currentFrame: HTMLIFrameElement | null = null;
 let currentGame: Game | null = null;
 let currentReviewStatus: HTMLDivElement | null = null;
+const learningEvidenceStore = new BrowserLearningEvidenceStore();
 function handlePersistedLearningEvent(event: LearningEvent): void {
+  // Mirror game attempts cleanly into Evidence v2 (typing-fluency isolated from semantic mastery)
+  void learningEvidenceStore.apply({
+    version: 2,
+    contentId: event.entityId,
+    entityId: event.entityId,
+    entityKind:
+      event.entityType === "grammar"
+        ? "grammar"
+        : event.entityType === "vocabulary"
+          ? "vocabulary"
+          : "sentence",
+    dimension: defaultEvidenceDimensionForActivity(event.activityType),
+    outcome: event.result === "correct" ? "correct" : "incorrect",
+    activityType: event.activityType,
+    source: event.gameId,
+    occurredAt: event.occurredAt,
+    ...(event.responseMs === undefined ? {} : { responseMs: event.responseMs }),
+    hintUsed: event.hintUsed,
+    replayUsed: event.replayUsed,
+  }).catch(() => undefined);
+
   const result = recordMixedLearningEvent(event);
   if (!result.matched || !result.segmentCompleted) return;
 
@@ -166,6 +190,7 @@ async function startEnglishActivity(
   gameId: RichPracticeGameId,
   activity: string,
   limit: number,
+  options?: { cefr?: string; seed?: number },
 ): Promise<void> {
   const game = registry.games.find((item) => item.id === gameId);
   if (game === undefined) {
@@ -175,7 +200,7 @@ async function startEnglishActivity(
   }
   clearPendingReviewForGame(gameId);
   cancelMixedReviewSegmentStart();
-  await queuePublishedEnglishActivity(gameId, activity, limit);
+  await queuePublishedEnglishActivity(gameId, activity, limit, options);
   navigate(game.path);
 }
 

@@ -13,7 +13,7 @@
   "runtimeCounts": {
     "dictionary": 900,
     "grammar": 300,
-    "sentences": 251726,
+    "sentences": 257226,
     "phrases": 9695,
     "curriculum": 300
   },
@@ -38,9 +38,9 @@
     "chunks": 2000,
     "idioms": 1185,
     "phrasalVerbsMissingMetadata": 0,
-    "collocationsWithoutExamples": 4889,
+    "collocationsWithoutExamples": 4794,
     "verbPatternsWithoutExamples": 254,
-    "phraseItemsWithoutExamples": 3824
+    "phraseItemsWithoutExamples": 3700
   },
   "e05": {
     "topics": 300,
@@ -57,12 +57,15 @@
   },
   "e06": {
     "examples": 129813,
-    "exercises": 101400,
+    "exercises": 106900,
     "exerciseByType": {
       "cloze": 50600,
       "translation": 20600,
       "error-correction": 100,
-      "transformation": 30100
+      "transformation": 30100,
+      "contextual-usage": 2000,
+      "sentence-building": 2500,
+      "listening-typing": 1000
     },
     "dialogues": 10125,
     "mistakes": 10388
@@ -119,16 +122,16 @@
   },
   "quality": {
     "stateCounts": {
-      "published": 262621
+      "published": 268121
     },
     "unfinishedPublishedChecks": 0,
     "missingProvenance": 0,
     "missingSourceLicense": 0
   },
   "warnings": [
-    "Collocations without exampleIds: 4889",
+    "Collocations without exampleIds: 4794",
     "Verb patterns without exampleIds: 254",
-    "Phrase items without exampleIds: 3824"
+    "Phrase items without exampleIds: 3700"
   ],
   "errors": []
 }

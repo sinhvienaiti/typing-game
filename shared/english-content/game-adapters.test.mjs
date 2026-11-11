@@ -3,6 +3,7 @@ import assert from "node:assert/strict";
 import {
   buildGameEnglishActivityDataset,
   englishActivityItemsFromRecords,
+  hasVerifiedTargetAttribution,
 } from "./game-adapters.mjs";
 
 const published={state:"published"};
@@ -170,4 +171,34 @@ test("adapts Monkeytype verb patterns and idioms without inventing mastery entit
   );
   assert.equal(idiom.items[0].entityType,"sentence");
   assert.equal(idiom.items[0].answerText,"break the ice");
+});
+
+test("preserves multi-answer alternatives and guards unverified rotational E11 targets",()=>{
+  const dataset=buildGameEnglishActivityDataset(
+    "monkeytype",
+    "transformation",
+    [{
+      id:"ex.transformation.e11.01.004",
+      type:"transformation",
+      prompt:"Rewrite as a negative sentence.\nSource: If it rains, we will take a taxi.",
+      targetIds:["gr.a2.first-conditional"],
+      acceptedAnswers:[
+        "If it rains, we will not take a taxi.",
+        "If it rains, we won't take a taxi.",
+      ],
+      sourceSentenceIds:["sent.tatoeba.9999"],
+      cefr:"A2",
+      quality:published,
+    }],
+    "monkey-multi",
+    {includeGrading:true},
+  );
+  assert.equal(dataset.items[0].answerText,"If it rains, we will not take a taxi.");
+  assert.deepEqual(dataset.items[0].acceptedAnswers,[
+    "If it rains, we will not take a taxi.",
+    "If it rains, we won't take a taxi.",
+  ]);
+  assert.equal(dataset.items[0].targetConfidence,"unverified-rotational");
+  assert.equal(hasVerifiedTargetAttribution({id:"ex.cloze.gra1.01.02",sourceSentenceIds:["sent.gra1.01.02.2"]}),true);
+  assert.equal(hasVerifiedTargetAttribution({id:"ex.cloze.e11.01.020",sourceSentenceIds:["sent.tatoeba.123"]}),false);
 });

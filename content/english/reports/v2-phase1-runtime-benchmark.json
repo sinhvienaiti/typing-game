@@ -1,0 +1,243 @@
+{
+  "schemaVersion": 1,
+  "phase": "Phase 0 vs Phase 1 Runtime Comparison",
+  "generatedAt": "2026-11-10T16:57:13.667Z",
+  "beforeBaseline": {
+    "resolve_10_ids_batch_cold": {
+      "label": "resolve_10_ids_batch_cold",
+      "elapsedMs": 5247.71,
+      "requests": 1831,
+      "shardRequests": 1827,
+      "indexRequests": 0,
+      "bytesRead": 2072042628,
+      "mbRead": 2072.0426,
+      "summary": {
+        "found": 7,
+        "usedIndex": false
+      }
+    },
+    "activity_cloze_20": {
+      "label": "activity_cloze_20",
+      "elapsedMs": 623.05,
+      "requests": 215,
+      "shardRequests": 214,
+      "indexRequests": 0,
+      "bytesRead": 256142480,
+      "mbRead": 256.1425,
+      "summary": {
+        "count": 20
+      }
+    },
+    "activity_translation_20": {
+      "label": "activity_translation_20",
+      "elapsedMs": 640.66,
+      "requests": 215,
+      "shardRequests": 214,
+      "indexRequests": 0,
+      "bytesRead": 256142480,
+      "mbRead": 256.1425,
+      "summary": {
+        "count": 20
+      }
+    },
+    "activity_example-typing_20": {
+      "label": "activity_example-typing_20",
+      "elapsedMs": 577.68,
+      "requests": 261,
+      "shardRequests": 260,
+      "indexRequests": 0,
+      "bytesRead": 274728499,
+      "mbRead": 274.7285,
+      "summary": {
+        "count": 20
+      }
+    },
+    "activity_collocation_20": {
+      "label": "activity_collocation_20",
+      "elapsedMs": 39.27,
+      "requests": 11,
+      "shardRequests": 10,
+      "indexRequests": 0,
+      "bytesRead": 10179627,
+      "mbRead": 10.1796,
+      "summary": {
+        "count": 20
+      }
+    },
+    "availability_monkeytype": {
+      "label": "availability_monkeytype",
+      "elapsedMs": 2200.8,
+      "requests": 780,
+      "shardRequests": 777,
+      "indexRequests": 0,
+      "bytesRead": 852885971,
+      "mbRead": 852.886,
+      "summary": {
+        "grammar-topic": 300,
+        "example-typing": 129813,
+        "translation": 20600,
+        "cloze": 50600,
+        "error-correction": 10488,
+        "sentence-building": 2500,
+        "transformation": 30100,
+        "listening-typing": 130813,
+        "contextual-usage": 2000,
+        "collocation": 5000,
+        "verb-pattern": 510,
+        "phrasal-verb": 1000,
+        "idiom": 1185,
+        "chunk": 2000
+      }
+    }
+  },
+  "afterIndexed": {
+    "resolve_10_ids_batch_cold": {
+      "label": "resolve_10_ids_batch_cold",
+      "elapsedMs": 36.78,
+      "requests": 19,
+      "shardRequests": 7,
+      "indexRequests": 10,
+      "bytesRead": 8859922,
+      "mbRead": 8.8599,
+      "summary": {
+        "found": 7,
+        "usedIndex": true
+      }
+    },
+    "activity_cloze_20": {
+      "label": "activity_cloze_20",
+      "elapsedMs": 3.34,
+      "requests": 2,
+      "shardRequests": 1,
+      "indexRequests": 1,
+      "bytesRead": 1235420,
+      "mbRead": 1.2354,
+      "summary": {
+        "count": 20
+      }
+    },
+    "activity_translation_20": {
+      "label": "activity_translation_20",
+      "elapsedMs": 4.03,
+      "requests": 2,
+      "shardRequests": 1,
+      "indexRequests": 1,
+      "bytesRead": 1151209,
+      "mbRead": 1.1512,
+      "summary": {
+        "count": 20
+      }
+    },
+    "activity_example-typing_20": {
+      "label": "activity_example-typing_20",
+      "elapsedMs": 2.57,
+      "requests": 2,
+      "shardRequests": 1,
+      "indexRequests": 1,
+      "bytesRead": 1145476,
+      "mbRead": 1.1455,
+      "summary": {
+        "count": 20
+      }
+    },
+    "activity_collocation_20": {
+      "label": "activity_collocation_20",
+      "elapsedMs": 3.49,
+      "requests": 2,
+      "shardRequests": 1,
+      "indexRequests": 1,
+      "bytesRead": 995071,
+      "mbRead": 0.9951,
+      "summary": {
+        "count": 20
+      }
+    },
+    "availability_monkeytype": {
+      "label": "availability_monkeytype",
+      "elapsedMs": 0.21,
+      "requests": 1,
+      "shardRequests": 0,
+      "indexRequests": 1,
+      "bytesRead": 4438,
+      "mbRead": 0.0044,
+      "summary": {
+        "grammar-topic": 300,
+        "example-typing": 129813,
+        "translation": 20600,
+        "cloze": 50600,
+        "error-correction": 10488,
+        "sentence-building": 2500,
+        "transformation": 30100,
+        "listening-typing": 130813,
+        "contextual-usage": 2000,
+        "collocation": 5000,
+        "verb-pattern": 510,
+        "phrasal-verb": 1000,
+        "idiom": 1185,
+        "chunk": 2000
+      }
+    }
+  },
+  "comparison": {
+    "resolve_10_ids_batch_cold": {
+      "beforeMs": 5247.71,
+      "afterMs": 36.78,
+      "beforeRequests": 1831,
+      "afterRequests": 19,
+      "beforeMB": 2072.0426,
+      "afterMB": 8.8599,
+      "byteReductionX": 233.9,
+      "speedupX": 142.7
+    },
+    "activity_cloze_20": {
+      "beforeMs": 623.05,
+      "afterMs": 3.34,
+      "beforeRequests": 215,
+      "afterRequests": 2,
+      "beforeMB": 256.1425,
+      "afterMB": 1.2354,
+      "byteReductionX": 207.3,
+      "speedupX": 186.5
+    },
+    "activity_translation_20": {
+      "beforeMs": 640.66,
+      "afterMs": 4.03,
+      "beforeRequests": 215,
+      "afterRequests": 2,
+      "beforeMB": 256.1425,
+      "afterMB": 1.1512,
+      "byteReductionX": 222.5,
+      "speedupX": 159
+    },
+    "activity_example-typing_20": {
+      "beforeMs": 577.68,
+      "afterMs": 2.57,
+      "beforeRequests": 261,
+      "afterRequests": 2,
+      "beforeMB": 274.7285,
+      "afterMB": 1.1455,
+      "byteReductionX": 239.8,
+      "speedupX": 224.8
+    },
+    "activity_collocation_20": {
+      "beforeMs": 39.27,
+      "afterMs": 3.49,
+      "beforeRequests": 11,
+      "afterRequests": 2,
+      "beforeMB": 10.1796,
+      "afterMB": 0.9951,
+      "byteReductionX": 10.2,
+      "speedupX": 11.3
+    },
+    "availability_monkeytype": {
+      "beforeMs": 2200.8,
+      "afterMs": 0.21,
+      "beforeRequests": 780,
+      "afterRequests": 1,
+      "beforeMB": 852.886,
+      "afterMB": 0.0044,
+      "byteReductionX": 192178,
+      "speedupX": 10480
+    }
+  }
+}

@@ -1,0 +1,328 @@
+{
+  "schemaVersion": 1,
+  "phase": "Phase 0 V1 Hygiene & Attribution Audit",
+  "generatedAt": "2026-11-11T07:43:01.804Z",
+  "examplesMetadataCoverage": {
+    "totalExamples": 129813,
+    "withCefr": 129813,
+    "withGrammarIds": 900,
+    "withGrammarIdsPct": 0.69,
+    "withLexicalIds": 331,
+    "withLexicalIdsPct": 0.25,
+    "withContexts": 129021
+  },
+  "exercisesAudit": {
+    "cloze": {
+      "total": 50600,
+      "e11RotationalTargetSlice": 50000,
+      "curatedTargetSlice": 600,
+      "multiAnswerCount": 119,
+      "properNounMidSentenceBlankSuspects": 99
+    },
+    "transformation": {
+      "total": 30100,
+      "e11RotationalTargetSlice": 30000,
+      "curatedTargetSlice": 100,
+      "multiAnswerCount": 5362,
+      "heuristicTopicMismatchCount": 315
+    },
+    "translation": {
+      "total": 20600,
+      "multiAnswerCount": 6823,
+      "singleAnswerOnlyPct": 66.88,
+      "recordsSharingSourceSentenceId": 5466
+    },
+    "otherExercisesCount": 5600,
+    "totalMultiAnswerExercisesTruncatedByV1Adapter": 12304,
+    "exerciseTypesWithZeroPublishedRecordsInExercisesShards": [
+      "collocation",
+      "grammar-typing"
+    ]
+  },
+  "mistakesAudit": {
+    "totalMistakes": 10388,
+    "pastTenseHomographReadAmbiguityCount": 0
+  },
+  "samples": {
+    "rotationalClozeProperNounSuspects": [
+      {
+        "id": "ex.cloze.e11.01.456",
+        "prompt": "Japan is in ___.",
+        "acceptedAnswers": [
+          "Asia",
+          "asia"
+        ],
+        "assignedTargetIds": [
+          "gr.b1.relative-whose"
+        ]
+      },
+      {
+        "id": "ex.cloze.e11.01.457",
+        "prompt": "Mount ___ is in Japan.",
+        "acceptedAnswers": [
+          "Fuji",
+          "fuji"
+        ],
+        "assignedTargetIds": [
+          "gr.b1.reported-statements"
+        ]
+      },
+      {
+        "id": "ex.cloze.e11.02.145",
+        "prompt": "The supplier missed two deadlines. ___ has delayed the entire project.",
+        "acceptedAnswers": [
+          "This",
+          "this"
+        ],
+        "assignedTargetIds": [
+          "gr.b2.stance-adverbs"
+        ]
+      },
+      {
+        "id": "ex.cloze.e11.02.278",
+        "prompt": "The initial forecast was optimistic. ___, the reserve proved sufficient.",
+        "acceptedAnswers": [
+          "Nonetheless",
+          "nonetheless"
+        ],
+        "assignedTargetIds": [
+          "gr.c1.advanced-condition-markers"
+        ]
+      },
+      {
+        "id": "ex.cloze.e11.03.163",
+        "prompt": "Barack ___ is a Christian.",
+        "acceptedAnswers": [
+          "Obama",
+          "obama"
+        ],
+        "assignedTargetIds": [
+          "gr.b1.advice-strength"
+        ]
+      },
+      {
+        "id": "ex.cloze.e11.03.492",
+        "prompt": "Today is the Mid-___ Festival.",
+        "acceptedAnswers": [
+          "Autumn",
+          "autumn"
+        ],
+        "assignedTargetIds": [
+          "gr.a2.relative-where"
+        ]
+      },
+      {
+        "id": "ex.cloze.e11.06.239",
+        "prompt": "The factory is on fire. ___ 119 immediately.",
+        "acceptedAnswers": [
+          "Call",
+          "call"
+        ],
+        "assignedTargetIds": [
+          "gr.a2.preposition-ing"
+        ]
+      },
+      {
+        "id": "ex.cloze.e11.06.263",
+        "prompt": "I'm a Jehovah's ___.",
+        "acceptedAnswers": [
+          "Witness",
+          "witness"
+        ],
+        "assignedTargetIds": [
+          "gr.a1.present-simple-negative"
+        ]
+      },
+      {
+        "id": "ex.cloze.e11.07.319",
+        "prompt": "There's no McDonald's in ___ Korea.",
+        "acceptedAnswers": [
+          "North",
+          "north"
+        ],
+        "assignedTargetIds": [
+          "gr.a2.too-enough-adjective"
+        ]
+      },
+      {
+        "id": "ex.cloze.e11.07.321",
+        "prompt": "She is the Prime ___ of Finland.",
+        "acceptedAnswers": [
+          "Minister",
+          "minister"
+        ],
+        "assignedTargetIds": [
+          "gr.a2.will-predictions"
+        ]
+      },
+      {
+        "id": "ex.cloze.e11.08.343",
+        "prompt": "This is a confidential document. ___ do not share it with anyone.",
+        "acceptedAnswers": [
+          "Please",
+          "please"
+        ],
+        "assignedTargetIds": [
+          "gr.b1.present-perfect-result-vs-event"
+        ]
+      },
+      {
+        "id": "ex.cloze.e11.09.031",
+        "prompt": "The cloth did not stain when the water was spilled on top of it. ___ scenario occurred, because the shirt was hydrophobic.",
+        "acceptedAnswers": [
+          "This",
+          "this"
+        ],
+        "assignedTargetIds": [
+          "gr.c1.advanced-substitution"
+        ]
+      },
+      {
+        "id": "ex.cloze.e11.09.142",
+        "prompt": "Tom fell in love. But with who? ___'s right, with Maria!",
+        "acceptedAnswers": [
+          "That",
+          "that"
+        ],
+        "assignedTargetIds": [
+          "gr.b1.present-perfect-repeated-events"
+        ]
+      },
+      {
+        "id": "ex.cloze.e11.09.300",
+        "prompt": "Tom disappeared on Christmas Eve last year. ___ has heard from him since.",
+        "acceptedAnswers": [
+          "Nobody",
+          "nobody"
+        ],
+        "assignedTargetIds": [
+          "gr.b1.reported-speech-backshift"
+        ]
+      },
+      {
+        "id": "ex.cloze.e11.09.415",
+        "prompt": "Politicians are supposed to be our servants, not our masters. ___ should behave accordingly.",
+        "acceptedAnswers": [
+          "They",
+          "they"
+        ],
+        "assignedTargetIds": [
+          "gr.b2.complex-noun-phrases"
+        ]
+      }
+    ],
+    "curatedGrammarClozeSamples": [
+      {
+        "id": "ex.cloze.00000001",
+        "type": "cloze",
+        "prompt": "She ___ the bus to work on weekdays.",
+        "acceptedAnswers": [
+          "takes"
+        ],
+        "targetIds": [
+          "gr.a1.present-simple-routines"
+        ]
+      },
+      {
+        "id": "ex.cloze.00000002",
+        "type": "cloze",
+        "prompt": "I ___ for the train now.",
+        "acceptedAnswers": [
+          "am waiting"
+        ],
+        "targetIds": [
+          "gr.a1.present-continuous-now"
+        ]
+      },
+      {
+        "id": "ex.cloze.00000003",
+        "type": "cloze",
+        "prompt": "I ___ Singapore twice.",
+        "acceptedAnswers": [
+          "have visited"
+        ],
+        "targetIds": [
+          "gr.a2.present-perfect-experience"
+        ]
+      },
+      {
+        "id": "ex.cloze.00000004",
+        "type": "cloze",
+        "prompt": "If it rains, we ___ a taxi.",
+        "acceptedAnswers": [
+          "will take"
+        ],
+        "targetIds": [
+          "gr.a2.first-conditional"
+        ]
+      },
+      {
+        "id": "ex.cloze.00000005",
+        "type": "cloze",
+        "prompt": "I ___ emails for two hours.",
+        "acceptedAnswers": [
+          "have been writing"
+        ],
+        "targetIds": [
+          "gr.b1.present-perfect-simple-vs-continuous"
+        ]
+      },
+      {
+        "id": "ex.cloze.00000006",
+        "type": "cloze",
+        "prompt": "If I had more time, I ___ another language.",
+        "acceptedAnswers": [
+          "would learn"
+        ],
+        "targetIds": [
+          "gr.b1.second-conditional"
+        ]
+      },
+      {
+        "id": "ex.cloze.00000007",
+        "type": "cloze",
+        "prompt": "If we had left earlier, we ___ the train.",
+        "acceptedAnswers": [
+          "would have caught"
+        ],
+        "targetIds": [
+          "gr.b2.third-conditional"
+        ]
+      },
+      {
+        "id": "ex.cloze.00000008",
+        "type": "cloze",
+        "prompt": "The new policy ___ to reduce waiting times.",
+        "acceptedAnswers": [
+          "is expected"
+        ],
+        "targetIds": [
+          "gr.b2.reporting-passive"
+        ]
+      },
+      {
+        "id": "ex.cloze.00000009",
+        "type": "cloze",
+        "prompt": "Rarely ___ such a clear improvement in one week.",
+        "acceptedAnswers": [
+          "do we see"
+        ],
+        "targetIds": [
+          "gr.c1.negative-inversion"
+        ]
+      },
+      {
+        "id": "ex.cloze.00000010",
+        "type": "cloze",
+        "prompt": "The rapid ___ of the service created new staffing needs.",
+        "acceptedAnswers": [
+          "expansion"
+        ],
+        "targetIds": [
+          "gr.c1.nominalisation"
+        ]
+      }
+    ],
+    "readHomographAmbiguousMistakes": []
+  }
+}

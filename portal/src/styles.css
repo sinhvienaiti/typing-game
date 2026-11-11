@@ -1162,6 +1162,54 @@ button { font: inherit; }
 .english-practice-grid {
   grid-template-columns: 1.2fr 1.4fr .7fr;
 }
+.english-practice-grid-v2 {
+  grid-template-columns: 1.1fr 1.2fr .7fr .6fr 1fr;
+}
+.english-guided-card {
+  margin-top: 1rem;
+}
+.english-guided-runner {
+  margin-top: 1rem;
+  padding: 1rem;
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 12px;
+  background: rgba(255,255,255,.02);
+  display: grid;
+  gap: .7rem;
+}
+.english-guided-meta {
+  font-size: .72rem;
+  color: #8395ad;
+}
+.english-guided-prompt {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #f3f7ff;
+}
+.english-guided-sub {
+  font-size: .78rem;
+  color: #a9bacf;
+}
+.english-guided-input {
+  padding: .65rem .8rem;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,.14);
+  background: rgba(11,16,28,.85);
+  color: #f3f7ff;
+  font-size: .92rem;
+}
+.english-guided-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem;
+}
+.english-guided-feedback {
+  font-size: .82rem;
+  line-height: 1.45;
+}
+.english-guided-feedback.correct { color: #8af5c1; }
+.english-guided-feedback.incorrect { color: #ff9f9f; }
+.english-guided-feedback.needs-review { color: #ffd98a; }
 .english-practice-availability {
   margin: .9rem 0;
   padding: .75rem .85rem;

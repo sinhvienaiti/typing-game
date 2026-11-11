@@ -75063,6 +75063,206 @@
           "sampleCount": 3
         }
       ]
+    },
+    {
+      "id": "e11.v2-starter-building",
+      "phase": "E11",
+      "category": "sentences",
+      "cefr": [
+        "A1",
+        "A2",
+        "B1",
+        "B2",
+        "C1",
+        "C2"
+      ],
+      "state": "draft",
+      "recordSets": [
+        {
+          "id": "exercises",
+          "path": "content/english/sentences/v2-starter-building-exercises.json",
+          "expectedCount": 2500,
+          "generated": false,
+          "allowedQualityStates": [
+            "draft"
+          ],
+          "requiredChecks": [
+            "schema",
+            "sourceLink",
+            "exactDuplicate",
+            "grammar",
+            "translation",
+            "naturalness",
+            "cefr",
+            "license"
+          ]
+        }
+      ],
+      "requiredBeforePublish": [
+        "grammar-review",
+        "bilingual-review",
+        "naturalness-review",
+        "cefr-review",
+        "license-review"
+      ],
+      "gameSmokes": [
+        {
+          "gameId": "monkeytype",
+          "activity": "sentence-building",
+          "recordSetId": "exercises",
+          "sampleCount": 3
+        }
+      ]
+    },
+    {
+      "id": "e11.v2-starter-contextual",
+      "phase": "E11",
+      "category": "sentences",
+      "cefr": [
+        "A1",
+        "A2",
+        "B1",
+        "B2",
+        "C1",
+        "C2"
+      ],
+      "state": "draft",
+      "recordSets": [
+        {
+          "id": "exercises",
+          "path": "content/english/sentences/v2-starter-contextual-exercises.json",
+          "expectedCount": 1200,
+          "generated": false,
+          "allowedQualityStates": [
+            "draft"
+          ],
+          "requiredChecks": [
+            "schema",
+            "sourceLink",
+            "exactDuplicate",
+            "grammar",
+            "translation",
+            "naturalness",
+            "cefr",
+            "license"
+          ]
+        }
+      ],
+      "requiredBeforePublish": [
+        "grammar-review",
+        "bilingual-review",
+        "naturalness-review",
+        "cefr-review",
+        "license-review"
+      ],
+      "gameSmokes": [
+        {
+          "gameId": "monkeytype",
+          "activity": "contextual-usage",
+          "recordSetId": "exercises",
+          "sampleCount": 3
+        }
+      ]
+    },
+    {
+      "id": "e11.v2-e16-contrast",
+      "phase": "E11",
+      "category": "sentences",
+      "cefr": [
+        "A1",
+        "A2",
+        "B1",
+        "B2",
+        "C1",
+        "C2"
+      ],
+      "state": "draft",
+      "recordSets": [
+        {
+          "id": "exercises",
+          "path": "content/english/sentences/v2-e16-contrast-exercises.json",
+          "expectedCount": 800,
+          "generated": false,
+          "allowedQualityStates": [
+            "draft"
+          ],
+          "requiredChecks": [
+            "schema",
+            "sourceLink",
+            "exactDuplicate",
+            "grammar",
+            "translation",
+            "naturalness",
+            "cefr",
+            "license"
+          ]
+        }
+      ],
+      "requiredBeforePublish": [
+        "grammar-review",
+        "bilingual-review",
+        "naturalness-review",
+        "cefr-review",
+        "license-review"
+      ],
+      "gameSmokes": [
+        {
+          "gameId": "monkeytype",
+          "activity": "contextual-usage",
+          "recordSetId": "exercises",
+          "sampleCount": 3
+        }
+      ]
+    },
+    {
+      "id": "e11.v2-starter-listening",
+      "phase": "E11",
+      "category": "sentences",
+      "cefr": [
+        "A1",
+        "A2",
+        "B1",
+        "B2",
+        "C1",
+        "C2"
+      ],
+      "state": "draft",
+      "recordSets": [
+        {
+          "id": "exercises",
+          "path": "content/english/sentences/v2-starter-listening-exercises.json",
+          "expectedCount": 1000,
+          "generated": false,
+          "allowedQualityStates": [
+            "draft"
+          ],
+          "requiredChecks": [
+            "schema",
+            "sourceLink",
+            "exactDuplicate",
+            "grammar",
+            "translation",
+            "naturalness",
+            "cefr",
+            "license"
+          ]
+        }
+      ],
+      "requiredBeforePublish": [
+        "grammar-review",
+        "bilingual-review",
+        "naturalness-review",
+        "cefr-review",
+        "license-review"
+      ],
+      "gameSmokes": [
+        {
+          "gameId": "monkeytype",
+          "activity": "listening-typing",
+          "recordSetId": "exercises",
+          "sampleCount": 3
+        }
+      ]
     }
   ]
 }
