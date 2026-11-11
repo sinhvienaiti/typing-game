@@ -114,4 +114,4 @@ Trạng thái mới: lúc 00:20 ngày 12/11 (sau commit `80c7e565` của tôi) c
 
 Việc chờ anh: giữ `b7c6d681` nguyên khối, hay tách thành 4 commit (mã / nội dung nguồn / sản phẩm publish / docs+reports) bằng `git reset --soft` rồi commit lại (không mất file); và có thêm 5 queue vào `.gitignore` không.
 
-Quyết định của anh (12/11): giữ `b7c6d681` nguyên khối, không tách. Còn mở: thêm 5 queue vào `.gitignore`.
+Quyết định của anh (12/11): giữ `b7c6d681` nguyên khối, không tách. 5 queue đã thêm vào `.gitignore` theo quyết định của anh.
