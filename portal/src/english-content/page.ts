@@ -24,12 +24,14 @@ type StartActivity = (
 ) => Promise<void>;
 
 const CAPABILITY_ID: Record<RichPracticeGameId, string> = {
+  monkeytype: "monkeytype",
   "recall-typing": "recall",
   "vocab-shooter": "shooter",
   "karaoke-typing": "karaoke",
   "space-typing": "space",
 };
 const GAME_ORDER: RichPracticeGameId[] = [
+  "monkeytype",
   "karaoke-typing",
   "space-typing",
   "recall-typing",

@@ -28,6 +28,7 @@ import {
 } from "../../../shared/learning/evidence-v2.mjs";
 
 export type RichPracticeGameId =
+  | "monkeytype"
   | "recall-typing"
   | "vocab-shooter"
   | "karaoke-typing"
@@ -50,6 +51,7 @@ export type GuidedPracticeItem = {
 
 const PENDING_KEY = "typingGamePendingEnglishActivityV1";
 const CAPABILITY_ID: Record<RichPracticeGameId, string> = {
+  monkeytype: "monkeytype",
   "recall-typing": "recall",
   "vocab-shooter": "shooter",
   "karaoke-typing": "karaoke",

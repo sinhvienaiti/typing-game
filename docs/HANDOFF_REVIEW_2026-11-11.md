@@ -115,3 +115,15 @@ Trạng thái mới: lúc 00:20 ngày 12/11 (sau commit `80c7e565` của tôi) c
 Việc chờ anh: giữ `b7c6d681` nguyên khối, hay tách thành 4 commit (mã / nội dung nguồn / sản phẩm publish / docs+reports) bằng `git reset --soft` rồi commit lại (không mất file); và có thêm 5 queue vào `.gitignore` không.
 
 Quyết định của anh (12/11): giữ `b7c6d681` nguyên khối, không tách. 5 queue đã thêm vào `.gitignore` theo quyết định của anh.
+
+## 7. Nhóm A, ưu tiên 1: `games/monkeytype` (12/11, theo quyết định của anh)
+
+Nhánh submodule `feature/english-content-v2-indexed-runtime`, commit `50702821c` (tách từ `eee4a246`, chưa push; gitlink root trỏ tới commit chưa push nên máy khác chưa checkout được).
+- `learning/grading.ts` (mới): port nguyên văn `grading.mjs`, `index-bucket.mjs`, `hasVerifiedTargetAttribution` từ root; test đối chiếu bucket với root.
+- `learning/rich-content.ts`: đọc `indexes/activities/{activity}.json`, chọn shard theo CEFR + seed, nạp song song tối đa 4, LRU 24 shard / 32 bucket, giải `sourceSentenceIds` qua `indexes/by-id/{xx}.json`, pin `contentVersion` xuyên phiên (ném lỗi khi lệch), kiểm `bytes`/`sha256` khi response có `text()`. Không có index thì quét manifest tuần tự nhưng dừng sớm khi đủ `limit`.
+- `learning/rich-practice.ts`, `context-cloze.ts`: chấm đa đáp án 3 trạng thái `correct | incorrect | needs-review`; `needs-review` không sinh sự kiện v1 nào; bỏ sự kiện `grammar` cho `gr.*` xoay vòng của E11 (`targetConfidence: unverified-rotational`, `ex.cloze.e11.*`, `ex.transformation.e11.*`); cloze từ bản ghi chưa xác thực gán `entityType: "sentence"`.
+- `learning/english-activity.ts` (mới) + `review-dataset.ts`: nghe `typing-game:english-content:v1:activity-dataset`, giữ đủ `acceptedAnswers`, `gradingMode`, `targetConfidence`, `learningFocus`, `packId`, `stage`; trả `activity-ready` / `activity-error`; chế độ học mới `english-activity` trong `store.ts`.
+- UI: thông báo "Open answer · compare with …" cho câu tự đối chiếu, hiện `note` khi chọn từ kém phù hợp ngữ cảnh.
+- Kiểm: vitest learning 64/64, toàn bộ frontend 1.349/1.349, `oxlint --type-aware --type-check` sạch trên phạm vi sửa, `pnpm build:monkeytype` qua (sau khi tách `rich-practice-types.ts` để madge hết vòng import).
+- Root: thêm `"monkeytype"` lại vào `RichPracticeGameId` và `CAPABILITY_ID` (`portal/src/english-content/activity-session.ts`, `page.ts`), `pnpm build:portal` qua; cập nhật gitlink submodule.
+- Chưa làm: ưu tiên 2 (recall/shooter/space), test E2E trình duyệt thật, push nhánh submodule (anh quyết).
