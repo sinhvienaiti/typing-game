@@ -21,3 +21,4 @@
 | 07/11 17:54 | Codex `gpt-6.1-sol` (gói plus) | Cả ngày sau lượt reset 05:30: 136 lượt chạy (làn 3: 46 lượt, 61,7 M; làn 1: 26 lượt, 22,5 M; làn 2: 11 lượt, 10,3 M; chấm mù: 9 lượt, 3,6 M; phiếu khác: 44 lượt, 65,0 M) | 136 lượt | 162,9 M token đầu vào | — | hết 100 % hạn mức tuần, mở lại 14/11 09:12; báo anh 18:00 |
 
 Luật: tốn hơn mức Claude tự làm, hoặc hơn 1,5 M, thì báo anh ngay (`README.md` luật 5).
+| 12/11 23:3x | Claude Opus 5.5 / Fable 5.1 (điều phối) + 14 phản biện Sonnet + Codex `gpt-6.1-sol` | Ngũ Lôi v20–v27, bộ quái v2–v7, UI jewel-crest, 25 âm quái, cổng chặn | Claude 568 lượt; Codex 49 lượt | Claude 37,6 M (hiệu dụng); Codex ~74 M đầu vào | — | gấp 2,3 lần 11/11 (16,5 M); xem `review/2026-11-12.md` |
