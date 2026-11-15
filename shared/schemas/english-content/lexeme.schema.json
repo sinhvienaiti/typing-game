@@ -89,6 +89,14 @@
     },
     "cefr": {
       "$ref": "https://typing-game.local/schemas/english-content/common.schema.json#/$defs/cefr"
+    },
+    "tier": {
+      "type": "string",
+      "enum": [
+        "core",
+        "standard",
+        "expanded"
+      ]
     }
   }
 }
