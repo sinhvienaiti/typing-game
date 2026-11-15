@@ -13,7 +13,7 @@
 | 07 | `batch-07.json` | 5000 | enrage ... cometary | Phase 1 (100k Core & Standard) | ✅ `completed` (5000/5000) |
 | 08 | `batch-08.json` | 5000 | consulship ... unsteadily | Phase 1 (100k Core & Standard) | ✅ `completed` (5000/5000) |
 | 09 | `batch-09.json` | 5000 | unthinkingly ... sawbones | Phase 1 (100k Core & Standard) | ✅ `completed` (5000/5000) |
-| 10 | `batch-10.json` | 5000 | secateurs ... horehound | Phase 1 (100k Core & Standard) | ⏳ `in_progress` (3500/5000) |
+| 10 | `batch-10.json` | 5000 | secateurs ... horehound | Phase 1 (100k Core & Standard) | ⏳ `in_progress` (4000/5000) |
 | 11 | `batch-11.json` | 5000 | idun ... karok | Phase 1 (100k Core & Standard) | ⏳  (500/5000)`pending` |
 | 12 | `batch-12.json` | 5000 | kastler ... aperies | Phase 1 (100k Core & Standard) | ⏳  (500/5000)`pending` |
 | 13 | `batch-13.json` | 5000 | aperitive ... caesalpinioideae | Phase 1 (100k Core & Standard) | ⏳  (500/5000)`pending` |
