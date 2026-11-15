@@ -106,7 +106,9 @@ function shuffled(arr, seed) {
 function matchesOptions(activity, record, options) {
   if (!published(record)) return false;
   if (options.cefr && record.cefr !== options.cefr) return false;
+  if (options.tier && record.tier !== options.tier) return false;
   if (options.maxAnswerLength && recordAnswerLength(activity, record) > options.maxAnswerLength) return false;
+  if (options.requireIpa === true && (typeof record.ipa !== "string" || record.ipa.trim() === "")) return false;
   return true;
 }
 

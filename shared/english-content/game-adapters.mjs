@@ -244,7 +244,7 @@ export function englishActivityItemsFromRecords(activity, records, options = {})
     }
     if (activity === "vocabulary") {
       const answer = text(record.en ?? record.headword, "vocabulary English");
-      const meaning = text(record.vi, "vocabulary Vietnamese");
+      const meaning = text(record.vi ?? record.meaningVi, "vocabulary Vietnamese");
       items.push({
         contentId: text(record.id ?? answer.toLocaleLowerCase("en-US"), "vocabulary id"),
         entityType: "vocabulary",
