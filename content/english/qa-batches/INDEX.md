@@ -13,34 +13,34 @@
 | 07 | `batch-07.json` | 5000 | enrage ... cometary | Phase 1 (100k Core & Standard) | ✅ `completed` (5000/5000) |
 | 08 | `batch-08.json` | 5000 | consulship ... unsteadily | Phase 1 (100k Core & Standard) | ✅ `completed` (5000/5000) |
 | 09 | `batch-09.json` | 5000 | unthinkingly ... sawbones | Phase 1 (100k Core & Standard) | ✅ `completed` (5000/5000) |
-| 10 | `batch-10.json` | 5000 | secateurs ... horehound | Phase 1 (100k Core & Standard) | ⏳ `pending` |
-| 11 | `batch-11.json` | 5000 | idun ... karok | Phase 1 (100k Core & Standard) | ⏳ `pending` |
-| 12 | `batch-12.json` | 5000 | kastler ... aperies | Phase 1 (100k Core & Standard) | ⏳ `pending` |
-| 13 | `batch-13.json` | 5000 | aperitive ... caesalpinioideae | Phase 1 (100k Core & Standard) | ⏳ `pending` |
-| 14 | `batch-14.json` | 5000 | caesarism ... countering | Phase 1 (100k Core & Standard) | ⏳ `pending` |
-| 15 | `batch-15.json` | 5000 | counterinsurgent ... dwindles | Phase 1 (100k Core & Standard) | ⏳ `pending` |
-| 16 | `batch-16.json` | 5000 | dwt ... fluxional | Phase 1 (100k Core & Standard) | ⏳ `pending` |
-| 17 | `batch-17.json` | 5000 | fluxionary ... hugueninia | Phase 1 (100k Core & Standard) | ⏳ `pending` |
-| 18 | `batch-18.json` | 5000 | huguenotism ... lacks | Phase 1 (100k Core & Standard) | ⏳ `pending` |
-| 19 | `batch-19.json` | 5000 | laconical ... myriametre | Phase 1 (100k Core & Standard) | ⏳ `pending` |
-| 20 | `batch-20.json` | 5000 | myricaceae ... to that | Phase 1 (100k Core & Standard) | ⏳ `pending` |
-| 21 | `batch-21.json` | 5000 | to it ... fine structure | Phase 2 (100k-200k Expanded & Phrases) | ⏳ `pending` |
-| 22 | `batch-22.json` | 5000 | fish oil ... wind energy facility | Phase 2 (100k-200k Expanded & Phrases) | ⏳ `pending` |
-| 23 | `batch-23.json` | 5000 | window blind ... pin bone | Phase 2 (100k-200k Expanded & Phrases) | ⏳ `pending` |
-| 24 | `batch-24.json` | 5000 | popularity contest ... black hawk | Phase 2 (100k-200k Expanded & Phrases) | ⏳ `pending` |
-| 25 | `batch-25.json` | 5000 | bottle opener ... spaghetti sauce | Phase 2 (100k-200k Expanded & Phrases) | ⏳ `pending` |
-| 26 | `batch-26.json` | 5000 | sparkling water ... bedside manner | Phase 2 (100k-200k Expanded & Phrases) | ⏳ `pending` |
-| 27 | `batch-27.json` | 5000 | bell toad ... imams | Phase 2 (100k-200k Expanded & Phrases) | ⏳ `pending` |
-| 28 | `batch-28.json` | 5000 | immediate apprehension ... torsion balance | Phase 2 (100k-200k Expanded & Phrases) | ⏳ `pending` |
-| 29 | `batch-29.json` | 5000 | trouser leg ... cassiuses | Phase 2 (100k-200k Expanded & Phrases) | ⏳ `pending` |
-| 30 | `batch-30.json` | 5000 | chimps ... william wyler | Phase 2 (100k-200k Expanded & Phrases) | ⏳ `pending` |
-| 31 | `batch-31.json` | 5000 | yuri gagarin ... pericardial vein | Phase 2 (100k-200k Expanded & Phrases) | ⏳ `pending` |
-| 32 | `batch-32.json` | 5000 | picea mariana ... proofreaders | Phase 2 (100k-200k Expanded & Phrases) | ⏳ `pending` |
-| 33 | `batch-33.json` | 5000 | proudhons ... serrati | Phase 2 (100k-200k Expanded & Phrases) | ⏳ `pending` |
-| 34 | `batch-34.json` | 5000 | sickbeds ... scotomata | Phase 2 (100k-200k Expanded & Phrases) | ⏳ `pending` |
-| 35 | `batch-35.json` | 5000 | semiprofessionals ... exchangeabilities | Phase 2 (100k-200k Expanded & Phrases) | ⏳ `pending` |
-| 36 | `batch-36.json` | 5000 | fascicules ... proximateness | Phase 2 (100k-200k Expanded & Phrases) | ⏳ `pending` |
-| 37 | `batch-37.json` | 5000 | prudences ... saturniid | Phase 2 (100k-200k Expanded & Phrases) | ⏳ `pending` |
-| 38 | `batch-38.json` | 5000 | saturniidae ... stridulate | Phase 2 (100k-200k Expanded & Phrases) | ⏳ `pending` |
-| 39 | `batch-39.json` | 5000 | stridulator ... umbellales | Phase 2 (100k-200k Expanded & Phrases) | ⏳ `pending` |
-| 40 | `batch-40.json` | 4998 | umbellar ... welsher | Phase 2 (100k-200k Expanded & Phrases) | ⏳ `pending` |
+| 10 | `batch-10.json` | 5000 | secateurs ... horehound | Phase 1 (100k Core & Standard) | ⏳ `in_progress` (500/5000) |
+| 11 | `batch-11.json` | 5000 | idun ... karok | Phase 1 (100k Core & Standard) | ⏳  (500/5000)`pending` |
+| 12 | `batch-12.json` | 5000 | kastler ... aperies | Phase 1 (100k Core & Standard) | ⏳  (500/5000)`pending` |
+| 13 | `batch-13.json` | 5000 | aperitive ... caesalpinioideae | Phase 1 (100k Core & Standard) | ⏳  (500/5000)`pending` |
+| 14 | `batch-14.json` | 5000 | caesarism ... countering | Phase 1 (100k Core & Standard) | ⏳  (500/5000)`pending` |
+| 15 | `batch-15.json` | 5000 | counterinsurgent ... dwindles | Phase 1 (100k Core & Standard) | ⏳  (500/5000)`pending` |
+| 16 | `batch-16.json` | 5000 | dwt ... fluxional | Phase 1 (100k Core & Standard) | ⏳  (500/5000)`pending` |
+| 17 | `batch-17.json` | 5000 | fluxionary ... hugueninia | Phase 1 (100k Core & Standard) | ⏳  (500/5000)`pending` |
+| 18 | `batch-18.json` | 5000 | huguenotism ... lacks | Phase 1 (100k Core & Standard) | ⏳  (500/5000)`pending` |
+| 19 | `batch-19.json` | 5000 | laconical ... myriametre | Phase 1 (100k Core & Standard) | ⏳  (500/5000)`pending` |
+| 20 | `batch-20.json` | 5000 | myricaceae ... to that | Phase 1 (100k Core & Standard) | ⏳  (500/5000)`pending` |
+| 21 | `batch-21.json` | 5000 | to it ... fine structure | Phase 2 (100k-200k Expanded & Phrases) | ⏳  (500/5000)`pending` |
+| 22 | `batch-22.json` | 5000 | fish oil ... wind energy facility | Phase 2 (100k-200k Expanded & Phrases) | ⏳  (500/5000)`pending` |
+| 23 | `batch-23.json` | 5000 | window blind ... pin bone | Phase 2 (100k-200k Expanded & Phrases) | ⏳  (500/5000)`pending` |
+| 24 | `batch-24.json` | 5000 | popularity contest ... black hawk | Phase 2 (100k-200k Expanded & Phrases) | ⏳  (500/5000)`pending` |
+| 25 | `batch-25.json` | 5000 | bottle opener ... spaghetti sauce | Phase 2 (100k-200k Expanded & Phrases) | ⏳  (500/5000)`pending` |
+| 26 | `batch-26.json` | 5000 | sparkling water ... bedside manner | Phase 2 (100k-200k Expanded & Phrases) | ⏳  (500/5000)`pending` |
+| 27 | `batch-27.json` | 5000 | bell toad ... imams | Phase 2 (100k-200k Expanded & Phrases) | ⏳  (500/5000)`pending` |
+| 28 | `batch-28.json` | 5000 | immediate apprehension ... torsion balance | Phase 2 (100k-200k Expanded & Phrases) | ⏳  (500/5000)`pending` |
+| 29 | `batch-29.json` | 5000 | trouser leg ... cassiuses | Phase 2 (100k-200k Expanded & Phrases) | ⏳  (500/5000)`pending` |
+| 30 | `batch-30.json` | 5000 | chimps ... william wyler | Phase 2 (100k-200k Expanded & Phrases) | ⏳  (500/5000)`pending` |
+| 31 | `batch-31.json` | 5000 | yuri gagarin ... pericardial vein | Phase 2 (100k-200k Expanded & Phrases) | ⏳  (500/5000)`pending` |
+| 32 | `batch-32.json` | 5000 | picea mariana ... proofreaders | Phase 2 (100k-200k Expanded & Phrases) | ⏳  (500/5000)`pending` |
+| 33 | `batch-33.json` | 5000 | proudhons ... serrati | Phase 2 (100k-200k Expanded & Phrases) | ⏳  (500/5000)`pending` |
+| 34 | `batch-34.json` | 5000 | sickbeds ... scotomata | Phase 2 (100k-200k Expanded & Phrases) | ⏳  (500/5000)`pending` |
+| 35 | `batch-35.json` | 5000 | semiprofessionals ... exchangeabilities | Phase 2 (100k-200k Expanded & Phrases) | ⏳  (500/5000)`pending` |
+| 36 | `batch-36.json` | 5000 | fascicules ... proximateness | Phase 2 (100k-200k Expanded & Phrases) | ⏳  (500/5000)`pending` |
+| 37 | `batch-37.json` | 5000 | prudences ... saturniid | Phase 2 (100k-200k Expanded & Phrases) | ⏳  (500/5000)`pending` |
+| 38 | `batch-38.json` | 5000 | saturniidae ... stridulate | Phase 2 (100k-200k Expanded & Phrases) | ⏳  (500/5000)`pending` |
+| 39 | `batch-39.json` | 5000 | stridulator ... umbellales | Phase 2 (100k-200k Expanded & Phrases) | ⏳  (500/5000)`pending` |
+| 40 | `batch-40.json` | 4998 | umbellar ... welsher | Phase 2 (100k-200k Expanded & Phrases) | ⏳  (500/5000)`pending` |
