@@ -22,7 +22,7 @@
 | 16 | `batch-16.json` | 5000 | dwt ... fluxional | Phase 1 (100k Core & Standard) | ✅ completed (5000/5000) |
 | 17 | `batch-17.json` | 5000 | fluxionary ... hugueninia | Phase 1 (100k Core & Standard) | ✅ completed (5000/5000) |
 | 18 | `batch-18.json` | 5000 | huguenotism ... lacks | Phase 1 (100k Core & Standard) | ✅ completed (5000/5000) |
-| 19 | `batch-19.json` | 5000 | laconical ... myriametre | Phase 1 (100k Core & Standard) | ⏳ in progress (2000/5000) |
+| 19 | `batch-19.json` | 5000 | laconical ... myriametre | Phase 1 (100k Core & Standard) | ⏳ in progress (2500/5000) |
 | 20 | `batch-20.json` | 5000 | myricaceae ... to that | Phase 1 (100k Core & Standard) | ⏳  (500/5000)`pending` |
 | 21 | `batch-21.json` | 5000 | to it ... fine structure | Phase 2 (100k-200k Expanded & Phrases) | ⏳  (500/5000)`pending` |
 | 22 | `batch-22.json` | 5000 | fish oil ... wind energy facility | Phase 2 (100k-200k Expanded & Phrases) | ⏳  (500/5000)`pending` |
