@@ -16,7 +16,7 @@
 | 10 | `batch-10.json` | 5000 | secateurs ... horehound | Phase 1 (100k Core & Standard) | ✅ `completed` (5000/5000) |
 | 11 | `batch-11.json` | 5000 | idun ... karok | Phase 1 (100k Core & Standard) | ✅ `completed` (5000/5000) |
 | 12 | `batch-12.json` | 5000 | kastler ... aperies | Phase 1 (100k Core & Standard) | ✅ `reviewed` (5000/5000) |
-| 13 | `batch-13.json` | 5000 | aperitive ... caesalpinioideae | Phase 1 (100k Core & Standard) | ⏳ `in_progress` (3500/5000) |
+| 13 | `batch-13.json` | 5000 | aperitive ... caesalpinioideae | Phase 1 (100k Core & Standard) | ⏳ `in_progress` (4000/5000) |
 | 14 | `batch-14.json` | 5000 | caesarism ... countering | Phase 1 (100k Core & Standard) | ⏳  (500/5000)`pending` |
 | 15 | `batch-15.json` | 5000 | counterinsurgent ... dwindles | Phase 1 (100k Core & Standard) | ⏳  (500/5000)`pending` |
 | 16 | `batch-16.json` | 5000 | dwt ... fluxional | Phase 1 (100k Core & Standard) | ⏳  (500/5000)`pending` |
