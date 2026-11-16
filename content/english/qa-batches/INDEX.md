@@ -29,7 +29,7 @@
 | 23 | `batch-23.json` | 5000 | window blind ... pin bone | Phase 2 (100k-200k Expanded & Phrases) | ✅ completed (5000/5000) |
 | 24 | `batch-24.json` | 5000 | popularity contest ... black hawk | Phase 2 (100k-200k Expanded & Phrases) | ✅ completed (5000/5000) |
 | 25 | `batch-25.json` | 5000 | bottle opener ... spaghetti sauce | Phase 2 (100k-200k Expanded & Phrases) | ✅ completed (5000/5000) |
-| 26 | `batch-26.json` | 5000 | sparkling water ... bedside manner | Phase 2 (100k-200k Expanded & Phrases) | ⏳ in-progress (500/5000) |
+| 26 | `batch-26.json` | 5000 | sparkling water ... bedside manner | Phase 2 (100k-200k Expanded & Phrases) | ⏳ in-progress (2500/5000) |
 | 27 | `batch-27.json` | 5000 | bell toad ... imams | Phase 2 (100k-200k Expanded & Phrases) | ⏳  (500/5000)`pending` |
 | 28 | `batch-28.json` | 5000 | immediate apprehension ... torsion balance | Phase 2 (100k-200k Expanded & Phrases) | ⏳  (500/5000)`pending` |
 | 29 | `batch-29.json` | 5000 | trouser leg ... cassiuses | Phase 2 (100k-200k Expanded & Phrases) | ⏳  (500/5000)`pending` |
