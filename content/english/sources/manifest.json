@@ -21,12 +21,12 @@
       "id": "wiktionary",
       "name": "English Wiktionary via Wiktextract/Kaikki",
       "url": "https://en.wiktionary.org/",
-      "license": "CC-BY-SA-4.0 AND GFDL-1.3-or-later",
-      "publishAllowed": true,
+      "license": "CC-BY-SA-4.0 OR GFDL-1.3-or-later",
+      "publishAllowed": false,
       "attributionRequired": true,
       "status": "reference",
       "snapshot": null,
-      "notes": "Content license is separate from Wiktextract software license; media/audio handled separately."
+      "notes": "Content license is separate from Wiktextract software license; media/audio handled separately. Publication gate is false until upstream extraction snapshot is pinned with verified checksum."
     },
     {
       "id": "simplewiktionary-en",
@@ -123,6 +123,34 @@
       "status": "import-enabled",
       "snapshot": "2026-10",
       "notes": "Original project content; no broader redistribution license is asserted by this identifier."
+    },
+    {
+      "id": "thichhoc-dict",
+      "name": "Thichhoc English-Vietnamese Dictionary",
+      "url": "https://github.com/thichhoc/dict-en-vi",
+      "license": "CC-BY-SA-4.0",
+      "publishAllowed": true,
+      "attributionRequired": true,
+      "status": "reference",
+      "snapshot": "4d6e92e8bcf8e3e762410c2b0a9f98fea8e62e5b",
+      "notes": "Pinned upstream commit 4d6e92e8bcf8e3e762410c2b0a9f98fea8e62e5b under CC-BY-SA-4.0. Derived from WordNet 3.1, CMUdict, wordfreq, LemmInflect, and Wiktionary.",
+      "releaseUrl": "https://github.com/thichhoc/dict-en-vi/tree/4d6e92e8bcf8e3e762410c2b0a9f98fea8e62e5b",
+      "sourceRepository": "thichhoc/dict-en-vi",
+      "sourceCommit": "4d6e92e8bcf8e3e762410c2b0a9f98fea8e62e5b"
+    },
+    {
+      "id": "cmudict",
+      "name": "Carnegie Mellon Pronouncing Dictionary",
+      "url": "https://github.com/cmusphinx/cmudict",
+      "license": "BSD-2-Clause",
+      "publishAllowed": true,
+      "attributionRequired": true,
+      "status": "reference",
+      "snapshot": "cmudict-0.7b-pinned",
+      "notes": "Carnegie Mellon University phonetic pronouncing dictionary under BSD-2-Clause license for English ARPAbet/IPA pronunciations.",
+      "releaseUrl": "https://github.com/cmusphinx/cmudict/tree/bb7e0965d1d4d23253b23617be4de3e3b793132d",
+      "sourceRepository": "cmusphinx/cmudict",
+      "sourceCommit": "bb7e0965d1d4d23253b23617be4de3e3b793132d"
     }
   ]
 }
