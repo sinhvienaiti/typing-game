@@ -27,7 +27,7 @@
 | 21 | `batch-21.json` | 5000 | to it ... fine structure | Phase 2 (100k-200k Expanded & Phrases) | ✅ completed (5000/5000) |
 | 22 | `batch-22.json` | 5000 | fish oil ... wind energy facility | Phase 2 (100k-200k Expanded & Phrases) | ✅ completed (5000/5000) |
 | 23 | `batch-23.json` | 5000 | window blind ... pin bone | Phase 2 (100k-200k Expanded & Phrases) | ✅ completed (5000/5000) |
-| 24 | `batch-24.json` | 5000 | popularity contest ... black hawk | Phase 2 (100k-200k Expanded & Phrases) | ⏳ in-progress (4000/5000) |
+| 24 | `batch-24.json` | 5000 | popularity contest ... black hawk | Phase 2 (100k-200k Expanded & Phrases) | ⏳ in-progress (4500/5000) |
 | 25 | `batch-25.json` | 5000 | bottle opener ... spaghetti sauce | Phase 2 (100k-200k Expanded & Phrases) | ⏳  (500/5000)`pending` |
 | 26 | `batch-26.json` | 5000 | sparkling water ... bedside manner | Phase 2 (100k-200k Expanded & Phrases) | ⏳  (500/5000)`pending` |
 | 27 | `batch-27.json` | 5000 | bell toad ... imams | Phase 2 (100k-200k Expanded & Phrases) | ⏳  (500/5000)`pending` |
