@@ -25,7 +25,7 @@
 | 19 | `batch-19.json` | 5000 | laconical ... myriametre | Phase 1 (100k Core & Standard) | ✅ completed (5000/5000) |
 | 20 | `batch-20.json` | 5000 | myricaceae ... to that | Phase 1 (100k Core & Standard) | ✅ completed (5000/5000) |
 | 21 | `batch-21.json` | 5000 | to it ... fine structure | Phase 2 (100k-200k Expanded & Phrases) | ✅ completed (5000/5000) |
-| 22 | `batch-22.json` | 5000 | fish oil ... wind energy facility | Phase 2 (100k-200k Expanded & Phrases) | ⏳ in-progress (2000/5000) |
+| 22 | `batch-22.json` | 5000 | fish oil ... wind energy facility | Phase 2 (100k-200k Expanded & Phrases) | ⏳ in-progress (2500/5000) |
 | 23 | `batch-23.json` | 5000 | window blind ... pin bone | Phase 2 (100k-200k Expanded & Phrases) | ⏳  (500/5000)`pending` |
 | 24 | `batch-24.json` | 5000 | popularity contest ... black hawk | Phase 2 (100k-200k Expanded & Phrases) | ⏳  (500/5000)`pending` |
 | 25 | `batch-25.json` | 5000 | bottle opener ... spaghetti sauce | Phase 2 (100k-200k Expanded & Phrases) | ⏳  (500/5000)`pending` |
