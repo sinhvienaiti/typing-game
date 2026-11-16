@@ -19,7 +19,7 @@
 | 13 | `batch-13.json` | 5000 | aperitive ... caesalpinioideae | Phase 1 (100k Core & Standard) | ✅ `completed` (5000/5000) |
 | 14 | `batch-14.json` | 5000 | caesarism ... countering | Phase 1 (100k Core & Standard) | ✅ `completed` (5000/5000) |
 | 15 | `batch-15.json` | 5000 | counterinsurgent ... dwindles | Phase 1 (100k Core & Standard) | ✅ completed (5000/5000) |
-| 16 | `batch-16.json` | 5000 | dwt ... fluxional | Phase 1 (100k Core & Standard) | ⏳ `pending` (3500/5000) |
+| 16 | `batch-16.json` | 5000 | dwt ... fluxional | Phase 1 (100k Core & Standard) | ⏳ `pending` (4000/5000) |
 | 17 | `batch-17.json` | 5000 | fluxionary ... hugueninia | Phase 1 (100k Core & Standard) | ⏳  (500/5000)`pending` |
 | 18 | `batch-18.json` | 5000 | huguenotism ... lacks | Phase 1 (100k Core & Standard) | ⏳  (500/5000)`pending` |
 | 19 | `batch-19.json` | 5000 | laconical ... myriametre | Phase 1 (100k Core & Standard) | ⏳  (500/5000)`pending` |
