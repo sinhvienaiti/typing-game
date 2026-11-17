@@ -36,7 +36,7 @@
 | 30 | `batch-30.json` | 5000 | chimps ... william wyler | Phase 2 (100k-200k Expanded & Phrases) | ✅ completed (5000/5000) |
 | 31 | `batch-31.json` | 5000 | yuri gagarin ... pericardial vein | Phase 2 (100k-200k Expanded & Phrases) | ✅ completed (5000/5000) |
 | 32 | `batch-32.json` | 5000 | picea mariana ... proofreaders | Phase 2 (100k-200k Expanded & Phrases) | ✅ completed (5000/5000) |
-| 33 | `batch-33.json` | 5000 | proudhons ... serrati | Phase 2 (100k-200k Expanded & Phrases) | ⏳ in-progress (2000/5000) |
+| 33 | `batch-33.json` | 5000 | proudhons ... serrati | Phase 2 (100k-200k Expanded & Phrases) | ⏳ in-progress (2500/5000) |
 | 34 | `batch-34.json` | 5000 | sickbeds ... scotomata | Phase 2 (100k-200k Expanded & Phrases) | ⏳  (500/5000)`pending` |
 | 35 | `batch-35.json` | 5000 | semiprofessionals ... exchangeabilities | Phase 2 (100k-200k Expanded & Phrases) | ⏳  (500/5000)`pending` |
 | 36 | `batch-36.json` | 5000 | fascicules ... proximateness | Phase 2 (100k-200k Expanded & Phrases) | ⏳  (500/5000)`pending` |
