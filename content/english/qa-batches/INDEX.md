@@ -31,7 +31,7 @@
 | 25 | `batch-25.json` | 5000 | bottle opener ... spaghetti sauce | Phase 2 (100k-200k Expanded & Phrases) | ✅ completed (5000/5000) |
 | 26 | `batch-26.json` | 5000 | sparkling water ... bedside manner | Phase 2 (100k-200k Expanded & Phrases) | ✅ completed (5000/5000) |
 | 27 | batch-27.json | 5000 | ✅ completed (5000/5000) | `lex.en.200k.030002` - `lex.en.200k.035001` |
-| 28 | `batch-28.json` | 5000 | immediate apprehension ... torsion balance | Phase 2 (100k-200k Expanded & Phrases) | ⏳  (500/5000)`pending` |
+| 28 | batch-28.json | 5000 | ⏳ in-progress (500/5000) | `lex.en.200k.035002` - `lex.en.200k.040001` |
 | 29 | `batch-29.json` | 5000 | trouser leg ... cassiuses | Phase 2 (100k-200k Expanded & Phrases) | ⏳  (500/5000)`pending` |
 | 30 | `batch-30.json` | 5000 | chimps ... william wyler | Phase 2 (100k-200k Expanded & Phrases) | ⏳  (500/5000)`pending` |
 | 31 | `batch-31.json` | 5000 | yuri gagarin ... pericardial vein | Phase 2 (100k-200k Expanded & Phrases) | ⏳  (500/5000)`pending` |
