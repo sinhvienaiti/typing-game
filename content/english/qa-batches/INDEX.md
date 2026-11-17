@@ -40,7 +40,7 @@
 | 34 | `batch-34.json` | 5000 | sickbeds ... scotomata | Phase 2 (100k-200k Expanded & Phrases) | ✅ completed (5000/5000) |
 | 35 | `batch-35.json` | 5000 | semiprofessionals ... exchangeabilities | Phase 2 (100k-200k Expanded & Phrases) | ✅ completed (5000/5000) |
 | 36 | `batch-36.json` | 5000 | fascicules ... proximateness | Phase 2 (100k-200k Expanded & Phrases) | ✅ completed (5000/5000) |
-| 37 | `batch-37.json` | 5000 | prudences ... saturniid | Phase 2 (100k-200k Expanded & Phrases) | ⏳ in-progress (4000/5000) |
+| 37 | `batch-37.json` | 5000 | prudences ... saturniid | Phase 2 (100k-200k Expanded & Phrases) | ⏳ in-progress (4500/5000) |
 | 38 | `batch-38.json` | 5000 | saturniidae ... stridulate | Phase 2 (100k-200k Expanded & Phrases) | ⏳  (500/5000)`pending` |
 | 39 | `batch-39.json` | 5000 | stridulator ... umbellales | Phase 2 (100k-200k Expanded & Phrases) | ⏳  (500/5000)`pending` |
 | 40 | `batch-40.json` | 4998 | umbellar ... welsher | Phase 2 (100k-200k Expanded & Phrases) | ⏳  (500/5000)`pending` |
