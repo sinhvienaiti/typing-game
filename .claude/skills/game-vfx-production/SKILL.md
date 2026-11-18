@@ -59,6 +59,12 @@ What he liked came from real art: a Firefly Video flame flipbook ("rực cháy k
 ## Hard rules
 
 - **No code-drawn look without a won A/B.** Flame bodies, auras, stars and glints, cracks, scorch and seams drawn in code scored under 6 every time (03-04/11/2026). Ship one only after two blind judges prefer it over Firefly or Blender versions. Allowed in code: noise and erosion masks, analytic thin rings and lines, placement, motion curves, colour grading, alpha thresholds, blending.
+- **Components first** (owner, 12/11/2026; AGENTS.md "Components first"). Never generate a composed skill in one clip or image. Before any generation:
+  - write the recipe as a component list (main shape ×3–4 variants, impact, shock ring, ground mark ×3, trail, source, gather) and mark each line `have` (library path) or `missing`;
+  - block the recipe in the lab from stills and existing parts first; generate only the `missing` lines, one component per job;
+  - video only where the inside moves; rings, seals, formations and scars are stills animated by code;
+  - count, direction, spacing, stagger, size and tint are code parameters, so a change of design ("five bolts" to "eight pillars") costs no generation;
+  - 12/11 audit: 909 takes on disk, about 40 % of clips wired in the lab; 14 shapes were generated once per element (about 270 jobs). For a new element or skill, try a tinted existing part before a new clip.
 - **Tools.**
   - **Firefly:** Adobe models only (Firefly Video, Firefly Image, the Upscaler, sound effects); never partner models; never sign in or click consent for the owner.
   - **Blender:** `/Applications/Blender.app`, run headless. It is not local AI. Heavy sims and renders go through `.local/bin/heavy.sh --cores=N`.

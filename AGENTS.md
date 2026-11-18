@@ -74,6 +74,8 @@ Who does what (owner, 04/11/2026):
 - The local Codex is a worker for code, logic and sound. It gets a ticket only once Claude has the complete solution, runs `gpt-6.1-sol` (`xhigh` or `ultra` for code and logic), and works one lane unless the owner asks for more.
 - Codex makes images when Gemini has hit its image limit (owner, 05/11/2026 18:20: "nếu gemini hết lượt ảnh, bạn có thể kêu codex tạo ảnh cùng nhé"), alongside ChatGPT, always from our reference images.
 
+- **Codex under 15 % quota: images only (owner, 11/11/2026).** "khi codex còn dưới 15%, thì không được phép kêu nó làm gì ngoài việc tạo ảnh nữa". Read the remaining quota before every Codex ticket (`rate_limits` in the newest `~/.codex/sessions/**/rollout-*.jsonl`). Below 15 % left, Codex gets image tickets only: no code, logic, sound, judging or measuring tickets until the quota resets.
+
 Details are in the `agent-orchestration` skill.
 
 Only purely mechanical work skips this step: a typo, a one-line bug fix, re-running a measurement, moving files.
@@ -108,7 +110,9 @@ Art must reach commercial-game level. Backgrounds, title screens, key art, map s
 
 3D models favour detail over weight (owner, 29/10/2026): no model a player sees up close goes under 2,000 triangles; keep the Tripo originals' face count, normal and roughness maps where the floors in `docs/games/MODEL_QUALITY.md` say so; cut only when measured frame time breaks the budget, in the order that doc gives. Existing models stay as they are until the owner asks.
 
-Acceptance bar 8.5, no provisional passes (owner, 01/11/2026): "tôi không muốn dùng tạm được nữa, tôi muốn phải đạt trên 8.5 trở lên". Every piece the player sees is accepted only when two independent blind judges both score it 8.5 or higher in the built play host at the player's settings, with no URL flags. This covers art, 3D models, maps, VFX, UI and audio, 2D and 3D alike. There is no "best of 3 tries" and no "better than before" pass. Anything already wired below 8.5 (marked provisional) is an open debt to redo to 8.5, not done work. Shared systems keep their bar of 9.
+Acceptance bar 8.5, no provisional passes (owner, 01/11/2026): "tôi không muốn dùng tạm được nữa, tôi muốn phải đạt trên 8.5 trở lên". Every piece the player sees is accepted only when two independent blind judges both score it 8.5 or higher in the built play host at the player's settings, with no URL flags. This covers art, 3D models, maps, VFX, UI and audio, 2D and 3D alike. There is no "best of 3 tries" and no "better than before" pass. Anything already wired below 8.5 (marked provisional) is an open debt to redo to 8.5, not done work.
+
+**Bar lowered to 8 (owner, 18/11/2026):** "tôi nghĩ giảm mọi tiêu chuẩn xuống trên 8 là được, 1 số cái gần 8 thì có thể hỏi ý kiến tôi để tôi chấm nếu đạt thì cũng cho đạt". Every 8.5 bar in this file and the skills now reads **8.0**: two blind judges both ≥ 8.0. A piece just under 8 goes to the owner with options; if he passes it, it passes. Shared systems keep 9. Shared systems keep their bar of 9.
 
 Judge VFX in two tiers (owner, 07/11/2026: "tôi đồng ý điều này, phải note lại để sau xử lý hình ảnh hay video còn làm theo"). In a commercial game a single smoke or spark layer on its own does not reach 8; the score comes from the composited, multi-layer effect in the game.
 - **Source layers** (Firefly clips, Blender renders, stills, flipbooks, sprites) are judged pass or fail on fitness: right shape and role, inside the frame with margin, clean background with no stray objects, a usable segment, and an end or loop the engine can shape.
@@ -123,6 +127,17 @@ Skill effects sparkle too (owner, 03/11/2026, later the same day): "bạn luôn 
 - Every phase of a skill carries a radiance layer around its main shape. The phases are charge, release, travel, impact and aftermath; the main shape is the flame, slash, seal, burst, beam or field.
 - The radiance layer is made of glints and star twinkles, fine light motes and glitter, soft halos and light rings (at most 0.9 a channel), shimmering rims and thin light rays.
 - No main shape ships bare. Its radiance is designed in the first brief, beside the shape, and judged with it. Skill: `game-vfx-layered`, method step 3.
+
+Components first, never a whole-scene generation (owner, 12/11/2026): "tạo ra các thành phần sử dụng nhiều, rồi tạo ra những thứ chính, sau đó tự xử lý để các hình ảnh phụ kết hợp với hình ảnh chính… tìm ra solution hiệu quả hơn, ít phải tạo đi tạo lại hình ảnh 3D hoặc video, âm thanh hơn".
+- A skill, attack or scene effect is a **recipe** over a library of small reusable components, placed, rotated, tinted, staggered and counted by code. A generated video or image holds **one** component (one bolt, one burst, one ring, one scar), never the composed skill ("five bolts in one clip").
+- Order of work: (1) list the components the recipe needs; (2) reuse from the library (`docs/games/tu-tien/skills/VFX_LIBRARY.md` and each game's own); (3) block the whole recipe in the lab with stills or existing parts and judge layout and timing there; (4) only then generate what is still missing, one component at a time, 3–4 variants of the main shape.
+- Three tiers: **universal** parts shared by every element (sparks, embers, dust, smoke, glints, shock rings; neutral, tinted by code), **element kit** (main shape variants, impact, trail, ground mark), **skill signature** (at most one or two unique pieces per skill).
+- Video only for parts whose inside moves (fire, smoke, lightning flicker, fluid). Rings, formations, seals, scars and marks stay stills that code rotates, scales and dissolves.
+- A whole-frame generation is allowed only for cut-ins and cinematics, or for one layout-bound layer (a source cloud over the whole zone), which is itself a shared component.
+- Sound follows the same rule: a library of ingredients (transient, body, tail, sweetener) per element, layered and varied at runtime (pitch, start offset, choice among 3–4 variants), not one new baked file per event. 3D: one skeleton, slot-based outfits, material and colour variants and the monster inventory before any new model.
+- Skill: `game-vfx-production` ("Components first").
+
+Rules are enforced by gates, not memory (owner, 12/11/2026: "không lẽ không có cách nào để bạn luôn áp dụng đúng"; "đồng ý làm cổng chặn"). The machine refuses what it can check, at zero token cost: `tools/codex-run/run.sh` (critic PASS line, one lane, quota under 15 % images only, sample before a batch), `.claude/hooks/guard-git.sh` (no media or whole-tree `git add`), the Firefly video driver (no shaped video without a still). Never work around a gate; fix the ticket. What needs judgement is audited every night by one Sonnet agent: `docs/work/RULE_AUDIT.md`.
 
 Reference images, never a prompt alone (owner, 05/11/2026): "việc sử dụng ảnh tham chiếu là cần thiết, k chỉ sử dụng mỗi prompt như vậy được, bạn đã mắc lỗi này rất nhiều lần r".
 - Every AI generation starts from our own reference images: images, video, 3D sources, cut-in art, VFX stills and map paintings, in ChatGPT, Gemini, Firefly or Tripo.

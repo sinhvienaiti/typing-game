@@ -188,6 +188,7 @@ That is about 19 M input tokens in 40 minutes. The owner noticed the quota drain
   - Cap Codex at about 1/7 of the week per day: about 23 M input tokens. Sum `.local/codex-runs/*/events.jsonl` from 00:00 at each feeder check.
   - At the cap, stop topping up every lane and say so to the owner in one line.
   - A row whose verdict needs motion seen at real speed ("not enough evidence" from stills) goes to Claude's batch review, never back to a Codex runner.
+- **Codex under 15 % quota: images only (owner, 11/11/2026).** "khi codex còn dưới 15%, thì không được phép kêu nó làm gì ngoài việc tạo ảnh nữa". Read the remaining quota before every Codex ticket (`rate_limits` in the newest `~/.codex/sessions/**/rollout-*.jsonl`). Below 15 % left, Codex gets image tickets only: no code, logic, sound, judging or measuring tickets until the quota resets.
 - **Fix the base before polishing.** Before small measured steps on an effect, compare its main source with the owner's look rules (for example memory `lightning-strike-look`) and show the owner one frame. On 07/11, three rounds of Thunder Pillar steps moved the score 5.5 → 6.5 while the base pillar video was wrong.
 
 ## The double-review protocol (every analysis, plan, design and solution)
