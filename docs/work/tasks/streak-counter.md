@@ -1,0 +1,16 @@
+# Bộ đếm chuỗi từ (canon D60)
+
+**Mục tiêu (≤ 3 dòng):** một con số to, đẹp, kể sức mạnh của người gõ: đếm từ sạch liên tiếp, mốc 10/25/50/100 nâng độ rực của chiêu. Chỉ để nhìn, không đổi sát thương.
+**Cách đã chốt:** anh duyệt 05/11 22:20 ("Duyệt cả 3", `DECISIONS.md`); canon D60, câu HUD §6.6 đã sửa. Học từ `docs/games/tu-tien/skills/REF_VIDEO_LESSONS_2026-11-05.md` bài 5. Hình, chỗ đặt, nhịp: chốt sau vòng Gemini (`docs/work/consult/streak-channel-gemini.md`), rồi cho anh xem 2–3 hướng trước khi dựng.
+**Nghiệm thu (số):** chữ quái luôn đọc được (tương phản ≥ 7:1); nằm trong ô vùng màn hình riêng, ngoài hành lang quái; không che số sát thương; hai giám khảo mù ≥ 8,5 trong bản chơi (hệ thống dùng chung giữa các game: ≥ 9).
+**Phiếu, báo cáo, ảnh:** (chưa có)
+
+## Nhật ký (mỗi dòng một sự kiện: ngày giờ · ai · việc · kết quả)
+- 05/11 22:22 · Claude · tạo việc sau khi anh duyệt · chờ vòng Gemini
+- 05/11 22:35 · Gemini · vòng hỏi xong (FAIL, PASS, PASS), `consult/streak-channel-gemini.md` · Claude chốt: góc trên trái, FAIR giữ chuỗi, không đứt theo giờ, trang trí từ tranh vẽ; 3 hướng hình → phiếu Codex 303 (6 ảnh) cho anh chọn
+- 05/11 22:43 · Codex · phiếu 303 xong: 6 ảnh 3 hướng (2172×724, 3:1), tấm ghép `owner-review/2026-11-05/tu-tien/streak-counter/streak-directions-6.jpg` · chờ anh chọn
+- 05/11 22:45 · Anh · chọn hàng 1 (mực vàng); chuẩn: `streak-ink-edict.v1-try1.png` · kế tiếp: tách lớp (5 nền theo mốc, không số, nền trong suốt) + số bằng font Cormorant Garamond nghiêng như số sát thương
+- 05/11 22:48 · Claude · phiếu Codex 304: tách lớp (2 bản hàng 5 nền không số, tấm vảy vàng/tia/mực, dải lụa mốc 100), nền trong suốt
+- 05/11 23:12 · Claude · kiểm 304: 4 ảnh có alpha thật, không lọt số; 5 nền mực vàng giữ khoảng tối ở giữa cho số; quầng sáng mốc 3–5 hơi chạm nhau, nên cắt ô bằng mặt nạ mềm. Chọn hàng nền bản 1 (`streak-plates-row.v1-try1`), vì bản 2 quầng nối nhau nhiều hơn. Tấm vảy vàng, tia, giọt mực, khói còn một lớp mờ rất nhạt (alpha min 1/255): lọc ngưỡng khi cắt. Tấm ghép: `owner-review/2026-11-05/tu-tien/streak-counter/streak-layers-304.jpg` · kế tiếp (mai): cắt lớp, dựng vào lab, số bằng Cormorant Garamond nghiêng
+- 06/11 · Claude (lab-flipbooks) · cắt lớp (việc điều phối): 5 nền mốc 0/10/25/50/100 (`cut-plate-t*.png`, cùng khung 538×788, tâm đặt số trùng ở (269, 394), lệch ≤ 0,6 px), atlas 38 hình vảy/tia/giọt/khói (`cut-flakes-atlas.png` 2048×1024), dải lụa (`cut-ribbons.png` 934×953), `manifest.json`, tất cả trong `art-src/lab/ui/streak-counter/`; tấm xem `owner-review/2026-11-06/tu-tien/streak-counter/streak-layers-cut.jpg`; không còn alpha dưới 8/255
+- 06/11 05:15 · Claude (lab-element-kits) · dựng trong lab, commit `5312650`: bộ đếm góc trên trái (bên phải bảng lab khi bảng hiện), lớp ảnh mực vàng đã cắt (5 nền mốc, vảy, tia, giọt mực, khói, dải lụa mốc 100), số Cormorant Garamond nghiêng ruột vàng viền mực; mỗi từ sạch nảy 122 % trong 0,4 s, Chớp hai tia chéo, Hoàn hảo một tia; Khá giữ chuỗi; Ẩu tan như mực 1,4 s; mốc 10/25/50/100 đổi nền 0,35 s; mờ 25 % khi quái tới gần 40 px; không đứt theo giờ. Đếm mọi từ của phím 0–7 và C; K = từ Chớp, Shift+K = từ Ẩu. 4310: đủ các mốc, 0 lỗi; 1076 test qua. Chưa: mốc nâng độ rực của chiêu, âm lên mốc, tổng kết đợt, chấm mù (bar 9).

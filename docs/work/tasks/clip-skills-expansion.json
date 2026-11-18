@@ -1,0 +1,2768 @@
+{
+ "about": "ClipSkill table for the 30 expansion skills (A1-D8), written by the lab-flipbooks agent 06/11/2026 for docs/work/tasks/lab-castable-skills.md (fields of section 1). Gameplay lines from Gemini (docs/games/tu-tien/source/gemini-skills-expansion-2026-11-05.md); strike times measured on the real clips in art-src/lab/vfx/expansion/.",
+ "arena": {
+  "sizeM": [
+   40,
+   26
+  ],
+  "source": "docs/games/tu-tien/skills/SKILL_REACH.md:92 (Thanh Thach Ai 40 x 26 m, centre (0;0)); a field shape of r 22 m from the centre covers every corner (half diagonal 23.9 m)"
+ },
+ "how": {
+  "clips": "Each expansion clip is the Firefly image-to-video of a still, 5 s, already at near full strength at frame 0: energy stays within about 20-40 % of its maximum for the whole clip, so the clip has no sharp \"impact frame\". tOnset is when the smoothed energy first reaches 90 % of its early maximum (first 2.5 s); when that is under 0.15 s (the clip starts at strength) strikes[0].t falls back to the Gemini snap time (0.15-0.4 s).",
+  "strikes": "strikes[0] is the main hit (power 1 or the strongest of the opening waves); later hits and ticks are offsets after it taken from the Gemini text (waves, strike counts, dot durations). kind \"hit\" = a damage event with the reaction and hit-stop of its tier; \"tick\" = a light dot damage with no hit-stop. power is relative within the skill (1 = the main hit).",
+  "count": "points per wave (7 lances, 16 handprints...), not waves; waves are the entries of strikes.",
+  "mark": "seconds of ground mark before the first hit for skills that fall from the sky or land on a point (lesson 1 of skills/REF_VIDEO_LESSONS_2026-11-05.md); null = none.",
+  "linger": "seconds of aftermath, from the decay time in the Gemini text (1.5-2.0 s here).",
+  "sfx": "one wav of tt-sfx-x-<id> (takes 1-4, 6 s each), picked by a heuristic on onset, peak and tail, not by ear; null where Firefly sound ran out (D6, D7, D8).",
+  "guess": "Every entry lists in guess[] the fields that are not measured or stated: shape, radius, count, damage, status, mark, linger and the later strikes are design decisions from the Gemini text and the arena size, not data."
+ },
+ "skills": [
+  {
+   "code": "A1",
+   "id": "myriad-lotus-domain",
+   "name": "Myriad Spirit Lotus Bloom · Vạn Linh Liên Hoa Trận",
+   "group": "A",
+   "role": "area",
+   "element": "wood",
+   "elements": [
+    "wood",
+    "light",
+    "water",
+    "fire"
+   ],
+   "clip": {
+    "folder": "expansion",
+    "id": "myriad-lotus-domain",
+    "atlas": "myriad-lotus-domain.atlas.png",
+    "fps": 6.0,
+    "frames": 31,
+    "cell": [
+     640,
+     360
+    ],
+    "pivot": [
+     0.4982,
+     0.4921
+    ],
+    "timing": {
+     "peak": 0,
+     "holdEnd": 22,
+     "endsHot": false,
+     "note": "peak: frame of peak energy (3-frame mean); holdEnd: last frame still at 60 % of it or more (the tail after it is the fade); endsHot: the last frame is still bright (the Firefly clip cuts to black without a fade), so the kit must erode or fade it"
+    }
+   },
+   "shape": "ring",
+   "radius": 18,
+   "count": 3,
+   "strikes": [
+    {
+     "t": 0.35,
+     "power": 0.6,
+     "kind": "hit"
+    },
+    {
+     "t": 0.47,
+     "power": 0.8,
+     "kind": "hit"
+    },
+    {
+     "t": 0.59,
+     "power": 1,
+     "kind": "hit"
+    },
+    {
+     "t": 1.15,
+     "power": 0.2,
+     "kind": "tick"
+    },
+    {
+     "t": 1.65,
+     "power": 0.2,
+     "kind": "tick"
+    },
+    {
+     "t": 2.15,
+     "power": 0.2,
+     "kind": "tick"
+    }
+   ],
+   "damage": "heavy",
+   "status": "stun",
+   "mark": null,
+   "linger": 1.8,
+   "sfx": "art-src/lab/firefly-sprint-2026-11-05/sound/tt-sfx-x-myriad-lotus-domain/take1.wav",
+   "gameplay": "Full-screen circular ground bloom around the player; unleashes 3 rapid concentric petal shockwaves in 0.35s that stun and damage all beasts, followed by a 1.8s lingering regen/dot field.",
+   "design": "3 concentric petal shockwaves in 0.35 s (stun), then a 1.8 s regen/dot field",
+   "measured": {
+    "tOnset": 0.04,
+    "tPeak": 0.04,
+    "earlyPeakEnergyShare": 1.0,
+    "flatness3s": 0.4,
+    "source": "24 fps energy of the source video (tools/vfx-flipbook analysis grid), first take; atlas peak frame 0 of 31 at 6.0 fps",
+    "t0Source": "design snap time (the clip is already at strength at frame 0, so the measured onset is not meaningful)"
+   },
+   "guess": [
+    "shape",
+    "radius",
+    "count",
+    "damage",
+    "status",
+    "mark",
+    "linger",
+    "strikes[1:] (offsets after the first hit and tick spacing come from the Gemini text)",
+    "strikes[0].t"
+   ],
+   "sfxMeasured": {
+    "onset": 0.04,
+    "peak": 0.12,
+    "tail": 5.98,
+    "durationS": 6.0,
+    "takes": 4,
+    "pick": "heuristic: peak near 0.4 s, onset <= 0.2 s, tail >= 2.5 s; not chosen by ear"
+   }
+  },
+  {
+   "code": "A2",
+   "id": "firmament-sundering-cleave",
+   "name": "Firmament-Sundering Rift · Liệt Thiên Trảm Ngân",
+   "group": "A",
+   "role": "area",
+   "element": "void",
+   "elements": [
+    "void",
+    "metal",
+    "blood",
+    "thunder"
+   ],
+   "clip": {
+    "folder": "expansion",
+    "id": "firmament-sundering-cleave",
+    "atlas": "firmament-sundering-cleave.atlas.png",
+    "fps": 6.0,
+    "frames": 31,
+    "cell": [
+     640,
+     360
+    ],
+    "pivot": [
+     0.4421,
+     0.542
+    ],
+    "timing": {
+     "peak": 0,
+     "holdEnd": 23,
+     "endsHot": false,
+     "note": "peak: frame of peak energy (3-frame mean); holdEnd: last frame still at 60 % of it or more (the tail after it is the fade); endsHot: the last frame is still bright (the Firefly clip cuts to black without a fade), so the kit must erode or fade it"
+    }
+   },
+   "shape": "line",
+   "radius": 3,
+   "count": 1,
+   "strikes": [
+    {
+     "t": 0.2,
+     "power": 0.4,
+     "kind": "hit"
+    },
+    {
+     "t": 0.6,
+     "power": 1,
+     "kind": "hit"
+    }
+   ],
+   "damage": "heavy",
+   "status": null,
+   "mark": 0.15,
+   "linger": 1.6,
+   "sfx": "art-src/lab/firefly-sprint-2026-11-05/sound/tt-sfx-x-firmament-sundering-cleave/take3.wav",
+   "gameplay": "Wide diagonal screen-spanning chasm; strikes instantly in 0.2s along a 45-degree slash line across the entire battlefield, pulling nearby beasts inward before erupting after 0.4s and decaying over 1.6s.",
+   "design": "slash line along a 45 degree diagonal over the whole field; pulls beasts in, erupts 0.4 s later",
+   "measured": {
+    "tOnset": 0.04,
+    "tPeak": 0.04,
+    "earlyPeakEnergyShare": 1.0,
+    "flatness3s": 0.33,
+    "source": "24 fps energy of the source video (tools/vfx-flipbook analysis grid), first take; atlas peak frame 0 of 31 at 6.0 fps",
+    "t0Source": "design snap time (the clip is already at strength at frame 0, so the measured onset is not meaningful)"
+   },
+   "guess": [
+    "shape",
+    "radius",
+    "count",
+    "damage",
+    "status",
+    "mark",
+    "linger",
+    "strikes[1:] (offsets after the first hit and tick spacing come from the Gemini text)",
+    "strikes[0].t"
+   ],
+   "sfxMeasured": {
+    "onset": 0.1,
+    "peak": 0.34,
+    "tail": 3.34,
+    "durationS": 6.0,
+    "takes": 4,
+    "pick": "heuristic: peak near 0.4 s, onset <= 0.2 s, tail >= 2.5 s; not chosen by ear"
+   }
+  },
+  {
+   "code": "A3",
+   "id": "nine-heavens-tribulation-net",
+   "name": "Nine-Heavens Tribulation Grid · Cửu Tiêu Lôi Kiếp Võng",
+   "group": "A",
+   "role": "area",
+   "element": "thunder",
+   "elements": [
+    "thunder",
+    "star",
+    "light"
+   ],
+   "clip": {
+    "folder": "expansion",
+    "id": "nine-heavens-tribulation-net",
+    "atlas": "nine-heavens-tribulation-net.atlas.png",
+    "fps": 6.0,
+    "frames": 31,
+    "cell": [
+     640,
+     360
+    ],
+    "pivot": [
+     0.5009,
+     0.4845
+    ],
+    "timing": {
+     "peak": 13,
+     "holdEnd": 24,
+     "endsHot": false,
+     "note": "peak: frame of peak energy (3-frame mean); holdEnd: last frame still at 60 % of it or more (the tail after it is the fade); endsHot: the last frame is still bright (the Firefly clip cuts to black without a fade), so the kit must erode or fade it"
+    }
+   },
+   "shape": "multi",
+   "radius": 2.4,
+   "count": 7,
+   "strikes": [
+    {
+     "t": 0.25,
+     "power": 1,
+     "kind": "hit"
+    },
+    {
+     "t": 0.75,
+     "power": 0.3,
+     "kind": "tick"
+    },
+    {
+     "t": 1.25,
+     "power": 0.3,
+     "kind": "tick"
+    },
+    {
+     "t": 1.75,
+     "power": 0.3,
+     "kind": "tick"
+    }
+   ],
+   "damage": "heavy",
+   "status": null,
+   "mark": 0.2,
+   "linger": 1.5,
+   "sfx": "art-src/lab/firefly-sprint-2026-11-05/sound/tt-sfx-x-nine-heavens-tribulation-net/take2.wav",
+   "gameplay": "Full-battlefield hexagonal geometric matrix; 7 vertical lightning lances strike in 0.25s and instantly link via ground-level laser arcs to shock every connected beast over 1.5s.",
+   "design": "7 lances strike in 0.25 s, ground arcs shock every linked beast for 1.5 s",
+   "measured": {
+    "tOnset": 0.04,
+    "tPeak": 4.04,
+    "earlyPeakEnergyShare": 0.95,
+    "flatness3s": 0.37,
+    "source": "24 fps energy of the source video (tools/vfx-flipbook analysis grid), first take; atlas peak frame 13 of 31 at 6.0 fps",
+    "t0Source": "design snap time (the clip is already at strength at frame 0, so the measured onset is not meaningful)"
+   },
+   "guess": [
+    "shape",
+    "radius",
+    "count",
+    "damage",
+    "status",
+    "mark",
+    "linger",
+    "strikes[1:] (offsets after the first hit and tick spacing come from the Gemini text)",
+    "strikes[0].t"
+   ],
+   "sfxMeasured": {
+    "onset": 0.08,
+    "peak": 0.58,
+    "tail": 4.62,
+    "durationS": 6.0,
+    "takes": 4,
+    "pick": "heuristic: peak near 0.4 s, onset <= 0.2 s, tail >= 2.5 s; not chosen by ear"
+   }
+  },
+  {
+   "code": "A4",
+   "id": "karmic-ember-tempest",
+   "name": "Karmic Ember Tempest · Hồng Liên Nghiệp Hỏa Vũ",
+   "group": "A",
+   "role": "area",
+   "element": "fire",
+   "elements": [
+    "fire",
+    "poison",
+    "dark",
+    "blood"
+   ],
+   "clip": {
+    "folder": "expansion",
+    "id": "karmic-ember-tempest",
+    "atlas": "karmic-ember-tempest.atlas.png",
+    "fps": 6.0,
+    "frames": 31,
+    "cell": [
+     640,
+     360
+    ],
+    "pivot": [
+     0.5299,
+     0.5744
+    ],
+    "timing": {
+     "peak": 0,
+     "holdEnd": 23,
+     "endsHot": false,
+     "note": "peak: frame of peak energy (3-frame mean); holdEnd: last frame still at 60 % of it or more (the tail after it is the fade); endsHot: the last frame is still bright (the Firefly clip cuts to black without a fade), so the kit must erode or fade it"
+    }
+   },
+   "shape": "field",
+   "radius": 22,
+   "count": 1,
+   "strikes": [
+    {
+     "t": 0.4,
+     "power": 1,
+     "kind": "hit"
+    },
+    {
+     "t": 0.9,
+     "power": 0.25,
+     "kind": "tick"
+    },
+    {
+     "t": 1.4,
+     "power": 0.25,
+     "kind": "tick"
+    },
+    {
+     "t": 1.9,
+     "power": 0.25,
+     "kind": "tick"
+    },
+    {
+     "t": 2.4,
+     "power": 0.25,
+     "kind": "tick"
+    }
+   ],
+   "damage": "heavy",
+   "status": null,
+   "mark": null,
+   "linger": 2.0,
+   "sfx": "art-src/lab/firefly-sprint-2026-11-05/sound/tt-sfx-x-karmic-ember-tempest/take1.wav",
+   "gameplay": "Wide spiral vortex covering 85% of the arena; searing energy feathers and weapon phantoms whirl inward in 0.4s to scorch the horde, leaving a 2.0s burning rune ring.",
+   "design": "85 % of the arena, whirls inward in 0.4 s, leaves a 2.0 s burning rune ring",
+   "measured": {
+    "tOnset": 0.04,
+    "tPeak": 4.42,
+    "earlyPeakEnergyShare": 0.99,
+    "flatness3s": 0.33,
+    "source": "24 fps energy of the source video (tools/vfx-flipbook analysis grid), first take; atlas peak frame 0 of 31 at 6.0 fps",
+    "t0Source": "design snap time (the clip is already at strength at frame 0, so the measured onset is not meaningful)"
+   },
+   "guess": [
+    "shape",
+    "radius",
+    "count",
+    "damage",
+    "status",
+    "mark",
+    "linger",
+    "strikes[1:] (offsets after the first hit and tick spacing come from the Gemini text)",
+    "strikes[0].t"
+   ],
+   "sfxMeasured": {
+    "onset": 0.24,
+    "peak": 1.12,
+    "tail": 2.88,
+    "durationS": 6.0,
+    "takes": 4,
+    "pick": "heuristic: peak near 0.4 s, onset <= 0.2 s, tail >= 2.5 s; not chosen by ear"
+   }
+  },
+  {
+   "code": "A5",
+   "id": "glacial-moon-tide",
+   "name": "Glacial Moon Reflection Tide · Hàn Nguyệt Kính Triều",
+   "group": "A",
+   "role": "area",
+   "element": "ice",
+   "elements": [
+    "ice",
+    "water",
+    "star"
+   ],
+   "clip": {
+    "folder": "expansion",
+    "id": "glacial-moon-tide",
+    "atlas": "glacial-moon-tide.atlas.png",
+    "fps": 6.0,
+    "frames": 31,
+    "cell": [
+     640,
+     360
+    ],
+    "pivot": [
+     0.3928,
+     0.5312
+    ],
+    "timing": {
+     "peak": 0,
+     "holdEnd": 24,
+     "endsHot": false,
+     "note": "peak: frame of peak energy (3-frame mean); holdEnd: last frame still at 60 % of it or more (the tail after it is the fade); endsHot: the last frame is still bright (the Firefly clip cuts to black without a fade), so the kit must erode or fade it"
+    }
+   },
+   "shape": "sweep",
+   "radius": 20,
+   "count": 1,
+   "strikes": [
+    {
+     "t": 0.3,
+     "power": 0.6,
+     "kind": "hit"
+    },
+    {
+     "t": 0.8,
+     "power": 1,
+     "kind": "hit"
+    }
+   ],
+   "damage": "heavy",
+   "status": "stun",
+   "mark": null,
+   "linger": 1.5,
+   "sfx": "art-src/lab/firefly-sprint-2026-11-05/sound/tt-sfx-x-glacial-moon-tide/take2.wav",
+   "gameplay": "Wide crescent wave sweeping across the arena in 0.3s to freeze beasts in place, leaving a giant translucent moon reflection on the ground that shatters at 0.8s and fades over 1.5s.",
+   "design": "crescent wave freezes in 0.3 s, the moon reflection shatters at 0.8 s",
+   "measured": {
+    "tOnset": 0.04,
+    "tPeak": 0.04,
+    "earlyPeakEnergyShare": 1.0,
+    "flatness3s": 0.33,
+    "source": "24 fps energy of the source video (tools/vfx-flipbook analysis grid), first take; atlas peak frame 0 of 31 at 6.0 fps",
+    "t0Source": "design snap time (the clip is already at strength at frame 0, so the measured onset is not meaningful)"
+   },
+   "guess": [
+    "shape",
+    "radius",
+    "count",
+    "damage",
+    "status",
+    "mark",
+    "linger",
+    "strikes[1:] (offsets after the first hit and tick spacing come from the Gemini text)",
+    "strikes[0].t"
+   ],
+   "arcDeg": 180,
+   "sfxMeasured": {
+    "onset": 0.32,
+    "peak": 1.3,
+    "tail": 4.2,
+    "durationS": 6.0,
+    "takes": 4,
+    "pick": "heuristic: peak near 0.4 s, onset <= 0.2 s, tail >= 2.5 s; not chosen by ear"
+   }
+  },
+  {
+   "code": "A6",
+   "id": "samsara-blood-mandala",
+   "name": "Scarlet Samsara Compass · Huyết Luân Luân Hồi Bàn",
+   "group": "A",
+   "role": "area",
+   "element": "blood",
+   "elements": [
+    "blood",
+    "dark",
+    "earth",
+    "void"
+   ],
+   "clip": {
+    "folder": "expansion",
+    "id": "samsara-blood-mandala",
+    "atlas": "samsara-blood-mandala.atlas.png",
+    "fps": 6.0,
+    "frames": 31,
+    "cell": [
+     640,
+     360
+    ],
+    "pivot": [
+     0.5137,
+     0.5135
+    ],
+    "timing": {
+     "peak": 19,
+     "holdEnd": 24,
+     "endsHot": false,
+     "note": "peak: frame of peak energy (3-frame mean); holdEnd: last frame still at 60 % of it or more (the tail after it is the fade); endsHot: the last frame is still bright (the Firefly clip cuts to black without a fade), so the kit must erode or fade it"
+    }
+   },
+   "shape": "field",
+   "radius": 20,
+   "count": 1,
+   "strikes": [
+    {
+     "t": 0.25,
+     "power": 0.7,
+     "kind": "hit"
+    },
+    {
+     "t": 0.7,
+     "power": 0.7,
+     "kind": "hit"
+    },
+    {
+     "t": 1.15,
+     "power": 0.25,
+     "kind": "tick"
+    },
+    {
+     "t": 1.6,
+     "power": 0.25,
+     "kind": "tick"
+    },
+    {
+     "t": 2.05,
+     "power": 0.25,
+     "kind": "tick"
+    }
+   ],
+   "damage": "heavy",
+   "status": null,
+   "mark": null,
+   "linger": 1.8,
+   "sfx": "art-src/lab/firefly-sprint-2026-11-05/sound/tt-sfx-x-samsara-blood-mandala/take2.wav",
+   "gameplay": "Giant octagonal Feng Shui astrolabe beneath all enemies; locks into place in 0.25s with rotating pointer needles that slice beasts twice, then drains life over a 1.8s fade.",
+   "design": "astrolabe under all beasts locks in 0.25 s, needles slice twice, drain for 1.8 s",
+   "measured": {
+    "tOnset": 0.04,
+    "tPeak": 4.92,
+    "earlyPeakEnergyShare": 0.88,
+    "flatness3s": 0.42,
+    "source": "24 fps energy of the source video (tools/vfx-flipbook analysis grid), first take; atlas peak frame 19 of 31 at 6.0 fps",
+    "t0Source": "design snap time (the clip is already at strength at frame 0, so the measured onset is not meaningful)"
+   },
+   "guess": [
+    "shape",
+    "radius",
+    "count",
+    "damage",
+    "status",
+    "mark",
+    "linger",
+    "strikes[1:] (offsets after the first hit and tick spacing come from the Gemini text)",
+    "strikes[0].t"
+   ],
+   "sfxMeasured": {
+    "onset": 0.1,
+    "peak": 0.18,
+    "tail": 5.98,
+    "durationS": 6.0,
+    "takes": 4,
+    "pick": "heuristic: peak near 0.4 s, onset <= 0.2 s, tail >= 2.5 s; not chosen by ear"
+   }
+  },
+  {
+   "code": "A7",
+   "id": "astral-meteor-constellation",
+   "name": "Seven-Star Astral Fall · Thất Tinh Tinh Hà Trụy",
+   "group": "A",
+   "role": "area",
+   "element": "star",
+   "elements": [
+    "star",
+    "metal",
+    "light",
+    "ice"
+   ],
+   "clip": {
+    "folder": "expansion",
+    "id": "astral-meteor-constellation",
+    "atlas": "astral-meteor-constellation.atlas.png",
+    "fps": 6.0,
+    "frames": 31,
+    "cell": [
+     640,
+     360
+    ],
+    "pivot": [
+     0.4489,
+     0.4866
+    ],
+    "timing": {
+     "peak": 3,
+     "holdEnd": 23,
+     "endsHot": false,
+     "note": "peak: frame of peak energy (3-frame mean); holdEnd: last frame still at 60 % of it or more (the tail after it is the fade); endsHot: the last frame is still bright (the Firefly clip cuts to black without a fade), so the kit must erode or fade it"
+    }
+   },
+   "shape": "multi",
+   "radius": 2.8,
+   "count": 7,
+   "strikes": [
+    {
+     "t": 0.3,
+     "power": 1,
+     "kind": "hit"
+    },
+    {
+     "t": 0.8,
+     "power": 0.4,
+     "kind": "hit"
+    }
+   ],
+   "damage": "heavy",
+   "status": null,
+   "mark": 0.2,
+   "linger": 1.7,
+   "sfx": "art-src/lab/firefly-sprint-2026-11-05/sound/tt-sfx-x-astral-meteor-constellation/take2.wav",
+   "gameplay": "Seven-point Big Dipper strike across the entire field; 7 giant translucent star-weapons plummet in 0.3s, linking with constellation beams that sweep outward and fade over 1.7s.",
+   "design": "7 star-weapons land in 0.3 s in the Big Dipper pattern, constellation beams sweep out",
+   "measured": {
+    "tOnset": 0.04,
+    "tPeak": 0.46,
+    "earlyPeakEnergyShare": 1.0,
+    "flatness3s": 0.48,
+    "source": "24 fps energy of the source video (tools/vfx-flipbook analysis grid), first take; atlas peak frame 3 of 31 at 6.0 fps",
+    "t0Source": "design snap time (the clip is already at strength at frame 0, so the measured onset is not meaningful)"
+   },
+   "guess": [
+    "shape",
+    "radius",
+    "count",
+    "damage",
+    "status",
+    "mark",
+    "linger",
+    "strikes[1:] (offsets after the first hit and tick spacing come from the Gemini text)",
+    "strikes[0].t"
+   ],
+   "sfxMeasured": {
+    "onset": 0.1,
+    "peak": 0.58,
+    "tail": 3.36,
+    "durationS": 6.0,
+    "takes": 4,
+    "pick": "heuristic: peak near 0.4 s, onset <= 0.2 s, tail >= 2.5 s; not chosen by ear"
+   }
+  },
+  {
+   "code": "A8",
+   "id": "miasma-briar-abyss",
+   "name": "Netherworld Briar Vortex · U Minh Kinh Cức Uyên",
+   "group": "A",
+   "role": "area",
+   "element": "poison",
+   "elements": [
+    "poison",
+    "wood",
+    "dark"
+   ],
+   "clip": {
+    "folder": "expansion",
+    "id": "miasma-briar-abyss",
+    "atlas": "miasma-briar-abyss.atlas.png",
+    "fps": 6.0,
+    "frames": 31,
+    "cell": [
+     640,
+     360
+    ],
+    "pivot": [
+     0.5048,
+     0.4922
+    ],
+    "timing": {
+     "peak": 0,
+     "holdEnd": 24,
+     "endsHot": false,
+     "note": "peak: frame of peak energy (3-frame mean); holdEnd: last frame still at 60 % of it or more (the tail after it is the fade); endsHot: the last frame is still bright (the Firefly clip cuts to black without a fade), so the kit must erode or fade it"
+    }
+   },
+   "shape": "ring",
+   "radius": 19,
+   "count": 1,
+   "strikes": [
+    {
+     "t": 0.3,
+     "power": 0.7,
+     "kind": "hit"
+    },
+    {
+     "t": 0.9,
+     "power": 0.3,
+     "kind": "tick"
+    },
+    {
+     "t": 1.5,
+     "power": 0.3,
+     "kind": "tick"
+    },
+    {
+     "t": 2.1,
+     "power": 0.3,
+     "kind": "tick"
+    }
+   ],
+   "damage": "heavy",
+   "status": "bind",
+   "mark": null,
+   "linger": 1.9,
+   "sfx": "art-src/lab/firefly-sprint-2026-11-05/sound/tt-sfx-x-miasma-briar-abyss/take2.wav",
+   "gameplay": "Arena-wide ring of spectral thorns; erupts from the perimeter in 0.3s and lashes inward to snare and poison all beasts, dissolving into luminous spore mist over 1.9s.",
+   "design": "thorn ring erupts at the edge in 0.3 s and lashes inward, snare and poison, spore mist 1.9 s",
+   "measured": {
+    "tOnset": 0.04,
+    "tPeak": 0.04,
+    "earlyPeakEnergyShare": 1.0,
+    "flatness3s": 0.32,
+    "source": "24 fps energy of the source video (tools/vfx-flipbook analysis grid), first take; atlas peak frame 0 of 31 at 6.0 fps",
+    "t0Source": "design snap time (the clip is already at strength at frame 0, so the measured onset is not meaningful)"
+   },
+   "guess": [
+    "shape",
+    "radius",
+    "count",
+    "damage",
+    "status",
+    "mark",
+    "linger",
+    "strikes[1:] (offsets after the first hit and tick spacing come from the Gemini text)",
+    "strikes[0].t"
+   ],
+   "sfxMeasured": {
+    "onset": 0.58,
+    "peak": 0.84,
+    "tail": 3.6,
+    "durationS": 6.0,
+    "takes": 4,
+    "pick": "heuristic: peak near 0.4 s, onset <= 0.2 s, tail >= 2.5 s; not chosen by ear"
+   }
+  },
+  {
+   "code": "B1",
+   "id": "asura-six-arms-avatar",
+   "name": "Three-Faced Six-Armed War Sovereign · Tam Đầu Lục Tí Chiến Tôn Pháp Tướng",
+   "group": "B",
+   "role": "avatar",
+   "element": "fire",
+   "elements": [
+    "fire",
+    "blood",
+    "metal",
+    "thunder"
+   ],
+   "clip": {
+    "folder": "expansion",
+    "id": "asura-six-arms-avatar",
+    "atlas": "asura-six-arms-avatar.atlas.png",
+    "fps": 6.0,
+    "frames": 31,
+    "cell": [
+     640,
+     360
+    ],
+    "pivot": [
+     0.5134,
+     0.5306
+    ],
+    "timing": {
+     "peak": 16,
+     "holdEnd": 22,
+     "endsHot": false,
+     "note": "peak: frame of peak energy (3-frame mean); holdEnd: last frame still at 60 % of it or more (the tail after it is the fade); endsHot: the last frame is still bright (the Firefly clip cuts to black without a fade), so the kit must erode or fade it"
+    }
+   },
+   "shape": "multi",
+   "radius": 3,
+   "count": 6,
+   "strikes": [
+    {
+     "t": 0.2,
+     "power": 0.7,
+     "kind": "hit"
+    },
+    {
+     "t": 0.27,
+     "power": 0.7,
+     "kind": "hit"
+    },
+    {
+     "t": 0.34,
+     "power": 0.7,
+     "kind": "hit"
+    },
+    {
+     "t": 0.41,
+     "power": 0.7,
+     "kind": "hit"
+    },
+    {
+     "t": 0.48,
+     "power": 0.7,
+     "kind": "hit"
+    },
+    {
+     "t": 0.55,
+     "power": 1,
+     "kind": "hit"
+    }
+   ],
+   "damage": "ult",
+   "status": null,
+   "mark": 0.15,
+   "linger": 1.8,
+   "sfx": "art-src/lab/firefly-sprint-2026-11-05/sound/tt-sfx-x-asura-six-arms-avatar/take2.wav",
+   "gameplay": "Giant upper-body manifestation behind the player; rises in 0.2s and slams 6 colossal spectral weapons onto the battlefield in a 0.35s radial shockwave, lingering for 1.8s.",
+   "design": "rises in 0.2 s, slams 6 weapons in a 0.35 s radial shockwave",
+   "measured": {
+    "tOnset": 0.04,
+    "tPeak": 0.04,
+    "earlyPeakEnergyShare": 1.0,
+    "flatness3s": 0.35,
+    "source": "24 fps energy of the source video (tools/vfx-flipbook analysis grid), first take; atlas peak frame 16 of 31 at 6.0 fps",
+    "t0Source": "design snap time (the clip is already at strength at frame 0, so the measured onset is not meaningful)"
+   },
+   "guess": [
+    "shape",
+    "radius",
+    "count",
+    "damage",
+    "status",
+    "mark",
+    "linger",
+    "strikes[1:] (offsets after the first hit and tick spacing come from the Gemini text)",
+    "strikes[0].t"
+   ],
+   "sfxMeasured": {
+    "onset": 0.1,
+    "peak": 0.64,
+    "tail": 4.14,
+    "durationS": 6.0,
+    "takes": 4,
+    "pick": "heuristic: peak near 0.4 s, onset <= 0.2 s, tail >= 2.5 s; not chosen by ear"
+   }
+  },
+  {
+   "code": "B2",
+   "id": "myriad-palm-bodhi-avatar",
+   "name": "Thousand-Hand Bodhi Illuminator · Thiên Thủ Lưu Ly Minh Vương Pháp Tướng",
+   "group": "B",
+   "role": "avatar",
+   "element": "light",
+   "elements": [
+    "light",
+    "wood",
+    "metal",
+    "earth"
+   ],
+   "clip": {
+    "folder": "expansion",
+    "id": "myriad-palm-bodhi-avatar",
+    "atlas": "myriad-palm-bodhi-avatar.atlas.png",
+    "fps": 6.0,
+    "frames": 31,
+    "cell": [
+     640,
+     360
+    ],
+    "pivot": [
+     0.4958,
+     0.4734
+    ],
+    "timing": {
+     "peak": 0,
+     "holdEnd": 23,
+     "endsHot": false,
+     "note": "peak: frame of peak energy (3-frame mean); holdEnd: last frame still at 60 % of it or more (the tail after it is the fade); endsHot: the last frame is still bright (the Firefly clip cuts to black without a fade), so the kit must erode or fade it"
+    }
+   },
+   "shape": "multi",
+   "radius": 2.6,
+   "count": 16,
+   "strikes": [
+    {
+     "t": 0.2,
+     "power": 0.6,
+     "kind": "hit"
+    },
+    {
+     "t": 0.3,
+     "power": 0.7,
+     "kind": "hit"
+    },
+    {
+     "t": 0.4,
+     "power": 0.8,
+     "kind": "hit"
+    },
+    {
+     "t": 0.5,
+     "power": 0.9,
+     "kind": "hit"
+    },
+    {
+     "t": 0.6,
+     "power": 1,
+     "kind": "hit"
+    }
+   ],
+   "damage": "ult",
+   "status": null,
+   "mark": 0.15,
+   "linger": 1.7,
+   "sfx": "art-src/lab/firefly-sprint-2026-11-05/sound/tt-sfx-x-myriad-palm-bodhi-avatar/take1.wav",
+   "gameplay": "Towering golden-jade spirit avatar; fans out an arc of spectral palms in 0.2s and stamps 16 giant glowing handprints across the entire battlefield in 0.4s, fading over 1.7s.",
+   "design": "fans palms in 0.2 s, stamps 16 handprints across the field within 0.4 s (4 waves of 4 here)",
+   "measured": {
+    "tOnset": 0.04,
+    "tPeak": 0.04,
+    "earlyPeakEnergyShare": 1.0,
+    "flatness3s": 0.32,
+    "source": "24 fps energy of the source video (tools/vfx-flipbook analysis grid), first take; atlas peak frame 0 of 31 at 6.0 fps",
+    "t0Source": "design snap time (the clip is already at strength at frame 0, so the measured onset is not meaningful)"
+   },
+   "guess": [
+    "shape",
+    "radius",
+    "count",
+    "damage",
+    "status",
+    "mark",
+    "linger",
+    "strikes[1:] (offsets after the first hit and tick spacing come from the Gemini text)",
+    "strikes[0].t",
+    "strikes (4 waves of 4 prints is an assumption; Gemini gives only 16 prints in 0.4 s)"
+   ],
+   "sfxMeasured": {
+    "onset": 0.0,
+    "peak": 0.38,
+    "tail": 2.62,
+    "durationS": 6.0,
+    "takes": 4,
+    "pick": "heuristic: peak near 0.4 s, onset <= 0.2 s, tail >= 2.5 s; not chosen by ear"
+   }
+  },
+  {
+   "code": "B3",
+   "id": "heaven-earth-titan-avatar",
+   "name": "Primordial Heaven-and-Earth Titan · Pháp Thiên Tượng Địa Cự Thần",
+   "group": "B",
+   "role": "avatar",
+   "element": "earth",
+   "elements": [
+    "earth",
+    "thunder",
+    "ice",
+    "metal"
+   ],
+   "clip": {
+    "folder": "expansion",
+    "id": "heaven-earth-titan-avatar",
+    "atlas": "heaven-earth-titan-avatar.atlas.png",
+    "fps": 6.0,
+    "frames": 31,
+    "cell": [
+     640,
+     360
+    ],
+    "pivot": [
+     0.4875,
+     0.5926
+    ],
+    "timing": {
+     "peak": 0,
+     "holdEnd": 22,
+     "endsHot": false,
+     "note": "peak: frame of peak energy (3-frame mean); holdEnd: last frame still at 60 % of it or more (the tail after it is the fade); endsHot: the last frame is still bright (the Firefly clip cuts to black without a fade), so the kit must erode or fade it"
+    }
+   },
+   "shape": "sweep",
+   "radius": 18,
+   "count": 1,
+   "strikes": [
+    {
+     "t": 0.35,
+     "power": 0.6,
+     "kind": "hit"
+    },
+    {
+     "t": 0.52,
+     "power": 0.8,
+     "kind": "hit"
+    },
+    {
+     "t": 0.7,
+     "power": 1,
+     "kind": "hit"
+    }
+   ],
+   "damage": "ult",
+   "status": null,
+   "mark": null,
+   "linger": 2.0,
+   "sfx": "art-src/lab/firefly-sprint-2026-11-05/sound/tt-sfx-x-heaven-earth-titan-avatar/take1.wav",
+   "gameplay": "Colossal crystalline-energy giant enveloping the cultivator; sweeps a titanic two-handed spectral weapon in a 270-degree cleave across the whole screen in 0.35s, decaying over 2.0s.",
+   "design": "two-handed 270 degree cleave across the whole screen in 0.35 s",
+   "measured": {
+    "tOnset": 0.04,
+    "tPeak": 0.04,
+    "earlyPeakEnergyShare": 1.0,
+    "flatness3s": 0.56,
+    "source": "24 fps energy of the source video (tools/vfx-flipbook analysis grid), first take; atlas peak frame 0 of 31 at 6.0 fps",
+    "t0Source": "design snap time (the clip is already at strength at frame 0, so the measured onset is not meaningful)"
+   },
+   "guess": [
+    "shape",
+    "radius",
+    "count",
+    "damage",
+    "status",
+    "mark",
+    "linger",
+    "strikes[1:] (offsets after the first hit and tick spacing come from the Gemini text)",
+    "strikes[0].t"
+   ],
+   "arcDeg": 270,
+   "sfxMeasured": {
+    "onset": 0.14,
+    "peak": 0.94,
+    "tail": 5.08,
+    "durationS": 6.0,
+    "takes": 4,
+    "pick": "heuristic: peak near 0.4 s, onset <= 0.2 s, tail >= 2.5 s; not chosen by ear"
+   }
+  },
+  {
+   "code": "B4",
+   "id": "polar-star-emperor-avatar",
+   "name": "Purple Micro Star Emperor · Tử Vi Tinh Quân Pháp Tướng",
+   "group": "B",
+   "role": "avatar",
+   "element": "star",
+   "elements": [
+    "star",
+    "void",
+    "light",
+    "ice"
+   ],
+   "clip": {
+    "folder": "expansion",
+    "id": "polar-star-emperor-avatar",
+    "atlas": "polar-star-emperor-avatar.atlas.png",
+    "fps": 6.0,
+    "frames": 31,
+    "cell": [
+     640,
+     360
+    ],
+    "pivot": [
+     0.5024,
+     0.5727
+    ],
+    "timing": {
+     "peak": 0,
+     "holdEnd": 23,
+     "endsHot": false,
+     "note": "peak: frame of peak energy (3-frame mean); holdEnd: last frame still at 60 % of it or more (the tail after it is the fade); endsHot: the last frame is still bright (the Firefly clip cuts to black without a fade), so the kit must erode or fade it"
+    }
+   },
+   "shape": "ring",
+   "radius": 14,
+   "count": 1,
+   "strikes": [
+    {
+     "t": 0.25,
+     "power": 1,
+     "kind": "hit"
+    },
+    {
+     "t": 0.85,
+     "power": 0.4,
+     "kind": "hit"
+    },
+    {
+     "t": 1.45,
+     "power": 0.3,
+     "kind": "tick"
+    }
+   ],
+   "damage": "ult",
+   "status": null,
+   "mark": 0.2,
+   "linger": 1.8,
+   "sfx": "art-src/lab/firefly-sprint-2026-11-05/sound/tt-sfx-x-polar-star-emperor-avatar/take1.wav",
+   "gameplay": "Regal nebula-light sovereign floating behind the player; points a finger downward to drop a giant celestial star-sword into the arena center in 0.25s, radiating a 1.8s astral wave.",
+   "design": "star-sword drops in the centre in 0.25 s, astral wave radiates for 1.8 s",
+   "measured": {
+    "tOnset": 0.04,
+    "tPeak": 0.04,
+    "earlyPeakEnergyShare": 1.0,
+    "flatness3s": 0.32,
+    "source": "24 fps energy of the source video (tools/vfx-flipbook analysis grid), first take; atlas peak frame 0 of 31 at 6.0 fps",
+    "t0Source": "design snap time (the clip is already at strength at frame 0, so the measured onset is not meaningful)"
+   },
+   "guess": [
+    "shape",
+    "radius",
+    "count",
+    "damage",
+    "status",
+    "mark",
+    "linger",
+    "strikes[1:] (offsets after the first hit and tick spacing come from the Gemini text)",
+    "strikes[0].t"
+   ],
+   "sfxMeasured": {
+    "onset": 0.0,
+    "peak": 0.8,
+    "tail": 5.0,
+    "durationS": 6.0,
+    "takes": 4,
+    "pick": "heuristic: peak near 0.4 s, onset <= 0.2 s, tail >= 2.5 s; not chosen by ear"
+   }
+  },
+  {
+   "code": "B5",
+   "id": "nether-samsara-monarch-avatar",
+   "name": "Nine-Nether Soul Arbiter · Cửu U Minh Đế Pháp Tướng",
+   "group": "B",
+   "role": "avatar",
+   "element": "dark",
+   "elements": [
+    "dark",
+    "blood",
+    "poison",
+    "void"
+   ],
+   "clip": {
+    "folder": "expansion",
+    "id": "nether-samsara-monarch-avatar",
+    "atlas": "nether-samsara-monarch-avatar.atlas.png",
+    "fps": 6.0,
+    "frames": 31,
+    "cell": [
+     640,
+     360
+    ],
+    "pivot": [
+     0.4956,
+     0.53
+    ],
+    "timing": {
+     "peak": 18,
+     "holdEnd": 24,
+     "endsHot": false,
+     "note": "peak: frame of peak energy (3-frame mean); holdEnd: last frame still at 60 % of it or more (the tail after it is the fade); endsHot: the last frame is still bright (the Firefly clip cuts to black without a fade), so the kit must erode or fade it"
+    }
+   },
+   "shape": "line",
+   "radius": 3.2,
+   "count": 2,
+   "strikes": [
+    {
+     "t": 0.3,
+     "power": 1,
+     "kind": "hit"
+    },
+    {
+     "t": 0.9,
+     "power": 0.25,
+     "kind": "tick"
+    },
+    {
+     "t": 1.5,
+     "power": 0.25,
+     "kind": "tick"
+    },
+    {
+     "t": 2.1,
+     "power": 0.25,
+     "kind": "tick"
+    }
+   ],
+   "damage": "ult",
+   "status": null,
+   "mark": null,
+   "linger": 1.9,
+   "sfx": "art-src/lab/firefly-sprint-2026-11-05/sound/tt-sfx-x-nether-samsara-monarch-avatar/take3.wav",
+   "gameplay": "Spectral underworld monarch rising from a dark floor vortex; crosses dual giant energy blades in an X-slash across the whole screen in 0.3s, applying soul-burn for 1.9s.",
+   "design": "X-slash with two giant blades in 0.3 s, soul-burn for 1.9 s (burn left as ticks)",
+   "measured": {
+    "tOnset": 0.04,
+    "tPeak": 2.92,
+    "earlyPeakEnergyShare": 0.94,
+    "flatness3s": 0.42,
+    "source": "24 fps energy of the source video (tools/vfx-flipbook analysis grid), first take; atlas peak frame 18 of 31 at 6.0 fps",
+    "t0Source": "design snap time (the clip is already at strength at frame 0, so the measured onset is not meaningful)"
+   },
+   "guess": [
+    "shape",
+    "radius",
+    "count",
+    "damage",
+    "status",
+    "mark",
+    "linger",
+    "strikes[1:] (offsets after the first hit and tick spacing come from the Gemini text)",
+    "strikes[0].t"
+   ],
+   "sfxMeasured": {
+    "onset": 0.18,
+    "peak": 0.48,
+    "tail": 5.62,
+    "durationS": 6.0,
+    "takes": 4,
+    "pick": "heuristic: peak near 0.4 s, onset <= 0.2 s, tail >= 2.5 s; not chosen by ear"
+   }
+  },
+  {
+   "code": "B6",
+   "id": "immortal-sword-progenitor-avatar",
+   "name": "Taixu Sword Immortal Phantom · Thái Hư Kiếm Tiên Pháp Tướng",
+   "group": "B",
+   "role": "avatar",
+   "element": "any",
+   "elements": [
+    "metal",
+    "wind",
+    "ice",
+    "light"
+   ],
+   "clip": {
+    "folder": "expansion",
+    "id": "immortal-sword-progenitor-avatar",
+    "atlas": "immortal-sword-progenitor-avatar.atlas.png",
+    "fps": 6.0,
+    "frames": 31,
+    "cell": [
+     640,
+     360
+    ],
+    "pivot": [
+     0.4885,
+     0.5179
+    ],
+    "timing": {
+     "peak": 0,
+     "holdEnd": 23,
+     "endsHot": false,
+     "note": "peak: frame of peak energy (3-frame mean); holdEnd: last frame still at 60 % of it or more (the tail after it is the fade); endsHot: the last frame is still bright (the Firefly clip cuts to black without a fade), so the kit must erode or fade it"
+    }
+   },
+   "shape": "multi",
+   "radius": 1.9,
+   "count": 24,
+   "strikes": [
+    {
+     "t": 0.2,
+     "power": 1,
+     "kind": "hit"
+    }
+   ],
+   "damage": "ult",
+   "status": null,
+   "mark": null,
+   "linger": 1.6,
+   "sfx": "art-src/lab/firefly-sprint-2026-11-05/sound/tt-sfx-x-immortal-sword-progenitor-avatar/take4.wav",
+   "gameplay": "Ethereal cyan-white immortal silhouette with a giant weapon-wheel halo; merges two fingers in 0.2s to fire 24 spectral weapons radially across the entire battlefield, decaying over 1.6s.",
+   "design": "merges two fingers in 0.2 s, 24 spectral weapons fan out radially",
+   "measured": {
+    "tOnset": 0.04,
+    "tPeak": 0.04,
+    "earlyPeakEnergyShare": 1.0,
+    "flatness3s": 0.32,
+    "source": "24 fps energy of the source video (tools/vfx-flipbook analysis grid), first take; atlas peak frame 0 of 31 at 6.0 fps",
+    "t0Source": "design snap time (the clip is already at strength at frame 0, so the measured onset is not meaningful)"
+   },
+   "guess": [
+    "shape",
+    "radius",
+    "count",
+    "damage",
+    "status",
+    "mark",
+    "linger",
+    "strikes[1:] (offsets after the first hit and tick spacing come from the Gemini text)",
+    "strikes[0].t"
+   ],
+   "sfxMeasured": {
+    "onset": 0.0,
+    "peak": 0.02,
+    "tail": 4.42,
+    "durationS": 6.0,
+    "takes": 4,
+    "pick": "heuristic: peak near 0.4 s, onset <= 0.2 s, tail >= 2.5 s; not chosen by ear"
+   }
+  },
+  {
+   "code": "C1",
+   "id": "azure-cloud-dragon",
+   "name": "Azure Tempest Dragon · Thanh Minh Vân Lôi Long",
+   "group": "C",
+   "role": "beast",
+   "element": "thunder",
+   "elements": [
+    "thunder",
+    "wind",
+    "water",
+    "wood"
+   ],
+   "clip": {
+    "folder": "expansion",
+    "id": "azure-cloud-dragon",
+    "atlas": "azure-cloud-dragon.atlas.png",
+    "fps": 6.0,
+    "frames": 31,
+    "cell": [
+     640,
+     360
+    ],
+    "pivot": [
+     0.4976,
+     0.5365
+    ],
+    "timing": {
+     "peak": 0,
+     "holdEnd": 22,
+     "endsHot": false,
+     "note": "peak: frame of peak energy (3-frame mean); holdEnd: last frame still at 60 % of it or more (the tail after it is the fade); endsHot: the last frame is still bright (the Firefly clip cuts to black without a fade), so the kit must erode or fade it"
+    }
+   },
+   "shape": "path",
+   "radius": 3,
+   "count": 1,
+   "strikes": [
+    {
+     "t": 0.35,
+     "power": 0.35,
+     "kind": "hit"
+    },
+    {
+     "t": 0.47,
+     "power": 0.35,
+     "kind": "hit"
+    },
+    {
+     "t": 0.59,
+     "power": 0.35,
+     "kind": "hit"
+    },
+    {
+     "t": 0.75,
+     "power": 1,
+     "kind": "hit"
+    }
+   ],
+   "damage": "heavy",
+   "status": null,
+   "mark": null,
+   "linger": 1.8,
+   "sfx": "art-src/lab/firefly-sprint-2026-11-05/sound/tt-sfx-x-azure-cloud-dragon/take4.wav",
+   "gameplay": "Colossal translucent dragon; sweeps a figure-eight path across the whole arena in 0.35s before diving into the center to detonate a field-wide lightning ring that fades over 1.8s.",
+   "design": "figure-eight path across the arena in 0.35 s, then dives to the centre and detonates a lightning ring",
+   "measured": {
+    "tOnset": 0.04,
+    "tPeak": 0.04,
+    "earlyPeakEnergyShare": 1.0,
+    "flatness3s": 0.32,
+    "source": "24 fps energy of the source video (tools/vfx-flipbook analysis grid), first take; atlas peak frame 0 of 31 at 6.0 fps",
+    "t0Source": "design snap time (the clip is already at strength at frame 0, so the measured onset is not meaningful)"
+   },
+   "guess": [
+    "shape",
+    "radius",
+    "count",
+    "damage",
+    "status",
+    "mark",
+    "linger",
+    "strikes[1:] (offsets after the first hit and tick spacing come from the Gemini text)",
+    "strikes[0].t"
+   ],
+   "then": {
+    "shape": "ring",
+    "radius": 18
+   },
+   "sfxMeasured": {
+    "onset": 0.22,
+    "peak": 0.48,
+    "tail": 3.24,
+    "durationS": 6.0,
+    "takes": 4,
+    "pick": "heuristic: peak near 0.4 s, onset <= 0.2 s, tail >= 2.5 s; not chosen by ear"
+   }
+  },
+  {
+   "code": "C2",
+   "id": "white-fiend-tiger",
+   "name": "Astral Slaying White Tiger · Canh Kim Sát Phạt Bạch Hổ",
+   "group": "C",
+   "role": "beast",
+   "element": "metal",
+   "elements": [
+    "metal",
+    "wind",
+    "ice",
+    "blood"
+   ],
+   "clip": {
+    "folder": "expansion",
+    "id": "white-fiend-tiger",
+    "atlas": "white-fiend-tiger.atlas.png",
+    "fps": 6.0,
+    "frames": 31,
+    "cell": [
+     640,
+     360
+    ],
+    "pivot": [
+     0.481,
+     0.5238
+    ],
+    "timing": {
+     "peak": 0,
+     "holdEnd": 23,
+     "endsHot": false,
+     "note": "peak: frame of peak energy (3-frame mean); holdEnd: last frame still at 60 % of it or more (the tail after it is the fade); endsHot: the last frame is still bright (the Firefly clip cuts to black without a fade), so the kit must erode or fade it"
+    }
+   },
+   "shape": "line",
+   "radius": 2.2,
+   "count": 4,
+   "strikes": [
+    {
+     "t": 0.25,
+     "power": 0.5,
+     "kind": "hit"
+    },
+    {
+     "t": 0.45,
+     "power": 1,
+     "kind": "hit"
+    }
+   ],
+   "damage": "heavy",
+   "status": null,
+   "mark": null,
+   "linger": 1.5,
+   "sfx": "art-src/lab/firefly-sprint-2026-11-05/sound/tt-sfx-x-white-fiend-tiger/take2.wav",
+   "gameplay": "Giant silver-white energy tiger; pounces into the arena center in 0.25s and rakes four colossal metallic claw-blade slashes across the entire screen, decaying over 1.5s.",
+   "design": "pounces in 0.25 s, rakes four colossal claw slashes across the screen",
+   "measured": {
+    "tOnset": 0.04,
+    "tPeak": 0.04,
+    "earlyPeakEnergyShare": 1.0,
+    "flatness3s": 0.32,
+    "source": "24 fps energy of the source video (tools/vfx-flipbook analysis grid), first take; atlas peak frame 0 of 31 at 6.0 fps",
+    "t0Source": "design snap time (the clip is already at strength at frame 0, so the measured onset is not meaningful)"
+   },
+   "guess": [
+    "shape",
+    "radius",
+    "count",
+    "damage",
+    "status",
+    "mark",
+    "linger",
+    "strikes[1:] (offsets after the first hit and tick spacing come from the Gemini text)",
+    "strikes[0].t"
+   ],
+   "sfxMeasured": {
+    "onset": 0.2,
+    "peak": 0.32,
+    "tail": 3.62,
+    "durationS": 6.0,
+    "takes": 4,
+    "pick": "heuristic: peak near 0.4 s, onset <= 0.2 s, tail >= 2.5 s; not chosen by ear"
+   }
+  },
+  {
+   "code": "C3",
+   "id": "vermilion-solar-phoenix",
+   "name": "Nirvana Sunfire Vermilion Bird · Nam Minh Ly Hỏa Chu Tước",
+   "group": "C",
+   "role": "beast",
+   "element": "fire",
+   "elements": [
+    "fire",
+    "light",
+    "wind",
+    "star"
+   ],
+   "clip": {
+    "folder": "expansion",
+    "id": "vermilion-solar-phoenix",
+    "atlas": "vermilion-solar-phoenix.atlas.png",
+    "fps": 6.0,
+    "frames": 31,
+    "cell": [
+     640,
+     360
+    ],
+    "pivot": [
+     0.5302,
+     0.4801
+    ],
+    "timing": {
+     "peak": 0,
+     "holdEnd": 23,
+     "endsHot": false,
+     "note": "peak: frame of peak energy (3-frame mean); holdEnd: last frame still at 60 % of it or more (the tail after it is the fade); endsHot: the last frame is still bright (the Firefly clip cuts to black without a fade), so the kit must erode or fade it"
+    }
+   },
+   "shape": "path",
+   "radius": 6,
+   "count": 1,
+   "strikes": [
+    {
+     "t": 0.35,
+     "power": 0.5,
+     "kind": "hit"
+    },
+    {
+     "t": 0.5,
+     "power": 0.5,
+     "kind": "hit"
+    },
+    {
+     "t": 0.65,
+     "power": 0.7,
+     "kind": "hit"
+    },
+    {
+     "t": 1.05,
+     "power": 0.2,
+     "kind": "tick"
+    },
+    {
+     "t": 1.65,
+     "power": 0.2,
+     "kind": "tick"
+    },
+    {
+     "t": 2.25,
+     "power": 0.2,
+     "kind": "tick"
+    }
+   ],
+   "damage": "heavy",
+   "status": null,
+   "mark": null,
+   "linger": 1.9,
+   "sfx": "art-src/lab/firefly-sprint-2026-11-05/sound/tt-sfx-x-vermilion-solar-phoenix/take3.wav",
+   "gameplay": "Dazzling translucent Vermilion Bird; glides across the entire screen from south to north in 0.35s, spreading massive wings that ignite a full-field phoenix-feather rune imprint for 1.9s.",
+   "design": "glides south to north in 0.35 s, wings ignite a feather-rune imprint for 1.9 s",
+   "measured": {
+    "tOnset": 0.04,
+    "tPeak": 0.04,
+    "earlyPeakEnergyShare": 1.0,
+    "flatness3s": 0.33,
+    "source": "24 fps energy of the source video (tools/vfx-flipbook analysis grid), first take; atlas peak frame 0 of 31 at 6.0 fps",
+    "t0Source": "design snap time (the clip is already at strength at frame 0, so the measured onset is not meaningful)"
+   },
+   "guess": [
+    "shape",
+    "radius",
+    "count",
+    "damage",
+    "status",
+    "mark",
+    "linger",
+    "strikes[1:] (offsets after the first hit and tick spacing come from the Gemini text)",
+    "strikes[0].t"
+   ],
+   "sfxMeasured": {
+    "onset": 0.06,
+    "peak": 0.42,
+    "tail": 4.92,
+    "durationS": 6.0,
+    "takes": 4,
+    "pick": "heuristic: peak near 0.4 s, onset <= 0.2 s, tail >= 2.5 s; not chosen by ear"
+   }
+  },
+  {
+   "code": "C4",
+   "id": "abyssal-xuanwu-tortoise",
+   "name": "Black-Abyss Tortoise & Serpent · Huyền Minh Trấn Hải Huyền Vũ",
+   "group": "C",
+   "role": "beast",
+   "element": "water",
+   "elements": [
+    "water",
+    "earth",
+    "ice",
+    "dark"
+   ],
+   "clip": {
+    "folder": "expansion",
+    "id": "abyssal-xuanwu-tortoise",
+    "atlas": "abyssal-xuanwu-tortoise.atlas.png",
+    "fps": 6.0,
+    "frames": 31,
+    "cell": [
+     640,
+     360
+    ],
+    "pivot": [
+     0.5111,
+     0.5313
+    ],
+    "timing": {
+     "peak": 18,
+     "holdEnd": 24,
+     "endsHot": false,
+     "note": "peak: frame of peak energy (3-frame mean); holdEnd: last frame still at 60 % of it or more (the tail after it is the fade); endsHot: the last frame is still bright (the Firefly clip cuts to black without a fade), so the kit must erode or fade it"
+    }
+   },
+   "shape": "ring",
+   "radius": 14,
+   "count": 1,
+   "strikes": [
+    {
+     "t": 0.3,
+     "power": 1,
+     "kind": "hit"
+    },
+    {
+     "t": 1.1,
+     "power": 0.2,
+     "kind": "tick"
+    },
+    {
+     "t": 1.9,
+     "power": 0.2,
+     "kind": "tick"
+    }
+   ],
+   "damage": "heavy",
+   "status": "slow",
+   "mark": 0.2,
+   "linger": 2.0,
+   "sfx": "art-src/lab/firefly-sprint-2026-11-05/sound/tt-sfx-x-abyssal-xuanwu-tortoise/take4.wav",
+   "gameplay": "Enormous translucent Xuanwu tortoise & serpent; drops onto the center in 0.3s to crush and slow all beasts with a hexagonal hydro-gravity barrier that ripples and fades over 2.0s.",
+   "design": "drops on the centre in 0.3 s, crushes and slows all with a hexagonal barrier for 2.0 s",
+   "measured": {
+    "tOnset": 0.04,
+    "tPeak": 2.92,
+    "earlyPeakEnergyShare": 0.98,
+    "flatness3s": 0.38,
+    "source": "24 fps energy of the source video (tools/vfx-flipbook analysis grid), first take; atlas peak frame 18 of 31 at 6.0 fps",
+    "t0Source": "design snap time (the clip is already at strength at frame 0, so the measured onset is not meaningful)"
+   },
+   "guess": [
+    "shape",
+    "radius",
+    "count",
+    "damage",
+    "status",
+    "mark",
+    "linger",
+    "strikes[1:] (offsets after the first hit and tick spacing come from the Gemini text)",
+    "strikes[0].t"
+   ],
+   "sfxMeasured": {
+    "onset": 0.0,
+    "peak": 0.52,
+    "tail": 4.16,
+    "durationS": 6.0,
+    "takes": 4,
+    "pick": "heuristic: peak near 0.4 s, onset <= 0.2 s, tail >= 2.5 s; not chosen by ear"
+   }
+  },
+  {
+   "code": "C5",
+   "id": "auspicious-thunder-qilin",
+   "name": "Violet-Gold Auspicious Qilin · Tử Kim Thụy Lôi Kỳ Lân",
+   "group": "C",
+   "role": "beast",
+   "element": "thunder",
+   "elements": [
+    "thunder",
+    "fire",
+    "light",
+    "earth"
+   ],
+   "clip": {
+    "folder": "expansion",
+    "id": "auspicious-thunder-qilin",
+    "atlas": "auspicious-thunder-qilin.atlas.png",
+    "fps": 6.0,
+    "frames": 31,
+    "cell": [
+     640,
+     360
+    ],
+    "pivot": [
+     0.5017,
+     0.5085
+    ],
+    "timing": {
+     "peak": 20,
+     "holdEnd": 24,
+     "endsHot": false,
+     "note": "peak: frame of peak energy (3-frame mean); holdEnd: last frame still at 60 % of it or more (the tail after it is the fade); endsHot: the last frame is still bright (the Firefly clip cuts to black without a fade), so the kit must erode or fade it"
+    }
+   },
+   "shape": "multi",
+   "radius": 4.5,
+   "count": 3,
+   "strikes": [
+    {
+     "t": 0.35,
+     "power": 1,
+     "kind": "hit"
+    }
+   ],
+   "damage": "heavy",
+   "status": null,
+   "mark": 0.2,
+   "linger": 1.6,
+   "sfx": "art-src/lab/firefly-sprint-2026-11-05/sound/tt-sfx-x-auspicious-thunder-qilin/take1.wav",
+   "gameplay": "Radiant antlered Qilin of violet-gold energy; bounds across three triangular points of the arena in 0.35s, stamping three giant lightning-lotus hoofprints that detonate together and fade over 1.6s.",
+   "design": "bounds across three triangle points in 0.35 s, the three lotus hoofprints detonate together",
+   "measured": {
+    "tOnset": 0.04,
+    "tPeak": 3.42,
+    "earlyPeakEnergyShare": 0.97,
+    "flatness3s": 0.33,
+    "source": "24 fps energy of the source video (tools/vfx-flipbook analysis grid), first take; atlas peak frame 20 of 31 at 6.0 fps",
+    "t0Source": "design snap time (the clip is already at strength at frame 0, so the measured onset is not meaningful)"
+   },
+   "guess": [
+    "shape",
+    "radius",
+    "count",
+    "damage",
+    "status",
+    "mark",
+    "linger",
+    "strikes[1:] (offsets after the first hit and tick spacing come from the Gemini text)",
+    "strikes[0].t"
+   ],
+   "sfxMeasured": {
+    "onset": 0.56,
+    "peak": 0.94,
+    "tail": 3.82,
+    "durationS": 6.0,
+    "takes": 4,
+    "pick": "heuristic: peak near 0.4 s, onset <= 0.2 s, tail >= 2.5 s; not chosen by ear"
+   }
+  },
+  {
+   "code": "C6",
+   "id": "astral-kunpeng-leviathan",
+   "name": "North-Sea Astral Kunpeng · Bắc Minh Hóa Vũ Côn Bằng",
+   "group": "C",
+   "role": "beast",
+   "element": "water",
+   "elements": [
+    "water",
+    "wind",
+    "void",
+    "star"
+   ],
+   "clip": {
+    "folder": "expansion",
+    "id": "astral-kunpeng-leviathan",
+    "atlas": "astral-kunpeng-leviathan.atlas.png",
+    "fps": 6.0,
+    "frames": 31,
+    "cell": [
+     640,
+     360
+    ],
+    "pivot": [
+     0.4616,
+     0.4768
+    ],
+    "timing": {
+     "peak": 0,
+     "holdEnd": 23,
+     "endsHot": false,
+     "note": "peak: frame of peak energy (3-frame mean); holdEnd: last frame still at 60 % of it or more (the tail after it is the fade); endsHot: the last frame is still bright (the Firefly clip cuts to black without a fade), so the kit must erode or fade it"
+    }
+   },
+   "shape": "field",
+   "radius": 22,
+   "count": 1,
+   "strikes": [
+    {
+     "t": 0.4,
+     "power": 1,
+     "kind": "hit"
+    },
+    {
+     "t": 1.0,
+     "power": 0.3,
+     "kind": "tick"
+    },
+    {
+     "t": 1.6,
+     "power": 0.3,
+     "kind": "tick"
+    }
+   ],
+   "damage": "heavy",
+   "status": null,
+   "mark": null,
+   "linger": 1.8,
+   "sfx": "art-src/lab/firefly-sprint-2026-11-05/sound/tt-sfx-x-astral-kunpeng-leviathan/take3.wav",
+   "gameplay": "Giant Kun-fish breaching a spatial vortex and instantly unfolding into a screen-spanning Peng-roc in 0.4s, buffeting the entire horde with a gale-and-tidal shockwave that decays over 1.8s.",
+   "design": "breaches a vortex and unfolds into a screen-spanning Peng in 0.4 s, gale-and-tide shockwave",
+   "measured": {
+    "tOnset": 0.04,
+    "tPeak": 0.04,
+    "earlyPeakEnergyShare": 1.0,
+    "flatness3s": 0.41,
+    "source": "24 fps energy of the source video (tools/vfx-flipbook analysis grid), first take; atlas peak frame 0 of 31 at 6.0 fps",
+    "t0Source": "design snap time (the clip is already at strength at frame 0, so the measured onset is not meaningful)"
+   },
+   "guess": [
+    "shape",
+    "radius",
+    "count",
+    "damage",
+    "status",
+    "mark",
+    "linger",
+    "strikes[1:] (offsets after the first hit and tick spacing come from the Gemini text)",
+    "strikes[0].t"
+   ],
+   "sfxMeasured": {
+    "onset": 0.22,
+    "peak": 0.78,
+    "tail": 4.6,
+    "durationS": 6.0,
+    "takes": 4,
+    "pick": "heuristic: peak near 0.4 s, onset <= 0.2 s, tail >= 2.5 s; not chosen by ear"
+   }
+  },
+  {
+   "code": "C7",
+   "id": "all-knowing-baize-spirit",
+   "name": "Celestial Truth Spirit Baize · Thông Thiên Hạo Quang Bạch Trạch",
+   "group": "C",
+   "role": "beast",
+   "element": "light",
+   "elements": [
+    "light",
+    "star",
+    "wind",
+    "wood"
+   ],
+   "clip": {
+    "folder": "expansion",
+    "id": "all-knowing-baize-spirit",
+    "atlas": "all-knowing-baize-spirit.atlas.png",
+    "fps": 6.0,
+    "frames": 31,
+    "cell": [
+     640,
+     360
+    ],
+    "pivot": [
+     0.5142,
+     0.4712
+    ],
+    "timing": {
+     "peak": 0,
+     "holdEnd": 23,
+     "endsHot": false,
+     "note": "peak: frame of peak energy (3-frame mean); holdEnd: last frame still at 60 % of it or more (the tail after it is the fade); endsHot: the last frame is still bright (the Firefly clip cuts to black without a fade), so the kit must erode or fade it"
+    }
+   },
+   "shape": "ring",
+   "radius": 20,
+   "count": 1,
+   "strikes": [
+    {
+     "t": 0.25,
+     "power": 0.8,
+     "kind": "hit"
+    },
+    {
+     "t": 0.85,
+     "power": 0.3,
+     "kind": "tick"
+    },
+    {
+     "t": 1.45,
+     "power": 0.3,
+     "kind": "tick"
+    }
+   ],
+   "damage": "heavy",
+   "status": "slow",
+   "mark": null,
+   "linger": 1.7,
+   "sfx": "art-src/lab/firefly-sprint-2026-11-05/sound/tt-sfx-x-all-knowing-baize-spirit/take1.wav",
+   "gameplay": "Graceful horned Baize spirit beast; materializes in the center in 0.25s and unleashes a 360-degree pulse of ancient truth-runes that weakens and damages all beasts over 1.7s.",
+   "design": "materialises in 0.25 s, 360 degree truth-rune pulse weakens (mapped to slow) and damages for 1.7 s",
+   "measured": {
+    "tOnset": 0.04,
+    "tPeak": 0.04,
+    "earlyPeakEnergyShare": 1.0,
+    "flatness3s": 0.33,
+    "source": "24 fps energy of the source video (tools/vfx-flipbook analysis grid), first take; atlas peak frame 0 of 31 at 6.0 fps",
+    "t0Source": "design snap time (the clip is already at strength at frame 0, so the measured onset is not meaningful)"
+   },
+   "guess": [
+    "shape",
+    "radius",
+    "count",
+    "damage",
+    "status",
+    "mark",
+    "linger",
+    "strikes[1:] (offsets after the first hit and tick spacing come from the Gemini text)",
+    "strikes[0].t",
+    "status: Gemini says weakens; mapped to slow"
+   ],
+   "sfxMeasured": {
+    "onset": 0.18,
+    "peak": 1.02,
+    "tail": 3.6,
+    "durationS": 6.0,
+    "takes": 4,
+    "pick": "heuristic: peak near 0.4 s, onset <= 0.2 s, tail >= 2.5 s; not chosen by ear"
+   }
+  },
+  {
+   "code": "C8",
+   "id": "nine-tailed-celestial-fox",
+   "name": "Moonlight Illusion Nine-Tailed Fox · Thanh Khâu Huyễn Nguyệt Cửu Vĩ Hồ",
+   "group": "C",
+   "role": "beast",
+   "element": "ice",
+   "elements": [
+    "ice",
+    "dark",
+    "fire",
+    "poison",
+    "void"
+   ],
+   "clip": {
+    "folder": "expansion",
+    "id": "nine-tailed-celestial-fox",
+    "atlas": "nine-tailed-celestial-fox.atlas.png",
+    "fps": 6.0,
+    "frames": 31,
+    "cell": [
+     640,
+     360
+    ],
+    "pivot": [
+     0.5019,
+     0.5217
+    ],
+    "timing": {
+     "peak": 0,
+     "holdEnd": 24,
+     "endsHot": false,
+     "note": "peak: frame of peak energy (3-frame mean); holdEnd: last frame still at 60 % of it or more (the tail after it is the fade); endsHot: the last frame is still bright (the Firefly clip cuts to black without a fade), so the kit must erode or fade it"
+    }
+   },
+   "shape": "sweep",
+   "radius": 14,
+   "count": 9,
+   "strikes": [
+    {
+     "t": 0.3,
+     "power": 0.6,
+     "kind": "hit"
+    },
+    {
+     "t": 0.45,
+     "power": 0.7,
+     "kind": "hit"
+    },
+    {
+     "t": 0.6,
+     "power": 1,
+     "kind": "hit"
+    },
+    {
+     "t": 1.1,
+     "power": 0.2,
+     "kind": "tick"
+    },
+    {
+     "t": 1.6,
+     "power": 0.2,
+     "kind": "tick"
+    },
+    {
+     "t": 2.1,
+     "power": 0.2,
+     "kind": "tick"
+    }
+   ],
+   "damage": "heavy",
+   "status": "stun",
+   "mark": null,
+   "linger": 1.8,
+   "sfx": "art-src/lab/firefly-sprint-2026-11-05/sound/tt-sfx-x-nine-tailed-celestial-fox/take4.wav",
+   "gameplay": "Ethereal nine-tailed fox spirit; spins in the center for 0.3s to lash nine giant ribbon-like energy tails across a full 360-degree radius, charming and burning beasts as fox-fire fades over 1.8s.",
+   "design": "spins 0.3 s, nine ribbon tails lash a full 360 degrees, charms (mapped to stun) and burns",
+   "measured": {
+    "tOnset": 0.04,
+    "tPeak": 0.04,
+    "earlyPeakEnergyShare": 1.0,
+    "flatness3s": 0.33,
+    "source": "24 fps energy of the source video (tools/vfx-flipbook analysis grid), first take; atlas peak frame 0 of 31 at 6.0 fps",
+    "t0Source": "design snap time (the clip is already at strength at frame 0, so the measured onset is not meaningful)"
+   },
+   "guess": [
+    "shape",
+    "radius",
+    "count",
+    "damage",
+    "status",
+    "mark",
+    "linger",
+    "strikes[1:] (offsets after the first hit and tick spacing come from the Gemini text)",
+    "strikes[0].t",
+    "status: Gemini says charms; mapped to stun"
+   ],
+   "arcDeg": 360,
+   "sfxMeasured": {
+    "onset": 0.08,
+    "peak": 0.4,
+    "tail": 3.12,
+    "durationS": 6.0,
+    "takes": 4,
+    "pick": "heuristic: peak near 0.4 s, onset <= 0.2 s, tail >= 2.5 s; not chosen by ear"
+   }
+  },
+  {
+   "code": "D1",
+   "id": "mountain-crushing-imperial-seal",
+   "name": "Heaven-Overturning Mountain Seal · Phiên Thiên Trấn Nhạc Ấn",
+   "group": "D",
+   "role": "treasure",
+   "element": "earth",
+   "elements": [
+    "earth",
+    "metal",
+    "light",
+    "star"
+   ],
+   "clip": {
+    "folder": "expansion",
+    "id": "mountain-crushing-imperial-seal",
+    "atlas": "mountain-crushing-imperial-seal.atlas.png",
+    "fps": 6.0,
+    "frames": 31,
+    "cell": [
+     640,
+     360
+    ],
+    "pivot": [
+     0.5015,
+     0.5548
+    ],
+    "timing": {
+     "peak": 0,
+     "holdEnd": 23,
+     "endsHot": false,
+     "note": "peak: frame of peak energy (3-frame mean); holdEnd: last frame still at 60 % of it or more (the tail after it is the fade); endsHot: the last frame is still bright (the Firefly clip cuts to black without a fade), so the kit must erode or fade it"
+    }
+   },
+   "shape": "point",
+   "radius": 7,
+   "count": 1,
+   "strikes": [
+    {
+     "t": 0.25,
+     "power": 1,
+     "kind": "hit"
+    },
+    {
+     "t": 1.05,
+     "power": 0.25,
+     "kind": "tick"
+    },
+    {
+     "t": 1.65,
+     "power": 0.25,
+     "kind": "tick"
+    }
+   ],
+   "damage": "heavy",
+   "status": null,
+   "mark": 0.25,
+   "linger": 1.8,
+   "sfx": "art-src/lab/firefly-sprint-2026-11-05/sound/tt-sfx-x-mountain-crushing-imperial-seal/take4.wav",
+   "gameplay": "Colossal square jade-gold imperial seal; plummets from above in 0.25s to stamp a massive square talisman across the center of the battlefield, crushing beasts and fading over 1.8s.",
+   "design": "square jade-gold seal plummets in 0.25 s and stamps the centre of the field",
+   "measured": {
+    "tOnset": 0.04,
+    "tPeak": 0.04,
+    "earlyPeakEnergyShare": 1.0,
+    "flatness3s": 0.48,
+    "source": "24 fps energy of the source video (tools/vfx-flipbook analysis grid), first take; atlas peak frame 0 of 31 at 6.0 fps",
+    "t0Source": "design snap time (the clip is already at strength at frame 0, so the measured onset is not meaningful)"
+   },
+   "guess": [
+    "shape",
+    "radius",
+    "count",
+    "damage",
+    "status",
+    "mark",
+    "linger",
+    "strikes[1:] (offsets after the first hit and tick spacing come from the Gemini text)",
+    "strikes[0].t"
+   ],
+   "sfxMeasured": {
+    "onset": 0.5,
+    "peak": 0.88,
+    "tail": 4.52,
+    "durationS": 6.0,
+    "takes": 4,
+    "pick": "heuristic: peak near 0.4 s, onset <= 0.2 s, tail >= 2.5 s; not chosen by ear"
+   }
+  },
+  {
+   "code": "D2",
+   "id": "primordial-chaos-bell",
+   "name": "Soul-Shaking Primordial Bell · Chấn Hồn Hồng Mông Chung",
+   "group": "D",
+   "role": "treasure",
+   "element": "metal",
+   "elements": [
+    "metal",
+    "thunder",
+    "wind",
+    "void"
+   ],
+   "clip": {
+    "folder": "expansion",
+    "id": "primordial-chaos-bell",
+    "atlas": "primordial-chaos-bell.atlas.png",
+    "fps": 6.0,
+    "frames": 31,
+    "cell": [
+     640,
+     360
+    ],
+    "pivot": [
+     0.503,
+     0.4936
+    ],
+    "timing": {
+     "peak": 0,
+     "holdEnd": 23,
+     "endsHot": false,
+     "note": "peak: frame of peak energy (3-frame mean); holdEnd: last frame still at 60 % of it or more (the tail after it is the fade); endsHot: the last frame is still bright (the Firefly clip cuts to black without a fade), so the kit must erode or fade it"
+    }
+   },
+   "shape": "ring",
+   "radius": 20,
+   "count": 3,
+   "strikes": [
+    {
+     "t": 0.2,
+     "power": 0.7,
+     "kind": "hit"
+    },
+    {
+     "t": 0.7,
+     "power": 0.85,
+     "kind": "hit"
+    },
+    {
+     "t": 1.2,
+     "power": 1,
+     "kind": "hit"
+    }
+   ],
+   "damage": "heavy",
+   "status": "stun",
+   "mark": null,
+   "linger": 2.0,
+   "sfx": "art-src/lab/firefly-sprint-2026-11-05/sound/tt-sfx-x-primordial-chaos-bell/take3.wav",
+   "gameplay": "Giant translucent ancient bronze bell over the arena center; tolls in 0.2s to unleash three visible sonic-rune rings across the whole battlefield that stun beasts and fade over 2.0s.",
+   "design": "tolls in 0.2 s, three sonic-rune rings stun everything",
+   "measured": {
+    "tOnset": 0.04,
+    "tPeak": 0.04,
+    "earlyPeakEnergyShare": 1.0,
+    "flatness3s": 0.32,
+    "source": "24 fps energy of the source video (tools/vfx-flipbook analysis grid), first take; atlas peak frame 0 of 31 at 6.0 fps",
+    "t0Source": "design snap time (the clip is already at strength at frame 0, so the measured onset is not meaningful)"
+   },
+   "guess": [
+    "shape",
+    "radius",
+    "count",
+    "damage",
+    "status",
+    "mark",
+    "linger",
+    "strikes[1:] (offsets after the first hit and tick spacing come from the Gemini text)",
+    "strikes[0].t"
+   ],
+   "sfxMeasured": {
+    "onset": 0.04,
+    "peak": 0.38,
+    "tail": 5.28,
+    "durationS": 6.0,
+    "takes": 4,
+    "pick": "heuristic: peak near 0.4 s, onset <= 0.2 s, tail >= 2.5 s; not chosen by ear"
+   }
+  },
+  {
+   "code": "D3",
+   "id": "blade-swallowing-immortal-gourd",
+   "name": "Myriad-Blade Spirit Gourd · Trảm Tiên Vạn Nhận Hồ Lô",
+   "group": "D",
+   "role": "treasure",
+   "element": "any",
+   "elements": [
+    "metal",
+    "wind",
+    "poison",
+    "blood",
+    "fire"
+   ],
+   "clip": {
+    "folder": "expansion",
+    "id": "blade-swallowing-immortal-gourd",
+    "atlas": "blade-swallowing-immortal-gourd.atlas.png",
+    "fps": 6.0,
+    "frames": 31,
+    "cell": [
+     640,
+     360
+    ],
+    "pivot": [
+     0.4899,
+     0.5539
+    ],
+    "timing": {
+     "peak": 0,
+     "holdEnd": 22,
+     "endsHot": false,
+     "note": "peak: frame of peak energy (3-frame mean); holdEnd: last frame still at 60 % of it or more (the tail after it is the fade); endsHot: the last frame is still bright (the Firefly clip cuts to black without a fade), so the kit must erode or fade it"
+    }
+   },
+   "shape": "cone",
+   "radius": 22,
+   "count": 1,
+   "strikes": [
+    {
+     "t": 0.2,
+     "power": 1,
+     "kind": "hit"
+    },
+    {
+     "t": 0.5,
+     "power": 0.4,
+     "kind": "tick"
+    },
+    {
+     "t": 0.8,
+     "power": 0.4,
+     "kind": "tick"
+    }
+   ],
+   "damage": "heavy",
+   "status": null,
+   "mark": null,
+   "linger": 1.6,
+   "sfx": "art-src/lab/firefly-sprint-2026-11-05/sound/tt-sfx-x-blade-swallowing-immortal-gourd/take4.wav",
+   "gameplay": "Giant floating energy gourd at the northern edge; uncorks in 0.2s to spray a wide 120-degree fan of thousands of glowing spirit blades across the entire horde, decaying over 1.6s.",
+   "design": "uncorks in 0.2 s, 120 degree fan of thousands of spirit blades",
+   "measured": {
+    "tOnset": 0.04,
+    "tPeak": 0.04,
+    "earlyPeakEnergyShare": 1.0,
+    "flatness3s": 0.43,
+    "source": "24 fps energy of the source video (tools/vfx-flipbook analysis grid), first take; atlas peak frame 0 of 31 at 6.0 fps",
+    "t0Source": "design snap time (the clip is already at strength at frame 0, so the measured onset is not meaningful)"
+   },
+   "guess": [
+    "shape",
+    "radius",
+    "count",
+    "damage",
+    "status",
+    "mark",
+    "linger",
+    "strikes[1:] (offsets after the first hit and tick spacing come from the Gemini text)",
+    "strikes[0].t"
+   ],
+   "arcDeg": 120,
+   "sfxMeasured": {
+    "onset": 0.54,
+    "peak": 0.68,
+    "tail": 4.24,
+    "durationS": 6.0,
+    "takes": 4,
+    "pick": "heuristic: peak near 0.4 s, onset <= 0.2 s, tail >= 2.5 s; not chosen by ear"
+   }
+  },
+  {
+   "code": "D4",
+   "id": "nine-dragon-refining-cauldron",
+   "name": "Nine-Dragon Heaven-Refining Cauldron · Cửu Long Luyện Thiên Đỉnh",
+   "group": "D",
+   "role": "treasure",
+   "element": "fire",
+   "elements": [
+    "fire",
+    "poison",
+    "blood",
+    "earth"
+   ],
+   "clip": {
+    "folder": "expansion",
+    "id": "nine-dragon-refining-cauldron",
+    "atlas": "nine-dragon-refining-cauldron.atlas.png",
+    "fps": 6.0,
+    "frames": 31,
+    "cell": [
+     640,
+     360
+    ],
+    "pivot": [
+     0.5079,
+     0.5081
+    ],
+    "timing": {
+     "peak": 7,
+     "holdEnd": 21,
+     "endsHot": false,
+     "note": "peak: frame of peak energy (3-frame mean); holdEnd: last frame still at 60 % of it or more (the tail after it is the fade); endsHot: the last frame is still bright (the Firefly clip cuts to black without a fade), so the kit must erode or fade it"
+    }
+   },
+   "shape": "ring",
+   "radius": 16,
+   "count": 9,
+   "strikes": [
+    {
+     "t": 0.25,
+     "power": 1,
+     "kind": "hit"
+    },
+    {
+     "t": 0.65,
+     "power": 0.5,
+     "kind": "hit"
+    },
+    {
+     "t": 1.05,
+     "power": 0.3,
+     "kind": "tick"
+    },
+    {
+     "t": 1.55,
+     "power": 0.3,
+     "kind": "tick"
+    }
+   ],
+   "damage": "heavy",
+   "status": null,
+   "mark": 0.2,
+   "linger": 1.9,
+   "sfx": "art-src/lab/firefly-sprint-2026-11-05/sound/tt-sfx-x-nine-dragon-refining-cauldron/take4.wav",
+   "gameplay": "Massive three-legged energy cauldron slams into the center in 0.25s while nine spectral fire-dragons erupt from its rim in a 360-degree spiral across the battlefield, fading over 1.9s.",
+   "design": "cauldron slams in 0.25 s, nine fire dragons spiral out 360 degrees",
+   "measured": {
+    "tOnset": 0.04,
+    "tPeak": 1.04,
+    "earlyPeakEnergyShare": 1.0,
+    "flatness3s": 0.34,
+    "source": "24 fps energy of the source video (tools/vfx-flipbook analysis grid), first take; atlas peak frame 7 of 31 at 6.0 fps",
+    "t0Source": "design snap time (the clip is already at strength at frame 0, so the measured onset is not meaningful)"
+   },
+   "guess": [
+    "shape",
+    "radius",
+    "count",
+    "damage",
+    "status",
+    "mark",
+    "linger",
+    "strikes[1:] (offsets after the first hit and tick spacing come from the Gemini text)",
+    "strikes[0].t"
+   ],
+   "sfxMeasured": {
+    "onset": 0.1,
+    "peak": 0.3,
+    "tail": 3.96,
+    "durationS": 6.0,
+    "takes": 4,
+    "pick": "heuristic: peak near 0.4 s, onset <= 0.2 s, tail >= 2.5 s; not chosen by ear"
+   }
+  },
+  {
+   "code": "D5",
+   "id": "seven-treasure-suppressing-pagoda",
+   "name": "Seven-Aperture Demon-Suppressing Pagoda · Thất Bảo Trấn Yêu Tháp",
+   "group": "D",
+   "role": "treasure",
+   "element": "light",
+   "elements": [
+    "light",
+    "earth",
+    "thunder",
+    "dark"
+   ],
+   "clip": {
+    "folder": "expansion",
+    "id": "seven-treasure-suppressing-pagoda",
+    "atlas": "seven-treasure-suppressing-pagoda.atlas.png",
+    "fps": 6.0,
+    "frames": 31,
+    "cell": [
+     640,
+     360
+    ],
+    "pivot": [
+     0.5024,
+     0.5376
+    ],
+    "timing": {
+     "peak": 19,
+     "holdEnd": 24,
+     "endsHot": false,
+     "note": "peak: frame of peak energy (3-frame mean); holdEnd: last frame still at 60 % of it or more (the tail after it is the fade); endsHot: the last frame is still bright (the Firefly clip cuts to black without a fade), so the kit must erode or fade it"
+    }
+   },
+   "shape": "field",
+   "radius": 20,
+   "count": 8,
+   "strikes": [
+    {
+     "t": 0.3,
+     "power": 0.8,
+     "kind": "hit"
+    },
+    {
+     "t": 0.9,
+     "power": 0.3,
+     "kind": "tick"
+    },
+    {
+     "t": 1.5,
+     "power": 0.3,
+     "kind": "tick"
+    },
+    {
+     "t": 2.1,
+     "power": 0.3,
+     "kind": "tick"
+    }
+   ],
+   "damage": "heavy",
+   "status": "bind",
+   "mark": 0.25,
+   "linger": 1.8,
+   "sfx": "art-src/lab/firefly-sprint-2026-11-05/sound/tt-sfx-x-seven-treasure-suppressing-pagoda/take2.wav",
+   "gameplay": "Hollow filigree-light pagoda base descends in 0.3s, firing eight radial chains of golden light and an octagonal floor array that immobilizes and damages all beasts for 1.8s.",
+   "design": "pagoda descends in 0.3 s, eight golden chains and an octagon array immobilise and damage for 1.8 s",
+   "measured": {
+    "tOnset": 0.04,
+    "tPeak": 3.04,
+    "earlyPeakEnergyShare": 0.96,
+    "flatness3s": 0.34,
+    "source": "24 fps energy of the source video (tools/vfx-flipbook analysis grid), first take; atlas peak frame 19 of 31 at 6.0 fps",
+    "t0Source": "design snap time (the clip is already at strength at frame 0, so the measured onset is not meaningful)"
+   },
+   "guess": [
+    "shape",
+    "radius",
+    "count",
+    "damage",
+    "status",
+    "mark",
+    "linger",
+    "strikes[1:] (offsets after the first hit and tick spacing come from the Gemini text)",
+    "strikes[0].t"
+   ],
+   "sfxMeasured": {
+    "onset": 0.56,
+    "peak": 0.94,
+    "tail": 3.32,
+    "durationS": 6.0,
+    "takes": 4,
+    "pick": "heuristic: peak near 0.4 s, onset <= 0.2 s, tail >= 2.5 s; not chosen by ear"
+   }
+  },
+  {
+   "code": "D6",
+   "id": "yin-yang-void-mirror",
+   "name": "Taiji Void-Reflecting Mirror · Thái Cực Chiếu Hư Kính",
+   "group": "D",
+   "role": "treasure",
+   "element": "light",
+   "elements": [
+    "light",
+    "dark",
+    "ice",
+    "void",
+    "star"
+   ],
+   "clip": {
+    "folder": "expansion",
+    "id": "yin-yang-void-mirror",
+    "atlas": "yin-yang-void-mirror.atlas.png",
+    "fps": 6.0,
+    "frames": 31,
+    "cell": [
+     640,
+     360
+    ],
+    "pivot": [
+     0.4887,
+     0.5836
+    ],
+    "timing": {
+     "peak": 19,
+     "holdEnd": 25,
+     "endsHot": false,
+     "note": "peak: frame of peak energy (3-frame mean); holdEnd: last frame still at 60 % of it or more (the tail after it is the fade); endsHot: the last frame is still bright (the Firefly clip cuts to black without a fade), so the kit must erode or fade it"
+    }
+   },
+   "shape": "sweep",
+   "radius": 22,
+   "count": 1,
+   "strikes": [
+    {
+     "t": 0.15,
+     "power": 0.3,
+     "kind": "hit"
+    },
+    {
+     "t": 0.65,
+     "power": 1,
+     "kind": "hit"
+    },
+    {
+     "t": 1.15,
+     "power": 0.25,
+     "kind": "tick"
+    },
+    {
+     "t": 1.75,
+     "power": 0.25,
+     "kind": "tick"
+    }
+   ],
+   "damage": "heavy",
+   "status": null,
+   "mark": null,
+   "linger": 1.6,
+   "sfx": null,
+   "gameplay": "Giant ornate circular mirror floating at the top edge; charges for 0.15s and sweeps a wide prism-laser beam across the entire battlefield in 0.35s, leaving a shimmering 1.6s refraction field.",
+   "design": "mirror charges 0.15 s, prism beam sweeps the field in 0.35 s, 1.6 s refraction field",
+   "measured": {
+    "tOnset": 0.04,
+    "tPeak": 4.04,
+    "earlyPeakEnergyShare": 0.72,
+    "flatness3s": 0.42,
+    "source": "24 fps energy of the source video (tools/vfx-flipbook analysis grid), first take; atlas peak frame 19 of 31 at 6.0 fps",
+    "t0Source": "design snap time (the clip is already at strength at frame 0, so the measured onset is not meaningful)"
+   },
+   "guess": [
+    "shape",
+    "radius",
+    "count",
+    "damage",
+    "status",
+    "mark",
+    "linger",
+    "strikes[1:] (offsets after the first hit and tick spacing come from the Gemini text)",
+    "strikes[0].t",
+    "sfx: no tt-sfx-x file was made (Firefly sound ran out)"
+   ],
+   "arcDeg": 120
+  },
+  {
+   "code": "D7",
+   "id": "five-element-heavenly-silk",
+   "name": "Immortal Binding Aurora Ribbon · Hỗn Thiên Khốn Tiên Lăng",
+   "group": "D",
+   "role": "treasure",
+   "element": "any",
+   "elements": [
+    "wind",
+    "water",
+    "fire",
+    "wood",
+    "light"
+   ],
+   "clip": {
+    "folder": "expansion",
+    "id": "five-element-heavenly-silk",
+    "atlas": "five-element-heavenly-silk.atlas.png",
+    "fps": 6.0,
+    "frames": 31,
+    "cell": [
+     640,
+     360
+    ],
+    "pivot": [
+     0.5262,
+     0.5179
+    ],
+    "timing": {
+     "peak": 19,
+     "holdEnd": 22,
+     "endsHot": false,
+     "note": "peak: frame of peak energy (3-frame mean); holdEnd: last frame still at 60 % of it or more (the tail after it is the fade); endsHot: the last frame is still bright (the Firefly clip cuts to black without a fade), so the kit must erode or fade it"
+    }
+   },
+   "shape": "field",
+   "radius": 16,
+   "count": 1,
+   "strikes": [
+    {
+     "t": 0.35,
+     "power": 0.4,
+     "kind": "hit"
+    },
+    {
+     "t": 0.7,
+     "power": 1,
+     "kind": "hit"
+    }
+   ],
+   "damage": "heavy",
+   "status": "bind",
+   "mark": null,
+   "linger": 1.7,
+   "sfx": null,
+   "gameplay": "Flowing ribbons of translucent elemental silk dart around the battlefield in 0.35s, looping beasts together before tightening in a bright flash and dissolving over 1.7s.",
+   "design": "silk darts in 0.35 s, loops beasts together, tightens in a flash",
+   "measured": {
+    "tOnset": 0.04,
+    "tPeak": 4.88,
+    "earlyPeakEnergyShare": 0.97,
+    "flatness3s": 0.38,
+    "source": "24 fps energy of the source video (tools/vfx-flipbook analysis grid), first take; atlas peak frame 19 of 31 at 6.0 fps",
+    "t0Source": "design snap time (the clip is already at strength at frame 0, so the measured onset is not meaningful)"
+   },
+   "guess": [
+    "shape",
+    "radius",
+    "count",
+    "damage",
+    "status",
+    "mark",
+    "linger",
+    "strikes[1:] (offsets after the first hit and tick spacing come from the Gemini text)",
+    "strikes[0].t",
+    "sfx: no tt-sfx-x file was made (Firefly sound ran out)"
+   ]
+  },
+  {
+   "code": "D8",
+   "id": "twelve-stem-nether-banners",
+   "name": "Twelve-Metropolis Array Banners · Thập Nhị Đô Thiên Trận Kỳ",
+   "group": "D",
+   "role": "treasure",
+   "element": "dark",
+   "elements": [
+    "dark",
+    "blood",
+    "thunder",
+    "poison",
+    "void"
+   ],
+   "clip": {
+    "folder": "expansion",
+    "id": "twelve-stem-nether-banners",
+    "atlas": "twelve-stem-nether-banners.atlas.png",
+    "fps": 6.0,
+    "frames": 31,
+    "cell": [
+     640,
+     360
+    ],
+    "pivot": [
+     0.509,
+     0.557
+    ],
+    "timing": {
+     "peak": 19,
+     "holdEnd": 24,
+     "endsHot": false,
+     "note": "peak: frame of peak energy (3-frame mean); holdEnd: last frame still at 60 % of it or more (the tail after it is the fade); endsHot: the last frame is still bright (the Firefly clip cuts to black without a fade), so the kit must erode or fade it"
+    }
+   },
+   "shape": "field",
+   "radius": 20,
+   "count": 12,
+   "strikes": [
+    {
+     "t": 0.62,
+     "power": 1,
+     "kind": "hit"
+    },
+    {
+     "t": 1.12,
+     "power": 0.3,
+     "kind": "tick"
+    },
+    {
+     "t": 1.62,
+     "power": 0.3,
+     "kind": "tick"
+    },
+    {
+     "t": 2.12,
+     "power": 0.3,
+     "kind": "tick"
+    }
+   ],
+   "damage": "heavy",
+   "status": null,
+   "mark": 0.15,
+   "linger": 1.8,
+   "sfx": null,
+   "gameplay": "Twelve translucent war banners plant themselves in a perimeter circle in 0.25s, instantly connecting via intersecting laser threads that slice every beast inside and fade over 1.8s.",
+   "design": "twelve banners plant in 0.25 s around the edge, star-polygon threads slice every beast inside",
+   "measured": {
+    "tOnset": 0.62,
+    "tPeak": 3.92,
+    "earlyPeakEnergyShare": 0.96,
+    "flatness3s": 0.43,
+    "source": "24 fps energy of the source video (tools/vfx-flipbook analysis grid), first take; atlas peak frame 19 of 31 at 6.0 fps",
+    "t0Source": "measured (clip reaches 90 % of its early peak)"
+   },
+   "guess": [
+    "shape",
+    "radius",
+    "count",
+    "damage",
+    "status",
+    "mark",
+    "linger",
+    "strikes[1:] (offsets after the first hit and tick spacing come from the Gemini text)",
+    "sfx: no tt-sfx-x file was made (Firefly sound ran out)"
+   ]
+  }
+ ]
+}

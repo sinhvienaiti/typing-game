@@ -88,3 +88,85 @@
 - 07/11 17:55 · Anh: "Làm vòng 4". Ba bước cho Cột Lôi: (1) khung va chạm cục bộ của hệ Lôi (sét phân nhánh, không viền mực) thay ngôi sao mực dùng chung, theo cách hệ Hỏa đã làm; (2) số sát thương bật ra khỏi thân quái bị đánh; (3) vết sét cháy nền đá mới, Codex vẽ 2 mẫu từ ảnh tham chiếu của ta, anh duyệt rồi mới lắp. Ba bước đều sau `tp2`, đo từng bước, chấm bằng Codex trên bộ ảnh nhãn mới
 - 07/11 18:10 · Anh chỉ ra ba vấn đề của Cột Lôi: (1) chỉ nên là sét đánh xuống, bỏ lớp hình trụ bao quanh của video; (2) không phải một tia mỏng mà nhiều tia giáng liên tiếp trong 3–5 s, phạm vi rộng hơn; (3) vết sau cú giáng phải là đất nứt và cháy, không phải vệt tím. Rồi: "tạm thời dừng lại khi có hạn mức tiếp của codex vậy". Vòng 4 dừng tới 14/11 09:12; phiếu vòng 4 sẽ viết lại theo ba điểm này, mọi cổng đóng tới lúc đó
 - 11/11 16:00 · Anh hỏi góc nhìn video có khớp camera game không. Claude kiểm: engine chỉ đặt phẳng (`layFlat`) các vai trò groundMark/ringBurst/groundImpact; mọi vai trò khác là thẻ quay về camera. Trong 131 việc làm lại chỉ 4 việc thuộc nhóm phẳng (boss-summon-sigil, dark-ground-mark, commander-howl-ring, light-ground-mark) và cả 4 ảnh đầu đều vẽ sẵn phối cảnh elip (h/w 0,52–0,65) nên sẽ bị bẹp hai lần: phải vẽ lại ảnh đầu nhìn thẳng từ trên. 127 việc còn lại là thẻ dựng, ảnh vẽ cho camera 55° là đúng ý đồ. Phát hiện kèm: vòng tụ lực là thẻ dựng nên không ôm quanh chân nhân vật (vấn đề cách đặt, để sau); dấu đất Dark trong lab quá mờ. Bằng chứng: `owner-review/2026-11-11/tu-tien/view-check/`; dữ liệu: `.local/s2/view-audit.json`
+- 13/11 08:0x · Anh: map phải rộng hơn khung hình, camera giữ nguyên tầm nhìn, rê chuột gần mép thì trượt xem phần sân xa hơn. Ghi canon D66. Việc sau: thiết kế lại map 1 cho sân rộng (cỡ sân, trượt camera, chỉ báo quái ngoài khung) bằng skill `game-map-concept`, có Gemini duyệt vì là hướng thiết kế lớn.
+- 13/11 09:4x · Anh chọn **map phương án B** (140 × 66 m, 3 × 2 khung; `docs/games/tu-tien/MAP1_WIDE.md`), duyệt **ba video cột lôi** (`i2v-thunder-column-{a,b,c}-i2v5`, 2 bản mỗi cột), và yêu cầu tám hướng cột lôi "đặc và dày hơn nữa… không đều ở đoạn di chuyển, cái chạy trước cái chạy sau".
+- 13/11 09:5x · Anh sửa hướng map: "tạm thời cứ để nó là map đường đơn trước, và chỉnh làm sao để góc nhìn có thể thấy quái di chuyển từ xa, và tốc độ quái di chuyển sẽ phù hợp với góc nhìn". Phương án B (hai hành lang) tạm gác; làm bản một đường, chỉnh camera để thấy quái từ xa, tốc độ quái theo thời gian quái đi qua khung nhìn. Phiếu 377 dừng tới khi xong.
+- 13/11 10:1x · Anh: game có **3 lựa chọn góc nhìn**: (1) từ trên xuống như lab, (2) ngang sau lưng gần mắt nhân vật, (3) ngang màn hình. Không có chữ trên đầu quái (gõ ở Bàn Quyết); quái đi thành bầy là đúng ý; hiệu ứng mặt đất phải được code chỉnh cho hợp từng góc. Cột lôi 367 trông như lốc xoáy → linh kiện mới "dòng sét đổ thẳng" (phiếu 378).
+- 13/11 11:0x · Anh: giữ **cả 4 góc nhìn** (trên xuống, sau lưng ngang mắt, sau lưng chếch 25°, nhìn ngang); **duyệt cột sét đổ thẳng 378** (cả ba, "k cần xử lý thêm"), thử tám hướng bằng chùm cột dày từ cột này; hiệu năng: máy trung bình = máy anh (Mac mini M4), thử từ máy yếu vừa tới trung bình, không tập trung máy rất yếu; máy cao chưa định nghĩa.
+- 13/11 15:4x · Anh duyệt cột chính Ngũ Lôi: ảnh `thunder-energy-sharp.v2-try1.png` (hai tia gãy gắt, Codex 379j) và hai video `i2v-thunder-energy-sharp-i2v5/take{1,2}`.
+- 15/11 17:4x · Anh: "về ảnh thì cứ tạm thời làm theo bạn đề xuất trước đi tại hiện tại tôi chưa có thời gian review". Tạm thời điều phối tự chốt theo đề xuất: Ngũ Lôi giữ v37 (chờ chấm mù sau 18/11), map một đường camera B 42°, vẽ lại ô đất theo ba sửa, bắt đầu rồng năng lượng trong lab, làm hai việc hiệu năng giữ hình. Mọi ảnh vẫn gửi anh để xem sau.
+- 16/11 · Anh: "đồng ý" đường rộng **12 m** cho map 1 một đường (camera B 42°, §13.4 `MAP1_WIDE.md`). Dựng theo phiếu 387 (sân 48 × 52 m, đường chữ S nửa rộng 6 m, Trận Trụ ±7,6, tốc độ quái §13.3, liveCap 90, quái bầy ×1,8 / Nhỏ ×1,4, ô đất 383b; tranh 384b chỉ làm tham chiếu).
+| 16/11/2026 | Giao việc | Hàng việc theo làn trong docs/work/LANES.md, máy tự chạy phiếu kế tiếp | "tạo file md, list ra các công việc của các agent để sau khi làm xong nó tự biết việc làm tiếp" |
+| 16/11/2026 | Tuyệt kỹ Mộc | Làm tiếp ngay (móng rễ cao, mầm có khối, góc sau lưng) | chọn "Làm tiếp ngay" |
+| 16/11/2026 | Tuyệt kỹ Kim | Ảnh đích khoảnh khắc B (396) | chọn "B" |
+| 16/11/2026 | Ảnh 6 hệ (398, 399) | Dùng bản Codex gợi ý cho từng hệ | chọn "Theo gợi ý của Codex" |
+| 16/11/2026 | Hoạt ảnh | Quay chính diện rồi làm đợt 2 | chọn "Quay lại chính diện rồi làm đợt 2" |
+| 16/11/2026 | Icon quái | Tinh anh: E1 Khiên ngọc; Boss: B1 Vương miện | chọn trong bảng 401 |
+| 16/11/2026 | Tuyệt kỹ Mộc | Đổi cách: rễ 3D dựng bằng Blender thay thẻ phẳng | chọn "Đổi cách: rễ 3D từ Blender" |
+| 16/11/2026 | Tuyệt kỹ Mộc | Giữ rễ 3D, chỉnh vật liệu (gỗ nâu, gân xanh sáng, rễ cong) | chọn "Giữ 3D, chỉnh vật liệu" |
+| 16/11/2026 | Video bùng nổ | Lửa mẫu đạt; Kim làm lại thành kiếm khí; làm cả loạt 20 clip theo kiểu lửa | chọn "Lửa đạt, Kim làm lại" |
+| 16/11/2026 | Video VFX | Đúng góc camera ~55°, không vẽ sẵn mặt đất, có điểm chạm cho code gắn hiệu ứng đất, chân thật | "các video phải được tạo đảm bảo chất lượng và phù hợp góc nhìn…" |
+| 16/11/2026 | Thủ ấn | Đổi cách: lấy 21 điểm khớp tay từ ảnh 411 bằng nhận dạng bàn tay, áp lên rig trong Blender có IK | chọn "Lấy điểm tay từ ảnh + Blender" |
+| 16/11/2026 | Thủ ấn | Tạm dừng trên ma-nơ-canh; làm tiếp khi có nhân vật chính, dùng quy trình điểm tay + Blender | "tạm thời dừng lại, sau build nhân vật thì tiếp tục" |
+| 16/11/2026 | Dải cut-in | Vẽ thêm ~10 kiểu dáng, mỗi kiểu nhiều màu để thay đổi và chồng lớp | "nên vẽ thêm khoảng 10 kiểu dáng, mỗi kiểu dáng lại nhiều màu sắc như kia…" |
+| 16/11/2026 | Clip bùng nổ trượt | Vẽ ảnh tĩnh đúng góc 55° trước, rồi Firefly image-to-video | chọn "Đồng ý, ảnh trước rồi video" |
+| 16/11/2026 | Bùng nổ -v2 | Giữ bản cũ cho poison-big, blood-big, thunder-impact và làm lại trên Firefly dáng rộng; làm mềm mép dưới 2 clip khói trắng | "đồng ý, cứ theo bạn đề xuất" |
+| 16/11/2026 | Sét/Huyết v3 | Dùng v3 làm lớp chính, chồng thêm tia sét phụ và vệt máu văng | chọn "Dùng v3 và chồng thêm lớp" |
+| 16/11/2026 | Huyết | Vương miện máu mẫu 1 (blood-crown.v2-try1) làm khung đầu video | chọn "Mẫu 1" |
+| 16/11/2026 | Mô hình 3D Kim/Hư Không | Dùng Tripo từ ảnh thành phần 396/398, thử 1 mẫu trước | chọn "Dùng Tripo từ ảnh thành phần" |
+| 16/11/2026 | Tripo Kim/Hư Không | Vẽ lại ảnh nguồn sạch (không vệt sáng) rồi Tripo lại 1 mẫu | chọn "Vẽ lại ảnh nguồn sạch rồi Tripo lại" |
+| 16/11/2026 | Hạn mức Codex | Tạm bỏ luật dưới 15 % chỉ làm ảnh, đến khi owner reset Codex | "tôi đã nói cứ cho codex làm đi, tôi sẽ reset codex sau" |
+| 16/11/2026 | Tripo Kim/Hư Không | Duyệt ảnh nguồn 429, chạy Tripo cả hai mẫu | chọn "Duyệt, chạy Tripo cả hai" |
+| 16/11/2026 | 3D Kim/Hư Không | Đưa Hư Không (Tripo) vào lab; Kim vẽ lại 1 thanh kiếm dày rồi Tripo | "đồng ý" |
+| 16/11/2026 | Kiếm Kim | Tripo từ mẫu 1 (ult-metal-sword.v1-try1) | chọn "Mẫu 1" |
+| 17/11/2026 | Tham khảo kỹ năng | Lấy Naraka: Bladepoint và Diablo IV làm chuẩn tham khảo trình diễn kỹ năng (chỉ ghi chép bằng chữ, không đưa hình vào AI) | "Naraka và Diablo IV rất phù hợp" |
+| 17/11/2026 | Kim mưa kiếm | Phóng to hiệu ứng cho camera chơi + nhịp camera đẩy vào 1–2 s lúc cao trào | "đồng ý, triển khai cho tôi đi" |
+| 17/11/2026 | Hạn mức Codex | Owner đã gia hạn Codex: bỏ miễn luật, bật lại luật dưới 15 % chỉ làm ảnh | "tôi vừa gia hạn lại quote của codex" |
+| 17/11/2026 | Kim mưa kiếm | Đổi cách: video Firefly ghép mảnh nhỏ (vệt sáng kiếm rơi, tia lửa cắm, bụi vàng), code đặt/nhân bản/định thời; trận pháp ảnh tĩnh ngang trên trời | chọn "Video Firefly ghép mảnh nhỏ" |
+| 17/11/2026 | Nhân vật và quái | Trước khi vẽ: lập bảng tham khảo từ các game tu tiên đang hot để owner review; thiết kế thời trang là trọng tâm, nhân vật phải đổi được quần áo (thiết kế theo ô trang phục ngay từ đầu) | "chúng ta nên tham khảo các mẫu dựa trên các dạng game đang hot của tu tiên… phần thiết kế thời trang rất quan trọng, sau này sẽ có thể đổi quần áo của nhân vật" |
+| 17/11/2026 | Nhân vật | Không chọn một phong cách: người chơi chọn phong cách và thời trang khi tạo nhân vật. Làm thân nền chung + nhiều bộ thời trang (3 hướng ở bảng tham khảo thành 3 bộ khởi đầu). Quái: thú Sơn Hải Kinh cho quái thường, yêu quái ma tu cho tinh anh và boss (Claude chọn mặc định) | "hướng phong cách lúc tạo nhân vật, người chơi có thể chọn… thời trang thì sẽ được chọn" |
+| 17/11/2026 | Khói, mây, bụi | Thư viện dùng chung: mây lớn bằng shader 3D (Codex); khói nhỏ/bụi bằng flipbook xám trung tính từ gói CC0 (kiểm giấy phép) hoặc Blender làm đúng; code tô màu theo hệ | "đồng ý" |
+| 17/11/2026 | Nữ chính trang sức | Bỏ vòng kiếm đeo lưng (xấu, không hợp); trang sức phải là đồ thật kiểu Hán phục (trâm bộ diêu, trâm ngọc, quan nhỏ, ngọc bội, tua); vầng hào quang kiếm nếu có là hiệu ứng VFX, không phải đồ đeo | "ai lại vẽ cái vòng toàn kiếm đằng sau như 1 đồ trang sức thế kia" |
+| 17/11/2026 | Cách làm VFX | Claude Opus tự làm hiệu ứng trong lab với vòng sửa → chụp → xem; Codex chỉ làm code không cần nhìn | chọn "Claude tự làm hiệu ứng, có mắt nhìn" |
+| 17/11/2026 | Nữ chính: thân nền v3 + 4 bộ lookbook 436e | Owner duyệt "tôi thấy đạt r": tỷ lệ ~7,9 đầu, đường cong trưởng thành, mỗi bộ một dáng riêng (Crimson Bride, Moon Blade, Jade Noble, Shadow Spider). Bước sau: giữ mặt đồng nhất, bảng 3 góc từng bộ cho Tripo/rig | owner |
+| 17/11/2026 | Quang: cú nổ kết | Owner chọn mẫu D (cầu sáng vỡ mảnh) của 440 → Firefly image-to-video | owner "chọn D" |
+| 17/11/2026 | Quang: video nổ | Owner chọn bản 1 (light-prism-burst.v1-try1.mp4) | owner |
+| 17/11/2026 | Lôi: tia sét | Tia code "như que" → làm tia sét năng lượng dày bằng ảnh tĩnh → Firefly video (như nổ Quang) | owner chọn |
+| 17/11/2026 | Lôi: sét nối quái | Owner chọn C (thunder-bolt-ff.v1-try3) làm sét nối; vẽ thêm sét lớn theo C | owner |
+| 17/11/2026 | Kim: kiếm | Kết hợp: kiếm nhỏ (số nhiều) dạng năng lượng B, kiếm lớn dạng kiếm thật + hào quang A | owner "tại sao không kết hợp cả 2" |
+| 17/11/2026 | Lôi: sét lớn | Dùng lại sét dày của Ngũ Lôi (five-thunder.ts, thunder-columns-mix) cho tuyệt kỹ Lôi; bỏ sét mỏng | owner "tôi rất ghét bạn dùng kiểu sét mỏng này… sao không lấy từ đó" |
+| 17/11/2026 | Kim kiếm | Owner duyệt kiểu kết hợp 433e (kiếm nhỏ năng lượng, kiếm lớn thật + hào quang); làm tiếp trận pháp trên trời | owner |
+| 17/11/2026 | Kim trận pháp | Owner bỏ 3 hướng chồng tầng 443 ("đừng làm phức tạp… góc nhìn bạn có làm nổi không"); làm trận pháp 1 lớp đơn giản, đẹp, dựng được, xem ngay trong camera chơi | owner |
+| 17/11/2026 | Lôi sét nối | Owner chê sét nối "xấu… đã dùng ảnh tham khảo chưa"; dùng đúng ảnh sét nối C owner đã chọn (thunder-bolt-ff.v1-try3) làm thành phần | owner |
+| 17/11/2026 | Lôi | Owner duyệt sét nối C (434h). Thêm: sét lan vào quái toả nhiều tia nhiều hướng; sét lớn đánh xuống kéo dài 3–4 s | owner |
+| 17/11/2026 | Kim trận pháp | Owner chọn A (vành chữ cổ + kiếm hướng tâm, một lớp); đặt làm mặc định trong lab | owner |
+| 17/11/2026 | Lôi | Sét lan rộng hơn; thay 1 cột đánh mãi bằng 6–7 cột sét giật xuống khắp vùng | owner "tại sao chỉ có 2 luồng sét đánh mãi mà không phải 6 7 luồng" |
+| 17/11/2026 | Lôi | Owner duyệt 434j ("Đạt") | owner |
+| 17/11/2026 | Kim | Bố cục mưa 433f ổn; hào quang và vệt sáng sau kiếm "rất xấu, rất thô… quá to", làm bằng cách khác | owner |
+| 17/11/2026 | Luật VFX | Thêm cổng G5 vào run.sh: phiếu code VFX phải có dòng "Nguồn hình:" với file ảnh/video/model có thật, thiếu là từ chối; rà soát lớp vẽ bằng code (docs/work/tasks/vfx-code-drawn-audit.md) | owner "tại sao bạn vẫn tự ý làm" → chọn cổng chặn + rà soát |
+| 17/11/2026 | Thay VFX vẽ code | Thứ tự Kim → Quang → Lôi; 6 lớp vùng xám cũng tính là vẽ code, thay hết bằng ảnh/video đúng hình, không kéo giãn | owner |
+| 17/11/2026 | Hư Không | Tuyệt kỹ Hư Không thành hố đen vũ trụ (owner gửi ảnh mẫu truyện bên ngoài; chỉ phân tích bằng lời, không đưa vào AI) | owner chọn Hư Không |
+| 18/11/2026 | Kim vệt kiếm | Owner chọn mẫu D (sword-trail.v1-try4, đuôi thành chuỗi hạt sáng) | owner |
+| 18/11/2026 | Hư Không hố đen | Owner duyệt phân cảnh 445; tiếp: Firefly video vành bồi tụ (có lõi đen) và lưỡi trăng khuyết, rồi Codex dựng trong lab | owner |
+| 18/11/2026 | Kim kiếm nhỏ | Owner: chỉ kiếm lớn dùng mô hình thật; kiếm nhỏ phải là dạng năng lượng (433g giữ mô hình Tripo là sai) → vẽ ảnh kiếm năng lượng làm thành phần | owner "các kiếm con nên dùng dạng năng lượng cơ mà" |
+| 18/11/2026 | Kim kiếm nhỏ | Owner chọn kiếm năng lượng A (energy-sword.v1-try1) | owner |
+| 18/11/2026 | Kim | Kiếm nhỏ to hơn 1,6–2 lần; trận pháp lùi về sau đàn quái để góc sau lưng không bị che | owner chọn |
+| 18/11/2026 | Kim kiếm lớn | Owner chê viền sáng kiếm lớn (lông nhọn + vàng phẳng) "nhìn rất xấu… k dùng code": gỡ feather-mantle và nhuộm phẳng, kiếm lớn hiện vật liệu gốc GLB; hào quang mới làm từ ảnh (phiếu 448) | owner |
+| 18/11/2026 | Hư Không hố đen | Lõi đen là mô hình cầu 3D thật (Claude làm trong Blender) + phóng to 1,5–2 lần + dải sáng chém ngang như ô 3 | owner chọn |
+| 18/11/2026 | Kim kiếm lớn | Owner chọn hào quang C (giant-sword-aura.v1-try3, hình thoi sao hai đầu) | owner |
+| 18/11/2026 | Hư Không hố đen | Thêm viền sáng mỏng (ảnh) quanh lõi cầu, vành bồi tụ rực và dày hơn, lõi nhỏ lại chút; Kim 433j ổn, chờ hào quang C | owner chọn |
+| 18/11/2026 | Kim kiếm trận | Owner nêu 7 lỗi 433k: trận lệch góc; kiếm nhỏ quá to; kiếm rơi xong mất (cần nhóm kiếm cắm lại ~1 s); hiệu ứng chạm đất ảo/xấu; cả skill như đồ chơi; kiếm cắm bị dựng thẳng; kiếm bay quá xa trận → phiếu 433l | owner |
+| 18/11/2026 | Codex 86% | Cổng G3 chặn 433l (Codex chỉ còn làm ảnh tới 24/11 09:48); owner chọn Claude Opus làm 433l bằng mắt | owner |
+| 18/11/2026 | Kim + Hư Không | Kim: trận trong hơn (~0,45) và nhỏ lại, bụi nổ nhuộm vàng sáng. Hố đen: chọn viền C, vành rực/dày hơn, lõi nhỏ lại. Claude Opus làm (Codex <15%) | owner |
+| 18/11/2026 | Kim kiếm lớn + chạm đất | Bỏ mảng đất dính ở chân kiếm Tripo (Claude sửa trong Blender); lúc kiếm lớn chạm đất thêm năng lượng vàng toả ra chồng lên nổ + bụi, đất nứt kiểu núi lửa (ảnh, phiếu 450) | owner |
+| 18/11/2026 | Hư Không lõi | Lõi v2 không nhận sáng (KHR_materials_unlit, đen), viền C phóng 1,14 lần silhouette, sau lõi | owner chọn sửa |
+| 18/11/2026 | Kim chạm đất | Owner chọn sóng A + đất nứt B (450); gắn cùng kiếm bỏ đá v2 | owner |
+| 18/11/2026 | Quang | Owner: vẽ lại có tham chiếu; chọn tia A2 soft beam. Thấu kính/vệt đất chưa chọn | owner |
+| 18/11/2026 | Tia quạt Ánh Sáng | A2 mẫu B (light-ray-a2.v1-try2) | phiếu 451 |
+| 18/11/2026 | Ngưỡng đạt | Hạ từ 8.5 xuống 8.0 (hai giám khảo ≥ 8); gần 8 thì hỏi owner chấm | owner |
+| 18/11/2026 | Vệt quạt đất Ánh Sáng | C tia mảnh (light-ground-wedge.v1-try3); thấu kính B1/B2 bị chê xấu, kém sang → vẽ lại 451c | phiếu 451b |
+| 18/11/2026 | Thân nền nữ chính | v5B dịu dàng, quyến rũ (436h) | owner |
+| 18/11/2026 | Bảo kính Ánh Sáng | A Nhật Luân Kính (light-relic-mirror-a) | phiếu 451c |
+| 18/11/2026 | Tripo | Owner duyệt bảo kính Nhật Luân v2 (451d) và thân nền v5B v2 (436i) để dựng 3D | owner |
+| 18/11/2026 | Nữ chính v6 | Chọn v6B (436j). Không dùng công cụ trả phí; chỉ Tripo (credit sẵn), Firefly, Blender | owner |
+| 18/11/2026 | Chòm sao Tinh Tú | A tinh vân chàm (452) | owner |
