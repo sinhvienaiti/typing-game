@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline' file:; style-src 'unsafe-inline'; img-src 'self' file:; media-src 'self' file:; connect-src 'none'; base-uri 'none'; form-action 'none'">
+  <title>Thư viện tài sản</title>
+  <style>/* PAGE_STYLE */</style>
+</head>
+<body>
+  <header>
+    <div><p class="eyebrow">TYPING GAME · KHO DÙNG LẠI</p><h1>Thư viện tài sản</h1><p id="scan-time">Đang đọc mục lục…</p></div>
+    <button id="theme" type="button" aria-label="Đổi giao diện sáng và tối">Sáng / tối</button>
+  </header>
+  <main>
+    <form id="filters" aria-label="Tìm và lọc tài sản">
+      <label class="query">Tìm chữ<input id="query" name="query" type="search" placeholder="hut, chòi, wood click…" autocomplete="off"></label>
+      <label>Loại<select id="kind" name="kind"><option value="">Mọi loại</option></select></label>
+      <label>Kiểu<select id="type" name="type"><option value="">Mọi kiểu</option><option value="image">2D</option><option value="3d">3D</option><option value="audio">Âm thanh</option><option value="music">Nhạc</option></select></label>
+      <label>Game<select id="game" name="game"><option value="">Mọi nguồn</option></select></label>
+      <label>Vùng<select id="biome" name="biome"><option value="">Mọi vùng</option></select></label>
+      <label>Phong cách<select id="style" name="style"><option value="">Mọi phong cách</option></select></label>
+      <label>Chất lượng<select id="quality" name="quality"><option value="">Mọi mức</option><option value="pass">Đạt</option><option value="provisional">Tạm</option><option value="below">Dưới thước</option><option value="unscored">Chưa chấm</option></select></label>
+      <label>Trạng thái<select id="status" name="status"><option value="">Mọi trạng thái</option></select></label>
+      <label>Drive<select id="drive" name="drive"><option value="">Mọi trạng thái Drive</option></select></label>
+      <label class="check"><input id="all" name="all" type="checkbox">Hiện bản ẩn và món mới xin</label>
+      <button id="reset" type="reset">Xóa bộ lọc</button>
+    </form>
+    <section class="results" aria-label="Kết quả tìm">
+      <div class="result-bar"><p id="count" role="status" aria-live="polite"></p><span class="muted">Bấm thẻ để xem và dùng lại</span></div>
+      <div id="grid" class="grid"></div>
+      <button id="more" type="button" hidden>Xem thêm</button>
+    </section>
+  </main>
+  <dialog id="detail" aria-labelledby="detail-name">
+    <div class="detail-top"><span class="eyebrow">CHI TIẾT TÀI SẢN</span><button id="close" type="button" autofocus>Đóng</button></div>
+    <div id="detail-body"></div>
+  </dialog>
+  <p id="notice" role="status" aria-live="polite"></p>
+  <div id="copy-fallback" hidden><label>Chọn lệnh rồi nhấn ⌘C hoặc Ctrl+C<textarea id="copy-text" readonly></textarea></label><button id="copy-close" type="button">Đóng</button></div>
+  <noscript>Bật JavaScript để tìm trong mục lục ngoại tuyến.</noscript>
+  <script src="catalog.data.js"></script>
+  <script>/* PAGE_SEARCH */</script>
+  <script>/* PAGE_APP */</script>
+</body>
+</html>

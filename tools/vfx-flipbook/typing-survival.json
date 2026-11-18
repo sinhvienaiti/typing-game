@@ -1,0 +1,116 @@
+{
+  "game": "typing-survival",
+  "doc": "docs/games/vfx/FIREFLY_VFX_LIST.md \u00a76 (Last Line AL-08, L10 set); keys: tools/vfx-flipbook/vfxflip/pipeline.py DEFAULTS",
+  "defaults": {
+    "loop": false,
+    "blend": "additive",
+    "background": "black",
+    "cell": [
+      256,
+      256
+    ],
+    "frames": 32,
+    "step": 1,
+    "layout": "centre",
+    "margin": 0.06,
+    "greyCut": 0.15,
+    "flash": true,
+    "maxSec": 2.0,
+    "fadeFrac": 0.03,
+    "tailFade": 0.3,
+    "crossfade": 8
+  },
+  "clips": {
+    "muzzle-flash": {
+      "phase": "R",
+      "aspect": "16:9",
+      "cell": [
+        256,
+        128
+      ],
+      "layout": "left-pivot",
+      "frames": 16,
+      "axis": "horizontal",
+      "coreSide": "left",
+      "greyCut": 0.2,
+      "maxSec": 1.0
+    },
+    "sparks": {
+      "phase": "I",
+      "aspect": "1:1",
+      "frames": 32,
+      "greyCut": 0.12,
+      "maxSec": 1.5
+    },
+    "fireball": {
+      "phase": "I",
+      "aspect": "1:1",
+      "frames": 36,
+      "greyCut": 0.2,
+      "maxSec": 3.0,
+      "note": "repacked to a 6x6 grid at 1024x1024 after ingest (L10)"
+    },
+    "smoke": {
+      "phase": "F",
+      "aspect": "16:9",
+      "blend": "normal",
+      "matte": "alpha-video",
+      "layout": "bbox",
+      "flash": false,
+      "greyCut": 0.0,
+      "startFrac": 0.01,
+      "maxSec": 3.0,
+      "endAtGap": 0.25,
+      "whiteFix": "off"
+    },
+    "fire-strip": {
+      "phase": "T",
+      "aspect": "16:9",
+      "loop": true,
+      "cell": [
+        512,
+        128
+      ],
+      "layout": "strip-x",
+      "frames": 16,
+      "step": 2,
+      "greyCut": 0.1
+    },
+    "electric-strip": {
+      "phase": "T",
+      "aspect": "16:9",
+      "loop": true,
+      "cell": [
+        512,
+        128
+      ],
+      "layout": "strip-x",
+      "frames": 16,
+      "step": 1,
+      "greyCut": 0.1
+    },
+    "rail-ion": {
+      "phase": "T",
+      "aspect": "16:9",
+      "loop": true,
+      "cell": [
+        512,
+        128
+      ],
+      "layout": "strip-x",
+      "frames": 16,
+      "step": 1,
+      "greyCut": 0.1
+    },
+    "beam-scorch": {
+      "phase": "F",
+      "aspect": "1:1",
+      "loop": false,
+      "flash": false,
+      "frames": 32,
+      "greyCut": 0.1,
+      "maxSec": 4.0,
+      "layout": "bbox"
+    }
+  }
+}
