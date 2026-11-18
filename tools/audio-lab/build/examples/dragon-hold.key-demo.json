@@ -1,0 +1,25 @@
+{
+  "$schema": "../schemas/recipe.schema.json",
+  "schema": "audiolab.recipe/1",
+  "game": "dragon-hold",
+  "id": "type.key.demo",
+  "group": "key-ok",
+  "family": "phim-ui",
+  "description": "Mẫu chỉ tổng hợp: phím gỗ. Tiếng tách trên 4 kHz, thân dưới 800 Hz, khoét 1–4 kHz (mục 6.2).",
+  "channels": 1,
+  "layers": [
+    {"id": "tick", "role": "attack", "source": {"synth": "click", "params": {"durMs": 4, "hpHz": 4500, "lpHz": 14000}}, "gainDb": -3},
+    {"id": "knock", "role": "body",
+     "source": {"synth": "tone", "params": {"wave": "triangle", "freqHz": 520, "endHz": 380, "glideMs": 12, "durMs": 45, "attackMs": 0.5, "decayMs": 40}},
+     "gainDb": -2, "filters": [{"type": "lowpass", "hz": 800, "order": 2}],
+     "vary": {"pitchCents": [-40, 40]}}
+  ],
+  "chain": {
+    "filters": [{"type": "peak", "hz": 2000, "gainDb": -6, "q": 0.8}],
+    "headTrim": {"thresholdDb": -50, "preRollMs": 0.3},
+    "tail": {"floorDb": -60, "fadeMs": 5},
+    "normalise": {"mode": "lufs-m-max", "target": -20}
+  },
+  "variants": {"count": 8, "seed": 17, "pitchCents": [-50, 50], "gainDb": [-1, 1]},
+  "export": {"path": "sfx/typing/key-demo"}
+}

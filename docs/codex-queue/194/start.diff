@@ -1,0 +1,434 @@
+diff --git a/README.md b/README.md
+index 6200a05..96f26c8 100644
+--- a/README.md
++++ b/README.md
+@@ -1,9 +1,40 @@
+ # Dragonhold
+ 
+ Chạy `pnpm deploy:pack` để build rồi kiểm thư mục `dist` bằng bộ kiểm của kit
+-với `--game dragon-hold`; lệnh dừng nếu build hoặc kiểm gói thất bại. Bản demo
+-nhà dùng `pnpm deploy:pack:local`, thêm `--allow-local-host` để chấp nhận nguồn
+-portal `typing-game.local`; các kiểm tra khác vẫn giữ nguyên. Hai lệnh chỉ
+-build và kiểm file tại máy, chưa tải media hay đưa gói lên máy chủ. Vite chép
+-bản từ vựng đã ghim trong `public/vocabulary/` vào `dist/vocabulary/`, gồm
+-index, manifest, 100 level và `ATTRIBUTION.md`.
++với `--game dragon-hold`; lệnh dừng nếu build hoặc kiểm gói thất bại.
++
++`VITE_PORTAL_URL` là URL cổng game được ghim lúc build, mặc định trống. Khi
++trống, màn kết quả chỉ có Replay/Retry, không tạo nút “Back to portal”; cầu nối
++học tập giữ sự kiện trong hàng đợi cục bộ, kể cả khi game nằm trong iframe.
++Muốn hiện nút, đặt một URL HTTP(S) tuyệt đối, không chứa thông tin đăng nhập.
++Nút giữ nguyên đường dẫn, query và fragment; cầu nối chỉ dùng phần nguồn
++(giao thức, tên miền, cổng) để gửi và kiểm tra `postMessage`.
++
++```sh
++# Bản phát hành độc lập, tắt cổng kể cả khi môi trường đang đặt biến.
++VITE_PORTAL_URL= pnpm deploy:pack
++
++# Bản phát hành có cổng riêng.
++VITE_PORTAL_URL=https://portal.example/learn/ pnpm deploy:pack
++
++# Bản demo nhà: đặt cổng ngay khi build, cho phép nguồn local lúc kiểm gói.
++VITE_PORTAL_URL=https://typing-game.local/ pnpm deploy:pack:local
++
++# Chỉ build demo, chưa kiểm gói.
++VITE_PORTAL_URL=https://typing-game.local/ pnpm build
++```
++
++`pnpm deploy:pack:local` thêm `--allow-local-host`; các kiểm tra còn lại giữ
++nguyên. Cờ này chỉ cho phép nguồn local, không tự đặt URL. Biến cũ
++`VITE_PORTAL_ORIGINS` không còn cấu hình nút; chuyển sang `VITE_PORTAL_URL`.
++Cũng có thể đặt biến trong file môi trường Vite tương ứng; sau khi đổi cần
++build lại. URL sai định dạng làm build dừng. Giá trị local còn trong bundle
++vẫn bị `deploy:pack` production từ chối.
++
++Vite thay mặc định `PARENT_ORIGIN` của cầu nối trong mã đang biên dịch, không
++ghi lại file kit đã ghim. Nếu khai báo kit đổi cấu trúc, bước này dừng để
++kiểm tra lại. `src/kit/**` và manifest giữ nguyên byte.
++
++Hai lệnh đóng gói chỉ build và kiểm file tại máy, chưa tải media hay đưa gói
++lên máy chủ. Vite chép bản từ vựng đã ghim trong `public/vocabulary/` vào
++`dist/vocabulary/`, gồm index, manifest, 100 level và `ATTRIBUTION.md`.
+diff --git a/src/app/app.ts b/src/app/app.ts
+index de8b9c4..f08c1ff 100644
+--- a/src/app/app.ts
++++ b/src/app/app.ts
+@@ -22,7 +22,7 @@ import { MAPS } from "../content/data/maps";
+ import { STAGE_M0 } from "../content/data/stages";
+ import { RINGS, URGENT } from "../content/rules";
+ import type { Difficulty, FoeId, MapDef, SimCommand, SimEvent, StageDef, WordDeck } from "../content/types";
+-import { createLearningBridge } from "../kit/learning";
++import { createPortalBridge } from "./portal";
+ import { safeLocalStorage } from "../kit/platform";
+ import { setSpeechGate } from "../kit/speech";
+ import { mmToU, uToM } from "../sim/fixed";
+@@ -218,7 +218,7 @@ export function startApp(doc: Document = document, given?: AppOptions): App {
+   map.useModels(models);
+ 
+   // Persistent services: audio, the learning bridge and client.
+-  const bridge = createLearningBridge({ gameId: "dragon-hold" });
++  const bridge = createPortalBridge();
+   const learning: LearningClient = createLearningClient({ bridge });
+   const audio: GameAudio = createAudio({ quality });
+   const stopMusicWatch = bridge.onSharedMusic((playing) => audio.setSharedMusic(playing));
+diff --git a/src/app/learning.ts b/src/app/learning.ts
+index b9640f0..0718395 100644
+--- a/src/app/learning.ts
++++ b/src/app/learning.ts
+@@ -9,12 +9,13 @@
+  */
+ import { ECONOMY, LEARNING } from "../content/rules";
+ import type { ActivityType, DeckWord, SimEvent, StageDef, WordDeck } from "../content/types";
+-import { buildCombatLearningEvent, createLearningBridge, normalizeLearningEntityId, type LearningBridge, type LearningEvent } from "../kit/learning";
++import { buildCombatLearningEvent, normalizeLearningEntityId, type LearningBridge, type LearningEvent } from "../kit/learning";
+ import { createRng, safeLocalStorage } from "../kit/platform";
+ import { speakEnglish } from "../kit/speech";
+ import { filterVocabularyEntries, loadVocabularyIndex, loadVocabularyLevel, textHasBlockedWord, type VocabularyEntry } from "../kit/vocab";
+ import { buildWordDeck, isDeckText, type DeckCandidate } from "../typing/deck";
+ import type { Gloss } from "../ui/learning-frame";
++import { createPortalBridge } from "./portal";
+ 
+ const GAME_ID = LEARNING.gameId;
+ /** Recall activities: always sent (01 §6.6), and a right answer without a hint counts toward hiding the meaning (01 §6.3). */
+@@ -243,7 +244,7 @@ const browser = typeof window !== "undefined";
+ export function createLearningClient(options: LearningClientOptions = {}): LearningClient {
+   const now = options.now ?? (() => Date.now());
+   const storage = options.storage ?? safeLocalStorage;
+-  const bridge = options.bridge ?? createLearningBridge({ gameId: GAME_ID });
++  const bridge = options.bridge ?? createPortalBridge();
+   const excludeMature = options.excludeMature ?? false;
+   const mode: PronounceMode = options.pronounce ?? "new-weak";
+   const speakNow = options.speak ?? ((text: string) => (browser ? speakEnglish(text, { enabled: true, rate: 0.9, volume: 1 }) : undefined));
+diff --git a/src/app/portal.ts b/src/app/portal.ts
+index 546c5e0..c2e2b1b 100644
+--- a/src/app/portal.ts
++++ b/src/app/portal.ts
+@@ -1,5 +1,34 @@
+-/** The first configured portal origin, with a home path. */
+-export function portalHome(origins: string | undefined): string {
+-  const origin = origins?.split(",").map((value) => value.trim()).find(Boolean);
+-  return (origin ?? "https://typing-game.local") + "/";
++import { LEARNING } from "../content/rules";
++import { createLearningBridge, type BridgeHost, type LearningBridge, type LearningBridgeOptions } from "../kit/learning";
++
++/** An optional build-time destination; paths, queries and fragments stay intact. */
++export function portalHome(value: string | undefined): string | null {
++  if (!value?.trim()) return null;
++  try {
++    const url = new URL(value.trim());
++    if (!["https:", "http:"].includes(url.protocol) || url.username || url.password) throw new Error("Invalid portal URL");
++    return url.href;
++  } catch {
++    throw new TypeError("VITE_PORTAL_URL must be an absolute HTTP(S) URL without credentials");
++  }
++}
++
++// Without a configured portal, framing must not flush the local learning queue.
++const standaloneHost: BridgeHost = {
++  parent: null,
++  addEventListener: () => {},
++  removeEventListener: () => {},
++  setTimeout: (callback, ms) => globalThis.setTimeout(callback, ms),
++  clearTimeout: (handle) => globalThis.clearTimeout(handle as ReturnType<typeof setTimeout>),
++  now: () => Date.now(),
++};
++
++export function createPortalBridge(options: Omit<LearningBridgeOptions, "gameId" | "parentOrigin"> = {}): LearningBridge {
++  const home = portalHome(import.meta.env.VITE_PORTAL_URL);
++  return createLearningBridge({
++    ...options,
++    gameId: LEARNING.gameId,
++    parentOrigin: home ? new URL(home).origin : "",
++    host: home ? options.host : standaloneHost,
++  });
+ }
+diff --git a/src/ui/results.ts b/src/ui/results.ts
+index d15e3f4..37775aa 100644
+--- a/src/ui/results.ts
++++ b/src/ui/results.ts
+@@ -252,14 +252,18 @@ export function createResults(root: HTMLElement, actions: ResultsActions): Prese
+   const foot = el(doc, "div", "dh-results__foot");
+   const buttons = el(doc, "div", "dh-results__actions");
+   const retryButton = uiButton(doc, "dh-retry", () => actions.retry());
+-  const portalButton = el(doc, "a", "dh-btn dh-results__portal");
+-  portalButton.href = portalHome(import.meta.env.VITE_PORTAL_ORIGINS);
+-  portalButton.target = "_top";
+-  portalButton.tabIndex = -1;
+-  portalButton.addEventListener("mousedown", (event) => event.preventDefault());
+-  portalButton.innerHTML = `<span class="dh-key">${keyLabel("enter")}</span>Back to portal`;
+   // Keep focus in the window key router, as uiButton does elsewhere.
+-  const resultButtons = [retryButton, portalButton] as const;
++  const resultButtons: HTMLElement[] = [retryButton];
++  const home = portalHome(import.meta.env.VITE_PORTAL_URL);
++  if (home) {
++    const portalButton = el(doc, "a", "dh-btn dh-results__portal");
++    portalButton.href = home;
++    portalButton.target = "_top";
++    portalButton.tabIndex = -1;
++    portalButton.addEventListener("mousedown", (event) => event.preventDefault());
++    portalButton.innerHTML = `<span class="dh-key">${keyLabel("enter")}</span>Back to portal`;
++    resultButtons.push(portalButton);
++  }
+   let focusedAction = 0;
+   const focusAction = (index: number): void => {
+     focusedAction = index;
+@@ -355,7 +359,7 @@ export function createResults(root: HTMLElement, actions: ResultsActions): Prese
+     setShown(easierButton, offerEasier);
+     if (easier !== null) easierButton.innerHTML = `<span class="dh-key">${keyLabel("call-early")}</span>Lost twice: retry on ${easier}`;
+     keys.innerHTML =
+-      `<span class="dh-key">${keyLabel("rotate-left")}</span><span class="dh-key">${keyLabel("rotate-right")}</span> buttons · ` +
++      (resultButtons.length > 1 ? `<span class="dh-key">${keyLabel("rotate-left")}</span><span class="dh-key">${keyLabel("rotate-right")}</span> buttons · ` : "") +
+       `<span class="dh-key">${keyLabel("tilt-up")}</span><span class="dh-key">${keyLabel("tilt-down")}</span> words` +
+       (actions.listen ? ` · <span class="dh-key">${keyLabel("replay")}</span> listen` : "");
+     focusAction(0);
+@@ -417,7 +421,7 @@ export function createResults(root: HTMLElement, actions: ResultsActions): Prese
+     }
+     if (!summary) return false;
+     if (action === "enter") resultButtons[focusedAction]!.click();
+-    else if (action === "rotate-left" || action === "rotate-right") focusAction(1 - focusedAction);
++    else if (action === "rotate-left" || action === "rotate-right") focusAction((focusedAction + 1) % resultButtons.length);
+     else if (action === "call-early" && offerEasier) actions.easier?.();
+     else if (action === "tilt-up") select(selected - 1);
+     else if (action === "tilt-down") select(selected + 1);
+diff --git a/tests/app/portal.test.ts b/tests/app/portal.test.ts
+index 8987581..cc0ec18 100644
+--- a/tests/app/portal.test.ts
++++ b/tests/app/portal.test.ts
+@@ -1,16 +1,92 @@
+-import { describe, expect, it } from "vitest";
+-import { portalHome } from "../../src/app/portal";
++import { afterEach, describe, expect, it, vi } from "vitest";
++import { createPortalBridge, portalHome } from "../../src/app/portal";
++import { LEARNING_ATTEMPT_MESSAGE, SHARED_MUSIC_MESSAGE, type BridgeHost } from "../../src/kit/learning";
++import { typedWordEvent } from "../../src/app/learning";
++
++afterEach(() => vi.unstubAllEnvs());
+ 
+ describe("portalHome", () => {
+-  it.each([undefined, "", " ,  , "])("uses the local portal for %j", (origins) => {
+-    expect(portalHome(origins)).toBe("https://typing-game.local/");
++  it.each([undefined, "", "   "])("has no portal for %j", (url) => {
++    expect(portalHome(url)).toBeNull();
++  });
++
++  it.each([
++    [" https://portal.example ", "https://portal.example/"],
++    ["https://portal.example/learn/?game=dragon-hold#home", "https://portal.example/learn/?game=dragon-hold#home"],
++    ["http://localhost:8080/portal/", "http://localhost:8080/portal/"],
++  ])("keeps the configured HTTP(S) destination %s", (url, home) => {
++    expect(portalHome(url)).toBe(home);
++  });
++
++  it.each(["/portal/", "https://a.example , https://b.example", "javascript:alert(1)", "data:text/html,portal", "ftp://portal.example", "https://user:secret@portal.example"])("rejects an invalid portal URL %s", (url) => {
++    expect(() => portalHome(url)).toThrow(/VITE_PORTAL_URL/);
++  });
++});
++
++function fixture() {
++  const parent = { postMessage: vi.fn() };
++  let receive = (_event: MessageEvent) => {};
++  const host: BridgeHost = {
++    parent,
++    addEventListener: (_type, listener) => { receive = listener; },
++    removeEventListener: vi.fn(),
++    setTimeout: vi.fn(), clearTimeout: vi.fn(), now: () => 1234,
++  };
++  const data = new Map<string, unknown>();
++  const storage = {
++    readJson: (key: string) => data.get(key) ?? null,
++    writeJson: (key: string, value: unknown) => { data.set(key, value); return true; },
++  };
++  const event = typedWordEvent({
++    type: "word-complete", tick: 1, word: 0, text: "river", kind: "enemy", grade: "perfect", errors: 0,
++    keyTicks: 40, responseMs: 640, target: null, activity: "typing-enemy", scored: true, hintUsed: false,
++  }, false, "2026-10-29T00:00:00.000Z");
++  return { host, parent, storage, event, receive: (origin: string) => receive({
++    origin, source: parent, data: { type: SHARED_MUSIC_MESSAGE, playing: true },
++  } as unknown as MessageEvent) };
++}
++
++describe("configured learning bridge", () => {
++  it.each([undefined, "", "   "])("keeps events local without a portal URL (%j), even in a frame", (url) => {
++    vi.stubEnv("VITE_PORTAL_URL", url);
++    const f = fixture();
++    const bridge = createPortalBridge({ host: f.host, storage: f.storage });
++    expect(bridge.parentOrigin).toBe("");
++    expect(bridge.embedded).toBe(false);
++    bridge.sendAttempt(f.event);
++    expect(bridge.queued()).toEqual([f.event]);
++    expect(bridge.requestFocus()).toBe(false);
++    expect(f.parent.postMessage).not.toHaveBeenCalled();
++    bridge.dispose();
+   });
+ 
+-  it("uses the first trimmed origin", () => {
+-    expect(portalHome(" https://a.example , https://b.example")).toBe("https://a.example/");
++  it("posts only to the configured origin and accepts messages only from it", () => {
++    vi.stubEnv("VITE_PORTAL_URL", " https://portal.example/learn/?game=dragon-hold#home ");
++    const f = fixture();
++    const bridge = createPortalBridge({ host: f.host, storage: f.storage });
++    const music = vi.fn();
++    bridge.onSharedMusic(music);
++    bridge.sendAttempt(f.event);
++    expect(bridge.embedded).toBe(true);
++    expect(bridge.parentOrigin).toBe("https://portal.example");
++    expect(f.parent.postMessage).toHaveBeenCalledWith(expect.objectContaining({ type: LEARNING_ATTEMPT_MESSAGE, event: f.event }), "https://portal.example");
++    f.receive("https://wrong.example");
++    expect(music).not.toHaveBeenCalled();
++    f.receive("https://portal.example");
++    expect(music).toHaveBeenCalledWith(true);
++    bridge.dispose();
+   });
+ 
+-  it("skips empty origins", () => {
+-    expect(portalHome(" , , https://b.example , https://c.example ")).toBe("https://b.example/");
++  it("flushes events kept without a portal when a configured portal is available", () => {
++    const f = fixture();
++    vi.stubEnv("VITE_PORTAL_URL", "");
++    const alone = createPortalBridge({ host: f.host, storage: f.storage });
++    alone.sendAttempt(f.event);
++    alone.dispose();
++    vi.stubEnv("VITE_PORTAL_URL", "https://portal.example/");
++    const embedded = createPortalBridge({ host: f.host, storage: f.storage });
++    expect(f.parent.postMessage).toHaveBeenCalledWith(expect.objectContaining({ event: f.event }), "https://portal.example");
++    expect(embedded.queued()).toEqual([]);
++    embedded.dispose();
+   });
+ });
+diff --git a/tests/ui/results-screen.test.ts b/tests/ui/results-screen.test.ts
+index 97061f2..f362935 100644
+--- a/tests/ui/results-screen.test.ts
++++ b/tests/ui/results-screen.test.ts
+@@ -1,4 +1,4 @@
+-import { afterEach, describe, expect, it, vi } from "vitest";
++import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+ import { portalHome } from "../../src/app/portal";
+ import { KEYS } from "../../src/content/rules";
+ import type { SimEvent } from "../../src/content/types";
+@@ -73,11 +73,31 @@ function fixture() {
+   return { doc, world, actions, results, node, key, open, frame };
+ }
+ 
++beforeEach(() => vi.stubEnv("VITE_PORTAL_URL", "https://portal.example/"));
+ afterEach(() => vi.unstubAllEnvs());
+ 
+ describe("results portal action (105b, DH-24 / G5)", () => {
+-  it.each([undefined, "", " https://portal.example , https://other.example "])("renders two matching actions with portalHome(%s) and target _top", (origins) => {
+-    vi.stubEnv("VITE_PORTAL_ORIGINS", origins);
++  it.each([undefined, "", "   "])("omits the portal action when the URL is empty (%j)", (url) => {
++    vi.stubEnv("VITE_PORTAL_URL", url);
++    for (const outcome of ["victory", "defeat"] as const) {
++      const f = fixture();
++      f.open(outcome);
++      const retry = f.node("dh-retry");
++      expect(f.node("dh-results__actions").children).toHaveLength(1);
++      expect(f.node("dh-results__actions").children[0]).toBe(retry);
++      expect(f.node("dh-results__portal")).toBeUndefined();
++      for (const code of ["ArrowRight", "ArrowLeft", "ArrowRight"]) {
++        expect(f.key(code)).toBe(true);
++        expect(retry.classList.contains("is-focused")).toBe(true);
++        f.key("Enter");
++      }
++      expect(f.actions.retry).toHaveBeenCalledTimes(3);
++      expect(f.node("dh-results__keys").innerHTML).not.toContain("buttons");
++    }
++  });
++
++  it.each(["https://portal.example/", " https://portal.example/learn/?game=dragon-hold#home "])("renders two matching actions with portalHome(%s) and target _top", (url) => {
++    vi.stubEnv("VITE_PORTAL_URL", url);
+     const f = fixture();
+     f.open("defeat");
+     const retry = f.node("dh-retry");
+@@ -86,7 +106,7 @@ describe("results portal action (105b, DH-24 / G5)", () => {
+     expect(retry.tagName).toBe("BUTTON");
+     expect(portal.tagName).toBe("A");
+     expect(portal.classList.contains("dh-btn")).toBe(true);
+-    expect(portal.href).toBe(portalHome(origins));
++    expect(portal.href).toBe(portalHome(url));
+     expect(portal.target).toBe("_top");
+     expect(portal.innerHTML).toBe(`<span class="dh-key">${keyLabel("enter")}</span>Back to portal`);
+     // A pointer click must keep the anchor's native navigation.
+diff --git a/vite.config.ts b/vite.config.ts
+index 06e76f7..03bc615 100644
+--- a/vite.config.ts
++++ b/vite.config.ts
+@@ -1,4 +1,6 @@
+-import { defineConfig } from "vite";
++import { fileURLToPath } from "node:url";
++import { defineConfig, loadEnv } from "vite";
++import { portalHome } from "./src/app/portal";
+ 
+ const env = (name: string): string | undefined => process.env[name]?.trim() || undefined;
+ 
+@@ -6,29 +8,46 @@ const env = (name: string): string | undefined => process.env[name]?.trim() || u
+ // nginx host. A plain `pnpm dev` on 127.0.0.1:3005 keeps Vite's own HMR socket.
+ const hmrHost = env("DEV_HMR_HOST");
+ 
+-export default defineConfig({
+-  base: "/",
+-  server: {
+-    host: env("DEV_HOST") ?? "127.0.0.1",
+-    port: 3005,
+-    strictPort: true,
+-    allowedHosts: (env("DEV_ALLOWED_HOSTS") ?? "dragon.typing-game.local")
+-      .split(",")
+-      .map((value) => value.trim())
+-      .filter(Boolean),
+-    hmr: hmrHost
+-      ? {
+-          host: hmrHost,
+-          protocol: (env("DEV_HMR_PROTOCOL") as "ws" | "wss" | undefined) ?? "wss",
+-          clientPort: Number(env("DEV_HMR_CLIENT_PORT") ?? 443),
+-        }
+-      : undefined,
+-  },
+-  build: {
+-    target: "es2022",
+-    // three.js in its own chunk: cached across game updates, and no chunk over the 500 kB warning.
+-    rollupOptions: { output: { manualChunks: { three: ["three"] } } },
+-    // three.js alone is ~560 kB minified (140 kB gzip).
+-    chunkSizeWarningLimit: 600,
+-  },
++export default defineConfig(({ mode }) => {
++  const root = fileURLToPath(new URL(".", import.meta.url));
++  const contract = fileURLToPath(new URL("./src/kit/learning/contract.ts", import.meta.url));
++  const home = portalHome(loadEnv(mode, root, "VITE_PORTAL_URL").VITE_PORTAL_URL);
++  const parentOrigin = home ? new URL(home).origin : "";
++  return {
++    plugins: [{
++      name: "dragonhold-portal-origin",
++      enforce: "pre",
++      transform(code, id) {
++        if (id !== contract) return null;
++        // Override only the compiled fallback; the pinned kit stays byte-for-byte intact.
++        const declaration = /^export const PARENT_ORIGIN = [^\n]+;$/gm;
++        if (code.match(declaration)?.length !== 1) this.error("Expected one kit PARENT_ORIGIN declaration");
++        return { code: code.replace(declaration, `export const PARENT_ORIGIN = ${JSON.stringify(parentOrigin)};`), map: null };
++      },
++    }],
++    base: "/",
++    server: {
++      host: env("DEV_HOST") ?? "127.0.0.1",
++      port: 3005,
++      strictPort: true,
++      allowedHosts: (env("DEV_ALLOWED_HOSTS") ?? "dragon.typing-game.local")
++        .split(",")
++        .map((value) => value.trim())
++        .filter(Boolean),
++      hmr: hmrHost
++        ? {
++            host: hmrHost,
++            protocol: (env("DEV_HMR_PROTOCOL") as "ws" | "wss" | undefined) ?? "wss",
++            clientPort: Number(env("DEV_HMR_CLIENT_PORT") ?? 443),
++          }
++        : undefined,
++    },
++    build: {
++      target: "es2022",
++      // three.js in its own chunk: cached across game updates, and no chunk over the 500 kB warning.
++      rollupOptions: { output: { manualChunks: { three: ["three"] } } },
++      // three.js alone is ~560 kB minified (140 kB gzip).
++      chunkSizeWarningLimit: 600,
++    },
++  };
+ });

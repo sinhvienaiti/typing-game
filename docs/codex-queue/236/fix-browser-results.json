@@ -1,0 +1,75 @@
+{
+  "date": "2026-10-31",
+  "by": "Claude (fix pass after review)",
+  "setup": {
+    "admin": "node admin/server.mjs, TYPING_GAME_ADMIN_PORT=3291, TYPING_GAME_ADMIN_DATA_DIR=<worktree>/tmp/fix236-data, token local-dev",
+    "portal": "portal/dist (pnpm --dir portal build) served by a scratch static server on 3292 with SPA fallback and /api/ proxied to 3291",
+    "browser": "Claude Browser pane, 800x600, real clicks for selector, sidebar and palette; DOM read back with JS",
+    "captures": "no image files written; nothing to prune"
+  },
+  "scenarios": [
+    {
+      "name": "Space present",
+      "status": { "spaceAvailable": true, "spaceStatus": "available" },
+      "checks": [
+        { "open": "/admin", "final": "/admin/shared", "breadcrumb": "All games / Overview", "selector": "All games pressed", "brand": "TG", "selectorRole": "group" },
+        { "open": "click Space Typing", "final": "/admin/space-typing", "breadcrumb": "Space Typing / Overview" },
+        { "open": "sidebar Ships", "final": "/admin/space-typing/ships", "breadcrumb": "Space Typing / Ships", "rendered": "Ships page" },
+        { "open": "Space sidebar Media Library", "final": "/admin/media", "breadcrumb": "Administration / Media Library", "selector": "Space Typing pressed", "sidebarFirstGroup": "Dashboard" },
+        { "open": "Space sidebar Roles & Permissions", "final": "/admin/roles", "breadcrumb": "Administration / Roles & Permissions", "selector": "Space Typing pressed" },
+        { "open": "reload /admin/media (same tab)", "selector": "Space Typing pressed" },
+        { "open": "/admin/roles with no remembered area (direct load)", "selector": "All games pressed", "sidebarFirstGroup": "All games" },
+        { "open": "palette search 'Typing Content'", "results": ["Learning Content, All games"] },
+        { "open": "palette result", "final": "/admin/shared/learning-content", "breadcrumb": "All games / Learning Content", "badge": "NO VISUAL PREVIEW / N/A", "roleGates": "attached" }
+      ],
+      "consoleErrors": 0
+    },
+    {
+      "name": "Space missing (TYPING_GAME_ADMIN_SPACE_DIR -> absent dir)",
+      "status": { "spaceAvailable": false, "spaceStatus": "not-checked-out" },
+      "api": { "/api/admin/space-typing/state": "503 space-typing-not-checked-out" },
+      "serverLog": "console.warn: Space Typing is not checked out at <dir>",
+      "checks": [
+        { "open": "/admin/space-typing/ships", "breadcrumb": "Space Typing / Ships", "content": "Space Typing is not checked out" },
+        { "open": "/admin/shared", "content": "Overview with catalogue tile and 4 games" },
+        { "open": "/admin/shared/learning-content", "content": "50 catalogue rows" },
+        { "open": "/admin/media", "content": "Media Library loads" }
+      ],
+      "consoleErrors": 0
+    },
+    {
+      "name": "Space failed (contracts present, space-typing-admin.v1.json half-written)",
+      "status": { "spaceAvailable": false, "spaceStatus": "failed" },
+      "api": { "/api/admin/space-typing/state": "503 space-typing-unavailable", "/api/runtime/space-typing/ships": "503 space-typing-unavailable" },
+      "serverLog": "console.error with SyntaxError stack (server.mjs:61)",
+      "checks": [
+        { "open": "/admin/space-typing/ships", "content": "Space Typing failed to start — see the Admin server log" }
+      ]
+    },
+    {
+      "name": "Invalid Typing Feel catalogue in a scratch root (copy of admin/, shared and games symlinked)",
+      "status": { "spaceAvailable": true, "spaceStatus": "available" },
+      "api": { "/api/admin/shared/overview": "200, catalogue { status: invalid }, 4 consumers" },
+      "checks": [
+        { "open": "/admin/space-typing/ships", "rendered": "Ships page" },
+        { "open": "/admin/shared", "content": "Catalogue unreadable + parser message, games table intact" },
+        { "open": "same root, consumers.json deleted: /admin/shared", "content": "Catalogue unreadable; Game list unreadable (missing)" },
+        { "open": "same root, consumers.json deleted: /admin/space-typing/equipment", "rendered": "Equipment page" }
+      ],
+      "consoleErrors": 0
+    },
+    {
+      "name": "Status probe fails (Admin stopped, proxy 502)",
+      "checks": [
+        { "open": "/admin/space-typing/ships", "rendered": "Ships page with its own 'could not be loaded' error and Retry; no endless 'Checking' notice" }
+      ]
+    },
+    {
+      "name": "Symlinked launch path (P3-e)",
+      "launch": "node <scratch>/fix236-link/server.mjs (symlink to admin/server.mjs), port 3293",
+      "guard": { "old": false, "new": true },
+      "result": "listens, /api/admin/shared/status 200"
+    }
+  ],
+  "stopped": "Admin 3291, 3293 and the static server 3292 stopped; ports free afterwards"
+}

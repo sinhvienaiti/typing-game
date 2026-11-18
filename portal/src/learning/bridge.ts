@@ -1,12 +1,19 @@
 import { BrowserLearningProfileStore } from "../../../shared/learning/browser-store.mjs";
 import {
+  LEARNING_ATTEMPT_MESSAGE,
+  LEARNING_LOOKUP_MESSAGE,
+  LEARNING_QUERY_MESSAGE,
   isLearningMessage,
   makeLearningAck,
   makeLearningError,
   makeLearningQueryResult,
   parseLearningMessage,
 } from "../../../shared/learning/message-contract.mjs";
-import { queryLearningProfile } from "../../../shared/learning/query.mjs";
+import {
+  lookupParsedLearningRecords,
+  queryLearningProfile,
+  type LearningLookup,
+} from "../../../shared/learning/query.mjs";
 import type { LearningEvent } from "../../../shared/learning/core.mjs";
 
 type GameTarget = {
@@ -81,7 +88,7 @@ export class ParentLearningBridge {
 
     try {
       const message = parseLearningMessage(event.data);
-      if ("event" in message) {
+      if (message.type === LEARNING_ATTEMPT_MESSAGE) {
         if (message.event.gameId !== currentGame.id) {
           throw new TypeError(
             "learning event gameId does not match the active game",
@@ -97,12 +104,21 @@ export class ParentLearningBridge {
         return true;
       }
 
-      void this.#handleQuery(
-        message.requestId,
-        message.query,
-        frameWindow,
-        expectedOrigin,
-      );
+      if (message.type === LEARNING_QUERY_MESSAGE) {
+        void this.#handleQuery(
+          message.requestId,
+          message.query,
+          frameWindow,
+          expectedOrigin,
+        );
+      } else if (message.type === LEARNING_LOOKUP_MESSAGE) {
+        void this.#handleLookup(
+          message.requestId,
+          message.lookup,
+          frameWindow,
+          expectedOrigin,
+        );
+      }
     } catch (error) {
       const requestId = safeRequestId(event.data);
       if (requestId !== null) {
@@ -151,15 +167,35 @@ export class ParentLearningBridge {
         targetOrigin,
         makeLearningQueryResult(requestId, result),
       );
-    } catch (error) {
+    } catch {
       this.#post(
         target,
         targetOrigin,
-        makeLearningError(
-          requestId,
-          "query-failed",
-          errorText(error),
-        ),
+        makeLearningError(requestId, "query-failed"),
+      );
+    }
+  }
+
+  async #handleLookup(
+    requestId: string,
+    lookup: LearningLookup,
+    target: Window,
+    targetOrigin: string,
+  ): Promise<void> {
+    try {
+      await this.flush();
+      const profile = await this.#store.load();
+      const result = lookupParsedLearningRecords(profile, lookup);
+      this.#post(
+        target,
+        targetOrigin,
+        makeLearningQueryResult(requestId, result),
+      );
+    } catch {
+      this.#post(
+        target,
+        targetOrigin,
+        makeLearningError(requestId, "query-failed"),
       );
     }
   }

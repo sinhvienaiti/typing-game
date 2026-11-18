@@ -1,0 +1,252 @@
+.st-admin-asset-studio {
+  display: grid;
+  grid-template-columns: minmax(340px, 420px) minmax(0, 1fr);
+  gap: 18px;
+  margin: 18px 0;
+  align-items: stretch;
+}
+
+.st-admin-asset-studio-settings,
+.st-admin-asset-studio-preview {
+  min-width: 0;
+  border: 1px solid rgba(111, 219, 255, 0.18);
+  border-radius: 16px;
+  background: rgba(7, 16, 28, 0.76);
+}
+
+.st-admin-asset-studio-settings {
+  padding: 18px;
+}
+
+.st-admin-asset-studio-section-head,
+.st-admin-asset-studio-preview-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.st-admin-asset-studio-section-head h2,
+.st-admin-asset-studio-preview-head h2 {
+  margin: 3px 0 0;
+  font-size: 1.08rem;
+}
+
+.st-admin-asset-studio-section-head p {
+  margin: 7px 0 0;
+  color: var(--st-admin-muted, #93a7bb);
+  font-size: 0.84rem;
+  line-height: 1.45;
+}
+
+.st-admin-asset-studio-eyebrow {
+  display: block;
+  color: var(--st-admin-muted, #93a7bb);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.st-admin-asset-studio-basic {
+  margin-top: 18px;
+}
+
+.st-admin-asset-studio-basic h3 {
+  margin: 0 0 10px;
+  font-size: 0.9rem;
+}
+
+.st-admin-asset-studio-fields,
+.st-admin-asset-studio-advanced-body {
+  display: grid;
+  gap: 12px;
+}
+
+.st-admin-asset-studio-advanced {
+  margin-top: 16px;
+  border-top: 1px solid rgba(111, 219, 255, 0.12);
+  padding-top: 12px;
+}
+
+.st-admin-asset-studio-advanced > summary {
+  cursor: pointer;
+  font-size: 0.86rem;
+  font-weight: 700;
+}
+
+.st-admin-asset-studio-advanced-body {
+  margin-top: 12px;
+}
+
+.st-admin-asset-studio-preview {
+  display: grid;
+  grid-template-rows: auto minmax(420px, 1fr) auto;
+  overflow: hidden;
+}
+
+.st-admin-asset-studio-preview-head,
+.st-admin-asset-studio-preview-footer {
+  padding: 14px 16px;
+}
+
+.st-admin-asset-studio-preview-head {
+  border-bottom: 1px solid rgba(111, 219, 255, 0.12);
+}
+
+.st-admin-asset-studio-preview-footer {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 8px 12px;
+  align-items: center;
+  border-top: 1px solid rgba(111, 219, 255, 0.12);
+}
+
+.st-admin-asset-studio-preview-footer .st-admin-asset-preview-status {
+  grid-column: 1 / -1;
+}
+
+.st-admin-asset-studio-stage {
+  min-height: 420px;
+  border: 0;
+  border-radius: 0;
+}
+
+.st-admin-asset-studio-stage .st-admin-asset-preview-frame,
+.st-admin-asset-studio-preview .st-admin-asset-preview-frame {
+  min-height: 420px;
+  height: 100%;
+}
+
+.st-admin-asset-choice-group {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.st-admin-asset-choice {
+  min-height: 32px;
+  padding: 6px 10px;
+  border: 1px solid rgba(111, 219, 255, 0.2);
+  border-radius: 999px;
+  background: rgba(8, 19, 32, 0.82);
+  color: inherit;
+  font: inherit;
+  font-size: 0.82rem;
+  cursor: pointer;
+}
+
+.st-admin-asset-choice:hover,
+.st-admin-asset-choice:focus-visible {
+  border-color: rgba(111, 219, 255, 0.5);
+}
+
+.st-admin-asset-choice.active,
+.st-admin-asset-choice[aria-pressed="true"] {
+  border-color: rgba(111, 219, 255, 0.82);
+  background: rgba(50, 151, 195, 0.24);
+}
+
+.st-admin-asset-scalar-control {
+  display: grid;
+  grid-template-columns: minmax(120px, 1fr) 82px auto;
+  gap: 8px;
+  align-items: center;
+}
+
+.st-admin-asset-scalar-range {
+  width: 100%;
+}
+
+.st-admin-asset-scalar-number {
+  width: 100%;
+  min-width: 0;
+}
+
+.st-admin-asset-scalar-reset {
+  white-space: nowrap;
+}
+
+.st-admin-asset-capability {
+  display: grid;
+  gap: 5px;
+  padding: 10px 0;
+  border-top: 1px solid rgba(111, 219, 255, 0.09);
+}
+
+.st-admin-asset-capability:first-child {
+  border-top: 0;
+}
+
+.st-admin-asset-capability-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.st-admin-asset-capability-copy {
+  color: var(--st-admin-muted, #93a7bb);
+  font-size: 0.8rem;
+  line-height: 1.4;
+}
+
+.st-admin-asset-studio-lifecycle {
+  grid-column: 1 / -1;
+}
+
+.st-admin-asset-studio-lifecycle:empty {
+  display: none;
+}
+
+.st-admin-asset-studio-lifecycle .st-admin-sticky-save,
+.st-admin-asset-studio-lifecycle .st-admin-v2-draft-bar {
+  margin: 0;
+}
+
+@media (max-width: 1080px) {
+  .st-admin-asset-studio {
+    grid-template-columns: 1fr;
+  }
+
+  .st-admin-asset-studio-preview {
+    grid-row: 1;
+  }
+
+  .st-admin-asset-studio-settings {
+    grid-row: 2;
+  }
+}
+
+@media (max-width: 700px) {
+  .st-admin-asset-studio {
+    gap: 12px;
+  }
+
+  .st-admin-asset-studio-settings {
+    padding: 14px;
+  }
+
+  .st-admin-asset-studio-preview-head,
+  .st-admin-asset-studio-preview-footer {
+    padding: 12px;
+  }
+
+  .st-admin-asset-studio-preview {
+    grid-template-rows: auto minmax(320px, 1fr) auto;
+  }
+
+  .st-admin-asset-studio-stage,
+  .st-admin-asset-studio-preview .st-admin-asset-preview-frame {
+    min-height: 320px;
+  }
+
+  .st-admin-asset-scalar-control {
+    grid-template-columns: minmax(0, 1fr) 76px;
+  }
+
+  .st-admin-asset-scalar-reset {
+    grid-column: 1 / -1;
+    justify-self: start;
+  }
+}

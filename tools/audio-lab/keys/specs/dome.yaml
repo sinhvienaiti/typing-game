@@ -1,0 +1,88 @@
+# Keyboard sound profile 'dome' (keypress-sound lane, 29/10/2026). Two cards: single keys and the spacebar.
+# Read by keys/pipeline.py (Stable Audio 3 prompts, slicing, picks) and by the critic (--spec this file).
+# Prompt keys: A, B, E = a 10 s typing passage sliced into single strokes; C, D, F = a 1 s single-stroke take (E, F: round 2, 29/10).
+# Prompts follow DECISIONS Q2 and Q6 (checked by the pipeline against gen/sa3.py Q2_TERMS + Q6_TERMS).
+- schema: 1
+  id: key.dome
+  game: keys
+  status: draft
+  profile: {id: dome, name: 'Soft Dome', order: 4, part: key}
+  purpose: "Single keystroke: electro-capacitive rubber-dome feel (Topre-style), soft round thock with a short tail"
+  playback: {mode: one-shot, channels: mono, bus: keys, format: "OGG Vorbis 48 kHz in game, WAV 48 kHz 24-bit master"}
+  duration: {min_ms: 40, max_ms: 180}
+  onset: {class: key, rise_max_ms: 10, lead_silence_max_ms: 2}
+  variants: {target: 10}
+  loudness:
+    file: {metric: lufs-m-max, pad_s: 0.4, true_peak_max_dbtp: -1, basis: 'one target for every file of every profile (AUDIO_PIPELINE 4.3.3, 5.1 step 4)'}
+  prompt:
+    style_root: premium mechanical keyboard, close-miked, dry
+    variants:
+      - "A: Close-up recording of typing on a Topre electro-capacitive keyboard, soft rounded rubber dome thock, muted and short, dry quiet room"
+      - "B: Topre keyboard typing ASMR, smooth rubber dome switches with a soft deep thock, slow steady typing, close microphone, no reverb"
+      - "C: One single keystroke on a Topre rubber dome keyboard, soft round muted thock, close-up, dry, isolated"
+      - "D: A single key press and release on a premium electro-capacitive keyboard, soft rounded deep thock, short, close microphone, studio quality"
+      - "E: Typing on a Topre electro-capacitive keyboard, soft muted thock with a gentle plastic clack, light and quiet keystrokes, slow steady typing, close microphone, dry room"
+      - "F: One keystroke on a Topre electro-capacitive keyboard, soft rounded thock with a light plastic top note, short, close-up, dry"
+  fit:   # profile targets for keys/family.py fit_score (trapezoids: 1 inside good, 0 at bad); starting points from the sound target, not tuned to takes
+    centroid_hz: {good: [1000, 2800], bad: [500, 4300], weight: 1.5}
+    share_above_5k: {good: [0, 0.15], bad: [0, 0.35], weight: 1.0}
+    share_below_800: {good: [0.15, 0.6], bad: [0.05, 0.9], weight: 1.0}
+    click_share: {good: [0, 0.6], bad: [0, 0.9], weight: 0.5}
+    decay_ms: {good: [15, 50], bad: [8, 90], weight: 0.5}
+    t_main_ms: {good: [0, 8], bad: [0, 15], weight: 1.0}
+    attack_ms: {good: [0, 5], bad: [0, 12], weight: 1.0}
+    hit_rise_ms: {good: [0, 2.5], bad: [0, 6], weight: 1.5}   # bottom-out sharpness (> 2 kHz rise), against model smear
+  critic:
+    group: key_ok
+    family: phim-ui
+    duration_ms: [40, 180]
+    attack_max_ms: 10   # deviation, owner to confirm: §4.3.1 says 3 ms for code-made ticks; a recorded-style keystroke is a finger touch then the bottom-out (creamy r1: median 5.5 ms, P90 11 ms). Head silence stays <= 2 ms; pick also gates the hit at <= 15 ms and ranks faster rises higher (fit attack_ms)
+    head_max_ms: 2
+    rate_hz: 6
+    intent: "a keystroke on a Topre electro-capacitive keyboard with rubber dome switches"
+    ast: {expected: [Typing, Computer keyboard], forbid: [Speech]}
+    clap:
+      labels: [a mechanical keyboard keystroke, a computer keyboard typing, a typewriter key, a mouse click, a user interface click, a wooden knock, a metal clang, a finger snap, a clock tick, a spring boing]
+      expected: [a mechanical keyboard keystroke, a computer keyboard typing]
+      contrast: [[a premium mechanical keyboard keystroke, a cheap plastic click]]
+  licence: {source: Stable Audio 3 Small-SFX (Stability AI Community License, owner registered 23/10/2026), allowed: [LicenseRef-Stability-Community-2024], no downloaded packs}
+- schema: 1
+  id: space.dome
+  game: keys
+  status: draft
+  profile: {id: dome, name: 'Soft Dome', order: 4, part: space}
+  purpose: "Spacebar / long key: electro-capacitive rubber-dome feel (Topre-style), soft round thock with a short tail"
+  playback: {mode: one-shot, channels: mono, bus: keys, format: "OGG Vorbis 48 kHz in game, WAV 48 kHz 24-bit master"}
+  duration: {min_ms: 60, max_ms: 260}
+  onset: {class: key, rise_max_ms: 10, lead_silence_max_ms: 2}
+  variants: {target: 3}
+  loudness:
+    file: {metric: lufs-m-max, pad_s: 0.4, true_peak_max_dbtp: -1, basis: 'one target for every file of every profile (AUDIO_PIPELINE 4.3.3, 5.1 step 4)'}
+  prompt:
+    style_root: premium mechanical keyboard, close-miked, dry
+    variants:
+      - "A: Pressing the spacebar again and again on a Topre electro-capacitive keyboard, soft deep rounded spacebar thock, muted, slow, close-up, dry quiet room"
+      - "C: One single spacebar press on a Topre rubber dome keyboard, soft deep round thock, close-up, dry, isolated"
+      - "E: Pressing the spacebar again and again on a Topre electro-capacitive keyboard, a soft but clear rounded thock with a light plastic top note, short, slow, close-up, dry room"
+      - "F: One spacebar press on a premium rubber dome keyboard, rounded muted thock with crisp keycap texture, short, close microphone, dry"
+  fit:   # profile targets for keys/family.py fit_score (trapezoids: 1 inside good, 0 at bad); starting points from the sound target, not tuned to takes
+    centroid_hz: {good: [600, 2000], bad: [250, 3200], weight: 1.5}
+    share_below_800: {good: [0.25, 0.8], bad: [0.1, 0.96], weight: 1.0}
+    share_above_5k: {good: [0, 0.15], bad: [0, 0.35], weight: 0.5}
+    t_main_ms: {good: [0, 8], bad: [0, 15], weight: 1.0}
+    attack_ms: {good: [0, 5], bad: [0, 12], weight: 1.0}
+    hit_rise_ms: {good: [0, 2.5], bad: [0, 6], weight: 1.5}   # bottom-out sharpness (> 2 kHz rise), against model smear
+  critic:
+    group: key_ok
+    family: phim-ui
+    duration_ms: [60, 260]
+    attack_max_ms: 10   # deviation, owner to confirm: §4.3.1 says 3 ms for code-made ticks; a recorded-style keystroke is a finger touch then the bottom-out (creamy r1: median 5.5 ms, P90 11 ms). Head silence stays <= 2 ms; pick also gates the hit at <= 15 ms and ranks faster rises higher (fit attack_ms)
+    head_max_ms: 2
+    rate_hz: 1.5
+    intent: "a spacebar press on a Topre electro-capacitive keyboard with rubber dome switches"
+    ast: {expected: [Typing, Computer keyboard], forbid: [Speech]}
+    clap:
+      labels: [a mechanical keyboard keystroke, a computer keyboard typing, a typewriter key, a mouse click, a user interface click, a wooden knock, a metal clang, a finger snap, a clock tick, a spring boing]
+      expected: [a mechanical keyboard keystroke, a computer keyboard typing]
+      contrast: [[a premium mechanical keyboard keystroke, a cheap plastic click]]
+  licence: {source: Stable Audio 3 Small-SFX (Stability AI Community License, owner registered 23/10/2026), allowed: [LicenseRef-Stability-Community-2024], no downloaded packs}

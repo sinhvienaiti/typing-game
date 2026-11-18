@@ -1,0 +1,19 @@
+{
+  "command": [
+    "node",
+    "src/kit/tools/deploy/check-pack.mjs",
+    "dist",
+    "--game",
+    "typing-defense",
+    "--json",
+    "--allow-local-host"
+  ],
+  "cwd": "games/typing-defense/tmp/codex-224/tree-170",
+  "env": {
+    "VITE_PORTAL_URL": "(absent)",
+    "pnpm_config_verify_deps_before_run": "false",
+    "TMPDIR": "/Users/toandx/htdocs/typing-game/games/typing-defense/tmp/codex-224/tmpdir"
+  },
+  "exit": 1,
+  "seconds": 0.0569
+}

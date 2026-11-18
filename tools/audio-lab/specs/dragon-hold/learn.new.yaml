@@ -1,0 +1,180 @@
+# Thẻ spec âm thanh (AUDIO_PIPELINE §5.1 bước 1). Sinh bởi `pnpm audio:specs generate`; kiểm bằng `pnpm audio:specs validate`.
+# Sửa tay: thêm `manual: true` vào mục đã sửa, hoặc ghi đường dẫn (vd. duration.target_ms) vào manual_fields.
+# status, references, prompt.variants, notes luôn được giữ khi sinh lại. Comment YAML thì không: ghi chú để ở notes.
+schema: 1
+id: learn.new
+game: dragon-hold
+status: draft
+manual_fields: []
+when: Hạ một từ mới lần đầu (sự kiện có điểm, 00 D14)
+purpose: Chuông đôi dịu
+category: word-reward
+family: thuong
+source_class: pitched-reward
+playback:
+  mode: one-shot
+  channels: mono
+  channels_basis: 'M0_SOUND_LIST §1: Tiếng lẻ mono. Nhạc và nền stereo'
+  bus: learning
+  priority: 0
+  min_gap_ms: 250
+  limit_group: null
+  caps: {}
+  format: OGG Vorbis 48 kHz trong game; gốc WAV 48 kHz (§4.3.1, §11)
+duration:
+  target_ms: 700
+  tolerance_pct: 20
+  tolerance_ms: null
+  min_ms: 560
+  max_ms: 840
+  basis: src/audio/catalog.ts lengthMs (nguồn chuẩn của độ dài)
+  category_range_ms: [150, 900]
+  music: null
+onset:
+  class: other
+  rise_max_ms: null
+  lead_silence_max_ms: 5
+  basis: AUDIO_PIPELINE §4.3.1 (thời gian lên, im lặng ở đầu)
+variants:
+  target: 1
+  min: 1
+  max: 3
+  basis: AUDIO_PIPELINE §4.3.3 (Thưởng xong từ)
+randomisation:
+  group: rare-fixed
+  pitch_cents: 0
+  gain_db: 0
+  rules:
+    - 'Không đổi ngẫu nhiên: âm hiếm được nhận ra nhờ luôn giống nhau'
+    - Chuỗi thưởng leo nốt theo thang, tối đa 8–12 bậc
+  current_code: 'Không đổi ngẫu nhiên (catalog vary: false)'
+  basis: AUDIO_PIPELINE §5.3 (mã cần cho mỗi nhóm giá trị riêng, §6.3)
+frequency_role:
+  bands:
+    - band: pitched
+      range_hz: null
+      role: Chuông nhỏ và đàn hạc theo ngũ cung
+  voice_band: decay-15db-100ms
+  voice_band_text: Năng lượng 1–4 kHz giảm ít nhất 15 dB trong 100 ms sau đầu tiếng; phần ngân dưới 1 kHz hoặc trên 4 kHz (§6.2)
+  spectrum: Nốt đúng thang, lệch không quá 10 cent. Năng lượng 1–4 kHz giảm ít nhất 15 dB trong 100 ms sau đầu tiếng (§6.2)
+  basis: AUDIO_PIPELINE §6.4, AUDIO_PIPELINE §4.3.3
+loudness:
+  file:
+    metric: peak-dbtp
+    target: -1
+    basis: 'M0_SOUND_LIST §1: Tiếng lẻ chuẩn hóa đỉnh −1 dBTP'
+  proposal:
+    metric: lufs-m-max
+    target: -20
+    pad_s: 0.4
+    true_peak_max_dbtp: -1
+    basis: 'AUDIO_PIPELINE §4.3.3, §5.1 bước 4: đề xuất chuẩn hóa mọi âm ngắn về một mức chung; tài liệu game đang ghi chuẩn hóa đỉnh'
+  bus: learning
+  bus_gain: 0.8
+  bus_gain_db: -1.94
+  gain_db: -1
+  gain_basis: src/audio/catalog.ts gainDb (mặc định 0 dB), mức trước bus
+  relative_db: -2.94
+  pronunciation_duck_db: 0.0
+  mix_target:
+    metric: lufs-m-max
+    range: [-22, -16]
+    text: Từ −22 (bậc C) đến −16 (bậc S)
+    weight: null
+    basis: AUDIO_PIPELINE §4.3.3 (mức trong bản trộn, bài A và B)
+prompt:
+  text: Soft two-note glass bell, C and G, gentle discovery, 700 ms
+  suffix: null
+  style_root: painterly fantasy forest, warm, organic, outdoor
+  sweetener: than hồng lách tách và đàn hạc
+  variants: []
+  basis: docs/audio/M0_SOUND_LIST.md; gốc prompt theo AUDIO_PIPELINE §5.2 (chốt sau bảng phong cách)
+pitches: null
+parts: null
+layer_plan: null
+references: []
+source_plan:
+  now: [sample-player]
+  later: []
+  ranked:
+    - rank: 1
+      kinds: [sample-player]
+      detail: Mẫu nhạc cụ thật VCSL, phát từng nốt bằng bộ phát mẫu Python; dời cao độ tối đa 3 bán cung; hoặc một nốt tốt, mã đổi cao độ trong khoảng đó
+    - rank: 2
+      kinds: [synth]
+      detail: Mô hình vật lý Faust (chuông, sáo)
+  needs_now: []
+  needs_later: []
+  note: Không viết prompt cho từng nốt. Nốt lệch dưới 10 cent
+  batch1: null
+  style_board: false
+  sa3_trial: false
+  basis: AUDIO_PIPELINE §3.2 (nguồn theo loại âm), §10.1 (khi chưa có Stable Audio 3)
+licence:
+  allowed: [CC0-1.0, project-code]
+  conditional: []
+  forbidden:
+    - non-commercial-weights
+    - freesound-cc-by-nc
+    - freesound-sampling-plus
+    - bbc-sound-effects
+    - pixabay
+    - sound-from-other-games
+    - sonniss-lot-1-2-and-any-ai-step
+    - elevenlabs-or-suno-free-tier-release
+  attribution_required: false
+  notes:
+    - Mẫu VCSL, VSCO-2-CE (CC0); MIDI do Claude viết; mido là MIT (chưa kiểm lại)
+    - Mã của dự án. pedalboard (GPL-3.0) chỉ import trên máy, không chép vào repo (§10.9)
+  record: art-src/audio/SOURCES.json và licences.jsonl (§10.5, §10.6); pnpm audio:licence-check chặn khi thiếu
+  basis: AUDIO_PIPELINE §10.2
+constraints: []
+board:
+  contexts: [trong-tran, lap-20]
+  contexts_before_phase3: [lap-20]
+  dense: true
+  repeat_interval_ms: 1500
+  repeat_basis: Đề xuất theo bot 40 WPM (§6.1); chỉnh khi có nhịp thật của game
+  loudness_match: lufs-m
+  basis: AUDIO_PIPELINE §7
+critic:
+  group: reward
+  dirty: false
+  weights_batch1:
+    l2: 0.6
+    l3: 0.3
+    l4: 0.1
+    l5: 0.0
+  loop_eval:
+    enabled: false
+    length_s: null
+    plays: null
+    interval_ms: null
+  ast:
+    expected: [Bell, Glass]
+    forbid: []
+  loop: false
+  stereo: false
+  pitched: true
+  attack_max_ms: null
+  head_max_ms: 5
+  rate_hz: 0.667
+  bpm: null
+  bars: null
+  beats_per_bar: null
+  intent: Soft two-note glass bell, C and G, gentle discovery, 700 ms
+  refs: []
+  basis: AUDIO_PIPELINE §4.4, §4.5 (L4 chỉ gắn cờ, trọng số tối đa 0,1)
+blocked_by: []
+origin:
+  code:
+    file: src/audio/catalog.ts
+    present: true
+    asset_stem: sfx/learning/new-word
+    synth_in_code: true
+  sound_list:
+    file: docs/audio/M0_SOUND_LIST.md
+    present: true
+    section: 5.10 Học (bus `learning`, P0, không bao giờ bị hạ)
+  plan: []
+notes: ''

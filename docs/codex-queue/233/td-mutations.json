@@ -1,0 +1,254 @@
+[
+  {
+    "id": "M5",
+    "file": "scripts/deploy/prune.mjs",
+    "sha256": "2c1fe4011e30e72206f81d534eb9456c7d8f1705f97a8bf55c7e04d484f855c2",
+    "mutated": {
+      "name": "M5-mutated",
+      "argv": [
+        "pnpm",
+        "exec",
+        "vitest",
+        "run",
+        "tests/deploy-prune.test.ts",
+        "-t",
+        "rejects a linked"
+      ],
+      "cwd": "/Users/toandx/htdocs/typing-game/games/typing-defense/tmp/codex-233/tree",
+      "portal_url": null,
+      "exit": 1,
+      "seconds": 0.83,
+      "test_files": "1 failed (1)",
+      "vitest_tests": "2 failed | 23 skipped (25)"
+    },
+    "restored": {
+      "name": "M5-restored",
+      "argv": [
+        "pnpm",
+        "exec",
+        "vitest",
+        "run",
+        "tests/deploy-prune.test.ts",
+        "-t",
+        "rejects a linked"
+      ],
+      "cwd": "/Users/toandx/htdocs/typing-game/games/typing-defense/tmp/codex-233/tree",
+      "portal_url": null,
+      "exit": 0,
+      "seconds": 0.693,
+      "test_files": "1 passed (1)",
+      "vitest_tests": "2 passed | 23 skipped (25)"
+    },
+    "restored_sha256": "2c1fe4011e30e72206f81d534eb9456c7d8f1705f97a8bf55c7e04d484f855c2"
+  },
+  {
+    "id": "M6",
+    "file": "src/app/learning.ts",
+    "sha256": "3378c7251d7bb0509b3fd03729c27ac10a76b563ceeb8b5d542772edda75f852",
+    "mutated": {
+      "name": "M6-mutated",
+      "argv": [
+        "pnpm",
+        "exec",
+        "vitest",
+        "run",
+        "tests/portal.test.ts",
+        "-t",
+        "creates one real bridge"
+      ],
+      "cwd": "/Users/toandx/htdocs/typing-game/games/typing-defense/tmp/codex-233/tree",
+      "portal_url": null,
+      "exit": 1,
+      "seconds": 0.642,
+      "test_files": "1 failed (1)",
+      "vitest_tests": "1 failed | 14 skipped (15)"
+    },
+    "restored": {
+      "name": "M6-restored",
+      "argv": [
+        "pnpm",
+        "exec",
+        "vitest",
+        "run",
+        "tests/portal.test.ts",
+        "-t",
+        "creates one real bridge"
+      ],
+      "cwd": "/Users/toandx/htdocs/typing-game/games/typing-defense/tmp/codex-233/tree",
+      "portal_url": null,
+      "exit": 0,
+      "seconds": 0.655,
+      "test_files": "1 passed (1)",
+      "vitest_tests": "1 passed | 14 skipped (15)"
+    },
+    "restored_sha256": "3378c7251d7bb0509b3fd03729c27ac10a76b563ceeb8b5d542772edda75f852"
+  },
+  {
+    "id": "P1-01-query",
+    "file": "vite.config.ts",
+    "sha256": "81d942f3d132c3ba3c35dda6cd7f39634b8729eef550a204a28a85e61f3afb04",
+    "mutated": {
+      "name": "P1-01-query-mutated",
+      "argv": [
+        "pnpm",
+        "exec",
+        "vitest",
+        "run",
+        "tests/portal-id.test.ts",
+        "-t",
+        "rewrites the real build through"
+      ],
+      "cwd": "/Users/toandx/htdocs/typing-game/games/typing-defense/tmp/codex-233/tree",
+      "portal_url": null,
+      "exit": 1,
+      "seconds": 0.92,
+      "test_files": "1 failed (1)",
+      "vitest_tests": "4 failed | 4 passed | 2 skipped (10)"
+    },
+    "restored": {
+      "name": "P1-01-query-restored",
+      "argv": [
+        "pnpm",
+        "exec",
+        "vitest",
+        "run",
+        "tests/portal-id.test.ts",
+        "-t",
+        "rewrites the real build through"
+      ],
+      "cwd": "/Users/toandx/htdocs/typing-game/games/typing-defense/tmp/codex-233/tree",
+      "portal_url": null,
+      "exit": 0,
+      "seconds": 1.032,
+      "test_files": "1 passed (1)",
+      "vitest_tests": "8 passed | 2 skipped (10)"
+    },
+    "restored_sha256": "81d942f3d132c3ba3c35dda6cd7f39634b8729eef550a204a28a85e61f3afb04"
+  },
+  {
+    "id": "P1-01-realpath",
+    "file": "vite.config.ts",
+    "sha256": "81d942f3d132c3ba3c35dda6cd7f39634b8729eef550a204a28a85e61f3afb04",
+    "mutated": {
+      "name": "P1-01-realpath-mutated",
+      "argv": [
+        "pnpm",
+        "exec",
+        "vitest",
+        "run",
+        "tests/portal-id.test.ts",
+        "-t",
+        "rewrites the real build through"
+      ],
+      "cwd": "/Users/toandx/htdocs/typing-game/games/typing-defense/tmp/codex-233/tree",
+      "portal_url": null,
+      "exit": 1,
+      "seconds": 0.98,
+      "test_files": "1 failed (1)",
+      "vitest_tests": "2 failed | 6 passed | 2 skipped (10)"
+    },
+    "restored": {
+      "name": "P1-01-realpath-restored",
+      "argv": [
+        "pnpm",
+        "exec",
+        "vitest",
+        "run",
+        "tests/portal-id.test.ts",
+        "-t",
+        "rewrites the real build through"
+      ],
+      "cwd": "/Users/toandx/htdocs/typing-game/games/typing-defense/tmp/codex-233/tree",
+      "portal_url": null,
+      "exit": 0,
+      "seconds": 1.027,
+      "test_files": "1 passed (1)",
+      "vitest_tests": "8 passed | 2 skipped (10)"
+    },
+    "restored_sha256": "81d942f3d132c3ba3c35dda6cd7f39634b8729eef550a204a28a85e61f3afb04"
+  },
+  {
+    "id": "P1-01-guard",
+    "file": "vite.config.ts",
+    "sha256": "81d942f3d132c3ba3c35dda6cd7f39634b8729eef550a204a28a85e61f3afb04",
+    "mutated": {
+      "name": "P1-01-guard-mutated",
+      "argv": [
+        "pnpm",
+        "exec",
+        "vitest",
+        "run",
+        "tests/portal-id.test.ts",
+        "-t",
+        "never transforms"
+      ],
+      "cwd": "/Users/toandx/htdocs/typing-game/games/typing-defense/tmp/codex-233/tree",
+      "portal_url": null,
+      "exit": 1,
+      "seconds": 0.711,
+      "test_files": "1 failed (1)",
+      "vitest_tests": "1 failed | 9 skipped (10)"
+    },
+    "restored": {
+      "name": "P1-01-guard-restored",
+      "argv": [
+        "pnpm",
+        "exec",
+        "vitest",
+        "run",
+        "tests/portal-id.test.ts",
+        "-t",
+        "never transforms"
+      ],
+      "cwd": "/Users/toandx/htdocs/typing-game/games/typing-defense/tmp/codex-233/tree",
+      "portal_url": null,
+      "exit": 0,
+      "seconds": 0.704,
+      "test_files": "1 passed (1)",
+      "vitest_tests": "1 passed | 9 skipped (10)"
+    },
+    "restored_sha256": "81d942f3d132c3ba3c35dda6cd7f39634b8729eef550a204a28a85e61f3afb04"
+  },
+  {
+    "id": "P1-02",
+    "file": "scripts/deploy/prune.mjs",
+    "sha256": "2c1fe4011e30e72206f81d534eb9456c7d8f1705f97a8bf55c7e04d484f855c2",
+    "mutated": {
+      "name": "P1-02-mutated",
+      "argv": [
+        "pnpm",
+        "exec",
+        "vitest",
+        "run",
+        "tests/deploy-prune.test.ts",
+        "-t",
+        "rejects dangling"
+      ],
+      "cwd": "/Users/toandx/htdocs/typing-game/games/typing-defense/tmp/codex-233/tree",
+      "portal_url": null,
+      "exit": 1,
+      "seconds": 1.001,
+      "test_files": "1 failed (1)",
+      "vitest_tests": "12 failed | 13 skipped (25)"
+    },
+    "restored": {
+      "name": "P1-02-restored",
+      "argv": [
+        "pnpm",
+        "exec",
+        "vitest",
+        "run",
+        "tests/deploy-prune.test.ts",
+        "-t",
+        "rejects dangling"
+      ],
+      "cwd": "/Users/toandx/htdocs/typing-game/games/typing-defense/tmp/codex-233/tree",
+      "portal_url": null,
+      "exit": 0,
+      "seconds": 0.974,
+      "test_files": "1 passed (1)",
+      "vitest_tests": "12 passed | 13 skipped (25)"
+    },
+    "restored_sha256": "2c1fe4011e30e72206f81d534eb9456c7d8f1705f97a8bf55c7e04d484f855c2"
+  }
+]

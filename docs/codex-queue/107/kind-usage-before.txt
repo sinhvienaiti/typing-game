@@ -1,0 +1,5 @@
+shared/game-kit/three/guide-scene.ts:55:    const entry = await options.model.library.entry(options.model.kind ?? "guides", options.model.id);
+shared/game-kit/three/models.test.ts:26:    for (const kind of MODEL_KINDS) expect(MODEL_CONTRACTS[kind].kind).toBe(kind);
+shared/game-kit/three/model-loader.ts:40:  if (!isRecord(raw) || !isModelKind(raw.kind) || typeof raw.id !== "string" || raw.id.length === 0 || !isRecord(raw.tiers)) return null;
+shared/game-kit/three/model-loader.ts:51:    kind: raw.kind,
+shared/game-kit/three/model-loader.ts:74:    else models[modelKey(entry.kind, entry.id)] = entry;

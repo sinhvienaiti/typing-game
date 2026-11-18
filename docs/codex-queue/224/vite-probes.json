@@ -1,0 +1,174 @@
+{
+  "portal": [
+    {
+      "value": "(undefined)",
+      "result": null
+    },
+    {
+      "value": "",
+      "result": null
+    },
+    {
+      "value": "   ",
+      "result": null
+    },
+    {
+      "value": " https://portal.example/path ",
+      "result": "https://portal.example/path"
+    },
+    {
+      "value": "https://portal.ex ample/",
+      "error": "TypeError: VITE_PORTAL_URL must be an absolute HTTP(S) URL without credentials"
+    },
+    {
+      "value": "https://portal.example/a b",
+      "result": "https://portal.example/a%20b"
+    },
+    {
+      "value": "https://por\ttal.example/",
+      "result": "https://portal.example/"
+    },
+    {
+      "value": "https://portal.example/\nbook",
+      "result": "https://portal.example/book"
+    },
+    {
+      "value": "https://user@portal.example/",
+      "error": "TypeError: VITE_PORTAL_URL must be an absolute HTTP(S) URL without credentials"
+    },
+    {
+      "value": "https://:pass@portal.example/",
+      "error": "TypeError: VITE_PORTAL_URL must be an absolute HTTP(S) URL without credentials"
+    },
+    {
+      "value": "https://@portal.example/",
+      "result": "https://portal.example/"
+    },
+    {
+      "value": "https://:@portal.example/",
+      "result": "https://portal.example/"
+    },
+    {
+      "value": "javascript:alert(1)",
+      "error": "TypeError: VITE_PORTAL_URL must be an absolute HTTP(S) URL without credentials"
+    },
+    {
+      "value": "data:text/html,x",
+      "error": "TypeError: VITE_PORTAL_URL must be an absolute HTTP(S) URL without credentials"
+    },
+    {
+      "value": "file:///portal",
+      "error": "TypeError: VITE_PORTAL_URL must be an absolute HTTP(S) URL without credentials"
+    },
+    {
+      "value": "ftp://portal.example/",
+      "error": "TypeError: VITE_PORTAL_URL must be an absolute HTTP(S) URL without credentials"
+    },
+    {
+      "value": "ws://portal.example/",
+      "error": "TypeError: VITE_PORTAL_URL must be an absolute HTTP(S) URL without credentials"
+    },
+    {
+      "value": "/portal",
+      "error": "TypeError: VITE_PORTAL_URL must be an absolute HTTP(S) URL without credentials"
+    },
+    {
+      "value": "//portal.example/",
+      "error": "TypeError: VITE_PORTAL_URL must be an absolute HTTP(S) URL without credentials"
+    },
+    {
+      "value": "http://portal.example:8080/path?q=1#book",
+      "result": "http://portal.example:8080/path?q=1#book"
+    },
+    {
+      "value": "https:portal.example",
+      "result": "https://portal.example/"
+    }
+  ],
+  "declarations": [
+    {
+      "code": "",
+      "error": "Error: Expected one kit PARENT_ORIGIN declaration"
+    },
+    {
+      "code": "export const PARENT_ORIGIN = \"old\";",
+      "result": "export const PARENT_ORIGIN = \"\";"
+    },
+    {
+      "code": "export const PARENT_ORIGIN = \"old\";\nexport const PARENT_ORIGIN = \"old\";",
+      "error": "Error: Expected one kit PARENT_ORIGIN declaration"
+    },
+    {
+      "code": "export const PARENT_ORIGIN = \"old\";\r\n",
+      "result": "export const PARENT_ORIGIN = \"\";\r\n"
+    }
+  ],
+  "transformIds": [
+    {
+      "id": "/Users/toandx/htdocs/typing-game/games/typing-defense/tmp/codex-224/tree/src/kit/learning/contract.ts",
+      "result": {
+        "code": "export const PARENT_ORIGIN = \"\";",
+        "map": null
+      }
+    },
+    {
+      "id": "/Users/toandx/htdocs/typing-game/games/typing-defense/tmp/codex-224/tree/src/kit/learning/contract.ts?v=123",
+      "result": null
+    },
+    {
+      "id": "/Users/toandx/htdocs/typing-game/games/typing-defense/tmp/codex-224/tree/src/kit/learning/contract.ts?import",
+      "result": null
+    },
+    {
+      "id": "/USERS/TOANDX/HTDOCS/TYPING-GAME/GAMES/TYPING-DEFENSE/TMP/CODEX-224/TREE/SRC/KIT/LEARNING/CONTRACT.TS",
+      "result": null
+    },
+    {
+      "id": "/Users/toandx/htdocs/typing-game/games/typing-defense/tmp/codex-224/alias-tree/src/kit/learning/contract.ts",
+      "result": null
+    }
+  ],
+  "pluginHooks": [
+    "name",
+    "enforce",
+    "transform"
+  ],
+  "realBuilds": {
+    "canonical": {
+      "success": true,
+      "code": "const PARENT_ORIGIN = \"\";\nexport {\n  PARENT_ORIGIN\n};\n",
+      "localHost": false
+    },
+    "queryV": {
+      "success": true,
+      "code": "const PARENT_ORIGIN = \"https://typing-game.local\";\nexport {\n  PARENT_ORIGIN\n};\n",
+      "localHost": true
+    },
+    "queryImport": {
+      "success": true,
+      "code": "const PARENT_ORIGIN = \"https://typing-game.local\";\nexport {\n  PARENT_ORIGIN\n};\n",
+      "localHost": true
+    },
+    "symlinkConfig": {
+      "success": true,
+      "code": "const PARENT_ORIGIN = \"\";\nexport {\n  PARENT_ORIGIN\n};\n",
+      "localHost": false
+    }
+  },
+  "unseenContractBuild": {
+    "success": true
+  },
+  "devPlugin": [
+    "wordwoven-portal-origin"
+  ],
+  "envFile": {
+    "success": true,
+    "code": "const PARENT_ORIGIN = \"https://env-file.example\";\nexport {\n  PARENT_ORIGIN\n};\n",
+    "localHost": false
+  },
+  "envOverride": {
+    "success": true,
+    "code": "const PARENT_ORIGIN = \"\";\nexport {\n  PARENT_ORIGIN\n};\n",
+    "localHost": false
+  }
+}

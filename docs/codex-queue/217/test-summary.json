@@ -1,0 +1,67 @@
+{
+  "before": {
+    "passed": 519,
+    "failed": 6,
+    "errors": 10,
+    "skipped": 6,
+    "failures": [
+      "FAILED common/tests/test_env.py::test_paths_outside_repo",
+      "FAILED common/tests/test_env.py::test_shell_env_matches_python_env",
+      "FAILED common/tests/test_env.py::test_running_python_is_audiolab_venv",
+      "FAILED board/tests/test_server.py::test_port_fallback_when_busy",
+      "FAILED specs/tests/test_generate.py::test_every_game_has_cards_that_validate",
+      "FAILED specs/tests/test_generate.py::test_cli_report_and_validate",
+      "ERROR board/tests/test_rendered_ctx.py::test_rendered_context_needs_a_file_for_every_candidate",
+      "ERROR board/tests/test_rendered_ctx.py::test_ctx_route_serves_the_render_and_rejects_others",
+      "ERROR board/tests/test_rendered_ctx.py::test_rating_keeps_the_scene_context_and_its_files",
+      "ERROR board/tests/test_review_fixes.py::test_calibration_session_hides_source_and_reveals_at_the_end",
+      "ERROR board/tests/test_server.py::test_api_flow",
+      "ERROR board/tests/test_server.py::test_security_rules",
+      "ERROR board/tests/test_server.py::test_anchors_inserted_from_earlier_sessions",
+      "ERROR board/tests/test_server.py::test_anchors_not_added_mid_session",
+      "ERROR board/tests/test_server.py::test_an_opened_session_skips_anchors_the_batch_offers",
+      "ERROR board/tests/test_server.py::test_two_sessions_of_a_batch_draw_different_anchor_pairs"
+    ]
+  },
+  "after": {
+    "passed": 539,
+    "failed": 6,
+    "errors": 10,
+    "skipped": 6,
+    "failures": [
+      "FAILED common/tests/test_env.py::test_paths_outside_repo",
+      "FAILED common/tests/test_env.py::test_shell_env_matches_python_env",
+      "FAILED common/tests/test_env.py::test_running_python_is_audiolab_venv",
+      "FAILED board/tests/test_server.py::test_port_fallback_when_busy",
+      "FAILED specs/tests/test_generate.py::test_every_game_has_cards_that_validate",
+      "FAILED specs/tests/test_generate.py::test_cli_report_and_validate",
+      "ERROR board/tests/test_rendered_ctx.py::test_rendered_context_needs_a_file_for_every_candidate",
+      "ERROR board/tests/test_rendered_ctx.py::test_ctx_route_serves_the_render_and_rejects_others",
+      "ERROR board/tests/test_rendered_ctx.py::test_rating_keeps_the_scene_context_and_its_files",
+      "ERROR board/tests/test_review_fixes.py::test_calibration_session_hides_source_and_reveals_at_the_end",
+      "ERROR board/tests/test_server.py::test_api_flow",
+      "ERROR board/tests/test_server.py::test_security_rules",
+      "ERROR board/tests/test_server.py::test_anchors_inserted_from_earlier_sessions",
+      "ERROR board/tests/test_server.py::test_anchors_not_added_mid_session",
+      "ERROR board/tests/test_server.py::test_an_opened_session_skips_anchors_the_batch_offers",
+      "ERROR board/tests/test_server.py::test_two_sessions_of_a_batch_draw_different_anchor_pairs"
+    ]
+  },
+  "new": {
+    "passed": 20,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "failures": []
+  },
+  "sameFailingTests": true,
+  "passCountDelta": 20,
+  "existingContextKeys": {
+    "passed": 74,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "failures": []
+  },
+  "licenceDefaultUnchanged": true
+}

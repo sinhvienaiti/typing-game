@@ -1,0 +1,85 @@
+[
+  {
+    "game": "Last Line",
+    "dir": "games/.wt-ts-codex/dist",
+    "report": {
+      "files": 51,
+      "bytes": 1519782,
+      "localHost": 1,
+      "vocabularyNotShipped": {
+        "count": 97,
+        "examples": [
+          "levels/004.json",
+          "levels/005.json",
+          "levels/006.json",
+          "levels/007.json",
+          "levels/008.json"
+        ]
+      },
+      "external": [
+        {
+          "host": "kit.invalid",
+          "count": 1
+        }
+      ]
+    },
+    "bundles": [
+      {
+        "path": "assets/index-BLtWX-3u.js",
+        "sha256": "b0d427e2a9813597aa27f023ee4234cc3dd68cd00f115381fce9087d869dc5ec",
+        "snippets": [
+          {
+            "needle": "/assets/space-typing/",
+            "offset": 133669,
+            "text": "status===\"rejected\"&&a(r.reason);return t().catch(a)})},Sp=\"/assets/space-typing/models/manifest.json\",Cr=/^[a-z][a-z0-9+.-]*:/i,zp=\"http://kit.invalid\";function"
+          },
+          {
+            "needle": "typing-game.local",
+            "offset": 309391,
+            "text": "ing-game:speech\",ev=\"typing-game:request-focus\",sv=\"https://typing-game.local\",rl=200,iv=/^[a-z0-9][a-z0-9-]{0,63}$/;function Gc(s){if(typeof s!=\"string\"||!i"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "game": "Dragonhold",
+    "dir": "games/.wt-dh-codex/dist",
+    "report": {
+      "files": 229,
+      "bytes": 29948980,
+      "localHost": 2,
+      "vocabularyNotShipped": {
+        "count": 0,
+        "examples": []
+      },
+      "external": [
+        {
+          "host": "catlikecoding.com",
+          "count": 1
+        },
+        {
+          "host": "developer.download.nvidia.com",
+          "count": 1
+        },
+        {
+          "host": "kit.invalid",
+          "count": 1
+        }
+      ]
+    },
+    "bundles": [
+      {
+        "path": "assets/index-BRh_Fs8R.js",
+        "sha256": "9fd11eb43fa8c1c9da59c0232620b2a328a6492499e27a6c356aca77d38c9d1c",
+        "snippets": [
+          {
+            "needle": "typing-game.local",
+            "offset": 105153,
+            "text": "ing-game:speech\",H1=\"typing-game:request-focus\",G1=\"https://typing-game.local\",nh=200,V1=/^[a-z0-9][a-z0-9-]{0,63}$/;function Wu(t){if(typeof t!=\"string\"||!V"
+          }
+        ]
+      }
+    ]
+  }
+]

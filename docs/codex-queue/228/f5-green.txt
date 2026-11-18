@@ -1,0 +1,32 @@
+$ node --test --test-name-pattern=F5 portal/tests/game-card.test.mjs
+cwd: /Users/toandx/htdocs/typing-game
+
+✔ F5 rejects fully decoded unsafe art %2e%2e/a.png (29.932708ms)
+✔ F5 rejects fully decoded unsafe art %2E%2E/a.png (0.160667ms)
+✔ F5 rejects fully decoded unsafe art %2F/a.png (0.129709ms)
+✔ F5 rejects fully decoded unsafe art %2e%2e%2F%2e%2e%2Fspace-typing/portal/icon.png (0.083334ms)
+✔ F5 rejects fully decoded unsafe art %2E%2E%2f%2E%2E%2fspace-typing/portal/icon.png (0.080667ms)
+✔ F5 rejects fully decoded unsafe art %2e%2e%5C%2e%2e%5Cspace-typing/portal/icon.png (0.069333ms)
+✔ F5 rejects fully decoded unsafe art %2e%2e%2F%2e%2e%5cspace-typing/portal/icon.png (0.06925ms)
+✔ F5 rejects fully decoded unsafe art %252e%252e%252F%252e%252e%252Fspace-typing/portal/icon.png (0.071333ms)
+✔ F5 rejects fully decoded unsafe art %252e%252e%255C%252e%252e%255Cspace-typing/portal/icon.png (0.091667ms)
+✔ F5 rejects fully decoded unsafe art %252e%2e%252f%2e%252e%5Cspace-typing/portal/icon.png (0.10475ms)
+✔ F5 rejects fully decoded unsafe art %25252e%25252e%25252fspace-typing/portal/icon.png (0.099583ms)
+✔ F5 rejects fully decoded unsafe art a%2Fb.png (0.064292ms)
+✔ F5 rejects fully decoded unsafe art a%5Cb.png (0.053958ms)
+✔ F5 rejects fully decoded unsafe art a%252Fb.png (0.087875ms)
+✔ F5 rejects fully decoded unsafe art a%255Cb.png (0.061375ms)
+✔ F5 rejects fully decoded unsafe art a.png%253Fsize=192 (0.086958ms)
+✔ F5 rejects fully decoded unsafe art a.png%2523icon (0.078292ms)
+✔ F5 rejects fully decoded unsafe art %zz.png (0.067417ms)
+✔ F5 preserves safe encoded filenames within the game prefix (0.0755ms)
+ℹ tests 19
+ℹ suites 0
+ℹ pass 19
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 71.573083
+
+exit: 0

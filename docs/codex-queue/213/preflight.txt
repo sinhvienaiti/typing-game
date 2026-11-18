@@ -1,0 +1,24 @@
+$ git log -1 --format=%h -- docs/games/audio/firefly/schema.json docs/games/audio/firefly/README.md
+exit: 0
+stdout: (rỗng)
+stderr: (rỗng)
+$ git -C games/dragon-hold branch --show-current
+exit: 0
+stdout: main
+
+stderr: (rỗng)
+$ git status --short -uall -- docs/games/audio/firefly/schema.json docs/games/audio/firefly/README.md docs/codex-queue/212/check.mjs
+exit: 0
+stdout: ?? docs/codex-queue/212/check.mjs
+?? docs/games/audio/firefly/README.md
+?? docs/games/audio/firefly/schema.json
+
+stderr: (rỗng)
+exports:
+10: export function validateList(value, schema) {
+43: export function calculateTakes(row, assumptions) {
+50: export function calculateTotals(rows) {
+55: export function readSoundIds() {
+84: export function audit(list, schema, soundIds, specIds, md) {
+schemaFields: {"sourceCommits": true, "branchOnly": true, "clips": true, "clipsWhy": true}
+decision: DỪNG vì chưa có mã commit của lược đồ/README 212.

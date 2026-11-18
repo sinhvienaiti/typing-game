@@ -1,0 +1,317 @@
+{
+ "$schema": "../../schemas/recipe.schema.json",
+ "schema": "audiolab.recipe/1",
+ "game": "dragon-hold",
+ "id": "trap.pine-bomb.trigger",
+ "group": "blast",
+ "family": "no",
+ "description": "Lô 1c (Q6, DECISIONS): âm theo hình dạng hành động, đủ phát có lực, thân, đuôi vang trong không gian bản đồ; lớp trầm chỉ nằm dưới, có thân và đuôi đè lên. Mỗi bản Stable Audio 3 của lớp thân được cân mức (gainDb của nguồn) theo LUFS-M max của cửa sổ qua bộ lọc của lớp, lên bằng bản to nhất của bể; bản nhỏ hơn quá 10 dB bị loại (sửa sau phản biện: bản thô lệch nhau tới 26 dB). Bom Hạt Thông 1100 ms (880–1320): giữ khung công thức 0a v3 anh chấm 3/5 (nứt ván Kenney impactPlank medium 002, tiếng tách nhiễu 2–8 kHz 30 ms, bốn hạt gỗ văng lệch giờ), thay thân nổ Kenney sci-fi bằng thân và đuôi Q6: bản Stable Audio 3 prompt C–F, cửa sổ 1 s từ 4 ms trước đỉnh tiếng nổ (nổ trầm có thân, hạt và dăm văng, vang rừng thông). Sub 240 ms nhỏ hơn 12 dB chỉ ở dưới. Đuôi hàm mũ từ 750 ms. Tiếng ngòi xì có ở bản nguyên khối (cũng trong lần chấm), công thức bắt đầu ở tiếng nổ vì bẫy nổ ngay khi quái chạm. Biến thể n dùng thân n.",
+ "channels": 1,
+ "layers": [
+  {
+   "id": "crack",
+   "role": "attack",
+   "source": {
+    "library": "kenney/impact-sounds/Audio/impactPlank_medium_002.ogg"
+   },
+   "gainDb": 2,
+   "filters": [
+    {
+     "type": "highpass",
+     "hz": 600
+    }
+   ],
+   "trim": {
+    "endMs": 320
+   },
+   "fadeOutMs": 120,
+   "vary": {
+    "pitchCents": [
+     -100,
+     60
+    ]
+   }
+  },
+  {
+   "id": "snap",
+   "role": "attack",
+   "source": {
+    "synth": "noise_burst",
+    "params": {
+     "color": "white",
+     "durMs": 30,
+     "attackMs": 0.2,
+     "decayMs": 25,
+     "hpHz": 2000,
+     "lpHz": 8000
+    }
+   },
+   "gainDb": -6
+  },
+  {
+   "id": "body",
+   "role": "body",
+   "gainDb": -2,
+   "fadeInMs": 2,
+   "fadeOutMs": 350,
+   "filters": [
+    {
+     "type": "highpass",
+     "hz": 40,
+     "order": 2
+    }
+   ],
+   "source": {
+    "gen": {
+     "tool": "stable-audio-3 (sa3_batch.py)",
+     "model": "stabilityai/stable-audio-3-optimized@08b17423649b5714b22eab20f96bf00751f2358a",
+     "licence": "LicenseRef-Stability-Community-2024",
+     "file": "/Users/toandx/AudioLab/work/dragon-hold/trap.pine-bomb.trigger/b1c/raw/trap.pine-bomb.trigger__C__s3003.f32.wav",
+     "record": "/Users/toandx/AudioLab/work/dragon-hold/trap.pine-bomb.trigger/b1c/raw/trap.pine-bomb.trigger__C__s3003.json",
+     "window": [
+      0.2704,
+      1.2704
+     ],
+     "gainDb": -0.6
+    }
+   },
+   "vary": {
+    "swapMode": "cycle",
+    "swap": [
+     {
+      "gen": {
+       "tool": "stable-audio-3 (sa3_batch.py)",
+       "model": "stabilityai/stable-audio-3-optimized@08b17423649b5714b22eab20f96bf00751f2358a",
+       "licence": "LicenseRef-Stability-Community-2024",
+       "file": "/Users/toandx/AudioLab/work/dragon-hold/trap.pine-bomb.trigger/b1c/raw/trap.pine-bomb.trigger__D__s3001.f32.wav",
+       "record": "/Users/toandx/AudioLab/work/dragon-hold/trap.pine-bomb.trigger/b1c/raw/trap.pine-bomb.trigger__D__s3001.json",
+       "window": [
+        0.1038,
+        1.1038
+       ],
+       "gainDb": -4.3
+      }
+     },
+     {
+      "gen": {
+       "tool": "stable-audio-3 (sa3_batch.py)",
+       "model": "stabilityai/stable-audio-3-optimized@08b17423649b5714b22eab20f96bf00751f2358a",
+       "licence": "LicenseRef-Stability-Community-2024",
+       "file": "/Users/toandx/AudioLab/work/dragon-hold/trap.pine-bomb.trigger/b1c/raw/trap.pine-bomb.trigger__E__s3003.f32.wav",
+       "record": "/Users/toandx/AudioLab/work/dragon-hold/trap.pine-bomb.trigger/b1c/raw/trap.pine-bomb.trigger__E__s3003.json",
+       "window": [
+        0.1187,
+        1.1187
+       ],
+       "gainDb": -5.4
+      }
+     },
+     {
+      "gen": {
+       "tool": "stable-audio-3 (sa3_batch.py)",
+       "model": "stabilityai/stable-audio-3-optimized@08b17423649b5714b22eab20f96bf00751f2358a",
+       "licence": "LicenseRef-Stability-Community-2024",
+       "file": "/Users/toandx/AudioLab/work/dragon-hold/trap.pine-bomb.trigger/b1c/raw/trap.pine-bomb.trigger__F__s3004.f32.wav",
+       "record": "/Users/toandx/AudioLab/work/dragon-hold/trap.pine-bomb.trigger/b1c/raw/trap.pine-bomb.trigger__F__s3004.json",
+       "window": [
+        0.0988,
+        1.0988
+       ],
+       "gainDb": 3.8
+      }
+     },
+     {
+      "gen": {
+       "tool": "stable-audio-3 (sa3_batch.py)",
+       "model": "stabilityai/stable-audio-3-optimized@08b17423649b5714b22eab20f96bf00751f2358a",
+       "licence": "LicenseRef-Stability-Community-2024",
+       "file": "/Users/toandx/AudioLab/work/dragon-hold/trap.pine-bomb.trigger/b1c/raw/trap.pine-bomb.trigger__C__s3002.f32.wav",
+       "record": "/Users/toandx/AudioLab/work/dragon-hold/trap.pine-bomb.trigger/b1c/raw/trap.pine-bomb.trigger__C__s3002.json",
+       "window": [
+        0.2714,
+        1.2714
+       ]
+      }
+     },
+     {
+      "gen": {
+       "tool": "stable-audio-3 (sa3_batch.py)",
+       "model": "stabilityai/stable-audio-3-optimized@08b17423649b5714b22eab20f96bf00751f2358a",
+       "licence": "LicenseRef-Stability-Community-2024",
+       "file": "/Users/toandx/AudioLab/work/dragon-hold/trap.pine-bomb.trigger/b1c/raw/trap.pine-bomb.trigger__D__s3006.f32.wav",
+       "record": "/Users/toandx/AudioLab/work/dragon-hold/trap.pine-bomb.trigger/b1c/raw/trap.pine-bomb.trigger__D__s3006.json",
+       "window": [
+        0.1028,
+        1.1028
+       ],
+       "gainDb": -3.6
+      }
+     }
+    ]
+   }
+  },
+  {
+   "id": "sub",
+   "role": "sub",
+   "source": {
+    "synth": "sub_thump",
+    "params": {
+     "startHz": 62,
+     "endHz": 35,
+     "glideMs": 120,
+     "durMs": 240,
+     "decayMs": 220
+    }
+   },
+   "gainDb": -12
+  },
+  {
+   "id": "seed1",
+   "role": "debris",
+   "source": {
+    "library": "kenney/impact-sounds/Audio/impactWood_light_000.ogg"
+   },
+   "offsetMs": 140,
+   "gainDb": -15,
+   "filters": [
+    {
+     "type": "highpass",
+     "hz": 900
+    }
+   ],
+   "vary": {
+    "offsetMs": [
+     -30,
+     30
+    ],
+    "pitchCents": [
+     -150,
+     150
+    ]
+   }
+  },
+  {
+   "id": "seed2",
+   "role": "debris",
+   "source": {
+    "library": "kenney/impact-sounds/Audio/impactWood_light_002.ogg"
+   },
+   "offsetMs": 270,
+   "gainDb": -17,
+   "filters": [
+    {
+     "type": "highpass",
+     "hz": 900
+    }
+   ],
+   "vary": {
+    "offsetMs": [
+     -40,
+     40
+    ],
+    "pitchCents": [
+     -150,
+     150
+    ]
+   }
+  },
+  {
+   "id": "seed3",
+   "role": "debris",
+   "source": {
+    "library": "kenney/impact-sounds/Audio/impactWood_light_003.ogg"
+   },
+   "offsetMs": 410,
+   "gainDb": -19,
+   "filters": [
+    {
+     "type": "highpass",
+     "hz": 900
+    }
+   ],
+   "vary": {
+    "offsetMs": [
+     -50,
+     50
+    ],
+    "pitchCents": [
+     -150,
+     150
+    ]
+   }
+  },
+  {
+   "id": "seed4",
+   "role": "debris",
+   "source": {
+    "library": "kenney/impact-sounds/Audio/impactWood_light_004.ogg"
+   },
+   "offsetMs": 560,
+   "gainDb": -22,
+   "filters": [
+    {
+     "type": "highpass",
+     "hz": 1200
+    }
+   ],
+   "vary": {
+    "offsetMs": [
+     -60,
+     60
+    ],
+    "pitchCents": [
+     -150,
+     150
+    ]
+   }
+  }
+ ],
+ "chain": {
+  "dcHpfHz": 30,
+  "filters": [
+   {
+    "type": "peak",
+    "hz": 2500,
+    "gainDb": -3,
+    "q": 0.7
+   }
+  ],
+  "headTrim": {
+   "thresholdDb": -50,
+   "preRollMs": 0.5
+  },
+  "maxLengthMs": 1320,
+  "tail": {
+   "floorDb": -60,
+   "shape": "exp",
+   "kneeMs": 750
+  },
+  "normalise": {
+   "mode": "lufs-m-max",
+   "target": -20
+  },
+  "limiter": {
+   "ceilingDbtp": -1.0,
+   "releaseMs": 80,
+   "maxGrDb": 6
+  }
+ },
+ "variants": {
+  "count": 6,
+  "seed": 3413,
+  "includeBase": true,
+  "pitchCents": [
+   -100,
+   100
+  ],
+  "gainDb": [
+   0,
+   0
+  ]
+ },
+ "export": {
+  "path": "sfx/trap/pine-bomb-trigger",
+  "ogg": true,
+  "oggQuality": 0.6
+ }
+}

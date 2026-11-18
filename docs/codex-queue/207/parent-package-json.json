@@ -1,0 +1,17 @@
+{
+  "file": "package.json",
+  "matches": [
+    {
+      "line": 23,
+      "text": "    \"build:local\": \"pnpm build:portal && pnpm build:shooter && pnpm build:recall && pnpm build:karaoke && pnpm build:space && pnpm build:monkeytype && bash scripts/game-dir.sh skip dragon-hold pnpm build:dragon && bash scripts/game-dir.sh skip typing-defense pnpm build:td && bash scripts/game-dir.sh skip typing-survival pnpm build:survival && bash scripts/game-dir.sh skip immortality-cultivation pnpm build:tutien\","
+    },
+    {
+      "line": 77,
+      "text": "    \"dev:survival:app\": \"bash scripts/game-dir.sh require typing-survival && cd games/typing-survival && DEV_HOST=127.0.0.1 DEV_ALLOWED_HOSTS=survival.typing-game.local DEV_HMR_HOST=survival.typing-game.local DEV_HMR_PROTOCOL=wss DEV_HMR_CLIENT_PORT=443 pnpm dev\","
+    },
+    {
+      "line": 78,
+      "text": "    \"build:survival\": \"bash scripts/game-dir.sh require typing-survival && pnpm --dir games/typing-survival build\","
+    }
+  ]
+}

@@ -1,0 +1,48 @@
+from pathlib import Path
+import json,re,subprocess,os
+repo=Path.cwd();dest=repo/'docs/codex-queue/227'
+env={**os.environ,'GIT_OPTIONAL_LOCKS':'0'}
+snap=json.loads((dest/'snap-before.json').read_text())
+claims={214:set((repo/'docs/codex-queue/214/files.txt').read_text().splitlines()),215:set((repo/'docs/codex-queue/215/files.txt').read_text().splitlines()),216:set(json.loads((repo/'docs/codex-queue/216/scope.json').read_text())['ownedPaths']),217:set(json.loads((repo/'docs/codex-queue/217/scope.json').read_text())['ownedPaths'])}
+core={214:['portal/public/games.json','portal/src/game-card.ts','portal/src/main.ts','portal/src/styles.css','scripts/game-dir.sh','scripts/bootstrap.sh'],215:['portal/src/learning/bridge.ts'],216:['infra/nginx/typing-game.local.play.conf','infra/nginx/typing-game.local.dev.conf','scripts/validate-play-mode.mjs','scripts/validate-play-mode.test.mjs'],217:['tools/audio-lab/build/policy.py','tools/audio-lab/build/licence_check.py','tools/audio-lab/build/tests/test_build_firefly_licence.py','tools/audio-lab/common/launch.py','tools/audio-lab/pytest.ini']}
+def owners(p):
+ out=[]
+ for n in range(214,218):
+  if p in core[n] or p.startswith(f'docs/codex-queue/{n}/') or p==f'docs/codex-queue/{n}-report.md':out.append(n)
+ if p.startswith('portal/tests/'):
+  out += [215] if p.endswith(('learning-lookup.test.mjs','learning-bridge.test.mjs')) else [214]
+ if p.startswith('shared/learning/'):
+  name=Path(p).name
+  if name in ['README.md','lookup.test.mjs'] or any(name.startswith(x+'.') for x in ['core','query','message-contract','profile-backup']):out.append(215)
+ if p.startswith('tools/audio-lab/firefly/'):out.append(217)
+ for n,suffix in [(214,'portal-english-names'),(215,'portal-learning-lookup'),(217,'audio-lab-firefly-ingest')]:
+  if re.fullmatch(r'docs/changelog/\d{4}-\d{2}-\d{2}-'+suffix+r'\.md',p):out.append(n)
+ return sorted(set(out))
+stat=subprocess.run(['git','diff','--stat'],env=env,capture_output=True,text=True)
+(dest/'diff-stat.txt').write_text('GIT_OPTIONAL_LOCKS=0 git diff --stat\nexit='+str(stat.returncode)+'\n'+stat.stdout+stat.stderr)
+rows=[];foreign=[];unclaimed=[]
+for entry in snap['entries']:
+ p=entry['path'];own=owners(p);claim=[n for n,c in claims.items() if p in c]
+ if not own:foreign.append(p)
+ elif not claim:unclaimed.append(p)
+ rows.append({'path':p,'status':entry['status'],'tickets':own,'claimed':claim})
+md=['# Gán đường của mốc đầu 227','','Nguồn: `snap-before.json` (status porcelain -z -uall) và `diff-stat.txt`. Chỉ gán quyền theo phiếu; không đọc kỹ hay kết luận các đường ngoài phạm vi. Các phiếu gốc và 227 không phải sản phẩm 214–217.','','| Đường | Status | Phiếu được giao | Có quyền ghi | Báo cáo nhận |','|---|---|---|---|---|']
+for r in rows:
+ md.append('| `'+r['path'].replace('|','\\|')+'` | `'+r['status']+'` | '+(', '.join(map(str,r['tickets'])) or 'ngoài phạm vi')+' | '+('có' if r['tickets'] else '—')+' | '+(', '.join(map(str,r['claimed'])) or '—')+' |')
+md+=['','## Đường ngoài phạm vi','',*[f'- `{p}`' for p in foreign],'','## Trong vùng ghi nhưng không được nhận','',*([f'- `{p}`' for p in unclaimed] or ['Không có.'])]
+(dest/'paths.md').write_text('\n'.join(md)+'\n')
+(dest/'paths.json').write_text(json.dumps({'rows':rows,'outside':foreign,'unclaimed':unclaimed},ensure_ascii=False,indent=2)+'\n')
+products=sorted(set(p for n,paths in claims.items() for p in paths if p.startswith(('portal/','shared/learning/','infra/','scripts/','tools/audio-lab/'))))
+(dest/'product-paths.json').write_text(json.dumps(products,indent=2)+'\n')
+diff=subprocess.run(['git','diff','--',*products],env=env,capture_output=True,text=True)
+(dest/'product-diff.txt').write_text('GIT_OPTIONAL_LOCKS=0 git diff -- <product-paths.json>\nexit='+str(diff.returncode)+'\n'+diff.stdout+diff.stderr)
+tracked=set(subprocess.check_output(['git','ls-files','-z','--',*products],env=env).decode().strip('\0').split('\0'))
+logs=[]
+args=['git','diff','--check','--',*sorted(tracked)]
+p=subprocess.run(args,env=env,capture_output=True,text=True);logs.append({'command':args,'exit':p.returncode,'output':p.stdout+p.stderr})
+for file in products:
+ if file not in tracked and Path(file).is_file():
+  args=['git','diff','--no-index','--check','/dev/null',file]
+  p=subprocess.run(args,env=env,capture_output=True,text=True);logs.append({'command':args,'exit':p.returncode,'output':p.stdout+p.stderr})
+(dest/'runs/whitespace.json').write_text(json.dumps(logs,ensure_ascii=False,indent=2)+'\n')
+print(json.dumps({'statusPaths':len(rows),'outside':len(foreign),'unclaimed':unclaimed,'products':len(products),'tracked':len(tracked),'new':len(products)-len(tracked),'whitespace':[(r['exit'],bool(r['output'])) for r in logs]},ensure_ascii=False))

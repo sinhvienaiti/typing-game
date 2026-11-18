@@ -1,5 +1,7 @@
 import "./styles.css";
-import { SpaceTypingAdmin } from "./admin/space-typing";
+import { gameCardModel, hideImageOnError } from "./game-card";
+import type { GameArtImage } from "./game-card";
+import { TypingGameAdmin } from "./admin/admin-shell";
 import { ParentLearningBridge } from "./learning/bridge";
 import { SharedMusicPlayer } from "./music";
 import { SmartReviewDashboard } from "./review/dashboard";
@@ -52,12 +54,30 @@ type Game = {
   description: string;
   path: string;
   appUrl: string;
-  icon: string;
+  icon?: string;
+  art?: { icon?: string; cover?: string };
+  group?: string;
 };
 
 type Registry = {
   games: Game[];
 };
+
+type NavGroup = {
+  id: string;
+  label: string;
+  element: HTMLDivElement;
+  toggle: HTMLButtonElement;
+  current: HTMLSpanElement;
+  menu: HTMLDivElement;
+  paths: Map<string, string>;
+};
+
+const NAV_GROUP_LABELS: ReadonlyArray<readonly [string, string]> = [
+  ["practice", "Luyện gõ"],
+  ["battle", "Game chiến đấu"],
+];
+const FALLBACK_NAV_GROUP: readonly [string, string] = ["other", "Khác"];
 
 const appElement = document.querySelector<HTMLDivElement>("#app");
 if (appElement === null) throw new Error("#app not found");
@@ -124,7 +144,7 @@ const learningBridge = new ParentLearningBridge(
 const reviewDashboard = new SmartReviewDashboard(navigate);
 const reviewFlow = new SmartReviewFlow(navigate, startReview);
 const learningMaintenance = new LearningMaintenancePage(navigate);
-const spaceTypingAdmin = new SpaceTypingAdmin(navigate);
+const typingGameAdmin = new TypingGameAdmin(navigate);
 
 function normalizedPath(): string {
   return location.pathname.replace(/\/$/, "") || "/";
@@ -222,16 +242,190 @@ function makeButton(label: string, path: string): HTMLButtonElement {
   return button;
 }
 
+function makeGameImage(art: GameArtImage, className: string, onHide?: () => void): HTMLImageElement {
+  const img = document.createElement("img");
+  img.className = className;
+  img.alt = art.alt;
+  img.width = art.width;
+  img.height = art.height;
+  img.loading = "lazy";
+  img.decoding = "async";
+  hideImageOnError(img, onHide);
+  img.src = art.src;
+  return img;
+}
+
+function makeGameButton(game: Game): HTMLButtonElement {
+  const model = gameCardModel(game);
+  const button = document.createElement("button");
+  button.className = "nav-game";
+  const icon = document.createElement("span");
+  icon.className = "nav-game-icon";
+  icon.setAttribute("aria-hidden", "true");
+  if (model.icon !== null) {
+    icon.append(makeGameImage(model.icon, "nav-game-art-icon"));
+  } else if (model.glyph !== null) {
+    icon.textContent = model.glyph;
+  }
+  const label = document.createElement("span");
+  label.textContent = model.title;
+  button.append(icon, label);
+  button.addEventListener("click", () => navigate(game.path));
+  navButtons.set(game.path, button);
+  return button;
+}
+
+const navGroups: NavGroup[] = [];
+
+function closeNavMenus(except: NavGroup | null = null): void {
+  for (const group of navGroups) {
+    if (group === except) continue;
+    group.element.classList.remove("open");
+    group.toggle.setAttribute("aria-expanded", "false");
+  }
+}
+
+function openNavMenu(group: NavGroup, focusFirst: boolean): void {
+  closeNavMenus(group);
+  group.element.classList.add("open");
+  group.toggle.setAttribute("aria-expanded", "true");
+  // Fixed popover so the scrollable nav row never clips it.
+  const rect = group.toggle.getBoundingClientRect();
+  const width = group.menu.offsetWidth;
+  const left = Math.max(8, Math.min(rect.left, window.innerWidth - width - 8));
+  group.menu.style.left = `${Math.round(left)}px`;
+  group.menu.style.top = `${Math.round(rect.bottom + 6)}px`;
+  if (focusFirst) group.menu.querySelector<HTMLButtonElement>("button")?.focus();
+}
+
+function makeNavGroup(id: string, label: string, games: Game[]): NavGroup {
+  const element = document.createElement("div");
+  element.className = "nav-group";
+  element.dataset["group"] = id;
+  element.setAttribute("role", "group");
+  element.setAttribute("aria-label", label);
+
+  const caption = document.createElement("span");
+  caption.className = "nav-group-caption";
+  caption.setAttribute("aria-hidden", "true");
+  caption.textContent = label;
+
+  const menuId = `nav-group-${id}`;
+  const toggle = document.createElement("button");
+  toggle.type = "button";
+  toggle.className = "nav-group-toggle";
+  toggle.setAttribute("aria-haspopup", "true");
+  toggle.setAttribute("aria-expanded", "false");
+  toggle.setAttribute("aria-controls", menuId);
+  const toggleLabel = document.createElement("span");
+  toggleLabel.className = "nav-group-label";
+  toggleLabel.textContent = label;
+  const current = document.createElement("span");
+  current.className = "nav-group-current";
+  const caret = document.createElement("span");
+  caret.className = "nav-group-caret";
+  caret.setAttribute("aria-hidden", "true");
+  caret.textContent = "▾";
+  toggle.append(toggleLabel, current, caret);
+
+  const menu = document.createElement("div");
+  menu.className = "nav-group-items";
+  menu.id = menuId;
+
+  const paths = new Map<string, string>();
+  for (const game of games) {
+    menu.append(makeGameButton(game));
+    paths.set(game.path, game.name);
+  }
+
+  element.append(caption, toggle, menu);
+  const group: NavGroup = { id, label, element, toggle, current, menu, paths };
+
+  toggle.addEventListener("click", (event) => {
+    if (element.classList.contains("open")) {
+      closeNavMenus();
+    } else {
+      // detail 0 means keyboard activation.
+      openNavMenu(group, event.detail === 0);
+    }
+  });
+  element.addEventListener("keydown", (event) => {
+    if (event.key !== "Escape" || !element.classList.contains("open")) return;
+    event.preventDefault();
+    closeNavMenus();
+    toggle.focus();
+  });
+
+  navGroups.push(group);
+  return group;
+}
+
+function groupedGames(games: Game[]): Array<[string, string, Game[]]> {
+  const known = new Map(NAV_GROUP_LABELS);
+  const buckets = new Map<string, Game[]>();
+  for (const [id] of NAV_GROUP_LABELS) buckets.set(id, []);
+  for (const game of games) {
+    const id = game.group !== undefined && known.has(game.group)
+      ? game.group
+      : FALLBACK_NAV_GROUP[0];
+    const bucket = buckets.get(id) ?? [];
+    bucket.push(game);
+    buckets.set(id, bucket);
+  }
+  const result: Array<[string, string, Game[]]> = [];
+  for (const [id, items] of buckets) {
+    if (items.length === 0) continue;
+    result.push([id, known.get(id) ?? FALLBACK_NAV_GROUP[1], items]);
+  }
+  return result;
+}
+
+// Inline groups when they fit; otherwise collapse each group into a menu.
+function fitNavigation(): void {
+  closeNavMenus();
+  nav.classList.remove("nav-compact");
+  if (links.scrollWidth > links.clientWidth + 1) {
+    nav.classList.add("nav-compact");
+  }
+}
+
 function updateNavigation(path: string): void {
+  closeNavMenus();
   for (const [buttonPath, button] of navButtons) {
     const active =
       buttonPath === "/review"
         ? path === "/review" || path.startsWith("/review/")
-        : buttonPath === "/admin/space-typing"
-          ? path === "/admin/space-typing" || path.startsWith("/admin/space-typing/")
+        : buttonPath === "/admin"
+          ? path === "/admin" || path.startsWith("/admin/")
           : path === buttonPath;
     button.classList.toggle("active", active);
+    if (active) button.setAttribute("aria-current", "page");
+    else button.removeAttribute("aria-current");
   }
+  for (const group of navGroups) {
+    const activeName = group.paths.get(path);
+    group.toggle.classList.toggle("active", activeName !== undefined);
+    group.current.textContent = activeName ?? "";
+  }
+}
+
+function portalFieldHasFocus(): boolean {
+  const active = document.activeElement;
+  if (!(active instanceof HTMLElement)) return false;
+  if (active instanceof HTMLIFrameElement) return false;
+  return (
+    active.isContentEditable ||
+    active instanceof HTMLInputElement ||
+    active instanceof HTMLTextAreaElement ||
+    active instanceof HTMLSelectElement
+  );
+}
+
+// Send keyboard input to the game unless the player is editing a portal field.
+function focusGameFrame(frame: HTMLIFrameElement): void {
+  if (frame !== currentFrame || !frame.isConnected) return;
+  if (portalFieldHasFocus()) return;
+  frame.focus();
 }
 
 function sendSharedMusicState(): void {
@@ -253,13 +447,34 @@ music.onPlaybackChange(() => {
 brand.addEventListener("click", () => navigate("/"));
 links.append(makeButton("Home", "/"));
 links.append(makeButton("Smart Review", "/review"));
-links.append(makeButton("Space Admin", "/admin/space-typing"));
-for (const game of registry.games) {
-  links.append(makeButton(game.name, game.path));
+links.append(makeButton("Admin", "/admin"));
+for (const [id, label, games] of groupedGames(registry.games)) {
+  links.append(makeNavGroup(id, label, games).element);
 }
 nav.append(brand, links, music.element);
 shell.append(nav, routeHost);
 app.replaceChildren(shell);
+
+fitNavigation();
+new ResizeObserver(() => fitNavigation()).observe(nav);
+void document.fonts?.ready.then(() => fitNavigation());
+document.addEventListener("pointerdown", (event) => {
+  const target = event.target;
+  if (target instanceof Node && navGroups.some((group) => group.element.contains(target))) {
+    return;
+  }
+  closeNavMenus();
+});
+document.addEventListener("focusin", (event) => {
+  const target = event.target;
+  if (target instanceof Node && navGroups.some((group) => group.element.contains(target))) {
+    return;
+  }
+  closeNavMenus();
+});
+// Clicking into the game iframe blurs the portal window.
+window.addEventListener("blur", () => closeNavMenus());
+links.addEventListener("scroll", () => closeNavMenus(), { passive: true });
 
 function renderHome(): HTMLElement {
   const main = document.createElement("main");
@@ -273,26 +488,51 @@ function renderHome(): HTMLElement {
   const grid = document.createElement("section");
   grid.className = "game-grid";
   for (const game of registry.games) {
+    const model = gameCardModel(game);
     const card = document.createElement("button");
     card.className = "game-card";
 
-    const icon = document.createElement("div");
-    icon.className = "game-icon";
-    icon.textContent = game.icon;
+    if (model.cover !== null) {
+      const cover = document.createElement("div");
+      cover.className = "game-cover";
+      card.classList.add("has-game-cover");
+      cover.append(makeGameImage(model.cover, "game-cover-image", () => {
+        cover.hidden = true;
+        card.classList.remove("has-game-cover");
+      }));
+      card.append(cover);
+    }
+
+    if (model.glyph !== null) {
+      const icon = document.createElement("div");
+      icon.className = "game-icon";
+      icon.textContent = model.glyph;
+      card.append(icon);
+    } else {
+      card.classList.add("game-card-art");
+    }
 
     const copy = document.createElement("div");
     copy.className = "game-copy";
     const title = document.createElement("h2");
-    title.textContent = game.name;
+    title.textContent = model.title;
     const desc = document.createElement("p");
-    desc.textContent = game.description;
-    copy.append(title, desc);
+    desc.textContent = model.description;
+    if (model.glyph === null) {
+      const heading = document.createElement("div");
+      heading.className = "game-card-heading";
+      if (model.icon !== null) heading.append(makeGameImage(model.icon, "game-art-icon"));
+      heading.append(title);
+      copy.append(heading, desc);
+    } else {
+      copy.append(title, desc);
+    }
 
     const play = document.createElement("div");
     play.className = "play";
     play.textContent = "PLAY →";
 
-    card.append(icon, copy, play);
+    card.append(copy, play);
     card.addEventListener("click", () => navigate(game.path));
     grid.append(card);
   }
@@ -337,6 +577,7 @@ function renderGame(game: Game): HTMLElement {
       frame.classList.remove("loading");
       loading.classList.add("done");
       sendSharedMusicState();
+      focusGameFrame(frame);
 
       const pending =
         game.id === "monkeytype"
@@ -374,6 +615,7 @@ function renderMissing(): HTMLElement {
 }
 
 function renderRoute(): void {
+  document.title = "Typing Games";
   const path = normalizedPath();
   const previousGame = currentGame;
   if (
@@ -420,9 +662,9 @@ function renderRoute(): void {
     return;
   }
 
-  if (path === "/admin/space-typing" || path.startsWith("/admin/space-typing/")) {
+  if (path === "/admin" || path.startsWith("/admin/")) {
     music.setKaraokeActive(false);
-    routeHost.replaceChildren(spaceTypingAdmin.render(path));
+    routeHost.replaceChildren(typingGameAdmin.render(path));
     return;
   }
 
@@ -445,6 +687,18 @@ window.addEventListener("message", (event: MessageEvent<unknown>) => {
   if (event.data === null || typeof event.data !== "object") return;
 
   const data = event.data as Record<string, unknown>;
+
+  if (data["type"] === "typing-game:request-focus") {
+    const gameId = data["gameId"];
+    if (
+      currentGame !== null &&
+      event.origin === new URL(currentGame.appUrl).origin &&
+      (gameId === undefined || gameId === currentGame.id)
+    ) {
+      focusGameFrame(currentFrame);
+    }
+    return;
+  }
 
   if (
     (currentGame?.id === "monkeytype" ||

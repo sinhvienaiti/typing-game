@@ -1,0 +1,29 @@
+{
+  "game": "dragon-hold",
+  "name": "slider-track",
+  "tryNumber": 2,
+  "sourceSize": [
+    1536,
+    1024
+  ],
+  "bboxAlphaGT16": [
+    46,
+    441,
+    1444,
+    120
+  ],
+  "bboxRatio": 12.033333333333333,
+  "ratioDeviationFrom16": 0.24791666666666667,
+  "scaleXY": [
+    0.7091412742382271,
+    0.5333333333333333
+  ],
+  "processed": "games/dragon-hold/tmp/codex-225/slider-track.try2.processed.png",
+  "operations": [
+    "games/dragon-hold/tmp/codex-225/slider-track.try2.crop.png",
+    "-filter",
+    "Lanczos",
+    "-resize",
+    "1024x64!"
+  ]
+}

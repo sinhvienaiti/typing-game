@@ -1,0 +1,23 @@
+Bốn test cũ không bị sửa
+$ git diff --quiet -- shared/game-kit/audio/scene-audio.test.ts
+exit=0
+
+
+Import sang module kit khác: 0 dòng
+$ grep -n 'from "\.\./' shared/game-kit/audio/dragon-voice.ts shared/game-kit/audio/fake-audio.test-helper.ts shared/game-kit/audio/file-bank.test.ts shared/game-kit/audio/file-bank.ts shared/game-kit/audio/index.ts shared/game-kit/audio/manifest.test.ts shared/game-kit/audio/manifest.ts shared/game-kit/audio/mix.test.ts shared/game-kit/audio/mix.ts shared/game-kit/audio/scene-audio-files.test.ts shared/game-kit/audio/scene-audio.test.ts shared/game-kit/audio/scene-audio.ts shared/game-kit/audio/util.ts shared/game-kit/audio/variants.test.ts shared/game-kit/audio/variants.ts
+exit=1
+
+
+Công thức tổng hợp trong ba module mới: 0 dòng
+$ grep -nE createOscillator|createBiquadFilter|noiseBuffer\( shared/game-kit/audio/manifest.ts shared/game-kit/audio/variants.ts shared/game-kit/audio/file-bank.ts
+exit=1
+
+
+Dòng + có tổng hợp: 1 (đúng một ngoại lệ cấp noise cho móc)
+scene-audio.ts:201
++    this.noise ??= noiseBuffer(context);
+
+Whitespace diff
+$ git diff --check -- shared/game-kit/audio/ shared/game-kit/README.md shared/game-kit/DRIFT.md
+exit=0
+

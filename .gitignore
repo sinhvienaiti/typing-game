@@ -11,8 +11,34 @@ dist/
 .idea/
 .cache/
 .local/
+# Evidence of review and test runs (games keep theirs in games/<id>/tmp/, also ignored)
+/tmp/
+# Hand-off folders between machines and Tripo upload sets (images, GLB): media, never in Git
+/typing-game-handoff-*/
+# Tripo CLI local context
+/.tripo/
 
 # Local background music files stay outside Git.
 shared/music/*
 !shared/music/README.md
 !shared/music/index.json
+
+# Prepared and verified offline Voice model, regenerated locally.
+portal/public/assets/voice/
+
+# Media store on Google Drive (docs/MEDIA_STORAGE.md). The private lock lists
+# licensed music filenames, so it stays out of this public repo (Drive _locks/ only).
+/media/private.md5
+/.media-old/
+/.media-tmp/
+# rclone credentials never belong in a repo.
+rclone.conf
+*.rclone.conf
+
+# Reference videos stay local (no media in Git)
+*.mov
+*.mp4
+
+# Python bytecode (Blender tooling)
+__pycache__/
+/.pnpm-store/

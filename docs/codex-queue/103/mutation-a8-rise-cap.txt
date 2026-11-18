@@ -1,0 +1,49 @@
+
+ RUN  v3.2.7 /Users/toandx/htdocs/typing-game/games/.wt-td-codex
+
+ ❯ tests/td-sheet-cards.test.ts (8 tests | 3 failed) 14ms
+   ✓ 103 A6: Knowledge on the results card > balanced with 0 Knowledge: visible false 6ms
+   ✓ 103 A6: Knowledge on the results card > learn with 0 Knowledge: visible true 1ms
+   ✓ 103 A6: Knowledge on the results card > challenge with 3 Knowledge: visible true 1ms
+   ✓ 103 A8: measured meaning strips take space in the column > keeps an upper meaning strip clear of the next word in the same column 0ms
+   × 103 A8: measured meaning strips take space in the column > reserves every meaning box even when the old 240 px rise is full 2ms
+     → expected 240 to be greater than 240
+   ✓ 103 A8: measured meaning strips take space in the column > uses the full meaning width and height when separating neighbouring columns 0ms
+   × 103 A8: draw includes mean cards for exactly 1000 ms > keeps the meaning strips above the next word at width 1280 1ms
+     → expected 360 to be less than or equal to 340
+   × 103 A8: draw includes mean cards for exactly 1000 ms > keeps the meaning strips above the next word at width 1920 1ms
+     → expected 360 to be less than or equal to 340
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 3 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/td-sheet-cards.test.ts > 103 A8: measured meaning strips take space in the column > reserves every meaning box even when the old 240 px rise is full
+AssertionError: expected 240 to be greater than 240
+ ❯ tests/td-sheet-cards.test.ts:42:32
+     40|     const cards = [live, ...Array.from({ length: 5 }, () => mean)];
+     41|     const box = columnBox(cards, 0);
+     42|     expect(box.heights.at(-1)).toBeGreaterThan(COLUMN.max);
+       |                                ^
+     43|     for (let k = 1; k < cards.length; k += 1) {
+     44|       const lower = cards[k - 1]!;
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/3]⎯
+
+ FAIL  tests/td-sheet-cards.test.ts > 103 A8: draw includes mean cards for exactly 1000 ms > keeps the meaning strips above the next word at width 1280
+ FAIL  tests/td-sheet-cards.test.ts > 103 A8: draw includes mean cards for exactly 1000 ms > keeps the meaning strips above the next word at width 1920
+AssertionError: expected 360 to be less than or equal to 340
+ ❯ tests/td-sheet-cards.test.ts:81:40
+     79|         const upper = stacked[k]!;
+     80|         const lower = stacked[k - 1]!;
+     81|         expect(upper.y + upper.height).toBeLessThanOrEqual(lower.y - 4…
+       |                                        ^
+     82|         expect(upper.el.style).toHaveProperty("transform");
+     83|         expect(upper.leave).toBe("mean");
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/3]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  3 failed | 5 passed (8)
+   Start at  19:52:37
+   Duration  386ms (transform 158ms, setup 0ms, collect 220ms, tests 14ms, environment 0ms, prepare 29ms)
+

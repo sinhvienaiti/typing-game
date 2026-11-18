@@ -1,0 +1,78 @@
+
+ RUN  v3.2.7 /Users/toandx/htdocs/typing-game/games/.wt-dh-codex
+
+ ❯ tests/ui/results-screen.test.ts (10 tests | 4 failed) 35ms
+   ✓ results portal action (105b, DH-24 / G5) > renders two matching actions with portalHome(undefined) and target _top 12ms
+   ✓ results portal action (105b, DH-24 / G5) > renders two matching actions with portalHome() and target _top 1ms
+   ✓ results portal action (105b, DH-24 / G5) > renders two matching actions with portalHome( https://portal.example , https://other.example ) and target _top 1ms
+   × results portal action (105b, DH-24 / G5) > starts victory on retry; right + Enter clicks the portal, left + Enter retries 7ms
+     → expected false to be true // Object.is equality
+   × results portal action (105b, DH-24 / G5) > starts defeat on retry; right + Enter clicks the portal, left + Enter retries 2ms
+     → expected false to be true // Object.is equality
+   × results portal action (105b, DH-24 / G5) > keeps up/down word selection and Tab listening independent of the selected action 2ms
+     → expected false to be true // Object.is equality
+   ✓ results portal action (105b, DH-24 / G5) > Escape skips the 2.6 s victory hold without activating an action 1ms
+   ✓ results portal action (105b, DH-24 / G5) > Enter skips the 2.6 s victory hold without activating an action 1ms
+   ✓ results portal action (105b, DH-24 / G5) > opens automatically after the hold and resets the selected action for a new run 2ms
+   × results portal action (105b, DH-24 / G5) > preserves the optional easier replay shortcut alongside the two actions 6ms
+     → expected "spy" to be called once, but got 0 times
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 4 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/ui/results-screen.test.ts > results portal action (105b, DH-24 / G5) > starts victory on retry; right + Enter clicks the portal, left + Enter retries
+ FAIL  tests/ui/results-screen.test.ts > results portal action (105b, DH-24 / G5) > starts defeat on retry; right + Enter clicks the portal, left + Enter retries
+AssertionError: expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ ❯ tests/ui/results-screen.test.ts:106:53
+    104|     f.actions.retry.mockClear();
+    105|     expect(f.key("ArrowRight")).toBe(true);
+    106|     expect(portal.classList.contains("is-focused")).toBe(true);
+       |                                                     ^
+    107|     expect(retry.classList.contains("is-focused")).toBe(false);
+    108|     f.key("Enter");
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/4]⎯
+
+ FAIL  tests/ui/results-screen.test.ts > results portal action (105b, DH-24 / G5) > keeps up/down word selection and Tab listening independent of the selected action
+AssertionError: expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ ❯ tests/ui/results-screen.test.ts:134:75
+    132|     f.key("Tab");
+    133|     expect(f.actions.listen).toHaveBeenLastCalledWith("cat");
+    134|     expect(f.node("dh-results__portal").classList.contains("is-focused…
+       |                                                                           ^
+    135|     f.key("Escape");
+    136|     expect(f.node("dh-results").hidden).toBe(false);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/4]⎯
+
+ FAIL  tests/ui/results-screen.test.ts > results portal action (105b, DH-24 / G5) > preserves the optional easier replay shortcut alongside the two actions
+AssertionError: expected "spy" to be called once, but got 0 times
+ ❯ tests/ui/results-screen.test.ts:181:48
+    179|     expect(f.actions.easier).toHaveBeenCalledOnce();
+    180|     f.key("Enter");
+    181|     expect(f.node("dh-results__portal").click).toHaveBeenCalledOnce();
+       |                                                ^
+    182|     expect(f.actions.retry).not.toHaveBeenCalled();
+    183|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/4]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  4 failed | 6 passed (10)
+   Start at  23:57:17
+   Duration  537ms (transform 115ms, setup 0ms, collect 159ms, tests 35ms, environment 0ms, prepare 52ms)
+

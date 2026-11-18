@@ -1,0 +1,93 @@
+{
+  "head": "f9abfd09987dadd519233c2f38692758d35cefca",
+  "branch": "td-codex",
+  "changed": [
+    "scripts/deploy/prune.mjs",
+    "tests/deploy-prune.test.ts",
+    "tests/portal.test.ts",
+    "vite.config.ts"
+  ],
+  "added": [
+    "docs/changelog/2026-10-30-fix-224-findings.md",
+    "tests/portal-id.test.ts"
+  ],
+  "allowed": [
+    "vite.config.ts",
+    "scripts/deploy/prune.mjs",
+    "tests/deploy-prune.test.ts",
+    "tests/portal.test.ts",
+    "tests/portal-id.test.ts",
+    "docs/changelog/2026-10-30-fix-224-findings.md"
+  ],
+  "protected_unchanged": 37,
+  "protected_paths": [
+    "public/assets/typing-defense/models/manifest.json",
+    "src/kit/README.md",
+    "src/kit/balance/bands.ts",
+    "src/kit/balance/director.ts",
+    "src/kit/balance/flow.ts",
+    "src/kit/balance/gates.ts",
+    "src/kit/balance/index.ts",
+    "src/kit/balance/math.ts",
+    "src/kit/balance/pace.ts",
+    "src/kit/balance/profile.ts",
+    "src/kit/balance/typist.ts",
+    "src/kit/input/index.ts",
+    "src/kit/input/keys.ts",
+    "src/kit/input/text.ts",
+    "src/kit/kit-manifest.json",
+    "src/kit/learning/bridge.ts",
+    "src/kit/learning/contract.ts",
+    "src/kit/learning/events.ts",
+    "src/kit/learning/index.ts",
+    "src/kit/platform/canvas-state.ts",
+    "src/kit/platform/frame-loop.ts",
+    "src/kit/platform/index.ts",
+    "src/kit/platform/rng.ts",
+    "src/kit/platform/safe-storage.ts",
+    "src/kit/tools/cdp-port.mjs",
+    "src/kit/tools/cdp-run.mjs",
+    "src/kit/tools/deploy/check-pack.mjs",
+    "src/kit/tools/index.ts",
+    "src/kit/tools/vite-shared-plugin.ts",
+    "src/kit/verify-kit.mjs",
+    "src/kit/vocab/content-filter.ts",
+    "src/kit/vocab/index.ts",
+    "src/kit/vocab/types.ts",
+    "src/kit/vocab/vocabulary.ts",
+    "src/kit/vocab/words.ts",
+    "tests/golden/td-1a.json",
+    "tests/golden/td-1b-boss.json"
+  ],
+  "before_paths": 328,
+  "after_paths": 330,
+  "status_before_lines": 28,
+  "status_after_lines": 30,
+  "diff_check_exit": 0,
+  "fixture_leftovers": [],
+  "platform": "macOS-15.5-arm64-arm-64bit",
+  "versions": {
+    "node": "v24.22.0",
+    "pnpm": "11.21.0"
+  },
+  "source_sha256": {
+    "vite.config.ts": "81d942f3d132c3ba3c35dda6cd7f39634b8729eef550a204a28a85e61f3afb04",
+    "scripts/deploy/prune.mjs": "2c1fe4011e30e72206f81d534eb9456c7d8f1705f97a8bf55c7e04d484f855c2",
+    "tests/deploy-prune.test.ts": "198d298a4669e2881c9f9747ad9b11af9ae9a6a6154e0ddc39eadea2d043453f",
+    "tests/portal.test.ts": "ac78bc4332eaf271136e14760d53fc11b61457b2384e0989b0db816154f7b143",
+    "tests/portal-id.test.ts": "88ac0cfde6c94a738b2452c542fbc4a6de550edb02835aafa408f90a4decb617",
+    "docs/changelog/2026-10-30-fix-224-findings.md": "26eba7104fe0deac6c9e231f41e5d77f3553547ae2fdb1f5fab335497d95e51a"
+  },
+  "check_before": {
+    "files": "40",
+    "tests": "414",
+    "kit": 33,
+    "exit": 0
+  },
+  "check_after": {
+    "files": "41",
+    "tests": "439",
+    "kit": 33,
+    "exit": 0
+  }
+}

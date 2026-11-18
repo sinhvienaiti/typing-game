@@ -1,0 +1,160 @@
+{
+  "$schema": "../../schemas/recipe.schema.json",
+  "schema": "audiolab.recipe/1",
+  "game": "typing-survival",
+  "id": "gun.xung",
+  "group": "shot",
+  "family": "ban",
+  "description": "Lô 0: pháo tự động hạng nặng, 120 ms, phát 5 lần mỗi giây (mục 8.3). Ba lớp: cú thịch sub 95→45 Hz, tiếng nổ giòn nhiễu trắng 2–9 kHz rất ngắn, khóa nòng Kenney Impact Metal light (hoán đổi), bão hòa nhẹ cho 'chắc' (DOOM). Họ bẩn có chủ ý (mục 4.4). Lớp năng lượng và đuôi hit.tail để lô sau. Vòng 2 (sau khi đọc thẻ ảnh): lớp khóa nòng Kenney ngân hai vạch 2,4 kHz và 3,8 kHz suốt 100 ms (CLAP nghe thành 'tiếng bíp UI', AST thành 'Music'), nên cắt còn 35 ms; thân 150–700 Hz to hơn 4 dB.",
+  "channels": 1,
+  "layers": [
+    {
+      "id": "thump",
+      "role": "sub",
+      "source": {
+        "synth": "sub_thump",
+        "params": {
+          "startHz": 95,
+          "endHz": 45,
+          "glideMs": 45,
+          "durMs": 110,
+          "decayMs": 100,
+          "click": 0.25,
+          "driveDb": 4
+        }
+      },
+      "gainDb": -2
+    },
+    {
+      "id": "crack",
+      "role": "attack",
+      "source": {
+        "synth": "noise_burst",
+        "params": {
+          "color": "white",
+          "durMs": 28,
+          "attackMs": 0.2,
+          "decayMs": 22,
+          "hpHz": 2000,
+          "lpHz": 9000
+        }
+      },
+      "gainDb": -4,
+      "vary": {
+        "gainDb": [
+          -1.5,
+          1.5
+        ]
+      }
+    },
+    {
+      "id": "breech",
+      "role": "mech",
+      "source": {
+        "library": "kenney/impact-sounds/Audio/impactMetal_light_000.ogg"
+      },
+      "offsetMs": 14,
+      "gainDb": -9,
+      "filters": [
+        {
+          "type": "highpass",
+          "hz": 1200
+        },
+        {
+          "type": "peak",
+          "hz": 2500,
+          "gainDb": -4,
+          "q": 1.0
+        }
+      ],
+      "trim": {
+        "endMs": 35
+      },
+      "fadeOutMs": 25,
+      "vary": {
+        "pitchCents": [
+          -100,
+          100
+        ],
+        "offsetMs": [
+          -3,
+          4
+        ],
+        "swap": [
+          {
+            "library": "kenney/impact-sounds/Audio/impactMetal_light_001.ogg"
+          },
+          {
+            "library": "kenney/impact-sounds/Audio/impactMetal_light_002.ogg"
+          },
+          {
+            "library": "kenney/impact-sounds/Audio/impactMetal_light_003.ogg"
+          },
+          {
+            "library": "kenney/impact-sounds/Audio/impactMetal_light_004.ogg"
+          }
+        ]
+      }
+    },
+    {
+      "id": "body",
+      "role": "body",
+      "source": {
+        "synth": "noise_burst",
+        "params": {
+          "color": "pink",
+          "durMs": 80,
+          "attackMs": 0.5,
+          "decayMs": 65,
+          "hpHz": 150,
+          "lpHz": 700,
+          "order": 4
+        }
+      },
+      "gainDb": -4
+    }
+  ],
+  "chain": {
+    "dcHpfHz": 35,
+    "saturation": {
+      "driveDb": 6,
+      "mix": 0.45
+    },
+    "headTrim": {
+      "thresholdDb": -50,
+      "preRollMs": 0.3
+    },
+    "maxLengthMs": 140,
+    "tail": {
+      "floorDb": -60,
+      "fadeMs": 10
+    },
+    "normalise": {
+      "mode": "lufs-m-max",
+      "target": -20
+    },
+    "limiter": {
+      "ceilingDbtp": -1.0,
+      "releaseMs": 40,
+      "maxGrDb": 6
+    }
+  },
+  "variants": {
+    "count": 6,
+    "seed": 120,
+    "includeBase": true,
+    "pitchCents": [
+      -100,
+      100
+    ],
+    "gainDb": [
+      -2,
+      2
+    ]
+  },
+  "export": {
+    "path": "sfx/guns/gun-xung",
+    "ogg": true,
+    "oggQuality": 0.6
+  }
+}

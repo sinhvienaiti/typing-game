@@ -1,0 +1,64 @@
+$ tsc --noEmit && vite build && node scripts/bundle-budget.mjs
+vite v7.3.7 building client environment for production...
+transforming...
+✓ 142 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                                                    0.82 kB │ gzip:   0.47 kB
+dist/assets/baloo-2-vietnamese-800-normal-ConLnEgt.woff2           4.80 kB
+dist/assets/baloo-2-vietnamese-600-normal-C5EqHgu0.woff2           5.39 kB
+dist/assets/baloo-2-vietnamese-800-normal-GQACmpuv.woff            6.74 kB
+dist/assets/be-vietnam-pro-vietnamese-800-normal-CA0HL1e4.woff     6.85 kB
+dist/assets/be-vietnam-pro-vietnamese-500-normal-CfdwVo8-.woff     6.88 kB
+dist/assets/be-vietnam-pro-vietnamese-700-normal-By_5yT39.woff     6.89 kB
+dist/assets/baloo-2-vietnamese-600-normal-CGkk4Wtx.woff            7.34 kB
+dist/assets/be-vietnam-pro-latin-ext-800-normal-BvOXQlBN.woff      9.18 kB
+dist/assets/be-vietnam-pro-latin-ext-700-normal-4Hjo2OtD.woff      9.19 kB
+dist/assets/be-vietnam-pro-latin-ext-500-normal-CK0UkkKf.woff      9.20 kB
+dist/assets/be-vietnam-pro-vietnamese-500-normal-DREgrEoJ.woff2   12.17 kB
+dist/assets/be-vietnam-pro-vietnamese-800-normal-D4LFh2W4.woff2   12.40 kB
+dist/assets/be-vietnam-pro-vietnamese-700-normal-Csr0PCuG.woff2   12.47 kB
+dist/assets/be-vietnam-pro-latin-ext-500-normal-h0Fp6aX0.woff2    13.55 kB
+dist/assets/be-vietnam-pro-latin-ext-800-normal-GEpNgheG.woff2    13.75 kB
+dist/assets/be-vietnam-pro-latin-ext-700-normal-C8_gqRu2.woff2    13.85 kB
+dist/assets/baloo-2-latin-ext-800-normal-C_Iwmf1s.woff2           15.07 kB
+dist/assets/baloo-2-latin-ext-600-normal-DiVeaYrH.woff2           15.98 kB
+dist/.vite/manifest.json                                          16.47 kB │ gzip:   1.58 kB
+dist/assets/be-vietnam-pro-latin-700-normal-C2EtzaOi.woff         16.91 kB
+dist/assets/be-vietnam-pro-latin-800-normal-Cwp5p0gU.woff         16.99 kB
+dist/assets/be-vietnam-pro-latin-500-normal-BJkVuMHw.woff         17.00 kB
+dist/assets/baloo-2-latin-800-normal-BbF3Etk1.woff2               18.63 kB
+dist/assets/baloo-2-latin-600-normal-tIfxVoAe.woff2               19.50 kB
+dist/assets/baloo-2-latin-ext-800-normal-D-iCxxqE.woff            19.67 kB
+dist/assets/baloo-2-latin-ext-600-normal-CFaB2nBN.woff            20.39 kB
+dist/assets/be-vietnam-pro-latin-500-normal-B6LVzGNe.woff2        21.89 kB
+dist/assets/be-vietnam-pro-latin-700-normal-DlW1Zbsh.woff2        22.15 kB
+dist/assets/be-vietnam-pro-latin-800-normal-BpHZASpI.woff2        22.32 kB
+dist/assets/baloo-2-latin-800-normal-B8BXfZF7.woff                22.60 kB
+dist/assets/baloo-2-latin-600-normal-B4tNaogw.woff                23.54 kB
+dist/assets/index-Dhtq595v.css                                    31.26 kB │ gzip:   7.51 kB
+dist/assets/sandbox-Crw4e07t.js                                    1.65 kB │ gzip:   0.82 kB
+dist/assets/tips-DKNUJnlV.js                                       1.73 kB │ gzip:   1.01 kB
+dist/assets/retry-G3GFNVhK.js                                      1.94 kB │ gzip:   1.01 kB
+dist/assets/profile-DH6yq40n.js                                    1.96 kB │ gzip:   1.09 kB
+dist/assets/settings-BMyNNd8k.js                                   2.81 kB │ gzip:   1.22 kB
+dist/assets/title-Bq34DST6.js                                      4.01 kB │ gzip:   1.76 kB
+dist/assets/sheets-CxYTVeCL.js                                     4.13 kB │ gzip:   2.07 kB
+dist/assets/dev-tools-_lnP-PRA.js                                  4.20 kB │ gzip:   1.85 kB
+dist/assets/fx-pipe-CIy60Okv.js                                    4.33 kB │ gzip:   1.92 kB
+dist/assets/learn-BzxbkaE8.js                                      8.00 kB │ gzip:   3.22 kB
+dist/assets/audio-min-TNG2jBWG.js                                 14.36 kB │ gzip:   5.54 kB
+dist/assets/meshopt_decoder.module-BbCP70j-.js                    22.41 kB │ gzip:   5.94 kB
+dist/assets/GLTFLoader-DebP8cHs.js                                46.04 kB │ gzip:  13.64 kB
+dist/assets/view-3d-DBARoWpr.js                                  121.42 kB │ gzip:  39.77 kB
+dist/assets/index-Bp8lva72.js                                    214.28 kB │ gzip:  79.82 kB
+dist/assets/three.module-Zn6Hw7gT.js                             525.46 kB │ gzip: 132.07 kB
+
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+✓ built in 1.08s
+bundle budget (BUILD_1B §20) /: start 81.58 kB gzip (entry + ui/title.ts) ≤ 85 kB, headroom 3.42 kB; later 211.17 kB (_three.module-Zn6Hw7gT.js 132.07, node_modules/.pnpm/three@0.170.0/node_modules/three/examples/jsm/libs/meshopt_decoder.module.js 5.94, node_modules/.pnpm/three@0.170.0/node_modules/three/examples/jsm/loaders/GLTFLoader.js 13.64, app/dev-tools.ts 1.84, app/learn.ts 3.22, app/retry.ts 1.01, app/sandbox.ts 0.82, ui/profile.ts 1.09, ui/settings.ts 1.22, ui/sheets.ts 2.07, ui/tips.ts 1.01, view/3d/view-3d.ts 39.77, view/audio-min.ts 5.54, view/fx-pipe.ts 1.92); total 292.75 kB
+bundle budget (BUILD_1B §20) /?title=0: start 83.04 kB gzip (entry + app/learn.ts) ≤ 85 kB, headroom 1.96 kB; later 209.71 kB (_three.module-Zn6Hw7gT.js 132.07, node_modules/.pnpm/three@0.170.0/node_modules/three/examples/jsm/libs/meshopt_decoder.module.js 5.94, node_modules/.pnpm/three@0.170.0/node_modules/three/examples/jsm/loaders/GLTFLoader.js 13.64, app/dev-tools.ts 1.84, app/retry.ts 1.01, app/sandbox.ts 0.82, ui/profile.ts 1.09, ui/settings.ts 1.22, ui/sheets.ts 2.07, ui/tips.ts 1.01, ui/title.ts 1.76, view/3d/view-3d.ts 39.77, view/audio-min.ts 5.54, view/fx-pipe.ts 1.92); total 292.75 kB
+bundle budget (BUILD_1C_MAP1 §4) 3D view: 171.83 kB gzip (view/3d/view-3d.ts + _three.module-Zn6Hw7gT.js) ≤ 260 kB, headroom 88.17 kB

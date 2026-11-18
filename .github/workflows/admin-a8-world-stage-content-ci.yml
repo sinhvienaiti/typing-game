@@ -1,0 +1,49 @@
+name: Space Typing Admin A8 World Stage Content CI
+
+on:
+  push:
+    branches:
+      - feat/space-typing-admin-uiux
+    paths:
+      - "games/space-typing"
+      - "portal/src/admin/space-typing-worlds-phase-b.ts"
+      - "portal/src/admin/space-typing-stages-phase-b.ts"
+      - "portal/src/admin/space-typing-typing-content-phase-b.ts"
+      - "portal/src/admin/space-typing-phase-b.ts"
+      - "scripts/validate-space-admin-a8-world-stage-content.mjs"
+      - ".github/workflows/admin-a8-world-stage-content-ci.yml"
+  pull_request:
+    paths:
+      - "games/space-typing"
+      - "portal/src/admin/space-typing-worlds-phase-b.ts"
+      - "portal/src/admin/space-typing-stages-phase-b.ts"
+      - "portal/src/admin/space-typing-typing-content-phase-b.ts"
+      - "portal/src/admin/space-typing-phase-b.ts"
+      - "scripts/validate-space-admin-a8-world-stage-content.mjs"
+      - ".github/workflows/admin-a8-world-stage-content-ci.yml"
+
+jobs:
+  authority-contract-and-portal-build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: true
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11.21.0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24.11.0
+          cache: pnpm
+          cache-dependency-path: |
+            pnpm-lock.yaml
+            portal/pnpm-lock.yaml
+      - name: Validate A8 World Stage content authority boundary
+        run: node scripts/validate-space-admin-a8-world-stage-content.mjs
+      - name: Install root dependencies required by Portal build config
+        run: pnpm install --frozen-lockfile
+      - name: Install Portal dependencies
+        run: pnpm --dir portal install --frozen-lockfile
+      - name: Build Portal
+        run: pnpm --dir portal build

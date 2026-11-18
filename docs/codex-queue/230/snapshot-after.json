@@ -1,0 +1,2602 @@
+{
+ "games/.wt-ts-art": {
+  "branch": "ts-art",
+  "fileCount": 311,
+  "files": {
+   ".gitignore": {
+    "bytes": 576,
+    "sha256": "748db5ce0448b116a9a0bc57315f936d0bac274940eb130b1af9e08cb3be0a25"
+   },
+   "AGENTS.md": {
+    "bytes": 20476,
+    "sha256": "8f1a3f3cc75976cf464b04fa623e5855fc9589df77667480dd3b14ad3b3a62e4"
+   },
+   "README.md": {
+    "bytes": 1652,
+    "sha256": "9fadc77fe44aae9904fb986973ab8ce3509e6f9d6ef9bf4bde8e04eaca50d426"
+   },
+   "docs/BUILD_NOTES.md": {
+    "bytes": 46931,
+    "sha256": "f1d54c92b099d6bbb6c1cddeef6516be8d9bbde18dcfdb6c2bc5bf81110a55bd"
+   },
+   "docs/BUILD_S0.md": {
+    "bytes": 12035,
+    "sha256": "68d60764ff35b59bc3e63dd424febdf179addda4f7d489a6bc32f61a54f4ece1"
+   },
+   "docs/BUILD_S1.md": {
+    "bytes": 110935,
+    "sha256": "38d1e50bea365caaf21ff9a2946fddd5b9094d2b6e95fd306b3af9d9cc2a27c8"
+   },
+   "docs/FEEL_PASS_S1.md": {
+    "bytes": 79295,
+    "sha256": "c4507dc734aa2eae70579f750b0e06de8744972450d0129949ab273b791b4d8d"
+   },
+   "docs/SURVIVAL_MODE_PLAN.md": {
+    "bytes": 50997,
+    "sha256": "bb60fc73174ede783aeeeac9f683daa70b82477745d11514991eff558db074fb"
+   },
+   "docs/art-requests/015-s1-s2.md": {
+    "bytes": 14399,
+    "sha256": "6e53f7aabab5681c33bee907a998bddf9680f3ad9a1bd2636b95daf5162b4958"
+   },
+   "docs/audio/THEME_SOUND_LIST.md": {
+    "bytes": 29568,
+    "sha256": "1728680891acbb8d48fe2c34c261c022b171d202b2f2fbed34dae68350d3b92a"
+   },
+   "docs/changelog/2026-10-23-balance.md": {
+    "bytes": 33871,
+    "sha256": "513afb2494d80ce1a4c6135cd587166279b0a875bf7ac8feb3b9d79c02ab0b41"
+   },
+   "docs/changelog/2026-10-23-kit-feedback.md": {
+    "bytes": 4688,
+    "sha256": "0bd43cd678ddd55474d7c44cc23a2c2dc4627b0d1abc0bfd83e6441d88ba1369"
+   },
+   "docs/changelog/2026-10-23-split.md": {
+    "bytes": 5356,
+    "sha256": "311641afa6602074084ca626297d550c6c0433c750d8c96f77586595ec8c5066"
+   },
+   "docs/changelog/2026-10-23-survival-s0.md": {
+    "bytes": 10071,
+    "sha256": "d572760d6ad1b894e4d9dcd2115d75cf9321220e63a13426ed1f4e4fcc555a09"
+   },
+   "docs/changelog/2026-10-23-theme.md": {
+    "bytes": 19254,
+    "sha256": "09ca241d064c3d20e71284cef7343dfe56ed15f3fc4b08ae9faf0bcce2d9183e"
+   },
+   "docs/changelog/2026-10-24-audio-q6-fix.md": {
+    "bytes": 3468,
+    "sha256": "3968fcf1c1dcba680aa1ed5d41a3747b477eae8815a768ed7ed5133a861e7031"
+   },
+   "docs/changelog/2026-10-24-audio-q6.md": {
+    "bytes": 3148,
+    "sha256": "2c841a8a80780d0ffe9a4c4c48e519868f88932914f076a635050150fa0b0f35"
+   },
+   "docs/changelog/2026-10-24-s1-r1-fix.md": {
+    "bytes": 43588,
+    "sha256": "4b7eb0704dffca1da4b8a11aeaf4f6696a8d200d9592820ba2d5ebfc1987720e"
+   },
+   "docs/changelog/2026-10-24-s1-r1-guns.md": {
+    "bytes": 27773,
+    "sha256": "6d64858a25fa1806ee86b85333acc783bdd299dd9a856f3f4a5b0b6107c454d6"
+   },
+   "docs/changelog/2026-10-24-s1-r1.md": {
+    "bytes": 20479,
+    "sha256": "5dc1e1f430eb68dedd9298883e5ff2a8664256367d7ce974a306c2d49b23e92b"
+   },
+   "docs/changelog/2026-10-24-s1-spec-review.md": {
+    "bytes": 9174,
+    "sha256": "f9965b3dd16c9b79bfb55c310f23c937177c78ee580f6481e46c19b6865c0399"
+   },
+   "docs/changelog/2026-10-24-s1-spec.md": {
+    "bytes": 3673,
+    "sha256": "3fe854791a36dcbb5f4166744c26ef004265b74ee02e37a45be97f16a829d2dd"
+   },
+   "docs/changelog/2026-10-25-audio-q6-s1.md": {
+    "bytes": 3447,
+    "sha256": "2ba4e043eb2b45ae10b54aae208210a1902fc421dde9699e811ef5fe7fafcb37"
+   },
+   "docs/changelog/2026-10-25-s1-r1-close.md": {
+    "bytes": 28386,
+    "sha256": "1fdb3b0eac0e59b39ee96b07c54b775b552b64d1c1af342121cd52ccffb38346"
+   },
+   "docs/changelog/2026-10-25-s1-r1-mac.md": {
+    "bytes": 41873,
+    "sha256": "22e399ec787f61f999d25c35e24cfa9b14fb61156a6986eb610bd599bab9fb7c"
+   },
+   "docs/changelog/2026-10-25-s1-r1-report.md": {
+    "bytes": 25303,
+    "sha256": "407bdc49717dc299212d985983b2650be562760e496aa69a94ba8081ad5ed695"
+   },
+   "docs/changelog/2026-10-26-feel-pass-s1.md": {
+    "bytes": 78140,
+    "sha256": "2159e4c15662025aa0f0b9ffce307e40903ecb33082e2aebdde8498d79c98501"
+   },
+   "docs/changelog/2026-10-26-feel-spec.md": {
+    "bytes": 4615,
+    "sha256": "00e9b0a6dcc7c52254a45974b436c7bc40654e24099c6a2d723bb44ff3d8d919"
+   },
+   "docs/changelog/2026-10-26-s1-r1-review-fix.md": {
+    "bytes": 47688,
+    "sha256": "d9b8fdaed996ba8b8755e477ad3fc9b0a77dd0a34fb26d0ff41f63dfcb56c5ae"
+   },
+   "docs/changelog/2026-10-27-feel-n4n6.md": {
+    "bytes": 59409,
+    "sha256": "9d52226ccb3c0cdb2931db70daf61ad9491fff769943e422a141a46f348a07c6"
+   },
+   "docs/changelog/2026-10-27-test-pass.md": {
+    "bytes": 32613,
+    "sha256": "4356f0c2fd4370bf1bbf80e01ce9ff027185808e304fbd7f13b2d9af514ecade"
+   },
+   "docs/changelog/2026-10-28-cloud-fix.md": {
+    "bytes": 13747,
+    "sha256": "b0daf983da3a0f8e60ace2c0182b4090387ef1b949cfb789a09be0f75d0c8670"
+   },
+   "docs/changelog/2026-10-28-dev-handle.md": {
+    "bytes": 1825,
+    "sha256": "1024bb380b4d31ddb35c09d445eb3cabc9ce9519c442a6fd4c933e85eb06b889"
+   },
+   "docs/changelog/2026-10-28-english-names.md": {
+    "bytes": 5678,
+    "sha256": "2ce47d5c8b6a26d72e77801a8bf9fcc405041540423af3b5cfe1c32867b653cb"
+   },
+   "docs/changelog/2026-10-28-first-frame.md": {
+    "bytes": 9614,
+    "sha256": "f9287e61fac65a70930e85cd4938c64b82d5a417585044f1c9527629d7d5ec0a"
+   },
+   "docs/changelog/2026-10-28-vfx-pair.md": {
+    "bytes": 14834,
+    "sha256": "c89b409dc2e0adf1fe2fca0a87cca2ba12e2477f4f8af0b3a5ebea4088bb4be1"
+   },
+   "docs/changelog/2026-10-28-vocab-pin.md": {
+    "bytes": 3432,
+    "sha256": "bc4fbf29c559de3c94a1428431d66e01e0665b9aece083b0544e44087aaa6e2d"
+   },
+   "docs/changelog/2026-10-29-card-esc.md": {
+    "bytes": 2733,
+    "sha256": "e2c2943d787562f6b87612901f75d649e276a0858601fbc71442f56d508af671"
+   },
+   "docs/changelog/2026-10-29-english-ui.md": {
+    "bytes": 4777,
+    "sha256": "cb3d0114269152e9f7910d9ddae4e934fba857c12e1dde06f6da1f7530031f34"
+   },
+   "docs/changelog/2026-10-29-pack-and-kit.md": {
+    "bytes": 3244,
+    "sha256": "3d19128e7161267c72ea1b77b85f5a69674edd8e0389a9e486cd8809c07fabd7"
+   },
+   "docs/changelog/2026-10-29-small-labels.md": {
+    "bytes": 2394,
+    "sha256": "1fe1b444fde666770f5dc5d26ca19a1e662121ff9fe7578f5cf3de920857c643"
+   },
+   "docs/changelog/2026-10-30-ui-art.md": {
+    "bytes": 2420,
+    "sha256": "87f437af55f0d49dc1d7f54c0cf29b694005a5af680903f1bbeb9a6224b69e0f"
+   },
+   "index.html": {
+    "bytes": 754,
+    "sha256": "1ba4974b9d999dd98fa5a1b3563f683a6ed71183876ebb13563d6b53e6a9032b"
+   },
+   "kit.config.json": {
+    "bytes": 118,
+    "sha256": "0dac5abb7058ecea64955848a516da5e94fb9e5356407749a2604d90dffa4553"
+   },
+   "media.md5": {
+    "bytes": 13886,
+    "sha256": "194c43409c05cfd7277545dafca1d6dab45f5414100c2fc90603eadca30a3c0d"
+   },
+   "package.json": {
+    "bytes": 1317,
+    "sha256": "2753ec64bc191669bad4ccd60fed4c7559276443dc94b792e8f4e43a90d5767f"
+   },
+   "pnpm-lock.yaml": {
+    "bytes": 34707,
+    "sha256": "ca869e86fd610bdd90964a7d00b61bf97be85d7022d028e7efdbcb1d7da8e0f0"
+   },
+   "pnpm-workspace.yaml": {
+    "bytes": 29,
+    "sha256": "ac02d96368617c760f093cfe61fdec64b6244007ab3553e0d6621f706f54a353"
+   },
+   "public/assets/typing-survival/ui/foe-brute.128.webp": {
+    "bytes": 7080,
+    "sha256": "2b862fba393f0a6a614da926ad5f12c297759a8e00b2d0989ce53b41b422e642"
+   },
+   "public/assets/typing-survival/ui/foe-brute.256.webp": {
+    "bytes": 18392,
+    "sha256": "f8297c4b9178d80d0fcf063e2fe35a627893282a4fbbc5364a5fea96c51320db"
+   },
+   "public/assets/typing-survival/ui/foe-brute.64.webp": {
+    "bytes": 2862,
+    "sha256": "13d0a8b8471228f23aa6a34e0896031a5dae6717045df0a74bffdc3b6121c584"
+   },
+   "public/assets/typing-survival/ui/foe-pack-leader.128.webp": {
+    "bytes": 7650,
+    "sha256": "14f754a0da80f3a6132e1ecb2e0500f64106f02104745b209b17eed502c06cef"
+   },
+   "public/assets/typing-survival/ui/foe-pack-leader.256.webp": {
+    "bytes": 19172,
+    "sha256": "7eff1a8223840c5986080a886af97fa9eddcf77991e0fce2704304b854cb1ea0"
+   },
+   "public/assets/typing-survival/ui/foe-pack-leader.64.webp": {
+    "bytes": 3034,
+    "sha256": "1741a00f81648c728fa071db4f010507ac329a6cc729761dfdf1fef13466fe94"
+   },
+   "public/assets/typing-survival/ui/foe-scout.128.webp": {
+    "bytes": 6080,
+    "sha256": "ddeaefda67a1ec418119cad0e6b1a6e2a01d8edd827d0be5d3a190a5705c88d5"
+   },
+   "public/assets/typing-survival/ui/foe-scout.256.webp": {
+    "bytes": 14746,
+    "sha256": "c903645f1f129b63808f9f7120c92afcb6d0fbdc0be1a6dc31270dc1c3484014"
+   },
+   "public/assets/typing-survival/ui/foe-scout.64.webp": {
+    "bytes": 2430,
+    "sha256": "efcad2a0bf2c34578b11129d95fb862c3c6261354670deabc0b8fdda22ac7f01"
+   },
+   "public/assets/typing-survival/ui/foe-shield-guard.128.webp": {
+    "bytes": 17034,
+    "sha256": "f378b9c1127ae7c67e700500b5a0b35479db7c83a3a57630c6b95cc29e2b2f27"
+   },
+   "public/assets/typing-survival/ui/foe-shield-guard.256.webp": {
+    "bytes": 49196,
+    "sha256": "17cc1f0992ccb0f2dbe55572062ffa67f3795e56298db02077c7337d694a8b28"
+   },
+   "public/assets/typing-survival/ui/foe-shield-guard.64.webp": {
+    "bytes": 5400,
+    "sha256": "33616ca1376ba87541b4dde06b7378a49e7ff855624f3abb7dba078cba34d6d0"
+   },
+   "public/assets/typing-survival/ui/foe-splitter.128.webp": {
+    "bytes": 5324,
+    "sha256": "64665f341a9fb7cefd41cbb4683016f401da28906597e4c8337e127a14347f84"
+   },
+   "public/assets/typing-survival/ui/foe-splitter.256.webp": {
+    "bytes": 13192,
+    "sha256": "5071e3df84eec28f9278bb1eb103c3e125d1e264cdc01462e31dfa774f3025b0"
+   },
+   "public/assets/typing-survival/ui/foe-splitter.64.webp": {
+    "bytes": 2140,
+    "sha256": "34a73e8654dee8845dcd950b140a4e87761bb22fd2f0e5b3453fa5660ca565b6"
+   },
+   "public/assets/typing-survival/ui/foe-swarm.128.webp": {
+    "bytes": 3980,
+    "sha256": "f6a4af67008a31d91b6d013a07a996d46e78b38a3eb252c53a41504b70a04991"
+   },
+   "public/assets/typing-survival/ui/foe-swarm.256.webp": {
+    "bytes": 10086,
+    "sha256": "ae1ee2f8d4e9ca7708d3632e54afc7289e7928599e33a5e12f08276305696dc3"
+   },
+   "public/assets/typing-survival/ui/foe-swarm.64.webp": {
+    "bytes": 1622,
+    "sha256": "1cf73884fe64a72de51fbf4b5e1b2bce14f8ed371e69abacf1380af4fd13ee13"
+   },
+   "public/assets/typing-survival/ui/gun-phao.128.webp": {
+    "bytes": 4942,
+    "sha256": "1a8cfc98bed2710f854bf41fa227034a7da7ac4a63303b89b8a981bbe7ce24e0"
+   },
+   "public/assets/typing-survival/ui/gun-phao.256.webp": {
+    "bytes": 12336,
+    "sha256": "23ed52c7e256b7768d3cfbba4c5c225e9ecf70e33e1cec51b43e3dfef2bb7f9b"
+   },
+   "public/assets/typing-survival/ui/gun-phao.64.webp": {
+    "bytes": 2112,
+    "sha256": "05f57f83f8fee31869229a952ac1a8841ccc6ed1deddc3b369ba66e893f3bc3b"
+   },
+   "public/assets/typing-survival/ui/gun-ray.128.webp": {
+    "bytes": 5212,
+    "sha256": "c382586ee86a0fb413fc289a53e12f8b096dd15577f1a259c62955b4ca2929e7"
+   },
+   "public/assets/typing-survival/ui/gun-ray.256.webp": {
+    "bytes": 14144,
+    "sha256": "a3ebd872506fc700ab87b1e5856abc821e4f406fe752d634c4e1f740e82da116"
+   },
+   "public/assets/typing-survival/ui/gun-ray.64.webp": {
+    "bytes": 3406,
+    "sha256": "63bf937736928f641e9b05f61c0d12a591cf3f2977b1f7cb3bf56a0c38b3b524"
+   },
+   "public/assets/typing-survival/ui/gun-tan.128.webp": {
+    "bytes": 11674,
+    "sha256": "f313a783d0fcb5a78e2cd9d42c30cd650e9b7335ca39c9b582a620f0f4fcf4ad"
+   },
+   "public/assets/typing-survival/ui/gun-tan.256.webp": {
+    "bytes": 13842,
+    "sha256": "c086eb31d41e79933f1e194e99b459070bc0870a4e04a3dd4f99e37ce16b1df3"
+   },
+   "public/assets/typing-survival/ui/gun-tan.64.webp": {
+    "bytes": 3788,
+    "sha256": "6c3702361bfcab8dbebd8f49470d72b3e5a2319b82dae0ed0da5aaf54d4854a9"
+   },
+   "public/assets/typing-survival/ui/gun-tia.128.webp": {
+    "bytes": 4286,
+    "sha256": "893c93e4e302aba1ee471281826c9abeffcb7d0f8d8174f88aa22b1d59a14d32"
+   },
+   "public/assets/typing-survival/ui/gun-tia.256.webp": {
+    "bytes": 10442,
+    "sha256": "6d2e489a5862111cd2cc37ec9a6dd907de2d7935f2049abdcb6f491c650e3614"
+   },
+   "public/assets/typing-survival/ui/gun-tia.64.webp": {
+    "bytes": 1908,
+    "sha256": "906ee8f10101146097ed29d3f1409fce21a580778759646284329145517e2520"
+   },
+   "public/assets/typing-survival/ui/gun-xung.128.webp": {
+    "bytes": 4322,
+    "sha256": "a601e8dc6995c698339d3d93740b115c830053d056a8f0bf3adf9449eb10be0c"
+   },
+   "public/assets/typing-survival/ui/gun-xung.256.webp": {
+    "bytes": 11406,
+    "sha256": "01580b5ad156b72ad6066cd3a1d1811bcf833eaa28b6e2530d87d15b8f02103e"
+   },
+   "public/assets/typing-survival/ui/gun-xung.64.webp": {
+    "bytes": 1772,
+    "sha256": "7be8620754512475e0a805d654747909648b49245b543cb5c77368f1df84984b"
+   },
+   "public/assets/typing-survival/ui/manifest.json": {
+    "bytes": 18029,
+    "sha256": "d7a983917fd1c0366028f2fc55d67443e8600355d106a36aa7f08051ab3dd596"
+   },
+   "public/assets/typing-survival/ui/stage-c1-s1.1536.webp": {
+    "bytes": 386306,
+    "sha256": "e4ab6258eb46bc1d056461029eacb9c61d532da16502419e12cddacf8437096e"
+   },
+   "public/assets/typing-survival/ui/stage-c1-s1.192.webp": {
+    "bytes": 10560,
+    "sha256": "969171f222fdad76dc5984300d5a5d1a649e101bf4ede522b9102569c03b2136"
+   },
+   "public/assets/typing-survival/ui/stage-c1-s1.384.webp": {
+    "bytes": 36900,
+    "sha256": "99db7f484b1c4b585277c6b7ff3f312308cbf6948b93e0cab0140603c230ae41"
+   },
+   "public/assets/typing-survival/ui/stage-c1-s1.768.webp": {
+    "bytes": 125332,
+    "sha256": "346c54e485dd0c682495e153a53a503340291c65a3df075a4d2e3bbeb51e317a"
+   },
+   "public/assets/typing-survival/ui/stage-c1-s2.1536.webp": {
+    "bytes": 448856,
+    "sha256": "9e114d0252951dda8477e2a4a6f4837204f42e178bfb787b0f421ff33b0f92d3"
+   },
+   "public/assets/typing-survival/ui/stage-c1-s2.192.webp": {
+    "bytes": 11456,
+    "sha256": "c3cfa0bcd210a72ca4e5fcfa372d515e59deef4ac1270addcfd4bf1e69bd4620"
+   },
+   "public/assets/typing-survival/ui/stage-c1-s2.384.webp": {
+    "bytes": 40330,
+    "sha256": "4c7be6fc50a6b88fd47a06d911772611e8e55e7b4e0779890097f862eb4d45e9"
+   },
+   "public/assets/typing-survival/ui/stage-c1-s2.768.webp": {
+    "bytes": 146580,
+    "sha256": "b2e43717a34f455d29c3daef3cb6b00bb987c25ea761609fdabee427f4d7d891"
+   },
+   "public/assets/typing-survival/ui/stage-c1-s3.1536.webp": {
+    "bytes": 446738,
+    "sha256": "02d753fb21c8e3751d8037bc46ecf85f1aa5fafc5d4591c0ded4c79ba64e49ca"
+   },
+   "public/assets/typing-survival/ui/stage-c1-s3.192.webp": {
+    "bytes": 12032,
+    "sha256": "1541daf426c8f40c6c288897e6df697d7a9e6b4e33195ba3dbadb9f857b93ba5"
+   },
+   "public/assets/typing-survival/ui/stage-c1-s3.384.webp": {
+    "bytes": 41220,
+    "sha256": "82528d129f506770b808d73de44800743e676637f4e2833ac8389a2c4e0e1438"
+   },
+   "public/assets/typing-survival/ui/stage-c1-s3.768.webp": {
+    "bytes": 146450,
+    "sha256": "3910d47dcc7c5b3c258f2d004d4846310b95bef42a2cc0b947414d256b5145ba"
+   },
+   "public/assets/typing-survival/ui/stage-c1-s4.1536.webp": {
+    "bytes": 437024,
+    "sha256": "baf3a19bf8946aa806c1015c34788a327974e7065cd57ee150b4c85fd6ca1892"
+   },
+   "public/assets/typing-survival/ui/stage-c1-s4.192.webp": {
+    "bytes": 10996,
+    "sha256": "bb883b45f378c789cba9f1e3c09b4fb7ceef8a145d4925cbb7a55da9ea8eb5ce"
+   },
+   "public/assets/typing-survival/ui/stage-c1-s4.384.webp": {
+    "bytes": 38538,
+    "sha256": "d173d28507073b7b14cb12b1df00d05d846a982bc05e720030c0e9b5b6652919"
+   },
+   "public/assets/typing-survival/ui/stage-c1-s4.768.webp": {
+    "bytes": 134878,
+    "sha256": "63c8615af21111c2556c32def38bfac1fd2af36f8da9a34b128472dde759bcbf"
+   },
+   "public/vocabulary/ATTRIBUTION.md": {
+    "bytes": 3101,
+    "sha256": "8f162dc2d3a977ab521537d3fdd770ca200bec144623854dbba95301d65c9269"
+   },
+   "public/vocabulary/index.json": {
+    "bytes": 12195,
+    "sha256": "a0cbb72a84bf8d224d203df5891461b25230807248627e60018070dec4ff9b9b"
+   },
+   "public/vocabulary/levels/001.json": {
+    "bytes": 17371,
+    "sha256": "75857e4a581f33dbbbb366e820cc28c68ca25206a748558d09af7231dc40096f"
+   },
+   "public/vocabulary/levels/002.json": {
+    "bytes": 18046,
+    "sha256": "d775598e98c47926d6f56079e98ba448db4029367dfa669cf3e5a7e6c200c07c"
+   },
+   "public/vocabulary/levels/003.json": {
+    "bytes": 18363,
+    "sha256": "b3ab7ad8a63b08323ddff1230f485d6f8ab00cd893cebaf35d73b9a973dbff31"
+   },
+   "public/vocabulary/vocab-manifest.json": {
+    "bytes": 538,
+    "sha256": "bc981715c00f4c3b1bb622b599186ffab884f2337a1009400fb353787baf8252"
+   },
+   "scripts/balance-lib.ts": {
+    "bytes": 11047,
+    "sha256": "d78dd643cf9415dd7f6e6d0f0a7beca62c956075a27147ebfd0d0c259f1b4a23"
+   },
+   "scripts/balance.ts": {
+    "bytes": 12562,
+    "sha256": "a3f31b4e887176b934b688c8b3570a310b5009836313cf2c62533c419fdad20a"
+   },
+   "scripts/chapter-hashes.ts": {
+    "bytes": 1423,
+    "sha256": "46167d49b2333b20bf3cac3a1b39810a8948dc97f45dbd405736b0d289845a4e"
+   },
+   "scripts/counters.ts": {
+    "bytes": 2171,
+    "sha256": "05350c0b03112948fb60b3514baa4ee72cdff96d9530fefced5ac218401ef0db"
+   },
+   "scripts/overrides.ts": {
+    "bytes": 4276,
+    "sha256": "23800a49eac78518b60cb9de2f31b194315bcd184f11087f109ca323b1df8dde"
+   },
+   "scripts/replay.ts": {
+    "bytes": 3358,
+    "sha256": "8e17c8b5a3ddbd3a3e77eecbfba66b78c2fb69ca523f7962046ab59958e01da0"
+   },
+   "scripts/rollup.ts": {
+    "bytes": 2804,
+    "sha256": "ac6ba0dc556aa569a05c2518cc2078b847a0739589106b9e17444ee53a6c45ed"
+   },
+   "scripts/s0-trace.ts": {
+    "bytes": 2265,
+    "sha256": "9599f0d5b5c6a0fcbc672a1faf34f1e6e2a877d5461d0e6ac2d95bd857d7ff08"
+   },
+   "scripts/ui-art/prepare.mjs": {
+    "bytes": 13835,
+    "sha256": "0ca43b80ae42a20821245a60bc2584324fa8b0b773d86d6ece41b0fdf45027fd"
+   },
+   "scripts/ui-art/selection.json": {
+    "bytes": 8618,
+    "sha256": "ef3197a981a06175fa3356dc66d129cb33f2b1c2b02c4d997481709446f68ef4"
+   },
+   "scripts/visual/scenarios/common.mjs": {
+    "bytes": 448,
+    "sha256": "5d484fa6c0e717a80949f1341d016199dc8f13e39b2bcdec566ba20c101b0fbf"
+   },
+   "scripts/visual/scenarios/survival-feel-guns.mjs": {
+    "bytes": 40087,
+    "sha256": "5c0dc64659091e75a62f71eb852d9219d471657ef18e9433b0a9a60a88c60174"
+   },
+   "scripts/visual/scenarios/survival-feel-lib.mjs": {
+    "bytes": 6918,
+    "sha256": "6190f58c9c2bb126f77a572ddec939466ea3362f220ec43f2c0899daa693e79f"
+   },
+   "scripts/visual/scenarios/survival-feel-ship.mjs": {
+    "bytes": 20036,
+    "sha256": "2f5ff1ddd08783db68f3515c983a7412e70db07485927ef3ec21461411a43396"
+   },
+   "scripts/visual/scenarios/survival-feel.mjs": {
+    "bytes": 45993,
+    "sha256": "521e2cdc9f2e9dcceca1c4e39f8d786832a76319fa6ae4b514aac4ea4f86dcbd"
+   },
+   "scripts/visual/scenarios/survival-s0-balance.mjs": {
+    "bytes": 9967,
+    "sha256": "38abadfbadf2e958cb461d6f4420036bfc649e5f3a82fbd7bdc24b61dbe46a51"
+   },
+   "scripts/visual/scenarios/survival-s0-boot.mjs": {
+    "bytes": 9338,
+    "sha256": "dfe925450967fd7ad6a15ddfc9e19ad1e059f50fccf8096c8cabff3e8fe92163"
+   },
+   "scripts/visual/scenarios/survival-s0-fight.mjs": {
+    "bytes": 4466,
+    "sha256": "ca96c023bf0174616eaf87972714d68aa1692577a22c84fd36a64020234c6117"
+   },
+   "scripts/visual/scenarios/survival-s0-frames.mjs": {
+    "bytes": 1909,
+    "sha256": "551c4c836ec7fcb382e405ae81d670374623ddb920a9625ba7ac7b9d8870d388"
+   },
+   "scripts/visual/scenarios/survival-s0-keys.mjs": {
+    "bytes": 4192,
+    "sha256": "c5affc36c741a3fd789c7e31900e3d32f330370472f5de03fb0289fcf4a01ca6"
+   },
+   "scripts/visual/scenarios/survival-s0-lib.mjs": {
+    "bytes": 2337,
+    "sha256": "4204b3fa31fb21970d7eff36b4a161240a43f5b67e07e62b6f6ead19622f0d27"
+   },
+   "scripts/visual/scenarios/survival-s0-menu.mjs": {
+    "bytes": 4417,
+    "sha256": "d530ad0234f798ec086725debcac0f830b5542583f4eb90c0d588bbedc0c1b6c"
+   },
+   "scripts/visual/scenarios/survival-s0-perf.mjs": {
+    "bytes": 4434,
+    "sha256": "53ad1c708e740cb921461bfbefc42a964b9532d9ce56c6b99be60a9712eb4e77"
+   },
+   "scripts/visual/scenarios/survival-s1-guns.mjs": {
+    "bytes": 5214,
+    "sha256": "04a4696ca07019235b83d04a27a12ad48dff987a3edcc9c8d85032fdb4f00897"
+   },
+   "scripts/visual/scenarios/survival-s1-hazards.mjs": {
+    "bytes": 3141,
+    "sha256": "cd38f3349145ee7ec32f2ca4bd7cfc346bccded0680ae075302da3c93341f702"
+   },
+   "scripts/visual/scenarios/survival-s1-latency.mjs": {
+    "bytes": 7668,
+    "sha256": "4199d984f808e90ac7cadfbbcc8a9f7bf94555cbff8842e8f483441e65e0c1fa"
+   },
+   "scripts/visual/scenarios/survival-s1-lib.mjs": {
+    "bytes": 2200,
+    "sha256": "6737d033ed199830b09c177e425591b3ebfd40382cff75d57a2b424f8c80367c"
+   },
+   "scripts/visual/scenarios/survival-s1-loadout.mjs": {
+    "bytes": 8414,
+    "sha256": "24b137376ad0c4d6ae475328994faa145b16033bdaffe9dc1b8232539d4701a1"
+   },
+   "scripts/visual/scenarios/survival-s1-perf.mjs": {
+    "bytes": 7163,
+    "sha256": "7d3cc657514b01dac891982693e1517cffb7deb226ae5436f198043b2aaa59f8"
+   },
+   "scripts/visual/scenarios/survival-s1-stage.mjs": {
+    "bytes": 5389,
+    "sha256": "a697c192a492a3bfef101c2ab0376956fa6d6c3de791f23d990cff4e4e6d6bd4"
+   },
+   "scripts/visual/scenarios/survival-ui-art.mjs": {
+    "bytes": 7004,
+    "sha256": "9e45ef5cb6aa1e7c6e0126cf58bbb47be405f756ce9c11988c707b6aa4109709"
+   },
+   "scripts/visual/scenarios/survival-vfx-pair.mjs": {
+    "bytes": 7498,
+    "sha256": "3fa4ddcb7e2340558661a063ac7895f4416d577c8e6584e6ee697353d791d675"
+   },
+   "src/app/dev.ts": {
+    "bytes": 4840,
+    "sha256": "348d16d441fafbf0bc960560a03a886e1feadebe74dc4ff2c3e78fc3fefc2587"
+   },
+   "src/app/english.ts": {
+    "bytes": 646,
+    "sha256": "fbe3ab0cc0ddc2e3a4c502955e655ace2003dde33c860a19246798f0958952bd"
+   },
+   "src/app/input.ts": {
+    "bytes": 3579,
+    "sha256": "37619997e51a0e6613ea3b372ff66c826d1bd202c012b42d318aa59ef0ef2e93"
+   },
+   "src/app/journey.ts": {
+    "bytes": 12957,
+    "sha256": "4eb1cec3bd5b2f596e594fbb69d9497780a34c88078c953776f86d40f1b9f202"
+   },
+   "src/app/learning.ts": {
+    "bytes": 987,
+    "sha256": "b221a30da36afc2a3dc7f52ca93c86cc66293d05cea33b075276d2cd3d67e4f6"
+   },
+   "src/app/main.ts": {
+    "bytes": 37123,
+    "sha256": "4c28744fcd94f499f9d100e3fb0b1fb3994a9aca25ea003024ad140b004ece41"
+   },
+   "src/app/menu.ts": {
+    "bytes": 2595,
+    "sha256": "04405da207239ca403571840558622ce09ad03b76e88da90cccc71f2c525913c"
+   },
+   "src/app/motion.ts": {
+    "bytes": 1601,
+    "sha256": "cb43b6028e5456ec008e8ea2f948b3ad0fd31826e3a729d785b6b2873cb35c4e"
+   },
+   "src/app/results.ts": {
+    "bytes": 4646,
+    "sha256": "7a50d91c65bd4242d437e9586bf74179c2e1068c33b97f31320462f202c5c42f"
+   },
+   "src/app/session.ts": {
+    "bytes": 2454,
+    "sha256": "9dd813db0404a45527b9a8a4e23bd7ec5da4e73234a9a1b34eb6358ec56dfd44"
+   },
+   "src/app/skill.ts": {
+    "bytes": 7282,
+    "sha256": "cc0b37af0c1e56f5bd746f51d3a49a11c7e2db0f1a43239b221c2df6751a40ed"
+   },
+   "src/app/vocab.ts": {
+    "bytes": 2712,
+    "sha256": "277d6ec25d046b5d1174254e541dc42df439110a05e0848482f27f22016db5f1"
+   },
+   "src/audio/gun-audio.ts": {
+    "bytes": 10490,
+    "sha256": "8af8c10729b9981f06a9603a87fa35a8d99834630442448a5acf3070b5733cac"
+   },
+   "src/audio/music.ts": {
+    "bytes": 8068,
+    "sha256": "8a1a5602d02a70553f5d09b9e79241df6022f890289637da251bb22a8d37defe"
+   },
+   "src/audio/synth.ts": {
+    "bytes": 4153,
+    "sha256": "45b6cff26c4ec500277f8f08894147ff11771da6264406cd45cb280646f77025"
+   },
+   "src/audio/theme-audio.ts": {
+    "bytes": 18636,
+    "sha256": "067c93103ee6c7d6a22576f8e5ef74a44612279bdf47a26fb64d122a365960f9"
+   },
+   "src/audio/type-audio.ts": {
+    "bytes": 4782,
+    "sha256": "18bfa47f59e477fe878a4168bb1c092edc84d95b7d4abc8c6f38e01bea8d2d9f"
+   },
+   "src/content/balance.ts": {
+    "bytes": 9366,
+    "sha256": "c81f022303c35234918acc096c99421c82939817c4d45d6ce4bfaa2fb3a1bf83"
+   },
+   "src/content/chapter-1.ts": {
+    "bytes": 4416,
+    "sha256": "6a08ca26287d9e544094f191fc26da513f76dad287be16cefcd1108aa173d023"
+   },
+   "src/content/deck.ts": {
+    "bytes": 632,
+    "sha256": "d6e096eba48cbbdfe4801dabd387531196f16c1b89c813883592b23f5c185af5"
+   },
+   "src/content/foes.ts": {
+    "bytes": 4479,
+    "sha256": "1a755efdbf34a8b52ce98324c9aeb21757fe10336655789e9e84a1463b48d89c"
+   },
+   "src/content/guns.ts": {
+    "bytes": 9964,
+    "sha256": "f1e77876234a469222bae5310526ff6d87152846db8b4cc7084584060852f885"
+   },
+   "src/content/rules.ts": {
+    "bytes": 4598,
+    "sha256": "e22cd9d5e2efed77665ab0d66b590a36b6d8ee41bca54621c70f8a6d9e03494c"
+   },
+   "src/content/stage-rules.ts": {
+    "bytes": 8696,
+    "sha256": "d1066efa1c4935014100e01d3acd1c945e528ee50780b7b23aebb4fdf259e2f2"
+   },
+   "src/content/stage-s0.ts": {
+    "bytes": 3909,
+    "sha256": "ea49a33a511ab1d8236bb284a176c03bf02cb36af0f850068f87614950d4972e"
+   },
+   "src/content/threat.ts": {
+    "bytes": 4219,
+    "sha256": "b0787cc81bb28ab5be0960e0520683fee4ef2f6d09fc3307b6f1a709f47e7673"
+   },
+   "src/kit/README.md": {
+    "bytes": 506,
+    "sha256": "94882f021f43e84a332911e43b07fa0e8ed7a7706cf36b82d3e1506ff9eaff0f"
+   },
+   "src/kit/audio/dragon-voice.ts": {
+    "bytes": 17386,
+    "sha256": "e2ad990904887af3e793721e3512669885b3847975547d06e407b8a817fcfb47"
+   },
+   "src/kit/audio/index.ts": {
+    "bytes": 673,
+    "sha256": "dcad0590f87e8ad7b26a21ee95e97401b732ad8ba82078c87fce2ff2153aab80"
+   },
+   "src/kit/audio/mix.ts": {
+    "bytes": 2947,
+    "sha256": "ea84d2fdbb507ba8c8db3db3e3ad984d0e51e98434ad1efb97b70751c82a3bfe"
+   },
+   "src/kit/audio/scene-audio.ts": {
+    "bytes": 11902,
+    "sha256": "d34d458a92d4a68498d4174f3532770bd9ae33d2acfd49bde9bfb4ef0d471f23"
+   },
+   "src/kit/audio/util.ts": {
+    "bytes": 676,
+    "sha256": "4cf81c46e98fe587f92d834cd74aeefe2b9fe0ff3326a33e83786406c25153a5"
+   },
+   "src/kit/balance/bands.ts": {
+    "bytes": 3765,
+    "sha256": "a9fc52f180faed12304b5c1dafc64e304ff630e95661f8c678aae091e2e76a23"
+   },
+   "src/kit/balance/director.ts": {
+    "bytes": 12788,
+    "sha256": "fbfe4964c5e1178495f805cbf570cc6179aaf4fc2d96e7ac5267e5238afc9c45"
+   },
+   "src/kit/balance/flow.ts": {
+    "bytes": 10346,
+    "sha256": "405dd2e2c1005a0beb4eac0197231376f83cc269694294a35764d24e8a57e56e"
+   },
+   "src/kit/balance/gates.ts": {
+    "bytes": 14056,
+    "sha256": "2524225aa2fc619b69ded1908f02f20e8e5a57cbbcd83ce1e98c622022d5ef3a"
+   },
+   "src/kit/balance/index.ts": {
+    "bytes": 2359,
+    "sha256": "c5aedb60bda94b0b3c58d2afc26561f0f69406557b9d9c808a472e4d972d505e"
+   },
+   "src/kit/balance/math.ts": {
+    "bytes": 3522,
+    "sha256": "5ec1fd3bff639cdc78ac27c1e51ef96b1147b1d4763dd848e97fa4e4ac50d589"
+   },
+   "src/kit/balance/pace.ts": {
+    "bytes": 6588,
+    "sha256": "e7abae39d28fd831eb4891b0ca635eb6015e119ff1c35a24a99397049aa0262f"
+   },
+   "src/kit/balance/profile.ts": {
+    "bytes": 19780,
+    "sha256": "d5112d137da87214ccd5c3bef53f98e8ce89a3ef181a6425796b84dc4c36bb15"
+   },
+   "src/kit/balance/typist.ts": {
+    "bytes": 12621,
+    "sha256": "1037f06ab9ced5b5150516cf5a35121acfc20420643ec0827436e387d58923b5"
+   },
+   "src/kit/feedback/audio-cues.ts": {
+    "bytes": 13716,
+    "sha256": "c9a441a04d71df60fac26d64b0de858c8727303aaa567abd69e10523ae56213a"
+   },
+   "src/kit/feedback/debris.ts": {
+    "bytes": 7020,
+    "sha256": "9f026e12f05eb778e6cb7330ca360ab95c3aa221074e6212e2988f3280adaf3c"
+   },
+   "src/kit/feedback/hitstop.ts": {
+    "bytes": 4748,
+    "sha256": "a310135bb45553f2cbac7bff20a74ec9d9668928a81c9defa602e3a4582a7ea6"
+   },
+   "src/kit/feedback/index.ts": {
+    "bytes": 1256,
+    "sha256": "e80c5bc8a00f49d4373862faaeaed251caf30dba74363a00472b82d4d0f9e2db"
+   },
+   "src/kit/feedback/kill-translation.ts": {
+    "bytes": 3718,
+    "sha256": "63720f9faa1966042b1ff5ac48b1e4b38857210aef00dbc78b4d18438df2f125"
+   },
+   "src/kit/feedback/numbers.ts": {
+    "bytes": 29844,
+    "sha256": "a1d627759a33670e86bbff7a85426c4a0536b3a49914e1274533e046562410d1"
+   },
+   "src/kit/feedback/profiles.ts": {
+    "bytes": 4115,
+    "sha256": "60781c94fb0143325742226806a8a397269889a8bc7a40f5bf61e580669dab0f"
+   },
+   "src/kit/feedback/quads.ts": {
+    "bytes": 1409,
+    "sha256": "c595a871fdf4ed8d5648e2b728f1b6c1f60135f5b517f89c4da0d76f3fec31c6"
+   },
+   "src/kit/feedback/reaction.ts": {
+    "bytes": 2865,
+    "sha256": "95de6524d265105a9adf0aa926379584c9f8cf265feebe069fb2f972d8d7c86f"
+   },
+   "src/kit/feedback/tiers.ts": {
+    "bytes": 3079,
+    "sha256": "b05b46de9b1ccb2ac05f4054f6934f73e4c0576f66d1a30a7a285131070d1660"
+   },
+   "src/kit/feedback/trauma.ts": {
+    "bytes": 3287,
+    "sha256": "793be174bffcdf7a920ce20571681a4295aae8a4d8ad835bc16808778f3fbae0"
+   },
+   "src/kit/input/index.ts": {
+    "bytes": 343,
+    "sha256": "ca5be095ce1ce0361c7973359b37920fdc30c7875902a631318238363124c5de"
+   },
+   "src/kit/input/keys.ts": {
+    "bytes": 2790,
+    "sha256": "3845362aea20a67fe6f050c29f7ab481de3178738b80c8e1975986d5c539cbb9"
+   },
+   "src/kit/input/text.ts": {
+    "bytes": 3350,
+    "sha256": "8a855b807c06a7d5388d417a08908f05ffd6b0866c9ae87f00c96eda93c45df6"
+   },
+   "src/kit/kit-manifest.json": {
+    "bytes": 6064,
+    "sha256": "9f3be95e637f809194ad2573c66b4f9edba2571ab694554c67f1b83de46b577a"
+   },
+   "src/kit/learning/bridge.ts": {
+    "bytes": 11189,
+    "sha256": "22ab5336eec25b5570bf97b55bbbdb38e0d9f99193a873e69116090583815b72"
+   },
+   "src/kit/learning/contract.ts": {
+    "bytes": 2378,
+    "sha256": "ab538e415b5f0df24578bc1c4a31dd46719aaafefbd43718166cae1d8cb19c15"
+   },
+   "src/kit/learning/events.ts": {
+    "bytes": 9802,
+    "sha256": "f96e80e3499e196531807e1879d9d6ce05d41018763289d67cb200931c96401f"
+   },
+   "src/kit/learning/index.ts": {
+    "bytes": 1098,
+    "sha256": "41c9765e0b88d7e4298835b56febfb12dd78051991c6e448508db9bcbdc0fc58"
+   },
+   "src/kit/platform/canvas-state.ts": {
+    "bytes": 788,
+    "sha256": "84bc0783762cfec14661533e5919e29c617af88d5288cf45f149d2f0220941aa"
+   },
+   "src/kit/platform/frame-loop.ts": {
+    "bytes": 4511,
+    "sha256": "d1b2ad3ecb2599d7c187eb1520bfbe9152bdd6ebd00bba04859a400d8056497d"
+   },
+   "src/kit/platform/index.ts": {
+    "bytes": 553,
+    "sha256": "e814e71ee98f9c080a9948956177ea4cf2e8d07221db78aa4cb2f6ea305a423d"
+   },
+   "src/kit/platform/rng.ts": {
+    "bytes": 2602,
+    "sha256": "56a7f59c91c6d92e5fbc4173e523c78018a6f467e4de5ae9a7292ecf5afeb054"
+   },
+   "src/kit/platform/safe-storage.ts": {
+    "bytes": 7515,
+    "sha256": "06d6f59c3e6eec2d48697fbece81c23803dbc69f126402206dffb58b372ddc3b"
+   },
+   "src/kit/speech/index.ts": {
+    "bytes": 277,
+    "sha256": "5e75886a3aad23c24e308765e5ff3d07e53266d32631d8f218ace0efd120cac1"
+   },
+   "src/kit/speech/speech.ts": {
+    "bytes": 9654,
+    "sha256": "83484f6f316072033f744de8984dd8a3fa02bdc3c8c59a21b9cb19b49018a2e1"
+   },
+   "src/kit/three/guide-scene.ts": {
+    "bytes": 9088,
+    "sha256": "77a539294bd3e5ff9f917a39c90928f6f1d8b9c89e1904d7a1e4a64b4eb1acaa"
+   },
+   "src/kit/three/hero.ts": {
+    "bytes": 18777,
+    "sha256": "a4551f46882299bddf719b1d3db52a2034133298ad13e2c52920519103a2ad80"
+   },
+   "src/kit/three/index.ts": {
+    "bytes": 1649,
+    "sha256": "d52ec88c65056fbe40fc8e55bc99a8af488ebec413c4e5663c858db1dfdb9f6d"
+   },
+   "src/kit/three/materials.ts": {
+    "bytes": 10302,
+    "sha256": "50d17ccd0b09da1ebc4a408e8279526a657414539e423e380522e3272ac2bee5"
+   },
+   "src/kit/three/model-contracts.ts": {
+    "bytes": 6855,
+    "sha256": "00c031567337bb0f04e50bf7208c2559310e3cde761cd85a1151d5155df61f70"
+   },
+   "src/kit/three/model-loader.ts": {
+    "bytes": 9107,
+    "sha256": "c9748be2e2db9fe00273a076094f37fd773ddfa7397ecd23e8d439275b6e89c7"
+   },
+   "src/kit/three/particles.ts": {
+    "bytes": 18871,
+    "sha256": "a64acbbd76dc1bbdd42d842914c4798dc5eed10c38b3329d34424b3b1be1be57"
+   },
+   "src/kit/three/stage.ts": {
+    "bytes": 9381,
+    "sha256": "1703ed6d6a0e53b21cac0ddb997e8e45442b03f838af17a09a9592e9574097f2"
+   },
+   "src/kit/three/textures.ts": {
+    "bytes": 6730,
+    "sha256": "46448456beaf6f4d1a6f63685253fa8f8242c7adaaed152f5762a61d4714af21"
+   },
+   "src/kit/three/util.ts": {
+    "bytes": 2178,
+    "sha256": "a52b455ac4cb6e48670e558a30b7fb7d6bb0e34ddaaa0c586958f4a6c1b21ad5"
+   },
+   "src/kit/tools/cdp-port.mjs": {
+    "bytes": 1610,
+    "sha256": "ac2389605a7d6d4b552a7aa14622b8240afb126c835c85c06df0b00fec783c2b"
+   },
+   "src/kit/tools/cdp-run.mjs": {
+    "bytes": 9707,
+    "sha256": "a9c78f4fdb4c25b9f692161aa3e270533cbe88b78ba614d8165e482923fc0719"
+   },
+   "src/kit/tools/deploy/check-pack.mjs": {
+    "bytes": 10067,
+    "sha256": "38b86ef0714547a59c675b6df124596a55c25131bab67da742fa41e93edbd540"
+   },
+   "src/kit/tools/index.ts": {
+    "bytes": 368,
+    "sha256": "40084681fa63aa22baacc1e38f6476b51d6a5b20ba99f18980ad7c95b8249f3d"
+   },
+   "src/kit/tools/vite-shared-plugin.ts": {
+    "bytes": 4333,
+    "sha256": "3939cb711114aa24c8c38ae98c74fa6f21c07e3c0f87b2af09fdc9eca6957a68"
+   },
+   "src/kit/verify-kit.mjs": {
+    "bytes": 2671,
+    "sha256": "39a190b2708a4b5b1c5058476214a8819cf4e5b8a3218a99f8d9e071878b0644"
+   },
+   "src/kit/vocab/content-filter.ts": {
+    "bytes": 3232,
+    "sha256": "d8ce768c63b9744e1e112581c9e564b741d1cf3a6c9c7350240ea295968d1a72"
+   },
+   "src/kit/vocab/index.ts": {
+    "bytes": 1422,
+    "sha256": "d2c397c1a033dcf9c1fae7899205155b0b4612de0a1bc172bb595aae337517c6"
+   },
+   "src/kit/vocab/types.ts": {
+    "bytes": 1074,
+    "sha256": "8e412814ceaff60c3ec65172032bb19b3756075370de89014cdf75a34547f8ac"
+   },
+   "src/kit/vocab/vocabulary.ts": {
+    "bytes": 24460,
+    "sha256": "b339c9cced26ce88de94babd5fe8f009677b9c786b93a7dbeed28357f5cec2e9"
+   },
+   "src/kit/vocab/words.ts": {
+    "bytes": 3117,
+    "sha256": "77c27e04c3774b515f6f4d2f906f21b17ea563491f987e43272481f9fd8570f4"
+   },
+   "src/sim/events.ts": {
+    "bytes": 4055,
+    "sha256": "55a89decb65afc6ea430c5f9f3d470c1b08d34a19f8c0764fb673c40dfbb9f49"
+   },
+   "src/sim/guns/aim.ts": {
+    "bytes": 8504,
+    "sha256": "da5fa6524d526c36e96e35d426682f3e3cde49b988e545faa15b97be6ce45ce7"
+   },
+   "src/sim/guns/phao.ts": {
+    "bytes": 5919,
+    "sha256": "1c059a8af6a12a62dd6f53ffd28d1edeedd3db22df1f05248eda09e747ef53f9"
+   },
+   "src/sim/guns/ray.ts": {
+    "bytes": 4478,
+    "sha256": "4e174974b7567f573429ff22abb0c2d294b447819c0991599249bec980a3b26c"
+   },
+   "src/sim/guns/tan.ts": {
+    "bytes": 4345,
+    "sha256": "a22b988054a9e452de8883a0cbb1efba55033f4d6c309e2334de90253e249a99"
+   },
+   "src/sim/guns/tia.ts": {
+    "bytes": 6384,
+    "sha256": "520d4a961853baf6ff20fa36fb98562b37b6aa6b5d16919d02ce927b540c247d"
+   },
+   "src/sim/guns/xung.ts": {
+    "bytes": 4443,
+    "sha256": "ce2b5c36d4736be8dfbcb5c8aaec02a444ae7861ba3060bf5600b749de93dd66"
+   },
+   "src/sim/hash.ts": {
+    "bytes": 2769,
+    "sha256": "eae9121b9fa640446e2f518e33ddba2fd17b3c3cef127beee5acbaee4064bd68"
+   },
+   "src/sim/hazards.ts": {
+    "bytes": 5646,
+    "sha256": "bb82f739a2fecd034323edb4127b00a1cf0f2babaea1dfe27ae37cba8814b94c"
+   },
+   "src/sim/hits.ts": {
+    "bytes": 6205,
+    "sha256": "545e525f1e3ac7cb9c9d97f0acd7019662b70fd4a63c8216eae127e09b51456d"
+   },
+   "src/sim/move.ts": {
+    "bytes": 8905,
+    "sha256": "7aafa17d444d4cfdeab4860033dcf3fe4e4c05de9efbcf84458471819118fc9e"
+   },
+   "src/sim/pace.ts": {
+    "bytes": 10810,
+    "sha256": "84fa07bf86ee1f6c3658fd5b82b7b823ad50ed7f41e4c050b5e3244bb5430b82"
+   },
+   "src/sim/plan.ts": {
+    "bytes": 5164,
+    "sha256": "d956ecf5fab5c9b06ebc0f7076cdbc624e976359db6de26e92d3a50dc3d69a56"
+   },
+   "src/sim/projectiles.ts": {
+    "bytes": 10161,
+    "sha256": "16412b704936c7f313715a7f2c260b4b1eab2cc65a1020ccd32369e219f813cb"
+   },
+   "src/sim/spawn.ts": {
+    "bytes": 10740,
+    "sha256": "cf133ed294893a3bb7fa45e48bf718b7e568c901fd5a38227b4e7c3017116ae0"
+   },
+   "src/sim/stage.ts": {
+    "bytes": 2414,
+    "sha256": "4f8dc81283e3e98c6c7711ea5974ed0b67c4fa5d008f3a5c5fcb6303ab94341a"
+   },
+   "src/sim/stores.ts": {
+    "bytes": 7276,
+    "sha256": "9ac9825ca6ece59d0c7fb71e4f7eb9917a083d30ef632da835be35897cd0eaee"
+   },
+   "src/sim/weapons.ts": {
+    "bytes": 5831,
+    "sha256": "d891cc5834a58484151bd1f4291fa9cf19beff743ba26e643fb12d79ee1bc2d0"
+   },
+   "src/sim/words.ts": {
+    "bytes": 10984,
+    "sha256": "6ccf0ac3ebd7abf12200044a5801f248eb031e879d1e4b7a868c37b6a95b6cd0"
+   },
+   "src/sim/world.ts": {
+    "bytes": 8050,
+    "sha256": "3be16c461c85dadc6d1b51d749ba22bda51ab09b11703e70b50aafb7f3b7f87a"
+   },
+   "src/view/beams.ts": {
+    "bytes": 12198,
+    "sha256": "00dcb19159d82b9b589cd44406e6e9f7f56906fb63835f5113f0cf270f73689d"
+   },
+   "src/view/bolts.ts": {
+    "bytes": 5188,
+    "sha256": "dbcf03c233d48fa3d68300589eef8fb015f60e3418592aafdda6925c8c117c1f"
+   },
+   "src/view/chunks.ts": {
+    "bytes": 11748,
+    "sha256": "5cbf44dc013b39d4111d746d6c10c5b3f243ccf816b1a626f13ffbd1b7fae704"
+   },
+   "src/view/combat.ts": {
+    "bytes": 21529,
+    "sha256": "0e2661bfbf3540d6183b21e0dc55dde853a4e816d4882575c324e877e29778eb"
+   },
+   "src/view/crowd.ts": {
+    "bytes": 17119,
+    "sha256": "fe70925facacd32012425910fba17d36657b66d4d61313ee4ccab79a2356873c"
+   },
+   "src/view/fx.ts": {
+    "bytes": 18134,
+    "sha256": "a3aa7b15a32ed7d2bf029377ce2d35bc20a48bb81b1b26c88250d30113063fd5"
+   },
+   "src/view/gun-rules.ts": {
+    "bytes": 7798,
+    "sha256": "30283c9214243728a8cf09d72803e978dbbbe3dedbddc40931b4a4c5f44c766c"
+   },
+   "src/view/gunfx.ts": {
+    "bytes": 9871,
+    "sha256": "b8d52832a63cbe8c2a9bea9a57c314fd812a63d47df5abe8928b5d3db655f7c5"
+   },
+   "src/view/hazard-fx.ts": {
+    "bytes": 9173,
+    "sha256": "6469439c5d230575579c937b59184dea982c87a4a108f5aa026bb313b21b4a8a"
+   },
+   "src/view/hud.ts": {
+    "bytes": 19964,
+    "sha256": "71eefdd07654ab03d73e56d4c243ba53fd7a95abbba12157cfc38b7ded3eb3d1"
+   },
+   "src/view/lights.ts": {
+    "bytes": 5275,
+    "sha256": "03c64a7c6b6c48b1df3b0f5af511e121250cfcbf02f3a3f6654d1a54706be29f"
+   },
+   "src/view/models.ts": {
+    "bytes": 2744,
+    "sha256": "df73da49aa953d6904c50efe6adb2626edf8e0b2a29d0d93c17107be3624d921"
+   },
+   "src/view/probes.ts": {
+    "bytes": 1613,
+    "sha256": "bebcf5ec01d641cfc81a13039a299b6c2f383391b182b4b360837ed564a64ebd"
+   },
+   "src/view/scene.ts": {
+    "bytes": 25373,
+    "sha256": "bfe352d720544dfa90821ddbf7e3e02d0cc39ac0ca070ad3c59a9f47dfada62a"
+   },
+   "src/view/screens-journey.ts": {
+    "bytes": 9660,
+    "sha256": "59454074a1e132ae057b11a2fd42cd0f95951f3e35e2b67155cb87f0a374326e"
+   },
+   "src/view/screens.ts": {
+    "bytes": 8791,
+    "sha256": "1d611d129f1b916b3c3a7279cdc1ed356f3a4d6a6d587fed28981c07f3bcc5b6"
+   },
+   "src/view/ship-rules.ts": {
+    "bytes": 8144,
+    "sha256": "583342c9456305d4567f714d50f943ac4ce4844c09cb84360a14948a38288e8d"
+   },
+   "src/view/ship.ts": {
+    "bytes": 15338,
+    "sha256": "889cbc3dd53613376659a9dc457b1d5649b940ad7c8292cbe5e59dedd7b910db"
+   },
+   "src/view/shots.ts": {
+    "bytes": 26490,
+    "sha256": "9e7444813587af8ce01a1633ff0245719577111e1db6be2a2309e27097ba61d4"
+   },
+   "src/view/strip.ts": {
+    "bytes": 18654,
+    "sha256": "d71b12d46249445b5ff98ebf6b035f8d86cbe77304d0184e8ca57a3d69a100ad"
+   },
+   "src/view/survival.css": {
+    "bytes": 37232,
+    "sha256": "2e9d191c40484eeb80809ee04a56123397b75580101213e7eb12a2f3cb975ce8"
+   },
+   "src/view/theme.css": {
+    "bytes": 4644,
+    "sha256": "642702c3b4e4493f716fe5c9ce335a3d580f5dc9efd71244ffbfab070546ad2b"
+   },
+   "src/view/theme.ts": {
+    "bytes": 2805,
+    "sha256": "a07e7a6cba5dd8b0ed1c4ed7634acd492f2323f2edeafb299ff56adff28bd540"
+   },
+   "src/view/type-rules.ts": {
+    "bytes": 6597,
+    "sha256": "ec5776e05d15e90eca9ef8af5376df9e0064f657a24ddc3651c659081cfd754b"
+   },
+   "src/view/typing-feel.ts": {
+    "bytes": 16968,
+    "sha256": "aa96e71071dd08e0f985501ce5bfff9f8355711252ae473933af3c074f67ddd0"
+   },
+   "src/view/ui-art.json": {
+    "bytes": 2929,
+    "sha256": "febaaa8ba23d4cef6f68b3b68c4b3d44ce3aac068c3b3870788a450289034d53"
+   },
+   "src/view/ui-art.ts": {
+    "bytes": 4527,
+    "sha256": "02c3c7862b1f367092d0cd9b72ff2bb454189db5d964d5ca75da790827773632"
+   },
+   "src/view/warm.ts": {
+    "bytes": 1006,
+    "sha256": "73dd6d8f8593f99d9d1822c0e22a838e333edfc3ab7d053bd14f4877dd5497d5"
+   },
+   "tests/balance.test.ts": {
+    "bytes": 21516,
+    "sha256": "3e76dcffeb404bba38a906967c0ebf2157f539242808a8f46ec96dae38a08495"
+   },
+   "tests/boundary.test.ts": {
+    "bytes": 3954,
+    "sha256": "7fa8ccea509737311d9f3efa5ffdcc40cb05ce92db64301feb92f69b9020e7a8"
+   },
+   "tests/deploy-pack.test.ts": {
+    "bytes": 3081,
+    "sha256": "fac540e41739d4238516ffaabc89e90fcf89456261920fbddc34d65906800d13"
+   },
+   "tests/dev-handle.test.ts": {
+    "bytes": 566,
+    "sha256": "7ee9907017bdfb5692dd7352f10393f943d1f458049c574d038d9070f2d240fc"
+   },
+   "tests/english-ui.test.ts": {
+    "bytes": 4639,
+    "sha256": "ff8720707a603c0b6219eaf9a3a34571b809e2b81b938d6940d516aa8dba43ae"
+   },
+   "tests/first-frame.test.ts": {
+    "bytes": 7410,
+    "sha256": "9a6a565d58021df8456570ad3125c2c41e32c946cd04d1227c0f70f3f2b83448"
+   },
+   "tests/golden/s0-trace.json": {
+    "bytes": 45911,
+    "sha256": "42e4e5a9534bc78a0c252353ea7ee4670a1bec9e43eb42ef38c886aade530eea"
+   },
+   "tests/golden/ui-text-206.json": {
+    "bytes": 4302,
+    "sha256": "f4f289afc9b35a187e9222035e80aeff06689e3274e00284df2c2d21565e6614"
+   },
+   "tests/gun-feel.test.ts": {
+    "bytes": 5412,
+    "sha256": "442db0cce1aa9d868d00db956af324bf66da661e4fe6fd140b0a23ea121708b8"
+   },
+   "tests/guns.test.ts": {
+    "bytes": 25806,
+    "sha256": "b929de5630e7c1769a38221a819d694d61565aa89928b7e9225637f77dbb203b"
+   },
+   "tests/intro-key.test.ts": {
+    "bytes": 7479,
+    "sha256": "bfe142db6732597990c8cadedbbe3fba8f7d3c24fe32bb2faca82558a23d2ff0"
+   },
+   "tests/learning.test.ts": {
+    "bytes": 957,
+    "sha256": "6544ab6457d10cda57e4bafd3f6a337db934b4db9fe739f1cc9d566219ddf957"
+   },
+   "tests/overrides.test.ts": {
+    "bytes": 3952,
+    "sha256": "a0f87416db88504f23d66ac2938a4c7dc9a2a86fad5f4f37266657fbdee29149"
+   },
+   "tests/s0-trace.test.ts": {
+    "bytes": 2038,
+    "sha256": "46af5889dd0dcfcf14cc239751b8518e29080adf61f4a3123abfa056b2ead728"
+   },
+   "tests/ship-motion.test.ts": {
+    "bytes": 8109,
+    "sha256": "d84510c21ebcfecbf92acee8963a0f69601f94baaa81183c053999acceba2a26"
+   },
+   "tests/small-labels.test.ts": {
+    "bytes": 1784,
+    "sha256": "9b7d5500cc634006997aff525ec0aaeaf014c575647b9b7efa3c4c498cdf9384"
+   },
+   "tests/stage-rules.test.ts": {
+    "bytes": 16950,
+    "sha256": "dd5064800bdb12dac63ada4e203c11fec402325ecedc15192fb749521be6ade1"
+   },
+   "tests/survival-boundary.test.ts": {
+    "bytes": 4432,
+    "sha256": "e0ef42c2feff33a9d4002022b82dfcb80b433da1097b9a2103dac28cf4b8da11"
+   },
+   "tests/survival-input.test.ts": {
+    "bytes": 3705,
+    "sha256": "24a81ffbc2b54e25076e1344fa812b9e7eb776bce188ce8af95fdc9d01d53862"
+   },
+   "tests/survival-sim.test.ts": {
+    "bytes": 25609,
+    "sha256": "03b1a8e3148afd5cdc0ebcdea0af36ffb7f2d1eafdf232e14f70125b5b3ccde6"
+   },
+   "tests/survival/arena.ts": {
+    "bytes": 3700,
+    "sha256": "17a3e494375a67e5acb0a19ce90ac296d1feadd4c6de5107097c88f26abaca90"
+   },
+   "tests/survival/blank.ts": {
+    "bytes": 2099,
+    "sha256": "239d7bcc7a37c1c5e767f511dc61dfbd031525d67329df21ff58d9b7bd23c56d"
+   },
+   "tests/survival/bot.ts": {
+    "bytes": 2039,
+    "sha256": "f097846018003a7e354a5a3af95520097da15164f1bad1a4673f1b03cb8a54d6"
+   },
+   "tests/survival/counters.ts": {
+    "bytes": 10271,
+    "sha256": "b60157e6995e627b8e4d9a715d7b3a0db64e0b11b92dc55e9975c147334ee32b"
+   },
+   "tests/survival/scan.ts": {
+    "bytes": 4314,
+    "sha256": "4c697a6e152bd17b911fa23a9f8e002014df4072545a3d1c2b723f4ffe1a6d06"
+   },
+   "tests/survival/tactics.ts": {
+    "bytes": 1675,
+    "sha256": "7b9b1ecaf3f23c86f129fb6b2c1a3af31569a2cfe864904cf1e89225670088f7"
+   },
+   "tests/survival/trace.ts": {
+    "bytes": 3032,
+    "sha256": "70b1dc0f07a42dbe050ff7f53f4f55ee1b7f70cb3d15203c0e2cd413971c315f"
+   },
+   "tests/survival/typist-bot.ts": {
+    "bytes": 13248,
+    "sha256": "7c001a1191f729555b98227cf5f392b704113a51562951c9a4cf2567568fad3f"
+   },
+   "tests/theme.test.ts": {
+    "bytes": 6770,
+    "sha256": "e111bb4526241f1f08ff78069cb7c84a3e0eb0aee3608aaf0427476d52a9b108"
+   },
+   "tests/type-feel.test.ts": {
+    "bytes": 5210,
+    "sha256": "285b958264c9db2fbb78de84d76c1d2bb88a0c0a9db86d4ab3ed198d9cfa4020"
+   },
+   "tests/ui-art-fixtures.ts": {
+    "bytes": 1910,
+    "sha256": "017f717a4e3c63e3aa70e9bd000cbf1dc923b9cefaeecb1cb1652c5841951cac"
+   },
+   "tests/ui-art-prepare.test.ts": {
+    "bytes": 6590,
+    "sha256": "ea624595ed8468d0bf27f0a1f90c8aca897971d16d5549f3e05c5fa215b1ab8a"
+   },
+   "tests/ui-art.test.ts": {
+    "bytes": 8114,
+    "sha256": "84b46022e8dd797afd673e436761bd764d26bfcb021261c22cde78a0c4b6d9ff"
+   },
+   "tests/vfx-pair.test.ts": {
+    "bytes": 2599,
+    "sha256": "1cdb07ae63c1817e40ff95ee915aa96c2525f8447a1b7f7dec676520c85cd29d"
+   },
+   "tests/vocab-pin.test.ts": {
+    "bytes": 2991,
+    "sha256": "ee29e1a34fad5a29f06b6315149604999a7f6c9472853b7a709991348bf1d2d7"
+   },
+   "tsconfig.json": {
+    "bytes": 599,
+    "sha256": "4ca3a24de73a2a90e463be826b37acc9986adcde2bdbfb35d6379c69216788c0"
+   },
+   "vite.config.ts": {
+    "bytes": 1809,
+    "sha256": "8cc00e2ee17314b28c23ce677d108f458bb7fca073e871aff691152bdd7250d9"
+   },
+   "vitest.config.ts": {
+    "bytes": 229,
+    "sha256": "9f3295334184b33ea8e33388e633f527accdba991e4b8734e170790c585e86ae"
+   },
+   "vocab.config.json": {
+    "bytes": 182,
+    "sha256": "b38d60247bf5b5639577d6946e6f963a87b32756723d834c7826f0169ae0ff52"
+   }
+  },
+  "head": "79db62851e00eadeca7bfd44c10c0c682a9cec8d",
+  "nodeModulesTop": [
+   {
+    "kind": "dir",
+    "mtime": 1793322335.5407267,
+    "name": ".bin"
+   },
+   {
+    "kind": "file",
+    "mtime": 1793322335.5031855,
+    "name": ".modules.yaml"
+   },
+   {
+    "kind": "file",
+    "mtime": 1793322335.4641767,
+    "name": ".package-map.json"
+   },
+   {
+    "kind": "dir",
+    "mtime": 1793322335.5326667,
+    "name": ".pnpm"
+   },
+   {
+    "kind": "file",
+    "mtime": 1793335874.1953444,
+    "name": ".pnpm-workspace-state-v1.json"
+   },
+   {
+    "kind": "dir",
+    "mtime": 1793335715.0096247,
+    "name": ".vite"
+   },
+   {
+    "kind": "dir",
+    "mtime": 1793336868.9326253,
+    "name": ".vite-temp"
+   },
+   {
+    "kind": "dir",
+    "mtime": 1793322335.4619398,
+    "name": "@fontsource"
+   },
+   {
+    "kind": "dir",
+    "mtime": 1793322335.4619255,
+    "name": "@types"
+   },
+   {
+    "kind": "link",
+    "mtime": 1793322335.4615512,
+    "name": "three"
+   },
+   {
+    "kind": "link",
+    "mtime": 1793322335.4614723,
+    "name": "tsx"
+   },
+   {
+    "kind": "link",
+    "mtime": 1793322335.461447,
+    "name": "typescript"
+   },
+   {
+    "kind": "link",
+    "mtime": 1793322335.461492,
+    "name": "vite"
+   },
+   {
+    "kind": "link",
+    "mtime": 1793322335.4615293,
+    "name": "vitest"
+   }
+  ],
+  "status": [
+   " M AGENTS.md",
+   " M README.md",
+   " M package.json",
+   " M src/app/journey.ts",
+   " M src/app/main.ts",
+   " M src/app/menu.ts",
+   " M src/view/hud.ts",
+   " M src/view/screens-journey.ts",
+   " M src/view/screens.ts",
+   " M src/view/survival.css",
+   "?? docs/changelog/2026-10-30-ui-art.md",
+   "?? scripts/ui-art/prepare.mjs",
+   "?? scripts/ui-art/selection.json",
+   "?? scripts/visual/scenarios/survival-ui-art.mjs",
+   "?? src/view/ui-art.json",
+   "?? src/view/ui-art.ts",
+   "?? tests/golden/ui-text-206.json",
+   "?? tests/ui-art-fixtures.ts",
+   "?? tests/ui-art-prepare.test.ts",
+   "?? tests/ui-art.test.ts"
+  ],
+  "vitestResults": [
+   {
+    "mtime": 1793336849.6245978,
+    "path": "node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/results.json",
+    "sha256": "cc2a356ee18b0b38c812fede0c978dd98cdb841a42c9a2d46980c6733656acba"
+   }
+  ]
+ },
+ "games/.wt-ts-codex": {
+  "branch": "ts-codex",
+  "fileCount": 288,
+  "files": {
+   ".gitignore": {
+    "bytes": 699,
+    "sha256": "c3ece5f5038d3816349bb8ec15ee2ecb4e245ed0b54adac4787f2f98324de46c"
+   },
+   "AGENTS.md": {
+    "bytes": 20284,
+    "sha256": "87fd81f138d32d9002b9b1c582df945c398177da512c88b1a802ed4385f0f5bf"
+   },
+   "README.md": {
+    "bytes": 2593,
+    "sha256": "cf1f69d04bebe3c8ef633100db6c99482603c9b27794d74fb49a81c02cedfe09"
+   },
+   "docs/BUILD_NOTES.md": {
+    "bytes": 46931,
+    "sha256": "f1d54c92b099d6bbb6c1cddeef6516be8d9bbde18dcfdb6c2bc5bf81110a55bd"
+   },
+   "docs/BUILD_S0.md": {
+    "bytes": 12035,
+    "sha256": "68d60764ff35b59bc3e63dd424febdf179addda4f7d489a6bc32f61a54f4ece1"
+   },
+   "docs/BUILD_S1.md": {
+    "bytes": 110935,
+    "sha256": "38d1e50bea365caaf21ff9a2946fddd5b9094d2b6e95fd306b3af9d9cc2a27c8"
+   },
+   "docs/FEEL_PASS_S1.md": {
+    "bytes": 79295,
+    "sha256": "c4507dc734aa2eae70579f750b0e06de8744972450d0129949ab273b791b4d8d"
+   },
+   "docs/SURVIVAL_MODE_PLAN.md": {
+    "bytes": 50997,
+    "sha256": "bb60fc73174ede783aeeeac9f683daa70b82477745d11514991eff558db074fb"
+   },
+   "docs/art-requests/015-s1-s2.md": {
+    "bytes": 14399,
+    "sha256": "6e53f7aabab5681c33bee907a998bddf9680f3ad9a1bd2636b95daf5162b4958"
+   },
+   "docs/audio/THEME_SOUND_LIST.md": {
+    "bytes": 29568,
+    "sha256": "1728680891acbb8d48fe2c34c261c022b171d202b2f2fbed34dae68350d3b92a"
+   },
+   "docs/changelog/2026-10-23-balance.md": {
+    "bytes": 33871,
+    "sha256": "513afb2494d80ce1a4c6135cd587166279b0a875bf7ac8feb3b9d79c02ab0b41"
+   },
+   "docs/changelog/2026-10-23-kit-feedback.md": {
+    "bytes": 4688,
+    "sha256": "0bd43cd678ddd55474d7c44cc23a2c2dc4627b0d1abc0bfd83e6441d88ba1369"
+   },
+   "docs/changelog/2026-10-23-split.md": {
+    "bytes": 5356,
+    "sha256": "311641afa6602074084ca626297d550c6c0433c750d8c96f77586595ec8c5066"
+   },
+   "docs/changelog/2026-10-23-survival-s0.md": {
+    "bytes": 10071,
+    "sha256": "d572760d6ad1b894e4d9dcd2115d75cf9321220e63a13426ed1f4e4fcc555a09"
+   },
+   "docs/changelog/2026-10-23-theme.md": {
+    "bytes": 19254,
+    "sha256": "09ca241d064c3d20e71284cef7343dfe56ed15f3fc4b08ae9faf0bcce2d9183e"
+   },
+   "docs/changelog/2026-10-24-audio-q6-fix.md": {
+    "bytes": 3468,
+    "sha256": "3968fcf1c1dcba680aa1ed5d41a3747b477eae8815a768ed7ed5133a861e7031"
+   },
+   "docs/changelog/2026-10-24-audio-q6.md": {
+    "bytes": 3148,
+    "sha256": "2c841a8a80780d0ffe9a4c4c48e519868f88932914f076a635050150fa0b0f35"
+   },
+   "docs/changelog/2026-10-24-s1-r1-fix.md": {
+    "bytes": 43588,
+    "sha256": "4b7eb0704dffca1da4b8a11aeaf4f6696a8d200d9592820ba2d5ebfc1987720e"
+   },
+   "docs/changelog/2026-10-24-s1-r1-guns.md": {
+    "bytes": 27773,
+    "sha256": "6d64858a25fa1806ee86b85333acc783bdd299dd9a856f3f4a5b0b6107c454d6"
+   },
+   "docs/changelog/2026-10-24-s1-r1.md": {
+    "bytes": 20479,
+    "sha256": "5dc1e1f430eb68dedd9298883e5ff2a8664256367d7ce974a306c2d49b23e92b"
+   },
+   "docs/changelog/2026-10-24-s1-spec-review.md": {
+    "bytes": 9174,
+    "sha256": "f9965b3dd16c9b79bfb55c310f23c937177c78ee580f6481e46c19b6865c0399"
+   },
+   "docs/changelog/2026-10-24-s1-spec.md": {
+    "bytes": 3673,
+    "sha256": "3fe854791a36dcbb5f4166744c26ef004265b74ee02e37a45be97f16a829d2dd"
+   },
+   "docs/changelog/2026-10-25-audio-q6-s1.md": {
+    "bytes": 3447,
+    "sha256": "2ba4e043eb2b45ae10b54aae208210a1902fc421dde9699e811ef5fe7fafcb37"
+   },
+   "docs/changelog/2026-10-25-s1-r1-close.md": {
+    "bytes": 28386,
+    "sha256": "1fdb3b0eac0e59b39ee96b07c54b775b552b64d1c1af342121cd52ccffb38346"
+   },
+   "docs/changelog/2026-10-25-s1-r1-mac.md": {
+    "bytes": 41873,
+    "sha256": "22e399ec787f61f999d25c35e24cfa9b14fb61156a6986eb610bd599bab9fb7c"
+   },
+   "docs/changelog/2026-10-25-s1-r1-report.md": {
+    "bytes": 25303,
+    "sha256": "407bdc49717dc299212d985983b2650be562760e496aa69a94ba8081ad5ed695"
+   },
+   "docs/changelog/2026-10-26-feel-pass-s1.md": {
+    "bytes": 78140,
+    "sha256": "2159e4c15662025aa0f0b9ffce307e40903ecb33082e2aebdde8498d79c98501"
+   },
+   "docs/changelog/2026-10-26-feel-spec.md": {
+    "bytes": 4615,
+    "sha256": "00e9b0a6dcc7c52254a45974b436c7bc40654e24099c6a2d723bb44ff3d8d919"
+   },
+   "docs/changelog/2026-10-26-s1-r1-review-fix.md": {
+    "bytes": 47688,
+    "sha256": "d9b8fdaed996ba8b8755e477ad3fc9b0a77dd0a34fb26d0ff41f63dfcb56c5ae"
+   },
+   "docs/changelog/2026-10-27-feel-n4n6.md": {
+    "bytes": 59409,
+    "sha256": "9d52226ccb3c0cdb2931db70daf61ad9491fff769943e422a141a46f348a07c6"
+   },
+   "docs/changelog/2026-10-27-test-pass.md": {
+    "bytes": 32613,
+    "sha256": "4356f0c2fd4370bf1bbf80e01ce9ff027185808e304fbd7f13b2d9af514ecade"
+   },
+   "docs/changelog/2026-10-28-cloud-fix.md": {
+    "bytes": 13747,
+    "sha256": "b0daf983da3a0f8e60ace2c0182b4090387ef1b949cfb789a09be0f75d0c8670"
+   },
+   "docs/changelog/2026-10-28-dev-handle.md": {
+    "bytes": 1825,
+    "sha256": "1024bb380b4d31ddb35c09d445eb3cabc9ce9519c442a6fd4c933e85eb06b889"
+   },
+   "docs/changelog/2026-10-28-english-names.md": {
+    "bytes": 5678,
+    "sha256": "2ce47d5c8b6a26d72e77801a8bf9fcc405041540423af3b5cfe1c32867b653cb"
+   },
+   "docs/changelog/2026-10-28-first-frame.md": {
+    "bytes": 9614,
+    "sha256": "f9287e61fac65a70930e85cd4938c64b82d5a417585044f1c9527629d7d5ec0a"
+   },
+   "docs/changelog/2026-10-28-vfx-pair.md": {
+    "bytes": 14834,
+    "sha256": "c89b409dc2e0adf1fe2fca0a87cca2ba12e2477f4f8af0b3a5ebea4088bb4be1"
+   },
+   "docs/changelog/2026-10-28-vocab-pin.md": {
+    "bytes": 3432,
+    "sha256": "bc4fbf29c559de3c94a1428431d66e01e0665b9aece083b0544e44087aaa6e2d"
+   },
+   "docs/changelog/2026-10-29-card-esc.md": {
+    "bytes": 2733,
+    "sha256": "e2c2943d787562f6b87612901f75d649e276a0858601fbc71442f56d508af671"
+   },
+   "docs/changelog/2026-10-29-english-ui.md": {
+    "bytes": 4777,
+    "sha256": "cb3d0114269152e9f7910d9ddae4e934fba857c12e1dde06f6da1f7530031f34"
+   },
+   "docs/changelog/2026-10-29-pack-and-kit.md": {
+    "bytes": 3244,
+    "sha256": "3d19128e7161267c72ea1b77b85f5a69674edd8e0389a9e486cd8809c07fabd7"
+   },
+   "docs/changelog/2026-10-29-small-labels.md": {
+    "bytes": 2394,
+    "sha256": "1fe1b444fde666770f5dc5d26ca19a1e662121ff9fe7578f5cf3de920857c643"
+   },
+   "docs/changelog/2026-10-30-first-run-guide.md": {
+    "bytes": 2119,
+    "sha256": "ef4f6506844ed1b9d8b982eb307cf9c80406a35a2ac294c1dbf7ba5dfcd316be"
+   },
+   "docs/changelog/2026-10-30-full-bay-knobs.md": {
+    "bytes": 8056,
+    "sha256": "abf0e9404f87cbb2f6b7c2099381197f811e0c5aed7a0c99807f6d908be028aa"
+   },
+   "docs/changelog/2026-10-30-own-models.md": {
+    "bytes": 2544,
+    "sha256": "f29245db441dc14af221f8da7f4de3cfe3fc4cb74805e08850646e41655650d4"
+   },
+   "docs/changelog/2026-10-30-portal-origin.md": {
+    "bytes": 3639,
+    "sha256": "2e2a13b019cdbdcd5c12168022b46646a920e71fa87aaa1ef1b87e6280554078"
+   },
+   "index.html": {
+    "bytes": 754,
+    "sha256": "1ba4974b9d999dd98fa5a1b3563f683a6ed71183876ebb13563d6b53e6a9032b"
+   },
+   "kit.config.json": {
+    "bytes": 118,
+    "sha256": "0dac5abb7058ecea64955848a516da5e94fb9e5356407749a2604d90dffa4553"
+   },
+   "media.md5": {
+    "bytes": 13886,
+    "sha256": "194c43409c05cfd7277545dafca1d6dab45f5414100c2fc90603eadca30a3c0d"
+   },
+   "package.json": {
+    "bytes": 1260,
+    "sha256": "0f44c39e02128927c415268c53a1422eae8cea88fbc621fd0f9baed4994948fb"
+   },
+   "pnpm-lock.yaml": {
+    "bytes": 34707,
+    "sha256": "ca869e86fd610bdd90964a7d00b61bf97be85d7022d028e7efdbcb1d7da8e0f0"
+   },
+   "pnpm-workspace.yaml": {
+    "bytes": 29,
+    "sha256": "ac02d96368617c760f093cfe61fdec64b6244007ab3553e0d6621f706f54a353"
+   },
+   "public/assets/typing-survival/models/enemies/rainbow-mine-3d/rainbow-mine-3d.high.glb": {
+    "bytes": 827972,
+    "sha256": "0f5a9e90388b278dee363f935ee937344c5830491a552907531d326ac63f63b0"
+   },
+   "public/assets/typing-survival/models/enemies/rainbow-mine-3d/rainbow-mine-3d.medium.glb": {
+    "bytes": 301076,
+    "sha256": "ba00c1016ac5c1b217ffdeb815961b61637a9b426bdabf65b8518d032ce0c80b"
+   },
+   "public/assets/typing-survival/models/enemies/rainbow-scout-3d/rainbow-scout-3d.high.glb": {
+    "bytes": 547544,
+    "sha256": "6b35b3de0d62a275f1cec7946c6811f42e3cb20ebad5268342e829cf2380e610"
+   },
+   "public/assets/typing-survival/models/enemies/rainbow-scout-3d/rainbow-scout-3d.medium.glb": {
+    "bytes": 208084,
+    "sha256": "c565cbfec48146fafb7c2e187b9870cef14184edeb403c4f439d4d4bdeebd850"
+   },
+   "public/assets/typing-survival/models/enemies/rainbow-shield-3d/rainbow-shield-3d.high.glb": {
+    "bytes": 991376,
+    "sha256": "0ac2a2a6e0e13111dd364db88154e73c3ef99d9d70afd7537937d232c38f43ba"
+   },
+   "public/assets/typing-survival/models/enemies/rainbow-shield-3d/rainbow-shield-3d.medium.glb": {
+    "bytes": 311644,
+    "sha256": "f0f399632097bd62e5c8fc21a4d696f6a7c9fcce721b7892f97c79e5f7288449"
+   },
+   "public/assets/typing-survival/models/enemies/rainbow-splitter-3d/rainbow-splitter-3d.high.glb": {
+    "bytes": 615648,
+    "sha256": "cb8597574456424246db48109bec4f60b04f2cb4a839d1a796e6a9d8bfc3142f"
+   },
+   "public/assets/typing-survival/models/enemies/rainbow-splitter-3d/rainbow-splitter-3d.medium.glb": {
+    "bytes": 216852,
+    "sha256": "e92db8b3d0d3463199023ab5ada061260c2dd9fb42e96bdb38a93c4e4a8149d4"
+   },
+   "public/assets/typing-survival/models/enemies/rainbow-tank-3d/rainbow-tank-3d.high.glb": {
+    "bytes": 547544,
+    "sha256": "a0051306e67cbf59c719ca34781acaa2fcffa87ebf8140ee7074196edc49e2e8"
+   },
+   "public/assets/typing-survival/models/enemies/rainbow-tank-3d/rainbow-tank-3d.medium.glb": {
+    "bytes": 208084,
+    "sha256": "c01a7d24719e6fb97664779749b4c01176c3363908b4289e06a00dbab8be0a7d"
+   },
+   "public/assets/typing-survival/models/heroes/draconis-v3/draconis-v3.high.glb": {
+    "bytes": 4362212,
+    "sha256": "3b1d7ce72ba3d10308e9277a0db45622d1d78f8967ee64bd2ad0c987ea74aa4f"
+   },
+   "public/assets/typing-survival/models/heroes/draconis-v3/draconis-v3.medium.glb": {
+    "bytes": 1565856,
+    "sha256": "937aef0aff25caed5005f0cd9568392224781141e7896fdccb6d52f4ef55ae0c"
+   },
+   "public/assets/typing-survival/models/manifest.json": {
+    "bytes": 8408,
+    "sha256": "26a4aa7f65d619c2767c7b1854d9f5a6c7e0e38c88c54fd56fdce6efc730d75e"
+   },
+   "public/assets/typing-survival/models/ships/vanguard/vanguard.high.glb": {
+    "bytes": 2748648,
+    "sha256": "27ec9d5c0427cf84c5f7b7df9c754472ce4e5c03fa89d8df1c4bdf7c60b46913"
+   },
+   "public/assets/typing-survival/models/ships/vanguard/vanguard.medium.glb": {
+    "bytes": 881140,
+    "sha256": "5a48f7985c6307f1900dfec624ed5d897ffcb7c14a8738f063c89db0272acc74"
+   },
+   "public/assets/typing-survival/models/skills/crimson-talon-bolt/crimson-talon-bolt.high.glb": {
+    "bytes": 339404,
+    "sha256": "95fa5601392f1e54181e9de2870ee7e517c2249a791adba49cede312d8d58802"
+   },
+   "public/assets/typing-survival/models/skills/crimson-talon-bolt/crimson-talon-bolt.medium.glb": {
+    "bytes": 149952,
+    "sha256": "5ca976ce2208f2dfc058facaba3e147d46605812356139a42e844e8c13591721"
+   },
+   "public/assets/typing-survival/models/skills/dragon-fireball/dragon-fireball.high.glb": {
+    "bytes": 277224,
+    "sha256": "c65f85d9d7dcf8cbc33d516eebc07ce4ec7ae18a763efa65c43455541d5bc423"
+   },
+   "public/assets/typing-survival/models/skills/dragon-fireball/dragon-fireball.medium.glb": {
+    "bytes": 138280,
+    "sha256": "87ae7bddb18a5e565637fd869827f1d48da8339e89c9fe709a58578a61e52243"
+   },
+   "public/assets/typing-survival/models/skills/frost-seraph-bolt/frost-seraph-bolt.high.glb": {
+    "bytes": 397600,
+    "sha256": "4d37c7ddf13aa4efa209375bc2f27f41f07655932e1a0929859d80a5d40aa2e4"
+   },
+   "public/assets/typing-survival/models/skills/frost-seraph-bolt/frost-seraph-bolt.medium.glb": {
+    "bytes": 161396,
+    "sha256": "af0edf77d6f472b334ed1d8c7c3c5403c52b21ba366c24e17b9dae74e22b41cc"
+   },
+   "public/assets/typing-survival/models/skills/solar-lance-bolt/solar-lance-bolt.high.glb": {
+    "bytes": 309304,
+    "sha256": "d62a7a3619423b07c70378e1a189d45387a9dc709c0bede980651898b1076d17"
+   },
+   "public/assets/typing-survival/models/skills/solar-lance-bolt/solar-lance-bolt.medium.glb": {
+    "bytes": 134232,
+    "sha256": "19a52189f5335a7684a68eb1206140216da488aeb1f3c8712af100d6117dc709"
+   },
+   "public/assets/typing-survival/models/skills/vanguard-bolt/vanguard-bolt.high.glb": {
+    "bytes": 354216,
+    "sha256": "3e167f099714609aa681fc126086a1e0f7f5127380816b5da37ea597bdeaa987"
+   },
+   "public/assets/typing-survival/models/skills/vanguard-bolt/vanguard-bolt.medium.glb": {
+    "bytes": 147288,
+    "sha256": "12bb060aec08ef330a77356cbecad1cfad994fa63707f7d3990a602b9d3d7101"
+   },
+   "public/vocabulary/ATTRIBUTION.md": {
+    "bytes": 3101,
+    "sha256": "8f162dc2d3a977ab521537d3fdd770ca200bec144623854dbba95301d65c9269"
+   },
+   "public/vocabulary/index.json": {
+    "bytes": 12195,
+    "sha256": "a0cbb72a84bf8d224d203df5891461b25230807248627e60018070dec4ff9b9b"
+   },
+   "public/vocabulary/levels/001.json": {
+    "bytes": 17371,
+    "sha256": "75857e4a581f33dbbbb366e820cc28c68ca25206a748558d09af7231dc40096f"
+   },
+   "public/vocabulary/levels/002.json": {
+    "bytes": 18046,
+    "sha256": "d775598e98c47926d6f56079e98ba448db4029367dfa669cf3e5a7e6c200c07c"
+   },
+   "public/vocabulary/levels/003.json": {
+    "bytes": 18363,
+    "sha256": "b3ab7ad8a63b08323ddff1230f485d6f8ab00cd893cebaf35d73b9a973dbff31"
+   },
+   "public/vocabulary/vocab-manifest.json": {
+    "bytes": 538,
+    "sha256": "bc981715c00f4c3b1bb622b599186ffab884f2337a1009400fb353787baf8252"
+   },
+   "scripts/balance-lib.ts": {
+    "bytes": 11047,
+    "sha256": "d78dd643cf9415dd7f6e6d0f0a7beca62c956075a27147ebfd0d0c259f1b4a23"
+   },
+   "scripts/balance.ts": {
+    "bytes": 12562,
+    "sha256": "a3f31b4e887176b934b688c8b3570a310b5009836313cf2c62533c419fdad20a"
+   },
+   "scripts/chapter-hashes.ts": {
+    "bytes": 1423,
+    "sha256": "46167d49b2333b20bf3cac3a1b39810a8948dc97f45dbd405736b0d289845a4e"
+   },
+   "scripts/counters.ts": {
+    "bytes": 2171,
+    "sha256": "05350c0b03112948fb60b3514baa4ee72cdff96d9530fefced5ac218401ef0db"
+   },
+   "scripts/overrides.ts": {
+    "bytes": 4276,
+    "sha256": "23800a49eac78518b60cb9de2f31b194315bcd184f11087f109ca323b1df8dde"
+   },
+   "scripts/replay.ts": {
+    "bytes": 3358,
+    "sha256": "8e17c8b5a3ddbd3a3e77eecbfba66b78c2fb69ca523f7962046ab59958e01da0"
+   },
+   "scripts/rollup.ts": {
+    "bytes": 2804,
+    "sha256": "ac6ba0dc556aa569a05c2518cc2078b847a0739589106b9e17444ee53a6c45ed"
+   },
+   "scripts/s0-trace.ts": {
+    "bytes": 2265,
+    "sha256": "9599f0d5b5c6a0fcbc672a1faf34f1e6e2a877d5461d0e6ac2d95bd857d7ff08"
+   },
+   "scripts/visual/scenarios/common.mjs": {
+    "bytes": 448,
+    "sha256": "5d484fa6c0e717a80949f1341d016199dc8f13e39b2bcdec566ba20c101b0fbf"
+   },
+   "scripts/visual/scenarios/survival-feel-guns.mjs": {
+    "bytes": 40087,
+    "sha256": "5c0dc64659091e75a62f71eb852d9219d471657ef18e9433b0a9a60a88c60174"
+   },
+   "scripts/visual/scenarios/survival-feel-lib.mjs": {
+    "bytes": 6918,
+    "sha256": "6190f58c9c2bb126f77a572ddec939466ea3362f220ec43f2c0899daa693e79f"
+   },
+   "scripts/visual/scenarios/survival-feel-ship.mjs": {
+    "bytes": 20036,
+    "sha256": "2f5ff1ddd08783db68f3515c983a7412e70db07485927ef3ec21461411a43396"
+   },
+   "scripts/visual/scenarios/survival-feel.mjs": {
+    "bytes": 45993,
+    "sha256": "521e2cdc9f2e9dcceca1c4e39f8d786832a76319fa6ae4b514aac4ea4f86dcbd"
+   },
+   "scripts/visual/scenarios/survival-s0-balance.mjs": {
+    "bytes": 9967,
+    "sha256": "38abadfbadf2e958cb461d6f4420036bfc649e5f3a82fbd7bdc24b61dbe46a51"
+   },
+   "scripts/visual/scenarios/survival-s0-boot.mjs": {
+    "bytes": 9338,
+    "sha256": "dfe925450967fd7ad6a15ddfc9e19ad1e059f50fccf8096c8cabff3e8fe92163"
+   },
+   "scripts/visual/scenarios/survival-s0-fight.mjs": {
+    "bytes": 4466,
+    "sha256": "ca96c023bf0174616eaf87972714d68aa1692577a22c84fd36a64020234c6117"
+   },
+   "scripts/visual/scenarios/survival-s0-frames.mjs": {
+    "bytes": 1909,
+    "sha256": "551c4c836ec7fcb382e405ae81d670374623ddb920a9625ba7ac7b9d8870d388"
+   },
+   "scripts/visual/scenarios/survival-s0-keys.mjs": {
+    "bytes": 4192,
+    "sha256": "c5affc36c741a3fd789c7e31900e3d32f330370472f5de03fb0289fcf4a01ca6"
+   },
+   "scripts/visual/scenarios/survival-s0-lib.mjs": {
+    "bytes": 2337,
+    "sha256": "4204b3fa31fb21970d7eff36b4a161240a43f5b67e07e62b6f6ead19622f0d27"
+   },
+   "scripts/visual/scenarios/survival-s0-menu.mjs": {
+    "bytes": 4417,
+    "sha256": "d530ad0234f798ec086725debcac0f830b5542583f4eb90c0d588bbedc0c1b6c"
+   },
+   "scripts/visual/scenarios/survival-s0-perf.mjs": {
+    "bytes": 4434,
+    "sha256": "53ad1c708e740cb921461bfbefc42a964b9532d9ce56c6b99be60a9712eb4e77"
+   },
+   "scripts/visual/scenarios/survival-s1-first-run.mjs": {
+    "bytes": 3220,
+    "sha256": "8ab200da13deb0f71dd684496a48955863c3b141f19bf271b28930555af7a203"
+   },
+   "scripts/visual/scenarios/survival-s1-guns.mjs": {
+    "bytes": 5214,
+    "sha256": "04a4696ca07019235b83d04a27a12ad48dff987a3edcc9c8d85032fdb4f00897"
+   },
+   "scripts/visual/scenarios/survival-s1-hazards.mjs": {
+    "bytes": 3141,
+    "sha256": "cd38f3349145ee7ec32f2ca4bd7cfc346bccded0680ae075302da3c93341f702"
+   },
+   "scripts/visual/scenarios/survival-s1-latency.mjs": {
+    "bytes": 7668,
+    "sha256": "4199d984f808e90ac7cadfbbcc8a9f7bf94555cbff8842e8f483441e65e0c1fa"
+   },
+   "scripts/visual/scenarios/survival-s1-lib.mjs": {
+    "bytes": 2200,
+    "sha256": "6737d033ed199830b09c177e425591b3ebfd40382cff75d57a2b424f8c80367c"
+   },
+   "scripts/visual/scenarios/survival-s1-loadout.mjs": {
+    "bytes": 8523,
+    "sha256": "d0fbed420a2a2144525f7df8a4d57cf1f01f3d4f0f1d1beb29bcf8a6e5a4a356"
+   },
+   "scripts/visual/scenarios/survival-s1-perf.mjs": {
+    "bytes": 7163,
+    "sha256": "7d3cc657514b01dac891982693e1517cffb7deb226ae5436f198043b2aaa59f8"
+   },
+   "scripts/visual/scenarios/survival-s1-stage.mjs": {
+    "bytes": 5389,
+    "sha256": "a697c192a492a3bfef101c2ab0376956fa6d6c3de791f23d990cff4e4e6d6bd4"
+   },
+   "scripts/visual/scenarios/survival-vfx-pair.mjs": {
+    "bytes": 7498,
+    "sha256": "3fa4ddcb7e2340558661a063ac7895f4416d577c8e6584e6ee697353d791d675"
+   },
+   "src/app/dev.ts": {
+    "bytes": 4840,
+    "sha256": "348d16d441fafbf0bc960560a03a886e1feadebe74dc4ff2c3e78fc3fefc2587"
+   },
+   "src/app/english.ts": {
+    "bytes": 646,
+    "sha256": "fbe3ab0cc0ddc2e3a4c502955e655ace2003dde33c860a19246798f0958952bd"
+   },
+   "src/app/guide.ts": {
+    "bytes": 2288,
+    "sha256": "cff874f3ec93ca211fc2c6b0331111450f6ab3accd3455b8125d0b3d41f37ba4"
+   },
+   "src/app/input.ts": {
+    "bytes": 3579,
+    "sha256": "37619997e51a0e6613ea3b372ff66c826d1bd202c012b42d318aa59ef0ef2e93"
+   },
+   "src/app/journey.ts": {
+    "bytes": 13299,
+    "sha256": "bd9c9f58db44516e0dbe09ea450e63733d321770fc16eb37392f587734351202"
+   },
+   "src/app/learning.ts": {
+    "bytes": 1202,
+    "sha256": "ce70aa6ee00523ec1a375943bb538c814d6c2ad90dfc8c7a9840d93f1d59c3de"
+   },
+   "src/app/main.ts": {
+    "bytes": 37110,
+    "sha256": "0d1c605bda91fedf1c4e26dd489482b5fdacc230adad82312d7f44bc9f8f2a4a"
+   },
+   "src/app/menu.ts": {
+    "bytes": 2570,
+    "sha256": "e2981b9e5faa3748eaa3bc3f6ee02eaafc0ec97778c2300f8ab90bb1a639ed87"
+   },
+   "src/app/motion.ts": {
+    "bytes": 1601,
+    "sha256": "cb43b6028e5456ec008e8ea2f948b3ad0fd31826e3a729d785b6b2873cb35c4e"
+   },
+   "src/app/portal.ts": {
+    "bytes": 1520,
+    "sha256": "c76e186d0eab3e353d723b6302540f1c43435a6059d5921e0033a0b71f9da6cf"
+   },
+   "src/app/results.ts": {
+    "bytes": 4646,
+    "sha256": "7a50d91c65bd4242d437e9586bf74179c2e1068c33b97f31320462f202c5c42f"
+   },
+   "src/app/session.ts": {
+    "bytes": 2454,
+    "sha256": "9dd813db0404a45527b9a8a4e23bd7ec5da4e73234a9a1b34eb6358ec56dfd44"
+   },
+   "src/app/skill.ts": {
+    "bytes": 7282,
+    "sha256": "cc0b37af0c1e56f5bd746f51d3a49a11c7e2db0f1a43239b221c2df6751a40ed"
+   },
+   "src/app/vocab.ts": {
+    "bytes": 2712,
+    "sha256": "277d6ec25d046b5d1174254e541dc42df439110a05e0848482f27f22016db5f1"
+   },
+   "src/audio/gun-audio.ts": {
+    "bytes": 10490,
+    "sha256": "8af8c10729b9981f06a9603a87fa35a8d99834630442448a5acf3070b5733cac"
+   },
+   "src/audio/music.ts": {
+    "bytes": 8068,
+    "sha256": "8a1a5602d02a70553f5d09b9e79241df6022f890289637da251bb22a8d37defe"
+   },
+   "src/audio/synth.ts": {
+    "bytes": 4153,
+    "sha256": "45b6cff26c4ec500277f8f08894147ff11771da6264406cd45cb280646f77025"
+   },
+   "src/audio/theme-audio.ts": {
+    "bytes": 18636,
+    "sha256": "067c93103ee6c7d6a22576f8e5ef74a44612279bdf47a26fb64d122a365960f9"
+   },
+   "src/audio/type-audio.ts": {
+    "bytes": 4782,
+    "sha256": "18bfa47f59e477fe878a4168bb1c092edc84d95b7d4abc8c6f38e01bea8d2d9f"
+   },
+   "src/content/balance.ts": {
+    "bytes": 9366,
+    "sha256": "c81f022303c35234918acc096c99421c82939817c4d45d6ce4bfaa2fb3a1bf83"
+   },
+   "src/content/chapter-1.ts": {
+    "bytes": 4416,
+    "sha256": "6a08ca26287d9e544094f191fc26da513f76dad287be16cefcd1108aa173d023"
+   },
+   "src/content/deck.ts": {
+    "bytes": 632,
+    "sha256": "d6e096eba48cbbdfe4801dabd387531196f16c1b89c813883592b23f5c185af5"
+   },
+   "src/content/foes.ts": {
+    "bytes": 4479,
+    "sha256": "1a755efdbf34a8b52ce98324c9aeb21757fe10336655789e9e84a1463b48d89c"
+   },
+   "src/content/guns.ts": {
+    "bytes": 10141,
+    "sha256": "70e7d4089c9c7dd03743b73490391477fb8550137e426e6700bff4e910cffee0"
+   },
+   "src/content/rules.ts": {
+    "bytes": 4598,
+    "sha256": "e22cd9d5e2efed77665ab0d66b590a36b6d8ee41bca54621c70f8a6d9e03494c"
+   },
+   "src/content/stage-rules.ts": {
+    "bytes": 8696,
+    "sha256": "d1066efa1c4935014100e01d3acd1c945e528ee50780b7b23aebb4fdf259e2f2"
+   },
+   "src/content/stage-s0.ts": {
+    "bytes": 3909,
+    "sha256": "ea49a33a511ab1d8236bb284a176c03bf02cb36af0f850068f87614950d4972e"
+   },
+   "src/content/threat.ts": {
+    "bytes": 4219,
+    "sha256": "b0787cc81bb28ab5be0960e0520683fee4ef2f6d09fc3307b6f1a709f47e7673"
+   },
+   "src/kit/README.md": {
+    "bytes": 506,
+    "sha256": "94882f021f43e84a332911e43b07fa0e8ed7a7706cf36b82d3e1506ff9eaff0f"
+   },
+   "src/kit/audio/dragon-voice.ts": {
+    "bytes": 17386,
+    "sha256": "e2ad990904887af3e793721e3512669885b3847975547d06e407b8a817fcfb47"
+   },
+   "src/kit/audio/index.ts": {
+    "bytes": 673,
+    "sha256": "dcad0590f87e8ad7b26a21ee95e97401b732ad8ba82078c87fce2ff2153aab80"
+   },
+   "src/kit/audio/mix.ts": {
+    "bytes": 2947,
+    "sha256": "ea84d2fdbb507ba8c8db3db3e3ad984d0e51e98434ad1efb97b70751c82a3bfe"
+   },
+   "src/kit/audio/scene-audio.ts": {
+    "bytes": 11902,
+    "sha256": "d34d458a92d4a68498d4174f3532770bd9ae33d2acfd49bde9bfb4ef0d471f23"
+   },
+   "src/kit/audio/util.ts": {
+    "bytes": 676,
+    "sha256": "4cf81c46e98fe587f92d834cd74aeefe2b9fe0ff3326a33e83786406c25153a5"
+   },
+   "src/kit/balance/bands.ts": {
+    "bytes": 3765,
+    "sha256": "a9fc52f180faed12304b5c1dafc64e304ff630e95661f8c678aae091e2e76a23"
+   },
+   "src/kit/balance/director.ts": {
+    "bytes": 12788,
+    "sha256": "fbfe4964c5e1178495f805cbf570cc6179aaf4fc2d96e7ac5267e5238afc9c45"
+   },
+   "src/kit/balance/flow.ts": {
+    "bytes": 10346,
+    "sha256": "405dd2e2c1005a0beb4eac0197231376f83cc269694294a35764d24e8a57e56e"
+   },
+   "src/kit/balance/gates.ts": {
+    "bytes": 14056,
+    "sha256": "2524225aa2fc619b69ded1908f02f20e8e5a57cbbcd83ce1e98c622022d5ef3a"
+   },
+   "src/kit/balance/index.ts": {
+    "bytes": 2359,
+    "sha256": "c5aedb60bda94b0b3c58d2afc26561f0f69406557b9d9c808a472e4d972d505e"
+   },
+   "src/kit/balance/math.ts": {
+    "bytes": 3522,
+    "sha256": "5ec1fd3bff639cdc78ac27c1e51ef96b1147b1d4763dd848e97fa4e4ac50d589"
+   },
+   "src/kit/balance/pace.ts": {
+    "bytes": 6588,
+    "sha256": "e7abae39d28fd831eb4891b0ca635eb6015e119ff1c35a24a99397049aa0262f"
+   },
+   "src/kit/balance/profile.ts": {
+    "bytes": 19780,
+    "sha256": "d5112d137da87214ccd5c3bef53f98e8ce89a3ef181a6425796b84dc4c36bb15"
+   },
+   "src/kit/balance/typist.ts": {
+    "bytes": 12621,
+    "sha256": "1037f06ab9ced5b5150516cf5a35121acfc20420643ec0827436e387d58923b5"
+   },
+   "src/kit/feedback/audio-cues.ts": {
+    "bytes": 13716,
+    "sha256": "c9a441a04d71df60fac26d64b0de858c8727303aaa567abd69e10523ae56213a"
+   },
+   "src/kit/feedback/debris.ts": {
+    "bytes": 7020,
+    "sha256": "9f026e12f05eb778e6cb7330ca360ab95c3aa221074e6212e2988f3280adaf3c"
+   },
+   "src/kit/feedback/hitstop.ts": {
+    "bytes": 4748,
+    "sha256": "a310135bb45553f2cbac7bff20a74ec9d9668928a81c9defa602e3a4582a7ea6"
+   },
+   "src/kit/feedback/index.ts": {
+    "bytes": 1256,
+    "sha256": "e80c5bc8a00f49d4373862faaeaed251caf30dba74363a00472b82d4d0f9e2db"
+   },
+   "src/kit/feedback/kill-translation.ts": {
+    "bytes": 3718,
+    "sha256": "63720f9faa1966042b1ff5ac48b1e4b38857210aef00dbc78b4d18438df2f125"
+   },
+   "src/kit/feedback/numbers.ts": {
+    "bytes": 29844,
+    "sha256": "a1d627759a33670e86bbff7a85426c4a0536b3a49914e1274533e046562410d1"
+   },
+   "src/kit/feedback/profiles.ts": {
+    "bytes": 4115,
+    "sha256": "60781c94fb0143325742226806a8a397269889a8bc7a40f5bf61e580669dab0f"
+   },
+   "src/kit/feedback/quads.ts": {
+    "bytes": 1409,
+    "sha256": "c595a871fdf4ed8d5648e2b728f1b6c1f60135f5b517f89c4da0d76f3fec31c6"
+   },
+   "src/kit/feedback/reaction.ts": {
+    "bytes": 2865,
+    "sha256": "95de6524d265105a9adf0aa926379584c9f8cf265feebe069fb2f972d8d7c86f"
+   },
+   "src/kit/feedback/tiers.ts": {
+    "bytes": 3079,
+    "sha256": "b05b46de9b1ccb2ac05f4054f6934f73e4c0576f66d1a30a7a285131070d1660"
+   },
+   "src/kit/feedback/trauma.ts": {
+    "bytes": 3287,
+    "sha256": "793be174bffcdf7a920ce20571681a4295aae8a4d8ad835bc16808778f3fbae0"
+   },
+   "src/kit/input/index.ts": {
+    "bytes": 343,
+    "sha256": "ca5be095ce1ce0361c7973359b37920fdc30c7875902a631318238363124c5de"
+   },
+   "src/kit/input/keys.ts": {
+    "bytes": 2790,
+    "sha256": "3845362aea20a67fe6f050c29f7ab481de3178738b80c8e1975986d5c539cbb9"
+   },
+   "src/kit/input/text.ts": {
+    "bytes": 3350,
+    "sha256": "8a855b807c06a7d5388d417a08908f05ffd6b0866c9ae87f00c96eda93c45df6"
+   },
+   "src/kit/kit-manifest.json": {
+    "bytes": 6064,
+    "sha256": "9f3be95e637f809194ad2573c66b4f9edba2571ab694554c67f1b83de46b577a"
+   },
+   "src/kit/learning/bridge.ts": {
+    "bytes": 11189,
+    "sha256": "22ab5336eec25b5570bf97b55bbbdb38e0d9f99193a873e69116090583815b72"
+   },
+   "src/kit/learning/contract.ts": {
+    "bytes": 2378,
+    "sha256": "ab538e415b5f0df24578bc1c4a31dd46719aaafefbd43718166cae1d8cb19c15"
+   },
+   "src/kit/learning/events.ts": {
+    "bytes": 9802,
+    "sha256": "f96e80e3499e196531807e1879d9d6ce05d41018763289d67cb200931c96401f"
+   },
+   "src/kit/learning/index.ts": {
+    "bytes": 1098,
+    "sha256": "41c9765e0b88d7e4298835b56febfb12dd78051991c6e448508db9bcbdc0fc58"
+   },
+   "src/kit/platform/canvas-state.ts": {
+    "bytes": 788,
+    "sha256": "84bc0783762cfec14661533e5919e29c617af88d5288cf45f149d2f0220941aa"
+   },
+   "src/kit/platform/frame-loop.ts": {
+    "bytes": 4511,
+    "sha256": "d1b2ad3ecb2599d7c187eb1520bfbe9152bdd6ebd00bba04859a400d8056497d"
+   },
+   "src/kit/platform/index.ts": {
+    "bytes": 553,
+    "sha256": "e814e71ee98f9c080a9948956177ea4cf2e8d07221db78aa4cb2f6ea305a423d"
+   },
+   "src/kit/platform/rng.ts": {
+    "bytes": 2602,
+    "sha256": "56a7f59c91c6d92e5fbc4173e523c78018a6f467e4de5ae9a7292ecf5afeb054"
+   },
+   "src/kit/platform/safe-storage.ts": {
+    "bytes": 7515,
+    "sha256": "06d6f59c3e6eec2d48697fbece81c23803dbc69f126402206dffb58b372ddc3b"
+   },
+   "src/kit/speech/index.ts": {
+    "bytes": 277,
+    "sha256": "5e75886a3aad23c24e308765e5ff3d07e53266d32631d8f218ace0efd120cac1"
+   },
+   "src/kit/speech/speech.ts": {
+    "bytes": 9654,
+    "sha256": "83484f6f316072033f744de8984dd8a3fa02bdc3c8c59a21b9cb19b49018a2e1"
+   },
+   "src/kit/three/guide-scene.ts": {
+    "bytes": 9088,
+    "sha256": "77a539294bd3e5ff9f917a39c90928f6f1d8b9c89e1904d7a1e4a64b4eb1acaa"
+   },
+   "src/kit/three/hero.ts": {
+    "bytes": 18777,
+    "sha256": "a4551f46882299bddf719b1d3db52a2034133298ad13e2c52920519103a2ad80"
+   },
+   "src/kit/three/index.ts": {
+    "bytes": 1649,
+    "sha256": "d52ec88c65056fbe40fc8e55bc99a8af488ebec413c4e5663c858db1dfdb9f6d"
+   },
+   "src/kit/three/materials.ts": {
+    "bytes": 10302,
+    "sha256": "50d17ccd0b09da1ebc4a408e8279526a657414539e423e380522e3272ac2bee5"
+   },
+   "src/kit/three/model-contracts.ts": {
+    "bytes": 6855,
+    "sha256": "00c031567337bb0f04e50bf7208c2559310e3cde761cd85a1151d5155df61f70"
+   },
+   "src/kit/three/model-loader.ts": {
+    "bytes": 9107,
+    "sha256": "c9748be2e2db9fe00273a076094f37fd773ddfa7397ecd23e8d439275b6e89c7"
+   },
+   "src/kit/three/particles.ts": {
+    "bytes": 18871,
+    "sha256": "a64acbbd76dc1bbdd42d842914c4798dc5eed10c38b3329d34424b3b1be1be57"
+   },
+   "src/kit/three/stage.ts": {
+    "bytes": 9381,
+    "sha256": "1703ed6d6a0e53b21cac0ddb997e8e45442b03f838af17a09a9592e9574097f2"
+   },
+   "src/kit/three/textures.ts": {
+    "bytes": 6730,
+    "sha256": "46448456beaf6f4d1a6f63685253fa8f8242c7adaaed152f5762a61d4714af21"
+   },
+   "src/kit/three/util.ts": {
+    "bytes": 2178,
+    "sha256": "a52b455ac4cb6e48670e558a30b7fb7d6bb0e34ddaaa0c586958f4a6c1b21ad5"
+   },
+   "src/kit/tools/cdp-port.mjs": {
+    "bytes": 1610,
+    "sha256": "ac2389605a7d6d4b552a7aa14622b8240afb126c835c85c06df0b00fec783c2b"
+   },
+   "src/kit/tools/cdp-run.mjs": {
+    "bytes": 9707,
+    "sha256": "a9c78f4fdb4c25b9f692161aa3e270533cbe88b78ba614d8165e482923fc0719"
+   },
+   "src/kit/tools/deploy/check-pack.mjs": {
+    "bytes": 10067,
+    "sha256": "38b86ef0714547a59c675b6df124596a55c25131bab67da742fa41e93edbd540"
+   },
+   "src/kit/tools/index.ts": {
+    "bytes": 368,
+    "sha256": "40084681fa63aa22baacc1e38f6476b51d6a5b20ba99f18980ad7c95b8249f3d"
+   },
+   "src/kit/tools/vite-shared-plugin.ts": {
+    "bytes": 4333,
+    "sha256": "3939cb711114aa24c8c38ae98c74fa6f21c07e3c0f87b2af09fdc9eca6957a68"
+   },
+   "src/kit/verify-kit.mjs": {
+    "bytes": 2671,
+    "sha256": "39a190b2708a4b5b1c5058476214a8819cf4e5b8a3218a99f8d9e071878b0644"
+   },
+   "src/kit/vocab/content-filter.ts": {
+    "bytes": 3232,
+    "sha256": "d8ce768c63b9744e1e112581c9e564b741d1cf3a6c9c7350240ea295968d1a72"
+   },
+   "src/kit/vocab/index.ts": {
+    "bytes": 1422,
+    "sha256": "d2c397c1a033dcf9c1fae7899205155b0b4612de0a1bc172bb595aae337517c6"
+   },
+   "src/kit/vocab/types.ts": {
+    "bytes": 1074,
+    "sha256": "8e412814ceaff60c3ec65172032bb19b3756075370de89014cdf75a34547f8ac"
+   },
+   "src/kit/vocab/vocabulary.ts": {
+    "bytes": 24460,
+    "sha256": "b339c9cced26ce88de94babd5fe8f009677b9c786b93a7dbeed28357f5cec2e9"
+   },
+   "src/kit/vocab/words.ts": {
+    "bytes": 3117,
+    "sha256": "77c27e04c3774b515f6f4d2f906f21b17ea563491f987e43272481f9fd8570f4"
+   },
+   "src/sim/events.ts": {
+    "bytes": 4055,
+    "sha256": "55a89decb65afc6ea430c5f9f3d470c1b08d34a19f8c0764fb673c40dfbb9f49"
+   },
+   "src/sim/guns/aim.ts": {
+    "bytes": 8504,
+    "sha256": "da5fa6524d526c36e96e35d426682f3e3cde49b988e545faa15b97be6ce45ce7"
+   },
+   "src/sim/guns/phao.ts": {
+    "bytes": 5919,
+    "sha256": "1c059a8af6a12a62dd6f53ffd28d1edeedd3db22df1f05248eda09e747ef53f9"
+   },
+   "src/sim/guns/ray.ts": {
+    "bytes": 4478,
+    "sha256": "4e174974b7567f573429ff22abb0c2d294b447819c0991599249bec980a3b26c"
+   },
+   "src/sim/guns/tan.ts": {
+    "bytes": 4345,
+    "sha256": "a22b988054a9e452de8883a0cbb1efba55033f4d6c309e2334de90253e249a99"
+   },
+   "src/sim/guns/tia.ts": {
+    "bytes": 6384,
+    "sha256": "520d4a961853baf6ff20fa36fb98562b37b6aa6b5d16919d02ce927b540c247d"
+   },
+   "src/sim/guns/xung.ts": {
+    "bytes": 4443,
+    "sha256": "ce2b5c36d4736be8dfbcb5c8aaec02a444ae7861ba3060bf5600b749de93dd66"
+   },
+   "src/sim/hash.ts": {
+    "bytes": 2769,
+    "sha256": "eae9121b9fa640446e2f518e33ddba2fd17b3c3cef127beee5acbaee4064bd68"
+   },
+   "src/sim/hazards.ts": {
+    "bytes": 5646,
+    "sha256": "bb82f739a2fecd034323edb4127b00a1cf0f2babaea1dfe27ae37cba8814b94c"
+   },
+   "src/sim/hits.ts": {
+    "bytes": 6205,
+    "sha256": "545e525f1e3ac7cb9c9d97f0acd7019662b70fd4a63c8216eae127e09b51456d"
+   },
+   "src/sim/move.ts": {
+    "bytes": 8905,
+    "sha256": "7aafa17d444d4cfdeab4860033dcf3fe4e4c05de9efbcf84458471819118fc9e"
+   },
+   "src/sim/pace.ts": {
+    "bytes": 10915,
+    "sha256": "342591a1158f8eb878ad6a8169e3962627fe55c0a735ef4f6d8c15c4ee415d1f"
+   },
+   "src/sim/plan.ts": {
+    "bytes": 5164,
+    "sha256": "d956ecf5fab5c9b06ebc0f7076cdbc624e976359db6de26e92d3a50dc3d69a56"
+   },
+   "src/sim/projectiles.ts": {
+    "bytes": 10161,
+    "sha256": "16412b704936c7f313715a7f2c260b4b1eab2cc65a1020ccd32369e219f813cb"
+   },
+   "src/sim/spawn.ts": {
+    "bytes": 10740,
+    "sha256": "cf133ed294893a3bb7fa45e48bf718b7e568c901fd5a38227b4e7c3017116ae0"
+   },
+   "src/sim/stage.ts": {
+    "bytes": 2414,
+    "sha256": "4f8dc81283e3e98c6c7711ea5974ed0b67c4fa5d008f3a5c5fcb6303ab94341a"
+   },
+   "src/sim/stores.ts": {
+    "bytes": 7276,
+    "sha256": "9ac9825ca6ece59d0c7fb71e4f7eb9917a083d30ef632da835be35897cd0eaee"
+   },
+   "src/sim/weapons.ts": {
+    "bytes": 8299,
+    "sha256": "0b33cde330581431659a74494f970b6d45274e6b33018e18f3d95691b85033e4"
+   },
+   "src/sim/words.ts": {
+    "bytes": 11082,
+    "sha256": "53f7d462a6cfb8fa3fa09bf8b149bb5d5acea0f61eb9bdd82bb9f93facc9d77d"
+   },
+   "src/sim/world.ts": {
+    "bytes": 8065,
+    "sha256": "38b1642f945dd64ac14b3f803977a4f84de115d0ba6027e24ea14260d356b922"
+   },
+   "src/view/beams.ts": {
+    "bytes": 12198,
+    "sha256": "00dcb19159d82b9b589cd44406e6e9f7f56906fb63835f5113f0cf270f73689d"
+   },
+   "src/view/bolts.ts": {
+    "bytes": 5666,
+    "sha256": "cb14d752d63d050bdd0cd656d28faa9bc931e98942800713374429e72d841bb3"
+   },
+   "src/view/chunks.ts": {
+    "bytes": 11748,
+    "sha256": "5cbf44dc013b39d4111d746d6c10c5b3f243ccf816b1a626f13ffbd1b7fae704"
+   },
+   "src/view/combat.ts": {
+    "bytes": 21571,
+    "sha256": "233afe7eadfaa3c444bc0422117fc699286a15f31d0bee5187675c3def9fe0c2"
+   },
+   "src/view/crowd.ts": {
+    "bytes": 16946,
+    "sha256": "7a3ba21fd1d7eb2edfc2aab9bf76192cb2aa7cb8402b1af196b042fc36639c5f"
+   },
+   "src/view/fx.ts": {
+    "bytes": 18134,
+    "sha256": "a3aa7b15a32ed7d2bf029377ce2d35bc20a48bb81b1b26c88250d30113063fd5"
+   },
+   "src/view/gun-rules.ts": {
+    "bytes": 7798,
+    "sha256": "30283c9214243728a8cf09d72803e978dbbbe3dedbddc40931b4a4c5f44c766c"
+   },
+   "src/view/gunfx.ts": {
+    "bytes": 9871,
+    "sha256": "b8d52832a63cbe8c2a9bea9a57c314fd812a63d47df5abe8928b5d3db655f7c5"
+   },
+   "src/view/hazard-fx.ts": {
+    "bytes": 9173,
+    "sha256": "6469439c5d230575579c937b59184dea982c87a4a108f5aa026bb313b21b4a8a"
+   },
+   "src/view/hud.ts": {
+    "bytes": 19593,
+    "sha256": "44dd2e2a30f075e4c6d308748d9cedbc12b226ba8def4e50dd5980b008d6924c"
+   },
+   "src/view/lights.ts": {
+    "bytes": 5275,
+    "sha256": "03c64a7c6b6c48b1df3b0f5af511e121250cfcbf02f3a3f6654d1a54706be29f"
+   },
+   "src/view/models.ts": {
+    "bytes": 3473,
+    "sha256": "b8d0314fcf8e7f9894fd1140bbf008461da897f9f40ab19828a38f491d90e159"
+   },
+   "src/view/probes.ts": {
+    "bytes": 1613,
+    "sha256": "bebcf5ec01d641cfc81a13039a299b6c2f383391b182b4b360837ed564a64ebd"
+   },
+   "src/view/scene.ts": {
+    "bytes": 25373,
+    "sha256": "bfe352d720544dfa90821ddbf7e3e02d0cc39ac0ca070ad3c59a9f47dfada62a"
+   },
+   "src/view/screens-journey.ts": {
+    "bytes": 8771,
+    "sha256": "71b6fe0f36f0534311d844c1dae1a9b4bdfff9c98ddace4bf49da151c04d4b65"
+   },
+   "src/view/screens.ts": {
+    "bytes": 8257,
+    "sha256": "8021d60d72e6bfa4b0a94b186397ce98739b611f769dbd744f4337788db51996"
+   },
+   "src/view/ship-rules.ts": {
+    "bytes": 8144,
+    "sha256": "583342c9456305d4567f714d50f943ac4ce4844c09cb84360a14948a38288e8d"
+   },
+   "src/view/ship.ts": {
+    "bytes": 15310,
+    "sha256": "14577a60a029211bd295eccf253840eb0defd838d57ceb700ca7b097b8bd7613"
+   },
+   "src/view/shots.ts": {
+    "bytes": 26490,
+    "sha256": "9e7444813587af8ce01a1633ff0245719577111e1db6be2a2309e27097ba61d4"
+   },
+   "src/view/strip.ts": {
+    "bytes": 18654,
+    "sha256": "d71b12d46249445b5ff98ebf6b035f8d86cbe77304d0184e8ca57a3d69a100ad"
+   },
+   "src/view/survival.css": {
+    "bytes": 34749,
+    "sha256": "4861d07aa64792d118d6c91c93cf899ced6c62da4939f896c1bed467faa76f2f"
+   },
+   "src/view/theme.css": {
+    "bytes": 4644,
+    "sha256": "642702c3b4e4493f716fe5c9ce335a3d580f5dc9efd71244ffbfab070546ad2b"
+   },
+   "src/view/theme.ts": {
+    "bytes": 2805,
+    "sha256": "a07e7a6cba5dd8b0ed1c4ed7634acd492f2323f2edeafb299ff56adff28bd540"
+   },
+   "src/view/type-rules.ts": {
+    "bytes": 6597,
+    "sha256": "ec5776e05d15e90eca9ef8af5376df9e0064f657a24ddc3651c659081cfd754b"
+   },
+   "src/view/typing-feel.ts": {
+    "bytes": 16968,
+    "sha256": "aa96e71071dd08e0f985501ce5bfff9f8355711252ae473933af3c074f67ddd0"
+   },
+   "src/view/warm.ts": {
+    "bytes": 1006,
+    "sha256": "73dd6d8f8593f99d9d1822c0e22a838e333edfc3ab7d053bd14f4877dd5497d5"
+   },
+   "tests/balance.test.ts": {
+    "bytes": 21516,
+    "sha256": "3e76dcffeb404bba38a906967c0ebf2157f539242808a8f46ec96dae38a08495"
+   },
+   "tests/boundary.test.ts": {
+    "bytes": 3954,
+    "sha256": "7fa8ccea509737311d9f3efa5ffdcc40cb05ce92db64301feb92f69b9020e7a8"
+   },
+   "tests/deploy-pack.test.ts": {
+    "bytes": 3081,
+    "sha256": "fac540e41739d4238516ffaabc89e90fcf89456261920fbddc34d65906800d13"
+   },
+   "tests/dev-handle.test.ts": {
+    "bytes": 566,
+    "sha256": "7ee9907017bdfb5692dd7352f10393f943d1f458049c574d038d9070f2d240fc"
+   },
+   "tests/english-ui.test.ts": {
+    "bytes": 4639,
+    "sha256": "ff8720707a603c0b6219eaf9a3a34571b809e2b81b938d6940d516aa8dba43ae"
+   },
+   "tests/first-frame.test.ts": {
+    "bytes": 7410,
+    "sha256": "9a6a565d58021df8456570ad3125c2c41e32c946cd04d1227c0f70f3f2b83448"
+   },
+   "tests/full-bay.test.ts": {
+    "bytes": 8680,
+    "sha256": "2d86eefd27cf12ac0f2558fbad33b8067849d8a75230ac4cd9a96821e28e0647"
+   },
+   "tests/golden/s0-trace.json": {
+    "bytes": 45911,
+    "sha256": "42e4e5a9534bc78a0c252353ea7ee4670a1bec9e43eb42ef38c886aade530eea"
+   },
+   "tests/guide.test.ts": {
+    "bytes": 7844,
+    "sha256": "1599ccd10a356042b6e9d7cf2a9d27b416cd1c2e8e67f33d72f4e83270df9dd1"
+   },
+   "tests/gun-feel.test.ts": {
+    "bytes": 5412,
+    "sha256": "442db0cce1aa9d868d00db956af324bf66da661e4fe6fd140b0a23ea121708b8"
+   },
+   "tests/guns.test.ts": {
+    "bytes": 25806,
+    "sha256": "b929de5630e7c1769a38221a819d694d61565aa89928b7e9225637f77dbb203b"
+   },
+   "tests/intro-key.test.ts": {
+    "bytes": 7479,
+    "sha256": "bfe142db6732597990c8cadedbbe3fba8f7d3c24fe32bb2faca82558a23d2ff0"
+   },
+   "tests/learning.test.ts": {
+    "bytes": 957,
+    "sha256": "6544ab6457d10cda57e4bafd3f6a337db934b4db9fe739f1cc9d566219ddf957"
+   },
+   "tests/overrides.test.ts": {
+    "bytes": 3952,
+    "sha256": "a0f87416db88504f23d66ac2938a4c7dc9a2a86fad5f4f37266657fbdee29149"
+   },
+   "tests/own-models.test.ts": {
+    "bytes": 5848,
+    "sha256": "8694f92aaa92411db38c60f053739d859d898334c0fd5293e56445d8ed99f8b9"
+   },
+   "tests/portal-build.test.ts": {
+    "bytes": 4181,
+    "sha256": "9eba13b4593774d5006c3f2ccd9514f061e275b6e3b0967894fbbd2042061e15"
+   },
+   "tests/portal.test.ts": {
+    "bytes": 5361,
+    "sha256": "8035c75368fce25fa7997a4f6dbeb281353b906ec2ae62bd44890b791a3ce2a8"
+   },
+   "tests/s0-trace.test.ts": {
+    "bytes": 2038,
+    "sha256": "46af5889dd0dcfcf14cc239751b8518e29080adf61f4a3123abfa056b2ead728"
+   },
+   "tests/ship-motion.test.ts": {
+    "bytes": 8109,
+    "sha256": "d84510c21ebcfecbf92acee8963a0f69601f94baaa81183c053999acceba2a26"
+   },
+   "tests/small-labels.test.ts": {
+    "bytes": 1784,
+    "sha256": "9b7d5500cc634006997aff525ec0aaeaf014c575647b9b7efa3c4c498cdf9384"
+   },
+   "tests/stage-rules.test.ts": {
+    "bytes": 16950,
+    "sha256": "dd5064800bdb12dac63ada4e203c11fec402325ecedc15192fb749521be6ade1"
+   },
+   "tests/survival-boundary.test.ts": {
+    "bytes": 4432,
+    "sha256": "e0ef42c2feff33a9d4002022b82dfcb80b433da1097b9a2103dac28cf4b8da11"
+   },
+   "tests/survival-input.test.ts": {
+    "bytes": 3705,
+    "sha256": "24a81ffbc2b54e25076e1344fa812b9e7eb776bce188ce8af95fdc9d01d53862"
+   },
+   "tests/survival-sim.test.ts": {
+    "bytes": 25609,
+    "sha256": "03b1a8e3148afd5cdc0ebcdea0af36ffb7f2d1eafdf232e14f70125b5b3ccde6"
+   },
+   "tests/survival/arena.ts": {
+    "bytes": 3700,
+    "sha256": "17a3e494375a67e5acb0a19ce90ac296d1feadd4c6de5107097c88f26abaca90"
+   },
+   "tests/survival/blank.ts": {
+    "bytes": 2099,
+    "sha256": "239d7bcc7a37c1c5e767f511dc61dfbd031525d67329df21ff58d9b7bd23c56d"
+   },
+   "tests/survival/bot.ts": {
+    "bytes": 2039,
+    "sha256": "f097846018003a7e354a5a3af95520097da15164f1bad1a4673f1b03cb8a54d6"
+   },
+   "tests/survival/counters.ts": {
+    "bytes": 10271,
+    "sha256": "b60157e6995e627b8e4d9a715d7b3a0db64e0b11b92dc55e9975c147334ee32b"
+   },
+   "tests/survival/scan.ts": {
+    "bytes": 4314,
+    "sha256": "4c697a6e152bd17b911fa23a9f8e002014df4072545a3d1c2b723f4ffe1a6d06"
+   },
+   "tests/survival/tactics.ts": {
+    "bytes": 1675,
+    "sha256": "7b9b1ecaf3f23c86f129fb6b2c1a3af31569a2cfe864904cf1e89225670088f7"
+   },
+   "tests/survival/trace.ts": {
+    "bytes": 3032,
+    "sha256": "70b1dc0f07a42dbe050ff7f53f4f55ee1b7f70cb3d15203c0e2cd413971c315f"
+   },
+   "tests/survival/typist-bot.ts": {
+    "bytes": 13354,
+    "sha256": "80e3fb2f23cd8d8e338ceb96f315b6861bf5d12a9bb6d104fcedeb4fa2223e67"
+   },
+   "tests/theme.test.ts": {
+    "bytes": 6770,
+    "sha256": "e111bb4526241f1f08ff78069cb7c84a3e0eb0aee3608aaf0427476d52a9b108"
+   },
+   "tests/type-feel.test.ts": {
+    "bytes": 5210,
+    "sha256": "285b958264c9db2fbb78de84d76c1d2bb88a0c0a9db86d4ab3ed198d9cfa4020"
+   },
+   "tests/vfx-pair.test.ts": {
+    "bytes": 2599,
+    "sha256": "1cdb07ae63c1817e40ff95ee915aa96c2525f8447a1b7f7dec676520c85cd29d"
+   },
+   "tests/vocab-pin.test.ts": {
+    "bytes": 2991,
+    "sha256": "ee29e1a34fad5a29f06b6315149604999a7f6c9472853b7a709991348bf1d2d7"
+   },
+   "tsconfig.json": {
+    "bytes": 599,
+    "sha256": "4ca3a24de73a2a90e463be826b37acc9986adcde2bdbfb35d6379c69216788c0"
+   },
+   "vite.config.ts": {
+    "bytes": 2417,
+    "sha256": "7912310933eaea477153af06415350d85f54eb1c039d421207b408c7f5f9a994"
+   },
+   "vitest.config.ts": {
+    "bytes": 229,
+    "sha256": "9f3295334184b33ea8e33388e633f527accdba991e4b8734e170790c585e86ae"
+   },
+   "vocab.config.json": {
+    "bytes": 182,
+    "sha256": "b38d60247bf5b5639577d6946e6f963a87b32756723d834c7826f0169ae0ff52"
+   }
+  },
+  "head": "ba6d70e9d6978eb4b430d119c409f3d47f9a364e",
+  "nodeModulesTop": [
+   {
+    "kind": "dir",
+    "mtime": 1793187848.037336,
+    "name": ".bin"
+   },
+   {
+    "kind": "file",
+    "mtime": 1793187848.0001547,
+    "name": ".modules.yaml"
+   },
+   {
+    "kind": "file",
+    "mtime": 1793187847.9920309,
+    "name": ".package-map.json"
+   },
+   {
+    "kind": "dir",
+    "mtime": 1793187848.0279138,
+    "name": ".pnpm"
+   },
+   {
+    "kind": "file",
+    "mtime": 1793244742.3541098,
+    "name": ".pnpm-workspace-state-v1.json"
+   },
+   {
+    "kind": "dir",
+    "mtime": 1793331550.9674842,
+    "name": ".vite"
+   },
+   {
+    "kind": "dir",
+    "mtime": 1793341979.7513306,
+    "name": ".vite-temp"
+   },
+   {
+    "kind": "dir",
+    "mtime": 1793187847.9836185,
+    "name": "@fontsource"
+   },
+   {
+    "kind": "dir",
+    "mtime": 1793187847.9833724,
+    "name": "@types"
+   },
+   {
+    "kind": "link",
+    "mtime": 1793187847.9819534,
+    "name": "three"
+   },
+   {
+    "kind": "link",
+    "mtime": 1793187847.9798124,
+    "name": "tsx"
+   },
+   {
+    "kind": "link",
+    "mtime": 1793187847.9799955,
+    "name": "typescript"
+   },
+   {
+    "kind": "link",
+    "mtime": 1793187847.9801033,
+    "name": "vite"
+   },
+   {
+    "kind": "link",
+    "mtime": 1793187847.9811687,
+    "name": "vitest"
+   }
+  ],
+  "status": [
+   " M src/content/guns.ts",
+   " M src/sim/pace.ts",
+   " M src/sim/weapons.ts",
+   " M src/sim/words.ts",
+   " M src/sim/world.ts",
+   " M tests/survival/typist-bot.ts",
+   "?? docs/changelog/2026-10-30-full-bay-knobs.md",
+   "?? tests/full-bay.test.ts"
+  ],
+  "vitestResults": [
+   {
+    "mtime": 1793341978.0824416,
+    "path": "node_modules/.vite/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/results.json",
+    "sha256": "15afb46cba1d260a4e2a29f713c345dce7025d3115bfd31bb96bb85074e0787f"
+   }
+  ]
+ }
+}

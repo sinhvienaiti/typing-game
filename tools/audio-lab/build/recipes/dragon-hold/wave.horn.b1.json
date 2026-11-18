@@ -1,0 +1,163 @@
+{
+ "$schema": "../../schemas/recipe.schema.json",
+ "schema": "audiolab.recipe/1",
+ "game": "dragon-hold",
+ "id": "wave.horn",
+ "group": "rare-fixed",
+ "family": "nen",
+ "description": "Lô 1 (BATCH1_BRIEF #5): anh chọn hai kèn co Rê–La (0a v1, 3/5), chê trombone. Ba ứng viên cùng hướng kèn co, khác hình câu: 1) một hơi dài 2 s; 2) hai hơi (ngắn 0,34 s, dài 1,5 s); 3) một hơi có trống đôi (nhịp lấy đà 160 ms). Vang rừng không nướng vào file: game gửi bus stingers 0,16 vào vang rừng 0,9 s (mixer.ts), bản dựng bối cảnh có vang đó.",
+ "channels": 1,
+ "layers": [
+  {
+   "id": "phrase",
+   "role": "body",
+   "source": {
+    "sampler": {
+     "notes": [
+      {
+       "start": 0,
+       "note": "D3",
+       "dur": 2.0,
+       "vel": 100,
+       "instrument": "f-horn.sus",
+       "choke": true
+      },
+      {
+       "start": 0.04,
+       "note": "A3",
+       "dur": 1.96,
+       "vel": 92,
+       "instrument": "f-horn.sus",
+       "choke": true
+      },
+      {
+       "start": 0,
+       "key": "hdruml-hit",
+       "dur": 0.6,
+       "vel": 115,
+       "instrument": "frame-drum"
+      }
+     ]
+    }
+   },
+   "fadeOutMs": 300,
+   "vary": {
+    "swapMode": "cycle",
+    "swap": [
+     {
+      "sampler": {
+       "notes": [
+        {
+         "start": 0,
+         "note": "D3",
+         "dur": 0.34,
+         "vel": 96,
+         "instrument": "f-horn.sus",
+         "choke": true
+        },
+        {
+         "start": 0.03,
+         "note": "A3",
+         "dur": 0.31,
+         "vel": 88,
+         "instrument": "f-horn.sus",
+         "choke": true
+        },
+        {
+         "start": 0.52,
+         "note": "D3",
+         "dur": 1.5,
+         "vel": 104,
+         "instrument": "f-horn.sus",
+         "choke": true
+        },
+        {
+         "start": 0.55,
+         "note": "A3",
+         "dur": 1.47,
+         "vel": 96,
+         "instrument": "f-horn.sus",
+         "choke": true
+        },
+        {
+         "start": 0,
+         "key": "hdruml-hit",
+         "dur": 0.6,
+         "vel": 112,
+         "instrument": "frame-drum"
+        }
+       ]
+      }
+     },
+     {
+      "sampler": {
+       "notes": [
+        {
+         "start": 0.16,
+         "note": "D3",
+         "dur": 1.9,
+         "vel": 100,
+         "instrument": "f-horn.sus",
+         "choke": true
+        },
+        {
+         "start": 0.2,
+         "note": "A3",
+         "dur": 1.86,
+         "vel": 92,
+         "instrument": "f-horn.sus",
+         "choke": true
+        },
+        {
+         "start": 0,
+         "key": "hdruml-hit",
+         "dur": 0.4,
+         "vel": 104,
+         "instrument": "frame-drum"
+        },
+        {
+         "start": 0.16,
+         "key": "hdruml-hit",
+         "dur": 0.6,
+         "vel": 118,
+         "instrument": "frame-drum"
+        }
+       ]
+      }
+     }
+    ]
+   }
+  }
+ ],
+ "chain": {
+  "dcHpfHz": 35,
+  "headTrim": {
+   "thresholdDb": -50,
+   "preRollMs": 0.5
+  },
+  "maxLengthMs": 2600,
+  "tail": {
+   "floorDb": -60,
+   "fadeMs": 300
+  },
+  "normalise": {
+   "mode": "lufs-m-max",
+   "target": -20
+  },
+  "limiter": {
+   "ceilingDbtp": -1.0,
+   "releaseMs": 80,
+   "maxGrDb": 6
+  }
+ },
+ "variants": {
+  "count": 3,
+  "seed": 2413,
+  "includeBase": true
+ },
+ "export": {
+  "path": "sfx/stinger/wave-horn",
+  "ogg": true,
+  "oggQuality": 0.6
+ }
+}

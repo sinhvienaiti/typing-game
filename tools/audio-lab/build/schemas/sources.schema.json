@@ -1,0 +1,293 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "audiolab.sources/1",
+  "title": "art-src/audio/SOURCES.json, version 1",
+  "description": "One record per released file (AUDIO_PIPELINE.md §10.5). Keys are paths under public/assets/<game>/audio (e.g. sfx/dragon/fire-impact-a-1.ogg); the key `$version` holds the schema id.",
+  "type": "object",
+  "properties": {
+    "$version": {
+      "const": "audiolab.sources/1"
+    }
+  },
+  "patternProperties": {
+    "^[^$].*": {
+      "$ref": "#/$defs/record"
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "date": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+    },
+    "layer": {
+      "type": "object",
+      "required": [
+        "id",
+        "licence"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "role": {
+          "type": "string"
+        },
+        "kind": {
+          "enum": [
+            "library",
+            "file",
+            "synth",
+            "gen",
+            "sampler"
+          ]
+        },
+        "tool": {
+          "type": "string"
+        },
+        "generator": {
+          "type": "string"
+        },
+        "params": {
+          "type": "object"
+        },
+        "source": {
+          "type": "string",
+          "description": "Library path or file name."
+        },
+        "sourceSha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "ledgerKey": {
+          "type": "string",
+          "description": "Row key in licences.jsonl."
+        },
+        "licence": {
+          "type": "string"
+        },
+        "licenceAccepted": {
+          "type": "string"
+        },
+        "model": {
+          "type": "string",
+          "description": "<repo>@<revision>"
+        },
+        "prompt": {
+          "type": "string"
+        },
+        "cfg": {
+          "type": "number"
+        },
+        "seed": {
+          "type": "integer"
+        },
+        "window": {
+          "type": "array",
+          "items": {
+            "type": "number"
+          }
+        },
+        "initAudio": {
+          "type": "string"
+        },
+        "initNoise": {
+          "type": "number"
+        },
+        "aiSteps": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "AI steps this layer's audio went through (generate, init-audio, lora, critic:audiobox...)."
+        },
+        "settings": {
+          "type": "object",
+          "description": "offset, gain, pitch, trim, fades, filters, reverse as rendered."
+        },
+        "sources": {
+          "type": "array",
+          "description": "sampler layers: every library sample the phrase used (one licences.jsonl row each).",
+          "items": {
+            "type": "object",
+            "required": [
+              "source",
+              "sourceSha256",
+              "ledgerKey"
+            ],
+            "properties": {
+              "source": {
+                "type": "string"
+              },
+              "sourceSha256": {
+                "$ref": "#/$defs/sha256"
+              },
+              "ledgerKey": {
+                "type": "string"
+              },
+              "licence": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "instruments": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "notes": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        },
+        "render": {
+          "type": "string"
+        },
+        "skipped": {
+          "type": "array"
+        },
+        "rawQa": {
+          "type": "object",
+          "description": "Raw L1 clip test of this layer's source file(s) as stored, before resampling, gain or mixing (§4.3.1). verdict BLOCK without exception never renders.",
+          "required": [
+            "check",
+            "verdict",
+            "files"
+          ],
+          "properties": {
+            "check": {
+              "type": "string"
+            },
+            "verdict": {
+              "enum": [
+                "PASS",
+                "BLOCK"
+              ]
+            },
+            "files": {
+              "type": "array",
+              "items": {
+                "type": "object"
+              }
+            },
+            "exception": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "record": {
+      "type": "object",
+      "required": [
+        "id",
+        "variant",
+        "sha256",
+        "date",
+        "layers",
+        "chain",
+        "tools"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "game": {
+          "type": "string"
+        },
+        "variant": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "renderVariant": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "date": {
+          "$ref": "#/$defs/date"
+        },
+        "recipe": {
+          "type": "string"
+        },
+        "recipeHash": {
+          "$ref": "#/$defs/sha256"
+        },
+        "seed": {
+          "type": "integer"
+        },
+        "run": {
+          "type": "string"
+        },
+        "master": {
+          "type": "string"
+        },
+        "masterSha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "durationMs": {
+          "type": "number"
+        },
+        "sampleRate": {
+          "type": "integer"
+        },
+        "channels": {
+          "type": "integer"
+        },
+        "layers": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/layer"
+          }
+        },
+        "chain": {
+          "type": "string"
+        },
+        "chainParams": {
+          "type": "object"
+        },
+        "tools": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "models": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Every model (generator or critic) that touched this file, <repo>@<revision>."
+        },
+        "aiSteps": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "AI steps applied to the whole file (e.g. critic:audiobox); they count for every layer."
+        },
+        "aiInputAllowed": {
+          "type": "boolean"
+        },
+        "rawQa": {
+          "type": "string"
+        },
+        "review": {
+          "type": [
+            "object",
+            "null"
+          ]
+        }
+      }
+    }
+  }
+}

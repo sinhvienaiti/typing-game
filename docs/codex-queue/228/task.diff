@@ -1,0 +1,245 @@
+--- a/portal/src/game-card.ts
++++ b/portal/src/game-card.ts
+@@ -29,0 +30,12 @@
++      let decoded = path;
++      for (;;) {
++        // Reject encoded separators at every encoding depth.
++        if (/%(?:2f|5c)/i.test(decoded)) return null;
++        const next = decodeURIComponent(decoded);
++        if (next === decoded) break;
++        decoded = next;
++      }
++      if (
++        !decoded.startsWith(prefix) ||
++        ["..", "\\", "//", "?", "#"].some((part) => decoded.includes(part))
++      ) return null;
+@@ -32,2 +44,5 @@
+-      // Check again after URL normalization, including encoded dot segments.
+-      if (image.origin !== app.origin || !image.pathname.startsWith(prefix)) return null;
++      const normalized = new URL(decoded, app);
++      if (
++        image.origin !== app.origin || !image.pathname.startsWith(prefix) ||
++        normalized.origin !== app.origin || !normalized.pathname.startsWith(prefix)
++      ) return null;
+--- a/portal/src/learning/bridge.ts
++++ b/portal/src/learning/bridge.ts
+@@ -13 +13 @@
+-  lookupLearningRecords,
++  lookupParsedLearningRecords,
+@@ -170,9 +170,5 @@
+-    } catch (error) {
+-      this.#post(
+-        target,
+-        targetOrigin,
+-        makeLearningError(
+-          requestId,
+-          "query-failed",
+-          errorText(error),
+-        ),
++    } catch {
++      this.#post(
++        target,
++        targetOrigin,
++        makeLearningError(requestId, "query-failed"),
+@@ -192 +188 @@
+-      const result = lookupLearningRecords(profile, lookup);
++      const result = lookupParsedLearningRecords(profile, lookup);
+@@ -198,5 +194,5 @@
+-    } catch (error) {
+-      this.#post(
+-        target,
+-        targetOrigin,
+-        makeLearningError(requestId, "query-failed", errorText(error)),
++    } catch {
++      this.#post(
++        target,
++        targetOrigin,
++        makeLearningError(requestId, "query-failed"),
+--- a/portal/tests/game-card.test.mjs
++++ b/portal/tests/game-card.test.mjs
+@@ -198,0 +199,37 @@
++
++for (const suffix of [
++  "%2e%2e/a.png",
++  "%2E%2E/a.png",
++  "%2F/a.png",
++  "%2e%2e%2F%2e%2e%2Fspace-typing/portal/icon.png",
++  "%2E%2E%2f%2E%2E%2fspace-typing/portal/icon.png",
++  "%2e%2e%5C%2e%2e%5Cspace-typing/portal/icon.png",
++  "%2e%2e%2F%2e%2e%5cspace-typing/portal/icon.png",
++  "%252e%252e%252F%252e%252e%252Fspace-typing/portal/icon.png",
++  "%252e%252e%255C%252e%252e%255Cspace-typing/portal/icon.png",
++  "%252e%2e%252f%2e%252e%5Cspace-typing/portal/icon.png",
++  "%25252e%25252e%25252fspace-typing/portal/icon.png",
++  "a%2Fb.png", "a%5Cb.png", "a%252Fb.png", "a%255Cb.png",
++  "a.png%253Fsize=192", "a.png%2523icon", "%zz.png",
++]) {
++  test(`F5 rejects fully decoded unsafe art ${suffix}`, async () => {
++    const { resolveGameArt } = await helpers();
++    const path = "/assets/dragon-hold/portal/" + suffix;
++    for (const appUrl of [sample.appUrl, sample.appUrl + "/play/session/", "HTTPS://DRAGON.TYPING-GAME.LOCAL"]) {
++      assert.deepEqual(resolveGameArt({ ...sample, appUrl, art: { icon: path, cover: sample.art.cover } }), {
++        icon: null, cover: sample.appUrl + sample.art.cover,
++      });
++      assert.deepEqual(resolveGameArt({ ...sample, appUrl, art: { icon: sample.art.icon, cover: path } }), {
++        icon: sample.appUrl + sample.art.icon, cover: null,
++      });
++    }
++  });
++}
++
++test("F5 preserves safe encoded filenames within the game prefix", async () => {
++  const { resolveGameArt } = await helpers();
++  for (const suffix of ["a%20b.png", "%69con.png", "a%2520b.png"]) {
++    const path = "/assets/dragon-hold/portal/" + suffix;
++    assert.equal(resolveGameArt({ ...sample, art: { icon: path } }).icon, sample.appUrl + path);
++  }
++});
+--- a/portal/tests/learning-lookup.test.mjs
++++ b/portal/tests/learning-lookup.test.mjs
+@@ -3,0 +4 @@
++import { parseLearningProfileBackup } from "../../shared/learning/profile-backup.mjs";
+@@ -190,0 +192,56 @@
++
++for (const [entityType, collection] of [["vocabulary", "vocabulary"], ["grammar", "grammar"], ["sentence", "sentences"]]) {
++  for (const type of ["lookup", "query"]) {
++    test(`F2 ${type} sends only contracted sample fields from a ${entityType} backup`, async () => {
++      const s = setup("dragon-hold", [attempt({ entityType })]);
++      const expected = structuredClone(s.store.profile[collection].lantern.recentSamples);
++      Object.assign(s.store.profile[collection].lantern.recentSamples[0], {
++        userAnswer: "PRIVATE_USER_ANSWER", expectedAnswer: "PRIVATE_EXPECTED_ANSWER",
++        extra: { answer: "PRIVATE_EXTRA" },
++      });
++      s.store.profile = parseLearningProfileBackup(JSON.stringify(s.store.profile));
++      const before = structuredClone(s.store.profile);
++      s.send({ ...request({ entityType, entityIds: ["lantern"] }), type: PREFIX + type });
++      await settle();
++      assert.deepEqual(expectResult(s).items[0].recentSamples, expected);
++      assert.doesNotMatch(JSON.stringify(s.posted), /PRIVATE_/);
++      assert.deepEqual(s.store.profile, before);
++    });
++  }
++}
++
++for (const type of ["lookup", "query"]) {
++  for (const failure of ["load", "profile version"]) {
++    test(`F3 ${type} returns only query-failed for a private ${failure} error`, async () => {
++      const s = setup();
++      if (failure === "load") {
++        s.store.load = async () => { throw new Error("PROFILE_SECRET: unrequested-word / private answer"); };
++      } else {
++        s.store.profile.version = "PRIVATE_PROFILE_VALUE";
++      }
++      s.send({ ...request(), type: PREFIX + type });
++      await settle();
++      expectError(s, "query-failed");
++      assert.deepEqual(s.posted[0].message, {
++        type: PREFIX + "error", requestId: "lookup-1", error: { code: "query-failed" },
++      });
++      assert.doesNotMatch(JSON.stringify(s.posted), /PROFILE_SECRET|PRIVATE_PROFILE_VALUE|private answer|unrequested-word/);
++    });
++  }
++}
++
++for (const [label, id] of [
++  ["100 ligatures", "ﬃ".repeat(100)],
++  ["ligatures and a combining accent", "ﬃ".repeat(99) + "e\u0301"],
++  ["a combining accent", "Cafe\u0301"],
++]) {
++  test(`F4 lookup accepts ${label} after one normalization`, async () => {
++    const s = setup("dragon-hold", [attempt({ entityId: id })]);
++    const normalized = normalizeVocabularyKey(id);
++    assert.ok(s.store.profile.vocabulary[normalized]);
++    s.send(request({ entityType: "vocabulary", entityIds: [id] }));
++    await settle();
++    assert.deepEqual(expectResult(s).items.map((item) => item.entityId), [normalized]);
++    assert.equal(s.store.loads, 1);
++  });
++}
+--- a/shared/learning/lookup.test.mjs
++++ b/shared/learning/lookup.test.mjs
+@@ -129,0 +130,30 @@
++
++for (const [entityType, collection] of [["vocabulary", "vocabulary"], ["grammar", "grammar"], ["sentence", "sentences"]]) {
++  test(`F2 ${entityType} lookup projects sample fields from an existing stored profile`, () => {
++    const profile = applyLearningEvents(null, [event("lantern", { entityType })]);
++    const expected = structuredClone(profile[collection].lantern.recentSamples);
++    Object.assign(profile[collection].lantern.recentSamples[0], {
++      userAnswer: "PRIVATE_USER_ANSWER", expectedAnswer: "PRIVATE_EXPECTED_ANSWER", extra: "PRIVATE_EXTRA",
++    });
++    const before = structuredClone(profile);
++    assert.deepEqual(query.lookupLearningRecords(profile, lookup(["lantern"], entityType), NOW).items[0].recentSamples, expected);
++    assert.deepEqual(profile, before);
++  });
++}
++
++test("F3 error contract supports code-only replies and preserves explicit public messages", () => {
++  assert.deepEqual(contract.makeLearningError("lookup-1", "query-failed"), {
++    type: contract.LEARNING_ERROR_MESSAGE, requestId: "lookup-1", error: { code: "query-failed" },
++  });
++  assert.equal(contract.makeLearningError("lookup-1", "invalid-request", "Invalid lookup").error.message, "Invalid lookup");
++});
++
++test("F4 parsed lookup accepts an NFKC-expanded id while raw lookup retains validation", () => {
++  const id = "ﬃ".repeat(99) + "e\u0301";
++  const profile = applyLearningEvents(null, [event(id)]);
++  const raw = lookup([id]);
++  const parsed = query.parseLearningLookup(raw);
++  assert.ok(parsed.entityIds[0].length > 200);
++  assert.deepEqual(query.lookupParsedLearningRecords(profile, parsed, NOW), query.lookupLearningRecords(profile, raw, NOW));
++  assert.throws(() => query.lookupLearningRecords(profile, lookup(["a".repeat(201)]), NOW), /too long/);
++});
+--- a/shared/learning/message-contract.d.mts
++++ b/shared/learning/message-contract.d.mts
+@@ -56 +56 @@
+-  message: string,
++  message?: string,
+@@ -60 +60 @@
+-  error: { code: string; message: string };
++  error: { code: string; message?: string };
+--- a/shared/learning/message-contract.mjs
++++ b/shared/learning/message-contract.mjs
+@@ -92,2 +92,2 @@
+-      message:
+-        typeof message === "string"
++      ...(message === undefined ? {} : {
++        message: typeof message === "string"
+@@ -95,0 +96 @@
++      }),
+--- a/shared/learning/query.d.mts
++++ b/shared/learning/query.d.mts
+@@ -15,0 +16,6 @@
++  now?: string,
++): LearningLookupResult;
++/** Accepts the result of parseLearningLookup. */
++export function lookupParsedLearningRecords(
++  profileInput: unknown,
++  lookup: LearningLookup,
+--- a/shared/learning/query.mjs
++++ b/shared/learning/query.mjs
+@@ -276,0 +277,9 @@
++    ...(record.recentSamples === undefined ? {} : {
++      recentSamples: record.recentSamples.map((sample) => ({
++        occurredAt: sample.occurredAt,
++        gameId: sample.gameId,
++        activityType: sample.activityType,
++        result: sample.result,
++        hintUsed: sample.hintUsed,
++      })),
++    }),
+@@ -289,0 +299,9 @@
++  return lookupParsedLearningRecords(profileInput, parseLearningLookup(lookupInput), now);
++}
++
++// Accept only the result of parseLearningLookup; normalization may expand ids.
++export function lookupParsedLearningRecords(
++  profileInput,
++  lookup,
++  now = new Date().toISOString(),
++) {
+@@ -291 +308,0 @@
+-  const lookup = parseLearningLookup(lookupInput);
+@@ -297,0 +315 @@
++      recentSamples: [],
+@@ -299 +316,0 @@
+-      recentSamples: record.recentSamples ?? [],

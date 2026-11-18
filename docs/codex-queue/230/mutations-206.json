@@ -1,0 +1,200 @@
+[
+ {
+  "id": "A1",
+  "file": "src/view/hud.ts",
+  "what": "bay icon (LL-39) not attached",
+  "tests": "all",
+  "mutated": {
+   "exit": 0,
+   "failed": 0,
+   "passed": 224,
+   "total": 225,
+   "failingFiles": [],
+   "seconds": 10.48
+  },
+  "restored": {
+   "exit": 0,
+   "failed": 0,
+   "passed": 224,
+   "total": 225,
+   "failingFiles": [],
+   "seconds": 6.3
+  },
+  "restoredSha256Match": true
+ },
+ {
+  "id": "A2",
+  "file": "src/view/hud.ts",
+  "what": "new-foe card portrait (LL-35) not attached",
+  "tests": "all",
+  "mutated": {
+   "exit": 0,
+   "failed": 0,
+   "passed": 224,
+   "total": 225,
+   "failingFiles": [],
+   "seconds": 6.12
+  },
+  "restored": {
+   "exit": 0,
+   "failed": 0,
+   "passed": 224,
+   "total": 225,
+   "failingFiles": [],
+   "seconds": 5.84
+  },
+  "restoredSha256Match": true
+ },
+ {
+  "id": "A3",
+  "file": "src/view/hud.ts",
+  "what": "error listener never installed",
+  "tests": "all",
+  "mutated": {
+   "exit": 0,
+   "failed": 0,
+   "passed": 224,
+   "total": 225,
+   "failingFiles": [],
+   "seconds": 5.61
+  },
+  "restored": {
+   "exit": 0,
+   "failed": 0,
+   "passed": 224,
+   "total": 225,
+   "failingFiles": [],
+   "seconds": 5.78
+  },
+  "restoredSha256Match": true
+ },
+ {
+  "id": "A4",
+  "file": "src/app/main.ts",
+  "what": "results Next button loses its stage image (LL-53)",
+  "tests": "all",
+  "mutated": {
+   "exit": 0,
+   "failed": 0,
+   "passed": 224,
+   "total": 225,
+   "failingFiles": [],
+   "seconds": 5.81
+  },
+  "restored": {
+   "exit": 0,
+   "failed": 0,
+   "passed": 224,
+   "total": 225,
+   "failingFiles": [],
+   "seconds": 5.8
+  },
+  "restoredSha256Match": true
+ },
+ {
+  "id": "A5",
+  "file": "src/app/main.ts",
+  "what": "trial intro asks for stage-s0 art",
+  "tests": "all",
+  "mutated": {
+   "exit": 0,
+   "failed": 0,
+   "passed": 224,
+   "total": 225,
+   "failingFiles": [],
+   "seconds": 5.72
+  },
+  "restored": {
+   "exit": 0,
+   "failed": 0,
+   "passed": 224,
+   "total": 225,
+   "failingFiles": [],
+   "seconds": 5.86
+  },
+  "restoredSha256Match": true
+ },
+ {
+  "id": "A6",
+  "file": "src/view/ui-art.ts",
+  "what": "1x picks the box width, not box x 1.5",
+  "tests": [
+   "tests/ui-art.test.ts",
+   "tests/english-ui.test.ts",
+   "tests/small-labels.test.ts",
+   "tests/theme.test.ts"
+  ],
+  "mutated": {
+   "exit": 1,
+   "failed": 2,
+   "passed": 30,
+   "total": 33,
+   "failingFiles": [
+    "tests/ui-art.test.ts"
+   ],
+   "seconds": 0.83
+  },
+  "restored": {
+   "exit": 0,
+   "failed": 0,
+   "passed": 32,
+   "total": 33,
+   "failingFiles": [],
+   "seconds": 0.82
+  },
+  "restoredSha256Match": true
+ },
+ {
+  "id": "A7",
+  "file": "src/view/survival.css",
+  "what": "briefing band display rule beats [hidden] (no :not)",
+  "tests": "all",
+  "mutated": {
+   "exit": 0,
+   "failed": 0,
+   "passed": 224,
+   "total": 225,
+   "failingFiles": [],
+   "seconds": 5.75
+  },
+  "restored": {
+   "exit": 0,
+   "failed": 0,
+   "passed": 224,
+   "total": 225,
+   "failingFiles": [],
+   "seconds": 5.69
+  },
+  "restoredSha256Match": true
+ },
+ {
+  "id": "A8",
+  "file": "src/view/ui-art.ts",
+  "what": "failed image stays visible",
+  "tests": [
+   "tests/ui-art.test.ts",
+   "tests/english-ui.test.ts",
+   "tests/small-labels.test.ts",
+   "tests/theme.test.ts"
+  ],
+  "mutated": {
+   "exit": 1,
+   "failed": 1,
+   "passed": 31,
+   "total": 33,
+   "failingFiles": [
+    "tests/ui-art.test.ts"
+   ],
+   "seconds": 0.81
+  },
+  "restored": {
+   "exit": 0,
+   "failed": 0,
+   "passed": 32,
+   "total": 33,
+   "failingFiles": [],
+   "seconds": 0.81
+  },
+  "restoredSha256Match": true
+ }
+]

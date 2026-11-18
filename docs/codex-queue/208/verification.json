@@ -1,0 +1,62 @@
+{
+  "headUnchanged": true,
+  "sha256Match": true,
+  "hashFileCount": 37,
+  "kitFileCount": 34,
+  "goldenFileCount": 2,
+  "unknownPaths": [],
+  "missing170Paths": [],
+  "files170": [
+    "docs/td/BUILD_1B.md",
+    "docs/td/PLAYTEST_1B.md",
+    "package.json",
+    "scripts/td/b9.ts",
+    "src/app/retry.ts",
+    "src/kit/balance/bands.ts",
+    "src/kit/balance/gates.ts",
+    "src/kit/balance/index.ts",
+    "src/kit/balance/pace.ts",
+    "src/kit/balance/typist.ts",
+    "src/kit/kit-manifest.json",
+    "src/kit/tools/cdp-run.mjs",
+    "tests/td-b9.test.ts",
+    "tests/td-flow.test.ts",
+    "README.md",
+    "docs/changelog/2026-10-29-pack-and-kit.md",
+    "src/kit/tools/cdp-port.mjs",
+    "src/kit/tools/deploy/check-pack.mjs",
+    "tests/deploy-pack.test.ts"
+  ],
+  "files208": [
+    "README.md",
+    "package.json",
+    "tests/deploy-pack.test.ts",
+    "src/app/learning.ts",
+    "src/app/portal.ts",
+    "vite.config.ts",
+    "deploy-models.json",
+    "scripts/deploy/prune.mjs",
+    "tests/portal.test.ts",
+    "tests/portal-build.test.ts",
+    "tests/deploy-prune.test.ts",
+    "docs/changelog/2026-10-30-deploy-pack.md"
+  ],
+  "sharedPaths": [
+    "README.md",
+    "package.json",
+    "tests/deploy-pack.test.ts"
+  ],
+  "worktreeChangedPaths": 28,
+  "diffCheckExit": 0,
+  "productionTextFilesScanned": 21,
+  "productionLocalStringCount": 0,
+  "productionLocalMatches": [],
+  "modelsAbsent": true,
+  "viteAbsent": true,
+  "productionRebuildIdentical": true,
+  "fixtureRemainders": [],
+  "parentCommandsReadOnly": {
+    "build:td": "bash scripts/game-dir.sh require typing-defense && pnpm --dir games/typing-defense build",
+    "dev:td:app": "bash scripts/game-dir.sh require typing-defense && cd games/typing-defense && DEV_HOST=127.0.0.1 DEV_ALLOWED_HOSTS=td.typing-game.local DEV_HMR_HOST=td.typing-game.local DEV_HMR_PROTOCOL=wss DEV_HMR_CLIENT_PORT=443 pnpm dev"
+  }
+}

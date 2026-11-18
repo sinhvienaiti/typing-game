@@ -1,0 +1,95 @@
+{
+  "node": "v24.22.0",
+  "commands": [
+    {
+      "command": [
+        "node",
+        "--test",
+        "shared/game-kit/tools/deploy/check-pack.test.mjs"
+      ],
+      "phase": "trước sửa",
+      "exitCode": 0,
+      "tests": 49,
+      "passed": 49,
+      "failed": 0,
+      "stdout": "test-before.txt"
+    },
+    {
+      "command": [
+        "node",
+        "--test",
+        "shared/game-kit/tools/deploy/check-pack.test.mjs"
+      ],
+      "phase": "sau sửa",
+      "exitCode": 0,
+      "tests": 55,
+      "passed": 55,
+      "failed": 0,
+      "stdout": "test-after.txt"
+    },
+    {
+      "command": [
+        "node",
+        "shared/game-kit/tools/deploy/check-pack.mjs",
+        "games/.wt-ts-codex/dist",
+        "--game",
+        "typing-survival",
+        "--json"
+      ],
+      "exitCode": 1,
+      "stdout": "typing-survival.json",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "node",
+        "shared/game-kit/tools/deploy/check-pack.mjs",
+        "games/.wt-ts-codex/dist",
+        "--game",
+        "typing-survival",
+        "--json",
+        "--allow-local-host"
+      ],
+      "exitCode": 1,
+      "stdout": "typing-survival-allow-local-host.json",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "node",
+        "shared/game-kit/tools/deploy/check-pack.mjs",
+        "games/.wt-dh-codex/dist",
+        "--game",
+        "dragon-hold",
+        "--json",
+        "--allow-local-host"
+      ],
+      "exitCode": 0,
+      "stdout": "dragon-hold-allow-local-host.json",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "node",
+        "shared/game-kit/tools/deploy/check-pack.mjs",
+        "games/.wt-dh-codex/dist",
+        "--game",
+        "dragon-hold",
+        "--json"
+      ],
+      "exitCode": 1,
+      "stdout": "dragon-hold-default.json",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "node",
+        "--test",
+        "--test-name-pattern=^missing-vocabulary accepts a 3 level manifest",
+        "docs/codex-queue/111b/mutation/check-pack.test.mjs"
+      ],
+      "exitCode": 1,
+      "stdout": "mutation-manifest.txt"
+    }
+  ]
+}

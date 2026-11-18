@@ -1,0 +1,56 @@
+diff --git a/src/sim/words.ts b/src/sim/words.ts
+index 7316d29..21e7c07 100644
+--- a/src/sim/words.ts
++++ b/src/sim/words.ts
+@@ -257 +257,2 @@ function finish(w: World, slot: number): void {
+-  if (loaded) w.events.push(w.tick, EV.load, slot, index, 0, 0, 0, 0, w.guns.mags[slot]!, flags);
++  const receiver = loaded ? slot : loadMagazine.fullBayWord(w, slot, clean, fast);
++  if (receiver >= 0) w.events.push(w.tick, EV.load, receiver, index, 0, 0, 0, 0, w.guns.mags[receiver]!, flags);
+
+diff --git a/src/sim/pace.ts b/src/sim/pace.ts
+index 44bf52b..1bede2f 100644
+--- a/src/sim/pace.ts
++++ b/src/sim/pace.ts
+@@ -24 +24 @@ import { movePeak, moveLull, waveAt } from "./plan";
+-import { xungRounds } from "./weapons";
++import { canBoost, spillTarget, xungRounds } from "./weapons";
+@@ -156,3 +156,3 @@ const snapshot: { -readonly [K in keyof FlowSnapshot]: FlowSnapshot[K] } & { kil
+- * itself); live words: the bays whose gun can still take a magazine (a full
+- * gun's word does nothing, so with every gun full and no word under way
+- * there is nothing to do: idle); the bays never pile words up (never capped);
++ * itself); live words: bays that can take a magazine, spill one to another
++ * bay, or boost an unboosted tail when the chapter knobs allow it. With no
++ * useful word and no word under way there is nothing to do (idle); the bays never pile words up (never capped);
+@@ -171 +171 @@ export function flowSnapshot(w: World): FlowSnapshot {
+-  for (let b = 0; b < G.mags.length; b += 1) if (G.gun[b]! >= 0 && G.mags[b]! < G.cap[b]!) live += 1;
++  for (let b = 0; b < G.mags.length; b += 1) if (G.gun[b]! >= 0 && (G.mags[b]! < G.cap[b]! || spillTarget(w, b) >= 0 || canBoost(w, b))) live += 1;
+
+diff --git a/src/sim/world.ts b/src/sim/world.ts
+index 7c70dfd..0714dae 100644
+--- a/src/sim/world.ts
++++ b/src/sim/world.ts
+@@ -119 +119 @@ export function createWorld(options: WorldOptions) {
+-    guns: createGuns(header.kit),
++    guns: createGuns(header.kit, stage.chapter),
+
+diff --git a/tests/survival/typist-bot.ts b/tests/survival/typist-bot.ts
+index 728b20a..baab6a9 100644
+--- a/tests/survival/typist-bot.ts
++++ b/tests/survival/typist-bot.ts
+@@ -16,3 +16,3 @@
+- *   the word seen first, the left bay, in reading order). A full gun's word
+- *   loads nothing: a typist reading left first types it anyway. With every
+- *   gun full the bot waits (idle).
++ *   the word seen first, the left bay, in reading order). A full word may
++ *   spill or boost under the chapter knobs; otherwise it loads nothing.
++ *   The bot waits when every bay has no useful word (idle).
+@@ -42,0 +43 @@ import { LEARN_RULES } from "../../src/content/stage-rules";
++import { fullBayValue } from "../../src/sim/weapons";
+@@ -44,0 +46,3 @@ import type { World, WorldOptions } from "../../src/sim/world";
++/** Pure bay value; the sim owns full-bay eligibility and precedence. */
++export const bayValue = fullBayValue;
++
+@@ -163,2 +167 @@ export class TypistBot {
+-      const gun = G.gun[bay]!;
+-      const danger = gun < 0 || mags >= G.cap[bay]! ? -1 : need[gun]! * (G.cap[bay]! - mags);
++      const danger = bayValue(w, bay, need);

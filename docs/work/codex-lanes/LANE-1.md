@@ -1,0 +1,65 @@
+# LANE-1 · Lab: Cột Lôi vòng 2 từng bước nhỏ và sửa phép đo
+
+Chạy bằng `lane-runner.md`. Thứ tự, việc phải xong trước và cổng ghi trong bảng. **Cổng:**
+- **C (Claude):** Claude quay, đo khung hình, cho chấm mù, rồi ghi `✅` kèm điểm khi đạt (§7: điểm tăng, không trục nào tụt, trong ngân sách). Không đạt thì ghi `✖` và lý do.
+- **A (anh):** anh duyệt.
+
+| # | Việc | Phiếu | Mức | Cần xong trước | Cổng | Trạng thái | Đầu ra |
+|---|---|---|---|---|---|---|---|
+| 1 | R2-1 phía người tung (mã) | `lane-R2-1a-thunder-caster.md` | high | — | | done | `340bd97` |
+| 2 | R2-1 kịch bản quay và đo | `lane-R2-1b-thunder-measure.md` | high | 1 | | done | `61d7f0e` (video=0) |
+| 3 | ĐO R2-1 (Claude) | — | — | 2 | C | done | Hiệu năng ĐẠT (Δp95 0,000 ms); chấm mù TRƯỢT (+0,5 trục mục tiêu), `docs/work/consult/r2-step1-verdict.md` |
+| 3a | R2-1 thử lại: chỉ đổi nhịp vòng ấn (đỉnh đúng khung phóng) | `lane-R2-1d-retry-timing.md` | high | 3 | | done | commit (Claude chạy đủ vitest 13:30) |
+| 3b | ĐO lại R2-1 (Claude); trượt lần nữa thì dừng và nghĩ lại (§7) | — | — | 3a | C | done | ĐẠT: tụ lực +4,5/+4,0, phóng +1,0/+1,5, Δp95 0,1 ms (`docs/work/consult/r2-step1b-verdict.md`) |
+| 4 | R2-2 bay và thân cột | `lane-R2-2-thunder.md` | high | 3b | ✅ 13:50 (#3b đạt) | done | `5c4bf30` (Claude chạy đủ vitest 14:30) |
+| 5 | ĐO R2-2 (Claude) | — | — | 4 | C | done | ĐẠT: bay +1,5/+2,5, cột +1,5/+0,5; cả chiêu 5,5 → 6,5 ở góc chơi; p95 9,8 ms (`docs/work/consult/r2-step2-verdict.md`) |
+| 6 | R2-3 chạm và phản ứng quái | `lane-R2-3-thunder.md` | high | 5 | ✅ 14:50 (#5 đạt) | done | commit (Claude chạy đủ vitest 15:00) |
+| 7 | ĐO R2-3 (Claude) | — | — | 6 | C | done | ĐẠT ngưỡng bước (chạm +1,0 nhịp/lực); cả chiêu vẫn 6,5; phản ứng quái chưa thấy rõ; p95 8,7 ms (`docs/work/consult/r2-step3-verdict.md`) |
+| 8 | R2-4 dư âm | `lane-R2-4-thunder.md` | high | 7 | ✅ 15:15 (#7 đạt) | done | commit (Claude chạy đủ vitest 15:30) |
+| 9 | ĐO R2-4 và gửi anh (Claude) | — | — | 8 | C | done | Dư âm +1,5 nhịp/lực; cả chiêu 6,5 (không tăng từ bước 2); p95 8,4 ms; 3 nút thắt trong `docs/work/consult/r2-step4-verdict.md` |
+| 10 | Sửa phép đo cổng boss, vòng Huyết, tia trúng đòn | `lane-L1-measure-fixes.md` | high | — | ✅ 12:20 (quay xong) | done | commit (Claude chạy đủ vitest 13:30) |
+| 11 | Sửa vòng phản hồi Framebuffer (glError 1282) | `lane-L1-gl-feedback.md` | high | — | ✅ 12:20 (quay xong) | done | commit sửa screen-fx (Claude chạy đủ vitest) |
+
+**Ghi chú cho runner:**
+- Việc "(Claude)" thì runner **không làm**, coi như cổng.
+- Việc 10 và 11 không chờ vòng 2; làm khi việc 4, 6, 8 còn bị cổng chặn.
+- Hai việc mã lab không chạy cùng lúc: làn này chỉ có một runner.
+
+**Kết thúc vòng 2 (15:50):** cả chiêu 5,5 → 6,5 sau bước 2, đứng yên qua bước 3 và 4. Dừng theo §7, chờ anh quyết vòng 3 (sửa lần lượt 3 nút thắt).
+
+## Vòng 3 (anh duyệt 07/11 15:55: "Làm vòng 3"): sửa lần lượt 3 nút thắt, đo sau mỗi bước
+
+| # | Việc | Phiếu | Mức | Cần xong trước | Cổng | Trạng thái | Đầu ra |
+|---|---|---|---|---|---|---|---|
+| 12 | R3-1 quái nhận đòn có lực | `lane-R3-1-foe-reaction.md` | high | 9 | ✅ 15:55 (anh duyệt) | done | `games/.wt-ic-lab-all`: phản ứng thân R3-1; 43 test đạt; chờ Claude đo/chấm #13; `docs/codex-queue/laneL1-report.md` |
+| 13 | ĐO R3-1 (Claude): cả chiêu ở góc chơi phải tăng | — | — | 12 | C | done 16:55: TRƯỢT hai lần (bc6077c, e132c92). Bảng 3 giám khảo mù: K = T = P, cả chiêu 6 = 6; nghiêng có chạy (20°) nhưng bị đĩa sao, cột sáng và số sát thương che; quái cao khoảng 20 px. Hiệu năng đạt (Δp95 −0,7 ms). Claude chốt: dừng hướng nghiêng, qua bước 2 | `docs/work/consult/r3-step1b-panel.md`, `r3-step1-verdict.md` |
+| 14 | R3-2 đường dẫn thành dải sét | `lane-R3-2-guide-strip.md` | high | 13 | ✅ 16:55 (Claude: #13 trượt hai lần, luật vòng 3 dừng khi hai bước liền không tăng) | done 16:43 | `games/.wt-ic-lab-all`: dải sét R3-2; 35 test + probe + TypeScript đạt; chờ Claude đo/chấm #15; `docs/codex-queue/laneL1-report.md` |
+| 15 | ĐO R3-2 (Claude) | — | — | 14 | C | done 17:20: ĐẠT. Codex chấm mù bộ D/R/W: pha bay nhịp và lực 3,5 → 5,5, tương tác 4,5 → 5,5, không trục nào tụt; cả chiêu 6,0 → 6,5. Hiệu năng ĐẠT (Δp95 −1,0 ms). Còn yếu: đầu sáng chưa nổi, đuôi chưa thon | `docs/work/consult/r3-step2-verdict.md` |
+| 16 | R3-3 dấu Lôi nguội trên mặt đất | `lane-R3-3-ground-mark.md` | high | 15 | ✅ 17:20 (#15 đạt) | done 17:19 | `games/.wt-ic-lab-all`: dấu Lôi nguội R3-3; 40 test + probe + TypeScript đạt; chờ Claude đo/chấm #17; `docs/codex-queue/laneL1-report.md` |
+| 17 | ĐO R3-3 và gửi anh (Claude) | — | — | 16 | C | done 17:50: TRƯỢT. Codex chấm mù bộ H/N/Q: dư âm tương tác 5,5 → 6,5 nhưng hình khối và dễ đọc −0,5; cả chiêu 6,5 → 6,5. Vết tím phẳng, không nguội dần, khó đọc ở góc chơi. Hiệu năng ĐẠT (Δp95 −1,6 ms). Không thử lại: cần vẽ ảnh vết cháy mới, anh duyệt mẫu trước. Vòng 3 đóng, gửi anh | `docs/work/consult/r3-step3-verdict.md` |
+
+**Đạt** ở vòng 3 = pha được sửa tăng ≥ 1 ở trục mục tiêu **và cả chiêu ở góc chơi tăng**, không trục nào tụt, trong ngân sách. Cả chiêu không tăng qua hai bước liền thì dừng và báo anh.
+
+## Vòng 4 (anh duyệt 07/11 17:55: "Làm vòng 4"): bỏ ngôi sao mực, dời số sát thương, vết cháy mới
+
+> **Tạm dừng từ 07/11 18:10** (anh: "tạm thời dừng lại khi có hạn mức tiếp của codex vậy"). Codex hết hạn mức tuần, mở lại 14/11 09:12. Mọi dòng dưới đây đóng cổng `C: Claude mở lại sau 14/11`. Lịch nạp việc 30 phút (cron `cdefb09f`) đã gỡ; khi mở lại thì tạo lại. Các feed `S1/S2/S4` vẫn chạy nền; feed S1 tự chạy lại 2 lượt chờ vào 14/11, sẽ chỉ ghi "không có việc" vì cổng đã đóng.
+>
+> **Hướng mới của anh (07/11 18:05), thay thứ tự cũ.** Ba vấn đề khiến Cột Lôi không như mong đợi:
+> 1. Cột Lôi chỉ nên là **sét đánh xuống**; video đang dùng có cả **hình trụ bao quanh** nên trông kém chất lượng. Bỏ lớp trụ.
+> 2. Tia sét **quá mỏng và đơn**. Nên là **nhiều tia sét giáng xuống liên tiếp trong 3–5 s, phạm vi rộng hơn**, cộng dồn thành sức mạnh của cột Lôi.
+> 3. Vết tím sau cú giáng **không giống vết sét đánh**: đất phải **nứt và cháy**, không phải vệt tím.
+>
+> Khi làm lại, Claude viết lại phiếu theo ba điểm này trước (khung va chạm và số sát thương xếp sau). Câu hỏi mở cho anh lúc đó: nhiều tia trong 3–5 s là chỉ hình ảnh (sát thương như cũ) hay đổi cả lối chơi (nhiều cú, phạm vi rộng hơn)? Nguồn dự kiến: tia sét phân nhánh không có trụ (Blender dựng rồi xuất flipbook, hoặc Firefly từ ảnh đầu đã duyệt); vết nứt cháy (Codex vẽ từ ảnh tham chiếu, hoặc Blender).
+
+Luật như vòng 3: mỗi bước đo xong mới làm bước kế; **đạt** = pha được sửa tăng ≥ 1 ở trục mục tiêu **và** cả chiêu ở góc chơi tăng, không trục nào tụt. Chấm bằng Codex trên bộ ảnh nhãn mới (`tools/blind-panel/build-panel.sh`). Hai bước liền không làm cả chiêu tăng thì dừng và báo anh. Bước 3a (vẽ mẫu) không phụ thuộc mã nên chạy xen khi Claude đang đo.
+
+| # | Việc | Phiếu | Mức | Cần xong trước | Cổng | Trạng thái | Đầu ra |
+|---|---|---|---|---|---|---|---|
+| 18 | R4-1 khung va chạm hệ Lôi thay ngôi sao mực | `lane-R4-1-thunder-impact-frame.md` | high | 17 | C: Claude mở lại sau 14/11 (viết lại theo hướng mới của anh) | blocked: Codex hết hạn mức tuần 17:54 (lượt lane1-run-26 thoát vì giới hạn), mở lại 14/11 09:12 | |
+| 19 | ĐO R4-1 (Claude) | — | — | 18 | C | todo (Claude) | |
+| 20 | R4-3a vẽ 2 mẫu vết sét cháy | `lane-R4-3a-scorch-samples.md` | high | — | C: Claude mở lại sau 14/11 (viết lại theo hướng mới của anh) | todo | |
+| 21 | Anh duyệt mẫu vết cháy | — | — | 20 | A | todo (anh) | |
+| 22 | R4-2 số sát thương không che quái | `lane-R4-2-numbers-clear.md` | high | 19 | C: Claude mở lại sau 14/11 (viết lại theo hướng mới của anh) | todo | |
+| 23 | ĐO R4-2 (Claude) | — | — | 22 | C | todo (Claude) | |
+| 24 | R4-3b lắp vết cháy đã duyệt | `lane-R4-3b-scorch-wire.md` | high | 21, 23 | C: Claude mở lại sau 14/11 (viết lại theo hướng mới của anh) | todo | |
+| 25 | ĐO R4-3b và gửi anh (Claude) | — | — | 24 | C | todo (Claude) | |

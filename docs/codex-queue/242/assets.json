@@ -1,0 +1,147 @@
+[
+  {
+    "name": "next-stage",
+    "base": "next-stage.r2",
+    "label": "Next stage",
+    "s720": 28,
+    "s1080": 40,
+    "compare": [
+      "menu-play",
+      "streak",
+      "retry"
+    ],
+    "prompt": "games/typing-survival/art-src/ui/icons/next-stage.r2-try1.prompt.txt",
+    "tries": []
+  },
+  {
+    "name": "bay-full",
+    "base": "bay-full.r2",
+    "label": "",
+    "s720": 20,
+    "s1080": 28,
+    "compare": [
+      "stat-evenness.r2",
+      "../parts/mag-full"
+    ],
+    "prompt": "games/typing-survival/art-src/ui/icons/bay-full.r2-try1.prompt.txt",
+    "tries": []
+  },
+  {
+    "name": "kills",
+    "base": "kills.r2",
+    "label": "Kills",
+    "s720": 28,
+    "s1080": 40,
+    "compare": [
+      "stat-accuracy.r2",
+      "objective"
+    ],
+    "prompt": "games/typing-survival/art-src/ui/icons/kills.r2-try1.prompt.txt",
+    "tries": []
+  },
+  {
+    "name": "stat-accuracy",
+    "base": "stat-accuracy.r2",
+    "label": "Accuracy",
+    "s720": 28,
+    "s1080": 40,
+    "compare": [
+      "kills.r2",
+      "objective",
+      "clock.r2"
+    ],
+    "prompt": "games/typing-survival/art-src/ui/icons/stat-accuracy.r2-try1.prompt.txt",
+    "tries": []
+  },
+  {
+    "name": "stat-evenness",
+    "base": "stat-evenness.r2",
+    "label": "Steadiness",
+    "s720": 28,
+    "s1080": 40,
+    "compare": [
+      "bay-full.r2",
+      "stat-wpm.v2"
+    ],
+    "prompt": "games/typing-survival/art-src/ui/icons/stat-evenness.r2-try1.prompt.txt",
+    "tries": []
+  },
+  {
+    "name": "stat-new-word",
+    "base": "stat-new-word.r2",
+    "label": "New-word read",
+    "s720": 28,
+    "s1080": 40,
+    "compare": [
+      "stat-words",
+      "learning-rule"
+    ],
+    "prompt": "games/typing-survival/art-src/ui/icons/stat-new-word.r2-try1.prompt.txt",
+    "tries": []
+  },
+  {
+    "name": "stat-words",
+    "base": "stat-words",
+    "label": "Words",
+    "s720": 28,
+    "s1080": 40,
+    "compare": [
+      "stat-new-word.r2",
+      "keyboard.r2"
+    ],
+    "prompt": "games/typing-survival/art-src/ui/icons/stat-words.try1.prompt.txt",
+    "tries": []
+  },
+  {
+    "name": "keyboard",
+    "base": "keyboard.r2",
+    "label": "Keyboard input",
+    "s720": 28,
+    "s1080": 40,
+    "compare": [
+      "../parts/keycap",
+      "stat-words"
+    ],
+    "prompt": "games/typing-survival/art-src/ui/icons/keyboard.r2-try1.prompt.txt",
+    "tries": []
+  },
+  {
+    "name": "clock",
+    "base": "clock.r2",
+    "label": "Time",
+    "s720": 22,
+    "s1080": 32,
+    "compare": [
+      "retry",
+      "stat-time"
+    ],
+    "prompt": "games/typing-survival/art-src/ui/icons/clock.r2-try1.prompt.txt",
+    "tries": []
+  },
+  {
+    "name": "hazard",
+    "base": "hazard.r2",
+    "label": "Hazard",
+    "s720": 28,
+    "s1080": 40,
+    "compare": [
+      "warning",
+      "surge"
+    ],
+    "prompt": "games/typing-survival/art-src/ui/icons/hazard.r2-try1.prompt.txt",
+    "tries": []
+  },
+  {
+    "name": "rift",
+    "base": "rift.r2",
+    "label": "Rift",
+    "s720": 24,
+    "s1080": 32,
+    "compare": [
+      "surge",
+      "warning"
+    ],
+    "prompt": "games/typing-survival/art-src/ui/icons/rift.r2-try1.prompt.txt",
+    "tries": []
+  }
+]

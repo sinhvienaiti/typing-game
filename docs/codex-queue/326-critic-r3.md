@@ -1,0 +1,12 @@
+# Phiếu 326 · Critic vòng 3 · FAIL
+
+Đã đọc mã thật ở `1b9461e`, mã Vite 7.3.7 trong `node_modules` và đầu ra của phiếu 325 (đã có trong `hybrid/`). Cả 15 mục của vòng 1 và vòng 2 đều đã vào phiếu. Lab mặc định giữ nguyên. Cảnh A/B sẵn sàng được cả khi chạy thời gian thật lẫn khi `fixed=1`. `tsc` gốc sạch. Trong test cũ, chỉ hash và số `7272` đổi; `OLD_KEYS` và `material.version` vẫn qua. `meta.pivot` của rồng trùng với pivot tính từ `video.pivot` qua `sourceRect`, lệch dưới 1e-4.
+
+## Phải sửa
+1. **Vite chặn `basis_transcoder.js` (403), nên KTX2 không bao giờ nạp được.** W có `pnpm-workspace.yaml`, nên `server.fs.allow` chỉ gồm W. `node_modules` là liên kết sang `immortality-cultivation/node_modules/.pnpm/…`; Vite dùng đường thật, nên URL thành `/@fs/…`, nằm ngoài W. Chỉ file đã được import mới vào `safeModulePaths`: file `.wasm?url` qua được, còn `basis_transcoder.js` thì bị `loadAndTransform` rồi `serveRawFsMiddleware` từ chối. Kết quả là bên phải luôn dùng PNG. Sửa mục 6, ý **Import**: "Thêm `basisJsUrl` (`three/examples/jsm/libs/basis/basis_transcoder.js?url`) để file `.js` cũng vào `safeModulePaths`. Thư mục transcoder vẫn lấy từ `basisWasmUrl`; nếu thư mục của `basisJsUrl` khác thì `console.warn`." Đã chạy `es-module-lexer` trên file này: 0 import, không lỗi, nên Vite trả file nguyên văn.
+2. **Bước `curl -sI` trước kịch bản luôn ra 403, kể cả khi mục 1 đã sửa.** `safeModulePaths` chỉ được điền sau khi trình duyệt nạp `skills-main.ts`. Ở mục 7, thay ý curl bằng: "Sau khi lần mở đầu tiên đã sẵn sàng, kịch bản đọc `performance.getEntriesByType("resource")`. Lấy các mục có tên chứa `basis_transcoder.` và không chứa `?import`, ghi `name` và `responseStatus` của chúng vào `hybrid-ab.json`. Phải có đúng 2 mục, cả hai là 200; nếu khác thì ghi vào báo cáo."
+3. **Cảnh clip chưa có bước prewarm**, trong khi bước `hitch` so `prewarm=0` với `prewarm=1` cho cả rồng. Thêm vào ý "Cảnh clip": "Nếu `prewarm`: `renderer.initTexture` texture màu và texture vector lai ngay ở lần `attach` đó, và cộng thời gian vào `uploadMs`."
+4. **Hai câu về pivot trái nhau.** Mục 5 ghi "pivot `meta.pivot`", còn ghi chú vòng 2 bảo tính từ `video.pivot`. Sửa mục 5 thành "pivot `(video.pivot·frame − crop.xy) / crop.wh` (với đầu ra 325 thì bằng `meta.pivot`)" và xoá ghi chú đó.
+
+## Ghi chú (không chặn)
+- Nên thêm `&bar=0` vào URL của kịch bản, để thanh chiêu của phiếu 322 không lọt vào video A/B.

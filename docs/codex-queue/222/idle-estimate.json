@@ -1,0 +1,74 @@
+{
+  "assumption": "Samples contain no foe positions. Visible words stand in for foes entering the Word Zone. Only wave gaps shrink; the final lookahead seconds run at ×1. The 0.3 s activation latch and manual ×2 are not modelled.",
+  "before": {
+    "waveSeconds": 521,
+    "idleSeconds": 273,
+    "noWordPct": 52.4,
+    "gaps": 154
+  },
+  "after": {
+    "lookaheadSeconds": 1.5,
+    "speed": 1.75,
+    "waveSeconds": 475,
+    "idleSeconds": 226.9,
+    "noWordPct": 47.8
+  },
+  "sensitivity": [
+    {
+      "lookaheadSeconds": 0,
+      "speed": 1.75,
+      "waveSeconds": 404.1,
+      "idleSeconds": 156,
+      "noWordPct": 38.6
+    },
+    {
+      "lookaheadSeconds": 0,
+      "speed": 2,
+      "waveSeconds": 384.6,
+      "idleSeconds": 136.5,
+      "noWordPct": 35.5
+    },
+    {
+      "lookaheadSeconds": 0.5,
+      "speed": 1.75,
+      "waveSeconds": 433.4,
+      "idleSeconds": 185.2,
+      "noWordPct": 42.7
+    },
+    {
+      "lookaheadSeconds": 0.5,
+      "speed": 2,
+      "waveSeconds": 418.7,
+      "idleSeconds": 170.6,
+      "noWordPct": 40.7
+    },
+    {
+      "lookaheadSeconds": 1,
+      "speed": 1.75,
+      "waveSeconds": 456.5,
+      "idleSeconds": 208.4,
+      "noWordPct": 45.6
+    },
+    {
+      "lookaheadSeconds": 1,
+      "speed": 2,
+      "waveSeconds": 445.7,
+      "idleSeconds": 197.6,
+      "noWordPct": 44.3
+    },
+    {
+      "lookaheadSeconds": 1.5,
+      "speed": 1.75,
+      "waveSeconds": 475,
+      "idleSeconds": 226.9,
+      "noWordPct": 47.8
+    },
+    {
+      "lookaheadSeconds": 1.5,
+      "speed": 2,
+      "waveSeconds": 467.4,
+      "idleSeconds": 219.2,
+      "noWordPct": 46.9
+    }
+  ]
+}

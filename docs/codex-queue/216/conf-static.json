@@ -1,0 +1,184 @@
+[
+  {
+    "file": "infra/nginx/typing-game.local.play.conf",
+    "beforeBalance": {
+      "depth": 0,
+      "minimum": 0,
+      "balanced": true
+    },
+    "afterBalance": {
+      "depth": 0,
+      "minimum": 0,
+      "balanced": true
+    },
+    "beforeServers": 11,
+    "afterServers": 11,
+    "locations": [
+      {
+        "host": "typing-game.local monkeytype.typing-game.local shooter.typing-game.local recall.typing-game.local karaoke.typing-game.local space.typing-game.local dragon.typing-game.local td.typing-game.local survival.typing-game.local tutien.typing-game.local",
+        "before": 0,
+        "after": 0,
+        "delta": 0
+      },
+      {
+        "host": "typing-game.local",
+        "before": 6,
+        "after": 6,
+        "delta": 0
+      },
+      {
+        "host": "monkeytype.typing-game.local",
+        "before": 1,
+        "after": 1,
+        "delta": 0
+      },
+      {
+        "host": "shooter.typing-game.local",
+        "before": 2,
+        "after": 2,
+        "delta": 0
+      },
+      {
+        "host": "recall.typing-game.local",
+        "before": 2,
+        "after": 2,
+        "delta": 0
+      },
+      {
+        "host": "karaoke.typing-game.local",
+        "before": 2,
+        "after": 2,
+        "delta": 0
+      },
+      {
+        "host": "space.typing-game.local",
+        "before": 9,
+        "after": 9,
+        "delta": 0
+      },
+      {
+        "host": "dragon.typing-game.local",
+        "before": 5,
+        "after": 3,
+        "delta": -2,
+        "forbiddenDataLocations": [],
+        "sharedTargets": []
+      },
+      {
+        "host": "td.typing-game.local",
+        "before": 6,
+        "after": 3,
+        "delta": -3,
+        "forbiddenDataLocations": [],
+        "sharedTargets": []
+      },
+      {
+        "host": "survival.typing-game.local",
+        "before": 7,
+        "after": 4,
+        "delta": -3,
+        "forbiddenDataLocations": [],
+        "sharedTargets": [],
+        "modelsLocations": 1,
+        "comment205": true
+      },
+      {
+        "host": "tutien.typing-game.local",
+        "before": 7,
+        "after": 7,
+        "delta": 0
+      }
+    ]
+  },
+  {
+    "file": "infra/nginx/typing-game.local.dev.conf",
+    "beforeBalance": {
+      "depth": 0,
+      "minimum": 0,
+      "balanced": true
+    },
+    "afterBalance": {
+      "depth": 0,
+      "minimum": 0,
+      "balanced": true
+    },
+    "beforeServers": 11,
+    "afterServers": 11,
+    "locations": [
+      {
+        "host": "typing-game.local monkeytype.typing-game.local shooter.typing-game.local recall.typing-game.local karaoke.typing-game.local space.typing-game.local dragon.typing-game.local td.typing-game.local survival.typing-game.local tutien.typing-game.local",
+        "before": 0,
+        "after": 0,
+        "delta": 0
+      },
+      {
+        "host": "typing-game.local",
+        "before": 4,
+        "after": 4,
+        "delta": 0
+      },
+      {
+        "host": "monkeytype.typing-game.local",
+        "before": 1,
+        "after": 1,
+        "delta": 0
+      },
+      {
+        "host": "shooter.typing-game.local",
+        "before": 1,
+        "after": 1,
+        "delta": 0
+      },
+      {
+        "host": "recall.typing-game.local",
+        "before": 1,
+        "after": 1,
+        "delta": 0
+      },
+      {
+        "host": "karaoke.typing-game.local",
+        "before": 1,
+        "after": 1,
+        "delta": 0
+      },
+      {
+        "host": "space.typing-game.local",
+        "before": 7,
+        "after": 7,
+        "delta": 0
+      },
+      {
+        "host": "dragon.typing-game.local",
+        "before": 3,
+        "after": 1,
+        "delta": -2,
+        "forbiddenDataLocations": [],
+        "sharedTargets": []
+      },
+      {
+        "host": "td.typing-game.local",
+        "before": 4,
+        "after": 1,
+        "delta": -3,
+        "forbiddenDataLocations": [],
+        "sharedTargets": []
+      },
+      {
+        "host": "survival.typing-game.local",
+        "before": 5,
+        "after": 2,
+        "delta": -3,
+        "forbiddenDataLocations": [],
+        "sharedTargets": [],
+        "modelsLocations": 1,
+        "comment205": true
+      },
+      {
+        "host": "tutien.typing-game.local",
+        "before": 5,
+        "after": 5,
+        "delta": 0
+      }
+    ]
+  }
+]

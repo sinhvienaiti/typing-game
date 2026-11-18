@@ -1,0 +1,104 @@
+{
+  "$schema": "../../schemas/recipe.schema.json",
+  "schema": "audiolab.recipe/1",
+  "game": "typing-defense",
+  "id": "ui-pick",
+  "group": "rare-fixed",
+  "family": "phim-ui",
+  "description": "Lô 0: gõ phách gỗ rồi một tiếng chuông đồng nhỏ, 0,6 s. Mẫu VCSL Woodblock có một tiếng tách nhỏ khoảng 5 ms trước nhát chính (bộ phê bình đo thời gian lên 10–13 ms, quá ngưỡng 3 ms của UI), nên dùng bản wood-click2 (nhát chính lên trong khoảng 2 ms), cắt bỏ 6 ms đầu và giữ phách to hơn chuông. Thử thêm lớp tách tổng hợp thì đạt ngưỡng lên nhưng cả id tụt về −33 LUFS-M, nên bỏ. Phách tre/gỗ: VCSL Woodblock qua bộ phát mẫu. Chuông: VCSL Hand Chimes (không dùng Hand Bells Nepalese, mục 8.2), ba nốt trong thang Hò–Xự–Xang–Xê–Cống làm ba ứng viên (G5, C6, A5). Nguồn chuông chờ chủ dự án duyệt (mục 16 #5).",
+  "channels": 1,
+  "layers": [
+    {
+      "id": "clapper",
+      "role": "attack",
+      "source": {
+        "sampler": {
+          "instrument": "woodblock",
+          "notes": "0:wood-click2:0.1:60"
+        }
+      },
+      "filters": [
+        {
+          "type": "highpass",
+          "hz": 600
+        }
+      ],
+      "trim": {
+        "startMs": 6,
+        "endMs": 70
+      },
+      "fadeOutMs": 35,
+      "fadeInMs": 0.3,
+      "gainDb": 6
+    },
+    {
+      "id": "bell",
+      "role": "sweetener",
+      "source": {
+        "sampler": {
+          "instrument": "hand-chimes",
+          "notes": "0:G5:0.6:80"
+        }
+      },
+      "offsetMs": 40,
+      "gainDb": -14,
+      "fadeOutMs": 200,
+      "vary": {
+        "swapMode": "cycle",
+        "swap": [
+          {
+            "sampler": {
+              "instrument": "hand-chimes",
+              "notes": "0:C6:0.6:80"
+            }
+          },
+          {
+            "sampler": {
+              "instrument": "hand-chimes",
+              "notes": "0:A5:0.6:80"
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "chain": {
+    "dcHpfHz": 60,
+    "filters": [
+      {
+        "type": "peak",
+        "hz": 2500,
+        "gainDb": -2,
+        "q": 0.8
+      }
+    ],
+    "headTrim": {
+      "thresholdDb": -50,
+      "preRollMs": 0.3
+    },
+    "maxLengthMs": 650,
+    "tail": {
+      "floorDb": -60,
+      "fadeMs": 120
+    },
+    "normalise": {
+      "mode": "lufs-m-max",
+      "target": -20
+    },
+    "limiter": {
+      "ceilingDbtp": -1.0,
+      "releaseMs": 60,
+      "maxGrDb": 6
+    }
+  },
+  "variants": {
+    "count": 3,
+    "seed": 600,
+    "includeBase": true
+  },
+  "export": {
+    "path": "sfx/ui/ui-pick",
+    "ogg": true,
+    "oggQuality": 0.6
+  }
+}

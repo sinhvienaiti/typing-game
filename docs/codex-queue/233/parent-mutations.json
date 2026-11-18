@@ -1,0 +1,168 @@
+[
+  {
+    "id": "f2",
+    "file": "shared/learning/query.mjs",
+    "sha256": "2e2997ad64650022373d53cadfa74fdc808a17a98687a9041c78271576936c59",
+    "mutated": {
+      "name": "f2-mutated",
+      "argv": [
+        "node",
+        "--test",
+        "--test-name-pattern=F2",
+        "portal/tests/learning-lookup.test.mjs",
+        "shared/learning/lookup.test.mjs"
+      ],
+      "cwd": "/Users/toandx/htdocs/typing-game/tmp/codex-233-portal",
+      "portal_url": null,
+      "exit": 1,
+      "seconds": 0.121,
+      "tests": 9,
+      "pass": 0,
+      "fail": 9,
+      "skipped": 0
+    },
+    "restored": {
+      "name": "f2-restored",
+      "argv": [
+        "node",
+        "--test",
+        "--test-name-pattern=F2",
+        "portal/tests/learning-lookup.test.mjs",
+        "shared/learning/lookup.test.mjs"
+      ],
+      "cwd": "/Users/toandx/htdocs/typing-game/tmp/codex-233-portal",
+      "portal_url": null,
+      "exit": 0,
+      "seconds": 0.119,
+      "tests": 9,
+      "pass": 9,
+      "fail": 0,
+      "skipped": 0
+    },
+    "restored_sha256": "2e2997ad64650022373d53cadfa74fdc808a17a98687a9041c78271576936c59"
+  },
+  {
+    "id": "f3",
+    "file": "portal/src/learning/bridge.ts",
+    "sha256": "eaa39b497af0f0d4d4aa6dd7b04048b10f12cf9652d55ed52adb7c9ee7c055ee",
+    "mutated": {
+      "name": "f3-mutated",
+      "argv": [
+        "node",
+        "--test",
+        "--test-name-pattern=F3",
+        "portal/tests/learning-lookup.test.mjs",
+        "shared/learning/lookup.test.mjs"
+      ],
+      "cwd": "/Users/toandx/htdocs/typing-game/tmp/codex-233-portal",
+      "portal_url": null,
+      "exit": 1,
+      "seconds": 0.139,
+      "tests": 5,
+      "pass": 1,
+      "fail": 4,
+      "skipped": 0
+    },
+    "restored": {
+      "name": "f3-restored",
+      "argv": [
+        "node",
+        "--test",
+        "--test-name-pattern=F3",
+        "portal/tests/learning-lookup.test.mjs",
+        "shared/learning/lookup.test.mjs"
+      ],
+      "cwd": "/Users/toandx/htdocs/typing-game/tmp/codex-233-portal",
+      "portal_url": null,
+      "exit": 0,
+      "seconds": 0.173,
+      "tests": 5,
+      "pass": 5,
+      "fail": 0,
+      "skipped": 0
+    },
+    "restored_sha256": "eaa39b497af0f0d4d4aa6dd7b04048b10f12cf9652d55ed52adb7c9ee7c055ee"
+  },
+  {
+    "id": "f4",
+    "file": "portal/src/learning/bridge.ts",
+    "sha256": "eaa39b497af0f0d4d4aa6dd7b04048b10f12cf9652d55ed52adb7c9ee7c055ee",
+    "mutated": {
+      "name": "f4-mutated",
+      "argv": [
+        "node",
+        "--test",
+        "--test-name-pattern=F4",
+        "portal/tests/learning-lookup.test.mjs",
+        "shared/learning/lookup.test.mjs"
+      ],
+      "cwd": "/Users/toandx/htdocs/typing-game/tmp/codex-233-portal",
+      "portal_url": null,
+      "exit": 1,
+      "seconds": 0.126,
+      "tests": 4,
+      "pass": 2,
+      "fail": 2,
+      "skipped": 0
+    },
+    "restored": {
+      "name": "f4-restored",
+      "argv": [
+        "node",
+        "--test",
+        "--test-name-pattern=F4",
+        "portal/tests/learning-lookup.test.mjs",
+        "shared/learning/lookup.test.mjs"
+      ],
+      "cwd": "/Users/toandx/htdocs/typing-game/tmp/codex-233-portal",
+      "portal_url": null,
+      "exit": 0,
+      "seconds": 0.125,
+      "tests": 4,
+      "pass": 4,
+      "fail": 0,
+      "skipped": 0
+    },
+    "restored_sha256": "eaa39b497af0f0d4d4aa6dd7b04048b10f12cf9652d55ed52adb7c9ee7c055ee"
+  },
+  {
+    "id": "f5",
+    "file": "portal/src/game-card.ts",
+    "sha256": "b9bfc949240eb3689fe96e22fa8738b927c29e40d689d999eb5999da72ba606f",
+    "mutated": {
+      "name": "f5-mutated",
+      "argv": [
+        "node",
+        "--test",
+        "--test-name-pattern=F5",
+        "portal/tests/game-card.test.mjs"
+      ],
+      "cwd": "/Users/toandx/htdocs/typing-game/tmp/codex-233-portal",
+      "portal_url": null,
+      "exit": 1,
+      "seconds": 0.125,
+      "tests": 19,
+      "pass": 3,
+      "fail": 16,
+      "skipped": 0
+    },
+    "restored": {
+      "name": "f5-restored",
+      "argv": [
+        "node",
+        "--test",
+        "--test-name-pattern=F5",
+        "portal/tests/game-card.test.mjs"
+      ],
+      "cwd": "/Users/toandx/htdocs/typing-game/tmp/codex-233-portal",
+      "portal_url": null,
+      "exit": 0,
+      "seconds": 0.11,
+      "tests": 19,
+      "pass": 19,
+      "fail": 0,
+      "skipped": 0
+    },
+    "restored_sha256": "b9bfc949240eb3689fe96e22fa8738b927c29e40d689d999eb5999da72ba606f"
+  }
+]

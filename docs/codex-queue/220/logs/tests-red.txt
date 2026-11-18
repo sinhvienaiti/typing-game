@@ -1,0 +1,251 @@
+
+ RUN  v3.2.7 /Users/toandx/htdocs/typing-game/games/.wt-ts-codex
+
+ ❯ tests/full-bay.test.ts (21 tests | 21 failed) 13ms
+   × full-bay candidates (220; defaults stay off) > exports three zero defaults and keeps a full word inert 5ms
+     → expected undefined to deeply equal { extra: +0, spill: +0, boost: +0 }
+   × full-bay candidates (220; defaults stay off) > R1 floors and clamps extra=1 at creation 0ms
+     → --set: unknown FULL_BAY
+   × full-bay candidates (220; defaults stay off) > R1 floors and clamps extra=2 at creation 0ms
+     → --set: unknown FULL_BAY
+   × full-bay candidates (220; defaults stay off) > R1 floors and clamps extra=1.9 at creation 0ms
+     → --set: unknown FULL_BAY
+   × full-bay candidates (220; defaults stay off) > R1 floors and clamps extra=-1 at creation 0ms
+     → --set: unknown FULL_BAY
+   × full-bay candidates (220; defaults stay off) > R1 floors and clamps extra=-0.1 at creation 0ms
+     → --set: unknown FULL_BAY
+   × full-bay candidates (220; defaults stay off) > R2 transfers the word's clean/fast quality to the receiving gun (dirty=false) 0ms
+     → --set: unknown FULL_BAY
+   × full-bay candidates (220; defaults stay off) > R2 transfers the word's clean/fast quality to the receiving gun (dirty=true) 0ms
+     → --set: unknown FULL_BAY
+   × full-bay candidates (220; defaults stay off) > R2 has no effect when every gun is full 0ms
+     → --set: unknown FULL_BAY
+   × full-bay candidates (220; defaults stay off) > R2 chooses least magazines, then lowest bay, and never an empty socket 0ms
+     → --set: unknown FULL_BAY
+   × full-bay candidates (220; defaults stay off) > S0 keeps its full-bay rule with FULL_BAY.spill=1 0ms
+     → --set: unknown FULL_BAY
+   × full-bay candidates (220; defaults stay off) > S0 keeps its full-bay rule with FULL_BAY.boost=0.3 0ms
+     → --set: unknown FULL_BAY
+   × full-bay candidates (220; defaults stay off) > S0 keeps its full-bay rule with FULL_BAY.spill=1,FULL_BAY.boost=0.3 0ms
+     → --set: unknown FULL_BAY
+   × full-bay candidates (220; defaults stay off) > R3 boosts the tail once, shifts its mark, and resets a newly loaded tail 0ms
+     → --set: unknown FULL_BAY
+   × full-bay candidates (220; defaults stay off) > R2 precedes R3; R3 applies only after all other bays fill 0ms
+     → --set: unknown FULL_BAY
+   × full-bay candidates (220; defaults stay off) > --set extra is read at call time and undo restores new worlds 3ms
+     → --set: unknown FULL_BAY
+   × full-bay candidates (220; defaults stay off) > --set spill is read at call time and undo restores new worlds 1ms
+     → --set: unknown FULL_BAY
+   × full-bay candidates (220; defaults stay off) > --set boost is read at call time and undo restores new worlds 1ms
+     → --set: unknown FULL_BAY
+   × full-bay candidates (220; defaults stay off) > R1 counts 2/3 as live and gives the bot a positive value 0ms
+     → --set: unknown FULL_BAY
+   × full-bay candidates (220; defaults stay off) > R2 live/value follows the receiving gun, and stops with no receiver 0ms
+     → --set: unknown FULL_BAY
+   × full-bay candidates (220; defaults stay off) > R3 live/value exists only for an unboosted tail; empty sockets never count 0ms
+     → --set: unknown FULL_BAY
+
+⎯⎯⎯⎯⎯⎯ Failed Tests 21 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/full-bay.test.ts > full-bay candidates (220; defaults stay off) > exports three zero defaults and keeps a full word inert
+AssertionError: expected undefined to deeply equal { extra: +0, spill: +0, boost: +0 }
+
+- Expected: 
+{
+  "boost": 0,
+  "extra": 0,
+  "spill": 0,
+}
+
++ Received: 
+undefined
+
+ ❯ tests/full-bay.test.ts:35:22
+     33| describe("full-bay candidates (220; defaults stay off)", () => {
+     34|   it("exports three zero defaults and keeps a full word inert", () => {
+     35|     expect(FULL_BAY).toEqual({ extra: 0, spill: 0, boost: 0 });
+       |                      ^
+     36|     const w = world();
+     37|     expect(Array.from(w.guns.cap)).toEqual([2, 2]);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/21]⎯
+
+ FAIL  tests/full-bay.test.ts > full-bay candidates (220; defaults stay off) > R1 floors and clamps extra=1 at creation
+ FAIL  tests/full-bay.test.ts > full-bay candidates (220; defaults stay off) > R1 floors and clamps extra=2 at creation
+ FAIL  tests/full-bay.test.ts > full-bay candidates (220; defaults stay off) > R1 floors and clamps extra=1.9 at creation
+ FAIL  tests/full-bay.test.ts > full-bay candidates (220; defaults stay off) > R1 floors and clamps extra=-1 at creation
+ FAIL  tests/full-bay.test.ts > full-bay candidates (220; defaults stay off) > R1 floors and clamps extra=-0.1 at creation
+Error: --set: unknown FULL_BAY
+ ❯ applyOne scripts/overrides.ts:54:61
+     52|   const stage = isStageId(head);
+     53|   let node = (stage ? stageById(head) : ROOTS[head]) as Node | undefin…
+     54|   if (node === undefined || typeof node !== "object") throw new Error(…
+       |                                                             ^
+     55|   const leaf = keys.pop();
+     56|   if (leaf === undefined) throw new Error("--set: no field in " + item…
+ ❯ applySet scripts/overrides.ts:36:89
+ ❯ knob tests/full-bay.test.ts:15:20
+ ❯ tests/full-bay.test.ts:47:90
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/21]⎯
+
+ FAIL  tests/full-bay.test.ts > full-bay candidates (220; defaults stay off) > R2 transfers the word's clean/fast quality to the receiving gun (dirty=false)
+ FAIL  tests/full-bay.test.ts > full-bay candidates (220; defaults stay off) > R2 transfers the word's clean/fast quality to the receiving gun (dirty=true)
+Error: --set: unknown FULL_BAY
+ ❯ applyOne scripts/overrides.ts:54:61
+     52|   const stage = isStageId(head);
+     53|   let node = (stage ? stageById(head) : ROOTS[head]) as Node | undefin…
+     54|   if (node === undefined || typeof node !== "object") throw new Error(…
+       |                                                             ^
+     55|   const leaf = keys.pop();
+     56|   if (leaf === undefined) throw new Error("--set: no field in " + item…
+ ❯ applySet scripts/overrides.ts:36:89
+ ❯ knob tests/full-bay.test.ts:15:20
+ ❯ tests/full-bay.test.ts:53:115
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/21]⎯
+
+ FAIL  tests/full-bay.test.ts > full-bay candidates (220; defaults stay off) > R2 has no effect when every gun is full
+Error: --set: unknown FULL_BAY
+ ❯ applyOne scripts/overrides.ts:54:61
+     52|   const stage = isStageId(head);
+     53|   let node = (stage ? stageById(head) : ROOTS[head]) as Node | undefin…
+     54|   if (node === undefined || typeof node !== "object") throw new Error(…
+       |                                                             ^
+     55|   const leaf = keys.pop();
+     56|   if (leaf === undefined) throw new Error("--set: no field in " + item…
+ ❯ applySet scripts/overrides.ts:36:89
+ ❯ knob tests/full-bay.test.ts:15:20
+ ❯ tests/full-bay.test.ts:73:55
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/21]⎯
+
+ FAIL  tests/full-bay.test.ts > full-bay candidates (220; defaults stay off) > R2 chooses least magazines, then lowest bay, and never an empty socket
+Error: --set: unknown FULL_BAY
+ ❯ applyOne scripts/overrides.ts:54:61
+     52|   const stage = isStageId(head);
+     53|   let node = (stage ? stageById(head) : ROOTS[head]) as Node | undefin…
+     54|   if (node === undefined || typeof node !== "object") throw new Error(…
+       |                                                             ^
+     55|   const leaf = keys.pop();
+     56|   if (leaf === undefined) throw new Error("--set: no field in " + item…
+ ❯ applySet scripts/overrides.ts:36:89
+ ❯ knob tests/full-bay.test.ts:15:20
+ ❯ tests/full-bay.test.ts:81:86
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/21]⎯
+
+ FAIL  tests/full-bay.test.ts > full-bay candidates (220; defaults stay off) > S0 keeps its full-bay rule with FULL_BAY.spill=1
+ FAIL  tests/full-bay.test.ts > full-bay candidates (220; defaults stay off) > S0 keeps its full-bay rule with FULL_BAY.boost=0.3
+ FAIL  tests/full-bay.test.ts > full-bay candidates (220; defaults stay off) > S0 keeps its full-bay rule with FULL_BAY.spill=1,FULL_BAY.boost=0.3
+Error: --set: unknown FULL_BAY
+ ❯ applyOne scripts/overrides.ts:54:61
+     52|   const stage = isStageId(head);
+     53|   let node = (stage ? stageById(head) : ROOTS[head]) as Node | undefin…
+     54|   if (node === undefined || typeof node !== "object") throw new Error(…
+       |                                                             ^
+     55|   const leaf = keys.pop();
+     56|   if (leaf === undefined) throw new Error("--set: no field in " + item…
+ ❯ applySet scripts/overrides.ts:36:89
+ ❯ knob tests/full-bay.test.ts:15:20
+ ❯ tests/full-bay.test.ts:92:142
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/21]⎯
+
+ FAIL  tests/full-bay.test.ts > full-bay candidates (220; defaults stay off) > R3 boosts the tail once, shifts its mark, and resets a newly loaded tail
+Error: --set: unknown FULL_BAY
+ ❯ applyOne scripts/overrides.ts:54:61
+     52|   const stage = isStageId(head);
+     53|   let node = (stage ? stageById(head) : ROOTS[head]) as Node | undefin…
+     54|   if (node === undefined || typeof node !== "object") throw new Error(…
+       |                                                             ^
+     55|   const leaf = keys.pop();
+     56|   if (leaf === undefined) throw new Error("--set: no field in " + item…
+ ❯ applySet scripts/overrides.ts:36:89
+ ❯ knob tests/full-bay.test.ts:15:20
+ ❯ tests/full-bay.test.ts:103:88
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/21]⎯
+
+ FAIL  tests/full-bay.test.ts > full-bay candidates (220; defaults stay off) > R2 precedes R3; R3 applies only after all other bays fill
+Error: --set: unknown FULL_BAY
+ ❯ applyOne scripts/overrides.ts:54:61
+     52|   const stage = isStageId(head);
+     53|   let node = (stage ? stageById(head) : ROOTS[head]) as Node | undefin…
+     54|   if (node === undefined || typeof node !== "object") throw new Error(…
+       |                                                             ^
+     55|   const leaf = keys.pop();
+     56|   if (leaf === undefined) throw new Error("--set: no field in " + item…
+ ❯ applySet scripts/overrides.ts:36:89
+ ❯ knob tests/full-bay.test.ts:15:20
+ ❯ tests/full-bay.test.ts:124:73
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[8/21]⎯
+
+ FAIL  tests/full-bay.test.ts > full-bay candidates (220; defaults stay off) > --set extra is read at call time and undo restores new worlds
+ FAIL  tests/full-bay.test.ts > full-bay candidates (220; defaults stay off) > --set spill is read at call time and undo restores new worlds
+ FAIL  tests/full-bay.test.ts > full-bay candidates (220; defaults stay off) > --set boost is read at call time and undo restores new worlds
+Error: --set: unknown FULL_BAY
+ ❯ applyOne scripts/overrides.ts:54:61
+     52|   const stage = isStageId(head);
+     53|   let node = (stage ? stageById(head) : ROOTS[head]) as Node | undefin…
+     54|   if (node === undefined || typeof node !== "object") throw new Error(…
+       |                                                             ^
+     55|   const leaf = keys.pop();
+     56|   if (leaf === undefined) throw new Error("--set: no field in " + item…
+ ❯ applySet scripts/overrides.ts:36:89
+ ❯ tests/full-bay.test.ts:143:17
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[9/21]⎯
+
+ FAIL  tests/full-bay.test.ts > full-bay candidates (220; defaults stay off) > R1 counts 2/3 as live and gives the bot a positive value
+Error: --set: unknown FULL_BAY
+ ❯ applyOne scripts/overrides.ts:54:61
+     52|   const stage = isStageId(head);
+     53|   let node = (stage ? stageById(head) : ROOTS[head]) as Node | undefin…
+     54|   if (node === undefined || typeof node !== "object") throw new Error(…
+       |                                                             ^
+     55|   const leaf = keys.pop();
+     56|   if (leaf === undefined) throw new Error("--set: no field in " + item…
+ ❯ applySet scripts/overrides.ts:36:89
+ ❯ knob tests/full-bay.test.ts:15:20
+ ❯ tests/full-bay.test.ts:153:72
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[10/21]⎯
+
+ FAIL  tests/full-bay.test.ts > full-bay candidates (220; defaults stay off) > R2 live/value follows the receiving gun, and stops with no receiver
+Error: --set: unknown FULL_BAY
+ ❯ applyOne scripts/overrides.ts:54:61
+     52|   const stage = isStageId(head);
+     53|   let node = (stage ? stageById(head) : ROOTS[head]) as Node | undefin…
+     54|   if (node === undefined || typeof node !== "object") throw new Error(…
+       |                                                             ^
+     55|   const leaf = keys.pop();
+     56|   if (leaf === undefined) throw new Error("--set: no field in " + item…
+ ❯ applySet scripts/overrides.ts:36:89
+ ❯ knob tests/full-bay.test.ts:15:20
+ ❯ tests/full-bay.test.ts:159:83
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[11/21]⎯
+
+ FAIL  tests/full-bay.test.ts > full-bay candidates (220; defaults stay off) > R3 live/value exists only for an unboosted tail; empty sockets never count
+Error: --set: unknown FULL_BAY
+ ❯ applyOne scripts/overrides.ts:54:61
+     52|   const stage = isStageId(head);
+     53|   let node = (stage ? stageById(head) : ROOTS[head]) as Node | undefin…
+     54|   if (node === undefined || typeof node !== "object") throw new Error(…
+       |                                                             ^
+     55|   const leaf = keys.pop();
+     56|   if (leaf === undefined) throw new Error("--set: no field in " + item…
+ ❯ applySet scripts/overrides.ts:36:89
+ ❯ knob tests/full-bay.test.ts:15:20
+ ❯ tests/full-bay.test.ts:170:90
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[12/21]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  21 failed (21)
+   Start at  13:31:22
+   Duration  432ms (transform 161ms, setup 0ms, collect 228ms, tests 13ms, environment 0ms, prepare 44ms)
+

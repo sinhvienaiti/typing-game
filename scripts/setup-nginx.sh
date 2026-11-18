@@ -8,12 +8,15 @@ if [[ "$MODE" != "dev" && "$MODE" != "play" ]]; then
 fi
 
 ROOT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
+source "$ROOT_DIR/scripts/local-env.sh"
 SOURCE="$ROOT_DIR/infra/nginx/typing-game.local.$MODE.conf"
 
 case "$(uname -s)" in
   Darwin)
     PLATFORM="macos"
-    NGINX_BASE="/usr/local/etc/nginx"
+    BREW_PREFIX="$(brew --prefix)"
+    NGINX_BIN="$BREW_PREFIX/bin/nginx"
+    NGINX_BASE="$BREW_PREFIX/etc/nginx"
     TARGET="$NGINX_BASE/servers/typing-game.local.conf"
     SSL_DIR="$NGINX_BASE/ssl/typing-game.local"
     ;;
@@ -39,6 +42,11 @@ HOSTS=(
   "recall.typing-game.local"
   "karaoke.typing-game.local"
   "space.typing-game.local"
+  "dragon.typing-game.local"
+  "td.typing-game.local"
+  "survival.typing-game.local"
+  "tutien.typing-game.local"
+  "feel.typing-game.local"
 )
 
 ensure_hosts() {
@@ -123,6 +131,27 @@ create_certificate() {
   rm -rf "$temp_dir"
 }
 
+nginx_version() {
+  local binary="nginx"
+  if [[ "$PLATFORM" == "macos" ]]; then
+    binary="$NGINX_BIN"
+  elif ! command -v nginx >/dev/null 2>&1; then
+    binary="/usr/sbin/nginx"
+  fi
+  "$binary" -v 2>&1 | sed -n 's|.*nginx/\([0-9][0-9.]*\).*|\1|p' | head -n 1
+}
+
+# `http2 on;` (the Typing Feel host) exists from nginx 1.25.1; an older nginx
+# (Ubuntu 24.04 apt ships 1.24) refuses the whole file, every host with it.
+# An unknown version keeps the line, so nginx -t reports it.
+nginx_has_http2_directive() {
+  local version
+  version="$(nginx_version)"
+  [[ "$version" =~ ^([0-9]+)\.([0-9]+)\.([0-9]+) ]] || return 0
+  local major="${BASH_REMATCH[1]}" minor="${BASH_REMATCH[2]}" patch="${BASH_REMATCH[3]}"
+  (( major > 1 || (major == 1 && (minor > 25 || (minor == 25 && patch >= 1))) ))
+}
+
 render_config() {
   local destination="$1"
   sed \
@@ -130,12 +159,41 @@ render_config() {
     -e "s|__SSL_CERT__|$CERT|g" \
     -e "s|__SSL_KEY__|$KEY|g" \
     "$SOURCE" > "$destination"
+  if ! nginx_has_http2_directive; then
+    echo "nginx $(nginx_version) is older than 1.25.1: dropping 'http2 on;', so feel.typing-game.local serves HTTP/1.1. Install nginx 1.25.1 or newer for HTTP/2." >&2
+    sed '/^[[:space:]]*http2 on;[[:space:]]*$/d' "$destination" > "$destination.http2"
+    mv "$destination.http2" "$destination"
+  fi
+}
+
+macos_nginx_running() {
+  local pid_file="$BREW_PREFIX/var/run/nginx.pid"
+  local nginx_pid=""
+  [[ -r "$pid_file" ]] || return 1
+  read -r nginx_pid < "$pid_file" || true
+  [[ "$nginx_pid" =~ ^[0-9]+$ ]] || return 1
+  local process
+  process="$(ps -p "$nginx_pid" -o comm= 2>/dev/null)" || return 1
+  [[ "$process" == *"nginx: master process "* || "$process" == */nginx ]]
 }
 
 restart_nginx() {
   if [[ "$PLATFORM" == "macos" ]]; then
-    nginx -t
-    brew services restart nginx
+    local state_dir="$ROOT_DIR/.local/nginx"
+    local state_file="$state_dir/applied-config.sha256"
+    local signature
+    signature="$(shasum -a 256 "$TARGET" "$CERT" "$NGINX_BASE/nginx.conf" | shasum -a 256 | awk '{print $1}')"
+    if [[ -r "$state_file" ]] && [[ "$(cat "$state_file")" == "$signature" ]] && macos_nginx_running; then
+      return
+    fi
+    sudo "$NGINX_BIN" -t
+    if macos_nginx_running; then
+      sudo "$NGINX_BIN" -s reload
+    else
+      sudo "$NGINX_BIN"
+    fi
+    mkdir -p "$state_dir"
+    printf '%s\n' "$signature" > "$state_file"
     return
   fi
 
@@ -173,11 +231,15 @@ if [[ "$PLATFORM" == "linux" ]]; then
 else
   mkdir -p "$(dirname "$TARGET")"
   if [[ ! -f "$TARGET" ]] || ! cmp -s "$temp_config" "$TARGET"; then
+    if [[ -f "$TARGET" ]]; then
+      mkdir -p "$NGINX_BASE/backups"
+      cp -p "$TARGET" "$NGINX_BASE/backups/$(basename "$TARGET").$(date +%Y%m%d-%H%M%S)"
+    fi
     cp "$temp_config" "$TARGET"
     restart_nginx
     echo "nginx switched to $MODE mode ($PLATFORM)."
   else
-    brew services start nginx >/dev/null 2>&1 || true
+    restart_nginx
     echo "nginx is already in $MODE mode ($PLATFORM)."
   fi
 fi

@@ -1,0 +1,29 @@
+{
+  "$schema": "../../schemas/recipe.schema.json",
+  "schema": "audiolab.recipe/1",
+  "game": "typing-defense",
+  "id": "leak",
+  "group": "rare-fixed",
+  "family": "nen",
+  "description": "Lô 0: quái lọt vào Lũy, cảnh báo, không còi, 1,2 s (mục 8.2: cồng hội làng hoặc kẻng sắt, không mõ, không chuông chùa). Hai ứng viên (swapMode cycle): một nhát cồng VCSL Gong 1, và kẻng sắt ba nhát VCSL Anvil. Sub nhẹ dưới nhát đầu. Khoét 1–4 kHz để không ngân ở dải giọng đọc. Nguồn cồng chờ chủ dự án duyệt (mục 16 #5).",
+  "channels": 1,
+  "layers": [
+    {"id": "strike", "role": "body", "source": {"sampler": {"instrument": "gong-1", "notes": [{"start": 0, "key": "gong", "dur": 1.1, "vel": 100, "choke": true}]}},
+     "fadeOutMs": 250,
+     "vary": {"swapMode": "cycle", "swap": [
+       {"sampler": {"instrument": "anvil", "notes": "0:anvil-hit2:0.4:105 0.28:anvil-hit2:0.4:90 0.56:anvil-hit2:0.6:80"}}]}},
+    {"id": "sub", "role": "sub", "source": {"synth": "sub_thump", "params": {"startHz": 70, "endHz": 45, "glideMs": 80, "durMs": 260, "decayMs": 240}},
+     "gainDb": -12}
+  ],
+  "chain": {
+    "dcHpfHz": 35,
+    "filters": [{"type": "peak", "hz": 2500, "gainDb": -4, "q": 0.8}],
+    "headTrim": {"thresholdDb": -50, "preRollMs": 0.5},
+    "maxLengthMs": 1300,
+    "tail": {"floorDb": -66, "fadeMs": 250},
+    "normalise": {"mode": "lufs-m-max", "target": -20},
+    "limiter": {"ceilingDbtp": -1.0, "releaseMs": 80, "maxGrDb": 6}
+  },
+  "variants": {"count": 2, "seed": 1200, "includeBase": true},
+  "export": {"path": "sfx/alerts/leak", "ogg": true, "oggQuality": 0.6}
+}

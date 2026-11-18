@@ -1,0 +1,18 @@
+$ node --test --test-name-pattern=F3 portal/tests/learning-lookup.test.mjs shared/learning/lookup.test.mjs
+cwd: /Users/toandx/htdocs/typing-game
+
+✔ F3 lookup returns only query-failed for a private load error (2.624417ms)
+✔ F3 lookup returns only query-failed for a private profile version error (0.358458ms)
+✔ F3 query returns only query-failed for a private load error (0.440792ms)
+✔ F3 query returns only query-failed for a private profile version error (0.31075ms)
+✔ F3 error contract supports code-only replies and preserves explicit public messages (0.72975ms)
+ℹ tests 5
+ℹ suites 0
+ℹ pass 5
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 69.271792
+
+exit: 0

@@ -1,0 +1,37 @@
+
+ RUN  v3.2.7 /Users/toandx/htdocs/typing-game/games/.wt-dh-codex
+
+ ❯ tests/vocab-pin.test.ts (7 tests | 1 failed) 277ms
+   ✓ pinned vocabulary (G7) > includes the complete ordered inventory and every configured file 3ms
+   × pinned vocabulary (G7) > agrees on the full commit pin and index version 9ms
+     → expected '18338405eebd9cfdbd6d6bf666ea79361c00a…' to be '0000000000000000000000000000000000000…' // Object.is equality
+   ✓ pinned vocabulary (G7) > matches every SHA-256 and keeps a sorted, formatted manifest 7ms
+   ✓ pinned vocabulary (G7) > covers the kit's entire curriculum using each index file field 5ms
+   ✓ pinned vocabulary (G7) > keeps each level nonempty after adult and child filtering and deck selection 53ms
+   ✓ pinned vocabulary (G7) > loads only pinned files for every supported saved level and its next-level candidate 192ms
+   ✓ pinned vocabulary (G7) > contains no parent vocabulary path outside the copied kit 7ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/vocab-pin.test.ts > pinned vocabulary (G7) > agrees on the full commit pin and index version
+AssertionError: expected '18338405eebd9cfdbd6d6bf666ea79361c00a…' to be '0000000000000000000000000000000000000…' // Object.is equality
+
+Expected: "0000000000000000000000000000000000000000"
+Received: "18338405eebd9cfdbd6d6bf666ea79361c00a564"
+
+ ❯ tests/vocab-pin.test.ts:44:26
+     42|   it("agrees on the full commit pin and index version", () => {
+     43|     expect(config.pin).toMatch(/^[a-f0-9]{40}$/);
+     44|     expect(manifest.pin).toBe(config.pin);
+       |                          ^
+     45|     expect(manifest.version).toBe(index.version);
+     46|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 6 passed (7)
+   Start at  19:44:14
+   Duration  1.27s (transform 401ms, setup 0ms, collect 568ms, tests 277ms, environment 0ms, prepare 102ms)
+

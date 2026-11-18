@@ -1,0 +1,133 @@
+{
+  "src/ui/skin.ts": [
+    {
+      "line": 132,
+      "text": "`<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\" focusable=\"false\">${body}</svg>`;"
+    }
+  ],
+  "src/ui/tags.ts": [
+    {
+      "line": 488,
+      "text": "name === \"\" ? \"\" : '<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"' + ICONS[name] + '\" fill=\"currentColor\"/></svg>';"
+    }
+  ],
+  "src/ui/styles/dh.css": [
+    {
+      "line": 44,
+      "text": ".dh-canvas,"
+    },
+    {
+      "line": 73,
+      "text": "repeating-linear-gradient(92deg, rgba(255, 236, 200, 0.022) 0 calc(2px * var(--ui)), transparent calc(2px * var(--ui)) calc(9px * var(--ui))),"
+    },
+    {
+      "line": 74,
+      "text": "radial-gradient(120% 90% at 30% 0%, rgba(255, 214, 160, 0.07), transparent 60%),"
+    },
+    {
+      "line": 75,
+      "text": "linear-gradient(180deg, #34271c 0%, #271d15 55%, #1c1510 100%);"
+    },
+    {
+      "line": 113,
+      "text": "background: linear-gradient(180deg, #f3ead6, #cdbd9c);"
+    },
+    {
+      "line": 163,
+      "text": "background: linear-gradient(180deg, #4d3929 0%, #35281d 60%, #2a2017 100%);"
+    },
+    {
+      "line": 174,
+      "text": "background: linear-gradient(180deg, #5c4531 0%, #3f2f22 60%, #2f241a 100%);"
+    },
+    {
+      "line": 345,
+      "text": "background: radial-gradient(circle at 40% 35%, #5a3322, #22150e 72%);"
+    },
+    {
+      "line": 461,
+      "text": "background: linear-gradient(180deg, #ffc08a 0%, var(--dh-ember) 55%, #b9532c 100%);"
+    },
+    {
+      "line": 465,
+      "text": "background: linear-gradient(180deg, #ffd27a 0%, var(--kit-urgent) 55%, #b9741c 100%);"
+    },
+    {
+      "line": 477,
+      "text": "background: repeating-linear-gradient(135deg, rgba(243, 239, 226, 0.75) 0 calc(3px * var(--ui)), rgba(243, 239, 226, 0.4) calc(3px * var(--ui)) calc(6px * var(--ui)));"
+    },
+    {
+      "line": 509,
+      "text": "background: linear-gradient(180deg, transparent, var(--dh-wood-edge), transparent);"
+    },
+    {
+      "line": 535,
+      "text": "background: linear-gradient(180deg, #ffe3b8, #e8b27a);"
+    },
+    {
+      "line": 556,
+      "text": "background: conic-gradient(rgba(10, 7, 5, 0.78) calc(var(--cool, 0) * 360deg), transparent 0);"
+    },
+    {
+      "line": 627,
+      "text": "background: linear-gradient(90deg, #8a2a18, #d4562e 60%, #f6913f);"
+    },
+    {
+      "line": 632,
+      "text": "background: linear-gradient(90deg, #d4562e, #f6b37a, #ffe3b8);"
+    },
+    {
+      "line": 755,
+      "text": "background: linear-gradient(90deg, rgba(200, 210, 74, 0.16), rgba(0, 0, 0, 0.18) 60%);"
+    },
+    {
+      "line": 845,
+      "text": "background: linear-gradient(180deg, rgba(200, 210, 74, 0.9), rgba(200, 210, 74, 0.45));"
+    },
+    {
+      "line": 1189,
+      "text": "background: linear-gradient(180deg, #4d3929, #2a2017);"
+    },
+    {
+      "line": 1450,
+      "text": "background: radial-gradient(ellipse at 50% 40%, rgba(20, 14, 10, 0.55), rgba(10, 7, 5, 0.86));"
+    }
+  ],
+  "src/ui/title.ts": [],
+  "src/ui/title-state.ts": [],
+  "src/ui/styles/title.css": [],
+  "src/app/app.ts": [
+    {
+      "line": 207,
+      "text": "const canvasHost = doc.getElementById(\"dh-canvas\");"
+    },
+    {
+      "line": 208,
+      "text": "if (!overlay || !canvasHost) throw new Error(\"app: #dh-overlay or #dh-canvas missing from index.html\");"
+    },
+    {
+      "line": 217,
+      "text": "const map: MapStage = createMapStage(canvasHost, mapDef, quality);"
+    },
+    {
+      "line": 486,
+      "text": "const rect = canvasHost.getBoundingClientRect();"
+    },
+    {
+      "line": 509,
+      "text": "canvasHost.addEventListener(\"pointerdown\", onCanvasDown);"
+    },
+    {
+      "line": 510,
+      "text": "canvasHost.addEventListener(\"pointerup\", onCanvasUp);"
+    },
+    {
+      "line": 1147,
+      "text": "canvasHost.removeEventListener(\"pointerdown\", onCanvasDown);"
+    },
+    {
+      "line": 1148,
+      "text": "canvasHost.removeEventListener(\"pointerup\", onCanvasUp);"
+    }
+  ]
+}

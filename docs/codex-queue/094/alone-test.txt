@@ -1,0 +1,65 @@
+$ vitest run
+
+ RUN  v3.2.7 /private/var/folders/d7/2x1km_3s363175h285_zlz680000gn/T/dh-094-alone/game
+
+ ✓ tests/sim/battle-determinism.test.ts (6 tests) 922ms
+   ✓ battle determinism > replays a whole M0 stage to the same hash every 10 s for the same seed  432ms
+ ✓ tests/sim/bot-run.test.ts (9 tests) 829ms
+   ✓ bot runs > stops a run that stalls and says where  408ms
+ ✓ tests/golden/golden.test.ts (10 tests) 614ms
+ ✓ tests/sim/bot-policy.test.ts (9 tests) 560ms
+   ✓ bot tactics > the weak buyer places by the dais, never upgrades, never buys Tim Rồng; the others fill and upgrade  411ms
+ ✓ tests/sim/bot-words.test.ts (4 tests) 392ms
+ ✓ tests/view/view-terrain.test.ts (15 tests) 568ms
+ ✓ tests/sim/battle-waves.test.ts (16 tests) 358ms
+ ✓ tests/boundary.test.ts (9 tests) 323ms
+ ✓ tests/vocab-pin.test.ts (7 tests) 243ms
+ ✓ tests/sim/bot-hands.test.ts (8 tests) 275ms
+ ✓ tests/audio/catalog.test.ts (9 tests) 118ms
+ ✓ tests/ui/tags-bodies.test.ts (21 tests) 138ms
+ ✓ tests/typing-words.test.ts (22 tests) 115ms
+ ✓ tests/view/lane-cue.test.ts (4 tests) 79ms
+ ✓ tests/sim/ourside-shop.test.ts (13 tests) 85ms
+ ✓ tests/sim/battle-species.test.ts (11 tests) 66ms
+ ✓ tests/sim/balance-pressure.test.ts (10 tests) 72ms
+ ✓ tests/audio/limiter.test.ts (11 tests) 56ms
+ ✓ tests/sim/ourside-status.test.ts (9 tests) 58ms
+ ✓ tests/sim/smoke.test.ts (5 tests) 54ms
+ ✓ tests/view/view-crowd-fx-effects.test.ts (19 tests) 54ms
+ ✓ tests/sim/ourside-traps.test.ts (7 tests) 59ms
+ ✓ tests/sim/ourside-houses.test.ts (5 tests) 48ms
+ ✓ tests/sim/ourside-units.test.ts (7 tests) 54ms
+ ✓ tests/typing-tags.test.ts (10 tests) 44ms
+ ✓ tests/sim/battle-auras.test.ts (8 tests) 50ms
+ ✓ tests/sim/battle-damage.test.ts (12 tests) 36ms
+ ✓ tests/sim/ourside-economy.test.ts (8 tests) 38ms
+ ✓ tests/view/crowd-rig.test.ts (11 tests) 39ms
+ ✓ tests/sim/ourside-wiring.test.ts (2 tests) 33ms
+ ✓ tests/view/view-crowd-fx-crowd.test.ts (13 tests) 18ms
+ ✓ tests/sim/bot-load.test.ts (7 tests) 12ms
+ ✓ tests/ui/tags-animation.test.ts (2 tests) 15ms
+ ✓ tests/typing-learning.test.ts (17 tests) 10ms
+ ✓ tests/ui/results.test.ts (4 tests) 13ms
+ ✓ tests/view/m0b-banners.test.ts (3 tests) 5ms
+ ✓ tests/content/map.test.ts (11 tests) 9ms
+ ✓ tests/app/typing-pace.test.ts (25 tests) 5ms
+ ✓ tests/app/pace-card.test.ts (10 tests) 6ms
+ ✓ tests/view/model-specs.test.ts (6 tests) 6ms
+ ✓ tests/audio/map-events.test.ts (13 tests) 6ms
+ ✓ tests/audio/music-plan.test.ts (6 tests) 4ms
+ ✓ tests/app/loop-router.test.ts (6 tests) 3ms
+ ✓ tests/ui/shop-strip.test.ts (4 tests) 6ms
+ ✓ tests/view/number-field.test.ts (4 tests) 4ms
+ ✓ tests/ui/placement.test.ts (6 tests) 3ms
+ ✓ tests/audio/engine.test.ts (3 tests) 3ms
+ ✓ tests/ui/hud.test.ts (7 tests) 3ms
+ ✓ tests/audio/mix.test.ts (7 tests) 2ms
+ ✓ tests/ui/screen-zones.test.ts (3 tests) 3ms
+ ✓ tests/ui/wave-card.test.ts (3 tests) 3ms
+ ✓ tests/ui/debut-card.test.ts (3 tests) 2ms
+
+ Test Files  52 passed (52)
+      Tests  460 passed (460)
+   Start at  19:42:33
+   Duration  18.36s (transform 1.14s, setup 0ms, collect 4.40s, tests 6.52s, environment 6ms, prepare 2.03s)
+

@@ -1,0 +1,10 @@
+{
+  "deploy:pack": {
+    "before208": "pnpm build && node src/kit/tools/deploy/check-pack.mjs dist --game typing-defense",
+    "after208": "pnpm build && node scripts/deploy/prune.mjs dist && node src/kit/tools/deploy/check-pack.mjs dist --game typing-defense"
+  },
+  "deploy:pack:local": {
+    "before208": "pnpm build && node src/kit/tools/deploy/check-pack.mjs dist --game typing-defense --allow-local-host",
+    "after208": "pnpm build && node scripts/deploy/prune.mjs dist && node src/kit/tools/deploy/check-pack.mjs dist --game typing-defense --allow-local-host"
+  }
+}

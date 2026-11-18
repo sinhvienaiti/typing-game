@@ -1,0 +1,1318 @@
+{
+  "game": "typing-survival",
+  "stage": "c1-s1",
+  "direction": "B · Lightbearer",
+  "sourceCommits": {
+    "main": "79db62851e00eadeca7bfd44c10c0c682a9cec8d"
+  },
+  "assumptions": {
+    "fileSeconds": 12,
+    "silenceMs": 1000,
+    "maxHitsPerTake": 8,
+    "usableFraction": 0.75,
+    "p0ReserveTakes": 1,
+    "note": "12 s theo lô 189; 75% cú dùng được là giả định biên tập chưa đo, chỉnh sau lượt đầu. Số lượt là kế hoạch, không phải bảo đảm chất lượng hay credit."
+  },
+  "rows": [
+    {
+      "id": "word.load",
+      "playerName": null,
+      "when": "Gõ xong từ và nạp được vào súng.",
+      "bus": "alerts",
+      "phase": "release",
+      "vfxSync": "Vòng ký hiệu đóng quanh súng canh, lóe nạp ngay EV.word.",
+      "priority": "P0",
+      "priorityWhy": "Đòn chữ, súng, trúng và chết: nhóm tạo lực chiến đấu được làm trước.",
+      "shape": "hits",
+      "prompt": "An edited sequence of isolated a luminous glyph ring closing around a floating sentinel gun, a quick energy rise, a crisp loading lock and a compact resolving chord, a short bright attack, then a low ringing body below one kilohertz, each one followed by a second of silence.",
+      "targetMs": {
+        "min": 200,
+        "max": 300
+      },
+      "variants": 3,
+      "hitsPerTake": 8,
+      "takes": 2,
+      "loop": false,
+      "voiceHint": "Lướt lên rồi khóa chắc, ngân thấp.",
+      "inbox": "~/AudioLab/inbox/firefly/typing-survival/word.load/",
+      "era": "reworded",
+      "eraNote": "Băng đạn đóng đổi thành vòng ký hiệu khóa quanh súng canh.",
+      "specCard": "tools/audio-lab/specs/typing-survival/word.load.yaml",
+      "basis": [
+        "Hướng B: docs/games/ART_DIRECTION_2026-10-28.md:547–575; hình dạng Q6: tools/audio-lab/DECISIONS.md §Q6.",
+        "Độ dài và số biến thể: tools/audio-lab/specs/typing-survival/word.load.yaml (duration.min_ms/max_ms, variants.target).",
+        "games/typing-survival/src/view/typing-feel.ts:140–146; games/typing-survival/src/audio/theme-audio.ts:234–238",
+        "Gõ trong bất kỳ bến súng nào; content/chapter-1.ts:39–53"
+      ]
+    },
+    {
+      "id": "word.perfect",
+      "playerName": null,
+      "when": "Từ đạt điều kiện perfect và nạp được.",
+      "bus": "alerts",
+      "phase": "release",
+      "vfxSync": "Vòng vàng trắng khép, áo choàng lóe ở EV.word.",
+      "priority": "P0",
+      "priorityWhy": "Đòn chữ, súng, trúng và chết: nhóm tạo lực chiến đấu được làm trước.",
+      "shape": "hits",
+      "prompt": "An edited sequence of isolated a perfected energy loading gesture, a swift charge rise and a crystalline locking strike, a short bright attack, then a low ringing body below one kilohertz and a delicate bell shimmer above four kilohertz, each one followed by a second of silence.",
+      "targetMs": {
+        "min": 360,
+        "max": 540
+      },
+      "variants": 2,
+      "hitsPerTake": 7,
+      "takes": 2,
+      "loop": false,
+      "voiceHint": "Khóa chắc rồi ngân sáng cao, gọn.",
+      "inbox": "~/AudioLab/inbox/firefly/typing-survival/word.perfect/",
+      "era": "reworded",
+      "eraNote": "Nạp băng kèm điện đổi thành vòng ký hiệu vàng trắng khóa và chuông cao, cùng điều kiện perfect.",
+      "specCard": "tools/audio-lab/specs/typing-survival/word.perfect.yaml",
+      "basis": [
+        "Hướng B: docs/games/ART_DIRECTION_2026-10-28.md:547–575; hình dạng Q6: tools/audio-lab/DECISIONS.md §Q6.",
+        "Độ dài và số biến thể: tools/audio-lab/specs/typing-survival/word.perfect.yaml (duration.min_ms/max_ms, variants.target).",
+        "games/typing-survival/src/view/typing-feel.ts:140–146; games/typing-survival/src/audio/theme-audio.ts:234–238",
+        "Gõ trong bất kỳ bến súng nào; content/chapter-1.ts:39–53"
+      ]
+    },
+    {
+      "id": "word.full",
+      "playerName": null,
+      "when": "Gõ xong từ khi bến súng đã đầy.",
+      "bus": "alerts",
+      "phase": "release",
+      "vfxSync": "Viền bến sáng đều tại EV.word, không thêm đạn.",
+      "priority": "P0",
+      "priorityWhy": "Đòn chữ, súng, trúng và chết: nhóm tạo lực chiến đấu được làm trước.",
+      "shape": "hits",
+      "prompt": "An edited sequence of isolated a full energy chamber acknowledging a completed glyph ring, a brief bright glass contact followed by a compact low resonant answer below one kilohertz, restrained and dry, each one followed by a second of silence.",
+      "targetMs": {
+        "min": 100,
+        "max": 100
+      },
+      "variants": 1,
+      "hitsPerTake": 8,
+      "takes": 2,
+      "loop": false,
+      "voiceHint": "Chạm nhẹ rồi hạ giọng ngay.",
+      "inbox": "~/AudioLab/inbox/firefly/typing-survival/word.full/",
+      "era": "reworded",
+      "eraNote": "Chốt băng đạn hụt đổi thành phản hồi vòng năng lượng đã đầy; vẫn không nhận thêm đạn.",
+      "specCard": null,
+      "basis": [
+        "Hướng B: docs/games/ART_DIRECTION_2026-10-28.md:547–575; hình dạng Q6: tools/audio-lab/DECISIONS.md §Q6.",
+        "Thẻ trống hoặc chưa có: lấy mốc tác giả từ THEME_SOUND_LIST.md và hàm phát; không phải số đo Firefly.",
+        "THEME_SOUND_LIST.md:48,57 và type-audio.ts:72–77: 100 ms; biến thể mặc định 1 theo THEME_SOUND_LIST §2, không thuộc nhóm cần 4–6.",
+        "games/typing-survival/src/view/typing-feel.ts:140–146; games/typing-survival/src/audio/type-audio.ts:72–77",
+        "Từ vẫn hoàn tất khi bến đã đầy: view/typing-feel.ts:140–146; content/chapter-1.ts:39–53"
+      ]
+    },
+    {
+      "id": "streak.up",
+      "playerName": null,
+      "when": "Chuỗi sạch đạt 3, 6, 10, 20 từ.",
+      "bus": "alerts",
+      "phase": null,
+      "vfxSync": "Số chuỗi nảy và ánh kính mũ tăng ở bậc mới.",
+      "priority": "P0",
+      "priorityWhy": "Đòn chữ, súng, trúng và chết: nhóm tạo lực chiến đấu được làm trước.",
+      "shape": "hits",
+      "prompt": "An edited sequence of isolated two delicate crystalline reward strikes sixty milliseconds apart, A5 then E6, each with a brief bright attack and a fine shimmer above four kilohertz, compact and restrained, each one followed by a second of silence.",
+      "targetMs": {
+        "min": 260,
+        "max": 260
+      },
+      "variants": 1,
+      "hitsPerTake": 8,
+      "takes": 2,
+      "loop": false,
+      "voiceHint": "Hai nốt liền, nốt sau cao hơn.",
+      "inbox": "~/AudioLab/inbox/firefly/typing-survival/streak.up/",
+      "era": "kept",
+      "eraNote": "Cùng sự kiện và vai trò; giữ hình dạng âm, diễn đạt bằng vật liệu hướng B.",
+      "specCard": null,
+      "basis": [
+        "Hướng B: docs/games/ART_DIRECTION_2026-10-28.md:547–575; hình dạng Q6: tools/audio-lab/DECISIONS.md §Q6.",
+        "Thẻ trống hoặc chưa có: lấy mốc tác giả từ THEME_SOUND_LIST.md và hàm phát; không phải số đo Firefly.",
+        "THEME_SOUND_LIST.md:49,58 và type-audio.ts:81–86: cú thứ hai ở 60 ms, ngân 200 ms, tổng 260 ms; biến thể mặc định 1 theo THEME_SOUND_LIST §2.",
+        "games/typing-survival/src/view/typing-feel.ts:160–162; games/typing-survival/src/audio/type-audio.ts:81–86",
+        "Gõ trong bất kỳ bến súng nào; content/chapter-1.ts:39–53"
+      ]
+    },
+    {
+      "id": "gun.xung",
+      "playerName": "Pulse Gun",
+      "when": "Mỗi viên Pulse Gun rời nòng.",
+      "bus": "guns",
+      "phase": "release",
+      "vfxSync": "Sao đầu nòng và viên lam xuất hiện cùng EV.shot.",
+      "priority": "P0",
+      "priorityWhy": "Đòn chữ, súng, trúng và chết: nhóm tạo lực chiến đấu được làm trước.",
+      "shape": "hits",
+      "prompt": "An edited sequence of isolated energy cannon shots from a floating sentinel gun, each with a brief loading catch, a bright crystalline crack, a dense plasma punch with weight, a short glassy shimmer settling into a low distant rumble, each one followed by a second of silence.",
+      "targetMs": {
+        "min": 96,
+        "max": 380
+      },
+      "variants": 6,
+      "hitsPerTake": 8,
+      "takes": 2,
+      "loop": false,
+      "voiceHint": "Căng rất ngắn, bật giòn, thân nặng.",
+      "inbox": "~/AudioLab/inbox/firefly/typing-survival/gun.xung/",
+      "era": "reworded",
+      "eraNote": "Súng cơ khí thời tàu đổi thành Pulse Gun canh bay: đầu tinh thể, thân plasma, vẫn phát mỗi viên.",
+      "specCard": "tools/audio-lab/specs/typing-survival/gun.xung.yaml",
+      "basis": [
+        "Hướng B: docs/games/ART_DIRECTION_2026-10-28.md:547–575; hình dạng Q6: tools/audio-lab/DECISIONS.md §Q6.",
+        "Độ dài và số biến thể: tools/audio-lab/specs/typing-survival/gun.xung.yaml (duration.min_ms/max_ms, variants.target).",
+        "Thẻ còn ghi phát nửa số viên; mã shots.ts:178 và THEME_SOUND_LIST §4 đã phát mỗi viên. Giữ duration thẻ theo phiếu, ingest phải nghe thử lặp 10–11 viên/s.",
+        "games/typing-survival/src/view/shots.ts:178; games/typing-survival/src/audio/theme-audio.ts:248–250",
+        "Chọn súng tương ứng trong 2/5; app/journey.ts:142,162,194–205; content/chapter-1.ts:39–53"
+      ]
+    },
+    {
+      "id": "gun.xung.tail",
+      "playerName": "Pulse Gun",
+      "when": "Đầu loạt, mỗi 0,5 s còn bắn và 150 ms sau viên cuối.",
+      "bus": "guns",
+      "phase": "aftermath",
+      "vfxSync": "Vệt sao chổi tàn, âm vang nối loạt; theo bộ hẹn hiện tại.",
+      "priority": "P0",
+      "priorityWhy": "Đòn chữ, súng, trúng và chết: nhóm tạo lực chiến đấu được làm trước.",
+      "shape": "hits",
+      "prompt": "An edited sequence of isolated diffuse low reports of plasma cannon fire rolling across a vast graphite steel and ancient stone causeway, a gentle onset, a broad dark resonant body below nine hundred hertz and a soft distant decay, each one followed by a second of silence.",
+      "targetMs": {
+        "min": 400,
+        "max": 700
+      },
+      "variants": 1,
+      "hitsPerTake": 7,
+      "takes": 2,
+      "loop": false,
+      "voiceHint": "Rền thấp tan xa, vào mềm.",
+      "inbox": "~/AudioLab/inbox/firefly/typing-survival/gun.xung.tail/",
+      "era": "reworded",
+      "eraNote": "Vang hành lang thép đổi thành dư âm plasma trên đường đắp thép than chì và đá cổ, giữ lịch gọi đuôi.",
+      "specCard": "tools/audio-lab/specs/typing-survival/gun.xung.tail.yaml",
+      "basis": [
+        "Hướng B: docs/games/ART_DIRECTION_2026-10-28.md:547–575; hình dạng Q6: tools/audio-lab/DECISIONS.md §Q6.",
+        "Độ dài và số biến thể: tools/audio-lab/specs/typing-survival/gun.xung.tail.yaml (duration.min_ms/max_ms, variants.target).",
+        "games/typing-survival/src/view/shots.ts:181,431; games/typing-survival/src/audio/theme-audio.ts:254–256",
+        "Chọn súng tương ứng trong 2/5; app/journey.ts:142,162,194–205; content/chapter-1.ts:39–53"
+      ]
+    },
+    {
+      "id": "gun.tia.start",
+      "playerName": "Heat Beam",
+      "when": "Heat Beam bắt đầu cháy.",
+      "bus": "guns",
+      "phase": "release",
+      "vfxSync": "Lóe mồi ở nòng tại EV.beamStart.",
+      "priority": "P0",
+      "priorityWhy": "Đòn chữ, súng, trúng và chết: nhóm tạo lực chiến đấu được làm trước.",
+      "shape": "hits",
+      "prompt": "An edited sequence of isolated a floating energy emitter igniting a sustained heat beam, a rapid power gathering whine, a forceful arc strike, dense plasma friction over a deep electrical hum, a short low echo, each one followed by a second of silence.",
+      "targetMs": {
+        "min": 480,
+        "max": 720
+      },
+      "variants": 1,
+      "hitsPerTake": 6,
+      "takes": 2,
+      "loop": false,
+      "voiceHint": "Vo ngắn lên, xé điện rồi ù.",
+      "inbox": "~/AudioLab/inbox/firefly/typing-survival/gun.tia.start/",
+      "era": "reworded",
+      "eraNote": "Máy phát công nghiệp bật đổi thành súng canh gom năng lượng rồi mồi plasma, giữ EV.beamStart.",
+      "specCard": "tools/audio-lab/specs/typing-survival/gun.tia.start.yaml",
+      "basis": [
+        "Hướng B: docs/games/ART_DIRECTION_2026-10-28.md:547–575; hình dạng Q6: tools/audio-lab/DECISIONS.md §Q6.",
+        "Độ dài và số biến thể: tools/audio-lab/specs/typing-survival/gun.tia.start.yaml (duration.min_ms/max_ms, variants.target).",
+        "games/typing-survival/src/view/combat.ts:261–266; games/typing-survival/src/audio/theme-audio.ts:260–267",
+        "Chọn súng tương ứng trong 2/5; app/journey.ts:142,162,194–205; content/chapter-1.ts:39–53"
+      ]
+    },
+    {
+      "id": "gun.tia.loop",
+      "playerName": "Heat Beam",
+      "when": "Suốt lúc Heat Beam cháy, chỉ khi game đang chạy.",
+      "bus": "guns",
+      "phase": "travel",
+      "vfxSync": "Bám đoạn tia đang quét; dừng theo trạng thái beam.",
+      "priority": "P0",
+      "priorityWhy": "Đòn chữ, súng, trúng và chết: nhóm tạo lực chiến đấu được làm trước.",
+      "shape": "loop",
+      "prompt": "A continuous sound recording of a continuous steady plasma beam texture with a deep fifty five hertz electrical hum, dense low energy friction and fine electrical grains above five kilohertz, constant level and constant timbre throughout, seamless sustained material.",
+      "targetMs": {
+        "min": 2000,
+        "max": 2000
+      },
+      "variants": 1,
+      "hitsPerTake": 1,
+      "takes": 3,
+      "loop": true,
+      "voiceHint": "Giữ ù đều một hơi.",
+      "inbox": "~/AudioLab/inbox/firefly/typing-survival/gun.tia.loop/",
+      "era": "kept",
+      "eraNote": "Cùng sự kiện và vai trò; giữ hình dạng âm, diễn đạt bằng vật liệu hướng B.",
+      "specCard": null,
+      "basis": [
+        "Hướng B: docs/games/ART_DIRECTION_2026-10-28.md:547–575; hình dạng Q6: tools/audio-lab/DECISIONS.md §Q6.",
+        "Thẻ trống hoặc chưa có: lấy mốc tác giả từ THEME_SOUND_LIST.md và hàm phát; không phải số đo Firefly.",
+        "THEME_SOUND_LIST.md §4/§9: prompt vòng 2 s; gun-audio.ts:74–76: nền duy trì, nhỏ hơn âm khởi đầu; biến thể 1 là mặc định biên tập theo THEME_SOUND_LIST §2.",
+        "games/typing-survival/src/view/beams.ts:172–184; games/typing-survival/src/audio/theme-audio.ts:206–214",
+        "Chọn súng tương ứng trong 2/5; app/journey.ts:142,162,194–205; content/chapter-1.ts:39–53"
+      ]
+    },
+    {
+      "id": "gun.tia.end",
+      "playerName": "Heat Beam",
+      "when": "Heat Beam ngừng cháy.",
+      "bus": "guns",
+      "phase": "aftermath",
+      "vfxSync": "Heat Beam tắt tại EV.beamEnd, còn vệt cháy sàn.",
+      "priority": "P0",
+      "priorityWhy": "Đòn chữ, súng, trúng và chết: nhóm tạo lực chiến đấu được làm trước.",
+      "shape": "hits",
+      "prompt": "An edited sequence of isolated an energy beam extinguishing, a descending electrical release, a contracting plasma body and a low resonant decay below one kilohertz across a wide ancient stone and graphite steel causeway, each one followed by a second of silence.",
+      "targetMs": {
+        "min": 320,
+        "max": 480
+      },
+      "variants": 1,
+      "hitsPerTake": 8,
+      "takes": 2,
+      "loop": false,
+      "voiceHint": "Vuốt thấp dần, tắt gọn.",
+      "inbox": "~/AudioLab/inbox/firefly/typing-survival/gun.tia.end/",
+      "era": "kept",
+      "eraNote": "Cùng sự kiện và vai trò; giữ hình dạng âm, diễn đạt bằng vật liệu hướng B.",
+      "specCard": "tools/audio-lab/specs/typing-survival/gun.tia.end.yaml",
+      "basis": [
+        "Hướng B: docs/games/ART_DIRECTION_2026-10-28.md:547–575; hình dạng Q6: tools/audio-lab/DECISIONS.md §Q6.",
+        "Độ dài và số biến thể: tools/audio-lab/specs/typing-survival/gun.tia.end.yaml (duration.min_ms/max_ms, variants.target).",
+        "games/typing-survival/src/view/combat.ts:269–271; games/typing-survival/src/audio/theme-audio.ts:270–271",
+        "Chọn súng tương ứng trong 2/5; app/journey.ts:142,162,194–205; content/chapter-1.ts:39–53"
+      ]
+    },
+    {
+      "id": "gun.tia.pulse",
+      "playerName": "Heat Beam",
+      "when": "Một nhịp Heat Beam có quái trúng.",
+      "bus": "impacts",
+      "phase": "impact",
+      "vfxSync": "Lóe cắt trên quái, gom theo khung có tiaHits.",
+      "priority": "P0",
+      "priorityWhy": "Đòn chữ, súng, trúng và chết: nhóm tạo lực chiến đấu được làm trước.",
+      "shape": "hits",
+      "prompt": "An edited sequence of isolated tiny concentrated beam contacts biting into cracked black glass, a crisp electrical strike, a tightly compressed sizzling body and a fine high frequency decay above four kilohertz, each one followed by a second of silence.",
+      "targetMs": {
+        "min": 40,
+        "max": 60
+      },
+      "variants": 4,
+      "hitsPerTake": 8,
+      "takes": 2,
+      "loop": false,
+      "voiceHint": "Xẹt rất ngắn, gọn.",
+      "inbox": "~/AudioLab/inbox/firefly/typing-survival/gun.tia.pulse/",
+      "era": "kept",
+      "eraNote": "Cùng sự kiện và vai trò; giữ hình dạng âm, diễn đạt bằng vật liệu hướng B.",
+      "specCard": "tools/audio-lab/specs/typing-survival/gun.tia.pulse.yaml",
+      "basis": [
+        "Hướng B: docs/games/ART_DIRECTION_2026-10-28.md:547–575; hình dạng Q6: tools/audio-lab/DECISIONS.md §Q6.",
+        "Độ dài và số biến thể: tools/audio-lab/specs/typing-survival/gun.tia.pulse.yaml (duration.min_ms/max_ms, variants.target).",
+        "games/typing-survival/src/view/combat.ts:193,294; games/typing-survival/src/audio/theme-audio.ts:275–280",
+        "Chọn súng tương ứng trong 2/5; app/journey.ts:142,162,194–205; content/chapter-1.ts:39–53"
+      ]
+    },
+    {
+      "id": "gun.tan.fire",
+      "playerName": "Scatter Gun",
+      "when": "Scatter Gun tung một loạt 7 viên.",
+      "bus": "guns",
+      "phase": "release",
+      "vfxSync": "Lóe nòng rộng và chùm đạn rời tại EV.volley.",
+      "priority": "P0",
+      "priorityWhy": "Đòn chữ, súng, trúng và chết: nhóm tạo lực chiến đấu được làm trước.",
+      "shape": "hits",
+      "prompt": "An edited sequence of isolated wide energy scatter blasts from a floating sentinel gun, a brief loading catch, a sharp crystalline release, a heavy spreading plasma body and sparkling fragments over a short low causeway echo, each one followed by a second of silence.",
+      "targetMs": {
+        "min": 240,
+        "max": 360
+      },
+      "variants": 4,
+      "hitsPerTake": 8,
+      "takes": 2,
+      "loop": false,
+      "voiceHint": "Khóa ngắn rồi bật rộng có lực.",
+      "inbox": "~/AudioLab/inbox/firefly/typing-survival/gun.tan.fire/",
+      "era": "reworded",
+      "eraNote": "Khóa bơm và vỏ đạn cơ khí đổi thành nổ chùm plasma từ súng canh, giữ một âm mỗi volley.",
+      "specCard": "tools/audio-lab/specs/typing-survival/gun.tan.fire.yaml",
+      "basis": [
+        "Hướng B: docs/games/ART_DIRECTION_2026-10-28.md:547–575; hình dạng Q6: tools/audio-lab/DECISIONS.md §Q6.",
+        "Độ dài và số biến thể: tools/audio-lab/specs/typing-survival/gun.tan.fire.yaml (duration.min_ms/max_ms, variants.target).",
+        "games/typing-survival/src/view/gunfx.ts:71–72",
+        "Chọn súng tương ứng trong 2/5; app/journey.ts:142,162,194–205; content/chapter-1.ts:39–53"
+      ]
+    },
+    {
+      "id": "gun.ray.armed",
+      "playerName": "Rail Gun",
+      "when": "Rail Gun có băng chờ, chưa vào nhịp nạp.",
+      "bus": "guns",
+      "phase": "charge",
+      "vfxSync": "Đạn sáng lơ lửng ở nòng; vòng điện giữ sẵn.",
+      "priority": "P0",
+      "priorityWhy": "Đòn chữ, súng, trúng và chết: nhóm tạo lực chiến đấu được làm trước.",
+      "shape": "loop",
+      "prompt": "A continuous sound recording of a small charged energy capacitor held ready, a quiet continuous hum below four hundred hertz and a faint electric glitter above five kilohertz, constant level and constant timbre throughout, seamless sustained material.",
+      "targetMs": {
+        "min": 2000,
+        "max": 2000
+      },
+      "variants": 1,
+      "hitsPerTake": 1,
+      "takes": 3,
+      "loop": true,
+      "voiceHint": "Ù nhỏ đều, hơi điện rất cao.",
+      "inbox": "~/AudioLab/inbox/firefly/typing-survival/gun.ray.armed/",
+      "era": "kept",
+      "eraNote": "Cùng sự kiện và vai trò; giữ hình dạng âm, diễn đạt bằng vật liệu hướng B.",
+      "specCard": null,
+      "basis": [
+        "Hướng B: docs/games/ART_DIRECTION_2026-10-28.md:547–575; hình dạng Q6: tools/audio-lab/DECISIONS.md §Q6.",
+        "Thẻ trống hoặc chưa có: lấy mốc tác giả từ THEME_SOUND_LIST.md và hàm phát; không phải số đo Firefly.",
+        "THEME_SOUND_LIST.md §4/§9: prompt vòng 2 s; gun-audio.ts:74–76: nền duy trì, nhỏ hơn âm khởi đầu; biến thể 1 là mặc định biên tập theo THEME_SOUND_LIST §2.",
+        "games/typing-survival/src/view/beams.ts:163–165; games/typing-survival/src/audio/gun-audio.ts:76",
+        "Chọn súng tương ứng trong 2/5; app/journey.ts:142,162,194–205; content/chapter-1.ts:39–53"
+      ]
+    },
+    {
+      "id": "gun.ray.charge",
+      "playerName": "Rail Gun",
+      "when": "Rail Gun bắt đầu nạp một phát, 0,15 s.",
+      "bus": "guns",
+      "phase": "charge",
+      "vfxSync": "Vòng điện co về nòng tại EV.charge; không lùi tick bắn.",
+      "priority": "P0",
+      "priorityWhy": "Đòn chữ, súng, trúng và chết: nhóm tạo lực chiến đấu được làm trước.",
+      "shape": "hits",
+      "prompt": "An edited sequence of isolated a rail emitter gathering power for a shot, a tightly rising capacitor whine and concentrated electrical tension ending precisely at its peak, a compact preparation gesture, each one followed by a second of silence.",
+      "targetMs": {
+        "min": 120,
+        "max": 180
+      },
+      "variants": 1,
+      "hitsPerTake": 8,
+      "takes": 2,
+      "loop": false,
+      "voiceHint": "Rít lên dốc rồi dứt ở đỉnh.",
+      "inbox": "~/AudioLab/inbox/firefly/typing-survival/gun.ray.charge/",
+      "era": "kept",
+      "eraNote": "Cùng sự kiện và vai trò; giữ hình dạng âm, diễn đạt bằng vật liệu hướng B.",
+      "specCard": "tools/audio-lab/specs/typing-survival/gun.ray.charge.yaml",
+      "basis": [
+        "Hướng B: docs/games/ART_DIRECTION_2026-10-28.md:547–575; hình dạng Q6: tools/audio-lab/DECISIONS.md §Q6.",
+        "Độ dài và số biến thể: tools/audio-lab/specs/typing-survival/gun.ray.charge.yaml (duration.min_ms/max_ms, variants.target).",
+        "games/typing-survival/src/view/gunfx.ts:73–74",
+        "Chọn súng tương ứng trong 2/5; app/journey.ts:142,162,194–205; content/chapter-1.ts:39–53"
+      ]
+    },
+    {
+      "id": "gun.ray.fire",
+      "playerName": "Rail Gun",
+      "when": "Rail Gun bắn tia xuyên.",
+      "bus": "guns",
+      "phase": "release",
+      "vfxSync": "Đầu tia thẳng bật ở nòng tại EV.rail.",
+      "priority": "P0",
+      "priorityWhy": "Đòn chữ, súng, trúng và chết: nhóm tạo lực chiến đấu được làm trước.",
+      "shape": "hits",
+      "prompt": "An edited sequence of isolated a powerful rail energy discharge from a floating sentinel gun, an extremely sharp crystalline crack, a dense low plasma body, electricity tearing above four kilohertz and a dark resonant tail below one kilohertz, each one followed by a second of silence.",
+      "targetMs": {
+        "min": 560,
+        "max": 840
+      },
+      "variants": 4,
+      "hitsPerTake": 6,
+      "takes": 2,
+      "loop": false,
+      "voiceHint": "Bật đanh, thân nặng rồi ngân xa.",
+      "inbox": "~/AudioLab/inbox/firefly/typing-survival/gun.ray.fire/",
+      "era": "reworded",
+      "eraNote": "Nổ súng ray cơ khí đổi thành nhát xả năng lượng xuyên có đuôi ion, giữ EV.rail.",
+      "specCard": "tools/audio-lab/specs/typing-survival/gun.ray.fire.yaml",
+      "basis": [
+        "Hướng B: docs/games/ART_DIRECTION_2026-10-28.md:547–575; hình dạng Q6: tools/audio-lab/DECISIONS.md §Q6.",
+        "Độ dài và số biến thể: tools/audio-lab/specs/typing-survival/gun.ray.fire.yaml (duration.min_ms/max_ms, variants.target).",
+        "games/typing-survival/src/view/gunfx.ts:75–76",
+        "Chọn súng tương ứng trong 2/5; app/journey.ts:142,162,194–205; content/chapter-1.ts:39–53"
+      ]
+    },
+    {
+      "id": "gun.phao.launch",
+      "playerName": "Star Mortar",
+      "when": "Star Mortar phóng một quả.",
+      "bus": "guns",
+      "phase": "release",
+      "vfxSync": "Cầu sáng rời nòng và bắt đầu cung bay tại EV.launch.",
+      "priority": "P0",
+      "priorityWhy": "Đòn chữ, súng, trúng và chết: nhóm tạo lực chiến đấu được làm trước.",
+      "shape": "hits",
+      "prompt": "An edited sequence of isolated a heavy luminous mortar orb launching from a floating sentinel gun, a brief chamber lock, a forceful launch crack with a weighty resonant body, a high ion whistle receding through space and a short low causeway echo, each one followed by a second of silence.",
+      "targetMs": {
+        "min": 400,
+        "max": 600
+      },
+      "variants": 4,
+      "hitsPerTake": 7,
+      "takes": 2,
+      "loop": false,
+      "voiceHint": "Khóa, phóng có lực, rít xa.",
+      "inbox": "~/AudioLab/inbox/firefly/typing-survival/gun.phao.launch/",
+      "era": "reworded",
+      "eraNote": "Đạn trượt vào ống thép đổi thành quả sáng khóa năng lượng và phóng theo cung từ súng canh.",
+      "specCard": "tools/audio-lab/specs/typing-survival/gun.phao.launch.yaml",
+      "basis": [
+        "Hướng B: docs/games/ART_DIRECTION_2026-10-28.md:547–575; hình dạng Q6: tools/audio-lab/DECISIONS.md §Q6.",
+        "Độ dài và số biến thể: tools/audio-lab/specs/typing-survival/gun.phao.launch.yaml (duration.min_ms/max_ms, variants.target).",
+        "games/typing-survival/src/view/gunfx.ts:77–78",
+        "Chọn súng tương ứng trong 2/5; app/journey.ts:142,162,194–205; content/chapter-1.ts:39–53"
+      ]
+    },
+    {
+      "id": "gun.phao.burst",
+      "playerName": "Star Mortar",
+      "when": "Quả Star Mortar nổ; tiếng riêng thay hit.* trong vùng.",
+      "bus": "impacts",
+      "phase": "impact",
+      "vfxSync": "Lóe nổ vùng tại EV.burst; các nổ liền leo nửa cung theo mã.",
+      "priority": "P0",
+      "priorityWhy": "Đòn chữ, súng, trúng và chết: nhóm tạo lực chiến đấu được làm trước.",
+      "shape": "hits",
+      "prompt": "An edited sequence of isolated a heavy plasma orb detonating on graphite steel and ancient stone, a sharp crystalline rupture, a deep expansive blast with a dense energy body, black glass fragments scattering and a low rolling spatial decay, each one followed by a second of silence.",
+      "targetMs": {
+        "min": 480,
+        "max": 720
+      },
+      "variants": 3,
+      "hitsPerTake": 6,
+      "takes": 2,
+      "loop": false,
+      "voiceHint": "Nứt giòn rồi nổ nặng, mảnh rơi.",
+      "inbox": "~/AudioLab/inbox/firefly/typing-survival/gun.phao.burst/",
+      "era": "reworded",
+      "eraNote": "Nổ mảnh trên sàn thép đổi thành quả plasma phá kính đen trên đường đắp đá cổ, giữ tiếng nổ vùng riêng.",
+      "specCard": "tools/audio-lab/specs/typing-survival/gun.phao.burst.yaml",
+      "basis": [
+        "Hướng B: docs/games/ART_DIRECTION_2026-10-28.md:547–575; hình dạng Q6: tools/audio-lab/DECISIONS.md §Q6.",
+        "Độ dài và số biến thể: tools/audio-lab/specs/typing-survival/gun.phao.burst.yaml (duration.min_ms/max_ms, variants.target).",
+        "games/typing-survival/src/view/gunfx.ts:79–82; games/typing-survival/src/view/combat.ts:197–198",
+        "Chọn súng tương ứng trong 2/5; app/journey.ts:142,162,194–205; content/chapter-1.ts:39–53"
+      ]
+    },
+    {
+      "id": "hit.t1",
+      "playerName": null,
+      "when": "Đòn bậc T1 trúng, gom khoảng 38 ms.",
+      "bus": "impacts",
+      "phase": "impact",
+      "vfxSync": "Lóe trúng nhẹ sau cửa sổ gom; không thêm thời gian chờ.",
+      "priority": "P0",
+      "priorityWhy": "Đòn chữ, súng, trúng và chết: nhóm tạo lực chiến đấu được làm trước.",
+      "shape": "hits",
+      "prompt": "An edited sequence of isolated small energy projectiles striking cracked black glass, a bright crisp fracture, a compact solid glass body and a brief high shimmer above four kilohertz, tightly focused impact material, each one followed by a second of silence.",
+      "targetMs": {
+        "min": 112,
+        "max": 168
+      },
+      "variants": 6,
+      "hitsPerTake": 8,
+      "takes": 2,
+      "loop": false,
+      "voiceHint": "Keng kính gọn, thân nhỏ.",
+      "inbox": "~/AudioLab/inbox/firefly/typing-survival/hit.t1/",
+      "era": "reworded",
+      "eraNote": "Keng nhẹ trên vỏ thép đổi thành nứt kính đen nhỏ, vẫn là đầu và thân của bậc T1.",
+      "specCard": "tools/audio-lab/specs/typing-survival/hit.t1.yaml",
+      "basis": [
+        "Hướng B: docs/games/ART_DIRECTION_2026-10-28.md:547–575; hình dạng Q6: tools/audio-lab/DECISIONS.md §Q6.",
+        "Độ dài và số biến thể: tools/audio-lab/specs/typing-survival/hit.t1.yaml (duration.min_ms/max_ms, variants.target).",
+        "games/typing-survival/src/view/combat.ts:185–198; games/typing-survival/src/audio/theme-audio.ts:294–303",
+        "Đòn thường/crit/perfect có T1–T3; content/chapter-1.ts:39–53"
+      ]
+    },
+    {
+      "id": "hit.t2",
+      "playerName": null,
+      "when": "Đòn bậc T2 hoặc T3 trúng, gom khoảng 38 ms.",
+      "bus": "impacts",
+      "phase": "impact",
+      "vfxSync": "Lóe crit hoặc perfect tại mục tiêu; mã giữ mức theo số trúng.",
+      "priority": "P0",
+      "priorityWhy": "Đòn chữ, súng, trúng và chết: nhóm tạo lực chiến đấu được làm trước.",
+      "shape": "hits",
+      "prompt": "An edited sequence of isolated medium energy impacts on thick cracked black glass, a hard bright fracture and a dense resonant glass body below one kilohertz, a compact high shimmer above four kilohertz, focused impact material, each one followed by a second of silence.",
+      "targetMs": {
+        "min": 208,
+        "max": 312
+      },
+      "variants": 4,
+      "hitsPerTake": 8,
+      "takes": 2,
+      "loop": false,
+      "voiceHint": "Nứt chắc, thân dày hơn bậc nhẹ.",
+      "inbox": "~/AudioLab/inbox/firefly/typing-survival/hit.t2/",
+      "era": "reworded",
+      "eraNote": "Keng trên thép dày đổi thành va chạm kính đen dày, vẫn là đầu và thân T2–T3 để ghép sub sau.",
+      "specCard": "tools/audio-lab/specs/typing-survival/hit.t2.yaml",
+      "basis": [
+        "Hướng B: docs/games/ART_DIRECTION_2026-10-28.md:547–575; hình dạng Q6: tools/audio-lab/DECISIONS.md §Q6.",
+        "Độ dài và số biến thể: tools/audio-lab/specs/typing-survival/hit.t2.yaml (duration.min_ms/max_ms, variants.target).",
+        "games/typing-survival/src/view/combat.ts:185–198; games/typing-survival/src/audio/theme-audio.ts:294–303",
+        "Đòn thường/crit/perfect có T1–T3; content/chapter-1.ts:39–53"
+      ]
+    },
+    {
+      "id": "hit.armour",
+      "playerName": "Armor",
+      "when": "Armor của quái chặn phần lớn đòn, gồm Brute.",
+      "bus": "impacts",
+      "phase": "impact",
+      "vfxSync": "Các tia lửa bật khỏi giáp tại EV.hit có FLAG.armour.",
+      "priority": "P0",
+      "priorityWhy": "Đòn chữ, súng, trúng và chết: nhóm tạo lực chiến đấu được làm trước.",
+      "shape": "hits",
+      "prompt": "An edited sequence of isolated energy projectiles glancing off thick armor, a bright metallic strike with a solid plate body, sparks scattering above four kilohertz and a short low resonance across graphite steel, each one followed by a second of silence.",
+      "targetMs": {
+        "min": 240,
+        "max": 360
+      },
+      "variants": 6,
+      "hitsPerTake": 8,
+      "takes": 2,
+      "loop": false,
+      "voiceHint": "Keng chắc bật ra, gọn.",
+      "inbox": "~/AudioLab/inbox/firefly/typing-survival/hit.armour/",
+      "era": "reworded",
+      "eraNote": "Đòn bị vỏ máy chặn đổi thành đạn năng lượng bật khỏi Armor; vai trò báo bị chặn giữ nguyên.",
+      "specCard": "tools/audio-lab/specs/typing-survival/hit.armour.yaml",
+      "basis": [
+        "Hướng B: docs/games/ART_DIRECTION_2026-10-28.md:547–575; hình dạng Q6: tools/audio-lab/DECISIONS.md §Q6.",
+        "Độ dài và số biến thể: tools/audio-lab/specs/typing-survival/hit.armour.yaml (duration.min_ms/max_ms, variants.target).",
+        "games/typing-survival/src/view/combat.ts:185–190; games/typing-survival/src/audio/theme-audio.ts:82",
+        "Brute Armor 4 từ 80 s; content/foes.ts:46; content/chapter-1.ts:49; affix giáp còn có ở sim/pace.ts:244–250"
+      ]
+    },
+    {
+      "id": "hit.sub",
+      "playerName": null,
+      "when": "Lớp dưới dùng chung từ T2, dành cho phiếu gắn sau.",
+      "bus": "impacts",
+      "phase": "impact",
+      "vfxSync": "Ghép đúng đầu trúng T2+ theo cờ bass, không phát riêng.",
+      "priority": "P0",
+      "priorityWhy": "Đòn chữ, súng, trúng và chết: nhóm tạo lực chiến đấu được làm trước.",
+      "shape": "hits",
+      "prompt": "An edited sequence of isolated low frequency reinforcement layers for a heavy energy impact, a controlled pressure onset, a compact forty to ninety hertz body and a quick natural decay, isolated lower layer material for composite impacts, each one followed by a second of silence.",
+      "targetMs": {
+        "min": 80,
+        "max": 120
+      },
+      "variants": 1,
+      "hitsPerTake": 8,
+      "takes": 2,
+      "loop": false,
+      "voiceHint": "Hơi trầm nén rất gọn.",
+      "inbox": "~/AudioLab/inbox/firefly/typing-survival/hit.sub/",
+      "era": "kept",
+      "eraNote": "Cùng sự kiện và vai trò; giữ hình dạng âm, diễn đạt bằng vật liệu hướng B.",
+      "specCard": "tools/audio-lab/specs/typing-survival/hit.sub.yaml",
+      "basis": [
+        "Hướng B: docs/games/ART_DIRECTION_2026-10-28.md:547–575; hình dạng Q6: tools/audio-lab/DECISIONS.md §Q6.",
+        "Độ dài và số biến thể: tools/audio-lab/specs/typing-survival/hit.sub.yaml (duration.min_ms/max_ms, variants.target).",
+        "Thẻ trống hoặc chưa có: lấy mốc tác giả từ THEME_SOUND_LIST.md và hàm phát; không phải số đo Firefly.",
+        "Chưa có id phát trong mã. AUDIO_PIPELINE.md §6.3 mục 3, §8.3 ưu tiên hơn ghi chú cũ THEME_SOUND_LIST.md:31; theme-audio.ts:294–307 hiện ghép sub trong flush(), tone 160 ms; trần 120 ms lấy AUDIO_PIPELINE.md:632. Khoảng 80–120 ms là mục tiêu biên tập đề xuất.",
+        "games/typing-survival/src/audio/theme-audio.ts:294–303",
+        "Lớp dự kiến tách file, chưa có id riêng trong SOUND_IDS. AUDIO_PIPELINE §6.3 mục 3 / §8.3; Sự kiện nền tảng có trong ải."
+      ]
+    },
+    {
+      "id": "hit.tail",
+      "playerName": null,
+      "when": "Lớp đuôi dùng chung theo cờ tail, dành cho phiếu gắn sau.",
+      "bus": "impacts",
+      "phase": "aftermath",
+      "vfxSync": "Bắt theo tiếng trúng đủ bậc; hiện First Shift chỉ có T1–T3.",
+      "priority": "P0",
+      "priorityWhy": "Đòn chữ, súng, trúng và chết: nhóm tạo lực chiến đấu được làm trước.",
+      "shape": "hits",
+      "prompt": "An edited sequence of isolated low resonant aftermath layers spreading across graphite steel and ancient stone, a soft onset, a dark ringing body below one kilohertz and a spacious fading decay, isolated tail material for composite impacts, each one followed by a second of silence.",
+      "targetMs": {
+        "min": 500,
+        "max": 700
+      },
+      "variants": 2,
+      "hitsPerTake": 7,
+      "takes": 2,
+      "loop": false,
+      "voiceHint": "Ngân trầm lan xa, vào mềm.",
+      "inbox": "~/AudioLab/inbox/firefly/typing-survival/hit.tail/",
+      "era": "reworded",
+      "eraNote": "Đuôi kim loại trong hành lang đổi thành ngân thấp của thép than chì và đá cổ trên đường đắp rộng.",
+      "specCard": "tools/audio-lab/specs/typing-survival/hit.tail.yaml",
+      "basis": [
+        "Hướng B: docs/games/ART_DIRECTION_2026-10-28.md:547–575; hình dạng Q6: tools/audio-lab/DECISIONS.md §Q6.",
+        "Độ dài và số biến thể: tools/audio-lab/specs/typing-survival/hit.tail.yaml (duration.min_ms/max_ms, variants.target).",
+        "Thẻ trống hoặc chưa có: lấy mốc tác giả từ THEME_SOUND_LIST.md và hàm phát; không phải số đo Firefly.",
+        "Chưa có id phát trong mã. AUDIO_PIPELINE.md §6.3 mục 3; THEME_SOUND_LIST.md:31 nói lớp đề xuất; theme-audio.ts:294–307 flush() có thân đuôi 500/700 ms từ T4. Giữ theo yêu cầu phiếu 212 dù c1-s1 hiện không đạt T4.",
+        "games/typing-survival/src/audio/theme-audio.ts:294–307",
+        "Lớp dự kiến tách file, chưa có id riêng trong SOUND_IDS. AUDIO_PIPELINE §6.3 mục 3 / §8.3; T4 chưa đạt trong ải."
+      ]
+    },
+    {
+      "id": "kill.swarm",
+      "playerName": "Swarm",
+      "when": "Quái không mang cờ Scout chết, có gom cụm; Brute cũng đi nhánh này.",
+      "bus": "kills",
+      "phase": "impact",
+      "vfxSync": "Kính đen vỡ và nứt cam tắt ở EV.kill; Brute có VFX chết lớn riêng.",
+      "priority": "P0",
+      "priorityWhy": "Đòn chữ, súng, trúng và chết: nhóm tạo lực chiến đấu được làm trước.",
+      "shape": "hits",
+      "prompt": "An edited sequence of isolated small void creatures of cracked black glass breaking apart, a compressed rupture, crunchy glass fragmentation, a compact low energy collapse and bright shards scattering across ancient stone with a short dark decay, each one followed by a second of silence.",
+      "targetMs": {
+        "min": 200,
+        "max": 300
+      },
+      "variants": 6,
+      "hitsPerTake": 8,
+      "takes": 2,
+      "loop": false,
+      "voiceHint": "Rạn, vỡ vụn, mảnh lăn.",
+      "inbox": "~/AudioLab/inbox/firefly/typing-survival/kill.swarm/",
+      "era": "reworded",
+      "eraNote": "Kim loại vỡ đổi thành kính đen vỡ; Brute vẫn dùng cùng nhánh âm hiện tại.",
+      "specCard": "tools/audio-lab/specs/typing-survival/kill.swarm.yaml",
+      "basis": [
+        "Hướng B: docs/games/ART_DIRECTION_2026-10-28.md:547–575; hình dạng Q6: tools/audio-lab/DECISIONS.md §Q6.",
+        "Độ dài và số biến thể: tools/audio-lab/specs/typing-survival/kill.swarm.yaml (duration.min_ms/max_ms, variants.target).",
+        "games/typing-survival/src/view/combat.ts:351–366; games/typing-survival/src/audio/theme-audio.ts:319",
+        "Swarm và Brute không mang cờ Scout; content/foes.ts:44,46; content/chapter-1.ts:39–53"
+      ]
+    },
+    {
+      "id": "kill.elite",
+      "playerName": "Scout",
+      "when": "Cụm chết có cờ Scout; không phải mọi quái lớn.",
+      "bus": "kills",
+      "phase": "impact",
+      "vfxSync": "Scout vỡ tại EV.kill, mảnh kính và phóng điện.",
+      "priority": "P0",
+      "priorityWhy": "Đòn chữ, súng, trúng và chết: nhóm tạo lực chiến đấu được làm trước.",
+      "shape": "hits",
+      "prompt": "An edited sequence of isolated a medium armored void creature of black glass collapsing, a tense crystalline fracture, a forceful energy rupture with a dense body, electrical discharge and falling glass fragments, a short low spatial decay, each one followed by a second of silence.",
+      "targetMs": {
+        "min": 400,
+        "max": 600
+      },
+      "variants": 3,
+      "hitsPerTake": 7,
+      "takes": 2,
+      "loop": false,
+      "voiceHint": "Vỡ mạnh, điện xé, mảnh rơi.",
+      "inbox": "~/AudioLab/inbox/firefly/typing-survival/kill.elite/",
+      "era": "reworded",
+      "eraNote": "Máy thép nổ đổi thành Scout kính đen tan cùng phóng điện.",
+      "specCard": "tools/audio-lab/specs/typing-survival/kill.elite.yaml",
+      "basis": [
+        "Hướng B: docs/games/ART_DIRECTION_2026-10-28.md:547–575; hình dạng Q6: tools/audio-lab/DECISIONS.md §Q6.",
+        "Độ dài và số biến thể: tools/audio-lab/specs/typing-survival/kill.elite.yaml (duration.min_ms/max_ms, variants.target).",
+        "games/typing-survival/src/view/combat.ts:351–366; games/typing-survival/src/audio/theme-audio.ts:319",
+        "Cụm có Scout từ 12 s, không lấy kích cỡ làm cờ; content/chapter-1.ts:48; view/combat.ts:337,351,366"
+      ]
+    },
+    {
+      "id": "kill.chime",
+      "playerName": null,
+      "when": "Lớp nốt của chuỗi hạ, hiện còn nhúng trong kill().",
+      "bus": "kills",
+      "phase": "aftermath",
+      "vfxSync": "Nốt đi cùng cụm chết; mã đổi cao độ theo chuỗi dưới 1 s.",
+      "priority": "P0",
+      "priorityWhy": "Đòn chữ, súng, trúng và chết: nhóm tạo lực chiến đấu được làm trước.",
+      "shape": "hits",
+      "prompt": "An edited sequence of isolated crystalline reward notes struck at C5 as neutral pitch source material, a brief bright contact, a compact low ringing body and a delicate high shimmer above four kilohertz, consistent pitch across takes, each one followed by a second of silence.",
+      "targetMs": {
+        "min": 240,
+        "max": 240
+      },
+      "variants": 1,
+      "hitsPerTake": 8,
+      "takes": 2,
+      "loop": false,
+      "voiceHint": "Một nốt rõ, ngân cao nhẹ.",
+      "inbox": "~/AudioLab/inbox/firefly/typing-survival/kill.chime/",
+      "era": "reworded",
+      "eraNote": "Thanh thép leo nốt đổi chất âm tinh thể; sự kiện nốt thưởng vẫn còn.",
+      "specCard": "tools/audio-lab/specs/typing-survival/kill.chime.yaml",
+      "basis": [
+        "Hướng B: docs/games/ART_DIRECTION_2026-10-28.md:547–575; hình dạng Q6: tools/audio-lab/DECISIONS.md §Q6.",
+        "Độ dài và số biến thể: tools/audio-lab/specs/typing-survival/kill.chime.yaml (duration.min_ms/max_ms, variants.target).",
+        "Thẻ trống hoặc chưa có: lấy mốc tác giả từ THEME_SOUND_LIST.md và hàm phát; không phải số đo Firefly.",
+        "Giữ vì sự kiện nốt hạ vẫn còn ở hướng B. THEME_SOUND_LIST.md §5, AUDIO_PIPELINE.md §6.4/§8.3 yêu cầu tách nốt; theme-audio.ts:315–328 hiện nốt nhúng 240 ms, chưa có id riêng. Mục tiêu biên tập 240 ms, biến thể 1 theo thẻ. Không nhúng nốt vào prompt kill.swarm/elite.",
+        "games/typing-survival/src/audio/theme-audio.ts:315–328",
+        "Lớp dự kiến tách file, chưa có id riêng trong SOUND_IDS. AUDIO_PIPELINE §6.3 mục 3 / §8.3; Sự kiện nền tảng có trong ải."
+      ]
+    },
+    {
+      "id": "foe.shot",
+      "playerName": "Scout",
+      "when": "Scout bắn cầu plasma về tuyến từ sau giây 12.",
+      "bus": "alerts",
+      "phase": "release",
+      "vfxSync": "Lóe nòng Scout tại EV.foeShot, đạn bắt đầu bay.",
+      "priority": "P1",
+      "priorityWhy": "Quái bắn, bị đánh, đợt dồn hoặc kết trận: nhóm báo tình trạng sau P0.",
+      "shape": "hits",
+      "prompt": "An edited sequence of isolated small hostile plasma shots, a quick rising charge, a sharp energetic release and a rushing compact plasma body moving toward the listener, a short low spatial decay, each one followed by a second of silence.",
+      "targetMs": {
+        "min": 200,
+        "max": 300
+      },
+      "variants": 4,
+      "hitsPerTake": 8,
+      "takes": 1,
+      "loop": false,
+      "voiceHint": "Vo lên ngắn rồi xé lao tới.",
+      "inbox": "~/AudioLab/inbox/firefly/typing-survival/foe.shot/",
+      "era": "reworded",
+      "eraNote": "Cầu plasma của lính máy đổi bối cảnh thành phát bắn của Scout kính đen, giữ nạp ngắn và tiếng lao tới.",
+      "specCard": "tools/audio-lab/specs/typing-survival/foe.shot.yaml",
+      "basis": [
+        "Hướng B: docs/games/ART_DIRECTION_2026-10-28.md:547–575; hình dạng Q6: tools/audio-lab/DECISIONS.md §Q6.",
+        "Độ dài và số biến thể: tools/audio-lab/specs/typing-survival/foe.shot.yaml (duration.min_ms/max_ms, variants.target).",
+        "games/typing-survival/src/view/combat.ts:233–235; games/typing-survival/src/audio/theme-audio.ts:336",
+        "Scout từ 12 s; content/chapter-1.ts:48; foe.shot.down cần Pulse Gun trong lựa chọn 2/5"
+      ]
+    },
+    {
+      "id": "foe.shot.down",
+      "playerName": "Scout",
+      "when": "Pulse Gun bắn hạ đạn Scout giữa đường.",
+      "bus": "impacts",
+      "phase": "impact",
+      "vfxSync": "Đạn vỡ và tia lửa tại EV.shotDown.",
+      "priority": "P1",
+      "priorityWhy": "Quái bắn, bị đánh, đợt dồn hoặc kết trận: nhóm báo tình trạng sau P0.",
+      "shape": "hits",
+      "prompt": "An edited sequence of isolated small plasma projectiles intercepted in midair, a crisp crystalline fracture, a tiny compressed energy breakup, bright sparks and fine fragments dispersing into a short high decay, each one followed by a second of silence.",
+      "targetMs": {
+        "min": 120,
+        "max": 180
+      },
+      "variants": 6,
+      "hitsPerTake": 8,
+      "takes": 1,
+      "loop": false,
+      "voiceHint": "Tách giòn, mảnh nhỏ tan.",
+      "inbox": "~/AudioLab/inbox/firefly/typing-survival/foe.shot.down/",
+      "era": "reworded",
+      "eraNote": "Đạn kim loại vỡ đổi thành cầu plasma bị chặn với tia lửa và mảnh tinh thể, giữ EV.shotDown.",
+      "specCard": "tools/audio-lab/specs/typing-survival/foe.shot.down.yaml",
+      "basis": [
+        "Hướng B: docs/games/ART_DIRECTION_2026-10-28.md:547–575; hình dạng Q6: tools/audio-lab/DECISIONS.md §Q6.",
+        "Độ dài và số biến thể: tools/audio-lab/specs/typing-survival/foe.shot.down.yaml (duration.min_ms/max_ms, variants.target).",
+        "games/typing-survival/src/view/combat.ts:237–240; games/typing-survival/src/audio/theme-audio.ts:344",
+        "Scout từ 12 s; content/chapter-1.ts:48; foe.shot.down cần Pulse Gun trong lựa chọn 2/5"
+      ]
+    },
+    {
+      "id": "hurt.hull",
+      "playerName": "Armor",
+      "when": "Đạn Scout chạm người chơi.",
+      "bus": "alerts",
+      "phase": "impact",
+      "vfxSync": "Giáp Lightbearer lóe khiên lam, áo choàng giật tại EV.playerHit.",
+      "priority": "P1",
+      "priorityWhy": "Quái bắn, bị đánh, đợt dồn hoặc kết trận: nhóm báo tình trạng sau P0.",
+      "shape": "hits",
+      "prompt": "An edited sequence of isolated a plasma projectile striking an armored caped guardian's blue energy shield, a sharp glasslike collision, a dense protective resonance, a brief electrical scatter and a low fading rumble, each one followed by a second of silence.",
+      "targetMs": {
+        "min": 320,
+        "max": 480
+      },
+      "variants": 3,
+      "hitsPerTake": 8,
+      "takes": 1,
+      "loop": false,
+      "voiceHint": "Va chắc rồi ngân thấp.",
+      "inbox": "~/AudioLab/inbox/firefly/typing-survival/hurt.hull/",
+      "era": "reworded",
+      "eraNote": "Thân tàu bị đập đổi thành giáp Lightbearer lóe khiên lam và áo choàng giật.",
+      "specCard": "tools/audio-lab/specs/typing-survival/hurt.hull.yaml",
+      "basis": [
+        "Hướng B: docs/games/ART_DIRECTION_2026-10-28.md:547–575; hình dạng Q6: tools/audio-lab/DECISIONS.md §Q6.",
+        "Độ dài và số biến thể: tools/audio-lab/specs/typing-survival/hurt.hull.yaml (duration.min_ms/max_ms, variants.target).",
+        "games/typing-survival/src/view/combat.ts:223–228; games/typing-survival/src/audio/theme-audio.ts:352–365",
+        "Scout từ 12 s; content/chapter-1.ts:48; foe.shot.down cần Pulse Gun trong lựa chọn 2/5"
+      ]
+    },
+    {
+      "id": "hurt.breach",
+      "playerName": "Armor",
+      "when": "Quái vượt vạch cuối, làm mất Armor.",
+      "bus": "alerts",
+      "phase": "impact",
+      "vfxSync": "Vòng đỏ và giật người tại EV.breach.",
+      "priority": "P1",
+      "priorityWhy": "Quái bắn, bị đánh, đợt dồn hoặc kết trận: nhóm báo tình trạng sau P0.",
+      "shape": "hits",
+      "prompt": "An edited sequence of isolated a defensive line breached on an ancient stone and graphite steel causeway, a forceful pressure rupture, a deep resonant structural body and a brief two tone warning, a low rolling decay, each one followed by a second of silence.",
+      "targetMs": {
+        "min": 640,
+        "max": 960
+      },
+      "variants": 1,
+      "hitsPerTake": 6,
+      "takes": 1,
+      "loop": false,
+      "voiceHint": "Nổ có thân, hai nhịp báo ngắn.",
+      "inbox": "~/AudioLab/inbox/firefly/typing-survival/hurt.breach/",
+      "era": "reworded",
+      "eraNote": "Thủng thân trạm đổi thành tuyến phòng thủ bị phá và mất Armor của nhân vật, giữ va chạm kèm báo động.",
+      "specCard": "tools/audio-lab/specs/typing-survival/hurt.breach.yaml",
+      "basis": [
+        "Hướng B: docs/games/ART_DIRECTION_2026-10-28.md:547–575; hình dạng Q6: tools/audio-lab/DECISIONS.md §Q6.",
+        "Độ dài và số biến thể: tools/audio-lab/specs/typing-survival/hurt.breach.yaml (duration.min_ms/max_ms, variants.target).",
+        "games/typing-survival/src/view/combat.ts:213–218; games/typing-survival/src/audio/theme-audio.ts:352–360",
+        "Để quái áp sát/vượt tuyến hoặc Armor cạn; content/chapter-1.ts:24,42–53; sim/pace.ts:119–145"
+      ]
+    },
+    {
+      "id": "hurt.drain",
+      "playerName": "Armor",
+      "when": "Quái trong vùng gần hút Armor; tối đa một tiếng mỗi 420 ms.",
+      "bus": "alerts",
+      "phase": "impact",
+      "vfxSync": "Đốm sáng giáp và luồng hút tại EV.drain.",
+      "priority": "P1",
+      "priorityWhy": "Quái bắn, bị đánh, đợt dồn hoặc kết trận: nhóm báo tình trạng sau P0.",
+      "shape": "hits",
+      "prompt": "An edited sequence of isolated small parasitic energy arcs draining an armored guardian's protective field, a crisp electrical attachment, a restrained low sizzling body and a fine high crackle fading above four kilohertz, each one followed by a second of silence.",
+      "targetMs": {
+        "min": 120,
+        "max": 180
+      },
+      "variants": 1,
+      "hitsPerTake": 8,
+      "takes": 1,
+      "loop": false,
+      "voiceHint": "Rè điện nhỏ, bám rồi tắt.",
+      "inbox": "~/AudioLab/inbox/firefly/typing-survival/hurt.drain/",
+      "era": "reworded",
+      "eraNote": "Điện hút trên tấm thép đổi thành hồ quang hút trường bảo vệ quanh giáp nhân vật, vẫn giới hạn mỗi 420 ms.",
+      "specCard": "tools/audio-lab/specs/typing-survival/hurt.drain.yaml",
+      "basis": [
+        "Hướng B: docs/games/ART_DIRECTION_2026-10-28.md:547–575; hình dạng Q6: tools/audio-lab/DECISIONS.md §Q6.",
+        "Độ dài và số biến thể: tools/audio-lab/specs/typing-survival/hurt.drain.yaml (duration.min_ms/max_ms, variants.target).",
+        "games/typing-survival/src/view/combat.ts:245–250; games/typing-survival/src/audio/theme-audio.ts:372–378",
+        "Để quái áp sát/vượt tuyến hoặc Armor cạn; content/chapter-1.ts:24,42–53; sim/pace.ts:119–145"
+      ]
+    },
+    {
+      "id": "alarm.surge",
+      "playerName": null,
+      "when": "Đợt dồn bắt đầu, mốc gốc 50 và 115 s có thể được pace dời.",
+      "bus": "alerts",
+      "phase": null,
+      "vfxSync": "Khớp peak đổi sang dương khi đang play; hướng B quái vật xa ngẩng lên.",
+      "priority": "P1",
+      "priorityWhy": "Quái bắn, bị đánh, đợt dồn hoặc kết trận: nhóm báo tình trạng sau P0.",
+      "shape": "single",
+      "prompt": "A single urgent warning gesture at the edge of a distant black hole, two rising and falling resonant calls over a deep pressure drone, a broad ominous body and a low fading spatial tail.",
+      "targetMs": {
+        "min": 1040,
+        "max": 1560
+      },
+      "variants": 1,
+      "hitsPerTake": 1,
+      "takes": 2,
+      "loop": false,
+      "voiceHint": "Hai lượt lên xuống, trầm và rộng.",
+      "inbox": "~/AudioLab/inbox/firefly/typing-survival/alarm.surge/",
+      "era": "kept",
+      "eraNote": "Cùng sự kiện và vai trò; giữ hình dạng âm, diễn đạt bằng vật liệu hướng B.",
+      "specCard": "tools/audio-lab/specs/typing-survival/alarm.surge.yaml",
+      "basis": [
+        "Hướng B: docs/games/ART_DIRECTION_2026-10-28.md:547–575; hình dạng Q6: tools/audio-lab/DECISIONS.md §Q6.",
+        "Độ dài và số biến thể: tools/audio-lab/specs/typing-survival/alarm.surge.yaml (duration.min_ms/max_ms, variants.target).",
+        "games/typing-survival/src/app/main.ts:649; games/typing-survival/src/audio/theme-audio.ts:392–399",
+        "Hai surge gốc 50/115 s; content/chapter-1.ts:47; pace có thể dời, sim/pace.ts:223–225"
+      ]
+    },
+    {
+      "id": "end.win",
+      "playerName": null,
+      "when": "Giữ đủ 150 s và thắng.",
+      "bus": "alerts",
+      "phase": null,
+      "vfxSync": "EV.end thắng mở băng rôn trước thẻ kết quả 0,9 s.",
+      "priority": "P1",
+      "priorityWhy": "Quái bắn, bị đánh, đợt dồn hoặc kết trận: nhóm báo tình trạng sau P0.",
+      "shape": "single",
+      "prompt": "A single victorious science fiction resolution, a weighty A power chord opening into white gold crystalline overtones, a brief bright crest, a deep relieved body and a spacious low decay.",
+      "targetMs": {
+        "min": 1600,
+        "max": 2400
+      },
+      "variants": 1,
+      "hitsPerTake": 1,
+      "takes": 2,
+      "loop": false,
+      "voiceHint": "Mở hợp âm chắc rồi thả nhẹ.",
+      "inbox": "~/AudioLab/inbox/firefly/typing-survival/end.win/",
+      "era": "reworded",
+      "eraNote": "Hợp âm máy kèm xả hơi đổi thành hợp âm năng lượng và âm bội tinh thể vàng trắng, cùng sự kiện thắng.",
+      "specCard": "tools/audio-lab/specs/typing-survival/end.win.yaml",
+      "basis": [
+        "Hướng B: docs/games/ART_DIRECTION_2026-10-28.md:547–575; hình dạng Q6: tools/audio-lab/DECISIONS.md §Q6.",
+        "Độ dài và số biến thể: tools/audio-lab/specs/typing-survival/end.win.yaml (duration.min_ms/max_ms, variants.target).",
+        "games/typing-survival/src/view/combat.ts:283–285; games/typing-survival/src/audio/theme-audio.ts:403–409",
+        "Giữ đủ 150 s; content/chapter-1.ts:42"
+      ]
+    },
+    {
+      "id": "end.lose",
+      "playerName": null,
+      "when": "Armor cạn, tuyến thua.",
+      "bus": "alerts",
+      "phase": null,
+      "vfxSync": "EV.end thua mở băng rôn trước thẻ kết quả 0,9 s.",
+      "priority": "P1",
+      "priorityWhy": "Quái bắn, bị đánh, đợt dồn hoặc kết trận: nhóm báo tình trạng sau P0.",
+      "shape": "single",
+      "prompt": "A single defeated energy field collapse, a descending power resonance, cracked black glass settling in several weighted contacts on ancient stone, a deep fading body and a dark spatial decay.",
+      "targetMs": {
+        "min": 1600,
+        "max": 2400
+      },
+      "variants": 1,
+      "hitsPerTake": 1,
+      "takes": 2,
+      "loop": false,
+      "voiceHint": "Hạ dần, rạn rồi chìm.",
+      "inbox": "~/AudioLab/inbox/firefly/typing-survival/end.lose/",
+      "era": "reworded",
+      "eraNote": "Máy hạ điện và thép sụp đổi thành trường năng lượng tắt, kính đen lắng trên đá cổ, cùng sự kiện thua.",
+      "specCard": "tools/audio-lab/specs/typing-survival/end.lose.yaml",
+      "basis": [
+        "Hướng B: docs/games/ART_DIRECTION_2026-10-28.md:547–575; hình dạng Q6: tools/audio-lab/DECISIONS.md §Q6.",
+        "Độ dài và số biến thể: tools/audio-lab/specs/typing-survival/end.lose.yaml (duration.min_ms/max_ms, variants.target).",
+        "games/typing-survival/src/view/combat.ts:283–285; games/typing-survival/src/audio/theme-audio.ts:403–415",
+        "Để quái áp sát/vượt tuyến hoặc Armor cạn; content/chapter-1.ts:24,42–53; sim/pace.ts:119–145"
+      ]
+    },
+    {
+      "id": "support.repair",
+      "playerName": "Armor",
+      "when": "Pace chọn support khi gần thua và director bật.",
+      "bus": "alerts",
+      "phase": null,
+      "vfxSync": "Vòng xanh từ trên xuống, Armor tăng tại EV.support.",
+      "priority": "P2",
+      "priorityWhy": "UI, sao hoặc tiếp tế: nhóm phụ sau P0 và P1.",
+      "shape": "hits",
+      "prompt": "An edited sequence of isolated a restorative green energy ring descending around an armored guardian, a smooth gathering rise, a precise crystalline closure, a warm low resonant body and a soft high shimmer, each one followed by a second of silence.",
+      "targetMs": {
+        "min": 720,
+        "max": 1080
+      },
+      "variants": 1,
+      "hitsPerTake": 5,
+      "takes": 1,
+      "loop": false,
+      "voiceHint": "Nâng lên, khép êm, ngân nhẹ.",
+      "inbox": "~/AudioLab/inbox/firefly/typing-survival/support.repair/",
+      "era": "reworded",
+      "eraNote": "Khoang sửa cập đổi thành vòng xanh từ trên xuống, vẫn tăng Armor.",
+      "specCard": "tools/audio-lab/specs/typing-survival/support.repair.yaml",
+      "basis": [
+        "Hướng B: docs/games/ART_DIRECTION_2026-10-28.md:547–575; hình dạng Q6: tools/audio-lab/DECISIONS.md §Q6.",
+        "Độ dài và số biến thể: tools/audio-lab/specs/typing-survival/support.repair.yaml (duration.min_ms/max_ms, variants.target).",
+        "games/typing-survival/src/view/combat.ts:253–258; games/typing-survival/src/sim/pace.ts:229–233",
+        "Director bật và chọn support khi nguy; content/chapter-1.ts:52; content/stage-rules.ts:103; sim/pace.ts:97–98,229–233"
+      ]
+    },
+    {
+      "id": "star.get",
+      "playerName": null,
+      "when": "Kết ải có ít nhất một sao; hiện mã gọi một lần cho cả nhóm.",
+      "bus": "ui",
+      "phase": null,
+      "vfxSync": "Khớp settle kết ải có stars.some(Boolean), không đợi từng sao bay.",
+      "priority": "P2",
+      "priorityWhy": "UI, sao hoặc tiếp tế: nhóm phụ sau P0 và P1.",
+      "shape": "hits",
+      "prompt": "An edited sequence of isolated a small crystalline reward star arriving, a precise bright contact, a delicate ringing body and a short airy shimmer above four kilohertz, each one followed by a second of silence.",
+      "targetMs": {
+        "min": 400,
+        "max": 600
+      },
+      "variants": 1,
+      "hitsPerTake": 7,
+      "takes": 1,
+      "loop": false,
+      "voiceHint": "Một ting sáng, ngân gọn.",
+      "inbox": "~/AudioLab/inbox/firefly/typing-survival/star.get/",
+      "era": "kept",
+      "eraNote": "Cùng sự kiện và vai trò; giữ hình dạng âm, diễn đạt bằng vật liệu hướng B.",
+      "specCard": "tools/audio-lab/specs/typing-survival/star.get.yaml",
+      "basis": [
+        "Hướng B: docs/games/ART_DIRECTION_2026-10-28.md:547–575; hình dạng Q6: tools/audio-lab/DECISIONS.md §Q6.",
+        "Độ dài và số biến thể: tools/audio-lab/specs/typing-survival/star.get.yaml (duration.min_ms/max_ms, variants.target).",
+        "games/typing-survival/src/app/main.ts:182–186",
+        "Ải khác s0 và stars.some(Boolean); app/main.ts:182–186; content/chapter-1.ts:39–42"
+      ]
+    },
+    {
+      "id": "ui.move",
+      "playerName": null,
+      "when": "Đổi mục hoặc giá trị cài đặt.",
+      "bus": "ui",
+      "phase": null,
+      "vfxSync": "Nút đổi focus hoặc rê chuột, lóe lam.",
+      "priority": "P2",
+      "priorityWhy": "UI, sao hoặc tiếp tế: nhóm phụ sau P0 và P1.",
+      "shape": "hits",
+      "prompt": "An edited sequence of isolated tiny smoked glass interface contacts, a dry precise crystalline tick with a tightly controlled brief resonance, each one followed by a second of silence.",
+      "targetMs": {
+        "min": 12,
+        "max": 18
+      },
+      "variants": 1,
+      "hitsPerTake": 8,
+      "takes": 1,
+      "loop": false,
+      "voiceHint": "Chạm kính rất gọn.",
+      "inbox": "~/AudioLab/inbox/firefly/typing-survival/ui.move/",
+      "era": "reworded",
+      "eraNote": "Rơ-le chọn mục đổi thành chạm kính khói rất ngắn, giữ hành động đổi focus.",
+      "specCard": "tools/audio-lab/specs/typing-survival/ui.move.yaml",
+      "basis": [
+        "Hướng B: docs/games/ART_DIRECTION_2026-10-28.md:547–575; hình dạng Q6: tools/audio-lab/DECISIONS.md §Q6.",
+        "Độ dài và số biến thể: tools/audio-lab/specs/typing-survival/ui.move.yaml (duration.min_ms/max_ms, variants.target).",
+        "games/typing-survival/src/app/main.ts:393,472,502; games/typing-survival/src/app/journey.ts:222,235",
+        "Menu, cài đặt và chọn súng quanh First Shift; app/journey.ts:142,194–205; app/main.ts:390–416"
+      ]
+    },
+    {
+      "id": "ui.select",
+      "playerName": null,
+      "when": "Chọn mục, nút hoặc súng.",
+      "bus": "ui",
+      "phase": null,
+      "vfxSync": "Nút lóe lam, bảng mở bằng đường sáng.",
+      "priority": "P2",
+      "priorityWhy": "UI, sao hoặc tiếp tế: nhóm phụ sau P0 và P1.",
+      "shape": "hits",
+      "prompt": "An edited sequence of isolated smoked glass interface selections, a crisp glass contact, a compact low confirmation resonance and a fine white gold shimmer, each one followed by a second of silence.",
+      "targetMs": {
+        "min": 120,
+        "max": 180
+      },
+      "variants": 1,
+      "hitsPerTake": 8,
+      "takes": 1,
+      "loop": false,
+      "voiceHint": "Chạm chắc rồi ù thấp.",
+      "inbox": "~/AudioLab/inbox/firefly/typing-survival/ui.select/",
+      "era": "reworded",
+      "eraNote": "Công tắc nặng đổi thành chạm kính khói và cộng hưởng xác nhận thấp, giữ hành động chọn.",
+      "specCard": "tools/audio-lab/specs/typing-survival/ui.select.yaml",
+      "basis": [
+        "Hướng B: docs/games/ART_DIRECTION_2026-10-28.md:547–575; hình dạng Q6: tools/audio-lab/DECISIONS.md §Q6.",
+        "Độ dài và số biến thể: tools/audio-lab/specs/typing-survival/ui.select.yaml (duration.min_ms/max_ms, variants.target).",
+        "games/typing-survival/src/app/main.ts:416,579; games/typing-survival/src/app/journey.ts:205,261",
+        "Menu, cài đặt và chọn súng quanh First Shift; app/journey.ts:142,194–205; app/main.ts:390–416"
+      ]
+    },
+    {
+      "id": "ui.back",
+      "playerName": null,
+      "when": "Đóng bảng hoặc quay lại.",
+      "bus": "ui",
+      "phase": null,
+      "vfxSync": "Bảng khép, đường sáng rút khi Esc hoặc back.",
+      "priority": "P2",
+      "priorityWhy": "UI, sao hoặc tiếp tế: nhóm phụ sau P0 và P1.",
+      "shape": "hits",
+      "prompt": "An edited sequence of isolated smoked glass interface closures, a lower gentle crystalline contact, a compact descending low resonance and a soft brief decay, each one followed by a second of silence.",
+      "targetMs": {
+        "min": 120,
+        "max": 180
+      },
+      "variants": 1,
+      "hitsPerTake": 8,
+      "takes": 1,
+      "loop": false,
+      "voiceHint": "Chạm thấp hơn chọn, tắt nhẹ.",
+      "inbox": "~/AudioLab/inbox/firefly/typing-survival/ui.back/",
+      "era": "reworded",
+      "eraNote": "Công tắc hạ đổi thành kính khói khép và ngân thấp đi xuống, giữ hành động quay lại.",
+      "specCard": "tools/audio-lab/specs/typing-survival/ui.back.yaml",
+      "basis": [
+        "Hướng B: docs/games/ART_DIRECTION_2026-10-28.md:547–575; hình dạng Q6: tools/audio-lab/DECISIONS.md §Q6.",
+        "Độ dài và số biến thể: tools/audio-lab/specs/typing-survival/ui.back.yaml (duration.min_ms/max_ms, variants.target).",
+        "games/typing-survival/src/app/main.ts:398,483; games/typing-survival/src/app/journey.ts:200,267",
+        "Menu, cài đặt và chọn súng quanh First Shift; app/journey.ts:142,194–205; app/main.ts:390–416"
+      ]
+    }
+  ],
+  "excluded": [
+    {
+      "id": "key.ok",
+      "reason": "Tiếng phím do bộ Firefly 189–191 phụ trách, không làm trùng.",
+      "firstStage": "s0",
+      "basis": [
+        "typing-feel.ts:120–129; theme-audio.ts:222–230; chapter-1.ts:39–53.",
+        "games/typing-survival/src/view/typing-feel.ts:120; games/typing-survival/src/audio/theme-audio.ts:222",
+        "Gõ trong bất kỳ bến súng nào; content/chapter-1.ts:39–53"
+      ]
+    },
+    {
+      "id": "key.bad",
+      "reason": "Tiếng phím do bộ Firefly 189–191 phụ trách, không làm trùng.",
+      "firstStage": "s0",
+      "basis": [
+        "typing-feel.ts:120–129; theme-audio.ts:222–230; chapter-1.ts:39–53.",
+        "games/typing-survival/src/view/typing-feel.ts:129; games/typing-survival/src/audio/theme-audio.ts:228",
+        "Gõ trong bất kỳ bến súng nào; content/chapter-1.ts:39–53"
+      ]
+    },
+    {
+      "id": "music.calm",
+      "reason": "Nhạc là stem 96 BPM La thứ theo AUDIO_PIPELINE §8.3, không phải SFX.",
+      "firstStage": "s0",
+      "basis": [
+        "theme-audio.ts:131–151,434–443; main.ts:651.",
+        "games/typing-survival/src/audio/theme-audio.ts:131–151",
+        "Có thể phát trong/ngoài trận nhưng loại khỏi SFX; app/main.ts:651; content/chapter-1.ts:39–53"
+      ]
+    },
+    {
+      "id": "music.surge",
+      "reason": "Nhạc là stem 96 BPM La thứ theo AUDIO_PIPELINE §8.3, không phải SFX.",
+      "firstStage": "s0",
+      "basis": [
+        "theme-audio.ts:131–151,434–443; main.ts:651.",
+        "games/typing-survival/src/app/main.ts:651; games/typing-survival/src/audio/theme-audio.ts:434–443",
+        "Có thể phát trong/ngoài trận nhưng loại khỏi SFX; app/main.ts:651; content/chapter-1.ts:39–53"
+      ]
+    },
+    {
+      "id": "leader.horn",
+      "reason": "Cần Pack Leader, chỉ objective hunt đưa vào.",
+      "firstStage": "c1-s2",
+      "basis": [
+        "gunfx.ts:91; chapter-1.ts:39–105; stage-s0.ts:52–70; spawn.ts:24–25,180–184.",
+        "games/typing-survival/src/view/gunfx.ts:90–91",
+        "Ngoài ải; đầu tiên c1-s2, objective hunt; content/chapter-1.ts:57–60; c1-s1 chỉ hold, :42"
+      ]
+    },
+    {
+      "id": "leader.down",
+      "reason": "Cần tiến độ hunt tăng sau khi hạ Pack Leader.",
+      "firstStage": "c1-s2",
+      "basis": [
+        "gunfx.ts:96; chapter-1.ts:39–105; stage-s0.ts:52–70; spawn.ts:24–25,180–184.",
+        "games/typing-survival/src/view/gunfx.ts:92–96",
+        "Ngoài ải; đầu tiên c1-s2, objective hunt; content/chapter-1.ts:57–60; c1-s1 chỉ hold, :42"
+      ]
+    },
+    {
+      "id": "rift.warn",
+      "reason": "Cần telegraph Rift; First Shift hazard null.",
+      "firstStage": "c1-s3",
+      "basis": [
+        "gunfx.ts:104; chapter-1.ts:39–105; stage-s0.ts:52–70; spawn.ts:24–25,180–184.",
+        "games/typing-survival/src/view/gunfx.ts:101–104",
+        "Ngoài ải; đầu tiên c1-s3; content/chapter-1.ts:74–78; c1-s1 hazard null, :43"
+      ]
+    },
+    {
+      "id": "rift.open",
+      "reason": "Cần Rift mở; First Shift hazard null.",
+      "firstStage": "c1-s3",
+      "basis": [
+        "gunfx.ts:107; chapter-1.ts:39–105; stage-s0.ts:52–70; spawn.ts:24–25,180–184.",
+        "games/typing-survival/src/view/gunfx.ts:105–107",
+        "Ngoài ải; đầu tiên c1-s3; content/chapter-1.ts:74–78; c1-s1 hazard null, :43"
+      ]
+    },
+    {
+      "id": "shield.hit",
+      "reason": "Cần Shield Guard; First Shift chỉ có brute pack.",
+      "firstStage": "c1-s4",
+      "basis": [
+        "gunfx.ts:84; chapter-1.ts:39–105; stage-s0.ts:52–70; spawn.ts:24–25,180–184.",
+        "games/typing-survival/src/view/gunfx.ts:83–84",
+        "Ngoài ải; đầu tiên c1-s4; content/chapter-1.ts:91–101; c1-s1 chỉ brute, :49"
+      ]
+    },
+    {
+      "id": "shield.break",
+      "reason": "Cần Shield Guard; First Shift chỉ có brute pack.",
+      "firstStage": "c1-s4",
+      "basis": [
+        "gunfx.ts:86; chapter-1.ts:39–105; stage-s0.ts:52–70; spawn.ts:24–25,180–184.",
+        "games/typing-survival/src/view/gunfx.ts:85–87",
+        "Ngoài ải; đầu tiên c1-s4; content/chapter-1.ts:91–101; c1-s1 chỉ brute, :49"
+      ]
+    },
+    {
+      "id": "foe.split",
+      "reason": "Cần Splitter; chưa có ải nào trong CHAPTER_1 hoặc Trial khai báo splitter pack.",
+      "firstStage": null,
+      "basis": [
+        "gunfx.ts:89; chapter-1.ts:39–105; stage-s0.ts:52–70; spawn.ts:24–25,180–184.",
+        "games/typing-survival/src/view/gunfx.ts:88–89; games/typing-survival/src/sim/projectiles.ts:51",
+        "Ngoài ải; chưa có ải đầu tiên trong mã; content/chapter-1.ts:36–107 và content/stage-s0.ts:67 không có splitter pack; sim/spawn.ts:180–184 bỏ loại thiếu cấu hình"
+      ]
+    },
+    {
+      "id": "hit.t4",
+      "reason": "Không đạt T4: combat.ts chỉ truyền T1–T3 vào audio.hit; chưa có ải đầu tiên phát được trong mã hiện tại.",
+      "firstStage": null,
+      "basis": [
+        "combat.ts:179–198; theme-audio.ts:294–306; src/kit/feedback/tiers.ts:34–39.",
+        "games/typing-survival/src/view/combat.ts:186,198; games/typing-survival/src/audio/theme-audio.ts:298; games/typing-survival/src/kit/feedback/tiers.ts:38–39",
+        "Ngoài mọi ải hiện tại: chỉ một nơi gọi audio.hit, view/combat.ts:186,198, t tối đa 3; tail cần T4, kit/feedback/tiers.ts:38–39; quái lớn chết không gọi audio.hit"
+      ]
+    }
+  ],
+  "retired": [
+    {
+      "id": "gun.xung.loop",
+      "reason": "Nền cơ khí liên thanh thời tàu không còn sự kiện âm riêng trong hướng B: Pulse Gun phát từng viên và có đuôi riêng, không có lệnh loop này.",
+      "basis": [
+        "gun-audio.ts:37,44–58; shots.ts:178–181,431; thẻ gun.xung.loop.yaml là đề xuất cũ.",
+        "games/typing-survival/src/audio/gun-audio.ts:37; games/typing-survival/src/view/shots.ts:178–181,431",
+        "Không còn sự kiện loop cơ khí riêng; per-shot và tail thay thế trong hướng B."
+      ]
+    }
+  ],
+  "totals": {
+    "rows": 37,
+    "takes": 66,
+    "byPriority": {
+      "P0": 50,
+      "P1": 11,
+      "P2": 5
+    }
+  }
+}

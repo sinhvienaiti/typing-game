@@ -1,0 +1,79 @@
+name: Space Typing Admin A5/A10 Production Preview CI
+
+on:
+  push:
+    branches:
+      - feat/space-typing-admin-uiux
+    paths:
+      - "games/space-typing"
+      - "portal/src/admin/contracts/space-typing-admin.v1.json"
+      - "portal/src/admin/space-typing-asset-preview.ts"
+      - "portal/src/admin/space-typing-asset-preview.css"
+      - "portal/src/admin/space-typing-phase-b.ts"
+      - "portal/src/admin/space-typing-ships-phase-b.ts"
+      - "portal/src/admin/space-typing-enemies-phase-b.ts"
+      - "portal/src/admin/space-typing-bosses-phase-b.ts"
+      - "portal/src/admin/space-typing-skills-phase-b.ts"
+      - "portal/src/admin/space-typing-equipment-phase-b.ts"
+      - "portal/src/admin/space-typing-worlds-phase-b.ts"
+      - "portal/src/admin/space-typing-stages-phase-b.ts"
+      - "portal/src/admin/space-typing-vfx-phase-b.ts"
+      - "portal/src/admin/v2/preview/**"
+      - "scripts/validate-space-admin-asset-preview.mjs"
+      - "scripts/validate-space-admin-a10-production-preview.mjs"
+      - "scripts/test-space-admin-production-preview-bridge.mjs"
+      - "scripts/test-space-admin-production-preview-studio.mjs"
+      - ".github/workflows/admin-a5-preview-ci.yml"
+  pull_request:
+    paths:
+      - "games/space-typing"
+      - "portal/src/admin/contracts/space-typing-admin.v1.json"
+      - "portal/src/admin/space-typing-asset-preview.ts"
+      - "portal/src/admin/space-typing-asset-preview.css"
+      - "portal/src/admin/space-typing-phase-b.ts"
+      - "portal/src/admin/space-typing-ships-phase-b.ts"
+      - "portal/src/admin/space-typing-enemies-phase-b.ts"
+      - "portal/src/admin/space-typing-bosses-phase-b.ts"
+      - "portal/src/admin/space-typing-skills-phase-b.ts"
+      - "portal/src/admin/space-typing-equipment-phase-b.ts"
+      - "portal/src/admin/space-typing-worlds-phase-b.ts"
+      - "portal/src/admin/space-typing-stages-phase-b.ts"
+      - "portal/src/admin/space-typing-vfx-phase-b.ts"
+      - "portal/src/admin/v2/preview/**"
+      - "scripts/validate-space-admin-asset-preview.mjs"
+      - "scripts/validate-space-admin-a10-production-preview.mjs"
+      - "scripts/test-space-admin-production-preview-bridge.mjs"
+      - "scripts/test-space-admin-production-preview-studio.mjs"
+      - ".github/workflows/admin-a5-preview-ci.yml"
+
+jobs:
+  preview-contract-and-portal-build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: true
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11.21.0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24.11.0
+          cache: pnpm
+          cache-dependency-path: |
+            pnpm-lock.yaml
+            portal/pnpm-lock.yaml
+      - name: Validate A5 preview transport invariants
+        run: node scripts/validate-space-admin-asset-preview.mjs
+      - name: Validate A10 production preview coverage and classification
+        run: node scripts/validate-space-admin-a10-production-preview.mjs
+      - name: Install root dependencies required by Portal build config
+        run: pnpm install --frozen-lockfile
+      - name: Install Portal dependencies
+        run: pnpm --dir portal install --frozen-lockfile
+      - name: Test Production Preview bridge candidate coalescing
+        run: node scripts/test-space-admin-production-preview-bridge.mjs
+      - name: Test Production Preview Studio action serialization
+        run: node scripts/test-space-admin-production-preview-studio.mjs
+      - name: Build Portal
+        run: pnpm --dir portal build

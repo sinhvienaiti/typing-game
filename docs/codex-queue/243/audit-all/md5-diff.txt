@@ -1,0 +1,669 @@
+--- before
++++ after
+@@ -1,3 +1,473 @@
++00ad6d3679db7d8a86a3e86a890fea12 docs/codex-queue/243-report.md
++cbace74c655a36d0ad4a6d7675d95001 docs/codex-queue/243/assets-check.json
++5af825ed1a0cc3543e5b34cdc21df6bb docs/codex-queue/243/assets.json
++adb7028c19e569fb70ea4017d2ab9109 docs/codex-queue/243/audit-final/all-pairs-32px.json
++5270cc4a0b34ede73cb83f103dcf3334 docs/codex-queue/243/audit-final/identify.txt
++39b1d5cd742b6b7c19739ed8d43f6157 docs/codex-queue/243/audit-final/md5-after.txt
++1b3ba5a20f69ba922befd3aca1e31a0f docs/codex-queue/243/audit-final/md5-diff.txt
++2dc64869a08ac4a2f00e7a9ffb55d783 docs/codex-queue/243/audit-final/summary.json
++8e0a88fb474f5b062dd62cba40c64626 docs/codex-queue/243/audit.py
++c222329efb0053fdbc6eca306377b1d9 docs/codex-queue/243/blind-notes-final.md
++23647a2e6f5fb3bfcb8c1272ff37d1de docs/codex-queue/243/blind-notes-v1.md
++4973a188534e5b2423bb89b6b378df0e docs/codex-queue/243/candidates-final/blind-1x.png
++e1e4db4b2bca563c62beffbf1455d2cf docs/codex-queue/243/candidates-final/blind-mapping.json
++0dae2d398995ac98d60210494cc4695d docs/codex-queue/243/candidates-final/button-crop.png
++a192b3bc5319906e627bce6a60a40c5b docs/codex-queue/243/candidates-final/effect-strength-1080-button.png
++d2771119bbaa6348fe3dbd0a007bd1bd docs/codex-queue/243/candidates-final/effect-strength-1080-panel.png
++6a43e8ad83bc85e008800339cb8efbd6 docs/codex-queue/243/candidates-final/effect-strength-720-button-4x.png
++2174dc030aa3a1d3bfeb5e18f704e873 docs/codex-queue/243/candidates-final/effect-strength-720-button.png
++7b25e10ebc8eb73fb8d514a0ccdf312c docs/codex-queue/243/candidates-final/effect-strength-720-panel-4x.png
++d8c92409b8efaf1d41889512213c9856 docs/codex-queue/243/candidates-final/effect-strength-720-panel.png
++0c20073349e2f9795de9934ea31ab748 docs/codex-queue/243/candidates-final/effect-strength-before-after.png
++39891222f3435b7b4702c37b568b1b85 docs/codex-queue/243/candidates-final/effect-strength.128.png
++20df871c2de300c124b09e04196c1ad0 docs/codex-queue/243/candidates-final/effect-strength.256.png
++d5214429355229694d6c0e38960bdd0a docs/codex-queue/243/candidates-final/effect-strength.64.png
++da945a024ffaa32e0b3c01318c47019f docs/codex-queue/243/candidates-final/effect-strength.clean.png
++787eef56456e8bc3a038ddeef7f321de docs/codex-queue/243/candidates-final/effect-strength.png
++555487f4fcba74a8ba1f95f5a527d9c9 docs/codex-queue/243/candidates-final/hud-settings-1080-button.png
++4e7b00c03da674f0a7a8be64dbec9783 docs/codex-queue/243/candidates-final/hud-settings-1080-panel.png
++0c377f41ff4d43106db1de1bdbace3a0 docs/codex-queue/243/candidates-final/hud-settings-720-button-4x.png
++5810316c4f265dfff09eed0102ffa51d docs/codex-queue/243/candidates-final/hud-settings-720-button.png
++ea24c8de08ebe024bc8be051df3b5c23 docs/codex-queue/243/candidates-final/hud-settings-720-panel-4x.png
++5e253eda37534683cb698936107980ef docs/codex-queue/243/candidates-final/hud-settings-720-panel.png
++1161479fcc6cd07345344dc53b5b8efa docs/codex-queue/243/candidates-final/hud-settings-before-after.png
++33115c2856089c276dc363344a1cc13a docs/codex-queue/243/candidates-final/hud-settings.r2.128.png
++2918786e2f5bac3720d1a1a7cf8d82f9 docs/codex-queue/243/candidates-final/hud-settings.r2.256.png
++83971df3308340156ac0d3b039d6c3bb docs/codex-queue/243/candidates-final/hud-settings.r2.64.png
++b5d23b6cb002c8b284ae52c1fb472964 docs/codex-queue/243/candidates-final/hud-settings.r2.clean.png
++7b51897abcff209d34552d4a9a9b5a11 docs/codex-queue/243/candidates-final/hud-settings.r2.png
++c5a822b4c776306c7bcad9a310096811 docs/codex-queue/243/candidates-final/letter-style-1080-button.png
++9f128b23bc4c1bc8107f8389e8ea171a docs/codex-queue/243/candidates-final/letter-style-1080-panel.png
++72fff80670d02e83cb1af4fcc35e33e5 docs/codex-queue/243/candidates-final/letter-style-720-button-4x.png
++45a6baa491717e357ec3c12dc8cac381 docs/codex-queue/243/candidates-final/letter-style-720-button.png
++ef0a9759cc5b5337d1b0f5fbac806bc2 docs/codex-queue/243/candidates-final/letter-style-720-panel-4x.png
++e15194dc6f5b2689ca9ff5db4453792b docs/codex-queue/243/candidates-final/letter-style-720-panel.png
++8163009e3c74e2bf01aeb42266611dd0 docs/codex-queue/243/candidates-final/letter-style-before-after.png
++07f570479f973e747ac87bcc1e7afb18 docs/codex-queue/243/candidates-final/letter-style.128.png
++e38a52fdb67a9cd626933f5098e74838 docs/codex-queue/243/candidates-final/letter-style.256.png
++378ae72211fac6a4083ed77deb985eb5 docs/codex-queue/243/candidates-final/letter-style.64.png
++29a78f9ac2ac1074b53c97eea4c7ac3f docs/codex-queue/243/candidates-final/letter-style.clean.png
++753cc061a61b67937dd1749960ebeef9 docs/codex-queue/243/candidates-final/letter-style.png
++b370f3f6882ad9aaae8165a3d4e87339 docs/codex-queue/243/candidates-final/menu-settings-1080-button.png
++125eb9e36d6017f74fc063dde401372c docs/codex-queue/243/candidates-final/menu-settings-1080-panel.png
++a1ef8cb44aec519c014780f08ae1b483 docs/codex-queue/243/candidates-final/menu-settings-720-button-4x.png
++a18a30b6eb0b93534fe3280bb3a55960 docs/codex-queue/243/candidates-final/menu-settings-720-button.png
++104a50d96ac35d28d484e8a59852834a docs/codex-queue/243/candidates-final/menu-settings-720-panel-4x.png
++44928cc7367a7b1436ad7a464fa00940 docs/codex-queue/243/candidates-final/menu-settings-720-panel.png
++ac08ccdbaa50612f1e4c9a08bc7385ea docs/codex-queue/243/candidates-final/menu-settings-before-after.png
++cb636aec07bf33865445c3d106417fba docs/codex-queue/243/candidates-final/menu-settings.r2.128.png
++44c281d8b38c58fe359966879df265c9 docs/codex-queue/243/candidates-final/menu-settings.r2.256.png
++c103368cb53ceecd3ef77df5f3725855 docs/codex-queue/243/candidates-final/menu-settings.r2.64.png
++9d921388dbcdc80cf86f0d7f27f35bf2 docs/codex-queue/243/candidates-final/menu-settings.r2.clean.png
++1d2c0cd3b7c1b08d94b51b657c7a2b99 docs/codex-queue/243/candidates-final/menu-settings.r2.png
++6d0cf4efa933c692455b87a3ed033a2a docs/codex-queue/243/candidates-final/metrics.json
++9e6a5819746cb4a8d058fda786a3de64 docs/codex-queue/243/candidates-final/pace-director-1080-button.png
++7cfde2f55430638ff6e100a80f37701e docs/codex-queue/243/candidates-final/pace-director-1080-panel.png
++aab42b5e3ce501713b64d2841e5b35f2 docs/codex-queue/243/candidates-final/pace-director-720-button-4x.png
++57a5ef4fd4df59a41a87f7e925e4d5ab docs/codex-queue/243/candidates-final/pace-director-720-button.png
++10629fe6d8b6778e0aad42c631a7915a docs/codex-queue/243/candidates-final/pace-director-720-panel-4x.png
++510d295f8d37f353d030fdd99269301a docs/codex-queue/243/candidates-final/pace-director-720-panel.png
++dfabb3cdff8a13745a0f92509676f9ba docs/codex-queue/243/candidates-final/pace-director-before-after.png
++bc5f4884475c4e782632238a88fc73c0 docs/codex-queue/243/candidates-final/pace-director.r2.128.png
++2e6e00956deaed4ee8c6a04fca11974a docs/codex-queue/243/candidates-final/pace-director.r2.256.png
++9c0e601fc5cf75f601e0d3724fe386b9 docs/codex-queue/243/candidates-final/pace-director.r2.64.png
++d9fe3f9278e16ef27e8604f34b519f18 docs/codex-queue/243/candidates-final/pace-director.r2.clean.png
++e832606e10c61a83bf34d6b92c2b2dd7 docs/codex-queue/243/candidates-final/pace-director.r2.png
++1158b4ebe35acfe9a0978f0b1f4bf042 docs/codex-queue/243/candidates-final/panel-crop.png
++690dad2180d3904584817dc2e89ce0f7 docs/codex-queue/243/candidates-final/shake-1080-button.png
++d0d1f0252c2bfd4b9ab14d2a09d644c3 docs/codex-queue/243/candidates-final/shake-1080-panel.png
++ec2245ba3e5d6157d7ca044174fc6cc7 docs/codex-queue/243/candidates-final/shake-720-button-4x.png
++31d6e8905dda64ae333db0d6f0b62a74 docs/codex-queue/243/candidates-final/shake-720-button.png
++8ee09a391acc9a0e84e950cfc9e01ba8 docs/codex-queue/243/candidates-final/shake-720-panel-4x.png
++3063478fba1fcb311ff323db9da2754c docs/codex-queue/243/candidates-final/shake-720-panel.png
++3e8cf6ef7c858a2021b5de522d1d603b docs/codex-queue/243/candidates-final/shake-before-after.png
++cbacbab80f6bdc1211ac8740e2cb9281 docs/codex-queue/243/candidates-final/shake.r2.128.png
++e7342643486d2ecbed7c05c5f0524836 docs/codex-queue/243/candidates-final/shake.r2.256.png
++72e18681e82df0580daa797b344553c4 docs/codex-queue/243/candidates-final/shake.r2.64.png
++787ad390bc454aad9d619d084123ce9c docs/codex-queue/243/candidates-final/shake.r2.clean.png
++c14488349ae7c7ae830f7829b1938f19 docs/codex-queue/243/candidates-final/shake.r2.png
++3d145f704cfc74b15c35e5e7558e5640 docs/codex-queue/243/candidates-final/ship-1080-button.png
++00ba50ab692e89816836f1a78c28e092 docs/codex-queue/243/candidates-final/ship-1080-panel.png
++05b3bdefc95712bd8ad526b51358d29b docs/codex-queue/243/candidates-final/ship-720-button-4x.png
++6d7cf2fb75ce03983cfe571730e308c7 docs/codex-queue/243/candidates-final/ship-720-button.png
++8ad06cdf515dc81be76d1ffd23cedb86 docs/codex-queue/243/candidates-final/ship-720-panel-4x.png
++0bc7e1618f7ed1b222ff090b6ca9efb3 docs/codex-queue/243/candidates-final/ship-720-panel.png
++47df4c2d37b71a4a4e343a7e80ec18ad docs/codex-queue/243/candidates-final/ship-before-after.png
++6b4e787dae8ea717d98e14d3cdd40d64 docs/codex-queue/243/candidates-final/ship.128.png
++9da942734d47098c8b92f806cfe49f02 docs/codex-queue/243/candidates-final/ship.256.png
++ecdf665c289df0036d2fce25391e6fb8 docs/codex-queue/243/candidates-final/ship.64.png
++d7eba8f549b21cfee3a2937f8df8520e docs/codex-queue/243/candidates-final/ship.clean.png
++d9a5e3c47b810b263f774dbedd730872 docs/codex-queue/243/candidates-final/ship.png
++4c2649c10e24ba312d5e7384f010d384 docs/codex-queue/243/candidates-final/vol-effects-1080-button.png
++cfe8cedaaf63ada97080aafe40955410 docs/codex-queue/243/candidates-final/vol-effects-1080-panel.png
++db0b4265d2cd2db26af08c66c1732b44 docs/codex-queue/243/candidates-final/vol-effects-720-button-4x.png
++4da33cf56fbe47f1564eee135a686f27 docs/codex-queue/243/candidates-final/vol-effects-720-button.png
++5424a47108fb504d72847da5384b06ee docs/codex-queue/243/candidates-final/vol-effects-720-panel-4x.png
++6e6daa436c2582897f8d52cb753b86bd docs/codex-queue/243/candidates-final/vol-effects-720-panel.png
++82378214a3ec7f1465600b646b4e3b8f docs/codex-queue/243/candidates-final/vol-effects-before-after.png
++907af43c2daa4c9a562b9dda90eabf48 docs/codex-queue/243/candidates-final/vol-effects.r2.128.png
++a60af7751a4f43af91ee704b14acad95 docs/codex-queue/243/candidates-final/vol-effects.r2.256.png
++e8c4d94cc26b13fcb4887c8518fdb34f docs/codex-queue/243/candidates-final/vol-effects.r2.64.png
++9d5f520bcd47b6c00dc3e374439d425b docs/codex-queue/243/candidates-final/vol-effects.r2.clean.png
++3fe1e8b2db3cfcb424ab9935622c052a docs/codex-queue/243/candidates-final/vol-effects.r2.png
++b4b4f017d22f764482de545f0910408b docs/codex-queue/243/candidates-final/vol-interface-1080-button.png
++7a80e7fd64c9e6750b491980734e5a26 docs/codex-queue/243/candidates-final/vol-interface-1080-panel.png
++498fa5501ac93f11e7b961d4827c3140 docs/codex-queue/243/candidates-final/vol-interface-720-button-4x.png
++6b372f0025204d0616066ae8b087ea33 docs/codex-queue/243/candidates-final/vol-interface-720-button.png
++a5aa0f46b254a4d2c6a28f6d584f1747 docs/codex-queue/243/candidates-final/vol-interface-720-panel-4x.png
++8f33380b6d7a9ef08708bf1e167175d9 docs/codex-queue/243/candidates-final/vol-interface-720-panel.png
++6df36b4c854de23f3261b1a80509ca83 docs/codex-queue/243/candidates-final/vol-interface-before-after.png
++40424d4d68170e59e68e3f13b0993c90 docs/codex-queue/243/candidates-final/vol-interface.r2.128.png
++de74143f824846afc0fb085c276f28e8 docs/codex-queue/243/candidates-final/vol-interface.r2.256.png
++b2aee74660de971124815976178abbbf docs/codex-queue/243/candidates-final/vol-interface.r2.64.png
++b85acc8d1fa6b93c2f603df7609c56a4 docs/codex-queue/243/candidates-final/vol-interface.r2.clean.png
++730953b20a19645bdb19e2b4c215250b docs/codex-queue/243/candidates-final/vol-interface.r2.png
++0a54516d1414b7005dcdaf4a3ad501f3 docs/codex-queue/243/candidates-final/word-size-1080-button.png
++567f8fe22fdac4704a7280cb47953a1e docs/codex-queue/243/candidates-final/word-size-1080-panel.png
++d31941c8c663305a4dac9c90eb87c53a docs/codex-queue/243/candidates-final/word-size-720-button-4x.png
++cea9ee9fdaa5634349d6fa96a33704a5 docs/codex-queue/243/candidates-final/word-size-720-button.png
++d47f04e63b01b4fa201c30498758cc2c docs/codex-queue/243/candidates-final/word-size-720-panel-4x.png
++bb6ceaa7437e78502f24061656703e01 docs/codex-queue/243/candidates-final/word-size-720-panel.png
++4e66ad5960ede9519310de1024341f7f docs/codex-queue/243/candidates-final/word-size-before-after.png
++6414afefb4b21e9d0275eda1259a505b docs/codex-queue/243/candidates-final/word-size.128.png
++144f3459305a504b9994da4327d97dae docs/codex-queue/243/candidates-final/word-size.256.png
++eaf9fa02cd2d47d89e767c3647124b7e docs/codex-queue/243/candidates-final/word-size.64.png
++7e7666bdb9dca81fd2a5a7106f0ad1fe docs/codex-queue/243/candidates-final/word-size.clean.png
++4fe8c2ebef29dc6548e62f3121e2757f docs/codex-queue/243/candidates-final/word-size.png
++0ba1d74c35791ec3369d32317394586a docs/codex-queue/243/candidates-v1/blind-1x.png
++e1e4db4b2bca563c62beffbf1455d2cf docs/codex-queue/243/candidates-v1/blind-mapping.json
++b1e5c89f9dab4664b732ed055be07cb7 docs/codex-queue/243/candidates-v1/button-crop.png
++cec34c201d54c0b68e5fc55bdb528565 docs/codex-queue/243/candidates-v1/effect-strength-1080-button.png
++e304a46c1a6beb868f8bf9a1fdef8e83 docs/codex-queue/243/candidates-v1/effect-strength-1080-panel.png
++a9eb7d87721fee1ba6bc058fc4ee0eed docs/codex-queue/243/candidates-v1/effect-strength-720-button-4x.png
++dcb7b4fce4d39c342b358fec5cf11b8b docs/codex-queue/243/candidates-v1/effect-strength-720-button.png
++3e8d6cb6aa479c75bdc04acfbead4fa7 docs/codex-queue/243/candidates-v1/effect-strength-720-panel-4x.png
++725e9c757533b2d9da6cbd78f1245541 docs/codex-queue/243/candidates-v1/effect-strength-720-panel.png
++1faf9c39150f454d76f9bf0d24971c8f docs/codex-queue/243/candidates-v1/effect-strength-before-after.png
++23ab0bbda8105ec59d65fa311e0c08af docs/codex-queue/243/candidates-v1/effect-strength.128.png
++a777c99c49f805ae7105b77245fc5d3b docs/codex-queue/243/candidates-v1/effect-strength.256.png
++acf2d75e45a31850c439233017765933 docs/codex-queue/243/candidates-v1/effect-strength.64.png
++cdd86460cd14a1c4a0c4289b6344a1be docs/codex-queue/243/candidates-v1/effect-strength.png
++0d8988dcd7d64c297ea1dd2f01938280 docs/codex-queue/243/candidates-v1/hud-settings-1080-button.png
++a829444fbd90680913b18c695985fd3a docs/codex-queue/243/candidates-v1/hud-settings-1080-panel.png
++dc5774751eee4979de355eae0eb29aec docs/codex-queue/243/candidates-v1/hud-settings-720-button-4x.png
++54e185250b2688690af64e5d802d77f0 docs/codex-queue/243/candidates-v1/hud-settings-720-button.png
++2c19a469ac25147cfb5290cecd9e4a61 docs/codex-queue/243/candidates-v1/hud-settings-720-panel-4x.png
++302b476022872e3fa2c533035f18639a docs/codex-queue/243/candidates-v1/hud-settings-720-panel.png
++9a84239c36bf87772526b0b280d42ed0 docs/codex-queue/243/candidates-v1/hud-settings-before-after.png
++e265f4fd6cf6b55813799d8e6f8686f1 docs/codex-queue/243/candidates-v1/hud-settings.r2.128.png
++537394e5296a5b1c914e976d58806bdb docs/codex-queue/243/candidates-v1/hud-settings.r2.256.png
++5796b6ad105a4815c60e8293c56bdded docs/codex-queue/243/candidates-v1/hud-settings.r2.64.png
++d0c3c6c5400f2454dae311d5ead8e2f3 docs/codex-queue/243/candidates-v1/hud-settings.r2.png
++7fcb2bfa1cb23f6ac38e6717ecde0f66 docs/codex-queue/243/candidates-v1/letter-style-1080-button.png
++b2c4c048606827c009d5a6791d6f64bf docs/codex-queue/243/candidates-v1/letter-style-1080-panel.png
++13f9f395d07c37689266f31fc2d25a2a docs/codex-queue/243/candidates-v1/letter-style-720-button-4x.png
++db9bb9cd22e6543c5ada3fe85cb4bba3 docs/codex-queue/243/candidates-v1/letter-style-720-button.png
++6625725040ce4ec6c2426bb80ef67d5e docs/codex-queue/243/candidates-v1/letter-style-720-panel-4x.png
++e3aabca10ec6806a4ebeccd155e0d296 docs/codex-queue/243/candidates-v1/letter-style-720-panel.png
++3afa3a31bf98e82f5db2387a96662775 docs/codex-queue/243/candidates-v1/letter-style-before-after.png
++6372ec15f3b25c8679d8ff043f1b6333 docs/codex-queue/243/candidates-v1/letter-style.128.png
++ea3f482c0a72970e3dda0572a0f7fdc6 docs/codex-queue/243/candidates-v1/letter-style.256.png
++2f24c13a2668f8a8f37aede1af2c1df6 docs/codex-queue/243/candidates-v1/letter-style.64.png
++5f7a57772b5d404c5270972e569cf996 docs/codex-queue/243/candidates-v1/letter-style.png
++3e821cd3ba98162082956991844c6bb3 docs/codex-queue/243/candidates-v1/menu-settings-1080-button.png
++a6608881cdcf8bfa860824bcdf66c6a2 docs/codex-queue/243/candidates-v1/menu-settings-1080-panel.png
++ff241653c779c0c5afd1e9a046caad20 docs/codex-queue/243/candidates-v1/menu-settings-720-button-4x.png
++2e2270b64002dc2690f117462f5b59f0 docs/codex-queue/243/candidates-v1/menu-settings-720-button.png
++ccad21ea7642c9da2f307fb3c416316b docs/codex-queue/243/candidates-v1/menu-settings-720-panel-4x.png
++4bdf12402ca7ddcfaa5dcec50d2c0e3f docs/codex-queue/243/candidates-v1/menu-settings-720-panel.png
++083184b646168d13c3a7c18dbb998525 docs/codex-queue/243/candidates-v1/menu-settings-before-after.png
++356ace8b178b3c761eb545966782fdaa docs/codex-queue/243/candidates-v1/menu-settings.r2.128.png
++002a9dc95b0cbbea212e8a195508110c docs/codex-queue/243/candidates-v1/menu-settings.r2.256.png
++13c85b09146ff8fab5c1445308ceaad2 docs/codex-queue/243/candidates-v1/menu-settings.r2.64.png
++5352b8a14a5c5f0b1cd59c383176ed49 docs/codex-queue/243/candidates-v1/menu-settings.r2.png
++e24aa3c2a6c38c5bd3ef6cfa4d5448d4 docs/codex-queue/243/candidates-v1/metrics.json
++b18c08c200ecf4a026c43e2948493467 docs/codex-queue/243/candidates-v1/pace-director-1080-button.png
++5434bb76cacab4ddf698d8067aea2eae docs/codex-queue/243/candidates-v1/pace-director-1080-panel.png
++403befc509701efb90d5999a11550b39 docs/codex-queue/243/candidates-v1/pace-director-720-button-4x.png
++b867380e0ec1d67e4dcf775e78829cbb docs/codex-queue/243/candidates-v1/pace-director-720-button.png
++9038548a9d2c22838d28fddc709b43c5 docs/codex-queue/243/candidates-v1/pace-director-720-panel-4x.png
++a7eb22b2507f370615488f3f7adf4a46 docs/codex-queue/243/candidates-v1/pace-director-720-panel.png
++2b61c5dc830562e7aaa8ca84e8e6aeed docs/codex-queue/243/candidates-v1/pace-director-before-after.png
++957ef94b48184004e84b644109bc6b9b docs/codex-queue/243/candidates-v1/pace-director.r2.128.png
++dda22bfbfa6a4466f4df2f1ad587752a docs/codex-queue/243/candidates-v1/pace-director.r2.256.png
++ec679cbae2828bed761d72f220135317 docs/codex-queue/243/candidates-v1/pace-director.r2.64.png
++8223fbed36ed498e0a01facb20468690 docs/codex-queue/243/candidates-v1/pace-director.r2.png
++eb45e96ade69c106d79cb4c3623d4277 docs/codex-queue/243/candidates-v1/panel-crop.png
++c81a92982b39f9580a3cee6f69282eca docs/codex-queue/243/candidates-v1/shake-1080-button.png
++867b925c0cd3fc03bb6a58a475769050 docs/codex-queue/243/candidates-v1/shake-1080-panel.png
++c90c40744df9c11a779f60b358c308d2 docs/codex-queue/243/candidates-v1/shake-720-button-4x.png
++2d43b5fbdd04a2cd0737cb3f08e063c7 docs/codex-queue/243/candidates-v1/shake-720-button.png
++f3728fb8df3377698f78a76129b5b021 docs/codex-queue/243/candidates-v1/shake-720-panel-4x.png
++d755a20cb3ab431566c1f23cec7ccbde docs/codex-queue/243/candidates-v1/shake-720-panel.png
++6a902b17819150bf632aae34cd8f44ae docs/codex-queue/243/candidates-v1/shake-before-after.png
++a74763189cc5f718fbdbd20244f81ed4 docs/codex-queue/243/candidates-v1/shake.r2.128.png
++305ba0c63ed4bfecd17b2bc721388d8c docs/codex-queue/243/candidates-v1/shake.r2.256.png
++ed38f91990441b9eee67f8805326a85b docs/codex-queue/243/candidates-v1/shake.r2.64.png
++d5fc8669a40e93a254c15245cf4be2c7 docs/codex-queue/243/candidates-v1/shake.r2.png
++890587d6e3ef0f229094ec6e040d1dc8 docs/codex-queue/243/candidates-v1/ship-1080-button.png
++70ced6071376a29f671b58ff722f5cc0 docs/codex-queue/243/candidates-v1/ship-1080-panel.png
++0aa7f9866b1ab22f8b8a5106cbfe4798 docs/codex-queue/243/candidates-v1/ship-720-button-4x.png
++5616b9ddfe33f6bffd019dca8713b32b docs/codex-queue/243/candidates-v1/ship-720-button.png
++07d87545b58ff3aa01920fb32b7b40cd docs/codex-queue/243/candidates-v1/ship-720-panel-4x.png
++9d3c5568de38201bf41a9ca48c126ceb docs/codex-queue/243/candidates-v1/ship-720-panel.png
++207df5ae73faaa2997bf97b53cc1715d docs/codex-queue/243/candidates-v1/ship-before-after.png
++2181a348c4e406074e4038f2abff2b0a docs/codex-queue/243/candidates-v1/ship.128.png
++68496d316f3e23872252560d1ad4e6e2 docs/codex-queue/243/candidates-v1/ship.256.png
++1a54c073e60b6fdf72508c9aa84315c6 docs/codex-queue/243/candidates-v1/ship.64.png
++def1cfeafd34159faca94d304d1748c0 docs/codex-queue/243/candidates-v1/ship.png
++c367e23d616de8d1ae4961cb84eb65f5 docs/codex-queue/243/candidates-v1/vol-effects-1080-button.png
++8308074d329bcce329aefb28d14cccfa docs/codex-queue/243/candidates-v1/vol-effects-1080-panel.png
++c06cb91321d9a4112f2a2a3694037592 docs/codex-queue/243/candidates-v1/vol-effects-720-button-4x.png
++4d4f2d6dd13b0145b39cd4d291321ebd docs/codex-queue/243/candidates-v1/vol-effects-720-button.png
++3ba4f827a48a6ea2d6ad0d17d6b8afd4 docs/codex-queue/243/candidates-v1/vol-effects-720-panel-4x.png
++31f30723faae8c2df79574cbee5d1c1e docs/codex-queue/243/candidates-v1/vol-effects-720-panel.png
++2921ba792e67f7150fe1a9009bbbb873 docs/codex-queue/243/candidates-v1/vol-effects-before-after.png
++dc0985f3f3c67cbf3b7bf07268315d94 docs/codex-queue/243/candidates-v1/vol-effects.r2.128.png
++7985f6c230fa580b7205e79ecaf1c0f9 docs/codex-queue/243/candidates-v1/vol-effects.r2.256.png
++594cbcc244d96e1989495a4413d5acff docs/codex-queue/243/candidates-v1/vol-effects.r2.64.png
++b0feee6f278cc07ecb945102cb98979c docs/codex-queue/243/candidates-v1/vol-effects.r2.png
++0961198395c6d921fce362ed6cb1f756 docs/codex-queue/243/candidates-v1/vol-interface-1080-button.png
++82e16915a25b29d231921d6f50b8889f docs/codex-queue/243/candidates-v1/vol-interface-1080-panel.png
++66618f0a56d364aa0c224cced1bdf45c docs/codex-queue/243/candidates-v1/vol-interface-720-button-4x.png
++d506ebb597f01b5e933546d2dcbcdc73 docs/codex-queue/243/candidates-v1/vol-interface-720-button.png
++585da3ef1bcc618848bd6e205d0fb7ab docs/codex-queue/243/candidates-v1/vol-interface-720-panel-4x.png
++86ba34fe0f153ed1c6ac45c737c7c4fd docs/codex-queue/243/candidates-v1/vol-interface-720-panel.png
++19dc1e3b1e0d1b68a31a75c643f0867a docs/codex-queue/243/candidates-v1/vol-interface-before-after.png
++f05cb56b4f2786dc286b1540d81fa5a4 docs/codex-queue/243/candidates-v1/vol-interface.r2.128.png
++b26e8132fe99c89b693625b01f5abb26 docs/codex-queue/243/candidates-v1/vol-interface.r2.256.png
++ae3e5c351fb31dd39e206ecae6cd7352 docs/codex-queue/243/candidates-v1/vol-interface.r2.64.png
++e832a4eae155437a6b2c8ae085db6584 docs/codex-queue/243/candidates-v1/vol-interface.r2.png
++a1502078776c31db39a0200bfc5b3547 docs/codex-queue/243/candidates-v1/word-size-1080-button.png
++074c6b4961561dec42feaa98241a6a76 docs/codex-queue/243/candidates-v1/word-size-1080-panel.png
++5dc7dd8fbe47f03e7af041e1b72fd8d8 docs/codex-queue/243/candidates-v1/word-size-720-button-4x.png
++a2ecbc2555c27163dec1ed8558217b38 docs/codex-queue/243/candidates-v1/word-size-720-button.png
++55b7439ac0f240b41d7fa0b85670112b docs/codex-queue/243/candidates-v1/word-size-720-panel-4x.png
++b40eac337ff330931fc2292e5328740f docs/codex-queue/243/candidates-v1/word-size-720-panel.png
++af0d795ddd27375c432588e6e592a792 docs/codex-queue/243/candidates-v1/word-size-before-after.png
++6fa68d315aff1e4264d0497ecebcb312 docs/codex-queue/243/candidates-v1/word-size.128.png
++9d8c38bdbd90346e2011705d9537a850 docs/codex-queue/243/candidates-v1/word-size.256.png
++9eeb448912a75a6e21e80728d9c68201 docs/codex-queue/243/candidates-v1/word-size.64.png
++65562b08f50ce7babee9f6d4d6beb68d docs/codex-queue/243/candidates-v1/word-size.png
++4cc38a4f3136720c54bdf5344eea61f9 docs/codex-queue/243/candidates-v2/blind-1x.png
++e1e4db4b2bca563c62beffbf1455d2cf docs/codex-queue/243/candidates-v2/blind-mapping.json
++3b2a87589f86e2bb8ad448085ed4c7e4 docs/codex-queue/243/candidates-v2/button-crop.png
++a94a5d95ab7239d5b4400e7053a1dc76 docs/codex-queue/243/candidates-v2/effect-strength-1080-button.png
++6aece578b713281caf4397452e2d7153 docs/codex-queue/243/candidates-v2/effect-strength-1080-panel.png
++31519d1f4c84f4c7ac10c9b9a845ad10 docs/codex-queue/243/candidates-v2/effect-strength-720-button-4x.png
++ccd1f47a2f97fc515e919c402d5c1dca docs/codex-queue/243/candidates-v2/effect-strength-720-button.png
++297ac57b2499b00035e9263cbd5a6f9d docs/codex-queue/243/candidates-v2/effect-strength-720-panel-4x.png
++140a93dfbfa00fe18c190ca88367f1e8 docs/codex-queue/243/candidates-v2/effect-strength-720-panel.png
++251afd139b2911b69791b0ee421d2dcd docs/codex-queue/243/candidates-v2/effect-strength-before-after.png
++337bfc34928b426d7a20cfb90a3810e4 docs/codex-queue/243/candidates-v2/effect-strength.128.png
++2ffdef4283dec91ba4b123bd95560c48 docs/codex-queue/243/candidates-v2/effect-strength.256.png
++ac66e0a5109c5cae4407f3f201bd0750 docs/codex-queue/243/candidates-v2/effect-strength.64.png
++5ed808bc992eb0259908a58131b31b1b docs/codex-queue/243/candidates-v2/effect-strength.clean.png
++74420512cbd522582efbebae5130ae0d docs/codex-queue/243/candidates-v2/effect-strength.png
++bee8f170ea991d178d9ae1e040dc4899 docs/codex-queue/243/candidates-v2/hud-settings-1080-button.png
++125074e941b3fe2c1bcafcddbaca5bb0 docs/codex-queue/243/candidates-v2/hud-settings-1080-panel.png
++45bf5cd367529aa10810ce1363a1e32c docs/codex-queue/243/candidates-v2/hud-settings-720-button-4x.png
++7319ed848c3967529b7071cbe713ed3b docs/codex-queue/243/candidates-v2/hud-settings-720-button.png
++f9712f01a82a91a97ed8ec6c17d4d01b docs/codex-queue/243/candidates-v2/hud-settings-720-panel-4x.png
++e2420335195f54f07f721ce9f65078a2 docs/codex-queue/243/candidates-v2/hud-settings-720-panel.png
++8ad781a32313fbb2fda2c6e2c003cbd2 docs/codex-queue/243/candidates-v2/hud-settings-before-after.png
++e0ef56f5bb0633d140506985ab38e379 docs/codex-queue/243/candidates-v2/hud-settings.r2.128.png
++8579018cdd6067e6e1850ddcfcfbdceb docs/codex-queue/243/candidates-v2/hud-settings.r2.256.png
++427fd566b23e6cf40f711dc0da550b43 docs/codex-queue/243/candidates-v2/hud-settings.r2.64.png
++0595ef8127a32ca1d2b00125d912b786 docs/codex-queue/243/candidates-v2/hud-settings.r2.clean.png
++d12e81fc93892640c390fb739520e263 docs/codex-queue/243/candidates-v2/hud-settings.r2.png
++9d67fe2600319d0580f52396f4c4a63c docs/codex-queue/243/candidates-v2/letter-style-1080-button.png
++02823ab3305d1f22e9957bccfc3df794 docs/codex-queue/243/candidates-v2/letter-style-1080-panel.png
++b3fb8280856e04c0a848175ec0c4546f docs/codex-queue/243/candidates-v2/letter-style-720-button-4x.png
++b474f9030275629be24da1a2c6fbbc6f docs/codex-queue/243/candidates-v2/letter-style-720-button.png
++673643d2146035b91aee8352ab37e40e docs/codex-queue/243/candidates-v2/letter-style-720-panel-4x.png
++18087b0099ce9ab8e4d7c1da9769bb63 docs/codex-queue/243/candidates-v2/letter-style-720-panel.png
++d90168ce5cbfea74eba20ffbbdd70bea docs/codex-queue/243/candidates-v2/letter-style-before-after.png
++bed4098d909a1e6a8ae292f9d755674e docs/codex-queue/243/candidates-v2/letter-style.128.png
++bec01312a5258c0890719cf2172eb046 docs/codex-queue/243/candidates-v2/letter-style.256.png
++77a1077e4dbc191b09205e5e458d27b7 docs/codex-queue/243/candidates-v2/letter-style.64.png
++91abd17ab67a8d4c63deb7694a2f2b9c docs/codex-queue/243/candidates-v2/letter-style.clean.png
++dba3934d63a7b1e3e5fc771ba2e59255 docs/codex-queue/243/candidates-v2/letter-style.png
++b28fd5120644f1c3e2e18f6aa4f4c5ac docs/codex-queue/243/candidates-v2/menu-settings-1080-button.png
++d19630c202225a7d5594eed93183fc3c docs/codex-queue/243/candidates-v2/menu-settings-1080-panel.png
++ba74f43dd3a0a07144be45965fa78957 docs/codex-queue/243/candidates-v2/menu-settings-720-button-4x.png
++fdff99b59c3b2cb1c14f26878b71523c docs/codex-queue/243/candidates-v2/menu-settings-720-button.png
++830e7c59a86215ea70aa5ca8a5dd563a docs/codex-queue/243/candidates-v2/menu-settings-720-panel-4x.png
++9df38d69034ad08c52f955a31be38beb docs/codex-queue/243/candidates-v2/menu-settings-720-panel.png
++d4741b027dcdac21faede4f68dacf486 docs/codex-queue/243/candidates-v2/menu-settings-before-after.png
++40b2bd03bb5feaf5c940e62cc16f1606 docs/codex-queue/243/candidates-v2/menu-settings.r2.128.png
++03c2bec5520ace4fc83a593e0fc43032 docs/codex-queue/243/candidates-v2/menu-settings.r2.256.png
++4ffb6fb648fe16e43dcd92b8a7341500 docs/codex-queue/243/candidates-v2/menu-settings.r2.64.png
++d5c88ae720a5449052e967e563ef00d2 docs/codex-queue/243/candidates-v2/menu-settings.r2.clean.png
++021a50af85900fd388d502825257e107 docs/codex-queue/243/candidates-v2/menu-settings.r2.png
++1f92c8d92d91c7a37c3c4035de3ac2f8 docs/codex-queue/243/candidates-v2/metrics.json
++9feeacae91d50a5a2855f24fb294fa8d docs/codex-queue/243/candidates-v2/pace-director-1080-button.png
++b47be731eb70936577f1dc7e15667e20 docs/codex-queue/243/candidates-v2/pace-director-1080-panel.png
++05a137fbdeec0855392495516946c1d5 docs/codex-queue/243/candidates-v2/pace-director-720-button-4x.png
++089789df63d35f851401eda509f9b465 docs/codex-queue/243/candidates-v2/pace-director-720-button.png
++680b49f5d31aed420cb376fb489c5018 docs/codex-queue/243/candidates-v2/pace-director-720-panel-4x.png
++d214f2fa58dfff26966abbce8299b3f3 docs/codex-queue/243/candidates-v2/pace-director-720-panel.png
++2ae4ff4a490aaf5b19e3aed590b7a3de docs/codex-queue/243/candidates-v2/pace-director-before-after.png
++3e902f85d590904d31e4147b13aa745f docs/codex-queue/243/candidates-v2/pace-director.r2.128.png
++84490023328e2d54351b327c8aede1a6 docs/codex-queue/243/candidates-v2/pace-director.r2.256.png
++03cde1d3967b0d9783129a28262414e8 docs/codex-queue/243/candidates-v2/pace-director.r2.64.png
++bdc9ca5770a16124dff644006331e0e0 docs/codex-queue/243/candidates-v2/pace-director.r2.clean.png
++d19dee3988cb031b4b8bd7ffab4175cb docs/codex-queue/243/candidates-v2/pace-director.r2.png
++815998eecac53fadf55c4993c8fe6f36 docs/codex-queue/243/candidates-v2/panel-crop.png
++a5f1c1df3f3bd029b5d454d86bc68300 docs/codex-queue/243/candidates-v2/shake-1080-button.png
++21b99912e05fc726aa69e21a874699dc docs/codex-queue/243/candidates-v2/shake-1080-panel.png
++23a6c9be351ee736d1115433a55e685b docs/codex-queue/243/candidates-v2/shake-720-button-4x.png
++80b7ac211c93e5ebb8cf5da494ea8cf0 docs/codex-queue/243/candidates-v2/shake-720-button.png
++c1765f76a1feced037344106f4608ebc docs/codex-queue/243/candidates-v2/shake-720-panel-4x.png
++10d5add6b9f3da5ab02ea7a00963783e docs/codex-queue/243/candidates-v2/shake-720-panel.png
++cabe6ecd327b7feccd29bedf9c68a1bd docs/codex-queue/243/candidates-v2/shake-before-after.png
++8c9cb3d01ff8da539307ce82d50f495c docs/codex-queue/243/candidates-v2/shake.r2.128.png
++995e1a92fb23d5980fb2d3bbf5fd4582 docs/codex-queue/243/candidates-v2/shake.r2.256.png
++82d4fc84aa7414595f61367e28dabe24 docs/codex-queue/243/candidates-v2/shake.r2.64.png
++81b8d172df766f37f5fea5437e8769a3 docs/codex-queue/243/candidates-v2/shake.r2.clean.png
++ee3258059b32ca80c51cb139c9224f91 docs/codex-queue/243/candidates-v2/shake.r2.png
++37d10faee12d1e73350d89cdf39fd52d docs/codex-queue/243/candidates-v2/ship-1080-button.png
++6200f9c9f5522d8d5843fc87b12be1da docs/codex-queue/243/candidates-v2/ship-1080-panel.png
++bbdc2e950ef06060da4cc4f494edccf9 docs/codex-queue/243/candidates-v2/ship-720-button-4x.png
++7ddd342b93181bed13a31253f8726ed1 docs/codex-queue/243/candidates-v2/ship-720-button.png
++89a389830cef0b7423123e76755228e9 docs/codex-queue/243/candidates-v2/ship-720-panel-4x.png
++e1e2ed47ae2cf2246edf73e56fa97dd6 docs/codex-queue/243/candidates-v2/ship-720-panel.png
++8cca715be161a61354fc9a6744a56783 docs/codex-queue/243/candidates-v2/ship-before-after.png
++c2bbb365aa17d257c90dd937479f22f3 docs/codex-queue/243/candidates-v2/ship.128.png
++0594c99e0e87e8a3503ba7d4737a86c1 docs/codex-queue/243/candidates-v2/ship.256.png
++ffe518cd8d93475901065a8d537028ad docs/codex-queue/243/candidates-v2/ship.64.png
++390fbcb8370224a7df3b26a059d68ec9 docs/codex-queue/243/candidates-v2/ship.clean.png
++6bff5ccad0a53b0f40897a64ca73be23 docs/codex-queue/243/candidates-v2/ship.png
++6a74ec5e2e8fb50d75eddb9fd47159d3 docs/codex-queue/243/candidates-v2/vol-effects-1080-button.png
++7e11b859d8374e0a9262049097731a89 docs/codex-queue/243/candidates-v2/vol-effects-1080-panel.png
++fb24be63f43cba394fd955e1ab61a9b6 docs/codex-queue/243/candidates-v2/vol-effects-720-button-4x.png
++21be329968b2705000b5c86f146142ba docs/codex-queue/243/candidates-v2/vol-effects-720-button.png
++f1b65af942f50e0d6452e817b2fb9109 docs/codex-queue/243/candidates-v2/vol-effects-720-panel-4x.png
++0d94c746a23ef26e35c75a7f9955c665 docs/codex-queue/243/candidates-v2/vol-effects-720-panel.png
++6f61c3a99b50feb757529257ea1fdc7e docs/codex-queue/243/candidates-v2/vol-effects-before-after.png
++7ef11dae356983fd9c197956f1cb721a docs/codex-queue/243/candidates-v2/vol-effects.r2.128.png
++61b89f3bf99f6bf5c9740dc883fd2816 docs/codex-queue/243/candidates-v2/vol-effects.r2.256.png
++45ba3b1e002ac6bd10d44399312a0028 docs/codex-queue/243/candidates-v2/vol-effects.r2.64.png
++be40a739ec3143c1cd3eb0df42c64a1e docs/codex-queue/243/candidates-v2/vol-effects.r2.clean.png
++5ae670924b2ee1f64e090d5f8b56e86f docs/codex-queue/243/candidates-v2/vol-effects.r2.png
++55308e418050bdc9dece9d83711c936d docs/codex-queue/243/candidates-v2/vol-interface-1080-button.png
++e703a2986da548893dd4cb96a79bfa91 docs/codex-queue/243/candidates-v2/vol-interface-1080-panel.png
++bc442ef9cde77566c7df9fce009fabdd docs/codex-queue/243/candidates-v2/vol-interface-720-button-4x.png
++a740efc92f5fa85bea7ab3ab90e20311 docs/codex-queue/243/candidates-v2/vol-interface-720-button.png
++00dba67b822087061d051b80f3877cc1 docs/codex-queue/243/candidates-v2/vol-interface-720-panel-4x.png
++76ab81e8580b3bcce3c1fc6d1a617d95 docs/codex-queue/243/candidates-v2/vol-interface-720-panel.png
++c2f456ebae9d249e799f6d5864c2c9e0 docs/codex-queue/243/candidates-v2/vol-interface-before-after.png
++c71e67eea523b0a6c882fd24d046aeb8 docs/codex-queue/243/candidates-v2/vol-interface.r2.128.png
++80ad3d5aa543ad5988e67e27ea2d0bb2 docs/codex-queue/243/candidates-v2/vol-interface.r2.256.png
++c600eb68e1f88c91b5d10d15d0e4eae0 docs/codex-queue/243/candidates-v2/vol-interface.r2.64.png
++3fba219323889285e202d29cadf468c0 docs/codex-queue/243/candidates-v2/vol-interface.r2.clean.png
++27d80d5117d302fe931c5a1a7cd5aa79 docs/codex-queue/243/candidates-v2/vol-interface.r2.png
++cf91000613a8bce7498222cbbe2d3987 docs/codex-queue/243/candidates-v2/word-size-1080-button.png
++0c33ad8748d7f6f200561dcc3ff190c9 docs/codex-queue/243/candidates-v2/word-size-1080-panel.png
++f93486db51978e8bf09cbb6187d3c5e0 docs/codex-queue/243/candidates-v2/word-size-720-button-4x.png
++508df26cdb2dade08b8440b74ea4aea4 docs/codex-queue/243/candidates-v2/word-size-720-button.png
++51b2a9ec581efed34d0a4aa8a58a948b docs/codex-queue/243/candidates-v2/word-size-720-panel-4x.png
++718c85f613260bcd6074c30234bc35da docs/codex-queue/243/candidates-v2/word-size-720-panel.png
++9d2a85b4046f0bfdd25a2b0ed42a4da5 docs/codex-queue/243/candidates-v2/word-size-before-after.png
++dbaa29f51a93fcf54659884cf36ea01a docs/codex-queue/243/candidates-v2/word-size.128.png
++bc5d6258bf15c8b4bb5c06e99509ce8c docs/codex-queue/243/candidates-v2/word-size.256.png
++b29cedaf9a4e28e52e8ea2578e4685f0 docs/codex-queue/243/candidates-v2/word-size.64.png
++dfad30d5c8f0f9feb76b33300caab844 docs/codex-queue/243/candidates-v2/word-size.clean.png
++e89a92be8476bed08846aa5141b40154 docs/codex-queue/243/candidates-v2/word-size.png
++c29d66b06321ce5b09885ebddb5872d4 docs/codex-queue/243/checksum-all.py
++d223fee8026c257aed00a276da2c1553 docs/codex-queue/243/deliver.py
++3158a6768275e4345170e1fe9f0aa419 docs/codex-queue/243/delivered.json
++3a1e5948b318321170d0e2bdcdad7092 docs/codex-queue/243/gear-check-final/masks-32px.png
++70d6929f6bbaa72a9138ef61fb43677f docs/codex-queue/243/gear-check-final/masks-8x.png
++79fa233f0d249bcc8870f4b108134b56 docs/codex-queue/243/gear-check-final/metrics.json
++f450d71ebc8c2e2e3b5ce8d2b7c4d5fe docs/codex-queue/243/gear-check.py
++7d9dcb5cfd966e0e05697865b7c77db4 docs/codex-queue/243/md5-before.txt
++2c67c20bd5aac363162354c7067a3e01 docs/codex-queue/243/process-final.py
++70701c68c3d07034180111837c67fb45 docs/codex-queue/243/process-run.py
++196f43d5c552c779064f2b4855420ef8 docs/codex-queue/243/process-v2.py
++48d541d877cb8931f7bc329d725eb437 docs/codex-queue/243/process.py
++18992a102e1e7b4295e4427080564a99 docs/codex-queue/243/selection.json
++f32f4e30c8eabd459c390fe34b11b3ab docs/codex-queue/243/sheets-final.py
++4dc038b11e793c8b46875320e90df3c3 docs/codex-queue/243/sheets-v1/effect-strength-column.png
++dce0595fe59ab7b4ffbfce19bd93566c docs/codex-queue/243/sheets-v1/hud-settings-column.png
++91824e8552070cc9a4d07e24d728b45f docs/codex-queue/243/sheets-v1/letter-style-column.png
++3798c3b8a257c3938f110953e5f4df16 docs/codex-queue/243/sheets-v1/letters-compare-28px.png
++d179a141974717efada8927e42a3797f docs/codex-queue/243/sheets-v1/menu-settings-column.png
++af73f5427ed584e348db00f6011e254f docs/codex-queue/243/sheets-v1/pace-director-column.png
++1cb71e70f256c3718580116ac2aef429 docs/codex-queue/243/sheets-v1/real-size-720-1x.png
++210ebb074ed3bbd2a98bb2426a412de3 docs/codex-queue/243/sheets-v1/shake-column.png
++1b1e97ba4c5fb75a59ed16cf9f95bd88 docs/codex-queue/243/sheets-v1/ship-column.png
++e3bdd08f6a2adf3a6c7ba21e738146f8 docs/codex-queue/243/sheets-v1/vol-effects-column.png
++e644d52cff94c391488d20137b5ee405 docs/codex-queue/243/sheets-v1/vol-interface-column.png
++7ad7ce9ed0c37cf5694244bbf4d5c8c1 docs/codex-queue/243/sheets-v1/word-size-column.png
++4e4e59ef83c4294477ace61db7a70c69 docs/codex-queue/243/sheets-v2/button-crop.png
++6c9e3d59364f22457fb03e3e57ad2697 docs/codex-queue/243/sheets-v2/effect-strength-1080-button.png
++dc8afa16eb68f1d72b25ea10e990b0b2 docs/codex-queue/243/sheets-v2/effect-strength-1080-panel.png
++416cab867fb85ab0be21d3783e34da2a docs/codex-queue/243/sheets-v2/effect-strength-720-button.png
++66b8643714d49b973d74815dbbf6074a docs/codex-queue/243/sheets-v2/effect-strength-720-panel-4x.png
++1bd863bbd4e4bdd2e9c375ac5b6f0f49 docs/codex-queue/243/sheets-v2/effect-strength-720-panel.png
++3ccb347a53e5451c6a624518f87ec0ad docs/codex-queue/243/sheets-v2/effect-strength-column.png
++e93f05a1f1c4b0d8688f2f8e65452f47 docs/codex-queue/243/sheets-v2/hud-settings-1080-button.png
++ce182072bfb238327c5aa2f62f1ad137 docs/codex-queue/243/sheets-v2/hud-settings-1080-panel.png
++b8707f376342d1e085641d7c6d309f47 docs/codex-queue/243/sheets-v2/hud-settings-720-button.png
++001dd2c73c0d14578362017c3bce5542 docs/codex-queue/243/sheets-v2/hud-settings-720-panel-4x.png
++c20a177c24c3277d483cdb2771413d90 docs/codex-queue/243/sheets-v2/hud-settings-720-panel.png
++380c93a0d7e8eeaa3bf20963c3396f2d docs/codex-queue/243/sheets-v2/hud-settings-column.png
++8e3577b6a4a6c36833fd7e9fb4914a36 docs/codex-queue/243/sheets-v2/letter-style-1080-button.png
++10062c8073cadc80241cee245638ba74 docs/codex-queue/243/sheets-v2/letter-style-1080-panel.png
++7d3f543eba8efdc6fb92add6545173ab docs/codex-queue/243/sheets-v2/letter-style-720-button.png
++d0d6e849ab503c291432aea928843e69 docs/codex-queue/243/sheets-v2/letter-style-720-panel-4x.png
++b6762c3db4c6b516a79eab37e8ee8553 docs/codex-queue/243/sheets-v2/letter-style-720-panel.png
++b44924be4f53594d4584d17456542387 docs/codex-queue/243/sheets-v2/letter-style-column.png
++04b40361048ad755008ac8a1f011c46b docs/codex-queue/243/sheets-v2/letters-compare-28px.png
++1a91dc4e3fef0465d5595ae2a8023c3d docs/codex-queue/243/sheets-v2/menu-settings-1080-button.png
++a42b373b0b3cd0e447ed20809d610509 docs/codex-queue/243/sheets-v2/menu-settings-1080-panel.png
++3dbc707692cbc4fe34f7c1f26fe4c396 docs/codex-queue/243/sheets-v2/menu-settings-720-button.png
++1c0a2e245d2287bda5e807a0816b715e docs/codex-queue/243/sheets-v2/menu-settings-720-panel-4x.png
++5af57619f13512adc2783d12dbf502ba docs/codex-queue/243/sheets-v2/menu-settings-720-panel.png
++a418115ed25bbca6dd50c60ca7a78312 docs/codex-queue/243/sheets-v2/menu-settings-column.png
++801a52bbaba9c7433e35c36518fc7804 docs/codex-queue/243/sheets-v2/pace-director-1080-button.png
++e7acaf2a3a99e3444e1083a69418cc92 docs/codex-queue/243/sheets-v2/pace-director-1080-panel.png
++38a9b28c9184e123eaf12de4cf1fe392 docs/codex-queue/243/sheets-v2/pace-director-720-button.png
++c5bfe7354d7707f8c9f564b7b9a90a00 docs/codex-queue/243/sheets-v2/pace-director-720-panel-4x.png
++374f987bbde8141a75e757064119e2b3 docs/codex-queue/243/sheets-v2/pace-director-720-panel.png
++830e8d98c625050391994687c8dc2dd9 docs/codex-queue/243/sheets-v2/pace-director-column.png
++423ecd273e4c1f8efacc7204305c7664 docs/codex-queue/243/sheets-v2/panel-crop.png
++72b16808a521f9099bde4c3648a1b16e docs/codex-queue/243/sheets-v2/real-size-720-1x.png
++f31214a2e29f164fe4439e8ece9de209 docs/codex-queue/243/sheets-v2/shake-1080-button.png
++9393081801fdfd916b17f7d750a3c9a2 docs/codex-queue/243/sheets-v2/shake-1080-panel.png
++e73b5f23db20e59e6d241949db9a1914 docs/codex-queue/243/sheets-v2/shake-720-button.png
++62aec78558bc527cb0a5477f7bf45ee0 docs/codex-queue/243/sheets-v2/shake-720-panel-4x.png
++baef41d09370273d038feb085e54f268 docs/codex-queue/243/sheets-v2/shake-720-panel.png
++f08fc9f84e27a9a2aac4a5de0ce24779 docs/codex-queue/243/sheets-v2/shake-column.png
++667bbfecf3a42054257369d6394cc13d docs/codex-queue/243/sheets-v2/ship-1080-button.png
++d74c7c6cec517b49119093b92f913c14 docs/codex-queue/243/sheets-v2/ship-1080-panel.png
++946d1739de70e6c7eb3182362fd77718 docs/codex-queue/243/sheets-v2/ship-720-button.png
++a8ac18f2211de8bd9a34a23d9632b2bd docs/codex-queue/243/sheets-v2/ship-720-panel-4x.png
++f7f06082db048899e7cb4c0625fdc441 docs/codex-queue/243/sheets-v2/ship-720-panel.png
++542b4a8aff5a31d50f06edb7868a7a4a docs/codex-queue/243/sheets-v2/ship-column.png
++b60e51e54d61fc3243559da83ecad0dd docs/codex-queue/243/sheets-v2/vol-effects-1080-button.png
++578e6d98004b1e406232787333b4415c docs/codex-queue/243/sheets-v2/vol-effects-1080-panel.png
++c39c498e348909164c643867537c0c56 docs/codex-queue/243/sheets-v2/vol-effects-720-button.png
++ed86d87d93ed8d4cfc67b4fa35c35df0 docs/codex-queue/243/sheets-v2/vol-effects-720-panel-4x.png
++38b3fec68b4e2ce41af369edc0f51ef0 docs/codex-queue/243/sheets-v2/vol-effects-720-panel.png
++bec7e7cf1db4aafac61d8d994a59c97d docs/codex-queue/243/sheets-v2/vol-effects-column.png
++af98c8c812e9b786220421c0922dac42 docs/codex-queue/243/sheets-v2/vol-interface-1080-button.png
++66830ea677cb7d2edfa58e5245981ea9 docs/codex-queue/243/sheets-v2/vol-interface-1080-panel.png
++8fcd03717c34ec7b9c381e5b14072b49 docs/codex-queue/243/sheets-v2/vol-interface-720-button.png
++98f0332a30e699e21b21c04e9447c144 docs/codex-queue/243/sheets-v2/vol-interface-720-panel-4x.png
++2102eaa2e35a80fb244b976037134077 docs/codex-queue/243/sheets-v2/vol-interface-720-panel.png
++7c03a359bcc0661457af92f06e4a55a3 docs/codex-queue/243/sheets-v2/vol-interface-column.png
++fd3b4ed89de67f8608a3fff171d82619 docs/codex-queue/243/sheets-v2/word-size-1080-button.png
++1bb011b04dcfb42e876f8a9eb0aac6cb docs/codex-queue/243/sheets-v2/word-size-1080-panel.png
++094eaebfdc76bd97a1529f87f7e5e4cc docs/codex-queue/243/sheets-v2/word-size-720-button.png
++25f998d1de10d640f79adc9c1f8f8ca9 docs/codex-queue/243/sheets-v2/word-size-720-panel-4x.png
++c12151f3087986de6b999b9894158591 docs/codex-queue/243/sheets-v2/word-size-720-panel.png
++b72ff0837200f29ad1bdcec7f19fe954 docs/codex-queue/243/sheets-v2/word-size-column.png
++9e11567867fe64994d7b3865e9308444 docs/codex-queue/243/sheets-wide.py
++1337a6a15c7e0732b02d77b0eed8ffa8 docs/codex-queue/243/sheets.py
++45b9044d09d80945ac5f84bca6773dc7 games/typing-survival/art-src/_review/243-sheet-v2.jpg
++b2db9bb029046e473c89c453df36a610 games/typing-survival/art-src/_review/243-sheet.jpg
+ 4426a842a97379b79422a121cd8e7eb0 games/typing-survival/art-src/ui/icons/armour.128.png
+ bc59fd854188b43dd4aca84b7118a08e games/typing-survival/art-src/ui/icons/armour.256.png
+ b9eca57677534dba30b361b6f4d4c43e games/typing-survival/art-src/ui/icons/armour.64.png
+@@ -70,6 +540,16 @@
+ 4d4319c7b07d3694cfe67aafc8fd4bcb games/typing-survival/art-src/ui/icons/clock.r2.prompt.txt
+ 7fde3e2aae4f0ee7f3332c13005cd4dc games/typing-survival/art-src/ui/icons/clock.try1.png
+ a195c43af58cc8f0c36cb01bbca207ad games/typing-survival/art-src/ui/icons/clock.try1.prompt.txt
++39891222f3435b7b4702c37b568b1b85 games/typing-survival/art-src/ui/icons/effect-strength.128.png
++684b57172370fcc8d5caa3978c42d37a games/typing-survival/art-src/ui/icons/effect-strength.128.prompt.txt
++20df871c2de300c124b09e04196c1ad0 games/typing-survival/art-src/ui/icons/effect-strength.256.png
++684b57172370fcc8d5caa3978c42d37a games/typing-survival/art-src/ui/icons/effect-strength.256.prompt.txt
++d5214429355229694d6c0e38960bdd0a games/typing-survival/art-src/ui/icons/effect-strength.64.png
++684b57172370fcc8d5caa3978c42d37a games/typing-survival/art-src/ui/icons/effect-strength.64.prompt.txt
++da945a024ffaa32e0b3c01318c47019f games/typing-survival/art-src/ui/icons/effect-strength.png
++684b57172370fcc8d5caa3978c42d37a games/typing-survival/art-src/ui/icons/effect-strength.prompt.txt
++3dc4abedb82c5ae191123bfc39681ef2 games/typing-survival/art-src/ui/icons/effect-strength.try1.png
++684b57172370fcc8d5caa3978c42d37a games/typing-survival/art-src/ui/icons/effect-strength.try1.prompt.txt
+ a3fd06974ef803553a4fe9b4556b8a8d games/typing-survival/art-src/ui/icons/equipment.128.png
+ 873c1ca0a02a699aec9581f57b6007c3 games/typing-survival/art-src/ui/icons/equipment.128.prompt.txt
+ 84aaf3386cbbb967c3b47cdb99c47be1 games/typing-survival/art-src/ui/icons/equipment.256.png
+@@ -236,6 +716,16 @@
+ 235fa2bab12c60f679f7b8d47226199d games/typing-survival/art-src/ui/icons/learning-rule.prompt.txt
+ fd9d704740d3987560967c4778ece9f2 games/typing-survival/art-src/ui/icons/learning-rule.try1.png
+ 235fa2bab12c60f679f7b8d47226199d games/typing-survival/art-src/ui/icons/learning-rule.try1.prompt.txt
++07f570479f973e747ac87bcc1e7afb18 games/typing-survival/art-src/ui/icons/letter-style.128.png
++296a3219694a2e0d320fb9ad625381a4 games/typing-survival/art-src/ui/icons/letter-style.128.prompt.txt
++e38a52fdb67a9cd626933f5098e74838 games/typing-survival/art-src/ui/icons/letter-style.256.png
++296a3219694a2e0d320fb9ad625381a4 games/typing-survival/art-src/ui/icons/letter-style.256.prompt.txt
++378ae72211fac6a4083ed77deb985eb5 games/typing-survival/art-src/ui/icons/letter-style.64.png
++296a3219694a2e0d320fb9ad625381a4 games/typing-survival/art-src/ui/icons/letter-style.64.prompt.txt
++29a78f9ac2ac1074b53c97eea4c7ac3f games/typing-survival/art-src/ui/icons/letter-style.png
++296a3219694a2e0d320fb9ad625381a4 games/typing-survival/art-src/ui/icons/letter-style.prompt.txt
++26d4f62132b5a2798bdec8314dc00ff9 games/typing-survival/art-src/ui/icons/letter-style.try1.png
++296a3219694a2e0d320fb9ad625381a4 games/typing-survival/art-src/ui/icons/letter-style.try1.prompt.txt
+ d78ed3d5ea5c5a8b25064933d23bb721 games/typing-survival/art-src/ui/icons/load-guns.128.png
+ b223453c86804e9dd46a7dd28ab6056c games/typing-survival/art-src/ui/icons/load-guns.128.prompt.txt
+ 5155bcaf773c015964066cd86834a474 games/typing-survival/art-src/ui/icons/load-guns.256.png
+@@ -316,6 +806,16 @@
+ 387454b79b0e940f548138fbdad8b8a4 games/typing-survival/art-src/ui/icons/menu-settings.64.png
+ 82ce28048816f4026dc9ff33593ad7f4 games/typing-survival/art-src/ui/icons/menu-settings.png
+ de001d84b1d3dfb475e81377a52ca629 games/typing-survival/art-src/ui/icons/menu-settings.prompt.txt
++5a8751c69eb9e2bc98fc1f35c1c6069f games/typing-survival/art-src/ui/icons/menu-settings.r2-try1.png
++eb9fa10eac500e44f37f7a2f307b4711 games/typing-survival/art-src/ui/icons/menu-settings.r2-try1.prompt.txt
++cb636aec07bf33865445c3d106417fba games/typing-survival/art-src/ui/icons/menu-settings.r2.128.png
++eb9fa10eac500e44f37f7a2f307b4711 games/typing-survival/art-src/ui/icons/menu-settings.r2.128.prompt.txt
++44c281d8b38c58fe359966879df265c9 games/typing-survival/art-src/ui/icons/menu-settings.r2.256.png
++eb9fa10eac500e44f37f7a2f307b4711 games/typing-survival/art-src/ui/icons/menu-settings.r2.256.prompt.txt
++c103368cb53ceecd3ef77df5f3725855 games/typing-survival/art-src/ui/icons/menu-settings.r2.64.png
++eb9fa10eac500e44f37f7a2f307b4711 games/typing-survival/art-src/ui/icons/menu-settings.r2.64.prompt.txt
++9d921388dbcdc80cf86f0d7f27f35bf2 games/typing-survival/art-src/ui/icons/menu-settings.r2.png
++eb9fa10eac500e44f37f7a2f307b4711 games/typing-survival/art-src/ui/icons/menu-settings.r2.prompt.txt
+ bacba5f4aa450e33c002f1dd2682d50c games/typing-survival/art-src/ui/icons/menu-settings.try1.png
+ e9621c7c2e118205569b32f43a868ece games/typing-survival/art-src/ui/icons/menu-settings.try1.prompt.txt
+ cdb7b0f5b8b199983e3593c4c351e2db games/typing-survival/art-src/ui/icons/menu-settings.try2.png
+@@ -392,6 +892,16 @@
+ 02462e9756b8e3ec2ce6dad16ac62031 games/typing-survival/art-src/ui/icons/pace-director.64.png
+ 4035bd83f79ea6827878da83a7ac0d04 games/typing-survival/art-src/ui/icons/pace-director.png
+ 086666fd80ab7f32217af655b80b38f3 games/typing-survival/art-src/ui/icons/pace-director.prompt.txt
++c1837cf6a2e7b10c46c9a75332a98623 games/typing-survival/art-src/ui/icons/pace-director.r2-try1.png
++bd30978511daae306e3832cec88e8a66 games/typing-survival/art-src/ui/icons/pace-director.r2-try1.prompt.txt
++bc5f4884475c4e782632238a88fc73c0 games/typing-survival/art-src/ui/icons/pace-director.r2.128.png
++bd30978511daae306e3832cec88e8a66 games/typing-survival/art-src/ui/icons/pace-director.r2.128.prompt.txt
++2e6e00956deaed4ee8c6a04fca11974a games/typing-survival/art-src/ui/icons/pace-director.r2.256.png
++bd30978511daae306e3832cec88e8a66 games/typing-survival/art-src/ui/icons/pace-director.r2.256.prompt.txt
++9c0e601fc5cf75f601e0d3724fe386b9 games/typing-survival/art-src/ui/icons/pace-director.r2.64.png
++bd30978511daae306e3832cec88e8a66 games/typing-survival/art-src/ui/icons/pace-director.r2.64.prompt.txt
++d9fe3f9278e16ef27e8604f34b519f18 games/typing-survival/art-src/ui/icons/pace-director.r2.png
++bd30978511daae306e3832cec88e8a66 games/typing-survival/art-src/ui/icons/pace-director.r2.prompt.txt
+ 0b41259485a5b9245c9ecdeb1f100414 games/typing-survival/art-src/ui/icons/pace-director.try1.png
+ 086666fd80ab7f32217af655b80b38f3 games/typing-survival/art-src/ui/icons/pace-director.try1.prompt.txt
+ fe1a67c6c0c4e15271396edf5cac3b10 games/typing-survival/art-src/ui/icons/pace-director.try2.png
+@@ -489,6 +999,16 @@
+ aae71974a311e8475be16d292babe10a games/typing-survival/art-src/ui/icons/shake.c2-try1.prompt.txt
+ 48187a19c6cd76fe02d1a9b2086fbe97 games/typing-survival/art-src/ui/icons/shake.png
+ aae71974a311e8475be16d292babe10a games/typing-survival/art-src/ui/icons/shake.prompt.txt
++1ec572ee86e3199ae5b7537bdf944a7a games/typing-survival/art-src/ui/icons/shake.r2-try1.png
++efd6e5e8806a08351bc9cb6beebc672c games/typing-survival/art-src/ui/icons/shake.r2-try1.prompt.txt
++cbacbab80f6bdc1211ac8740e2cb9281 games/typing-survival/art-src/ui/icons/shake.r2.128.png
++efd6e5e8806a08351bc9cb6beebc672c games/typing-survival/art-src/ui/icons/shake.r2.128.prompt.txt
++e7342643486d2ecbed7c05c5f0524836 games/typing-survival/art-src/ui/icons/shake.r2.256.png
++efd6e5e8806a08351bc9cb6beebc672c games/typing-survival/art-src/ui/icons/shake.r2.256.prompt.txt
++72e18681e82df0580daa797b344553c4 games/typing-survival/art-src/ui/icons/shake.r2.64.png
++efd6e5e8806a08351bc9cb6beebc672c games/typing-survival/art-src/ui/icons/shake.r2.64.prompt.txt
++787ad390bc454aad9d619d084123ce9c games/typing-survival/art-src/ui/icons/shake.r2.png
++efd6e5e8806a08351bc9cb6beebc672c games/typing-survival/art-src/ui/icons/shake.r2.prompt.txt
+ 3665ac0425e01f4286473ab81ab942a0 games/typing-survival/art-src/ui/icons/shake.try1.png
+ aa13ce74d447cf33e792419173a44286 games/typing-survival/art-src/ui/icons/shake.try1.prompt.txt
+ e67df48c6419d9e56be242387b172f21 games/typing-survival/art-src/ui/icons/shake.try2.png
+@@ -500,6 +1020,16 @@
+ 8eb8b8464398abaf7f038550d3009789 games/typing-survival/art-src/ui/icons/shard.prompt.txt
+ 19f8ba463240984a73d82beeee91e8db games/typing-survival/art-src/ui/icons/shard.try2.png
+ 8eb8b8464398abaf7f038550d3009789 games/typing-survival/art-src/ui/icons/shard.try2.prompt.txt
++6b4e787dae8ea717d98e14d3cdd40d64 games/typing-survival/art-src/ui/icons/ship.128.png
++314cbb5c0d03896b01662667b4b9d458 games/typing-survival/art-src/ui/icons/ship.128.prompt.txt
++9da942734d47098c8b92f806cfe49f02 games/typing-survival/art-src/ui/icons/ship.256.png
++314cbb5c0d03896b01662667b4b9d458 games/typing-survival/art-src/ui/icons/ship.256.prompt.txt
++ecdf665c289df0036d2fce25391e6fb8 games/typing-survival/art-src/ui/icons/ship.64.png
++314cbb5c0d03896b01662667b4b9d458 games/typing-survival/art-src/ui/icons/ship.64.prompt.txt
++d7eba8f549b21cfee3a2937f8df8520e games/typing-survival/art-src/ui/icons/ship.png
++314cbb5c0d03896b01662667b4b9d458 games/typing-survival/art-src/ui/icons/ship.prompt.txt
++46e1369e1fd84c153964605abcacf85b games/typing-survival/art-src/ui/icons/ship.try1.png
++314cbb5c0d03896b01662667b4b9d458 games/typing-survival/art-src/ui/icons/ship.try1.prompt.txt
+ b662911d2ba87064a77ee99576bbfc63 games/typing-survival/art-src/ui/icons/star-lit.128.png
+ 0353c7198d38862cbec781facad70fe6 games/typing-survival/art-src/ui/icons/star-lit.256.png
+ 2e11dcc77e2d9df3336c69058f0a8079 games/typing-survival/art-src/ui/icons/star-lit.64.png
+@@ -654,6 +1184,16 @@
+ 9a6c02eb5fa0731ef67c9517d095bbb9 games/typing-survival/art-src/ui/icons/warning.prompt.txt
+ afbed38217c45e8f0d25efea8d70c41c games/typing-survival/art-src/ui/icons/warning.try1.png
+ 9a6c02eb5fa0731ef67c9517d095bbb9 games/typing-survival/art-src/ui/icons/warning.try1.prompt.txt
++6414afefb4b21e9d0275eda1259a505b games/typing-survival/art-src/ui/icons/word-size.128.png
++c2f063b75794e4e776f8031bc268e761 games/typing-survival/art-src/ui/icons/word-size.128.prompt.txt
++144f3459305a504b9994da4327d97dae games/typing-survival/art-src/ui/icons/word-size.256.png
++c2f063b75794e4e776f8031bc268e761 games/typing-survival/art-src/ui/icons/word-size.256.prompt.txt
++eaf9fa02cd2d47d89e767c3647124b7e games/typing-survival/art-src/ui/icons/word-size.64.png
++c2f063b75794e4e776f8031bc268e761 games/typing-survival/art-src/ui/icons/word-size.64.prompt.txt
++7e7666bdb9dca81fd2a5a7106f0ad1fe games/typing-survival/art-src/ui/icons/word-size.png
++c2f063b75794e4e776f8031bc268e761 games/typing-survival/art-src/ui/icons/word-size.prompt.txt
++a3ba2f96396ed698a83121a5d0e0bec4 games/typing-survival/art-src/ui/icons/word-size.try1.png
++c2f063b75794e4e776f8031bc268e761 games/typing-survival/art-src/ui/icons/word-size.try1.prompt.txt
+ 8d3ddbd092b4e89805c387a329fc83d5 games/typing-survival/art-src/ui/quick-settings/hud-settings.128.png
+ 2fa881540996e81c7381e6e04c0d81ff games/typing-survival/art-src/ui/quick-settings/hud-settings.128.prompt.txt
+ cbb4041179607a645dc9d5b9dff5496c games/typing-survival/art-src/ui/quick-settings/hud-settings.256.png
+@@ -662,6 +1202,8 @@
+ 2fa881540996e81c7381e6e04c0d81ff games/typing-survival/art-src/ui/quick-settings/hud-settings.64.prompt.txt
+ 2731e1bb20931acd8101776341abab4b games/typing-survival/art-src/ui/quick-settings/hud-settings.png
+ 2fa881540996e81c7381e6e04c0d81ff games/typing-survival/art-src/ui/quick-settings/hud-settings.prompt.txt
++713ca5a10e8a17aa774ab11feee5e4e8 games/typing-survival/art-src/ui/quick-settings/hud-settings.r2-try1.png
++462f9813c4207aea40ba3883bfe3345f games/typing-survival/art-src/ui/quick-settings/hud-settings.r2-try1.prompt.txt
+ 6de240669db3d9c76bb1c0d8690e95ea games/typing-survival/art-src/ui/quick-settings/hud-settings.try1.png
+ 2fa881540996e81c7381e6e04c0d81ff games/typing-survival/art-src/ui/quick-settings/hud-settings.try1.prompt.txt
+ 6217bf4f24f9baecf49a708e292a14f7 games/typing-survival/art-src/ui/quick-settings/hud-sound-muted.128.png
+@@ -692,6 +1234,14 @@
+ 2fa881540996e81c7381e6e04c0d81ff games/typing-survival/art-src/ui/quick-settings/selected/hud-settings.64.prompt.txt
+ b3b031dacb3662de71758c78677b72de games/typing-survival/art-src/ui/quick-settings/selected/hud-settings.png
+ 2fa881540996e81c7381e6e04c0d81ff games/typing-survival/art-src/ui/quick-settings/selected/hud-settings.prompt.txt
++33115c2856089c276dc363344a1cc13a games/typing-survival/art-src/ui/quick-settings/selected/hud-settings.r2.128.png
++462f9813c4207aea40ba3883bfe3345f games/typing-survival/art-src/ui/quick-settings/selected/hud-settings.r2.128.prompt.txt
++2918786e2f5bac3720d1a1a7cf8d82f9 games/typing-survival/art-src/ui/quick-settings/selected/hud-settings.r2.256.png
++462f9813c4207aea40ba3883bfe3345f games/typing-survival/art-src/ui/quick-settings/selected/hud-settings.r2.256.prompt.txt
++83971df3308340156ac0d3b039d6c3bb games/typing-survival/art-src/ui/quick-settings/selected/hud-settings.r2.64.png
++462f9813c4207aea40ba3883bfe3345f games/typing-survival/art-src/ui/quick-settings/selected/hud-settings.r2.64.prompt.txt
++b5d23b6cb002c8b284ae52c1fb472964 games/typing-survival/art-src/ui/quick-settings/selected/hud-settings.r2.png
++462f9813c4207aea40ba3883bfe3345f games/typing-survival/art-src/ui/quick-settings/selected/hud-settings.r2.prompt.txt
+ 62a0ecbe6a9fd9656d5f02f149bff7f3 games/typing-survival/art-src/ui/quick-settings/selected/hud-sound-muted.128.png
+ 6d89de04e65e29de2c83130b39ac9120 games/typing-survival/art-src/ui/quick-settings/selected/hud-sound-muted.128.prompt.txt
+ a6543d1a4ba654b21a8b401707f19b66 games/typing-survival/art-src/ui/quick-settings/selected/hud-sound-muted.256.png
+@@ -716,6 +1266,14 @@
+ 69748b4e3c892e71a2e1675a3e7c1b99 games/typing-survival/art-src/ui/quick-settings/selected/vol-effects.64.prompt.txt
+ ca0580abfafea3dbad9c5417e70f7363 games/typing-survival/art-src/ui/quick-settings/selected/vol-effects.png
+ 69748b4e3c892e71a2e1675a3e7c1b99 games/typing-survival/art-src/ui/quick-settings/selected/vol-effects.prompt.txt
++907af43c2daa4c9a562b9dda90eabf48 games/typing-survival/art-src/ui/quick-settings/selected/vol-effects.r2.128.png
++65f60e6f7b95a3147731d940feff78b9 games/typing-survival/art-src/ui/quick-settings/selected/vol-effects.r2.128.prompt.txt
++a60af7751a4f43af91ee704b14acad95 games/typing-survival/art-src/ui/quick-settings/selected/vol-effects.r2.256.png
++65f60e6f7b95a3147731d940feff78b9 games/typing-survival/art-src/ui/quick-settings/selected/vol-effects.r2.256.prompt.txt
++e8c4d94cc26b13fcb4887c8518fdb34f games/typing-survival/art-src/ui/quick-settings/selected/vol-effects.r2.64.png
++65f60e6f7b95a3147731d940feff78b9 games/typing-survival/art-src/ui/quick-settings/selected/vol-effects.r2.64.prompt.txt
++9d5f520bcd47b6c00dc3e374439d425b games/typing-survival/art-src/ui/quick-settings/selected/vol-effects.r2.png
++65f60e6f7b95a3147731d940feff78b9 games/typing-survival/art-src/ui/quick-settings/selected/vol-effects.r2.prompt.txt
+ 864c5e95d55fc15fd6461b5196996c4d games/typing-survival/art-src/ui/quick-settings/selected/vol-interface.128.png
+ 22b06d4457324fff5e3691c55a737be9 games/typing-survival/art-src/ui/quick-settings/selected/vol-interface.128.prompt.txt
+ 201773206f33d611cb51dffc2711d77d games/typing-survival/art-src/ui/quick-settings/selected/vol-interface.256.png
+@@ -724,6 +1282,14 @@
+ 22b06d4457324fff5e3691c55a737be9 games/typing-survival/art-src/ui/quick-settings/selected/vol-interface.64.prompt.txt
+ 3e63b628157272e08452b53e7fa83cad games/typing-survival/art-src/ui/quick-settings/selected/vol-interface.png
+ 22b06d4457324fff5e3691c55a737be9 games/typing-survival/art-src/ui/quick-settings/selected/vol-interface.prompt.txt
++40424d4d68170e59e68e3f13b0993c90 games/typing-survival/art-src/ui/quick-settings/selected/vol-interface.r2.128.png
++16b4ff5af76cf668d24efe5ab8750015 games/typing-survival/art-src/ui/quick-settings/selected/vol-interface.r2.128.prompt.txt
++de74143f824846afc0fb085c276f28e8 games/typing-survival/art-src/ui/quick-settings/selected/vol-interface.r2.256.png
++16b4ff5af76cf668d24efe5ab8750015 games/typing-survival/art-src/ui/quick-settings/selected/vol-interface.r2.256.prompt.txt
++b2aee74660de971124815976178abbbf games/typing-survival/art-src/ui/quick-settings/selected/vol-interface.r2.64.png
++16b4ff5af76cf668d24efe5ab8750015 games/typing-survival/art-src/ui/quick-settings/selected/vol-interface.r2.64.prompt.txt
++b85acc8d1fa6b93c2f603df7609c56a4 games/typing-survival/art-src/ui/quick-settings/selected/vol-interface.r2.png
++16b4ff5af76cf668d24efe5ab8750015 games/typing-survival/art-src/ui/quick-settings/selected/vol-interface.r2.prompt.txt
+ b0236cb9ec2d572ba517cf12f1337f29 games/typing-survival/art-src/ui/quick-settings/selected/vol-keyboard.128.png
+ 7049b310b8849072bf526b4147caaf47 games/typing-survival/art-src/ui/quick-settings/selected/vol-keyboard.128.prompt.txt
+ 9f42bcdcff6a3fd03e76120fe42d9fb2 games/typing-survival/art-src/ui/quick-settings/selected/vol-keyboard.256.png
+@@ -782,6 +1348,10 @@
+ 69748b4e3c892e71a2e1675a3e7c1b99 games/typing-survival/art-src/ui/quick-settings/vol-effects.64.prompt.txt
+ e5477b99e5546968628294aa0319e2e0 games/typing-survival/art-src/ui/quick-settings/vol-effects.png
+ 69748b4e3c892e71a2e1675a3e7c1b99 games/typing-survival/art-src/ui/quick-settings/vol-effects.prompt.txt
++d885c081ad80d9f1473b915e7305f78d games/typing-survival/art-src/ui/quick-settings/vol-effects.r2-try1.png
++5f46b9a1fb307f204d12b4b665fac317 games/typing-survival/art-src/ui/quick-settings/vol-effects.r2-try1.prompt.txt
++68fc69718a39ac3b5c82403edc1cab51 games/typing-survival/art-src/ui/quick-settings/vol-effects.r2-try2.png
++65f60e6f7b95a3147731d940feff78b9 games/typing-survival/art-src/ui/quick-settings/vol-effects.r2-try2.prompt.txt
+ 3cc6c086f9c79592e0865bc5ef4e3604 games/typing-survival/art-src/ui/quick-settings/vol-effects.try1.png
+ 69748b4e3c892e71a2e1675a3e7c1b99 games/typing-survival/art-src/ui/quick-settings/vol-effects.try1.prompt.txt
+ af45b47eb26c558dec19d249ae34c87b games/typing-survival/art-src/ui/quick-settings/vol-interface.128.png
+@@ -792,6 +1362,8 @@
+ 22b06d4457324fff5e3691c55a737be9 games/typing-survival/art-src/ui/quick-settings/vol-interface.64.prompt.txt
+ 91cc1e158439f3d4b4785acd2c1eff07 games/typing-survival/art-src/ui/quick-settings/vol-interface.png
+ 22b06d4457324fff5e3691c55a737be9 games/typing-survival/art-src/ui/quick-settings/vol-interface.prompt.txt
++f5b44bf941f256f1046c26010df33ec9 games/typing-survival/art-src/ui/quick-settings/vol-interface.r2-try1.png
++16b4ff5af76cf668d24efe5ab8750015 games/typing-survival/art-src/ui/quick-settings/vol-interface.r2-try1.prompt.txt
+ 1ffa0ad344ce4f1d8652b0b56a40efd7 games/typing-survival/art-src/ui/quick-settings/vol-interface.try1.png
+ 22b06d4457324fff5e3691c55a737be9 games/typing-survival/art-src/ui/quick-settings/vol-interface.try1.prompt.txt
+ e1d2f1c8384921a5886c315793c57e20 games/typing-survival/art-src/ui/quick-settings/vol-keyboard.128.png

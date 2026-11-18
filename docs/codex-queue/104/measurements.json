@@ -1,0 +1,47 @@
+{
+  "before": {
+    "files": 16,
+    "tests": 156,
+    "duration": "5.06s (transform 1.22s, setup 0ms, collect 7.48s, tests 17.67s, environment 9ms, prepare 1000ms)"
+  },
+  "after": {
+    "files": 17,
+    "tests": 159,
+    "duration": "5.12s (transform 1.14s, setup 0ms, collect 7.80s, tests 18.18s, environment 2ms, prepare 927ms)"
+  },
+  "check_before_exit": 0,
+  "check_after_exit": 0,
+  "new_tests_red": {
+    "exit": 1,
+    "failed": 3
+  },
+  "new_tests_green": {
+    "exit": 0,
+    "passed": 3
+  },
+  "chapter": {
+    "before": {
+      "lines": 152,
+      "sha256": "ae7e9859269b2aece6a7bacbd946dfa93b9a131aeb68a5f5dbed97830dfe626e"
+    },
+    "after": {
+      "lines": 152,
+      "sha256": "ae7e9859269b2aece6a7bacbd946dfa93b9a131aeb68a5f5dbed97830dfe626e"
+    }
+  },
+  "chapter_diff_bytes": 0,
+  "grep": {
+    "grep-milestone.txt": {
+      "exit": 1,
+      "lines": 0
+    },
+    "grep-old-labels.txt": {
+      "exit": 1,
+      "lines": 0
+    }
+  },
+  "max_words_per_sentence": 13,
+  "worktree_status_paths": 6,
+  "esc_implemented": false,
+  "browser_run": false
+}

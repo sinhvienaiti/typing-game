@@ -1,0 +1,27 @@
+--- a/src/app/main.ts
++++ b/src/app/main.ts
+@@ -31,6 +31,7 @@
+ import { TypeFeel } from "../view/typing-feel";
+ import { warmPrograms } from "../view/warm";
+ import { FrameCosts, bays, devHandleWanted, eventCounts, installDevHandle, numberBoxes, runState, snapshot } from "./dev";
++import { LoadHint, noticeFor } from "./guide";
+ import { Journey, NEXT_KEY, introKey, objectiveText, recordStage, starsOf, takeChoice, type RunChoice } from "./journey";
+ import { adviceText, countedText, profileView, runStats, runWords } from "./results";
+ import { ImeNotice, installAutoPause, installKeys, type KeyAction } from "./input";
+@@ -154,6 +155,7 @@
+ /** The ship and quality the settings screen picked (they take a new page). */
+ const chosen = { pilot, tier };
+ const imeNotice = new ImeNotice();
++const loadHint = new LoadHint(safeLocalStorage);
+ const spoken = new Set<string>();
+ let lastSpeak = -1e9;
+ let clock = 0;
+@@ -632,7 +634,7 @@
+   typing.read(world, now);
+   hud.update(world, combat.killsWithin(now, 3000), now);
+   typing.land(now);
+-  hud.setNotice(imeNotice.on(now) ? "Switch to an English keyboard" : vocab.source === "fallback" ? "Offline word list (server words unavailable)" : "");
++  const notice = noticeFor(imeNotice.on(now), vocab.source === "fallback", loadHint.text(mode, hud.loads)); hud.setNotice(notice.text, notice.kind);
+   // The floor glows red as the press reaches the ship (inside the guns' reach and closing); the music rises with the horde.
+   let near = 0;
+   let shown = 0;

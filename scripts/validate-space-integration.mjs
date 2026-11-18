@@ -39,6 +39,34 @@ const expectedGames = [
     appUrl: "https://space.typing-game.local",
     submodule: "games/space-typing",
   },
+  // Split from Space Typing; submodules are registered once their repos exist.
+  {
+    id: "dragon-hold",
+    path: "/dragon-hold",
+    appUrl: "https://dragon.typing-game.local",
+    submodule: "games/dragon-hold",
+    pendingSubmodule: true,
+  },
+  {
+    id: "typing-defense",
+    path: "/typing-defense",
+    appUrl: "https://td.typing-game.local",
+    submodule: "games/typing-defense",
+    pendingSubmodule: true,
+  },
+  {
+    id: "typing-survival",
+    path: "/typing-survival",
+    appUrl: "https://survival.typing-game.local",
+    submodule: "games/typing-survival",
+    pendingSubmodule: true,
+  },
+  {
+    id: "immortality-cultivation",
+    path: "/immortality-cultivation",
+    appUrl: "https://tutien.typing-game.local",
+    submodule: "games/immortality-cultivation",
+  },
 ];
 
 const registry = JSON.parse(read("portal/public/games.json"));
@@ -59,10 +87,12 @@ for (const expected of expectedGames) {
 
 const gitmodules = read(".gitmodules");
 for (const expected of expectedGames) {
-  assert(
-    gitmodules.includes("path = " + expected.submodule),
-    expected.submodule + " is missing from .gitmodules",
-  );
+  if (gitmodules.includes("path = " + expected.submodule)) continue;
+  if (expected.pendingSubmodule) {
+    console.warn("WARN " + expected.submodule + " is not a submodule yet.");
+    continue;
+  }
+  assert(false, expected.submodule + " is missing from .gitmodules");
 }
 
 const packageJson = JSON.parse(read("package.json"));

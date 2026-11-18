@@ -1,0 +1,212 @@
+{
+  "commit": "79db62851e00eadeca7bfd44c10c0c682a9cec8d",
+  "matrix": {
+    "reports": 14,
+    "variants": 6,
+    "cells": 504,
+    "cellsEach": [
+      36
+    ],
+    "pairsEach": [
+      10
+    ],
+    "botRuns": 50400,
+    "g3cRuns": 14000,
+    "overridesValid": true
+  },
+  "audit": [
+    {
+      "first": 1,
+      "cells": 24,
+      "changedCells": 0,
+      "winOver4": 0,
+      "maxWinDelta": 0,
+      "maxSDelta": 0,
+      "exactJsonChanged": 0
+    },
+    {
+      "first": 101,
+      "cells": 24,
+      "changedCells": 0,
+      "winOver4": 0,
+      "maxWinDelta": 0,
+      "maxSDelta": 0,
+      "exactJsonChanged": null
+    }
+  ],
+  "timing": {
+    "waves": [
+      {
+        "wave": "V0",
+        "startUTC": "2026-10-30T03:02:36.269Z",
+        "endUTC": "2026-10-30T03:06:00.665Z",
+        "uptime": "10:02  2 users, load averages: 5.10 4.70 4.37",
+        "load": 5.1,
+        "limit": 6,
+        "peak": 2,
+        "tmpdir": "/Users/toandx/htdocs/typing-game/games/typing-survival/tmp/codex-209/tmpdir"
+      },
+      {
+        "wave": "A",
+        "startUTC": "2026-10-30T03:07:05.498Z",
+        "endUTC": "2026-10-30T03:11:55.542Z",
+        "uptime": "10:07  2 users, load averages: 4.98 5.34 4.79",
+        "load": 4.98,
+        "limit": 6,
+        "peak": 6,
+        "tmpdir": "/Users/toandx/htdocs/typing-game/games/typing-survival/tmp/codex-209/tmpdir"
+      },
+      {
+        "wave": "B",
+        "startUTC": "2026-10-30T03:12:22.742Z",
+        "endUTC": "2026-10-30T03:16:21.019Z",
+        "uptime": "10:12  2 users, load averages: 6.25 7.05 5.85",
+        "load": 6.25,
+        "limit": 6,
+        "peak": 4,
+        "tmpdir": "/Users/toandx/htdocs/typing-game/games/typing-survival/tmp/codex-209/tmpdir"
+      },
+      {
+        "wave": "C",
+        "startUTC": "2026-10-30T03:17:29.087Z",
+        "endUTC": "2026-10-30T03:20:42.073Z",
+        "uptime": "10:17  2 users, load averages: 4.74 6.36 5.94",
+        "load": 4.74,
+        "limit": 6,
+        "peak": 2,
+        "tmpdir": "/Users/toandx/htdocs/typing-game/games/typing-survival/tmp/codex-209/tmpdir"
+      }
+    ],
+    "maxConcurrentReports": 6,
+    "reportSeconds": 3425,
+    "processWallSeconds": 3427.6420000000003,
+    "wallRoundSeconds": 1085.804,
+    "smokeSeconds": 6,
+    "niceDeniedReports": 14
+  },
+  "rawCopies": {
+    "files": 42,
+    "allMatch": true
+  },
+  "reproducible": {
+    "files": [
+      "summary.json",
+      "summary.md"
+    ],
+    "before": [
+      "a36f35f4a5dbca0ee2d80d6b84ef0898a1c3855be9c830ae7cec588ee5d57b64",
+      "4df876b17d00ac99ac981cee4e747e9a903c16c435786a9c6f7fe32e2a01d896"
+    ],
+    "after": [
+      "a36f35f4a5dbca0ee2d80d6b84ef0898a1c3855be9c830ae7cec588ee5d57b64",
+      "4df876b17d00ac99ac981cee4e747e9a903c16c435786a9c6f7fe32e2a01d896"
+    ],
+    "identical": true
+  },
+  "immutableCopy": {
+    "command": "diff -r -x node_modules main verify",
+    "exit": 0,
+    "outputBytes": 0
+  },
+  "gameStatus": {
+    "before": "",
+    "after": "",
+    "taskFilesVisible": [],
+    "unchanged": true
+  },
+  "parentStatus": {
+    "own": [
+      "?? docs/codex-queue/209-report.md",
+      "?? docs/codex-queue/209/decision-B.json",
+      "?? docs/codex-queue/209/decision-v6.json",
+      "?? docs/codex-queue/209/decision-v6.md",
+      "?? docs/codex-queue/209/evidence/audit-2026-10-28/balance-c1s1-seeds1-100.json",
+      "?? docs/codex-queue/209/evidence/audit-2026-10-28/balance-c1s1-seeds1-100.md",
+      "?? docs/codex-queue/209/evidence/audit-2026-10-28/balance-c1s1-seeds101-200.md",
+      "?? docs/codex-queue/209/evidence/copy-diff.txt",
+      "?? docs/codex-queue/209/evidence/game-status-after.txt",
+      "?? docs/codex-queue/209/evidence/game-status-before.txt",
+      "?? docs/codex-queue/209/evidence/main-since-audit.txt",
+      "?? docs/codex-queue/209/evidence/main.commit",
+      "?? docs/codex-queue/209/evidence/parent-other-lanes-delta.json",
+      "?? docs/codex-queue/209/evidence/parent-status-after.txt",
+      "?? docs/codex-queue/209/evidence/parent-status-before.txt",
+      "?? docs/codex-queue/209/evidence/runs-manifest.json",
+      "?? docs/codex-queue/209/evidence/smoke.err",
+      "?? docs/codex-queue/209/evidence/smoke.json",
+      "?? docs/codex-queue/209/evidence/smoke.md",
+      "?? docs/codex-queue/209/evidence/wave-A.json",
+      "?? docs/codex-queue/209/evidence/wave-B.json",
+      "?? docs/codex-queue/209/evidence/wave-C.json",
+      "?? docs/codex-queue/209/evidence/wave-V0.json",
+      "?? docs/codex-queue/209/method.md",
+      "?? docs/codex-queue/209/runs/v0-s1.err",
+      "?? docs/codex-queue/209/runs/v0-s1.json",
+      "?? docs/codex-queue/209/runs/v0-s1.md",
+      "?? docs/codex-queue/209/runs/v0-s101.err",
+      "?? docs/codex-queue/209/runs/v0-s101.json",
+      "?? docs/codex-queue/209/runs/v0-s101.md",
+      "?? docs/codex-queue/209/runs/v1-s1.err",
+      "?? docs/codex-queue/209/runs/v1-s1.json",
+      "?? docs/codex-queue/209/runs/v1-s1.md",
+      "?? docs/codex-queue/209/runs/v1-s101.err",
+      "?? docs/codex-queue/209/runs/v1-s101.json",
+      "?? docs/codex-queue/209/runs/v1-s101.md",
+      "?? docs/codex-queue/209/runs/v2-s1.err",
+      "?? docs/codex-queue/209/runs/v2-s1.json",
+      "?? docs/codex-queue/209/runs/v2-s1.md",
+      "?? docs/codex-queue/209/runs/v2-s101.err",
+      "?? docs/codex-queue/209/runs/v2-s101.json",
+      "?? docs/codex-queue/209/runs/v2-s101.md",
+      "?? docs/codex-queue/209/runs/v3-s1.err",
+      "?? docs/codex-queue/209/runs/v3-s1.json",
+      "?? docs/codex-queue/209/runs/v3-s1.md",
+      "?? docs/codex-queue/209/runs/v3-s101.err",
+      "?? docs/codex-queue/209/runs/v3-s101.json",
+      "?? docs/codex-queue/209/runs/v3-s101.md",
+      "?? docs/codex-queue/209/runs/v4-s1.err",
+      "?? docs/codex-queue/209/runs/v4-s1.json",
+      "?? docs/codex-queue/209/runs/v4-s1.md",
+      "?? docs/codex-queue/209/runs/v4-s101.err",
+      "?? docs/codex-queue/209/runs/v4-s101.json",
+      "?? docs/codex-queue/209/runs/v4-s101.md",
+      "?? docs/codex-queue/209/runs/v5-s1.err",
+      "?? docs/codex-queue/209/runs/v5-s1.json",
+      "?? docs/codex-queue/209/runs/v5-s1.md",
+      "?? docs/codex-queue/209/runs/v5-s101.err",
+      "?? docs/codex-queue/209/runs/v5-s101.json",
+      "?? docs/codex-queue/209/runs/v5-s101.md",
+      "?? docs/codex-queue/209/runs/v6-s1.err",
+      "?? docs/codex-queue/209/runs/v6-s1.json",
+      "?? docs/codex-queue/209/runs/v6-s1.md",
+      "?? docs/codex-queue/209/runs/v6-s101.err",
+      "?? docs/codex-queue/209/runs/v6-s101.json",
+      "?? docs/codex-queue/209/runs/v6-s101.md",
+      "?? docs/codex-queue/209/summary.json",
+      "?? docs/codex-queue/209/summary.md",
+      "?? docs/codex-queue/209/tools/run-wave.mjs",
+      "?? docs/codex-queue/209/tools/summarize.mjs",
+      "?? docs/codex-queue/209/tools/verify.mjs",
+      "?? docs/codex-queue/209/variants.json",
+      "?? docs/codex-queue/209/verification.json"
+    ],
+    "preexistingOtherEntries": 401,
+    "otherEntriesNow": 401,
+    "otherAdded": [],
+    "otherRemoved": [],
+    "note": "Repo cha đã có nhiều mục của làn khác trước phiếu; chỉ phần do phiếu 209 tạo nằm trong 209/ và 209-report.md."
+  },
+  "cleanup": {
+    "atUTC": "2026-10-30T03:24:10.623962+00:00",
+    "deleted": [
+      "games/typing-survival/tmp/codex-209/main",
+      "games/typing-survival/tmp/codex-209/tmpdir",
+      "games/typing-survival/tmp/codex-209/verify"
+    ],
+    "remaining": [
+      "main.commit",
+      "runs"
+    ],
+    "allThreeAbsent": true
+  }
+}

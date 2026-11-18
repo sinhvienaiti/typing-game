@@ -156,6 +156,7 @@ The persistent project handoff and engineering history live under docs:
 - [2026-09-19 detail](./docs/changelog/2026-09-19.md)
 - [Recall Typing design](./docs/design/RECALL_TYPING_GAME.md)
 - [Karaoke Typing design](./docs/design/KARAOKE_TYPING_GAME.md)
+- [Media store on Google Drive](./docs/MEDIA_STORAGE.md): images, music and 3D models stay out of Git; `pnpm media:setup`, then `pnpm media:pull`.
 
 Meaningful implementation or infrastructure changes should update the current day's changelog and the project context in the same Git workflow.
 

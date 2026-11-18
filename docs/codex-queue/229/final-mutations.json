@@ -1,0 +1,56 @@
+[
+  {
+    "id": "M5",
+    "path": "scripts/deploy/prune.mjs",
+    "old": "if (lstatSync(at).isSymbolicLink())",
+    "new": "if (false && lstatSync(at).isSymbolicLink())",
+    "before_sha256": "2c1fe4011e30e72206f81d534eb9456c7d8f1705f97a8bf55c7e04d484f855c2",
+    "mutated_exit": 1,
+    "restored_exit": 0
+  },
+  {
+    "id": "M6",
+    "path": "src/app/learning.ts",
+    "old": "let bridge: LearningBridge | null = null;",
+    "new": "let bridge: LearningBridge | null = createPortalBridge();",
+    "before_sha256": "3378c7251d7bb0509b3fd03729c27ac10a76b563ceeb8b5d542772edda75f852",
+    "mutated_exit": 1,
+    "restored_exit": 0
+  },
+  {
+    "id": "P1-01-query",
+    "path": "vite.config.ts",
+    "old": "const path = id.split(\"?\")[0]!.replace(/\\\\/g, \"/\");",
+    "new": "const path = id.replace(/\\\\/g, \"/\");",
+    "before_sha256": "81d942f3d132c3ba3c35dda6cd7f39634b8729eef550a204a28a85e61f3afb04",
+    "mutated_exit": 1,
+    "restored_exit": 0
+  },
+  {
+    "id": "P1-01-realpath",
+    "path": "vite.config.ts",
+    "old": "return realpathSync(path);",
+    "new": "return path;",
+    "before_sha256": "81d942f3d132c3ba3c35dda6cd7f39634b8729eef550a204a28a85e61f3afb04",
+    "mutated_exit": 1,
+    "restored_exit": 0
+  },
+  {
+    "id": "P1-01-guard",
+    "path": "vite.config.ts",
+    "old": "if (!error && !transformed)",
+    "new": "if (false && !error && !transformed)",
+    "before_sha256": "81d942f3d132c3ba3c35dda6cd7f39634b8729eef550a204a28a85e61f3afb04",
+    "mutated_exit": 1,
+    "restored_exit": 0
+  },
+  {
+    "id": "P1-02",
+    "path": "scripts/deploy/prune.mjs",
+    "old": "return lstatSync(path, { throwIfNoEntry: false });",
+    "new": "return existsSync(path) ? lstatSync(path) : undefined;",
+    "before_sha256": "2c1fe4011e30e72206f81d534eb9456c7d8f1705f97a8bf55c7e04d484f855c2",
+    "mutated_exit": 1,
+    "restored_exit": 0
+  }
+]

@@ -1,0 +1,191 @@
+# Thẻ spec âm thanh (AUDIO_PIPELINE §5.1 bước 1). Sinh bởi `pnpm audio:specs generate`; kiểm bằng `pnpm audio:specs validate`.
+# Sửa tay: thêm `manual: true` vào mục đã sửa, hoặc ghi đường dẫn (vd. duration.target_ms) vào manual_fields.
+# status, references, prompt.variants, notes luôn được giữ khi sinh lại. Comment YAML thì không: ghi chú để ở notes.
+schema: 1
+id: night-fall
+game: typing-defense
+status: draft
+manual_fields: []
+when: Trời tối, đêm bắt đầu
+purpose: Trang nghiêm, sắp đánh
+category: stinger
+family: nen
+source_class: warning-stinger
+playback:
+  mode: one-shot
+  channels: mono
+  channels_basis: 'THEME_SOUND_LIST §1: mono cho tiếng ngắn, stereo cho nhạc và âm nền'
+  bus: world
+  priority: null
+  min_gap_ms: null
+  limit_group: null
+  caps: {}
+  format: OGG Vorbis 48 kHz trong game; gốc WAV 48 kHz (§4.3.1, §11)
+duration:
+  target_ms: 3000
+  tolerance_pct: 20
+  tolerance_ms: null
+  min_ms: 2400
+  max_ms: 3600
+  basis: Prompt trong docs/audio/THEME_SOUND_LIST.md
+  category_range_ms: [1000, 3600]
+  music: null
+onset:
+  class: other
+  rise_max_ms: null
+  lead_silence_max_ms: 5
+  basis: AUDIO_PIPELINE §4.3.1 (thời gian lên, im lặng ở đầu)
+variants:
+  target: 1
+  min: 1
+  max: 1
+  basis: AUDIO_PIPELINE §4.3.3 (Stinger)
+randomisation:
+  group: rare-fixed
+  pitch_cents: 0
+  gain_db: 0
+  rules:
+    - 'Không đổi ngẫu nhiên: âm hiếm được nhận ra nhờ luôn giống nhau'
+    - Chuỗi thưởng leo nốt theo thang, tối đa 8–12 bậc
+  current_code: 'Tổng hợp trong mã; game chưa có bộ tải file (§6.3 #6)'
+  basis: AUDIO_PIPELINE §5.3 (mã cần cho mỗi nhóm giá trị riêng, §6.3)
+frequency_role:
+  bands:
+    - band: pitched
+      range_hz: null
+      role: word-hit đàn tranh theo thang Hò–Xự–Xang–Xê–Cống
+  voice_band: free
+  voice_band_text: Không phát dày; vẫn tránh ngân dài ở 1–4 kHz khi đang đọc từ
+  spectrum: Cùng giọng với nhạc
+  basis: AUDIO_PIPELINE §6.4, AUDIO_PIPELINE §4.3.3
+loudness:
+  file:
+    metric: peak-dbtp
+    target: -1
+    basis: 'THEME_SOUND_LIST §1: Tiếng ngắn đỉnh −1 dBTP (TK 24.9)'
+  proposal:
+    metric: lufs-m-max
+    target: -20
+    pad_s: 0.4
+    true_peak_max_dbtp: -1
+    basis: 'AUDIO_PIPELINE §4.3.3, §5.1 bước 4: đề xuất chuẩn hóa mọi âm ngắn về một mức chung; tài liệu game đang ghi chuẩn hóa đỉnh'
+  bus: world
+  bus_gain: 0.9
+  bus_gain_db: -0.92
+  gain_db: 0
+  gain_basis: 'Mã không có mức riêng cho từng id: nhánh TypingAudio nối thẳng vào bus, mức nằm trong mã tổng hợp. File phát ở 0 dB vào bus'
+  relative_db: -0.92
+  pronunciation_duck_db: null
+  mix_target:
+    metric: lufs-s-max
+    range: [-16, -12]
+    text: null
+    weight: null
+    basis: AUDIO_PIPELINE §4.3.3 (mức trong bản trộn, bài A và B)
+prompt:
+  text: Three village drum beats (slow, slow-quick) followed by one deep bronze gong, evening alarm in a bamboo village, 3 s.
+  suffix: null
+  style_root: bamboo, wood, bronze, paper, Vietnamese village, dry, outdoor
+  sweetener: tre, chuông đồng và đàn tranh
+  variants: []
+  basis: docs/audio/THEME_SOUND_LIST.md; gốc prompt theo AUDIO_PIPELINE §5.2 (chốt sau bảng phong cách)
+pitches: null
+parts: null
+layer_plan: null
+references: []
+source_plan:
+  now: [sample-player]
+  later: []
+  ranked:
+    - rank: 1
+      kinds: [sample-player]
+      detail: Mẫu nhạc cụ (kèn co VSCO, cồng và trống khung VCSL) cộng MIDI
+    - rank: 2
+      kinds: [model-later]
+      detail: Stable Audio 3 (tù và, còi)
+  needs_now: []
+  needs_later: []
+  note: Báo nguy chỉ có một phiên bản cố định, để người chơi học được
+  batch1: null
+  style_board: false
+  sa3_trial: false
+  basis: AUDIO_PIPELINE §3.2 (nguồn theo loại âm), §10.1 (khi chưa có Stable Audio 3)
+licence:
+  allowed: [CC0-1.0, project-code]
+  conditional:
+    - licence: Stability-Community-2024
+      condition: 'Bước 0: đăng ký Community License, chấp nhận AUP và điều khoản Gemma; có licences/stability-registration.txt (§10.1)'
+    - licence: MIT (ACE-Step 1.5)
+      condition: Ghim phiên bản; kiểm giai điệu trước khi bán
+    - licence: Apache-2.0 (MOSS-SoundEffect)
+      condition: Chỉ khi bước 0 trả lời không
+  forbidden:
+    - non-commercial-weights
+    - freesound-cc-by-nc
+    - freesound-sampling-plus
+    - bbc-sound-effects
+    - pixabay
+    - sound-from-other-games
+    - sonniss-lot-1-2-and-any-ai-step
+    - elevenlabs-or-suno-free-tier-release
+  attribution_required: false
+  notes:
+    - Mẫu VCSL, VSCO-2-CE (CC0); MIDI do Claude viết; mido là MIT (chưa kiểm lại)
+    - 'Chưa cài: chờ bước 0 của chủ dự án'
+  record: art-src/audio/SOURCES.json và licences.jsonl (§10.5, §10.6); pnpm audio:licence-check chặn khi thiếu
+  basis: AUDIO_PIPELINE §10.2
+constraints:
+  - Cồng là cồng hội làng, chỉ cho lúc trang trọng hoặc báo nguy; VCSL Gong 1/2 chưa rõ loại. Chủ dự án duyệt (§8.2)
+  - 'Chất liệu: tre, gỗ, chuông đồng, cồng, giấy, trống cơm, sáo trúc, đàn tranh. Không laser, không tiếng máy, không synth điện tử'
+  - Thang ngũ cung Hò, Xự, Xang, Xê, Cống (gần C D F G A); nốt của chữ và nhạc cùng một thang (TK 24.8)
+  - 'Không tôn giáo (TK 22.1): không chuông chùa, không mõ chùa, không tụng; cồng là cồng hội làng; phách tre thay mõ'
+  - 'Tránh âm Trung Quốc hay Nhật Bản dán nhãn Việt: nhị dẫn giai điệu, shakuhachi, taiko (§8.2)'
+board:
+  contexts: [mot-minh, trong-tran]
+  contexts_before_phase3: [mot-minh, lap-20]
+  dense: false
+  repeat_interval_ms: null
+  repeat_basis: null
+  loudness_match: lufs-m
+  basis: AUDIO_PIPELINE §7
+critic:
+  group: stinger
+  dirty: false
+  weights_batch1:
+    l2: 0.6
+    l3: 0.3
+    l4: 0.1
+    l5: 0.0
+  loop_eval:
+    enabled: false
+    length_s: null
+    plays: null
+    interval_ms: null
+  ast:
+    expected: [Wood, Gong, Drum]
+    forbid: []
+  loop: false
+  stereo: false
+  pitched: true
+  attack_max_ms: null
+  head_max_ms: 5
+  rate_hz: null
+  bpm: null
+  bars: null
+  beats_per_bar: null
+  intent: Three village drum beats (slow, slow-quick) followed by one deep bronze gong, evening alarm in a bamboo village, 3 s.
+  refs: []
+  basis: AUDIO_PIPELINE §4.4, §4.5 (L4 chỉ gắn cờ, trọng số tối đa 0,1)
+blocked_by: [chu-du-an-duyet]
+origin:
+  code:
+    file: src/view/audio-min.ts
+    present: true
+    asset_stem: null
+    synth_in_code: true
+  sound_list:
+    file: docs/audio/THEME_SOUND_LIST.md
+    present: true
+    section: 3. Trận và làng (bus `world`)
+  plan: []
+notes: ''

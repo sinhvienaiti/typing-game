@@ -1,0 +1,454 @@
+--- a/README.md
++++ b/README.md
+@@ -1,6 +1,14 @@
+ # Last Line
+ 
+-Chạy `pnpm deploy:pack` trong repo game để build production rồi kiểm gói `dist/` bằng bộ kiểm của kit cho `typing-survival`; lệnh trả mã lỗi nếu build hoặc kiểm gói thất bại. Bản demo nhà dùng `pnpm deploy:pack:local`, chỉ cho phép thêm miền `typing-game.local`, vẫn chặn tài nguyên của game khác. Muốn lấy báo cáo JSON sau build, chạy `node src/kit/tools/deploy/check-pack.mjs dist --game typing-survival --json` (thêm `--allow-local-host` cho demo nhà). Bản production còn bị chặn bởi nguồn portal `https://typing-game.local` ghi cứng trong cầu nối học. Các lệnh này chỉ build và kiểm `dist/`, chưa tải media hay đưa gói lên máy chủ.
++Chạy `pnpm deploy:pack` trong repo game, không đặt `VITE_PORTAL_URL`, để build bản phát hành độc lập rồi kiểm gói `dist/` bằng bộ kiểm của kit cho `typing-survival`; lệnh trả mã lỗi nếu build hoặc kiểm gói thất bại. Khi biến trống hoặc không đặt, cầu nối giữ sự kiện học trong hàng đợi cục bộ, kể cả khi game nằm trong iframe; không gửi tin và không xả hay xóa hàng đợi.
++
++`VITE_PORTAL_URL` nhận một URL HTTP(S) tuyệt đối, không có user/password; URL sai làm build dừng. Khi có giá trị, cầu nối dùng phần nguồn của URL: `https://portal.example/learn/?x=1` → `https://portal.example`. Bản demo nhà dùng:
++
++```bash
++VITE_PORTAL_URL=https://typing-game.local/ pnpm deploy:pack:local
++```
++
++Nếu môi trường đang có biến, tắt rõ bằng `VITE_PORTAL_URL= pnpm deploy:pack`. Cờ `--allow-local-host` của bộ kiểm (được `deploy:pack:local` dùng) chỉ cho phép miền nhà, không tự đặt biến và vẫn chặn tài nguyên của game khác. Muốn lấy báo cáo JSON sau build, chạy `node src/kit/tools/deploy/check-pack.mjs dist --game typing-survival --json` (thêm `--allow-local-host` cho demo nhà). Các lệnh này chỉ build và kiểm `dist/`, chưa tải media hay đưa gói lên máy chủ.
+ 
+ ## Models
+ 
+--- a/vite.config.ts
++++ b/vite.config.ts
+@@ -1,4 +1,13 @@
+-import { defineConfig } from "vite";
++import { fileURLToPath } from "node:url";
++import { defineConfig, loadEnv } from "vite";
++import { portalHome } from "./src/app/portal";
++
++/** Replace only the compiled fallback; the pinned kit stays byte-for-byte intact. */
++export function replacePortalOrigin(code: string, parentOrigin: string): string {
++  const declaration = /^export const PARENT_ORIGIN = [^\n]+;$/gm;
++  if (code.match(declaration)?.length !== 1) throw new Error("Expected one kit PARENT_ORIGIN declaration");
++  return code.replace(declaration, () => `export const PARENT_ORIGIN = ${JSON.stringify(parentOrigin)};`);
++}
+ 
+ const env = (name: string): string | undefined => process.env[name]?.trim() || undefined;
+ 
+@@ -7,28 +16,46 @@
+ // `pnpm dev` on 127.0.0.1:3007 keeps Vite's own HMR socket.
+ const hmrHost = env("DEV_HMR_HOST");
+ 
+-export default defineConfig({
+-  base: "/",
+-  server: {
+-    host: env("DEV_HOST") ?? "127.0.0.1",
+-    port: 3007,
+-    strictPort: true,
+-    // tmp/ holds evidence and other agents' scratch trees: a tsconfig or
+-    // index.html written there must not force a full reload mid-scenario.
+-    watch: { ignored: ["**/tmp/**"] },
+-    allowedHosts: (env("DEV_ALLOWED_HOSTS") ?? "survival.typing-game.local")
+-      .split(",")
+-      .map((value) => value.trim())
+-      .filter(Boolean),
+-    hmr: hmrHost
+-      ? {
+-          host: hmrHost,
+-          protocol: (env("DEV_HMR_PROTOCOL") as "ws" | "wss" | undefined) ?? "wss",
+-          clientPort: Number(env("DEV_HMR_CLIENT_PORT") ?? 443),
++export default defineConfig(({ mode }) => {
++  const root = fileURLToPath(new URL(".", import.meta.url));
++  const contract = fileURLToPath(new URL("./src/kit/learning/contract.ts", import.meta.url));
++  const home = portalHome(loadEnv(mode, root, "VITE_PORTAL_URL").VITE_PORTAL_URL);
++  const parentOrigin = home ? new URL(home).origin : "";
++  return {
++    plugins: [{
++      name: "last-line-portal-origin",
++      enforce: "pre",
++      transform(code, id) {
++        if (id !== contract) return null;
++        try {
++          return { code: replacePortalOrigin(code, parentOrigin), map: null };
++        } catch (error) {
++          this.error(error instanceof Error ? error : String(error));
+         }
+-      : undefined,
+-  },
+-  build: {
+-    target: "es2022",
+-  },
++      },
++    }],
++    base: "/",
++    server: {
++      host: env("DEV_HOST") ?? "127.0.0.1",
++      port: 3007,
++      strictPort: true,
++      // tmp/ holds evidence and other agents' scratch trees: a tsconfig or
++      // index.html written there must not force a full reload mid-scenario.
++      watch: { ignored: ["**/tmp/**"] },
++      allowedHosts: (env("DEV_ALLOWED_HOSTS") ?? "survival.typing-game.local")
++        .split(",")
++        .map((value) => value.trim())
++        .filter(Boolean),
++      hmr: hmrHost
++        ? {
++            host: hmrHost,
++            protocol: (env("DEV_HMR_PROTOCOL") as "ws" | "wss" | undefined) ?? "wss",
++            clientPort: Number(env("DEV_HMR_CLIENT_PORT") ?? 443),
++          }
++        : undefined,
++    },
++    build: {
++      target: "es2022",
++    },
++  };
+ });
+--- /dev/null
++++ b/src/app/portal.ts
+@@ -0,0 +1,38 @@
++import { createLearningBridge, type BridgeHost, type LearningBridge, type LearningBridgeOptions } from "../kit/learning";
++
++/** This game's id in portal/public/games.json. */
++export const GAME_ID = "typing-survival";
++
++/** An optional build-time destination; paths, queries and fragments stay intact. */
++export function portalHome(value: string | undefined): string | null {
++  if (!value?.trim()) return null;
++  try {
++    const url = new URL(value.trim());
++    if (!["https:", "http:"].includes(url.protocol) || url.username || url.password) throw new Error("Invalid portal URL");
++    return url.href;
++  } catch {
++    throw new TypeError("VITE_PORTAL_URL must be an absolute HTTP(S) URL without credentials");
++  }
++}
++
++// Without a configured portal, framing must not flush the local learning queue.
++const standaloneHost: BridgeHost = {
++  parent: null,
++  addEventListener: () => {},
++  removeEventListener: () => {},
++  setTimeout: (callback, ms) => globalThis.setTimeout(callback, ms),
++  clearTimeout: (handle) => globalThis.clearTimeout(handle as ReturnType<typeof setTimeout>),
++  now: () => Date.now(),
++};
++
++export type PortalBridgeOptions = Omit<LearningBridgeOptions, "gameId" | "parentOrigin">;
++
++export function createPortalBridge(options: PortalBridgeOptions = {}): LearningBridge {
++  const home = portalHome(import.meta.env.VITE_PORTAL_URL);
++  return createLearningBridge({
++    ...options,
++    gameId: GAME_ID,
++    parentOrigin: home ? new URL(home).origin : "",
++    host: home ? options.host : standaloneHost,
++  });
++}
+--- a/src/app/learning.ts
++++ b/src/app/learning.ts
+@@ -1,21 +1,27 @@
+ /**
+  * Typed words go to the portal's learning record (kit learning bridge).
+- * Inside the portal they are posted to it; played alone they wait in a
+- * local queue the bridge sends the next time the game runs in the portal.
++ * With a configured portal they are posted to it; otherwise they wait in a
++ * local queue the bridge sends the next time a configured portal is available.
+  * Learning never stops the fight: any failure is dropped.
+  */
+-import { buildCombatLearningEvent, createLearningBridge, type LearningBridge } from "../kit/learning";
++import { buildCombatLearningEvent, type LearningBridge } from "../kit/learning";
++import { createPortalBridge, GAME_ID, type PortalBridgeOptions } from "./portal";
+ import type { Word } from "./vocab";
+ 
+-/** This game's id in portal/public/games.json. */
+-export const GAME_ID = "typing-survival";
++export { GAME_ID };
+ 
+ let bridge: LearningBridge | null = null;
++
++/** Recreate the module bridge with an injected host/storage for isolated tests. */
++export function resetLearningBridge(options?: PortalBridgeOptions): void {
++  bridge?.dispose();
++  bridge = options ? createPortalBridge(options) : null;
++}
+ 
+ /** One finished word: "correct" when typed without a wrong key. */
+ export function reportWord(word: Word, perfect: boolean): void {
+   try {
+-    bridge ??= createLearningBridge({ gameId: GAME_ID });
++    bridge ??= createPortalBridge();
+     bridge.sendAttempt(buildCombatLearningEvent({ gameId: GAME_ID, entry: { id: word.en, en: word.en, vi: word.vi, ipa: word.ipa }, perfect }));
+   } catch {
+     // The record is a bonus; the fight goes on without it.
+--- /dev/null
++++ b/tests/portal.test.ts
+@@ -0,0 +1,115 @@
++import { afterEach, describe, expect, it, vi } from "vitest";
++import { LEARNING_ATTEMPT_MESSAGE, SHARED_MUSIC_MESSAGE, type BridgeHost, type LearningBridge, type QueueStorage } from "../src/kit/learning";
++
++const bridges: LearningBridge[] = [];
++afterEach(() => {
++  for (const bridge of bridges.splice(0)) bridge.dispose();
++  vi.unstubAllEnvs();
++  vi.resetModules();
++});
++
++describe("portalHome", () => {
++  it.each([undefined, "", "   "])("has no portal for %j", async (url) => {
++    const { portalHome } = await import("../src/app/portal");
++    expect(portalHome(url)).toBeNull();
++  });
++
++  it.each([
++    [" https://portal.example ", "https://portal.example/"],
++    ["https://portal.example/learn/?x=1#home", "https://portal.example/learn/?x=1#home"],
++    ["http://localhost:8080/learn/", "http://localhost:8080/learn/"],
++  ])("keeps the valid HTTP(S) URL %s", async (url, home) => {
++    const { portalHome } = await import("../src/app/portal");
++    expect(portalHome(url)).toBe(home);
++  });
++
++  it.each(["not a URL", "/learn/", "ftp://portal.example", "javascript:alert(1)",
++    "https://user@portal.example", "https://:secret@portal.example", "https://user:secret@portal.example"])("rejects %s with the variable name", async (url) => {
++    const { portalHome } = await import("../src/app/portal");
++    expect(() => portalHome(url)).toThrow(/VITE_PORTAL_URL/);
++  });
++});
++
++function fixture() {
++  const parent = { postMessage: vi.fn() };
++  let receive = (_event: MessageEvent) => {};
++  const host: BridgeHost = {
++    parent,
++    addEventListener: (_type, listener) => { receive = listener; },
++    removeEventListener: vi.fn(),
++    setTimeout: vi.fn(), clearTimeout: vi.fn(), now: () => 1234,
++  };
++  const data = new Map<string, unknown>();
++  const storage: QueueStorage = {
++    readJson: (key) => data.get(key) ?? null,
++    writeJson: (key, value) => { data.set(key, value); return true; },
++  };
++  return { host, parent, storage, receive: (origin: string) => receive({
++    origin, source: parent, data: { type: SHARED_MUSIC_MESSAGE, playing: true },
++  } as unknown as MessageEvent) };
++}
++
++describe("portal learning bridge", () => {
++  it.each([undefined, "", "   "])("reportWord keeps every event queued in a frame without a portal (%j)", async (url) => {
++    vi.stubEnv("VITE_PORTAL_URL", url);
++    const { createPortalBridge } = await import("../src/app/portal");
++    const { reportWord, resetLearningBridge } = await import("../src/app/learning");
++    const f = fixture();
++    const bridge = createPortalBridge({ host: f.host, storage: f.storage });
++    bridges.push(bridge);
++    resetLearningBridge({ host: f.host, storage: f.storage });
++    reportWord({ en: "River", vi: "sông", ipa: "/ˈrɪvər/" }, true);
++    reportWord({ en: "house", vi: "ngôi nhà", ipa: "" }, false);
++    expect(bridge.parentOrigin).toBe("");
++    expect(bridge.embedded).toBe(false);
++    expect(bridge.queued().map((event) => [event.gameId, event.entityId, event.result])).toEqual([
++      ["typing-survival", "river", "correct"], ["typing-survival", "house", "wrong"],
++    ]);
++    // Recreating a framed bridge must neither flush nor delete saved attempts.
++    resetLearningBridge({ host: f.host, storage: f.storage });
++    expect(bridge.flushQueue()).toBe(0);
++    expect(bridge.queued()).toHaveLength(2);
++    expect(bridge.requestFocus()).toBe(false);
++    expect(f.parent.postMessage).not.toHaveBeenCalled();
++    resetLearningBridge();
++  });
++
++  it("reportWord posts only to the configured URL origin", async () => {
++    vi.stubEnv("VITE_PORTAL_URL", "https://portal.example/learn/?x=1#home");
++    const { reportWord, resetLearningBridge } = await import("../src/app/learning");
++    const f = fixture();
++    resetLearningBridge({ host: f.host, storage: f.storage });
++    reportWord({ en: "River", vi: "sông", ipa: "" }, true);
++    expect(f.parent.postMessage).toHaveBeenCalledTimes(1);
++    expect(f.parent.postMessage).toHaveBeenCalledWith(expect.objectContaining({
++      type: LEARNING_ATTEMPT_MESSAGE,
++      event: expect.objectContaining({ gameId: "typing-survival", entityId: "river" }),
++    }), "https://portal.example");
++    resetLearningBridge();
++  });
++
++  it("retains kit queue flushing and origin checks when a portal is configured", async () => {
++    const { createPortalBridge } = await import("../src/app/portal");
++    const { reportWord, resetLearningBridge } = await import("../src/app/learning");
++    const f = fixture();
++    vi.stubEnv("VITE_PORTAL_URL", "");
++    resetLearningBridge({ host: f.host, storage: f.storage });
++    reportWord({ en: "river", vi: "sông", ipa: "" }, true);
++    resetLearningBridge();
++    vi.stubEnv("VITE_PORTAL_URL", "https://portal.example/learn/?x=1");
++    const bridge = createPortalBridge({ host: f.host, storage: f.storage });
++    bridges.push(bridge);
++    expect(bridge.parentOrigin).toBe("https://portal.example");
++    expect(bridge.embedded).toBe(true);
++    expect(f.parent.postMessage).toHaveBeenCalledWith(expect.objectContaining({
++      event: expect.objectContaining({ gameId: "typing-survival", entityId: "river" }),
++    }), "https://portal.example");
++    expect(bridge.queued()).toEqual([]);
++    const music = vi.fn();
++    bridge.onSharedMusic(music);
++    f.receive("https://wrong.example");
++    expect(music).not.toHaveBeenCalled();
++    f.receive("https://portal.example");
++    expect(music).toHaveBeenCalledWith(true);
++  });
++});
+--- /dev/null
++++ b/tests/portal-build.test.ts
+@@ -0,0 +1,86 @@
++import { spawnSync } from "node:child_process";
++import { mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
++import { join, resolve } from "node:path";
++import { build } from "vite";
++import { afterEach, describe, expect, it, vi } from "vitest";
++
++const root = resolve(__dirname, "..");
++afterEach(() => vi.unstubAllEnvs());
++
++async function compileProbe() {
++  mkdirSync(join(root, "tmp"), { recursive: true });
++  const fixture = mkdtempSync(join(root, "tmp/portal-build-"));
++  try {
++    const entry = join(fixture, "probe.ts");
++    // Probe the kit fallback as well as the game adapter: both enter the real bundle.
++    writeFileSync(entry, 'export { createLearningBridge } from "../../src/kit/learning";\nexport { createPortalBridge } from "../../src/app/portal";');
++    return await build({
++      configFile: join(root, "vite.config.ts"),
++      logLevel: "silent",
++      build: {
++        write: false, minify: false,
++        rollupOptions: { input: entry, preserveEntrySignatures: "strict" },
++      },
++    });
++  } finally {
++    rmSync(fixture, { recursive: true, force: true });
++  }
++}
++
++describe("portal build configuration", () => {
++  it.each([
++    [undefined, ""], ["", ""], ["   ", ""],
++    ["https://portal.example/learn/?x=1", "https://portal.example"],
++    ["https://typing-game.local/", "https://typing-game.local"],
++  ])("executes the emitted bridge for VITE_PORTAL_URL=%j without changing kit bytes", async (url, origin) => {
++    vi.stubEnv("VITE_PORTAL_URL", url);
++    const contract = join(root, "src/kit/learning/contract.ts");
++    const original = readFileSync(contract);
++    try {
++      const result = await compileProbe();
++      if (!("output" in result)) throw new Error("Expected a single Rollup build");
++      const chunks = result.output.filter((item) => item.type === "chunk");
++      expect(chunks).toHaveLength(1);
++      const code = chunks[0]!.code;
++      if (!url?.trim()) expect(code).not.toContain("typing-game.local");
++      const executed = spawnSync(process.execPath, ["--input-type=module", "--eval", `
++        import { readFileSync } from "node:fs";
++        const code = readFileSync(0);
++        const bundled = await import("data:text/javascript;base64," + code.toString("base64"));
++        const kit = bundled.createLearningBridge({ gameId: "typing-survival" });
++        const game = bundled.createPortalBridge();
++        console.log(JSON.stringify([kit.parentOrigin, game.parentOrigin, game.gameId]));
++        kit.dispose(); game.dispose();
++      `], { input: code, encoding: "utf8", timeout: 5000 });
++      expect(executed.error).toBeUndefined();
++      expect(executed.stderr).toBe("");
++      expect(executed.status).toBe(0);
++      expect(JSON.parse(executed.stdout)).toEqual([origin, origin, "typing-survival"]);
++    } finally {
++      expect(readFileSync(contract)).toEqual(original);
++    }
++  });
++
++  it.each(["not a URL", "ftp://portal.example", "https://user:secret@portal.example"])("stops the real Vite build for %s", async (url) => {
++    vi.stubEnv("VITE_PORTAL_URL", url);
++    await expect(compileProbe()).rejects.toThrow(/VITE_PORTAL_URL/);
++  });
++
++  it.each([0, 2])("rejects %i kit fallback declarations", async (count) => {
++    const { replacePortalOrigin } = await import("../vite.config");
++    const code = 'export const PARENT_ORIGIN = "https://typing-game.local";\n'.repeat(count);
++    expect(() => replacePortalOrigin(code, "")).toThrow(/Expected one kit PARENT_ORIGIN declaration/);
++  });
++
++  it("replaces exactly the single fallback declaration", async () => {
++    const { replacePortalOrigin } = await import("../vite.config");
++    const code = '// A pinned kit contract.\nexport const PARENT_ORIGIN = "https://typing-game.local";\nexport const OTHER = 200;\n';
++    expect(replacePortalOrigin(code, "https://portal.example")).toBe(
++      '// A pinned kit contract.\nexport const PARENT_ORIGIN = "https://portal.example";\nexport const OTHER = 200;\n',
++    );
++    expect(replacePortalOrigin(code, "")).toContain('export const PARENT_ORIGIN = "";');
++    expect(replacePortalOrigin(code, "https://$&.portal.example")).toContain(
++      'export const PARENT_ORIGIN = "https://$&.portal.example";',
++    );
++  });
++});
+--- /dev/null
++++ b/docs/changelog/2026-10-30-portal-origin.md
+@@ -0,0 +1,62 @@
++# Nguồn portal lúc build · 30/10/2026
++
++Phiếu 207: bản phát hành Last Line không còn mặc định gửi sự kiện học tới
++`https://typing-game.local`. `src/app/portal.ts` tập trung `portalHome()` và
++`createPortalBridge()`; `learning.ts` dùng adapter này, vẫn giữ một cầu nối
++ở mức module. Hàm `resetLearningBridge()` dành cho test có thể truyền host và
++storage, không đổi đường gọi khi chơi.
++
++`VITE_PORTAL_URL` là một URL HTTP(S) tuyệt đối, không có user/password. URL
++sai làm Vite dừng với lỗi có tên biến. Có giá trị thì dùng phần nguồn của
++URL; ví dụ `https://portal.example/learn/?x=1` → `https://portal.example`.
++Trống, chỉ khoảng trắng hoặc không đặt thì host không có `parent`, kể cả khi
++game đang nằm trong iframe: không `postMessage`, không xả hay xóa hàng đợi.
++Khi có portal được cấu hình, giữ cách gửi/nhận và xả hàng đợi hiện tại của kit.
++
++Plugin Vite `enforce: "pre"` đọc `loadEnv` theo mode, chỉ thay khai báo
++`PARENT_ORIGIN` trong `src/kit/learning/contract.ts` khi biên dịch. Không có
++đúng một khai báo thì `this.error` dừng build. Giá trị thay được giữ nguyên
++ký tự, kể cả `$&`. Kit trên đĩa giữ nguyên byte, không chạy `kit:sync`.
++
++## Cách đóng gói
++
++- Phát hành độc lập: `pnpm deploy:pack`, không đặt biến.
++- Demo nhà: `VITE_PORTAL_URL=https://typing-game.local/ pnpm deploy:pack:local`.
++- Tắt biến đang có trong môi trường: `VITE_PORTAL_URL= pnpm deploy:pack`.
++
++`--allow-local-host` chỉ cho phép nguồn nhà trong bộ kiểm, không tự đặt biến.
++README đã ghi các lệnh và bỏ câu nguồn portal còn chặn production.
++
++## Số đo và kiểm
++
++Đo trên nhánh `ts-codex`, HEAD `184c90d`, có phần model riêng của phiếu 205
++chưa commit. Bằng chứng ở repo cha: `docs/codex-queue/207/`.
++
++| Kiểm | Trước | Sau |
++| --- | ---: | ---: |
++| `deploy:pack` production, mã thoát | 1 | 0 |
++| Lỗi `local-host` / tổng lỗi | 1 / 1 | 0 / 0 |
++| Chuỗi `typing-game.local` trong toàn bộ dist | 1 | 0 |
++| File dist | 76 | 76 |
++| Byte dist | 18.273.794 | 18.274.078 |
++
++Tăng 284 byte. Quét đủ 12 file HTML/JS/CSS/JSON production: 0 chuỗi local;
++inventory có đường, byte và SHA-256 của cả 76 file. Demo nhà đạt 0 lỗi,
++18.274.393 byte, có 2 chuỗi local được cấu hình rõ. Đã dựng lại production
++không biến để bàn giao, inventory khớp bản production đã kiểm.
++
++Test trước mã: 29 đỏ, 1 xanh trong 3 file. Test bổ sung phép thay `$&` có
++1 đỏ trước sửa; sau cùng 30/30 xanh. `pnpm check` xanh 265/265 test trong
++25 file; `verify-kit` xanh 61/61. Không có test thời gian đỏ nên không cần
++chạy riêng ba lần. Test build dùng `write: false`, thực thi JS bằng Node;
++fixture nằm trong `tmp/` của game và tự xóa.
++
++Giữ nguyên SHA-256 của 62 file kit kể cả manifest, 20 file sim, 9 file
++content và golden S0. Golden:
++`42e4e5a9534bc78a0c252353ea7ee4670a1bec9e43eb42ef38c886aade530eea`;
++test bộ bài vẫn nhận `7f073fa2`. Không đổi luật chơi hoặc chữ người chơi thấy.
++
++Không sửa script repo cha, kit, media hoặc phần bắt tay `hello`/`ack`.
++Claude cần đặt biến cho Play/dev ở máy nhà và cập nhật mục 9 của tài liệu
++triển khai độc lập; nếu chưa đặt, sự kiện học tiếp tục nằm trong hàng đợi.
++Không chạy server, trình duyệt hay mạng; chưa kết luận toàn bộ G7 đã đạt.

@@ -1,0 +1,215 @@
+--- a/src/lab/cutin.ts	2026-11-04 09:30:35
++++ b/src/lab/cutin.ts	2026-11-04 09:30:35
+@@ -99,8 +99,15 @@
+     shout: frame("tt-cutin-a-shout.v1-try1.png", 1821, 864, 0.26, 0.38),
+   },
+   b: {
+-    gather: frame("tt-cutin-b-gather.v1-try1.png", 1916, 821, 0.29, 0.21),
+-    shout: frame("tt-cutin-b-shout.v1-try1.png", 1823, 863, 0.3, 0.32),
++    // Anchored between her eyes, face and hand boxes measured on the files (owner preview, 03/11 evening).
++    gather: frame("tt-cutin-b-gather.v1-try1.png", 1916, 821, 0.308, 0.195, [
++      [0.23, 0.04, 0.37, 0.42],
++      [0.31, 0.3, 0.4, 0.62],
++    ]),
++    shout: frame("tt-cutin-b-shout.v1-try1.png", 1823, 863, 0.284, 0.322, [
++      [0.19, 0.1, 0.34, 0.45],
++      [0.62, 0.2, 0.75, 0.62],
++    ]),
+   },
+   // The owner's pick, upscaled 2x with Firefly Upscaler (Adobe model; the 1836 px originals showed soft on screen).
+   // Anchored between her eyes in both frames, so her eyes hold still through the cut; face and hand
+@@ -117,6 +124,28 @@
+   },
+ };
+ 
++/**
++ * Elegant shout-face candidates (owner preview, 03/11 evening: the shout read angry). Each is the current shout
++ * with only her head swapped for a ChatGPT face edit, so body, seal and sword are the same pixels. The anchor is the
++ * current one plus the eye-midpoint shift measured on the file; the face box reaches her chin.
++ * Skin matched to the gather frame of the same style (owner 03/11 evening: "nên nhất quán nước da"): a
++ * deterministic CIELAB transfer on her skin only (tmp/shots/cutin/shout-faces/tools/skinmatch.py), mean skin
++ * deltaE2000 <= 1.1 to the gather; PNG so nothing outside the skin changes (the gather frames are untouched).
++ * B's hand box is measured on the skin mask (the old [0.62, 0.2, 0.75, 0.62] sat right of her hand).
++ */
++const C_SHOUT_KEEP: readonly Box[] = [[0.24, 0.12, 0.38, 0.4], [0.43, 0.25, 0.556, 0.554]];
++const B_HAND_KEEP: Box = [0.43, 0.2, 0.6, 0.58];
++export const CUTIN_SHOUT_CANDIDATES: Readonly<Record<string, { readonly style: "b" | "c"; readonly shout: CutInFrame }>> = {
++  c1: { style: "c", shout: frame("tt-cutin-c-shout-e1-head-skin-up2x.v2-try1.png", 3671, 1713, 0.31, 0.233, C_SHOUT_KEEP) },
++  c2: { style: "c", shout: frame("tt-cutin-c-shout-e2-head-skin-up2x.v2-try1.png", 3671, 1713, 0.309, 0.237, C_SHOUT_KEEP) },
++  c3: { style: "c", shout: frame("tt-cutin-c-shout-e3-head-skin-up2x.v2-try1.png", 3671, 1713, 0.31, 0.233, C_SHOUT_KEEP) },
++  c4: { style: "c", shout: frame("tt-cutin-c-shout-e4-head-skin-up2x.v2-try1.png", 3671, 1713, 0.311, 0.232, C_SHOUT_KEEP) },
++  b1: { style: "b", shout: frame("tt-cutin-b-shout-e1-head-skin.v2-try1.png", 1823, 863, 0.287, 0.327, [[0.19, 0.1, 0.34, 0.48], B_HAND_KEEP]) },
++  b2: { style: "b", shout: frame("tt-cutin-b-shout-e2-head-skin.v2-try1.png", 1823, 863, 0.287, 0.33, [[0.19, 0.1, 0.34, 0.48], B_HAND_KEEP]) },
++  // Radiant Resolve in B (03/11 evening, one ChatGPT try); eyes about 1 px right and 1 px down of the current shout's.
++  b3: { style: "b", shout: frame("tt-cutin-b-shout-e3-head-skin.v2-try1.png", 1823, 863, 0.2845, 0.3235, [[0.19, 0.1, 0.34, 0.49], B_HAND_KEEP]) },
++};
++
+ const clamp01 = (v: number): number => (v < 0 ? 0 : v > 1 ? 1 : v);
+ 
+ /**
+--- a/src/lab/orbit.ts	1970-01-01 08:00:00
++++ b/src/lab/orbit.ts	2026-11-04 09:30:35
+@@ -0,0 +1,94 @@
++/**
++ * Lab-only orbit camera (owner, 03/11/2026: "game lab đang không cho thay đổi góc nhìn kiểu 360 độ"): O turns it
++ * on; dragging turns the view all the way round the point the play camera looks at and tilts it, the wheel keeps
++ * zooming, O again returns to the play camera. It only re-aims the pose the zoom placed this frame, so the zoom,
++ * a big skill's wide framing, the kick and the shake all still apply. The game keeps its fixed 3/4 camera (D48, D57).
++ * No allocation per frame.
++ */
++import * as THREE from "three";
++
++/** Lowest and highest elevation above the ground (deg) and drag speeds (deg per CSS px). */
++const MIN_ELEV = 4;
++const MAX_ELEV = 89;
++const YAW_PER_PX = 0.35;
++const ELEV_PER_PX = 0.25;
++/** Half-life of the smoothing toward the dragged angles (s). */
++const HALF_LIFE_S = 0.06;
++
++export class LabOrbit {
++  enabled = false;
++  /** Yaw added round the vertical axis (deg) and the elevation over the ground (deg; NaN: the play camera's). */
++  private yaw = 0;
++  private elev = Number.NaN;
++  private yawShown = 0;
++  private elevShown = Number.NaN;
++  private dragging = false;
++  private lastX = 0;
++  private lastY = 0;
++  private readonly pivot = new THREE.Vector3();
++  private readonly fwd = new THREE.Vector3();
++  private readonly off = new THREE.Vector3();
++
++  constructor(private readonly el: HTMLElement) {
++    el.addEventListener("pointerdown", (e) => {
++      if (!this.enabled || e.button !== 0) return;
++      this.dragging = true;
++      this.lastX = e.clientX;
++      this.lastY = e.clientY;
++      el.setPointerCapture(e.pointerId);
++    });
++    el.addEventListener("pointermove", (e) => {
++      if (!this.dragging) return;
++      const dx = e.clientX - this.lastX;
++      const dy = e.clientY - this.lastY;
++      this.lastX = e.clientX;
++      this.lastY = e.clientY;
++      this.yaw -= dx * YAW_PER_PX;
++      if (Number.isNaN(this.elev)) this.elev = this.elevShown;
++      this.elev = Math.max(MIN_ELEV, Math.min(MAX_ELEV, this.elev + dy * ELEV_PER_PX));
++    });
++    const stop = (e: PointerEvent): void => {
++      if (!this.dragging) return;
++      this.dragging = false;
++      if (el.hasPointerCapture(e.pointerId)) el.releasePointerCapture(e.pointerId);
++    };
++    el.addEventListener("pointerup", stop);
++    el.addEventListener("pointercancel", stop);
++  }
++
++  /** O: on with the play camera's angles; off back to the play camera. */
++  toggle(): void {
++    this.enabled = !this.enabled;
++    this.yaw = this.yawShown = 0;
++    this.elev = this.elevShown = Number.NaN;
++    this.el.style.cursor = this.enabled ? "grab" : "";
++  }
++
++  /**
++   * Re-aims `camera` (already placed by the zoom this frame): round the ground point its centre ray meets, by the
++   * dragged yaw and elevation, at the same distance.
++   */
++  apply(camera: THREE.PerspectiveCamera, dtS: number): void {
++    if (!this.enabled) return;
++    camera.getWorldDirection(this.fwd);
++    if (this.fwd.y > -1e-3) return;
++    const t = -camera.position.y / this.fwd.y;
++    this.pivot.copy(camera.position).addScaledVector(this.fwd, t);
++    this.off.copy(camera.position).sub(this.pivot);
++    const dist = this.off.length();
++    const baseYaw = Math.atan2(this.off.x, this.off.z);
++    const baseElev = THREE.MathUtils.radToDeg(Math.asin(Math.min(1, this.off.y / dist)));
++    if (Number.isNaN(this.elevShown)) this.elevShown = baseElev;
++    const wantElev = Number.isNaN(this.elev) ? baseElev : this.elev;
++    const k = dtS <= 0 ? 1 : 1 - Math.pow(0.5, dtS / HALF_LIFE_S);
++    this.yawShown += (this.yaw - this.yawShown) * k;
++    this.elevShown += (wantElev - this.elevShown) * k;
++    const yaw = baseYaw + THREE.MathUtils.degToRad(this.yawShown);
++    const elev = THREE.MathUtils.degToRad(this.elevShown);
++    const h = Math.cos(elev) * dist;
++    camera.position.set(this.pivot.x + Math.sin(yaw) * h, this.pivot.y + Math.sin(elev) * dist, this.pivot.z + Math.cos(yaw) * h);
++    camera.up.set(0, 1, 0);
++    camera.lookAt(this.pivot);
++    camera.updateMatrixWorld(true);
++  }
++}
+--- a/src/lab/skills-main.ts	2026-11-04 09:30:35
++++ b/src/lab/skills-main.ts	2026-11-04 09:30:35
+@@ -33,6 +33,7 @@
+ import { RenderPass } from "three/examples/jsm/postprocessing/RenderPass.js";
+ import type { Quality } from "../content/types";
+ import { CameraZoom } from "../view/camera-zoom";
++import { LabOrbit } from "./orbit";
+ import { createRenderer, placeCamera } from "../view/renderer";
+ import { K5_MAX, SwordSkillFx, type SwordSkillHost, type SwordSlot, type SwordSkillTextures } from "../view/skills/sword-skills";
+ import { loadSwordModels, loadWeaponModel, standInModel, type BladeSet } from "../view/skills/blades";
+@@ -47,7 +48,7 @@
+ import { LabBus, type Material } from "./events";
+ import { DeathFx } from "./death-fx";
+ import { VictimDirector } from "./victims";
+-import { CutIn, CUTIN_ART } from "./cutin";
++import { CutIn, CUTIN_ART, CUTIN_SHOUT_CANDIDATES } from "./cutin";
+ import { LabSound, type SoundTake } from "./sound";
+ import { createSkillNumbers } from "../view/hitfx";
+ import { DamageCompiler } from "../view/damage-compile";
+@@ -178,6 +179,8 @@
+ const camBase = new THREE.Vector3();
+ // Player zoom (canon D57): the whole field by default, wheel or = / - toward a close view on Lam, Z toggles.
+ const zoom = new CameraZoom();
++/** O: an orbit view all round the field (lab only; owner preview 03/11). */
++const freeOrbit = new LabOrbit(view.stage.renderer.domElement);
+ /** A fixed camera set by __lab.camera (not "play"): the zoom leaves it alone until "play" again. */
+ let customCamera = false;
+ const kick = new CameraKick();
+@@ -641,7 +644,15 @@
+ const cutin = new CutIn(document.body);
+ const ULT_HOLD = Number(params.get("cutin") ?? "1.7") || 1.7;
+ /** Holds this short (scenarios pass ?cutin=0.05 to skip the cut-in) show no painting and no cut. */
+-const ULT_ART = ULT_HOLD >= 0.6 ? CUTIN_ART.c : undefined;
++/** ?cutinArt=a|b|c picks the painting style (owner preview, 03/11 evening: he asked to try B, the anime cel). */
++/** ?cutinShout=c1..c4|b1..b3 swaps only the shout frame for an elegant-face candidate, skin matched to the gather (owner preview, 03/11 evening). */
++const SHOUT_ID = params.get("cutinShout") ?? "c3"; // the owner picked C3 (03/11 night)
++const SHOUT_PICK = Object.hasOwn(CUTIN_SHOUT_CANDIDATES, SHOUT_ID) ? CUTIN_SHOUT_CANDIDATES[SHOUT_ID] : undefined;
++const ART_PARAM = (["a", "b", "c"] as const).find((k) => k === params.get("cutinArt"));
++const CUTIN_STYLE = ART_PARAM ?? SHOUT_PICK?.style ?? "c";
++if (SHOUT_PICK && SHOUT_PICK.style !== CUTIN_STYLE) console.warn(`cutinShout is a style ${SHOUT_PICK.style} candidate; cutinArt=${CUTIN_STYLE} keeps its own shout`);
++const ART_BASE = SHOUT_PICK && SHOUT_PICK.style === CUTIN_STYLE ? { ...CUTIN_ART[CUTIN_STYLE], shout: SHOUT_PICK.shout } : CUTIN_ART[CUTIN_STYLE];
++const ULT_ART = ULT_HOLD >= 0.6 ? ART_BASE : undefined;
+ const ULT_CUTIN = {
+   name: "MILKY-WAY SWORD RAIN",
+   hanzi: "天河劍雨",
+@@ -997,6 +1008,7 @@
+   else if (e.key === "=" || e.key === "+") zoom.zoomIn();
+   else if (e.key === "-" || e.key === "_") zoom.zoomOut();
+   else if (e.key === "z" || e.key === "Z") zoom.toggle();
++  else if (e.key === "o" || e.key === "O") freeOrbit.toggle();
+ });
+ window.addEventListener(
+   "wheel",
+@@ -1027,6 +1039,7 @@
+     ["W", "Next sword"],
+     ["E", "Next element"],
+     ["Z", "Zoom: close view / whole field (wheel, = and - too)"],
++    ["O", "Orbit: drag to turn the view all round (O again: play camera)"],
+   ];
+   for (const [key, name] of names) {
+     const b = document.createElement("button");
+@@ -1150,6 +1163,7 @@
+   zoom.holdWide(cutin.active || myriad.running || fx.isRunning("k5"));
+   if (!customCamera && !followShown) {
+     zoom.update(view.camera, view.fit, 0, caster.x, caster.z, dt);
++    freeOrbit.apply(view.camera, dt);
+     camBase.copy(view.camera.position);
+   } else if (camBase.lengthSq() === 0) camBase.copy(view.camera.position);
+   kick.update(dt);

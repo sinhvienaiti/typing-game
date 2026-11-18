@@ -1,0 +1,81 @@
+$ node --test admin/shared-ia.test.mjs admin/store.test.mjs admin/admin-security.test.mjs admin/admin-roles.test.mjs admin/developer-tools.test.mjs admin/media-assets-v2.test.mjs admin/media-bootstrap.test.mjs admin/media-http.test.mjs admin/media-http-ownership.test.mjs admin/account-bridge.test.mjs
+✔ admin tokens compare in constant time and weak ones are flagged (0.567125ms)
+✔ server wallet corrections need players.save and reach the Worker with their reason (12.775459ms)
+✔ a deployed Worker is refused while Admin runs on a weak token (1.236625ms)
+✔ A13 role templates expose least-privilege defaults (1.454792ms)
+✔ A13 unknown roles fail closed (1.124666ms)
+✔ A13 granular deployment overrides only affect known permissions (0.535542ms)
+✔ A13 restricted role cannot execute forbidden permission checks (0.18175ms)
+✔ A13 actor exposes templates/effective access without a browser-controlled role selector (0.600542ms)
+✔ local actor preserves backward-compatible super-admin permissions (1.97175ms)
+✔ authorization fails closed when permission is absent (0.258125ms)
+✔ whole-revision change scope reports every changed domain/path (1.547125ms)
+✔ audit log records attempt and success with resolved revision identity (8.650625ms)
+✔ denied mutations are audited and never execute (3.686333ms)
+✔ audit attempt failure prevents mutation from running (0.463625ms)
+✔ final audit append failure does not make a completed mutation look failed (0.36025ms)
+✔ A15 Developer Tools manifest exposes the five consolidated diagnostic workspaces (0.655209ms)
+✔ Admin upload replacement creates immutable versions and cache-safe URLs (35.406791ms)
+✔ references preserve historical versions and fail closed on hard delete (11.48875ms)
+✔ generated multi-component bundles bootstrap idempotently without copying ownership (5.617ms)
+✔ archive hides an asset from normal lists without breaking exact-version resolution (8.667875ms)
+✔ reference admission rejects mismatched asset/version pairs (5.539417ms)
+✔ runtime Music, ship bundles and SFX bootstrap as reference-only assets idempotently (51.159583ms)
+✔ generated ship bundle byte changes create a new immutable reference version (19.267458ms)
+✔ incomplete generated ship bundles are skipped rather than fabricated (9.47075ms)
+✖ pinned Space Typing runtime tree bootstraps without binary copies or duplicate versions (43.079209ms)
+✔ runtime-owned Media V2 assets reject replacement and archive mutations (16.797542ms)
+✔ Media HTTP creates immutable assets, lists them and serves exact Admin blobs (18.110791ms)
+✔ Media HTTP replacement creates a new version without mutating the old blob (16.680333ms)
+✔ archive/unarchive uses media.delete permission but never hard-deletes versions (9.229917ms)
+✔ reference-only components return canonical-runtime guidance instead of being proxied as Admin blobs (3.959125ms)
+✔ Media write permission fails closed and records denied audit (2.309125ms)
+✔ Media HTTP serializes concurrent uploads so registry admissions are not lost (15.568167ms)
+✔ shared Admin and Media V2 run with Space present (138.131666ms)
+Space Typing is not checked out; shared Admin and Media V2 remain available: ENOENT: no such file or directory, open '/var/folders/d7/2x1km_3s363175h285_zlz680000gn/T/admin-shared-ia-Guxd7F/absent-space/contracts/space-typing-admin.v1.json'
+✔ shared Admin and Media V2 run with Space missing (4.029375ms)
+✔ shared overview reads an optional imported catalogue (2.038584ms)
+✔ shared.publish is dangerous and distinct from Space publishing (0.154667ms)
+✔ default config seeds additive Phase B system and feature flag namespaces (0.865875ms)
+✔ draft revisions stay isolated from runtime until CAS publish (9.157ms)
+✔ Phase B system changes stay isolated until publish (6.5065ms)
+✔ Phase B validation rejects unsafe malformed system and feature flag drafts (2.236875ms)
+✔ pre-Phase-B v1 revisions remain valid when additive namespaces are absent (2.765458ms)
+✔ publish rejects stale expected active revisions (3.982208ms)
+✔ publish rejects a stale-base draft even when expected active is current (9.153625ms)
+✔ rollback rejects a draft that is not on the active ancestry (4.20275ms)
+✔ rollback is a CAS pointer change to an immutable prior revision (2.405333ms)
+✔ contract/schema drift is rejected before a revision is written (2.069167ms)
+✔ B03 default audio profile matches runtime-backed gain fields (0.425709ms)
+✔ B03 audio draft stays isolated until publish and preserves legacy compatibility (4.689333ms)
+✔ B03 audio validation rejects out-of-range gain and category defaults (2.13075ms)
+✔ B04.2 World Music canonical all-scope draft stays isolated until publish (5.524125ms)
+✔ B04.2 rejects malformed scope ids and unsafe replacement playlists (2.058583ms)
+ℹ tests 51
+ℹ suites 0
+ℹ pass 50
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 224.23975
+
+✖ failing tests:
+
+test at admin/media-bootstrap.test.mjs:142:1
+✖ pinned Space Typing runtime tree bootstraps without binary copies or duplicate versions (43.079209ms)
+  AssertionError [ERR_ASSERTION]: Every pinned ship3D manifest entry must have a complete generated bundle.
+  
+  11 !== 22
+  
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game-wt/admin-ia/admin/media-bootstrap.test.mjs:156:12)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 11,
+    expected: 22,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+[ELIFECYCLE] Command failed with exit code 1.

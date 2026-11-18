@@ -1,0 +1,141 @@
+$ node src/kit/verify-kit.mjs && pnpm test && pnpm build
+src/kit OK: 92 files match kit-manifest.json (kit 0.1.0, modules platform, input, vocab, learning, speech, audio, ui, tools, typing, three, feedback, balance)
+$ vitest run
+
+ RUN  v3.2.7 /Users/toandx/htdocs/typing-game/games/.wt-dh-keys
+
+ ✓ tests/english-ui.test.ts (9 tests) 498ms
+   ✓ English player text > keeps Vietnamese literals only in vocabulary meanings outside the copied kit  488ms
+ ✓ tests/sim/battle-waves.test.ts (16 tests) 806ms
+   ✓ battle waves: the director at run time > plays the whole M0 stage: an ideal fast typist wins with stars, nobody typing loses in wave 1  305ms
+ ✓ tests/sim/bot-words.test.ts (4 tests) 984ms
+   ✓ bot typist on the words store > never sticks on a word the world locked under it (a slip before a switch)  410ms
+ ✓ tests/sim/bot-policy.test.ts (9 tests) 1027ms
+   ✓ bot tactics > the weak buyer places by the dais, never upgrades, never buys Tim Rồng; the others fill and upgrade  780ms
+ ✓ tests/golden/golden.test.ts (10 tests) 1230ms
+   ✓ golden M0 > runs sloppy-hard-off-seed3 to the stored command log  304ms
+ ✓ tests/sim/bot-hands.test.ts (8 tests) 613ms
+ ✓ tests/view/view-terrain.test.ts (15 tests) 1187ms
+   ✓ view-terrain height field > is deterministic and finite everywhere, skirt included  549ms
+   ✓ view-terrain scatter > keeps trees off lanes, water, slots, the dais and the sky lane  401ms
+ ✓ tests/sim/bot-run.test.ts (9 tests) 1325ms
+   ✓ bot runs > stops a run that stalls and says where  667ms
+ ✓ tests/view/lane-cue.test.ts (4 tests) 417ms
+   ✓ lane cue > fades a cued dirt lane in over a quarter second and out again; a quiet sky lane dims and its chevrons stop  414ms
+ ✓ tests/boundary.test.ts (9 tests) 532ms
+ ✓ tests/vocab-pin.test.ts (7 tests) 364ms
+ ✓ tests/sim/battle-determinism.test.ts (6 tests) 1874ms
+   ✓ battle determinism > replays a whole M0 stage to the same hash every 10 s for the same seed  822ms
+   ✓ battle determinism > differs for another seed (spawn jitter comes from the seeded spawn stream only)  419ms
+ ✓ tests/sim/ourside-shop.test.ts (13 tests) 146ms
+ ✓ tests/ui/tags-bodies.test.ts (21 tests) 246ms
+ ✓ tests/audio/limiter.test.ts (11 tests) 106ms
+ ✓ tests/sim/ourside-status.test.ts (9 tests) 89ms
+ ✓ tests/sim/balance-pressure.test.ts (10 tests) 240ms
+ ✓ tests/audio/catalog.test.ts (9 tests) 193ms
+ ✓ tests/typing-words.test.ts (22 tests) 194ms
+ ✓ tests/sim/ourside-economy.test.ts (8 tests) 44ms
+ ✓ tests/sim/battle-species.test.ts (11 tests) 102ms
+ ✓ tests/sim/battle-auras.test.ts (8 tests) 48ms
+ ✓ tests/sim/battle-damage.test.ts (12 tests) 71ms
+ ✓ tests/view/view-crowd-fx-effects.test.ts (19 tests) 73ms
+ ✓ tests/sim/ourside-units.test.ts (7 tests) 98ms
+ ✓ tests/sim/ourside-houses.test.ts (5 tests) 63ms
+ ✓ tests/typing-tags.test.ts (10 tests) 86ms
+ ✓ tests/sim/smoke.test.ts (5 tests) 89ms
+ ✓ tests/sim/ourside-traps.test.ts (7 tests) 108ms
+ ✓ tests/view/crowd-rig.test.ts (11 tests) 102ms
+ ✓ tests/sim/ourside-wiring.test.ts (2 tests) 52ms
+ ✓ tests/ui/results-screen.test.ts (10 tests) 26ms
+ ✓ tests/app/typing-pace.test.ts (25 tests) 5ms
+ ✓ tests/ui/results.test.ts (4 tests) 10ms
+ ✓ tests/sim/bot-load.test.ts (7 tests) 16ms
+ ✓ tests/ui/tags-animation.test.ts (2 tests) 11ms
+ ✓ tests/app/settings-and-keyboard.test.ts (13 tests) 16ms
+ ✓ tests/content/map.test.ts (11 tests) 9ms
+ ✓ tests/audio/music-plan.test.ts (6 tests) 10ms
+ ✓ tests/view/view-crowd-fx-crowd.test.ts (13 tests) 12ms
+ ✓ tests/app/loop-router.test.ts (6 tests) 6ms
+ ✓ tests/typing-learning.test.ts (17 tests) 13ms
+ ✓ tests/app/pace-card.test.ts (10 tests) 6ms
+ ✓ tests/view/model-specs.test.ts (6 tests) 5ms
+ ✓ tests/view/number-field.test.ts (4 tests) 4ms
+ ✓ tests/view/m0b-banners.test.ts (3 tests) 8ms
+ ✓ tests/ui/hud.test.ts (7 tests) 7ms
+ ✓ tests/ui/placement.test.ts (6 tests) 7ms
+ ✓ tests/ui/shop-strip.test.ts (4 tests) 5ms
+ ✓ tests/app/portal.test.ts (5 tests) 2ms
+ ✓ tests/audio/mix.test.ts (7 tests) 3ms
+ ✓ tests/audio/map-events.test.ts (13 tests) 7ms
+ ✓ tests/ui/screen-zones.test.ts (3 tests) 3ms
+ ✓ tests/audio/engine.test.ts (3 tests) 3ms
+ ✓ tests/ui/debut-card.test.ts (3 tests) 2ms
+ ✓ tests/ui/wave-card.test.ts (3 tests) 4ms
+ ✓ tests/app/quick-settings.test.ts (8 tests) 115ms
+ ✓ tests/deploy-pack.test.ts (8 tests) 6057ms
+   ✓ deployment package commands > deploy:pack builds before checking the package for Dragonhold  1063ms
+   ✓ deployment package commands > deploy:pack stops when the build fails  962ms
+   ✓ deployment package commands > deploy:pack rejects assets belonging to another game  1119ms
+   ✓ deployment package commands > deploy:pack:local builds before checking the package for Dragonhold  884ms
+   ✓ deployment package commands > deploy:pack:local stops when the build fails  545ms
+   ✓ deployment package commands > deploy:pack:local rejects assets belonging to another game  500ms
+   ✓ deployment package commands > rejects the home portal in production  498ms
+   ✓ deployment package commands > permits the home portal for the local demo  484ms
+
+ Test Files  58 passed (58)
+      Tests  513 passed (513)
+   Start at  07:56:56
+   Duration  6.30s (transform 2.59s, setup 0ms, collect 11.22s, tests 19.37s, environment 204ms, prepare 2.54s)
+
+$ tsc --noEmit && vite build
+vite v7.3.7 building client environment for production...
+transforming...
+✓ 206 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                                                          1.03 kB │ gzip:   0.55 kB
+dist/assets/cormorant-garamond-vietnamese-700-normal--OtHbi1I.woff2      6.23 kB
+dist/assets/be-vietnam-pro-vietnamese-400-normal-BuGn0gnm.woff           6.57 kB
+dist/assets/be-vietnam-pro-vietnamese-800-normal-CA0HL1e4.woff           6.85 kB
+dist/assets/be-vietnam-pro-vietnamese-700-normal-By_5yT39.woff           6.89 kB
+dist/assets/noto-sans-greek-400-normal-DCESwnT1.woff2                    7.89 kB
+dist/assets/cormorant-garamond-vietnamese-700-normal-GOTdnRS1.woff       8.87 kB
+dist/assets/be-vietnam-pro-latin-ext-400-normal-DYBYyMQr.woff            8.90 kB
+dist/assets/be-vietnam-pro-latin-ext-800-normal-BvOXQlBN.woff            9.18 kB
+dist/assets/be-vietnam-pro-latin-ext-700-normal-4Hjo2OtD.woff            9.19 kB
+dist/assets/noto-sans-greek-400-normal-Be2BcUUc.woff                     9.92 kB
+dist/assets/be-vietnam-pro-vietnamese-400-normal-CRcqvyg1.woff2         11.53 kB
+dist/assets/be-vietnam-pro-vietnamese-800-normal-D4LFh2W4.woff2         12.40 kB
+dist/assets/be-vietnam-pro-vietnamese-700-normal-Csr0PCuG.woff2         12.47 kB
+dist/assets/cormorant-garamond-cyrillic-700-normal-SLG_-a_c.woff2       12.54 kB
+dist/assets/be-vietnam-pro-latin-ext-400-normal-CiZNW1ec.woff2          13.06 kB
+dist/assets/noto-sans-latin-400-normal-BTkUljjl.woff2                   13.12 kB
+dist/assets/be-vietnam-pro-latin-ext-800-normal-GEpNgheG.woff2          13.75 kB
+dist/assets/cormorant-garamond-cyrillic-ext-700-normal-Do0rx6yy.woff2   13.83 kB
+dist/assets/be-vietnam-pro-latin-ext-700-normal-C8_gqRu2.woff2          13.85 kB
+dist/assets/cormorant-garamond-cyrillic-700-normal-D3uyJ5DH.woff        15.29 kB
+dist/assets/be-vietnam-pro-latin-400-normal-bXgqVju9.woff               16.43 kB
+dist/assets/noto-sans-latin-400-normal-DPpKfCgK.woff                    16.69 kB
+dist/assets/be-vietnam-pro-latin-700-normal-C2EtzaOi.woff               16.91 kB
+dist/assets/be-vietnam-pro-latin-800-normal-Cwp5p0gU.woff               16.99 kB
+dist/assets/cormorant-garamond-cyrillic-ext-700-normal-BaW-xaxb.woff    17.08 kB
+dist/assets/cormorant-garamond-latin-ext-700-normal-CNjt5vTB.woff2      19.33 kB
+dist/assets/be-vietnam-pro-latin-400-normal-PpnXBOrz.woff2              21.17 kB
+dist/assets/be-vietnam-pro-latin-700-normal-DlW1Zbsh.woff2              22.15 kB
+dist/assets/be-vietnam-pro-latin-800-normal-BpHZASpI.woff2              22.32 kB
+dist/assets/cormorant-garamond-latin-700-normal-DajfzrDU.woff2          22.34 kB
+dist/assets/cormorant-garamond-latin-ext-700-normal-qRbaVVD7.woff       27.04 kB
+dist/assets/cormorant-garamond-latin-700-normal-O25Qpphb.woff           30.25 kB
+dist/assets/noto-sans-latin-ext-400-normal-CVf-LbaS.woff2               55.64 kB
+dist/assets/noto-sans-latin-ext-400-normal-CNh9dRW_.woff                78.45 kB
+dist/assets/index-B00c5BlN.css                                          46.07 kB │ gzip:   8.77 kB
+dist/assets/meshopt_decoder.module-BbCP70j-.js                          22.41 kB │ gzip:   5.94 kB
+dist/assets/GLTFLoader-CLwCZMJZ.js                                      46.03 kB │ gzip:  13.64 kB
+dist/assets/three-DRz6Geb_.js                                          561.85 kB │ gzip: 141.82 kB
+dist/assets/index-C31tkQ6Q.js                                          724.86 kB │ gzip: 255.51 kB
+
+(!) Some chunks are larger than 600 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+✓ built in 1.15s

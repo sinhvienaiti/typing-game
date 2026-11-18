@@ -1,0 +1,26 @@
+$ node scripts/media/media.mjs push --dry-run --only runtime
+Đẩy thử (--dry-run): không kết nối Drive, không ghi gì lên Drive hay vào danh sách md5.
+
+runtime → Drive repo/games/space-typing/ (thay thẳng, không giữ bản cũ)
+  Đẩy 0 file (0 B): mới 0, thay 0, đổi tên 0. Bỏ khỏi danh sách: 0.
+  Kèm 12 mô hình runtime đã mất bản gốc (vẫn có trong Git, 28,8 MB).
+
+runtime → Drive repo/games/dragon-hold/ (thay thẳng, không giữ bản cũ)
+  Đẩy 15 file (3,7 MB): mới 15, thay 0, đổi tên 0. Bỏ khỏi danh sách: 0.
+  Theo thư mục:
+    public/assets/dragon-hold/decals                     1 file     1,3 KB
+    public/assets/dragon-hold/ground                     1 file     2,5 KB
+    public/assets/dragon-hold/models/kit3                1 file     5,2 KB
+    public/assets/dragon-hold/models/m0b                 1 file    14,7 KB
+    public/assets/dragon-hold/vfx/firefly               11 file     3,7 MB
+
+runtime → Drive repo/games/typing-defense/ (thay thẳng, không giữ bản cũ)
+  Đẩy 0 file (0 B): mới 0, thay 0, đổi tên 0. Bỏ khỏi danh sách: 0.
+
+runtime → Drive repo/games/typing-survival/ (thay thẳng, không giữ bản cũ)
+  Đẩy 0 file (0 B): mới 0, thay 0, đổi tên 0. Bỏ khỏi danh sách: 0.
+
+runtime → Drive repo/games/immortality-cultivation/ (thay thẳng, không giữ bản cũ)
+  Đẩy 0 file (0 B): mới 0, thay 0, đổi tên 0. Bỏ khỏi danh sách: 0.
+
+Tổng: 15 file, 3,7 MB. Danh sách đầy đủ: .cache/media-push-dry-run.txt

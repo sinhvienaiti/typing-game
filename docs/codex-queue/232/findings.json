@@ -1,0 +1,63 @@
+[
+ {
+  "id": "F1",
+  "ticket": 200,
+  "level": "P1",
+  "where": "games/.wt-td-ui/src/ui/td.css:217,228-229; src/ui/theme.css:50",
+  "what": "Heading box fixed at 84 px (56 px when height <= 800 px) but the banner img is 340x84.15 px (300x74.25 px); the inherited .vd-sheet h2::after seal bar (4 px + 4 px margin) becomes a second grid row. Content is ~26 px taller than the box at 1280x720 and ~8 px at 1920x1080; .td-result-heading is position:relative, so the overflow paints over the next line (stars on win, hint line on loss).",
+  "repro": "1280x720, sandbox flood -> defeat (td-theme results); compare .td-result-banner.getBoundingClientRect().bottom and the seal bar with .td-hint-line / .td-stars top.",
+  "fix": "height:auto (or min-height) for .td-result-heading, or give the banner the box height (height:56px; width:auto); .td-result-heading::after { content:none }. td-theme: assert banner.bottom <= next sibling top."
+ },
+ {
+  "id": "F2",
+  "ticket": 200,
+  "level": "P2",
+  "where": "games/.wt-td-ui/src/ui/td.css:217; src/ui/sheets.ts:100",
+  "what": "Heading text #fff3d6 relies on the banner. While the banner loads or after it fails (img hidden), the text sits on paper: contrast 1.01:1 on #fff4d6, 1.09:1 on #f5e9cc, 1.33:1 on #e6d4ab (ink #2b2118: 10.8-14.4:1).",
+  "repro": "Rename banner.*.webp in a copy or block the URL; open results: 'Fort fallen' is cream on cream.",
+  "fix": "Default the heading to ink; add class has-banner from bindArt's loaded callback and switch to cream only under it. Test: failed banner -> no has-banner class."
+ },
+ {
+  "id": "F3",
+  "ticket": 203,
+  "level": "P2",
+  "where": "games/.wt-td-ui/src/view/words/feel.css:5; src/view/words/cards.ts:307-333",
+  "what": "The stamp element has its own font, clamp(26px, 30px*--ui, 32px), but card letters are clamp(18px, 22px*--ui, 24px). At --ui 0.8 / 1.2 the stamp is 26/18 = 1.44x and 32/24 = 1.33x the letter before stampStep scales it: first frame 3.47x / 3.20x (unlocked card) instead of 2.4x, and the 'rest' step (1.0, 50-66 ms) shows a white letter 1.11-1.44x larger than the jade letter under it (card scale 1.0-1.2). The old ::before inherited the letter's font.",
+  "repro": "key-dark capture at both sizes: measure .td-key-stamp rect height at t>=50 ms vs the .k rect height.",
+  "fix": "Size the stamp from the source: fontSize = getComputedStyle(source).fontSize and multiply scale by (source rect height / unscaled height), or scale = step.scale * r.height / stampHeight. Test: fake source of 18 px -> stamp rect at t=50 equals 18 px."
+ },
+ {
+  "id": "F4",
+  "ticket": 203,
+  "level": "P2",
+  "where": "games/.wt-td-ui/src/view/words/cards.ts:144; src/view/words/feel.css:3,5",
+  "what": "The chain tier no longer turns the stamp gold. cards.ts stopped setting --tier (only this.chainTier for scale); .td-words { --tier: 0 } has no consumer left; .td-key-stamp glow is fixed #7ff5e0. Old ::before mixed #7ff5e0 -> #ffc75c by tier*25 %. Brief A5: '--tier cộng thêm như nay'.",
+  "repro": "rg -- '--tier' src -> only feel.css:3. Chain 3+ in key-multi capture: stamp stays cyan.",
+  "fix": "Set --tier on the root (or stamp el) on 'chain' events and restore color-mix(...) glow in .td-key-stamp. Test: CSS of .td-key-stamp uses var(--tier); draw after a chain event sets it."
+ },
+ {
+  "id": "F5",
+  "ticket": 203,
+  "level": "P2",
+  "where": "games/.wt-td-ui/tests/td-c10-r5.test.ts",
+  "what": "Two of 9 mutations on the five fixes stay green: M2 removes the per-frame card clamp in draw (cards.ts:288); M7 removes the hard outline in burst (cards.ts:107). Only the pure functions are tested for A1 cards and A4.",
+  "repro": "mutations.json M2 (22/22 green), M7 (20/20 green).",
+  "fix": "Test draw() with a card whose rect crosses the chip box -> el.style.translate set and card.x moved; test read() of a wordHit -> el.style.outline has #FFF0D8 and outlineOffset = out - width."
+ },
+ {
+  "id": "N1",
+  "ticket": 203,
+  "level": "P3",
+  "where": "games/.wt-td-ui/src/view/3d/words.ts:499; src/view/words/dom.ts:5-6",
+  "what": "fitElement resets translate then reads getBoundingClientRect for every card, stamp, fly and the slip letter each frame (write-read per element). The slip letter keeps inline opacity '1' after its WAAPI fade, so it is measured every frame forever. Cost unmeasured.",
+  "fix": "Measure frame time in td-1c-words; if needed batch reads before writes and skip the slip letter when its animation is finished."
+ },
+ {
+  "id": "N2",
+  "ticket": 200,
+  "level": "P3",
+  "where": "games/.wt-td-ui/scripts/td/prepare-ui.mjs:44-47",
+  "what": "--check only compares mtimes; an output with wrong px or bytes that is newer than its source passes.",
+  "fix": "Add magick identify of each output to --check (px against ui-picks)."
+ }
+]

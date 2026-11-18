@@ -1,0 +1,132 @@
+/* Cross-route Admin V2 control and preview UX fixes. */
+.stx-field > span {
+  line-height: 1.35;
+}
+
+.stx-field input:not([type="range"]),
+.stx-field select {
+  box-sizing: border-box;
+  min-height: 42px;
+  height: 42px;
+  padding: 0 11px;
+  font-size: 13px;
+  line-height: normal;
+}
+
+.stx-field select {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.stx-grid > .st-admin-btn {
+  min-height: 42px;
+  align-self: end;
+}
+
+.st-admin-asset-choice[data-choice-id="published"],
+.st-admin-asset-choice[data-choice-id="draft"] {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.st-admin-asset-choice[data-choice-id="published"]::after,
+.st-admin-asset-choice[data-choice-id="draft"]::after {
+  padding: 2px 6px;
+  border: 1px solid rgba(111, 231, 255, .24);
+  border-radius: 999px;
+  font-size: 9px;
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: .08em;
+}
+
+.st-admin-asset-choice[data-choice-id="published"]::after {
+  content: "CURRENT";
+  color: var(--holo-dim);
+}
+
+.st-admin-asset-choice[data-choice-id="draft"]::after {
+  content: "CANDIDATE";
+  color: var(--holo-accent);
+  border-color: rgba(95, 227, 255, .38);
+  background: rgba(95, 227, 255, .06);
+}
+
+.st-admin-runtime-preview-grid > .st-admin-btn[data-preview-draft-action="true"] {
+  border-color: rgba(95, 227, 255, .42);
+  background: rgba(95, 227, 255, .07);
+}
+
+.st-admin-runtime-preview-grid + .stx-notice + .stx-grid {
+  min-height: 112px;
+  margin-top: 10px;
+  padding: 12px;
+  border: 1px solid rgba(111, 231, 255, .16);
+  background: rgba(2, 8, 18, .46);
+}
+
+.st-admin-runtime-preview-grid + .stx-notice + .stx-grid::before {
+  content: "PRODUCTION PREVIEW RESULT";
+  grid-column: 1 / -1;
+  color: var(--holo-accent);
+  font: 800 10px/1.2 var(--holo-display);
+  letter-spacing: .12em;
+}
+
+.st-admin-panel:has(> .st-admin-media-candidate-test) {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  align-items: stretch;
+}
+
+.st-admin-panel:has(> .st-admin-media-candidate-test) > .st-admin-panel-head,
+.st-admin-panel:has(> .st-admin-media-candidate-test) > .stx-grid,
+.st-admin-panel:has(> .st-admin-media-candidate-test) > .stx-notice,
+.st-admin-panel:has(> .st-admin-media-candidate-test) > .st-admin-asset-preview-status {
+  grid-column: 1 / -1;
+}
+
+.st-admin-panel:has(> .st-admin-media-candidate-test) > .st-admin-media-candidate-test,
+.st-admin-panel:has(> .st-admin-media-candidate-test) > .st-admin-production-preview-shell {
+  min-width: 0;
+  margin-top: 0;
+}
+
+.st-admin-panel:has(> .st-admin-media-candidate-test) > .st-admin-media-candidate-test {
+  border-color: rgba(160, 123, 255, .28);
+  background: rgba(42, 22, 74, .12);
+}
+
+.st-admin-panel:has(> .st-admin-media-candidate-test) .st-admin-media-candidate-visual {
+  min-height: 300px;
+  height: 100%;
+}
+
+.st-admin-panel:has(> .st-admin-media-candidate-test) > .st-admin-production-preview-shell::before {
+  content: "CURRENT · PRODUCTION";
+  display: block;
+  margin-bottom: 7px;
+  color: var(--holo-dim);
+  font: 800 10px/1.2 var(--holo-display);
+  letter-spacing: .12em;
+}
+
+@media (max-width: 980px) {
+  .st-admin-panel:has(> .st-admin-media-candidate-test) {
+    grid-template-columns: 1fr;
+  }
+
+  .st-admin-panel:has(> .st-admin-media-candidate-test) > .st-admin-media-candidate-test,
+  .st-admin-panel:has(> .st-admin-media-candidate-test) > .st-admin-production-preview-shell {
+    grid-column: 1;
+  }
+}
+
+@media (max-width: 720px) {
+  .stx-field input:not([type="range"]),
+  .stx-field select {
+    font-size: 16px;
+  }
+}

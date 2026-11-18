@@ -1,0 +1,1750 @@
+[
+  {
+    "id": 0,
+    "verdict": "Simplify",
+    "owner": "product (giữ)",
+    "critique": "North star đúng, nhưng khẳng định social là retention mạnh nhất chưa có bằng chứng; loop tuyến tính buộc qua economy/social mâu thuẫn learn-only.",
+    "correction": "Thay bằng loop học khép kín; meta là nhánh tùy chọn. Không schema product.",
+    "risk": "Không lấy time-spent thay bằng chứng nhớ bài; Home không chờ meta API.",
+    "v1": "Một cohort học hoàn chỉnh",
+    "v2": "Thử lớp có đối chứng",
+    "v3": "Mở rộng theo bằng chứng",
+    "related_sections": [
+      97,
+      83
+    ],
+    "source_file": "source/space_academy_detailed_plans_reviewed_v2_2026-10-09/000_executive_summary.md"
+  },
+  {
+    "id": 1,
+    "verdict": "Keep",
+    "owner": "product (giữ)",
+    "critique": "Platform-first đúng; cây A1–C2 và mọi kỹ năng là tầm nhìn, không phải backlog V1.",
+    "correction": "Giữ portal shell; game là adapter của canonical attempts; không rewrite toàn bộ game.",
+    "risk": "Bridge phải kiểm tra origin/source và compatibility; giữ deep link cũ.",
+    "v1": "Shell và adapter hiện có",
+    "v2": "Thêm track đủ nội dung",
+    "v3": "Mở rộng activity",
+    "related_sections": [
+      70,
+      69
+    ],
+    "source_file": "source/space_academy_detailed_plans_reviewed_v2_2026-10-09/001_product_reframing.md"
+  },
+  {
+    "id": 2,
+    "verdict": "Simplify",
+    "owner": "product (giữ)",
+    "critique": "Quy tắc đạt 2/3 tiêu chí có thể cho qua tính năng hại học nhưng tăng retention và rẻ.",
+    "correction": "Đặt learning safety/accessibility là điều kiện bắt buộc; giá trị và chi phí là bước sau. Không DB.",
+    "risk": "Shop scarcity không được vượt gate chống thao túng.",
+    "v1": "Checklist chọn tính năng",
+    "v2": "Đo thử meta nhỏ",
+    "v3": "Chỉ nhân rộng thử nghiệm tốt",
+    "related_sections": [
+      3,
+      76
+    ],
+    "source_file": "source/space_academy_detailed_plans_reviewed_v2_2026-10-09/002_what_we_borrow_from_online_games_and_what_we_do_not.md"
+  },
+  {
+    "id": 3,
+    "verdict": "Keep",
+    "owner": "product (giữ)",
+    "critique": "Progressive disclosure tốt nhưng tự suy đoán sở thích để bật competition dễ phá quyền lựa chọn.",
+    "correction": "Dùng opt-in rõ cho social/rank; policy ưu tiên exam và accessibility hơn preset.",
+    "risk": "Ẩn UI không thay authorization; không preload feature đã ẩn.",
+    "v1": "Focus và đường học độc lập",
+    "v2": "Disclosure theo lựa chọn",
+    "v3": "Cá nhân hóa có reset",
+    "related_sections": [
+      5,
+      75
+    ],
+    "source_file": "source/space_academy_detailed_plans_reviewed_v2_2026-10-09/003_core_product_principles.md"
+  },
+  {
+    "id": 4,
+    "verdict": "Simplify",
+    "owner": "product (giữ)",
+    "critique": "Sáu persona cùng lúc vượt năng lực nội dung/vận hành; teacher/admin không cùng quyền.",
+    "correction": "Chọn adult solo learner làm giả định pilot; teacher pilot ở V2; persona là preference, role là authorization.",
+    "risk": "Không suy tuổi/quyền từ persona; tránh thu PII không cần.",
+    "v1": "Một cohort General English",
+    "v2": "Teacher/class và IELTS pilot",
+    "v3": "Cohort mới sau kiểm chứng",
+    "related_sections": [
+      23,
+      30
+    ],
+    "source_file": "source/space_academy_detailed_plans_reviewed_v2_2026-10-09/004_target_user_personas.md"
+  },
+  {
+    "id": 5,
+    "verdict": "Simplify",
+    "owner": "product → platform UX; product giữ policy",
+    "critique": "Ba style cộng preset typing tạo ma trận trạng thái khó dự đoán.",
+    "correction": "Một preference schema versioned; thứ tự OS accessibility > exam policy > user choice > default.",
+    "risk": "Không dùng Immersive để bật lại sound/motion bị tắt; cache nhẹ.",
+    "v1": "Focus/Balanced qua token",
+    "v2": "Immersive giới hạn",
+    "v3": "Preset cộng đồng sau moderation",
+    "related_sections": [
+      3,
+      26
+    ],
+    "source_file": "source/space_academy_detailed_plans_reviewed_v2_2026-10-09/005_experience_styles.md"
+  },
+  {
+    "id": 6,
+    "verdict": "Simplify",
+    "owner": "classroom → product",
+    "critique": "Metaphor IA đang kéo theo before/during/after, chat và classroom art dù không có lớp.",
+    "correction": "Chuyển thành guideline tên/route, bỏ runtime class dependencies khỏi mục này.",
+    "risk": "Solo không cần membership để học; không tạo campus bundle.",
+    "v1": "Learn/Practice/Profile",
+    "v2": "Class là route tùy chọn",
+    "v3": "Thêm area nếu có nhu cầu",
+    "related_sections": [
+      7,
+      85
+    ],
+    "source_file": "source/space_academy_detailed_plans_reviewed_v2_2026-10-09/006_school_academy_as_the_organizing_metaphor.md"
+  },
+  {
+    "id": 7,
+    "verdict": "Simplify",
+    "owner": "product (giữ)",
+    "critique": "Mười hai khu vực tạo navigation rỗng trước khi có chức năng.",
+    "correction": "Gộp Language/Practice/Simulation vào activity picker; Library là progress view.",
+    "risk": "Không render route stub như feature đã có; lazy-load Games.",
+    "v1": "Ba route chính và Games tùy chọn",
+    "v2": "Classes, catalog",
+    "v3": "Events/competition có gate",
+    "related_sections": [
+      1,
+      73
+    ],
+    "source_file": "source/space_academy_detailed_plans_reviewed_v2_2026-10-09/007_space_academy_areas.md"
+  },
+  {
+    "id": 8,
+    "verdict": "Postpone",
+    "owner": "classroom (giữ)",
+    "critique": "15–30 người chỉ là giả thuyết; thiếu lifecycle, admission và quyền giáo viên.",
+    "correction": "Class tách course và cohort; membership unique active; join/invite atomic capacity; session pin lesson_version.",
+    "risk": "Private roster, thu hồi quyền ngay khi rời lớp; giới hạn participant payload.",
+    "v1": "Không bắt có lớp",
+    "v2": "Pilot 8–12 người rồi thử 15–30",
+    "v3": "Mở rộng khi đủ hỗ trợ",
+    "related_sections": [
+      9,
+      12,
+      64
+    ],
+    "source_file": "source/space_academy_detailed_plans_reviewed_v2_2026-10-09/008_class_system.md"
+  },
+  {
+    "id": 9,
+    "verdict": "Simplify",
+    "owner": "npc → classroom; identity cấp quyền",
+    "critique": "Role giáo viên người thật đang mang schema relationship NPC, thiếu authority giảng dạy.",
+    "correction": "Teacher assignment là membership role; NPC chỉ persona/presenter, không actor được publish hay xem PII.",
+    "risk": "Teacher chỉ xem lớp phụ trách; NPC facts tối thiểu; không tạo 6 bảng NPC cho role.",
+    "v1": "Editor nội bộ và mentor kịch bản",
+    "v2": "Real teacher + NPC gắn nhãn",
+    "v3": "Specialist AI được đánh giá",
+    "related_sections": [
+      30,
+      78,
+      10
+    ],
+    "source_file": "source/space_academy_detailed_plans_reviewed_v2_2026-10-09/009_teacher_roles.md"
+  },
+  {
+    "id": 10,
+    "verdict": "Simplify",
+    "owner": "npc (giữ, adapter tùy chọn)",
+    "critique": "Structured memory vẫn là dữ liệu cá nhân; AI classmates tăng moderation/cost mà chưa chứng minh giá trị.",
+    "correction": "V1 greeting theo template; V2 facts lấy từ learning read API; lưu consent/expiry/source nếu thêm memory.",
+    "risk": "Prompt/data isolation; không tự cấp thưởng; budget request; xoá memory/cache theo user.",
+    "v1": "Mentor tĩnh có nhãn",
+    "v2": "Context ngắn có opt-in",
+    "v3": "AI classmates chỉ thử riêng",
+    "related_sections": [
+      27,
+      30,
+      64
+    ],
+    "source_file": "source/space_academy_detailed_plans_reviewed_v2_2026-10-09/010_npc_ai_philosophy.md"
+  },
+  {
+    "id": 11,
+    "verdict": "Simplify",
+    "owner": "classroom (giữ orchestration)",
+    "critique": "40 phút không phù hợp learner 10–20 phút; session timing đang lẫn lesson pacing.",
+    "correction": "Lesson runner self-paced độc lập; class_session quản lý started_at, phase, revision, instructor command.",
+    "risk": "Reconnect lấy snapshot; timeout không tự chấm trượt; timer server khi có assessment.",
+    "v1": "Bài 10–15 phút",
+    "v2": "Lớp 25–40 phút tùy chọn",
+    "v3": "Live/exam template khác",
+    "related_sections": [
+      12,
+      15
+    ],
+    "source_file": "source/space_academy_detailed_plans_reviewed_v2_2026-10-09/011_class_time_lesson_structure.md"
+  },
+  {
+    "id": 12,
+    "verdict": "Keep",
+    "owner": "learning → content cho định nghĩa; learning cho execution",
+    "critique": "Bảng liệt kê không có lesson_versions/step_versions; sequence lại mặc định có collaboration.",
+    "correction": "Content sở hữu lesson_version + ordered steps; learning sở hữu lesson_session/checkpoint/attempt; skip step tùy policy.",
+    "risk": "Pin version khi start; không gửi answer key trước đáp án; resume atomic.",
+    "v1": "Runner với read/listen/recall",
+    "v2": "Thêm writing/class wrapper",
+    "v3": "Branching khi đủ dữ liệu",
+    "related_sections": [
+      70,
+      71,
+      78
+    ],
+    "source_file": "source/space_academy_detailed_plans_reviewed_v2_2026-10-09/012_lesson_as_a_sequence_not_a_page.md"
+  },
+  {
+    "id": 13,
+    "verdict": "Postpone",
+    "owner": "classroom (giữ)",
+    "critique": "Lịch thứ Hai–Chủ nhật không phải prerequisite cho spaced review; ép lịch làm nợ bài.",
+    "correction": "Weekly template là schedule config, không tạo mastery hay gọi LiveOps để học được.",
+    "risk": "Lưu timezone IANA, ngoại lệ/nghỉ và occurrence; không gửi nhắc mặc định.",
+    "v1": "Personal review queue",
+    "v2": "Class weekly template",
+    "v3": "Recurring calendar nâng cao",
+    "related_sections": [
+      8,
+      62
+    ],
+    "source_file": "source/space_academy_detailed_plans_reviewed_v2_2026-10-09/013_weekly_class_structure.md"
+  },
+  {
+    "id": 14,
+    "verdict": "Simplify",
+    "owner": "admin → content; admin là giao diện",
+    "critique": "Builder thiếu lesson aggregate, nhưng lại đề xuất admin_changes như source of truth.",
+    "correction": "Authoring form + schema validator + preview dùng cùng runner; publish immutable version với expected_revision.",
+    "risk": "Content editor không có reward quyền; tránh arbitrary HTML/script; giới hạn asset.",
+    "v1": "Form/import có kiểm định",
+    "v2": "Teacher authoring theo lớp",
+    "v3": "Drag/drop sau nhu cầu thật",
+    "related_sections": [
+      70,
+      12,
+      78
+    ],
+    "source_file": "source/space_academy_detailed_plans_reviewed_v2_2026-10-09/014_lesson_builder.md"
+  },
+  {
+    "id": 15,
+    "verdict": "Simplify",
+    "owner": "classroom (giữ)",
+    "critique": "Mastery +12 không nói đo gì; phase reconnect chưa có state machine cụ thể.",
+    "correction": "State scheduled→running→completed/cancelled, phase_revision; debrief đọc skill evidence thay XP chung.",
+    "risk": "Late join không replay reward; phase change kiểm tra expected_revision.",
+    "v1": "Resume/debrief solo",
+    "v2": "Class phase snapshot",
+    "v3": "Đồng bộ nhóm nâng cao",
+    "related_sections": [
+      11,
+      12
+    ],
+    "source_file": "source/space_academy_detailed_plans_reviewed_v2_2026-10-09/015_before_during_after_class.md"
+  },
+  {
+    "id": 16,
+    "verdict": "Postpone",
+    "owner": "social → classroom UX; social chỉ cung cấp giao tiếp",
+    "critique": "Break là thời điểm UX, không phải lý do tạo toàn bộ friendships/messages/challenges.",
+    "correction": "Một link nghỉ/thoát và optional class lounge; không schema break riêng.",
+    "risk": "Không lôi learner sang shop bằng countdown; chặn notifications trong focus.",
+    "v1": "Cho nghỉ và kết thúc sạch",
+    "v2": "Lounge đã moderation",
+    "v3": "Mini-activity tùy chọn",
+    "related_sections": [
+      8,
+      64
+    ],
+    "source_file": "source/space_academy_detailed_plans_reviewed_v2_2026-10-09/016_break_time.md"
+  },
+  {
+    "id": 17,
+    "verdict": "Postpone",
+    "owner": "social (giữ)",
+    "critique": "Clubs thêm vòng membership/moderation cạnh class trước khi có community đủ lớn.",
+    "correction": "Giữ club riêng cohort nhưng tái dùng moderation/room contract; không guild economy.",
+    "risk": "Invite abuse, owner bỏ nhóm, archive và roster visibility phải rõ.",
+    "v1": "Không clubs",
+    "v2": "Thử nhóm interest có operator",
+    "v3": "Club tự quản có giới hạn",
+    "related_sections": [
+      64,
+      78
+    ],
+    "source_file": "source/space_academy_detailed_plans_reviewed_v2_2026-10-09/017_clubs.md"
+  },
+  {
+    "id": 18,
+    "verdict": "Postpone",
+    "owner": "classroom (giữ projection)",
+    "critique": "XP/rank/theme tạo tiến bộ thứ hai dễ lẫn mastery và gây áp lực đồng đội.",
+    "correction": "Contribution projection từ evidence đủ điều kiện; unique source_attempt, cap/user; rank thuộc prestige.",
+    "risk": "Không cộng theo số message; normalized cohort size; roster snapshot.",
+    "v1": "Không class XP",
+    "v2": "Milestone nhóm phi cạnh tranh",
+    "v3": "Rank nếu fairness đạt",
+    "related_sections": [
+      8,
+      27,
+      77
+    ],
+    "source_file": "source/space_academy_detailed_plans_reviewed_v2_2026-10-09/018_class_progression.md"
+  },
+  {
+    "id": 19,
+    "verdict": "Simplify",
+    "owner": "classroom (giữ)",
+    "critique": "20+ người để +10% gây áp lực người vắng dù văn bản nói không phạt.",
+    "correction": "Attendance là private participation record; công nhận async tương đương; bỏ threshold bonus.",
+    "risk": "Presence heartbeat không chứng minh học; không công khai người vắng.",
+    "v1": "Không điểm danh bắt buộc",
+    "v2": "Attendance/async completion",
+    "v3": "Chỉ nghiên cứu bonus không ép buộc",
+    "related_sections": [
+      8,
+      12
+    ],
+    "source_file": "source/space_academy_detailed_plans_reviewed_v2_2026-10-09/019_attendance_class_participation.md"
+  },
+  {
+    "id": 20,
+    "verdict": "Postpone",
+    "owner": "prestige (giữ)",
+    "critique": "Helping/attendance/mastery chưa có thang so sánh; nhóm đông dễ thắng.",
+    "correction": "Chọn một assessment chuẩn, cohort frozen, min participation, normalized score; bỏ helping rank.",
+    "risk": "Chống thông đồng và lộ trình độ; bounded snapshot aggregation.",
+    "v1": "Không class competition",
+    "v2": "Goal hợp tác không xếp hạng",
+    "v3": "Competition sau verification",
+    "related_sections": [
+      8,
+      77,
+      54
+    ],
+    "source_file": "source/space_academy_detailed_plans_reviewed_v2_2026-10-09/020_class_competition.md"
+  },
+  {
+    "id": 21,
+    "verdict": "Simplify",
+    "owner": "liveops → classroom cho term; liveops cho campaign",
+    "critique": "seasons và season.finalized bị cả prestige/liveops cùng sở hữu; term không đồng nghĩa contest.",
+    "correction": "academic_terms riêng competition_seasons và campaigns; prestige phát competition.season.finalized duy nhất.",
+    "risk": "Không reset mastery; chỉ đóng eligibility window, lưu timezone/snapshot.",
+    "v1": "Course không season",
+    "v2": "Academic term",
+    "v3": "Campaign/competition liên kết ID",
+    "related_sections": [
+      8,
+      54,
+      61
+    ],
+    "source_file": "source/space_academy_detailed_plans_reviewed_v2_2026-10-09/021_school_terms_seasons.md"
+  },
+  {
+    "id": 22,
+    "verdict": "Postpone",
+    "owner": "classroom (giữ completion)",
+    "critique": "Yearbook vĩnh viễn và alumni graph thiếu visibility/deletion; certificate dễ bị hiểu là chứng nhận năng lực.",
+    "correction": "Course completion do learning xác nhận; class lưu ceremony refs; certificate ghi rõ loại hoàn thành.",
+    "risk": "Opt-in photo/history; pseudonymize khi xoá user; không bất biến PII.",
+    "v1": "Progress cá nhân",
+    "v2": "Completion và badge tùy chọn",
+    "v3": "Alumni/yearbook có consent",
+    "related_sections": [
+      8,
+      27,
+      64
+    ],
+    "source_file": "source/space_academy_detailed_plans_reviewed_v2_2026-10-09/022_graduation_alumni.md"
+  },
+  {
+    "id": 23,
+    "verdict": "Simplify",
+    "owner": "learning → content curriculum; learning đo evidence",
+    "critique": "Goal, skill, CEFR, topic và modality trộn thành track ngang hàng.",
+    "correction": "Taxonomy tách goal/skill/topic/claimed_level/activity; CEFR là nhãn nội dung, không chứng nhận từ XP.",
+    "risk": "Typing copy không chứng minh listening/recall; khóa một dải trình độ đủ bài.",
+    "v1": "Pilot A2–B1 có kiểm duyệt",
+    "v2": "IELTS/skill bổ sung",
+    "v3": "A1–C2 theo capacity nội dung",
+    "related_sections": [
+      70,
+      27
+    ],
+    "source_file": "source/space_academy_detailed_plans_reviewed_v2_2026-10-09/023_core_learning_tracks.md"
+  },
+  {
+    "id": 24,
+    "verdict": "Postpone",
+    "owner": "ielts → learning assessment adapter + content pack",
+    "critique": "Tách riêng attempts/responses/history dễ tạo mastery kép; nhãn Estimated Band chưa đảm bảo chất lượng chấm.",
+    "correction": "Dùng assessment_run chung với exam_spec_version và rubric_version; IELTS extension lưu mục tiêu và section config.",
+    "risk": "Không band từ WPM; answer key kín, autosave, consent audio; AI cost cap.",
+    "v1": "Không hứa IELTS đủ bốn kỹ năng",
+    "v2": "Reading/Listening training đã QA",
+    "v3": "Full mock + W/S khi calibration đạt",
+    "related_sections": [
+      12,
+      70,
+      72,
+      77
+    ],
+    "source_file": "source/space_academy_detailed_plans_reviewed_v2_2026-10-09/024_ielts_as_a_first_class_track.md"
+  },
+  {
+    "id": 25,
+    "verdict": "Simplify",
+    "owner": "learning (giữ)",
+    "critique": "Mission narrative có thể che loại bài; mission_steps trùng lesson_steps.",
+    "correction": "Mission là presentation/course assignment trỏ lesson_version; dùng nhãn học rõ cạnh tên sci-fi.",
+    "risk": "Không thưởng mỗi bước làm tăng farm; tránh query toàn graph khi mở bài.",
+    "v1": "Một lesson sequence",
+    "v2": "Campaign học nhẹ",
+    "v3": "Narrative nhiều nhánh nếu hữu ích",
+    "related_sections": [
+      12,
+      23
+    ],
+    "source_file": "source/space_academy_detailed_plans_reviewed_v2_2026-10-09/025_mission_based_learning_structure.md"
+  },
+  {
+    "id": 26,
+    "verdict": "Simplify",
+    "owner": "typing (giữ adapter)",
+    "critique": "Deep Cockpit trước loop học tăng settings debt; TAB restart chiếm điều hướng accessibility.",
+    "correction": "Giữ input hiện có, settings schema nhỏ; PB keyed ruleset/content/input_mode; shortcut opt-in.",
+    "risk": "IME composition không chấm sớm; paste/autocorrect khác ranked; input local không gọi mạng mỗi phím.",
+    "v1": "Minimal + font/mute/IME",
+    "v2": "Preset/theme đã đo",
+    "v3": "Advanced studio khi có nhu cầu",
+    "related_sections": [
+      70,
+      75,
+      77
+    ],
+    "source_file": "source/space_academy_detailed_plans_reviewed_v2_2026-10-09/026_typing_experience.md"
+  },
+  {
+    "id": 27,
+    "verdict": "Keep",
+    "owner": "learning (giữ)",
+    "critique": "Tỉ lệ đúng và taxonomy lỗi chưa đủ kết luận mastery; copy spelling dễ bị đọc thành recall.",
+    "correction": "Evidence theo item+sense+skill+modality+hints; algorithm_version, due_at, uncertainty; rule-based trước ML.",
+    "risk": "Không tự nâng cấp CEFR; tránh vòng lặp chỉ luyện điểm yếu; serialize concurrent updates.",
+    "v1": "Review deterministic và delayed recall",
+    "v2": "Adaptive có holdout",
+    "v3": "ML sau calibration",
+    "related_sections": [
+      70,
+      12
+    ],
+    "source_file": "source/space_academy_detailed_plans_reviewed_v2_2026-10-09/027_personalized_learning_intelligence.md"
+  },
+  {
+    "id": 28,
+    "verdict": "Simplify",
+    "owner": "learning (giữ read model)",
+    "critique": "Word card, event stamp và IELTS medal có ba nguồn sự thật khác nhau.",
+    "correction": "Codex đọc mastery; cosmetic ownership đọc economy; award đọc prestige; discovered khác mastered.",
+    "risk": "Denominator snapshot/version; không công khai điểm yếu; paginate cards.",
+    "v1": "Danh sách đã học/cần ôn",
+    "v2": "Collections theo topic",
+    "v3": "Cross-domain showcase",
+    "related_sections": [
+      27,
+      70
+    ],
+    "source_file": "source/space_academy_detailed_plans_reviewed_v2_2026-10-09/028_knowledge_codex_collections.md"
+  },
+  {
+    "id": 29,
+    "verdict": "Simplify",
+    "owner": "learning (giữ projection)",
+    "critique": "Book là view đúng, nhưng completion % có thể thay đổi khi curriculum publish.",
+    "correction": "book_view trỏ course_version; completion và retained knowledge hiển thị riêng.",
+    "risk": "Không nhân bản progress; upgrade course cần policy; thumbnail nhẹ.",
+    "v1": "Course progress đơn giản",
+    "v2": "Bookshelf theo version",
+    "v3": "Cosmetic book covers",
+    "related_sections": [
+      28,
+      70
+    ],
+    "source_file": "source/space_academy_detailed_plans_reviewed_v2_2026-10-09/029_books_as_progress_objects.md"
+  },
+  {
+    "id": 30,
+    "verdict": "Simplify",
+    "owner": "identity (giữ profile; tách authentication foundation)",
+    "critique": "Profile đang được dùng thay nền auth; user_titles/user_badges trùng awards/ownership.",
+    "correction": "Account/session/RBAC là platform; profile chỉ display preferences và showcase refs; field visibility riêng.",
+    "risk": "Private default learning target; chống enumeration/XSS; xoá/export; cache theo viewer scope.",
+    "v1": "Account/profile tối thiểu",
+    "v2": "Showcase/class affiliation opt-in",
+    "v3": "Public profile có moderation",
+    "related_sections": [
+      78,
+      54,
+      50
+    ],
+    "source_file": "source/space_academy_detailed_plans_reviewed_v2_2026-10-09/030_user_identity_system.md"
+  },
+  {
+    "id": 31,
+    "verdict": "Keep",
+    "owner": "avatar (giữ direction)",
+    "critique": "2D một pose phù hợp; không vì quyết định này bắt mọi learner qua editor.",
+    "correction": "Static starter portrait V1; modular renderer là nhánh V2, micro-motion optional.",
+    "risk": "Reduced-motion ưu tiên cao nhất; avatar lỗi không chặn học.",
+    "v1": "Portrait + prototype ngoài critical path",
+    "v2": "Modular một pose",
+    "v3": "Motion có budget",
+    "related_sections": [
+      33,
+      39,
+      74
+    ],
+    "source_file": "source/space_academy_detailed_plans_reviewed_v2_2026-10-09/031_avatar_direction_current_preferred_decision.md"
+  },
+  {
+    "id": 32,
+    "verdict": "Simplify",
+    "owner": "avatar (giữ loadout)",
+    "critique": "Layer list cố định sai trong một số outfit; avatar_items trùng economy items.",
+    "correction": "Economy catalog item_id → avatar render_definition; manifest có occlusion/slot/body_template_version.",
+    "risk": "Equip kiểm ownership server; preview không cấp quyền; thumbnail composite.",
+    "v1": "Chưa editor đầy đủ",
+    "v2": "4–6 slot, whitelist compatibility",
+    "v3": "Thêm slot theo QA",
+    "related_sections": [
+      33,
+      50,
+      72
+    ],
+    "source_file": "source/space_academy_detailed_plans_reviewed_v2_2026-10-09/032_2d_avatar_layer_system.md"
+  },
+  {
+    "id": 33,
+    "verdict": "Keep",
+    "owner": "avatar cho compatibility; media giữ blob manifest",
+    "critique": "1024×1400 là authoring canvas, không delivery size; template thiếu anchor thực tế.",
+    "correction": "Khóa template v1 bằng mẫu đã duyệt; hash, anchor, z_groups, masks, variants, thumbnail refs.",
+    "risk": "Validate alpha/dimensions và matrix outfit; tránh texture decode phình RAM.",
+    "v1": "Template + thử art",
+    "v2": "CI manifest/composite",
+    "v3": "Multiple body chỉ sau QA",
+    "related_sections": [
+      72,
+      74
+    ],
+    "source_file": "source/space_academy_detailed_plans_reviewed_v2_2026-10-09/033_avatar_technical_template.md"
+  },
+  {
+    "id": 34,
+    "verdict": "Simplify",
+    "owner": "avatar (giữ)",
+    "critique": "Một pose tốt; các pose Study/Cute tạo nhân chi phí mọi item, không chỉ renderer.",
+    "correction": "pose_id gắn template_version; fallback default nếu item không support; V1 không bán pose.",
+    "risk": "Không equip tổ hợp thiếu asset; không tải tất cả poses trước.",
+    "v1": "Một portrait/pose",
+    "v2": "Một modular pose",
+    "v3": "Pose thứ hai khi đủ compatibility",
+    "related_sections": [
+      33,
+      32
+    ],
+    "source_file": "source/space_academy_detailed_plans_reviewed_v2_2026-10-09/034_avatar_pose.md"
+  },
+  {
+    "id": 35,
+    "verdict": "Postpone",
+    "owner": "avatar (giữ preview; economy mua)",
+    "critique": "Preview chung renderer đúng; cache tất cả đã xem có thể tăng memory vô hạn.",
+    "correction": "Local ephemeral loadout, bounded LRU; equip expected_revision; purchase trả ownership receipt riêng.",
+    "risk": "Race buy/equip và giá đổi; không persist mỗi hover.",
+    "v1": "Không shop preview bắt buộc",
+    "v2": "Preview/equip nhỏ",
+    "v3": "Set compare/random opt-in",
+    "related_sections": [
+      32,
+      50,
+      51
+    ],
+    "source_file": "source/space_academy_detailed_plans_reviewed_v2_2026-10-09/035_avatar_shop_preview.md"
+  },
+  {
+    "id": 36,
+    "verdict": "Simplify",
+    "owner": "media (giữ production)",
+    "critique": "Starter inventory 210 asset chưa tính badge/title quá lớn; tổ hợp nhiều cũng là tổ hợp cần QA.",
+    "correction": "Thử 1 body, 3 hair, 3 top, 2 bottom, 2 shoe, 3 accessory và vài frame; không cam kết số launch trước art test.",
+    "risk": "Aura không mặc nhiên rẻ trên GPU; rights và variant manifest bắt buộc.",
+    "v1": "Art vertical slice",
+    "v2": "Catalog nhỏ sau compatibility test",
+    "v3": "Tăng theo production throughput",
+    "related_sections": [
+      33,
+      72
+    ],
+    "source_file": "source/space_academy_detailed_plans_reviewed_v2_2026-10-09/036_cosmetic_content_strategy.md"
+  },
+  {
+    "id": 37,
+    "verdict": "Postpone",
+    "owner": "economy (giữ catalog/entitlement)",
+    "critique": "Set completion bổ sung grant trigger và có thể làm người dùng mua món không muốn.",
+    "correction": "set_version + member item IDs; completion derive từ entitlements; unique set_bonus_grant.",
+    "risk": "Không power bonus; không đếm duplicate/revoked item; catalog paginate.",
+    "v1": "Không set economy",
+    "v2": "Một set thử nghiệm",
+    "v3": "Set nhiều mùa khi ổn định",
+    "related_sections": [
+      50,
+      51
+    ],
+    "source_file": "source/space_academy_detailed_plans_reviewed_v2_2026-10-09/037_item_sets.md"
+  },
+  {
+    "id": 38,
+    "verdict": "Simplify",
+    "owner": "avatar → economy catalog; media trình bày",
+    "critique": "Common…Mythic, Limited, Prestige đang trộn rarity, availability và earned origin.",
+    "correction": "Tách presentation_tier, acquisition_policy, availability_window; avatar chỉ render style token.",
+    "risk": "Không màu là tín hiệu duy nhất; tier không tự cấp permission/effect nặng.",
+    "v1": "Không rarity ladder",
+    "v2": "2–3 presentation tiers",
+    "v3": "Thêm chỉ khi có ý nghĩa",
+    "related_sections": [
+      50,
+      39
+    ],
+    "source_file": "source/space_academy_detailed_plans_reviewed_v2_2026-10-09/038_cosmetic_rarity.md"
+  },
+  {
+    "id": 39,
+    "verdict": "Keep",
+    "owner": "media → design system; economy giữ business rules",
+    "critique": "Brand spine ôm economy dễ biến design token thành rule cấp thưởng.",
+    "correction": "Một token/cue registry; profile/component states; catalog chỉ tham chiếu token.",
+    "risk": "Contrast và semantic text độc lập màu; không tải registry toàn media.",
+    "v1": "Type/color/focus/sound nhỏ",
+    "v2": "Avatar/class extensions",
+    "v3": "Season skins không fork UI",
+    "related_sections": [
+      73,
+      75
+    ],
+    "source_file": "source/space_academy_detailed_plans_reviewed_v2_2026-10-09/039_visual_audio_brand_spine.md"
+  },
+  {
+    "id": 40,
+    "verdict": "Simplify",
+    "owner": "media (giữ audio runtime)",
+    "critique": "Tám mixer group và hover/tab sounds là scope lớn; voice NPC không luôn ưu tiên lesson audio.",
+    "correction": "Ba control đầu: learning, music, effects; priority exam/learning > NPC > music/effects; parent điều phối iframe.",
+    "risk": "Audio focus lease có release/timeout; autoplay gesture, mute và caption; không decode toàn thư viện.",
+    "v1": "Reuse parent BGM/ducking",
+    "v2": "Mix profiles theo activity",
+    "v3": "Advanced mixer tùy nhu cầu",
+    "related_sections": [
+      72,
+      73
+    ],
+    "source_file": "source/space_academy_detailed_plans_reviewed_v2_2026-10-09/040_audio_design.md"
+  },
+  {
+    "id": 41,
+    "verdict": "Simplify",
+    "owner": "npc nội dung; media owns voice asset",
+    "critique": "Dynamic TTS cache theo text không đủ isolation khi text chứa dữ liệu người học.",
+    "correction": "V1 text + ít line QA; cache public chỉ cho generic, private cache theo user/retention cho personalized.",
+    "risk": "Voice rights, request cost cap, fallback text; không phát thông tin riêng ở lớp.",
+    "v1": "Text/line tĩnh",
+    "v2": "TTS generic được duyệt",
+    "v3": "Personalized voice opt-in",
+    "related_sections": [
+      10,
+      40,
+      72
+    ],
+    "source_file": "source/space_academy_detailed_plans_reviewed_v2_2026-10-09/041_npc_voice.md"
+  },
+  {
+    "id": 42,
+    "verdict": "Simplify",
+    "owner": "media (giữ; bỏ self-integration)",
+    "critique": "media integrates media là dependency vô nghĩa; mastery gold ring có thể biến ước lượng thành sự thật.",
+    "correction": "Semantic cue config, không event domain cho animation; trạng thái học do learning trả.",
+    "risk": "Reduced motion và non-color feedback; cap concurrent effect và stop hidden tab.",
+    "v1": "Feedback tĩnh/nhẹ",
+    "v2": "Milestone animation nhỏ",
+    "v3": "Signature effect hiếm",
+    "related_sections": [
+      39,
+      74
+    ],
+    "source_file": "source/space_academy_detailed_plans_reviewed_v2_2026-10-09/042_vfx_language.md"
+  },
+  {
+    "id": 43,
+    "verdict": "Simplify",
+    "owner": "economy (giữ optional)",
+    "critique": "Bảy nguồn thưởng trước khi có eligibility tạo double reward và farm dễ.",
+    "correction": "Chỉ accepted evidence/milestone trigger; unique user+source+rule_version+benefit; reward failure không rollback learning.",
+    "risk": "Không browser event tự mint; audit/reversal; async có trạng thái pending.",
+    "v1": "Completion feedback phi tiền",
+    "v2": "Một nguồn credit và milestone",
+    "v3": "Thêm nguồn qua simulator",
+    "related_sections": [
+      27,
+      50,
+      79
+    ],
+    "source_file": "source/space_academy_detailed_plans_reviewed_v2_2026-10-09/043_reward_system.md"
+  },
+  {
+    "id": 44,
+    "verdict": "Reject",
+    "owner": "economy (đúng owner, bỏ cơ chế đề xuất)",
+    "critique": "Login→crystal/chest/fragment thưởng mở app, trái meaningful learning và tăng currency sớm.",
+    "correction": "Bỏ daily login payout; nếu hiển thị consistency thì derive từ ngày học đủ điều kiện, không claim endpoint.",
+    "risk": "Timezone hopping và streak pressure; không auto-reset động lực khi nghỉ.",
+    "v1": "Không payout đăng nhập",
+    "v2": "Weekly recap tự nguyện",
+    "v3": "Không khôi phục chest ladder mặc định",
+    "related_sections": [
+      76,
+      47
+    ],
+    "source_file": "source/space_academy_detailed_plans_reviewed_v2_2026-10-09/044_daily_check_in.md"
+  },
+  {
+    "id": 45,
+    "verdict": "Reject",
+    "owner": "economy (đúng owner, bỏ time ladder)",
+    "critique": "15/30/60 phút active vẫn tối ưu thời gian và script heartbeat, dù không AFK.",
+    "correction": "Bỏ thưởng theo phút; reward theo evidence có cap; duration chỉ giúp pacing và vận hành.",
+    "risk": "Không giám sát mỗi phím để chứng minh active; learner chậm không bị thiệt.",
+    "v1": "Không timed payout",
+    "v2": "Qualified evidence rewards",
+    "v3": "Điều chỉnh theo outcome",
+    "related_sections": [
+      43,
+      27
+    ],
+    "source_file": "source/space_academy_detailed_plans_reviewed_v2_2026-10-09/045_active_session_rewards.md"
+  },
+  {
+    "id": 46,
+    "verdict": "Postpone",
+    "owner": "economy (giữ incentive projection)",
+    "critique": "100 điểm nhiều mode vẫn thành checklist; bản ví dụ cộng 75 không đủ định nghĩa điều kiện.",
+    "correction": "Nếu thử, nhiều đường learn-only tương đương; derive capped qualified events, không meter balance riêng.",
+    "risk": "Cap chung ngăn stack daily/weekly/game; không rewards cho replay event.",
+    "v1": "Personal plan không điểm",
+    "v2": "Thử weekly goal trước",
+    "v3": "Daily meter chỉ sau benefit test",
+    "related_sections": [
+      43,
+      47,
+      79
+    ],
+    "source_file": "source/space_academy_detailed_plans_reviewed_v2_2026-10-09/046_daily_activity_meter.md"
+  },
+  {
+    "id": 47,
+    "verdict": "Simplify",
+    "owner": "economy (giữ)",
+    "critique": "Weekly crystal/chest không cần để giúp học đều; rule snapshot tốt nhưng thiếu period identity.",
+    "correction": "Recap trước; nếu reward thì period_id + timezone frozen + rule_version + semantic grant key.",
+    "risk": "DST/timezone changes không tạo hai tuần claim; công nhận nhịp học khác nhau.",
+    "v1": "Recap tiến độ",
+    "v2": "Một bonus deterministic",
+    "v3": "Tối ưu theo cohort, không chest RNG",
+    "related_sections": [
+      43,
+      50
+    ],
+    "source_file": "source/space_academy_detailed_plans_reviewed_v2_2026-10-09/047_weekly_rewards.md"
+  },
+  {
+    "id": 48,
+    "verdict": "Simplify",
+    "owner": "economy owns grant; learning/prestige owns eligibility",
+    "critique": "Certification, hours, mastered item và PB không cùng loại bằng chứng.",
+    "correction": "milestone_evidence_id tham chiếu nguồn; entitlement chỉ materialize reward, không định nghĩa mastery.",
+    "risk": "Grant/revoke từ nguồn đã kiểm tra; không gọi completion là chứng nhận chính thức.",
+    "v1": "Course completion record",
+    "v2": "Cosmetic milestone",
+    "v3": "Achievement nâng cao",
+    "related_sections": [
+      27,
+      43,
+      54
+    ],
+    "source_file": "source/space_academy_detailed_plans_reviewed_v2_2026-10-09/048_long_term_rewards.md"
+  },
+  {
+    "id": 49,
+    "verdict": "Simplify",
+    "owner": "economy (giữ read model)",
+    "critique": "Claim inbox thêm việc phải làm và nguy cơ mất thưởng vì không mở tab.",
+    "correction": "Auto-grant deterministic benefit; inbox là receipt/unread; chỉ choice reward cần claim.",
+    "risk": "Claim-all trả từng kết quả idempotent; unread state không quyết định ownership.",
+    "v1": "Không reward inbox",
+    "v2": "Receipt list gọn",
+    "v3": "Choice reward nếu cần",
+    "related_sections": [
+      43,
+      50
+    ],
+    "source_file": "source/space_academy_detailed_plans_reviewed_v2_2026-10-09/049_reward_center.md"
+  },
+  {
+    "id": 50,
+    "verdict": "Simplify",
+    "owner": "economy (giữ duy nhất ledger/catalog/entitlements)",
+    "critique": "double-entry-ish không phải invariant; Credits/Crystals/token/fragment vượt V1.",
+    "correction": "V2 chỉ earned Credits; integer ledger balanced qua issuance/sink accounts, atomic wallet/order/ownership, semantic dedupe.",
+    "risk": "Concurrent spend không âm; audit compensating reversal; không cross-write inventory từ avatar.",
+    "v1": "Không ví cần thiết",
+    "v2": "Một currency đóng, không trade",
+    "v3": "Currency mới chỉ có lý do riêng",
+    "related_sections": [
+      43,
+      79,
+      78
+    ],
+    "source_file": "source/space_academy_detailed_plans_reviewed_v2_2026-10-09/050_economy.md"
+  },
+  {
+    "id": 51,
+    "verdict": "Postpone",
+    "owner": "economy (giữ)",
+    "critique": "Nhiều shop và Honor Store mâu thuẫn prestige không được mua.",
+    "correction": "Một catalog; earned-only award nằm gallery tách purchase; price/version/eligibility server kiểm tra.",
+    "risk": "Hai tab mua cùng item, stale price, sold-out phải atomic; không client balance authority.",
+    "v1": "Không shop prerequisite",
+    "v2": "Catalog nhỏ giá cố định",
+    "v3": "Rotation sau simulator",
+    "related_sections": [
+      50,
+      35,
+      93
+    ],
+    "source_file": "source/space_academy_detailed_plans_reviewed_v2_2026-10-09/051_shop_system.md"
+  },
+  {
+    "id": 52,
+    "verdict": "Simplify",
+    "owner": "economy entitlement; design system render",
+    "critique": "Caret/highlighter/ink cosmetic có thể làm giảm khả năng đọc; brand không được định nghĩa domain.",
+    "correction": "Theme tokens có contract theo surface; free accessible defaults; cosmetic item trỏ token bundle.",
+    "risk": "Contrast/motion audit trước publish; không cosmetic đổi grading/hints.",
+    "v1": "Một theme đọc rõ",
+    "v2": "Stationery nhỏ",
+    "v3": "Bộ cosmetic rộng nếu hữu ích",
+    "related_sections": [
+      39,
+      50,
+      75
+    ],
+    "source_file": "source/space_academy_detailed_plans_reviewed_v2_2026-10-09/052_stationery_as_a_signature_cosmetic_system.md"
+  },
+  {
+    "id": 53,
+    "verdict": "Postpone",
+    "owner": "economy (giữ availability)",
+    "critique": "permanent/seasonal/may_return/never_return không loại trừ nhau; quantity scarcity thiếu allocation.",
+    "correction": "Tách recurrence_policy, window, eligibility, supply_cap; serial mint dưới transaction; lời hứa exclusivity versioned.",
+    "risk": "Không đếm ngược giả; timezone rõ; hủy/revoke không tái dùng serial lịch sử.",
+    "v1": "Không limited shop",
+    "v2": "Season skin có return policy",
+    "v3": "Capped supply khi vận hành đủ",
+    "related_sections": [
+      50,
+      61,
+      77
+    ],
+    "source_file": "source/space_academy_detailed_plans_reviewed_v2_2026-10-09/053_limited_seasonal_items.md"
+  },
+  {
+    "id": 54,
+    "verdict": "Postpone",
+    "owner": "prestige (giữ award/competition)",
+    "critique": "Prestige đang bao trùm mastery, completion và participation dễ lẫn “verified”.",
+    "correction": "Award_definition có evidence_type và verification_policy; competition riêng learning progress.",
+    "risk": "Award chỉ sau adjudication; appeal/revoke có revision; không bảng mastery thứ hai.",
+    "v1": "Private completion/PB",
+    "v2": "Achievement không competitive",
+    "v3": "Competitive prestige verified",
+    "related_sections": [
+      77,
+      27
+    ],
+    "source_file": "source/space_academy_detailed_plans_reviewed_v2_2026-10-09/054_prestige_system.md"
+  },
+  {
+    "id": 55,
+    "verdict": "Postpone",
+    "owner": "prestige (giữ projection)",
+    "critique": "10 chiều ×14 loại rank phân mảnh cohort và xếp hạng thang chưa calibrated.",
+    "correction": "Bắt đầu 1 ruleset typing opt-in; ruleset_hash/input_mode/content_version/period; không global English score.",
+    "risk": "Min cohort, ties, pseudonym/privacy; snapshot/query bounded.",
+    "v1": "Private PB",
+    "v2": "Private challenge results",
+    "v3": "Một board verified rồi mở rộng",
+    "related_sections": [
+      77,
+      26,
+      54
+    ],
+    "source_file": "source/space_academy_detailed_plans_reviewed_v2_2026-10-09/055_ranking_center.md"
+  },
+  {
+    "id": 56,
+    "verdict": "Simplify",
+    "owner": "prestige → typing/learning owns PB; prestige reads verified awards",
+    "critique": "PB không cần prestige subsystem; Most Improved dễ sandbag baseline.",
+    "correction": "PB keyed comparable ruleset; learning improvement từ delayed assessments; nhiều lần đo baseline.",
+    "risk": "Không so WPM khác duration/input; private mặc định; không replay PB reward.",
+    "v1": "Private PB",
+    "v2": "Progress milestones",
+    "v3": "Most Improved có eligibility rõ",
+    "related_sections": [
+      26,
+      27
+    ],
+    "source_file": "source/space_academy_detailed_plans_reviewed_v2_2026-10-09/056_personal_best_improvement_prestige.md"
+  },
+  {
+    "id": 57,
+    "verdict": "Postpone",
+    "owner": "prestige (giữ)",
+    "critique": "Immutable Hall of Fame tuyệt đối cản sửa cheat, khiếu nại và xoá dữ liệu cá nhân.",
+    "correction": "Final result revisions append-only; public view latest effective revision; profile ref có thể ẩn/pseudonymize.",
+    "risk": "Không khóa PII vĩnh viễn; CDN purge khi correction; kiểm chứng trước publish.",
+    "v1": "Không Hall",
+    "v2": "Không cần cho pilot class",
+    "v3": "History sau season verified",
+    "related_sections": [
+      54,
+      77
+    ],
+    "source_file": "source/space_academy_detailed_plans_reviewed_v2_2026-10-09/057_hall_of_fame.md"
+  },
+  {
+    "id": 58,
+    "verdict": "Postpone",
+    "owner": "prestige eligibility; economy entitlement; avatar renderer",
+    "critique": "Prestige không nên tự tạo inventory riêng; non-tradeable chưa đủ chặn admin/shop mint.",
+    "correction": "Award-issued entitlement có grant_reason + source_award; catalog acquisition_policy=award_only.",
+    "risk": "Purchase path và admin grant reject nếu thiếu valid award; revoke loadout fallback.",
+    "v1": "Không prestige cosmetic",
+    "v2": "Completion badge rõ loại",
+    "v3": "Exclusive award visual",
+    "related_sections": [
+      54,
+      50,
+      32
+    ],
+    "source_file": "source/space_academy_detailed_plans_reviewed_v2_2026-10-09/058_exclusive_prestige_cosmetics.md"
+  },
+  {
+    "id": 59,
+    "verdict": "Simplify",
+    "owner": "prestige → economy entitlement provenance",
+    "critique": "Provenance cần cho item thường lẫn prestige; hiện không có owner chung.",
+    "correction": "ownership_origin(source_type, source_id, acquired_at, policy_version); prestige bổ sung evidence ref.",
+    "risk": "Serial có unique constraint; public view giấu actor/private evidence.",
+    "v1": "Provenance nội dung trước",
+    "v2": "Item receipt đơn giản",
+    "v3": "Serial/season khi cần",
+    "related_sections": [
+      50,
+      54
+    ],
+    "source_file": "source/space_academy_detailed_plans_reviewed_v2_2026-10-09/059_item_provenance.md"
+  },
+  {
+    "id": 60,
+    "verdict": "Postpone",
+    "owner": "prestige tournament; learning assessment",
+    "critique": "Tournament và exam là hai lifecycle khác nhau; bracket 256 chưa có người dùng đủ.",
+    "correction": "Tách assessment_run khỏi competition_entry; tournament tham chiếu verified result, không own đáp án.",
+    "risk": "Fairness/ties/disconnect và appeals trước bracket; không streaming/spectator V1.",
+    "v1": "Learning assessment nhỏ",
+    "v2": "Timed practice",
+    "v3": "Tournament sau đủ participants/ops",
+    "related_sections": [
+      24,
+      77,
+      54
+    ],
+    "source_file": "source/space_academy_detailed_plans_reviewed_v2_2026-10-09/060_tournaments_exams.md"
+  },
+  {
+    "id": 61,
+    "verdict": "Postpone",
+    "owner": "liveops (giữ campaign)",
+    "critique": "Lịch dày mỗi tối là nghĩa vụ và tạo vận hành liên tục.",
+    "correction": "Một campaign async có occurrence IDs; phần live không có lợi thế mastery hoặc reward thiết yếu.",
+    "risk": "Dedup scheduled jobs; cancel policy; UTC instant + timezone recurrence; quiet hours.",
+    "v1": "Không LiveOps runtime",
+    "v2": "Một thử nghiệm async",
+    "v3": "Live nhiều slot nếu đủ demand",
+    "related_sections": [
+      78,
+      50,
+      62
+    ],
+    "source_file": "source/space_academy_detailed_plans_reviewed_v2_2026-10-09/061_scheduled_events.md"
+  },
+  {
+    "id": 62,
+    "verdict": "Simplify",
+    "owner": "liveops → calendar read model; source owner giữ schedule",
+    "critique": "Calendar không nên sở hữu cả class/club/event schedule.",
+    "correction": "Unified DTO {source_type, source_id, occurrence_id, start,end,tz,revision}; source commands riêng.",
+    "risk": "Filter quyền trước cache; DST/ICS nếu thêm cần test; window pagination.",
+    "v1": "Review due trong Home",
+    "v2": "Class calendar",
+    "v3": "Aggregate events/club",
+    "related_sections": [
+      8,
+      61
+    ],
+    "source_file": "source/space_academy_detailed_plans_reviewed_v2_2026-10-09/062_event_calendar.md"
+  },
+  {
+    "id": 63,
+    "verdict": "Postpone",
+    "owner": "liveops (giữ)",
+    "critique": "Festival nhiều activity tạo content/event QA lớn trước khi loop học tốt.",
+    "correction": "Bundle published activity IDs, không viết game engine cho từng event.",
+    "risk": "Licensing/expiry từng asset; hoạt động async tương đương; preload riêng route.",
+    "v1": "Không festival",
+    "v2": "Một theme course tùy chọn",
+    "v3": "Festival reuse activity đủ ổn",
+    "related_sections": [
+      61,
+      68,
+      72
+    ],
+    "source_file": "source/space_academy_detailed_plans_reviewed_v2_2026-10-09/063_school_events.md"
+  },
+  {
+    "id": 64,
+    "verdict": "Postpone",
+    "owner": "social (giữ chat/friends); platform safety là prerequisite",
+    "critique": "Report/mute/block mới là nút, thiếu moderator queue, enforcement và retention.",
+    "correction": "Text class room có ACL; report case lifecycle, block policy, rate limits, deletion/takedown; chưa DM/file.",
+    "risk": "Server kiểm membership mỗi send/read/reconnect; operator coverage; tên hiển thị cũng UGC.",
+    "v1": "Không user chat công khai",
+    "v2": "Private class text đã moderation",
+    "v3": "Friends/clubs sau safety gate",
+    "related_sections": [
+      30,
+      78,
+      8
+    ],
+    "source_file": "source/space_academy_detailed_plans_reviewed_v2_2026-10-09/064_social_system.md"
+  },
+  {
+    "id": 65,
+    "verdict": "Postpone",
+    "owner": "social (giữ ephemeral)",
+    "critique": "Online count không được trở thành attendance truth; opt-out phải áp cả aggregate nhỏ.",
+    "correction": "TTL presence theo room, approximate; authorised subscribers; không ghi heartbeat DB.",
+    "risk": "Không expose last_seen rộng; hide small cohort inference; multi-tab aggregate.",
+    "v1": "Không presence",
+    "v2": "Polling/TTL cho class",
+    "v3": "Realtime khi latency cần",
+    "related_sections": [
+      64,
+      8
+    ],
+    "source_file": "source/space_academy_detailed_plans_reviewed_v2_2026-10-09/065_social_presence.md"
+  },
+  {
+    "id": 66,
+    "verdict": "Postpone",
+    "owner": "social (giữ room)",
+    "critique": "Study room không voice/video vẫn cần ACL, scheduling và abuse response.",
+    "correction": "Reuse room membership; activity independently executable; room closure/host transfer policy.",
+    "risk": "Không public discovery trước moderation; limit room/fanout; degrade về solo.",
+    "v1": "Solo study đầy đủ",
+    "v2": "Invite-only room thử nghiệm",
+    "v3": "Discovery sau safety/scale",
+    "related_sections": [
+      64,
+      65,
+      12
+    ],
+    "source_file": "source/space_academy_detailed_plans_reviewed_v2_2026-10-09/066_study_rooms.md"
+  },
+  {
+    "id": 67,
+    "verdict": "Postpone",
+    "owner": "social owns invite; activity owns score",
+    "critique": "Async tiết kiệm hạ tầng nhưng cùng đề chưa chắc công bằng nếu xem đáp án trước.",
+    "correction": "Challenge snapshot rules/content/seed/deadline/attempt_limit; result_refs từ adapter; reveal sau cả hai hoặc deadline.",
+    "risk": "Invite/block/rate limits; no coin wagering; không grade client totals.",
+    "v1": "Private PB",
+    "v2": "Async friend challenge giới hạn",
+    "v3": "Ranked challenge verified",
+    "related_sections": [
+      64,
+      26,
+      77
+    ],
+    "source_file": "source/space_academy_detailed_plans_reviewed_v2_2026-10-09/067_friend_challenges.md"
+  },
+  {
+    "id": 68,
+    "verdict": "Postpone",
+    "owner": "learning → activities; learning owns evidence",
+    "critique": "Nhiều minigame trùng learning core; game score không là mastery.",
+    "correction": "Activity capability registry, objective/evidence contract; nhóm là wrapper, không engine chung bắt buộc.",
+    "risk": "One completion per item; no duplicate XP; load theo route.",
+    "v1": "Reuse activity hiện có",
+    "v2": "Một activity hợp tác",
+    "v3": "Game mới qua learning evaluation",
+    "related_sections": [
+      69,
+      27
+    ],
+    "source_file": "source/space_academy_detailed_plans_reviewed_v2_2026-10-09/068_group_activities_mini_games.md"
+  },
+  {
+    "id": 69,
+    "verdict": "Keep",
+    "owner": "typing → activities/space-typing adapter",
+    "critique": "Shared IDs đúng; “phát reward events” dễ cho game quyền mint và repetition bị gọi mastery.",
+    "correction": "Game gửi candidate evidence, server learning validate; economy chỉ consume accepted event. Combat progression độc lập.",
+    "risk": "Không import game currency thành academy credit; giữ adapter/version handshake.",
+    "v1": "Tích hợp hiện có + contract migration",
+    "v2": "Learning-context launch nâng cấp",
+    "v3": "Thêm mode nếu hiệu quả",
+    "related_sections": [
+      70,
+      27,
+      73
+    ],
+    "source_file": "source/space_academy_detailed_plans_reviewed_v2_2026-10-09/069_space_typings_role.md"
+  },
+  {
+    "id": 70,
+    "verdict": "Keep",
+    "owner": "content_ops → content canonical registry; learning owns learner state",
+    "critique": "Rich records đang vừa ở content_records vừa learning_items; compact ABI thiếu sense/version mapping.",
+    "correction": "Một content_id+sense_id+immutable_version; ABI là export adapter; lesson/assessment reference canonical registry.",
+    "risk": "Dedupe không gộp khác nghĩa; block/takedown có cache invalidation; migration giữ legacy IDs.",
+    "v1": "Registry/publish và adapter",
+    "v2": "Content authoring mở rộng",
+    "v3": "Search riêng khi đo cần",
+    "related_sections": [
+      71,
+      72,
+      78
+    ],
+    "source_file": "source/space_academy_detailed_plans_reviewed_v2_2026-10-09/070_content_learning_data_foundation.md"
+  },
+  {
+    "id": 71,
+    "verdict": "Keep",
+    "owner": "content_ops (giữ rights review)",
+    "critique": "License allowlist chưa đủ provenance của adaptation, audio và từng derivative.",
+    "correction": "Asset/content có source, rights_basis, evidence_ref, attribution, derivative_chain, review_status; publish gate.",
+    "risk": "Không coi AI-generated tự động có quyền; block unknown theo policy nội bộ; takedown phủ CDN.",
+    "v1": "Rights trước publish",
+    "v2": "Batch review/expiry queue",
+    "v3": "Mở rộng nguồn đã kiểm định",
+    "related_sections": [
+      70,
+      72
+    ],
+    "source_file": "source/space_academy_detailed_plans_reviewed_v2_2026-10-09/071_content_sources_licensing.md"
+  },
+  {
+    "id": 72,
+    "verdict": "Simplify",
+    "owner": "media (giữ assets/jobs); content_ops kiểm rights",
+    "critique": "Hai accent, timing, dynamic generation và search là nhiều pipeline chưa cần cùng lúc.",
+    "correction": "Một locale ưu tiên; deterministic job key input_hash+voice+locale+model_version; manifest/CDN và retry.",
+    "risk": "Private audio signed access; không cache PII public; validate MIME/duration; codec fallback test device.",
+    "v1": "Audio chuẩn ít, pre-generated",
+    "v2": "Hai accent/timing có giá trị",
+    "v3": "On-demand có cost/quality gate",
+    "related_sections": [
+      71,
+      74
+    ],
+    "source_file": "source/space_academy_detailed_plans_reviewed_v2_2026-10-09/072_media_production_strategy.md"
+  },
+  {
+    "id": 73,
+    "verdict": "Keep",
+    "owner": "platform (giữ)",
+    "critique": "Singleton audio toàn app không trực tiếp áp dụng nhiều iframe; lazy loading chưa có gate đo.",
+    "correction": "Parent audio focus contract + child lifecycle pause/dispose; core route không phụ thuộc game load.",
+    "risk": "Unload iframe/subscription; trace route payload và memory sau nhiều switch.",
+    "v1": "CI budget + lifecycle",
+    "v2": "Realtime đo theo demand",
+    "v3": "Scale theo bottleneck",
+    "related_sections": [
+      74,
+      40
+    ],
+    "source_file": "source/space_academy_detailed_plans_reviewed_v2_2026-10-09/073_performance_philosophy.md"
+  },
+  {
+    "id": 74,
+    "verdict": "Simplify",
+    "owner": "platform (giữ engineering policy)",
+    "critique": "Gọi “budgets” nhưng không có số; còn tạo outbox.event.created như business event.",
+    "correction": "Dùng budget proposal có thiết bị/network/scenario; outbox là hạ tầng không event domain cho UI.",
+    "risk": "Đo decoded memory và p95 latency; payload caps; fail build trên budget đã ratify.",
+    "v1": "Khóa budget provisional rồi đo",
+    "v2": "RUM cohort mobile",
+    "v3": "Điều chỉnh bằng evidence",
+    "related_sections": [
+      73,
+      72
+    ],
+    "source_file": "source/space_academy_detailed_plans_reviewed_v2_2026-10-09/074_asset_performance_budgets.md"
+  },
+  {
+    "id": 75,
+    "verdict": "Keep",
+    "owner": "platform UX (giữ)",
+    "critique": "Voice/chat/shop trên mobile chưa đảm bảo lesson input/autosave/accessibility.",
+    "correction": "Responsive runner trước; keyboard/IME/touch contract; static avatar fallback; core parity dù meta tắt.",
+    "risk": "Background audio và offline resume; không xếp soft keyboard cùng physical keyboard ranked.",
+    "v1": "Read/listen/review đủ trên mobile",
+    "v2": "Class/text interaction",
+    "v3": "Rich mode tùy khả năng",
+    "related_sections": [
+      12,
+      26,
+      74
+    ],
+    "source_file": "source/space_academy_detailed_plans_reviewed_v2_2026-10-09/075_mobile_as_a_first_class_experience.md"
+  },
+  {
+    "id": 76,
+    "verdict": "Keep",
+    "owner": "economy policy (giữ)",
+    "critique": "Anti-pattern đúng nhưng 044–046 và 050 vi phạm ngay trong cùng bộ tài liệu.",
+    "correction": "Biến policy thành gate: no login/time payout, no purchasable evidence, no required game route.",
+    "risk": "Test stacking/caps; accessible defaults không bị khóa cosmetic; không dùng expiry ép học.",
+    "v1": "Loại reward pressure",
+    "v2": "Audit economy nhỏ",
+    "v3": "Review mọi campaign",
+    "related_sections": [
+      43,
+      44,
+      45
+    ],
+    "source_file": "source/space_academy_detailed_plans_reviewed_v2_2026-10-09/076_reward_economy_anti_patterns_to_avoid.md"
+  },
+  {
+    "id": 77,
+    "verdict": "Keep",
+    "owner": "prestige policy; activity verifier thực thi",
+    "critique": "Client run signature, paste detection không chứng minh con người; Verified dễ hứa quá mức.",
+    "correction": "Server-issued run nonce/rules/content, replay checks, evidence trust tier, review/appeal; signed challenge không ký sự thật input.",
+    "risk": "Chấp nhận browser không chống bot tuyệt đối; raw keystrokes bounded/retention; IME không mặc định cheat.",
+    "v1": "Phân loại trust, private results",
+    "v2": "Verification thử kín",
+    "v3": "Public rank sau false-positive audit",
+    "related_sections": [
+      26,
+      30,
+      78
+    ],
+    "source_file": "source/space_academy_detailed_plans_reviewed_v2_2026-10-09/077_prestige_integrity.md"
+  },
+  {
+    "id": 78,
+    "verdict": "Simplify",
+    "owner": "admin → application surface; domain giữ mutation",
+    "critique": "Admin_changes/approval_requests không thay business state; universal console quá lớn.",
+    "correction": "V1 content preview/publish, user access, audit, job errors, takedown; command handler owner validate.",
+    "risk": "Role scope, audit actor/reason, secrets server-side; local token hiện tại không là auth production.",
+    "v1": "Ops tối thiểu từ đầu",
+    "v2": "Class/moderation/economy tools cùng feature",
+    "v3": "LiveOps/appeals đầy đủ",
+    "related_sections": [
+      70,
+      30
+    ],
+    "source_file": "source/space_academy_detailed_plans_reviewed_v2_2026-10-09/078_admin_game_master_learning_operations_console.md"
+  },
+  {
+    "id": 79,
+    "verdict": "Keep",
+    "owner": "admin → economy model; admin chỉ chạy scenario",
+    "critique": "Đặt simulation ở Phase 6 sau khi economy chạy là quá muộn.",
+    "correction": "Pure deterministic simulator dùng cùng reward function/version, seed, replay fixtures; không production credentials.",
+    "risk": "Burst/retry/timezone/farm/sink exhaustion; percentile và worst-case; không chỉ mean.",
+    "v1": "Chưa cần khi chưa currency",
+    "v2": "Bắt buộc trước credit launch",
+    "v3": "Stochastic scenarios từ dữ liệu thật",
+    "related_sections": [
+      50,
+      43
+    ],
+    "source_file": "source/space_academy_detailed_plans_reviewed_v2_2026-10-09/079_reward_simulator.md"
+  },
+  {
+    "id": 80,
+    "verdict": "Simplify",
+    "owner": "admin → content preview + learning runner",
+    "critique": "Simulator chỉ cộng phút không kiểm tra thực tế đọc/nghe/chuyển task.",
+    "correction": "Reuse published runner preview; duration interval theo text/audio/transition/hints; không giả learner mastery.",
+    "risk": "Không ghi practice giả vào production; audio load budget tính vào cold path.",
+    "v1": "Estimate + preview",
+    "v2": "Teacher timing từ quan sát",
+    "v3": "Adaptive estimator sau calibration",
+    "related_sections": [
+      14,
+      12
+    ],
+    "source_file": "source/space_academy_detailed_plans_reviewed_v2_2026-10-09/080_lesson_simulator.md"
+  },
+  {
+    "id": 81,
+    "verdict": "Postpone",
+    "owner": "admin → liveops application surface",
+    "critique": "Event Builder đang sở hữu class schedule/exam/shop cùng lúc, dẫn tới owner chồng.",
+    "correction": "Shared form/version/audit components; source-specific validators/commands; không universal workflow engine.",
+    "risk": "Publish expected_revision; cancel không xoá lịch sử; privilege tách reward/calendar.",
+    "v1": "Content ops đủ",
+    "v2": "Schedule admin cho class",
+    "v3": "Campaign editor và jobs audit",
+    "related_sections": [
+      61,
+      78,
+      50
+    ],
+    "source_file": "source/space_academy_detailed_plans_reviewed_v2_2026-10-09/081_liveops_admin.md"
+  },
+  {
+    "id": 82,
+    "verdict": "Simplify",
+    "owner": "product (giữ docs)",
+    "critique": "9 master plan bỏ qua migration, safety và content/assessment như deliverable riêng.",
+    "correction": "Giữ 106 mục làm traceability; gom ADR/contracts theo owner; thêm migration/safety/verification docs.",
+    "risk": "Một định nghĩa invariant tránh 106 checklist drift; không tạo microservice theo file.",
+    "v1": "Core contracts/roadmap",
+    "v2": "Owner specs theo feature",
+    "v3": "ADR khi tách service",
+    "related_sections": [
+      70,
+      78,
+      83
+    ],
+    "source_file": "source/space_academy_detailed_plans_reviewed_v2_2026-10-09/082_proposed_master_plan_document_split.md"
+  },
+  {
+    "id": 83,
+    "verdict": "Reject",
+    "owner": "product (giữ owner, thay thứ tự)",
+    "critique": "Phase 1 avatar/shop, Phase 2 economy, Phase 3 learning trái learning-first; simulator tận Phase 6.",
+    "correction": "Thay bằng baseline→content/auth/ops→learning→pilot gate→nhánh class hoặc identity/economy→verified liveops.",
+    "risk": "Không làm migration big bang; rollback ở từng slice; compatibility tests trước integration.",
+    "v1": "Learning vertical slice",
+    "v2": "Class/economy độc lập có gates",
+    "v3": "Competition/LiveOps",
+    "related_sections": [
+      97,
+      70,
+      79
+    ],
+    "source_file": "source/space_academy_detailed_plans_reviewed_v2_2026-10-09/083_recommended_build_order.md"
+  },
+  {
+    "id": 84,
+    "verdict": "Keep",
+    "owner": "product (giữ)",
+    "critique": "Non-goals hợp lý nhưng không nên ngầm biến thành V3 backlog.",
+    "correction": "Giữ 3D/free roam/power economy/trade ngoài roadmap cả ba phiên bản; đổi cần ADR và lý do riêng.",
+    "risk": "Không xoá game hiện có chỉ vì có combat; giữ boundary combat/learning.",
+    "v1": "Enforce non-goals",
+    "v2": "Giữ nguyên",
+    "v3": "Giữ nguyên trừ quyết định mới",
+    "related_sections": [
+      1,
+      69
+    ],
+    "source_file": "source/space_academy_detailed_plans_reviewed_v2_2026-10-09/084_important_non_goals_current_rejections.md"
+  },
+  {
+    "id": 85,
+    "verdict": "Keep",
+    "owner": "product (giữ acceptance scenario)",
+    "critique": "Simple learner là bài test quan trọng nhất; progress 68% thiếu denominator.",
+    "correction": "Acceptance: start→answer→feedback→resume→review không gọi social/economy; progress gắn course_version.",
+    "risk": "Test meta API down, slow network, mute/reduced-motion và mobile.",
+    "v1": "Release gate V1",
+    "v2": "Regression mọi feature",
+    "v3": "Tiếp tục gate bắt buộc",
+    "related_sections": [
+      12,
+      27,
+      75
+    ],
+    "source_file": "source/space_academy_detailed_plans_reviewed_v2_2026-10-09/085_core_ux_example_simple_learner.md"
+  },
+  {
+    "id": 86,
+    "verdict": "Postpone",
+    "owner": "product (giữ scenario)",
+    "critique": "PB classmates/feed online tiết lộ hoạt động nếu auto-public.",
+    "correction": "Composition view đọc projections có visibility; không lưu social persona state riêng.",
+    "risk": "Block/mute xuyên feed/challenge; Home không fanout mọi class.",
+    "v1": "Không feed",
+    "v2": "Class view opt-in",
+    "v3": "Friends/activity feed có cap",
+    "related_sections": [
+      8,
+      64,
+      65
+    ],
+    "source_file": "source/space_academy_detailed_plans_reviewed_v2_2026-10-09/086_core_ux_example_social_learner.md"
+  },
+  {
+    "id": 87,
+    "verdict": "Postpone",
+    "owner": "product (giữ scenario)",
+    "critique": "Ranked IELTS và English mastery chưa có comparable assessment; không phải toggle UI đủ.",
+    "correction": "Scenario chỉ enabled khi ruleset/verification/appeal đã đạt; học riêng vẫn hoạt động.",
+    "risk": "Không mix casual/unverified; hiển thị policy và pending; load ranking on demand.",
+    "v1": "PB private",
+    "v2": "Challenge thử kín",
+    "v3": "Verified ranked experience",
+    "related_sections": [
+      54,
+      77
+    ],
+    "source_file": "source/space_academy_detailed_plans_reviewed_v2_2026-10-09/087_core_ux_example_competitive_user.md"
+  },
+  {
+    "id": 88,
+    "verdict": "Postpone",
+    "owner": "product (giữ scenario)",
+    "critique": "Collector loop xoay quanh limited token/shop rotation dễ biến retention thành FOMO.",
+    "correction": "Bắt đầu earned cosmetic không thời hạn; catalog view chỉ đọc economy, không own progress.",
+    "risk": "Không reward cho mua; budget asset và no dark patterns; accessible default miễn phí.",
+    "v1": "Free starter identity",
+    "v2": "Catalog thường và receipt",
+    "v3": "Collections theo evidence",
+    "related_sections": [
+      50,
+      51,
+      76
+    ],
+    "source_file": "source/space_academy_detailed_plans_reviewed_v2_2026-10-09/088_core_ux_example_cosmetic_collector_user.md"
+  },
+  {
+    "id": 89,
+    "verdict": "Simplify",
+    "owner": "product UX; classroom/content ownership",
+    "critique": "Teacher flow bỏ qua quyền publish, cancellation và version thay đổi sau giao bài.",
+    "correction": "Teacher chọn approved lesson hoặc tạo draft; publisher duyệt; assignment pin version, follow-up từ learning.",
+    "risk": "Không export toàn learner corpus; class ACL và audit; preview không mutate progress.",
+    "v1": "Internal editor flow",
+    "v2": "Pilot teacher đầy đủ scope",
+    "v3": "Delegated authoring có policy",
+    "related_sections": [
+      14,
+      8,
+      78
+    ],
+    "source_file": "source/space_academy_detailed_plans_reviewed_v2_2026-10-09/089_core_ux_example_teacher.md"
+  },
+  {
+    "id": 90,
+    "verdict": "Keep",
+    "owner": "media/design system (giữ)",
+    "critique": "Brand thesis tốt; typography/audio/asset consistency đáng giá hơn thêm hệ meta.",
+    "correction": "Gộp bible với 039; một bộ tokens/components/character art direction, không schema brand riêng.",
+    "risk": "Contrast, localization và loading placeholders; không tải neon/VFX trên reading.",
+    "v1": "Design system nhỏ hoàn chỉnh",
+    "v2": "Avatar/class kit",
+    "v3": "Season variant cùng components",
+    "related_sections": [
+      39,
+      74
+    ],
+    "source_file": "source/space_academy_detailed_plans_reviewed_v2_2026-10-09/090_brand_direction.md"
+  },
+  {
+    "id": 91,
+    "verdict": "Simplify",
+    "owner": "economy → product/design policy",
+    "critique": "Academic objects là ngôn ngữ thiết kế; không cần domain economy để có notebook UI.",
+    "correction": "Tách decorative certificate khỏi proof of completion; functional study tools luôn sẵn.",
+    "risk": "Không bán accessibility/hints cơ bản; cosmetic không đổi grading.",
+    "v1": "UI học có brand",
+    "v2": "Stationery token pack",
+    "v3": "Collector extensions",
+    "related_sections": [
+      52,
+      93
+    ],
+    "source_file": "source/space_academy_detailed_plans_reviewed_v2_2026-10-09/091_why_academic_objects_matter.md"
+  },
+  {
+    "id": 92,
+    "verdict": "Simplify",
+    "owner": "prestige → product recognition policy",
+    "critique": "Recognition đa trục hợp lý nhưng helping/reputation dễ farm hoặc thiên vị.",
+    "correction": "Personal milestone/private feedback trước; public award có evidence và consent; không universal score.",
+    "risk": "Bỏ ranking helping nếu không đo đáng tin; avoid shame cho người học chậm.",
+    "v1": "Private progress",
+    "v2": "Class acknowledgments có lựa chọn",
+    "v3": "Award sau verification",
+    "related_sections": [
+      27,
+      54,
+      64
+    ],
+    "source_file": "source/space_academy_detailed_plans_reviewed_v2_2026-10-09/092_recognition_status.md"
+  },
+  {
+    "id": 93,
+    "verdict": "Keep",
+    "owner": "prestige policy + economy enforcement",
+    "critique": "“Không bán” mới là lời hứa nếu catalog/admin vẫn mint mọi item.",
+    "correction": "acquisition_policy enforced cùng code cho purchase/admin/reward; award_only cần source_award verified.",
+    "risk": "Test forged request, direct admin grant, revoked award; không bán lookalike gây nhầm.",
+    "v1": "Giữ policy",
+    "v2": "Enforce trước shop",
+    "v3": "Audit mọi prestige release",
+    "related_sections": [
+      50,
+      54,
+      78
+    ],
+    "source_file": "source/space_academy_detailed_plans_reviewed_v2_2026-10-09/093_what_must_never_be_sold.md"
+  },
+  {
+    "id": 94,
+    "verdict": "Simplify",
+    "owner": "economy (giữ)",
+    "critique": "Danh sách pose/emote/VFX vượt catalog nhỏ và dễ bán tính năng accessibility.",
+    "correction": "Earned Credits chỉ cosmetic; stable price/item_version, free baseline đủ đọc/học.",
+    "risk": "Không link spend vào mastery; no negative wallet; asset downgrade khi yếu.",
+    "v1": "Không credit store",
+    "v2": "Một catalog ít item",
+    "v3": "Thêm theo QA/usage",
+    "related_sections": [
+      50,
+      51,
+      75
+    ],
+    "source_file": "source/space_academy_detailed_plans_reviewed_v2_2026-10-09/094_what_can_be_purchased_with_earned_credits.md"
+  },
+  {
+    "id": 95,
+    "verdict": "Simplify",
+    "owner": "npc → product UX; npc presenter",
+    "critique": "“Alive” không cần upcoming event/class nếu learner solo chưa tham gia.",
+    "correction": "Greeting có nhãn và next review thật; không sinh recent human activity giả.",
+    "risk": "Không lưu relationship score V1; no polling NPC schedules; text fallback.",
+    "v1": "Daily plan + mentor tĩnh",
+    "v2": "Context rõ nguồn",
+    "v3": "NPC phong phú sau evaluation",
+    "related_sections": [
+      10,
+      27
+    ],
+    "source_file": "source/space_academy_detailed_plans_reviewed_v2_2026-10-09/095_living_even_when_alone_principle.md"
+  },
+  {
+    "id": 96,
+    "verdict": "Postpone",
+    "owner": "social → product hypothesis",
+    "critique": "“Strongest loop” là giả thuyết, không lý do xây cả network trước learning.",
+    "correction": "Pilot class so với solo trên delayed learning, voluntary return và moderation load; không schema retention.",
+    "risk": "Tránh spam invite/notification; phân biệt selection bias với causal effect.",
+    "v1": "Không phụ thuộc social",
+    "v2": "Class pilot có tiêu chí",
+    "v3": "Mở rộng khi lợi ích rõ",
+    "related_sections": [
+      8,
+      64,
+      97
+    ],
+    "source_file": "source/space_academy_detailed_plans_reviewed_v2_2026-10-09/096_social_retention_principle.md"
+  },
+  {
+    "id": 97,
+    "verdict": "Keep",
+    "owner": "learning (giữ)",
+    "critique": "Đây phải là dependency spine, hiện bị đặt sau economy trong build order.",
+    "correction": "Goal→lesson→feedback→due review→evidence progress; mọi nhánh meta tháo được.",
+    "risk": "Tắt economy/social/game mà vẫn học/resume được; bảo toàn lịch sử khi migration.",
+    "v1": "Core release gate",
+    "v2": "Mở rộng content",
+    "v3": "Giữ gate mọi phiên bản",
+    "related_sections": [
+      12,
+      27,
+      70
+    ],
+    "source_file": "source/space_academy_detailed_plans_reviewed_v2_2026-10-09/097_learning_retention_principle.md"
+  },
+  {
+    "id": 98,
+    "verdict": "Simplify",
+    "owner": "economy policy (giữ)",
+    "critique": "Learn→earn→buy không phù hợp mọi persona; recognition không phải điều kiện quay lại.",
+    "correction": "Giữ tùy chọn, đo tác động lên delayed recall; không hành động mua để unlock core.",
+    "risk": "Không notification pressure; cap reward stacking; không mutate learning qua wallet.",
+    "v1": "Không reward dependency",
+    "v2": "Earned identity thử nhỏ",
+    "v3": "Tối ưu nếu outcome không giảm",
+    "related_sections": [
+      43,
+      76
+    ],
+    "source_file": "source/space_academy_detailed_plans_reviewed_v2_2026-10-09/098_reward_retention_principle.md"
+  },
+  {
+    "id": 99,
+    "verdict": "Postpone",
+    "owner": "liveops policy (giữ)",
+    "critique": "Async/replay “khi hợp lý” chưa bảo đảm learner không mất tiến độ thiết yếu.",
+    "correction": "Core content/review luôn truy cập; event chỉ presentation/challenge thêm; reward eligibility rõ.",
+    "risk": "Expiry không xoá mastery; time zone fairness và opt-in reminder.",
+    "v1": "Không event loop",
+    "v2": "Async trial",
+    "v3": "Live event có điều kiện",
+    "related_sections": [
+      61,
+      76
+    ],
+    "source_file": "source/space_academy_detailed_plans_reviewed_v2_2026-10-09/099_event_retention_principle.md"
+  },
+  {
+    "id": 100,
+    "verdict": "Keep",
+    "owner": "product (giữ)",
+    "critique": "Tầm nhìn tám kiểu người dùng không phải acceptance checklist launch.",
+    "correction": "Đổi thesis thành staged strategy và lựa chọn cohort; không schema riêng.",
+    "risk": "Không chứng minh giá trị bằng số feature; học độc lập là gate.",
+    "v1": "Solo value rõ",
+    "v2": "Một–hai nhánh mở rộng",
+    "v3": "Nhiều persona khi đủ capacity",
+    "related_sections": [
+      4,
+      83
+    ],
+    "source_file": "source/space_academy_detailed_plans_reviewed_v2_2026-10-09/100_final_design_thesis.md"
+  },
+  {
+    "id": 101,
+    "verdict": "Simplify",
+    "owner": "product (giữ)",
+    "critique": "Giữ philosophy nhưng “class must have shared progression” quá mạnh cho pilot.",
+    "correction": "Phân loại invariant (learning/privacy) và hypothesis (class progression/retention); mỗi câu có test/gate.",
+    "risk": "Không nhân PR checklist 106 lần; owner quyết exceptions có ADR.",
+    "v1": "5–7 invariant chung",
+    "v2": "Bổ sung bằng evidence",
+    "v3": "Loại câu không còn đúng",
+    "related_sections": [
+      3,
+      18,
+      96
+    ],
+    "source_file": "source/space_academy_detailed_plans_reviewed_v2_2026-10-09/101_product_philosophy_statements_to_preserve.md"
+  },
+  {
+    "id": 102,
+    "verdict": "Keep",
+    "owner": "review (giữ non-runtime)",
+    "critique": "45 câu hỏi cần quyết định cụ thể; không coi câu hỏi là yêu cầu xây feature.",
+    "correction": "Trả lời 45 câu trong 04_OPEN_QUESTIONS; owner/phase gắn roadmap, unknown ghi rõ.",
+    "risk": "Không runtime schema/API; không giả số đã benchmark hoặc đo retention.",
+    "v1": "Chốt defaults có thể đảo",
+    "v2": "Đánh giá pilot",
+    "v3": "Đánh giá scale",
+    "related_sections": [
+      83,
+      103
+    ],
+    "source_file": "source/space_academy_detailed_plans_reviewed_v2_2026-10-09/102_open_questions_for_claude_review.md"
+  },
+  {
+    "id": 103,
+    "verdict": "Keep",
+    "owner": "review (giữ non-runtime)",
+    "critique": "Output yêu cầu đầy đủ, nhưng dài không thay tính truy vết/khả thi.",
+    "correction": "Cung cấp 106 quyết định, finding register, contracts, phases và DAG kiểm tra được.",
+    "risk": "Không tuyên bố implementation pass chỉ vì docs đủ; archive hash giữ source.",
+    "v1": "Bộ review này",
+    "v2": "Update decision log",
+    "v3": "ADR tiếp theo",
+    "related_sections": [
+      102,
+      83
+    ],
+    "source_file": "source/space_academy_detailed_plans_reviewed_v2_2026-10-09/103_suggested_review_output_from_claude.md"
+  },
+  {
+    "id": 104,
+    "verdict": "Simplify",
+    "owner": "product (giữ)",
+    "critique": "Dòng “Ưu tiên hiện tại” class/social+identity/reward che mất prerequisite learning/content.",
+    "correction": "Ưu tiên: content/evidence/ops/mobile trước; brand prototype song song; class/economy qua gate.",
+    "risk": "Không đồng nhất ưu tiên chiến lược với dependency build; migration có trust tiers.",
+    "v1": "Core trước meta",
+    "v2": "Class + identity nhỏ",
+    "v3": "Prestige/events khi đủ tin cậy",
+    "related_sections": [
+      83,
+      70,
+      97
+    ],
+    "source_file": "source/space_academy_detailed_plans_reviewed_v2_2026-10-09/104_current_direction_to_treat_as_most_important.md"
+  },
+  {
+    "id": 105,
+    "verdict": "Keep",
+    "owner": "product (giữ)",
+    "critique": "Vision tốt nhưng ham muốn limited frame chưa chứng minh học tốt hơn.",
+    "correction": "Success là bằng chứng nhớ/vận dụng, voluntary return, trust và performance; numbers là giả thuyết trước pilot.",
+    "risk": "Không tối ưu time-spent hay vanity unlock; không hứa outcome chưa đo.",
+    "v1": "Chứng minh loop học",
+    "v2": "Chứng minh lợi ích cộng đồng",
+    "v3": "Mở rộng có kiểm soát",
+    "related_sections": [
+      97,
+      96,
+      98
+    ],
+    "source_file": "source/space_academy_detailed_plans_reviewed_v2_2026-10-09/105_closing_vision.md"
+  }
+]

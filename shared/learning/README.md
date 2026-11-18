@@ -38,6 +38,13 @@ Common aggregates include attempts, correct/wrong counts, hint/replay counts, av
 
 Grammar/sentence records also keep bounded error classifications. Sentence records keep bounded recent answers.
 
+Mỗi sự kiện ở cả ba loại thực thể còn thêm một mẫu vào `recentSamples`:
+`{ occurredAt, gameId, activityType, result, hintUsed }`. `hintUsed` luôn là
+boolean; mẫu không chứa `userAnswer` hay `expectedAnswer`. Danh sách theo
+thời gian, giữ tối đa tám mẫu mới nhất, kể cả khi sự kiện đến muộn.
+Bản ghi và bản sao lưu v1 cũ không có trường này vẫn đọc/nhập được;
+lookup trả `[]` cho bản ghi cũ. Không dựng lại các mẫu lịch sử bị thiếu.
+
 ## Mastery v1
 
 Mastery is deterministic and clamped to 0-100. It is a learning-strength indicator, not a literal percentage of knowledge.
@@ -99,6 +106,7 @@ Child games communicate through the versioned namespace:
 ```text
 typing-game:learning:v1:attempt
 typing-game:learning:v1:query
+typing-game:learning:v1:lookup
 
 typing-game:learning:v1:ack
 typing-game:learning:v1:query-result
@@ -124,6 +132,52 @@ Current query contract supports:
 - deterministic sorts including Smart Priority, mastery, mistakes, recency, review age, response speed, attempts and A-Z/Z-A.
 
 Child-specific adapters are added only in their integration milestones. L02 defines and validates the parent transport; it does not duplicate Smart Review logic in children.
+
+### Tra bản ghi theo danh sách id
+
+Mọi game đang mở trong iframe, có nguồn khớp `appUrl` trong registry, có
+thể gửi lookup. Tin không mang `gameId`; portal dùng game đang mở để kiểm
+nguồn, giống attempt và query.
+
+```json
+{
+  "type": "typing-game:learning:v1:lookup",
+  "requestId": "lookup-1",
+  "query": {
+    "entityType": "vocabulary",
+    "entityIds": ["Lantern ", "dragon"]
+  }
+}
+```
+
+`entityType` bắt buộc là `vocabulary`, `grammar` hoặc `sentence`.
+`entityIds` chứa 1–200 chuỗi **trước khi bỏ trùng**; mỗi chuỗi tối đa
+200 ký tự sau `trim()`. Từ vựng chuẩn hóa theo quy tắc NFKC ở trên;
+grammar/sentence chỉ `trim()`. Bỏ id rỗng và trùng, giữ thứ tự lần đầu;
+danh sách còn rỗng là lỗi. Các trường lạ trong `query` được bỏ qua.
+
+Portal ghi hết attempt đang chờ trước khi đọc hồ sơ. Tra cứu dùng khóa
+trực tiếp, bỏ id chưa có và các khóa nguyên mẫu như `constructor`,
+`__proto__`, `toString`. Tin trả có cùng `requestId` và dạng sau
+(`items` là mảng item đầy đủ, ví dụ rỗng khi chưa học từ nào):
+
+```json
+{
+  "type": "typing-game:learning:v1:query-result",
+  "requestId": "lookup-1",
+  "result": { "entityType": "vocabulary", "items": [] }
+}
+```
+
+Mỗi item gồm các trường bản ghi, `entityType`, `entityId`, `mastery`,
+`reviewPriority`, `status` và luôn có `recentSamples`. Điểm được tính
+lại tại thời điểm tra cứu; ngày ôn và các bộ đếm giữ nguyên. Thứ tự item
+theo id yêu cầu đã chuẩn hóa. Lookup chỉ đọc hồ sơ, không gọi `onApplied`.
+
+Tin hỏng nhận `typing-game:learning:v1:error` với cùng `requestId`,
+`error: { code: "invalid-request", message: "..." }`. Kho lỗi khi đọc
+nhận cùng dạng với mã `query-failed`. Thông báo lỗi là tiếng Anh.
+`requestId` hỏng, sai cửa sổ/nguồn hoặc chưa mở game thì không trả lời.
 
 ## Smart Review Dashboard
 

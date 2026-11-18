@@ -1,0 +1,573 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "ic-prod",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": [
+        "--dir",
+        "games/immortality-cultivation",
+        "exec",
+        "vite",
+        "preview",
+        "--host",
+        "127.0.0.1",
+        "--port",
+        "3008",
+        "--strictPort"
+      ],
+      "port": 3008
+    },
+    {
+      "name": "ic-dev",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": [
+        "--dir",
+        "games/immortality-cultivation",
+        "exec",
+        "vite",
+        "--host",
+        "127.0.0.1",
+        "--port",
+        "3018",
+        "--strictPort"
+      ],
+      "port": 3018
+    },
+    {
+      "name": "dev",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": [
+        "run",
+        "dev"
+      ],
+      "port": 3000
+    },
+    {
+      "name": "dh-demo",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": [
+        "--dir",
+        "games/.wt-dh-demo",
+        "exec",
+        "vite",
+        "--host",
+        "127.0.0.1",
+        "--port",
+        "4155",
+        "--strictPort"
+      ],
+      "port": 4155
+    },
+    {
+      "name": "ts-codex-dev",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": [
+        "--dir",
+        "games/.wt-ts-codex",
+        "exec",
+        "vite",
+        "--host",
+        "127.0.0.1",
+        "--port",
+        "4186",
+        "--strictPort"
+      ],
+      "port": 4186
+    },
+    {
+      "name": "ts-typefx-dev",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": [
+        "--dir",
+        "games/.wt-ts-typefx",
+        "exec",
+        "vite",
+        "--host",
+        "127.0.0.1",
+        "--port",
+        "4193",
+        "--strictPort"
+      ],
+      "port": 4193
+    },
+    {
+      "name": "ts-codex-prod",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": [
+        "--dir",
+        "games/.wt-ts-codex",
+        "exec",
+        "vite",
+        "preview",
+        "--host",
+        "127.0.0.1",
+        "--port",
+        "4187",
+        "--strictPort"
+      ],
+      "port": 4187
+    },
+    {
+      "name": "td-codex-prod",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": [
+        "--dir",
+        "games/.wt-td-codex",
+        "exec",
+        "vite",
+        "preview",
+        "--host",
+        "127.0.0.1",
+        "--port",
+        "4157",
+        "--strictPort"
+      ],
+      "port": 4157
+    },
+    {
+      "name": "dh-codex-prod",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": [
+        "--dir",
+        "games/.wt-dh-codex",
+        "exec",
+        "vite",
+        "preview",
+        "--host",
+        "127.0.0.1",
+        "--port",
+        "4147",
+        "--strictPort"
+      ],
+      "port": 4147
+    },
+    {
+      "name": "td-play-dev",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": [
+        "--dir",
+        "games/.wt-play-typing-defense",
+        "exec",
+        "vite",
+        "--host",
+        "127.0.0.1",
+        "--port",
+        "4158",
+        "--strictPort"
+      ],
+      "port": 4158
+    },
+    {
+      "name": "typing-fx-lab",
+      "runtimeExecutable": "node",
+      "runtimeArgs": [
+        "shared/game-kit/node_modules/vite/bin/vite.js",
+        "--config",
+        "tools/typing-feedback-lab/vite.config.mjs"
+      ],
+      "port": 4192
+    },
+    {
+      "name": "monkeytype-feel-dev",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": [
+        "--dir",
+        "games/monkeytype/frontend",
+        "exec",
+        "vite",
+        "--host",
+        "127.0.0.1",
+        "--port",
+        "4194",
+        "--strictPort"
+      ],
+      "port": 4194
+    },
+    {
+      "name": "dh-codex-dev",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": [
+        "--dir",
+        "games/.wt-dh-codex",
+        "exec",
+        "vite",
+        "--host",
+        "127.0.0.1",
+        "--port",
+        "4148",
+        "--strictPort"
+      ],
+      "port": 4148
+    },
+    {
+      "name": "ts-art-dev",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": [
+        "--dir",
+        "games/.wt-ts-art",
+        "exec",
+        "vite",
+        "--host",
+        "127.0.0.1",
+        "--port",
+        "4189",
+        "--strictPort"
+      ],
+      "port": 4189
+    },
+    {
+      "name": "td-ui-dev",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": [
+        "--dir",
+        "games/.wt-td-ui",
+        "exec",
+        "vite",
+        "--host",
+        "127.0.0.1",
+        "--port",
+        "4159",
+        "--strictPort"
+      ],
+      "port": 4159
+    },
+    {
+      "name": "dh-keys-dev",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": [
+        "--dir",
+        "games/.wt-dh-keys",
+        "exec",
+        "vite",
+        "--host",
+        "127.0.0.1",
+        "--port",
+        "4149",
+        "--strictPort"
+      ],
+      "port": 4149
+    },
+    {
+      "name": "td-keys-dev",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": [
+        "--dir",
+        "games/.wt-td-keys",
+        "exec",
+        "vite",
+        "--host",
+        "127.0.0.1",
+        "--port",
+        "4160",
+        "--strictPort"
+      ],
+      "port": 4160
+    },
+    {
+      "name": "ts-style-dev",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": [
+        "--dir",
+        "games/.wt-ts-style",
+        "exec",
+        "vite",
+        "--host",
+        "127.0.0.1",
+        "--port",
+        "4198",
+        "--strictPort"
+      ],
+      "port": 4198
+    },
+    {
+      "name": "ic-owner-preview",
+      "runtimeExecutable": "node",
+      "runtimeArgs": [
+        "games/immortality-cultivation/node_modules/vite/bin/vite.js",
+        "--config",
+        "games/immortality-cultivation/tmp/owner-preview/owner-preview.config.mts",
+        "--host",
+        "127.0.0.1",
+        "--port",
+        "3160",
+        "--strictPort"
+      ],
+      "port": 3160
+    },
+    {
+      "name": "ic-owner-preview-aura",
+      "runtimeExecutable": "node",
+      "runtimeArgs": [
+        "games/immortality-cultivation/node_modules/vite/bin/vite.js",
+        "--config",
+        "games/immortality-cultivation/tmp/owner-preview-aura/owner-preview.config.mts",
+        "--host",
+        "127.0.0.1",
+        "--port",
+        "3162",
+        "--strictPort"
+      ],
+      "port": 3162
+    },
+    {
+      "name": "ic-codex-dev",
+      "runtimeExecutable": "node",
+      "runtimeArgs": [
+        "games/.wt-immortality-cultivation-codex/node_modules/vite/bin/vite.js",
+        "--config",
+        "/private/tmp/claude-501/-Users-toandx-htdocs-typing-game/0cd1bde2-f9f3-4880-8237-1e76082aeff4/scratchpad/ic-codex.config.mts",
+        "--configLoader",
+        "runner",
+        "--host",
+        "127.0.0.1",
+        "--port",
+        "3028",
+        "--strictPort"
+      ],
+      "port": 3028,
+      "env": {
+        "IC_VITE_CACHE_DIR": "/private/tmp/ic-codex-vite-cache"
+      }
+    },
+    {
+      "name": "ic-twin-dev",
+      "runtimeExecutable": "node",
+      "runtimeArgs": [
+        "games/.wt-ic-twin-fieldwide/node_modules/vite/bin/vite.js",
+        "--config",
+        "/private/tmp/claude-501/-Users-toandx-htdocs-typing-game/0cd1bde2-f9f3-4880-8237-1e76082aeff4/scratchpad/ic-twin.config.mts",
+        "--configLoader",
+        "runner",
+        "--host",
+        "127.0.0.1",
+        "--port",
+        "3038",
+        "--strictPort"
+      ],
+      "port": 3038,
+      "env": {
+        "IC_VITE_CACHE_DIR": "/private/tmp/ic-twin-vite-cache"
+      }
+    },
+    {
+      "name": "ic-sound-dev",
+      "runtimeExecutable": "node",
+      "runtimeArgs": [
+        "games/.wt-ic-sound/node_modules/vite/bin/vite.js",
+        "--config",
+        "/private/tmp/claude-501/-Users-toandx-htdocs-typing-game/0cd1bde2-f9f3-4880-8237-1e76082aeff4/scratchpad/ic-sound.config.mts",
+        "--configLoader",
+        "runner",
+        "--host",
+        "127.0.0.1",
+        "--port",
+        "3048",
+        "--strictPort"
+      ],
+      "port": 3048,
+      "env": {
+        "IC_VITE_CACHE_DIR": "/private/tmp/ic-sound-vite-cache"
+      }
+    },
+    {
+      "name": "ic-swarm-dev",
+      "runtimeExecutable": "node",
+      "runtimeArgs": [
+        "games/.wt-ic-dragon-swarm/node_modules/vite/bin/vite.js",
+        "--config",
+        "/private/tmp/claude-501/-Users-toandx-htdocs-typing-game/0cd1bde2-f9f3-4880-8237-1e76082aeff4/scratchpad/ic-swarm.config.mts",
+        "--configLoader",
+        "runner",
+        "--host",
+        "127.0.0.1",
+        "--port",
+        "3058",
+        "--strictPort"
+      ],
+      "port": 3058
+    },
+    {
+      "name": "ic-lab-elements",
+      "runtimeExecutable": "node",
+      "runtimeArgs": [
+        "games/.wt-ic-lab-elements/node_modules/vite/bin/vite.js",
+        "--config",
+        "/private/tmp/claude-501/-Volumes-SS990TPRO-htdocs-typing-game/f3552ecb-c8db-461b-ad73-a9748b239c23/scratchpad/ic-lab-elements.config.mts",
+        "--configLoader",
+        "runner",
+        "--host",
+        "127.0.0.1",
+        "--port",
+        "3068",
+        "--strictPort"
+      ],
+      "port": 3068,
+      "env": {
+        "IC_VITE_CACHE_DIR": "/private/tmp/ic-lab-elements-vite-cache"
+      }
+    },
+    {
+      "name": "ic-lab-elements-snap",
+      "runtimeExecutable": "node",
+      "runtimeArgs": [
+        "games/.wt-ic-lab-elements/node_modules/vite/bin/vite.js",
+        "--config",
+        "/private/tmp/claude-501/-Volumes-SS990TPRO-htdocs-typing-game/f3552ecb-c8db-461b-ad73-a9748b239c23/scratchpad/ic-lab-snap.config.mts",
+        "--configLoader",
+        "runner",
+        "--host",
+        "127.0.0.1",
+        "--port",
+        "3078",
+        "--strictPort"
+      ],
+      "port": 3078,
+      "env": {
+        "IC_VITE_CACHE_DIR": "/private/tmp/ic-lab-elements-snap-vite-cache"
+      }
+    },
+    {
+      "name": "ic-lab-owner-4310",
+      "runtimeExecutable": "node",
+      "runtimeArgs": [
+        "games/.wt-ic-lab-elements/node_modules/vite/bin/vite.js",
+        "--config",
+        "/private/tmp/lab-elements-snapshot-0511.config.mts",
+        "--configLoader",
+        "runner",
+        "--host",
+        "127.0.0.1",
+        "--port",
+        "4310",
+        "--strictPort"
+      ],
+      "port": 4310,
+      "env": {
+        "IC_VITE_CACHE_DIR": "/private/tmp/ic-lab-owner-4310-vite-cache"
+      }
+    },
+    {
+      "name": "ic-lab-streak",
+      "runtimeExecutable": "node",
+      "runtimeArgs": [
+        "games/.wt-ic-lab-streak/node_modules/vite/bin/vite.js",
+        "--config",
+        "/private/tmp/claude-501/-Volumes-SS990TPRO-htdocs-typing-game/441ccab2-bf58-4362-b770-0943f58d468a/scratchpad/ic-lab-streak.config.mts",
+        "--configLoader",
+        "runner",
+        "--host",
+        "127.0.0.1",
+        "--port",
+        "3098",
+        "--strictPort"
+      ],
+      "port": 3098,
+      "env": {
+        "IC_VITE_CACHE_DIR": "/private/tmp/ic-lab-streak-vite-cache"
+      }
+    },
+    {
+      "name": "review-gallery",
+      "runtimeExecutable": "node",
+      "runtimeArgs": [
+        "/private/tmp/claude-501/-Users-toandx-htdocs-typing-game/0cd1bde2-f9f3-4880-8237-1e76082aeff4/scratchpad/gallery/serve.mjs",
+        "4330"
+      ],
+      "port": 4330
+    },
+    {
+      "name": "ic-lab-skillbar",
+      "runtimeExecutable": "node",
+      "runtimeArgs": [
+        "games/.wt-ic-lab-skillbar/node_modules/vite/bin/vite.js",
+        "--config",
+        "/private/tmp/claude-501/-Users-toandx-htdocs-typing-game/0cd1bde2-f9f3-4880-8237-1e76082aeff4/scratchpad/ic-lab-skillbar.config.mts",
+        "--configLoader",
+        "runner",
+        "--host",
+        "127.0.0.1",
+        "--port",
+        "3108",
+        "--strictPort"
+      ],
+      "port": 3108
+    },
+    {
+      "name": "ic-lab-hybrid",
+      "runtimeExecutable": "node",
+      "runtimeArgs": [
+        "games/.wt-ic-lab-hybrid/node_modules/vite/bin/vite.js",
+        "--config",
+        "/private/tmp/claude-501/-Users-toandx-htdocs-typing-game/0cd1bde2-f9f3-4880-8237-1e76082aeff4/scratchpad/ic-lab-hybrid.config.mts",
+        "--configLoader",
+        "runner",
+        "--host",
+        "127.0.0.1",
+        "--port",
+        "3126",
+        "--strictPort"
+      ],
+      "port": 3126
+    },
+    {
+      "name": "ic-lab-sigils",
+      "runtimeExecutable": "node",
+      "runtimeArgs": [
+        "games/.wt-ic-lab-sigils/node_modules/vite/bin/vite.js",
+        "--config",
+        "/private/tmp/claude-501/-Users-toandx-htdocs-typing-game/0cd1bde2-f9f3-4880-8237-1e76082aeff4/scratchpad/ic-lab-sigils.config.mts",
+        "--configLoader",
+        "runner",
+        "--host",
+        "127.0.0.1",
+        "--port",
+        "3136",
+        "--strictPort"
+      ],
+      "port": 3136
+    },
+    {
+      "name": "ic-lab-combined",
+      "runtimeExecutable": "node",
+      "runtimeArgs": [
+        "games/.wt-ic-lab-all/node_modules/vite/bin/vite.js",
+        "--config",
+        "/private/tmp/claude-501/-Volumes-SS990TPRO-htdocs-typing-game/0cd1bde2-f9f3-4880-8237-1e76082aeff4/scratchpad/ic-lab-panel.config.mts",
+        "--configLoader",
+        "runner",
+        "--host",
+        "127.0.0.1",
+        "--port",
+        "3146",
+        "--strictPort"
+      ],
+      "port": 3146
+    },
+    {
+      "name": "ic-swarm-sim",
+      "runtimeExecutable": "node",
+      "runtimeArgs": [
+        "games/.wt-ic-swarm-sim/node_modules/vite/bin/vite.js",
+        "--config",
+        "/private/tmp/claude-501/-Users-toandx-htdocs-typing-game/0cd1bde2-f9f3-4880-8237-1e76082aeff4/scratchpad/ic-swarm-sim.config.mts",
+        "--configLoader",
+        "runner",
+        "--host",
+        "127.0.0.1",
+        "--port",
+        "3156",
+        "--strictPort"
+      ],
+      "port": 3156
+    },
+    {
+      "name": "ic-387a",
+      "runtimeExecutable": "node",
+      "runtimeArgs": [
+        ".local/captures/387a/serve.mjs"
+      ],
+      "port": 3039
+    }
+  ]
+}

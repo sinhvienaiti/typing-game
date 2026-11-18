@@ -1,0 +1,144 @@
+{
+  "deny": [
+    "**/TU_TIEN_*.md",
+    "TU_TIEN_*.md",
+    "docs/games/tu-tien",
+    "docs/games/tu-tien/**",
+    "games/immortality-cultivation",
+    "games/immortality-cultivation/**",
+    "games/monkeytype",
+    "games/monkeytype/**",
+    "typing-game-handoff-2026-10-25/**/*TU_TIEN*",
+    "typing-game-handoff-2026-10-25/**/*Tu-Tien*",
+    "typing-game-handoff-2026-10-25/**/*tu-tien*",
+    "typing-game-handoff-2026-10-25/**/*tu_tien*",
+    "typing-game-handoff-2026-10-25/**/TU_TIEN*",
+    "typing-game-handoff-2026-10-25/**/TU_TIEN*/**",
+    "typing-game-handoff-2026-10-25/**/immortality-cultivation",
+    "typing-game-handoff-2026-10-25/**/immortality-cultivation/**",
+    "typing-game-handoff-2026-10-25/**/tu-tien",
+    "typing-game-handoff-2026-10-25/**/tu-tien*",
+    "typing-game-handoff-2026-10-25/**/tu-tien*/**",
+    "typing-game-handoff-2026-10-25/**/tu-tien/**",
+    "typing-game-handoff-2026-10-25/**/tu_tien*",
+    "typing-game-handoff-2026-10-25/**/tu_tien*/**"
+  ],
+  "ignore": [
+    "**/.media-tmp",
+    "**/.media-tmp/**",
+    "**/.visual",
+    "**/.visual/**",
+    "**/.wt-*",
+    "**/.wt-*/**",
+    "**/dist",
+    "**/dist/**",
+    "**/node_modules",
+    "**/node_modules/**",
+    "**/tmp",
+    "**/tmp/**",
+    "library/browse",
+    "library/browse.new",
+    "library/browse.new/**",
+    "library/browse/**"
+  ],
+  "roots": [
+    {
+      "game": "dragon-hold",
+      "id": "dragon-hold:art-src",
+      "mode": "catalog",
+      "path": "games/dragon-hold/art-src"
+    },
+    {
+      "game": "dragon-hold",
+      "id": "dragon-hold:public",
+      "mode": "catalog",
+      "path": "games/dragon-hold/public"
+    },
+    {
+      "game": "dragon-hold",
+      "id": "dragon-hold:src/assets",
+      "mode": "catalog",
+      "path": "games/dragon-hold/src/assets"
+    },
+    {
+      "game": "typing-defense",
+      "id": "typing-defense:art-src",
+      "mode": "catalog",
+      "path": "games/typing-defense/art-src"
+    },
+    {
+      "game": "typing-defense",
+      "id": "typing-defense:public",
+      "mode": "catalog",
+      "path": "games/typing-defense/public"
+    },
+    {
+      "game": "typing-defense",
+      "id": "typing-defense:src/assets",
+      "mode": "catalog",
+      "path": "games/typing-defense/src/assets"
+    },
+    {
+      "game": "typing-survival",
+      "id": "typing-survival:art-src",
+      "mode": "catalog",
+      "path": "games/typing-survival/art-src"
+    },
+    {
+      "game": "typing-survival",
+      "id": "typing-survival:public",
+      "mode": "catalog",
+      "path": "games/typing-survival/public"
+    },
+    {
+      "game": "typing-survival",
+      "id": "typing-survival:src/assets",
+      "mode": "catalog",
+      "path": "games/typing-survival/src/assets"
+    },
+    {
+      "game": "space-typing",
+      "id": "space-typing:art-src",
+      "mode": "catalog",
+      "path": "games/space-typing/art-src"
+    },
+    {
+      "game": "space-typing",
+      "id": "space-typing:public",
+      "mode": "catalog",
+      "path": "games/space-typing/public"
+    },
+    {
+      "game": "space-typing",
+      "id": "space-typing:src/assets",
+      "mode": "catalog",
+      "path": "games/space-typing/src/assets"
+    },
+    {
+      "id": "audio-libraries",
+      "mode": "catalog",
+      "path": "~/AudioLab/libraries",
+      "style": "neutral"
+    },
+    {
+      "id": "audio-work",
+      "mode": "draft",
+      "path": "~/AudioLab/work",
+      "status": "draft"
+    },
+    {
+      "id": "private-music",
+      "licence": "private-producer",
+      "mode": "private",
+      "notForRelease": true,
+      "path": "shared/music",
+      "private": true
+    },
+    {
+      "id": "handoff",
+      "mode": "copies-only",
+      "path": "typing-game-handoff-2026-10-25"
+    }
+  ],
+  "schemaVersion": 1
+}

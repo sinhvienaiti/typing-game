@@ -1,0 +1,21 @@
+import {spawn,execFileSync} from 'node:child_process';
+import fs from 'node:fs';
+import path from 'node:path';
+const root='/Users/toandx/htdocs/typing-game';
+const base=path.join(root,'games/typing-survival/tmp/codex-209');
+const report=path.join(root,'docs/codex-queue/209');
+const [wave,...ids]=process.argv.slice(2);
+const specs=JSON.parse(fs.readFileSync(path.join(report,'variants.json')));
+const uptime=execFileSync('uptime',{encoding:'utf8'}).trim();
+const load=Number(uptime.match(/load averages?:\s*([\d.]+)/)?.[1]);
+if(!Number.isFinite(load))throw Error('Cannot read load: '+uptime);
+const limit=load>10?3:6;
+const jobs=ids.flatMap(id=>[1,101].map(first=>({id,first,set:specs[id]})));
+let active=0,peak=0;
+const log={wave,start:new Date().toISOString(),uptime,load,limit,tmpdir:path.join(base,'tmpdir'),jobs:[],peak:0};
+const save=()=>fs.writeFileSync(path.join(report,`evidence/wave-${wave}.json`),JSON.stringify(log,null,2)+'\n');save();
+async function worker(){while(jobs.length){const job=jobs.shift();const name=`${job.id}-s${job.first}`;const args=['-n','15',process.execPath,'--import','tsx','scripts/balance.ts','--stages=c1-s1','--seeds=100',`--first=${job.first}`,'--g3c',`--json=../runs/${name}.json`,`--out=../runs/${name}.md`];if(job.set)args.push('--set='+job.set);
+const err=fs.openSync(path.join(base,`runs/${name}.err`),'w');const record={...job,start:new Date().toISOString(),args};log.jobs.push(record);active++;peak=Math.max(peak,active);log.peak=peak;save();
+const child=spawn('nice',args,{cwd:path.join(base,'main'),env:{...process.env,TMPDIR:path.join(base,'tmpdir')},stdio:['ignore','ignore',err]});
+record.pid=child.pid;save();const code=await new Promise((resolve,reject)=>{child.on('error',reject);child.on('close',resolve)});fs.closeSync(err);active--;record.end=new Date().toISOString();record.wallSeconds=(Date.parse(record.end)-Date.parse(record.start))/1000;record.exit=code;save();console.log(name+' exit='+code+' wall='+record.wallSeconds);if(code!==0)throw Error(name+' failed');}}
+await Promise.all(Array.from({length:Math.min(limit,jobs.length)},worker));log.end=new Date().toISOString();save();

@@ -1,0 +1,294 @@
+{
+ "$schema": "../../schemas/recipe.schema.json",
+ "schema": "audiolab.recipe/1",
+ "game": "dragon-hold",
+ "id": "fire.impact.b",
+ "group": "hit-heavy",
+ "family": "trung",
+ "description": "Lô 1 (BATCH1_BRIEF #3): cùng họ với fire.impact.a, tối hơn, có lách tách. Giữ đầu tiếng generic light của hai bản 0b được 3/5, thân đổi sang Stable Audio 3 prompt C ('warm deep flame burst, crackling embers') và E (tối hơn), hạ thân 1 bán cung, lọc thấp 6,5 kHz, bốn tiếng than hồng, sub 85 ms. Biến thể n dùng thân n.",
+ "channels": 1,
+ "layers": [
+  {
+   "id": "front",
+   "role": "attack",
+   "gainDb": -3,
+   "filters": [
+    {
+     "type": "highpass",
+     "hz": 140
+    }
+   ],
+   "trim": {
+    "endMs": 80
+   },
+   "fadeOutMs": 50,
+   "source": {
+    "library": "kenney/impact-sounds/Audio/impactGeneric_light_002.ogg"
+   },
+   "vary": {
+    "swapMode": "cycle",
+    "swap": [
+     {
+      "library": "kenney/impact-sounds/Audio/impactGeneric_light_000.ogg"
+     },
+     {
+      "library": "kenney/impact-sounds/Audio/impactGeneric_light_002.ogg"
+     },
+     {
+      "library": "kenney/impact-sounds/Audio/impactGeneric_light_000.ogg"
+     },
+     {
+      "library": "kenney/impact-sounds/Audio/impactGeneric_light_002.ogg"
+     },
+     {
+      "library": "kenney/impact-sounds/Audio/impactGeneric_light_000.ogg"
+     }
+    ]
+   }
+  },
+  {
+   "id": "body",
+   "role": "body",
+   "gainDb": -1,
+   "fadeInMs": 3,
+   "fadeOutMs": 140,
+   "pitchSemitones": -1,
+   "filters": [
+    {
+     "type": "highpass",
+     "hz": 120,
+     "order": 4
+    }
+   ],
+   "source": {
+    "gen": {
+     "tool": "stable-audio-3 (sa3_batch.py)",
+     "model": "stabilityai/stable-audio-3-optimized@08b17423649b5714b22eab20f96bf00751f2358a",
+     "licence": "LicenseRef-Stability-Community-2024",
+     "file": "/Users/toandx/AudioLab/work/dragon-hold/fire.impact.b/b1/raw/fire.impact.b__C__s2006.f32.wav",
+     "record": "/Users/toandx/AudioLab/work/dragon-hold/fire.impact.b/b1/raw/fire.impact.b__C__s2006.json",
+     "window": [
+      0.0868,
+      0.4568
+     ]
+    }
+   },
+   "vary": {
+    "swapMode": "cycle",
+    "swap": [
+     {
+      "gen": {
+       "tool": "stable-audio-3 (sa3_batch.py)",
+       "model": "stabilityai/stable-audio-3-optimized@08b17423649b5714b22eab20f96bf00751f2358a",
+       "licence": "LicenseRef-Stability-Community-2024",
+       "file": "/Users/toandx/AudioLab/work/dragon-hold/fire.impact.b/b1/raw/fire.impact.b__E__s2003.f32.wav",
+       "record": "/Users/toandx/AudioLab/work/dragon-hold/fire.impact.b/b1/raw/fire.impact.b__E__s2003.json",
+       "window": [
+        0.0249,
+        0.3949
+       ]
+      }
+     },
+     {
+      "gen": {
+       "tool": "stable-audio-3 (sa3_batch.py)",
+       "model": "stabilityai/stable-audio-3-optimized@08b17423649b5714b22eab20f96bf00751f2358a",
+       "licence": "LicenseRef-Stability-Community-2024",
+       "file": "/Users/toandx/AudioLab/work/dragon-hold/fire.impact.b/b1/raw/fire.impact.b__E__s2002.f32.wav",
+       "record": "/Users/toandx/AudioLab/work/dragon-hold/fire.impact.b/b1/raw/fire.impact.b__E__s2002.json",
+       "window": [
+        0.0848,
+        0.4548
+       ]
+      }
+     },
+     {
+      "gen": {
+       "tool": "stable-audio-3 (sa3_batch.py)",
+       "model": "stabilityai/stable-audio-3-optimized@08b17423649b5714b22eab20f96bf00751f2358a",
+       "licence": "LicenseRef-Stability-Community-2024",
+       "file": "/Users/toandx/AudioLab/work/dragon-hold/fire.impact.a/sa3-trial/raw/fire.impact.a__C__s1002.f32.wav",
+       "record": "/Users/toandx/AudioLab/work/dragon-hold/fire.impact.a/sa3-trial/raw/fire.impact.a__C__s1002.json",
+       "window": [
+        0.1337,
+        0.5037
+       ]
+      }
+     },
+     {
+      "gen": {
+       "tool": "stable-audio-3 (sa3_batch.py)",
+       "model": "stabilityai/stable-audio-3-optimized@08b17423649b5714b22eab20f96bf00751f2358a",
+       "licence": "LicenseRef-Stability-Community-2024",
+       "file": "/Users/toandx/AudioLab/work/dragon-hold/fire.impact.a/sa3-trial/raw/fire.impact.a__C__s1006.f32.wav",
+       "record": "/Users/toandx/AudioLab/work/dragon-hold/fire.impact.a/sa3-trial/raw/fire.impact.a__C__s1006.json",
+       "window": [
+        0.0858,
+        0.4558
+       ]
+      }
+     },
+     {
+      "gen": {
+       "tool": "stable-audio-3 (sa3_batch.py)",
+       "model": "stabilityai/stable-audio-3-optimized@08b17423649b5714b22eab20f96bf00751f2358a",
+       "licence": "LicenseRef-Stability-Community-2024",
+       "file": "/Users/toandx/AudioLab/work/dragon-hold/fire.impact.b/b1/raw/fire.impact.b__C__s2002.f32.wav",
+       "record": "/Users/toandx/AudioLab/work/dragon-hold/fire.impact.b/b1/raw/fire.impact.b__C__s2002.json",
+       "window": [
+        0.2185,
+        0.5885
+       ]
+      }
+     }
+    ]
+   }
+  },
+  {
+   "id": "sub",
+   "role": "sub",
+   "source": {
+    "synth": "sub_thump",
+    "params": {
+     "startHz": 75,
+     "endHz": 42,
+     "glideMs": 50,
+     "durMs": 85,
+     "decayMs": 65
+    }
+   },
+   "gainDb": -9
+  },
+  {
+   "id": "ember1",
+   "role": "sweetener",
+   "source": {
+    "synth": "click",
+    "params": {
+     "durMs": 3,
+     "hpHz": 3200,
+     "lpHz": 9000
+    }
+   },
+   "offsetMs": 90,
+   "gainDb": -24,
+   "vary": {
+    "offsetMs": [
+     -20,
+     25
+    ]
+   }
+  },
+  {
+   "id": "ember2",
+   "role": "sweetener",
+   "source": {
+    "synth": "click",
+    "params": {
+     "durMs": 2,
+     "hpHz": 3800,
+     "lpHz": 10000
+    }
+   },
+   "offsetMs": 190,
+   "gainDb": -27,
+   "vary": {
+    "offsetMs": [
+     -25,
+     30
+    ]
+   }
+  },
+  {
+   "id": "ember3",
+   "role": "sweetener",
+   "source": {
+    "synth": "click",
+    "params": {
+     "durMs": 2,
+     "hpHz": 3000,
+     "lpHz": 8000
+    }
+   },
+   "offsetMs": 260,
+   "gainDb": -28,
+   "vary": {
+    "offsetMs": [
+     -30,
+     30
+    ]
+   }
+  },
+  {
+   "id": "ember4",
+   "role": "sweetener",
+   "source": {
+    "synth": "click",
+    "params": {
+     "durMs": 3,
+     "hpHz": 2600,
+     "lpHz": 7000
+    }
+   },
+   "offsetMs": 330,
+   "gainDb": -30,
+   "vary": {
+    "offsetMs": [
+     -30,
+     20
+    ]
+   }
+  }
+ ],
+ "chain": {
+  "dcHpfHz": 35,
+  "filters": [
+   {
+    "type": "lowpass",
+    "hz": 6500,
+    "order": 2
+   }
+  ],
+  "saturation": {
+   "driveDb": 2,
+   "mix": 0.25
+  },
+  "headTrim": {
+   "thresholdDb": -50,
+   "preRollMs": 0.5
+  },
+  "maxLengthMs": 450,
+  "tail": {
+   "floorDb": -60,
+   "shape": "exp",
+   "kneeMs": 170
+  },
+  "normalise": {
+   "mode": "lufs-m-max",
+   "target": -20
+  },
+  "limiter": {
+   "ceilingDbtp": -1.0,
+   "releaseMs": 60,
+   "maxGrDb": 6
+  }
+ },
+ "variants": {
+  "count": 6,
+  "seed": 2411,
+  "includeBase": true,
+  "pitchCents": [
+   -20,
+   20
+  ],
+  "gainDb": [
+   -0.5,
+   0.5
+  ]
+ },
+ "export": {
+  "path": "sfx/dragon/fire-impact-b",
+  "ogg": true,
+  "oggQuality": 0.6
+ }
+}

@@ -1,0 +1,227 @@
+[
+  {
+    "log": "kit.log",
+    "command": [
+      "node",
+      "src/kit/verify-kit.mjs"
+    ],
+    "exitCode": 0,
+    "seconds": 0.032
+  },
+  {
+    "log": "tests.log",
+    "command": [
+      "node_modules/.bin/vitest",
+      "run"
+    ],
+    "exitCode": 1,
+    "seconds": 8.308
+  },
+  {
+    "log": "tsc.log",
+    "command": [
+      "node_modules/.bin/tsc",
+      "--noEmit"
+    ],
+    "exitCode": 0,
+    "seconds": 2.236
+  },
+  {
+    "log": "build.log",
+    "command": [
+      "node_modules/.bin/vite",
+      "build"
+    ],
+    "exitCode": 0,
+    "seconds": 1.573
+  },
+  {
+    "log": "golden.log",
+    "command": [
+      "node_modules/.bin/vitest",
+      "run",
+      "tests/golden/golden.test.ts"
+    ],
+    "exitCode": 0,
+    "seconds": 0.946
+  },
+  {
+    "log": "english-ui.log",
+    "command": [
+      "node_modules/.bin/vitest",
+      "run",
+      "tests/english-ui.test.ts"
+    ],
+    "exitCode": 0,
+    "seconds": 0.829
+  },
+  {
+    "log": "prepare-check.log",
+    "command": [
+      "node",
+      "scripts/ui-art/prepare.mjs",
+      "--check",
+      "--art-src",
+      "/Users/toandx/htdocs/typing-game/games/dragon-hold/art-src"
+    ],
+    "exitCode": 0,
+    "seconds": 0.077
+  },
+  {
+    "log": "pack-local-build.log",
+    "command": [
+      "node_modules/.bin/tsc",
+      "--noEmit"
+    ],
+    "exitCode": 0,
+    "seconds": 1.93
+  },
+  {
+    "log": "pack-local-vite.log",
+    "command": [
+      "node_modules/.bin/vite",
+      "build"
+    ],
+    "exitCode": 0,
+    "seconds": 1.191
+  },
+  {
+    "log": "pack-local.json",
+    "command": [
+      "node",
+      "src/kit/tools/deploy/check-pack.mjs",
+      "dist",
+      "--game",
+      "dragon-hold",
+      "--json",
+      "--allow-local-host"
+    ],
+    "exitCode": 0,
+    "seconds": 0.055
+  },
+  {
+    "log": "pack-prod-tsc.log",
+    "command": [
+      "node_modules/.bin/tsc",
+      "--noEmit"
+    ],
+    "exitCode": 0,
+    "seconds": 1.892
+  },
+  {
+    "log": "pack-prod-build.log",
+    "command": [
+      "node_modules/.bin/vite",
+      "build"
+    ],
+    "exitCode": 0,
+    "seconds": 1.191
+  },
+  {
+    "log": "pack-prod.json",
+    "command": [
+      "node",
+      "src/kit/tools/deploy/check-pack.mjs",
+      "dist",
+      "--game",
+      "dragon-hold",
+      "--json"
+    ],
+    "exitCode": 0,
+    "seconds": 0.056
+  },
+  {
+    "log": "balance-b35.md",
+    "command": [
+      "node",
+      "--import=tsx",
+      "scripts/balance/run.ts",
+      "--seeds=20",
+      "--bots=b35",
+      "--jobs=4",
+      "--json=/Users/toandx/htdocs/typing-game/games/dragon-hold/tmp/codex-222/logs/balance-b35.json"
+    ],
+    "exitCode": 0,
+    "seconds": 4.685
+  },
+  {
+    "log": "idle-estimate.json",
+    "command": [
+      "node",
+      "scripts/balance/idle-estimate.mjs",
+      "/Users/toandx/htdocs/typing-game/games/dragon-hold/tmp/map1-audit/feel-35-1280/samples.json"
+    ],
+    "exitCode": 0,
+    "seconds": 0.037
+  },
+  {
+    "log": "syntax-dh.log",
+    "command": [
+      "node",
+      "--check",
+      "scripts/visual/scenarios/lib/dh.mjs"
+    ],
+    "exitCode": 0,
+    "seconds": 0.027
+  },
+  {
+    "log": "syntax-dh-bench.log",
+    "command": [
+      "node",
+      "--check",
+      "scripts/visual/scenarios/dh-bench.mjs"
+    ],
+    "exitCode": 0,
+    "seconds": 0.023
+  },
+  {
+    "log": "syntax-dh-camera.log",
+    "command": [
+      "node",
+      "--check",
+      "scripts/visual/scenarios/dh-camera.mjs"
+    ],
+    "exitCode": 0,
+    "seconds": 0.024
+  },
+  {
+    "log": "syntax-dh-map-shots.log",
+    "command": [
+      "node",
+      "--check",
+      "scripts/visual/scenarios/dh-map-shots.mjs"
+    ],
+    "exitCode": 0,
+    "seconds": 0.025
+  },
+  {
+    "log": "syntax-dh-models.log",
+    "command": [
+      "node",
+      "--check",
+      "scripts/visual/scenarios/dh-models.mjs"
+    ],
+    "exitCode": 0,
+    "seconds": 0.025
+  },
+  {
+    "log": "syntax-dh-pace.log",
+    "command": [
+      "node",
+      "--check",
+      "scripts/visual/scenarios/dh-pace.mjs"
+    ],
+    "exitCode": 0,
+    "seconds": 0.024
+  },
+  {
+    "log": "syntax-ui-preview.log",
+    "command": [
+      "node",
+      "--check",
+      "scripts/visual/scenarios/ui-preview.mjs"
+    ],
+    "exitCode": 0,
+    "seconds": 0.024
+  }
+]

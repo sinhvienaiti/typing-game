@@ -1,0 +1,224 @@
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: Shop must not remain a primary navigation item in A2.
+    at file:///Users/toandx/htdocs/typing-game-wt/admin-ia/scripts/validate-space-admin-v2-shell.mjs:45:10 {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: 'import "@fontsource/exo-2/600.css";\n' +
+    'import "@fontsource/exo-2/700.css";\n' +
+    'import "@fontsource/exo-2/800.css";\n' +
+    'import "@fontsource/be-vietnam-pro/400.css";\n' +
+    'import "@fontsource/be-vietnam-pro/500.css";\n' +
+    'import "@fontsource/be-vietnam-pro/600.css";\n' +
+    'import "@fontsource/be-vietnam-pro/700.css";\n' +
+    'import "./space-typing-ui.css";\n' +
+    'import "./space-typing-phase-b.css";\n' +
+    'import "./space-typing-remediation.css";\n' +
+    'import "./v2/admin-v2.css";\n' +
+    'import { SpaceTypingAdminApi } from "./api";\n' +
+    'import { renderPhaseBAdminScreen } from "./space-typing-phase-b";\n' +
+    'import { adminNavIcon } from "./space-typing-icons";\n' +
+    'import { installAdminCommandShortcut, openAdminCommandPalette } from "./space-typing-command";\n' +
+    'import { AdminHelpScope } from "./v2/admin-help";\n' +
+    'import { renderAdminV2Dashboard } from "./v2/dashboard";\n' +
+    'import { renderAdminV2DeveloperTools } from "./v2/developer-tools";\n' +
+    'import { renderAdminV2MediaLibrary } from "./v2/media-library";\n' +
+    '\n' +
+    'type NavItem = {\n' +
+    '  label: string;\n' +
+    '  path: string;\n' +
+    '  icon: string;\n' +
+    '  description: string;\n' +
+    '};\n' +
+    '\n' +
+    'type NavGroup = {\n' +
+    '  id: string;\n' +
+    '  label: string;\n' +
+    '  description: string;\n' +
+    '  items: readonly NavItem[];\n' +
+    '  requiredPermission?: string;\n' +
+    '};\n' +
+    '\n' +
+    'const ADMIN_BASE = "/admin/space-typing";\n' +
+    'const NAV_STATE_KEY = "typing-game:space-admin-collapsed-groups";\n' +
+    'const DEVELOPER_PERMISSION = "developer.runtime-inspect";\n' +
+    '\n' +
+    'const NAV_GROUPS: readonly NavGroup[] = [\n' +
+    '  {\n' +
+    '    id: "dashboard",\n' +
+    '    label: "Dashboard",\n' +
+    '    description: "Published state, drafts and administrator activity that need attention now.",\n' +
+    '    items: [\n' +
+    '      { label: "Overview", path: ADMIN_BASE, icon: "◫", description: "See real Admin state, pending drafts and recent administrator activity." },\n' +
+    '    ],\n' +
+    '  },\n' +
+    '  {\n' +
+    '    id: "content",\n' +
+    '    label: "Content",\n' +
+    '    description: "Manage worlds, stages and learning-content assignments backed by canonical game data.",\n' +
+    '    items: [\n' +
+    '      { label: "Worlds & Stages", path: `${ADMIN_BASE}/stages`, icon: "⌘", description: "Manage supported world and stage configuration through the revision-backed workflow." },\n' +
+    '      { label: "Typing Content", path: `${ADMIN_BASE}/typing-content`, icon: "Aa", description: "Browse canonical English-learning content used by Space Typing without creating a duplicate content database." },\n' +
+    '    ],\n' +
+    '  },\n' +
+    '  {\n' +
+    '    id: "gameplay",\n' +
+    '    label: "Gameplay",\n' +
+    '    description: "Manage revision-backed gameplay entities currently connected to the Space Typing runtime.",\n' +
+    '    items: [\n' +
+    '      { label: "Ships", path: `${ADMIN_BASE}/ships`, icon: "△", description: "Manage the ship properties currently supported by the canonical runtime." },\n' +
+    '      { label: "Equipment", path: `${ADMIN_BASE}/equipment`, icon: "◇", description: "Manage supported equipment definitions, stats and perks." },\n' +
+    '      { label: "Skills", path: `${ADMIN_BASE}/skills`, icon: "ϟ", description: "Manage supported combat-skill definitions and parameters." },\n' +
+    '      { label: "Enemies", path: `${ADMIN_BASE}/enemies`, icon: "✦", description: "Manage supported enemy admission and projectile policy values." },\n' +
+    '      { label: "Bosses", path: `${ADMIN_BASE}/bosses`, icon: "✹", description: "Manage supported boss identity values through the canonical revision workflow." },\n' +
+    '    ],\n' +
+    '  },\n' +
+    '  {\n' +
+    '    id: "economy-live-ops",\n' +
+    '    label: "Economy",\n' +
+    '    description: "Manage canonical Shop merchandising.",\n' +
+    '    items: [\n' +
+    '      { label: "Shop", path: `${ADMIN_BASE}/shop`, icon: "▱", description: "Manage supported Shop offers, pricing and merchandising through the canonical Shop owner." },\n' +
+    '    ],\n' +
+    '  },\n' +
+    '  {\n' +
+    '    id: "players-live-ops",\n' +
+    '    label: "Players & Live Ops",\n' +
+    '    description: "Online accounts (Cloudflare Worker + D1), chat moderation, Daily Hub mail and gift codes, and the read-only event catalog.",\n' +
+    '    items: [\n' +
+    '      { label: "Players", path: `${ADMIN_BASE}/players`, icon: "☺", description: "Look up pilots, their cloud save, Daily Hub progress, rewards and sessions; ban, sign out, restore saves, send gifts." },\n' +
+    '      { label: "Mail & Gift Codes", path: `${ADMIN_BASE}/liveops-mail`, icon: "✉", description: "Send gifts and announcements to every player and create gift codes; read the email outbox and account audit." },\n' +
+    '      { label: "Chat Moderation", path: `${ADMIN_BASE}/chat`, icon: "☏", description: "Read world chat, delete messages, mute players, handle reports and post system announcements." },\n' +
+    '      { label: "Feedback", path: `${ADMIN_BASE}/feedback`, icon: "✎", description: "Read ideas, bug reports and contact messages players send from the game; mark them handled or reply by in-game mail." },\n' +
+    '      { label: "Events (read-only)", path: `${ADMIN_BASE}/events`, icon: "⌁", description: "Read the in-stage event catalog owned by the game code. Scheduling is not available yet." },\n' +
+    '    ],\n' +
+    '  },\n' +
+    '  {\n' +
+    '    id: "media",\n' +
+    '    label: "Media",\n' +
+    '    description: "Browse canonical game media, upload Admin-managed assets and keep source-owned runtime media read-only.",\n' +
+    '    items: [\n' +
+    '      { label: "Media Library", path: `${ADMIN_BASE}/media`, icon: "▧", description: "Browse images, models, music, SFX and Admin uploads, with immutable version history and usage." },\n' +
+    '      { label: "Music Library", path: `${ADMIN_BASE}/music-library`, icon: "♫", description: "Browse, upload and manage the legacy authored music capability while it is migrated into Media V2." },\n' +
+    '      { label: "SFX", path: `${ADMIN_BASE}/sfx`, icon: "◉", description: "Inspect production sample-backed sound effects and test the exact committed runtime assets without changing game policy." },\n' +
+    '      { label: "World / Stage Music", path: `${ADMIN_BASE}/world-music`, icon: "◎", description: "Assign music to global, galaxy, world and stage contexts and preview the canonical result." },\n' +
+    '    ],\n' +
+    '  },\n' +
+    '  {\n' +
+    '    id: "system",\n' +
+    '    label: "System",\n' +
+    '    description: "Manage safe global settings, access review and the revision lifecycle.",\n' +
+    '    items: [\n' +
+    '      { label: "Audio Defaults", path: `${ADMIN_BASE}/audio`, icon: "◖", description: "Set default audio behavior while preserving player-specific preferences." },\n' +
+    '      { label: "General Settings", path: `${ADMIN_BASE}/settings`, icon: "⚙", description: "Manage global game defaults, network behavior and maintenance settings." },\n' +
+    '      { label: "Roles & Permissions", path: `${ADMIN_BASE}/roles`, icon: "◈", description: "Review server-enforced role templates, dangerous permissions and this deployment\'s effective access." },\n' +
+    '      { label: "History & Publish", path: `${ADMIN_BASE}/history`, icon: "↶", description: "Review drafts, validate complete change scope, publish or roll back safely." },\n' +
+    '    ],\n' +
+    '  },\n' +
+    '  {\n' +
+    '    id: "developer",\n' +
+    '    label: "Developer Tools",\n' +
+    '    description: "Runtime contracts, capability diagnostics and isolated QA tools separated from normal administrator workflows.",\n' +
+    '    requiredPermission: DEVELOPER_PERMISSION,\n' +
+    '    items: [\n' +
+    '      { label: "Developer Tools", path: `${ADMIN_BASE}/developer-tools`, icon: "⌬", description: "Open permission-gated runtime, economy, Live Ops, PvP, visual and QA diagnostics." },\n' +
+    '    ],\n' +
+    '  },\n' +
+    '];\n' +
+    '\n' +
+    '/** Pages reached from inside a section that should keep its nav item lit. */\n' +
+    'const NAV_ALIASES: Readonly<Record<string, string>> = {\n' +
+    '  [`${ADMIN_BASE}/worlds-stages`]: `${ADMIN_BASE}/stages`,\n' +
+    '};\n' +
+    '\n' +
+    'const LEGACY_ROUTE_LABELS: Readonly<Record<string, string>> = {\n' +
+    '  [`${ADMIN_BASE}/analytics`]: "Analytics / Telemetry",\n' +
+    '  [`${ADMIN_BASE}/shop`]: "Shop",\n' +
+    '  [`${ADMIN_BASE}/currencies`]: "Currencies",\n' +
+    '  [`${ADMIN_BASE}/rewards`]: "Rewards & Drops",\n' +
+    '  [`${ADMIN_BASE}/warp`]: "Stamina / Warp",\n' +
+    '  [`${ADMIN_BASE}/missions`]: "Missions",\n' +
+    '  [`${ADMIN_BASE}/daily-weekly`]: "Daily / Weekly",\n' +
+    '  [`${ADMIN_BASE}/expedition`]: "Expedition",\n' +
+    '  [`${ADMIN_BASE}/events`]: "Live Ops",\n' +
+    '  [`${ADMIN_BASE}/duel`]: "Duel Settings",\n' +
+    '  [`${ADMIN_BASE}/ranked`]: "Ranked",\n' +
+    '  [`${ADMIN_BASE}/alternative-modes`]: "Alternative Modes",\n' +
+    '  [`${ADMIN_BASE}/backgrounds`]: "Backgrounds",\n' +
+    '  [`${ADMIN_BASE}/vfx`]: "VFX",\n' +
+    '  [`${ADMIN_BASE}/ui-assets`]: "UI Assets",\n' +
+    '  [`${ADMIN_BASE}/feature-gates`]: "Feature Gates",\n' +
+    '  [`${ADMIN_BASE}/qa`]: "QA Sandbox",\n' +
+    '  [`${ADMIN_BASE}/worlds-stages`]: "Worlds & Stages · Stage overrides",\n' +
+    '  [`${ADMIN_BASE}/players`]: "Players",\n' +
+    '  [`${ADMIN_BASE}/liveops-mail`]: "Mail & Gift Codes",\n' +
+    '  [`${ADMIN_BASE}/chat`]: "Chat Moderation",\n' +
+    '  [`${ADMIN_BASE}/feedback`]: "Feedback",\n' +
+    '  [`${ADMIN_BASE}/roles`]: "Roles & Permissions",\n' +
+    '};\n' +
+    '\n' +
+    'function element<K extends keyof HTMLElementTagNameMap>(\n' +
+    '  tag: K,\n' +
+    '  className?: string,\n' +
+    '  text?: string,\n' +
+    '): HTMLElementTagNameMap[K] {\n' +
+    '  const node = document.createElement(tag);\n' +
+    '  if (className !== undefined) node.className = className;\n' +
+    '  if (text !== undefined) node.textContent = text;\n' +
+    '  return node;\n' +
+    '}\n' +
+    '\n' +
+    'function button(\n' +
+    '  label: string,\n' +
+    '  onClick: () => void,\n' +
+    '  className = "st-admin-btn",\n' +
+    '): HTMLButtonElement {\n' +
+    '  const node = element("button", className, label);\n' +
+    '  node.type = "button";\n' +
+    '  node.addEventListener("click", onClick);\n' +
+    '  return node;\n' +
+    '}\n' +
+    '\n' +
+    'function statusBadge(\n' +
+    '  label: string,\n' +
+    '  tone: "good" | "warn" | "bad" | "info" = "info",\n' +
+    '): HTMLElement {\n' +
+    '  return element("span", `st-admin-status ${tone}`, label);\n' +
+    '}\n' +
+    '\n' +
+    'function normalizedAdminPath(path: string): string {\n' +
+    '  if (path === `${ADMIN_BASE}/flags`) return `${ADMIN_BASE}/feature-gates`;\n' +
+    '  return path;\n' +
+    '}\n' +
+    '\n' +
+    'function readCollapsedGroups(): Set<string> {\n' +
+    '  try {\n' +
+    '    const raw = localStorage.getItem(NAV_STATE_KEY);\n' +
+    '    if (raw === null) return new Set(NAV_GROUPS.map((group) => group.id));\n' +
+    '    const parsed = JSON.parse(raw) as unknown;\n' +
+    '    if (!Array.isArray(parsed)) return new Set();\n' +
+    '    return new Set(parsed.filter((value): value is string => typeof value === "string"));\n' +
+    '  } catch {\n' +
+    '    return new Set();\n' +
+    '  }\n' +
+    '}\n' +
+    '\n' +
+    'function writeCollapsedGroups(groups: Set<string>): void {\n' +
+    '  try {\n' +
+    '    localStorage.setItem(NAV_STATE_KEY, JSON.stringify([...groups]));\n' +
+    '  } catch {\n' +
+    '    // Navigation remains fully usable even when local storage is unavailable.\n' +
+    '  }\n' +
+    '}\n' +
+    '\n' +
+    'function routeLabel(path: string): string {\n' +
+    '  const primary = NAV_GROUPS.flatMap((group) => group.items).find((item) => item.path === path);\n' +
+    '  return primary?.label ?? LEGA'... 7945 more characters,
+  expected: /label: "Shop"/,
+  operator: 'doesNotMatch',
+  diff: 'simple'
+}
+
+Node.js v24.22.0

@@ -1,0 +1,114 @@
+{
+ "schema": "audiolab.critic.calibration/1",
+ "version": "1",
+ "date": "2026-10-24",
+ "status": "active",
+ "basis_vi": "Hiệu chỉnh đầu tiên theo điểm mù của chủ dự án (mục 4.6): lô 0a (13 id, 23/10/2026) và lô 0b vòng 2 (6 id Stable Audio 3, 23–24/10/2026), 50 bản, 37 cặp sao khác nhau, nghe bằng loa. Chỉ hạ trọng số lớp đã xếp ngược tai anh và dời mục tiêu L2 của vài nhóm về phía bản anh chấm cao. L1 và L1b không đổi. Số liệu ít: đây là điểm xuất phát, không phải kết luận (mục 4.6 bước 7).",
+ "data": {
+  "ratings": [
+   "~/AudioLab/review/_calib/ratings.jsonl",
+   "~/AudioLab/review/dragon-hold/ratings.jsonl",
+   "~/AudioLab/review/typing-defense/ratings.jsonl",
+   "~/AudioLab/review/typing-survival/ratings.jsonl"
+  ],
+  "batches": ["0a", "0b"],
+  "ids": 19,
+  "candidates": 50,
+  "pairs": 37,
+  "probe_items": 6,
+  "probe_picked": 6,
+  "device": "speakers",
+  "listen_minutes": {"0a": 12.8, "0b": 2.9},
+  "anchors": 0,
+  "fault_tags": 0,
+  "report": "~/AudioLab/work/_calibration/owner-v1.md",
+  "command": "bash tools/audio-lab/run.sh critic agreement --calibration 1"
+ },
+ "agreement": {
+  "measured_on": "chính 19 id dùng để chọn luật (lạc quan)",
+  "before": {"combined_pairs": "13/37", "combined_top": "6,5/19", "L2_pairs": "15/37", "L3_pairs": "14/37", "L4_pairs": "19/37"},
+  "after": {"combined_pairs": "24/37", "combined_top": "10,5/19", "L2_pairs": "22/37"},
+  "weights_only": {"combined_pairs": "15/37", "combined_top": "7,5/19"},
+  "l2_only": {"combined_pairs": "19/37", "combined_top": "8,5/19"}
+ },
+ "weights": {
+  "rules": [
+   {
+    "id": "w-l3-audiobox",
+    "match": {"family": ["trung", "ban", "phim-ui", "thuong"]},
+    "scale": {"L3": 0.33},
+    "to": "L2",
+    "why_vi": "audiobox (L3) xếp ngược tai anh ở bốn họ này: khớp 7/28 cặp (trúng 4/13, bắn 0/4, phím và UI 3/8, thưởng 0/3), thấp hơn đoán ngẫu nhiên. Ở lô 1 họ thường, L3 từ 0,3 xuống 0,1 (ngang L4) và L2 từ 0,6 lên 0,8. Họ bẩn vẫn 0 như mục 4.4. Họ nền (L3 khớp 6/7), nổ và sinh vật (1 cặp mỗi họ) giữ trọng số của kế hoạch.",
+    "evidence": ["0a:calib-1", "0a:calib-2", "0a:calib-3", "0a:hit.t1", "0a:hit.t2", "0a:word-hit", "0a:ui-pick", "0a:ui-move", "0b:call-chop", "0b:hit.t1"]
+   }
+  ]
+ },
+ "l2": {
+  "rules": [
+   {
+    "id": "t-amb-forest-bright",
+    "match": {"group": "ambience", "id": "forest"},
+    "set": [
+     {"feature": "share_above_3k", "good": [0.3, null], "bad": [0.05, null], "weight": 1.5,
+      "low_vi": "tối, thiếu tiếng lá kim xào xạc trên 3 kHz"},
+     {"feature": "share_low300_hi4k10k", "good": [0.45, null], "bad": [0.25, null], "weight": 0.5,
+      "low_vi": "nhiều năng lượng ở 300 Hz–4 kHz"},
+     {"feature": "lufs_m_range_db", "good": [null, 7], "bad": [null, 10], "weight": 1.0,
+      "high_vi": "độ to dao động mạnh trong vòng lặp"}
+    ],
+    "why_vi": "amb.forest (0b): anh chấm bản sáng, xì E s2006 4/5 (54 % năng lượng trên 3 kHz, dao động 6,5 dB) trên bản trầm, ù H s2004 3/5 (2 %) và G s2004 2/5. Mục tiêu cũ (phần lớn năng lượng dưới 300 Hz và 4–10 kHz, dao động ≤ 4 dB) xếp bản anh chọn thứ 38/47. Nay thưởng phần trên 3 kHz, nới phần dưới 300 Hz và cho cơn gió dao động đến 7 dB. Chỉ áp cho nền rừng.",
+    "evidence": ["0b:amb.forest"]
+   },
+   {
+    "id": "t-hit-small-steel",
+    "match": {"group": "hit_small", "game": "typing-survival"},
+    "set": [
+     {"feature": "share_200_800", "good": [0.1, 0.35], "bad": [0.0, 0.6], "weight": 1.0,
+      "low_vi": "thiếu thân 200–800 Hz", "high_vi": "thân 200–800 Hz quá dày, mất tiếng keng thép"},
+     {"feature": "crest_db", "good": [20, null], "bad": [12, null], "weight": 1.5,
+      "low_vi": "ít độ nảy (crest thấp, bị nén)"}
+    ],
+    "why_vi": "hit.t1: ở 0b anh chọn bản Stable Audio 3 nguyên khối (thân 5,5 %, crest 17,9 dB) 3/5 trên hai công thức có thân dày (41–57 %, crest 13,9–14,6 dB) 2/5; ở 0a anh chọn bản crest cao nhất (19,9 dB, thân 23 %) trên bản 17,7 dB. Thân 200–800 Hz thành một khoảng (10–35 %), không còn 'càng nhiều càng tốt'; crest được thưởng dần từ 12 tới 20 dB. Chỉ Tuyến Cuối: chưa có điểm cho tiếng trúng nhỏ của game khác.",
+    "evidence": ["0a:hit.t1", "0b:hit.t1"]
+   },
+   {
+    "id": "t-hit-boom",
+    "match": {"group": ["hit_heavy", "hit_fire"]},
+    "set": [
+     {"feature": "share_below_150", "good": [null, 0.7], "bad": [null, 0.9], "weight": 1.0,
+      "high_vi": "quá nặng ở dải dưới 150 Hz (ù, kéo lê)"}
+    ],
+    "why_vi": "Họ trúng: bản được chấm cao có ít năng lượng dưới 150 Hz hơn ở 8/12 cặp. hit.t2 (0a): bản nặng sub nhất (78 %) bị chấm 1/5; fire.impact.a (0a): bản 84 % dưới 150 Hz 2/5, bản 55 % 3/5. Khớp mục 6.3: sub của Tuyến Cuối là lớp dùng chung `hit.sub`, không nướng vào file bậc trúng.",
+    "evidence": ["0a:hit.t2", "0a:fire.impact.a", "0a:calib-1"]
+   },
+   {
+    "id": "t-creature-whole-call",
+    "match": {"group": "creature", "id": "(howl|roar)"},
+    "set": [
+     {"feature": "attack_ms", "good": [null, 150], "bad": [null, 300], "weight": 1.0,
+      "high_vi": "tiếng gọi lớn dần quá chậm"}
+    ],
+    "why_vi": "enemy.quadruped.howl (0b): anh chấm tiếng tru trọn (lên 138,5 ms, bị luật ≤ 30 ms chặn) 3/5, cao nhất id. Với tiếng gọi trọn (tru, gầm), L2 không còn phạt đoạn lớn dần dưới 150 ms. Cổng L1 không đổi ở đây: nới cổng là việc của thẻ spec và mục 4.3.1 (DECISIONS.md).",
+    "evidence": ["0b:enemy.quadruped.howl"]
+   },
+   {
+    "id": "t-call-chop-knock",
+    "match": {"game": "typing-defense", "id": "^call-chop$"},
+    "set": [
+     {"feature": "share_below_300", "good": [0.3, null], "bad": [0.05, null], "weight": 1.5,
+      "low_vi": "thiếu thân trầm dưới 300 Hz: dễ thành tiếng 'tốc' rỗng, cao (giống mõ)"}
+    ],
+    "why_vi": "call-chop (0b): hai bản gõ trầm (79 % và 55 % năng lượng dưới 300 Hz) 3/5, bản đối chứng 'tốc' rỗng, cao giống mõ (2,5 %) 2/5. Thẻ ghi 'Chắc, trầm'; TK 22.1 cấm mõ. Máy cũ (L2 hòa, audiobox thích bản mõ) xếp bản mõ thứ 5/41, trên cả hai bản anh chọn.",
+    "evidence": ["0b:call-chop"]
+   }
+  ]
+ },
+ "notes_vi": [
+  "L4 (CLAP/AST) khớp 19/37 cặp, ngang đoán ngẫu nhiên, và đã bị trần 0,1 (mục 4.4): giữ nguyên.",
+  "Họ nền: L2 khớp 2/7 cặp là do mục tiêu nền rừng sai hướng (đã sửa bằng t-amb-forest-bright), không hạ trọng số L2; L3 khớp 6/7 nên giữ 0,3.",
+  "Không đổi vì quá ít dữ liệu: shot_launch (calib-3, bản laser gốc nhiều sub được 4/5, trái mục tiêu 'dưới 120 Hz thấp hơn 12 dB'), UI (ui-move: anh chọn bản ít năng lượng 1–5 kHz nhất), word-hit (quãng tám là quyết định của thẻ spec, không phải mục tiêu L2).",
+  "Bỏ sau khi thử: hạ L2 của họ nền (không thêm cặp nào, kéo hạng bản rừng anh chọn từ 4 xuống 7), nới đầu tiếng fire.impact (không thêm cặp nào), hạ trọng số 1–5 kHz của UI (không thêm cặp nào).",
+  "Giới hạn của dữ liệu: mọi lượt chấm nghe bằng loa (không tai nghe), nên phần dưới 150 Hz có thể nghe thiếu; lô 0b chỉ mất 2,9 phút cho 15 bản, nhiều bản nghe một lần; amb.forest chỉ nghe một vòng ('Một mình'), chưa nghe Lặp; không có cặp mốc (chưa đo độ nhất quán, mục 4.6 bước 6) và không có nhãn 'rè/lỗi' (L1b không có gì để chỉnh). Luật t-hit-boom và t-amb-forest-bright phải được kiểm lại bằng tai nghe ở lô 1.",
+  "Ước lại sau 20–30 lượt chấm mới (mục 4.6 bước 8); lô 1 chấm với bản này bật, rồi so bằng `critic agreement --batch 1`."
+ ]
+}

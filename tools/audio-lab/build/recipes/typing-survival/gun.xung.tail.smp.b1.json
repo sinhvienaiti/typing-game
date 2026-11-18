@@ -1,0 +1,121 @@
+{
+ "$schema": "../../schemas/recipe.schema.json",
+ "schema": "audiolab.recipe/1",
+ "game": "typing-survival",
+ "id": "gun.xung.tail.smp",
+ "group": "generic",
+ "family": "ban",
+ "description": "Lô 1 (BATCH1_BRIEF §3.2): khi ngừng bắn. Vang thép: VCSL Brake Drum (biến thể 2: Anvil) lọc thấp 1,5 kHz; vang sảnh tổng hợp (nhiễu hồng 150–1200 Hz, t60 650 ms); servo hạ (răng cưa 260→70 Hz lọc thấp 700 Hz). Phần 1–4 kHz tắt sớm.",
+ "channels": 1,
+ "layers": [
+  {
+   "id": "steel",
+   "role": "body",
+   "gainDb": -4,
+   "filters": [
+    {
+     "type": "lowpass",
+     "hz": 1500,
+     "order": 4
+    }
+   ],
+   "trim": {
+    "endMs": 650
+   },
+   "fadeOutMs": 250,
+   "source": {
+    "library": "vcsl/Idiophones/Struck Idiophones/Brake Drum/BrakeDrum1_Hammer_v2_rr1_Mid.wav"
+   },
+   "vary": {
+    "swapMode": "cycle",
+    "swap": [
+     {
+      "library": "vcsl/Idiophones/Struck Idiophones/Anvil/Anvil_Hit2_v2_rr1_Mid.wav"
+     }
+    ]
+   }
+  },
+  {
+   "id": "hall",
+   "role": "tail",
+   "gainDb": -6,
+   "source": {
+    "synth": "noise_burst",
+    "params": {
+     "color": "pink",
+     "durMs": 650,
+     "attackMs": 15,
+     "decayMs": 650,
+     "hpHz": 150,
+     "lpHz": 1200,
+     "order": 2
+    }
+   }
+  },
+  {
+   "id": "servo",
+   "role": "sweetener",
+   "gainDb": -14,
+   "offsetMs": 40,
+   "source": {
+    "synth": "tone",
+    "params": {
+     "wave": "saw",
+     "freqHz": 260,
+     "endHz": 70,
+     "glideMs": 420,
+     "durMs": 480,
+     "attackMs": 20,
+     "decayMs": 600
+    }
+   },
+   "filters": [
+    {
+     "type": "lowpass",
+     "hz": 700,
+     "order": 2
+    }
+   ]
+  }
+ ],
+ "chain": {
+  "dcHpfHz": 35,
+  "headTrim": {
+   "thresholdDb": -50,
+   "preRollMs": 0.5
+  },
+  "maxLengthMs": 650,
+  "tail": {
+   "floorDb": -60,
+   "shape": "exp",
+   "kneeMs": 380
+  },
+  "normalise": {
+   "mode": "lufs-m-max",
+   "target": -20
+  },
+  "limiter": {
+   "ceilingDbtp": -1.0,
+   "releaseMs": 80,
+   "maxGrDb": 6
+  }
+ },
+ "variants": {
+  "count": 2,
+  "seed": 2511,
+  "includeBase": true,
+  "pitchCents": [
+   0,
+   0
+  ],
+  "gainDb": [
+   0,
+   0
+  ]
+ },
+ "export": {
+  "path": "sfx/guns/gun-xung-tail",
+  "ogg": true,
+  "oggQuality": 0.6
+ }
+}

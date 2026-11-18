@@ -1,0 +1,186 @@
+# Thẻ spec âm thanh (AUDIO_PIPELINE §5.1 bước 1). Sinh bởi `pnpm audio:specs generate`; kiểm bằng `pnpm audio:specs validate`.
+# Sửa tay: thêm `manual: true` vào mục đã sửa, hoặc ghi đường dẫn (vd. duration.target_ms) vào manual_fields.
+# status, references, prompt.variants, notes luôn được giữ khi sinh lại. Comment YAML thì không: ghi chú để ở notes.
+schema: 1
+id: type.miss
+game: dragon-hold
+status: draft
+manual_fields: []
+when: Phím sai, phím lạc
+purpose: '"Tóc" đục, nhỏ, không còi'
+category: key-bad
+family: phim-ui
+source_class: key
+playback:
+  mode: one-shot
+  channels: mono
+  channels_basis: 'M0_SOUND_LIST §1: Tiếng lẻ mono. Nhạc và nền stereo'
+  bus: typing
+  priority: 2
+  min_gap_ms: 20
+  limit_group: null
+  caps: {}
+  format: OGG Vorbis 48 kHz trong game; gốc WAV 48 kHz (§4.3.1, §11)
+duration:
+  target_ms: 60
+  tolerance_pct: 20
+  tolerance_ms: null
+  min_ms: 48
+  max_ms: 72
+  basis: src/audio/catalog.ts lengthMs (nguồn chuẩn của độ dài)
+  category_range_ms: [60, 150]
+  music: null
+onset:
+  class: key
+  rise_max_ms: 3
+  lead_silence_max_ms: 2
+  basis: 'AUDIO_PIPELINE §4.3.1 (thời gian lên, im lặng ở đầu); M0_SOUND_LIST §1: Đầu file không có khoảng lặng. Tiếng gõ phải bắt đầu ngay (< 20 ms)'
+variants:
+  target: 2
+  min: 2
+  max: 3
+  basis: AUDIO_PIPELINE §4.3.3 (Phím sai)
+randomisation:
+  group: key-bad
+  pitch_cents: 30
+  gain_db: null
+  rules:
+    - Nghỉ 150 ms giữa hai lần, để gõ loạn không ra tiếng dồn
+  current_code: 'Không đổi ngẫu nhiên (catalog vary: false)'
+  basis: AUDIO_PIPELINE §5.3 (mã cần cho mỗi nhóm giá trị riêng, §6.3)
+frequency_role:
+  bands:
+    - band: body
+      range_hz: [120, 800]
+      role: Thân lửa, thân quái
+  voice_band: avoid
+  voice_band_text: Tránh dải 1–4 kHz
+  spectrum: Năng lượng ở 150–600 Hz. Phần trên 3 kHz thấp hơn ít nhất 20 dB
+  basis: AUDIO_PIPELINE §6.4, AUDIO_PIPELINE §4.3.3
+loudness:
+  file:
+    metric: peak-dbtp
+    target: -1
+    basis: 'M0_SOUND_LIST §1: Tiếng lẻ chuẩn hóa đỉnh −1 dBTP'
+  proposal:
+    metric: lufs-m-max
+    target: -20
+    pad_s: 0.4
+    true_peak_max_dbtp: -1
+    basis: 'AUDIO_PIPELINE §4.3.3, §5.1 bước 4: đề xuất chuẩn hóa mọi âm ngắn về một mức chung; tài liệu game đang ghi chuẩn hóa đỉnh'
+  bus: typing
+  bus_gain: 0.8
+  bus_gain_db: -1.94
+  gain_db: -12
+  gain_basis: src/audio/catalog.ts gainDb (mặc định 0 dB), mức trước bus
+  relative_db: -13.94
+  pronunciation_duck_db: -2.0
+  mix_target:
+    metric: lufs-m-max
+    range: null
+    text: Nhỏ hơn phím đúng ít nhất 3 dB
+    weight: null
+    basis: AUDIO_PIPELINE §4.3.3 (mức trong bản trộn, bài A và B)
+prompt:
+  text: Soft dull wooden knock, muted, short, gentle error tick, not a buzzer, under 60 ms
+  suffix: null
+  style_root: painterly fantasy forest, warm, organic, outdoor
+  sweetener: than hồng lách tách và đàn hạc
+  variants: []
+  basis: docs/audio/M0_SOUND_LIST.md; gốc prompt theo AUDIO_PIPELINE §5.2 (chốt sau bảng phong cách)
+pitches: null
+parts: null
+layer_plan: null
+references: []
+source_plan:
+  now: [synth]
+  later: []
+  ranked:
+    - rank: 1
+      kinds: [synth]
+      detail: Tổng hợp bằng mã (theo luật dự án), chỉnh bằng bản dựng không chạy game và tai AI
+    - rank: 2
+      kinds: [cc0-layer]
+      detail: Một mẫu thu thật Kenney CC0, mã đổi cao độ
+    - rank: 3
+      kinds: [owner-recording]
+      detail: Một mẫu tự ghi, mã đổi cao độ
+  needs_now: []
+  needs_later: []
+  note: Mô hình khuếch tán yếu với tiếng dưới 50 ms
+  batch1: null
+  style_board: false
+  sa3_trial: false
+  basis: AUDIO_PIPELINE §3.2 (nguồn theo loại âm), §10.1 (khi chưa có Stable Audio 3)
+licence:
+  allowed: [project-code, CC0-1.0, owner-original]
+  conditional:
+    - licence: CC0-1.0 (Freesound, người tải lên từ chối AI)
+      condition: Chỉ ghép tay, không vào bước AI nào, không vào LoRA (§10.2)
+    - licence: release-CC0-or-transfer
+      condition: 'Bản ghi của người khác: cần giấy đồng ý (§10.4)'
+  forbidden:
+    - non-commercial-weights
+    - freesound-cc-by-nc
+    - freesound-sampling-plus
+    - bbc-sound-effects
+    - pixabay
+    - sound-from-other-games
+    - sonniss-lot-1-2-and-any-ai-step
+    - elevenlabs-or-suno-free-tier-release
+  attribution_required: false
+  notes:
+    - Mã của dự án. pedalboard (GPL-3.0) chỉ import trên máy, không chép vào repo (§10.9)
+    - Kenney, VCSL, VSCO-2-CE, Freesound CC0. Lưu LICENSE-<ngày>.txt kèm thư viện
+  record: art-src/audio/SOURCES.json và licences.jsonl (§10.5, §10.6); pnpm audio:licence-check chặn khi thiếu
+  basis: AUDIO_PIPELINE §10.2
+constraints: []
+board:
+  contexts: [trong-tran, lap-20]
+  contexts_before_phase3: [lap-20]
+  dense: true
+  repeat_interval_ms: 600
+  repeat_basis: Đề xuất theo bot 40 WPM (§6.1); chỉnh khi có nhịp thật của game
+  loudness_match: lufs-m
+  basis: AUDIO_PIPELINE §7
+critic:
+  group: key_bad
+  dirty: false
+  weights_batch1:
+    l2: 0.6
+    l3: 0.3
+    l4: 0.1
+    l5: 0.0
+  loop_eval:
+    enabled: true
+    length_s: [3, 4]
+    plays: 10
+    interval_ms: 600
+  ast:
+    expected: [Wood]
+    forbid: []
+  loop: false
+  stereo: false
+  pitched: false
+  attack_max_ms: 3
+  head_max_ms: 2
+  rate_hz: 1.667
+  bpm: null
+  bars: null
+  beats_per_bar: null
+  intent: Soft dull wooden knock, muted, short, gentle error tick, not a buzzer, under 60 ms
+  refs: []
+  basis: AUDIO_PIPELINE §4.4, §4.5 (L4 chỉ gắn cờ, trọng số tối đa 0,1)
+blocked_by: []
+origin:
+  code:
+    file: src/audio/catalog.ts
+    present: true
+    asset_stem: sfx/typing/miss
+    synth_in_code: true
+  sound_list:
+    file: docs/audio/M0_SOUND_LIST.md
+    present: true
+    section: 5.1 Gõ phím (bus `typing`, P2)
+  plan: []
+notes: 'Q6 (24/10): không phải âm hành động; chỉ thay chữ ''thud'' (tiếng trầm đứng riêng, bị cấm) bằng ''knock''.'

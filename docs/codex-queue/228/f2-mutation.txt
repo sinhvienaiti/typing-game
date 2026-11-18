@@ -1,0 +1,307 @@
+$ node --test --test-name-pattern=F2 portal/tests/learning-lookup.test.mjs shared/learning/lookup.test.mjs
+cwd: /Users/toandx/htdocs/typing-game
+
+✖ F2 lookup sends only contracted sample fields from a vocabulary backup (3.457875ms)
+✖ F2 query sends only contracted sample fields from a vocabulary backup (0.843042ms)
+✖ F2 lookup sends only contracted sample fields from a grammar backup (0.426583ms)
+✖ F2 query sends only contracted sample fields from a grammar backup (0.364875ms)
+✖ F2 lookup sends only contracted sample fields from a sentence backup (0.494417ms)
+✖ F2 query sends only contracted sample fields from a sentence backup (0.378792ms)
+✖ F2 vocabulary lookup projects sample fields from an existing stored profile (2.65625ms)
+✖ F2 grammar lookup projects sample fields from an existing stored profile (0.254334ms)
+✖ F2 sentence lookup projects sample fields from an existing stored profile (0.182167ms)
+ℹ tests 9
+ℹ suites 0
+ℹ pass 0
+ℹ fail 9
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 71.121041
+
+✖ failing tests:
+
+test at portal/tests/learning-lookup.test.mjs:195:5
+✖ F2 lookup sends only contracted sample fields from a vocabulary backup (3.457875ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+
+    [
+      {
+        activityType: 'meaning-recall',
+  +     expectedAnswer: 'PRIVATE_EXPECTED_ANSWER',
+  +     extra: {
+  +       answer: 'PRIVATE_EXTRA'
+  +     },
+        gameId: 'recall-typing',
+        hintUsed: false,
+        occurredAt: '2026-10-30T06:00:00.000Z',
+        result: 'correct',
+  +     userAnswer: 'PRIVATE_USER_ANSWER'
+      }
+    ]
+
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/portal/tests/learning-lookup.test.mjs:206:14)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: [ { occurredAt: '2026-10-30T06:00:00.000Z', gameId: 'recall-typing', activityType: 'meaning-recall', result: 'correct', hintUsed: false, userAnswer: 'PRIVATE_USER_ANSWER', expectedAnswer: 'PRIVATE_EXPECTED_ANSWER', extra: [Object] } ],
+    expected: [ { occurredAt: '2026-10-30T06:00:00.000Z', gameId: 'recall-typing', activityType: 'meaning-recall', result: 'correct', hintUsed: false } ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at portal/tests/learning-lookup.test.mjs:195:5
+✖ F2 query sends only contracted sample fields from a vocabulary backup (0.843042ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+
+    [
+      {
+        activityType: 'meaning-recall',
+  +     expectedAnswer: 'PRIVATE_EXPECTED_ANSWER',
+  +     extra: {
+  +       answer: 'PRIVATE_EXTRA'
+  +     },
+        gameId: 'recall-typing',
+        hintUsed: false,
+        occurredAt: '2026-10-30T06:00:00.000Z',
+        result: 'correct',
+  +     userAnswer: 'PRIVATE_USER_ANSWER'
+      }
+    ]
+
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/portal/tests/learning-lookup.test.mjs:206:14)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: [ { occurredAt: '2026-10-30T06:00:00.000Z', gameId: 'recall-typing', activityType: 'meaning-recall', result: 'correct', hintUsed: false, userAnswer: 'PRIVATE_USER_ANSWER', expectedAnswer: 'PRIVATE_EXPECTED_ANSWER', extra: [Object] } ],
+    expected: [ { occurredAt: '2026-10-30T06:00:00.000Z', gameId: 'recall-typing', activityType: 'meaning-recall', result: 'correct', hintUsed: false } ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at portal/tests/learning-lookup.test.mjs:195:5
+✖ F2 lookup sends only contracted sample fields from a grammar backup (0.426583ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+
+    [
+      {
+        activityType: 'meaning-recall',
+  +     expectedAnswer: 'PRIVATE_EXPECTED_ANSWER',
+  +     extra: {
+  +       answer: 'PRIVATE_EXTRA'
+  +     },
+        gameId: 'recall-typing',
+        hintUsed: false,
+        occurredAt: '2026-10-30T06:00:00.000Z',
+        result: 'correct',
+  +     userAnswer: 'PRIVATE_USER_ANSWER'
+      }
+    ]
+
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/portal/tests/learning-lookup.test.mjs:206:14)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: [ { occurredAt: '2026-10-30T06:00:00.000Z', gameId: 'recall-typing', activityType: 'meaning-recall', result: 'correct', hintUsed: false, userAnswer: 'PRIVATE_USER_ANSWER', expectedAnswer: 'PRIVATE_EXPECTED_ANSWER', extra: [Object] } ],
+    expected: [ { occurredAt: '2026-10-30T06:00:00.000Z', gameId: 'recall-typing', activityType: 'meaning-recall', result: 'correct', hintUsed: false } ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at portal/tests/learning-lookup.test.mjs:195:5
+✖ F2 query sends only contracted sample fields from a grammar backup (0.364875ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+
+    [
+      {
+        activityType: 'meaning-recall',
+  +     expectedAnswer: 'PRIVATE_EXPECTED_ANSWER',
+  +     extra: {
+  +       answer: 'PRIVATE_EXTRA'
+  +     },
+        gameId: 'recall-typing',
+        hintUsed: false,
+        occurredAt: '2026-10-30T06:00:00.000Z',
+        result: 'correct',
+  +     userAnswer: 'PRIVATE_USER_ANSWER'
+      }
+    ]
+
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/portal/tests/learning-lookup.test.mjs:206:14)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: [ { occurredAt: '2026-10-30T06:00:00.000Z', gameId: 'recall-typing', activityType: 'meaning-recall', result: 'correct', hintUsed: false, userAnswer: 'PRIVATE_USER_ANSWER', expectedAnswer: 'PRIVATE_EXPECTED_ANSWER', extra: [Object] } ],
+    expected: [ { occurredAt: '2026-10-30T06:00:00.000Z', gameId: 'recall-typing', activityType: 'meaning-recall', result: 'correct', hintUsed: false } ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at portal/tests/learning-lookup.test.mjs:195:5
+✖ F2 lookup sends only contracted sample fields from a sentence backup (0.494417ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+
+    [
+      {
+        activityType: 'meaning-recall',
+  +     expectedAnswer: 'PRIVATE_EXPECTED_ANSWER',
+  +     extra: {
+  +       answer: 'PRIVATE_EXTRA'
+  +     },
+        gameId: 'recall-typing',
+        hintUsed: false,
+        occurredAt: '2026-10-30T06:00:00.000Z',
+        result: 'correct',
+  +     userAnswer: 'PRIVATE_USER_ANSWER'
+      }
+    ]
+
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/portal/tests/learning-lookup.test.mjs:206:14)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: [ { occurredAt: '2026-10-30T06:00:00.000Z', gameId: 'recall-typing', activityType: 'meaning-recall', result: 'correct', hintUsed: false, userAnswer: 'PRIVATE_USER_ANSWER', expectedAnswer: 'PRIVATE_EXPECTED_ANSWER', extra: [Object] } ],
+    expected: [ { occurredAt: '2026-10-30T06:00:00.000Z', gameId: 'recall-typing', activityType: 'meaning-recall', result: 'correct', hintUsed: false } ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at portal/tests/learning-lookup.test.mjs:195:5
+✖ F2 query sends only contracted sample fields from a sentence backup (0.378792ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+
+    [
+      {
+        activityType: 'meaning-recall',
+  +     expectedAnswer: 'PRIVATE_EXPECTED_ANSWER',
+  +     extra: {
+  +       answer: 'PRIVATE_EXTRA'
+  +     },
+        gameId: 'recall-typing',
+        hintUsed: false,
+        occurredAt: '2026-10-30T06:00:00.000Z',
+        result: 'correct',
+  +     userAnswer: 'PRIVATE_USER_ANSWER'
+      }
+    ]
+
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/portal/tests/learning-lookup.test.mjs:206:14)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: [ { occurredAt: '2026-10-30T06:00:00.000Z', gameId: 'recall-typing', activityType: 'meaning-recall', result: 'correct', hintUsed: false, userAnswer: 'PRIVATE_USER_ANSWER', expectedAnswer: 'PRIVATE_EXPECTED_ANSWER', extra: [Object] } ],
+    expected: [ { occurredAt: '2026-10-30T06:00:00.000Z', gameId: 'recall-typing', activityType: 'meaning-recall', result: 'correct', hintUsed: false } ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at shared/learning/lookup.test.mjs:132:3
+✖ F2 vocabulary lookup projects sample fields from an existing stored profile (2.65625ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+
+    [
+      {
+        activityType: 'meaning-recall',
+  +     expectedAnswer: 'PRIVATE_EXPECTED_ANSWER',
+  +     extra: 'PRIVATE_EXTRA',
+        gameId: 'recall-typing',
+        hintUsed: false,
+        occurredAt: '2026-10-30T06:00:00.000Z',
+        result: 'correct',
+  +     userAnswer: 'PRIVATE_USER_ANSWER'
+      }
+    ]
+
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/shared/learning/lookup.test.mjs:139:12)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: [ { occurredAt: '2026-10-30T06:00:00.000Z', gameId: 'recall-typing', activityType: 'meaning-recall', result: 'correct', hintUsed: false, userAnswer: 'PRIVATE_USER_ANSWER', expectedAnswer: 'PRIVATE_EXPECTED_ANSWER', extra: 'PRIVATE_EXTRA' } ],
+    expected: [ { occurredAt: '2026-10-30T06:00:00.000Z', gameId: 'recall-typing', activityType: 'meaning-recall', result: 'correct', hintUsed: false } ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at shared/learning/lookup.test.mjs:132:3
+✖ F2 grammar lookup projects sample fields from an existing stored profile (0.254334ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+
+    [
+      {
+        activityType: 'meaning-recall',
+  +     expectedAnswer: 'PRIVATE_EXPECTED_ANSWER',
+  +     extra: 'PRIVATE_EXTRA',
+        gameId: 'recall-typing',
+        hintUsed: false,
+        occurredAt: '2026-10-30T06:00:00.000Z',
+        result: 'correct',
+  +     userAnswer: 'PRIVATE_USER_ANSWER'
+      }
+    ]
+
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/shared/learning/lookup.test.mjs:139:12)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: [ { occurredAt: '2026-10-30T06:00:00.000Z', gameId: 'recall-typing', activityType: 'meaning-recall', result: 'correct', hintUsed: false, userAnswer: 'PRIVATE_USER_ANSWER', expectedAnswer: 'PRIVATE_EXPECTED_ANSWER', extra: 'PRIVATE_EXTRA' } ],
+    expected: [ { occurredAt: '2026-10-30T06:00:00.000Z', gameId: 'recall-typing', activityType: 'meaning-recall', result: 'correct', hintUsed: false } ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at shared/learning/lookup.test.mjs:132:3
+✖ F2 sentence lookup projects sample fields from an existing stored profile (0.182167ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+
+    [
+      {
+        activityType: 'meaning-recall',
+  +     expectedAnswer: 'PRIVATE_EXPECTED_ANSWER',
+  +     extra: 'PRIVATE_EXTRA',
+        gameId: 'recall-typing',
+        hintUsed: false,
+        occurredAt: '2026-10-30T06:00:00.000Z',
+        result: 'correct',
+  +     userAnswer: 'PRIVATE_USER_ANSWER'
+      }
+    ]
+
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/shared/learning/lookup.test.mjs:139:12)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: [ { occurredAt: '2026-10-30T06:00:00.000Z', gameId: 'recall-typing', activityType: 'meaning-recall', result: 'correct', hintUsed: false, userAnswer: 'PRIVATE_USER_ANSWER', expectedAnswer: 'PRIVATE_EXPECTED_ANSWER', extra: 'PRIVATE_EXTRA' } ],
+    expected: [ { occurredAt: '2026-10-30T06:00:00.000Z', gameId: 'recall-typing', activityType: 'meaning-recall', result: 'correct', hintUsed: false } ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+exit: 1

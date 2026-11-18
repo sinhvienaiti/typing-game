@@ -1,0 +1,60 @@
++
++
++      // BUILD_1B §6.5 round 1 (docs/td/BUILD_NOTES.md §7.1): 3,200 → 3,400 hit points, 0.9 → 0.8 m/s (G3); R1 review: 3,800; R2 (§7.3): 4,200; lane A2: 4,550.
++      id: "moc-tinh", tier: "boss", hp: 4550, armorPct: 30, resistPct: 0, speed: 0.8, altitude: "ground", leak: 0, gold: 0,
++    clearNight(w);
++    const at = working();
++    const food = w.food;
++    const made: number[] = [];
++    const open = w.calls.live().find((c) => w.calls.kind[c] === CALL_KIND.harvest)!;
++    const w = world();
++    const working = () => w.npcs.live().filter((n) => w.npcs.kind[n] === NPC_KIND.villager && w.npcs.task[n] === TASK.working);
++    const { w, plot } = farmWorld();
++    drain: { lives: 1, everyS: 20, warnS: 1.2 },
++    enemy: "moc-tinh", retreatPct: 50, kHp: 0.32, kHp2: 12, kHpMax: 1.4, modeHp: { relax: 0.78, learn: 0.78, challenge: 0.9 }, retreatS: 2, chestGold: 150, heroMul: 0.35,
++    expect([w.phase, w.calls.used[open], made]).toEqual(["night", 0, []]);
++    expect(at.every((n) => w.npcs.call[n]! >= 0 && w.calls.kind[w.npcs.call[n]!] === CALL_KIND.chop)).toBe(true);
++    expect(at.length).toBeGreaterThan(0);
++    expect(w.calls.expire[open]).toBe(w.tick - 1 + T(CALL.powerLifeS));
++    expect(w.food - food).toBeGreaterThanOrEqual(3 * FARM.food); // the ripe plots harvested all the same
++    expect(working().every((n) => w.npcs.call[n]! < 0)).toBe(true); // chopping alone by night
++    for (let k = 0; k < T(60) && w.phase === "night"; k += 1) made.push(...send(w).filter((event) => event.t === "call" && event.kind === CALL_KIND.harvest && event.state === "made").map(() => w.tick));
++    if (B.plot[at + p] === PLOT.ripe && w.phase !== "night") N.call[n] = makeCall(w, CALL_KIND.harvest, CALL.words.harvest, n, b, -1, p);
++    run(w, 1); // the day's first tick
++    send(w, { t: "callNight" });
++    send(w, { t: "callNight" });
++    until(w, () => plot(0) === PLOT.growing);
++    until(w, () => w.calls.live().some((c) => w.calls.kind[c] === CALL_KIND.chop));
++    until(w, () => w.calls.live().some((c) => w.calls.kind[c] === CALL_KIND.harvest), T(60));
++    until(w, () => w.phase === "day", T(10));
++    until(w, () => w.phase === "night" && w.calls.live().every((c) => w.calls.kind[c] !== CALL_KIND.chop) && working().length > 0, T(60));
++    w.waveLeft[1] = w.waveLeft[1]! + 1000; // the night held open
++  // Night falls: a chop or harvest call left open lives a power call's time; villagers and farmers work on alone (economy.ts).
++  // Rễ hút sinh khí, a life every 20 s of its fight (R3: 30 s, R3_PLAN §7.1; lane A2: 20 s once night harvests went silent).
++  // k factor (R2 §7.4: 0.3 / 6.5, cap 1.46; R3 §7.9: 0.4 / 5.5, cap 1.42; A1: 0.4 / 7.5, 1.49; A2: 0.32 / 12, 1.4), Thư giãn, Học ×0.78, Thử thách ×0.9.
++  balanced: { dayS: 75, open: 3, typeS: 8, slipS: 1.8, hpMul: 1, floorE: 20, lifeK: 1.0, powerCdS: 9, pause: false, warnK: 1, directK: 2.2 },
++  for (const c of phase === "night" ? w.calls.live() : []) if (w.calls.kind[c] === CALL_KIND.chop || w.calls.kind[c] === CALL_KIND.harvest) w.calls.expire[c] = w.tick + ticks(CALL.powerLifeS);
++  it("a chop begun by night calls at daybreak: by day every villager at work has its chop call (lane A2, gate 5b)", () => {
++  it("by night a farmer harvests without a call; a harvest call left open at nightfall lives a power call's time (lane A2)", () => {
++  } else if (N.call[n]! < 0 && w.tick === w.dayStarts[w.day]) N.call[n] = makeCall(w, CALL_KIND.chop, CALL.words.chop, n, -1, t, -1);
++  });
++  });
++ * 1.35 s for chains of chop words, BUILD_NOTES §7.3, §7.8; by mode since lane A2, Cân bằng 1.8 with chop calls at daybreak, §7.10).
++ * made chop words crowd out the towers' calls; a chop begun by night calls at daybreak), its wood paid as it goes; then it
++ * picks a tree again (a mark may call it away). A tree with no way to it is left (−2) until marked again.
++/** §4.1: plots grow by themselves; the farmer walks inside the farm to a plot, sows it (2 s) or harvests it (12 s, a 3-word call by day). */
+-      // BUILD_1B §6.5 round 1 (docs/td/BUILD_NOTES.md §7.1): 3,200 → 3,400 hit points, 0.9 → 0.8 m/s (G3); R1 review: 3,800; R2 (§7.3): 4,200.
+-      id: "moc-tinh", tier: "boss", hp: 4200, armorPct: 30, resistPct: 0, speed: 0.8, altitude: "ground", leak: 0, gold: 0,
+-    drain: { lives: 1, everyS: 30, warnS: 1.2 },
+-    enemy: "moc-tinh", retreatPct: 50, kHp: 0.4, kHp2: 7.5, kHpMax: 1.49, modeHp: { relax: 0.78, learn: 0.78, challenge: 0.9 }, retreatS: 2, chestGold: 150, heroMul: 0.35,
+-    if (B.plot[at + p] === PLOT.ripe) N.call[n] = makeCall(w, CALL_KIND.harvest, CALL.words.harvest, n, b, -1, p);
+-  // Night falls: a chop call left open lives a power call's time; the villagers chop on alone (economy.ts: no new one by night).
+-  // R3: Rễ hút sinh khí, a life every 30 s of its fight (R3_PLAN §7.1; 20 s cost the slow bots 10–12 points of wins, §7.9).
+-  // k factor (R2 §7.4: 0.3 / 6.5, cap 1.46; R3 §7.9: 0.4 / 5.5, cap 1.42; A1: 0.4 / 7.5, 1.49), Thư giãn, Học ×0.78, Thử thách ×0.9.
+-  balanced: { dayS: 75, open: 3, typeS: 8, slipS: 1.35, hpMul: 1, floorE: 20, lifeK: 1.0, powerCdS: 9, pause: false, warnK: 1, directK: 2.2 },
+-  for (const c of phase === "night" ? w.calls.live() : []) if (w.calls.kind[c] === CALL_KIND.chop) w.calls.expire[c] = w.tick + ticks(CALL.powerLifeS);
+-  }
+- * 1.35 s for chains of chop words, BUILD_NOTES §7.3, §7.8; by mode since lane A2, §7.10).
+- * away). A tree with no way to it is left (−2) until marked again.
+- * made chop words crowd out the towers' calls), its wood paid as it goes; then it picks a tree again (a mark may call it
+-/** §4.1: plots grow by themselves; the farmer walks inside the farm to a plot, sows it (2 s) or harvests it (12 s, a 3-word call). */

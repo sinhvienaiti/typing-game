@@ -1,0 +1,83 @@
+{
+  "branch": "td-ui",
+  "ancestor": "2a1f61d",
+  "check": {
+    "before": {
+      "exit": 0,
+      "testFiles": 43,
+      "tests": 405
+    },
+    "after": {
+      "exit": 0,
+      "testFiles": 46,
+      "tests": 426
+    },
+    "timingFailures": 0,
+    "kitFilesMatched": 42
+  },
+  "golden": {
+    "exit": 0,
+    "same": [
+      true,
+      true
+    ],
+    "changed": [
+      {},
+      {}
+    ]
+  },
+  "budget": {
+    "method": "Vite manifest import closure; node:zlib gzipSync, same as bundle-budget.mjs",
+    "before": {
+      "/": 82314,
+      "/?title=0": 83754,
+      "3d_kB_rounded": 171.83
+    },
+    "after": {
+      "/": 83233,
+      "/?title=0": 84677,
+      "3d": 172347
+    },
+    "files": [
+      "assets/view-3d-BSdSHzjV.js",
+      "assets/three.module-Zn6Hw7gT.js",
+      "assets/index-DwXFbP4C.js"
+    ]
+  },
+  "headroom": {
+    "/": 1767,
+    "/?title=0": 323,
+    "3d": 87653
+  },
+  "tsLinesOutsideKit": {
+    "before": 13101,
+    "after": 13231,
+    "ceiling": 16500
+  },
+  "syntaxCheckExit": 0,
+  "protectedDiffExit": 0,
+  "partB": {
+    "accepted": [],
+    "copiedMedia": []
+  },
+  "emoji": {
+    "files": 20,
+    "occurrences": 23,
+    "fileCharPairs": 19
+  },
+  "gridCases": 1128,
+  "pointerCases": 24,
+  "sourceSha256": {
+    "src/view/words/cards.ts": "d477b657b3e6b9b0dc89bf04c4041acac9f180349f518c9e6d62710416db47f7",
+    "src/view/words/feel.css": "42c5165921c78d5ca836b162f48e43c82806d0b8f32167d2310dbe2814b4d920",
+    "src/view/words/dom.ts": "5220874130de4d3b63f156e3e7c75be03708520ebe6b4010c3b0e5016e52dc4f",
+    "src/view/words/safe.ts": "fc946d60d490ba03e1a6f3e6a4706eaa912df73b1b1a8662b6c15a844f211dc6",
+    "src/view/words/steps.ts": "cf094e2a4f4f45b0c461aa3b9a3c30b5a682f50a4d563dba1fb24da5475dbc62",
+    "src/view/words/tray.ts": "40292cb2ccae60d3ac08da9e8cbfe5c827b65dfcc639b6dcfc1b381301bd6898",
+    "src/view/3d/words.ts": "aa4ccf3830bc0e470fa08f6883be1faf4874fe0f50e37117c8fd4baeb7c32e8d",
+    "scripts/visual/scenarios/td-1c-words.mjs": "a43cc07a038203269ed070f1cc50a4116bf78426b666b99fe72f99d6cc53b67b",
+    "tests/td-c10-r5.test.ts": "31ec0b9e5aa2b5b5508df8559e7b0ac7913625b3466694d6ff76efa86482965b",
+    "tests/td-card-art.test.ts": "dc7976ba1a1eeba533ba4693c6c7b078e04b7758ce72bf57403a9f637b193a7b",
+    "tests/td-no-emoji.test.ts": "b17888ea6482c36dd489bdea037c784b032d57dfe88710aee09f21971f4e4d95"
+  }
+}

@@ -1,0 +1,41 @@
+
+ RUN  v3.2.7 /Users/toandx/htdocs/typing-game/games/.wt-td-codex
+
+ ❯ tests/td-sheet-cards.test.ts (8 tests | 1 failed) 16ms
+   ✓ 103 A6: Knowledge on the results card > balanced with 0 Knowledge: visible false 6ms
+   × 103 A6: Knowledge on the results card > learn with 0 Knowledge: visible true 4ms
+     → expected false to be true // Object.is equality
+   ✓ 103 A6: Knowledge on the results card > challenge with 3 Knowledge: visible true 2ms
+   ✓ 103 A8: measured meaning strips take space in the column > keeps an upper meaning strip clear of the next word in the same column 0ms
+   ✓ 103 A8: measured meaning strips take space in the column > reserves every meaning box even when the old 240 px rise is full 0ms
+   ✓ 103 A8: measured meaning strips take space in the column > uses the full meaning width and height when separating neighbouring columns 0ms
+   ✓ 103 A8: draw includes mean cards for exactly 1000 ms > keeps the meaning strips above the next word at width 1280 2ms
+   ✓ 103 A8: draw includes mean cards for exactly 1000 ms > keeps the meaning strips above the next word at width 1920 1ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/td-sheet-cards.test.ts > 103 A6: Knowledge on the results card > learn with 0 Knowledge: visible true
+AssertionError: expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ ❯ tests/td-sheet-cards.test.ts:19:52
+     17|         const sheet = Object.assign(Object.create(Sheet.prototype), { …
+     18|         sheet.show("results", w);
+     19|         expect(el.innerHTML.includes("Knowledge")).toBe(visible);
+       |                                                    ^
+     20|         if (visible) expect(el.innerHTML).toContain(`<dt>Knowledge</dt…
+     21|       }
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 7 passed (8)
+   Start at  19:52:34
+   Duration  408ms (transform 162ms, setup 0ms, collect 227ms, tests 16ms, environment 0ms, prepare 38ms)
+

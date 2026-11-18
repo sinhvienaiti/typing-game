@@ -1,0 +1,201 @@
+{
+  "buildEmbedded": [
+    {
+      "base": "games/dragon-hold",
+      "name": "vite",
+      "version": "7.3.7",
+      "license": "MIT",
+      "packageJson": "games/dragon-hold/node_modules/vite/package.json",
+      "licensePath": "games/dragon-hold/node_modules/vite/LICENSE.md",
+      "licenseSha256": "a77a1c089806b39ad339535bdf3677f636c91d96693e8ad7b11fe733f650ea64",
+      "source": "games/dragon-hold/node_modules/vite/dist/node/chunks/config.js",
+      "sourceSha256": "2e71344450b7c25a7fe0848d5ee474fb7342614d900ab9168588986150cbb9f9",
+      "helperMarkers": {
+        "function polyfill()": 849687,
+        "function preload(baseModule, deps, importerUrl)": 835060
+      }
+    },
+    {
+      "base": "games/typing-defense",
+      "name": "vite",
+      "version": "7.3.7",
+      "license": "MIT",
+      "packageJson": "games/typing-defense/node_modules/vite/package.json",
+      "licensePath": "games/typing-defense/node_modules/vite/LICENSE.md",
+      "licenseSha256": "a77a1c089806b39ad339535bdf3677f636c91d96693e8ad7b11fe733f650ea64",
+      "source": "games/typing-defense/node_modules/vite/dist/node/chunks/config.js",
+      "sourceSha256": "2e71344450b7c25a7fe0848d5ee474fb7342614d900ab9168588986150cbb9f9",
+      "helperMarkers": {
+        "function polyfill()": 849687,
+        "function preload(baseModule, deps, importerUrl)": 835060
+      }
+    },
+    {
+      "base": "games/typing-survival",
+      "name": "vite",
+      "version": "7.3.7",
+      "license": "MIT",
+      "packageJson": "games/typing-survival/node_modules/vite/package.json",
+      "licensePath": "games/typing-survival/node_modules/vite/LICENSE.md",
+      "licenseSha256": "a77a1c089806b39ad339535bdf3677f636c91d96693e8ad7b11fe733f650ea64",
+      "source": "games/typing-survival/node_modules/vite/dist/node/chunks/config.js",
+      "sourceSha256": "2e71344450b7c25a7fe0848d5ee474fb7342614d900ab9168588986150cbb9f9",
+      "helperMarkers": {
+        "function polyfill()": 849687,
+        "function preload(baseModule, deps, importerUrl)": 835060
+      }
+    }
+  ],
+  "vendored": [
+    {
+      "base": "games/dragon-hold",
+      "path": "games/dragon-hold/node_modules/three/examples/jsm/libs/meshopt_decoder.module.js",
+      "container": "three@0.170.0",
+      "sha256": "01f48524f4bac6141eaba07e94cc36e7ee56f311796fa6117c159842941b0468",
+      "header": "// This file is part of meshoptimizer library and is distributed under the terms of MIT License.\n// Copyright (C) 2016-2022, by Arseny Kapoulkine (arseny.kapoulkine@gmail.com)\nvar MeshoptDecoder = (function() {\n\t\"use strict\";\n\n\t// Built with clang version 14.0.4\n\t// Built from meshoptimizer 0.18"
+    },
+    {
+      "base": "games/typing-survival",
+      "path": "games/typing-survival/node_modules/three/examples/jsm/libs/meshopt_decoder.module.js",
+      "container": "three@0.170.0",
+      "sha256": "01f48524f4bac6141eaba07e94cc36e7ee56f311796fa6117c159842941b0468",
+      "header": "// This file is part of meshoptimizer library and is distributed under the terms of MIT License.\n// Copyright (C) 2016-2022, by Arseny Kapoulkine (arseny.kapoulkine@gmail.com)\nvar MeshoptDecoder = (function() {\n\t\"use strict\";\n\n\t// Built with clang version 14.0.4\n\t// Built from meshoptimizer 0.18"
+    },
+    {
+      "base": "shared/game-kit",
+      "path": "shared/game-kit/node_modules/three/examples/jsm/libs/ktx-parse.module.js",
+      "container": "three@0.170.0",
+      "sha256": "34a3a68f08db30a353802c5a762c5dcd89a168a1b56567019ef4a7563ceaf4d4",
+      "header": "Không có nhãn semver trong bản nhúng."
+    },
+    {
+      "base": "shared/game-kit",
+      "path": "shared/game-kit/node_modules/three/examples/jsm/libs/meshopt_decoder.module.js",
+      "container": "three@0.170.0",
+      "sha256": "01f48524f4bac6141eaba07e94cc36e7ee56f311796fa6117c159842941b0468",
+      "header": "// This file is part of meshoptimizer library and is distributed under the terms of MIT License.\n// Copyright (C) 2016-2022, by Arseny Kapoulkine (arseny.kapoulkine@gmail.com)\nvar MeshoptDecoder = (function() {\n\t\"use strict\";\n\n\t// Built with clang version 14.0.4\n\t// Built from meshoptimizer 0.18"
+    },
+    {
+      "base": "shared/game-kit",
+      "path": "shared/game-kit/node_modules/three/examples/jsm/libs/zstddec.module.js",
+      "container": "three@0.170.0",
+      "sha256": "5cbf818e842628a4464e748594a6deae18ceddda3c2f541e7b3a0ff5fc7611e2",
+      "header": "Không có nhãn semver trong bản nhúng."
+    }
+  ],
+  "distExisting": [
+    {
+      "base": "games/dragon-hold",
+      "js": [
+        {
+          "path": "games/dragon-hold/dist/assets/GLTFLoader-CLwCZMJZ.js",
+          "sha256": "e4758645148b13f475a4ca20e6763f28425e417dec694ffa925958a8ae94c986"
+        },
+        {
+          "path": "games/dragon-hold/dist/assets/index-BRh_Fs8R.js",
+          "sha256": "9fd11eb43fa8c1c9da59c0232620b2a328a6492499e27a6c356aca77d38c9d1c"
+        },
+        {
+          "path": "games/dragon-hold/dist/assets/meshopt_decoder.module-BbCP70j-.js",
+          "sha256": "46f055a26db0b270684f504b82b809932c2162d2e6c9909c93e7fbfee5f40801"
+        },
+        {
+          "path": "games/dragon-hold/dist/assets/three-DRz6Geb_.js",
+          "sha256": "bfb5b7a0a48195de91f7619f4594b66d77dfe0b2cceb410570c97e64f144d4b6"
+        }
+      ],
+      "modulepreload": true,
+      "preloadHelper": true,
+      "fullMitPermissionText": false,
+      "copyrightMarker": false,
+      "noticeFiles": [],
+      "publicCodeFiles": []
+    },
+    {
+      "base": "games/typing-defense",
+      "js": [
+        {
+          "path": "games/typing-defense/dist/assets/learn-AdKa66hf.js",
+          "sha256": "b344e65d02ba5aac01b712c70ffa78fd31d403487d54010d9e63a93db478a990"
+        },
+        {
+          "path": "games/typing-defense/dist/assets/sandbox-C__2Pwex.js",
+          "sha256": "bf773adb9a0c55b66111fcb6b84eff88c2c3131c404de913be65fb084bfebd98"
+        },
+        {
+          "path": "games/typing-defense/dist/assets/fx-pipe-DktXHS38.js",
+          "sha256": "83e8fbb1d9fcfa8c68d6e4c4fd3148f9a45e37ffc69d94ad7f7958bd7aa4cf81"
+        },
+        {
+          "path": "games/typing-defense/dist/assets/tips-CRt3KfnY.js",
+          "sha256": "1dfd5e819730a114327167a2f779832b128c60eb6abc44651803909def64fa3d"
+        },
+        {
+          "path": "games/typing-defense/dist/assets/settings-Dnx8jMWA.js",
+          "sha256": "71fff16f44e297a0d196968c9cfa55bdb7b58d043e359aec50776c57fadfd2d7"
+        },
+        {
+          "path": "games/typing-defense/dist/assets/retry-CKmpu6pD.js",
+          "sha256": "308c4d5bf6a625c2ac5c05e0bd3cac5d69edf22f5ae06c2df3cfa5f0f912aba6"
+        },
+        {
+          "path": "games/typing-defense/dist/assets/title-tPbf1f70.js",
+          "sha256": "01c51ae16cac0e3b2dd0c15071734c8ae4bfb11290d06846c4f0eca9bb12b0f7"
+        },
+        {
+          "path": "games/typing-defense/dist/assets/audio-min-DRGwZIKR.js",
+          "sha256": "cb9118dd573718ff877c703d582b269022d6dbea990af5239851ccbc33f10286"
+        },
+        {
+          "path": "games/typing-defense/dist/assets/sheets-BvYRJZTh.js",
+          "sha256": "5a74cef0b38861338ff15101fcdc7efaff8ddcf24c1ca7988549bb1972ffd514"
+        },
+        {
+          "path": "games/typing-defense/dist/assets/dev-tools-D1K1RH-f.js",
+          "sha256": "cb854cd69e458e982c12e58c832f266ce5a0802223cf45f953036253187eb85d"
+        },
+        {
+          "path": "games/typing-defense/dist/assets/profile-BnItJLpy.js",
+          "sha256": "5ea7fd702d4fc319dac8d35887ab81e5aa12bbadf400bac7055a66bd6a1ffb19"
+        },
+        {
+          "path": "games/typing-defense/dist/assets/index-B8Ci_BAj.js",
+          "sha256": "6a103a42488ee5bb2e4919f346e6c08fd68f3ad304a084099aa272492bd82d4d"
+        }
+      ],
+      "modulepreload": true,
+      "preloadHelper": true,
+      "fullMitPermissionText": false,
+      "copyrightMarker": false,
+      "noticeFiles": [],
+      "publicCodeFiles": []
+    },
+    {
+      "base": "games/typing-survival",
+      "js": [
+        {
+          "path": "games/typing-survival/dist/assets/index-BLtWX-3u.js",
+          "sha256": "b0d427e2a9813597aa27f023ee4234cc3dd68cd00f115381fce9087d869dc5ec"
+        },
+        {
+          "path": "games/typing-survival/dist/assets/GLTFLoader-BM60796l.js",
+          "sha256": "e9271457eb829478a338cda622908c4f6b97cd594690eb5f62ed550adab71a15"
+        },
+        {
+          "path": "games/typing-survival/dist/assets/meshopt_decoder.module-BbCP70j-.js",
+          "sha256": "46f055a26db0b270684f504b82b809932c2162d2e6c9909c93e7fbfee5f40801"
+        },
+        {
+          "path": "games/typing-survival/dist/assets/BufferGeometryUtils-Dnx6px1C.js",
+          "sha256": "33905162e2631edb449c197a4b3a69d5ff4997838f6e6d089f79556168c46351"
+        }
+      ],
+      "modulepreload": true,
+      "preloadHelper": true,
+      "fullMitPermissionText": false,
+      "copyrightMarker": false,
+      "noticeFiles": [],
+      "publicCodeFiles": []
+    }
+  ]
+}

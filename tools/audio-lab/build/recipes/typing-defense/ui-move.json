@@ -1,0 +1,31 @@
+{
+  "$schema": "../../schemas/recipe.schema.json",
+  "schema": "audiolab.recipe/1",
+  "game": "typing-defense",
+  "id": "ui-move",
+  "group": "rare-fixed",
+  "family": "phim-ui",
+  "description": "Lô 0: chạm rất nhẹ lên thanh tre mỏng, 40 ms (UI Lời Gọi: tre, giấy). Ba hướng thử, mỗi biến thể một hướng (swapMode cycle): mõ gỗ VCSL Woodblock, mõ gỗ click2, trống khe VCSL Slit Drum; lớp 'giấy' là nhiễu 3–8 kHz 12 ms. UI không đổi ngẫu nhiên (mục 5.3), nên biến thể ở đây là ứng viên chọn hướng, không phải bộ biến thể chạy trong game.",
+  "channels": 1,
+  "layers": [
+    {"id": "tap", "role": "attack",
+     "source": {"sampler": {"instrument": "woodblock", "notes": "0:wood-click3:0.05:70"}},
+     "filters": [{"type": "highpass", "hz": 700}], "trim": {"endMs": 60}, "fadeOutMs": 25,
+     "vary": {"swapMode": "cycle", "swap": [
+       {"sampler": {"instrument": "woodblock", "notes": "0:wood-click2:0.05:60"}},
+       {"sampler": {"instrument": "slit-drum", "notes": "0:logdrumhi-medm:0.05:60"}}]}},
+    {"id": "paper", "role": "sweetener", "source": {"synth": "noise_burst", "params": {"color": "white", "durMs": 12, "attackMs": 0.3, "decayMs": 9, "hpHz": 3000, "lpHz": 8000}},
+     "gainDb": -14}
+  ],
+  "chain": {
+    "dcHpfHz": 60,
+    "filters": [{"type": "peak", "hz": 2200, "gainDb": -3, "q": 0.9}],
+    "headTrim": {"thresholdDb": -50, "preRollMs": 0.2},
+    "maxLengthMs": 48,
+    "tail": {"floorDb": -60, "fadeMs": 6},
+    "normalise": {"mode": "lufs-m-max", "target": -20},
+    "limiter": {"ceilingDbtp": -1.0, "releaseMs": 20, "maxGrDb": 6}
+  },
+  "variants": {"count": 3, "seed": 40, "includeBase": true},
+  "export": {"path": "sfx/ui/ui-move", "ogg": true, "oggQuality": 0.6}
+}

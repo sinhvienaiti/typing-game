@@ -1,0 +1,3 @@
+Đã chọn ảnh tĩnh và dải bốn khung `v3-try4`: bề rộng bằng **0,650 lần v1**, chân bốn khung cùng `y=666`. Giữ đủ 8 ảnh thử và prompt; các bản trước không chọn vì sai rộng, căn chân hoặc khổ.
+
+Anh xem [tấm ghép duyệt](games/immortality-cultivation/art-src/lab/firefly-sprint-2026-11-05/stills/skills/thunder-energy-379d-sheet.jpg), nhất là nét gấp khúc của hai tia chính. Chi tiết trong [báo cáo 379d](docs/codex-queue/379d-report.md).

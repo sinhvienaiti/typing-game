@@ -1,0 +1,40 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+_________ test_context_menu_needs_no_voice_and_other_slots_are_silent __________
+
+tmp_path = PosixPath('/Users/toandx/htdocs/typing-game/tmp/firefly-ingest/pytest-tmp/test_context_menu_needs_no_voi0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x108347770>
+
+    def test_context_menu_needs_no_voice_and_other_slots_are_silent(tmp_path, monkeypatch):
+        from context import voices
+        from firefly.listening import context_audio
+        path = tmp_path / 'ui.wav'
+        sf.write(path, .2 * impact(1, ms=120), SR, subtype='PCM_16')
+        monkeypatch.setattr(voices, 'DIR', tmp_path / 'absent-cache')
+>       x, scenario, timeline, _ = context_audio('typing-defense', 'ui-move', path, {})
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+firefly/tests/test_firefly.py:236:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+firefly/listening.py:45: in context_audio
+    sc, seconds = mod.build(scenario, chosen)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+context/td_scenes.py:344: in build
+    sc.word_done(t, note, lv, bell=bell, flash=flash)
+context/td_scenes.py:298: in word_done
+    self.voices.append(mixer.Voice(t_request=t, t_start=t + self.delay, audio=voices.load(v, w), word=w, voice=v))
+                                                                              ^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+voice = 'Samantha', word = 'harbor'
+
+    def read(voice, word):
+        path = voices.path_for(voice, word)
+        if not path.is_file():
+>           raise FileNotFoundError(f'Thiếu giọng cache: {path.name}')
+E           FileNotFoundError: Thiếu giọng cache: samantha-harbor.wav
+
+firefly/listening.py:25: FileNotFoundError
+=========================== short test summary info ============================
+FAILED firefly/tests/test_firefly.py::test_context_menu_needs_no_voice_and_other_slots_are_silent
+1 failed in 2.16s

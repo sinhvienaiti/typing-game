@@ -1,0 +1,37 @@
+{
+  "by": "Claude (coordinator), in-app browser, 31/10/2026 01:10–01:20, before the review fixes",
+  "setup": "worktree admin-ia; Admin server on 3199 with TYPING_GAME_ADMIN_DATA_DIR=tmp/236-admin-data; portal Vite on 3100; second run with TYPING_GAME_ADMIN_SPACE_DIR=tmp/236/absent-space",
+  "spacePresent": {
+    "1280x800": [
+      { "opened": "/admin", "final": "/admin/shared", "breadcrumb": "All games / Overview", "overflow": false },
+      { "opened": "/admin/shared/learning-content", "final": "/admin/shared/learning-content", "breadcrumb": "All games / Learning Content", "overflow": false },
+      { "opened": "/admin/space-typing", "final": "/admin/space-typing", "breadcrumb": "Space Typing / Overview", "h1": "Dashboard", "overflow": false },
+      { "opened": "/admin/space-typing/ships", "final": "/admin/space-typing/ships", "breadcrumb": "Space Typing / Ships", "overflow": false },
+      { "opened": "/admin/space-typing/media?x=1#y", "final": "/admin/media?x=1#y", "breadcrumb": "Administration / Media Library", "overflow": false },
+      { "opened": "/admin/space-typing/roles", "final": "/admin/roles", "breadcrumb": "Administration / Roles & Permissions", "overflow": false },
+      { "opened": "/admin/space-typing/typing-content", "final": "/admin/shared/learning-content", "breadcrumb": "All games / Learning Content" }
+    ],
+    "1920x1080": [
+      { "opened": "/admin/space-typing/ships", "final": "/admin/space-typing/ships", "areaPressed": "Space Typing", "overflow": false },
+      { "opened": "/admin/roles", "final": "/admin/roles", "overflow": false }
+    ],
+    "interactions": {
+      "areaSelector": "clicking Space Typing on /admin/shared goes to /admin/space-typing",
+      "commandPalette": "Cmd+K, type 'Learning', ArrowDown, Enter goes to /admin/shared/learning-content (Enter with no highlighted row does nothing, as before)"
+    },
+    "consoleErrors": "only Vite HMR websocket to wss://typing-game.local (dev proxy setting), no app errors"
+  },
+  "spaceMissing": {
+    "1280x800": [
+      { "opened": "/admin/shared", "result": "Overview renders, catalogue 'Not imported yet', four games listed" },
+      { "opened": "/admin/shared/learning-content", "result": "renders, 18,000 words / 100 levels" },
+      { "opened": "/admin/space-typing/ships", "result": "'Space Typing is not checked out', sidebar still listed" },
+      { "opened": "/admin/media", "result": "Media Library renders, 39 assets" },
+      { "opened": "/admin/roles", "result": "Roles & Permissions renders" }
+    ]
+  },
+  "notes": [
+    "P3 seen: the Space area root shows breadcrumb 'Space Typing / Overview' while its heading is 'Dashboard'.",
+    "P3 seen: the 'not checked out' page gives no hint how to fix it."
+  ]
+}

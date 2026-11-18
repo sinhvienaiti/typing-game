@@ -1,0 +1,216 @@
+{
+  "branch": "td-ui",
+  "head": "2a1f61d",
+  "initialStatusClean": true,
+  "installedDependencies": true,
+  "mediaSourceSymlink": "/Users/toandx/htdocs/typing-game/games/typing-defense/art-src/ui",
+  "mediaOutputSymlink": "/Users/toandx/htdocs/typing-game/games/typing-defense/public/assets/typing-defense/ui",
+  "testBeforeCode": {
+    "exit": 1,
+    "reason": "Chưa có module danh sách chọn; suite đỏ trước triển khai."
+  },
+  "targetedTests": {
+    "command": "pnpm exec vitest run tests/td-ui-art.test.ts tests/td-sheet-cards.test.ts",
+    "files": 2,
+    "passed": 21,
+    "failed": 0,
+    "environment": "node",
+    "newTests": 13,
+    "existingTests": 8
+  },
+  "typecheck": {
+    "command": "pnpm exec tsc --noEmit",
+    "exit": 0
+  },
+  "scenarioSyntax": {
+    "command": "node --check scripts/visual/scenarios/td-theme.mjs",
+    "exit": 0,
+    "scenarioExecuted": false
+  },
+  "golden": {
+    "command": "pnpm td:golden:check",
+    "exit": 0,
+    "same": 2,
+    "changed": {},
+    "problems": 0,
+    "rejected": 0,
+    "content": "f2a21037",
+    "deck": "9c9b91d8",
+    "runs": [
+      {
+        "ticks": 19660,
+        "commands": 389
+      },
+      {
+        "ticks": 5695,
+        "commands": 49
+      }
+    ],
+    "log": "golden.txt"
+  },
+  "media": {
+    "files": 16,
+    "totalBytes": 1121340,
+    "titleBackdropBytes": [
+      256422,
+      332700
+    ],
+    "allDimensionsMatch": true,
+    "quality": {
+      "opaqueWebp": 84,
+      "alphaWebp": 88,
+      "alphaQuality": 100,
+      "exact": true
+    }
+  },
+  "check": {
+    "exit": 0,
+    "command": "ART_MAGICK=/opt/homebrew/bin/magick node scripts/td/prepare-ui.mjs --check"
+  },
+  "repeat": {
+    "written": 0,
+    "fresh": 16,
+    "exit": 0
+  },
+  "grep": {
+    "titleDuskInSourceAndIndex": 0,
+    "uiUrlFiles": [
+      "index.html",
+      "src/ui/art.ts"
+    ]
+  },
+  "sourcesUnchanged": 6,
+  "staticSheets": [
+    {
+      "path": "games/.wt-td-ui/tmp/200/favicon.jpg",
+      "width": 1000,
+      "height": 400,
+      "bytes": 52227
+    },
+    {
+      "path": "games/.wt-td-ui/tmp/200/files.jpg",
+      "width": 3920,
+      "height": 4260,
+      "bytes": 2466426
+    },
+    {
+      "path": "games/.wt-td-ui/tmp/200/results-mock.jpg",
+      "width": 1000,
+      "height": 760,
+      "bytes": 85383
+    },
+    {
+      "path": "games/.wt-td-ui/tmp/200/title-mock-1280.jpg",
+      "width": 1280,
+      "height": 720,
+      "bytes": 337861
+    },
+    {
+      "path": "games/.wt-td-ui/tmp/200/title-mock-1920.jpg",
+      "width": 1920,
+      "height": 1080,
+      "bytes": 615570
+    }
+  ],
+  "rawFramesCreated": 0,
+  "browserRun": false,
+  "budgetMeasured": true,
+  "pnpmCheckRun": true,
+  "gitScope": {
+    "paths": [
+      "docs/changelog/2026-10-30-title-results-art.md",
+      "docs/changelog/README.md",
+      "index.html",
+      "scripts/td/prepare-ui.mjs",
+      "scripts/td/ui-picks.json",
+      "scripts/visual/scenarios/td-theme.mjs",
+      "src/main.ts",
+      "src/ui/art.ts",
+      "src/ui/sheets.ts",
+      "src/ui/td.css",
+      "src/ui/title.css",
+      "src/ui/title.ts",
+      "tests/td-ui-art.test.ts"
+    ],
+    "allowed": true,
+    "diffWhitespaceCheck": 0
+  },
+  "pnpmCheck": {
+    "command": "pnpm check",
+    "exit": 0,
+    "testFiles": 43,
+    "passed": 405,
+    "failed": 0,
+    "durationSeconds": 8.3,
+    "timingFailures": 0,
+    "timingRetriesRequired": false,
+    "kitFilesMatch": 42,
+    "buildExit": 0,
+    "log": "check.txt"
+  },
+  "resumedAt": "2026-10-30",
+  "resumeDirtyFilesAuthorized": true,
+  "budget": {
+    "unit": "decimal bytes (1000 B = 1 kB)",
+    "budgetBytes": 85000,
+    "baselineCommit": "2a1f61d",
+    "baselineMethod": "git archive 2a1f61d, extracted under this worktree tmp; identical installed dependencies via node_modules symlink",
+    "baselineBuild": {
+      "command": "node node_modules/typescript/bin/tsc --noEmit && node node_modules/vite/bin/vite.js build && node scripts/bundle-budget.mjs",
+      "exit": 0,
+      "note": "pnpm build in the archive refused the shared node_modules symlink during its automatic dependency check. Ran the identical package build steps directly, without installing dependencies or using the network."
+    },
+    "before": {
+      "root": "/Users/toandx/htdocs/typing-game/games/.wt-td-ui/tmp/200-baseline-2a1f61d",
+      "startBytes": 81583,
+      "startKB": 81.583,
+      "headroomBytes": 3417,
+      "withinBudget": true,
+      "files": [
+        {
+          "file": "assets/index-Bp8lva72.js",
+          "gzipBytes": 79824
+        },
+        {
+          "file": "assets/title-Bq34DST6.js",
+          "gzipBytes": 1759
+        }
+      ],
+      "directRunBytes": 83041
+    },
+    "after": {
+      "root": "/Users/toandx/htdocs/typing-game/games/.wt-td-ui",
+      "startBytes": 82314,
+      "startKB": 82.314,
+      "headroomBytes": 2686,
+      "withinBudget": true,
+      "files": [
+        {
+          "file": "assets/index-BYxZIrkO.js",
+          "gzipBytes": 80537
+        },
+        {
+          "file": "assets/title-9SnDozbO.js",
+          "gzipBytes": 1777
+        }
+      ],
+      "directRunBytes": 83754
+    },
+    "deltaBytes": 731
+  },
+  "staticReview": {
+    "viewedAtOriginalResolution": true,
+    "groups": 4,
+    "files": 5,
+    "visibleBlockArtifacts": false,
+    "visibleBanding": false,
+    "pinkEdgesOnLogoOrCrest": false,
+    "browserAcceptancePending": true,
+    "note": "Favicon ×4 nearest-neighbour; logo đọc rõ. Crest thua giảm màu/sáng nhưng còn cùng dáng huy hiệu thắng; Claude quyết nhận diện trạng thái."
+  },
+  "mediaPreservedOnResume": true,
+  "oldBackdropPreserved": {
+    "path": "/Users/toandx/htdocs/typing-game/games/typing-defense/public/assets/typing-defense/ui/title-dusk.webp",
+    "md5": "2cd7eb2c5e861cccc88ed32cffc2d420"
+  }
+}

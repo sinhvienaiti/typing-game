@@ -1,0 +1,71 @@
+[
+  {
+    "command": [
+      "node",
+      "shared/game-kit/tools/deploy/check-pack.mjs",
+      "games/.wt-ts-codex/dist",
+      "--game",
+      "typing-survival",
+      "--json"
+    ],
+    "exit_code": 1,
+    "output": "typing-survival.json"
+  },
+  {
+    "command": [
+      "node",
+      "shared/game-kit/tools/deploy/check-pack.mjs",
+      "games/.wt-dh-codex/dist",
+      "--game",
+      "dragon-hold",
+      "--json"
+    ],
+    "exit_code": 1,
+    "output": "dragon-hold.json"
+  },
+  {
+    "command": [
+      "node",
+      "shared/game-kit/tools/deploy/check-pack.mjs",
+      "games/typing-defense/dist",
+      "--game",
+      "typing-defense",
+      "--json"
+    ],
+    "exit_code": 1,
+    "output": "typing-defense.json"
+  },
+  {
+    "command": [
+      "node",
+      "--test",
+      "shared/game-kit/tools/deploy/check-pack.test.mjs"
+    ],
+    "exit_code": 0,
+    "output": "test-final.txt",
+    "tests": 49,
+    "pass": 49,
+    "fail": 0
+  },
+  {
+    "command": [
+      "node",
+      "--check",
+      "shared/game-kit/tools/deploy/check-pack.mjs"
+    ],
+    "exit_code": 0,
+    "output": "node-check.txt"
+  },
+  {
+    "command": [
+      "git",
+      "status",
+      "--short",
+      "-uall",
+      "--",
+      "shared/game-kit"
+    ],
+    "exit_code": 0,
+    "output": "git-status.txt"
+  }
+]

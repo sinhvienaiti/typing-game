@@ -1,0 +1,194 @@
+# Nghiên cứu "uy lực" của chiêu (03/11/2026)
+
+Lý do: anh chấm lab chiêu khoảng 6/10 (canon D58): chiêu phải chờ gồng, không có hiệu ứng màn hình, thiếu sự khủng bố của tu tiên, ít chiêu diện rộng, không có số sát thương, quái không phản ứng, không có âm thanh và tiếng hô.
+
+- **Câu hỏi gửi ChatGPT** (Chat, thinking High, làm 5 phút 36 giây, có tra web): https://chatgpt.com/c/6ae8d7a8-cdfc-83ec-9522-f7cde2543fc9
+- **Bản trả lời gốc** (tiếng Anh, có link nguồn): [`source/power-research-chatgpt-2026-11-03.md`](source/power-research-chatgpt-2026-11-03.md)
+- **Tình trạng nguồn:** Claude chưa mở lại từng link. Số liệu của các game (khựng đòn của Street Fighter V, rung của GDC, số gộp của ZZZ) chỉ dùng làm điểm xuất phát, sẽ chỉnh trong lab.
+
+## Điều rút ra từ nghiên cứu
+
+1. **Chiêu cả sân phải có bốn trạng thái đọc được:** trời đổi, kiếm tụ, kiếm chọn từng con mồi, một nhát kết. Người chơi phải nhìn một con thú mà hiểu "sáu thanh kia đã chọn con này".
+   - Học từ Tale of Immortal (mưa kiếm lớn dần), NARAKA (kiếm bay ưu tiên các mục tiêu khác nhau), Hàn Lập điều 72 thanh Thanh Trúc Phong Vân Kiếm, và Vampire Survivors (thấy từng con bị săn trước, rồi mới quét cả màn).
+2. **Rung theo "trauma":** cường độ = trauma² dùng nhiễu mượt, không rung ngẫu nhiên. Khựng đòn chia bậc theo cỡ đòn. Đòn thường gần như không khựng, để dòng gõ không bị gãy.
+   - Monster Hunter là lời cảnh báo: khựng quá mạnh thì người chơi kêu vướng, bỏ hẳn thì kêu đòn nhẹ bẫng.
+3. **Thế giới phản ứng nhiều hơn camera.** Nên làm tối thế giới, chớp sáng ngắn, đổi bóng dáng của thú. Mờ toàn màn hình và cảnh cận che sân thì rất hạn chế.
+   - Genshin và HSR bị chê vì cảnh cận và chớp sáng lặp lại gây mỏi mắt. Nên có thanh chỉnh độ rung và chớp (hướng dẫn trợ năng của Microsoft).
+4. **Phản ứng của thú phải đổi bóng dáng**, không chỉ đổi lớp da: lóe viền 2–4 khung, vệt chém theo hướng, giật lùi nhẹ, rồi biến hình rõ khi chết.
+   - Chỉ tinh anh mới bị choáng hoặc cắm kiếm. Thú Vương không bao giờ bị đẩy, chỉ giật thân trên.
+   - Lấy từ DMC5: đòn thứ hai không khởi động lại phản ứng đang chạy.
+5. **Số sát thương gộp theo đòn, không theo từng va chạm.**
+   - Gộp mỗi mục tiêu trong 100–150 ms ("12.8K × 6"). Từ 5 thú trở lên trúng cùng lúc thì hiện một số tổng ở giữa cụm.
+   - Chí mạng to 120–135 %. Số không được đè lên nhãn chữ.
+   - Học cách gộp sát thương của ZZZ và số rút gọn của Diablo IV và Lost Ark.
+6. **Tiếng hô ngắn thắng câu dài:** mỗi chiêu hay dùng cần 3 bản thu để khỏi nhàm. Âm thanh chia lớp: gọi, bay, chạm theo chất (thịt, đá, linh), chết. Tuyệt kỹ thêm lớp "thế giới đổi": nhạc lùi, lặng 40–60 ms trước nhát cuối, tiếng chuông dài.
+   - Không phát 500 tiếng kiếm riêng. Gộp va chạm theo khoảng 30–50 ms, và chỉ 8–12 thanh gần người chơi có tiếng vụt qua.
+7. **Nhãn chữ là lớp riêng sau hậu kỳ:** không nhận bloom, mờ, tách màu, đổi phơi sáng hay chớp. Viền tối 2–3 px, nền tối 65–85 %. VFX dưới nhãn giảm 40–60 %.
+
+## Hướng ChatGPT đề xuất và cách ta dùng
+
+ChatGPT đưa ba hướng:
+- **A, Thiên Hà Kiếm Lưu** (sông kiếm trên trời): thanh thoát, đậm chất tiên hiệp.
+- **B, Liệp Sát Kiếm Trận** (trận săn đen đỏ): đáng sợ, nhưng nghiêng về ma đạo.
+- **C, Tinh Hà Kiếm Vực** (chòm sao): rực rỡ, nhưng dễ ra kiểu gacha chung chung.
+
+ChatGPT chọn **A, lấy thêm phản ứng thú dữ dội của B và cách gộp số của C**.
+
+Claude theo hướng đó, với hai chỗ sửa theo anh:
+- **Cảnh cận cho tuyệt kỹ** là cảnh cận thật, khoảng 1 s, dừng game lẫn giờ gõ (D58). ChatGPT khuyên chỉ có băng chữ ngắn.
+- **Hiệu ứng màn hình mạnh hơn bảng của ChatGPT**, vì anh chê "không hề có hiệu ứng màn ảnh". Lấy mức giữa A và B, rồi chỉnh theo khung ảnh và ý anh.
+
+| Bậc | Rung | Khựng | Chậm | Tối / chớp | Cảnh cận |
+|---|---|---|---|---|---|
+| Đánh thường | 3 px, tắt trong 90 ms | 14 ms, chỉ con thú trúng đòn | không | không chớp toàn màn; chớp tại chỗ trúng α 0,4 trong 70 ms, bán kính 130 px | không |
+| Chiêu | 7 px, 200 ms; đẩy zoom 1,5 % ở nhát kết | 50 ms ở đòn chính, 67 ms ở nhát kết | 0,6× trong 140 ms ở nhát kết | lúc ra chiêu đèn thế giới giảm 22 % trong 300 ms (Ngự Kiếm Quyết thì không); chớp tại chỗ α 0,42, bán kính 190 px; nhát kết: chớp toàn màn α 0,3 trong 3 khung, mờ tỏa tâm 80 ms, viền màu 6 px | không |
+| Tuyệt kỹ và chiêu cả sân | 16 px + nghiêng ≤ 0,35°, 350 ms; đẩy zoom 4 % | 50 ms mỗi đợt, 100 ms ở cao trào | 0,3× trong 280 ms | suốt chiêu (tuyệt kỹ: từ lúc vào cảnh cận) đèn thế giới còn 55 %, thế giới mất 60 % màu, viền tối quanh khung: độ sáng trung bình của sân giảm 35–50 %; cao trào: chớp α 0,42 trong 3 khung rồi trả nhanh về khung tối, mờ tỏa tâm 80 ms, viền màu 12 px | có, khoảng 1 s, dừng game và giờ gõ |
+
+Sửa ở lượt 2 (03/11): hai giám khảo mù không thấy màn hình phản ứng ở tốc độ thật (độ sáng sân chỉ giảm từ 66 xuống 62, nhát kết thành sương sữa, đòn thường và Ngự Kiếm Quyết nhuộm xanh cả màn như bộ lọc), nên rung và khựng gần gấp đôi, tối bằng cách hạ đèn thế giới (VFX giữ nguyên độ sáng), chớp toàn màn chỉ ở nhát kết.
+
+**Chiêu cả sân mẫu: Vạn Kiếm Triều Tông** (萬劍朝宗, Ten-Thousand Sword Convergence), dựng làm mẫu trong lab. Tên và ô chốt theo danh mục chiêu mới.
+
+| Thời điểm | Diễn biến |
+|---|---|
+| F0, phím cuối | 8 kiếm thật rời tay ngay tới thú gần |
+| F1–20 | Thế giới tối dần (lượt 2: đèn thế giới còn 55 %, độ sáng sân giảm khoảng 45 %, lượt 1 chỉ 8 % nên không thấy); một vệt sông kiếm hiện chéo trên trời |
+| F4–30 | 64 hạt kiếm bay lên; sông kiếm phủ gần 40 m, 320 kiếm ở High |
+| F30–168 | Săn: mỗi 100 ms có 24–36 kiếm tách ra lao xuống. Kiếm được tái dùng nên thấy được 700–900 nhát |
+| F168–192 | Kiếm còn lại bay lên, xoắn một vòng, xếp thành một nét chéo khổng lồ |
+| F192 | Nhát kết quét cả sân. Sông kiếm thu về một điểm trên đầu anh hùng, kèm một tiếng chuông ngọc trầm |
+
+Chọn mục tiêu có giữ chỗ:
+- **Điểm ưu tiên** = mối nguy với cổng × 2 + tinh anh × 1,5 + độ gần × 0,8 + máu thấp × 0,5 − số kiếm đã giữ.
+- **Số kiếm giữ mỗi con:** thú thường 2, tinh anh 4–6, Thú Vương 8–12.
+- **Đổi mục tiêu:** con chết thì kiếm đổi đích ở tick sau; 15–20 % số kiếm cố ý chọn con khác gần đó.
+
+## Việc tiếp theo
+
+- **Dựng lớp uy lực dùng chung trong lab** (bất kể danh mục chiêu mới ra sao):
+  - hiệu ứng màn hình theo bậc, cảnh cận tuyệt kỹ, phản ứng và cái chết của thú;
+  - số sát thương gộp, ra chiêu tức thì;
+  - móc âm theo sự kiện, mẫu Vạn Kiếm Triều Tông.
+- **Danh mục chiêu mới:** nghiên cứu nguồn Trung Quốc song song ở ChatGPT và Gemini (Argon), xem [`SKILL_CATALOG_V2_RESEARCH.md`](SKILL_CATALOG_V2_RESEARCH.md) khi xong.
+- **Âm thanh** (tiếng hiệu ứng và tiếng hô tiếng Trung) tạo trong Firefly, theo [`WEAPON_AUDIO.md`](WEAPON_AUDIO.md) và D58.
+
+## Kết quả lượt 1 (03/11, khoảng 03:15)
+
+Lượt 1 có 12 commit dựng (`3cd207d`…`193f15a`), changelog ở `docs/changelog/2026-11-03-lab-power-pass.md` của repo game. Sau đó một agent soát đối kháng tìm ra 7 lỗi thật và sửa cả 7 (`c05eea4`…`662eaa2`):
+- NaN vào bloom ở Ultra;
+- một đòn cũ giữ đòn mới thành 83 ms;
+- bộ điều chỉnh độ phân giải hạ nhầm;
+- nhát kết vượt bảng bậc;
+- rung và tách màu sai tỉ lệ theo độ cao màn hình;
+- kiếm xoay phụ thuộc tốc độ khung;
+- tạo chuỗi mỗi đòn.
+
+Đo lại: phím tới đòn 33 ms; High p95 phím 7 là 8,4 ms, K5 là 9,7 ms.
+
+**Hai giám khảo mù: 5,8 và 5,5** (trần 8,5). Hai người cùng thấy:
+- ở cận cảnh, tuyệt kỹ và chiêu cả sân ra khỏi khung;
+- màn hình tối chưa đủ (độ sáng chỉ giảm từ 66 xuống 62), nhát kết là sương sữa;
+- kiếm phím 7 thành "đống que sáng" một màu, không có thanh chủ;
+- quái phản ứng ít, sau chiêu xoáy còn đứng trắng bệch như lỗi;
+- số sát thương nhiều và rối, có số ra ngoài sân;
+- cảnh cận đứng im như băng quảng cáo, tranh tả thực không khớp nhân vật tạm trên sân, chữ Hán đứng trước tên tiếng Anh.
+
+**Lượt 2** (workflow `wf_38571378-1ef`) sửa đúng các điểm này, rồi soát đối kháng và cho hai giám khảo mới chấm. Theo luật ba lần thử: nếu tới lượt 3 vẫn không tăng rõ, Claude bàn hướng khác với ChatGPT trước lượt 4.
+
+## Kết quả lượt 2 (03/11, khoảng 05:00)
+
+- **Dựng:** 10 commit (`3eba149`…`32b027a`), changelog `docs/changelog/2026-11-03-lab-power-pass-r2.md` của repo game. Sau đó soát đối kháng, sửa 4 lỗi (`d005f07`…`1332702`):
+  - lóe cao trào không hiện khung đầu;
+  - chữ số bị cắt trong atlas;
+  - số chồng nhau ở mép xa;
+  - reset còn sót mặt cắt chết.
+- **Đo lại:**
+  - từ phím tới hiệu ứng 0 ms, tới thân 33 ms;
+  - High p95: phím 7 10,5 ms, K5 10,9 ms;
+  - thế giới tối thêm khoảng 40–45 %;
+  - số sát thương trên phím 7 từ 271 còn 61.
+- **Hai giám khảo mới: 5,4 và 5,4.** Không tăng, dù đã làm đủ danh sách lượt 1. Cả hai cùng chỉ ra:
+  - lóe cao trào thành lớp sương xanh xám "như lỗi render";
+  - kiếm như nhựa, que tăm, bốn màu không có thứ bậc;
+  - tuyệt kỹ K5 là đĩa phẳng nhỏ như mặt đồng hồ HUD;
+  - quái phản ứng vẫn nhỏ;
+  - số còn rối;
+  - đòn cơ bản quá nhỏ;
+  - cảnh cận đẹp nhưng tĩnh.
+- **Kết luận:** hai lượt bám danh sách không tăng điểm. Vấn đề nằm ở hướng mỹ thuật và kỹ thuật dựng (thứ bậc giá trị sáng tối, chất liệu, sprite vẽ bằng code), không ở việc thiếu mục. Claude đã gửi ChatGPT chẩn đoán trước lượt 3: https://chatgpt.com/c/6ae90a5c-7d00-83ec-b620-e2cf41e2b534
+
+## Lượt 3: đổi cách làm theo chẩn đoán (03/11, khoảng 05:30)
+
+Bản chẩn đoán gốc: [`source/vfx-diagnosis-chatgpt-2026-11-03.md`](source/vfx-diagnosis-chatgpt-2026-11-03.md). Bản tóm tắt:
+- **Gốc lỗi là thứ bậc sáng tối.** Lóe cộng màu trong không gian tuyến tính, mờ xuyên tâm, tách màu 12 px và thân kiếm cộng sáng trong suốt cùng kéo cả khung về vùng xám giữa.
+- **Hướng đúng:** lõi trắng nhỏ, một dải lam bão hòa hẹp, trên nền tối sạch. Hình đồ họa vẽ có chủ đích, không cộng dồn hiệu ứng.
+
+**Khung mục tiêu ("hợp đồng hình")** do Claude vẽ bằng ChatGPT trước khi code (chat https://chatgpt.com/c/6ae90c2e-7d20-83ec-acb9-d513107b7055). Có 6 khung ở camera chơi:
+1. đòn cơ bản lúc phóng;
+2. đòn cơ bản lúc trúng;
+3. mưa kiếm cả sân lúc tụ;
+4. mưa kiếm cả sân lúc đỉnh;
+5. khung va chạm tuyệt kỹ đảo màu kiểu anime;
+6. cảnh sau tuyệt kỹ.
+
+Ảnh và prompt nguyên văn ở `games/immortality-cultivation/art-src/skills/targets/` (không đưa vào Git); bảng ghép ở `tmp/shots/targets/target-frames-sheet.jpg`. Hai giám khảo mù chấm khung mục tiêu trước khi dùng làm chuẩn.
+
+**Lượt 3a** (agent, đang chạy) bỏ phần sai và dựng nền:
+- kiểm chuỗi hậu kỳ;
+- khung va chạm đồ họa 1–3 khung;
+- kiếm ba tầng trắng và lam, vàng chỉ cho kiếm chủ;
+- quái phân tầng phản ứng;
+- tối đa 8 con số;
+- dựng lại đòn cơ bản.
+
+**Lượt 3b** dựng theo khung mục tiêu:
+- tuyệt kỹ theo chiều đứng: cổng trời, cột sáng, mưa kiếm phủ ≥ 70 % sân;
+- flipbook vẽ tay cho nổ, khói, mực;
+- cảnh cận có dáng hành động.
+
+**Hai giám khảo chấm khung mục tiêu (ảnh tĩnh): 6,6 và 6,8**, chưa đạt ngưỡng 8 để làm chuẩn.
+- **Mạnh:** khung 3–5 có ý hay và sức mạnh cao (thị trường 7–7,5, cuốn hút 7,5–8, sức mạnh 7,5–9).
+- **Yếu:**
+  - không vẽ đè lên ảnh chụp thật của game, nên lệch sân, ánh sáng và mẫu quái giữa các khung;
+  - vẽ to gấp 3–5 lần tỉ lệ thật (nhân vật 30–70 px);
+  - có kiếm đâm ngược chuôi ở khung 4;
+  - khung 4 thiếu thứ bậc sáng;
+  - đòn cơ bản thiếu sức nặng: cần ấn dưới chân, vệt dày ≥ 4 px;
+  - nhân vật thiếu "bộ hào quang";
+  - khung 5 vẽ từ camera thấp, không phải camera chơi;
+  - khung 6 chưa rõ con nào chết.
+- **Bước tiếp:** vẽ lại cả 6 khung đè lên một ảnh chụp thật của game ở camera chơi. Việc này cần anh kéo ảnh vào chat ChatGPT, vì trang ChatGPT chặn ảnh từ máy cục bộ.
+
+**Họa tiết khung va chạm vẽ tay** (ChatGPT, mực đen trên nền trắng) đã có: tia mực xuyên tâm, sao nổ, vệt chém trăng khuyết, trường vệt kiếm, mực vỡ. Bản gốc, mặt nạ alpha 1024 px và prompt ở `games/immortality-cultivation/art-src/skills/impact-tex/`.
+
+## Kết quả lượt 3a (03/11, khoảng 06:30)
+
+**Đã làm:** dựng 8 commit (`f39a5ea`…`580bee3`) gồm:
+- kiểm chuỗi hậu kỳ (lớp sương xám là do pass màn hình);
+- khung va chạm đồ họa dùng họa tiết vẽ tay (khung cao trào 81–84 % đen hoặc 57–66 % trắng; vùng xám giữa dưới 12 %, trước là 76–93 %);
+- lõi kiếm đưa vào bloom 5–7,5, trước là khoảng 2;
+- kiếm ba tầng chỉ trắng và lam;
+- quái phân tầng phản ứng;
+- tối đa 8 con số;
+- đòn cơ bản có vụ nổ trên mục tiêu.
+
+Hiệu năng: High p95 phím 7 9,3 ms, K5 10,8 ms.
+
+**Hai giám khảo mới: 5,3 và 5,1.**
+- **Khen:** khung va chạm tối rồi đảo trắng là hình mạnh nhất. Hai giám khảo chấm lại bản lượt 2 để so: lớp sương lượt 2 chỉ được 2,5.
+- **Chê:**
+  - tuyệt kỹ là xoáy phẳng dưới đất, không phải mưa kiếm, tổng sát thương thấp hơn chiêu sông kiếm;
+  - khung va chạm chỉ 1–2 khung nên trông như nhấp nháy;
+  - sông kiếm thành kim lấm tấm;
+  - nhát kết là mấy đường laser mảnh;
+  - quái chưa bị hất, chém;
+  - vòng HUD dưới chân;
+  - cảnh cận là ảnh tả thực đứng im.
+- **Đánh giá:** đúng dự đoán của ChatGPT, bước gọt bỏ chỉ dọn nền; điểm chỉ lên khi có hình được thiết kế.
+
+**Lượt 3b** (workflow `wf_3d0628db-70e`) dựng:
+- tuyệt kỹ thành mưa kiếm từ cổng trời;
+- giữ khung va chạm 3–5 khung;
+- sông kiếm thân dày, kiếm có thiết kế;
+- vệt kiếm khí dày ở nhát kết;
+- quái chết lần lượt dọc vết chém;
+- trận đồ tu tiên khi tụ lực.

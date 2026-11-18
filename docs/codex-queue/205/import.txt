@@ -1,0 +1,39 @@
+$ node scripts/models/prepare-models.mjs --root games/.wt-ts-codex --out games/.wt-ts-codex/public/assets/typing-survival/models --url-base /assets/typing-survival/models/ --import games/space-typing/public/assets/space-typing/models/manifest.json --only ships/vanguard,heroes/draconis-v3,enemies/rainbow-mine-3d,enemies/rainbow-scout-3d,enemies/rainbow-tank-3d,enemies/rainbow-shield-3d,enemies/rainbow-splitter-3d,skills/vanguard-bolt,skills/solar-lance-bolt,skills/frost-seraph-bolt,skills/crimson-talon-bolt,skills/dragon-fireball --tiers high,medium --generated-at 2026-10-30T00:00:00.000Z
+  high   ← ships/vanguard/vanguard.high.glb (2.62 MB)
+  medium ← ships/vanguard/vanguard.medium.glb (0.84 MB)
+import ships/vanguard → /assets/typing-survival/models/
+  high   ← heroes/draconis-v3/draconis-v3.high.glb (4.16 MB)
+  medium ← heroes/draconis-v3/draconis-v3.medium.glb (1.49 MB)
+import heroes/draconis-v3 → /assets/typing-survival/models/
+  high   ← enemies/rainbow-mine-3d/rainbow-mine-3d.high.glb (0.79 MB)
+  medium ← enemies/rainbow-mine-3d/rainbow-mine-3d.medium.glb (0.29 MB)
+import enemies/rainbow-mine-3d → /assets/typing-survival/models/
+  high   ← enemies/rainbow-scout-3d/rainbow-scout-3d.high.glb (0.52 MB)
+  medium ← enemies/rainbow-scout-3d/rainbow-scout-3d.medium.glb (0.20 MB)
+import enemies/rainbow-scout-3d → /assets/typing-survival/models/
+  high   ← enemies/rainbow-tank-3d/rainbow-tank-3d.high.glb (0.52 MB)
+  medium ← enemies/rainbow-tank-3d/rainbow-tank-3d.medium.glb (0.20 MB)
+import enemies/rainbow-tank-3d → /assets/typing-survival/models/
+  high   ← enemies/rainbow-shield-3d/rainbow-shield-3d.high.glb (0.95 MB)
+  medium ← enemies/rainbow-shield-3d/rainbow-shield-3d.medium.glb (0.30 MB)
+import enemies/rainbow-shield-3d → /assets/typing-survival/models/
+  high   ← enemies/rainbow-splitter-3d/rainbow-splitter-3d.high.glb (0.59 MB)
+  medium ← enemies/rainbow-splitter-3d/rainbow-splitter-3d.medium.glb (0.21 MB)
+import enemies/rainbow-splitter-3d → /assets/typing-survival/models/
+  high   ← skills/vanguard-bolt/vanguard-bolt.high.glb (0.34 MB)
+  medium ← skills/vanguard-bolt/vanguard-bolt.medium.glb (0.14 MB)
+import skills/vanguard-bolt → /assets/typing-survival/models/
+  high   ← skills/solar-lance-bolt/solar-lance-bolt.high.glb (0.29 MB)
+  medium ← skills/solar-lance-bolt/solar-lance-bolt.medium.glb (0.13 MB)
+import skills/solar-lance-bolt → /assets/typing-survival/models/
+  high   ← skills/frost-seraph-bolt/frost-seraph-bolt.high.glb (0.38 MB)
+  medium ← skills/frost-seraph-bolt/frost-seraph-bolt.medium.glb (0.15 MB)
+import skills/frost-seraph-bolt → /assets/typing-survival/models/
+  high   ← skills/crimson-talon-bolt/crimson-talon-bolt.high.glb (0.32 MB)
+  medium ← skills/crimson-talon-bolt/crimson-talon-bolt.medium.glb (0.14 MB)
+import skills/crimson-talon-bolt → /assets/typing-survival/models/
+  high   ← skills/dragon-fireball/dragon-fireball.high.glb (0.26 MB)
+  medium ← skills/dragon-fireball/dragon-fireball.medium.glb (0.13 MB)
+import skills/dragon-fireball → /assets/typing-survival/models/
+
+manifest: 12 models → games/.wt-ts-codex/public/assets/typing-survival/models/manifest.json (URLs /assets/typing-survival/models/…, game games/.wt-ts-codex)

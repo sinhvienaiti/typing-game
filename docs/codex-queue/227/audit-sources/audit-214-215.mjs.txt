@@ -1,0 +1,62 @@
+import fs from 'node:fs';
+import assert from 'node:assert/strict';
+import {execFileSync} from 'node:child_process';
+import {resolveGameArt} from '../../portal/src/game-card.ts';
+import {ParentLearningBridge} from '../../portal/src/learning/bridge.ts';
+import {applyLearningEvents} from '../../shared/learning/core.mjs';
+import {parseLearningProfileBackup} from '../../shared/learning/profile-backup.mjs';
+import {parseLearningMessage,LEARNING_LOOKUP_MESSAGE} from '../../shared/learning/message-contract.mjs';
+globalThis.window=globalThis;
+const git=args=>execFileSync('git',args,{env:{...process.env,GIT_OPTIONAL_LOCKS:'0'},encoding:'utf8'});
+const dest='docs/codex-queue/227/';
+const games=JSON.parse(fs.readFileSync('portal/public/games.json')).games;
+const before=JSON.parse(git(['show','HEAD:portal/public/games.json'])).games;
+const ids=['dragon-hold','typing-defense','typing-survival'];
+const legacy=games.filter(g=>!ids.includes(g.id));
+assert.deepEqual(legacy,before.filter(g=>!ids.includes(g.id)));
+assert.deepEqual(legacy,JSON.parse(fs.readFileSync('portal/tests/fixtures/legacy-games.json')));
+for(let i=0;i<games.length;i++)for(const k of ['id','path','appUrl','group'])assert.deepEqual(games[i][k],before[i][k]);
+const names=['Dragonhold','Wordwoven','Last Line'];
+const descriptions=ids.map((id,i)=>{const g=games.find(g=>g.id===id);assert.equal(g.name,names[i]);assert.match(g.description,/^[^.?!]+\.$/);assert.ok(g.description.length>=50&&g.description.length<=110);assert.doesNotMatch(g.description,/[^\x20-\x7e]|\p{Extended_Pictographic}/u);assert.ok(!Object.hasOwn(g,'icon'));assert.deepEqual(g.art,{icon:`/assets/${id}/portal/icon-192.png`,cover:`/assets/${id}/portal/cover-wide.webp`});return {id,name:g.name,text:g.description,length:g.description.length};});
+const g=games.find(g=>g.id===ids[0]);
+const suffixes=['%2e%2e/a.png','%2E%2E/a.png','%2F/a.png','%2e%2e%2F%2e%2e%2Fspace-typing/portal/icon.png','a b.png','a\t.png','a\n.png','ICON.PNG'];
+const artCases=[];
+for(const suffix of suffixes)for(const appUrl of [g.appUrl,g.appUrl+'/play/session/',g.appUrl.toUpperCase()]){
+ const input=`/assets/${g.id}/portal/${suffix}`;
+ const result=resolveGameArt({...g,appUrl,art:{icon:input}}).icon;
+ if(result)assert.equal(new URL(result).origin,new URL(appUrl).origin);
+ artCases.push({input,appUrl,result,decodedNormalizedPath:result?new URL(decodeURIComponent(new URL(result).pathname),appUrl).pathname:null});
+}
+artCases.push({input:'/ASSETS/dragon-hold/portal/a.png',result:resolveGameArt({...g,art:{icon:'/ASSETS/dragon-hold/portal/a.png'}}).icon});
+const scriptChecks=[];
+for(const p of ['scripts/game-dir.sh','scripts/bootstrap.sh']){
+ const now=fs.readFileSync(p,'utf8'),head=git(['show',`HEAD:${p}`]);
+ assert.equal(head.replaceAll('Rồng Giữ Ải','Dragonhold').replaceAll('Lời Gọi','Wordwoven').replaceAll('Tuyến Cuối','Last Line'),now);
+ const labels=t=>t.split('\n').flatMap((line,i)=>line.includes('Tu Tiên')?[{line:i+1,text:line}]:[]);
+ assert.deepEqual(labels(now),labels(head));
+ scriptChecks.push({path:p,onlyLabelChanges:true,oldNames:0,tuTien:labels(now)});
+}
+fs.writeFileSync(dest+'audit-214.json',JSON.stringify({command:'node tmp/codex-227/audit-214-215.mjs',exit:0,legacyEntriesDeepEqual:legacy.length,routesAndOrderUnchanged:true,descriptions,artCases,scriptChecks},null,2)+'\n');
+const baseEvent={version:1,entityType:'vocabulary',entityId:'lantern',gameId:'recall-typing',activityType:'meaning-recall',result:'correct',occurredAt:'2026-10-30T06:00:00.000Z'};
+const data={type:LEARNING_LOOKUP_MESSAGE,requestId:'review-227',query:{entityType:'vocabulary',entityIds:['lantern'],unknown:'ignored'},gameId:'evil-ignored'};
+assert.ok(!('gameId' in parseLearningMessage(data)));
+async function trial(label,{origin=g.appUrl,sourceMode='frame',active=true,storeError=null,profile=applyLearningEvents(null,[baseEvent]),query=data.query}={}){
+ const posted=[];let loads=0,writes=0,callbacks=0;
+ const frame={contentWindow:{postMessage:(message,targetOrigin)=>posted.push({message,targetOrigin})}};
+ const store={async load(){loads++;if(storeError)throw new Error(storeError);return profile;},async applyMany(){writes++;}};
+ const bridge=new ParentLearningBridge(store,()=>callbacks++);
+ bridge.handleMessage({data:{...data,query},source:sourceMode==='frame'?frame.contentWindow:{},origin},active?frame:null,active?g:null);
+ await new Promise(r=>setImmediate(r));
+ for(const p of posted){assert.equal(p.targetOrigin,g.appUrl);assert.notEqual(p.targetOrigin,'*');assert.equal(p.message.requestId,data.requestId);}
+ return {label,loads,writes,callbacks,posted};
+}
+const cases=[];
+for(const c of [['correct origin, wrong window',{sourceMode:'other'}],['wrong origin, correct window',{origin:'https://evil.example'}],['no active game',{active:false}],['valid',{}],['201 duplicates',{query:{entityType:'vocabulary',entityIds:Array(201).fill('lantern')}}],['storage error includes profile data',{storeError:'PROFILE_SECRET: unrequested-word / private answer'}]])cases.push(await trial(...c));
+const imported=applyLearningEvents(null,[baseEvent]);imported.vocabulary.lantern.recentSamples[0].userAnswer='PRIVATE_USER_ANSWER';imported.vocabulary.lantern.recentSamples[0].expectedAnswer='PRIVATE_EXPECTED_ANSWER';
+const backup=parseLearningProfileBackup(JSON.stringify(imported));
+cases.push(await trial('accepted backup contains answer fields in recentSamples',{profile:backup}));
+const expanded='\uFB03'.repeat(100);
+cases.push(await trial('100 ligatures expand to 300 characters on second parse',{profile:applyLearningEvents(null,[{...baseEvent,entityId:expanded}]),query:{entityType:'vocabulary',entityIds:[expanded]}}));
+cases.push(await trial('stored profile version is echoed in query-failed',{profile:{version:'PRIVATE_PROFILE_VALUE'}}));
+fs.writeFileSync(dest+'audit-215.json',JSON.stringify({command:'node tmp/codex-227/audit-214-215.mjs',exit:0,cases,unknownFieldsDropped:parseLearningMessage(data)},null,2)+'\n');
+console.log(JSON.stringify({legacyEntries:legacy.length,artCases:artCases.length,bridgeCases:cases.length,errors:cases.filter(c=>c.posted[0]?.message.error).map(c=>({label:c.label,error:c.posted[0].message.error})),backupSample:cases.find(c=>c.label.startsWith('accepted backup')).posted[0].message.result.items[0].recentSamples}));

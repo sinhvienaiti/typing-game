@@ -1,0 +1,141 @@
+[
+  {
+    "id": "M1",
+    "path": "vite.config.ts",
+    "description": "Giữ kiểm đúng một khai báo nhưng không thay origin",
+    "tests": [
+      "tests/portal-build.test.ts"
+    ],
+    "original_sha256": "f53de7808971be942b145a462de1f3cd9e46d2761862c83ef9bdad446f74ec76",
+    "mutated_sha256": "41aab6ae531cbd98891e2f42bf2f3a5258a75401488277c5ea0112c362a3d8fd",
+    "mutated": {
+      "failed": 3,
+      "passed": 4,
+      "summary": "Tests  3 failed | 4 passed (7)",
+      "exit": 1
+    },
+    "restored_sha256": "f53de7808971be942b145a462de1f3cd9e46d2761862c83ef9bdad446f74ec76",
+    "restored": {
+      "failed": 0,
+      "passed": 7,
+      "summary": "Tests  7 passed (7)",
+      "exit": 0
+    }
+  },
+  {
+    "id": "M2",
+    "path": "src/app/learning.ts",
+    "description": "Luôn đưa host nhúng cho kit, kể cả khi biến trống",
+    "tests": [
+      "tests/portal.test.ts"
+    ],
+    "original_sha256": "3378c7251d7bb0509b3fd03729c27ac10a76b563ceeb8b5d542772edda75f852",
+    "mutated_sha256": "da3cbee4712458fc2e9e887771c328a0127b6be1e4b5a60145fc174294e246b2",
+    "mutated": {
+      "failed": 1,
+      "passed": 13,
+      "summary": "Tests  1 failed | 13 passed (14)",
+      "exit": 1
+    },
+    "restored_sha256": "3378c7251d7bb0509b3fd03729c27ac10a76b563ceeb8b5d542772edda75f852",
+    "restored": {
+      "failed": 0,
+      "passed": 14,
+      "summary": "Tests  14 passed (14)",
+      "exit": 0
+    }
+  },
+  {
+    "id": "M3",
+    "path": "scripts/deploy/prune.mjs",
+    "description": "Bỏ bước xóa .vite",
+    "tests": [
+      "tests/deploy-prune.test.ts",
+      "tests/deploy-pack.test.ts"
+    ],
+    "original_sha256": "9e5a2ccb590a2b955de75ccbf776a2a0ef2a39f42a59363e35c0ac9333d1e015",
+    "mutated_sha256": "4af4fae8ec0b510a87323e15115ce1826fe755bf87cc20fa2a51468939b51a94",
+    "mutated": {
+      "failed": 5,
+      "passed": 16,
+      "summary": "Tests  5 failed | 16 passed (21)",
+      "exit": 1
+    },
+    "restored_sha256": "9e5a2ccb590a2b955de75ccbf776a2a0ef2a39f42a59363e35c0ac9333d1e015",
+    "restored": {
+      "failed": 0,
+      "passed": 21,
+      "summary": "Tests  21 passed (21)",
+      "exit": 0
+    }
+  },
+  {
+    "id": "M4",
+    "path": "src/app/retry.ts",
+    "description": "Tên tải xuống trở về mẫu cũ",
+    "tests": [
+      "tests/td-b9.test.ts"
+    ],
+    "original_sha256": "9c46d9a10235cb9e542b48ba3cae01ff39c61aafbcb3f45c1cfdbaeb98cbd3df",
+    "mutated_sha256": "aba459d524421f499c15245fe7ec0115d633220d91854865abf4c27e1649b265",
+    "mutated": {
+      "failed": 1,
+      "passed": 4,
+      "summary": "Tests  1 failed | 4 passed (5)",
+      "exit": 1
+    },
+    "restored_sha256": "9c46d9a10235cb9e542b48ba3cae01ff39c61aafbcb3f45c1cfdbaeb98cbd3df",
+    "restored": {
+      "failed": 0,
+      "passed": 5,
+      "summary": "Tests  5 passed (5)",
+      "exit": 0
+    }
+  },
+  {
+    "id": "M5",
+    "path": "scripts/deploy/prune.mjs",
+    "description": "Bỏ chặn symlink ở dist và tổ tiên",
+    "tests": [
+      "tests/deploy-prune.test.ts"
+    ],
+    "original_sha256": "9e5a2ccb590a2b955de75ccbf776a2a0ef2a39f42a59363e35c0ac9333d1e015",
+    "mutated_sha256": "b795fb2b0012fe1200d58a40afdef17467409d51a1de0cf3dcaeed8ec0fc6578",
+    "mutated": {
+      "failed": 0,
+      "passed": 11,
+      "summary": "Tests  11 passed (11)",
+      "exit": 0
+    },
+    "restored_sha256": "9e5a2ccb590a2b955de75ccbf776a2a0ef2a39f42a59363e35c0ac9333d1e015",
+    "restored": {
+      "failed": 0,
+      "passed": 11,
+      "summary": "Tests  11 passed (11)",
+      "exit": 0
+    }
+  },
+  {
+    "id": "M6",
+    "path": "src/app/learning.ts",
+    "description": "Khởi tạo singleton ngay lúc import thay vì lười",
+    "tests": [
+      "tests/portal.test.ts"
+    ],
+    "original_sha256": "3378c7251d7bb0509b3fd03729c27ac10a76b563ceeb8b5d542772edda75f852",
+    "mutated_sha256": "4b7df5e1b693999998c761f306c62c7bce3712702ed487efc57e6b9141dd899d",
+    "mutated": {
+      "failed": 0,
+      "passed": 14,
+      "summary": "Tests  14 passed (14)",
+      "exit": 0
+    },
+    "restored_sha256": "3378c7251d7bb0509b3fd03729c27ac10a76b563ceeb8b5d542772edda75f852",
+    "restored": {
+      "failed": 0,
+      "passed": 14,
+      "summary": "Tests  14 passed (14)",
+      "exit": 0
+    }
+  }
+]

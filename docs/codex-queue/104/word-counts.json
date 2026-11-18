@@ -1,0 +1,48 @@
+[
+  {
+    "rule": "Thiếu chữ",
+    "before": "mỗi từ ẩn 1 chữ (từ 7 chữ trở lên: 2), không bao giờ là chữ đầu. IPA và nghĩa vẫn hiện. Gõ sai ô ẩn thì chữ đúng hiện ra.",
+    "after": "Mỗi từ ẩn một chữ, từ có ít nhất bảy chữ ẩn hai. Chữ đầu luôn hiện. Nghĩa và phiên âm vẫn hiện. Gõ sai chữ ẩn sẽ hiện chữ đúng.",
+    "sentences": [
+      {
+        "text": "Mỗi từ ẩn một chữ, từ có ít nhất bảy chữ ẩn hai.",
+        "words": 13
+      },
+      {
+        "text": "Chữ đầu luôn hiện.",
+        "words": 4
+      },
+      {
+        "text": "Nghĩa và phiên âm vẫn hiện.",
+        "words": 6
+      },
+      {
+        "text": "Gõ sai chữ ẩn sẽ hiện chữ đúng.",
+        "words": 8
+      }
+    ]
+  },
+  {
+    "rule": "Chuẩn",
+    "before": "từ và nghĩa trên bến; khi gõ, từ hiện to trên dòng gõ trên mũi tàu, bến đang gõ hiện IPA và nghĩa; gõ xong hiện \"từ · nghĩa ✓\".",
+    "after": "Từ và nghĩa hiện trên bến. Từ đang gõ hiện lớn phía trên mũi tàu. Bến đang gõ hiện phiên âm và nghĩa. Gõ xong, từ và nghĩa hiện cùng dấu ✓.",
+    "sentences": [
+      {
+        "text": "Từ và nghĩa hiện trên bến.",
+        "words": 6
+      },
+      {
+        "text": "Từ đang gõ hiện lớn phía trên mũi tàu.",
+        "words": 9
+      },
+      {
+        "text": "Bến đang gõ hiện phiên âm và nghĩa.",
+        "words": 8
+      },
+      {
+        "text": "Gõ xong, từ và nghĩa hiện cùng dấu ✓.",
+        "words": 9
+      }
+    ]
+  }
+]

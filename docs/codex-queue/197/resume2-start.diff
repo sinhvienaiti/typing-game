@@ -1,0 +1,1302 @@
+diff --git a/README.md b/README.md
+index 6200a05..39badbb 100644
+--- a/README.md
++++ b/README.md
+@@ -1,9 +1,44 @@
+ # Dragonhold
+ 
+ Chạy `pnpm deploy:pack` để build rồi kiểm thư mục `dist` bằng bộ kiểm của kit
+-với `--game dragon-hold`; lệnh dừng nếu build hoặc kiểm gói thất bại. Bản demo
+-nhà dùng `pnpm deploy:pack:local`, thêm `--allow-local-host` để chấp nhận nguồn
+-portal `typing-game.local`; các kiểm tra khác vẫn giữ nguyên. Hai lệnh chỉ
+-build và kiểm file tại máy, chưa tải media hay đưa gói lên máy chủ. Vite chép
+-bản từ vựng đã ghim trong `public/vocabulary/` vào `dist/vocabulary/`, gồm
+-index, manifest, 100 level và `ATTRIBUTION.md`.
++với `--game dragon-hold`; lệnh dừng nếu build hoặc kiểm gói thất bại.
++
++`VITE_PORTAL_URL` là URL cổng game được ghim lúc build, mặc định trống. Khi
++trống, màn kết quả chỉ có Replay/Retry, không tạo nút “Back to portal”; cầu nối
++học tập giữ sự kiện trong hàng đợi cục bộ, kể cả khi game nằm trong iframe.
++Muốn hiện nút, đặt một URL HTTP(S) tuyệt đối, không chứa thông tin đăng nhập.
++Nút giữ nguyên đường dẫn, query và fragment; cầu nối chỉ dùng phần nguồn
++(giao thức, tên miền, cổng) để gửi và kiểm tra `postMessage`.
++
++```sh
++# Bản phát hành độc lập, tắt cổng kể cả khi môi trường đang đặt biến.
++VITE_PORTAL_URL= pnpm deploy:pack
++
++# Bản phát hành có cổng riêng.
++VITE_PORTAL_URL=https://portal.example/learn/ pnpm deploy:pack
++
++# Bản demo nhà: đặt cổng ngay khi build, cho phép nguồn local lúc kiểm gói.
++VITE_PORTAL_URL=https://typing-game.local/ pnpm deploy:pack:local
++
++# Chỉ build demo, chưa kiểm gói.
++VITE_PORTAL_URL=https://typing-game.local/ pnpm build
++```
++
++`pnpm deploy:pack:local` thêm `--allow-local-host`; các kiểm tra còn lại giữ
++nguyên. Cờ này chỉ cho phép nguồn local, không tự đặt URL. Biến cũ
++`VITE_PORTAL_ORIGINS` không còn cấu hình nút; chuyển sang `VITE_PORTAL_URL`.
++Cũng có thể đặt biến trong file môi trường Vite tương ứng; sau khi đổi cần
++build lại. URL sai định dạng làm build dừng. Giá trị local còn trong bundle
++vẫn bị `deploy:pack` production từ chối.
++
++Vite thay mặc định `PARENT_ORIGIN` của cầu nối trong mã đang biên dịch, không
++ghi lại file kit đã ghim. Nếu khai báo kit đổi cấu trúc, bước này dừng để
++kiểm tra lại. `src/kit/**` và manifest giữ nguyên byte.
++
++Hai lệnh đóng gói chỉ build và kiểm file tại máy, chưa tải media hay đưa gói
++lên máy chủ. Vite chép bản từ vựng đã ghim trong `public/vocabulary/` vào
++`dist/vocabulary/`, gồm index, manifest, 100 level và `ATTRIBUTION.md`.
++
++### Ảnh icon UI
++
++Chạy `pnpm prepare-ui-art --art-src ../dragon-hold/art-src` trong worktree để đóng gói bảng chọn `src/ui/ui-art.json` thành WebP 64/128/256 và manifest trong `public/assets/dragon-hold/ui/icons/`. Dùng thêm `--check` để kiểm nguồn, MD5 và byte mà không ghi file; `--out <dir>` đổi thư mục xuất. Đặt `ART_MAGICK=/opt/homebrew/bin/magick` trên Mac. Script chỉ thu nhỏ khi thiếu cỡ, không phóng to; ảnh dưới 35 dB PSNR được xuất lossless. Khi nhận icon thay thế, cập nhật `source` và `interim` trong bảng rồi chạy lại lệnh.
+diff --git a/package.json b/package.json
+index ab31bc8..ca502d0 100644
+--- a/package.json
++++ b/package.json
+@@ -16,7 +16,8 @@
+     "dh:golden:update": "tsx scripts/balance/golden.ts --update",
+     "visual": "node scripts/visual/cdp-run.mjs",
+     "prepare-ground": "node scripts/assets/prepare-ground.mjs",
+-    "prepare-decals": "node scripts/assets/prepare-decals.mjs"
++    "prepare-decals": "node scripts/assets/prepare-decals.mjs",
++    "prepare-ui-art": "node scripts/ui-art/prepare.mjs"
+   },
+   "dependencies": {
+     "@fontsource/be-vietnam-pro": "^5.3.0",
+diff --git a/src/app/app.css b/src/app/app.css
+index 9370762..68a0221 100644
+--- a/src/app/app.css
++++ b/src/app/app.css
+@@ -277,3 +277,20 @@
+   background: rgba(32, 24, 17, 0.8);
+   pointer-events: none;
+ }
++
++
++/* Pre-router deck recovery uses the existing game panel and authored Retry art. */
++.dh-deck-notice {
++  position: absolute;
++  left: 50%;
++  top: 50%;
++  transform: translate(-50%, -50%);
++  width: min(calc(460px * var(--ui)), 90vw);
++  padding: calc(24px * var(--ui));
++  pointer-events: auto;
++  z-index: 80;
++}
++.dh-deck-notice__actions { display: flex; flex-wrap: wrap; gap: calc(12px * var(--ui)); }
++.dh-deck-notice .dh-btn:focus-visible { outline: calc(2px * var(--ui)) solid var(--dh-cream); outline-offset: calc(3px * var(--ui)); }
++.dh-ff { display: flex; align-items: center; gap: calc(4px * var(--ui)); }
++.dh-ff__rate { font-size: calc(12px * var(--ui)); }
+diff --git a/src/app/app.ts b/src/app/app.ts
+index de8b9c4..de06cf6 100644
+--- a/src/app/app.ts
++++ b/src/app/app.ts
+@@ -22,7 +22,10 @@ import { MAPS } from "../content/data/maps";
+ import { STAGE_M0 } from "../content/data/stages";
+ import { RINGS, URGENT } from "../content/rules";
+ import type { Difficulty, FoeId, MapDef, SimCommand, SimEvent, StageDef, WordDeck } from "../content/types";
+-import { createLearningBridge } from "../kit/learning";
++import { createPortalBridge } from "./portal";
++import { startDeckBoot } from "./deck-boot";
++import { normalizeQuality } from "./quality";
++import { createIdleSpeed, frameTimeScale } from "./idle-speed";
+ import { safeLocalStorage } from "../kit/platform";
+ import { setSpeechGate } from "../kit/speech";
+ import { mmToU, uToM } from "../sim/fixed";
+@@ -34,7 +37,7 @@ import { createPlacementUi, type PlacementUi } from "../ui/placement-ui";
+ import { VICTORY_HOLD_MS, createResults } from "../ui/results";
+ import { createShopStrip } from "../ui/shop-strip";
+ import { createDebutCard } from "../ui/debut-card";
+-import { el, installSkin, keyLabel, setShown, uiButton } from "../ui/skin";
++import { el, icon, installSkin, keyLabel, setShown, uiButton } from "../ui/skin";
+ import { createTags } from "../ui/tags";
+ import { createWaveCard } from "../ui/wave-card";
+ import { createActors, type ActorsView } from "../view/actors";
+@@ -73,7 +76,6 @@ export interface AppOptions {
+   readonly tagSizePct?: number;
+ }
+ 
+-const QUALITIES: readonly Quality[] = ["low", "medium", "high", "ultra"];
+ const DIFFICULTIES: readonly Difficulty[] = ["easy", "normal", "hard"];
+ /** One level easier (00 §4.10), and the levels' names (00 §4.10 table). */
+ const EASIER: Readonly<Record<Difficulty, Difficulty | null>> = { hard: "normal", normal: "easy", easy: null };
+@@ -99,7 +101,7 @@ export function optionsFromUrl(search: string, dev: boolean): AppOptions {
+   };
+   const speed = num("speed");
+   return {
+-    quality: q && QUALITIES.includes(q) ? q : undefined,
++    quality: normalizeQuality(q, !dev),
+     difficulty: d && DIFFICULTIES.includes(d) ? d : undefined,
+     seed: num("seed"),
+     // A whole WPM in 10–120: the world keeps integers only.
+@@ -185,7 +187,7 @@ export function startApp(doc: Document = document, given?: AppOptions): App {
+   const dev = import.meta.env.DEV;
+   const options: AppOptions = given ?? optionsFromUrl(view.location.search, dev);
+   const stage = options.stage ?? STAGE_M0;
+-  const quality: Quality = options.quality ?? "high";
++  const quality: Quality = normalizeQuality(options.quality, !dev) ?? "high";
+   const seed = options.seed ?? stage.seed;
+   /** The typing speed of the next run: from ?wpm=, else unset until the speed card is answered. */
+   const urlWpm = clampWpm(options.typistWpm);
+@@ -218,7 +220,7 @@ export function startApp(doc: Document = document, given?: AppOptions): App {
+   map.useModels(models);
+ 
+   // Persistent services: audio, the learning bridge and client.
+-  const bridge = createLearningBridge({ gameId: "dragon-hold" });
++  const bridge = createPortalBridge();
+   const learning: LearningClient = createLearningClient({ bridge });
+   const audio: GameAudio = createAudio({ quality });
+   const stopMusicWatch = bridge.onSharedMusic((playing) => audio.setSharedMusic(playing));
+@@ -240,7 +242,10 @@ export function startApp(doc: Document = document, given?: AppOptions): App {
+   const notice2 = el(doc, "div", "dh-notice");
+   notice2.setAttribute("role", "status");
+   setShown(notice2, false);
+-  const ffBadge = el(doc, "div", "dh-ff", "×2");
++  const ffBadge = el(doc, "div", "dh-ff");
++  ffBadge.innerHTML = icon("fast-forward");
++  const ffRate = el(doc, "small", "dh-ff__rate");
++  ffBadge.append(ffRate);
+   setShown(ffBadge, false);
+   /** Pause menu and 3-2-1: a plain dim layer, words and the learning frame hidden (01 §3.9 "Tạm dừng che chữ"). */
+   const hush = el(doc, "div", "dh-hush");
+@@ -273,6 +278,9 @@ export function startApp(doc: Document = document, given?: AppOptions): App {
+   let veilMode: "none" | "focus" | "soft" = "none";
+   let countdownUntil = 0;
+   let fastForward = false;
++  const idleLatch = createIdleSpeed();
++  let idleSpeed = false;
++  let lastTimeScale = 1;
+   let hurtUntil = 0;
+   let seepUntil = 0;
+   let seepStrong = false;
+@@ -627,6 +635,8 @@ export function startApp(doc: Document = document, given?: AppOptions): App {
+     learning.flush();
+     audio.resetRun();
+     fastForward = false;
++    idleLatch.reset();
++    idleSpeed = false;
+     countdownUntil = 0;
+     if (victoryTurn !== null) map.rig.reset();
+     victoryTurn = null;
+@@ -819,7 +829,11 @@ export function startApp(doc: Document = document, given?: AppOptions): App {
+ 
+     if (veilMode === "soft") setShown(veil, activePanel() === null);
+     if (fastForward && !fastForwardAllowed(world)) fastForward = false;
+-    setShown(ffBadge, fastForward);
++    const speedBlocked = isPaused || run.placement.mode !== "idle";
++    idleSpeed = idleLatch.update(world, now, speedBlocked);
++    setShown(ffBadge, !speedBlocked && (fastForward || idleSpeed));
++    ffRate.textContent = fastForward ? "×2" : "×1.75";
++    ffBadge.setAttribute("aria-label", fastForward ? "Fast forward ×2" : "Fast forward ×1.75: no words on screen");
+     hurt.classList.toggle("is-on", now < hurtUntil);
+     seep.classList.toggle("is-on", now < seepUntil);
+     seep.classList.toggle("is-strong", now < seepUntil && seepStrong);
+@@ -865,7 +879,9 @@ export function startApp(doc: Document = document, given?: AppOptions): App {
+     if (!run) return 1;
+     const stop = run.fx.timeScale(now);
+     if (stop < 1) slowFrames += 1;
+-    return stop * (fastForward ? 2 : 1) * speed;
++    const blocked = paused(now) || run.placement.mode !== "idle";
++    idleSpeed = idleLatch.update(run.world, now, blocked);
++    return lastTimeScale = frameTimeScale(stop, speed, fastForward && fastForwardAllowed(run.world), idleSpeed, blocked);
+   };
+ 
+   // ── Boot: deck, world, loop, router ──
+@@ -885,7 +901,7 @@ export function startApp(doc: Document = document, given?: AppOptions): App {
+     }
+     ready = true;
+   };
+-  void learning.buildDeck(stage).then((built) => {
++  const deckBoot = startDeckBoot(overlay, notice, learning, stage, (built) => {
+     if (disposed) return;
+     deck = built;
+     notice.remove();
+@@ -917,7 +933,7 @@ export function startApp(doc: Document = document, given?: AppOptions): App {
+     world: () => run!.world,
+     state: () => {
+       const world = run?.world;
+-      if (!world) return { ready, paceCard: paceCard.isOpen };
++      if (!world) return { ready, paceCard: paceCard.isOpen, idleSpeed, timeScale: lastTimeScale };
+       return {
+         ready,
+         pace: { ...run!.header, kPm: world.pace.kPm, marginPm: world.pace.marginPm, graceTicks: world.pace.graceTicks },
+@@ -948,6 +964,8 @@ export function startApp(doc: Document = document, given?: AppOptions): App {
+         veil: veilMode,
+         countdown: countdownUntil > view.performance.now(),
+         fastForward,
++        idleSpeed,
++        timeScale: lastTimeScale,
+         placement: run!.placement.mode + ":" + (run!.placement.item ?? ""),
+         panel: handle.panel(),
+         slots: world.slots.map((slot) => (slot.item ? slot.def.id + "=" + slot.item + "@" + slot.level : null)).filter(Boolean),
+@@ -1091,6 +1109,7 @@ export function startApp(doc: Document = document, given?: AppOptions): App {
+   return {
+     dispose(): void {
+       disposed = true;
++      deckBoot.dispose();
+       learning.flush();
+       loop?.stop();
+       router?.dispose();
+diff --git a/src/app/learning.ts b/src/app/learning.ts
+index b9640f0..0f03480 100644
+--- a/src/app/learning.ts
++++ b/src/app/learning.ts
+@@ -9,12 +9,13 @@
+  */
+ import { ECONOMY, LEARNING } from "../content/rules";
+ import type { ActivityType, DeckWord, SimEvent, StageDef, WordDeck } from "../content/types";
+-import { buildCombatLearningEvent, createLearningBridge, normalizeLearningEntityId, type LearningBridge, type LearningEvent } from "../kit/learning";
++import { buildCombatLearningEvent, normalizeLearningEntityId, type LearningBridge, type LearningEvent } from "../kit/learning";
+ import { createRng, safeLocalStorage } from "../kit/platform";
+ import { speakEnglish } from "../kit/speech";
+-import { filterVocabularyEntries, loadVocabularyIndex, loadVocabularyLevel, textHasBlockedWord, type VocabularyEntry } from "../kit/vocab";
++import { clearVocabularyRuntimeCache, filterVocabularyEntries, loadVocabularyIndex, loadVocabularyLevel, textHasBlockedWord, type VocabularyEntry } from "../kit/vocab";
+ import { buildWordDeck, isDeckText, type DeckCandidate } from "../typing/deck";
+ import type { Gloss } from "../ui/learning-frame";
++import { createPortalBridge } from "./portal";
+ 
+ const GAME_ID = LEARNING.gameId;
+ /** Recall activities: always sent (01 §6.6), and a right answer without a hint counts toward hiding the meaning (01 §6.3). */
+@@ -119,6 +120,16 @@ export interface ReviewItem {
+   readonly mode: "listen" | "meaning";
+ }
+ 
++export type DeckFailureReason = "load-failed" | "empty" | "too-small";
++
++/** A failed stage deck never reaches world creation. Count is the usable deck size. */
++export class DeckBuildError extends Error {
++  constructor(readonly reason: DeckFailureReason, readonly count: number) {
++    super("dragon-hold: vocabulary " + reason + " (" + count + " words)");
++    this.name = "DeckBuildError";
++  }
++}
++
+ export interface LearningClient {
+   /** The stage's deck; resolves with a cold-start deck when the portal does not answer in 2 s. */
+   buildDeck(stage: StageDef): Promise<WordDeck>;
+@@ -233,7 +244,15 @@ async function defaultEntries(levels: readonly number[], excludeMature: boolean)
+   const lists = await Promise.all(
+     levels
+       .filter((level) => index.levels.some((item) => item.level === level))
+-      .map(async (level) => (await loadVocabularyLevel(level, index, { excludeMature })).map((entry) => ({ ...entry, level }))),
++      .map(async (level) => {
++        try {
++          return (await loadVocabularyLevel(level, index, { excludeMature })).map((entry) => ({ ...entry, level }));
++        } catch (error) {
++          // The kit rejects an empty document; preserve the app's empty-vs-network distinction.
++          if (error instanceof Error && error.message === "Vocabulary level " + level + " has no valid entries.") return [];
++          throw error;
++        }
++      }),
+   );
+   return lists.flat();
+ }
+@@ -243,7 +262,7 @@ const browser = typeof window !== "undefined";
+ export function createLearningClient(options: LearningClientOptions = {}): LearningClient {
+   const now = options.now ?? (() => Date.now());
+   const storage = options.storage ?? safeLocalStorage;
+-  const bridge = options.bridge ?? createLearningBridge({ gameId: GAME_ID });
++  const bridge = options.bridge ?? createPortalBridge();
+   const excludeMature = options.excludeMature ?? false;
+   const mode: PronounceMode = options.pronounce ?? "new-weak";
+   const speakNow = options.speak ?? ((text: string) => (browser ? speakEnglish(text, { enabled: true, rate: 0.9, volume: 1 }) : undefined));
+@@ -318,7 +337,17 @@ export function createLearningClient(options: LearningClientOptions = {}): Learn
+       try {
+         entries = await (options.loadEntries ? options.loadEntries(levels) : defaultEntries(levels, excludeMature));
+       } catch (error) {
++        deck = null;
++        if (!options.loadEntries) clearVocabularyRuntimeCache();
+         console.warn("dragon-hold: vocabulary did not load", error);
++        throw new DeckBuildError("load-failed", 0);
++      }
++      if (entries.length === 0) {
++        deck = null;
++        if (!options.loadEntries) clearVocabularyRuntimeCache();
++        const error = new DeckBuildError("empty", 0);
++        console.warn("dragon-hold: vocabulary did not load", error);
++        throw error;
+       }
+       for (const entry of entries) {
+         const text = normalizeLearningEntityId(entry.en);
+@@ -341,6 +370,14 @@ export function createLearningClient(options: LearningClientOptions = {}): Learn
+       deck = buildWordDeck(candidatesFrom(entries, records, excludeMature), level, (min, max) => rng.words.int(min, max), {
+         newMax: stageDef.type === "boss" ? LEARNING.newPerBossStage : LEARNING.newPerStage,
+       });
++      if (deck.words.length < LEARNING.deckSize[0]) {
++        const error = new DeckBuildError("too-small", deck.words.length);
++        deck = null;
++        // A repaired server response must be fetched again by Retry, including successful short loads.
++        if (!options.loadEntries) clearVocabularyRuntimeCache();
++        console.warn("dragon-hold: vocabulary did not load", error);
++        throw error;
++      }
+       byText.clear();
+       for (const word of deck.words) byText.set(word.text, word);
+       stage.clear();
+diff --git a/src/app/portal.ts b/src/app/portal.ts
+index 546c5e0..c2e2b1b 100644
+--- a/src/app/portal.ts
++++ b/src/app/portal.ts
+@@ -1,5 +1,34 @@
+-/** The first configured portal origin, with a home path. */
+-export function portalHome(origins: string | undefined): string {
+-  const origin = origins?.split(",").map((value) => value.trim()).find(Boolean);
+-  return (origin ?? "https://typing-game.local") + "/";
++import { LEARNING } from "../content/rules";
++import { createLearningBridge, type BridgeHost, type LearningBridge, type LearningBridgeOptions } from "../kit/learning";
++
++/** An optional build-time destination; paths, queries and fragments stay intact. */
++export function portalHome(value: string | undefined): string | null {
++  if (!value?.trim()) return null;
++  try {
++    const url = new URL(value.trim());
++    if (!["https:", "http:"].includes(url.protocol) || url.username || url.password) throw new Error("Invalid portal URL");
++    return url.href;
++  } catch {
++    throw new TypeError("VITE_PORTAL_URL must be an absolute HTTP(S) URL without credentials");
++  }
++}
++
++// Without a configured portal, framing must not flush the local learning queue.
++const standaloneHost: BridgeHost = {
++  parent: null,
++  addEventListener: () => {},
++  removeEventListener: () => {},
++  setTimeout: (callback, ms) => globalThis.setTimeout(callback, ms),
++  clearTimeout: (handle) => globalThis.clearTimeout(handle as ReturnType<typeof setTimeout>),
++  now: () => Date.now(),
++};
++
++export function createPortalBridge(options: Omit<LearningBridgeOptions, "gameId" | "parentOrigin"> = {}): LearningBridge {
++  const home = portalHome(import.meta.env.VITE_PORTAL_URL);
++  return createLearningBridge({
++    ...options,
++    gameId: LEARNING.gameId,
++    parentOrigin: home ? new URL(home).origin : "",
++    host: home ? options.host : standaloneHost,
++  });
+ }
+diff --git a/src/ui/debut-card.ts b/src/ui/debut-card.ts
+index fd0032b..15710b6 100644
+--- a/src/ui/debut-card.ts
++++ b/src/ui/debut-card.ts
+@@ -113,7 +113,7 @@ export function createDebutCard(root: HTMLElement): Presenter {
+     if (!lines || !def) return;
+     showing = foe;
+     until = now + DEBUT_MS;
+-    mark.innerHTML = general ? icon("crown") : foeIcon(def.gait, def.show.placeholder.color);
++    mark.innerHTML = general ? icon("crown", { box: 28 }) : foeIcon(def.family, { box: 28 });
+     setText(kicker, general ? "New general" : "New foe");
+     setText(name, def.nameVi);
+     setText(does, lines.does);
+diff --git a/src/ui/hud.ts b/src/ui/hud.ts
+index 04ec6f3..20a2939 100644
+--- a/src/ui/hud.ts
++++ b/src/ui/hud.ts
+@@ -241,10 +241,12 @@ export function createHud(root: HTMLElement, sink: CommandSink, options: HudOpti
+   goldStat.append(goldValue, goldFloat);
+   goldStat.title = "Gold";
+   const waveStat = el(doc, "div", "dh-stat");
++  waveStat.innerHTML = `<span class="dh-icon">${icon("wave-horn")}</span>`;
+   waveStat.append(el(doc, "span", "dh-label", "Wave"));
+   const waveValue = el(doc, "b", "", "0/0");
+   waveStat.append(waveValue);
+   const chainStat = el(doc, "div", "dh-stat dh-stat--chain");
++  chainStat.innerHTML = `<span class="dh-icon">${icon("chain")}</span>`;
+   chainStat.append(el(doc, "span", "dh-label", "Chain"));
+   const chainValue = el(doc, "b", "", "0");
+   const chainMult = el(doc, "span", "dh-chain-mult");
+@@ -258,12 +260,14 @@ export function createHud(root: HTMLElement, sink: CommandSink, options: HudOpti
+   const pauseButton = uiButton(doc, "dh-pause", () => options.onPause?.());
+   pauseButton.innerHTML = icon("pause") + `<span class="dh-key">Esc</span>`;
+   pauseButton.title = "Pause (Esc)";
++  pauseButton.ariaLabel = pauseButton.title;
+   setShown(pauseButton, Boolean(options.onPause));
+   system.append(pauseButton);
+   if (options.onCameraReset) {
+     const cameraButton = uiButton(doc, "dh-camera", () => options.onCameraReset?.());
+     cameraButton.innerHTML = icon("camera") + `<span class="dh-key">${keyLabel("camera-reset")}</span>`;
+     cameraButton.title = "Reset camera (" + keyLabel("camera-reset") + ")";
++    cameraButton.ariaLabel = cameraButton.title;
+     system.prepend(cameraButton);
+   }
+ 
+@@ -329,7 +333,8 @@ export function createHud(root: HTMLElement, sink: CommandSink, options: HudOpti
+   );
+ 
+   const rage = el(doc, "div", "dh-rage");
+-  const rageLabel = el(doc, "span", "dh-label", "Dragon Rage");
++  const rageLabel = el(doc, "span", "dh-label");
++  rageLabel.innerHTML = icon("dragon-rage") + " Dragon Rage";
+   const rageBar = el(doc, "div", "dh-rage__bar");
+   const rageFill = el(doc, "div", "dh-rage__fill");
+   rageBar.append(rageFill);
+@@ -361,8 +366,13 @@ export function createHud(root: HTMLElement, sink: CommandSink, options: HudOpti
+     }
+     toastNode.style.bottom = Math.round(hud.getBoundingClientRect().bottom - box.top + TOAST_GAP_PX) + "px";
+   };
+-  const toast = (text: string): void => {
+-    setText(toastNode, text);
++  const toast = (text: string, rejected = false): void => {
++    toastNode.textContent = text;
++    if (rejected) {
++      const mark = el(doc, "span", "dh-icon");
++      mark.innerHTML = icon("deny");
++      toastNode.prepend(mark);
++    }
+     setClass(toastNode, "is-on", true);
+     toastOn = true;
+     placeToast();
+@@ -430,6 +440,8 @@ export function createHud(root: HTMLElement, sink: CommandSink, options: HudOpti
+     } else if (phase === "wave") line = `Defending · wave <b>${w.wave}</b>`;
+     else if (phase === "victory") line = "Stage cleared";
+     else line = "Dragon Platform lost";
++    const phaseIcon = phase === "prep" ? "phase-prep" : phase === "warning" || phase === "wave" ? "phase-fight" : phase === "break" ? "phase-break" : null;
++    if (phaseIcon) line = icon(phaseIcon) + " " + line;
+     if (phaseLine.innerHTML !== line) phaseLine.innerHTML = line;
+ 
+     // The toast sits just above the strip, which folds outside prep and breaks (CSS fallback; placeToast measures).
+@@ -506,7 +518,7 @@ export function createHud(root: HTMLElement, sink: CommandSink, options: HudOpti
+           if (event.reason !== "start") goldDelta += event.delta;
+           break;
+         case "rejected":
+-          toast(rejectText(event.command, event.reason));
++          toast(rejectText(event.command, event.reason), true);
+           break;
+         case "hit":
+           if (event.target.kind === "hero") {
+diff --git a/src/ui/learning-frame.ts b/src/ui/learning-frame.ts
+index 44d5369..d3bac1b 100644
+--- a/src/ui/learning-frame.ts
++++ b/src/ui/learning-frame.ts
+@@ -14,6 +14,7 @@ import { DIFFICULTY, LEARNING } from "../content/rules";
+ import type { Difficulty, SimCommand, SimEvent } from "../content/types";
+ import { LEARNING_FRAME_CLASSES, SEMANTIC_COLORS, installKitStyles } from "../kit/ui";
+ import type { World } from "../sim/world";
++import { icon } from "./skin";
+ import { chooseSpot, keepoutRects, zonesFor, type Rect } from "./screen-zones";
+ 
+ /** Meaning and IPA for a word, from the loaded vocabulary. */
+@@ -61,14 +62,14 @@ export interface FrameView {
+   readonly ipa: string;
+   readonly meaning: string;
+   readonly level: WordLevel;
+-  /** A typed word's "từ · nghĩa ✓" card. */
++  /** A typed word's "word · meaning · correct" card. */
+   readonly done: boolean;
+ }
+ 
+ /**
+  * What the frame shows (01 §6.3): the locked word (IPA unless known; meaning
+  * for new and not-yet-remembered words, or after 3 wrong keys), and after a
+- * word is typed its "word · meaning ✓" card: 2.5 s pinned for new and weak
++ * word is typed its "word · meaning correct" card: 2.5 s pinned for new and weak
+  * words (nothing replaces it meanwhile), 0.8 s for others. Known words never
+  * enter. Easy shows every meaning; Hard only a new word's.
+  */
+@@ -96,7 +97,7 @@ export class FrameQueue {
+     if (text === undefined || this.locked?.word.text === text) this.locked = null;
+   }
+ 
+-  /** A wave ended: the "word · meaning ✓" card goes, so a Thẻ Ôn question never finds its answer pinned here. */
++  /** A wave ended: the "word · meaning correct" card goes, so a Thẻ Ôn question never finds its answer pinned here. */
+   clearCard(): void {
+     this.card = null;
+   }
+@@ -178,7 +179,21 @@ const CSS = `
+ .dh-lpanel__keys { font-size: max(12px, calc(13px * var(--ui))); color: #B9AE95; }
+ `;
+ 
+-const SPEAKER = '<svg class="dh-learn__speaker" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4 9h4l5-4v14l-5-4H4zm12.5 3a4.5 4.5 0 0 0-2.5-4v8a4.5 4.5 0 0 0 2.5-4zM14 3.2v2.1a7 7 0 0 1 0 13.4v2.1a9 9 0 0 0 0-17.6z"/></svg>';
++/** Shared markup keeps completion and listening testable without a DOM. */
++export function speakerMarkup(): string {
++  return '<span class="dh-learn__speaker">' + icon("speaker", { box: 18 }) + '</span>';
++}
++
++export function learningWordMarkup(view: Pick<FrameView, "text" | "typed" | "done" | "level">): string {
++  return '<span class="' + LEARNING_FRAME_CLASSES.typed + '">' + escapeHtml(view.text.slice(0, view.typed)) + '</span>' + escapeHtml(view.text.slice(view.typed)) +
++    (view.done ? ' <span class="dh-learn__check">' + icon("check", { box: 18 }) + '</span>' : '') +
++    (view.level === "new" ? ' <span class="dh-learn__badge">' + icon("new-word") + ' NEW</span>' : '');
++}
++
++export function reviewMeaningMarkup(mode: ReviewQuestion["mode"], meaning: string): string {
++  return mode === "meaning" ? escapeHtml(meaning) : icon("speaker", { box: 22 });
++}
++
+ 
+ function installStyles(doc: Document): void {
+   installKitStyles(doc as unknown as Parameters<typeof installKitStyles>[0]);
+@@ -217,7 +232,7 @@ export function createLearningFrame(root: HTMLElement, gloss: Gloss, options: Le
+   el.setAttribute("role", "status");
+   el.setAttribute("aria-live", "polite");
+   el.innerHTML =
+-    '<div class="dh-learn__top"><i class="dh-learn__dot"></i><span class="' + c.word + '"></span>' + (options.speak ? SPEAKER : "") + "</div>" +
++    '<div class="dh-learn__top"><i class="dh-learn__dot"></i><span class="' + c.word + '"></span>' + (options.speak ? speakerMarkup() : "") + "</div>" +
+     '<div class="' + c.ipa + '"></div><div class="' + c.meaning + '"></div><div class="' + c.recent + '"></div>';
+   root.append(el);
+   const word = el.querySelector<HTMLElement>("." + c.word)!;
+@@ -319,11 +334,7 @@ export function createLearningFrame(root: HTMLElement, gloss: Gloss, options: Le
+           ipa.textContent = meaning.textContent = "";
+           dot.className = "dh-learn__dot";
+         } else {
+-          const typed = escapeHtml(view.text.slice(0, view.typed));
+-          const rest = escapeHtml(view.text.slice(view.typed));
+-          word.innerHTML =
+-            '<span class="' + c.typed + '">' + typed + "</span>" + rest + (view.done ? ' <span class="dh-learn__check">✓</span>' : "") +
+-            (view.level === "new" ? ' <span class="dh-learn__badge">NEW</span>' : "");
++          word.innerHTML = learningWordMarkup(view);
+           ipa.textContent = view.ipa;
+           meaning.textContent = view.meaning;
+           dot.className = "dh-learn__dot is-" + view.level;
+@@ -615,7 +626,7 @@ export function createReviewCard(root: HTMLElement, hooks: PanelHooks): Learning
+     box.step.textContent = (item.mode === "listen" ? "Listen and type" : "Read the meaning, type the word") + " · " + (index + 1) + " / " + items.length;
+     box.word.textContent = "";
+     box.ipa.textContent = "";
+-    box.mean.textContent = item.mode === "meaning" ? item.vi : "🔊";
++    box.mean.innerHTML = reviewMeaningMarkup(item.mode, item.vi);
+     box.answer.innerHTML = blanks(typed, item.text.length);
+     box.result.textContent = "";
+     box.result.className = "dh-lpanel__result";
+diff --git a/src/ui/placement-ui.ts b/src/ui/placement-ui.ts
+index 7d7beb2..577fc09 100644
+--- a/src/ui/placement-ui.ts
++++ b/src/ui/placement-ui.ts
+@@ -528,13 +528,13 @@ export function createPlacementUi(root: HTMLElement, project: Projector, sink: C
+       const cost = upgradeCost(slot.item, slot.level);
+       const short = cost !== null && cost > w.economy.gold ? cost - w.economy.gold : 0;
+       const up = uiButton(doc, cost === null || short > 0 ? "is-poor" + (short > 0 ? " is-short" : "") : "", () => pressEdit("upgrade", menuSlot, true));
+-      up.innerHTML = `<span class="dh-key">=</span>`;
++      up.innerHTML = `<span class="dh-key">=</span><span class="dh-icon">${icon("upgrade")}</span>`;
+       // Short of gold: the whole row dims and says by how much, like the carry strip (test pass 27/10).
+       const upLabel = menuArmed?.action === "upgrade" ? "Press again to upgrade" : cost === null ? "Max level" : "Upgrade " + (slot.level + 1) + (short > 0 ? " · need " + short + " Gold" : "");
+       up.append(el(doc, "span", "", upLabel), el(doc, "span", "", cost === null ? "" : String(cost)));
+       if (cost === null) up.disabled = true;
+       const sell = uiButton(doc, "", () => pressEdit("sell", menuSlot, true));
+-      sell.innerHTML = `<span class="dh-key">-</span>`;
++      sell.innerHTML = `<span class="dh-key">-</span><span class="dh-icon">${icon("sell")}</span>`;
+       sell.append(el(doc, "span", "", menuArmed?.action === "sell" ? "Press again to sell" : "Sell"), el(doc, "span", "", "+" + sellRefund(w, menuSlot)));
+       children.push(up, sell);
+     }
+diff --git a/src/ui/results.ts b/src/ui/results.ts
+index d15e3f4..514930c 100644
+--- a/src/ui/results.ts
++++ b/src/ui/results.ts
+@@ -236,7 +236,7 @@ export function createResults(root: HTMLElement, actions: ResultsActions): Prese
+   const stars = el(doc, "div", "dh-stars");
+   const starNodes = [0, 1, 2].map(() => {
+     const node = el(doc, "span", "dh-star");
+-    node.innerHTML = icon("star");
++    node.innerHTML = icon("star-unlit", { box: 46 });
+     stars.append(node);
+     return node;
+   });
+@@ -252,14 +252,18 @@ export function createResults(root: HTMLElement, actions: ResultsActions): Prese
+   const foot = el(doc, "div", "dh-results__foot");
+   const buttons = el(doc, "div", "dh-results__actions");
+   const retryButton = uiButton(doc, "dh-retry", () => actions.retry());
+-  const portalButton = el(doc, "a", "dh-btn dh-results__portal");
+-  portalButton.href = portalHome(import.meta.env.VITE_PORTAL_ORIGINS);
+-  portalButton.target = "_top";
+-  portalButton.tabIndex = -1;
+-  portalButton.addEventListener("mousedown", (event) => event.preventDefault());
+-  portalButton.innerHTML = `<span class="dh-key">${keyLabel("enter")}</span>Back to portal`;
+   // Keep focus in the window key router, as uiButton does elsewhere.
+-  const resultButtons = [retryButton, portalButton] as const;
++  const resultButtons: HTMLElement[] = [retryButton];
++  const home = portalHome(import.meta.env.VITE_PORTAL_URL);
++  if (home) {
++    const portalButton = el(doc, "a", "dh-btn dh-results__portal");
++    portalButton.href = home;
++    portalButton.target = "_top";
++    portalButton.tabIndex = -1;
++    portalButton.addEventListener("mousedown", (event) => event.preventDefault());
++    portalButton.innerHTML = `<span class="dh-key">${keyLabel("enter")}</span>Back to portal`;
++    resultButtons.push(portalButton);
++  }
+   let focusedAction = 0;
+   const focusAction = (index: number): void => {
+     focusedAction = index;
+@@ -292,8 +296,9 @@ export function createResults(root: HTMLElement, actions: ResultsActions): Prese
+   /** A won stage waiting for its panel: stars, wave, and when (−1: set at the next frame). */
+   let pending: { stars: 0 | 1 | 2 | 3; wave: number; at: number } | null = null;
+ 
+-  const tile = (value: string, label: string, money = false): HTMLElement => {
++  const tile = (value: string, label: string, artName: string, money = false): HTMLElement => {
+     const node = el(doc, "div", "dh-tile" + (money ? " is-money" : ""));
++    node.innerHTML = icon(artName, { box: 25 });
+     node.append(el(doc, "b", "", value), el(doc, "span", "", label));
+     return node;
+   };
+@@ -312,15 +317,18 @@ export function createResults(root: HTMLElement, actions: ResultsActions): Prese
+     const s = summary;
+     setText(title, s.outcome === "victory" ? "Stage cleared" : "Dragon Platform lost");
+     setText(sub, world.stage.nameVi + " · " + (s.outcome === "victory" ? s.waves + "/" + s.waves + " waves" : "lost at wave " + s.wave + "/" + s.waves));
+-    starNodes.forEach((node, index) => setClass(node, "is-on", index < s.stars));
++    starNodes.forEach((node, index) => {
++      setClass(node, "is-on", index < s.stars);
++      node.innerHTML = icon(index < s.stars ? "star-lit" : "star-unlit", { box: 46 });
++    });
+     setShown(stars, s.outcome === "victory");
+     setText(hint, starHint(s));
+     tiles.replaceChildren(
+-      tile(String(s.goldLeft), "Gold left", true),
+-      tile(String(s.goldEarned), "Gold earned", true),
+-      tile(s.accuracyPct === null ? "—" : s.accuracyPct + "%", "Accuracy"),
+-      tile(s.newLearned + "/" + s.newMet, "New learned"),
+-      tile(String(s.met), "Words seen"),
++      tile(String(s.goldLeft), "Gold left", "gold", true),
++      tile(String(s.goldEarned), "Gold earned", "gold", true),
++      tile(s.accuracyPct === null ? "—" : s.accuracyPct + "%", "Accuracy", "stat-accuracy"),
++      tile(s.newLearned + "/" + s.newMet, "New learned", "stat-new-words"),
++      tile(String(s.met), "Words seen", "stat-words-seen"),
+     );
+     list = log.list();
+     setText(bookCount, list.length + " words · " + s.mistyped + " mistyped");
+@@ -329,11 +337,15 @@ export function createResults(root: HTMLElement, actions: ResultsActions): Prese
+         const row = el(doc, "li", "dh-word");
+         const status = wordStatus(record);
+         const g = actions.gloss?.(record.text) ?? null;
++        const badge = el(doc, "span", "dh-wstatus is-" + status);
++        const statusIcon = status === "new" ? "status-learned" : status === "fresh" ? "status-new" : status === "review" ? "status-review" : status === "good" ? "check" : null;
++        badge.innerHTML = statusIcon ? icon(statusIcon, { box: 25 }) : "";
++        badge.append(STATUS_VI[status] + (record.errors > 0 ? " · " + record.errors + " errors" : ""));
+         row.append(
+           el(doc, "span", "dh-word__text", record.text),
+           el(doc, "span", "dh-word__ipa", g?.ipa ?? ""),
+           el(doc, "span", "dh-word__vi", g?.vi ?? ""),
+-          el(doc, "span", "dh-wstatus is-" + status, STATUS_VI[status] + (record.errors > 0 ? " · " + record.errors + " errors" : "")),
++          badge,
+         );
+         if (actions.listen) {
+           const listen = uiButton(doc, "dh-listen", () => {
+@@ -341,6 +353,7 @@ export function createResults(root: HTMLElement, actions: ResultsActions): Prese
+             actions.listen?.(record.text);
+           });
+           listen.title = "Listen: " + record.text;
++          listen.ariaLabel = listen.title;
+           listen.innerHTML = icon("speaker");
+           row.append(listen);
+         } else row.append(el(doc, "span"));
+@@ -349,13 +362,13 @@ export function createResults(root: HTMLElement, actions: ResultsActions): Prese
+       }),
+     );
+     if (list.length === 0) bookList.append(el(doc, "li", "dh-book__empty", "No words typed this stage."));
+-    retryButton.innerHTML = `<span class="dh-key">${keyLabel("enter")}</span>` + (s.outcome === "victory" ? "Replay" : "Retry");
++    retryButton.innerHTML = icon("retry", { box: 25 }) + `<span class="dh-key">${keyLabel("enter")}</span>` + (s.outcome === "victory" ? "Replay" : "Retry");
+     const easier = s.outcome === "defeat" ? (actions.easierOffer?.() ?? null) : null;
+     offerEasier = easier !== null;
+     setShown(easierButton, offerEasier);
+     if (easier !== null) easierButton.innerHTML = `<span class="dh-key">${keyLabel("call-early")}</span>Lost twice: retry on ${easier}`;
+     keys.innerHTML =
+-      `<span class="dh-key">${keyLabel("rotate-left")}</span><span class="dh-key">${keyLabel("rotate-right")}</span> buttons · ` +
++      (resultButtons.length > 1 ? `<span class="dh-key">${keyLabel("rotate-left")}</span><span class="dh-key">${keyLabel("rotate-right")}</span> buttons · ` : "") +
+       `<span class="dh-key">${keyLabel("tilt-up")}</span><span class="dh-key">${keyLabel("tilt-down")}</span> words` +
+       (actions.listen ? ` · <span class="dh-key">${keyLabel("replay")}</span> listen` : "");
+     focusAction(0);
+@@ -417,7 +430,7 @@ export function createResults(root: HTMLElement, actions: ResultsActions): Prese
+     }
+     if (!summary) return false;
+     if (action === "enter") resultButtons[focusedAction]!.click();
+-    else if (action === "rotate-left" || action === "rotate-right") focusAction(1 - focusedAction);
++    else if (action === "rotate-left" || action === "rotate-right") focusAction((focusedAction + 1) % resultButtons.length);
+     else if (action === "call-early" && offerEasier) actions.easier?.();
+     else if (action === "tilt-up") select(selected - 1);
+     else if (action === "tilt-down") select(selected + 1);
+diff --git a/src/ui/skin.ts b/src/ui/skin.ts
+index 7a78c40..1bdd1e3 100644
+--- a/src/ui/skin.ts
++++ b/src/ui/skin.ts
+@@ -2,8 +2,7 @@
+  * The carved-wood UI skin (DESIGN.md §1, 05 §4): Cormorant Garamond titles,
+  * Be Vietnam Pro battle text, kit/ui semantic colours and --ui scale, and
+  * src/ui/styles/dh.css. Installs once at boot. Also the small DOM helpers and
+- * stand-in icons every ui part shares (05 §4.1: canvas or vector icons until
+- * the hand-drawn set arrives). Buttons never take focus (06 §2 rule 7).
++ * authored icons every UI part shares. Buttons never take focus (06 §2 rule 7).
+  * Owner: ui (LANES.md).
+  */
+ import "@fontsource/be-vietnam-pro/400.css";
+@@ -17,7 +16,8 @@ import "@fontsource/noto-sans/greek-400.css";
+ import "./styles/dh.css";
+ import { applyUiScale, installKitStyles } from "../kit/ui";
+ import { KEYS } from "../content/rules";
+-import type { Gait } from "../content/types";
++import type { Family } from "../content/types";
++import art from "./ui-art.json";
+ 
+ const SKIN_FLAG = "dhSkin";
+ 
+@@ -27,6 +27,8 @@ export function installSkin(doc: Document): void {
+   root.classList.add("dh-skin");
+   if (root.dataset[SKIN_FLAG] === "1") return;
+   root.dataset[SKIN_FLAG] = "1";
++  const warned = new Set<string>();
++  doc.addEventListener("error", (event) => handleArtError(event, warned), true);
+   installKitStyles(doc as unknown as Parameters<typeof installKitStyles>[0]);
+   const view = doc.defaultView;
+   if (!view) return;
+@@ -124,62 +126,61 @@ export function keyLabel(action: string, platform: KeyPlatform = keyPlatform()):
+   return (mod === "alt" ? "Alt+" : "Shift+") + (base === "↵" ? "Enter" : base);
+ }
+ 
+-// ── Stand-in icons (inline SVG, 24 × 24; colours by CSS `color` unless fixed) ──
++// ── Authored UI icons; three SVGs still await accepted art. ───────────
+ 
+-const svg = (body: string, extra = ""): string =>
+-  `<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"${extra}>${body}</svg>`;
++const svg = (body: string): string =>
++  `<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">${body}</svg>`;
+ 
+-const POTION = svg('<path d="M9.5 3h5M10.3 3v4.6L6 14.5A4.2 4.2 0 0 0 9.6 21h4.8a4.2 4.2 0 0 0 3.6-6.5l-4.3-6.9V3" fill="#3a2a22" stroke="#e9dcc0" stroke-width="1.3" stroke-linejoin="round"/><path d="M7.2 14.2h9.6l1 1.8A3 3 0 0 1 15.2 20H8.8a3 3 0 0 1-2.6-4z" fill="#d9707a"/>');
+-
+-export const ICONS = {
+-  coin: svg('<circle cx="12" cy="12" r="9" fill="var(--kit-money)"/><circle cx="12" cy="12" r="6" fill="none" stroke="#8a5a12" stroke-width="1.6"/><path d="M12 8.5v7" stroke="#8a5a12" stroke-width="1.8" stroke-linecap="round"/>'),
++const STILL_SVG: Readonly<Record<string, string>> = {
+   armour: svg('<path d="M12 2.8 4.5 5.6v6.1c0 4.6 3.1 8 7.5 9.5 4.4-1.5 7.5-4.9 7.5-9.5V5.6z" fill="#8f9aa3" stroke="#2a2420" stroke-width="1.2"/><path d="M12 5.6v13" stroke="#cfd6dc" stroke-width="1.4"/>'),
+-  shield: svg('<circle cx="12" cy="12" r="8.5" fill="none" stroke="#f3efe2" stroke-width="2" stroke-dasharray="3 2"/><circle cx="12" cy="12" r="4" fill="#f3efe2" opacity=".7"/>'),
+-  breath: svg('<path d="M3 13c4-1 6-5 10-6 3-.8 5 .2 7 2-2.3-.2-3.7.6-4.4 2 2.6.2 4 1.6 4.6 3.6-2-1-4-1-5.7.2C12 17 8 16.6 3 13z" fill="#ffb27a" stroke="#7a2a12" stroke-width="1.1"/><path d="M6 13c3-.3 5-2 7.5-2.4" stroke="#fff1c8" stroke-width="1.3" fill="none" stroke-linecap="round"/>'),
+-  skyfire: svg('<circle cx="15.5" cy="15.5" r="4.6" fill="#ff9a52" stroke="#7a2a12" stroke-width="1.1"/><path d="M3.5 3.5 12 12M7 3l6.5 7M3 7l7 6.5" stroke="#ffd29a" stroke-width="1.7" stroke-linecap="round"/><path d="M8 21h13" stroke="#ffb27a" stroke-width="1.4" stroke-dasharray="2 2"/>'),
+-  inferno: svg('<path d="M12 2.5c1.6 3.4 5.5 5 5.5 9.7A5.5 5.5 0 0 1 12 18a5.5 5.5 0 0 1-5.5-5.8c0-2.4 1.2-3.7 2.3-5 .3 1.8 1 2.6 2 3 0-3.2.4-5.3 1.2-7.7z" fill="#ff7a3a" stroke="#6b1e0c" stroke-width="1.1"/><path d="M12 11c1 1.4 2.4 2.1 2.4 3.6A2.4 2.4 0 0 1 12 17a2.4 2.4 0 0 1-2.4-2.4c0-1.4 1.4-2.2 2.4-3.6z" fill="#ffe08a"/><path d="M4 21h16" stroke="#ff9a52" stroke-width="1.6" stroke-linecap="round"/>'),
+-  roar: svg('<path d="M4 9.5h3.5l5-4v13l-5-4H4z" fill="#ffcf9a" stroke="#6b3a1c" stroke-width="1.1"/><path d="M15.5 8.5c1.6 1.8 1.6 5.2 0 7M18 6c3 3.3 3 8.7 0 12" stroke="#ffcf9a" stroke-width="1.6" fill="none" stroke-linecap="round"/>'),
+-  potion: POTION,
+-  spikes: svg('<path d="M3 18 6 8l3 10 3-12 3 12 3-10 3 10z" fill="#a98463" stroke="#3c2a1a" stroke-width="1.1" stroke-linejoin="round"/><path d="M2 19h20" stroke="#6b4a2e" stroke-width="2"/>'),
+-  "pine-bomb": svg('<ellipse cx="11" cy="14" rx="6" ry="7" fill="#8a5d36" stroke="#3c2a1a" stroke-width="1.1"/><path d="M6.5 11.5c3 1.5 6 1.5 9 0M6 15c3 1.6 7 1.6 10 0M8 18.4c2 .9 4 .9 6 0" stroke="#c9945e" stroke-width="1.1" fill="none"/><path d="M14 7.5c1-2 3-3 5.5-3" stroke="#d9c49a" stroke-width="1.3" fill="none"/><circle cx="20" cy="4.3" r="1.6" fill="#ffb27a"/>'),
+-  "net-launcher": svg('<circle cx="12" cy="11" r="7.5" fill="none" stroke="#d9c49a" stroke-width="1.3"/><path d="M5 11h14M12 3.5v15M7 6l10 10M17 6 7 16" stroke="#d9c49a" stroke-width=".9"/><path d="M12 18.5V22M9 22h6" stroke="#8a6a48" stroke-width="1.8" stroke-linecap="round"/>'),
+-  "moss-warden": svg('<circle cx="12" cy="6" r="3.2" fill="#9cc488" stroke="#24301c" stroke-width="1.1"/><path d="M6 21c0-6 2.4-10 6-10s6 4 6 10z" fill="#5d8a5a" stroke="#24301c" stroke-width="1.1"/><path d="M13.5 13.5h6v3.2c0 2-1.4 3.4-3 4-1.6-.6-3-2-3-4z" fill="#b9a27a" stroke="#3c2a1a" stroke-width="1"/>'),
+-  "herb-hut": svg('<path d="M3.5 11 12 4l8.5 7" fill="none" stroke="#c9b48a" stroke-width="1.6" stroke-linejoin="round"/><path d="M5.5 10.5V20h13v-9.5" fill="#6b5a46" stroke="#2a2018" stroke-width="1.1"/><path d="M12 19.5c-2.6-1-3.6-3.6-2.3-6.6 2.8.6 4 3.1 2.3 6.6z" fill="#9fd1e8"/><path d="M12 19.5c.4-2 1.6-3.4 3.4-4" stroke="#e9f6ff" stroke-width="1" fill="none"/>'),
+-  "small-potion": POTION,
+-  "dragon-heart": svg('<path d="M12 20.5s-7.5-4.6-7.5-10.3A4.2 4.2 0 0 1 12 7.6a4.2 4.2 0 0 1 7.5 2.6c0 5.7-7.5 10.3-7.5 10.3z" fill="#d9705f" stroke="#5a1c12" stroke-width="1.1"/><path d="M8 10.5c.5-1.4 1.6-2 2.8-2" stroke="#ffd0c0" stroke-width="1.3" fill="none" stroke-linecap="round"/>'),
+-  "hard-scale": svg('<path d="M4 9a8 8 0 0 1 16 0c0 5-3.5 9-8 12-4.5-3-8-7-8-12z" fill="#b9705a" stroke="#4a1e12" stroke-width="1.1"/><path d="M6 10c2-2.5 10-2.5 12 0M7 14c2-2.2 8-2.2 10 0M9 17.6c1.4-1.4 4.6-1.4 6 0" stroke="#f0b9a0" stroke-width="1.1" fill="none"/>'),
+-  crown: svg('<path d="M3.5 17.5 5 7.5l4.4 4.3L12 5l2.6 6.8L19 7.5l1.5 10z" fill="var(--dh-blight)" stroke="#3a3a12" stroke-width="1.1" stroke-linejoin="round"/><path d="M4 20h16" stroke="var(--dh-blight)" stroke-width="1.8"/>'),
+-  wing: svg('<path d="M2.5 15c4-6.5 9-9.5 19-10.5-2.5 2-3.5 3.5-4 5.5 1.5-.3 2.5 0 3.5.5-2.6.8-4 2-5 3.6 1 0 1.8.3 2.4.8-5.4 1.4-10.2 1.4-15.9.1z" fill="var(--dh-blight)" stroke="#3a3a12" stroke-width="1.1" stroke-linejoin="round"/>'),
+-  pause: svg('<rect x="6" y="5" width="4" height="14" rx="1.2" fill="currentColor"/><rect x="14" y="5" width="4" height="14" rx="1.2" fill="currentColor"/>'),
+-  camera: svg('<circle cx="12" cy="12" r="7.5" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="2.6" fill="currentColor"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>'),
+-  speaker: svg('<path d="M4 9.5h3.5l5-4v13l-5-4H4z" fill="currentColor"/><path d="M15.5 8.5c1.6 1.8 1.6 5.2 0 7M18 6c3 3.3 3 8.7 0 12" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round"/>'),
+-  star: svg('<path d="m12 2.8 2.8 5.9 6.4.8-4.7 4.5 1.2 6.4L12 17.3l-5.7 3.1 1.2-6.4L2.8 9.5l6.4-.8z" stroke-linejoin="round"/>'),
+   dragon: svg('<path d="M4 17c2-1 3-3.5 3-6.5C7 6.5 9.6 4 13 4c2.5 0 4.6 1.4 5.6 3.6L21 8.4l-2 1.6c0 3.6-2.6 6.5-6.2 7l-1.8 3-1.6-2.4L6.5 21z" fill="#e8875a" stroke="#5a1c0c" stroke-width="1.1" stroke-linejoin="round"/><circle cx="15.2" cy="8" r="1.1" fill="#fff1c8"/><path d="M9 9.5c1.5-.6 2.6-.4 3.6.6" stroke="#ffd0a0" stroke-width="1.1" fill="none"/>'),
+   "white-dragon": svg('<path d="M4 17c2-1 3-3.5 3-6.5C7 6.5 9.6 4 13 4c2.5 0 4.6 1.4 5.6 3.6L21 8.4l-2 1.6c0 3.6-2.6 6.5-6.2 7l-1.8 3-1.6-2.4L6.5 21z" fill="#eef1f2" stroke="#5a6470" stroke-width="1.1" stroke-linejoin="round"/><circle cx="15.2" cy="8" r="1.1" fill="#5a8ab8"/>'),
+-  flag: svg('<path d="M6 21V3.5" stroke="#d9c49a" stroke-width="1.8" stroke-linecap="round"/><path d="M6.5 4h11l-2.6 3.6L17.5 11h-11z" fill="#6f9a5a" stroke="#24301c" stroke-width="1"/>'),
+-  rune: svg('<circle cx="12" cy="12" r="8" fill="none" stroke="#9fd1e8" stroke-width="1.6"/><circle cx="12" cy="12" r="4.5" fill="none" stroke="#9fd1e8" stroke-width="1" stroke-dasharray="2 2"/><path d="M12 4v3M12 17v3M4 12h3M17 12h3" stroke="#9fd1e8" stroke-width="1.2"/>'),
+-  bar: svg('<rect x="3" y="9.5" width="18" height="5" rx="2.5" fill="#d9c49a" stroke="#3c2a1a" stroke-width="1"/>'),
+-} as const;
++};
++
++export interface IconOptions {
++  readonly box?: number;
++  readonly label?: boolean;
++}
++
++const ART_BY_KEY = new Map(art.icons.flatMap((entry) => [entry.name, ...entry.keys].map((key) => [key, entry] as const)));
++const escapeAttribute = (text: string): string => text.replace(/[&"<>]/g, (ch) => ({ "&": "&amp;", '"': "&quot;", "<": "&lt;", ">": "&gt;" })[ch]!);
+ 
++/** Markup uses the table alone; later art replacements need no caller changes. */
++export function icon(name: string, { box = 20, label = false }: IconOptions = {}): string {
++  const entry = ART_BY_KEY.get(name);
++  if (!entry) return STILL_SVG[name] ?? "";
++  const size = entry.sizes.find((candidate) => candidate >= box * 2.4) ?? entry.sizes[entry.sizes.length - 1]!;
++  return `<img class="dh-art" src="/assets/dragon-hold/ui/icons/${entry.name}.${size}.webp?v=${art.version}" width="${box}" height="${box}" alt="${label ? escapeAttribute(entry.alt) : ""}"${label ? "" : ' aria-hidden="true"'} decoding="async" draggable="false" style="--dh-art-box:${box}px">`;
++}
++
++/** Kept for callers that read the shared table directly. */
++export const ICONS: Readonly<Record<string, string>> = Object.fromEntries([
++  ...Object.keys(STILL_SVG).map((name) => [name, icon(name)]),
++  ...[...ART_BY_KEY.keys()].map((name) => [name, icon(name)]),
++]);
+ export type IconName = keyof typeof ICONS;
+ 
+-/** Icon markup by name; unknown names give an empty string. */
+-export function icon(name: string): string {
+-  return (ICONS as Readonly<Record<string, string>>)[name] ?? "";
++/** Family portraits replace the former gait silhouettes. */
++export function foeIcon(family: Family, options?: IconOptions): string {
++  return icon("family-" + family, options);
++}
++
++interface ArtErrorTarget {
++  readonly tagName: string;
++  readonly classList?: { contains(name: string): boolean };
++  readonly currentSrc?: string;
++  readonly src?: string;
++  hidden: boolean;
+ }
+ 
+-/** A foe silhouette by gait in its family colour (wave card, results): biped tall, quadruped long and low, flyer winged, swarm a cluster. */
+-export function foeIcon(gait: Gait, color: string): string {
+-  const stroke = 'stroke="#14100c" stroke-width="1.1" stroke-linejoin="round"';
+-  const eye = '#C8D24A';
+-  switch (gait) {
+-    case "biped":
+-      return svg(`<circle cx="12" cy="6" r="3.4" fill="${color}" ${stroke}/><path d="M7.5 21.5 8.5 11a3.5 3.5 0 0 1 7 0l1 10.5z" fill="${color}" ${stroke}/><circle cx="13.2" cy="5.6" r=".9" fill="${eye}"/>`);
+-    case "quadruped":
+-      return svg(`<path d="M3 12.5c0-2.3 2.2-3.5 5-3.5h7.5l2.5-2.5 3 1.5-1 3c.4 2.2-.6 4-3 4.5H8c-3 0-5-1-5-3z" fill="${color}" ${stroke}/><path d="M6.5 15.5v4M10 15.5v4M14 15.5v4M17 15v4" stroke="${color}" stroke-width="2.2" stroke-linecap="round"/><circle cx="19.2" cy="8.6" r=".9" fill="${eye}"/>`);
+-    case "flyer":
+-      return svg(`<path d="M12 9c-3-4-7-5-10-4 1.6 3 4.4 5.2 8 5.6M12 9c3-4 7-5 10-4-1.6 3-4.4 5.2-8 5.6" fill="${color}" ${stroke}/><ellipse cx="12" cy="13" rx="2.8" ry="5" fill="${color}" ${stroke}/><circle cx="12" cy="10.2" r=".9" fill="${eye}"/><path d="M12 18v3" stroke="${color}" stroke-width="1.4"/>`);
+-    case "swarm":
+-      return svg(`<ellipse cx="7" cy="15" rx="3.2" ry="2.2" fill="${color}" ${stroke}/><ellipse cx="16.5" cy="16.5" rx="3.2" ry="2.2" fill="${color}" ${stroke}/><ellipse cx="12" cy="8.5" rx="3.2" ry="2.2" fill="${color}" ${stroke}/><circle cx="9" cy="14.6" r=".7" fill="${eye}"/><circle cx="18.5" cy="16.1" r=".7" fill="${eye}"/><circle cx="14" cy="8.1" r=".7" fill="${eye}"/>`);
++/** Capture errors without a DOM dependency; each document warns once per URL. */
++export function handleArtError(event: { readonly target: unknown }, warned: Set<string>, warn: (message: string) => void = console.warn): void {
++  const image = event.target as ArtErrorTarget | null;
++  if (image?.tagName !== "IMG" || !image.classList?.contains("dh-art")) return;
++  const url = image.currentSrc || image.src || "";
++  if (!warned.has(url)) {
++    warned.add(url);
++    warn("[ui-art] missing image: " + url);
+   }
++  image.hidden = true;
+ }
+diff --git a/src/ui/styles/dh.css b/src/ui/styles/dh.css
+index 92f5598..da68a2f 100644
+--- a/src/ui/styles/dh.css
++++ b/src/ui/styles/dh.css
+@@ -84,39 +84,6 @@ body {
+   user-select: none;
+ }
+ 
+-/* Moss clumps along the top edge of every panel. */
+-.dh-panel::before {
+-  content: "";
+-  position: absolute;
+-  left: 7%;
+-  right: 14%;
+-  top: calc(-4px * var(--ui));
+-  height: calc(8px * var(--ui));
+-  background:
+-    radial-gradient(ellipse 9% 100% at 4% 70%, var(--dh-moss-hi) 0 45%, transparent 55%),
+-    radial-gradient(ellipse 14% 90% at 16% 60%, var(--dh-moss) 0 50%, transparent 58%),
+-    radial-gradient(ellipse 7% 80% at 27% 70%, #7a9a58 0 45%, transparent 55%),
+-    radial-gradient(ellipse 16% 70% at 58% 75%, var(--dh-moss) 0 50%, transparent 58%),
+-    radial-gradient(ellipse 6% 90% at 71% 60%, var(--dh-moss-hi) 0 45%, transparent 55%),
+-    radial-gradient(ellipse 10% 70% at 92% 75%, #4f6a3e 0 50%, transparent 58%);
+-  filter: drop-shadow(0 1px 0 rgba(0, 0, 0, 0.6));
+-  pointer-events: none;
+-}
+-
+-/* A moss tuft on the lower left corner. */
+-.dh-panel::after {
+-  content: "";
+-  position: absolute;
+-  left: calc(-3px * var(--ui));
+-  bottom: calc(-3px * var(--ui));
+-  width: calc(22px * var(--ui));
+-  height: calc(14px * var(--ui));
+-  background:
+-    radial-gradient(ellipse 50% 60% at 30% 70%, var(--dh-moss) 0 60%, transparent 66%),
+-    radial-gradient(ellipse 35% 45% at 70% 80%, #4f6a3e 0 60%, transparent 66%);
+-  pointer-events: none;
+-}
+-
+ .dh-title {
+   font-family: var(--dh-font-title);
+   /* Cormorant's old-style figures read "1/10" as "I/IO": lining figures for every number in a title. */
+@@ -158,12 +125,32 @@ body {
+ }
+ 
+ .dh-icon > svg,
+-.dh-btn svg {
++.dh-btn svg,
++.dh-icon > img,
++.dh-btn img {
+   display: block;
+   width: 100%;
+   height: 100%;
+ }
+ 
++.dh-art {
++  display: inline-block;
++  width: calc(var(--dh-art-box, 20px) * var(--ui));
++  height: calc(var(--dh-art-box, 20px) * var(--ui));
++  object-fit: contain;
++  vertical-align: middle;
++  flex: none;
++}
++.dh-art[hidden] { display: none; }
++.dh-btn > img.dh-art {
++  width: calc(var(--dh-art-box, 20px) * var(--ui));
++  height: calc(var(--dh-art-box, 20px) * var(--ui));
++}
++.dh-phase > .dh-art, .dh-rage > .dh-label > .dh-art { margin-right: calc(4px * var(--ui)); }
++.dh-toast > .dh-icon { margin-right: calc(6px * var(--ui)); vertical-align: middle; }
++.dh-tile > .dh-art { margin-bottom: calc(3px * var(--ui)); }
++.dh-wstatus { display: inline-flex; align-items: center; gap: calc(4px * var(--ui)); }
++
+ /* ── Buttons: carved wood, never focused ──────────────────────────────── */
+ 
+ .dh-btn {
+@@ -1504,20 +1491,6 @@ body {
+   height: calc(46px * var(--ui));
+ }
+ 
+-.dh-star svg {
+-  width: 100%;
+-  height: 100%;
+-  fill: #2a1e14;
+-  stroke: #6b4f36;
+-  stroke-width: 1.2;
+-}
+-
+-.dh-star.is-on svg {
+-  fill: var(--dh-ember-hi);
+-  stroke: #7a2a12;
+-  filter: drop-shadow(0 0 calc(6px * var(--ui)) rgba(246, 179, 122, 0.6));
+-}
+-
+ .dh-star.is-on {
+   animation: dh-star-in 0.45s ease-out backwards;
+ }
+@@ -1670,8 +1643,8 @@ body {
+ }
+ 
+ .dh-word .dh-btn {
+-  width: calc(26px * var(--ui));
+-  height: calc(24px * var(--ui));
++  width: calc(28px * var(--ui));
++  height: calc(28px * var(--ui));
+   padding: calc(4px * var(--ui));
+ }
+ 
+diff --git a/src/ui/wave-card.ts b/src/ui/wave-card.ts
+index 627a284..17e3fdc 100644
+--- a/src/ui/wave-card.ts
++++ b/src/ui/wave-card.ts
+@@ -246,7 +246,8 @@ export function createWaveCard(root: HTMLElement, sink: CommandSink): Presenter
+         const row = el(doc, "div", "dh-lane" + (lane.count > 0 ? " is-lit" : " is-dark"));
+         row.dataset.lane = lane.id;
+         const name = el(doc, "span", "dh-lane__name");
+-        if (lane.sky) name.innerHTML = `<span class="dh-icon">${icon("wing")}</span>`;
++        const laneIcon = lane.sky ? "lane-sky" : lane.id === "cau" ? "lane-bridge" : lane.id === "suoi" ? "lane-stream" : null;
++        if (laneIcon) name.innerHTML = `<span class="dh-icon">${icon(laneIcon)}</span>`;
+         name.append(lane.nameVi);
+         const foes = el(doc, "span", "dh-lane__foes");
+         if (lane.foes.length === 0) foes.append(el(doc, "span", "dh-wave-card__hint", "Clear"));
+@@ -255,7 +256,7 @@ export function createWaveCard(root: HTMLElement, sink: CommandSink): Presenter
+           chip.title = tally.code + " " + tally.nameVi + (tally.general ? " · general" : "") + (tally.flyer ? " · flying" : "");
+           chip.innerHTML =
+             (tally.general ? `<span class="dh-icon dh-foe__mark">${icon("crown")}</span>` : "") +
+-            `<span class="dh-icon">${foeIcon(tally.gait, tally.color)}</span>` +
++            `<span class="dh-icon">${foeIcon(tally.family)}</span>` +
+             (tally.flyer && !lane.sky ? `<span class="dh-icon dh-foe__mark">${icon("wing")}</span>` : "");
+           // The short name beside the icon: a new player reads "Kiến ×6", not only a shape (the title keeps the full name).
+           chip.append(el(doc, "span", "dh-foe__name", shortFoeName(tally)), countNode(tally.count));
+@@ -286,7 +287,8 @@ export function createWaveCard(root: HTMLElement, sink: CommandSink): Presenter
+     }
+     // "Đợt thở" (02 §5.1) is the design's word; on the card it read as "a breathing wave", so the player sees "Đợt nhẹ".
+     if (summary.breather) {
+-      const warn = el(doc, "span", "dh-warn", "Breather");
++      const warn = el(doc, "span", "dh-warn");
++      warn.innerHTML = `<span class="dh-icon">${icon("phase-break")}</span>Breather`;
+       warn.title = "Lighter wave after a general: fewer foes, time to regroup";
+       warnNodes.push(warn);
+     }
+@@ -362,7 +364,7 @@ export function createWaveCard(root: HTMLElement, sink: CommandSink): Presenter
+     if (phase === "break" && left !== null) {
+       // The stage's call-early gold can run out (00 §4.9's 15 % pool): then only the rage is offered (test pass 27/10).
+       const bonus = callEarlyBonus(left, callEarlyRoom(w));
+-      const gains = [...(bonus > 0 ? [`<span class="dh-bonus">+${bonus} Gold</span>`] : []), ...(w.stage.unlocks.rage ? [`+${RAGE.callEarlyX10 / 10} Dragon Rage`] : [])];
++      const gains = [...(bonus > 0 ? [`<span class="dh-bonus">+${bonus} Gold</span>`] : []), ...(w.stage.unlocks.rage ? [`${icon("dragon-rage")} +${RAGE.callEarlyX10 / 10} Dragon Rage`] : [])];
+       const callHtml = `<span class="dh-key">${keyLabel("call-early")}</span>Call early` + (gains.length > 0 ? " " + gains.join(" · ") : "");
+       if (callButton.innerHTML !== callHtml) callButton.innerHTML = callHtml;
+     }
+diff --git a/tests/app/portal.test.ts b/tests/app/portal.test.ts
+index 8987581..cc0ec18 100644
+--- a/tests/app/portal.test.ts
++++ b/tests/app/portal.test.ts
+@@ -1,16 +1,92 @@
+-import { describe, expect, it } from "vitest";
+-import { portalHome } from "../../src/app/portal";
++import { afterEach, describe, expect, it, vi } from "vitest";
++import { createPortalBridge, portalHome } from "../../src/app/portal";
++import { LEARNING_ATTEMPT_MESSAGE, SHARED_MUSIC_MESSAGE, type BridgeHost } from "../../src/kit/learning";
++import { typedWordEvent } from "../../src/app/learning";
++
++afterEach(() => vi.unstubAllEnvs());
+ 
+ describe("portalHome", () => {
+-  it.each([undefined, "", " ,  , "])("uses the local portal for %j", (origins) => {
+-    expect(portalHome(origins)).toBe("https://typing-game.local/");
++  it.each([undefined, "", "   "])("has no portal for %j", (url) => {
++    expect(portalHome(url)).toBeNull();
++  });
++
++  it.each([
++    [" https://portal.example ", "https://portal.example/"],
++    ["https://portal.example/learn/?game=dragon-hold#home", "https://portal.example/learn/?game=dragon-hold#home"],
++    ["http://localhost:8080/portal/", "http://localhost:8080/portal/"],
++  ])("keeps the configured HTTP(S) destination %s", (url, home) => {
++    expect(portalHome(url)).toBe(home);
++  });
++
++  it.each(["/portal/", "https://a.example , https://b.example", "javascript:alert(1)", "data:text/html,portal", "ftp://portal.example", "https://user:secret@portal.example"])("rejects an invalid portal URL %s", (url) => {
++    expect(() => portalHome(url)).toThrow(/VITE_PORTAL_URL/);
++  });
++});
++
++function fixture() {
++  const parent = { postMessage: vi.fn() };
++  let receive = (_event: MessageEvent) => {};
++  const host: BridgeHost = {
++    parent,
++    addEventListener: (_type, listener) => { receive = listener; },
++    removeEventListener: vi.fn(),
++    setTimeout: vi.fn(), clearTimeout: vi.fn(), now: () => 1234,
++  };
++  const data = new Map<string, unknown>();
++  const storage = {
++    readJson: (key: string) => data.get(key) ?? null,
++    writeJson: (key: string, value: unknown) => { data.set(key, value); return true; },
++  };
++  const event = typedWordEvent({
++    type: "word-complete", tick: 1, word: 0, text: "river", kind: "enemy", grade: "perfect", errors: 0,
++    keyTicks: 40, responseMs: 640, target: null, activity: "typing-enemy", scored: true, hintUsed: false,
++  }, false, "2026-10-29T00:00:00.000Z");
++  return { host, parent, storage, event, receive: (origin: string) => receive({
++    origin, source: parent, data: { type: SHARED_MUSIC_MESSAGE, playing: true },
++  } as unknown as MessageEvent) };
++}
++
++describe("configured learning bridge", () => {
++  it.each([undefined, "", "   "])("keeps events local without a portal URL (%j), even in a frame", (url) => {
++    vi.stubEnv("VITE_PORTAL_URL", url);
++    const f = fixture();
++    const bridge = createPortalBridge({ host: f.host, storage: f.storage });
++    expect(bridge.parentOrigin).toBe("");
++    expect(bridge.embedded).toBe(false);
++    bridge.sendAttempt(f.event);
++    expect(bridge.queued()).toEqual([f.event]);
++    expect(bridge.requestFocus()).toBe(false);
++    expect(f.parent.postMessage).not.toHaveBeenCalled();
++    bridge.dispose();
+   });
+ 
+-  it("uses the first trimmed origin", () => {
+-    expect(portalHome(" https://a.example , https://b.example")).toBe("https://a.example/");
++  it("posts only to the configured origin and accepts messages only from it", () => {
++    vi.stubEnv("VITE_PORTAL_URL", " https://portal.example/learn/?game=dragon-hold#home ");
++    const f = fixture();
++    const bridge = createPortalBridge({ host: f.host, storage: f.storage });
++    const music = vi.fn();
++    bridge.onSharedMusic(music);
++    bridge.sendAttempt(f.event);
++    expect(bridge.embedded).toBe(true);
++    expect(bridge.parentOrigin).toBe("https://portal.example");
++    expect(f.parent.postMessage).toHaveBeenCalledWith(expect.objectContaining({ type: LEARNING_ATTEMPT_MESSAGE, event: f.event }), "https://portal.example");
++    f.receive("https://wrong.example");
++    expect(music).not.toHaveBeenCalled();
++    f.receive("https://portal.example");
++    expect(music).toHaveBeenCalledWith(true);
++    bridge.dispose();
+   });
+ 
+-  it("skips empty origins", () => {
+-    expect(portalHome(" , , https://b.example , https://c.example ")).toBe("https://b.example/");
++  it("flushes events kept without a portal when a configured portal is available", () => {
++    const f = fixture();
++    vi.stubEnv("VITE_PORTAL_URL", "");
++    const alone = createPortalBridge({ host: f.host, storage: f.storage });
++    alone.sendAttempt(f.event);
++    alone.dispose();
++    vi.stubEnv("VITE_PORTAL_URL", "https://portal.example/");
++    const embedded = createPortalBridge({ host: f.host, storage: f.storage });
++    expect(f.parent.postMessage).toHaveBeenCalledWith(expect.objectContaining({ event: f.event }), "https://portal.example");
++    expect(embedded.queued()).toEqual([]);
++    embedded.dispose();
+   });
+ });
+diff --git a/tests/ui/results-screen.test.ts b/tests/ui/results-screen.test.ts
+index 97061f2..4e15531 100644
+--- a/tests/ui/results-screen.test.ts
++++ b/tests/ui/results-screen.test.ts
+@@ -1,4 +1,4 @@
+-import { afterEach, describe, expect, it, vi } from "vitest";
++import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+ import { portalHome } from "../../src/app/portal";
+ import { KEYS } from "../../src/content/rules";
+ import type { SimEvent } from "../../src/content/types";
+@@ -15,6 +15,7 @@ class ElementStub {
+   disabled = false;
+   href = "";
+   target = "";
++  ariaLabel = "";
+   dataset: Record<string, string> = {};
+   children: ElementStub[] = [];
+   private listeners = new Map<string, ((event: unknown) => void)[]>();
+@@ -52,10 +53,47 @@ class DocumentStub {
+   }
+ }
+ 
+-const assigned = (word: number, text: string): SimEvent => ({
++const assigned = (word: number, text: string): Extract<SimEvent, { type: "word-assigned" }> => ({
+   tick: word, type: "word-assigned", word, text, kind: "enemy", group: "known", target: null, firstTier: 1,
+ });
+ 
++describe("results UI art (194)", () => {
++  it("shows earned/unearned star images, five stat images and retry at their accepted sizes", () => {
++    const f = fixture();
++    f.results.onEvents([{ tick: 0, type: "victory", stars: 2 }], f.world);
++    f.key("Escape");
++    const stars = f.node("dh-stars").children;
++    expect(stars.map((node) => node.innerHTML.match(/star-(lit|unlit)/)?.[0])).toEqual(["star-lit", "star-lit", "star-unlit"]);
++    for (const node of stars) expect(node.innerHTML).toContain('width="46" height="46"');
++    const tiles = f.node("dh-tiles").children;
++    for (const [index, name] of ["gold", "gold", "stat-accuracy", "stat-new-words", "stat-words-seen"].entries()) {
++      expect(tiles[index]!.innerHTML).toContain(name + ".64.webp");
++      expect(tiles[index]!.innerHTML).toContain('width="25" height="25"');
++    }
++    expect(f.node("dh-retry").innerHTML).toContain("retry.64.webp");
++    expect(f.node("dh-retry").innerHTML).toContain('width="25"');
++  });
++
++  it("maps all five word statuses and labels listening without changing the visible text", () => {
++    const f = fixture();
++    const words = ["learned", "fresh", "review", "good", "miss"];
++    const events: SimEvent[] = words.map((text, word) => ({ ...assigned(word, text), type: "word-assigned", group: word < 2 ? "new" : "known" }));
++    for (const word of [0, 3, 4]) events.push({ tick: word, type: "word-complete", word, text: words[word]!, kind: "enemy", errors: word === 4 ? 1 : 0, grade: "good", hintUsed: false, keyTicks: 30, responseMs: 500, target: null, activity: "typing-enemy", scored: true });
++    events.push({ tick: 10, type: "defeat", wave: 10 });
++    f.results.onEvents(events, f.world);
++    const rows = f.node("dh-book__list").children;
++    for (const [status, name] of Object.entries({ new: "status-learned", fresh: "status-new", review: "status-review", good: "check", miss: null })) {
++      const badge = rows.flatMap((row) => row.children).find((child) => child.classList.contains("is-" + status))!;
++      if (name) { expect(badge.innerHTML).toContain(name + ".64.webp"); expect(badge.innerHTML).toContain('width="25"'); }
++      else expect(badge.innerHTML).toBe("");
++    }
++    for (const listen of rows.flatMap((row) => row.children).filter((child) => child.classList.contains("dh-listen"))) {
++      expect(listen.innerHTML).toContain("speaker.64.webp");
++      expect(listen.ariaLabel).toBe("Listen: " + rows.find((row) => row.children.includes(listen))!.children[0]!.textContent);
++    }
++  });
++});
++
+ function fixture() {
+   const doc = new DocumentStub();
+   const world = fakeWorld({ wave: 10 });
+@@ -73,11 +111,31 @@ function fixture() {
+   return { doc, world, actions, results, node, key, open, frame };
+ }
+ 
++beforeEach(() => vi.stubEnv("VITE_PORTAL_URL", "https://portal.example/"));
+ afterEach(() => vi.unstubAllEnvs());
+ 
+ describe("results portal action (105b, DH-24 / G5)", () => {
+-  it.each([undefined, "", " https://portal.example , https://other.example "])("renders two matching actions with portalHome(%s) and target _top", (origins) => {
+-    vi.stubEnv("VITE_PORTAL_ORIGINS", origins);
++  it.each([undefined, "", "   "])("omits the portal action when the URL is empty (%j)", (url) => {
++    vi.stubEnv("VITE_PORTAL_URL", url);
++    for (const outcome of ["victory", "defeat"] as const) {
++      const f = fixture();
++      f.open(outcome);
++      const retry = f.node("dh-retry");
++      expect(f.node("dh-results__actions").children).toHaveLength(1);
++      expect(f.node("dh-results__actions").children[0]).toBe(retry);
++      expect(f.node("dh-results__portal")).toBeUndefined();
++      for (const code of ["ArrowRight", "ArrowLeft", "ArrowRight"]) {
++        expect(f.key(code)).toBe(true);
++        expect(retry.classList.contains("is-focused")).toBe(true);
++        f.key("Enter");
++      }
++      expect(f.actions.retry).toHaveBeenCalledTimes(3);
++      expect(f.node("dh-results__keys").innerHTML).not.toContain("buttons");
++    }
++  });
++
++  it.each(["https://portal.example/", " https://portal.example/learn/?game=dragon-hold#home "])("renders two matching actions with portalHome(%s) and target _top", (url) => {
++    vi.stubEnv("VITE_PORTAL_URL", url);
+     const f = fixture();
+     f.open("defeat");
+     const retry = f.node("dh-retry");
+@@ -86,7 +144,7 @@ describe("results portal action (105b, DH-24 / G5)", () => {
+     expect(retry.tagName).toBe("BUTTON");
+     expect(portal.tagName).toBe("A");
+     expect(portal.classList.contains("dh-btn")).toBe(true);
+-    expect(portal.href).toBe(portalHome(origins));
++    expect(portal.href).toBe(portalHome(url));
+     expect(portal.target).toBe("_top");
+     expect(portal.innerHTML).toBe(`<span class="dh-key">${keyLabel("enter")}</span>Back to portal`);
+     // A pointer click must keep the anchor's native navigation.
+diff --git a/vite.config.ts b/vite.config.ts
+index 06e76f7..03bc615 100644
+--- a/vite.config.ts
++++ b/vite.config.ts
+@@ -1,4 +1,6 @@
+-import { defineConfig } from "vite";
++import { fileURLToPath } from "node:url";
++import { defineConfig, loadEnv } from "vite";
++import { portalHome } from "./src/app/portal";
+ 
+ const env = (name: string): string | undefined => process.env[name]?.trim() || undefined;
+ 
+@@ -6,29 +8,46 @@ const env = (name: string): string | undefined => process.env[name]?.trim() || u
+ // nginx host. A plain `pnpm dev` on 127.0.0.1:3005 keeps Vite's own HMR socket.
+ const hmrHost = env("DEV_HMR_HOST");
+ 
+-export default defineConfig({
+-  base: "/",
+-  server: {
+-    host: env("DEV_HOST") ?? "127.0.0.1",
+-    port: 3005,
+-    strictPort: true,
+-    allowedHosts: (env("DEV_ALLOWED_HOSTS") ?? "dragon.typing-game.local")
+-      .split(",")
+-      .map((value) => value.trim())
+-      .filter(Boolean),
+-    hmr: hmrHost
+-      ? {
+-          host: hmrHost,
+-          protocol: (env("DEV_HMR_PROTOCOL") as "ws" | "wss" | undefined) ?? "wss",
+-          clientPort: Number(env("DEV_HMR_CLIENT_PORT") ?? 443),
+-        }
+-      : undefined,
+-  },
+-  build: {
+-    target: "es2022",
+-    // three.js in its own chunk: cached across game updates, and no chunk over the 500 kB warning.
+-    rollupOptions: { output: { manualChunks: { three: ["three"] } } },
+-    // three.js alone is ~560 kB minified (140 kB gzip).
+-    chunkSizeWarningLimit: 600,
+-  },
++export default defineConfig(({ mode }) => {
++  const root = fileURLToPath(new URL(".", import.meta.url));
++  const contract = fileURLToPath(new URL("./src/kit/learning/contract.ts", import.meta.url));
++  const home = portalHome(loadEnv(mode, root, "VITE_PORTAL_URL").VITE_PORTAL_URL);
++  const parentOrigin = home ? new URL(home).origin : "";
++  return {
++    plugins: [{
++      name: "dragonhold-portal-origin",
++      enforce: "pre",
++      transform(code, id) {
++        if (id !== contract) return null;
++        // Override only the compiled fallback; the pinned kit stays byte-for-byte intact.
++        const declaration = /^export const PARENT_ORIGIN = [^\n]+;$/gm;
++        if (code.match(declaration)?.length !== 1) this.error("Expected one kit PARENT_ORIGIN declaration");
++        return { code: code.replace(declaration, `export const PARENT_ORIGIN = ${JSON.stringify(parentOrigin)};`), map: null };
++      },
++    }],
++    base: "/",
++    server: {
++      host: env("DEV_HOST") ?? "127.0.0.1",
++      port: 3005,
++      strictPort: true,
++      allowedHosts: (env("DEV_ALLOWED_HOSTS") ?? "dragon.typing-game.local")
++        .split(",")
++        .map((value) => value.trim())
++        .filter(Boolean),
++      hmr: hmrHost
++        ? {
++            host: hmrHost,
++            protocol: (env("DEV_HMR_PROTOCOL") as "ws" | "wss" | undefined) ?? "wss",
++            clientPort: Number(env("DEV_HMR_CLIENT_PORT") ?? 443),
++          }
++        : undefined,
++    },
++    build: {
++      target: "es2022",
++      // three.js in its own chunk: cached across game updates, and no chunk over the 500 kB warning.
++      rollupOptions: { output: { manualChunks: { three: ["three"] } } },
++      // three.js alone is ~560 kB minified (140 kB gzip).
++      chunkSizeWarningLimit: 600,
++    },
++  };
+ });

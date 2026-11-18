@@ -1,0 +1,2252 @@
+{
+  "source": "/Users/toandx/htdocs/typing-game/games/dragon-hold/tmp/map1-audit/feel-35-1280",
+  "profile": {
+    "wpm": 35,
+    "acc": 0.97,
+    "urlWpm": "card Digit5",
+    "size": "1280x720",
+    "mode": "normal",
+    "end": "play",
+    "seed": "1"
+  },
+  "sampleCount": 7149,
+  "recordedLetterCount": 905,
+  "simLetters": 745,
+  "wordAttempts": 168,
+  "reflection": "Kịch bản CDP, không phải người; bỏ rc-raw.hurt.",
+  "assumptions": {
+    "performanceOffsetMs": 0,
+    "alignmentErrorMs": 25,
+    "markMs": 100,
+    "evalPairMs": [
+      20,
+      19,
+      17,
+      17,
+      17,
+      17,
+      16,
+      17,
+      16
+    ],
+    "pollMs": [
+      110,
+      109,
+      107,
+      107,
+      107,
+      107,
+      106,
+      107,
+      106
+    ],
+    "pollCaveat": "Không có log mỗi lần hỏi PICK: không nhận diện được phân bố poll chính xác. Dùng 90 ms + proxy hai eval đo tại warning; các eval còn lại chưa tách được.",
+    "reactionErrorMs": 100,
+    "cleanReactionP50": 154,
+    "cleanReactionP90": 392,
+    "startSpanMs": [
+      1511,
+      1512,
+      1535,
+      1555,
+      1517,
+      1519,
+      1548,
+      1537,
+      1535,
+      1542
+    ],
+    "hpLossSpanMs": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1734,
+      1711,
+      1650,
+      0
+    ],
+    "completeSpanMs": [
+      1112,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1132
+    ],
+    "generalSpanMs": 1160
+  },
+  "waves": [
+    {
+      "wave": 1,
+      "startMs": 34212,
+      "endMs": 82612,
+      "seconds": 48.4,
+      "hpStart": 469,
+      "hpMin": 469,
+      "hpDrop": 0,
+      "letters": 49,
+      "lettersPerMinute": 60.743801652892564,
+      "wordsCompleted": null,
+      "wordsReason": "Không đo được: words là số từ sống; kills gồm bẫy/kỹ năng; stats.words là tổng 168 lượt chọn, không phải sự kiện hoàn tất.",
+      "reaction": {
+        "p50": 35,
+        "p90": 241,
+        "n": 12,
+        "cleanP50": 35,
+        "cleanP90": 127,
+        "cleanN": 11,
+        "censored": 0,
+        "samples": [
+          {
+            "bornMs": 37212,
+            "firstKeyMs": 37453,
+            "ms": 241,
+            "pause": true,
+            "pauses": [
+              "w1-03-first-word"
+            ]
+          },
+          {
+            "bornMs": 40713,
+            "firstKeyMs": 40741,
+            "ms": 28,
+            "pause": false,
+            "pauses": []
+          },
+          {
+            "bornMs": 42913,
+            "firstKeyMs": 43024,
+            "ms": 111,
+            "pause": false,
+            "pauses": []
+          },
+          {
+            "bornMs": 48011,
+            "firstKeyMs": 48033,
+            "ms": 22,
+            "pause": false,
+            "pauses": []
+          },
+          {
+            "bornMs": 53714,
+            "firstKeyMs": 53796,
+            "ms": 82,
+            "pause": false,
+            "pauses": []
+          },
+          {
+            "bornMs": 57012,
+            "firstKeyMs": 57023,
+            "ms": 11,
+            "pause": false,
+            "pauses": []
+          },
+          {
+            "bornMs": 59511,
+            "firstKeyMs": 59638,
+            "ms": 127,
+            "pause": false,
+            "pauses": []
+          },
+          {
+            "bornMs": 64811,
+            "firstKeyMs": 64822,
+            "ms": 11,
+            "pause": false,
+            "pauses": []
+          },
+          {
+            "bornMs": 70011,
+            "firstKeyMs": 70089,
+            "ms": 78,
+            "pause": false,
+            "pauses": []
+          },
+          {
+            "bornMs": 72113,
+            "firstKeyMs": 72440,
+            "ms": 327,
+            "pause": false,
+            "pauses": []
+          },
+          {
+            "bornMs": 77311,
+            "firstKeyMs": 77313,
+            "ms": 2,
+            "pause": false,
+            "pauses": []
+          },
+          {
+            "bornMs": 80812,
+            "firstKeyMs": 80847,
+            "ms": 35,
+            "pause": false,
+            "pauses": []
+          }
+        ]
+      },
+      "pauses": [
+        {
+          "name": "start-banner",
+          "startMs": 34784,
+          "endMs": 36295,
+          "ms": 1511,
+          "basis": "sheets.spanMs, neo tại mark start; thiếu thời gian montage"
+        },
+        {
+          "name": "w1-02-start",
+          "startMs": 36295,
+          "endMs": 36395,
+          "ms": 100,
+          "basis": "giả định 100 ms/mark; căn chỉnh đồng hồ ±25 ms"
+        },
+        {
+          "name": "ff-sleep",
+          "startMs": 36639,
+          "endMs": 36889,
+          "ms": 250,
+          "basis": "sleep 250 ms, fastForward=false"
+        },
+        {
+          "name": "w1-08-ff-try",
+          "startMs": 36889,
+          "endMs": 36989,
+          "ms": 100,
+          "basis": "giả định 100 ms/mark; căn chỉnh đồng hồ ±25 ms"
+        },
+        {
+          "name": "w1-03-first-word",
+          "startMs": 37229,
+          "endMs": 37329,
+          "ms": 100,
+          "basis": "giả định 100 ms/mark; căn chỉnh đồng hồ ±25 ms"
+        },
+        {
+          "name": "w1-complete-place-moss-grunt",
+          "startMs": 39064,
+          "endMs": 40176,
+          "ms": 1112,
+          "basis": "neo chữ cuối chuỗi đầu khớp; 120 ms trước + 200 ms sau nằm trong burst"
+        },
+        {
+          "name": "w1-05-peak-6foes-15s",
+          "startMs": 43194,
+          "endMs": 43294,
+          "ms": 100,
+          "basis": "peak làm tròn giây, sai số ±0,5 s"
+        },
+        {
+          "name": "w1-09-mid20s",
+          "startMs": 55674,
+          "endMs": 55774,
+          "ms": 100,
+          "basis": "giả định 100 ms/mark; căn chỉnh đồng hồ ±25 ms"
+        },
+        {
+          "name": "w1-05-peak-6foes-30s",
+          "startMs": 58194,
+          "endMs": 58294,
+          "ms": 100,
+          "basis": "peak làm tròn giây, sai số ±0,5 s"
+        },
+        {
+          "name": "w1-05-peak-8foes-43s",
+          "startMs": 71194,
+          "endMs": 71294,
+          "ms": 100,
+          "basis": "peak làm tròn giây, sai số ±0,5 s"
+        },
+        {
+          "name": "w1-10-mid45s",
+          "startMs": 79314,
+          "endMs": 79414,
+          "ms": 100,
+          "basis": "giả định 100 ms/mark; căn chỉnh đồng hồ ±25 ms"
+        }
+      ],
+      "pauseSeconds": 3.673,
+      "nearest": "100% lần chọn tự do theo PICK; khóa và urgent trước",
+      "tickRatio": 0.9965122072745392
+    },
+    {
+      "wave": 2,
+      "startMs": 97913,
+      "endMs": 149513,
+      "seconds": 51.6,
+      "hpStart": 492,
+      "hpMin": 492,
+      "hpDrop": 0,
+      "letters": 71,
+      "lettersPerMinute": 82.55813953488372,
+      "wordsCompleted": null,
+      "wordsReason": "Không đo được: words là số từ sống; kills gồm bẫy/kỹ năng; stats.words là tổng 168 lượt chọn, không phải sự kiện hoàn tất.",
+      "reaction": {
+        "p50": 194,
+        "p90": 407,
+        "n": 13,
+        "cleanP50": 154,
+        "cleanP90": 363,
+        "cleanN": 11,
+        "censored": 0,
+        "samples": [
+          {
+            "bornMs": 101213,
+            "firstKeyMs": 101407,
+            "ms": 194,
+            "pause": true,
+            "pauses": [
+              "w2-03-first-word"
+            ]
+          },
+          {
+            "bornMs": 106912,
+            "firstKeyMs": 106940,
+            "ms": 28,
+            "pause": false,
+            "pauses": []
+          },
+          {
+            "bornMs": 109911,
+            "firstKeyMs": 109999,
+            "ms": 88,
+            "pause": false,
+            "pauses": []
+          },
+          {
+            "bornMs": 113012,
+            "firstKeyMs": 113365,
+            "ms": 353,
+            "pause": false,
+            "pauses": []
+          },
+          {
+            "bornMs": 117512,
+            "firstKeyMs": 117528,
+            "ms": 16,
+            "pause": false,
+            "pauses": []
+          },
+          {
+            "bornMs": 123313,
+            "firstKeyMs": 123467,
+            "ms": 154,
+            "pause": false,
+            "pauses": []
+          },
+          {
+            "bornMs": 126327,
+            "firstKeyMs": 126734,
+            "ms": 407,
+            "pause": false,
+            "pauses": []
+          },
+          {
+            "bornMs": 128312,
+            "firstKeyMs": 128512,
+            "ms": 200,
+            "pause": false,
+            "pauses": []
+          },
+          {
+            "bornMs": 131312,
+            "firstKeyMs": 131598,
+            "ms": 286,
+            "pause": false,
+            "pauses": []
+          },
+          {
+            "bornMs": 137312,
+            "firstKeyMs": 137315,
+            "ms": 3,
+            "pause": false,
+            "pauses": []
+          },
+          {
+            "bornMs": 142913,
+            "firstKeyMs": 143276,
+            "ms": 363,
+            "pause": false,
+            "pauses": []
+          },
+          {
+            "bornMs": 145112,
+            "firstKeyMs": 145550,
+            "ms": 438,
+            "pause": true,
+            "pauses": [
+              "w2-10-mid45s"
+            ]
+          },
+          {
+            "bornMs": 147913,
+            "firstKeyMs": 147966,
+            "ms": 53,
+            "pause": false,
+            "pauses": []
+          }
+        ]
+      },
+      "pauses": [
+        {
+          "name": "start-banner",
+          "startMs": 98385,
+          "endMs": 99897,
+          "ms": 1512,
+          "basis": "sheets.spanMs, neo tại mark start; thiếu thời gian montage"
+        },
+        {
+          "name": "w2-02-start",
+          "startMs": 99897,
+          "endMs": 99997,
+          "ms": 100,
+          "basis": "giả định 100 ms/mark; căn chỉnh đồng hồ ±25 ms"
+        },
+        {
+          "name": "w2-11-first-trap-trigger",
+          "startMs": 100215,
+          "endMs": 100315,
+          "ms": 100,
+          "basis": "giả định 100 ms/mark; căn chỉnh đồng hồ ±25 ms"
+        },
+        {
+          "name": "ff-sleep",
+          "startMs": 100540,
+          "endMs": 100790,
+          "ms": 250,
+          "basis": "sleep 250 ms, fastForward=false"
+        },
+        {
+          "name": "w2-08-ff-try",
+          "startMs": 100790,
+          "endMs": 100890,
+          "ms": 100,
+          "basis": "giả định 100 ms/mark; căn chỉnh đồng hồ ±25 ms"
+        },
+        {
+          "name": "w2-03-first-word",
+          "startMs": 101196,
+          "endMs": 101296,
+          "ms": 100,
+          "basis": "giả định 100 ms/mark; căn chỉnh đồng hồ ±25 ms"
+        },
+        {
+          "name": "w2-09-mid20s",
+          "startMs": 119825,
+          "endMs": 119925,
+          "ms": 100,
+          "basis": "giả định 100 ms/mark; căn chỉnh đồng hồ ±25 ms"
+        },
+        {
+          "name": "w2-05-peak-9foes-109s",
+          "startMs": 137194,
+          "endMs": 137294,
+          "ms": 100,
+          "basis": "peak làm tròn giây, sai số ±0,5 s"
+        },
+        {
+          "name": "w2-10-mid45s",
+          "startMs": 145353,
+          "endMs": 145453,
+          "ms": 100,
+          "basis": "giả định 100 ms/mark; căn chỉnh đồng hồ ±25 ms"
+        }
+      ],
+      "pauseSeconds": 2.462,
+      "nearest": "100% lần chọn tự do theo PICK; khóa và urgent trước",
+      "tickRatio": 0.9948492428521478
+    },
+    {
+      "wave": 3,
+      "startMs": 165512,
+      "endMs": 214714,
+      "seconds": 49.202,
+      "hpStart": 515,
+      "hpMin": 515,
+      "hpDrop": 0,
+      "letters": 66,
+      "lettersPerMinute": 80.48453314905898,
+      "wordsCompleted": null,
+      "wordsReason": "Không đo được: words là số từ sống; kills gồm bẫy/kỹ năng; stats.words là tổng 168 lượt chọn, không phải sự kiện hoàn tất.",
+      "reaction": {
+        "p50": 216,
+        "p90": 571,
+        "n": 14,
+        "cleanP50": 216,
+        "cleanP90": 571,
+        "cleanN": 12,
+        "censored": 0,
+        "samples": [
+          {
+            "bornMs": 168812,
+            "firstKeyMs": 169002,
+            "ms": 190,
+            "pause": true,
+            "pauses": [
+              "w3-03-first-word"
+            ]
+          },
+          {
+            "bornMs": 173612,
+            "firstKeyMs": 173630,
+            "ms": 18,
+            "pause": false,
+            "pauses": []
+          },
+          {
+            "bornMs": 176311,
+            "firstKeyMs": 176311,
+            "ms": 0,
+            "pause": false,
+            "pauses": []
+          },
+          {
+            "bornMs": 181412,
+            "firstKeyMs": 181790,
+            "ms": 378,
+            "pause": false,
+            "pauses": []
+          },
+          {
+            "bornMs": 182612,
+            "firstKeyMs": 183183,
+            "ms": 571,
+            "pause": false,
+            "pauses": []
+          },
+          {
+            "bornMs": 189611,
+            "firstKeyMs": 189664,
+            "ms": 53,
+            "pause": false,
+            "pauses": []
+          },
+          {
+            "bornMs": 192413,
+            "firstKeyMs": 192428,
+            "ms": 15,
+            "pause": false,
+            "pauses": []
+          },
+          {
+            "bornMs": 194212,
+            "firstKeyMs": 194464,
+            "ms": 252,
+            "pause": false,
+            "pauses": []
+          },
+          {
+            "bornMs": 197214,
+            "firstKeyMs": 197430,
+            "ms": 216,
+            "pause": false,
+            "pauses": []
+          },
+          {
+            "bornMs": 202712,
+            "firstKeyMs": 202919,
+            "ms": 207,
+            "pause": false,
+            "pauses": []
+          },
+          {
+            "bornMs": 203713,
+            "firstKeyMs": 204458,
+            "ms": 745,
+            "pause": false,
+            "pauses": []
+          },
+          {
+            "bornMs": 208024,
+            "firstKeyMs": 208297,
+            "ms": 273,
+            "pause": false,
+            "pauses": []
+          },
+          {
+            "bornMs": 210513,
+            "firstKeyMs": 210729,
+            "ms": 216,
+            "pause": true,
+            "pauses": [
+              "w3-10-mid45s"
+            ]
+          },
+          {
+            "bornMs": 213213,
+            "firstKeyMs": 213625,
+            "ms": 412,
+            "pause": false,
+            "pauses": []
+          }
+        ]
+      },
+      "pauses": [
+        {
+          "name": "start-banner",
+          "startMs": 166014,
+          "endMs": 167549,
+          "ms": 1535,
+          "basis": "sheets.spanMs, neo tại mark start; thiếu thời gian montage"
+        },
+        {
+          "name": "w3-02-start",
+          "startMs": 167549,
+          "endMs": 167649,
+          "ms": 100,
+          "basis": "giả định 100 ms/mark; căn chỉnh đồng hồ ±25 ms"
+        },
+        {
+          "name": "w3-11-first-trap-trigger",
+          "startMs": 167866,
+          "endMs": 167966,
+          "ms": 100,
+          "basis": "giả định 100 ms/mark; căn chỉnh đồng hồ ±25 ms"
+        },
+        {
+          "name": "ff-sleep",
+          "startMs": 168162,
+          "endMs": 168412,
+          "ms": 250,
+          "basis": "sleep 250 ms, fastForward=false"
+        },
+        {
+          "name": "w3-08-ff-try",
+          "startMs": 168412,
+          "endMs": 168512,
+          "ms": 100,
+          "basis": "giả định 100 ms/mark; căn chỉnh đồng hồ ±25 ms"
+        },
+        {
+          "name": "w3-03-first-word",
+          "startMs": 168807,
+          "endMs": 168907,
+          "ms": 100,
+          "basis": "giả định 100 ms/mark; căn chỉnh đồng hồ ±25 ms"
+        },
+        {
+          "name": "w3-09-mid20s",
+          "startMs": 185577,
+          "endMs": 185677,
+          "ms": 100,
+          "basis": "giả định 100 ms/mark; căn chỉnh đồng hồ ±25 ms"
+        },
+        {
+          "name": "w3-05-peak-9foes-174s",
+          "startMs": 202194,
+          "endMs": 202294,
+          "ms": 100,
+          "basis": "peak làm tròn giây, sai số ±0,5 s"
+        },
+        {
+          "name": "w3-10-mid45s",
+          "startMs": 210533,
+          "endMs": 210633,
+          "ms": 100,
+          "basis": "giả định 100 ms/mark; căn chỉnh đồng hồ ±25 ms"
+        }
+      ],
+      "pauseSeconds": 2.485,
+      "nearest": "100% lần chọn tự do theo PICK; khóa và urgent trước",
+      "tickRatio": 0.9950846531949754
+    },
+    {
+      "wave": 4,
+      "startMs": 231612,
+      "endMs": 282012,
+      "seconds": 50.4,
+      "hpStart": 538,
+      "hpMin": 538,
+      "hpDrop": 0,
+      "letters": 77,
+      "lettersPerMinute": 91.66666666666667,
+      "wordsCompleted": null,
+      "wordsReason": "Không đo được: words là số từ sống; kills gồm bẫy/kỹ năng; stats.words là tổng 168 lượt chọn, không phải sự kiện hoàn tất.",
+      "reaction": {
+        "p50": 186,
+        "p90": 450,
+        "n": 15,
+        "cleanP50": 42,
+        "cleanP90": 326,
+        "cleanN": 12,
+        "censored": 0,
+        "samples": [
+          {
+            "bornMs": 234314,
+            "firstKeyMs": 234699,
+            "ms": 385,
+            "pause": true,
+            "pauses": [
+              "ff-sleep",
+              "w4-08-ff-try",
+              "w4-11-first-trap-trigger"
+            ]
+          },
+          {
+            "bornMs": 236813,
+            "firstKeyMs": 237582,
+            "ms": 769,
+            "pause": true,
+            "pauses": [
+              "w4-03-first-word"
+            ]
+          },
+          {
+            "bornMs": 242312,
+            "firstKeyMs": 242549,
+            "ms": 237,
+            "pause": false,
+            "pauses": []
+          },
+          {
+            "bornMs": 244512,
+            "firstKeyMs": 244562,
+            "ms": 50,
+            "pause": false,
+            "pauses": []
+          },
+          {
+            "bornMs": 246812,
+            "firstKeyMs": 246998,
+            "ms": 186,
+            "pause": false,
+            "pauses": []
+          },
+          {
+            "bornMs": 249313,
+            "firstKeyMs": 249324,
+            "ms": 11,
+            "pause": false,
+            "pauses": []
+          },
+          {
+            "bornMs": 251613,
+            "firstKeyMs": 252063,
+            "ms": 450,
+            "pause": true,
+            "pauses": [
+              "w4-09-mid20s"
+            ]
+          },
+          {
+            "bornMs": 257612,
+            "firstKeyMs": 257641,
+            "ms": 29,
+            "pause": false,
+            "pauses": []
+          },
+          {
+            "bornMs": 260113,
+            "firstKeyMs": 260439,
+            "ms": 326,
+            "pause": false,
+            "pauses": []
+          },
+          {
+            "bornMs": 261913,
+            "firstKeyMs": 262258,
+            "ms": 345,
+            "pause": false,
+            "pauses": []
+          },
+          {
+            "bornMs": 264412,
+            "firstKeyMs": 264421,
+            "ms": 9,
+            "pause": false,
+            "pauses": []
+          },
+          {
+            "bornMs": 267413,
+            "firstKeyMs": 267455,
+            "ms": 42,
+            "pause": false,
+            "pauses": []
+          },
+          {
+            "bornMs": 273212,
+            "firstKeyMs": 273221,
+            "ms": 9,
+            "pause": false,
+            "pauses": []
+          },
+          {
+            "bornMs": 278012,
+            "firstKeyMs": 278042,
+            "ms": 30,
+            "pause": false,
+            "pauses": []
+          },
+          {
+            "bornMs": 280813,
+            "firstKeyMs": 281113,
+            "ms": 300,
+            "pause": false,
+            "pauses": []
+          }
+        ]
+      },
+      "pauses": [
+        {
+          "name": "start-banner",
+          "startMs": 232206,
+          "endMs": 233761,
+          "ms": 1555,
+          "basis": "sheets.spanMs, neo tại mark start; thiếu thời gian montage"
+        },
+        {
+          "name": "w4-02-start",
+          "startMs": 233761,
+          "endMs": 233861,
+          "ms": 100,
+          "basis": "giả định 100 ms/mark; căn chỉnh đồng hồ ±25 ms"
+        },
+        {
+          "name": "ff-sleep",
+          "startMs": 234064,
+          "endMs": 234314,
+          "ms": 250,
+          "basis": "sleep 250 ms, fastForward=false"
+        },
+        {
+          "name": "w4-08-ff-try",
+          "startMs": 234314,
+          "endMs": 234414,
+          "ms": 100,
+          "basis": "giả định 100 ms/mark; căn chỉnh đồng hồ ±25 ms"
+        },
+        {
+          "name": "w4-11-first-trap-trigger",
+          "startMs": 234515,
+          "endMs": 234615,
+          "ms": 100,
+          "basis": "giả định 100 ms/mark; căn chỉnh đồng hồ ±25 ms"
+        },
+        {
+          "name": "w4-03-first-word",
+          "startMs": 237389,
+          "endMs": 237489,
+          "ms": 100,
+          "basis": "giả định 100 ms/mark; căn chỉnh đồng hồ ±25 ms"
+        },
+        {
+          "name": "w4-09-mid20s",
+          "startMs": 251876,
+          "endMs": 251976,
+          "ms": 100,
+          "basis": "giả định 100 ms/mark; căn chỉnh đồng hồ ±25 ms"
+        },
+        {
+          "name": "w4-05-peak-9foes-244s",
+          "startMs": 272194,
+          "endMs": 272294,
+          "ms": 100,
+          "basis": "peak làm tròn giây, sai số ±0,5 s"
+        },
+        {
+          "name": "w4-10-mid45s",
+          "startMs": 276726,
+          "endMs": 276826,
+          "ms": 100,
+          "basis": "giả định 100 ms/mark; căn chỉnh đồng hồ ±25 ms"
+        }
+      ],
+      "pauseSeconds": 2.505,
+      "nearest": "100% lần chọn tự do theo PICK; khóa và urgent trước",
+      "tickRatio": 0.9945012458114959
+    },
+    {
+      "wave": 5,
+      "startMs": 300813,
+      "endMs": 361912,
+      "seconds": 61.099,
+      "hpStart": 561,
+      "hpMin": 551,
+      "hpDrop": 10,
+      "letters": 99,
+      "lettersPerMinute": 97.21926709111442,
+      "wordsCompleted": null,
+      "wordsReason": "Không đo được: words là số từ sống; kills gồm bẫy/kỹ năng; stats.words là tổng 168 lượt chọn, không phải sự kiện hoàn tất.",
+      "reaction": {
+        "p50": 198,
+        "p90": 648,
+        "n": 20,
+        "cleanP50": 198,
+        "cleanP90": 413,
+        "cleanN": 17,
+        "censored": 0,
+        "samples": [
+          {
+            "bornMs": 303212,
+            "firstKeyMs": 303695,
+            "ms": 483,
+            "pause": true,
+            "pauses": [
+              "ff-sleep",
+              "w5-08-ff-try",
+              "w5-11-first-trap-trigger"
+            ]
+          },
+          {
+            "bornMs": 305113,
+            "firstKeyMs": 305779,
+            "ms": 666,
+            "pause": true,
+            "pauses": [
+              "w5-03-first-word"
+            ]
+          },
+          {
+            "bornMs": 307313,
+            "firstKeyMs": 307604,
+            "ms": 291,
+            "pause": false,
+            "pauses": []
+          },
+          {
+            "bornMs": 311414,
+            "firstKeyMs": 311474,
+            "ms": 60,
+            "pause": false,
+            "pauses": []
+          },
+          {
+            "bornMs": 313713,
+            "firstKeyMs": 313797,
+            "ms": 84,
+            "pause": false,
+            "pauses": []
+          },
+          {
+            "bornMs": 315714,
+            "firstKeyMs": 316362,
+            "ms": 648,
+            "pause": false,
+            "pauses": []
+          },
+          {
+            "bornMs": 318520,
+            "firstKeyMs": 318819,
+            "ms": 299,
+            "pause": false,
+            "pauses": []
+          },
+          {
+            "bornMs": 321521,
+            "firstKeyMs": 321719,
+            "ms": 198,
+            "pause": false,
+            "pauses": []
+          },
+          {
+            "bornMs": 323212,
+            "firstKeyMs": 323611,
+            "ms": 399,
+            "pause": false,
+            "pauses": []
+          },
+          {
+            "bornMs": 326013,
+            "firstKeyMs": 326204,
+            "ms": 191,
+            "pause": false,
+            "pauses": []
+          },
+          {
+            "bornMs": 328612,
+            "firstKeyMs": 330235,
+            "ms": 1623,
+            "pause": true,
+            "pauses": [
+              "general-move"
+            ]
+          },
+          {
+            "bornMs": 336014,
+            "firstKeyMs": 336064,
+            "ms": 50,
+            "pause": false,
+            "pauses": []
+          },
+          {
+            "bornMs": 338312,
+            "firstKeyMs": 338358,
+            "ms": 46,
+            "pause": false,
+            "pauses": []
+          },
+          {
+            "bornMs": 339813,
+            "firstKeyMs": 340007,
+            "ms": 194,
+            "pause": false,
+            "pauses": []
+          },
+          {
+            "bornMs": 342312,
+            "firstKeyMs": 342313,
+            "ms": 1,
+            "pause": false,
+            "pauses": []
+          },
+          {
+            "bornMs": 343514,
+            "firstKeyMs": 343893,
+            "ms": 379,
+            "pause": false,
+            "pauses": []
+          },
+          {
+            "bornMs": 350620,
+            "firstKeyMs": 351033,
+            "ms": 413,
+            "pause": false,
+            "pauses": []
+          },
+          {
+            "bornMs": 355112,
+            "firstKeyMs": 355133,
+            "ms": 21,
+            "pause": false,
+            "pauses": []
+          },
+          {
+            "bornMs": 357114,
+            "firstKeyMs": 357312,
+            "ms": 198,
+            "pause": false,
+            "pauses": []
+          },
+          {
+            "bornMs": 360711,
+            "firstKeyMs": 360964,
+            "ms": 253,
+            "pause": false,
+            "pauses": []
+          }
+        ]
+      },
+      "pauses": [
+        {
+          "name": "start-banner",
+          "startMs": 301241,
+          "endMs": 302758,
+          "ms": 1517,
+          "basis": "sheets.spanMs, neo tại mark start; thiếu thời gian montage"
+        },
+        {
+          "name": "w5-02-start",
+          "startMs": 302758,
+          "endMs": 302858,
+          "ms": 100,
+          "basis": "giả định 100 ms/mark; căn chỉnh đồng hồ ±25 ms"
+        },
+        {
+          "name": "ff-sleep",
+          "startMs": 303057,
+          "endMs": 303307,
+          "ms": 250,
+          "basis": "sleep 250 ms, fastForward=false"
+        },
+        {
+          "name": "w5-08-ff-try",
+          "startMs": 303307,
+          "endMs": 303407,
+          "ms": 100,
+          "basis": "giả định 100 ms/mark; căn chỉnh đồng hồ ±25 ms"
+        },
+        {
+          "name": "w5-11-first-trap-trigger",
+          "startMs": 303507,
+          "endMs": 303607,
+          "ms": 100,
+          "basis": "giả định 100 ms/mark; căn chỉnh đồng hồ ±25 ms"
+        },
+        {
+          "name": "w5-03-first-word",
+          "startMs": 305572,
+          "endMs": 305672,
+          "ms": 100,
+          "basis": "giả định 100 ms/mark; căn chỉnh đồng hồ ±25 ms"
+        },
+        {
+          "name": "w5-06-general",
+          "startMs": 318304,
+          "endMs": 318404,
+          "ms": 100,
+          "basis": "giả định 100 ms/mark; căn chỉnh đồng hồ ±25 ms"
+        },
+        {
+          "name": "w5-09-mid20s",
+          "startMs": 320835,
+          "endMs": 320935,
+          "ms": 100,
+          "basis": "giả định 100 ms/mark; căn chỉnh đồng hồ ±25 ms"
+        },
+        {
+          "name": "general-move",
+          "startMs": 328750,
+          "endMs": 329910,
+          "ms": 1160,
+          "basis": "sheets.spanMs; mốc từ timeline, sai số một khoảng snapshot"
+        },
+        {
+          "name": "w5-10-mid45s",
+          "startMs": 345959,
+          "endMs": 346059,
+          "ms": 100,
+          "basis": "giả định 100 ms/mark; căn chỉnh đồng hồ ±25 ms"
+        },
+        {
+          "name": "w5-05-peak-9foes-321s",
+          "startMs": 349194,
+          "endMs": 349294,
+          "ms": 100,
+          "basis": "peak làm tròn giây, sai số ±0,5 s"
+        }
+      ],
+      "pauseSeconds": 3.727,
+      "nearest": "100% lần chọn tự do theo PICK; khóa và urgent trước",
+      "tickRatio": 0.9954004424001967
+    },
+    {
+      "wave": 6,
+      "startMs": 378312,
+      "endMs": 426515,
+      "seconds": 48.203,
+      "hpStart": 584,
+      "hpMin": 584,
+      "hpDrop": 0,
+      "letters": 63,
+      "lettersPerMinute": 78.41835570400183,
+      "wordsCompleted": null,
+      "wordsReason": "Không đo được: words là số từ sống; kills gồm bẫy/kỹ năng; stats.words là tổng 168 lượt chọn, không phải sự kiện hoàn tất.",
+      "reaction": {
+        "p50": 142,
+        "p90": 392,
+        "n": 14,
+        "cleanP50": 142,
+        "cleanP90": 392,
+        "cleanN": 13,
+        "censored": 0,
+        "samples": [
+          {
+            "bornMs": 380913,
+            "firstKeyMs": 381127,
+            "ms": 214,
+            "pause": true,
+            "pauses": [
+              "w6-03-first-word"
+            ]
+          },
+          {
+            "bornMs": 382713,
+            "firstKeyMs": 383208,
+            "ms": 495,
+            "pause": false,
+            "pauses": []
+          },
+          {
+            "bornMs": 389011,
+            "firstKeyMs": 389012,
+            "ms": 1,
+            "pause": false,
+            "pauses": []
+          },
+          {
+            "bornMs": 390512,
+            "firstKeyMs": 390524,
+            "ms": 12,
+            "pause": false,
+            "pauses": []
+          },
+          {
+            "bornMs": 392813,
+            "firstKeyMs": 392955,
+            "ms": 142,
+            "pause": false,
+            "pauses": []
+          },
+          {
+            "bornMs": 396513,
+            "firstKeyMs": 396534,
+            "ms": 21,
+            "pause": false,
+            "pauses": []
+          },
+          {
+            "bornMs": 402017,
+            "firstKeyMs": 402394,
+            "ms": 377,
+            "pause": false,
+            "pauses": []
+          },
+          {
+            "bornMs": 403815,
+            "firstKeyMs": 404000,
+            "ms": 185,
+            "pause": false,
+            "pauses": []
+          },
+          {
+            "bornMs": 406312,
+            "firstKeyMs": 406508,
+            "ms": 196,
+            "pause": false,
+            "pauses": []
+          },
+          {
+            "bornMs": 409614,
+            "firstKeyMs": 409802,
+            "ms": 188,
+            "pause": false,
+            "pauses": []
+          },
+          {
+            "bornMs": 415114,
+            "firstKeyMs": 415116,
+            "ms": 2,
+            "pause": false,
+            "pauses": []
+          },
+          {
+            "bornMs": 419813,
+            "firstKeyMs": 419829,
+            "ms": 16,
+            "pause": false,
+            "pauses": []
+          },
+          {
+            "bornMs": 422317,
+            "firstKeyMs": 422366,
+            "ms": 49,
+            "pause": false,
+            "pauses": []
+          },
+          {
+            "bornMs": 424914,
+            "firstKeyMs": 425306,
+            "ms": 392,
+            "pause": false,
+            "pauses": []
+          }
+        ]
+      },
+      "pauses": [
+        {
+          "name": "start-banner",
+          "startMs": 378800,
+          "endMs": 380319,
+          "ms": 1519,
+          "basis": "sheets.spanMs, neo tại mark start; thiếu thời gian montage"
+        },
+        {
+          "name": "w6-02-start",
+          "startMs": 380319,
+          "endMs": 380419,
+          "ms": 100,
+          "basis": "giả định 100 ms/mark; căn chỉnh đồng hồ ±25 ms"
+        },
+        {
+          "name": "w6-11-first-trap-trigger",
+          "startMs": 380618,
+          "endMs": 380718,
+          "ms": 100,
+          "basis": "giả định 100 ms/mark; căn chỉnh đồng hồ ±25 ms"
+        },
+        {
+          "name": "w6-03-first-word",
+          "startMs": 380937,
+          "endMs": 381037,
+          "ms": 100,
+          "basis": "giả định 100 ms/mark; căn chỉnh đồng hồ ±25 ms"
+        },
+        {
+          "name": "ff-sleep",
+          "startMs": 388184,
+          "endMs": 388434,
+          "ms": 250,
+          "basis": "sleep 250 ms, fastForward=false"
+        },
+        {
+          "name": "w6-08-ff-try",
+          "startMs": 388434,
+          "endMs": 388534,
+          "ms": 100,
+          "basis": "giả định 100 ms/mark; căn chỉnh đồng hồ ±25 ms"
+        },
+        {
+          "name": "w6-09-mid20s",
+          "startMs": 398342,
+          "endMs": 398442,
+          "ms": 100,
+          "basis": "giả định 100 ms/mark; căn chỉnh đồng hồ ±25 ms"
+        },
+        {
+          "name": "w6-05-peak-9foes-386s",
+          "startMs": 414194,
+          "endMs": 414294,
+          "ms": 100,
+          "basis": "peak làm tròn giây, sai số ±0,5 s"
+        },
+        {
+          "name": "w6-10-mid45s",
+          "startMs": 423949,
+          "endMs": 424049,
+          "ms": 100,
+          "basis": "giả định 100 ms/mark; căn chỉnh đồng hồ ±25 ms"
+        }
+      ],
+      "pauseSeconds": 2.469,
+      "nearest": "100% lần chọn tự do theo PICK; khóa và urgent trước",
+      "tickRatio": 0.9947148561009947
+    },
+    {
+      "wave": 7,
+      "startMs": 444117,
+      "endMs": 491112,
+      "seconds": 46.995,
+      "hpStart": 607,
+      "hpMin": 574,
+      "hpDrop": 33,
+      "letters": 74,
+      "lettersPerMinute": 94.47813597191191,
+      "wordsCompleted": null,
+      "wordsReason": "Không đo được: words là số từ sống; kills gồm bẫy/kỹ năng; stats.words là tổng 168 lượt chọn, không phải sự kiện hoàn tất.",
+      "reaction": {
+        "p50": 256,
+        "p90": 657,
+        "n": 13,
+        "cleanP50": 78,
+        "cleanP90": 368,
+        "cleanN": 8,
+        "censored": 0,
+        "samples": [
+          {
+            "bornMs": 445713,
+            "firstKeyMs": 446370,
+            "ms": 657,
+            "pause": true,
+            "pauses": [
+              "start-banner",
+              "w7-02-start"
+            ]
+          },
+          {
+            "bornMs": 448214,
+            "firstKeyMs": 448582,
+            "ms": 368,
+            "pause": false,
+            "pauses": []
+          },
+          {
+            "bornMs": 451015,
+            "firstKeyMs": 451367,
+            "ms": 352,
+            "pause": true,
+            "pauses": [
+              "ff-sleep",
+              "w7-08-ff-try"
+            ]
+          },
+          {
+            "bornMs": 455513,
+            "firstKeyMs": 455725,
+            "ms": 212,
+            "pause": true,
+            "pauses": [
+              "w7-03-first-word"
+            ]
+          },
+          {
+            "bornMs": 457514,
+            "firstKeyMs": 457770,
+            "ms": 256,
+            "pause": false,
+            "pauses": []
+          },
+          {
+            "bornMs": 459314,
+            "firstKeyMs": 459638,
+            "ms": 324,
+            "pause": false,
+            "pauses": []
+          },
+          {
+            "bornMs": 463813,
+            "firstKeyMs": 463841,
+            "ms": 28,
+            "pause": false,
+            "pauses": []
+          },
+          {
+            "bornMs": 464814,
+            "firstKeyMs": 465367,
+            "ms": 553,
+            "pause": true,
+            "pauses": [
+              "w7-09-mid20s"
+            ]
+          },
+          {
+            "bornMs": 471312,
+            "firstKeyMs": 471334,
+            "ms": 22,
+            "pause": false,
+            "pauses": []
+          },
+          {
+            "bornMs": 473313,
+            "firstKeyMs": 473391,
+            "ms": 78,
+            "pause": false,
+            "pauses": []
+          },
+          {
+            "bornMs": 474813,
+            "firstKeyMs": 477969,
+            "ms": 3156,
+            "pause": true,
+            "pauses": [
+              "w7-04-first-damage",
+              "hp-loss"
+            ]
+          },
+          {
+            "bornMs": 485712,
+            "firstKeyMs": 485891,
+            "ms": 179,
+            "pause": false,
+            "pauses": []
+          },
+          {
+            "bornMs": 489914,
+            "firstKeyMs": 489980,
+            "ms": 66,
+            "pause": false,
+            "pauses": []
+          }
+        ]
+      },
+      "pauses": [
+        {
+          "name": "start-banner",
+          "startMs": 444644,
+          "endMs": 446192,
+          "ms": 1548,
+          "basis": "sheets.spanMs, neo tại mark start; thiếu thời gian montage"
+        },
+        {
+          "name": "w7-02-start",
+          "startMs": 446192,
+          "endMs": 446292,
+          "ms": 100,
+          "basis": "giả định 100 ms/mark; căn chỉnh đồng hồ ±25 ms"
+        },
+        {
+          "name": "w7-11-first-trap-trigger",
+          "startMs": 448008,
+          "endMs": 448108,
+          "ms": 100,
+          "basis": "giả định 100 ms/mark; căn chỉnh đồng hồ ±25 ms"
+        },
+        {
+          "name": "ff-sleep",
+          "startMs": 450914,
+          "endMs": 451164,
+          "ms": 250,
+          "basis": "sleep 250 ms, fastForward=false"
+        },
+        {
+          "name": "w7-08-ff-try",
+          "startMs": 451164,
+          "endMs": 451264,
+          "ms": 100,
+          "basis": "giả định 100 ms/mark; căn chỉnh đồng hồ ±25 ms"
+        },
+        {
+          "name": "w7-03-first-word",
+          "startMs": 455532,
+          "endMs": 455632,
+          "ms": 100,
+          "basis": "giả định 100 ms/mark; căn chỉnh đồng hồ ±25 ms"
+        },
+        {
+          "name": "w7-09-mid20s",
+          "startMs": 465167,
+          "endMs": 465267,
+          "ms": 100,
+          "basis": "giả định 100 ms/mark; căn chỉnh đồng hồ ±25 ms"
+        },
+        {
+          "name": "w7-04-first-damage",
+          "startMs": 475465,
+          "endMs": 475565,
+          "ms": 100,
+          "basis": "giả định 100 ms/mark; căn chỉnh đồng hồ ±25 ms"
+        },
+        {
+          "name": "hp-loss",
+          "startMs": 475565,
+          "endMs": 477299,
+          "ms": 1734,
+          "basis": "sheets.spanMs sau mark first-damage"
+        },
+        {
+          "name": "w7-05-peak-9foes-456s",
+          "startMs": 484194,
+          "endMs": 484294,
+          "ms": 100,
+          "basis": "peak làm tròn giây, sai số ±0,5 s"
+        },
+        {
+          "name": "w7-10-mid45s",
+          "startMs": 489226,
+          "endMs": 489326,
+          "ms": 100,
+          "basis": "giả định 100 ms/mark; căn chỉnh đồng hồ ±25 ms"
+        }
+      ],
+      "pauseSeconds": 4.332,
+      "nearest": "100% lần chọn tự do theo PICK; khóa và urgent trước",
+      "tickRatio": 0.9947253064861871
+    },
+    {
+      "wave": 8,
+      "startMs": 508612,
+      "endMs": 559412,
+      "seconds": 50.8,
+      "hpStart": 607,
+      "hpMin": 592,
+      "hpDrop": 15,
+      "letters": 68,
+      "lettersPerMinute": 80.31496062992126,
+      "wordsCompleted": null,
+      "wordsReason": "Không đo được: words là số từ sống; kills gồm bẫy/kỹ năng; stats.words là tổng 168 lượt chọn, không phải sự kiện hoàn tất.",
+      "reaction": {
+        "p50": 307,
+        "p90": 585,
+        "n": 12,
+        "cleanP50": 303,
+        "cleanP90": 355,
+        "cleanN": 9,
+        "censored": 0,
+        "samples": [
+          {
+            "bornMs": 510411,
+            "firstKeyMs": 510803,
+            "ms": 392,
+            "pause": true,
+            "pauses": [
+              "start-banner",
+              "w8-02-start"
+            ]
+          },
+          {
+            "bornMs": 512111,
+            "firstKeyMs": 512784,
+            "ms": 673,
+            "pause": true,
+            "pauses": [
+              "w8-11-first-trap-trigger",
+              "w8-03-first-word"
+            ]
+          },
+          {
+            "bornMs": 518511,
+            "firstKeyMs": 518518,
+            "ms": 7,
+            "pause": false,
+            "pauses": []
+          },
+          {
+            "bornMs": 522711,
+            "firstKeyMs": 523031,
+            "ms": 320,
+            "pause": false,
+            "pauses": []
+          },
+          {
+            "bornMs": 527012,
+            "firstKeyMs": 527367,
+            "ms": 355,
+            "pause": false,
+            "pauses": []
+          },
+          {
+            "bornMs": 528412,
+            "firstKeyMs": 528997,
+            "ms": 585,
+            "pause": true,
+            "pauses": [
+              "w8-09-mid20s"
+            ]
+          },
+          {
+            "bornMs": 534511,
+            "firstKeyMs": 534582,
+            "ms": 71,
+            "pause": false,
+            "pauses": []
+          },
+          {
+            "bornMs": 536612,
+            "firstKeyMs": 536919,
+            "ms": 307,
+            "pause": false,
+            "pauses": []
+          },
+          {
+            "bornMs": 541112,
+            "firstKeyMs": 541415,
+            "ms": 303,
+            "pause": false,
+            "pauses": []
+          },
+          {
+            "bornMs": 544112,
+            "firstKeyMs": 544427,
+            "ms": 315,
+            "pause": false,
+            "pauses": []
+          },
+          {
+            "bornMs": 548611,
+            "firstKeyMs": 548644,
+            "ms": 33,
+            "pause": false,
+            "pauses": []
+          },
+          {
+            "bornMs": 552412,
+            "firstKeyMs": 552422,
+            "ms": 10,
+            "pause": false,
+            "pauses": []
+          }
+        ]
+      },
+      "pauses": [
+        {
+          "name": "start-banner",
+          "startMs": 509085,
+          "endMs": 510622,
+          "ms": 1537,
+          "basis": "sheets.spanMs, neo tại mark start; thiếu thời gian montage"
+        },
+        {
+          "name": "w8-02-start",
+          "startMs": 510622,
+          "endMs": 510722,
+          "ms": 100,
+          "basis": "giả định 100 ms/mark; căn chỉnh đồng hồ ±25 ms"
+        },
+        {
+          "name": "w8-11-first-trap-trigger",
+          "startMs": 512388,
+          "endMs": 512488,
+          "ms": 100,
+          "basis": "giả định 100 ms/mark; căn chỉnh đồng hồ ±25 ms"
+        },
+        {
+          "name": "w8-03-first-word",
+          "startMs": 512604,
+          "endMs": 512704,
+          "ms": 100,
+          "basis": "giả định 100 ms/mark; căn chỉnh đồng hồ ±25 ms"
+        },
+        {
+          "name": "w8-04-first-damage",
+          "startMs": 515029,
+          "endMs": 515129,
+          "ms": 100,
+          "basis": "giả định 100 ms/mark; căn chỉnh đồng hồ ±25 ms"
+        },
+        {
+          "name": "hp-loss",
+          "startMs": 515129,
+          "endMs": 516840,
+          "ms": 1711,
+          "basis": "sheets.spanMs sau mark first-damage"
+        },
+        {
+          "name": "ff-sleep",
+          "startMs": 517882,
+          "endMs": 518132,
+          "ms": 250,
+          "basis": "sleep 250 ms, fastForward=false"
+        },
+        {
+          "name": "w8-08-ff-try",
+          "startMs": 518132,
+          "endMs": 518232,
+          "ms": 100,
+          "basis": "giả định 100 ms/mark; căn chỉnh đồng hồ ±25 ms"
+        },
+        {
+          "name": "w8-09-mid20s",
+          "startMs": 528800,
+          "endMs": 528900,
+          "ms": 100,
+          "basis": "giả định 100 ms/mark; căn chỉnh đồng hồ ±25 ms"
+        },
+        {
+          "name": "w8-05-peak-9foes-519s",
+          "startMs": 547194,
+          "endMs": 547294,
+          "ms": 100,
+          "basis": "peak làm tròn giây, sai số ±0,5 s"
+        },
+        {
+          "name": "w8-10-mid45s",
+          "startMs": 554436,
+          "endMs": 554536,
+          "ms": 100,
+          "basis": "giả định 100 ms/mark; căn chỉnh đồng hồ ±25 ms"
+        }
+      ],
+      "pauseSeconds": 4.298,
+      "nearest": "100% lần chọn tự do theo PICK; khóa và urgent trước",
+      "tickRatio": 0.9954770715661452
+    },
+    {
+      "wave": 9,
+      "startMs": 578312,
+      "endMs": 627712,
+      "seconds": 49.4,
+      "hpStart": 630,
+      "hpMin": 583,
+      "hpDrop": 47,
+      "letters": 67,
+      "lettersPerMinute": 81.37651821862349,
+      "wordsCompleted": null,
+      "wordsReason": "Không đo được: words là số từ sống; kills gồm bẫy/kỹ năng; stats.words là tổng 168 lượt chọn, không phải sự kiện hoàn tất.",
+      "reaction": {
+        "p50": 308,
+        "p90": 605,
+        "n": 11,
+        "cleanP50": 37,
+        "cleanP90": 449,
+        "cleanN": 7,
+        "censored": 0,
+        "samples": [
+          {
+            "bornMs": 579912,
+            "firstKeyMs": 580517,
+            "ms": 605,
+            "pause": true,
+            "pauses": [
+              "start-banner",
+              "w9-02-start"
+            ]
+          },
+          {
+            "bornMs": 582612,
+            "firstKeyMs": 582920,
+            "ms": 308,
+            "pause": true,
+            "pauses": [
+              "ff-sleep",
+              "w9-08-ff-try"
+            ]
+          },
+          {
+            "bornMs": 585112,
+            "firstKeyMs": 585365,
+            "ms": 253,
+            "pause": true,
+            "pauses": [
+              "w9-03-first-word"
+            ]
+          },
+          {
+            "bornMs": 589412,
+            "firstKeyMs": 589449,
+            "ms": 37,
+            "pause": false,
+            "pauses": []
+          },
+          {
+            "bornMs": 591712,
+            "firstKeyMs": 594018,
+            "ms": 2306,
+            "pause": true,
+            "pauses": [
+              "hp-loss"
+            ]
+          },
+          {
+            "bornMs": 605312,
+            "firstKeyMs": 605663,
+            "ms": 351,
+            "pause": false,
+            "pauses": []
+          },
+          {
+            "bornMs": 609825,
+            "firstKeyMs": 610274,
+            "ms": 449,
+            "pause": false,
+            "pauses": []
+          },
+          {
+            "bornMs": 614112,
+            "firstKeyMs": 614124,
+            "ms": 12,
+            "pause": false,
+            "pauses": []
+          },
+          {
+            "bornMs": 620112,
+            "firstKeyMs": 620474,
+            "ms": 362,
+            "pause": false,
+            "pauses": []
+          },
+          {
+            "bornMs": 624111,
+            "firstKeyMs": 624113,
+            "ms": 2,
+            "pause": false,
+            "pauses": []
+          },
+          {
+            "bornMs": 626611,
+            "firstKeyMs": 626612,
+            "ms": 1,
+            "pause": false,
+            "pauses": []
+          }
+        ]
+      },
+      "pauses": [
+        {
+          "name": "start-banner",
+          "startMs": 578802,
+          "endMs": 580337,
+          "ms": 1535,
+          "basis": "sheets.spanMs, neo tại mark start; thiếu thời gian montage"
+        },
+        {
+          "name": "w9-02-start",
+          "startMs": 580337,
+          "endMs": 580437,
+          "ms": 100,
+          "basis": "giả định 100 ms/mark; căn chỉnh đồng hồ ±25 ms"
+        },
+        {
+          "name": "w9-11-first-trap-trigger",
+          "startMs": 581983,
+          "endMs": 582083,
+          "ms": 100,
+          "basis": "giả định 100 ms/mark; căn chỉnh đồng hồ ±25 ms"
+        },
+        {
+          "name": "ff-sleep",
+          "startMs": 582478,
+          "endMs": 582728,
+          "ms": 250,
+          "basis": "sleep 250 ms, fastForward=false"
+        },
+        {
+          "name": "w9-08-ff-try",
+          "startMs": 582728,
+          "endMs": 582828,
+          "ms": 100,
+          "basis": "giả định 100 ms/mark; căn chỉnh đồng hồ ±25 ms"
+        },
+        {
+          "name": "w9-03-first-word",
+          "startMs": 585169,
+          "endMs": 585269,
+          "ms": 100,
+          "basis": "giả định 100 ms/mark; căn chỉnh đồng hồ ±25 ms"
+        },
+        {
+          "name": "w9-04-first-damage",
+          "startMs": 591603,
+          "endMs": 591703,
+          "ms": 100,
+          "basis": "giả định 100 ms/mark; căn chỉnh đồng hồ ±25 ms"
+        },
+        {
+          "name": "hp-loss",
+          "startMs": 591703,
+          "endMs": 593353,
+          "ms": 1650,
+          "basis": "sheets.spanMs sau mark first-damage"
+        },
+        {
+          "name": "w9-09-mid20s",
+          "startMs": 598848,
+          "endMs": 598948,
+          "ms": 100,
+          "basis": "giả định 100 ms/mark; căn chỉnh đồng hồ ±25 ms"
+        },
+        {
+          "name": "w9-05-peak-9foes-591s",
+          "startMs": 619194,
+          "endMs": 619294,
+          "ms": 100,
+          "basis": "peak làm tròn giây, sai số ±0,5 s"
+        },
+        {
+          "name": "w9-10-mid45s",
+          "startMs": 623727,
+          "endMs": 623827,
+          "ms": 100,
+          "basis": "giả định 100 ms/mark; căn chỉnh đồng hồ ±25 ms"
+        }
+      ],
+      "pauseSeconds": 4.235,
+      "nearest": "100% lần chọn tự do theo PICK; khóa và urgent trước",
+      "tickRatio": 0.9934649400827071
+    },
+    {
+      "wave": 10,
+      "startMs": 645212,
+      "endMs": 710212,
+      "seconds": 65,
+      "hpStart": 630,
+      "hpMin": 630,
+      "hpDrop": 0,
+      "letters": 111,
+      "lettersPerMinute": 102.46153846153847,
+      "wordsCompleted": null,
+      "wordsReason": "Không đo được: words là số từ sống; kills gồm bẫy/kỹ năng; stats.words là tổng 168 lượt chọn, không phải sự kiện hoàn tất.",
+      "reaction": {
+        "p50": 194,
+        "p90": 717,
+        "n": 20,
+        "cleanP50": 184,
+        "cleanP90": 395,
+        "cleanN": 15,
+        "censored": 0,
+        "samples": [
+          {
+            "bornMs": 646914,
+            "firstKeyMs": 647632,
+            "ms": 718,
+            "pause": true,
+            "pauses": [
+              "start-banner",
+              "w10-02-start"
+            ]
+          },
+          {
+            "bornMs": 649114,
+            "firstKeyMs": 650846,
+            "ms": 1732,
+            "pause": true,
+            "pauses": [
+              "w10-complete-cold-blight-wolf",
+              "w10-11-first-trap-trigger",
+              "w10-03-first-word"
+            ]
+          },
+          {
+            "bornMs": 655913,
+            "firstKeyMs": 656069,
+            "ms": 156,
+            "pause": true,
+            "pauses": [
+              "w10-08-ff-try"
+            ]
+          },
+          {
+            "bornMs": 657712,
+            "firstKeyMs": 657869,
+            "ms": 157,
+            "pause": false,
+            "pauses": []
+          },
+          {
+            "bornMs": 658913,
+            "firstKeyMs": 659059,
+            "ms": 146,
+            "pause": false,
+            "pauses": []
+          },
+          {
+            "bornMs": 661713,
+            "firstKeyMs": 661727,
+            "ms": 14,
+            "pause": false,
+            "pauses": []
+          },
+          {
+            "bornMs": 663713,
+            "firstKeyMs": 663793,
+            "ms": 80,
+            "pause": false,
+            "pauses": []
+          },
+          {
+            "bornMs": 665713,
+            "firstKeyMs": 666298,
+            "ms": 585,
+            "pause": true,
+            "pauses": [
+              "w10-09-mid20s"
+            ]
+          },
+          {
+            "bornMs": 668113,
+            "firstKeyMs": 668307,
+            "ms": 194,
+            "pause": false,
+            "pauses": []
+          },
+          {
+            "bornMs": 670812,
+            "firstKeyMs": 671207,
+            "ms": 395,
+            "pause": false,
+            "pauses": []
+          },
+          {
+            "bornMs": 677813,
+            "firstKeyMs": 677845,
+            "ms": 32,
+            "pause": false,
+            "pauses": []
+          },
+          {
+            "bornMs": 680112,
+            "firstKeyMs": 680542,
+            "ms": 430,
+            "pause": false,
+            "pauses": []
+          },
+          {
+            "bornMs": 683622,
+            "firstKeyMs": 683987,
+            "ms": 365,
+            "pause": false,
+            "pauses": []
+          },
+          {
+            "bornMs": 686921,
+            "firstKeyMs": 687189,
+            "ms": 268,
+            "pause": false,
+            "pauses": []
+          },
+          {
+            "bornMs": 690913,
+            "firstKeyMs": 691630,
+            "ms": 717,
+            "pause": true,
+            "pauses": [
+              "w10-10-mid45s"
+            ]
+          },
+          {
+            "bornMs": 696013,
+            "firstKeyMs": 696026,
+            "ms": 13,
+            "pause": false,
+            "pauses": []
+          },
+          {
+            "bornMs": 700012,
+            "firstKeyMs": 700335,
+            "ms": 323,
+            "pause": false,
+            "pauses": []
+          },
+          {
+            "bornMs": 702513,
+            "firstKeyMs": 702894,
+            "ms": 381,
+            "pause": false,
+            "pauses": []
+          },
+          {
+            "bornMs": 706514,
+            "firstKeyMs": 706525,
+            "ms": 11,
+            "pause": false,
+            "pauses": []
+          },
+          {
+            "bornMs": 708312,
+            "firstKeyMs": 708496,
+            "ms": 184,
+            "pause": false,
+            "pauses": []
+          }
+        ]
+      },
+      "pauses": [
+        {
+          "name": "start-banner",
+          "startMs": 645899,
+          "endMs": 647441,
+          "ms": 1542,
+          "basis": "sheets.spanMs, neo tại mark start; thiếu thời gian montage"
+        },
+        {
+          "name": "w10-02-start",
+          "startMs": 647441,
+          "endMs": 647541,
+          "ms": 100,
+          "basis": "giả định 100 ms/mark; căn chỉnh đồng hồ ±25 ms"
+        },
+        {
+          "name": "w10-complete-cold-blight-wolf",
+          "startMs": 648519,
+          "endMs": 649651,
+          "ms": 1132,
+          "basis": "neo chữ cuối chuỗi đầu khớp; 120 ms trước + 200 ms sau nằm trong burst"
+        },
+        {
+          "name": "w10-11-first-trap-trigger",
+          "startMs": 650448,
+          "endMs": 650548,
+          "ms": 100,
+          "basis": "giả định 100 ms/mark; căn chỉnh đồng hồ ±25 ms"
+        },
+        {
+          "name": "w10-03-first-word",
+          "startMs": 650653,
+          "endMs": 650753,
+          "ms": 100,
+          "basis": "giả định 100 ms/mark; căn chỉnh đồng hồ ±25 ms"
+        },
+        {
+          "name": "ff-sleep",
+          "startMs": 655631,
+          "endMs": 655881,
+          "ms": 250,
+          "basis": "sleep 250 ms, fastForward=false"
+        },
+        {
+          "name": "w10-08-ff-try",
+          "startMs": 655881,
+          "endMs": 655981,
+          "ms": 100,
+          "basis": "giả định 100 ms/mark; căn chỉnh đồng hồ ±25 ms"
+        },
+        {
+          "name": "w10-09-mid20s",
+          "startMs": 666107,
+          "endMs": 666207,
+          "ms": 100,
+          "basis": "giả định 100 ms/mark; căn chỉnh đồng hồ ±25 ms"
+        },
+        {
+          "name": "w10-10-mid45s",
+          "startMs": 691441,
+          "endMs": 691541,
+          "ms": 100,
+          "basis": "giả định 100 ms/mark; căn chỉnh đồng hồ ±25 ms"
+        },
+        {
+          "name": "w10-05-peak-9foes-666s",
+          "startMs": 694194,
+          "endMs": 694294,
+          "ms": 100,
+          "basis": "peak làm tròn giây, sai số ±0,5 s"
+        }
+      ],
+      "pauseSeconds": 3.624,
+      "nearest": "100% lần chọn tự do theo PICK; khóa và urgent trước",
+      "tickRatio": 0.9934611255590193
+    }
+  ],
+  "idleReference": {
+    "waveSeconds": 521,
+    "noWordPct": 52.4,
+    "noWordWithFoesPct": 50.1,
+    "wordsOnScreenShare": {
+      "0": 52.4,
+      "1": 43.6,
+      "2": 3.9,
+      "3": 0.1
+    },
+    "maxWordsAtOnce": 3,
+    "byWave": {
+      "1": {
+        "noWordPct": 69.6,
+        "s": 48,
+        "minHp": 469,
+        "maxLive": 9,
+        "maxWords": 1
+      },
+      "2": {
+        "noWordPct": 56.2,
+        "s": 52,
+        "minHp": 492,
+        "maxLive": 9,
+        "maxWords": 2
+      },
+      "3": {
+        "noWordPct": 60.2,
+        "s": 49,
+        "minHp": 515,
+        "maxLive": 9,
+        "maxWords": 2
+      },
+      "4": {
+        "noWordPct": 54.9,
+        "s": 50,
+        "minHp": 538,
+        "maxLive": 9,
+        "maxWords": 2
+      },
+      "5": {
+        "noWordPct": 44.7,
+        "s": 61,
+        "minHp": 551,
+        "maxLive": 9,
+        "maxWords": 2
+      },
+      "6": {
+        "noWordPct": 65.3,
+        "s": 48,
+        "minHp": 584,
+        "maxLive": 10,
+        "maxWords": 2
+      },
+      "7": {
+        "noWordPct": 42.1,
+        "s": 47,
+        "minHp": 574,
+        "maxLive": 9,
+        "maxWords": 2
+      },
+      "8": {
+        "noWordPct": 52.7,
+        "s": 51,
+        "minHp": 592,
+        "maxLive": 10,
+        "maxWords": 2
+      },
+      "9": {
+        "noWordPct": 45.4,
+        "s": 49,
+        "minHp": 583,
+        "maxLive": 10,
+        "maxWords": 3
+      },
+      "10": {
+        "noWordPct": 38.8,
+        "s": 65,
+        "minHp": 630,
+        "maxLive": 10,
+        "maxWords": 2
+      }
+    },
+    "gapP50s": 1.5,
+    "gapP90s": 4.2,
+    "gapMaxS": 5.9,
+    "gaps": 154
+  }
+}

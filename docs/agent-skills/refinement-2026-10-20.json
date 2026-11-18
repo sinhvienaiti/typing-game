@@ -1,0 +1,123 @@
+{
+  "schemaVersion": 1,
+  "completedAt": "2026-10-20T12:19:40.971734+00:00",
+  "scope": "Approved four small skill refinements; no runtime or external skill installation",
+  "heads": {
+    ".": "1b6d90d28af81c9deaf245d571936ac7c166727a",
+    "games/space-typing": "8941c1cc9ce5565d09da5921e057aabfc355a6dd"
+  },
+  "updatedFiles": [
+    {
+      "path": ".agents/skill-sources.json",
+      "beforeSha256": "8c7843de94ebe94acd258212c3e999487ccf8b244d4c28056c3eb5c8448e96ba",
+      "afterSha256": "1493b953fe41524f2f5b829085e84dd78e6b98643ed3e2150c5dffd41b0eb31d"
+    },
+    {
+      "path": ".agents/skills/combat-vfx-audio/references/presentation-map.md",
+      "beforeSha256": "f0834193ee1e6d4eb9a971452073f00c743f4c27cca21b253eea43c9e8aa5770",
+      "afterSha256": "e7a4ee3b046a4baaaffbf6da423f505c7b91cd781f4c78ae712f8a3c416943a3"
+    },
+    {
+      "path": ".agents/skills/game-asset-2d-to-3d/references/asset-map.md",
+      "beforeSha256": "30682e2fadb7556c47bcd92786e1bcac08249f19e13f2a1800360b7a9c7df1f9",
+      "afterSha256": "35c34493a6e3f8615620b9e081b9ffb2580eded5e865ea7447b7f67fc2ac41e3"
+    },
+    {
+      "path": ".agents/skills/space-typing-director/references/project-map.md",
+      "beforeSha256": "7434c3c49927cece37a4e1b820c6519e16fc5ba1309e497edbe624c7808cc860",
+      "afterSha256": "1edd35981c3682bce037871e9ee6fdd1aae67033e1df4dd6fec9b1769aa609f0"
+    },
+    {
+      "path": ".claude/.agent-skills-sync.json",
+      "beforeSha256": "e70b3c6f61f0448a27fe1748d18153e0d44eabdba71f65660a3b939bb59d73b1",
+      "afterSha256": "8a9b0bcb74143aca9ea4e4c9aa6de10aa59669d31b448683f16fcaeaaaac9782"
+    },
+    {
+      "path": ".claude/skills/combat-vfx-audio/references/presentation-map.md",
+      "beforeSha256": "f0834193ee1e6d4eb9a971452073f00c743f4c27cca21b253eea43c9e8aa5770",
+      "afterSha256": "e7a4ee3b046a4baaaffbf6da423f505c7b91cd781f4c78ae712f8a3c416943a3"
+    },
+    {
+      "path": ".claude/skills/game-asset-2d-to-3d/references/asset-map.md",
+      "beforeSha256": "30682e2fadb7556c47bcd92786e1bcac08249f19e13f2a1800360b7a9c7df1f9",
+      "afterSha256": "35c34493a6e3f8615620b9e081b9ffb2580eded5e865ea7447b7f67fc2ac41e3"
+    },
+    {
+      "path": ".claude/skills/space-typing-director/references/project-map.md",
+      "beforeSha256": "7434c3c49927cece37a4e1b820c6519e16fc5ba1309e497edbe624c7808cc860",
+      "afterSha256": "1edd35981c3682bce037871e9ee6fdd1aae67033e1df4dd6fec9b1769aa609f0"
+    },
+    {
+      "path": "docs/AGENT_SKILLS_SETUP.md",
+      "beforeSha256": "5a1c779f7860da635da05ab962cf527478d66e6318dffeb69f4bfa4686686cad",
+      "afterSha256": "15942413ebb81fb77eb39a27cef324e2ab55141ad0ec3d62923368d2e166825c"
+    },
+    {
+      "path": "docs/AGENT_SKILLS_AUDIT_2026-10-20.md",
+      "beforeSha256": "b93843dedd194c8521f70e16e32bef91457a23e623a938ea81cc4c667a172e20",
+      "afterSha256": "0d7e87e3cf34c18147721a5a07d93594ff353297d37aa63c6071845896f003ed"
+    }
+  ],
+  "newFiles": [
+    {
+      "path": "scripts/verify-agent-skill-sources.mjs",
+      "sha256": "0d2aa7ddf40fe6c101248c46dde390bfe78b2238451cf1f323a6399c840055a5"
+    }
+  ],
+  "verification": {
+    "projectValidator": "PASS: 13 skills, 0 errors, 0 warnings",
+    "officialQuickValidator": "PASS: 13/13",
+    "claudeSync": "PASS: 3 reference updates; final check 0 changes; all canonical mirrors equal",
+    "externalProvenance": "PASS: 18/18 trees; all previous expected digests and source revisions retained",
+    "verifierFixtures": [
+      "PASS: known digest and ignored entries",
+      "PASS: changed content rejected",
+      "PASS: extra file rejected",
+      "PASS: symlink rejected",
+      "PASS: missing file rejected",
+      "PASS: plugin skill subfolder resolved",
+      "PASS: missing locale/options rejected",
+      "PASS: incomplete options rejected",
+      "PASS: wrong locale rejected"
+    ],
+    "scriptSyntax": "PASS",
+    "gitDiffCheck": "PASS",
+    "blenderVersionProbe": {
+      "path": "/private/tmp/space-typing-blender-volume/Blender.app/Contents/MacOS/Blender",
+      "reportedVersion": "4.5.7 LTS",
+      "exitCode": 0,
+      "limitation": "Temporary executable; USD cache-line warning printed; no export/render acceptance performed"
+    },
+    "protectedFiles": {
+      "baselineCount": 1328,
+      "unchanged": 1318,
+      "changedOnlyApprovedPaths": true
+    },
+    "discovery": [
+      {
+        "cwd": "/Users/toandx/htdocs/typing-game",
+        "errors": [],
+        "projectSkills": 13,
+        "userSkills": 9,
+        "allProjectAndUserEnabled": true
+      },
+      {
+        "cwd": "/Users/toandx/htdocs/typing-game/games/space-typing",
+        "errors": [],
+        "projectSkills": 0,
+        "userSkills": 9,
+        "allProjectAndUserEnabled": true
+      }
+    ],
+    "gameStudio": {
+      "installed": true,
+      "enabled": true,
+      "skills": 9
+    },
+    "behavioralBenchmark": "NOT_RUN; unrelated to small documentation/refinement scope",
+    "independentReview": {
+      "assetRouting": "Read-only Aegis/Vanguard task correctly resolved visual ID, preparation branches, Medium selection and Admin/fallback authority; fixed filename and mode wording clarifications.",
+      "provenance": "Fixed acceptance of missing locale/options; strict v1 metadata and resolved-collator validation now pass rejection fixtures."
+    }
+  }
+}

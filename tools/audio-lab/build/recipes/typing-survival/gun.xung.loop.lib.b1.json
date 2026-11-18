@@ -1,0 +1,104 @@
+{
+ "$schema": "../../schemas/recipe.schema.json",
+ "schema": "audiolab.recipe/1",
+ "game": "typing-survival",
+ "id": "gun.xung.loop.lib",
+ "group": "ambience",
+ "family": "ban",
+ "description": "Lô 1 (BATCH1_BRIEF §3.2): nền cơ khí liên thanh từ thư viện CC0, không mô hình. Động cơ Kenney Sci-fi engineCircular (lọc thấp 500 Hz) là phần chính 80–500 Hz; lách cách băng đạn VSCO-2-CE Ratchet1-Fast (lọc cao 3 kHz) rất nhỏ; đoạn 3,0 s nối thành vòng 2,5 s. Biến thể 2 đổi sang spaceEngineLow (đoạn giữa) và Snare2-roll.",
+ "channels": 1,
+ "layers": [
+  {
+   "id": "engine",
+   "role": "body",
+   "trim": {
+    "startMs": 1000,
+    "endMs": 4000
+   },
+   "filters": [
+    {
+     "type": "highpass",
+     "hz": 60
+    },
+    {
+     "type": "lowpass",
+     "hz": 500,
+     "order": 4
+    }
+   ],
+   "source": {
+    "library": "kenney/sci-fi-sounds/Audio/engineCircular_001.ogg"
+   },
+   "vary": {
+    "swapMode": "cycle",
+    "swap": [
+     {
+      "library": "kenney/sci-fi-sounds/Audio/spaceEngineLow_002.ogg"
+     }
+    ]
+   }
+  },
+  {
+   "id": "rattle",
+   "role": "sweetener",
+   "gainDb": -22,
+   "trim": {
+    "startMs": 2000,
+    "endMs": 5000
+   },
+   "filters": [
+    {
+     "type": "highpass",
+     "hz": 3000,
+     "order": 4
+    },
+    {
+     "type": "lowpass",
+     "hz": 8000
+    }
+   ],
+   "source": {
+    "library": "vsco2ce/Percussion/Ratchet1-Fast_v1_rr1_Sum.wav"
+   },
+   "vary": {
+    "swapMode": "cycle",
+    "swap": [
+     {
+      "library": "vsco2ce/Percussion/Snare2-rollNS_v3_rr1_Sum.wav"
+     }
+    ]
+   }
+  }
+ ],
+ "chain": {
+  "dcHpfHz": 35,
+  "loopCrossfadeMs": 500,
+  "normalise": {
+   "mode": "lufs-i",
+   "target": -26
+  },
+  "limiter": {
+   "ceilingDbtp": -1.0,
+   "maxGrDb": 3
+  }
+ },
+ "variants": {
+  "count": 2,
+  "seed": 2510,
+  "includeBase": true,
+  "pitchCents": [
+   0,
+   0
+  ],
+  "gainDb": [
+   0,
+   0
+  ]
+ },
+ "export": {
+  "path": "sfx/guns/gun-xung-loop",
+  "ogg": true,
+  "oggQuality": 0.6
+ },
+ "loop": true
+}

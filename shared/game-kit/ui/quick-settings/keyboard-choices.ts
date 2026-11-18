@@ -1,0 +1,411 @@
+// Ticket 190: shared keyboard-sound picker for QuickSettings and the Typing Feedback Lab.
+import type { QuickChoiceOption } from "./types";
+import type { KeyboardSoundChoice } from "../../feedback/typing-fx/audio";
+
+const STYLE_ID = "kit-keyboard-choices";
+let nextGroupId = 0;
+/**
+ * Art plates for the rows (QuickSkin.listRow / listRowActive, ticket 245), on
+ * under an ancestor with `kit-qs--skin-list` (QuickSettings sets it; the Lab
+ * does not). The list loses its web box (border, rounded corners, flat fills);
+ * each option draws its plate on ::before (nine-slice, inset by
+ * --kit-qs-list-inset so plates stand apart), hover brightens the plate, the
+ * chosen row wears the active plate, and keyboard focus is a glow hugging the
+ * plate (--kit-qs-glow-filter), hover brightens it with the glow
+ * (--kit-qs-list-hover-filter). `overflow: clip` with a clip margin keeps the
+ * label's ellipsis and lets the glow out. The `.kit-qs` prefix outranks every
+ * plain state rule above.
+ */
+const PLATE = ".kit-qs.kit-qs--skin-list .kit-keyboards";
+const OPTION = `${PLATE} button.kit-keyboards__option`;
+const KEYBOARD_PLATES_CSS = `
+${PLATE}{border:0;border-radius:0;background:transparent;padding:var(--kit-qs-list-pad,4px 6px)}
+${PLATE} button{background:transparent;box-shadow:none}
+${OPTION}{position:relative;isolation:isolate;overflow:clip;overflow-clip-margin:8px;padding:0 var(--kit-qs-list-text-x,16px);background:transparent;box-shadow:none;color:var(--kit-qs-text,#F3F4F6)}
+${OPTION}::before{content:"";position:absolute;inset:var(--kit-qs-list-inset,2px 0);z-index:-1;box-sizing:border-box;border:0 solid transparent;border-image:var(--kit-qs-list-row,none) var(--kit-qs-list-slice,0) fill / var(--kit-qs-list-edge,12px) / 0 stretch;pointer-events:none}
+${OPTION}:hover:not(:disabled){background:transparent;box-shadow:none}
+${OPTION}:hover:not(:disabled)::before{filter:var(--kit-qs-list-hover-filter,brightness(1.3) drop-shadow(0 0 calc(5px * var(--kit-qs-s,1)) var(--kit-qs-glow,#FFD166)))}
+${OPTION}[aria-selected="true"],${OPTION}[aria-selected="true"]:hover:not(:disabled){background:transparent;box-shadow:none;color:var(--kit-qs-active-text,var(--kit-qs-text,#F3F4F6))}
+${OPTION}[aria-selected="true"]::before{border-image:var(--kit-qs-list-row-active,none) var(--kit-qs-list-active-slice,0) fill / var(--kit-qs-list-active-edge,12px) / 0 stretch}
+.kit-qs.kit-qs--list-tint .kit-keyboards button.kit-keyboards__option[aria-selected="true"]::before{filter:var(--kit-qs-list-active-filter)}
+${OPTION}:disabled,${OPTION}[aria-selected="true"]:disabled{background:transparent;box-shadow:none;color:var(--kit-qs-muted,#C3C9D3)}
+${OPTION}:disabled::before,${OPTION}[aria-selected="true"]:disabled::before{filter:grayscale(.6) brightness(.7)}
+${OPTION}:focus-visible{outline:none}
+${OPTION}[aria-selected]:focus-visible::before{filter:var(--kit-qs-glow-filter)}
+.kit-qs.kit-qs--list-tint .kit-keyboards button.kit-keyboards__option[aria-selected="true"]:focus-visible::before{filter:var(--kit-qs-list-active-filter) var(--kit-qs-glow-filter)}
+${PLATE} .kit-keyboards__listen:hover:not(:disabled){background:transparent;filter:brightness(1.2) var(--kit-qs-glow-filter)}
+${PLATE} .kit-keyboards__listen:focus-visible{outline:none;filter:var(--kit-qs-glow-filter)}
+`;
+
+/**
+ * Kept separate from TF2's quick-settings/css.ts. 9 × 34 px at 720p, independently scrollable, with
+ * a thin scrollbar in --kit-qs-scroll-thumb on a clear track (no grey OS bar inside the panel art).
+ * Listen icons scale with the panel (--kit-qs-s), shrink while pressed, and are lit (`is-playing`)
+ * while their sample sounds (playing()).
+ * Rows and family headings snap to the top (proximity), past a fade of 10 px (scaled) at an edge
+ * the list has more rows beyond (data-more-above / data-more-below), so no half plate ends hard.
+ * The selected option keeps its accent fill under the pointer (a dark inset ring marks the hover);
+ * a selected option that is also disabled ("Saved sound · unavailable") is muted ink on the panel's
+ * dark ground with an accent bar, so every state stays readable (≥ 4.5:1, see keyboard-panel.test.ts).
+ */
+export const KEYBOARD_CHOICES_CSS = `
+.kit-keyboards{--kit-kb-fade:calc(10px * var(--kit-qs-s,1));--kit-kb-fade-top:0px;--kit-kb-fade-bottom:0px;display:grid;grid-template-columns:minmax(0,1fr) auto;max-height:306px;overflow:auto;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:var(--kit-qs-scroll-thumb,var(--kit-qs-line,#4A505C)) transparent;scroll-snap-type:y proximity;scroll-padding-block:var(--kit-kb-fade);width:100%;border:1px solid var(--kit-qs-line,#4A505C);border-radius:6px;background:var(--kit-qs-control,#232731);-webkit-mask-image:linear-gradient(to bottom,transparent,#000 var(--kit-kb-fade-top),#000 calc(100% - var(--kit-kb-fade-bottom)),transparent);mask-image:linear-gradient(to bottom,transparent,#000 var(--kit-kb-fade-top),#000 calc(100% - var(--kit-kb-fade-bottom)),transparent)}
+.kit-keyboards[data-more-above]{--kit-kb-fade-top:var(--kit-kb-fade)}
+.kit-keyboards[data-more-below]{--kit-kb-fade-bottom:var(--kit-kb-fade)}
+.kit-keyboards__list .kit-keyboards__option,.kit-keyboards__list .kit-keyboards__family{scroll-snap-align:start}
+.kit-keyboards__list,.kit-keyboards__listens,.kit-keyboards__group{display:flex;flex-direction:column;min-width:0}
+.kit-keyboards button{box-sizing:border-box;display:block;flex:0 0 34px;height:34px;min-height:34px;margin:0;border:0;border-radius:0;padding:0 10px;font:inherit;text-align:left;background:transparent;color:var(--kit-qs-text,#F3F4F6);cursor:pointer}
+.kit-keyboards__option{width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.kit-keyboards button:focus-visible{outline:2px solid var(--kit-qs-focus,#FFD166);outline-offset:-3px}
+.kit-keyboards button:hover:not(:disabled){background:var(--kit-qs-bg,#14161B)}
+.kit-keyboards button[aria-selected="true"]{background:var(--kit-qs-accent,#8FD3FF);color:var(--kit-qs-accent-text,#0B0D12)}
+.kit-keyboards button[aria-selected="true"]:hover:not(:disabled){background:var(--kit-qs-accent,#8FD3FF);box-shadow:inset 0 0 0 2px var(--kit-qs-accent-text,#0B0D12)}
+.kit-keyboards button:disabled{color:var(--kit-qs-muted,#C3C9D3);cursor:not-allowed}
+.kit-keyboards button[aria-selected="true"]:disabled{background:var(--kit-qs-bg,#14161B);color:var(--kit-qs-muted,#C3C9D3);box-shadow:inset 4px 0 0 var(--kit-qs-accent,#8FD3FF)}
+.kit-keyboards__listen{min-width:44px;text-align:center!important}
+.kit-keyboards__listen img{display:block;width:calc(24px * var(--kit-qs-s,1));height:calc(24px * var(--kit-qs-s,1));object-fit:contain;pointer-events:none;transition:transform .08s,filter .08s}
+.kit-keyboards__listen:active:not(:disabled) img{transform:scale(.84)}
+.kit-keyboards__listen.is-playing img{filter:brightness(1.35) drop-shadow(0 0 calc(4px * var(--kit-qs-s,1)) var(--kit-qs-glow,var(--kit-qs-focus,#FFD166)))}
+.kit-keyboards__family{box-sizing:border-box;height:28px;min-height:28px;flex:0 0 28px;padding:4px 10px;font-size:.82em;font-weight:700;color:var(--kit-qs-muted,#C3C9D3)}
+.kit-keyboards__note{font-size:.82em;margin-left:.35em}
+.kit-keyboards__spacer{height:34px;flex:0 0 34px}
+.kit-qs__row--keyboards{align-items:start}
+@media (any-pointer:coarse){.kit-keyboards button{height:44px;min-height:44px;flex-basis:44px}.kit-keyboards__spacer{height:44px;flex-basis:44px}}
+${KEYBOARD_PLATES_CSS}`;
+
+/**
+ * What a list hands to the one that replaces it (QuickSettings.setChoiceOptions):
+ * its scroll position and the option or Listen button that had keyboard focus.
+ */
+export type KeyboardChoicesState = {
+  readonly scrollTop: number;
+  readonly focus: { readonly value: string; readonly listen: boolean } | null;
+};
+
+/** A mouse pointer's place in client coordinates (PointerEvent clientX/clientY). */
+export type KeyboardPointer = { readonly x: number; readonly y: number };
+
+export class KeyboardSoundChoices {
+  readonly element: HTMLElement;
+  private readonly buttons: HTMLButtonElement[] = [];
+  private readonly listens: HTMLButtonElement[] = [];
+  private pointerFocus = false;
+  /** True while adopt() moves focus: that focus is not the player's, so it previews nothing. */
+  private quietFocus = false;
+  /** This list replaced another (config.settle) and the mouse pointer has not moved since: see still(). */
+  private settling: boolean;
+  /** Where the pointer rested when this list replaced the old one; null until known. */
+  private rest: KeyboardPointer | null;
+  private destroyed = false;
+  private readonly families: { family: string; index: number }[] = [];
+
+  constructor(private readonly config: {
+    readonly document: Document;
+    readonly options: readonly KeyboardSoundChoice[];
+    readonly label: string;
+    readonly onSelect: (choice: QuickChoiceOption) => void;
+    /** delay=0 for the explicit Listen button; otherwise the 150 ms dwell. */
+    readonly onPreview: (choice: QuickChoiceOption, delay?: number) => void;
+    readonly onStop: () => void;
+    /** Ticket 180 hud-sound image URL. Missing art uses a labelled Listen button. */
+    readonly listenIcon?: string;
+    /**
+     * Set when this list replaces another one (QuickSettings.setChoiceOptions):
+     * where the mouse pointer last was (null: not known). The new rows can land
+     * under a resting pointer, and the browser then sends their pointerenter
+     * (and pointerleave) with no move. Until the pointer really moves, those
+     * events at that point preview and stop nothing: only the player's own
+     * hover does. Unknown: the first mouse event the list sees gives the point.
+     */
+    readonly settle?: { readonly pointer: KeyboardPointer | null };
+  }) {
+    this.settling = config.settle !== undefined;
+    this.rest = config.settle?.pointer ?? null;
+    const doc = config.document;
+    if (!doc.getElementById(STYLE_ID)) {
+      const style = doc.createElement("style");
+      style.id = STYLE_ID;
+      style.textContent = KEYBOARD_CHOICES_CSS;
+      doc.head.append(style);
+    }
+    const root = this.element = doc.createElement("div");
+    root.className = "kit-keyboards";
+    const list = doc.createElement("div");
+    list.className = "kit-keyboards__list";
+    list.setAttribute("role", "listbox");
+    list.setAttribute("aria-label", config.label);
+    // Listen buttons are siblings of the listbox, never interactive descendants of role=option.
+    const listens = doc.createElement("div");
+    listens.className = "kit-keyboards__listens";
+    root.append(list, listens);
+    root.addEventListener("scroll", () => this.edges(), { passive: true });
+    // A move away from where the pointer rested ends the settling (a catch-up move at the same point does not).
+    if (this.settling) root.addEventListener("pointermove", (event) => { this.still(event); }, { passive: true });
+    let parent = list;
+    let family: string | undefined;
+    config.options.forEach((choice, index) => {
+      // Contiguous groups preserve the catalogue's order even when a family recurs.
+      const nextFamily = choice.value === "off" ? undefined : choice.family?.trim() || undefined;
+      if (nextFamily !== family) {
+        family = nextFamily;
+        parent = list;
+        if (family) {
+          const group = doc.createElement("div");
+          group.className = "kit-keyboards__group";
+          group.setAttribute("role", "group");
+          const heading = doc.createElement("div");
+          heading.className = "kit-keyboards__family";
+          heading.id = `kit-keyboards-family-${++nextGroupId}`;
+          heading.textContent = family;
+          group.setAttribute("aria-labelledby", heading.id);
+          group.append(heading);
+          list.append(group);
+          parent = group;
+          this.families.push({ family, index });
+          const spacer = doc.createElement("span");
+          spacer.className = "kit-keyboards__family";
+          spacer.setAttribute("aria-hidden", "true");
+          listens.append(spacer);
+        }
+      }
+      const button = doc.createElement("button");
+      button.type = "button";
+      button.className = "kit-keyboards__option";
+      button.setAttribute("role", "option");
+      button.dataset.value = choice.value;
+      button.textContent = choice.label;
+      button.title = choice.label;
+      button.disabled = choice.disabled === true;
+      button.tabIndex = -1;
+      const note = choice.note ?? (choice.disabled ? "pending" : "");
+      if (note) {
+        const small = doc.createElement("small");
+        small.className = "kit-keyboards__note";
+        small.textContent = note;
+        button.append(" ", small);
+      }
+      button.addEventListener("pointerdown", () => { this.pointerFocus = true; });
+      button.addEventListener("pointerenter", (event) => {
+        if (event.pointerType !== "mouse" || this.still(event)) return;
+        if (!button.disabled) config.onPreview(choice);
+      });
+      button.addEventListener("pointerleave", (event) => {
+        if (event.pointerType !== "mouse" || this.still(event)) return;
+        config.onStop();
+      });
+      button.addEventListener("focus", () => {
+        this.rove(index);
+        if (!this.pointerFocus && !this.quietFocus && !button.disabled) config.onPreview(choice);
+      });
+      // A replaced list's last events (its focused option leaving the document) are not the player's.
+      button.addEventListener("blur", () => { this.pointerFocus = false; if (!this.destroyed) config.onStop(); });
+      button.addEventListener("pointercancel", () => { this.pointerFocus = false; config.onStop(); });
+      button.addEventListener("click", () => {
+        this.pointerFocus = false;
+        if (!button.disabled) config.onSelect(choice);
+      });
+      button.addEventListener("keydown", (event) => {
+        this.pointerFocus = false;
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          if (!event.repeat && !button.disabled) config.onSelect(choice);
+          return;
+        }
+        const enabled = this.buttons.map((b, i) => b.disabled ? -1 : i).filter((i) => i >= 0);
+        const at = enabled.indexOf(index);
+        const currentFamily = [...this.families].reverse().find((group) => group.index <= index);
+        const familyTarget = event.key === "PageDown"
+          ? this.families.find((group) => group.index > index && group !== currentFamily)
+          : [...this.families].reverse().find((group) => group.index < (currentFamily?.index ?? index));
+        const pageTarget = familyTarget && enabled.find((i) => i >= familyTarget.index && i < (this.families.find((group) => group.index > familyTarget.index)?.index ?? this.buttons.length));
+        if (event.key === "PageUp" || event.key === "PageDown") event.preventDefault();
+        const target = event.key === "PageUp" || event.key === "PageDown" ? pageTarget : event.key === "Home" ? enabled[0] : event.key === "End" ? enabled.at(-1) : event.key === "ArrowDown" ? enabled[Math.min(enabled.length - 1, at + 1)] : event.key === "ArrowUp" ? enabled[Math.max(0, at - 1)] : undefined;
+        if (target === undefined) return;
+        event.preventDefault();
+        this.buttons[target]!.focus({ preventScroll: true });
+        this.scrollTo(this.buttons[target]!);
+      });
+      this.buttons.push(button);
+      parent.append(button);
+      if (choice.preview && !choice.disabled) {
+        const listen = doc.createElement("button");
+        listen.type = "button";
+        listen.className = "kit-keyboards__listen";
+        listen.dataset.listen = choice.value;
+        listen.setAttribute("aria-label", `Listen to ${choice.label}`);
+        listen.tabIndex = -1;
+        listen.title = `Listen to ${choice.label}`;
+        // Touch must not start a focus/hover preview as well as the explicit one.
+        listen.addEventListener("click", () => config.onPreview(choice, 0));
+        listen.addEventListener("blur", () => { if (!this.destroyed) config.onStop(); });
+        this.listens.push(listen);
+        listens.append(listen);
+      } else {
+        const spacer = doc.createElement("span");
+        spacer.className = "kit-keyboards__spacer";
+        spacer.setAttribute("aria-hidden", "true");
+        listens.append(spacer);
+      }
+    });
+    this.setListenIcon(config.listenIcon);
+    // Nothing selected yet: the owner's own sync(value) reveals the selection.
+    this.sync("", false);
+  }
+
+  /**
+   * While this list settles: true for a mouse event at the point where the
+   * pointer rested (the first event seen gives that point when it was not
+   * known), which is the browser catching up with the new layout, not the
+   * player. An event anywhere else means the pointer moved: the settling ends
+   * and from then on every event is the player's (false).
+   */
+  private still(event: PointerEvent): boolean {
+    if (!this.settling || event.pointerType !== "mouse") return false;
+    const rest = this.rest ?? (this.rest = { x: event.clientX, y: event.clientY });
+    if (Math.abs(event.clientX - rest.x) < 1 && Math.abs(event.clientY - rest.y) < 1) return true;
+    this.settling = false;
+    return false;
+  }
+
+  /** One option is tabbable (the focused, else the selected one), and only that row's Listen button after it. */
+  private rove(index: number): void {
+    this.buttons.forEach((button, i) => { button.tabIndex = i === index ? 0 : -1; });
+    const value = this.buttons[index]?.dataset.value;
+    for (const listen of this.listens) listen.tabIndex = value !== undefined && listen.dataset.listen === value ? 0 : -1;
+  }
+
+  /**
+   * Marks `value` selected. `reveal` (default) then scrolls it into view once
+   * the list is visible; QuickSettings passes false while it rebuilds a list,
+   * so the list stays where the player left it.
+   */
+  sync(value: string, reveal = true): void {
+    this.buttons.forEach((button) => button.setAttribute("aria-selected", String(button.dataset.value === value)));
+    const focused = this.buttons.indexOf(this.config.document.activeElement as HTMLButtonElement);
+    const selected = this.buttons.findIndex((button) => button.dataset.value === value && !button.disabled);
+    this.rove(focused >= 0 ? focused : selected >= 0 ? selected : this.buttons.findIndex((button) => !button.disabled));
+    if (!reveal) return;
+    // QuickSettings syncs just before dialog.show(); measure after it becomes visible.
+    queueMicrotask(() => {
+      if (!this.destroyed && this.element.isConnected) {
+        const button = this.buttons.find((b) => b.getAttribute("aria-selected") === "true");
+        if (button) this.scrollTo(button, true);
+        this.edges();
+      }
+    });
+  }
+
+  /**
+   * Scroll only this control, keeping the surrounding settings panel
+   * stationary. A row the fade or the edge hides comes into view: `center`
+   * (the selection when the panel opens) puts it in the middle; otherwise the
+   * list moves as little as it can and stops on a row's snap position (its
+   * top past the fade), so proximity snapping leaves it there. The first row
+   * of a family brings its heading along when it scrolls up.
+   */
+  private scrollTo(button: HTMLButtonElement, center = false): void {
+    const el = this.element;
+    const top = el.getBoundingClientRect().top + el.clientTop;
+    const view = el.clientHeight;
+    const fade = this.fade();
+    const at = el.scrollTop;
+    const rect = button.getBoundingClientRect();
+    const y0 = rect.top - top + at;
+    const y1 = rect.bottom - top + at;
+    if (y0 >= at + fade - 0.5 && y1 <= at + view - fade + 0.5) return;
+    let next: number;
+    if (center) next = (y0 + y1) / 2 - view / 2;
+    else if (y0 < at + fade) {
+      const heading = button.previousElementSibling;
+      const lead = heading?.classList.contains("kit-keyboards__family") ? heading.getBoundingClientRect() : null;
+      next = (lead !== null && lead.height > 0 ? lead.top - top + at : y0) - fade;
+    } else {
+      const want = y1 - view + fade;
+      // The nearest snap position at or below `want` keeps the row in view.
+      const snaps = [...el.querySelectorAll<HTMLElement>(".kit-keyboards__list .kit-keyboards__option, .kit-keyboards__list .kit-keyboards__family")]
+        .map((item) => item.getBoundingClientRect())
+        .filter((box) => box.height > 0)
+        .map((box) => box.top - top + at - fade)
+        .filter((snap) => snap >= want - 0.5 && snap <= y0 - fade + 0.5);
+      next = snaps.length > 0 ? Math.min(...snaps) : want;
+    }
+    el.scrollTop = Math.max(0, Math.round(next));
+    this.edges();
+  }
+
+  /** The fade at the list's edges in px (its scroll-padding), 0 where styles are not computed. */
+  private fade(): number {
+    const view = this.config.document.defaultView;
+    const value = view ? parseFloat(view.getComputedStyle(this.element).scrollPaddingTop) : NaN;
+    return Number.isFinite(value) && value > 0 ? value : 0;
+  }
+
+  /** Marks the edges with rows beyond them, which turns the fade on there (QuickSettings calls it on a resize too). */
+  edges(): void {
+    if (this.destroyed) return;
+    const el = this.element;
+    el.toggleAttribute("data-more-above", el.scrollTop > 0.5);
+    el.toggleAttribute("data-more-below", el.scrollTop + el.clientHeight < el.scrollHeight - 0.5);
+  }
+
+  /** Lights the Listen button of `value` (`is-playing`) while its preview sounds; null: none. */
+  playing(value: string | null): void {
+    for (const listen of this.listens) listen.classList.toggle("is-playing", value !== null && listen.dataset.listen === value);
+  }
+
+  setListenIcon(url?: string): void {
+    for (const listen of this.listens) {
+      listen.replaceChildren();
+      if (!url) { listen.textContent = "Listen"; continue; }
+      const img = this.config.document.createElement("img");
+      img.src = url;
+      img.alt = "";
+      img.addEventListener("error", () => { listen.textContent = "Listen"; }, { once: true });
+      listen.append(img);
+    }
+  }
+
+  /** This list's scroll and keyboard focus, for the list that replaces it (adopt). */
+  state(): KeyboardChoicesState {
+    const active = this.config.document.activeElement;
+    const option = this.buttons.find((button) => button === active);
+    const listen = this.listens.find((button) => button === active);
+    return {
+      scrollTop: this.element.scrollTop,
+      focus: option !== undefined ? { value: option.dataset.value ?? "", listen: false } : listen !== undefined ? { value: listen.dataset.listen ?? "", listen: true } : null,
+    };
+  }
+
+  /**
+   * Takes over from the list this one replaced, once its element is in the
+   * document and synced: the same scroll position and, when the old list had
+   * keyboard focus, focus on the same option or Listen button (else the
+   * selected option, else the first enabled one). That focus is not the
+   * player's, so it previews nothing and scrolls nothing.
+   */
+  adopt(state: KeyboardChoicesState): void {
+    if (this.destroyed) return;
+    this.element.scrollTop = state.scrollTop;
+    this.edges();
+    if (state.focus === null) return;
+    const { value, listen } = state.focus;
+    const target = (listen ? this.listens.find((button) => button.dataset.listen === value) : undefined)
+      ?? this.buttons.find((button) => button.dataset.value === value && !button.disabled)
+      ?? this.buttons.find((button) => button.getAttribute("aria-selected") === "true" && !button.disabled)
+      ?? this.buttons.find((button) => !button.disabled);
+    if (target === undefined) return;
+    this.quietFocus = true;
+    try {
+      target.focus({ preventScroll: true });
+    } finally {
+      this.quietFocus = false;
+    }
+  }
+
+  /** Removes the list. `stop` (default) also stops its preview; a list being replaced passes false, so a preview the player started plays on. */
+  destroy(stop = true): void {
+    this.destroyed = true;
+    if (stop) this.config.onStop();
+    this.element.remove();
+  }
+}

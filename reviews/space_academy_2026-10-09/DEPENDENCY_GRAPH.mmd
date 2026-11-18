@@ -1,0 +1,118 @@
+flowchart TD
+  subgraph V1["V1"]
+    BASE["BASE: Baseline repo, contract fixtures, migration inventory"]
+    ACCESS["ACCESS: Account, authorization, privacy policy"]
+    SHELL["SHELL: Shell, design tokens, budgets, mobile"]
+    OPS["OPS: Audit, publish tooling, support, restore"]
+    CONTENT["CONTENT: Canonical content, rights, versions"]
+    MEDIA["MEDIA: Published learning media + manifest"]
+    LESSON["LESSON: Versioned lesson runner + resume"]
+    EVIDENCE["EVIDENCE: Attempts, skill evidence, review queue"]
+    BRIDGE["BRIDGE: Adapters and server authority cutover"]
+    HOME["HOME: Learn-only UX and progress"]
+    G1["G1: Core learning pilot gate"]
+  end
+  subgraph V2["V2"]
+    SAFETY["SAFETY: Moderation queue, ACL enforcement, operators"]
+    CLASS["CLASS: Cohort, teacher, assignments, async class"]
+    CHAT["CHAT: Private class text room"]
+    GCLASS["GCLASS: Class-with-chat pilot gate"]
+    CALENDAR["CALENDAR: Class calendar read model"]
+    AVATAR["AVATAR: Single-pose renderer, free preview, compatibility"]
+    SIM["SIM: Reward rule core and simulator fixtures"]
+    ECON["ECON: Credit ledger, grants, catalog, entitlements"]
+    SHOP["SHOP: Fixed-price catalog, purchase, equip, receipt"]
+    GECON["GECON: Economy and shop launch gate"]
+    IELTS["IELTS: Curated R/L assessment adapter"]
+    MENTOR["MENTOR: Scoped optional NPC context and text/voice"]
+  end
+  subgraph V3["V3"]
+    VERIFY["VERIFY: Competitive challenge, evidence review, appeals"]
+    PRESTIGE["PRESTIGE: Rank rules, season finalization, award revisions"]
+    GPRESTIGE["GPRESTIGE: Verified competition release gate"]
+    LIVE["LIVE: Async campaigns, occurrence jobs, cancellation"]
+    TOURNAMENT["TOURNAMENT: Tournament format and adjudication"]
+    COMMUNITY["COMMUNITY: Invite-only clubs and study rooms"]
+    FULLIELTS["FULLIELTS: Full mock and calibrated W/S, conditional"]
+  end
+  BASE --> ACCESS
+  BASE --> SHELL
+  ACCESS --> OPS
+  OPS --> CONTENT
+  CONTENT --> MEDIA
+  SHELL --> MEDIA
+  CONTENT --> LESSON
+  MEDIA --> LESSON
+  ACCESS --> LESSON
+  SHELL --> LESSON
+  LESSON --> EVIDENCE
+  ACCESS --> EVIDENCE
+  EVIDENCE --> BRIDGE
+  BASE --> BRIDGE
+  LESSON --> HOME
+  EVIDENCE --> HOME
+  BRIDGE --> HOME
+  HOME --> G1
+  OPS --> G1
+  MEDIA --> G1
+  SHELL --> G1
+  G1 --> SAFETY
+  ACCESS --> SAFETY
+  OPS --> SAFETY
+  G1 --> CLASS
+  LESSON --> CLASS
+  EVIDENCE --> CLASS
+  OPS --> CLASS
+  CLASS --> CHAT
+  SAFETY --> CHAT
+  CLASS --> GCLASS
+  CHAT --> GCLASS
+  SAFETY --> GCLASS
+  CLASS --> CALENDAR
+  G1 --> AVATAR
+  MEDIA --> AVATAR
+  SHELL --> AVATAR
+  G1 --> SIM
+  EVIDENCE --> SIM
+  OPS --> SIM
+  SIM --> ECON
+  EVIDENCE --> ECON
+  ACCESS --> ECON
+  OPS --> ECON
+  ECON --> SHOP
+  AVATAR --> SHOP
+  SIM --> GECON
+  ECON --> GECON
+  SHOP --> GECON
+  G1 --> IELTS
+  CONTENT --> IELTS
+  LESSON --> IELTS
+  EVIDENCE --> IELTS
+  MEDIA --> IELTS
+  G1 --> MENTOR
+  EVIDENCE --> MENTOR
+  ACCESS --> MENTOR
+  MEDIA --> MENTOR
+  G1 --> VERIFY
+  BRIDGE --> VERIFY
+  ACCESS --> VERIFY
+  OPS --> VERIFY
+  VERIFY --> PRESTIGE
+  EVIDENCE --> PRESTIGE
+  OPS --> PRESTIGE
+  VERIFY --> GPRESTIGE
+  PRESTIGE --> GPRESTIGE
+  G1 --> LIVE
+  OPS --> LIVE
+  CONTENT --> LIVE
+  EVIDENCE --> LIVE
+  GPRESTIGE --> TOURNAMENT
+  LIVE --> TOURNAMENT
+  GCLASS --> COMMUNITY
+  SAFETY --> COMMUNITY
+  IELTS --> FULLIELTS
+  ACCESS --> FULLIELTS
+  OPS --> FULLIELTS
+  GECON -.->|"Campaign cấp currency/item reward"| LIVE
+  GPRESTIGE -.->|"Campaign trao competitive award"| LIVE
+  GCLASS -.->|"Campaign gắn lớp có chat"| LIVE

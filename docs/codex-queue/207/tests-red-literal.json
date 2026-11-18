@@ -1,0 +1,18 @@
+{
+  "command": [
+    "pnpm",
+    "exec",
+    "vitest",
+    "run",
+    "tests/portal.test.ts",
+    "tests/portal-build.test.ts",
+    "tests/learning.test.ts",
+    "--reporter=default",
+    "--reporter=json",
+    "--outputFile=/Users/toandx/htdocs/typing-game/docs/codex-queue/207/tests-red-literal-results.json"
+  ],
+  "cwd": "/Users/toandx/htdocs/typing-game/games/.wt-ts-codex",
+  "VITE_PORTAL_URL": null,
+  "exitCode": 1,
+  "seconds": 1.186
+}

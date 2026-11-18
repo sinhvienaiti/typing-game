@@ -1,0 +1,47 @@
+{
+ "tree (200+203)": {
+  "exit": 0,
+  "kit": "42",
+  "testFiles": "46",
+  "tests": "426",
+  "failed": 0,
+  "start/": 83233,
+  "start/?title=0": 84677,
+  "view3d": 172347
+ },
+ "tree-200 (200 only)": {
+  "exit": 0,
+  "kit": "42",
+  "testFiles": "43",
+  "tests": "405",
+  "failed": 0,
+  "start/": 82314,
+  "start/?title=0": 83754,
+  "view3d": 171833
+ },
+ "tree-base (HEAD 2a1f61d)": {
+  "exit": 0,
+  "kit": "42",
+  "testFiles": "42",
+  "tests": "392",
+  "failed": 0,
+  "start/": 81583,
+  "start/?title=0": 83041,
+  "view3d": 171833
+ },
+ "unit": "gzip bytes, closure+gzipSync as scripts/bundle-budget.mjs; ceiling 85000 (start), 260000 (3D)",
+ "tsLinesOutsideKit": {
+  "base": 13060,
+  "200": 13101,
+  "200+203": 13231,
+  "ceiling": 16500
+ },
+ "golden": "2/2 same:true, changed {}, content f2a21037, deck 9c9b91d8, 19660 ticks/389 cmds, boss 5695 ticks/49 cmds (golden.txt)",
+ "prepareUi": "--check exit 0, no output; second run 'UI media: 0 written, 16 fresh', exit 0; 16/16 md5 unchanged (prepare-ui.txt)",
+ "nodeCheck": {
+  "td-1c-words.mjs": 0,
+  "td-theme.mjs": 0,
+  "prepare-ui.mjs": 0
+ },
+ "fullCheckSeconds": 12.3
+}

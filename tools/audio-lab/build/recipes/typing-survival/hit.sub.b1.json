@@ -1,0 +1,82 @@
+{
+ "$schema": "../../schemas/recipe.schema.json",
+ "schema": "audiolab.recipe/1",
+ "game": "typing-survival",
+ "id": "hit.sub",
+ "group": "generic",
+ "family": "trung",
+ "description": "Lô 1 (BATCH1_BRIEF #13): sub dùng chung của bậc trúng (mã thêm từ T2). Biến thể 1: 85→45 Hz, 90 ms, bão hòa 3 dB; biến thể 2: 72→42 Hz, 110 ms, bão hòa 6 dB (tròn hơn, nhiều họa âm hơn).",
+ "channels": 1,
+ "layers": [
+  {
+   "id": "sub",
+   "role": "sub",
+   "source": {
+    "synth": "sub_thump",
+    "params": {
+     "startHz": 85,
+     "endHz": 45,
+     "glideMs": 45,
+     "durMs": 90,
+     "decayMs": 80,
+     "driveDb": 3
+    }
+   },
+   "vary": {
+    "swapMode": "cycle",
+    "swap": [
+     {
+      "synth": "sub_thump",
+      "params": {
+       "startHz": 72,
+       "endHz": 42,
+       "glideMs": 60,
+       "durMs": 110,
+       "decayMs": 100,
+       "driveDb": 6
+      }
+     }
+    ]
+   }
+  }
+ ],
+ "chain": {
+  "dcHpfHz": 25,
+  "headTrim": {
+   "thresholdDb": -50,
+   "preRollMs": 0.3
+  },
+  "maxLengthMs": 130,
+  "tail": {
+   "floorDb": -60,
+   "fadeMs": 10
+  },
+  "normalise": {
+   "mode": "lufs-m-max",
+   "target": -20
+  },
+  "limiter": {
+   "ceilingDbtp": -1.0,
+   "releaseMs": 40,
+   "maxGrDb": 6
+  }
+ },
+ "variants": {
+  "count": 2,
+  "seed": 2520,
+  "includeBase": true,
+  "pitchCents": [
+   0,
+   0
+  ],
+  "gainDb": [
+   0,
+   0
+  ]
+ },
+ "export": {
+  "path": "sfx/hits/hit-sub",
+  "ogg": true,
+  "oggQuality": 0.6
+ }
+}

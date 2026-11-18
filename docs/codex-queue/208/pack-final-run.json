@@ -1,0 +1,16 @@
+{
+  "command": [
+    "node",
+    "src/kit/tools/deploy/check-pack.mjs",
+    "dist",
+    "--game",
+    "typing-defense",
+    "--json"
+  ],
+  "cwd": "/Users/toandx/htdocs/typing-game/games/.wt-td-codex",
+  "env": {
+    "VITE_PORTAL_URL": ""
+  },
+  "exitCode": 0,
+  "seconds": 0.042
+}

@@ -1,0 +1,29 @@
+{
+  "tool": "image_gen.imagegen",
+  "callCount": 1,
+  "successfulImages": 0,
+  "requestedAsset": "grass-jade.v3.try1.png",
+  "promptPath": "games/typing-defense/art-src/scenery/meadow/ground-v2/grass-jade.v3.try1.prompt.txt",
+  "referencePaths": [
+    "games/typing-defense/art-src/scenery/meadow/ground-v2/road-paved.png",
+    "games/typing-defense/art-src/scenery/meadow/ground-v2/trail-worn.png"
+  ],
+  "httpStatus": 429,
+  "errorType": "usage_limit_reached",
+  "errorMessage": "The usage limit has been reached",
+  "planType": "plus",
+  "resetsAtUnix": 1793364446,
+  "resetsAtAsiaHoChiMinh": "2026-10-30T19:47:26+07:00",
+  "reportedResetsInSeconds": 41558,
+  "blockedAssets": [
+    "grass-jade",
+    "grass-moss",
+    "stream-bank"
+  ],
+  "generationAttemptsUsed": {
+    "grass-jade": 0,
+    "grass-moss": 0,
+    "stream-bank": 0
+  },
+  "policy": "Không chuyển API/CLI, không dùng ảnh cũ giả v3; giữ tối đa ba ảnh sinh thành công mỗi ô"
+}

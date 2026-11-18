@@ -1,0 +1,520 @@
+✔ vocabulary normalization matches the shared library contract (1.357ms)
+✔ event parser validates and canonicalizes learning events (1.247583ms)
+✔ vocabulary aggregates are deterministic and keep source games unique (1.420125ms)
+✔ recent mistakes are bounded (0.99525ms)
+✔ grammar keeps error classifications separate from vocabulary spelling (0.277208ms)
+✔ sentence answers are bounded and keep accepted-result history (0.792833ms)
+✔ weak and stale records receive higher review priority (0.142208ms)
+✔ batched events are applied in event-time order without rolling current state backward (0.739417ms)
+✔ batched learning updates keep the input profile immutable (0.221334ms)
+✔ prototype-like entity ids are stored as own learning records safely (0.146125ms)
+✔ lookup contract constants match the kit text and parse the nested query (10.746666ms)
+✔ lookup parser normalizes vocabulary, deduplicates and preserves first order (0.506875ms)
+✔ lookup parser rejects null (0.370875ms)
+✔ lookup parser rejects array (0.082709ms)
+✔ lookup parser rejects string (0.075708ms)
+✔ lookup parser rejects date (0.063125ms)
+✔ lookup parser rejects custom prototype (0.065292ms)
+✔ lookup parser rejects missing type (0.065666ms)
+✔ lookup parser rejects unknown type (0.081375ms)
+✔ lookup parser rejects ids not array (0.166833ms)
+✔ lookup parser rejects non-string id (0.09175ms)
+✔ lookup parser rejects long id (0.119958ms)
+✔ lookup parser rejects empty array (0.062667ms)
+✔ lookup parser rejects empty ids (0.061041ms)
+✔ lookup parser rejects 201 repeated ids (0.0405ms)
+✔ lookup directly reads requested records in order, recalculating query item metrics (12.536875ms)
+✔ lookup vocabulary excludes prototype keys, including own records, and supports legacy samples (0.279208ms)
+✔ lookup grammar excludes prototype keys, including own records, and supports legacy samples (0.165458ms)
+✔ lookup sentence excludes prototype keys, including own records, and supports legacy samples (0.168708ms)
+✔ core vocabulary keeps eight chronological samples with five fields, including a late event (0.759666ms)
+✔ core grammar keeps eight chronological samples with five fields, including a late event (0.486042ms)
+✔ core sentence keeps eight chronological samples with five fields, including a late event (1.693833ms)
+✔ backup accepts eight samples and a legacy record without samples (0.422916ms)
+✔ backup rejects nine samples (0.101209ms)
+✔ backup rejects null sample (0.059709ms)
+✔ backup rejects array sample (0.062333ms)
+✔ backup rejects string sample (0.05375ms)
+✔ backup rejects non-array (0.05ms)
+✔ backup rejects null list (0.056458ms)
+✔ F2 vocabulary lookup projects sample fields from an existing stored profile (0.110875ms)
+✔ F2 grammar lookup projects sample fields from an existing stored profile (0.07175ms)
+✔ F2 sentence lookup projects sample fields from an existing stored profile (0.066125ms)
+✖ F2 types stored profile drops a sample whose occurredAt holds an object, lookup and query (0.957166ms)
+✔ F2 types backup import drops a sample whose occurredAt holds an object (0.603833ms)
+✖ F2 types stored profile drops a sample whose occurredAt holds an array, lookup and query (0.251625ms)
+✔ F2 types backup import drops a sample whose occurredAt holds an array (0.411709ms)
+✖ F2 types stored profile drops a sample whose gameId holds an object, lookup and query (0.199542ms)
+✔ F2 types backup import drops a sample whose gameId holds an object (0.377625ms)
+✖ F2 types stored profile drops a sample whose gameId holds an array, lookup and query (0.154334ms)
+✔ F2 types backup import drops a sample whose gameId holds an array (0.315375ms)
+✖ F2 types stored profile drops a sample whose activityType holds an object, lookup and query (0.14375ms)
+✔ F2 types backup import drops a sample whose activityType holds an object (0.323292ms)
+✖ F2 types stored profile drops a sample whose activityType holds an array, lookup and query (0.251166ms)
+✔ F2 types backup import drops a sample whose activityType holds an array (1.35175ms)
+✖ F2 types stored profile drops a sample whose result holds an object, lookup and query (0.220667ms)
+✔ F2 types backup import drops a sample whose result holds an object (0.72125ms)
+✖ F2 types stored profile drops a sample whose result holds an array, lookup and query (0.172209ms)
+✔ F2 types backup import drops a sample whose result holds an array (0.337584ms)
+✖ F2 types stored profile drops a sample whose hintUsed holds an object, lookup and query (0.147375ms)
+✔ F2 types backup import drops a sample whose hintUsed holds an object (0.283084ms)
+✖ F2 types stored profile drops a sample whose hintUsed holds an array, lookup and query (0.150833ms)
+✔ F2 types backup import drops a sample whose hintUsed holds an array (0.596917ms)
+✖ F2 types stored profile drops samples with a wrong primitive or a missing field (0.424ms)
+✔ F2 types backup import drops samples with a wrong primitive or a missing field (1.409541ms)
+✔ F2 types stored profile drops non-object samples and reads a non-list as no samples (0.700958ms)
+✔ F3 error contract supports code-only replies and preserves explicit public messages (0.222833ms)
+✔ F4 parsed lookup accepts an NFKC-expanded id while raw lookup retains validation (0.350916ms)
+✔ learning profile backup round-trips through JSON (2.571584ms)
+✔ import accepts a validated raw v1 profile for recovery compatibility (0.305834ms)
+✔ import rejects malformed records before IndexedDB replacement (0.383209ms)
+✔ import rejects partial v1 profiles instead of silently filling collections (0.23825ms)
+✔ import rejects non-canonical vocabulary keys (0.20025ms)
+✔ selected reset clears only requested collections (0.213542ms)
+✔ reset all returns a fresh empty profile (0.938333ms)
+✔ import rejects internally inconsistent learning counters (0.241375ms)
+✔ import rejects out-of-range derived scores (0.2225ms)
+✔ import rejects fractional counters and impossible error totals (0.385167ms)
+✔ learning message contract accepts only supported versioned messages (1.80725ms)
+✔ learning query message validates the nested query (0.350042ms)
+✔ query parser enforces bounded pagination, filters and sort values (0.186209ms)
+✔ expanded dashboard filters remain bounded and validated (0.137916ms)
+✔ batched learning events preserve every event in order (0.614334ms)
+✔ profile query filters, sorts and paginates bounded results (0.83325ms)
+✔ large learning profiles remain page-bounded and navigable (139.527583ms)
+ℹ tests 84
+ℹ suites 0
+ℹ pass 73
+ℹ fail 11
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 216.742625
+
+✖ failing tests:
+
+test at shared/learning/lookup.test.mjs:169:5
+✖ F2 types stored profile drops a sample whose occurredAt holds an object, lookup and query (0.957166ms)
+  AssertionError [ERR_ASSERTION]: vocabulary
+  + actual - expected
+
+    [
+      {
+  +     activityType: 'meaning-recall',
+  +     gameId: 'recall-typing',
+  +     hintUsed: false,
+  +     occurredAt: {
+  +       expectedAnswer: 'PRIVATE_NESTED_EXPECTED_ANSWER',
+  +       userAnswer: 'PRIVATE_NESTED_USER_ANSWER'
+  +     },
+  +     result: 'correct'
+  +   },
+  +   {
+        activityType: 'listening',
+        gameId: 'recall-typing',
+        hintUsed: true,
+        occurredAt: '2026-10-30T06:01:00.000Z',
+        result: 'correct'
+
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/shared/learning/lookup.test.mjs:176:18)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ { occurredAt: [Object], gameId: 'recall-typing', activityType: 'meaning-recall', result: 'correct', hintUsed: false }, { occurredAt: '2026-10-30T06:01:00.000Z', gameId: 'recall-typing', activityType: 'listening', result: 'correct', hintUsed: true } ],
+    expected: [ { occurredAt: '2026-10-30T06:01:00.000Z', gameId: 'recall-typing', activityType: 'listening', result: 'correct', hintUsed: true } ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at shared/learning/lookup.test.mjs:169:5
+✖ F2 types stored profile drops a sample whose occurredAt holds an array, lookup and query (0.251625ms)
+  AssertionError [ERR_ASSERTION]: vocabulary
+  + actual - expected
+
+    [
+      {
+  +     activityType: 'meaning-recall',
+  +     gameId: 'recall-typing',
+  +     hintUsed: false,
+  +     occurredAt: [
+  +       {
+  +         expectedAnswer: 'PRIVATE_NESTED_EXPECTED_ANSWER',
+  +         userAnswer: 'PRIVATE_NESTED_USER_ANSWER'
+  +       }
+  +     ],
+  +     result: 'correct'
+  +   },
+  +   {
+        activityType: 'listening',
+        gameId: 'recall-typing',
+        hintUsed: true,
+        occurredAt: '2026-10-30T06:01:00.000Z',
+        result: 'correct'
+
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/shared/learning/lookup.test.mjs:176:18)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ { occurredAt: [Array], gameId: 'recall-typing', activityType: 'meaning-recall', result: 'correct', hintUsed: false }, { occurredAt: '2026-10-30T06:01:00.000Z', gameId: 'recall-typing', activityType: 'listening', result: 'correct', hintUsed: true } ],
+    expected: [ { occurredAt: '2026-10-30T06:01:00.000Z', gameId: 'recall-typing', activityType: 'listening', result: 'correct', hintUsed: true } ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at shared/learning/lookup.test.mjs:169:5
+✖ F2 types stored profile drops a sample whose gameId holds an object, lookup and query (0.199542ms)
+  AssertionError [ERR_ASSERTION]: vocabulary
+  + actual - expected
+
+    [
+      {
+  +     activityType: 'meaning-recall',
+  +     gameId: {
+  +       expectedAnswer: 'PRIVATE_NESTED_EXPECTED_ANSWER',
+  +       userAnswer: 'PRIVATE_NESTED_USER_ANSWER'
+  +     },
+  +     hintUsed: false,
+  +     occurredAt: '2026-10-30T06:00:00.000Z',
+  +     result: 'correct'
+  +   },
+  +   {
+        activityType: 'listening',
+        gameId: 'recall-typing',
+        hintUsed: true,
+        occurredAt: '2026-10-30T06:01:00.000Z',
+        result: 'correct'
+
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/shared/learning/lookup.test.mjs:176:18)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ { occurredAt: '2026-10-30T06:00:00.000Z', gameId: [Object], activityType: 'meaning-recall', result: 'correct', hintUsed: false }, { occurredAt: '2026-10-30T06:01:00.000Z', gameId: 'recall-typing', activityType: 'listening', result: 'correct', hintUsed: true } ],
+    expected: [ { occurredAt: '2026-10-30T06:01:00.000Z', gameId: 'recall-typing', activityType: 'listening', result: 'correct', hintUsed: true } ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at shared/learning/lookup.test.mjs:169:5
+✖ F2 types stored profile drops a sample whose gameId holds an array, lookup and query (0.154334ms)
+  AssertionError [ERR_ASSERTION]: vocabulary
+  + actual - expected
+
+    [
+      {
+  +     activityType: 'meaning-recall',
+  +     gameId: [
+  +       {
+  +         expectedAnswer: 'PRIVATE_NESTED_EXPECTED_ANSWER',
+  +         userAnswer: 'PRIVATE_NESTED_USER_ANSWER'
+  +       }
+  +     ],
+  +     hintUsed: false,
+  +     occurredAt: '2026-10-30T06:00:00.000Z',
+  +     result: 'correct'
+  +   },
+  +   {
+        activityType: 'listening',
+        gameId: 'recall-typing',
+        hintUsed: true,
+        occurredAt: '2026-10-30T06:01:00.000Z',
+        result: 'correct'
+
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/shared/learning/lookup.test.mjs:176:18)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ { occurredAt: '2026-10-30T06:00:00.000Z', gameId: [Array], activityType: 'meaning-recall', result: 'correct', hintUsed: false }, { occurredAt: '2026-10-30T06:01:00.000Z', gameId: 'recall-typing', activityType: 'listening', result: 'correct', hintUsed: true } ],
+    expected: [ { occurredAt: '2026-10-30T06:01:00.000Z', gameId: 'recall-typing', activityType: 'listening', result: 'correct', hintUsed: true } ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at shared/learning/lookup.test.mjs:169:5
+✖ F2 types stored profile drops a sample whose activityType holds an object, lookup and query (0.14375ms)
+  AssertionError [ERR_ASSERTION]: vocabulary
+  + actual - expected
+
+    [
+      {
+  +     activityType: {
+  +       expectedAnswer: 'PRIVATE_NESTED_EXPECTED_ANSWER',
+  +       userAnswer: 'PRIVATE_NESTED_USER_ANSWER'
+  +     },
+  +     gameId: 'recall-typing',
+  +     hintUsed: false,
+  +     occurredAt: '2026-10-30T06:00:00.000Z',
+  +     result: 'correct'
+  +   },
+  +   {
+        activityType: 'listening',
+        gameId: 'recall-typing',
+        hintUsed: true,
+        occurredAt: '2026-10-30T06:01:00.000Z',
+        result: 'correct'
+
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/shared/learning/lookup.test.mjs:176:18)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ { occurredAt: '2026-10-30T06:00:00.000Z', gameId: 'recall-typing', activityType: [Object], result: 'correct', hintUsed: false }, { occurredAt: '2026-10-30T06:01:00.000Z', gameId: 'recall-typing', activityType: 'listening', result: 'correct', hintUsed: true } ],
+    expected: [ { occurredAt: '2026-10-30T06:01:00.000Z', gameId: 'recall-typing', activityType: 'listening', result: 'correct', hintUsed: true } ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at shared/learning/lookup.test.mjs:169:5
+✖ F2 types stored profile drops a sample whose activityType holds an array, lookup and query (0.251166ms)
+  AssertionError [ERR_ASSERTION]: vocabulary
+  + actual - expected
+
+    [
+      {
+  +     activityType: [
+  +       {
+  +         expectedAnswer: 'PRIVATE_NESTED_EXPECTED_ANSWER',
+  +         userAnswer: 'PRIVATE_NESTED_USER_ANSWER'
+  +       }
+  +     ],
+  +     gameId: 'recall-typing',
+  +     hintUsed: false,
+  +     occurredAt: '2026-10-30T06:00:00.000Z',
+  +     result: 'correct'
+  +   },
+  +   {
+        activityType: 'listening',
+        gameId: 'recall-typing',
+        hintUsed: true,
+        occurredAt: '2026-10-30T06:01:00.000Z',
+        result: 'correct'
+
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/shared/learning/lookup.test.mjs:176:18)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ { occurredAt: '2026-10-30T06:00:00.000Z', gameId: 'recall-typing', activityType: [Array], result: 'correct', hintUsed: false }, { occurredAt: '2026-10-30T06:01:00.000Z', gameId: 'recall-typing', activityType: 'listening', result: 'correct', hintUsed: true } ],
+    expected: [ { occurredAt: '2026-10-30T06:01:00.000Z', gameId: 'recall-typing', activityType: 'listening', result: 'correct', hintUsed: true } ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at shared/learning/lookup.test.mjs:169:5
+✖ F2 types stored profile drops a sample whose result holds an object, lookup and query (0.220667ms)
+  AssertionError [ERR_ASSERTION]: vocabulary
+  + actual - expected
+
+    [
+      {
+  +     activityType: 'meaning-recall',
+  +     gameId: 'recall-typing',
+  +     hintUsed: false,
+  +     occurredAt: '2026-10-30T06:00:00.000Z',
+  +     result: {
+  +       expectedAnswer: 'PRIVATE_NESTED_EXPECTED_ANSWER',
+  +       userAnswer: 'PRIVATE_NESTED_USER_ANSWER'
+  +     }
+  +   },
+  +   {
+        activityType: 'listening',
+        gameId: 'recall-typing',
+        hintUsed: true,
+        occurredAt: '2026-10-30T06:01:00.000Z',
+        result: 'correct'
+
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/shared/learning/lookup.test.mjs:176:18)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ { occurredAt: '2026-10-30T06:00:00.000Z', gameId: 'recall-typing', activityType: 'meaning-recall', result: [Object], hintUsed: false }, { occurredAt: '2026-10-30T06:01:00.000Z', gameId: 'recall-typing', activityType: 'listening', result: 'correct', hintUsed: true } ],
+    expected: [ { occurredAt: '2026-10-30T06:01:00.000Z', gameId: 'recall-typing', activityType: 'listening', result: 'correct', hintUsed: true } ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at shared/learning/lookup.test.mjs:169:5
+✖ F2 types stored profile drops a sample whose result holds an array, lookup and query (0.172209ms)
+  AssertionError [ERR_ASSERTION]: vocabulary
+  + actual - expected
+
+    [
+      {
+  +     activityType: 'meaning-recall',
+  +     gameId: 'recall-typing',
+  +     hintUsed: false,
+  +     occurredAt: '2026-10-30T06:00:00.000Z',
+  +     result: [
+  +       {
+  +         expectedAnswer: 'PRIVATE_NESTED_EXPECTED_ANSWER',
+  +         userAnswer: 'PRIVATE_NESTED_USER_ANSWER'
+  +       }
+  +     ]
+  +   },
+  +   {
+        activityType: 'listening',
+        gameId: 'recall-typing',
+        hintUsed: true,
+        occurredAt: '2026-10-30T06:01:00.000Z',
+        result: 'correct'
+
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/shared/learning/lookup.test.mjs:176:18)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ { occurredAt: '2026-10-30T06:00:00.000Z', gameId: 'recall-typing', activityType: 'meaning-recall', result: [Array], hintUsed: false }, { occurredAt: '2026-10-30T06:01:00.000Z', gameId: 'recall-typing', activityType: 'listening', result: 'correct', hintUsed: true } ],
+    expected: [ { occurredAt: '2026-10-30T06:01:00.000Z', gameId: 'recall-typing', activityType: 'listening', result: 'correct', hintUsed: true } ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at shared/learning/lookup.test.mjs:169:5
+✖ F2 types stored profile drops a sample whose hintUsed holds an object, lookup and query (0.147375ms)
+  AssertionError [ERR_ASSERTION]: vocabulary
+  + actual - expected
+
+    [
+      {
+  +     activityType: 'meaning-recall',
+  +     gameId: 'recall-typing',
+  +     hintUsed: {
+  +       expectedAnswer: 'PRIVATE_NESTED_EXPECTED_ANSWER',
+  +       userAnswer: 'PRIVATE_NESTED_USER_ANSWER'
+  +     },
+  +     occurredAt: '2026-10-30T06:00:00.000Z',
+  +     result: 'correct'
+  +   },
+  +   {
+        activityType: 'listening',
+        gameId: 'recall-typing',
+        hintUsed: true,
+        occurredAt: '2026-10-30T06:01:00.000Z',
+        result: 'correct'
+
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/shared/learning/lookup.test.mjs:176:18)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ { occurredAt: '2026-10-30T06:00:00.000Z', gameId: 'recall-typing', activityType: 'meaning-recall', result: 'correct', hintUsed: [Object] }, { occurredAt: '2026-10-30T06:01:00.000Z', gameId: 'recall-typing', activityType: 'listening', result: 'correct', hintUsed: true } ],
+    expected: [ { occurredAt: '2026-10-30T06:01:00.000Z', gameId: 'recall-typing', activityType: 'listening', result: 'correct', hintUsed: true } ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at shared/learning/lookup.test.mjs:169:5
+✖ F2 types stored profile drops a sample whose hintUsed holds an array, lookup and query (0.150833ms)
+  AssertionError [ERR_ASSERTION]: vocabulary
+  + actual - expected
+
+    [
+      {
+  +     activityType: 'meaning-recall',
+  +     gameId: 'recall-typing',
+  +     hintUsed: [
+  +       {
+  +         expectedAnswer: 'PRIVATE_NESTED_EXPECTED_ANSWER',
+  +         userAnswer: 'PRIVATE_NESTED_USER_ANSWER'
+  +       }
+  +     ],
+  +     occurredAt: '2026-10-30T06:00:00.000Z',
+  +     result: 'correct'
+  +   },
+  +   {
+        activityType: 'listening',
+        gameId: 'recall-typing',
+        hintUsed: true,
+        occurredAt: '2026-10-30T06:01:00.000Z',
+        result: 'correct'
+
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/shared/learning/lookup.test.mjs:176:18)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ { occurredAt: '2026-10-30T06:00:00.000Z', gameId: 'recall-typing', activityType: 'meaning-recall', result: 'correct', hintUsed: [Array] }, { occurredAt: '2026-10-30T06:01:00.000Z', gameId: 'recall-typing', activityType: 'listening', result: 'correct', hintUsed: true } ],
+    expected: [ { occurredAt: '2026-10-30T06:01:00.000Z', gameId: 'recall-typing', activityType: 'listening', result: 'correct', hintUsed: true } ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at shared/learning/lookup.test.mjs:215:1
+✖ F2 types stored profile drops samples with a wrong primitive or a missing field (0.424ms)
+  AssertionError [ERR_ASSERTION]: occurredAt=1793340000000
+  + actual - expected
+
+    [
+      {
+  +     activityType: 'meaning-recall',
+  +     gameId: 'recall-typing',
+  +     hintUsed: false,
+  +     occurredAt: 1793340000000,
+  +     result: 'correct'
+  +   },
+  +   {
+        activityType: 'listening',
+        gameId: 'recall-typing',
+        hintUsed: true,
+        occurredAt: '2026-10-30T06:01:00.000Z',
+        result: 'correct'
+
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/shared/learning/lookup.test.mjs:218:52)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ { occurredAt: 1793340000000, gameId: 'recall-typing', activityType: 'meaning-recall', result: 'correct', hintUsed: false }, { occurredAt: '2026-10-30T06:01:00.000Z', gameId: 'recall-typing', activityType: 'listening', result: 'correct', hintUsed: true } ],
+    expected: [ { occurredAt: '2026-10-30T06:01:00.000Z', gameId: 'recall-typing', activityType: 'listening', result: 'correct', hintUsed: true } ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+exit: 1

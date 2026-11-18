@@ -1,0 +1,748 @@
+src/app/app.css:99: /* Speed card (typing-pace.ts): before Học trước, and from the pause menu. */
+src/app/app.css:185: /* 120 ms dark edge when Hỏa Long is hit (05 §5); never over the centre. */
+src/app/app.css:201: /* Héo lan's seep (BALANCE.md §5): a violet edge each beat; ≥ 5 % of max HP in one beat reads stronger (test pass 27/10). */
+src/app/app.ts:4:  * learning, audio). Flow: Học trước (the stage's new words) → setup (prep,
+src/app/app.ts:5:  * starting gold, wave card) → waves with 20 s breaks and the shop, Thẻ Ôn
+src/app/app.ts:68:   /** Dev only: world time × speed (rules unchanged, scenarios run a whole stage faster). */
+src/app/app.ts:70:   /** Show Học trước before the first setup (default true). */
+src/app/app.ts:171:   /** Answers of the open Thẻ Ôn, in order. */
+src/app/app.ts:235:   /** Héo lan's seep: a violet edge each beat, stronger when a beat takes ≥ 5 % of max HP (test pass 27/10). */
+src/app/app.ts:243:   const ffBadge = el(doc, "div", "dh-ff", "×2");
+src/app/app.ts:245:   /** Pause menu and 3-2-1: a plain dim layer, words and the learning frame hidden (01 §3.9 "Tạm dừng che chữ"). */
+src/app/app.ts:288:   /** The last Thẻ Ôn answers (debug handle: scenarios answer by keyboard). */
+src/app/app.ts:314:       // ⇧↵ in a break closes Thẻ Ôn and calls the next wave (its answers are not required).
+src/app/app.ts:526:       // Thẻ Ôn opens on the last kill of a wave: that word's leaving tag and letter sparks would show the answer.
+src/app/app.ts:538:     // The card's "Quái sắp vào từ các đường sáng": the coming wave's lanes light on the map (26/10 review).
+src/app/app.ts:564:     // Học trước shows the word: copying it is not a recall (00 D14), so its answers go out with hintUsed.
+src/app/app.ts:640:   // ── Events the app itself follows: Thẻ Ôn, flushes, the hurt edge ──
+src/app/app.ts:656:           // No Thẻ Ôn after the last wave: the results screen comes next.
+src/app/app.ts:664:           // The next wave is coming (a click on Gọi sớm): the card closes, nothing is lost.
+src/app/app.ts:680:           // A foe's blow darkens the edge (05 §5); Héo lan's seep (source "hero") tints it violet, so a beat that
+src/app/app.ts:802:     // Prep: Học trước once, then the setup.
+src/app/contracts.ts:14:   /** World seconds since the last frame: dt × time scale (hit-stop 0.05, fast-forward 2). */
+src/app/input-router.ts:14: /** A learning panel (Học trước, Thẻ Ôn) takes letters and enter, backspace, escape, replay while open. */
+src/app/input-router.ts:21:    * aside (closed) and the action should go on (Thẻ Ôn and ⇧↵ Gọi sớm, test
+src/app/learning.ts:26:  * Học trước goes out as `review-card` with hintUsed (its word, IPA and
+src/app/learning.ts:102: /** One word's meetings in this stage (Sổ Từ Ải, Thẻ Ôn picks; 01 §6.5). */
+src/app/learning.ts:113: /** A Thẻ Ôn question (01 §6.5). */
+src/app/learning.ts:133:    * A recall-activity answer (Học trước, Thẻ Ôn), `review-card` unless
+src/app/learning.ts:134:    * `activity` says otherwise: always sent (01 §6.6). Học trước passes
+src/app/learning.ts:140:   /** Up to 3 Thẻ Ôn questions from `wave`: Ẩu words, then words typed with a hint, then new words (01 §6.5). */
+src/app/learning.ts:142:   /** Every word met this stage, for Sổ Từ Ải. */
+src/app/learning.ts:146:   /** Plays a word at once (Học trước, Thẻ Ôn, a speaker icon). */
+src/app/typing-pace.ts:3:  * is built with sets word lengths, the pace k and Héo lan's grace, so it must
+src/app/typing-pace.ts:6:  *   - otherwise the speed card asks before Học trước. It offers the speed
+src/app/typing-pace.ts:177: /** Where a speed came from, for players: the URL is the portal's link (test pass 27/10: "theo đường dẫn" read as jargon). */
+src/app/typing-pace.ts:182: /** Short text for menus and logs: "35 WPM (đã chọn)". */
+src/app/typing-pace.ts:199:   /** Σ (ℓ − 1) / 5 and Σ t × d (minutes): E = their ratio. */
+src/app/typing-pace.ts:202:   /** Per-letter times × d (ms), for CV. */
+src/audio/catalog.ts:73:   // Hỏa Long (dragon bus; the kit's dragon voice synth through its voice bus).
+src/audio/catalog.ts:127:   // General G01 Yêu Rêu Cầm Cờ (own set, 02 §3.4).
+src/audio/catalog.ts:135:   // Traps ×2 each: arm (built) and trigger.
+src/audio/catalog.ts:143:   // Supports ×2 each: Vệ Binh Rêu (place, down) and Lều Thuốc Nam (place, pulse); a shared blow on our side.
+src/audio/catalog.ts:150:   // UI ×4 (P2).
+src/audio/dev/harness.html:6:     <title>Âm M0a: kiểm tra</title>
+src/audio/dev/harness.html:18:     <h1>Rồng Giữ Ải · âm M0a (dev, không phải trang game)</h1>
+src/audio/dev/harness.html:19:     <p id="status">Đang dựng…</p>
+src/audio/dev/harness.ts:324:     status.textContent = "Âm " + (index + 1) + "/" + SOUND_IDS.length + ": " + id;
+src/audio/dev/harness.ts:334:   status.textContent = "Bầy 200 quái…";
+src/audio/dev/harness.ts:338:   g.fillText("200 quái, 6 s: đỉnh " + crowd.result.peak + " · tiếng tối đa " + crowd.result.maxVoices + " · phím " + crowd.result.keysPlayed + "/" + crowd.result.keysAsked, 4, rowY);
+src/audio/dev/harness.ts:341:   status.textContent = "Nhường tiếng…";
+src/audio/dev/harness.ts:345:   status.textContent = "Nhạc…";
+src/audio/dev/harness.ts:348:   g.fillText("Nhạc 14 s: Rừng 0–6 s, thêm Đợt từ ô nhịp kế · đỉnh " + music.result.peak + " · " + music.result.calmRmsDb + " dB → " + music.result.battleRmsDb + " dB", 4, rowY + 92);
+src/audio/dev/harness.ts:351:   g.fillText("Phát âm từ: " + ducks.map((d) => d.bus + " " + d.dipDb + " dB (" + d.downMs + " ms)").join(" · "), 4, rowY + 186);
+src/audio/dev/harness.ts:353:   status.textContent = "Chạy thật (AudioContext)…";
+src/audio/dev/harness.ts:355:   g.fillText("createAudio thật: " + liveResult.frames + " khung, " + liveResult.admitted + " tiếng, nhạc " + JSON.stringify(liveResult.music) + ", lỗi " + liveResult.errors.length, 4, rowY + 204);
+src/audio/dev/harness.ts:370:   status.textContent = failures.length === 0 && crowd.result.ok && music.result.ok && liveResult.ok ? "Xong: đạt" : "Xong: có lỗi";
+src/audio/index.ts:69:   /** A Bạch Long or narrator line is playing (06 §6): music, ambience, enemies dip. */
+src/audio/index.ts:77:   /** Learning frame sounds (Thẻ Ôn, Học trước); never ducked. */
+src/audio/limiter.ts:14: /** 05 §8 "Tiếng cùng lúc". */
+src/audio/map-events.ts:6:  * a rising pentatonic chime; warnings (a foe winding up on Hỏa Long, a
+src/audio/map-events.ts:47: /** Hỏa Long below this share of HP is "low" (05 §7 P1, music surge). */
+src/audio/map-events.ts:95: /** Hỏa Long's low-HP alarm (05 §7 P1): one alarm on crossing 35 %, then a soft heartbeat while below. */
+src/audio/map-events.ts:362:       // Héo lan (source "hero", every 2 s while foes stand near) is quieter than a blow but grows with the beat:
+src/audio/map-events.ts:408:   /** One death sound per class per frame, louder as √N (05 §5 "một vụ nổ cỡ √N"), and one chime. */
+src/audio/mix.ts:26:   // Dialogue waits for the word (05 §7.2 "hoãn thoại"): deep dip until it is held back.
+src/audio/mix.ts:56:   // Boss warning and Cụm Ấn: world −4, music −3, P5 off (ambience nearly gone).
+src/audio/mix.ts:136: /** Effects dip while paused (the sim stands still; 06 §2 "âm tạm ngưng"). */
+src/audio/mixer.ts:4:  * is level (settings × bus gain) → duck → pause low-pass → master, with a send
+src/audio/mixer.ts:129:   /** The bus's level right now (settings × bus gain × pause), for checks. */
+src/audio/music-plan.ts:2:  * Music plan (05 §7.2): four layers on one tempo and key, Rừng (calm) →
+src/audio/music-plan.ts:3:  * + Đợt (battle) → + Dồn (surge: last wave or Hỏa Long under 35 %) → + the
+src/audio/music-plan.ts:4:  * general's motif. M0a synthesises Rừng and Đợt; Dồn and the general layer
+src/audio/music-plan.ts:12: /** A layer change starts at the next bar and takes this long (05 §7.2 "mờ 2 s ở đầu ô nhịp"). */
+src/audio/music-plan.ts:19:   /** Hỏa Long HP, percent. */
+src/audio/music.ts:3:  * Rừng (pad, harp plucks, wooden flute) and Đợt (frame drum, cello ostinato)
+src/audio/music.ts:4:  * from synth.ts instruments; Dồn and the general's motif sound only when the
+src/audio/music.ts:183:       // A synth-only layer with no file stays silent (Dồn and the general's motif in M0a).
+src/audio/synth.ts:7:  * hiss; enemies get a material layer (05 §6.3: lá "xào", lông "thịch", vỏ
+src/audio/synth.ts:8:  * "rắc"…) and a small spirit mote when they die. Instruments for the
+src/audio/synth.ts:157:       case "leaf": // "xào", bursting dry leaves
+src/audio/synth.ts:161:       case "rotwood": // "cộp"
+src/audio/synth.ts:165:       case "stone": // "cộc"
+src/audio/synth.ts:169:       case "fur": // "thịch"
+src/audio/synth.ts:173:       case "chitin": // "rắc"
+src/audio/synth.ts:178:       case "mist": // glassy "vút"
+src/audio/synth.ts:182:       case "mud": // "bọp"
+src/audio/synth.ts:257:   // ── Hỏa Long ──────────────────────────────────────────────────────────────
+src/audio/synth.ts:337:   // ── Enemies: bipeds (bước nhẹ, hự, chém "xoẹt") ───────────────────────────
+src/audio/synth.ts:365:   // ── Quadrupeds (vó nặng, khịt, húc "huỵch", cắn "phập") ───────────────────
+src/audio/synth.ts:399:   // ── Flyers (vỗ cánh, kêu cao, bổ nhào rít) ────────────────────────────────
+src/audio/synth.ts:421:   // ── Swarm (lộp độp nhanh, rít nhỏ) ────────────────────────────────────────
+src/audio/synth.ts:541:   // ── UI ×4 ─────────────────────────────────────────────────────────────────
+src/content/data/enemies.ts:2:  * M0 foes of the Bầy Héo: E09, E11, E18, E19, E01, E25 (02 §2.1 stats, §2.2
+src/content/data/enemies.ts:184:     // 05 §6.2: a flyer's sting shows a red ring on the ground ≥ 0.5 s (02 §2.2's 0.4 s "chổng bụng" stretched to it).
+src/content/data/generals.ts:2:  * M0 general G01 Yêu Rêu Cầm Cờ (02 §3.2 stats, §3.4 presentation): aura
+src/content/data/generals.ts:3:  * Xung Phong, skill Cắm Cờ, Ấn Phá on every 3rd chain word. Chapter-1 numbers.
+src/content/data/generals.ts:33:     // Ấn Phá: chain words 3, 6, 9…; turns the aura off 8 s and staggers 0.5 s (01 §3.6).
+src/content/data/generals.ts:35:     // "Quân gần chùn 1 s": allies within the aura radius flinch.
+src/content/data/maps.ts:5:  * Đường Cầu (north) crosses it on a bridge, the choke point; Đường Suối (west)
+src/content/data/maps.ts:36:   // Bạch Long stands at the south-west edge of the dais, clear of Hỏa Long's wings (05 §6.1).
+src/content/data/maps.ts:88:     // Đường Cầu: four trap slots (one on the bridge deck), two block points.
+src/content/data/maps.ts:95:     // Đường Suối: three trap slots (none in the ford), two block points.
+src/content/data/maps.ts:110:   // Looks 4 m north of the dais: the wave card no longer covers the Đường Cầu slots by the north gate.
+src/content/data/our-side.ts:2:  * M0 items of our side (03; DESIGN.md §9 M0): traps Gai Chông, Bom Hạt Thông,
+src/content/data/our-side.ts:3:  * Lưới Phóng; blocker Vệ Binh Rêu; magic house Lều Thuốc Nam; Bình Máu Nhỏ;
+src/content/data/our-side.ts:4:  * in-run buys Tim Rồng, Vảy Cứng. Chapter-1 numbers (×g(c) for damage and HP).
+src/content/data/our-side.ts:25:   /** Gai Chông stabs every 0.5 s (8 VL/s → 4 a stab at C1); its slow lingers 0.3 s after a foe steps off. */
+src/content/data/our-side.ts:72:     // Tự (≥ 3 foes); the Chữ mode with a trigger word stays off until C4 (00 D13).
+src/content/data/our-side.ts:96:     // 10 m + 10 % (00 §7 data tuning): from cau-t4 it reaches the wasps' stop on Đường Trời (10.5 m).
+src/content/data/our-side.ts:123:     // 03 gave 1.5 % of max HP a second for allies, the Dragons too: one hut healed ~90 % a wave and wiped out Héo lan
+src/content/data/our-side.ts:160:       // Our side reads pale blue (05 §2.2), never the moss green of the Bầy Héo; a blue disc marks its feet.
+src/content/data/waves.ts:4:  * by 02 §5.2, lane mix by 02 §5.5 (main lane 60–70 % of ground threat; Đường
+src/content/data/waves.ts:5:  * Cầu leads waves 1–3 and 7–8, Đường Suối waves 4–6 and 9–10).
+src/content/data/waves.ts:10:  *   a peak of light singles (02 §5.3: ≥ 1.5 × the mean group pace, slowest to
+src/content/data/waves.ts:21:  *   skills decide (02 §5.3 "chết bằng từ cụm, PHUN và bẫy").
+src/content/data/waves.ts:37: /** A line of `count` grunts, 0.6 s apart (02 §5.2 "Hàng"). */
+src/content/data/waves.ts:46:  * 3 × 1.2 W at once reads 1.59 in a 6 s window, over the 1.15 cap of middle
+src/content/data/waves.ts:52: /** W × 100 of a group's typing work (00 §4.4): a cluster is 1 W, the rest W × heads. */
+src/content/data/waves.ts:59: /** Members of a group as (ms after its start, W × 100), as the spawner sends them (02 §5.2 gaps; a cluster is one arrival). */
+src/content/data/waves.ts:74:  * The busiest 6, 8 or 10 s window × 100 of `arrivals` that touches [from, to]:
+src/content/data/waves.ts:115:   /** Work pace × 100 of the reference typist (≈ the wave's load × 100). */
+src/content/data/waves.ts:118:   /** The layout keeps every short peak at or under this × 100 (the cap less a margin for the director's squeeze). */
+src/content/data/waves.ts:204:   /** A lull holding a second group lasts 2 s longer (02 §5.3: ≤ 0.4 × the mean pace; ~0.25 groups a second here). */
+src/content/data/waves.ts:236:   // word zone and take the reference typist W × 2.64 s from there (a backlog past 1.0 is the support's, 00 §4.4).
+src/content/data/waves.ts:258: // word zone first (Đường Suối's ford, then Đường Cầu, then shooters, wasps, ants), so their words
+src/content/data/waves.ts:273:     // First Ong Gai and first Yêu Rêu Cung (alone in the third lull); grunt pairs hold the other lulls (no heavy foe yet: our side is two items strong).
+src/content/data/waves.ts:285:     // First Heo Nanh Đá, alone in a lull; the first Yêu Rêu Cung in a peak (it stops 12 m out and shoots the Dragon while it lives).
+src/content/data/waves.ts:297:     // Đường Suối leads; boars open the wave and hold a lull.
+src/content/data/waves.ts:309:     // First general: G01 walks Đường Suối alone in the long lull; its 6 W keep the typist on it ~16 s.
+src/content/data/waves.ts:333:     // Đường Cầu leads again; the first wolf line opens it.
+src/content/data/waves.ts:357:     // Đường Suối leads: a wolf line opens, a boar holds a lull.
+src/content/rules.ts:2:  * Rồng Giữ Ải rule numbers for M0. Source: docs/games/dragon-lane/00-canon.md
+src/content/rules.ts:7:  * millimetres, …Pct percent, …Pm permille, …X10 tenths, w100 W × 100.
+src/content/rules.ts:27: /** Enemy HP = W × 90 × g(c) × difficulty, rounded (00 §4.1); `wPm` is the difficulty W factor (1000 for swarm and small, 00 §4.6). */
+src/content/rules.ts:36:   /** Chớp: e = 0 and t_k ≤ 0.85 × t_exp (00 §4.2). */
+src/content/rules.ts:38:   /** e = 1 gives Tốt on words of ≥ 6 letters, Vừa on ≤ 5 (00 §4.2). */
+src/content/rules.ts:40:   /** Ẩu from this many errors; Cụm Ấn from 3 (00 §4.2). */
+src/content/rules.ts:49:   /** Chain change per grade; Ẩu halves it (01 §3.7). */
+src/content/rules.ts:52:   /** Special words (Ấn Phá, Từ Ngắt, Cụm Ấn, Từ Khẩn) typed well: +2 (01 §3.8). */
+src/content/rules.ts:100:   /** C(E) = 60 / (0.45 + 12 (ℓ̄ + 1) / (E d)) words a minute (00 §4.3). */
+src/content/rules.ts:104:   /** ℓ̄ × 10 by E: < 45 WPM 4.5, 45–64 5.5, ≥ 65 6.0 (00 §4.3). */
+src/content/rules.ts:117:  *   E_eff = E × (0.6 + 0.4 a²) × (1 − 0.5 CV), held in [0.7 E, E]
+src/content/rules.ts:118:  *   k     = clamp(C(E_eff) / C_ref; 0.75; 1.50)      spawn gaps × 1 / k, both ways
+src/content/rules.ts:147:    * Slip margin (BALANCE.md §2 factor 3 "Thói sửa lỗi → biên thời gian"): T_a
+src/content/rules.ts:148:    * and Héo lan's grace × margin, margin = 1 + this / 10 × P(a word of ℓ̄
+src/content/rules.ts:149:    * letters goes Ẩu at the player's accuracy) + the uneven part below
+src/content/rules.ts:150:    * (world.ts paceFor, `marginPm`). ℓ̄ follows E (5 letters under 45 WPM, 6
+src/content/rules.ts:157:   /** Uneven margin (BALANCE.md §2 factor 4): this % × CV added to the margin above: CV 0.35 → + 0.21, 0.25 → + 0.15, 0.15 → + 0.09. */
+src/content/rules.ts:161: /** Wave load L × 100 bands (00 §4.4). */
+src/content/rules.ts:176: /** Typing-load W_gõ: swarm clusters and word-shield layers count 1 each (00 §4.4). */
+src/content/rules.ts:199:   /** Both Dragons heal 10 % max HP between waves; at most 20 % with Library and Tổ Ấm (00 §4.5). */
+src/content/rules.ts:213:   /** General W ≤ 35 % of the wave's W_gõ (40 % in a general stage's last wave) (00 §4.5). */
+src/content/rules.ts:223:   /** Lulls between peaks ≥ 8 s at rate × 0.4; peaks run at rate × 1.6 (02 §5.3). */
+src/content/rules.ts:229: /** Stars (01 §5): 1 win, 2 with ≥ 50 % HP, 3 with ≥ 80 % and no Lông Phượng. */
+src/content/rules.ts:234: /** W × 100 and threat × 10 ranges per tier (00 §4.6). */
+src/content/rules.ts:245: /** Elites: W and threat × 1.6 (00 §4.6). */
+src/content/rules.ts:326:   /** Gold budget = 200 + 900 × f_lanes × f_type (00 §4.9). */
+src/content/rules.ts:368:   /** 01 §2.2 starts at 1000; BALANCE.md §9.1 (D23) sets it so the standard bot keeps S 35–65 % under Héo lan (PRESSURE). */
+src/content/rules.ts:413:   /** Lửa Chữ: a Chớp word burns 0.2 P a second for 3 s. */
+src/content/rules.ts:415:   /** Phun Lửa (Alt + 1): 60° cone, 12 m, 1.5 P → 2.0 P, burn 3 s; default target: the lane with the most foe HP within 12 m. */
+src/content/rules.ts:417:   /** Thiên Hỏa (Alt + 2): lands after 0.8 s, radius 4 m, 2.5 P → 3.2 P, stun 1 s; default: the densest group in the word zone. */
+src/content/rules.ts:419:   /** Long Hống from the urgent word: 3 P word damage within 10 m, knockback 6 m, interrupts every cast (01 §3.6). */
+src/content/rules.ts:421:   /** Viêm Đế (Alt + 5): 10 s; each word fires a 2 × 22 m beam along the lane at 1.2 P (word); at the end Spit_Big 7 m, 4 P (magic). */
+src/content/rules.ts:423:   /** Chữ Chiêu typed: +10 % power, +1 chain (01 §2.4). */
+src/content/rules.ts:429:  * Continuous pressure, Héo lan (BALANCE.md §5, §9.1, D23): every beat of a
+src/content/rules.ts:430:  * wave, each target left waiting in the word zone seeps Héo into the Fire
+src/content/rules.ts:432:  * (`graceX10` tenths of one word at the player's raw E, × the slip and
+src/content/rules.ts:435:  * of HP a second, `ringX10` inside Vòng Nguy (10 m, 01 §2.1), `heldPct` of the
+src/content/rules.ts:437:  * beat (falling behind costs, it never snowballs). × g(c), × the difficulty's
+src/content/rules.ts:438:  * Héo (`difficultyPm`, 00 §4.10's modes Thư giãn / Cân bằng / Thử thách), ×
+src/content/rules.ts:439:  * √k (half of the pace each way: our side works by the clock), × the wave's
+src/content/rules.ts:486:   /** E25 zigzags ±0.25 m every 1.2 s (02 §2.2 "dòng zigzag"). */
+src/content/rules.ts:496: /** Urgent word, Từ Khẩn (01 §3.6): once a wave, when ≥ 3 foes are in the melee ring or the Fire Dragon is under 35 % HP. */
+src/content/rules.ts:499: /** Long Nộ, 0–100 shared by both ultimates (01 §2.4), in tenths. */
+src/content/rules.ts:555:   /** Threat = 10 / seconds to the dais × tier factor + 6 attacking + 8 casting + 5 marked. */
+src/content/rules.ts:646:   /** Hard control (stun, root, freeze): 2nd within 10 s × 0.6, 3rd × 0.3, then Vững 4 s. */
+src/content/rules.ts:660:   /** Knockback distance ÷ weight; giants × 0.25 (03 §2.3). */
+src/content/rules.ts:698:   /** Resonance: a word hit on a foe inside a recharging trap's area cuts 0.8 s (Chớp, Hoàn hảo 1.2 s), at most 50 % a cycle (03 §10.2). */
+src/content/rules.ts:776: /** Sim speed (00 §8): one 60 Hz step at the peak ≤ 0.3 ms headless; a whole stage ≥ 200× real time. */
+src/content/types.ts:2:  * Rồng Giữ Ải: content and simulation contracts every lane builds on
+src/content/types.ts:24: /** A finished word (00 §2): Chớp, Hoàn hảo, Tốt, Vừa, Ẩu. Words never expire. */
+src/content/types.ts:27: /** 00 §4.2: "word" (Chữ) ignores armour and resist; only word shields stop it. "true" is poison only. */
+src/content/types.ts:39: // ── Enemies (Bầy Héo, 02) ───────────────────────────────────────────────────
+src/content/types.ts:45: /** Anything that walks a lane for the Bầy Héo side. */
+src/content/types.ts:72:   | "block" // CHẶN
+src/content/types.ts:73:   | "slow" // CHẬM
+src/content/types.ts:75:   | "blast" // NỔ
+src/content/types.ts:76:   | "push" // ĐẨY
+src/content/types.ts:77:   | "net" // LƯỚI
+src/content/types.ts:78:   | "reveal" // LỘ
+src/content/types.ts:79:   | "break-armour" // PHÁ-giáp
+src/content/types.ts:80:   | "break-word" // PHÁ-chữ
+src/content/types.ts:81:   | "silence" // CÂM
+src/content/types.ts:84:   | "interrupt" // NGẮT
+src/content/types.ts:85:   | "priority"; // ƯT
+src/content/types.ts:167:   /** W × 100 (00 §4.1): HP = w100 × 90 × g(c) / 100 × difficulty (swarm and small excepted). */
+src/content/types.ts:174:   /** Threat ĐĐ × 10 (02 §1.2): composition and gold split only. */
+src/content/types.ts:242:   /** Seal word (Ấn Phá): every Nth chain word for captains; turns auras off and staggers (01 §3.5, §3.6). */
+src/content/types.ts:261: /** What the carry strip (Bộ Mang Theo) holds: keys 1…9 pick by index. */
+src/content/types.ts:271:   /** Main effect gain at levels 2, 3, in % (cumulative: 145 then ×1.35). */
+src/content/types.ts:299:   /** Runs all the time (no recharge): Gai Chông, Bùn Lầy. */
+src/content/types.ts:307:   /** Has the optional trigger word (Từ Kích, 03 §10.3); off for M0 (00 D13). */
+src/content/types.ts:512:   | "frenzy" // Cuồng Nộ
+src/content/types.ts:513:   | "death-blast" // Nổ Khi Chết
+src/content/types.ts:514:   | "blight-trail" // Lửa Mục
+src/content/types.ts:515:   | "double-shot" // Đòn Kép
+src/content/types.ts:516:   | "stone-armour" // Giáp Đá: +1 armour tier
+src/content/types.ts:517:   | "mist-shield" // Khiên Sương
+src/content/types.ts:518:   | "regrowth" // Tái Sinh
+src/content/types.ts:519:   | "thorns" // Gai Ngược
+src/content/types.ts:521:   | "unstoppable" // Xuyên Chặn
+src/content/types.ts:522:   | "trap-proof" // Kháng Bẫy
+src/content/types.ts:523:   | "drain"; // Hút Nạp
+src/content/types.ts:529:   /** Target average load L × 100 (00 §4.4). */
+src/content/types.ts:531:   /** Short peak cap × 100 (00 §4.4). */
+src/content/types.ts:549:   /** Bạch Long fights (shield, gale, assist words): false while he only guides (00 D21). */
+src/content/types.ts:571:   /** Carry strip (Bộ Mang Theo), keys 1…9 in this order (03 §0.1 rule 5). */
+src/content/types.ts:592:   | "seal" // Ấn Phá
+src/content/types.ts:594:   | "interrupt" // Từ Ngắt
+src/content/types.ts:595:   | "urgent" // Từ Khẩn → Long Hống
+src/content/types.ts:596:   | "skill" // Chữ Chiêu
+src/content/types.ts:597:   | "assist" // Từ Trợ
+src/content/types.ts:598:   | "trigger" // Từ Kích
+src/content/types.ts:600:   | "boss-seal" // Cụm Ấn
+src/content/types.ts:649:   /** Prep: words typed right in Học trước (01 §6.5); gold goes through the sim so replays match. */
+src/content/types.ts:651:   /** Break: one Thẻ Ôn answer (01 §6.5); right gives gold and XP. */
+src/content/types.ts:656: /** Run phases: prep (Bày binh) → warning (Báo đợt 6 s) → wave → break → … → victory | defeat. */
+src/content/types.ts:684:   | "steadfast" // Vững: immune to hard control
+src/content/types.ts:703:       /** Enemy warnings are red; ours (Thiên Hỏa) pale orange (05 §6). */
+src/content/types.ts:726:       /** Which attack of the source dealt it, on foes (a Phun Lửa burn is "breath"); the balance report splits damage by it. */
+src/content/types.ts:780:   /** A general's aura ring turns on or off (spawn, Ấn Phá, silence, death); members are read from world.auras each frame. */
+src/content/types.ts:783:    * G01's Cắm Cờ (02 §3.2): "windup" while the general stands 1 s (banner −1),
+src/content/types.ts:797:   /** Héo lan (BALANCE.md §5): this beat's seep into the Fire Dragon and where it came from (foes standing near), metres. */
+src/kit/README.md:1: # src/kit — chép từ `shared/game-kit`
+src/kit/README.md:3: Thư mục này do `node scripts/sync-game-kit.mjs --target games/<id>` ở repo cha tạo ra.
+src/kit/README.md:5: - **Không sửa tay.** Mọi file được kiểm sha256 theo `kit-manifest.json`.
+src/kit/README.md:6: - `node src/kit/verify-kit.mjs` báo lỗi khi một file khác bản kê. Lệnh `check` của game chạy nó.
+src/kit/README.md:7: - Muốn đổi kit: sửa ở `shared/game-kit`, chạy `pnpm kit:test`, rồi `pnpm kit:sync --target games/<id>`.
+src/kit/README.md:8: - Chọn module trong `kit.config.json` của game.
+src/kit/balance/bands.ts:23: export const MODE_LABELS: { readonly [M in BandMode]: string } = { relax: "Thư giãn", balanced: "Cân bằng", challenge: "Thử thách" };
+src/kit/balance/bands.ts:25:   win: "Thắng",
+src/kit/balance/bands.ts:26:   s: "Biên S",
+src/kit/balance/bands.ts:27:   p: "Áp lực P",
+src/kit/balance/bands.ts:28:   i: "Nhàn I",
+src/kit/balance/bands.ts:29:   o: "Ngộp O",
+src/kit/balance/bands.ts:30:   n: "Gần thua N",
+src/kit/balance/bands.ts:31:   q: "Quãng Q",
+src/kit/balance/director.ts:4:  * 20 s window, works out a tension τ against the mode's band, and after 3 low
+src/kit/balance/director.ts:77:   /** τ that triggered the step, ‰ (> 0 too hot, < 0 too calm). */
+src/kit/balance/director.ts:102:  * τ in ‰: how far the window sits outside the band. Too hot (> 0): P above
+src/kit/balance/flow.ts:6:  * sliding window (4 × 300 ticks = 20 s) for the pace director and over the
+src/kit/balance/flow.ts:36:   /** Buckets in the window: 4 × 300 = 20 s at 60 Hz. */
+src/kit/balance/flow.ts:40:   /** This many dropped locks within `abandonTicks` is overload ("bỏ khóa liên tục"). */
+src/kit/balance/flow.ts:85:   /** Share of damage not done by typing ("phần phe ta"); null when the game reports no damage. */
+src/kit/balance/gates.ts:3:  * Balance gates B1–B9 (BALANCE.md §7). A game runs its bot × mode × seed
+src/kit/balance/gates.ts:87:   B1: "Cùng vùng cuốn",
+src/kit/balance/gates.ts:88:   B2: "Không quá dễ",
+src/kit/balance/gates.ts:89:   B3: "Không quá khó",
+src/kit/balance/gates.ts:90:   B4: "Chuẩn thắng ẩu",
+src/kit/balance/gates.ts:91:   B5: "Gõ là sức chính",
+src/kit/balance/gates.ts:92:   B6: "Chiến thuật có nghĩa",
+src/kit/balance/gates.ts:93:   B7: "Bộ điều nhịp nhẹ tay",
+src/kit/balance/gates.ts:94:   B8: "Học không bị lấn",
+src/kit/balance/gates.ts:95:   B9: "Khớp người thật",
+src/kit/balance/gates.ts:146:     threshold: off.length === 0 ? "trong dải" : "lệch: " + off.map((entry) => METRIC_LABELS[entry.metric] + " " + (entry.verdict === "below" ? "thấp" : entry.verdict === "above" ? "cao" : "thiếu")).join(", "),
+src/kit/balance/gates.ts:159:     if (row === undefined) missing.push(`${bot} · ${MODE_LABELS[mode]}${director ? "" : " · tắt nhịp"}`);
+src/kit/balance/gates.ts:172:         checks.push({ label: row.bot, measured: `S ${pct(row.s)}, I ${pct(row.i)}`, threshold: "không đồng thời S ≥ 90 % và I ≥ 20 %", pass: !(row.s >= 900 && row.i >= 200) });
+src/kit/balance/gates.ts:178:       if (novice !== undefined) checks.push({ label: "novice · Cân bằng", measured: "thắng " + pct(novice.win), threshold: "≥ 70 %", pass: novice.win >= 700 });
+src/kit/balance/gates.ts:179:       if (child !== undefined) checks.push({ label: "child · Thư giãn", measured: "thắng " + pct(child.win), threshold: "≥ 85 %", pass: child.win >= 850 });
+src/kit/balance/gates.ts:186:       if (steady !== undefined && sloppy !== undefined) checks.push({ label: "steady vs sloppy", measured: `S ${pct(steady.s)} vs ${pct(sloppy.s)}`, threshold: "S chậm chắc > S ẩu", pass: steady.s > sloppy.s });
+src/kit/balance/gates.ts:189:           checks.push({ label: "standard vs sloppy", measured: `hạ quái ${standard.killSeconds.toFixed(2)} s vs ${sloppy.killSeconds.toFixed(2)} s`, threshold: "chuẩn nhanh hơn", pass: standard.killSeconds < sloppy.killSeconds });
+src/kit/balance/gates.ts:191:           checks.push({ label: "standard vs sloppy", measured: `Q ${pct(standard.q)} vs ${pct(sloppy.q)}`, threshold: "chuẩn hạ sớm hơn (Q thấp hơn)", pass: standard.q < sloppy.q });
+src/kit/balance/gates.ts:192:         } else missing.push("standard/sloppy · thời gian hạ quái hoặc Q");
+src/kit/balance/gates.ts:202:         if (row !== undefined) checks.push({ label: "no-type · " + MODE_LABELS[mode], measured: "thắng " + pct(row.win), threshold: "≤ " + pct(maxWin), pass: row.win <= maxWin });
+src/kit/balance/gates.ts:212:           checks.push({ label: MODE_LABELS[mode], measured: `thắng ${pct(high.win)} vs ${pct(low.win)}`, threshold: "Tốt hơn Kém ≥ 10 điểm %", pass: high.win - low.win >= 100 });
+src/kit/balance/gates.ts:223:         checks.push({ label, measured: `${row.stepsPerWave.toFixed(2)} bậc/đợt, khoảng sinh ${pct(row.spawnMin)}–${pct(row.spawnMax)}`, threshold: `≤ ${maxSteps} bậc/đợt, trong ±${pct(cap)}`, pass: row.stepsPerWave <= maxSteps && row.spawnMin >= 1000 - cap && row.spawnMax <= 1000 + cap });
+src/kit/balance/gates.ts:225:       if (checks.length === 0) missing.push("nhật ký bộ điều nhịp");
+src/kit/balance/gates.ts:227:       if (off !== undefined) checks.push(inBandChecks(off, bands.balanced, "standard · tắt nhịp"));
+src/kit/balance/gates.ts:231:       for (const row of all.filter((entry) => entry.learnOk !== null)) checks.push({ label: `${row.bot} · ${MODE_LABELS[row.mode]}`, measured: row.learnOk ? "đạt" : "trượt", threshold: "cổng học của game", pass: row.learnOk === true });
+src/kit/balance/gates.ts:232:       if (checks.length === 0) missing.push("cổng học của game");
+src/kit/balance/gates.ts:247:         checks.push({ label: match.label, measured: measured.join(", "), threshold: off.length === 0 ? `lệch ≤ ${Math.round(tolerance * 100)} %` : "lệch: " + off.join(", "), pass: off.length === 0 });
+src/kit/balance/gates.ts:249:       if (checks.length === 0) missing.push("buổi chơi thử của người thật");
+src/kit/balance/gates.ts:260: const STATUS_TEXT: { readonly [S in GateStatus]: string } = { pass: "ĐẠT", fail: "TRƯỢT", skip: "THIẾU SỐ" };
+src/kit/balance/gates.ts:265:   const lines = ["| # | Cổng | Kết quả | Số đo |", "|---|---|---|---|"];
+src/kit/balance/gates.ts:268:     if (row.missing.length > 0) parts.push("thiếu: " + row.missing.join(", "));
+src/kit/balance/math.ts:4:  * + − × ÷ (Math.exp and Math.log may differ in the last bit between engines),
+src/kit/balance/pace.ts:19:  * E_eff = E × (0.6 + 0.4·a²) × (1 − 0.5·CV), held in [0.7E, E].
+src/kit/balance/pace.ts:20:  * In-session fatigue first lowers E itself: E × (1 − min(fatigue, 0.15)).
+src/kit/balance/pace.ts:29: /** C(E) = 60 / (0.45 + 12·(ℓ̄ + 1)/(E·d)) words a minute (dragon-hold 00 §4.3). */
+src/kit/balance/pace.ts:47: /** What the game supplies for k: ℓ̄ for this E, d, and its reference capacity C_ref. */
+src/kit/balance/pace.ts:52: /** Dragonhold's reference: 35 WPM, ℓ̄ 4.5, d 0.86 → ≈ 22.7 words a minute. */
+src/kit/balance/pace.ts:55: /** k = clamp(C(E_eff)/C_ref; 0.75; 1.30), rounded to 1/1000. Spawn gaps and wave clocks × 1/k. */
+src/kit/balance/pace.ts:82: /** Telegraph time × 0.85–1.5 from telegraph reflex: 0.35 → 1.5, 0.75 (default) → 1.0, 0.95 → 0.85, linear between. */
+src/kit/balance/pace.ts:110:   rest: "Tay bạn đang chậm dần: nghỉ vài phút rồi chơi tiếp nhé.",
+src/kit/balance/pace.ts:111:   "slow-down": "Bạn gõ nhanh nhưng hay sai: chậm lại một nhịp sẽ được Hoàn hảo nhiều hơn.",
+src/kit/balance/pace.ts:112:   accuracy: "Gõ chắc từng chữ trước, tốc độ sẽ tự lên.",
+src/kit/balance/pace.ts:113:   steady: "Nhịp gõ chưa đều: giữ một tốc độ vừa phải cho mọi từ.",
+src/kit/balance/pace.ts:114:   "new-words": "Từ mới còn lạ: đọc nghĩa và nghe phát âm trước khi gõ.",
+src/kit/balance/pace.ts:115:   crowd: "Khi đông quái, chọn một từ và gõ dứt điểm rồi mới sang từ khác.",
+src/kit/balance/pace.ts:116:   "keep-going": "Bạn đang tiến bộ đều. Giữ phong độ!",
+src/kit/balance/profile.ts:203: /** Defaults blended into measurements by confidence (BALANCE.md §2: "trộn dần sang số đo"). */
+src/kit/balance/typist.ts:84: /** BALANCE.md §6 "Bộ bot chuẩn". "Không gõ" has no a or CV: it never types (1 and 0 are placeholders). */
+src/kit/balance/typist.ts:86:   { id: "child", label: "Trẻ em", represents: "Hồ sơ trẻ em", wpm: 15, accuracy: 0.88, cv: 0.4, tactics: "poor", backspace: 0.7, abandon: 0.05, crowdDrop: 0.4, lookAway: [2.5, 5], fatigue: 0.08 },
+src/kit/balance/typist.ts:87:   { id: "novice", label: "Mới", represents: "Người mới tập gõ", wpm: 25, accuracy: 0.92, cv: 0.35, tactics: "fair", backspace: 0.85, abandon: 0.04, crowdDrop: 0.3, lookAway: [2, 4], fatigue: 0.05 },
+src/kit/balance/typist.ts:88:   { id: "steady", label: "Chậm chắc", represents: "Gõ chậm nhưng chuẩn", wpm: 25, accuracy: 0.99, cv: 0.2, tactics: "fair", backspace: 0.95, abandon: 0.01, crowdDrop: 0.25, lookAway: [1.5, 3], fatigue: 0.03 },
+src/kit/balance/typist.ts:89:   { id: "standard", label: "Chuẩn", represents: "Người chơi tham chiếu", wpm: 35, accuracy: 0.95, cv: 0.25, tactics: "fair", backspace: 0.9, abandon: 0.02, crowdDrop: 0.2, lookAway: [1.2, 2.5], fatigue: 0.03 },
+src/kit/balance/typist.ts:90:   { id: "skilled", label: "Khá", represents: "", wpm: 50, accuracy: 0.96, cv: 0.2, tactics: "good", backspace: 0.9, abandon: 0.02, crowdDrop: 0.15, lookAway: [1, 2], fatigue: 0.02 },
+src/kit/balance/typist.ts:91:   { id: "sloppy", label: "Ẩu", represents: "Gõ nhanh nhưng ẩu", wpm: 50, accuracy: 0.85, cv: 0.35, tactics: "fair", backspace: 0.6, abandon: 0.06, crowdDrop: 0.25, lookAway: [0.8, 1.6], fatigue: 0.04 },
+src/kit/balance/typist.ts:92:   { id: "fast", label: "Nhanh", represents: "Người gõ giỏi", wpm: 70, accuracy: 0.97, cv: 0.15, tactics: "good", backspace: 0.9, abandon: 0.01, crowdDrop: 0.1, lookAway: [0.6, 1.2], fatigue: 0.02 },
+src/kit/balance/typist.ts:93:   { id: "no-type", label: "Không gõ", represents: "Kiểm \"gõ là sức chính\"", wpm: 0, accuracy: 1, cv: 0, tactics: "good", backspace: 0, abandon: 0, crowdDrop: 0, lookAway: [1, 2], fatigue: 0 },
+src/kit/balance/typist.ts:94:   { id: "type-only", label: "Chỉ gõ", represents: "Kiểm \"hỗ trợ cần thiết\"", wpm: 35, accuracy: 0.95, cv: 0.25, tactics: "none", backspace: 0.9, abandon: 0.02, crowdDrop: 0.2, lookAway: [1.2, 2.5], fatigue: 0.03 },
+src/kit/feedback/index.ts:1: // Kit module feedback/: Sinh Tồn S0's combat feedback (feat/survival-s0 src/feedback) with a per-game profile (ship, dragon, td).
+src/kit/feedback/numbers.ts:9:  * (0.3 s) and show "×N"; a number flies along its blow;
+src/kit/feedback/numbers.ts:76:   /** Text shown for number i (digits, then "×N" for rolled-up ticks), kept until it changes. */
+src/kit/feedback/numbers.ts:83:     this.labels[i] = this.style[i] === STYLE.tick && this.count[i]! > 1 ? digits + "×" + this.count[i] : digits;
+src/kit/feedback/numbers.ts:115:     // Rows: full-size glyphs start at the number's top (y − px / 2); a "×N" tail is smaller and inside them.
+src/kit/feedback/numbers.ts:351:  * own row, far enough below that its accents (À, Ả) stay out of the digits.
+src/kit/feedback/numbers.ts:358:   glyphs: "0123456789×",
+src/kit/feedback/numbers.ts:602:   /** Writes the field's glyphs for a view `width` × `height` CSS px. */
+src/kit/feedback/numbers.ts:625:       const times = text.indexOf("×");
+src/kit/feedback/numbers.ts:629:         // The glyph's middle, as it always was: the middle of the old quad (advance × 1.4, from 0.2 advance left of x).
+src/kit/feedback/profiles.ts:1: // Source: new for the kit: one feedback profile per game (ship: Sinh Tồn S0's numbers; dragon: dragon-hold 05 §5, §7.2; td: a calmer start)
+src/kit/feedback/profiles.ts:4:  * modules used to keep as constants. `ship` is Sinh Tồn S0's numbers; the
+src/kit/feedback/profiles.ts:51:   numbers: { mergeS: 0.15, tickMergeS: 0.3, crowdMergeS: 0.3, colors: ["#fff4e2", "#ffc93a", "#d9fffb", "#ffd9a8"], label: "HOÀN HẢO", labelColor: "#5ff5e6" },
+src/kit/feedback/profiles.ts:72: /** Lời Gọi (TD): a calm top-down view: stops only from T3 and shorter, a smaller shake, shards gone sooner. */
+src/kit/feedback/tiers.ts:17:   /** Damage number: size (× the base), seconds shown, pop (scale on arrival); null: none. */
+src/kit/feedback/tiers.ts:32: /** Sinh Tồn S0's table: the "ship" profile, and the base of the others. */
+src/kit/feedback/trauma.ts:67:     // circle (each axis reaches 1, and both at once would be √2 × maxPx).
+src/kit/input/keys.ts:10:  *    the 2D game does (src/main.ts keydown), so a press still composing "â"
+src/kit/input/keys.ts:14:  *    Backspace and the accented letter instead ("ô", "í", "ơ"). That key never
+src/kit/input/keys.ts:42: // Latin letters with Vietnamese marks, and đ, in both cases.
+src/kit/input/keys.ts:45:     "àáạảãâầấậẩẫăằắặẳẵ",
+src/kit/input/keys.ts:46:     "èéẹẻẽêềếệểễ",
+src/kit/input/keys.ts:47:     "ìíịỉĩ",
+src/kit/input/keys.ts:48:     "òóọỏõôồốộổỗơờớợởỡ",
+src/kit/input/keys.ts:49:     "ùúụủũưừứựửữ",
+src/kit/input/keys.ts:50:     "ỳýỵỷỹ",
+src/kit/input/keys.ts:51:     "đ",
+src/kit/speech/speech.ts:128:         speechNotice("Thiết bị không có giọng đọc tiếng Anh");
+src/kit/typing/budget.ts:7:  *   K_enemy = max(enemyMin; ⌈enemyPct % × N_max⌉)   kept for enemies, `urgent` of them for urgent ones
+src/kit/typing/config.ts:45: /** TD 6.4's word life L_w = clamp(base + perChar·(len + 1)/(E·d); min; max) × k. */
+src/kit/typing/config.ts:65:   /** t_exp = perChar × (len − 1) / (E × d) seconds. */
+src/kit/typing/picker.ts:37:  * (−1 none): returns word × 4 + tier, or −1 when none fits (a letter jam).
+src/kit/typing/scorer.ts:10:  *     L_w = clamp(base + perChar·(len + 1)/(E·d); min; max) × k
+src/kit/typing/scorer.ts:27: /** L_w × `k` (a mode's k_L), at least `floor` seconds. */
+src/kit/typing/scorer.ts:72:     // t_k ≤ flashPct % · perChar·(len − 1)/(E·d), both sides × 100·E·d·1000 to stay in integers.
+src/kit/typing/tempo.ts:43: /** C(E) = 60 / (react + perChar·(ℓ̄ + 1)/(E·d)) words a minute (dragon-hold 00 §4.3: ≈ 22.7 at E 35, ℓ̄ 4.5, d 0.86). */
+src/kit/typing/tempo.ts:47: /** k_E = clamp(C(E)/reference; min; max): spawn gaps × 1/k_E (00 §4.4, only ever slower). */
+src/sim/auras.ts:3:  * at most 2 auras per foe; Ấn Phá and silence turn them off for a while.
+src/sim/auras.ts:4:  * A planted banner (Cắm Cờ, boss.ts) is a "damage" source of its own.
+src/sim/auras.ts:30:   /** Per foe slot × AURA_BITS.length: the strongest value in % of each kind it gets. */
+src/sim/auras.ts:60: /** True while `general`'s auras run: not sealed (Ấn Phá), not silenced (CÂM). */
+src/sim/auras.ts:144: /** Ấn Phá typed: auras of `general` off for the seal's time, a short stagger (01 §3.6). A repeat within the same seal is ignored. */
+src/sim/boss.ts:2:  * Scripted skills of generals and bosses (02 §3–4). M0: G01's Cắm Cờ, a
+src/sim/boss.ts:5:  * wind-up breaks on stun, flinch, knockback or Long Hống), plants when
+src/sim/boss.ts:60: /** A general's Cắm Cờ wind-up broke (stun, knockback, Long Hống): no banner, half the cooldown. */
+src/sim/combat.ts:6:  * skills Phun Lửa, Thiên Hỏa, Long Hống, Viêm Đế; rage (Long Nộ); Dragon
+src/sim/combat.ts:44:   /** Chữ Chiêu: the skill it casts (null: none). */
+src/sim/combat.ts:48: /** Thiên Hỏa on its way down (0.8 s). */
+src/sim/combat.ts:60:   /** Long Nộ × 10 (01 §2.4). */
+src/sim/combat.ts:63:   /** Viêm Đế active until (−1: off). */
+src/sim/combat.ts:76:   /** Ticks towards the next Héo beat (PRESSURE), and the Héo not yet dealt, in thousandths of HP. */
+src/sim/combat.ts:95: /** Fire Dragon power P of the stage (P_ref = 100 × g(c), 00 §4.1), × 1000. */
+src/sim/combat.ts:97: /** One W in HP: 90 × g(c) (00 §4.1). */
+src/sim/combat.ts:99: /** D = P × M_q × M_c × (1 + Σ) (00 §4.2). */
+src/sim/combat.ts:104: /** A foe's blow on our side: × g(c), × difficulty, × its damage auras (banner). */
+src/sim/combat.ts:161:     // Phá giáp halves armour (00 §4.2).
+src/sim/combat.ts:172:   // The blow's strength before it is cut to the HP left (event only: a finishing word showed "HOÀN HẢO 1").
+src/sim/combat.ts:214:   // Long Nộ: +1 for every 4 % of max HP lost (01 §2.4).
+src/sim/combat.ts:327: /** A trap within `range` u that a fire arrow may hit (03 §7: recharging traps only; Gai Chông runs all the time). */
+src/sim/combat.ts:364:       // E01 Ngòi Độc (02 §2.2): a unit stung with the skill ready is poisoned.
+src/sim/combat.ts:377:       // E11 Tên Lửa (02 §2.2): the trap stays off 3 s more.
+src/sim/combat.ts:414:  * Héo lan (PRESSURE, BALANCE.md §5): every beat in a wave, each target left
+src/sim/combat.ts:415:  * waiting in the word zone seeps Héo into the Fire Dragon. A target waits
+src/sim/combat.ts:419:  * second, `ringX10` inside Vòng Nguy (10 m), `heldPct` of the zone rate while
+src/sim/combat.ts:421:  * strongest); true damage, × g(c), × the difficulty's Héo, × its damage auras, × the
+src/sim/combat.ts:422:  * √ of the pace k, × the wave's ramp, a running total so fractions add up.
+src/sim/combat.ts:453:     // Tenths of HP a second × the beat's ms × g(c) × difficulty × auras, in thousandths of HP.
+src/sim/combat.ts:456:   // The Héo thickens with the waiting words, up to `maxTargets` of them (the strongest): falling behind costs, it never snowballs.
+src/sim/combat.ts:460:   // × √k: a slower player's foes come further apart (less to seep) but our side, which works by the clock, has
+src/sim/combat.ts:462:   // × the wave's ramp: the Héo thickens over the stage, light while our side is still small, heaviest in the last waves.
+src/sim/combat.ts:473: /** Foes' wind-ups (telegraph events) and strikes on their targets (01 §4.2), and Héo lan near the dais. E19 strikes through its charge (movement). */
+src/sim/combat.ts:498:     // E11 Tên Lửa: with the skill ready, the next arrow goes to a trap in range.
+src/sim/combat.ts:585:     // A small foe always falls to one word that is not Ẩu (00 §4.6).
+src/sim/combat.ts:588:     // Cộng Hưởng (03 §10.2): word hits cut the recharge of traps around the foe.
+src/sim/combat.ts:590:     // Lửa Chữ (01 §2.4): a Chớp word burns 0.2 P a second for 3 s.
+src/sim/combat.ts:598:   // Viêm Đế: every word also fires a beam down the lane (01 §2.4).
+src/sim/combat.ts:612:  * One area blow (Thiên Hỏa, Phun Lửa, Viêm Đế's finale) on `victims`, nearest
+src/sim/combat.ts:639: /** Viêm Đế's beam: 2 × 22 m from the dais along `lane`, 1.2 P word damage to every foe in it. */
+src/sim/combat.ts:660: /** The skill a Chữ Chiêu casts (00 §5): the ultimate when rage is full, else the ready skill with the longest cooldown. */
+src/sim/combat.ts:674: /** Alt + 1/2/5 (and the urgent word's Long Hống); `at` in metres, else the default target (01 §2.4). `bonusPct`: Chữ Chiêu +10 %. */
+src/sim/combat.ts:714: /** Phun Lửa (01 §2.4): 60° cone, 12 m from the dais, magic, burn 3 s; default: the lane with the most foe HP within 12 m. False: no foe in reach. */
+src/sim/combat.ts:758:  * Thiên Hỏa (01 §2.4): lands 0.8 s later, 4 m, magic, stun 1 s; default: the
+src/sim/combat.ts:812: /** Long Hống (01 §3.6): 3 P word damage within 10 m, knockback 6 m, every cast interrupted. */
+src/sim/combat.ts:828: /** Viêm Đế ends with Spit_Big: 4 P magic within 7 m (01 §2.4). */
+src/sim/combat.ts:837: /** Strikes and skill impacts due this tick; Viêm Đế's end; rage over time; skill-ready events. */
+src/sim/combat.ts:913: /** Adds rage × 10 with chain-tier bonus, capped at 100 (01 §2.4); emits `rage`. */
+src/sim/director.ts:3:  * tick the kit's FlowMeter reads the world (a foe in Vòng Nguy, a pounce,
+src/sim/director.ts:8:  * defeat one Bình Máu dropped on the dais (heal over 2 s), once a wave. It
+src/sim/director.ts:9:  * steers to the difficulty's mode (Dễ: Thư giãn, Thường: Cân bằng, Khó: Thử
+src/sim/director.ts:10:  * thách) with the idle target raised by the plan's own idle
+src/sim/director.ts:34:  * The director's patience in M0 (BALANCE.md §4.2 "nhẹ tay", B7): a window
+src/sim/director.ts:62: /** Short peaks the director keeps under (00 §4.4 hard cap 1.40 less 0.05 for gate jitter), × 100. */
+src/sim/director.ts:65: /** `wave` with every gap × scale ‰ (what the spawner does with the director's scale). */
+src/sim/director.ts:88:  * chasing idle the plan cannot remove (B7 "nhẹ tay"); P, O and HP keep the
+src/sim/director.ts:89:  * band's own numbers. In Cân bằng that target (30 %) sits 20 points above
+src/sim/director.ts:95:  * 00 D27's proposed bands: BALANCE.md §3 with Cân bằng's I ≤ 20 %, not the
+src/sim/director.ts:99:  * (scripts/balance/report.ts bandGates). Only Cân bằng differs because B1 and
+src/sim/director.ts:100:  * B7 read only Cân bằng. Option a (count only idle stretches ≥ 1 s) changes
+src/sim/director.ts:116: /** The BALANCE.md §3 mode of each difficulty (00 §4.10): Dễ plays as Thư giãn, Thường as Cân bằng, Khó as Thử thách. */
+src/sim/director.ts:136:  * spawn gaps × it, never so short that the wave's planned short peak
+src/sim/director.ts:187:     // A real threat (BALANCE.md §3 P): a foe in Vòng Nguy, a pounce or charge winding up, a blow winding up at our side.
+src/sim/director.ts:225:  * BALANCE.md §4.2 judges the window by P, I, O and the HP margin ("biên
+src/sim/director.ts:226:  * máu"); the kit reads the margin only when it is too low. A window whose
+src/sim/director.ts:261:       // A Bình Máu falls on the dais (BALANCE.md §4.2) for a player who is playing: someone typed within the
+src/sim/economy.ts:3:  * 900 × f_lanes × f_type split 60 % kills (by threat share; a cluster pays
+src/sim/economy.ts:29:   /** Planned threat × 10 of the whole stage, and the threat killed so far (capped at the plan). */
+src/sim/economy.ts:35:   /** Swarm clusters: threat × 10 of members killed, paid when the cluster is gone. */
+src/sim/economy.ts:45: /** Gold threat × 10 of one foe: ĐĐ × 10, elites × 1.6 (00 §4.6). */
+src/sim/economy.ts:53:  * Planned threat × 10 of a stage, the denominator of kill gold: every member
+src/sim/economy.ts:55:  * cluster of `count` heads, escort clusters their minimum), elites × 1.6.
+src/sim/economy.ts:114: /** Leftover gold at the end turns into Vảy Rồng: min(3, floor(left / 100)) (00 §4.9). */
+src/sim/economy.ts:241: /** Per-tick economy: phase hooks of our side (break starts: units rise, houses mend); Giếng Vàng comes later. */
+src/sim/fixed.ts:26: /** round(a × b / c) for integers; c > 0. */
+src/sim/fixed.ts:49:  * half-angle cos = `cosPm` / 1000 and length `range` u (Phun Lửa: 60° cone).
+src/sim/houses.ts:2:  * Magic houses (03 §8): auras on allies, HP 600 (+40 % a level), Đổ Nát at 0
+src/sim/houses.ts:5:  * M0: Lều Thuốc Nam (03 gave 1.5 %; OUR_SIDE tuning 0.3 %) heals max HP a
+src/sim/houses.ts:42: /** Effect × permille at `level` (×1.45, then ×1.35 more). */
+src/sim/houses.ts:49: /** Max HP at `level`: 600 × g(c), +40 % a level (03 §8.1). */
+src/sim/houses.ts:112: /** Damage to a house (foes that break buildings, archers): Đổ Nát at 0; emits `hit`. Returns HP removed. */
+src/sim/houses.ts:118:   // Đổ Nát: off until repaired; its energy stays (03 §10.2).
+src/sim/houses.ts:209:  * gets only the strongest (03 §8: "Hào quang cùng loại không cộng; lấy mạnh
+src/sim/houses.ts:210:  * nhất"). It beats only in a wave: breaks already heal 10 % (00 §4.5), and
+src/sim/houses.ts:211:  * the break's heal cap (20 % with Tổ Ấm or Thư Viện) must not grow by a house
+src/sim/houses.ts:219:     // 0 HP from a blow dealt outside damageHouse is Đổ Nát too.
+src/sim/houses.ts:251:     // Xung: Lều Thuốc Nam heals 10 % at once.
+src/sim/movement.ts:2:  * Foe movement (02 §1.3, §2.2, 01 §2.1, §4.1): walk the lane at speed ×
+src/sim/movement.ts:3:  * slows × auras; stop at a blocker, at the melee ring (6 m), the shooting
+src/sim/movement.ts:54: /** A wind-up the foe was building breaks (stun, knockback, Long Hống); a leap or charge in flight runs on. */
+src/sim/movement.ts:65: /** Knock weight (03 §2.1, §2.3): small and medium 1, big 2, generals 2, giants × 0.25. */
+src/sim/movement.ts:73: /** Pushes `enemy` back along its lane by `distance` u ÷ weight (03 §2.3); never off the lane. */
+src/sim/placement.ts:163: /** Threat of the next wave per lane (×10), from the wave card's groups (03 §4.1 reads the next wave). */
+src/sim/shop.ts:3:  * sell, buy Tim Rồng, Vảy Cứng and potions; in a wave (C1–C5) only
+src/sim/shop.ts:23:   /** Consumables held, by id (2 slots × 3, 03 §6.3). */
+src/sim/shop.ts:25:   /** Tim Rồng and Vảy Cứng bought this run. */
+src/sim/shop.ts:109: /** Base max HP of the Fire Dragon at this chapter (01 §2.2, ×g(c)). */
+src/sim/shop.ts:112: /** Max HP Tim Rồng has added so far (hero level-ups must keep it when they rescale max HP). */
+src/sim/spawn.ts:72: /** Spawn time scale (BALANCE.md §4.1, §4.2, 00 §4.10): × 1000 / k, × the difficulty's spawn gap, × the pace director's scale. */
+src/sim/spawn.ts:231: /** One foe at its gate on `lane`, HP by W × 90 × g(c) × difficulty (00 §4.1); emits `spawn`. Null at the live cap. */
+src/sim/spawn.ts:249:   // HP (00 §4.1, §4.6, §4.10): swarm and small keep W on every difficulty; elites × 1.6.
+src/sim/status.ts:3:  * under its cap, hard control (stun, root, freeze) shrinks on repeats (×1,
+src/sim/status.ts:4:  * ×0.6, ×0.3) then grants Vững 4 s, burn stacks 3 per source (a breath burn
+src/sim/status.ts:5:  * and a Chớp word burn tick apart, each credited to its own source), poison
+src/sim/status.ts:29:   /** Tick it starts; Vững after a third hard control starts when that control ends. */
+src/sim/status.ts:37:   /** Kill source of its damage (a burn from Phun Lửa counts as breath). */
+src/sim/status.ts:118: /** Damage taken × permille: Đánh dấu and vulnerable sources multiply (00 §4.2). */
+src/sim/status.ts:125: /** Armour × permille: Phá giáp halves it (00 §4.2). */
+src/sim/status.ts:210: /** Hard control after diminishing returns and Vững; 0 when resisted. */
+src/sim/status.ts:215:     // The third control still runs; Vững follows it.
+src/sim/status.ts:229:     // Vững 4 s from the end of this third control (03 §2.3).
+src/sim/status.ts:286: /** Removes every entry of `id` (Lửa xóa Ướt, a unit rising); emits the off event if one was on. */
+src/sim/status.ts:302: /** Damage type of a damage-over-time status (03 §2.3: Cháy is P magic, Độc is C true). */
+src/sim/status.ts:361:       // Damage over time on a foe with no named source is the Fire Dragon's (Lửa Chữ, Phun Lửa).
+src/sim/status.ts:407: /** Heals Bạch Long while he stands (no statuses on the guide in M0). */
+src/sim/traps.ts:3:  * air; one shot then recharge, except continuous Gai Chông; auto trigger by
+src/sim/traps.ts:6:  * M0: Gai Chông (strip 4 m: slow 25 %, 8 VL/s), Bom Hạt Thông (3 m, ≥ 3 foes:
+src/sim/traps.ts:7:  * 120 VL, push 2 m, 22 s), Lưới Phóng (post, 10 m: grounds the nearest low
+src/sim/traps.ts:46: /** Main effect × permille at `level` (03 §7.3: ×1.45, then ×1.35 more). */
+src/sim/traps.ts:108: /** Damage of one blow at C-chapter strength: base × g(c) × level, at least 1. */
+src/sim/traps.ts:172: /** A word hit `enemy`: recharging traps whose area holds it lose 0.8 s (1.2 s on Chớp, Hoàn hảo), capped at 50 % a cycle. */
+src/sim/units.ts:9:  * M0: Vệ Binh Rêu (2 slots = 8 quarters, 450 HP, G1, 12 VL / 1.2 s, 14 s).
+src/sim/units.ts:68: /** Stat × permille after `level`, each level multiplying by (100 + pct) % (03 §9.2). */
+src/sim/units.ts:75: /** Max HP at `level`: base × g(c), +40 % a level. */
+src/sim/units.ts:79: /** One blow at `level` with the chain bonus: base × g(c), +25 % a level, at least 1. */
+src/sim/units.ts:354:   // Chain 40+: a 50 shield (× g(c)) on every unit each 10 s (03 §10.4).
+src/sim/waves.ts:2:  * Run flow (01 §1.2, 00 §4.5): prep (Bày binh) → Enter → warning 6 s → wave
+src/sim/waves.ts:93: /** Stars by Fire Dragon HP at the end (01 §5); no Lông Phượng in M0. */
+src/sim/waves.ts:206: /** Typing work W_gõ × 100 of one member (00 §4.4): a cluster counts 1 W, elites × 1.6. */
+src/sim/waves.ts:213: /** One arrival of typing work: ms from the wave start, W × 100, lane, foe and heads. */
+src/sim/waves.ts:232: /** W_gõ × 100 of a wave (00 §4.4). */
+src/sim/waves.ts:235: /** Reference capacity: 22.7 words a minute (00 §4.3), as W × 100 per second. */
+src/sim/waves.ts:238: /** Average load × 100 of a wave: W_gõ / (22.7 × minutes) (00 §4.4). */
+src/sim/waves.ts:245:  * Peak load × 100 of a plan: each arrival's work is typed at the reference
+src/sim/waves.ts:246:  * rate from its time on (W × 60 / 22.7 s, so one foe alone never reads
+src/sim/waves.ts:289: /** Threat × 10 (02 §1.2) of a wave by lane id; a swarm head counts its own threat. */
+src/sim/words.ts:4:  * lock protection 1.2 s, grading (Chớp…Ẩu), the chain, the urgent word, skill
+src/sim/words.ts:79: /** Per foe (by serial): words dealt so far (Ấn Phá every Nth) and its next word's tick (−1: none). */
+src/sim/words.ts:204: /** Threat tier factor × 10 (01 §3.2). */
+src/sim/words.ts:227: /** Threat × 1000 (01 §3.2): 10 / seconds to the dais × tier factor + 6 attacking + 8 casting + 5 marked. */
+src/sim/words.ts:271:  * word × 4 + tier of a new word for kit kind `kind`: a met one not yet seen
+src/sim/words.ts:295: /** A word for `groups` in [lo, hi], else one letter shorter, else any length (01 §3.4 "thiếu từ"); word × 4 + tier or −1. */
+src/sim/words.ts:409:   // A general's last chain word is D4 like Ấn Phá (02 §1.4).
+src/sim/words.ts:618:   // Thầy Rồng (01 §6.7): a new word typed right the first time gives XP and heals the Fire Dragon 2 %.
+src/sim/words.ts:652:   // A lock let go with letters in feeds the pace director's "bỏ khóa" count (BALANCE.md §3 O).
+src/sim/words.ts:832: /** Words a foe carries in all (its chain, 01 §3.5): W rounded up, elites × 1.6; a swarm cluster shares one; a small foe falls to one word (00 §4.6). */
+src/sim/words.ts:845:  * carries), or once it fights (held by a unit, attacking). Thiên Hỏa's
+src/sim/words.ts:864: /** For a general's tag: whether its next two words are Ấn Phá (01 §3.5). */
+src/sim/world.ts:2:  * The Rồng Giữ Ải world and its fixed 60 Hz step. Pure TypeScript: no clock,
+src/sim/world.ts:52:   /** The in-run pace director (BALANCE.md §4.2); default on. Off for fair-score modes and the "Nhịp tự điều" setting. */
+src/sim/world.ts:58:   /** k: spawn gaps × 1000 / kPm (PACE.kMinPm–kMaxPm: 0.75–1.50). */
+src/sim/world.ts:62:   /** T_a of a one-word foe: the word zone in time, in ticks (× the margin). */
+src/sim/world.ts:65:    * Time margin (BALANCE.md §2 factors 3 "Thói sửa lỗi" and 4 "Độ đều: người
+src/sim/world.ts:66:    * không đều được biên an toàn lớn hơn" → biên thời gian), permille: 1000 +
+src/sim/world.ts:67:    * PACE.sloppyMarginX10 / 10 × the chance a word of ℓ̄ letters takes ≥ 2
+src/sim/world.ts:68:    * errors (a Ẩu word, 00 §4.2) at accuracy a + PACE.unevenMarginPct % of CV.
+src/sim/world.ts:69:    * T_a and Héo lan's grace stretch by it.
+src/sim/world.ts:72:   /** One word's time at the player's raw E (C(E), 00 §4.3) × the margin, in ticks: Héo lan's grace per waiting word (PRESSURE). */
+src/sim/world.ts:74:   /** √k × 1000 (Héo lan follows half the pace, combat.ts stepBlight). */
+src/sim/world.ts:104: /** Bạch Long: stands beside the hero as a guide in M0 (00 D21); fights from M1. */
+src/sim/world.ts:265: /** E_eff × 1000 = E × (0.6 + 0.4 a²) × (1 − 0.5 CV), held in [0.7 E, E] (BALANCE.md §4.1); a and CV in permille. */
+src/sim/world.ts:278: /** C(E_eff) in words a minute × 10 (00 §4.3), ℓ̄ by the band of E (word lengths follow E, 01 §3.4). */
+src/sim/world.ts:282:   // C = 60 / (0.45 + 12 (ℓ̄ + 1) / (E_eff d)): seconds a word × 10^6.
+src/sim/world.ts:288:  * Chance × 1000 that a word of ℓ̄ letters (rounded, by E's band, 00 §4.3)
+src/sim/world.ts:289:  * takes ≥ 2 wrong keys when each key is right with `accuracyPm` ‰: a Ẩu word
+src/sim/world.ts:296:   // In millionths: right^n and n × wrong × right^(n−1).
+src/sim/world.ts:434:   stepBoss(world); // 7 general skills (Cắm Cờ), boss phases later
+src/typing/config.ts:2:  * Rồng Giữ Ải typing numbers for kit/typing: TD 1A.6 defaults changed where
+src/typing/deck.ts:117: /** The deck's new words in deck order: the stage's Học trước list (01 §6.5). */
+src/typing/grading.ts:2:  * Grading a finished word and the chain (01 §3.7–3.8, 00 §4.2): Chớp ×1.25,
+src/typing/grading.ts:3:  * Hoàn hảo ×1.10, Tốt ×1.00, Vừa ×0.90, Ẩu ×0.60, then the chain tier's
+src/typing/grading.ts:4:  * M_c up to ×1.16. No random crits anywhere (00 D03). Integers only. Pure.
+src/typing/grading.ts:22:  * `typingTicks` (first key to last), at E = `wpm`: Chớp needs no error and
+src/typing/grading.ts:23:  * t_k ≤ 0.85 t_exp; one error is Tốt from 6 letters, Vừa below; two (three
+src/typing/grading.ts:24:  * for a boss seal cluster) is Ẩu.
+src/typing/grading.ts:40: /** The chain after a word of `grade`: +1 (+2 for special words typed well), Vừa keeps it, Ẩu halves it (01 §3.7–3.8). */
+src/typing/lengths.ts:37:  * Ấn Phá and a general's last word are D4, the urgent column (02 §1.4); `last` marks that last word.
+src/ui/debut-card.ts:2:  * Debut cards (02 §1.5: "loài mới có thẻ góc 3 s … làm gì, khắc chế"): the
+src/ui/debut-card.ts:7:  * a run. Test passes 26–27/10: new foes (Ong Gai, Yêu Rêu Cung, Heo, Sói, G01)
+src/ui/debut-card.ts:8:  * came with only "Heo ×1" on the wave card.
+src/ui/hud.ts:4:  * bottom-left Hỏa Long (HP, shield, armour, level), skill slots Alt + 1/2 with
+src/ui/hud.ts:5:  * cooldowns, the urgent-word Long Hống, consumable slots Alt + 7/8, Long Nộ and
+src/ui/hud.ts:6:  * Viêm Đế (Alt + 5). Bạch Long stands by as a guide (00 D21). DOM, ≤ 10 % of
+src/ui/hud.ts:55: /** Hỏa Long's skills on keys (01 §2.4, 00 §6); Long Hống comes from the urgent word, Viêm Đế from full rage. */
+src/ui/hud.ts:70:   /** Long Nộ 0–100 (one decimal dropped). */
+src/ui/hud.ts:73:   /** Viêm Đế burning now, and its seconds left. */
+src/ui/hud.ts:139: /** M_c of the chain tier as "×1,08" (00 §4.2); empty at tier 0. */
+src/ui/hud.ts:142:   return tier === 0 ? "" : "×" + (CHAIN.mcPm[tier]! / 1000).toFixed(2).replace(".", ",");
+src/ui/hud.ts:439:     // Hỏa Long.
+src/ui/hud.ts:486:     // Long Nộ and Viêm Đế.
+src/ui/learning-frame.ts:4:  * words pinned 2.5 s, others 0.8 s; "Vừa học" line of the last 3 new words.
+src/ui/learning-frame.ts:7:  * Also the two learning panels: Học trước (8 new words before the stage)
+src/ui/learning-frame.ts:8:  * and Thẻ Ôn (≤ 3 questions in a break), 01 §6.5. While one is open it takes
+src/ui/learning-frame.ts:38:   // Whole senses up to the first comma that no longer fits: "yêu, thương, yêu thương" → "yêu, thương"
+src/ui/learning-frame.ts:39:   // (test pass 26/10: the tag read "yêu, thương, yêu thươ…").
+src/ui/learning-frame.ts:64:   /** A typed word's "từ · nghĩa ✓" card. */
+src/ui/learning-frame.ts:78:   /** The last 3 new words typed, newest first ("Vừa học"). */
+src/ui/learning-frame.ts:99:   /** A wave ended: the "word · meaning ✓" card goes, so a Thẻ Ôn question never finds its answer pinned here. */
+src/ui/learning-frame.ts:158: /* Thẻ Ôn: a small card at the top centre under the next-wave card, never over the dais and its pads (05 §4.5). */
+src/ui/learning-frame.ts:201: /** The frame, and a cover for while a learning panel asks: its words and the Vừa học line would give the answers away. */
+src/ui/learning-frame.ts:207: /** What the frame may show while a Học trước or Thẻ Ôn panel is open: nothing (01 §6.5 answers stay hidden). */
+src/ui/learning-frame.ts:332:       // "small (nhỏ) · big (to, lớn)": HTML collapses runs of spaces, so entries need a visible separator.
+src/ui/learning-frame.ts:359: // ── Panels: Học trước and Thẻ Ôn (01 §6.5) ─────────────────────────────────
+src/ui/learning-frame.ts:424: /** Copying a shown word (Học trước): each letter that differs from it is pink, so a slip shows at once. */
+src/ui/learning-frame.ts:429: /** Two Esc presses within this many ms close Học trước; one skips the word on screen. */
+src/ui/learning-frame.ts:436:  * Học trước (01 §6.5): the stage's new words one by one (word, IPA, meaning,
+src/ui/learning-frame.ts:550: /** A Thẻ Ôn question: hear then type, or read the meaning then type (01 §6.5; choose-the-meaning comes from chapter 3). */
+src/ui/learning-frame.ts:556:  * Thẻ Ôn (01 §6.5): up to 3 questions from the wave just played. A right
+src/ui/placement-ui.ts:59: /** The Dragon's keep-out on screen: the dais rim (RINGS.daisMm) and up to Hỏa Long's head (2.5 m hover, 05 §6.1). */
+src/ui/placement-ui.ts:423:    * Hỏa Long on the dais, on screen: the box round the dais rim and the Dragon
+src/ui/placement-ui.ts:550:     // Lanes and slots on screen, for the floating cards that must not cover them (wave card, Thẻ Ôn).
+src/ui/results.ts:3:  * defeat, gold, accuracy, new words learned, and the Sổ Từ Ải list (words
+src/ui/results.ts:22:    * when there is no offer now (already Dễ, or not two defeats yet).
+src/ui/results.ts:44:   /** Wrong keys over all finishes; finishes with Ẩu; finishes with a hint. */
+src/ui/results.ts:56:  * Status in Sổ Từ Ải (01 §6.5: mới học, gõ sai, cần ôn). A new word is "mới
+src/ui/results.ts:57:  * học" only once it was typed with no wrong key (the summary's "Từ mới đã
+src/ui/results.ts:58:  * học" counts the same); a new word met but never typed clean is "fresh"
+src/ui/results.ts:59:  * (test pass 27/10: the defeat screen called words never typed "Mới học").
+src/ui/results.ts:108:   /** Sổ Từ Ải order: new, mistyped, to review, then the rest; alphabetical inside. */
+src/ui/results.ts:133:   /** HP the Fire Dragon lost to Héo lan's seep and to foes' blows (the defeat line names the bigger one). */
+src/ui/results.ts:137: /** HP lost by cause, read from `hit` events on the Fire Dragon: Héo lan comes from the hero itself (combat stepBlight). */
+src/ui/results.ts:181:  * Why the run was lost, for the line under the title: hardly any typing, Héo
+src/ui/results.ts:184:  * 99 % of the Dragon's losses in waves 5–10 were Héo lan and a run with no
+src/ui/results.ts:192: /** The line under the stars (06 §6: "Giữ máu Hỏa Long để có 3 sao"). */
+src/ui/screen-zones.ts:5:  * its overlay root each frame; the wave card and Thẻ Ôn read them and pick
+src/ui/shop-strip.ts:2:  * Carry strip (Bộ Mang Theo, 03 §4.2, 05 §4.5): bottom-right item cells with
+src/ui/shop-strip.ts:3:  * icon, price and number key (1…9 in the stage's carry order, then Tim Rồng
+src/ui/shop-strip.ts:4:  * and Vảy Cứng in breaks). Placeables enter placement mode; Bình Máu Nhỏ,
+src/ui/shop-strip.ts:5:  * Tim Rồng and Vảy Cứng are bought through the sink. In prep and breaks the
+src/ui/shop-strip.ts:35:   /** The same in a few letters for the cell ("Thiếu 20", "Hết ô"). */
+src/ui/shop-strip.ts:37:   /** State in words ("Có 2", "Đã mua 1/3") and as a corner badge ("2", "1/3"). */
+src/ui/shop-strip.ts:213:       // "Bấm 6 lần nữa" read as "press six more times" (test pass 26/10): the key goes in a chip, pressed once again.
+src/ui/skin.ts:127: // ── Stand-in icons (inline SVG, 24 × 24; colours by CSS `color` unless fixed) ──
+src/ui/styles/dh.css:1: /* Rồng Giữ Ải UI skin: carved wood, dark bark, moss edges (DESIGN.md §1, 05 §4).
+src/ui/styles/dh.css:5:   /* 05 §4.1: supporting text (key chips, labels, badges) stays ≥ 11 px even at 1280 × 720 (--ui 0.8). */
+src/ui/styles/dh.css:17:   /* Bầy Héo mark: ash grey with blight-yellow cracks (00 D02); enemy marks only. */
+src/ui/styles/dh.css:19:   /* Our side: Hỏa Long peach fire, Bạch Long cream, houses pale blue (05 §2.2). */
+src/ui/styles/dh.css:395: /* Two lines at every size: "Bạch Long" and "dẫn đường" each stay whole (test pass 26/10: four lines at 720p). */
+src/ui/styles/dh.css:400: /* At 720p the column is ~39 px: "dẫn đường" (~54 px) ran under the ⌥1 slot; the tooltip keeps the full line. */
+src/ui/styles/dh.css:549: /* The urgent word's chip ("Từ Khẩn") is wider than a slot: room on its left keeps it off the ⌥2 chip (test pass 26/10, 720p). */
+src/ui/styles/dh.css:797:   /* Be Vietnam Pro 700: × is 396 units high, digits up to 760; 1.4 gives 73 %. */
+src/ui/styles/dh.css:953: /* ── Carry strip (Bộ Mang Theo, 03 §4.2, 05 §4.5) ─────────────────────── */
+src/ui/styles/dh.css:1054: /* "Thiếu 28" may break after its word at 720p: the 11 px floor is wider than the cell (gate round 2). */
+src/ui/styles/dh.css:1107: /* In a wave the strip folds to icons and keys (05 §4.2: 420 × 56). */
+src/ui/tags.ts:35: /** A tag to place: anchored by its bottom centre at (ax, ay), size w × h, higher priority placed first. */
+src/ui/tags.ts:43:   /** Size with the frame shrunk (measured); default w and h × the shrink factor's half. */
+src/ui/tags.ts:117:    * given was dh-crowd's 6 × 6 grid, which read 33–34 % as 42 % and 75 % as 33 %; it now measures areas.)
+src/ui/tags.ts:472: /** Small inline icons (24 × 24 paths), drawn in currentColor. */
+src/ui/tags.ts:611:   /** Héo lan seeped from this tag's foe: the frame flashes until then. */
+src/ui/tags.ts:631:    * True while a learning card asks for a word (Thẻ Ôn, Học trước): the layer hides, and leaving
+src/ui/tags.ts:882:       // "j": the letter just typed pops up and glows once (05 §4.3 "nảy"; test passes 26–27/10: only its colour changed).
+src/ui/tags.ts:945:           // Héo lan seeps from these foes: their tags flash so the player sees which words cost HP (test pass 27/10).
+src/ui/ui-preview.ts:152:   { text: "bridge", vi: "cây cầu", ipa: "/brɪdʒ/", group: "new" },
+src/ui/ui-preview.ts:153:   { text: "honey", vi: "mật ong", ipa: "/ˈhʌni/", group: "new" },
+src/ui/ui-preview.ts:154:   { text: "valley", vi: "thung lũng", ipa: "/ˈvæli/", group: "new" },
+src/ui/ui-preview.ts:155:   { text: "forest", vi: "khu rừng", ipa: "/ˈfɔːrɪst/", group: "learning" },
+src/ui/ui-preview.ts:156:   { text: "river", vi: "con sông", ipa: "/ˈrɪvər/", group: "due" },
+src/ui/ui-preview.ts:157:   { text: "stone", vi: "hòn đá", ipa: "/stoʊn/", group: "known" },
+src/ui/ui-preview.ts:158:   { text: "arrow", vi: "mũi tên", ipa: "/ˈæroʊ/", group: "learning" },
+src/ui/ui-preview.ts:159:   { text: "shield", vi: "cái khiên", ipa: "/ʃiːld/", group: "due" },
+src/ui/ui-preview.ts:160:   { text: "banner", vi: "lá cờ", ipa: "/ˈbænər/", group: "learning" },
+src/ui/ui-preview.ts:161:   { text: "wolf", vi: "con sói", ipa: "/wʊlf/", group: "known" },
+src/ui/ui-preview.ts:162:   { text: "leaf", vi: "chiếc lá", ipa: "/liːf/", group: "known" },
+src/ui/ui-preview.ts:163:   { text: "dragon", vi: "con rồng", ipa: "/ˈdræɡən/", group: "known" },
+src/ui/ui-preview.ts:164:   { text: "village", vi: "ngôi làng", ipa: "/ˈvɪlɪdʒ/", group: "due" },
+src/ui/ui-preview.ts:165:   { text: "thunder", vi: "sấm", ipa: "/ˈθʌndər/", group: "new" },
+src/ui/ui-preview.ts:216:     `<div class="${LEARNING_FRAME_CLASSES.ipa}">/ˈfɔːrɪst/</div><div class="${LEARNING_FRAME_CLASSES.meaning}">khu rừng</div>` +
+src/ui/ui-preview.ts:487:         // The break after wave 5: the card shows wave 6, the breather (its "Đợt nhẹ" tag).
+src/ui/wave-card.ts:78:  * "Blight Wolf"; owner 27/10, English game nouns); a general is "Tướng".
+src/ui/wave-card.ts:125: /** The wave-start banner line (05 §4.6): "Đợt 7 · 2 đường · có tướng địch"; the last wave is "Đợt cuối" (test pass 27/10). */
+src/ui/wave-card.ts:206:     // Thẻ Ôn moves out of the card's way, not the other way round; the wave banner is gone in 1.2 s.
+src/ui/wave-card.ts:239:     node.append(el(doc, "span", "dh-count-times", "×"), String(count));
+src/ui/wave-card.ts:260:           // The short name beside the icon: a new player reads "Kiến ×6", not only a shape (the title keeps the full name).
+src/ui/wave-card.ts:273:       warn.title = "Flyers ×" + summary.flyers + (skyNames.length ? " on " + skyNames.join(", ") : "") + ": ground traps cannot hit them; use Net Launcher";
+src/ui/wave-card.ts:287:     // "Đợt thở" (02 §5.1) is the design's word; on the card it read as "a breathing wave", so the player sees "Đợt nhẹ".
+src/view/actors.ts:141:  * A general's death lasts longer and sinks into moss (02 §3.4 "thân tan thành
+src/view/actors.ts:142:  * rêu"; test pass 27/10: G01 vanished in 0.1 s like a grunt). fx.ts plays the
+src/view/actors.ts:440:             // G01's Cắm Cờ: stands with the banner high, plants it.
+src/view/actors.ts:605:         // Flyers spiral down as they go (05 §6.2 "rơi xoáy"); a general slumps and sinks, tinted moss.
+src/view/banners.ts:2:  * G01's banner (02 §3.2 Cắm Cờ, 05 §6 general row: "mang cờ; chiêu: cột sáng
+src/view/banners.ts:3:  * màu hào quang, tên chiêu 1 s"). Every live general carries a banner on its
+src/view/banners.ts:5:  * in the aura colour rises, the aura ring shows its 5 m reach and "Cắm Cờ"
+src/view/banners.ts:10:  * its own banner and its clips raise it (intro, Cắm Cờ) and drop it (death),
+src/view/banners.ts:27: /** Héo cloth (00 D02): ash grey with a withered-yellow border and crack sigil. */
+src/view/banners.ts:45: /** "Cắm Cờ" over the planted banner: 1 s (05 §6), its size (metres) and lift over the pole. */
+src/view/banners.ts:51: /** A dead general's banner falls (02 §3.4 "cờ gãy đổ"), lies this long, then sinks (test pass 27/10: it vanished with the body). */
+src/view/banners.ts:102:     // The Héo eye (00 D02 #C8D24A) and its cracks.
+src/view/banners.ts:129: /** "Cắm Cờ" as a sprite texture: cream letters, a dark outline, the aura colour underline. */
+src/view/banners.ts:230:    * on the ground, and "Cắm Cờ" labels showing.
+src/view/bench.ts:412:       // 1.5× the design speed so the bench sees a lot of motion.
+src/view/bench.ts:604:  * 0.25 s, Phun Lửa every 3 s, Thiên Hỏa every 4 s, a pine-cone bomb every
+src/view/camera.ts:278:       // shake = trauma² × maxPx, so this trauma peaks at `pixels`.
+src/view/crowd-rig.ts:326:           // G01: đâm cán cờ, the haft drawn back on the wind-up and jabbed forward, the flag kept high.
+src/view/crowd-rig.ts:350:     // G01's Cắm Cờ: raise the banner high (stands 1 s), plant it at the end.
+src/view/crowd-rig.ts:377:         // Phất cờ: the banner lifted upright over the head and swung side to side twice.
+src/view/crowd-rig.ts:524:           // Húc: head down on the wind-up, tusks thrown up on the strike.
+src/view/crowd-rig.ts:799:  * segment (÷ its reach), only bones whose region holds the vertex; weights
+src/view/crowd-rig.ts:1043:         // Rows of the 3 × 4 affine part (three stores column-major).
+src/view/crowd.ts:114:   /** The geometry's own size [w, h, l]; instance scale = placeholder size ÷ this. */
+src/view/crowd.ts:169: // Bone texture: row = frame, 3 texels per bone (rows of its 3 × 4 matrix); aClip = (row A, row B, blend of B, -).
+src/view/crowd.ts:401: // Bầy Héo (05 §2.2): the family colour greyed toward ash; our side keeps its colour. The owner's models keep
+src/view/crowd.ts:429: // Withered-yellow cracks on every foe's shell (05 §2.2 "khe nứt vàng úa"): each instance samples its own patch of
+src/view/crowd.ts:516: /** Unit primitives, feet at y = 0, nose +z, size 1 × 1 × 1. */
+src/view/crowd.ts:579: /** 05 §2.3: characters are drawn 1.4 × the scene's scale (placeholder sizes are real sizes); foes take foe-look.ts's tier scale. */
+src/view/crowd.ts:771:       // About OUTLINE_PX at 1080p whatever the zoom: width = k × distance.
+src/view/foe-look.ts:40:  * path; moss turns withered olive-yellow (the Bầy Héo are withered moss, the
+src/view/fx.ts:3:  * (05 §5–6): fire bolts from Hỏa Long's mouth that land on the strike's `hit`
+src/view/fx.ts:4:  * event, Phun Lửa cone, Thiên Hỏa meteor, Long Hống shock ring, burn on foes,
+src/view/fx.ts:36: /** Hỏa Long's fire: peach orange; strong (Chớp, Hoàn hảo) heads are typing teal (05 §6). */
+src/view/fx.ts:53:   /** HDR orange (above the 1.6 bloom threshold once stacked): the hot heart of Thiên Hỏa's mass and blast. */
+src/view/fx.ts:87: /** Viêm Đế's beam (01 §2.4: 2 × 22 m down the lane), how long it burns (s). */
+src/view/fx.ts:89: /** Héo lan's stream from a waiting foe to the Dragon (s). */
+src/view/fx.ts:91: /** Hắc Vụ's grey violet (00 D02), darker for a normal-blended body that reads on light ground. */
+src/view/fx.ts:238:    * One quad at (x, y, z): `size` metres across, growing by `grow` × over its
+src/view/fx.ts:414:    * World-size multiplier of the fire effects (bolts, impacts, Phun Lửa, Thiên Hỏa), set each frame from the camera
+src/view/fx.ts:505:   // ── Bolts (05 §6.1 đòn gõ) ────────────────────────────────────────────
+src/view/fx.ts:507:   /** A fire bolt from `from` to the target; `strong` (Chớp, Hoàn hảo) has a teal head. Returns its index or −1. */
+src/view/fx.ts:527:     // Muzzle flash at the mouth (05 §6 "phát"): a hot puff with body, so it reads on the light dais.
+src/view/fx.ts:557:   /** A blow lands at `at`: flash, sparks and rays by tier, a ring from T3 (05 §5, §6 "trúng"). */
+src/view/fx.ts:596:   /** Phun Lửa: a 60° cone of fire `lengthM` long from `from` toward (toX, toZ) for 0.7 s, then scorch. */
+src/view/fx.ts:604:     // Scorch along the cone (05 §6.1 "đất cháy decal").
+src/view/fx.ts:613:   /** Thiên Hỏa: a burning mass falls on (x, z) over `delayS`, a ring of `radiusM`, stun stars. */
+src/view/fx.ts:637:    * Thiên Hỏa lands (05 §6.1: a 4 m ring, stun stars). Round 2 readability: the
+src/view/fx.ts:681:   /** Long Hống: a shock ring out to `radiusM` from the dais, dust at its edge (T4). */
+src/view/fx.ts:693:   /** Viêm Đế (inferno) cast: a crown of fire round the Dragon for its length (placeholder until the v3 model swap). */
+src/view/fx.ts:701:   /** Burn on a foe: small flames on its back while it lasts (05 §6.1 Lửa Chữ). */
+src/view/fx.ts:720:   /** Gai Chông: stakes jab up, splinters and dust along the strip. */
+src/view/fx.ts:730:   /** Bom Hạt Thông: flash, a column of fire and resin, a ring of the blast radius, smoke and shells (T3–T4). */
+src/view/fx.ts:746:   /** Lưới Phóng: a net flies up from the post and drops over (x, z), cords pulling in (03 §7: grounds low flyers). */
+src/view/fx.ts:758:   /** Heal: a pale ring and motes rising over (x, z) (Lều Thuốc Nam pulse, Bình Máu Nhỏ). */
+src/view/fx.ts:766:   /** Héo lan: a grey-violet wisp drifts from a foe standing near toward the dais (BALANCE.md §5; Hắc Vụ's colour, D02). */
+src/view/fx.ts:775:   /** One heal beat (Lều Thuốc Nam): a light drop floats from the house to the ally, a small ring where it lands (05 §6.6). */
+src/view/fx.ts:793:    * T0: a right key (05 §4.3 "một đốm lửa chạy từ mõm Hỏa Long tới quái", §5 T0): a few motes at the mouth, a
+src/view/fx.ts:811:    * Viêm Đế's beam (01 §2.4, 05 §6.1: "mỗi từ một tia xuyên 2 × 22 m dọc
+src/view/fx.ts:812:    * đường"): fire runs from the dais end of the lane outward along `points`
+src/view/fx.ts:829:    * Héo lan's beat (BALANCE.md §5): a dark violet stream runs from each
+src/view/fx.ts:856:    * A general falls (02 §3.4 G01: "cờ gãy đổ, thân tan thành rêu"; 02 §3.2
+src/view/fx.ts:857:    * "quân gần chùn 1 s"): the body breaks into moss that spreads on the
+src/view/fx.ts:959:         // Stars circling over the struck area (05 §6.1 Thiên Hỏa "sao choáng").
+src/view/fx.ts:980:    * (drawing-buffer height ÷ 2 tan(fov / 2)).
+src/view/fx.ts:1034:       // Its shadow on the target darkens and widens as it comes down (05 §6.1 "bóng báo").
+src/view/fx.ts:1099:    * DOM tags stay still): each blow sends its peak in px (trauma² × 12). Without it, `onShake` gets this module's
+src/view/fx.ts:1121: /** Grade → strong bolt (teal head, Attack_Both): Chớp and Hoàn hảo (05 §6). */
+src/view/fx.ts:1141:   /** Viêm Đế beams drawn this tick, by lane (a cluster word hits several foes at once). */
+src/view/fx.ts:1214:               // Viêm Đế: the word's strike also fires a beam down its foe's lane (01 §2.4); draw it once a lane a tick.
+src/view/fx.ts:1237:               // A finishing word shows its strength: lock protection or a trap may have left the foe at 1 HP (test pass 27/10: "HOÀN HẢO 1").
+src/view/fx.ts:1334:       // Far from the dais the fire grows (×1 within 40 m, ×2.4 at most), so a strike reads at the play camera (05 §5).
+src/view/fx.ts:1366: /** Feedback tier for a grade's bolt (05 §5: Tốt, Vừa T1; Chớp, Hoàn hảo T3; Ẩu T1). */
+src/view/heroes.ts:2:  * The two Dragons on the dais (01 §2, 05 §6.1): Hỏa Long hovering 2.5 m over
+src/view/heroes.ts:4:  * Attack_Both on Chớp, Hoàn hảo or a foe within 6 m, Cast for Thiên Hỏa,
+src/view/heroes.ts:5:  * Boost for Long Hống, Hit, Death, Victory; Bạch Long standing beside as the
+src/view/heroes.ts:7:  * the owner's GLB (draconis v2 for Hỏa Long, v4 for Bạch Long; v3 kept for the
+src/view/heroes.ts:8:  * Viêm Đế swap at M0c), loaded with the kit three loader from
+src/view/heroes.ts:11:  * The app builds the Dragons once and keeps them across "Chơi lại ải"
+src/view/heroes.ts:14:  * Bạch Long's colour (round 2): the GLB is the same white humanoid dragon
+src/view/heroes.ts:20:  * M0b (test pass item 35: both Dragons read red at 60 px): Bạch Long's own
+src/view/heroes.ts:24:  * edge (05 §2.2 "kem trắng, lông vũ"). Never cyan (the typing colour).
+src/view/heroes.ts:25:  * Hỏa Long (v2) keeps its warm peach-red.
+src/view/heroes.ts:63: /** 05 §2.3 at the default camera: Hỏa Long 80–100 px, Bạch Long 60–70 px at 1080p. */
+src/view/heroes.ts:66: /** Bạch Long's studio light (Space title: RoomEnvironment, 0.04 blur) and how strongly its materials take it. */
+src/view/heroes.ts:68: /** Bạch Long faces the default camera (south, +z), turned this far toward the dais. */
+src/view/heroes.ts:72:  * Bạch Long's pearl recolour (M0b), on its base colour (linear): warm texels (hue red to yellow, saturated) become
+src/view/heroes.ts:125:   /** Hỏa Long's rig once loaded (null: placeholder). */
+src/view/heroes.ts:128:   /** Plays a one-shot on Hỏa Long. */
+src/view/heroes.ts:131:   /** Turns Hỏa Long toward (x, z) metres. */
+src/view/heroes.ts:199:   /** Word slot → its foe, and the locked foe Hỏa Long faces. */
+src/view/heroes.ts:256:           // Pearl, not red: told apart from Hỏa Long at 60 px (M0b).
+src/view/heroes.ts:405:               // 05 §6.1: L and R in turn; Both on Chớp, Hoàn hảo or a foe within 6 m.
+src/view/heroes.ts:426:             // Héo lan seeps (source "hero") without a flinch; foes' blows knock the Dragon.
+src/view/lane-cue.ts:2:  * Lit lanes of the wave warning (wave-card.ts: "Quái sắp vào từ các đường
+src/view/lane-cue.ts:3:  * sáng"; 01 §1.2: "Thẻ báo: đường nào sáng"). Each frame the lanes the coming wave uses go to
+src/view/lane-cue.ts:6:  * run while the wave uses it, and stay still under "Đường Trời: Yên".
+src/view/layout.ts:84:      * Bézier whose control point is the chord midpoint moved along the chord
+src/view/layout.ts:85:      * normal by bend × length (signed: + to the left of from→to). Small wobble
+src/view/layout.ts:160:      * face foot a row of tall blocks (cliff-rock-a, height a tier × kA), turned to the dais, every stepM; the
+src/view/layout.ts:161:      * lowest tier mixes in wide blocks (cliff-rock-b, width kB × tier); a few wide blocks along the top lip.
+src/view/layout.ts:295:    * angle a is r × (1 + wobble · (0.7 sin(lobes · a + phase) + 0.3 sin((lobes + 2) · a + 2.3 phase))),
+src/view/layout.ts:431: /** Tree tints (multiplied into the texture): base, sun green, cool blue-green, deep, fresh. Never yellow (Héo). */
+src/view/layout.ts:634:     // Bézier control point: chord midpoint pushed along the normal by bend × length.
+src/view/layout.ts:803:   // right = forward × up (up = +y), camera up = right × forward.
+src/view/layout.ts:1488:   // LG1: a fallen log beside the Cầu trail past its gate (the gate's forest gap has a story).
+src/view/maps/L2-cau.map.json:7:   "brief": "MAP_PLAN 3.2: sun from the east; the high side is west, a pale three-tier cliff framing the left edge with a gorge where Đường Suối and the stream leave; a bright open meadow east and south-east with the pond at its far edge; footpaths with destinations (pond landing, cliff scree, a south-east forest bay; no fishing path: the north bridgehead has a trap slot within 4 m); anchor grove in the north-west wedge across the river; forest bays every 60–90° and a gap at every gate.",
+src/view/motion.ts:76:   /** A one-shot clip by name (G01's Cắm Cờ and intro, the warden's block, fall and rise), when the rig has it. */
+src/view/paint.ts:18:  * is a 1 × 1 texel of its own mean colour, so the palette alone shows.
+src/view/paint.ts:44: /** Decal sheets (2 × 2 each): the accepted files of art request 015 / Codex 017. */
+src/view/paint.ts:593: // one of the 2 × 2 sheet quarters by weight; density read at the decal centre by the caller's channel weights.
+src/view/paths.ts:7:  * on the way uses it (26/10 review: the card said "Quái sắp vào từ các đường
+src/view/paths.ts:8:  * sáng" and no lane lit, and the sky arrows ran under "Đường Trời: Yên").
+src/view/paths.ts:177:  * alpha 0.3 hardly showed on the light dirt in the 1280×720 pictures, 26/10.)
+src/view/paths.ts:321: /** Sky ribbon opacity: a wave on the way uses the lane / it stays quiet ("Yên" on the wave card). */
+src/view/scatter.ts:100:  * ΔE2000 ≥ 20 from #FF4A4A, #FFB020, #FFC83A and the withered #C8D24A (darker and less saturated).
+src/view/stage.ts:80:  * diorama at 1080p, Apple Silicon, vsync off: post + FXAA ≈ 3.5 ms, 4× MSAA
+src/view/stage.ts:156: /** Projects (x, y, z) metres to CSS pixels of a `width` × `height` view; ignores the shake offset. */
+src/view/telegraphs.ts:3:  * filling over the wind-up (≥ 0.5 s), ours (Thiên Hỏa) pale orange with a
+src/view/telegraphs.ts:123:     // Aura: a withered-yellow ring that breathes, ticks round it. Round 3: a dark violet-grey edge (Hắc Vụ)
+src/view/telegraphs.ts:140:   // Ours (no dark edge) fill at half strength: the foes under Thiên Hỏa's target stay visible.
+src/view/telegraphs.ts:219:   /** `realDt` (default `worldDt`): wall time, for fading out while the world stands still (a pause, Thẻ Ôn). */
+src/view/telegraphs.ts:434:         // A warning ending as the world stops (the wave's last foe, then Thẻ Ôn holds the break) still goes:
+src/view/telegraphs.ts:435:         // the fade runs on wall time (test pass 27/10: a boar's red arrow stood through Thẻ Ôn).

@@ -1,0 +1,24 @@
+$ git branch --show-current
+feat/space-typing-admin-uiux
+$ git status --short -uall -- portal shared/learning infra/nginx scripts/validate-play-mode.mjs scripts/validate-play-mode.test.mjs
+ M infra/nginx/typing-game.local.dev.conf
+ M infra/nginx/typing-game.local.play.conf
+ M portal/public/games.json
+ M portal/src/learning/bridge.ts
+ M portal/src/main.ts
+ M portal/src/styles.css
+ M scripts/validate-play-mode.mjs
+ M shared/learning/README.md
+ M shared/learning/core.d.mts
+ M shared/learning/core.mjs
+ M shared/learning/message-contract.d.mts
+ M shared/learning/message-contract.mjs
+ M shared/learning/profile-backup.mjs
+ M shared/learning/query.d.mts
+ M shared/learning/query.mjs
+?? portal/src/game-card.ts
+?? portal/tests/fixtures/legacy-games.json
+?? portal/tests/game-card.test.mjs
+?? portal/tests/learning-lookup.test.mjs
+?? scripts/validate-play-mode.test.mjs
+?? shared/learning/lookup.test.mjs

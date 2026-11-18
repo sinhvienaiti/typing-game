@@ -1,0 +1,112 @@
+{
+ "$schema": "../../schemas/recipe.schema.json",
+ "schema": "audiolab.recipe/1",
+ "game": "typing-defense",
+ "id": "ui-move",
+ "group": "rare-fixed",
+ "family": "phim-ui",
+ "description": "Lô 1 (BATCH1_BRIEF 4.4): bản cuối từ trống khe VCSL Slit Drum (anh chọn 0a v3, ea8b0706). Máy chấm sai id này (0/3 cặp; anh chọn bản ít năng lượng 1–5 kHz nhất), nên ba bản trải đều thay vì theo điểm máy: 1) khe cao, lớp nhẹ, lớp 'giấy' nhỏ hơn 0a 6 dB; 2) khe thấp, lớp nhẹ; 3) khe cao, lớp vừa (velocity 90). Lên ≤ 3 ms, 40 ms.",
+ "channels": 1,
+ "layers": [
+  {
+   "id": "tap",
+   "role": "attack",
+   "filters": [
+    {
+     "type": "highpass",
+     "hz": 500
+    }
+   ],
+   "trim": {
+    "endMs": 60
+   },
+   "fadeOutMs": 25,
+   "source": {
+    "sampler": {
+     "instrument": "slit-drum",
+     "notes": "0:logdrumhi-medm:0.05:60"
+    }
+   },
+   "vary": {
+    "swapMode": "cycle",
+    "swap": [
+     {
+      "sampler": {
+       "instrument": "slit-drum",
+       "notes": "0:logdrumlo-medm:0.05:60"
+      }
+     },
+     {
+      "sampler": {
+       "instrument": "slit-drum",
+       "notes": "0:logdrumhi-medm:0.05:90"
+      }
+     }
+    ]
+   }
+  },
+  {
+   "id": "paper",
+   "role": "sweetener",
+   "gainDb": -20,
+   "source": {
+    "synth": "noise_burst",
+    "params": {
+     "color": "white",
+     "durMs": 12,
+     "attackMs": 0.3,
+     "decayMs": 9,
+     "hpHz": 3000,
+     "lpHz": 8000
+    }
+   }
+  }
+ ],
+ "chain": {
+  "dcHpfHz": 60,
+  "filters": [
+   {
+    "type": "peak",
+    "hz": 2200,
+    "gainDb": -3,
+    "q": 0.9
+   }
+  ],
+  "headTrim": {
+   "thresholdDb": -50,
+   "preRollMs": 0.2
+  },
+  "maxLengthMs": 46,
+  "tail": {
+   "floorDb": -60,
+   "fadeMs": 6
+  },
+  "normalise": {
+   "mode": "lufs-m-max",
+   "target": -20
+  },
+  "limiter": {
+   "ceilingDbtp": -1.0,
+   "releaseMs": 20,
+   "maxGrDb": 6
+  }
+ },
+ "variants": {
+  "count": 3,
+  "seed": 2601,
+  "includeBase": true,
+  "pitchCents": [
+   0,
+   0
+  ],
+  "gainDb": [
+   0,
+   0
+  ]
+ },
+ "export": {
+  "path": "sfx/ui/ui-move",
+  "ogg": true,
+  "oggQuality": 0.6
+ }
+}

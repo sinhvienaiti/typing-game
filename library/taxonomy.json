@@ -1,0 +1,2517 @@
+{
+  "audioCategoryMap": {
+    "ambience": "ambience",
+    "blast": "explosion",
+    "creature": "creature",
+    "death-big": "death",
+    "death-swarm": "death",
+    "fx-other": "foley",
+    "hit-heavy": "impact",
+    "hit-small": "impact",
+    "key-bad": "typing",
+    "key-ok": "typing",
+    "music": "music",
+    "shot": "shot",
+    "stinger": "stinger",
+    "ui": "ui",
+    "warning": "stinger",
+    "word-reward": "reward"
+  },
+  "audioFamilyMap": {
+    "ban": "shot",
+    "chet": "death",
+    "nen": "ambience",
+    "nhac": "music",
+    "no": "explosion",
+    "phim-ui": "ui",
+    "sinh-vat": "creature",
+    "thuong": "reward",
+    "trung": "impact"
+  },
+  "biomes": {
+    "any": "Mọi vùng",
+    "coast": "Ven biển",
+    "hill": "Đồi",
+    "meadow": "Đồng cỏ",
+    "pine-forest": "Rừng thông",
+    "rainforest": "Rừng mưa",
+    "river": "Sông",
+    "space": "Vũ trụ",
+    "village": "Làng"
+  },
+  "folderMap": {
+    "dragon-hold": {
+      "2d": {
+        "kind": "prop"
+      },
+      "2d/samples": {
+        "kind": "prop"
+      },
+      "3d": {
+        "kind": "prop"
+      },
+      "backdrops": {
+        "kind": "backdrop"
+      },
+      "decals": {
+        "kind": "ground"
+      },
+      "decals/pine-river": {
+        "kind": "ground"
+      },
+      "enemies": {
+        "kind": "creature"
+      },
+      "fx": {
+        "kind": "vfx"
+      },
+      "fx/life": {
+        "kind": "vfx"
+      },
+      "generals": {
+        "kind": "character"
+      },
+      "ground": {
+        "kind": "ground"
+      },
+      "ground/pine-river": {
+        "kind": "ground"
+      },
+      "houses": {
+        "kind": "building"
+      },
+      "icons": {
+        "kind": "ui"
+      },
+      "models": {
+        "kind": "prop"
+      },
+      "models/enemies": {
+        "kind": "creature"
+      },
+      "models/props": {
+        "kind": "prop"
+      },
+      "models/units": {
+        "kind": "character"
+      },
+      "props": {
+        "kind": "prop"
+      },
+      "props/pine-river": {
+        "biomes": [
+          "pine-forest",
+          "river"
+        ],
+        "items": {
+          "bridge-old": {
+            "kind": "structure",
+            "subkind": "bridge"
+          },
+          "bush-blossom": {
+            "kind": "nature",
+            "subkind": "bush"
+          },
+          "bush-moss": {
+            "kind": "nature",
+            "subkind": "bush"
+          },
+          "cliff-rock-a": {
+            "kind": "nature",
+            "subkind": "cliff"
+          },
+          "cliff-rock-b": {
+            "kind": "nature",
+            "subkind": "cliff"
+          },
+          "grass-tuft": {
+            "kind": "nature",
+            "subkind": "grass"
+          },
+          "lantern-post": {
+            "kind": "prop",
+            "subkind": "post"
+          },
+          "log": {
+            "kind": "nature",
+            "subkind": "log"
+          },
+          "pine-round": {
+            "kind": "nature",
+            "subkind": "tree"
+          },
+          "pine-young": {
+            "kind": "nature",
+            "subkind": "tree"
+          },
+          "rail-fence": {
+            "kind": "prop",
+            "subkind": "fence"
+          },
+          "reed-clump": {
+            "kind": "nature",
+            "subkind": "reed"
+          },
+          "river-stones": {
+            "kind": "nature",
+            "subkind": "rock"
+          },
+          "rock-boulder": {
+            "kind": "nature",
+            "subkind": "rock"
+          },
+          "stump": {
+            "kind": "nature",
+            "subkind": "stump"
+          },
+          "tree-violet": {
+            "kind": "nature",
+            "subkind": "tree"
+          },
+          "wildflower-clump": {
+            "kind": "nature",
+            "subkind": "flower"
+          },
+          "wooden-jetty": {
+            "kind": "structure",
+            "subkind": "jetty"
+          }
+        },
+        "kind": "nature",
+        "perItem": true
+      },
+      "refs": {
+        "kind": "prop"
+      },
+      "traps": {
+        "kind": "trap"
+      },
+      "ui": {
+        "kind": "ui"
+      },
+      "units": {
+        "kind": "character"
+      },
+      "vfx": {
+        "kind": "vfx"
+      }
+    },
+    "space-typing": {
+      "3d": {
+        "kind": "prop"
+      },
+      "Dota-Sounds": {
+        "kind": "foley",
+        "licence": "private-valve",
+        "media": "audio",
+        "notForRelease": true,
+        "perItem": true,
+        "private": true
+      },
+      "bosses": {
+        "kind": "creature"
+      },
+      "combat-vfx": {
+        "kind": "vfx"
+      },
+      "combat-vfx-sequences": {
+        "kind": "motion"
+      },
+      "defense": {
+        "kind": "building"
+      },
+      "duel-targets": {
+        "kind": "prop"
+      },
+      "enemies": {
+        "kind": "creature"
+      },
+      "expansion-v2": {
+        "kind": "prop"
+      },
+      "expansion-v2/boss-parts": {
+        "kind": "creature"
+      },
+      "expansion-v2/conditions": {
+        "kind": "ui"
+      },
+      "expansion-v2/elite": {
+        "kind": "creature"
+      },
+      "expansion-v2/encounter-recipes": {
+        "kind": "ui"
+      },
+      "expansion-v2/expedition": {
+        "kind": "backdrop"
+      },
+      "expansion-v2/flow": {
+        "kind": "ui"
+      },
+      "expansion-v2/learning": {
+        "kind": "ui"
+      },
+      "expansion-v2/meta": {
+        "kind": "ui"
+      },
+      "expansion-v2/relics": {
+        "kind": "item"
+      },
+      "expansion-v2/typing-patterns": {
+        "kind": "ui"
+      },
+      "fx": {
+        "kind": "vfx"
+      },
+      "g01": {
+        "biomes": [
+          "space"
+        ],
+        "itemPrefixes": {
+          "atlas-life": {
+            "kind": "prop"
+          },
+          "atlas-rocks": {
+            "kind": "prop"
+          },
+          "dust": {
+            "kind": "vfx"
+          },
+          "glow": {
+            "kind": "vfx"
+          }
+        },
+        "kind": "backdrop",
+        "perItem": true
+      },
+      "g02": {
+        "biomes": [
+          "space"
+        ],
+        "itemPrefixes": {
+          "atlas-life": {
+            "kind": "prop"
+          },
+          "atlas-rocks": {
+            "kind": "prop"
+          },
+          "dust": {
+            "kind": "vfx"
+          },
+          "glow": {
+            "kind": "vfx"
+          }
+        },
+        "kind": "backdrop",
+        "perItem": true
+      },
+      "g03": {
+        "biomes": [
+          "space"
+        ],
+        "itemPrefixes": {
+          "atlas-life": {
+            "kind": "prop"
+          },
+          "atlas-rocks": {
+            "kind": "prop"
+          },
+          "dust": {
+            "kind": "vfx"
+          },
+          "glow": {
+            "kind": "vfx"
+          }
+        },
+        "kind": "backdrop",
+        "perItem": true
+      },
+      "g04": {
+        "biomes": [
+          "space"
+        ],
+        "itemPrefixes": {
+          "atlas-life": {
+            "kind": "prop"
+          },
+          "atlas-rocks": {
+            "kind": "prop"
+          },
+          "dust": {
+            "kind": "vfx"
+          },
+          "glow": {
+            "kind": "vfx"
+          }
+        },
+        "kind": "backdrop",
+        "perItem": true
+      },
+      "g05": {
+        "biomes": [
+          "space"
+        ],
+        "itemPrefixes": {
+          "atlas-life": {
+            "kind": "prop"
+          },
+          "atlas-rocks": {
+            "kind": "prop"
+          },
+          "dust": {
+            "kind": "vfx"
+          },
+          "glow": {
+            "kind": "vfx"
+          }
+        },
+        "kind": "backdrop",
+        "perItem": true
+      },
+      "g06": {
+        "biomes": [
+          "space"
+        ],
+        "itemPrefixes": {
+          "atlas-life": {
+            "kind": "prop"
+          },
+          "atlas-rocks": {
+            "kind": "prop"
+          },
+          "dust": {
+            "kind": "vfx"
+          },
+          "glow": {
+            "kind": "vfx"
+          }
+        },
+        "kind": "backdrop",
+        "perItem": true
+      },
+      "g07": {
+        "biomes": [
+          "space"
+        ],
+        "itemPrefixes": {
+          "atlas-life": {
+            "kind": "prop"
+          },
+          "atlas-rocks": {
+            "kind": "prop"
+          },
+          "dust": {
+            "kind": "vfx"
+          },
+          "glow": {
+            "kind": "vfx"
+          }
+        },
+        "kind": "backdrop",
+        "perItem": true
+      },
+      "g08": {
+        "biomes": [
+          "space"
+        ],
+        "itemPrefixes": {
+          "atlas-life": {
+            "kind": "prop"
+          },
+          "atlas-rocks": {
+            "kind": "prop"
+          },
+          "dust": {
+            "kind": "vfx"
+          },
+          "glow": {
+            "kind": "vfx"
+          }
+        },
+        "kind": "backdrop",
+        "perItem": true
+      },
+      "g09": {
+        "biomes": [
+          "space"
+        ],
+        "itemPrefixes": {
+          "atlas-life": {
+            "kind": "prop"
+          },
+          "atlas-rocks": {
+            "kind": "prop"
+          },
+          "dust": {
+            "kind": "vfx"
+          },
+          "glow": {
+            "kind": "vfx"
+          }
+        },
+        "kind": "backdrop",
+        "perItem": true
+      },
+      "g10": {
+        "biomes": [
+          "space"
+        ],
+        "itemPrefixes": {
+          "atlas-life": {
+            "kind": "prop"
+          },
+          "atlas-rocks": {
+            "kind": "prop"
+          },
+          "dust": {
+            "kind": "vfx"
+          },
+          "glow": {
+            "kind": "vfx"
+          }
+        },
+        "kind": "backdrop",
+        "perItem": true
+      },
+      "icons": {
+        "kind": "ui"
+      },
+      "models": {
+        "kind": "prop"
+      },
+      "models/bosses": {
+        "kind": "creature"
+      },
+      "models/enemies": {
+        "kind": "creature"
+      },
+      "models/items": {
+        "kind": "item"
+      },
+      "models/raw": {
+        "kind": "prop"
+      },
+      "models/ships": {
+        "kind": "vehicle"
+      },
+      "models/skills": {
+        "kind": "vfx"
+      },
+      "pickups": {
+        "kind": "item"
+      },
+      "projectiles": {
+        "kind": "projectile"
+      },
+      "public/assets/audio": {
+        "items": {
+          "announcer-base": {
+            "kind": "voice"
+          }
+        },
+        "kind": "foley",
+        "media": "audio",
+        "perItem": true
+      },
+      "public/assets/audio/ambient": {
+        "kind": "ambience",
+        "media": "audio"
+      },
+      "public/assets/audio/announcer": {
+        "kind": "voice",
+        "media": "audio"
+      },
+      "public/assets/audio/dragon": {
+        "items": {
+          "combust": {
+            "kind": "explosion"
+          },
+          "fire-breath": {
+            "kind": "shot"
+          },
+          "fire-burst": {
+            "kind": "shot"
+          },
+          "fire-explosion": {
+            "kind": "explosion"
+          },
+          "fireball-explosion": {
+            "kind": "explosion"
+          },
+          "fireball-swell": {
+            "kind": "shot"
+          },
+          "roar": {
+            "kind": "creature"
+          }
+        },
+        "kind": "shot",
+        "media": "audio",
+        "perItem": true
+      },
+      "public/assets/audio/duel": {
+        "kind": "foley",
+        "media": "audio"
+      },
+      "public/assets/audio/duel/music": {
+        "kind": "music",
+        "media": "audio"
+      },
+      "public/assets/audio/duel/music/songs": {
+        "kind": "music",
+        "media": "audio"
+      },
+      "public/assets/audio/duel/sfx": {
+        "items": {
+          "bomb-impact": {
+            "kind": "explosion"
+          },
+          "bomb-launch": {
+            "kind": "shot"
+          },
+          "cataclysm": {
+            "kind": "explosion"
+          },
+          "disrupt-emp": {
+            "kind": "impact"
+          },
+          "energy-impact": {
+            "kind": "impact"
+          },
+          "heavy-launch": {
+            "kind": "shot"
+          },
+          "intercept": {
+            "kind": "impact"
+          },
+          "kinetic-impact": {
+            "kind": "impact"
+          },
+          "laser-launch": {
+            "kind": "shot"
+          },
+          "lock-acquire": {
+            "kind": "ui"
+          },
+          "missile-impact": {
+            "kind": "explosion"
+          },
+          "missile-launch": {
+            "kind": "shot"
+          },
+          "precision": {
+            "kind": "reward"
+          },
+          "repair-energy": {
+            "kind": "reward"
+          },
+          "round-draw": {
+            "kind": "stinger"
+          },
+          "round-loss": {
+            "kind": "stinger"
+          },
+          "round-win": {
+            "kind": "stinger"
+          },
+          "scan-pulse": {
+            "kind": "ui"
+          },
+          "shield-break": {
+            "kind": "impact"
+          },
+          "shield-hit": {
+            "kind": "impact"
+          },
+          "ship-destruction": {
+            "kind": "death"
+          },
+          "typing-miss": {
+            "kind": "typing"
+          }
+        },
+        "kind": "impact",
+        "media": "audio",
+        "perItem": true
+      },
+      "public/assets/audio/duel/war": {
+        "items": {
+          "explosion-a": {
+            "kind": "explosion"
+          },
+          "explosion-b": {
+            "kind": "explosion"
+          },
+          "explosion-big": {
+            "kind": "explosion"
+          },
+          "gun-a": {
+            "kind": "shot"
+          },
+          "gun-b": {
+            "kind": "shot"
+          },
+          "gunshot-real": {
+            "kind": "shot"
+          },
+          "hit-a": {
+            "kind": "impact"
+          },
+          "hit-b": {
+            "kind": "impact"
+          },
+          "hit-heavy": {
+            "kind": "impact"
+          },
+          "impact-design": {
+            "kind": "impact"
+          },
+          "laser-impact": {
+            "kind": "impact"
+          },
+          "missile": {
+            "kind": "shot"
+          },
+          "railgun": {
+            "kind": "shot"
+          },
+          "rocket": {
+            "kind": "shot"
+          },
+          "shield": {
+            "kind": "impact"
+          },
+          "tank-fire": {
+            "kind": "shot"
+          }
+        },
+        "kind": "shot",
+        "media": "audio",
+        "perItem": true
+      },
+      "public/assets/audio/music": {
+        "kind": "music",
+        "media": "audio"
+      },
+      "public/assets/audio/music/songs": {
+        "kind": "music",
+        "media": "audio"
+      },
+      "public/assets/audio/music/worlds": {
+        "kind": "music",
+        "media": "audio"
+      },
+      "public/assets/audio/sfx": {
+        "kind": "foley",
+        "media": "audio"
+      },
+      "public/assets/audio/sfx/kenney": {
+        "items": {
+          "confirm": {
+            "kind": "ui"
+          },
+          "crystal-break": {
+            "kind": "foley"
+          },
+          "crystal-hit": {
+            "kind": "impact"
+          },
+          "engine-large": {
+            "kind": "movement"
+          },
+          "error": {
+            "kind": "ui"
+          },
+          "explosion-crunch": {
+            "kind": "explosion"
+          },
+          "explosion-crunch-big": {
+            "kind": "explosion"
+          },
+          "explosion-crunch-chain": {
+            "kind": "explosion"
+          },
+          "explosion-low": {
+            "kind": "explosion"
+          },
+          "force-field": {
+            "kind": "impact"
+          },
+          "force-field-cast": {
+            "kind": "shot"
+          },
+          "laser-large": {
+            "kind": "shot"
+          },
+          "laser-small": {
+            "kind": "shot"
+          },
+          "thruster": {
+            "kind": "movement"
+          }
+        },
+        "kind": "ui",
+        "media": "audio",
+        "perItem": true
+      },
+      "public/assets/audio/stingers": {
+        "kind": "stinger",
+        "media": "audio"
+      },
+      "puzzle": {
+        "kind": "prop"
+      },
+      "relics": {
+        "kind": "item"
+      },
+      "ships": {
+        "kind": "vehicle"
+      },
+      "src/assets/audio": {
+        "kind": "foley",
+        "media": "audio",
+        "perItem": true
+      },
+      "src/assets/audio/ui": {
+        "items": {
+          "reward-big": {
+            "kind": "reward"
+          },
+          "reward-shimmer": {
+            "kind": "reward"
+          },
+          "reward-small": {
+            "kind": "reward"
+          },
+          "streak": {
+            "kind": "reward"
+          }
+        },
+        "kind": "ui",
+        "media": "audio",
+        "perItem": true
+      },
+      "td": {
+        "kind": "prop",
+        "perItem": true,
+        "style": "viet-village"
+      },
+      "td/enemies": {
+        "kind": "creature",
+        "style": "viet-village"
+      },
+      "td/generation-2026-10-22-p8-p9-p12": {
+        "kind": "prop",
+        "perItem": true,
+        "style": "viet-village"
+      },
+      "td/generation-l1-l3-s1-s3-s12": {
+        "kind": "prop",
+        "perItem": true,
+        "style": "viet-village"
+      },
+      "td/helpers": {
+        "kind": "character",
+        "style": "viet-village"
+      },
+      "td/scenery": {
+        "kind": "nature",
+        "style": "viet-village"
+      },
+      "td/scenery/coast": {
+        "biomes": [
+          "coast"
+        ],
+        "hyphenVariants": true,
+        "kind": "nature",
+        "style": "viet-village"
+      },
+      "td/scenery/meadow": {
+        "biomes": [
+          "meadow"
+        ],
+        "hyphenVariants": true,
+        "kind": "nature",
+        "style": "viet-village"
+      },
+      "td/scenery/rainforest": {
+        "biomes": [
+          "rainforest"
+        ],
+        "hyphenVariants": true,
+        "kind": "nature",
+        "style": "viet-village"
+      },
+      "td/scenery/shared": {
+        "biomes": [
+          "any"
+        ],
+        "hyphenVariants": true,
+        "kind": "nature",
+        "style": "viet-village"
+      },
+      "td/ui": {
+        "kind": "ui",
+        "style": "viet-village"
+      },
+      "td/units": {
+        "kind": "character",
+        "style": "viet-village"
+      }
+    },
+    "typing-defense": {
+      "2d-prompts": {
+        "kind": "prop"
+      },
+      "3d": {
+        "kind": "prop"
+      },
+      "anim": {
+        "kind": "motion"
+      },
+      "animals": {
+        "kind": "creature"
+      },
+      "backdrops": {
+        "kind": "backdrop"
+      },
+      "bosses": {
+        "kind": "creature"
+      },
+      "branches": {
+        "kind": "building"
+      },
+      "buildings": {
+        "kind": "building"
+      },
+      "enemies": {
+        "kind": "creature"
+      },
+      "helpers": {
+        "kind": "character"
+      },
+      "heroes": {
+        "kind": "character"
+      },
+      "kits": {
+        "kind": "building",
+        "subkind": "kit-part"
+      },
+      "landmarks": {
+        "items": {
+          "cau-do": {
+            "kind": "structure",
+            "subkind": "bridge"
+          },
+          "cau-go": {
+            "kind": "structure",
+            "subkind": "bridge"
+          },
+          "cau-tau": {
+            "kind": "structure",
+            "subkind": "jetty"
+          },
+          "choi-canh-doi": {
+            "kind": "building",
+            "subkind": "hut"
+          },
+          "da-ke": {
+            "kind": "nature",
+            "subkind": "rock"
+          },
+          "goc-da-rong": {
+            "kind": "nature",
+            "subkind": "tree"
+          },
+          "hai-dang": {
+            "kind": "structure",
+            "subkind": "lighthouse"
+          },
+          "nha-rai-da": {
+            "kind": "building",
+            "subkind": "house"
+          },
+          "re-vom": {
+            "kind": "structure",
+            "subkind": "arch"
+          },
+          "thac-ho-sut": {
+            "kind": "nature",
+            "subkind": "waterfall"
+          },
+          "them-da-trang": {
+            "kind": "structure",
+            "subkind": "stairs"
+          },
+          "vach-thac-bac": {
+            "kind": "nature",
+            "subkind": "cliff"
+          }
+        },
+        "kind": "structure",
+        "perItem": true
+      },
+      "loot": {
+        "kind": "item"
+      },
+      "models": {
+        "kind": "prop"
+      },
+      "models/attachments": {
+        "kind": "weapon"
+      },
+      "models/buildings": {
+        "kind": "building"
+      },
+      "models/enemies": {
+        "kind": "creature"
+      },
+      "models/helpers": {
+        "kind": "character"
+      },
+      "models/heroes": {
+        "kind": "character"
+      },
+      "models/loot": {
+        "kind": "item"
+      },
+      "models/projectiles": {
+        "kind": "projectile"
+      },
+      "models/props": {
+        "kind": "prop"
+      },
+      "models/units": {
+        "kind": "character"
+      },
+      "portraits": {
+        "kind": "character"
+      },
+      "projectiles": {
+        "kind": "projectile"
+      },
+      "props": {
+        "kind": "prop"
+      },
+      "ruins": {
+        "kind": "structure",
+        "subkind": "ruin"
+      },
+      "scenery": {
+        "kind": "nature"
+      },
+      "scenery/coast": {
+        "biomes": [
+          "coast"
+        ],
+        "hyphenVariants": true,
+        "kind": "nature"
+      },
+      "scenery/meadow": {
+        "biomes": [
+          "meadow"
+        ],
+        "hyphenVariants": true,
+        "kind": "nature"
+      },
+      "scenery/rainforest": {
+        "biomes": [
+          "rainforest"
+        ],
+        "hyphenVariants": true,
+        "kind": "nature"
+      },
+      "scenery/shared": {
+        "biomes": [
+          "any"
+        ],
+        "hyphenVariants": true,
+        "kind": "nature"
+      },
+      "tripo-spares": {
+        "kind": "prop"
+      },
+      "ui": {
+        "kind": "ui"
+      },
+      "units": {
+        "kind": "character"
+      },
+      "vfx": {
+        "kind": "vfx"
+      },
+      "workers": {
+        "kind": "character"
+      }
+    },
+    "typing-survival": {
+      "ui": {
+        "kind": "ui"
+      }
+    }
+  },
+  "gameStyles": {
+    "dragon-hold": "mythic-forest",
+    "space-typing": "sci-fi-space",
+    "typing-defense": "viet-village",
+    "typing-survival": "steel-station"
+  },
+  "kinds": {
+    "audio": {
+      "ambience": {
+        "label": "Âm nền",
+        "labelVi": "âm nền",
+        "subkindLabelVi": {
+          "engine": "động cơ",
+          "forest": "rừng",
+          "river": "sông",
+          "station": "trạm",
+          "wind": "gió"
+        },
+        "subkinds": {
+          "engine": "Động cơ",
+          "forest": "Rừng",
+          "river": "Sông",
+          "station": "Trạm",
+          "wind": "Gió"
+        },
+        "synonyms": "ambient, atmosphere, am nen"
+      },
+      "creature": {
+        "label": "Tiếng sinh vật",
+        "labelVi": "tiếng quái",
+        "subkindLabelVi": {
+          "call": "kêu",
+          "growl": "gừ",
+          "howl": "hú",
+          "roar": "gầm"
+        },
+        "subkinds": {
+          "call": "Kêu",
+          "growl": "Gừ",
+          "howl": "Hú",
+          "roar": "Gầm"
+        },
+        "synonyms": "monster sound, tiếng sinh vật, tieng quai"
+      },
+      "death": {
+        "label": "Âm chết",
+        "labelVi": "tiếng chết",
+        "subkindLabelVi": {
+          "destruction": "phá hủy",
+          "large": "quái lớn",
+          "swarm": "bầy nhỏ"
+        },
+        "subkinds": {
+          "destruction": "Phá hủy",
+          "large": "Quái lớn",
+          "swarm": "Bầy nhỏ"
+        },
+        "synonyms": "death sound, tiếng gục, tieng chet"
+      },
+      "explosion": {
+        "label": "Âm nổ",
+        "labelVi": "tiếng nổ",
+        "subkindLabelVi": {
+          "blast": "vụ nổ",
+          "chain": "nổ dây chuyền",
+          "fire": "lửa"
+        },
+        "subkinds": {
+          "blast": "Vụ nổ",
+          "chain": "Nổ dây chuyền",
+          "fire": "Lửa"
+        },
+        "synonyms": "blast sound, boom, tieng no"
+      },
+      "foley": {
+        "label": "Tiếng động",
+        "labelVi": "tiếng động",
+        "subkindLabelVi": {
+          "break": "vỡ",
+          "cloth": "vải",
+          "knock": "gõ cửa",
+          "mechanical": "cơ khí"
+        },
+        "subkinds": {
+          "break": "Vỡ",
+          "cloth": "Vải",
+          "knock": "Gõ cửa",
+          "mechanical": "Cơ khí"
+        },
+        "synonyms": "sound effect, sfx, tieng dong"
+      },
+      "impact": {
+        "label": "Âm va chạm",
+        "labelVi": "tiếng va chạm",
+        "subkindLabelVi": {
+          "heavy": "nặng",
+          "metal": "kim loại",
+          "shield": "khiên",
+          "small": "nhẹ",
+          "stone": "đá",
+          "wood": "gỗ"
+        },
+        "subkinds": {
+          "heavy": "Nặng",
+          "metal": "Kim loại",
+          "shield": "Khiên",
+          "small": "Nhẹ",
+          "stone": "Đá",
+          "wood": "Gỗ"
+        },
+        "synonyms": "hit sound, tiếng trúng, tieng va cham"
+      },
+      "movement": {
+        "label": "Âm di chuyển",
+        "labelVi": "tiếng di chuyển",
+        "subkindLabelVi": {
+          "footstep": "bước chân",
+          "thruster": "động cơ đẩy",
+          "whoosh": "lướt",
+          "wing": "cánh"
+        },
+        "subkinds": {
+          "footstep": "Bước chân",
+          "thruster": "Động cơ đẩy",
+          "whoosh": "Lướt",
+          "wing": "Cánh"
+        },
+        "synonyms": "movement sound, tiếng bước, tieng di chuyen"
+      },
+      "music": {
+        "label": "Nhạc",
+        "labelVi": "nhạc",
+        "subkindLabelVi": {
+          "boss": "trùm",
+          "calm": "êm dịu",
+          "combat": "giao chiến",
+          "menu": "trình đơn"
+        },
+        "subkinds": {
+          "boss": "Trùm",
+          "calm": "Êm dịu",
+          "combat": "Giao chiến",
+          "menu": "Trình đơn"
+        },
+        "synonyms": "soundtrack, bản nhạc, nhac"
+      },
+      "reward": {
+        "label": "Âm thưởng",
+        "labelVi": "tiếng thưởng",
+        "subkindLabelVi": {
+          "coin": "nhận xu",
+          "level": "thăng cấp",
+          "streak": "chuỗi đúng",
+          "word": "hoàn thành từ"
+        },
+        "subkinds": {
+          "coin": "Nhận xu",
+          "level": "Thăng cấp",
+          "streak": "Chuỗi đúng",
+          "word": "Hoàn thành từ"
+        },
+        "synonyms": "reward sound, tiếng nhận thưởng, tieng thuong"
+      },
+      "shot": {
+        "label": "Âm phóng, bắn",
+        "labelVi": "tiếng bắn",
+        "subkindLabelVi": {
+          "breath": "khạc lửa",
+          "gun": "súng",
+          "laser": "laser",
+          "launch": "phóng"
+        },
+        "subkinds": {
+          "breath": "Khạc",
+          "gun": "Súng",
+          "laser": "Laser",
+          "launch": "Phóng"
+        },
+        "synonyms": "shot sound, tiếng phóng, tieng ban"
+      },
+      "stinger": {
+        "label": "Âm báo chuyển cảnh",
+        "labelVi": "nhạc báo",
+        "subkindLabelVi": {
+          "defeat": "thua",
+          "round": "hiệp mới",
+          "victory": "thắng",
+          "warning": "báo nguy"
+        },
+        "subkinds": {
+          "defeat": "Thất bại",
+          "round": "Hiệp",
+          "victory": "Chiến thắng",
+          "warning": "Báo nguy"
+        },
+        "synonyms": "jingle, nhạc chuyển cảnh, nhac bao"
+      },
+      "typing": {
+        "label": "Âm gõ phím",
+        "labelVi": "tiếng gõ phím",
+        "subkindLabelVi": {
+          "correction": "sửa chữ",
+          "key-bad": "phím sai",
+          "key-ok": "phím đúng"
+        },
+        "subkinds": {
+          "correction": "Sửa chữ",
+          "key-bad": "Phím sai",
+          "key-ok": "Phím đúng"
+        },
+        "synonyms": "keyboard sound, gõ phím, tieng go phim"
+      },
+      "ui": {
+        "label": "Âm giao diện",
+        "labelVi": "tiếng giao diện",
+        "subkindLabelVi": {
+          "click": "bấm",
+          "close": "đóng",
+          "confirm": "xác nhận",
+          "error": "lỗi",
+          "hover": "rê chuột",
+          "open": "mở"
+        },
+        "subkinds": {
+          "click": "Bấm",
+          "close": "Đóng",
+          "confirm": "Xác nhận",
+          "error": "Lỗi",
+          "hover": "Rê chuột",
+          "open": "Mở"
+        },
+        "synonyms": "ui sound, tiếng nút, tieng giao dien"
+      },
+      "voice": {
+        "label": "Giọng người",
+        "labelVi": "giọng nói",
+        "subkindLabelVi": {
+          "announcer": "xướng giọng",
+          "dialogue": "hội thoại"
+        },
+        "subkinds": {
+          "announcer": "Xướng giọng",
+          "dialogue": "Hội thoại"
+        },
+        "synonyms": "voice line, lời thoại, giong noi"
+      }
+    },
+    "visual": {
+      "backdrop": {
+        "label": "Phông cảnh",
+        "labelVi": "phông nền",
+        "subkindLabelVi": {
+          "atlas": "tập ảnh",
+          "panorama": "toàn cảnh",
+          "plate": "lớp cảnh",
+          "scene": "cảnh màn chơi",
+          "sky": "bầu trời",
+          "world": "thế giới"
+        },
+        "subkindSynonyms": {
+          "atlas": "texture atlas, sprite sheet, tap anh",
+          "panorama": "vista, cảnh rộng, toan canh",
+          "plate": "parallax layer, lớp nền, lop canh",
+          "scene": "stage, cảnh, canh man choi",
+          "sky": "skybox, trời, bau troi",
+          "world": "planet, hành tinh, the gioi"
+        },
+        "subkinds": {
+          "atlas": "Tập ảnh",
+          "panorama": "Toàn cảnh",
+          "plate": "Lớp cảnh",
+          "scene": "Cảnh màn chơi",
+          "sky": "Bầu trời",
+          "world": "Thế giới"
+        },
+        "synonyms": "background, phông cảnh, phong nen"
+      },
+      "building": {
+        "label": "Công trình",
+        "labelVi": "công trình",
+        "subkindLabelVi": {
+          "barracks": "doanh trại",
+          "bridge": "cầu",
+          "farm": "nông trại",
+          "gate": "cổng",
+          "house": "nhà",
+          "hut": "chòi, lều",
+          "keep": "thành lũy",
+          "kit-part": "phần lắp ghép",
+          "landmark": "địa danh",
+          "mine": "mỏ",
+          "shrine": "miếu",
+          "tower": "tháp",
+          "wall": "tường thành",
+          "workshop": "xưởng"
+        },
+        "subkindSynonyms": {
+          "barracks": "military camp, trại lính, doanh trai",
+          "bridge": "footbridge, cầu gỗ, cau go",
+          "farm": "field, ruộng, nong trai",
+          "gate": "gateway, cổng thành, cong thanh",
+          "house": "home, nhà ở, nha",
+          "hut": "shack, cabin, choi leu",
+          "keep": "castle, thành, thanh luy",
+          "kit-part": "modular kit, bộ lắp ghép, phan lap ghep",
+          "landmark": "monument, công trình lớn, dia danh",
+          "mine": "gold mine, hầm mỏ, ham mo",
+          "shrine": "temple, đền, mieu",
+          "tower": "turret, tháp canh, thap",
+          "wall": "rampart, tường, tuong thanh",
+          "workshop": "forge, xưởng gỗ, xuong"
+        },
+        "subkinds": {
+          "barracks": "Doanh trại",
+          "bridge": "Cầu",
+          "farm": "Nông trại",
+          "gate": "Cổng",
+          "house": "Nhà",
+          "hut": "Chòi, lều",
+          "keep": "Thành lũy",
+          "kit-part": "Bộ phận lắp ghép",
+          "landmark": "Địa danh",
+          "mine": "Mỏ",
+          "shrine": "Miếu",
+          "tower": "Tháp",
+          "wall": "Tường thành",
+          "workshop": "Xưởng"
+        },
+        "synonyms": "buildings, tòa nhà, cong trinh"
+      },
+      "character": {
+        "label": "Nhân vật",
+        "labelVi": "nhân vật",
+        "subkindLabelVi": {
+          "general": "tướng",
+          "guide": "người hướng dẫn",
+          "helper": "trợ thủ",
+          "hero": "anh hùng",
+          "mascot": "linh vật",
+          "portrait": "chân dung",
+          "soldier": "lính",
+          "unit": "quân",
+          "villager": "dân làng",
+          "worker": "thợ"
+        },
+        "subkindSynonyms": {
+          "general": "commander, thủ lĩnh, tuong",
+          "guide": "narrator, mentor, nguoi huong dan",
+          "helper": "sidekick, assistant, tro thu",
+          "hero": "protagonist, nhân vật chính, anh hung",
+          "mascot": "pet, thú cưng, linh vat",
+          "portrait": "bust, khuôn mặt, chan dung",
+          "soldier": "warrior, chiến binh, linh",
+          "unit": "troop, đơn vị, quan",
+          "villager": "peasant, người dân, dan lang",
+          "worker": "builder, người làm, tho"
+        },
+        "subkinds": {
+          "general": "Tướng",
+          "guide": "Người hướng dẫn",
+          "helper": "Trợ thủ",
+          "hero": "Anh hùng",
+          "mascot": "Linh vật",
+          "portrait": "Chân dung",
+          "soldier": "Lính",
+          "unit": "Quân",
+          "villager": "Dân làng",
+          "worker": "Thợ"
+        },
+        "synonyms": "characters, npc, nhan vat"
+      },
+      "creature": {
+        "label": "Sinh vật",
+        "labelVi": "quái",
+        "subkindLabelVi": {
+          "animal": "động vật",
+          "aquatic": "quái nước",
+          "beast": "thú",
+          "boss": "trùm",
+          "dragon": "rồng",
+          "enemy": "địch",
+          "flyer": "quái bay",
+          "humanoid": "quái hình người",
+          "insect": "côn trùng",
+          "machine": "máy, tàu",
+          "plant": "quái cây, rêu",
+          "spirit": "ma, tinh linh",
+          "undead": "xác sống"
+        },
+        "subkindSynonyms": {
+          "animal": "critter, wildlife, con vật, dong vat",
+          "aquatic": "fish, sea serpent, thủy quái, quai nuoc",
+          "beast": "monster beast, wolf, quái thú, quai thu",
+          "boss": "boss monster, big boss, quái trùm, quai trum",
+          "dragon": "wyrm, drake, rồng thần, con rong",
+          "enemy": "foe, hostile, kẻ địch, ke dich",
+          "flyer": "bird, bat, chim, quai bay",
+          "humanoid": "goblin, troll, quỷ, quai hinh nguoi",
+          "insect": "bug, wasp, sâu bọ, con trung",
+          "machine": "robot, drone, ship, người máy, may tau",
+          "plant": "plant monster, moss monster, quái cây, quai cay reu",
+          "spirit": "ghost, yokai, yêu tinh, ma tinh linh",
+          "undead": "zombie, skeleton, cương thi, xac song"
+        },
+        "subkinds": {
+          "animal": "Động vật",
+          "aquatic": "Quái nước",
+          "beast": "Thú",
+          "boss": "Trùm",
+          "dragon": "Rồng",
+          "enemy": "Địch",
+          "flyer": "Quái bay",
+          "humanoid": "Quái hình người",
+          "insect": "Côn trùng",
+          "machine": "Máy móc, robot, tàu",
+          "plant": "Quái cây, rêu",
+          "spirit": "Ma, tinh linh",
+          "undead": "Xác sống"
+        },
+        "synonyms": "monster, enemy, quái vật, quai vat"
+      },
+      "ground": {
+        "label": "Mặt đất",
+        "labelVi": "mặt đất",
+        "subkindLabelVi": {
+          "decal": "dấu phủ",
+          "path": "đường đi",
+          "terrain": "địa hình",
+          "tile": "ô nền"
+        },
+        "subkindSynonyms": {
+          "decal": "overlay, vết, dau phu",
+          "path": "road, lối đi, duong di",
+          "terrain": "landscape, heightmap, dia hinh",
+          "tile": "floor tile, gạch, o nen"
+        },
+        "subkinds": {
+          "decal": "Dấu phủ",
+          "path": "Đường đi",
+          "terrain": "Địa hình",
+          "tile": "Ô nền"
+        },
+        "synonyms": "floor, nền đất, mat dat"
+      },
+      "item": {
+        "label": "Vật phẩm",
+        "labelVi": "vật phẩm",
+        "subkindLabelVi": {
+          "chest": "rương",
+          "coin": "đồng xu",
+          "equipment": "trang bị",
+          "feather": "lông vũ",
+          "food": "thức ăn",
+          "gem": "đá quý",
+          "loot": "chiến lợi phẩm",
+          "pickup": "đồ nhặt",
+          "relic": "di vật",
+          "resource": "tài nguyên",
+          "seed": "hạt giống",
+          "tool": "dụng cụ",
+          "weapon": "vũ khí"
+        },
+        "subkindSynonyms": {
+          "chest": "treasure chest, hòm, ruong",
+          "coin": "gold coin, tiền, dong xu",
+          "equipment": "gear, armor, trang bi",
+          "feather": "plume, lông chim, long vu",
+          "food": "meal, đồ ăn, thuc an",
+          "gem": "crystal, ngọc, da quy",
+          "loot": "drop, của rơi, chien loi pham",
+          "pickup": "power-up, vật phẩm nhặt, do nhat",
+          "relic": "artifact, bảo vật, di vat",
+          "resource": "material, nguyên liệu, tai nguyen",
+          "seed": "sapling, cây mạ, hat giong",
+          "tool": "pickaxe, đồ nghề, dung cu",
+          "weapon": "sword, binh khí, vu khi"
+        },
+        "subkinds": {
+          "chest": "Rương",
+          "coin": "Đồng xu",
+          "equipment": "Trang bị",
+          "feather": "Lông vũ",
+          "food": "Thức ăn",
+          "gem": "Đá quý",
+          "loot": "Chiến lợi phẩm",
+          "pickup": "Vật phẩm nhặt",
+          "relic": "Di vật",
+          "resource": "Tài nguyên",
+          "seed": "Hạt giống",
+          "tool": "Dụng cụ",
+          "weapon": "Vũ khí"
+        },
+        "synonyms": "items, món đồ, vat pham"
+      },
+      "motion": {
+        "label": "Chuyển động",
+        "labelVi": "chuyển động",
+        "subkindLabelVi": {
+          "animation": "hoạt ảnh",
+          "clip": "đoạn chuyển động",
+          "pose": "tư thế",
+          "sequence": "chuỗi hình"
+        },
+        "subkindSynonyms": {
+          "animation": "animated, anim clip, hoat anh",
+          "clip": "action clip, mocap, doan chuyen dong",
+          "pose": "stance, rest pose, tu the",
+          "sequence": "frames, image sequence, chuoi hinh"
+        },
+        "subkinds": {
+          "animation": "Hoạt ảnh",
+          "clip": "Đoạn chuyển động",
+          "pose": "Tư thế",
+          "sequence": "Chuỗi hình"
+        },
+        "synonyms": "animation, anim, chuyen dong"
+      },
+      "nature": {
+        "label": "Thiên nhiên",
+        "labelVi": "thiên nhiên",
+        "subkindLabelVi": {
+          "bamboo": "tre",
+          "bush": "bụi cây",
+          "cliff": "vách đá",
+          "flower": "hoa",
+          "grass": "cỏ",
+          "log": "khúc gỗ",
+          "mushroom": "nấm",
+          "reed": "lau sậy",
+          "rock": "đá",
+          "stump": "gốc cây",
+          "tree": "cây",
+          "water": "nước",
+          "waterfall": "thác"
+        },
+        "subkindSynonyms": {
+          "bamboo": "bamboo clump, bụi tre, bui tre",
+          "bush": "shrub, hedge, bui cay",
+          "cliff": "rock wall, escarpment, vach da",
+          "flower": "blossom, bông hoa, bong hoa",
+          "grass": "grass tuft, bãi cỏ, bai co",
+          "log": "fallen log, trunk, khuc go",
+          "mushroom": "toadstool, fungus, cay nam",
+          "reed": "cattail, rush, lau say",
+          "rock": "boulder, hòn đá, hon da",
+          "stump": "tree stump, gốc, goc cay",
+          "tree": "pine, palm, cay",
+          "water": "pond, ao hồ, nuoc",
+          "waterfall": "falls, thác nước, thac nuoc"
+        },
+        "subkinds": {
+          "bamboo": "Tre",
+          "bush": "Bụi cây",
+          "cliff": "Vách đá",
+          "flower": "Hoa",
+          "grass": "Cỏ",
+          "log": "Khúc gỗ",
+          "mushroom": "Nấm",
+          "reed": "Lau sậy",
+          "rock": "Đá",
+          "stump": "Gốc cây",
+          "tree": "Cây",
+          "water": "Nước",
+          "waterfall": "Thác"
+        },
+        "synonyms": "scenery, cây cối, thien nhien"
+      },
+      "projectile": {
+        "label": "Đạn bay",
+        "labelVi": "đạn",
+        "subkindLabelVi": {
+          "arrow": "mũi tên",
+          "beam": "tia",
+          "bullet": "viên đạn",
+          "fireball": "cầu lửa",
+          "missile": "tên lửa"
+        },
+        "subkindSynonyms": {
+          "arrow": "bolt, dart, mui ten",
+          "beam": "ray, tia sáng, tia sang",
+          "bullet": "shell, round, vien dan",
+          "fireball": "fire bolt, quả cầu lửa, cau lua",
+          "missile": "rocket, torpedo, ten lua"
+        },
+        "subkinds": {
+          "arrow": "Mũi tên",
+          "beam": "Tia",
+          "bullet": "Viên đạn",
+          "fireball": "Cầu lửa",
+          "missile": "Tên lửa"
+        },
+        "synonyms": "ammo, đạn bay, dan bay"
+      },
+      "prop": {
+        "label": "Đạo cụ",
+        "labelVi": "đạo cụ",
+        "subkindLabelVi": {
+          "banner": "cờ, phướn",
+          "barrel": "thùng tròn",
+          "basket": "giỏ",
+          "campfire": "lửa trại",
+          "cart": "xe đẩy",
+          "crate": "thùng",
+          "debris": "mảnh vụn",
+          "fence": "hàng rào",
+          "jetty": "cầu tàu",
+          "lantern": "đèn lồng",
+          "post": "cột",
+          "scaffold": "giàn giáo",
+          "sign": "biển báo",
+          "woodpile": "đống củi"
+        },
+        "subkindSynonyms": {
+          "banner": "flag, pennant, co phuon",
+          "barrel": "cask, thùng gỗ, thung tron",
+          "basket": "wicker basket, thúng, gio",
+          "campfire": "bonfire, đống lửa, lua trai",
+          "cart": "wagon, xe kéo, xe day",
+          "crate": "box, hộp, thung",
+          "debris": "rubble, đổ nát, manh vun",
+          "fence": "railing, rào, hang rao",
+          "jetty": "dock, bến, cau tau",
+          "lantern": "lamp, đèn, den long",
+          "post": "pole, cọc, cot",
+          "scaffold": "scaffolding, giàn, gian giao",
+          "sign": "signpost, bảng chỉ đường, bien bao",
+          "woodpile": "firewood, củi, dong cui"
+        },
+        "subkinds": {
+          "banner": "Cờ, phướn",
+          "barrel": "Thùng tròn",
+          "basket": "Giỏ",
+          "campfire": "Lửa trại",
+          "cart": "Xe đẩy",
+          "crate": "Thùng",
+          "debris": "Mảnh vụn",
+          "fence": "Hàng rào rời",
+          "jetty": "Cầu tàu",
+          "lantern": "Đèn lồng",
+          "post": "Cột",
+          "scaffold": "Giàn",
+          "sign": "Biển báo",
+          "woodpile": "Đống củi"
+        },
+        "synonyms": "props, đồ vật, dao cu"
+      },
+      "structure": {
+        "label": "Kết cấu",
+        "labelVi": "cầu, cổng, tường",
+        "subkindLabelVi": {
+          "arch": "vòm",
+          "bridge": "cầu",
+          "dais": "bệ",
+          "fence": "hàng rào",
+          "gate": "cổng",
+          "jetty": "cầu tàu",
+          "lighthouse": "hải đăng",
+          "ruin": "phế tích",
+          "stairs": "bậc thang",
+          "wall": "tường",
+          "well": "giếng"
+        },
+        "subkindSynonyms": {
+          "arch": "archway, cổng vòm, vom",
+          "bridge": "footbridge, cầu gỗ, cau go",
+          "dais": "platform, bệ đá, be da",
+          "fence": "palisade, railing, hang rao",
+          "gate": "gateway, cổng làng, cong lang",
+          "jetty": "dock, pier, cau tau",
+          "lighthouse": "beacon, đèn biển, hai dang",
+          "ruin": "ruins, tàn tích, phe tich",
+          "stairs": "steps, cầu thang, bac thang",
+          "wall": "rampart, tường thành, tuong",
+          "well": "water well, giếng nước, gieng"
+        },
+        "subkinds": {
+          "arch": "Vòm",
+          "bridge": "Cầu",
+          "dais": "Bệ",
+          "fence": "Hàng rào",
+          "gate": "Cổng",
+          "jetty": "Cầu tàu",
+          "lighthouse": "Hải đăng",
+          "ruin": "Phế tích",
+          "stairs": "Bậc thang",
+          "wall": "Tường",
+          "well": "Giếng"
+        },
+        "synonyms": "architecture, kiến trúc, ket cau"
+      },
+      "trap": {
+        "label": "Bẫy",
+        "labelVi": "bẫy",
+        "subkindLabelVi": {
+          "bomb": "bom",
+          "mine": "mìn",
+          "snare": "bẫy giữ",
+          "spike": "chông"
+        },
+        "subkindSynonyms": {
+          "bomb": "explosive, trái nổ, trai no",
+          "mine": "landmine, mine trap, min",
+          "snare": "net, bẫy lưới, bay giu",
+          "spike": "spikes, bẫy chông, chong"
+        },
+        "subkinds": {
+          "bomb": "Bom",
+          "mine": "Mìn",
+          "snare": "Bẫy giữ",
+          "spike": "Chông"
+        },
+        "synonyms": "traps, cạm bẫy, cam bay"
+      },
+      "ui": {
+        "label": "Giao diện",
+        "labelVi": "giao diện",
+        "subkindLabelVi": {
+          "badge": "huy hiệu",
+          "button": "nút",
+          "card": "thẻ",
+          "cursor": "con trỏ",
+          "frame": "khung",
+          "icon": "biểu tượng",
+          "panel": "bảng",
+          "portrait": "chân dung"
+        },
+        "subkindSynonyms": {
+          "badge": "medal, emblem, huy hieu",
+          "button": "btn, nút bấm, nut bam",
+          "card": "tile, thẻ bài, the bai",
+          "cursor": "pointer, mouse, con tro",
+          "frame": "border, viền, khung vien",
+          "icon": "symbol, glyph, bieu tuong",
+          "panel": "window, khung bảng, khung bang",
+          "portrait": "avatar, ảnh đại diện, chan dung"
+        },
+        "subkinds": {
+          "badge": "Huy hiệu",
+          "button": "Nút",
+          "card": "Thẻ",
+          "cursor": "Con trỏ",
+          "frame": "Khung",
+          "icon": "Biểu tượng",
+          "panel": "Bảng",
+          "portrait": "Chân dung"
+        },
+        "synonyms": "interface, hud, giao dien"
+      },
+      "vehicle": {
+        "label": "Phương tiện",
+        "labelVi": "phương tiện",
+        "subkindLabelVi": {
+          "fighter": "tiêm kích",
+          "ship": "tàu",
+          "tank": "xe tăng",
+          "transport": "vận tải"
+        },
+        "subkindSynonyms": {
+          "fighter": "fighter jet, máy bay, tiem kich",
+          "ship": "spaceship, phi thuyền, tau vu tru",
+          "tank": "armored vehicle, mech, xe tang",
+          "transport": "carrier, tàu chở, van tai"
+        },
+        "subkinds": {
+          "fighter": "Tiêm kích",
+          "ship": "Tàu",
+          "tank": "Xe tăng",
+          "transport": "Vận tải"
+        },
+        "synonyms": "vehicles, xe cộ, phuong tien"
+      },
+      "vfx": {
+        "label": "Hiệu ứng",
+        "labelVi": "hiệu ứng",
+        "subkindLabelVi": {
+          "aftermath": "dư âm",
+          "aura": "hào quang",
+          "charge": "tụ lực",
+          "decal": "vết cháy",
+          "explosion": "vụ nổ",
+          "flipbook": "dải khung hình",
+          "impact": "va chạm",
+          "life": "sinh vật nền",
+          "mask": "mặt nạ",
+          "release": "phóng",
+          "sprite": "hình hạt",
+          "trail": "vệt bay"
+        },
+        "subkindSynonyms": {
+          "aftermath": "afterglow, residue, du am",
+          "aura": "glow, halo, hao quang",
+          "charge": "wind-up, charging, tu luc",
+          "decal": "scorch mark, dấu phủ, vet chay",
+          "explosion": "blast, nổ, vu no",
+          "flipbook": "sprite sheet, chuỗi khung, dai khung hinh",
+          "impact": "hit, trúng đòn, va cham",
+          "life": "ambient life, chim bướm, sinh vat nen",
+          "mask": "alpha mask, matte, mat na",
+          "release": "muzzle flash, cast, phong",
+          "sprite": "particle, hạt sáng, hinh hat",
+          "trail": "streak, wake, vet bay"
+        },
+        "subkinds": {
+          "aftermath": "Dư âm",
+          "aura": "Hào quang",
+          "charge": "Tụ lực",
+          "decal": "Vết cháy, dấu phủ",
+          "explosion": "Vụ nổ",
+          "flipbook": "Dải khung hình",
+          "impact": "Va chạm",
+          "life": "Sinh vật nền (chim, bướm)",
+          "mask": "Mặt nạ",
+          "release": "Phóng",
+          "sprite": "Hình hạt",
+          "trail": "Vệt bay"
+        },
+        "synonyms": "effects, fx, hieu ung"
+      },
+      "weapon": {
+        "label": "Vũ khí",
+        "labelVi": "vũ khí",
+        "subkindLabelVi": {
+          "axe": "rìu",
+          "bow": "cung",
+          "cannon": "đại bác",
+          "crossbow": "nỏ",
+          "gun": "súng",
+          "hammer": "búa",
+          "shield": "khiên",
+          "spear": "giáo"
+        },
+        "subkindSynonyms": {
+          "axe": "hatchet, cái rìu, riu",
+          "bow": "longbow, cây cung, cay cung",
+          "cannon": "artillery, súng thần công, dai bac",
+          "crossbow": "arbalest, nỏ thần, no than",
+          "gun": "rifle, blaster, sung",
+          "hammer": "mallet, maul, bua",
+          "shield": "buckler, lá chắn, khien",
+          "spear": "lance, ngọn giáo, ngon giao"
+        },
+        "subkinds": {
+          "axe": "Rìu",
+          "bow": "Cung",
+          "cannon": "Đại bác",
+          "crossbow": "Nỏ",
+          "gun": "Súng",
+          "hammer": "Búa",
+          "shield": "Khiên",
+          "spear": "Giáo"
+        },
+        "synonyms": "weapons, binh khí, vu khi"
+      }
+    }
+  },
+  "pipeline": {
+    "concept-only": "Chỉ có ảnh ý tưởng",
+    "glb-original": "GLB gốc",
+    "processed": "Đã xử lý",
+    "runtime": "Đang dùng trong game",
+    "tripo-requested": "Đã yêu cầu Tripo"
+  },
+  "related": [
+    [
+      "hut",
+      "house"
+    ],
+    [
+      "jetty",
+      "bridge"
+    ],
+    [
+      "click",
+      "knock"
+    ],
+    [
+      "stone",
+      "cliff"
+    ],
+    [
+      "bush",
+      "tree"
+    ],
+    [
+      "bow",
+      "arrow"
+    ]
+  ],
+  "schemaVersion": 1,
+  "status": {
+    "draft": "Nháp",
+    "pass": "Đạt",
+    "private": "Riêng tư",
+    "provisional": "Dùng tạm",
+    "rejected": "Bị loại",
+    "requested": "Đã yêu cầu",
+    "review": "Chờ duyệt",
+    "shipped": "Đã phát hành",
+    "unscored": "Chưa chấm"
+  },
+  "styles": {
+    "mythic-forest": "Rừng huyền thoại",
+    "neutral": "Trung tính",
+    "sci-fi-space": "Vũ trụ khoa học viễn tưởng",
+    "steel-station": "Trạm thép",
+    "viet-village": "Làng Việt"
+  },
+  "synonyms": [
+    [
+      "ant",
+      "kien",
+      "kiến"
+    ],
+    [
+      "arrow",
+      "arrows",
+      "ten",
+      "tên"
+    ],
+    [
+      "axe",
+      "riu",
+      "rìu"
+    ],
+    [
+      "bamboo",
+      "tre"
+    ],
+    [
+      "bandana",
+      "headband",
+      "khan",
+      "khăn"
+    ],
+    [
+      "basket",
+      "gio",
+      "giỏ"
+    ],
+    [
+      "bird",
+      "chim"
+    ],
+    [
+      "black",
+      "den",
+      "đen"
+    ],
+    [
+      "blossom",
+      "flower",
+      "flowering",
+      "hoa"
+    ],
+    [
+      "blue",
+      "xanh"
+    ],
+    [
+      "book",
+      "sach",
+      "sách"
+    ],
+    [
+      "bow",
+      "crossbow",
+      "cung",
+      "no",
+      "nỏ"
+    ],
+    [
+      "bridge",
+      "cầu"
+    ],
+    [
+      "brown",
+      "nau",
+      "nâu"
+    ],
+    [
+      "buffalo",
+      "trau",
+      "trâu"
+    ],
+    [
+      "bush",
+      "shrub",
+      "bui",
+      "bụi"
+    ],
+    [
+      "click",
+      "tap",
+      "tick",
+      "gõ",
+      "bấm",
+      "bam"
+    ],
+    [
+      "cliff",
+      "vach",
+      "vách"
+    ],
+    [
+      "club",
+      "chuy",
+      "gay",
+      "chùy",
+      "gậy"
+    ],
+    [
+      "dragonfly",
+      "chuồn chuồn",
+      "chuon chuon"
+    ],
+    [
+      "fan",
+      "quat",
+      "quạt"
+    ],
+    [
+      "feather",
+      "long",
+      "lông"
+    ],
+    [
+      "goggles",
+      "kinh",
+      "kính"
+    ],
+    [
+      "gold",
+      "golden",
+      "yellow",
+      "vang",
+      "vàng"
+    ],
+    [
+      "hair",
+      "hairstyle",
+      "toc",
+      "tóc"
+    ],
+    [
+      "hammer",
+      "mallet",
+      "bua",
+      "búa"
+    ],
+    [
+      "hat",
+      "helmet",
+      "mu",
+      "non",
+      "mũ",
+      "nón"
+    ],
+    [
+      "house",
+      "home",
+      "nhà",
+      "nha"
+    ],
+    [
+      "hut",
+      "cottage",
+      "leu",
+      "shack",
+      "cabin",
+      "chòi",
+      "choi",
+      "lều"
+    ],
+    [
+      "insect",
+      "bug"
+    ],
+    [
+      "jetty",
+      "dock",
+      "pier",
+      "wharf",
+      "cầu tàu",
+      "cau tau"
+    ],
+    [
+      "knock",
+      "gõ cửa",
+      "go cua"
+    ],
+    [
+      "leaf",
+      "leafy",
+      "la",
+      "lá"
+    ],
+    [
+      "moss",
+      "mossy",
+      "reu",
+      "rêu"
+    ],
+    [
+      "mustache",
+      "moustache",
+      "ria"
+    ],
+    [
+      "pickaxe",
+      "cuoc",
+      "cuốc"
+    ],
+    [
+      "pig",
+      "piggy",
+      "heo"
+    ],
+    [
+      "pine",
+      "evergreen",
+      "thong",
+      "thông"
+    ],
+    [
+      "purple",
+      "violet",
+      "tim",
+      "tím"
+    ],
+    [
+      "red",
+      "do",
+      "đỏ"
+    ],
+    [
+      "scaffold",
+      "gian",
+      "giàn"
+    ],
+    [
+      "shield",
+      "khien",
+      "khiên"
+    ],
+    [
+      "spike",
+      "spikes",
+      "chong"
+    ],
+    [
+      "stone",
+      "rock",
+      "rocks",
+      "rocky",
+      "stones",
+      "đá"
+    ],
+    [
+      "tree",
+      "cay",
+      "cây"
+    ],
+    [
+      "wasp",
+      "ong"
+    ],
+    [
+      "water",
+      "nuoc",
+      "nước"
+    ],
+    [
+      "waterfall",
+      "thac",
+      "thác"
+    ],
+    [
+      "white",
+      "trang",
+      "trắng"
+    ],
+    [
+      "wolf",
+      "soi",
+      "sói"
+    ],
+    [
+      "wood",
+      "wooden",
+      "go",
+      "timber",
+      "gỗ"
+    ]
+  ],
+  "tags": [
+    "aftermath",
+    "ambience",
+    "animation",
+    "ant",
+    "archer",
+    "arrow",
+    "atlas",
+    "aura",
+    "axe",
+    "backdrop",
+    "badge",
+    "bamboo",
+    "bandana",
+    "barracks",
+    "barrel",
+    "basket",
+    "bell",
+    "bird",
+    "black",
+    "blossom",
+    "blue",
+    "boar",
+    "bomb",
+    "book",
+    "boss",
+    "boulder",
+    "bow",
+    "branch",
+    "bridge",
+    "bright",
+    "bronze",
+    "brown",
+    "buffalo",
+    "bullet",
+    "bush",
+    "button",
+    "call",
+    "cannon",
+    "canopy",
+    "card",
+    "cart",
+    "cartoon",
+    "charge",
+    "chest",
+    "chime",
+    "click",
+    "cliff",
+    "clip",
+    "close",
+    "cloth",
+    "coast",
+    "coin",
+    "cold",
+    "confirm",
+    "copper",
+    "crate",
+    "creature",
+    "crossbow",
+    "crystal",
+    "cursor",
+    "dais",
+    "dark",
+    "death",
+    "debris",
+    "decal",
+    "defeat",
+    "dragon",
+    "dragonfly",
+    "drum",
+    "dry",
+    "electric",
+    "enemy",
+    "energy",
+    "engine",
+    "equipment",
+    "error",
+    "evergreen",
+    "explosion",
+    "fan",
+    "fantasy",
+    "farm",
+    "feather",
+    "fence",
+    "fighter",
+    "fire",
+    "flame",
+    "flower",
+    "flute",
+    "foley",
+    "footstep",
+    "forest",
+    "frost",
+    "gate",
+    "general",
+    "glass",
+    "glow",
+    "goggles",
+    "gold",
+    "gong",
+    "grass",
+    "gravel",
+    "green",
+    "ground",
+    "growl",
+    "guide",
+    "hair",
+    "hammer",
+    "harp",
+    "hat",
+    "healer",
+    "heavy",
+    "helmet",
+    "helper",
+    "hero",
+    "hill",
+    "house",
+    "hover",
+    "howl",
+    "hut",
+    "ice",
+    "icon",
+    "impact",
+    "insect",
+    "intact",
+    "iron",
+    "jetty",
+    "keep",
+    "kinetic",
+    "knock",
+    "lantern",
+    "large",
+    "laser",
+    "leaf",
+    "leather",
+    "light",
+    "log",
+    "long",
+    "lookout",
+    "loop",
+    "loot",
+    "loss",
+    "low",
+    "meadow",
+    "mechanical",
+    "medium",
+    "metal",
+    "mine",
+    "missile",
+    "mossy",
+    "motion",
+    "movement",
+    "mud",
+    "music",
+    "neutral",
+    "new",
+    "old",
+    "open",
+    "ornate",
+    "panel",
+    "path",
+    "pickaxe",
+    "pickup",
+    "pig",
+    "pine",
+    "pitched",
+    "plasma",
+    "plate",
+    "pose",
+    "post",
+    "projectile",
+    "purple",
+    "rainforest",
+    "red",
+    "reed",
+    "release",
+    "relic",
+    "resource",
+    "reward",
+    "river",
+    "roar",
+    "rock",
+    "rocket",
+    "root",
+    "rope",
+    "round",
+    "ruined",
+    "rustic",
+    "sand",
+    "scaffold",
+    "sci-fi",
+    "seamless",
+    "sequence",
+    "shield",
+    "ship",
+    "short",
+    "shot",
+    "shrine",
+    "silver",
+    "sky",
+    "small",
+    "snare",
+    "snow",
+    "soft",
+    "soil",
+    "space",
+    "spear",
+    "spike",
+    "square",
+    "steel",
+    "stilts",
+    "stinger",
+    "stone",
+    "stump",
+    "stylized",
+    "tall",
+    "tank",
+    "tap",
+    "terrain",
+    "thatch",
+    "thruster",
+    "tick",
+    "tile",
+    "timber",
+    "tower",
+    "trail",
+    "transport",
+    "trap",
+    "tree",
+    "typing",
+    "ui",
+    "unit",
+    "vehicle",
+    "vfx",
+    "victory",
+    "village",
+    "voice",
+    "wall",
+    "warm",
+    "warning",
+    "wasp",
+    "water",
+    "waterfall",
+    "well",
+    "white",
+    "whoosh",
+    "win",
+    "wing",
+    "wolf",
+    "wood",
+    "wooden",
+    "worker",
+    "workshop",
+    "world",
+    "zither"
+  ],
+  "viTokens": {
+    "cau": {
+      "folders": [
+        "typing-defense:landmarks"
+      ],
+      "word": "bridge"
+    },
+    "da": {
+      "folders": [
+        "scenery/",
+        "landmarks/"
+      ],
+      "word": "stone"
+    }
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "$schema": "../schemas/recipe.schema.json",
+  "schema": "audiolab.recipe/1",
+  "game": "typing-defense",
+  "id": "leak.demo",
+  "group": "rare-fixed",
+  "family": "nen",
+  "description": "Mẫu thư viện VCSL (CC0): hai nhát kẻng sắt (VCSL Anvil, mục 8.2) cách nhau 280 ms, thêm sub nhẹ dưới nhát đầu. Khoét 1–4 kHz và làm mờ đuôi để không ngân ở dải giọng đọc. Chỉ là mẫu, chưa phải âm đã duyệt.",
+  "channels": 1,
+  "layers": [
+    {
+      "id": "strike1", "role": "attack",
+      "source": {"library": "vcsl/Idiophones/Struck Idiophones/Anvil/Anvil_Hit2_v3_rr1_Mid.wav"},
+      "gainDb": 0,
+      "fadeOutMs": 250,
+      "trim": {"endMs": 700}
+    },
+    {
+      "id": "strike2", "role": "attack",
+      "source": {"library": "vcsl/Idiophones/Struck Idiophones/Anvil/Anvil_Hit2_v2_rr1_Mid.wav"},
+      "offsetMs": 280,
+      "gainDb": -2,
+      "fadeOutMs": 400,
+      "trim": {"endMs": 900}
+    },
+    {
+      "id": "sub", "role": "sub",
+      "source": {"synth": "sub_thump", "params": {"startHz": 75, "endHz": 48, "glideMs": 60, "durMs": 220, "decayMs": 200}},
+      "gainDb": -10
+    }
+  ],
+  "chain": {
+    "filters": [{"type": "peak", "hz": 2500, "gainDb": -4, "q": 0.8}],
+    "headTrim": {"thresholdDb": -50, "preRollMs": 0.5},
+    "maxLengthMs": 1400,
+    "tail": {"floorDb": -60, "fadeMs": 40},
+    "normalise": {"mode": "lufs-m-max", "target": -20}
+  },
+  "variants": {"count": 1, "seed": 28},
+  "export": {"path": "sfx/alerts/leak-demo"}
+}

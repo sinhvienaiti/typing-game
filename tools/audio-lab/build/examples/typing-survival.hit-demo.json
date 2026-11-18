@@ -1,0 +1,58 @@
+{
+  "$schema": "../schemas/recipe.schema.json",
+  "schema": "audiolab.recipe/1",
+  "game": "typing-survival",
+  "id": "hit.demo",
+  "group": "hit-heavy",
+  "family": "trung",
+  "description": "Mẫu: tiếng trúng thép nặng. Lớp đầu Kenney Impact (CC0, hoán đổi 5 bản), thân nhiễu 200–800 Hz, sub 90→45 Hz và tiếng ngân FM kim loại.",
+  "channels": 1,
+  "layers": [
+    {
+      "id": "attack", "role": "attack",
+      "source": {"library": "kenney/impact-sounds/Audio/impactMetal_medium_000.ogg"},
+      "gainDb": 0,
+      "filters": [{"type": "highpass", "hz": 400}],
+      "fadeOutMs": 20,
+      "vary": {
+        "pitchCents": [-60, 60],
+        "swap": [
+          {"library": "kenney/impact-sounds/Audio/impactMetal_medium_001.ogg"},
+          {"library": "kenney/impact-sounds/Audio/impactMetal_medium_002.ogg"},
+          {"library": "kenney/impact-sounds/Audio/impactMetal_medium_003.ogg"},
+          {"library": "kenney/impact-sounds/Audio/impactMetal_medium_004.ogg"}
+        ]
+      }
+    },
+    {
+      "id": "body", "role": "body",
+      "source": {"synth": "noise_burst", "params": {"color": "pink", "durMs": 160, "attackMs": 1, "decayMs": 140, "hpHz": 200, "lpHz": 800, "order": 4}},
+      "gainDb": -6,
+      "vary": {"gainDb": [-1, 1]}
+    },
+    {
+      "id": "sub", "role": "sub",
+      "source": {"synth": "sub_thump", "params": {"startHz": 90, "endHz": 45, "glideMs": 50, "durMs": 140, "decayMs": 130, "click": 0.2}},
+      "gainDb": -4
+    },
+    {
+      "id": "ring", "role": "sweetener",
+      "source": {"synth": "fm_ping", "params": {"carrierHz": 2300, "ratio": 1.41, "index": 3, "indexDecayMs": 40, "durMs": 380, "decayMs": 360}},
+      "offsetMs": 2,
+      "gainDb": -16,
+      "filters": [{"type": "peak", "hz": 2500, "gainDb": -4, "q": 1.0}],
+      "vary": {"pitchCents": [-80, 80]}
+    }
+  ],
+  "chain": {
+    "dcHpfHz": 35,
+    "saturation": {"driveDb": 4, "mix": 0.4},
+    "headTrim": {"thresholdDb": -50, "preRollMs": 0.5},
+    "maxLengthMs": 600,
+    "tail": {"floorDb": -60, "fadeMs": 12},
+    "normalise": {"mode": "lufs-m-max", "target": -20},
+    "limiter": {"ceilingDbtp": -1.0, "releaseMs": 60, "maxGrDb": 6}
+  },
+  "variants": {"count": 6, "seed": 811, "includeBase": true, "pitchCents": [-80, 80], "gainDb": [-1, 1]},
+  "export": {"path": "sfx/hits/hit-demo", "ogg": true, "oggQuality": 0.6}
+}

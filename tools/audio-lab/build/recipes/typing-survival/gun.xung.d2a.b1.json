@@ -1,0 +1,232 @@
+{
+ "$schema": "../../schemas/recipe.schema.json",
+ "schema": "audiolab.recipe/1",
+ "game": "typing-survival",
+ "id": "gun.xung.d2a",
+ "group": "shot",
+ "family": "ban",
+ "description": "Lô 1 (BATCH1_BRIEF §3.4, hướng 2 'thân Stable Audio 3'): công thức 0b (3/5) với thân Stable Audio 3 lọc 90 Hz–1,8 kHz (4 thân 0b đã kiểm không có đầu tiếng thứ hai: A s1005, D s1002, C s1002, D s1005; 4 thân mới từ prompt E–H, chỉ giữ thân một đầu tiếng), cửa sổ 200 ms từ 4 ms trước đỉnh; khóa nòng đổi sang Impact Metal light như 0a, cộng nổ giòn và lớp đuôi chung như hướng 1. Bộ A: có sub. Biến thể n dùng thân n và khóa nòng n.",
+ "channels": 1,
+ "layers": [
+  {
+   "id": "crack",
+   "role": "attack",
+   "source": {
+    "synth": "noise_burst",
+    "params": {
+     "color": "white",
+     "durMs": 30,
+     "attackMs": 0.2,
+     "decayMs": 30,
+     "hpHz": 1800,
+     "lpHz": 9000
+    }
+   },
+   "gainDb": 8,
+   "vary": {
+    "gainDb": [
+     -1.0,
+     1.0
+    ]
+   }
+  },
+  {
+   "id": "breech",
+   "role": "mech",
+   "offsetMs": 12,
+   "gainDb": -9,
+   "filters": [
+    {
+     "type": "highpass",
+     "hz": 1200
+    },
+    {
+     "type": "peak",
+     "hz": 2500,
+     "gainDb": -4,
+     "q": 1.0
+    }
+   ],
+   "trim": {
+    "endMs": 35
+   },
+   "fadeOutMs": 25,
+   "vary": {
+    "offsetMs": [
+     -3,
+     4
+    ],
+    "swapMode": "cycle",
+    "swap": [
+     {
+      "library": "kenney/impact-sounds/Audio/impactMetal_light_001.ogg"
+     },
+     {
+      "library": "kenney/impact-sounds/Audio/impactMetal_light_002.ogg"
+     },
+     {
+      "library": "kenney/impact-sounds/Audio/impactMetal_light_003.ogg"
+     }
+    ]
+   },
+   "source": {
+    "library": "kenney/impact-sounds/Audio/impactMetal_light_000.ogg"
+   }
+  },
+  {
+   "id": "body",
+   "role": "body",
+   "offsetMs": 0.5,
+   "gainDb": 1,
+   "fadeInMs": 1.5,
+   "fadeOutMs": 90,
+   "filters": [
+    {
+     "type": "highpass",
+     "hz": 90,
+     "order": 2
+    },
+    {
+     "type": "lowpass",
+     "hz": 1800,
+     "order": 4
+    }
+   ],
+   "source": {
+    "gen": {
+     "tool": "stable-audio-3 (sa3_batch.py)",
+     "model": "stabilityai/stable-audio-3-optimized@08b17423649b5714b22eab20f96bf00751f2358a",
+     "licence": "LicenseRef-Stability-Community-2024",
+     "file": "/Users/toandx/AudioLab/work/typing-survival/gun.xung/sa3-trial/raw/gun.xung__A__s1005.f32.wav",
+     "record": "/Users/toandx/AudioLab/work/typing-survival/gun.xung/sa3-trial/raw/gun.xung__A__s1005.json",
+     "window": [
+      0.0364,
+      0.2364
+     ]
+    }
+   },
+   "vary": {
+    "swapMode": "cycle",
+    "swap": [
+     {
+      "gen": {
+       "tool": "stable-audio-3 (sa3_batch.py)",
+       "model": "stabilityai/stable-audio-3-optimized@08b17423649b5714b22eab20f96bf00751f2358a",
+       "licence": "LicenseRef-Stability-Community-2024",
+       "file": "/Users/toandx/AudioLab/work/typing-survival/gun.xung/b1/raw/gun.xung__F__s2005.f32.wav",
+       "record": "/Users/toandx/AudioLab/work/typing-survival/gun.xung/b1/raw/gun.xung__F__s2005.json",
+       "window": [
+        0.012,
+        0.212
+       ]
+      }
+     },
+     {
+      "gen": {
+       "tool": "stable-audio-3 (sa3_batch.py)",
+       "model": "stabilityai/stable-audio-3-optimized@08b17423649b5714b22eab20f96bf00751f2358a",
+       "licence": "LicenseRef-Stability-Community-2024",
+       "file": "/Users/toandx/AudioLab/work/typing-survival/gun.xung/sa3-trial/raw/gun.xung__D__s1002.f32.wav",
+       "record": "/Users/toandx/AudioLab/work/typing-survival/gun.xung/sa3-trial/raw/gun.xung__D__s1002.json",
+       "window": [
+        0.0299,
+        0.2299
+       ]
+      }
+     },
+     {
+      "gen": {
+       "tool": "stable-audio-3 (sa3_batch.py)",
+       "model": "stabilityai/stable-audio-3-optimized@08b17423649b5714b22eab20f96bf00751f2358a",
+       "licence": "LicenseRef-Stability-Community-2024",
+       "file": "/Users/toandx/AudioLab/work/typing-survival/gun.xung/b1/raw/gun.xung__G__s2002.f32.wav",
+       "record": "/Users/toandx/AudioLab/work/typing-survival/gun.xung/b1/raw/gun.xung__G__s2002.json",
+       "window": [
+        0.0259,
+        0.2259
+       ]
+      }
+     }
+    ]
+   }
+  },
+  {
+   "id": "tail",
+   "role": "tail",
+   "source": {
+    "synth": "noise_burst",
+    "params": {
+     "color": "pink",
+     "durMs": 380,
+     "attackMs": 3,
+     "decayMs": 900,
+     "hpHz": 160,
+     "lpHz": 650,
+     "order": 4
+    }
+   },
+   "gainDb": -1
+  },
+  {
+   "id": "sub",
+   "role": "sub",
+   "source": {
+    "synth": "sub_thump",
+    "params": {
+     "startHz": 95,
+     "endHz": 45,
+     "glideMs": 45,
+     "durMs": 115,
+     "decayMs": 100,
+     "click": 0.2,
+     "driveDb": 8
+    }
+   },
+   "gainDb": -4
+  }
+ ],
+ "chain": {
+  "dcHpfHz": 35,
+  "saturation": {
+   "driveDb": 5,
+   "mix": 0.35
+  },
+  "headTrim": {
+   "thresholdDb": -50,
+   "preRollMs": 0.3
+  },
+  "maxLengthMs": 380,
+  "tail": {
+   "floorDb": -60,
+   "shape": "exp",
+   "kneeMs": 300
+  },
+  "normalise": {
+   "mode": "lufs-m-max",
+   "target": -20
+  },
+  "limiter": {
+   "ceilingDbtp": -1.0,
+   "releaseMs": 40,
+   "maxGrDb": 6
+  }
+ },
+ "variants": {
+  "count": 4,
+  "seed": 2503,
+  "includeBase": true,
+  "pitchCents": [
+   -20,
+   20
+  ],
+  "gainDb": [
+   -0.5,
+   0.5
+  ]
+ },
+ "export": {
+  "path": "sfx/guns/gun-xung-a",
+  "ogg": true,
+  "oggQuality": 0.6
+ }
+}

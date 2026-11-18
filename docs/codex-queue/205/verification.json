@@ -1,0 +1,71 @@
+{
+  "head": "184c90d3380785e5afacd7d9267942781517b3ed",
+  "branch": "ts-codex",
+  "initialWorktreeClean": true,
+  "initialHead": "184c90d",
+  "worktreeAllowedPathsOnly": true,
+  "worktreePaths": [
+    ".gitignore",
+    "README.md",
+    "src/app/main.ts",
+    "src/view/bolts.ts",
+    "src/view/combat.ts",
+    "src/view/crowd.ts",
+    "src/view/models.ts",
+    "src/view/ship.ts",
+    "vite.config.ts",
+    "docs/changelog/2026-10-30-own-models.md",
+    "public/assets/typing-survival/models/manifest.json",
+    "tests/own-models.test.ts"
+  ],
+  "manifestVisibleInGitStatus": true,
+  "glbsAbsentFromGitStatus": true,
+  "parentAddedStatusLines": [
+    " M tools/vfx-flipbook/dragon-hold.json",
+    "?? docs/codex-queue/205-report.md"
+  ],
+  "parentRemovedStatusLines": [],
+  "parentOnly205Changes": false,
+  "concurrentChangesOutsideTask": [
+    " M tools/vfx-flipbook/dragon-hold.json"
+  ],
+  "ownWritesOutsideAllowedPaths": [],
+  "checks": [
+    {
+      "command": "git -C games/.wt-ts-codex diff --check",
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": "git diff --check -- docs/codex-queue/205-report.md docs/codex-queue/205",
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": "diff docs/codex-queue/205/chapter-before.txt docs/codex-queue/205/chapter-after.txt",
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": "diff docs/codex-queue/205/golden-before.txt docs/codex-queue/205/golden-after.txt",
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  ],
+  "chapterLinesBefore": 152,
+  "chapterLinesAfter": 152,
+  "goldenSha256": "42e4e5a9534bc78a0c252353ea7ee4670a1bec9e43eb42ef38c886aade530eea",
+  "foreignAssetErrors": 0,
+  "localHostErrors": 1,
+  "distForeignPathFiles": [],
+  "distFiles": 76,
+  "distBytes": 18273794,
+  "distModelsMatchPublic": true,
+  "importWarnings": [],
+  "modelTemporaryFiles": [],
+  "afterChecksEdits": "Comments, whitespace and documentation only; no runtime changes."
+}

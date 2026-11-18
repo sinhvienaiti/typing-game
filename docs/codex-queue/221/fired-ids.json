@@ -1,0 +1,587 @@
+[
+  {
+    "id": "call-power",
+    "trigger": "src/view/sound-map.ts:12,36",
+    "bus": "typing",
+    "sourceEvent": "call",
+    "map1": true,
+    "map1Basis": "src/content/slice-1a.ts:20–83,212–215; src/ui/tips.ts:16–25; src/view/words/cards.ts:29; src/sim/systems/economy.ts:286–295",
+    "firstStage": "w1-silverfall"
+  },
+  {
+    "id": "call-build",
+    "trigger": "src/view/sound-map.ts:12,36",
+    "bus": "typing",
+    "sourceEvent": "call",
+    "map1": true,
+    "map1Basis": "src/content/slice-1a.ts:20–83,212–215; src/ui/tips.ts:16–25; src/view/words/cards.ts:29; src/sim/systems/economy.ts:286–295",
+    "firstStage": "w1-silverfall"
+  },
+  {
+    "id": "call-harvest",
+    "trigger": "src/view/sound-map.ts:12,36",
+    "bus": "typing",
+    "sourceEvent": "call",
+    "map1": true,
+    "map1Basis": "src/content/slice-1a.ts:20–83,212–215; src/ui/tips.ts:16–25; src/view/words/cards.ts:29; src/sim/systems/economy.ts:286–295",
+    "firstStage": "w1-silverfall"
+  },
+  {
+    "id": "call-chop",
+    "trigger": "src/view/sound-map.ts:12,36",
+    "bus": "typing",
+    "sourceEvent": "call",
+    "map1": true,
+    "map1Basis": "src/content/slice-1a.ts:20–83,212–215; src/ui/tips.ts:16–25; src/view/words/cards.ts:29; src/sim/systems/economy.ts:286–295",
+    "firstStage": "w1-silverfall"
+  },
+  {
+    "id": "call-mine",
+    "trigger": "src/view/sound-map.ts:12,36",
+    "bus": "typing",
+    "sourceEvent": "call",
+    "map1": true,
+    "map1Basis": "src/content/slice-1a.ts:20–83,212–215; src/ui/tips.ts:16–25; src/view/words/cards.ts:29; src/sim/systems/economy.ts:286–295",
+    "firstStage": "w1-silverfall"
+  },
+  {
+    "id": "call-quiz",
+    "trigger": "src/view/sound-map.ts:12,36",
+    "bus": "typing",
+    "sourceEvent": "call",
+    "map1": true,
+    "map1Basis": "src/content/slice-1a.ts:20–83,212–215; src/ui/tips.ts:16–25; src/view/words/cards.ts:29; src/sim/systems/economy.ts:286–295",
+    "firstStage": "w1-silverfall"
+  },
+  {
+    "id": "key-right",
+    "trigger": "src/view/sound-map.ts:37",
+    "bus": "typing",
+    "sourceEvent": "wordKey",
+    "map1": true,
+    "map1Basis": "src/view/sound-map.ts:37; docs/games/ART_DIRECTION_2026-10-28.md:517; Phiếu 221 mục 6; docs/audio/THEME_SOUND_LIST.md:16,30",
+    "firstStage": "w1-silverfall"
+  },
+  {
+    "id": "key-wrong",
+    "trigger": "src/view/sound-map.ts:37",
+    "bus": "typing",
+    "sourceEvent": "wordKey",
+    "map1": true,
+    "map1Basis": "src/content/slice-1a.ts:20–83,212–215; src/ui/tips.ts:16–25",
+    "firstStage": "w1-silverfall"
+  },
+  {
+    "id": "word-hit",
+    "trigger": "src/view/sound-map.ts:38",
+    "bus": "typing",
+    "sourceEvent": "wordHit",
+    "map1": true,
+    "map1Basis": "src/content/slice-1a.ts:20–83,212–215; src/ui/tips.ts:16–25",
+    "firstStage": "w1-silverfall"
+  },
+  {
+    "id": "word-hit-bell",
+    "trigger": "src/view/sound-map.ts:38",
+    "bus": "typing",
+    "sourceEvent": "wordHit",
+    "map1": true,
+    "map1Basis": "src/content/slice-1a.ts:20–83,212–215; src/ui/tips.ts:16–25",
+    "firstStage": "w1-silverfall"
+  },
+  {
+    "id": "chain-callout",
+    "trigger": "src/view/sound-map.ts:39",
+    "bus": "typing",
+    "sourceEvent": "chain",
+    "map1": true,
+    "map1Basis": "src/content/slice-1a.ts:20–83,212–215; src/ui/tips.ts:16–25",
+    "firstStage": "w1-silverfall"
+  },
+  {
+    "id": "wordshot-fire",
+    "trigger": "src/view/sound-map.ts:13,48 (FIRES)",
+    "bus": "world",
+    "sourceEvent": "FX.fire",
+    "map1": true,
+    "map1Basis": "src/content/slice-1a.ts:20–83,212–215; src/ui/tips.ts:16–25; src/content/slice-1a.ts:25–30,41–59,148; src/sim/systems/combat.ts:76–86,135–137; src/sim/systems/rewards.ts:44–55",
+    "firstStage": "w1-silverfall"
+  },
+  {
+    "id": "arrow-fire",
+    "trigger": "src/view/sound-map.ts:13,48 (FIRES)",
+    "bus": "world",
+    "sourceEvent": "FX.fire",
+    "map1": true,
+    "map1Basis": "src/content/slice-1a.ts:20–83,212–215; src/ui/tips.ts:16–25; src/content/slice-1a.ts:25–30,41–59,148; src/sim/systems/combat.ts:76–86,135–137; src/sim/systems/rewards.ts:44–55",
+    "firstStage": "w1-silverfall"
+  },
+  {
+    "id": "blast",
+    "trigger": "src/view/sound-map.ts:14,48 (RING)",
+    "bus": "world",
+    "sourceEvent": "FX.burst",
+    "map1": true,
+    "map1Basis": "src/content/slice-1a.ts:55–59,148; src/sim/systems/projectile.ts:48–60",
+    "firstStage": "w1-silverfall"
+  },
+  {
+    "id": "ink-puff",
+    "trigger": "src/view/sound-map.ts:14,48 (RING)",
+    "bus": "world",
+    "sourceEvent": "FX.death",
+    "map1": true,
+    "map1Basis": "src/content/slice-1a.ts:87–129,187–192; src/sim/systems/deaths.ts:33; src/sim/systems/boss.ts:270",
+    "firstStage": "w1-silverfall"
+  },
+  {
+    "id": "coin",
+    "trigger": "src/view/sound-map.ts:14,48 (RING)",
+    "bus": "world",
+    "sourceEvent": "FX.coin",
+    "map1": true,
+    "map1Basis": "src/content/slice-1a.ts:21–83,171–180,215",
+    "firstStage": "w1-silverfall"
+  },
+  {
+    "id": "leak",
+    "trigger": "src/view/sound-map.ts:14,48 (RING)",
+    "bus": "world",
+    "sourceEvent": "FX.leak",
+    "map1": true,
+    "map1Basis": "src/content/slice-1a.ts:187–215; src/sim/systems/waves.ts:91; src/ui/hud.ts:52",
+    "firstStage": "w1-silverfall"
+  },
+  {
+    "id": "night-fall",
+    "trigger": "src/view/sound-map.ts:40",
+    "bus": "world",
+    "sourceEvent": "phase",
+    "map1": true,
+    "map1Basis": "src/content/slice-1a.ts:187–215; src/sim/systems/waves.ts:91; src/ui/hud.ts:52",
+    "firstStage": "w1-silverfall"
+  },
+  {
+    "id": "dawn",
+    "trigger": "src/view/sound-map.ts:40",
+    "bus": "world",
+    "sourceEvent": "phase",
+    "map1": true,
+    "map1Basis": "src/content/slice-1a.ts:187–215; src/sim/systems/waves.ts:91; src/ui/hud.ts:52",
+    "firstStage": "w1-silverfall"
+  },
+  {
+    "id": "defeat",
+    "trigger": "src/view/sound-map.ts:27 (ONE)",
+    "bus": "world",
+    "sourceEvent": "defeat",
+    "map1": true,
+    "map1Basis": "src/content/slice-1a.ts:187–215; src/sim/systems/waves.ts:91; src/ui/hud.ts:52",
+    "firstStage": "w1-silverfall"
+  },
+  {
+    "id": "day-countdown",
+    "trigger": "src/view/audio-min.ts:114",
+    "bus": "ui",
+    "sourceEvent": "frame(day)",
+    "map1": true,
+    "map1Basis": "src/content/slice-1a.ts:187–215; src/sim/systems/waves.ts:91; src/ui/hud.ts:52; src/view/audio-min.ts:114,229: mỗi giây, gỗ hiện 0,04 s; đề xuất biên 30–80 ms, hai cao độ theo ba giây cuối.",
+    "firstStage": "w1-silverfall"
+  },
+  {
+    "id": "direct-break",
+    "trigger": "src/view/sound-map.ts:41",
+    "bus": "world",
+    "sourceEvent": "direct",
+    "map1": true,
+    "map1Basis": "src/content/slice-1a.ts:116–119,190; src/view/words/cards.ts:29; src/sim/systems/direct.ts:55–87; src/view/audio-min.ts:207: trống hiện có, đề xuất kéo thân/đuôi gọn theo Q6; src/content/slice-1a.ts:118 cơ chế ngắt.",
+    "firstStage": "w1-silverfall"
+  },
+  {
+    "id": "direct-pin",
+    "trigger": "src/view/sound-map.ts:41",
+    "bus": "world",
+    "sourceEvent": "direct",
+    "map1": false,
+    "map1Basis": "src/content/slice-1a.ts:131–137,186–193; src/view/sound-map.ts:41",
+    "firstStage": null
+  },
+  {
+    "id": "direct-shield",
+    "trigger": "src/view/sound-map.ts:41",
+    "bus": "world",
+    "sourceEvent": "direct",
+    "map1": false,
+    "map1Basis": "src/content/slice-1a.ts:131–143,186–193; src/view/sound-map.ts:41",
+    "firstStage": null
+  },
+  {
+    "id": "helper-panic",
+    "trigger": "src/view/sound-map.ts:27 (ONE)",
+    "bus": "world",
+    "sourceEvent": "panic",
+    "map1": true,
+    "map1Basis": "src/content/slice-1a.ts:21–83,171–180,215; src/sim/systems/agents.ts:121; src/view/audio-min.ts:210: hai gõ cách 100 ms, mỗi gõ 50 ms; đề xuất 100–250 ms gồm lông.",
+    "firstStage": "w1-silverfall"
+  },
+  {
+    "id": "boss-warn",
+    "trigger": "src/view/sound-map.ts:27 (ONE)",
+    "bus": "world",
+    "sourceEvent": "bossWarn",
+    "map1": true,
+    "map1Basis": "src/content/slice-1a.ts:199–215; src/sim/systems/boss.ts:31–34,125–217,225–277; src/view/boss-2d.ts:69–125,161–200; src/view/fx-2d.ts:33–45,85–95; Mã: bossWarn ngày 5. Ý đồ §8.2: A gầm gỗ theo vết rễ cảnh báo, hai nhịp rõ; chưa phải I đòn. Căn cứ view: src/view/boss-2d.ts:69–125,161–200; src/view/fx-2d.ts:33–45,85–95.",
+    "firstStage": "w1-silverfall"
+  },
+  {
+    "id": "boss-lull",
+    "trigger": "src/view/sound-map.ts:27 (ONE)",
+    "bus": "world",
+    "sourceEvent": "bossLull",
+    "map1": true,
+    "map1Basis": "src/content/slice-1a.ts:199–215; src/sim/systems/boss.ts:31–34,125–217,225–277; src/view/boss-2d.ts:69–125,161–200; src/view/fx-2d.ts:33–45,85–95; Mã: bossLull có end, lullS=12 (slice-1a.ts:214), SYNTH audio-min.ts:220. Ý đồ: A vết nứt và nhịp đất; một đoạn diễn tiến single, không loop; không tự kéo thời gian chờ. Căn cứ view: src/view/boss-2d.ts:69–125,161–200; src/view/fx-2d.ts:33–45,85–95.",
+    "firstStage": "w1-silverfall"
+  },
+  {
+    "id": "boss-emerge",
+    "trigger": "src/view/sound-map.ts:27 (ONE)",
+    "bus": "world",
+    "sourceEvent": "bossEmerge",
+    "map1": true,
+    "map1Basis": "src/content/slice-1a.ts:199–215; src/sim/systems/boss.ts:31–34,125–217,225–277; src/view/boss-2d.ts:69–125,161–200; src/view/fx-2d.ts:33–45,85–95; Mã: bossEmerge, boss-2d.ts:83–88 văng đá/rễ 1,2–1,3 s. Ý đồ: R tại thân trước I đá, F đất lắng; gầm là chất liệu gỗ, không thoại. Căn cứ view: src/view/boss-2d.ts:69–125,161–200; src/view/fx-2d.ts:33–45,85–95.",
+    "firstStage": "w1-silverfall"
+  },
+  {
+    "id": "boss-phase",
+    "trigger": "src/view/sound-map.ts:27 (ONE)",
+    "bus": "world",
+    "sourceEvent": "bossPhase",
+    "map1": true,
+    "map1Basis": "src/content/slice-1a.ts:199–215; src/sim/systems/boss.ts:31–34,125–217,225–277; src/view/boss-2d.ts:69–125,161–200; src/view/fx-2d.ts:33–45,85–95; Mã: stagger 70%, stunS=5; boss.ts:225–252, boss-2d.ts:97–99. Ý đồ: I vỏ nứt, F sao choáng, không thêm cồng thường vào nhịp đánh. Căn cứ view: src/view/boss-2d.ts:69–125,161–200; src/view/fx-2d.ts:33–45,85–95.",
+    "firstStage": "w1-silverfall"
+  },
+  {
+    "id": "boss-roots",
+    "trigger": "src/view/sound-map.ts:43",
+    "bus": "world",
+    "sourceEvent": "bossStrike",
+    "map1": true,
+    "map1Basis": "src/content/slice-1a.ts:199–215; src/sim/systems/boss.ts:31–34,125–217,225–277; src/view/boss-2d.ts:69–125,161–200; src/view/fx-2d.ts:33–45,85–95; Mã: roots hit=false, warnS=1,5 s (90 khung cơ sở); nhân warnK rồi làm tròn ticks (boss.ts:31,133–134). Ý đồ: A chạy theo vòng và vết rễ (boss-2d.ts:161–185), I tách ở boss-roots-hit, không nổ sớm. Căn cứ view: src/view/boss-2d.ts:69–125,161–200; src/view/fx-2d.ts:33–45,85–95.",
+    "firstStage": "w1-silverfall"
+  },
+  {
+    "id": "boss-roots-hit",
+    "trigger": "src/view/sound-map.ts:43",
+    "bus": "world",
+    "sourceEvent": "bossStrike",
+    "map1": true,
+    "map1Basis": "src/content/slice-1a.ts:199–215; src/sim/systems/boss.ts:31–34,125–217,225–277; src/view/boss-2d.ts:69–125,161–200; src/view/fx-2d.ts:33–45,85–95; Mã: roots hit=true khi hết warnS=1,5 s × warnK; I cùng stun nhà. Ý đồ: I rễ chạm, F mảnh gỗ; boss-2d.ts:74–80, fx-2d.ts:85–95 rễ mọc 120 ms rồi tan, không đợi rễ mọc xong mới phát I. Căn cứ view: src/view/boss-2d.ts:69–125,161–200; src/view/fx-2d.ts:33–45,85–95.",
+    "firstStage": "w1-silverfall"
+  },
+  {
+    "id": "boss-slam",
+    "trigger": "src/view/sound-map.ts:44",
+    "bus": "world",
+    "sourceEvent": "bossStrike",
+    "map1": true,
+    "map1Basis": "src/content/slice-1a.ts:199–215; src/sim/systems/boss.ts:31–34,125–217,225–277; src/view/boss-2d.ts:69–125,161–200; src/view/fx-2d.ts:33–45,85–95; Mã: slam hit=true sau 1,2 s × warnK; keep hit=true cũng rơi vào boss-slam (sound-map.ts:44), sau 1,2 s × warnK; slice-1a.ts:205,208. Cả hai hit=false hiện im. Ý đồ: A cành/cung đỏ báo trước, I ngay tick kết, F gỗ đá; phần vung trong file chỉ sát đầu chạm, không dịch tick. Căn cứ view: src/view/boss-2d.ts:69–125,161–200; src/view/fx-2d.ts:33–45,85–95.",
+    "firstStage": "w1-silverfall"
+  },
+  {
+    "id": "boss-drain",
+    "trigger": "src/view/sound-map.ts:43",
+    "bus": "world",
+    "sourceEvent": "bossStrike",
+    "map1": true,
+    "map1Basis": "src/content/slice-1a.ts:199–215; src/sim/systems/boss.ts:31–34,125–217,225–277; src/view/boss-2d.ts:69–125,161–200; src/view/fx-2d.ts:33–45,85–95; Mã: drain hit=false, warnS=1,2 s × warnK. Ý đồ: A theo rễ bò từ boss tới Fort (boss-2d.ts:188–199), I tách boss-drain-hit; file cảnh báo cần cắt/chọn theo cửa sổ thực ở phiếu gắn. Căn cứ view: src/view/boss-2d.ts:69–125,161–200; src/view/fx-2d.ts:33–45,85–95.",
+    "firstStage": "w1-silverfall"
+  },
+  {
+    "id": "boss-drain-hit",
+    "trigger": "src/view/sound-map.ts:43",
+    "bus": "world",
+    "sourceEvent": "bossStrike",
+    "map1": true,
+    "map1Basis": "src/content/slice-1a.ts:199–215; src/sim/systems/boss.ts:31–34,125–217,225–277; src/view/boss-2d.ts:69–125,161–200; src/view/fx-2d.ts:33–45,85–95; Mã: drain hit=true sau 1,2 s × warnK; boss.ts:203–211 đồng thời FX.leak, nên leak có thể chồng cùng tick. Ý đồ: I lúc mất mạng, F xung sinh khí 0,7 s theo boss-2d.ts:188–200; chưa đổi bus/trần. Căn cứ view: src/view/boss-2d.ts:69–125,161–200; src/view/fx-2d.ts:33–45,85–95.",
+    "firstStage": "w1-silverfall"
+  },
+  {
+    "id": "boss-retreat",
+    "trigger": "src/view/sound-map.ts:27 (ONE)",
+    "bus": "world",
+    "sourceEvent": "bossRetreat",
+    "map1": true,
+    "map1Basis": "src/content/slice-1a.ts:199–215; src/sim/systems/boss.ts:31–34,125–217,225–277; src/view/boss-2d.ts:69–125,161–200; src/view/fx-2d.ts:33–45,85–95; Mã: rút 2 s, Chest trả ngay bossRetreat (boss.ts:255–263; slice-1a.ts:203); boss-2d.ts:100–105 lá và giấy. Ý đồ: F lắng đất, chuỗi đồng thưởng nằm cuối; không dời mốc trả thưởng. Căn cứ view: src/view/boss-2d.ts:69–125,161–200; src/view/fx-2d.ts:33–45,85–95.",
+    "firstStage": "w1-silverfall"
+  },
+  {
+    "id": "ui-move",
+    "trigger": "src/view/audio-min.ts:127–129",
+    "bus": "ui",
+    "sourceEvent": "ui()",
+    "map1": true,
+    "map1Basis": "src/content/slice-1a.ts:20–83,212–215; src/ui/tips.ts:16–25; src/view/audio-min.ts:127–129; docs/audio/THEME_SOUND_LIST.md:50–57",
+    "firstStage": "w1-silverfall"
+  },
+  {
+    "id": "ui-pick",
+    "trigger": "src/view/audio-min.ts:127–129",
+    "bus": "ui",
+    "sourceEvent": "ui()",
+    "map1": true,
+    "map1Basis": "src/content/slice-1a.ts:20–83,212–215; src/ui/tips.ts:16–25; src/view/audio-min.ts:127–129; docs/audio/THEME_SOUND_LIST.md:50–57",
+    "firstStage": "w1-silverfall"
+  },
+  {
+    "id": "ui-off",
+    "trigger": "src/view/audio-min.ts:127–129",
+    "bus": "ui",
+    "sourceEvent": "ui()",
+    "map1": true,
+    "map1Basis": "src/content/slice-1a.ts:20–83,212–215; src/ui/tips.ts:16–25; src/view/audio-min.ts:127–129; docs/audio/THEME_SOUND_LIST.md:50–57",
+    "firstStage": "w1-silverfall"
+  },
+  {
+    "id": "ui-lamp",
+    "trigger": "src/view/audio-min.ts:127–129",
+    "bus": "ui",
+    "sourceEvent": "ui()",
+    "map1": true,
+    "map1Basis": "src/content/slice-1a.ts:20–83,212–215; src/ui/tips.ts:16–25; src/view/audio-min.ts:127–129; docs/audio/THEME_SOUND_LIST.md:50–57",
+    "firstStage": "w1-silverfall"
+  },
+  {
+    "id": "key-lock",
+    "trigger": "src/view/sound-map.ts:37",
+    "bus": "typing",
+    "sourceEvent": "wordKey",
+    "map1": true,
+    "map1Basis": "src/content/slice-1a.ts:20–83,212–215; src/ui/tips.ts:16–25; src/view/sound-map.ts:37; src/sim/events.ts:66: mốc kết quả lock, không có độ dài mẫu trong mã.",
+    "firstStage": "w1-silverfall"
+  },
+  {
+    "id": "key-group",
+    "trigger": "src/view/sound-map.ts:37",
+    "bus": "typing",
+    "sourceEvent": "wordKey",
+    "map1": true,
+    "map1Basis": "src/content/slice-1a.ts:20–83,212–215; src/ui/tips.ts:16–25; src/view/sound-map.ts:37; src/sim/events.ts:66: mốc kết quả group, không có độ dài mẫu trong mã.",
+    "firstStage": "w1-silverfall"
+  },
+  {
+    "id": "chain-step",
+    "trigger": "src/view/sound-map.ts:39",
+    "bus": "typing",
+    "sourceEvent": "chain",
+    "map1": true,
+    "map1Basis": "src/content/slice-1a.ts:20–83,212–215; src/ui/tips.ts:16–25; src/view/sound-map.ts:39; src/sim/events.ts:70: mỗi lần chuỗi tăng chưa qua tier.",
+    "firstStage": "w1-silverfall"
+  },
+  {
+    "id": "chain-tier",
+    "trigger": "src/view/sound-map.ts:39",
+    "bus": "typing",
+    "sourceEvent": "chain",
+    "map1": true,
+    "map1Basis": "src/content/slice-1a.ts:20–83,212–215; src/ui/tips.ts:16–25; src/view/sound-map.ts:39; src/sim/events.ts:70: một nhịp lên bậc, đề xuất hai nốt ngắn.",
+    "firstStage": "w1-silverfall"
+  },
+  {
+    "id": "call-ult",
+    "trigger": "src/view/sound-map.ts:12,36",
+    "bus": "typing",
+    "sourceEvent": "call",
+    "map1": true,
+    "map1Basis": "src/content/slice-1a.ts:20–83,212–215; src/ui/tips.ts:16–25; src/view/words/cards.ts:29; src/sim/systems/economy.ts:286–295; src/sim/systems/ult.ts:67; src/content/rules.ts:94: cửa sổ Spell lifeS=4, không phải độ dài âm báo.",
+    "firstStage": "w1-silverfall"
+  },
+  {
+    "id": "call-direct",
+    "trigger": "src/view/sound-map.ts:12,36",
+    "bus": "typing",
+    "sourceEvent": "call",
+    "map1": true,
+    "map1Basis": "src/content/slice-1a.ts:20–83,212–215; src/ui/tips.ts:16–25; src/view/words/cards.ts:29; src/sim/systems/economy.ts:286–295; src/content/slice-1a.ts:118,190; src/view/sound-map.ts:12,36: lời gọi ngắt Raccoon Dog ở đêm 4.",
+    "firstStage": "w1-silverfall"
+  },
+  {
+    "id": "cannon-fire",
+    "trigger": "src/view/sound-map.ts:13,48 (FIRES)",
+    "bus": "world",
+    "sourceEvent": "FX.fire",
+    "map1": true,
+    "map1Basis": "src/content/slice-1a.ts:20–83,212–215; src/ui/tips.ts:16–25; src/content/slice-1a.ts:25–30,41–59,148; src/sim/systems/combat.ts:76–86,135–137; src/sim/systems/rewards.ts:44–55; src/sim/systems/combat.ts:86,135; src/content/slice-1a.ts:55–59: nhịp pháo 2,6/2,4/2,2 s, đề xuất phần phát dưới 0,8 s.",
+    "firstStage": "w1-silverfall"
+  },
+  {
+    "id": "bolt-fire",
+    "trigger": "src/view/sound-map.ts:13,48 (FIRES)",
+    "bus": "world",
+    "sourceEvent": "FX.fire",
+    "map1": true,
+    "map1Basis": "src/content/slice-1a.ts:20–83,212–215; src/ui/tips.ts:16–25; src/content/slice-1a.ts:25–30,41–59,148; src/sim/systems/combat.ts:76–86,135–137; src/sim/systems/rewards.ts:44–55; src/sim/systems/combat.ts:86,135; src/content/slice-1a.ts:25–30: nhịp Fort 1,2 s, nỏ có thân ngắn.",
+    "firstStage": "w1-silverfall"
+  },
+  {
+    "id": "fireball-fire",
+    "trigger": "src/view/sound-map.ts:13,48 (FIRES)",
+    "bus": "world",
+    "sourceEvent": "FX.fire",
+    "map1": true,
+    "map1Basis": "src/content/slice-1a.ts:20–83,212–215; src/ui/tips.ts:16–25; src/content/slice-1a.ts:25–30,41–59,148; src/sim/systems/combat.ts:76–86,135–137; src/sim/systems/rewards.ts:44–55; src/sim/systems/agents.ts:166–167; src/content/slice-1a.ts:148: nhịp 1,6 s; đề xuất 600–900 ms giữ thân lửa và đuôi theo Q6.",
+    "firstStage": "w1-silverfall"
+  },
+  {
+    "id": "feather-fall",
+    "trigger": "src/view/sound-map.ts:13,48 (FIRES)",
+    "bus": "world",
+    "sourceEvent": "FX.fire / PROJECTILE.feather (khóa không có emitter)",
+    "map1": false,
+    "map1Basis": "src/view/sound-map.ts:13,48; src/sim/systems/ult.ts:102–110; src/sim/stores/projectiles.ts:33–46; git grep FX.fire td-1c -- src: chỉ combat.ts:86 đẩy event. Nhịp T để phiếu gắn: ult.ts:20–23 SPEED=12/60 m/tick, FROM dài 9,6 m; rules.ts:94 fallS=0,8 → 48 khung cho đích đứng yên. I vẫn có blast (projectile.ts:60). Ý đồ §8.2: A/R ở rồng, T lông, I nổ, F than; không sửa sim ở phiếu này.",
+    "firstStage": null
+  },
+  {
+    "id": "hit",
+    "trigger": "src/view/sound-map.ts:14,48 (RING)",
+    "bus": "world",
+    "sourceEvent": "FX.hit",
+    "map1": true,
+    "map1Basis": "src/content/slice-1a.ts:25–45,87–99; src/sim/systems/projectile.ts:61–64; src/sim/systems/projectile.ts:61–64: mốc chạm đơn, đề xuất đầu và thân gọn vì có thể trúng dày.",
+    "firstStage": "w1-silverfall"
+  },
+  {
+    "id": "block",
+    "trigger": "src/view/sound-map.ts:14,48 (RING)",
+    "bus": "world",
+    "sourceEvent": "FX.block",
+    "map1": true,
+    "map1Basis": "src/content/slice-1a.ts:67–76,87–88,215; src/sim/systems/block.ts:79; src/sim/systems/block.ts:79; src/content/slice-1a.ts:69–73: chặn ban đầu, lính đánh nhịp 1,0/0,9 s.",
+    "firstStage": "w1-silverfall"
+  },
+  {
+    "id": "soldier-down",
+    "trigger": "src/view/sound-map.ts:14,48 (RING)",
+    "bus": "world",
+    "sourceEvent": "FX.soldierDown",
+    "map1": true,
+    "map1Basis": "src/content/slice-1a.ts:67–76,87–88,215; src/sim/systems/combat.ts:191; src/sim/systems/combat.ts:191: mốc chết một lính; đề xuất một lần vũ khí/áo rơi, không có file số đo.",
+    "firstStage": "w1-silverfall"
+  },
+  {
+    "id": "fizzle",
+    "trigger": "src/view/sound-map.ts:14,48 (RING)",
+    "bus": "world",
+    "sourceEvent": "FX.fizzle",
+    "map1": true,
+    "map1Basis": "src/content/slice-1a.ts:39–64; src/sim/systems/rewards.ts:44–47; src/sim/systems/rewards.ts:44–47: không có mục tiêu, đề xuất giấy tản ngắn ở nguồn.",
+    "firstStage": "w1-silverfall"
+  },
+  {
+    "id": "boss-hit",
+    "trigger": "src/view/sound-map.ts:14,48 (RING)",
+    "bus": "world",
+    "sourceEvent": "FX.bossHit",
+    "map1": true,
+    "map1Basis": "src/content/slice-1a.ts:199–215; src/sim/systems/boss.ts:31–34,125–217,225–277; src/view/boss-2d.ts:69–125,161–200; src/view/fx-2d.ts:33–45,85–95; Mã: combat.ts:37 phát FX.bossHit khi dmg>0; boss-2d.ts:114–125 lóe và dăm gỗ, sát thương cháy cũng có event. Ý đồ: I vỏ gỗ đúng chất liệu, F mảnh; không thêm báo trước vào âm trúng. Căn cứ view: src/view/boss-2d.ts:69–125,161–200; src/view/fx-2d.ts:33–45,85–95.",
+    "firstStage": "w1-silverfall"
+  },
+  {
+    "id": "boss-summon",
+    "trigger": "src/view/sound-map.ts:44",
+    "bus": "world",
+    "sourceEvent": "bossStrike",
+    "map1": true,
+    "map1Basis": "src/content/slice-1a.ts:199–215; src/sim/systems/boss.ts:31–34,125–217,225–277; src/view/boss-2d.ts:69–125,161–200; src/view/fx-2d.ts:33–45,85–95; Mã: sound-map.ts:44 trả cùng id cho summon hit=false và true; warnS=0,8 s cố định/48 khung (boss.ts:175–191), không nhân warnK. Ý đồ: A hạt/rễ, R mọc lúc hết báo; hiện cùng file phát hai lần, cần phiếu gắn tách A/R hoặc chọn phần, chưa có id mới. Căn cứ view: src/view/boss-2d.ts:69–125,161–200; src/view/fx-2d.ts:33–45,85–95.",
+    "firstStage": "w1-silverfall"
+  },
+  {
+    "id": "build-start",
+    "trigger": "src/view/sound-map.ts:28 (ONE)",
+    "bus": "world",
+    "sourceEvent": "built",
+    "map1": true,
+    "map1Basis": "src/content/slice-1a.ts:21–83,171–180,215; src/sim/events.ts:36; src/view/sound-map.ts:28: bắt đầu việc, đề xuất một nhịp búa ngắn, không lấy 1,2 s mọc model làm độ dài âm.",
+    "firstStage": "w1-silverfall"
+  },
+  {
+    "id": "build-done",
+    "trigger": "src/view/sound-map.ts:28 (ONE)",
+    "bus": "world",
+    "sourceEvent": "finished",
+    "map1": true,
+    "map1Basis": "src/content/slice-1a.ts:21–83,171–180,215; src/sim/events.ts:37; src/view/sound-map.ts:28: hoàn tất việc, đề xuất stinger hai nốt §8.2.",
+    "firstStage": "w1-silverfall"
+  },
+  {
+    "id": "sell",
+    "trigger": "src/view/sound-map.ts:28 (ONE)",
+    "bus": "world",
+    "sourceEvent": "sold",
+    "map1": true,
+    "map1Basis": "src/content/slice-1a.ts:21–83,171–180,215; src/sim/events.ts:38; src/view/sound-map.ts:28: bán/undo, đề xuất tháo vật liệu và tiền gọn.",
+    "firstStage": "w1-silverfall"
+  },
+  {
+    "id": "house-stun",
+    "trigger": "src/view/sound-map.ts:28 (ONE)",
+    "bus": "world",
+    "sourceEvent": "stun",
+    "map1": true,
+    "map1Basis": "src/content/slice-1a.ts:21–83,171–180,215; src/view/boss-2d.ts:74–80: rung 150 ms, dăm gỗ 420 ms, bụi 500 ms; đề xuất âm 200–500 ms.",
+    "firstStage": "w1-silverfall"
+  },
+  {
+    "id": "ult-cast",
+    "trigger": "src/view/sound-map.ts:28 (ONE)",
+    "bus": "world",
+    "sourceEvent": "ult",
+    "map1": true,
+    "map1Basis": "src/content/slice-1a.ts:215; src/sim/systems/ult.ts:55–70; src/ui/hud.ts:33; src/sim/systems/ult.ts:66–70; src/content/rules.ts:94: minGapS=45, rơi 0,8 s, đề xuất âm phát 700–1200 ms độc lập nhịp rơi.",
+    "firstStage": "w1-silverfall"
+  },
+  {
+    "id": "wave-start",
+    "trigger": "src/view/sound-map.ts:28 (ONE)",
+    "bus": "world",
+    "sourceEvent": "waveStart",
+    "map1": true,
+    "map1Basis": "src/content/slice-1a.ts:187–215; src/sim/systems/waves.ts:91; src/ui/hud.ts:52; src/sim/systems/waves.ts:69–75: một tín hiệu đầu đợt, đề xuất kẻng dưới 850 ms.",
+    "firstStage": "w1-silverfall"
+  },
+  {
+    "id": "night-called",
+    "trigger": "src/view/sound-map.ts:28 (ONE)",
+    "bus": "world",
+    "sourceEvent": "nightCalled",
+    "map1": true,
+    "map1Basis": "src/content/slice-1a.ts:187–215; src/sim/systems/waves.ts:91; src/ui/hud.ts:52; src/sim/systems/waves.ts:86–92: tín hiệu gọi đêm thành công, đề xuất hai trống ngắn trước đuôi.",
+    "firstStage": "w1-silverfall"
+  },
+  {
+    "id": "harvest-done",
+    "trigger": "src/view/sound-map.ts:29 (ONE)",
+    "bus": "world",
+    "sourceEvent": "harvested",
+    "map1": true,
+    "map1Basis": "src/content/slice-1a.ts:21–83,171–180,215; src/sim/systems/economy.ts:131: một ô thu hoạch hoàn tất, đề xuất sột bó lúa 300–650 ms.",
+    "firstStage": "w1-silverfall"
+  },
+  {
+    "id": "tree-fall",
+    "trigger": "src/view/sound-map.ts:29 (ONE)",
+    "bus": "world",
+    "sourceEvent": "felled",
+    "map1": true,
+    "map1Basis": "src/content/slice-1a.ts:21–83,171–180,215; src/sim/systems/economy.ts:198: cây đổ hoàn tất, đề xuất nứt/thân/lá/đuôi 700–1400 ms.",
+    "firstStage": "w1-silverfall"
+  },
+  {
+    "id": "victory",
+    "trigger": "src/view/sound-map.ts:28 (ONE)",
+    "bus": "world",
+    "sourceEvent": "victory",
+    "map1": true,
+    "map1Basis": "src/content/slice-1a.ts:187–215; src/sim/systems/waves.ts:91; src/ui/hud.ts:52; src/sim/systems/boss.ts:277; src/ui/hud.ts:52: kết trận, đề xuất stinger 1,5–2,5 s.",
+    "firstStage": "w1-silverfall"
+  }
+]

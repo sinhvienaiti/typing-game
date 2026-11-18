@@ -1,0 +1,186 @@
+# Thẻ spec âm thanh (AUDIO_PIPELINE §5.1 bước 1). Sinh bởi `pnpm audio:specs generate`; kiểm bằng `pnpm audio:specs validate`.
+# Sửa tay: thêm `manual: true` vào mục đã sửa, hoặc ghi đường dẫn (vd. duration.target_ms) vào manual_fields.
+# status, references, prompt.variants, notes luôn được giữ khi sinh lại. Comment YAML thì không: ghi chú để ở notes.
+schema: 1
+id: dragon.heartbeat
+game: dragon-hold
+status: draft
+manual_fields: []
+when: Mỗi 1,4 s khi máu còn dưới 35 %
+purpose: Nhịp tim trầm, nhẹ
+category: warning
+family: nen
+source_class: warning-stinger
+playback:
+  mode: one-shot
+  channels: mono
+  channels_basis: 'M0_SOUND_LIST §1: Tiếng lẻ mono. Nhạc và nền stereo'
+  bus: stingers
+  priority: 1
+  min_gap_ms: 900
+  limit_group: null
+  caps: {}
+  format: OGG Vorbis 48 kHz trong game; gốc WAV 48 kHz (§4.3.1, §11)
+duration:
+  target_ms: 420
+  tolerance_pct: 20
+  tolerance_ms: null
+  min_ms: 336
+  max_ms: 504
+  basis: src/audio/catalog.ts lengthMs (nguồn chuẩn của độ dài)
+  category_range_ms: [250, 2000]
+  music: null
+onset:
+  class: other
+  rise_max_ms: null
+  lead_silence_max_ms: 5
+  basis: AUDIO_PIPELINE §4.3.1 (thời gian lên, im lặng ở đầu)
+variants:
+  target: 1
+  min: 1
+  max: 1
+  basis: AUDIO_PIPELINE §4.3.3 (Báo nguy)
+randomisation:
+  group: rare-fixed
+  pitch_cents: 0
+  gain_db: 0
+  rules:
+    - 'Không đổi ngẫu nhiên: âm hiếm được nhận ra nhờ luôn giống nhau'
+    - Chuỗi thưởng leo nốt theo thang, tối đa 8–12 bậc
+  current_code: 'Không đổi ngẫu nhiên (catalog vary: false)'
+  basis: AUDIO_PIPELINE §5.3 (mã cần cho mỗi nhóm giá trị riêng, §6.3)
+frequency_role:
+  bands:
+    - band: voice
+      range_hz: [1000, 4000]
+      role: Chỉ đầu tiếng rất ngắn
+  voice_band: short-warning
+  voice_band_text: Báo nguy ngắn; không có âm kéo dài ở 1–4 kHz
+  spectrum: Không có âm kéo dài ở 1–4 kHz
+  basis: AUDIO_PIPELINE §6.4, AUDIO_PIPELINE §4.3.3
+loudness:
+  file:
+    metric: peak-dbtp
+    target: -1
+    basis: 'M0_SOUND_LIST §1: Tiếng lẻ chuẩn hóa đỉnh −1 dBTP'
+  proposal:
+    metric: lufs-m-max
+    target: -20
+    pad_s: 0.4
+    true_peak_max_dbtp: -1
+    basis: 'AUDIO_PIPELINE §4.3.3, §5.1 bước 4: đề xuất chuẩn hóa mọi âm ngắn về một mức chung; tài liệu game đang ghi chuẩn hóa đỉnh'
+  bus: stingers
+  bus_gain: 0.75
+  bus_gain_db: -2.5
+  gain_db: -6
+  gain_basis: src/audio/catalog.ts gainDb (mặc định 0 dB), mức trước bus
+  relative_db: -8.5
+  pronunciation_duck_db: -2.0
+  mix_target:
+    metric: lufs-m-max
+    range: [-17, -14]
+    text: null
+    weight: null
+    basis: AUDIO_PIPELINE §4.3.3 (mức trong bản trộn, bài A và B)
+prompt:
+  text: Soft low heartbeat, two beats, deep and muffled, 400 ms
+  suffix: null
+  style_root: painterly fantasy forest, warm, organic, outdoor
+  sweetener: than hồng lách tách và đàn hạc
+  variants: []
+  basis: docs/audio/M0_SOUND_LIST.md; gốc prompt theo AUDIO_PIPELINE §5.2 (chốt sau bảng phong cách)
+pitches: null
+parts: null
+layer_plan: null
+references: []
+source_plan:
+  now: [sample-player]
+  later: []
+  ranked:
+    - rank: 1
+      kinds: [sample-player]
+      detail: Mẫu nhạc cụ (kèn co VSCO, cồng và trống khung VCSL) cộng MIDI
+    - rank: 2
+      kinds: [model-later]
+      detail: Stable Audio 3 (tù và, còi)
+  needs_now: []
+  needs_later: []
+  note: Báo nguy chỉ có một phiên bản cố định, để người chơi học được
+  batch1: null
+  style_board: false
+  sa3_trial: false
+  basis: AUDIO_PIPELINE §3.2 (nguồn theo loại âm), §10.1 (khi chưa có Stable Audio 3)
+licence:
+  allowed: [CC0-1.0, project-code]
+  conditional:
+    - licence: Stability-Community-2024
+      condition: 'Bước 0: đăng ký Community License, chấp nhận AUP và điều khoản Gemma; có licences/stability-registration.txt (§10.1)'
+    - licence: MIT (ACE-Step 1.5)
+      condition: Ghim phiên bản; kiểm giai điệu trước khi bán
+    - licence: Apache-2.0 (MOSS-SoundEffect)
+      condition: Chỉ khi bước 0 trả lời không
+  forbidden:
+    - non-commercial-weights
+    - freesound-cc-by-nc
+    - freesound-sampling-plus
+    - bbc-sound-effects
+    - pixabay
+    - sound-from-other-games
+    - sonniss-lot-1-2-and-any-ai-step
+    - elevenlabs-or-suno-free-tier-release
+  attribution_required: false
+  notes:
+    - Mẫu VCSL, VSCO-2-CE (CC0); MIDI do Claude viết; mido là MIT (chưa kiểm lại)
+    - 'Chưa cài: chờ bước 0 của chủ dự án'
+  record: art-src/audio/SOURCES.json và licences.jsonl (§10.5, §10.6); pnpm audio:licence-check chặn khi thiếu
+  basis: AUDIO_PIPELINE §10.2
+constraints: []
+board:
+  contexts: [mot-minh, trong-tran]
+  contexts_before_phase3: [mot-minh, lap-20]
+  dense: false
+  repeat_interval_ms: null
+  repeat_basis: null
+  loudness_match: lufs-m
+  basis: AUDIO_PIPELINE §7
+critic:
+  group: alarm
+  dirty: false
+  weights_batch1:
+    l2: 0.6
+    l3: 0.3
+    l4: 0.1
+    l5: 0.0
+  loop_eval:
+    enabled: false
+    length_s: null
+    plays: null
+    interval_ms: null
+  ast:
+    expected: []
+    forbid: []
+  loop: false
+  stereo: false
+  pitched: false
+  attack_max_ms: null
+  head_max_ms: 5
+  rate_hz: null
+  bpm: null
+  bars: null
+  beats_per_bar: null
+  intent: Soft low heartbeat, two beats, deep and muffled, 400 ms
+  refs: []
+  basis: AUDIO_PIPELINE §4.4, §4.5 (L4 chỉ gắn cờ, trọng số tối đa 0,1)
+blocked_by: []
+origin:
+  code:
+    file: src/audio/catalog.ts
+    present: true
+    asset_stem: sfx/dragon/heartbeat
+    synth_in_code: true
+  sound_list:
+    file: docs/audio/M0_SOUND_LIST.md
+    present: true
+    section: 5.2 Hỏa Long (bus `dragon`, trừ báo nguy ở `stingers`)
+  plan: []
+notes: ''

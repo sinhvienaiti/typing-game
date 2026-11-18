@@ -1,0 +1,60 @@
+{
+  "time": "2026-10-30T08:19:44.787184+00:00",
+  "markerNs": 1793347370404749947,
+  "findNewer": {
+    "command": [
+      "find",
+      "games/.wt-td-scenery",
+      "games/typing-defense/public",
+      "-newer",
+      "games/typing-defense/tmp/codex-231/marker"
+    ],
+    "exit": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  "worktreeChanges": [],
+  "mainPublicChanges": [],
+  "sourceInventoryUnchanged": true,
+  "status": {
+    "command": [
+      "git",
+      "-C",
+      "/Users/toandx/htdocs/typing-game/games/.wt-td-scenery",
+      "--no-optional-locks",
+      "status",
+      "--short",
+      "-uall"
+    ],
+    "exit": 0,
+    "stdout": " M package.json\n?? docs/changelog/2026-10-30-scenery-atlas.md\n?? docs/changelog/2026-10-30-scenery-layout.md\n?? public/assets/typing-defense/scenery/manifest.json\n?? scripts/td/prepare-scenery.mjs\n?? scripts/td/scenery-layout-sheet.ts\n?? scripts/td/scenery-set.json\n?? src/view/3d/scenery-layout.ts\n?? tests/golden/td-scenery-layout.json\n?? tests/td-scenery-layout.test.ts\n?? tests/td-scenery-prep.test.ts\n",
+    "stderr": ""
+  },
+  "statusUnchanged": true,
+  "head": {
+    "command": [
+      "git",
+      "-C",
+      "/Users/toandx/htdocs/typing-game/games/.wt-td-scenery",
+      "rev-parse",
+      "HEAD"
+    ],
+    "exit": 0,
+    "stdout": "2a1f61d7da2ee6e6ca4abdc23f8775f872d9c9e7\n",
+    "stderr": ""
+  },
+  "headUnchanged": true,
+  "diffStat": {
+    "command": [
+      "git",
+      "-C",
+      "/Users/toandx/htdocs/typing-game/games/.wt-td-scenery",
+      "diff",
+      "--stat"
+    ],
+    "exit": 0,
+    "stdout": " package.json | 1 +\n 1 file changed, 1 insertion(+)\n",
+    "stderr": ""
+  },
+  "diffStatUnchanged": true
+}

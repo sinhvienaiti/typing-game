@@ -1,0 +1,29 @@
+{
+  "game": "typing-defense",
+  "name": "slider-track",
+  "tryNumber": 2,
+  "sourceSize": [
+    1536,
+    1024
+  ],
+  "bboxAlphaGT16": [
+    36,
+    454,
+    1465,
+    95
+  ],
+  "bboxRatio": 15.421052631578947,
+  "ratioDeviationFrom16": 0.03618421052631582,
+  "scaleXY": [
+    0.6989761092150171,
+    0.6736842105263158
+  ],
+  "processed": "games/typing-defense/tmp/codex-225/slider-track.try2.edge.processed.png",
+  "operations": [
+    "games/typing-defense/tmp/codex-225/slider-track.try2.edge.crop.png",
+    "-filter",
+    "Lanczos",
+    "-resize",
+    "1024x64!"
+  ]
+}

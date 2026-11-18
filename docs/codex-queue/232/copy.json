@@ -1,0 +1,14 @@
+{
+ "method": "224 'Dựng bản chép': ls-files -co --exclude-standard via rsync -a; public/ via rsync -aL (symlinked ground/ui dereferenced); node_modules real dir with 11 absolute symlinks (skip .vite, .vite-temp, .pnpm-workspace-state-v1.json); 6 accepted sources copied (rsync -aL, mtime kept) to tree/art-src/ui for prepare-ui --check",
+ "env": "env -u VITE_PORTAL_URL pnpm_config_verify_deps_before_run=false TMPDIR=<codex-232>/tmpdir",
+ "node": "v24.22.0",
+ "pnpm": "11.21.0",
+ "filesOutsideNodeModules": 531,
+ "lsFilesShaMatch": "372/372",
+ "publicFiles": 163,
+ "nodeModulesSymlinks": 11,
+ "extraTrees": {
+  "tree-200": "tree with the 12 paths of 203 reverted (4 from HEAD, 8 new removed)",
+  "tree-base": "tree with all 25 paths reverted; 0 tracked files differ from HEAD"
+ }
+}

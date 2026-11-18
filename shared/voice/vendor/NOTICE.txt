@@ -1,0 +1,17 @@
+Offline Voice distribution
+
+Vosk API and vosk-model-small-en-us-0.15: Alpha Cephei, Apache-2.0.
+https://github.com/alphacep/vosk-api
+https://alphacephei.com/vosk/models
+
+vosk-browser 0.0.8: C. Coreilly and contributors, Apache-2.0.
+https://github.com/ccoreilly/vosk-browser
+
+This distribution modifies model.conf endpoint rules 2/3/4 to 0.25/0.35/0.5
+seconds and repackages the original model deterministically under model/.
+It extracts the original Gr.fst symbol table into vocabulary.json.
+Source archive and generated artifact checksums are pinned in model-manifest.json.
+
+The browser engine includes third-party implementations distributed by
+vosk-browser; their notices are retained in the bundled engine source, including
+Microsoft TypeScript helpers, zstddec and the Kaldi/Vosk WASM runtime.

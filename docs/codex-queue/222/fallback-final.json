@@ -1,0 +1,44 @@
+{
+  "env": {
+    "pnpm_config_verify_deps_before_run": ""
+  },
+  "reason": "Tắt kiểm/cài phụ thuộc tự động ở pnpm con do 8 test deploy-pack gọi pnpm; không sửa file hay assertions.",
+  "steps": [
+    {
+      "log": "kit-final.log",
+      "command": [
+        "node",
+        "src/kit/verify-kit.mjs"
+      ],
+      "exitCode": 0,
+      "seconds": 0.035
+    },
+    {
+      "log": "tests-final.log",
+      "command": [
+        "node_modules/.bin/vitest",
+        "run"
+      ],
+      "exitCode": 0,
+      "seconds": 6.65
+    },
+    {
+      "log": "tsc-final.log",
+      "command": [
+        "node_modules/.bin/tsc",
+        "--noEmit"
+      ],
+      "exitCode": 0,
+      "seconds": 1.966
+    },
+    {
+      "log": "build-final.log",
+      "command": [
+        "node_modules/.bin/vite",
+        "build"
+      ],
+      "exitCode": 0,
+      "seconds": 1.32
+    }
+  ]
+}

@@ -1,6 +1,8 @@
 import { defineConfig } from "vite";
+import { offlineVoskPlugin } from "../scripts/offline-vosk-plugin.mjs";
 
 export default defineConfig({
+  plugins: [offlineVoskPlugin()],
   server: {
     host: "127.0.0.1",
     port: 3100,
@@ -12,6 +14,10 @@ export default defineConfig({
       clientPort: 443,
     },
     proxy: {
+      "/api/runtime/typing-feel": {
+        target: "http://127.0.0.1:3199",
+        changeOrigin: false,
+      },
       "/api/admin": {
         target: "http://127.0.0.1:3199",
         changeOrigin: false,

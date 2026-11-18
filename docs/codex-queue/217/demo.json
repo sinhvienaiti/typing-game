@@ -1,0 +1,175 @@
+{
+  "codes": {
+    "ingest": 0,
+    "ingestAgain": 0,
+    "listen": 0,
+    "status": 0
+  },
+  "ids": [
+    {
+      "id": "fire.impact.a",
+      "found": 6,
+      "passed": 6,
+      "selected": 4,
+      "variantsExpected": {
+        "target": 4,
+        "min": 3,
+        "max": 6,
+        "basis": "M0_SOUND_LIST §1: Đòn trúng nên có 3–6 biến thể; §9 #2: 4"
+      },
+      "variants": [
+        {
+          "variant": 1,
+          "durationMs": 513.9375,
+          "lufsMMax": -20.379999994758833,
+          "lufsI": -20.379999994758826,
+          "truePeakDbtp": -1.9594827797778307,
+          "oggLufsMMax": -20.326607046105003,
+          "oggTruePeakDbtp": -1.9726747964740075,
+          "gate": "PASS"
+        },
+        {
+          "variant": 2,
+          "durationMs": 508.3333333333333,
+          "lufsMMax": -20.380000016963507,
+          "lufsI": -20.380000016963518,
+          "truePeakDbtp": -1.459818336923717,
+          "oggLufsMMax": -20.317577394167923,
+          "oggTruePeakDbtp": -1.3484284417317434,
+          "gate": "PASS"
+        },
+        {
+          "variant": 3,
+          "durationMs": 502.93750000000006,
+          "lufsMMax": -20.463338046869413,
+          "lufsI": -20.46333804686943,
+          "truePeakDbtp": -1.2944727182020972,
+          "oggLufsMMax": -20.43149036716312,
+          "oggTruePeakDbtp": -1.3453001113271454,
+          "gate": "PASS"
+        },
+        {
+          "variant": 4,
+          "durationMs": 494.35416666666663,
+          "lufsMMax": -20.66728115213568,
+          "lufsI": -23.453580260468446,
+          "truePeakDbtp": -1.295341045225317,
+          "oggLufsMMax": -20.61399699215149,
+          "oggTruePeakDbtp": -1.3596643074547667,
+          "gate": "PASS"
+        }
+      ],
+      "finalGate": "PASS",
+      "idLevel": -20.38,
+      "split": {
+        "mode": "onset",
+        "threshold_db": -35,
+        "min_gap_ms": 150,
+        "pre_ms": 5,
+        "tail_floor_db": -60
+      },
+      "listen": {
+        "mode": "context",
+        "scenario": "dh-cast-chain",
+        "duration_s": 20.0,
+        "true_peak_dbtp": -6.22155021910431,
+        "lufs_m_max": -23.632308673623886
+      }
+    },
+    {
+      "id": "amb.forest",
+      "found": 1,
+      "passed": 1,
+      "selected": 1,
+      "variantsExpected": {
+        "target": 1,
+        "min": 1,
+        "max": 1,
+        "basis": "AUDIO_PIPELINE §4.3.3 (Nền lặp); §9 #7: 1"
+      },
+      "variants": [
+        {
+          "variant": 1,
+          "durationMs": 5950.0,
+          "lufsMMax": -25.96092645522013,
+          "lufsI": -25.999999910559033,
+          "truePeakDbtp": -18.285985042568267,
+          "oggLufsMMax": -25.9685774937054,
+          "oggTruePeakDbtp": -18.19330543167589,
+          "gate": "PASS"
+        }
+      ],
+      "finalGate": "PASS",
+      "idLevel": -26.0,
+      "split": {
+        "mode": "whole",
+        "threshold_db": -35,
+        "min_gap_ms": 150,
+        "pre_ms": 5,
+        "tail_floor_db": -60
+      },
+      "listen": {
+        "mode": "context",
+        "scenario": "dh-cast-chain",
+        "duration_s": 20.0,
+        "true_peak_dbtp": -6.020730168546721,
+        "lufs_m_max": -24.13971243646206
+      }
+    }
+  ],
+  "repeat": {
+    "same": 10,
+    "total": 10,
+    "equal": true,
+    "before": {
+      "dragon-hold/fire.impact.a/demo-217/masters/fire.impact.a-v2.wav": "0b1f8b357f1bdd88b8ee276c6c95d020a48c25b7d2725e36ec7f26e9764fb7dd",
+      "dragon-hold/fire.impact.a/demo-217/masters/fire.impact.a-v3.wav": "0693e722a4f99da74055564837145bbf7a9555c0454363a19c94b5c35e2beb38",
+      "dragon-hold/fire.impact.a/demo-217/masters/fire.impact.a-v1.wav": "7728e566116c618461ed1fa25562989aaa1d2b8e255d3cc2bd1e43f888b3445e",
+      "dragon-hold/fire.impact.a/demo-217/masters/fire.impact.a-v4.wav": "f4c2ce16b06888438e99fe086bf13631900545c93fb575f1ba791315163eae03",
+      "dragon-hold/fire.impact.a/demo-217/runtime/firefly/fire.impact.a-4.ogg": "cec3b81d64344ce52f1f4e629ef1db6339139ebdea319b1e0987280953ab0af3",
+      "dragon-hold/fire.impact.a/demo-217/runtime/firefly/fire.impact.a-1.ogg": "e4d1e0f2c58216ea2bdb10678c9166c1d1d1d7fd1160929f800aad02623fcb11",
+      "dragon-hold/fire.impact.a/demo-217/runtime/firefly/fire.impact.a-3.ogg": "f03b689dff567d33f816c8a8f03b926e4af4280979977eb7fffbca24890e4340",
+      "dragon-hold/fire.impact.a/demo-217/runtime/firefly/fire.impact.a-2.ogg": "a012d48f5c9bef257fb02a57f2f37ef4b643a46cf68970c5f718b0074d94967d",
+      "dragon-hold/amb.forest/demo-217/masters/amb.forest-v1.wav": "fddbcc6b54bf7401779405406187a877e8b99ed0af1e3e1848efbd6b0e1e8ca1",
+      "dragon-hold/amb.forest/demo-217/runtime/firefly/amb.forest-1.ogg": "b60cfe3c8775945eafdf275543d1ae929460f4cbd508a3b2b0642968dabb3dfb"
+    },
+    "after": {
+      "dragon-hold/fire.impact.a/demo-217/masters/fire.impact.a-v2.wav": "0b1f8b357f1bdd88b8ee276c6c95d020a48c25b7d2725e36ec7f26e9764fb7dd",
+      "dragon-hold/fire.impact.a/demo-217/masters/fire.impact.a-v3.wav": "0693e722a4f99da74055564837145bbf7a9555c0454363a19c94b5c35e2beb38",
+      "dragon-hold/fire.impact.a/demo-217/masters/fire.impact.a-v1.wav": "7728e566116c618461ed1fa25562989aaa1d2b8e255d3cc2bd1e43f888b3445e",
+      "dragon-hold/fire.impact.a/demo-217/masters/fire.impact.a-v4.wav": "f4c2ce16b06888438e99fe086bf13631900545c93fb575f1ba791315163eae03",
+      "dragon-hold/fire.impact.a/demo-217/runtime/firefly/fire.impact.a-4.ogg": "cec3b81d64344ce52f1f4e629ef1db6339139ebdea319b1e0987280953ab0af3",
+      "dragon-hold/fire.impact.a/demo-217/runtime/firefly/fire.impact.a-1.ogg": "e4d1e0f2c58216ea2bdb10678c9166c1d1d1d7fd1160929f800aad02623fcb11",
+      "dragon-hold/fire.impact.a/demo-217/runtime/firefly/fire.impact.a-3.ogg": "f03b689dff567d33f816c8a8f03b926e4af4280979977eb7fffbca24890e4340",
+      "dragon-hold/fire.impact.a/demo-217/runtime/firefly/fire.impact.a-2.ogg": "a012d48f5c9bef257fb02a57f2f37ef4b643a46cf68970c5f718b0074d94967d",
+      "dragon-hold/amb.forest/demo-217/masters/amb.forest-v1.wav": "fddbcc6b54bf7401779405406187a877e8b99ed0af1e3e1848efbd6b0e1e8ca1",
+      "dragon-hold/amb.forest/demo-217/runtime/firefly/amb.forest-1.ogg": "b60cfe3c8775945eafdf275543d1ae929460f4cbd508a3b2b0642968dabb3dfb"
+    }
+  },
+  "inbox": {
+    "unchanged": true,
+    "before": {
+      "dragon-hold/fire.impact.a/demo.wav": {
+        "sha256": "6c54ac3a4c76c724ab1e5be889108b49426f7f81420ca3acb507d26ff47fa877",
+        "mtimeNs": 1793335443543544698
+      },
+      "dragon-hold/amb.forest/demo.wav": {
+        "sha256": "3372871f792a1a3fc402660df67630df41c314828363d57bec5aff6ece78bcf4",
+        "mtimeNs": 1793335443551705306
+      }
+    },
+    "after": {
+      "dragon-hold/fire.impact.a/demo.wav": {
+        "sha256": "6c54ac3a4c76c724ab1e5be889108b49426f7f81420ca3acb507d26ff47fa877",
+        "mtimeNs": 1793335443543544698
+      },
+      "dragon-hold/amb.forest/demo.wav": {
+        "sha256": "3372871f792a1a3fc402660df67630df41c314828363d57bec5aff6ece78bcf4",
+        "mtimeNs": 1793335443551705306
+      }
+    }
+  },
+  "out": "/Users/toandx/htdocs/typing-game/tmp/firefly-ingest/demo-out",
+  "voiceCache": "/Users/toandx/AudioLab/work/_context/voices",
+  "note": "Fixture kỹ thuật; không phải âm để phát hành, chưa đánh giá nghe. Không ghi hoặc sửa cache giọng."
+}

@@ -1,0 +1,20 @@
+[
+  {
+    "id": "M5",
+    "path": "scripts/deploy/prune.mjs",
+    "old": "if (lstatSync(at).isSymbolicLink())",
+    "new": "if (false && lstatSync(at).isSymbolicLink())",
+    "before_sha256": "9e5a2ccb590a2b955de75ccbf776a2a0ef2a39f42a59363e35c0ac9333d1e015",
+    "mutated_exit": 1,
+    "restored_exit": 0
+  },
+  {
+    "id": "M6",
+    "path": "src/app/learning.ts",
+    "old": "let bridge: LearningBridge | null = null;",
+    "new": "let bridge: LearningBridge | null = createPortalBridge();",
+    "before_sha256": "3378c7251d7bb0509b3fd03729c27ac10a76b563ceeb8b5d542772edda75f852",
+    "mutated_exit": 1,
+    "restored_exit": 0
+  }
+]

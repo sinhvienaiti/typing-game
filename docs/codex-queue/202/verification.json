@@ -1,0 +1,133 @@
+{
+  "time": "2026-10-30T13:42:35.014259+07:00",
+  "branch": "td-scenery",
+  "head": "2a1f61d7da2ee6e6ca4abdc23f8775f872d9c9e7",
+  "status": " M package.json\n?? docs/changelog/2026-10-30-scenery-atlas.md\n?? docs/changelog/2026-10-30-scenery-layout.md\n?? public/assets/typing-defense/scenery/manifest.json\n?? scripts/td/prepare-scenery.mjs\n?? scripts/td/scenery-layout-sheet.ts\n?? scripts/td/scenery-set.json\n?? src/view/3d/scenery-layout.ts\n?? tests/golden/td-scenery-layout.json\n?? tests/td-scenery-layout.test.ts\n?? tests/td-scenery-prep.test.ts\n",
+  "trackedDiffStat": " package.json | 1 +\n 1 file changed, 1 insertion(+)\n",
+  "trackedSrcDiffStat": "",
+  "scopeOK": true,
+  "unknown": [],
+  "md5_199_equal": true,
+  "199Md5": {
+    "package.json": "80e3b830ecb7a2be705e9250b2282815",
+    "scripts/td/prepare-scenery.mjs": "19c31dc0b6dff49a0b70df65044f8073",
+    "scripts/td/scenery-set.json": "060f798290e64c883a0bec1b39010b7e",
+    "tests/td-scenery-prep.test.ts": "f83212d644ffd8f42cc939a8c2b6ba46",
+    "public/assets/typing-defense/scenery/manifest.json": "492ceb1151f352f29fc5a7993ebfba7d",
+    "docs/changelog/2026-10-30-scenery-atlas.md": "ccd5ece76fb02e208a1ad96e44cc3fdc"
+  },
+  "gitDiffCheckExit": 0,
+  "tests": {
+    "files": 44,
+    "passed": 475,
+    "failed": 0,
+    "skipped": 0,
+    "layoutPassed": 73,
+    "timingFailures": 0
+  },
+  "pnpmCheck": {
+    "command": "pnpm check",
+    "exitCode": 0
+  },
+  "build": {
+    "command": "pnpm build",
+    "exitCode": 0
+  },
+  "typescript": {
+    "command": "tsc --noEmit (in check and build)",
+    "exit": 0
+  },
+  "gameGolden": {
+    "command": "pnpm td:golden:check",
+    "exit": 0,
+    "same": [
+      true,
+      true
+    ]
+  },
+  "bundleBudget": {
+    "command": "pnpm build (tsc --noEmit && vite build && node scripts/bundle-budget.mjs)",
+    "exit": 0,
+    "units": "kB gzip = 1000 bytes",
+    "start": {
+      "/": {
+        "actual": 81.58,
+        "limit": 85,
+        "headroom": 3.42
+      },
+      "/?title=0": {
+        "actual": 83.04,
+        "limit": 85,
+        "headroom": 1.96
+      }
+    },
+    "view3d": {
+      "actual": 171.83,
+      "limit": 260,
+      "headroom": 88.17
+    },
+    "totalJs": 292.75,
+    "layoutIntegratedInRenderer": false,
+    "output": [
+      "bundle budget (BUILD_1B §20) /: start 81.58 kB gzip (entry + ui/title.ts) ≤ 85 kB, headroom 3.42 kB; later 211.17 kB (_three.module-Zn6Hw7gT.js 132.07, node_modules/.pnpm/three@0.170.0/node_modules/three/examples/jsm/libs/meshopt_decoder.module.js 5.94, node_modules/.pnpm/three@0.170.0/node_modules/three/examples/jsm/loaders/GLTFLoader.js 13.64, app/dev-tools.ts 1.84, app/learn.ts 3.22, app/retry.ts 1.01, app/sandbox.ts 0.82, ui/profile.ts 1.09, ui/settings.ts 1.22, ui/sheets.ts 2.07, ui/tips.ts 1.01, view/3d/view-3d.ts 39.77, view/audio-min.ts 5.54, view/fx-pipe.ts 1.92); total 292.75 kB",
+      "bundle budget (BUILD_1B §20) /?title=0: start 83.04 kB gzip (entry + app/learn.ts) ≤ 85 kB, headroom 1.96 kB; later 209.71 kB (_three.module-Zn6Hw7gT.js 132.07, node_modules/.pnpm/three@0.170.0/node_modules/three/examples/jsm/libs/meshopt_decoder.module.js 5.94, node_modules/.pnpm/three@0.170.0/node_modules/three/examples/jsm/loaders/GLTFLoader.js 13.64, app/dev-tools.ts 1.84, app/retry.ts 1.01, app/sandbox.ts 0.82, ui/profile.ts 1.09, ui/settings.ts 1.22, ui/sheets.ts 2.07, ui/tips.ts 1.01, ui/title.ts 1.76, view/3d/view-3d.ts 39.77, view/audio-min.ts 5.54, view/fx-pipe.ts 1.92); total 292.75 kB",
+      "bundle budget (BUILD_1C_MAP1 §4) 3D view: 171.83 kB gzip (view/3d/view-3d.ts + _three.module-Zn6Hw7gT.js) ≤ 260 kB, headroom 88.17 kB"
+    ]
+  },
+  "mediaBudget": {
+    "rows": {
+      "high": {
+        "models": 10081928,
+        "ground": 1133898,
+        "scenery": 4032026,
+        "vfx": 0,
+        "total": 15247852
+      },
+      "medium": {
+        "models": 5612428,
+        "ground": 308618,
+        "scenery": 1332774,
+        "vfx": 0,
+        "total": 7253820
+      }
+    },
+    "starter": 3422868,
+    "night1": 4065425,
+    "missing": [
+      "enemies/moc-tinh",
+      "units/worker-base",
+      "heroes/draconis",
+      "helpers/helper-owlet"
+    ],
+    "listed": 53,
+    "over": []
+  },
+  "timing": {
+    "samplesMs": [
+      39.68629200000032,
+      39.71445799999947,
+      40.50958300000002,
+      39.9551249999995,
+      40.59825000000001
+    ],
+    "medianMs": 39.9551249999995,
+    "targetMs": 50
+  },
+  "manifest199Present": true,
+  "manifestMetadataEqual": true,
+  "tmp202": {
+    "field-high.jpg": 508749,
+    "layout-accepted-high.jpg": 368112,
+    "layout-high-default.json": 2450038,
+    "layout-high.jpg": 460508,
+    "layout-low-default.json": 264516,
+    "layout-low.jpg": 380261,
+    "layout-medium-default.json": 1156774,
+    "layout-medium.jpg": 422393,
+    "seeds.jpg": 544639
+  },
+  "sheetsVisuallyReviewed": true,
+  "pruneApply": false,
+  "complete": true,
+  "remaining": "Claude duyệt rồi commit; L3 gắn renderer và nghiệm thu 3D, không thuộc phiếu dữ liệu 202."
+}

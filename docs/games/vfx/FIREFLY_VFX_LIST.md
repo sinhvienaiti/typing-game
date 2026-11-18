@@ -1,0 +1,89 @@
+# Clip hiệu ứng tạo bằng Firefly Video (Dragonhold, lô 1)
+
+Chủ dự án, 29/10/2026 tối: sau clip thử `fire-burst__v1`, lửa của Rồng "cố gắng lên 9, 8,5 vẫn chấp nhận được" (`docs/games/VFX_STANDARD.md` §5.6). Chủ dự án duyệt khoảng 25 clip (khoảng 2.500 credit) cho lô này.
+
+## 1. Luật
+
+- **Chỉ model Firefly Video của Adobe** (nhãn "Commercially safe"). Model đối tác (Veo, Kling, Seedance, Runway, Ray…) chỉ để tham khảo, không đưa vào game.
+- Người điều phối tạo trong tab Firefly chủ dự án đã đăng nhập; không đăng nhập hộ, không mua credit. Lô mới hay vượt số clip đã duyệt thì hỏi chủ dự án trước.
+- Cài đặt: 1080p, 24 fps, 5 giây; tỉ lệ theo bảng dưới.
+- **Không tốn credit** (đo 29/10): tài khoản ghi "Standard features: Unlimited access", số dư đứng 8.900/10.010 sau 25 clip. Nhưng có **giới hạn tốc độ**: gửi dồn quá khoảng 10 lệnh thì báo "Something went wrong" hoặc "try again at …" (chờ vài phút). Gửi cách nhau 8–30 giây.
+- **Tải về:** nút Download của trang không lưu file trong khung trình duyệt của app. Bấm từng ô ở dải lịch sử bên phải để trang nạp video, đọc `src` của thẻ video (link ký tên, hết hạn sau 4 giờ, không chia sẻ), tải bằng `curl`, so cỡ với `x-resource-length`, rồi xóa file chứa link.
+- Video là media, không vào Git. Clip gốc: `~/VFXLab/inbox/firefly/dragon-hold/<id>/<id>__vN.mp4`, kèm `<id>__vN.txt` ghi model, cài đặt, prompt, ngày, credit trước và sau.
+- Flipbook ra: `~/VFXLab/out/dragon-hold/<id>/` (công cụ `tools/vfx-flipbook/`), rồi chép bản chọn vào `games/dragon-hold/art-src/vfx/firefly/` khi V-dh2 dùng.
+
+## 2. Đuôi chung của prompt
+
+Mọi prompt mở bằng **"Game VFX element, stylized painterly fantasy fire for a dragon,"** và đóng bằng:
+
+> Pure black background, nothing else in frame, no ground, no floor, no text. Locked-off static camera, the effect stays inside the frame. Steady exposure, no camera shake.
+
+Riêng `smoke-roll` dùng nền trắng (khói tối trên trắng tách bằng độ sáng, chắc hơn tách màu xanh với khói nửa trong).
+
+## 3. Danh sách
+
+| id | Pha | Dùng cho | Tỉ lệ | Lặp | Blend | Số bản | Ô atlas |
+|---|---|---|---|---|---|---:|---|
+| `charge-orb` | A gồng | cầu lửa trước mõm khi gõ | 1:1 | có | additive | 3 | 256 |
+| `muzzle-flash` | R tung đòn | lóe và lưỡi lửa ở miệng | 16:9 | không | additive | 3 | 256×128 |
+| `fireball-head` | T bay | đầu đạn đòn chữ và Sky Fire | 1:1 | có | additive | 2 | 256 |
+| `flame-trail` | T bay | vân lửa cuộn UV cho ribbon | 16:9 | có | additive | 2 | dải 1024×256 |
+| `impact-burst` | I trúng | nổ đòn thường (đã có v1) | 1:1 | không | additive | 2 | 256 |
+| `impact-big` | I trúng | nổ đòn mạnh, Sky Fire | 1:1 | không | additive | 3 | 512 |
+| `smoke-roll` | F dư âm | khói than sau nổ | 1:1 | không | normal | 3 | 256 |
+| `embers` | I, F | tàn lửa, tia lửa bay cung | 1:1 | không | additive | 2 | 256 |
+| `ground-fire` | F dư âm | đám lửa cháy trên đất sau Sky Fire | 1:1 | có | additive | 2 | 256 |
+
+Tổng 22 clip mới, cộng `fire-burst__v1` đã có. Còn khoảng 3 lượt cho bản hỏng.
+
+**Đã tạo (29/10, khoảng 20:10–20:40):** 24 clip mới, đủ chín id; `impact-burst__v1` là bản chép của clip thử 16:9. Nhận xét nhanh của điều phối (chưa chấm):
+- `muzzle-flash` v1–v3 mỏng (sao lóe kèm vệt nhỏ); v4, v5 dùng prompt mạnh hơn (dưới đây) nên ra luồng lửa dày, cuộn khói, nhưng chạy chéo từ dưới trái lên trên phải, cần xoay.
+- `fireball-head` v1 vẽ tay đẹp, bay sang trái; v2 tô phẳng kiểu hoạt hình, loại.
+- `impact-burst` v2, v3 và `impact-big` v1–v3 đều dùng được: lóe sao, khối lửa cuộn, vành khói tối viền đỏ.
+- `charge-orb` ra xoáy lốc; `embers` ra chùm tia đầu tròn; `flame-trail` ra dải lửa có lỗ, hơi giống dung nham.
+- `ground-fire` v1 là bức tường lửa thấp nhìn ngang; v2 là nêm lửa chéo, loại.
+- `smoke-roll` khói xám đậm trên nền trắng, đẹp nhưng nở tràn mép khung từ giữa clip: dùng đoạn đầu và làm mờ mép.
+
+Prompt `muzzle-flash` v4, v5 (phần giữa): a powerful cone-shaped blast of fire erupts from the left edge and fills the left half of the frame: a bright white-yellow flash at the source, then a wide cone of thick rolling orange flames with ragged tongues of uneven length bursts to the right, the flames curl, break apart and fade into embers and a little dark smoke within one second.
+
+### Prompt (phần giữa)
+
+- **charge-orb:** a small swirling orb of fire hovers in the centre, flame wisps spiral inward toward a white-yellow hot core, saturated orange body, deep red edges, tiny embers are drawn into it; the orb keeps the same size and brightness the whole time, a seamless continuous loop with no build-up and no fade.
+- **muzzle-flash:** a short violent jet of fire bursts from the left edge toward the right: a bright star-shaped flash at the left, then three to five ragged flame tongues of uneven length shoot to the right and break apart within half a second, leaving a few embers and a thin wisp of dark smoke.
+- **fireball-head:** a rolling ball of fire stays in the centre while its flames churn and lick backward to the left, as if it flies to the right; white-yellow core, orange body, deep red ragged edges; constant size and brightness, a seamless continuous loop.
+- **flame-trail:** a horizontal river of fire flows steadily from left to right across the whole width of the frame, a band about one fifth of the frame tall, turbulent noisy flame texture with holes and torn edges, yellow-hot in the middle, orange and deep red at the edges; the same density all the time, a seamless continuous loop.
+- **impact-burst:** a dragon fireball bursts in the centre of the frame with a small white-yellow hot core, a saturated orange body and deep red edges that break into licking flame tongues, then it rolls outward and fades into dark charcoal smoke with a few drifting embers.
+- **impact-big:** a large fiery explosion erupts in the centre: a brief white-yellow flash, then a rolling ball of orange fire with inner shadows billows upward and outward, deep red edges, then it turns into dark charcoal smoke while sparks fly out.
+- **smoke-roll:** thick dark charcoal grey smoke billows up from the lower centre, rolls and expands, then thins out and fades away completely; no fire, no sparks. (Đuôi: "Pure white background…" thay cho nền đen.)
+- **embers:** a burst of glowing embers and hot sparks flies outward from the centre in arcs that fall with gravity, each spark a bright yellow head with a tapering orange-red tail, they cool and fade out; no flames, no smoke.
+- **ground-fire:** a low patch of flames burns on an invisible floor, seen from a three-quarter top-down view, small licking flame tongues and floating embers, constant intensity, a seamless continuous loop.
+
+## 4. Cắt thành flipbook (việc của `tools/vfx-flipbook/`)
+
+- Một lần nổ (`impact-*`, `muzzle-flash`, `embers`, `smoke-roll`): bỏ khung đen đầu, khung đầu của lóe ≥ 95 % đỉnh (§5.6), cắt đuôi khi tắt hẳn; 24–32 khung.
+- Lặp (`charge-orb`, `fireball-head`, `flame-trail`, `ground-fire`): chọn đoạn 1–2 giây đều nhất, nối vòng bằng hòa chéo; không nháy ở chỗ nối.
+- Đen nền về 0 (crush), căn tâm theo khối sáng, cắt vuông hay chữ nhật theo bảng, atlas PNG lũy thừa 2, JSON `{ cols, rows, fps, loop, blend, cell, pivot, source }`, tờ xem trên nền sáng và nền tối.
+- Lõi trắng ≤ 30 % bán kính (VFX_STANDARD); nếu clip quá trắng thì hạ đỉnh, không cắt màu.
+
+### Cách chạy công cụ
+
+Từ repo cha (Python lấy venv của Audio Lab, có numpy, scipy, Pillow; đổi bằng `VFXFLIP_PY`; cần `ffmpeg`):
+
+```bash
+tools/vfx-flipbook/run.sh all dragon-hold                      # mọi clip đang có trong inbox
+tools/vfx-flipbook/run.sh ingest dragon-hold impact-big v2     # một bản; bỏ vN thì chạy mọi bản của id
+tools/vfx-flipbook/run.sh test -q                              # test bằng clip tổng hợp
+```
+
+- Bảng thông số mỗi id: `tools/vfx-flipbook/dragon-hold.json` (lặp, blend, ô, bố cục, trục, phía lõi…). Chỉnh riêng một bản bằng `"versions": { "v2": { "start": 20, "end": 60, "flipX": true, "rotate": 15 } }`, rồi chạy lại id đó.
+- Mỗi bản ra 5 file ở `~/VFXLab/out/dragon-hold/<id>/`: `.atlas.png` (RGB cho additive, RGBA alpha thẳng cho normal), `.json` (cols, rows, fps, loop, blend, cell, pivot, source, frames, trim), `.sheet.jpg` (mọi khung trên nền tối và nền sáng), `.preview.mp4`, `.metrics.json`. `summary.json` gom dòng tóm tắt và cờ của cả game.
+- Clip Firefly thường không có lóe: khối lửa lớn dần 1–3 giây. Khi đó công cụ bắt đầu ở khung đạt 35 % đỉnh (`growthStart`) và ghi chú "no flash"; lóe ≥ 95 % ở khung đầu phải do lớp lóe của game đảm nhận.
+- Lõi trắng quá 30 % bán kính: mặc định làm ấm phần ngoài của lõi về trắng-vàng (`whiteFix: "warm"`, giữ kênh sáng nhất, không cắt màu). `"peak"` là cách hạ đỉnh nguyên văn, làm lõi xám đi; `"off"` chỉ báo cờ.
+
+## 5. Clip nền trong suốt (Firefly "Transparent background", từ 31/10)
+
+- Chế độ này chỉ có 540p, 16:9, 24 fps, 5 giây. Mỗi clip ra **hai file H.264 cùng cỡ, cùng số khung (121)**: video màu và video matte xám (alpha). Trong inbox đặt `<id>__vN.rgb.mp4` + `<id>__vN.alpha.mp4` + `<id>__vN.txt` (model, cài đặt, seed, prompt). Thiếu `.alpha.mp4` thì công cụ bỏ qua bản đó.
+- **Màu và matte (đo 31/10 trên `impact-cel` v1, v2):** video màu là cảnh đã ghép lên nền riêng của Firefly (gradient nâu cam hoặc tối, sáng lên theo vụ nổ), không phải màu thẳng, cũng không phải premultiplied trên đen. Chỗ alpha 0 là nền đó; ở mép mềm `C = a·F + (1−a)·B` (sai số 0,015–0,03; coi là màu thẳng thì 0,06–0,16, coi là premultiplied thì 0,05–0,22). Matte khớp khung với video màu.
+- **Công cụ:** `"matte": "alpha-video"` (tự bật khi gặp cặp file; blend luôn `normal`). Alpha lấy từ video matte (nhiễu codec về 0, từ 0,97 là đặc). Nền B dựng lại từng khung từ các điểm alpha 0 rồi gỡ khỏi mép: `F = (C − (1−a)·B) / a`; dưới alpha 0,35 màu ngả dần về màu điểm đặc gần nhất, vùng trong suốt cũng mang màu đó, nên lọc ảnh không kéo nền hay màu đen vào mép. Atlas RGBA alpha thẳng. Cắt, căn tâm, ô, tờ xem, preview, metrics giữ như cũ; `whiteFix` chỉ làm ấm lõi khi bảng ghi `"warm"` (hàng cel ghi `"off"`, chỉ đo). `endAtGap` (giây) kết thúc ở khoảng trống đầu tiên sau khi hiệu ứng bắt đầu, vì Firefly lấp 5 giây bằng cách phát lại vụ nổ. `checks.fringe` trong `metrics.json` so mép mềm với màu đặc ngay bên trong, kèm số đo của video gốc. Nét viền tối vẽ sẵn trong clip nằm trong vùng matte đặc nên công cụ không gỡ.
+- Hàng trong bảng: `impact-cel` (I, một lần, ô 512, khoảng trống 0,1 s, tối đa 2,5 s) và `smoke-cel` (F, một lần, ô 256, bbox, khoảng trống 0,25 s, tối đa 4 s). Chạy như clip thường: `tools/vfx-flipbook/run.sh ingest dragon-hold impact-cel` (mọi bản), hoặc `run.sh all dragon-hold`.
+- **Lấy file ra khỏi trang:** CSP của trang Firefly chặn `fetch` tới localhost nhưng không chặn `form-action`. Điều phối chạy một bộ nhận nhỏ trên `127.0.0.1` (nhận POST multipart, ghi vào `~/VFXLab/inbox/firefly/<game>/<id>/` theo tên ở trên). Trong trang, gắn dữ liệu từng video vào một `<input type="file">` (qua `DataTransfer`) và gửi `<form method="post" enctype="multipart/form-data">` tới bộ nhận, đích là iframe ẩn để trang không rời đi. So cỡ file nhận với cỡ gốc; không lưu link ký tên.

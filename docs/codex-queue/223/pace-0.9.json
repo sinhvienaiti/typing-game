@@ -1,0 +1,982 @@
+{
+ "seeds": 20,
+ "bases": [
+  20261023,
+  21261026
+ ],
+ "gates": [
+  {
+   "id": "G1",
+   "name": "35 WPM, đồ trung bình",
+   "want": "75–90 %",
+   "got": "chưa chạy",
+   "status": "bị chặn"
+  },
+  {
+   "id": "G3",
+   "name": "25 WPM, đồ trung bình",
+   "want": "≥ 70 %",
+   "got": "chưa chạy",
+   "status": "bị chặn"
+  },
+  {
+   "id": "G5",
+   "name": "Chỉ gõ, không mua (10 đợt)",
+   "want": "≤ 40 % (00 §7 ải 21+: thua ≥ 60 %; M0 ở sức C2; DESIGN §9 cùng số)",
+   "got": "chưa chạy",
+   "status": "bị chặn"
+  },
+  {
+   "id": "G6",
+   "name": "Không gõ, mua tốt nhất",
+   "want": "thua 100 %, trước hết đợt 3",
+   "got": "chưa chạy",
+   "status": "bị chặn"
+  },
+  {
+   "id": "G9",
+   "name": "Tải đỉnh (lớn nhất của cửa sổ 6, 8, 10 s, mọi bot gõ)",
+   "want": "≤ 1.40",
+   "got": "chưa chạy",
+   "status": "bị chặn"
+  }
+ ],
+ "bGates": {
+  "shared": [
+   {
+    "id": "B1",
+    "name": "Shared flow band",
+    "status": "skip",
+    "checks": [],
+    "missing": [
+     "novice · Balanced",
+     "steady · Balanced",
+     "standard · Balanced",
+     "skilled · Balanced",
+     "sloppy · Balanced",
+     "fast · Balanced"
+    ]
+   },
+   {
+    "id": "B2",
+    "name": "Not too easy",
+    "status": "pass",
+    "checks": [
+     {
+      "label": "b35human",
+      "measured": "S 89%, I 28%",
+      "threshold": "not both S ≥ 90% and I ≥ 20%",
+      "pass": true
+     }
+    ],
+    "missing": []
+   },
+   {
+    "id": "B3",
+    "name": "Not too hard",
+    "status": "skip",
+    "checks": [],
+    "missing": [
+     "novice · Balanced",
+     "child · Relax"
+    ]
+   },
+   {
+    "id": "B4",
+    "name": "Accuracy beats speed",
+    "status": "skip",
+    "checks": [],
+    "missing": [
+     "steady · Balanced",
+     "sloppy · Balanced",
+     "standard · Balanced"
+    ]
+   },
+   {
+    "id": "B5",
+    "name": "Typing drives combat",
+    "status": "skip",
+    "checks": [],
+    "missing": [
+     "no-type · Relax",
+     "no-type · Balanced",
+     "no-type · Challenge"
+    ]
+   },
+   {
+    "id": "B6",
+    "name": "Tactics matter",
+    "status": "skip",
+    "checks": [],
+    "missing": [
+     "standard@good · Balanced",
+     "standard@poor · Balanced",
+     "standard@good · Challenge",
+     "standard@poor · Challenge"
+    ]
+   },
+   {
+    "id": "B7",
+    "name": "Gentle pace director",
+    "status": "skip",
+    "checks": [
+     {
+      "label": "b35human · Balanced",
+      "measured": "0.22 steps/wave, spawn scale 86%–100%",
+      "threshold": "≤ 3 steps/wave, within ±15%",
+      "pass": true
+     }
+    ],
+    "missing": [
+     "standard · Balanced · director off"
+    ]
+   },
+   {
+    "id": "B8",
+    "name": "Learning stays clear",
+    "status": "skip",
+    "checks": [],
+    "missing": [
+     "game learning gate"
+    ]
+   },
+   {
+    "id": "B9",
+    "name": "Matches human play",
+    "status": "skip",
+    "checks": [],
+    "missing": [
+     "human playtest"
+    ]
+   }
+  ],
+  "d27": [
+   {
+    "id": "B1",
+    "name": "Shared flow band",
+    "status": "skip",
+    "checks": [],
+    "missing": [
+     "novice · Balanced",
+     "steady · Balanced",
+     "standard · Balanced",
+     "skilled · Balanced",
+     "sloppy · Balanced",
+     "fast · Balanced"
+    ]
+   },
+   {
+    "id": "B7",
+    "name": "Gentle pace director",
+    "status": "skip",
+    "checks": [
+     {
+      "label": "b35human · Balanced",
+      "measured": "0.22 steps/wave, spawn scale 86%–100%",
+      "threshold": "≤ 3 steps/wave, within ±15%",
+      "pass": true
+     }
+    ],
+    "missing": [
+     "standard · Balanced · director off"
+    ]
+   }
+  ]
+ },
+ "bGateSets": [
+  {
+   "base": 20261023,
+   "shared": [
+    {
+     "id": "B1",
+     "name": "Shared flow band",
+     "status": "skip",
+     "checks": [],
+     "missing": [
+      "novice · Balanced",
+      "steady · Balanced",
+      "standard · Balanced",
+      "skilled · Balanced",
+      "sloppy · Balanced",
+      "fast · Balanced"
+     ]
+    },
+    {
+     "id": "B2",
+     "name": "Not too easy",
+     "status": "fail",
+     "checks": [
+      {
+       "label": "b35human",
+       "measured": "S 92%, I 28%",
+       "threshold": "not both S ≥ 90% and I ≥ 20%",
+       "pass": false
+      }
+     ],
+     "missing": []
+    },
+    {
+     "id": "B3",
+     "name": "Not too hard",
+     "status": "skip",
+     "checks": [],
+     "missing": [
+      "novice · Balanced",
+      "child · Relax"
+     ]
+    },
+    {
+     "id": "B4",
+     "name": "Accuracy beats speed",
+     "status": "skip",
+     "checks": [],
+     "missing": [
+      "steady · Balanced",
+      "sloppy · Balanced",
+      "standard · Balanced"
+     ]
+    },
+    {
+     "id": "B5",
+     "name": "Typing drives combat",
+     "status": "skip",
+     "checks": [],
+     "missing": [
+      "no-type · Relax",
+      "no-type · Balanced",
+      "no-type · Challenge"
+     ]
+    },
+    {
+     "id": "B6",
+     "name": "Tactics matter",
+     "status": "skip",
+     "checks": [],
+     "missing": [
+      "standard@good · Balanced",
+      "standard@poor · Balanced",
+      "standard@good · Challenge",
+      "standard@poor · Challenge"
+     ]
+    },
+    {
+     "id": "B7",
+     "name": "Gentle pace director",
+     "status": "skip",
+     "checks": [
+      {
+       "label": "b35human · Balanced",
+       "measured": "0.21 steps/wave, spawn scale 86%–100%",
+       "threshold": "≤ 3 steps/wave, within ±15%",
+       "pass": true
+      }
+     ],
+     "missing": [
+      "standard · Balanced · director off"
+     ]
+    },
+    {
+     "id": "B8",
+     "name": "Learning stays clear",
+     "status": "skip",
+     "checks": [],
+     "missing": [
+      "game learning gate"
+     ]
+    },
+    {
+     "id": "B9",
+     "name": "Matches human play",
+     "status": "skip",
+     "checks": [],
+     "missing": [
+      "human playtest"
+     ]
+    }
+   ],
+   "d27": [
+    {
+     "id": "B1",
+     "name": "Shared flow band",
+     "status": "skip",
+     "checks": [],
+     "missing": [
+      "novice · Balanced",
+      "steady · Balanced",
+      "standard · Balanced",
+      "skilled · Balanced",
+      "sloppy · Balanced",
+      "fast · Balanced"
+     ]
+    },
+    {
+     "id": "B7",
+     "name": "Gentle pace director",
+     "status": "skip",
+     "checks": [
+      {
+       "label": "b35human · Balanced",
+       "measured": "0.21 steps/wave, spawn scale 86%–100%",
+       "threshold": "≤ 3 steps/wave, within ±15%",
+       "pass": true
+      }
+     ],
+     "missing": [
+      "standard · Balanced · director off"
+     ]
+    }
+   ]
+  },
+  {
+   "base": 21261026,
+   "shared": [
+    {
+     "id": "B1",
+     "name": "Shared flow band",
+     "status": "skip",
+     "checks": [],
+     "missing": [
+      "novice · Balanced",
+      "steady · Balanced",
+      "standard · Balanced",
+      "skilled · Balanced",
+      "sloppy · Balanced",
+      "fast · Balanced"
+     ]
+    },
+    {
+     "id": "B2",
+     "name": "Not too easy",
+     "status": "pass",
+     "checks": [
+      {
+       "label": "b35human",
+       "measured": "S 84%, I 28%",
+       "threshold": "not both S ≥ 90% and I ≥ 20%",
+       "pass": true
+      }
+     ],
+     "missing": []
+    },
+    {
+     "id": "B3",
+     "name": "Not too hard",
+     "status": "skip",
+     "checks": [],
+     "missing": [
+      "novice · Balanced",
+      "child · Relax"
+     ]
+    },
+    {
+     "id": "B4",
+     "name": "Accuracy beats speed",
+     "status": "skip",
+     "checks": [],
+     "missing": [
+      "steady · Balanced",
+      "sloppy · Balanced",
+      "standard · Balanced"
+     ]
+    },
+    {
+     "id": "B5",
+     "name": "Typing drives combat",
+     "status": "skip",
+     "checks": [],
+     "missing": [
+      "no-type · Relax",
+      "no-type · Balanced",
+      "no-type · Challenge"
+     ]
+    },
+    {
+     "id": "B6",
+     "name": "Tactics matter",
+     "status": "skip",
+     "checks": [],
+     "missing": [
+      "standard@good · Balanced",
+      "standard@poor · Balanced",
+      "standard@good · Challenge",
+      "standard@poor · Challenge"
+     ]
+    },
+    {
+     "id": "B7",
+     "name": "Gentle pace director",
+     "status": "skip",
+     "checks": [
+      {
+       "label": "b35human · Balanced",
+       "measured": "0.23 steps/wave, spawn scale 86%–100%",
+       "threshold": "≤ 3 steps/wave, within ±15%",
+       "pass": true
+      }
+     ],
+     "missing": [
+      "standard · Balanced · director off"
+     ]
+    },
+    {
+     "id": "B8",
+     "name": "Learning stays clear",
+     "status": "skip",
+     "checks": [],
+     "missing": [
+      "game learning gate"
+     ]
+    },
+    {
+     "id": "B9",
+     "name": "Matches human play",
+     "status": "skip",
+     "checks": [],
+     "missing": [
+      "human playtest"
+     ]
+    }
+   ],
+   "d27": [
+    {
+     "id": "B1",
+     "name": "Shared flow band",
+     "status": "skip",
+     "checks": [],
+     "missing": [
+      "novice · Balanced",
+      "steady · Balanced",
+      "standard · Balanced",
+      "skilled · Balanced",
+      "sloppy · Balanced",
+      "fast · Balanced"
+     ]
+    },
+    {
+     "id": "B7",
+     "name": "Gentle pace director",
+     "status": "skip",
+     "checks": [
+      {
+       "label": "b35human · Balanced",
+       "measured": "0.23 steps/wave, spawn scale 86%–100%",
+       "threshold": "≤ 3 steps/wave, within ±15%",
+       "pass": true
+      }
+     ],
+     "missing": [
+      "standard · Balanced · director off"
+     ]
+    }
+   ]
+  }
+ ],
+ "readiness": [
+  {
+   "what": "Enter bắt đầu, báo đợt, đợt chạy",
+   "lane": "sim-battle (waves)",
+   "ok": true
+  },
+  {
+   "what": "Quái sinh ở cổng",
+   "lane": "sim-battle (spawn)",
+   "ok": true
+  },
+  {
+   "what": "Quái đi theo đường",
+   "lane": "sim-battle (movement)",
+   "ok": true
+  },
+  {
+   "what": "Quái đánh Rồng, lính, nhà",
+   "lane": "sim-battle (combat)",
+   "ok": true
+  },
+  {
+   "what": "Gán chữ lên quái",
+   "lane": "typing-learning (words)",
+   "ok": true
+  },
+  {
+   "what": "Gõ xong từ",
+   "lane": "typing-learning (words)",
+   "ok": true
+  },
+  {
+   "what": "Đòn gõ trúng quái",
+   "lane": "sim-battle (combat)",
+   "ok": true
+  },
+  {
+   "what": "Kỹ năng Rồng gây sát thương",
+   "lane": "sim-battle (combat)",
+   "ok": true
+  },
+  {
+   "what": "Quái chết",
+   "lane": "sim-battle (combat)",
+   "ok": true
+  },
+  {
+   "what": "Gold chảy (hạ quái, hết đợt)",
+   "lane": "sim-ourside (economy)",
+   "ok": true
+  },
+  {
+   "what": "Đặt món trong cửa hàng",
+   "lane": "sim-ourside (shop)",
+   "ok": true
+  },
+  {
+   "what": "Bẫy, lính, nhà gây sát thương",
+   "lane": "sim-ourside (traps, units)",
+   "ok": true
+  },
+  {
+   "what": "Hết đợt, sang nghỉ",
+   "lane": "sim-battle (waves)",
+   "ok": true
+  }
+ ],
+ "plan": [
+  {
+   "wave": 1,
+   "groups": 12,
+   "w": 12,
+   "target": 0.62,
+   "load": 0.6219227779217414,
+   "band": "0.55–0.65",
+   "peaks": [
+    0.8321953010279007,
+    0.7420429515418504,
+    0.7929515418502204
+   ],
+   "canonCap": null,
+   "generalPct": 0,
+   "problems": []
+  },
+  {
+   "wave": 2,
+   "groups": 14,
+   "w": 16.2,
+   "target": 0.75,
+   "load": 0.751217250173893,
+   "band": "0.75–1.00",
+   "peaks": [
+    1.0060572687224674,
+    0.9911894273127756,
+    0.9679515418502207
+   ],
+   "canonCap": 1.15,
+   "generalPct": 0,
+   "problems": []
+  },
+  {
+   "wave": 3,
+   "groups": 14,
+   "w": 17.4,
+   "target": 0.78,
+   "load": 0.7795116852086911,
+   "band": "0.75–1.00",
+   "peaks": [
+    1.000000000000001,
+    0.9911894273127753,
+    0.9571806167400888
+   ],
+   "canonCap": 1.15,
+   "generalPct": 0,
+   "problems": []
+  },
+  {
+   "wave": 4,
+   "groups": 14,
+   "w": 18.599999999999998,
+   "target": 0.79,
+   "load": 0.7929515418502202,
+   "band": "0.75–1.00",
+   "peaks": [
+    1.0000000000000013,
+    0.9911894273127754,
+    0.9821806167400889
+   ],
+   "canonCap": 1.15,
+   "generalPct": 0,
+   "problems": []
+  },
+  {
+   "wave": 5,
+   "groups": 15,
+   "w": 24.4,
+   "target": 0.9,
+   "load": 0.895741556534508,
+   "band": "0.75–1.00",
+   "peaks": [
+    1.0000000000000013,
+    1.0000000000000013,
+    1.0000000000000013
+   ],
+   "canonCap": 1.15,
+   "generalPct": 24.59016393442623,
+   "problems": []
+  },
+  {
+   "wave": 6,
+   "groups": 14,
+   "w": 16.4,
+   "target": 0.73,
+   "load": 0.7347121630702605,
+   "band": "0.60–0.80",
+   "peaks": [
+    1.0000000000000013,
+    0.9911894273127754,
+    0.9629515418502206
+   ],
+   "canonCap": 1.15,
+   "generalPct": 0,
+   "problems": []
+  },
+  {
+   "wave": 7,
+   "groups": 15,
+   "w": 20,
+   "target": 0.91,
+   "load": 0.911438553850828,
+   "band": "0.75–1.00",
+   "peaks": [
+    1.0977973568281936,
+    1.0858480176211456,
+    1.0779955947136561
+   ],
+   "canonCap": 1.15,
+   "generalPct": 0,
+   "problems": []
+  },
+  {
+   "wave": 8,
+   "groups": 15,
+   "w": 19.4,
+   "target": 0.9,
+   "load": 0.8996058428008347,
+   "band": "0.75–1.00",
+   "peaks": [
+    1.0680249632892804,
+    1.0573788546255498,
+    1.058766519823788
+   ],
+   "canonCap": 1.15,
+   "generalPct": 0,
+   "problems": []
+  },
+  {
+   "wave": 9,
+   "groups": 15,
+   "w": 20,
+   "target": 0.88,
+   "load": 0.881057268722467,
+   "band": "0.75–1.00",
+   "peaks": [
+    1.0977973568281936,
+    1.10112885462555,
+    1.0829955947136563
+   ],
+   "canonCap": 1.15,
+   "generalPct": 0,
+   "problems": []
+  },
+  {
+   "wave": 10,
+   "groups": 19,
+   "w": 29.2,
+   "target": 1.15,
+   "load": 1.1519495035834046,
+   "band": "1.05–1.25",
+   "peaks": [
+    1.3859765051395003,
+    1.3885737885462552,
+    1.3801762114537444
+   ],
+   "canonCap": 1.15,
+   "generalPct": 20.547945205479454,
+   "problems": [
+    "vượt L_đỉnh C2 1.15: ngoại lệ M0 ≤ 1.40 (DESIGN §9), chờ chủ dự án ghi vào 00"
+   ]
+  }
+ ],
+ "byMode": {
+  "balanced": {
+   "b35human": {
+    "bot": "b35human",
+    "label": "b35human",
+    "runs": 40,
+    "results": {
+     "victory": 40
+    },
+    "winPct": 100,
+    "meanWave": 10,
+    "defeatWaves": [],
+    "stalled": [],
+    "stars": {
+     "2": 9,
+     "3": 31
+    },
+    "heroHpPct": 86.50842266462482,
+    "peaks": {
+     "6s": 1.3525697503671053,
+     "8s": 1.351073788546254,
+     "10s": 1.3451762114537422
+    },
+    "waves": [
+     {
+      "wave": 1,
+      "runs": 40,
+      "w": 12,
+      "load": 0.5597272076165812,
+      "peak": 0.765528634361234,
+      "busyPct": 52.7233264469422,
+      "wordsPerMin": 13.26579943973698,
+      "goldAtEnd": 95.375,
+      "heroHpAtEndPct": 492
+     },
+     {
+      "wave": 2,
+      "runs": 40,
+      "w": 16.200000000000003,
+      "load": 0.6760990835727333,
+      "peak": 0.9482929515418506,
+      "busyPct": 66.98565812596622,
+      "wordsPerMin": 16.852856244556236,
+      "goldAtEnd": 103,
+      "heroHpAtEndPct": 506.2
+     },
+     {
+      "wave": 3,
+      "runs": 40,
+      "w": 17.399999999999988,
+      "load": 0.7015557603775815,
+      "peak": 1.000000000000001,
+      "busyPct": 67.93349085570874,
+      "wordsPerMin": 16.337404136082522,
+      "goldAtEnd": 102.125,
+      "heroHpAtEndPct": 492.95
+     },
+     {
+      "wave": 4,
+      "runs": 40,
+      "w": 18.600000000000016,
+      "load": 0.7136552366083644,
+      "peak": 1.0000000000000013,
+      "busyPct": 69.897971935306,
+      "wordsPerMin": 15.831470388167144,
+      "goldAtEnd": 103.625,
+      "heroHpAtEndPct": 502.7
+     },
+     {
+      "wave": 5,
+      "runs": 40,
+      "w": 24.399999999999984,
+      "load": 0.8061674008810578,
+      "peak": 1.1325624082231984,
+      "busyPct": 71.90909428151458,
+      "wordsPerMin": 16.34033777772046,
+      "goldAtEnd": 126.25,
+      "heroHpAtEndPct": 521.725
+     },
+     {
+      "wave": 6,
+      "runs": 40,
+      "w": 16.399999999999988,
+      "load": 0.6612364638041582,
+      "peak": 1.0049192364170336,
+      "busyPct": 62.56336204182136,
+      "wordsPerMin": 15.318937241465267,
+      "goldAtEnd": 106.4,
+      "heroHpAtEndPct": 547.9
+     },
+     {
+      "wave": 7,
+      "runs": 40,
+      "w": 20,
+      "load": 0.8203003557095772,
+      "peak": 1.1776431718061666,
+      "busyPct": 69.03482674737441,
+      "wordsPerMin": 17.62006237925609,
+      "goldAtEnd": 129.8,
+      "heroHpAtEndPct": 533.125
+     },
+     {
+      "wave": 8,
+      "runs": 40,
+      "w": 19.399999999999984,
+      "load": 0.8096495198340141,
+      "peak": 1.1526431718061665,
+      "busyPct": 68.67027847155481,
+      "wordsPerMin": 16.504535907845288,
+      "goldAtEnd": 127.95,
+      "heroHpAtEndPct": 555.75
+     },
+     {
+      "wave": 9,
+      "runs": 40,
+      "w": 20,
+      "load": 0.7929475771123355,
+      "peak": 1.1859765051395,
+      "busyPct": 65.28565304558933,
+      "wordsPerMin": 17.54672755326603,
+      "goldAtEnd": 142.525,
+      "heroHpAtEndPct": 575.8
+     },
+     {
+      "wave": 10,
+      "runs": 40,
+      "w": 29.200000000000024,
+      "load": 1.0367607428414396,
+      "peak": 1.3525697503671072,
+      "busyPct": 64.87023338521479,
+      "wordsPerMin": 16.943369333490985,
+      "goldAtEnd": 185.425,
+      "heroHpAtEndPct": 564.9
+     }
+    ],
+    "damage": {
+     "word": 57.54444817175444,
+     "skill": 12.145852302678872,
+     "ourSide": 30.309699525566685,
+     "other": 0
+    },
+    "kills": {
+     "word": 176.2,
+     "trap": 21.675,
+     "skyfire": 55.449999999999996,
+     "inferno": 5.1000000000000005,
+     "unit": 7.5749999999999975
+    },
+    "hard": {
+     "sharePct": 4.063879954421062,
+     "worstPct": 22.762148337595907,
+     "over35Pct": 0,
+     "heldPct": 7.713824874610575
+    },
+    "typing": {
+     "keys": 763.725,
+     "accuracyPct": 95.98677534452847,
+     "words": 156.875,
+     "locks": 145.05,
+     "locksLostPct": 0.8445363667700793,
+     "capacityWpm": 0,
+     "measuredWpm": 16.268300938361932
+    },
+    "gold": {
+     "start": 200,
+     "earned": 1214.625,
+     "spent": 1229.2,
+     "end": 185.425,
+     "beforeLast": 29.425,
+     "formula": 1325,
+     "byReason": {
+      "buy": -32.25,
+      "build": -798,
+      "learn-ahead": 34.375,
+      "kill": 675,
+      "wave-end": 281.00000000000006,
+      "review-card": 224.25,
+      "upgrade": -398.94999999999993
+     }
+    },
+    "live": {
+     "maxFoes": 11,
+     "maxWords": 5
+    },
+    "jamsPerMin": {
+     "letter": 0,
+     "short": 0,
+     "tier2": 0
+    },
+    "kit": {
+     "bot": "b35human",
+     "mode": "balanced",
+     "director": true,
+     "runs": 40,
+     "win": 1000,
+     "s": 893,
+     "p": 135,
+     "i": 283,
+     "o": 0,
+     "n": 0,
+     "q": 365,
+     "support": 433,
+     "killSeconds": 3.4154516501113568,
+     "stepsPerWave": 0.22000000000000003,
+     "maxWaveSteps": 2,
+     "spawnMin": 860,
+     "spawnMax": 1000,
+     "learnOk": null
+    },
+    "hpMin": 683,
+    "skillShare": {
+     "word": 56.71359083720707,
+     "trap": 24.8261609239469,
+     "unit": 5.483538601619783,
+     "skyfire": 11.121867062826473,
+     "inferno": 1.85484257439977
+    },
+    "heroBy": {
+     "hero": 676.1,
+     "thorn-wasp": 2.6000000000000005,
+     "tusk-boar": 9.35
+    },
+    "peakMax": 1.3525697503671053,
+    "ultimateGapS": 196.46333333333334,
+    "rejected": {},
+    "sent": {
+     "buy": 43,
+     "place": 472,
+     "learn-ahead": 40,
+     "start": 40,
+     "skill": 716,
+     "review-card": 1080,
+     "upgrade": 371,
+     "consumable": 3
+    },
+    "events": {
+     "gold": 8463,
+     "bought": 43,
+     "skill": 2217,
+     "built": 472,
+     "phase": 1200,
+     "wave-start": 400,
+     "spawn": 10640,
+     "rage": 24878,
+     "word-assigned": 6817,
+     "word-progress": 24421,
+     "grade": 6275,
+     "word-complete": 6275,
+     "word-released": 6817,
+     "hit": 64171,
+     "death": 10640,
+     "hero-level": 320,
+     "trap-trigger": 31106,
+     "blight": 1413,
+     "telegraph": 4106,
+     "attack": 13556,
+     "move": 8513,
+     "wave-end": 400,
+     "status": 18179,
+     "pace": 88,
+     "upgraded": 371,
+     "aura": 160,
+     "heal": 3462,
+     "victory": 40,
+     "consumable": 3,
+     "banner": 12
+    },
+    "steps": {
+     "meanMs": 0.0027326813965468932,
+     "p95Ms": 0.013958000000002357,
+     "p99Ms": 0.0348329999999919,
+     "maxMs": 18.094791999999984,
+     "realtime": 6098.572530464259
+    }
+   }
+  }
+ }
+}

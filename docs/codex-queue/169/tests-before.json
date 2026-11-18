@@ -1,0 +1,16 @@
+{
+  "command": [
+    "pnpm",
+    "exec",
+    "vitest",
+    "run",
+    "tests/deploy-pack.test.ts",
+    "tests/english-ui.test.ts",
+    "--reporter=default",
+    "--reporter=json",
+    "--outputFile.json=../../docs/codex-queue/169/tests-before-results.json"
+  ],
+  "exitCode": 1,
+  "seconds": 1.308,
+  "log": "tests-before.log"
+}

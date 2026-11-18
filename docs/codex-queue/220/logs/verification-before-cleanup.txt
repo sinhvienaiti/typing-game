@@ -1,0 +1,50 @@
+{
+  "checks": {
+    "beforeCheckExit": 0,
+    "afterCheckExit": 0,
+    "testsBefore": true,
+    "testsAfter": true,
+    "goldenBefore": "42e4e5a9534bc78a0c252353ea7ee4670a1bec9e43eb42ef38c886aade530eea",
+    "goldenAfter": "42e4e5a9534bc78a0c252353ea7ee4670a1bec9e43eb42ef38c886aade530eea",
+    "chapterLinesBefore": 152,
+    "chapterLinesAfter": 152,
+    "chapterMatch": true,
+    "variantCount": 4,
+    "singleReports": 10,
+    "fourStageReports": 6,
+    "rawFilesMatch": true,
+    "allExit0": true,
+    "waveStartLimits": true,
+    "loadRoseAbove10With4Reports": true,
+    "liveLimitDuringRiseGuaranteed": false,
+    "summaryOverridesValid": true,
+    "worktreeHead": "ba6d70e9d6978eb4b430d119c409f3d47f9a364e",
+    "onlyAllowedWorktreePaths": true,
+    "protectedDiff": {
+      "exit": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "diffCheck": {
+      "exit": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "contentDiff": {
+      "exit": 0,
+      "stdout": "src/content/guns.ts\n",
+      "stderr": ""
+    },
+    "worldNumstat": {
+      "exit": 0,
+      "stdout": "1\t1\tsrc/sim/world.ts\n",
+      "stderr": ""
+    },
+    "tmpdirRemoved": false,
+    "tmpRunsRemain": true
+  },
+  "rawReports": 16,
+  "rawFiles": 48,
+  "machineSeconds": 7466,
+  "measurementSpanSeconds": 2770.307
+}

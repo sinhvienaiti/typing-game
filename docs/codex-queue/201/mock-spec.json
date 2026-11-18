@@ -1,0 +1,241 @@
+{
+  "camera": {
+    "verticalFovDegrees": 38,
+    "aspect": 1.7777777777777777,
+    "downAngleDegrees": 55,
+    "distanceMetres": 58,
+    "target": [
+      0,
+      0,
+      0
+    ],
+    "position": [
+      0,
+      47.51081856876152,
+      33.26743330836067
+    ],
+    "right": [
+      1,
+      0,
+      0
+    ]
+  },
+  "tileMetres": 8,
+  "mip": {
+    "sizes": [
+      1024,
+      512,
+      256,
+      128
+    ],
+    "filter": "Lanczos",
+    "lod": "log2(max(length(dUV/dx),length(dUV/dy))*1024); clamp 0..3",
+    "textureLookup": "bilinear periodic inside each mip; trilinear between adjacent levels"
+  },
+  "samplesPerPixel": 16,
+  "samplePattern": "4 × 4 subpixel grid, centres at (k+0.5)/4",
+  "layout": {
+    "jade": "Phủ toàn mặt phẳng y=0",
+    "moss": [
+      {
+        "centerXZ": [
+          -14,
+          4
+        ],
+        "diameterXZ": [
+          18,
+          12
+        ]
+      },
+      {
+        "centerXZ": [
+          12,
+          -9
+        ],
+        "diameterXZ": [
+          16,
+          12
+        ]
+      }
+    ],
+    "road": {
+      "axisXZ": [
+        0.6,
+        0.8
+      ],
+      "normalXZ": [
+        0.8,
+        -0.6
+      ],
+      "normalOffset": -2,
+      "width": 4,
+      "trailEachSide": 1.5,
+      "uv": "u=(0.8*x-0.6*z+2)/8; v=(0.6*x+0.8*z)/8"
+    },
+    "stream": {
+      "centerX": "-18 + 0.12*z + 1.5*sin(z/12)",
+      "width": 5,
+      "bankEachSide": 2,
+      "distance": "local normal approximation |x-centerX|/sqrt(1+(0.12+0.125*cos(z/12))²)"
+    },
+    "softEdgeMetres": 0.4,
+    "compositeOrder": [
+      "jade",
+      "moss",
+      "trail",
+      "road",
+      "bank",
+      "water"
+    ]
+  },
+  "waterColor": "#386b68",
+  "lighting": "Không đèn, bóng, sương hoặc tia nắng; lấy màu sRGB trực tiếp",
+  "limitations": [
+    "Khung phối cảnh là kiểm ô và lớp vật liệu, không mô phỏng shader làn L",
+    "Mặt nạ bố cục do script, giống hệt bộ 122 và v3"
+  ],
+  "frames": {
+    "1280": {
+      "source": "games/typing-defense/tmp/201/frames/td-1c-road-1280x720-default.jpg",
+      "sourceDimensions": [
+        2005,
+        572
+      ],
+      "crop": {
+        "x": 0,
+        "y": 32,
+        "width": 960,
+        "height": 540,
+        "geometry": "960x540+0+32"
+      },
+      "detection": {
+        "labelDarkThreshold": 0.12,
+        "labelDarkFractions": [
+          0.9650872817955112,
+          0.9576059850374065,
+          0.940149625935162,
+          0.9576059850374065,
+          0.9513715710723192,
+          0.9389027431421446,
+          0.8266832917705735,
+          0.8104738154613467,
+          0.800498753117207,
+          0.7668329177057357,
+          0.3940149625935162,
+          0.32169576059850374,
+          0.45012468827930174,
+          0.4376558603491272,
+          0.4177057356608479,
+          0.4800498753117207,
+          0.5349127182044888,
+          0.4713216957605985,
+          0.371571072319202,
+          0.42768079800498754,
+          0.8254364089775561,
+          0.8541147132169576,
+          0.8391521197007481,
+          0.9039900249376559,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "gapStart": 960,
+        "gapEnd": 971,
+        "gapDarkFractionThreshold": 0.95
+      },
+      "noUpscale": true
+    },
+    "1920": {
+      "source": "games/typing-defense/tmp/201/frames/td-1c-road-1920x1080-default.jpg",
+      "sourceDimensions": [
+        2673,
+        752
+      ],
+      "crop": {
+        "x": 0,
+        "y": 32,
+        "width": 1280,
+        "height": 720,
+        "geometry": "1280x720+0+32"
+      },
+      "detection": {
+        "labelDarkThreshold": 0.12,
+        "labelDarkFractions": [
+          0.9672591206735267,
+          0.961646398503274,
+          0.9485500467726847,
+          0.9588400374181478,
+          0.9513564078578111,
+          0.9429373246024322,
+          0.8306828811973808,
+          0.8175865294667914,
+          0.7904583723105706,
+          0.7380729653882133,
+          0.3816651075771749,
+          0.3246024321796071,
+          0.44434050514499535,
+          0.4331150608044902,
+          0.4546304957904584,
+          0.4920486435921422,
+          0.5238540692235735,
+          0.4724041159962582,
+          0.3760523854069224,
+          0.43592142188961647,
+          0.8362956033676333,
+          0.8241347053320861,
+          0.8484565014031805,
+          0.9073900841908326,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "gapStart": 1280,
+        "gapEnd": 1296,
+        "gapDarkFractionThreshold": 0.95
+      },
+      "noUpscale": true
+    }
+  }
+}

@@ -1,0 +1,116 @@
+{
+ "$schema": "../../schemas/recipe.schema.json",
+ "schema": "audiolab.recipe/1",
+ "game": "typing-defense",
+ "id": "coin.short",
+ "group": "default",
+ "family": "thuong",
+ "description": "Lô 1 (BATCH1_BRIEF #27), hướng 'tắt nhanh ở 1–4 kHz': một tiếng xu chạm khác (Kenney RPG handleCoins2, cắt 110–165 ms), chuông Hand Chimes đủ dải giữ 262 ms và mờ dần từ 32 ms, nên nghe ra nốt rồi tắt, không đọng dưới giọng đọc. Vòng 2, 3: vòng 1 ngắn hơn 240 ms của thẻ và dùng cả nắm xu; vòng 2 dài 238 ms. Biến thể n dùng nốt n.",
+ "channels": 1,
+ "layers": [
+  {
+   "id": "coin",
+   "role": "attack",
+   "gainDb": -2,
+   "trim": {
+    "startMs": 110,
+    "endMs": 165
+   },
+   "fadeOutMs": 30,
+   "filters": [
+    {
+     "type": "highpass",
+     "hz": 400
+    }
+   ],
+   "source": {
+    "library": "kenney/rpg-audio/Audio/handleCoins2.ogg"
+   }
+  },
+  {
+   "id": "chime",
+   "role": "sweetener",
+   "gainDb": -6,
+   "offsetMs": 8,
+   "trim": {
+    "endMs": 262
+   },
+   "fadeOutMs": 230,
+   "source": {
+    "sampler": {
+     "instrument": "hand-chimes",
+     "notes": "0:C7:0.5:85"
+    }
+   },
+   "vary": {
+    "swapMode": "cycle",
+    "swap": [
+     {
+      "sampler": {
+       "instrument": "hand-chimes",
+       "notes": "0:A6:0.5:85"
+      }
+     },
+     {
+      "sampler": {
+       "instrument": "hand-chimes",
+       "notes": "0:G6:0.5:85"
+      }
+     },
+     {
+      "sampler": {
+       "instrument": "hand-chimes",
+       "notes": "0:D7:0.5:85"
+      }
+     }
+    ]
+   }
+  }
+ ],
+ "chain": {
+  "dcHpfHz": 40,
+  "filters": [
+   {
+    "type": "highpass",
+    "hz": 150
+   }
+  ],
+  "headTrim": {
+   "thresholdDb": -50,
+   "preRollMs": 0.5
+  },
+  "maxLengthMs": 340,
+  "tail": {
+   "floorDb": -60,
+   "shape": "exp",
+   "kneeMs": 180
+  },
+  "normalise": {
+   "mode": "lufs-m-max",
+   "target": -20
+  },
+  "limiter": {
+   "ceilingDbtp": -1.0,
+   "releaseMs": 60,
+   "maxGrDb": 6
+  }
+ },
+ "variants": {
+  "count": 4,
+  "seed": 2502,
+  "includeBase": true,
+  "pitchCents": [
+   0,
+   0
+  ],
+  "gainDb": [
+   0,
+   0
+  ]
+ },
+ "export": {
+  "path": "sfx/battle/coin",
+  "ogg": true,
+  "oggQuality": 0.6
+ }
+}

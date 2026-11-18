@@ -1,0 +1,866 @@
+--- a/src/app/app.ts
++++ b/src/app/app.ts
+@@ -23,7 +23,7 @@
+ import { RINGS, URGENT } from "../content/rules";
+ import type { Difficulty, FoeId, MapDef, SimCommand, SimEvent, StageDef, WordDeck } from "../content/types";
+ import { createPortalBridge } from "./portal";
+-import { startDeckBoot } from "./deck-boot";
++import { createDeckLoader, startDeckBoot } from "./deck-boot";
+ import { normalizeQuality } from "./quality";
+ import { createIdleSpeed, frameTimeScale } from "./idle-speed";
+ import { safeLocalStorage } from "../kit/platform";
+@@ -53,7 +53,7 @@
+ import { createTelegraphs, type TelegraphsView } from "../view/telegraphs";
+ import type { ActionHandler, FrameInfo, Presenter, Quality, ScreenPoint } from "./contracts";
+ import { createInputRouter, type InputRouter, type KeyPanel } from "./input-router";
+-import { DeckBuildError, createLearningClient, type LearningClient } from "./learning";
++import { createLearningClient, type LearningClient } from "./learning";
+ import { createLoop, type Loop } from "./loop";
+ import { createPaceCard } from "./pace-card";
+ import { PaceMeter, clampWpm, measuredHeader, offerEasy, paceLabel, paceOptions, readPaceMemory, recordStage, rememberPick, sameSpeed, type PaceHeader } from "./typing-pace";
+@@ -914,7 +914,16 @@
+       begin();
+     });
+   };
+-  const title = options.title === false ? null : createTitle(overlay, { onStart: startFromTitle });
++  // Title path: the 195 loader without its panel; the title shows the error and Retry.
++  const titleDeck = options.title === false ? null : createDeckLoader(learning, stage, {
++    ready: (built) => {
++      if (disposed) return;
++      deck = built;
++      title?.settle("words");
++    },
++    failed: (error) => { if (!disposed) title?.settle("words", error.reason); },
++  });
++  const title = titleDeck ? createTitle(overlay, { onStart: startFromTitle, onRetry: () => titleDeck.load() }) : null;
+   // R2: attach the map camera with title.onShow/onHide and title.setBackdrop("live").
+   title?.show();
+   // Moved before buildDeck: the title receives keys while all four sources load.
+@@ -924,19 +933,13 @@
+     onImeSign: () => { if (run) imeUntil = view.performance.now() + 8000; },
+     now: () => view.performance.now(),
+   });
+-  const deckBoot = title ? { dispose() {} } : startDeckBoot(overlay, notice, learning, stage, (built) => {
++  const deckBoot = titleDeck ?? startDeckBoot(overlay, notice, learning, stage, (built) => {
+     if (disposed) return;
+     deck = built;
+     startFromTitle();
+   });
+   if (title) {
+-    void learning.buildDeck(stage).then(built => {
+-      if (disposed) return;
+-      deck = built;
+-      title.settle("words");
+-    }, error => {
+-      if (!disposed) title.settle("words", error instanceof DeckBuildError ? error.reason : "load-failed");
+-    });
++    titleDeck?.load();
+     for (const [source, promise] of [["models", models.ready], ["ground", map.groundBaked], ["dragons", heroes.ready]] as const) {
+       void Promise.resolve(promise).catch((error: unknown) => {
+         if (!disposed) console.warn("title: load failed", source, error);
+--- a/src/app/deck-boot.ts
++++ b/src/app/deck-boot.ts
+@@ -3,6 +3,48 @@
+ import { DeckBuildError, type LearningClient } from "./learning";
+ import { portalHome } from "./portal";
+ 
++export interface DeckLoader {
++  /** Starts one build; false while one runs, after a delivered deck, or after dispose. */
++  load(): boolean;
++  readonly busy: boolean;
++  dispose(): void;
++}
++
++/** The 195 recovery path without a panel: one build at a time, nothing after a deck or dispose. */
++export function createDeckLoader(learning: Pick<LearningClient, "buildDeck">, stage: StageDef, on: {
++  ready(deck: WordDeck): void;
++  failed(error: DeckBuildError): void;
++  started?(): void;
++}): DeckLoader {
++  let busy = false;
++  let closed = false;
++  const run = async (): Promise<void> => {
++    let built: WordDeck;
++    try {
++      built = await learning.buildDeck(stage);
++    } catch (error) {
++      busy = false;
++      if (!closed) on.failed(error instanceof DeckBuildError ? error : new DeckBuildError("load-failed", 0));
++      return;
++    }
++    busy = false;
++    if (closed) return;
++    closed = true;
++    on.ready(built);
++  };
++  return {
++    load() {
++      if (closed || busy) return false;
++      busy = true;
++      on.started?.();
++      void run();
++      return true;
++    },
++    get busy() { return busy; },
++    dispose() { closed = true; },
++  };
++}
++
+ /** Owns pre-router input and the single deck-to-boot transition. */
+ export function startDeckBoot(root: HTMLElement, notice: HTMLElement, learning: Pick<LearningClient, "buildDeck">, stage: StageDef, ready: (deck: WordDeck) => void): { dispose(): void } {
+   const doc = root.ownerDocument;
+@@ -10,7 +52,6 @@
+   let panel: HTMLElement | null = null;
+   let retry: HTMLButtonElement | null = null;
+   let actions: HTMLElement[] = [];
+-  let busy = false;
+   let closed = false;
+   let index = 0;
+ 
+@@ -18,7 +59,7 @@
+     if (closed || !panel || !["Enter", "Tab", "ArrowLeft", "ArrowRight"].includes(event.code)) return;
+     event.preventDefault();
+     event.stopPropagation();
+-    if (busy) return;
++    if (loader.busy) return;
+     if (event.code === "Enter") actions[index]?.click();
+     else {
+       const delta = event.code === "ArrowLeft" || (event.code === "Tab" && event.shiftKey) ? -1 : 1;
+@@ -28,6 +69,7 @@
+   };
+   const dispose = (): void => {
+     closed = true;
++    loader.dispose();
+     view.removeEventListener("keydown", onKey, true);
+     panel?.remove();
+   };
+@@ -46,7 +88,7 @@
+       const row = el(doc, "div", "dh-deck-notice__actions");
+       retry = el(doc, "button", "dh-btn dh-deck-notice__retry");
+       retry.type = "button";
+-      retry.addEventListener("click", () => { void load(); });
++      retry.addEventListener("click", () => { loader.load(); });
+       row.append(retry);
+       actions = [retry];
+       const home = portalHome(import.meta.env.VITE_PORTAL_URL);
+@@ -70,24 +112,15 @@
+     retry!.focus();
+   };
+   let lead: HTMLElement | null = null;
+-  const load = async (): Promise<void> => {
+-    if (closed || busy) return;
+-    busy = true;
+-    if (retry) { retry.disabled = true; retry.textContent = "Loading words…"; }
+-    let built: WordDeck;
+-    try {
+-      built = await learning.buildDeck(stage);
+-    } catch (error) {
+-      busy = false;
+-      if (!closed) show(error instanceof DeckBuildError ? error : new DeckBuildError("load-failed", 0));
+-      return;
+-    }
+-    busy = false;
+-    if (closed) return;
+-    notice.remove();
+-    dispose();
+-    ready(built);
+-  };
+-  void load();
++  const loader = createDeckLoader(learning, stage, {
++    started: () => { if (retry) { retry.disabled = true; retry.textContent = "Loading words…"; } },
++    failed: show,
++    ready: (built) => {
++      notice.remove();
++      dispose();
++      ready(built);
++    },
++  });
++  loader.load();
+   return { dispose };
+ }
+--- a/src/ui/styles/title.css
++++ b/src/ui/styles/title.css
+@@ -1,4 +1,5 @@
+-.dh-title {
++/* The title screen's own root: .dh-title stays the shared heading typography (dh.css). */
++.dh-title-screen {
+   position: absolute;
+   inset: 0;
+   z-index: 40;
+@@ -7,9 +8,9 @@
+   background: #17130f;
+   color: var(--dh-cream);
+ }
+-.dh-title[hidden], .dh-title [hidden] { display: none !important; }
+-.dh-title[data-backdrop="live"] { background: transparent; }
+-.dh-title[data-backdrop="live"] > .dh-title__backdrop { display: none; }
++.dh-title-screen[hidden], .dh-title-screen [hidden] { display: none !important; }
++.dh-title-screen[data-backdrop="live"] { background: transparent; }
++.dh-title-screen[data-backdrop="live"] > .dh-title__backdrop { display: none; }
+ .dh-title__backdrop {
+   position: absolute;
+   inset: 0;
+--- a/src/ui/title-state.ts
++++ b/src/ui/title-state.ts
+@@ -18,6 +18,15 @@
+   const blocked = state.reason ?? (source === "words" ? reason : undefined);
+   return { ...state, completed, reason: blocked, status: blocked ? "blocked" : completed.length === 4 ? "ready" : "loading" };
+ }
++/** Retry after a deck error: forget only the words result; the other sources stay settled. */
++export function retryTitle(state: TitleState): TitleState {
++  if (state.status !== "blocked") return state;
++  return { status: "loading", completed: state.completed.filter(source => source !== "words"), portal: state.portal, focus: state.focus };
++}
++/** On a blocked title the first slot is Retry; titleAction itself never retries. */
++export function wantsRetry(state: TitleState, action: string | null): boolean {
++  return state.status === "blocked" && action === "enter" && state.focus === 0;
++}
+ export function titleAction(state: TitleState, action: string | null): { state: TitleState; command: "start" | "portal" | null } {
+   if (state.status === "started") return { state, command: null };
+   const delta = action === "rotate-left" || action === "tilt-up" ? -1 : action === "rotate-right" || action === "tilt-down" ? 1 : 0;
+--- a/src/ui/title.ts
++++ b/src/ui/title.ts
+@@ -1,8 +1,8 @@
+ import "./styles/title.css";
+ import { portalHome } from "../app/portal";
+-import { el, uiButton } from "./skin";
++import { el, icon, uiButton } from "./skin";
+ import table from "./ui-art.json";
+-import { initialTitleState, settleTitle, titleAction, type TitleDeckError, type TitleSource, type TitleStatus } from "./title-state";
++import { initialTitleState, retryTitle, settleTitle, titleAction, wantsRetry, type TitleDeckError, type TitleSource, type TitleStatus } from "./title-state";
+ 
+ export interface TitleArtTable {
+   readonly version: number;
+@@ -22,19 +22,21 @@
+   dispose(): void;
+ }
+ 
+-export function createTitle(root: HTMLElement, options: { onStart(): void; art?: TitleArtTable }): Title {
++/** onRetry reloads the words after a deck error; it returns false when no load started. */
++export function createTitle(root: HTMLElement, options: { onStart(): void; onRetry?(): boolean | void; art?: TitleArtTable }): Title {
+   const doc = root.ownerDocument;
+   const art = options.art ?? table;
+   const home = portalHome(import.meta.env.VITE_PORTAL_URL);
+   let state = initialTitleState(home !== null);
+-  let open = false, disposed = false;
++  let open = false, disposed = false, retrying = false;
+   const shown = new Set<() => void>(), hidden = new Set<() => void>();
+   const warned = new Set<string>();
+   const warn = (name: string): void => {
+     if (warned.has(name)) return;
+     warned.add(name); console.warn("title: missing art", name);
+   };
+-  const screen = el(doc, "section", "dh-title");
++  // Layout lives on .dh-title-screen only; .dh-title keeps the shared heading typography.
++  const screen = el(doc, "section", "dh-title-screen dh-title");
+   screen.hidden = true;
+   screen.dataset.backdrop = "art";
+   screen.setAttribute("aria-label", "Dragonhold");
+@@ -55,8 +57,11 @@
+   logoText.hidden = logo !== null;
+   const menu = el(doc, "div", "dh-title__menu");
+   const emblem = image("emblem", "dh-title__emblem");
+-  const start = uiButton(doc, "dh-title__start", () => { select(0); act("enter"); });
++  const start = uiButton(doc, "dh-title__start", () => { if (primary() === start) { select(0); act("enter"); } });
+   start.textContent = "Start";
++  // The 195 recovery on the title: shown while words are blocked or reloading.
++  const retryButton = options.onRetry ? uiButton(doc, "dh-title__retry", () => { select(0); retry(); }) : null;
++  let retryLabel = "";
+   const status = el(doc, "p", "dh-title__status");
+   status.setAttribute("role", "status");
+   const progress = el(doc, "progress", "dh-title__progress");
+@@ -70,14 +75,15 @@
+     "Place traps, units and houses on the lanes during breaks.",
+     "Keep Hỏa Long standing until the last wave ends.",
+   ]) help.append(el(doc, "p", "", line));
+-  const actions: HTMLElement[] = [start];
+   if (emblem) menu.append(emblem);
+-  menu.append(start, error, status, progress, help);
+-  if (home) {
+-    const portal = el(doc, "a", "dh-btn dh-title__portal", "Back to portal");
++  menu.append(start);
++  if (retryButton) menu.append(retryButton);
++  menu.append(error, status, progress, help);
++  const portal = home ? el(doc, "a", "dh-btn dh-title__portal", "Back to portal") : null;
++  if (portal && home) {
+     portal.href = home; portal.target = "_top"; portal.tabIndex = -1;
+     portal.addEventListener("mousedown", event => event.preventDefault());
+-    actions.push(portal); menu.append(portal);
++    menu.append(portal);
+   }
+   const quickSlot = el(doc, "div", "dh-title__quick");
+   if (backdrop) screen.append(backdrop);
+@@ -85,9 +91,22 @@
+   if (logo) screen.append(logo);
+   screen.append(logoText, menu, quickSlot); root.append(screen);
+ 
++  /** Slot 0: Retry while words are blocked or reloading, else Start; slot 1: the portal. */
++  const primary = (): HTMLButtonElement => retryButton && (state.status === "blocked" || retrying) ? retryButton : start;
+   const paint = (): void => {
+     start.disabled = state.status !== "ready";
+-    actions.forEach((node, i) => node.classList.toggle("is-focused", state.focus === i));
++    if (retryButton) {
++      retryButton.hidden = primary() !== retryButton;
++      retryButton.disabled = state.status !== "blocked";
++      const label = state.status === "blocked" ? "retry" : "loading";
++      if (label !== retryLabel) {
++        retryLabel = label;
++        if (label === "retry") retryButton.innerHTML = icon("retry") + "Retry";
++        else retryButton.textContent = "Loading words…";
++      }
++    }
++    const slots = [primary(), portal];
++    for (const node of [start, retryButton, portal]) node?.classList.toggle("is-focused", node === slots[state.focus]);
+     error.hidden = state.status !== "blocked";
+     const last = state.completed[state.completed.length - 1] ?? "words";
+     status.textContent = state.status === "blocked"
+@@ -103,21 +122,36 @@
+     if (!open) return;
+     open = false; screen.hidden = true; hidden.forEach(fn => fn());
+   };
++  const retry = (): void => {
++    if (!open || disposed || !options.onRetry || state.status !== "blocked") return;
++    const before = state;
++    state = retryTitle(state); retrying = true; paint();
++    // The loader refused (busy or closed): stay blocked.
++    if (options.onRetry() === false) { state = before; retrying = false; paint(); }
++  };
+   const act = (action: string | null): void => {
+     if (!open || disposed) return;
++    if (retryButton && wantsRetry(state, action)) { retry(); return; }
+     const next = titleAction(state, action); state = next.state; paint();
+     if (next.command === "start") { hide(); options.onStart(); }
+-    else if (next.command === "portal") actions[1]?.click();
++    else if (next.command === "portal") portal?.click();
+   };
+-  actions.forEach((node, index) => {
+-    for (const event of ["pointerenter", "mouseenter", "focus"]) node.addEventListener(event, () => select(index));
+-  });
++  const hover = (node: HTMLElement | null, index: number, when: () => boolean = () => true): void => {
++    for (const event of ["pointerenter", "mouseenter", "focus"]) node?.addEventListener(event, () => { if (when()) select(index); });
++  };
++  hover(start, 0, () => primary() === start);
++  hover(retryButton, 0);
++  hover(portal, 1);
+   paint();
+   return {
+     get isOpen() { return open; }, get state() { return state.status; }, quickSlot,
+     show() { if (disposed || open || state.status === "started") return; open = true; screen.hidden = false; shown.forEach(fn => fn()); },
+     hide,
+-    settle(source, reason) { if (!disposed) { state = settleTitle(state, source, reason); paint(); } },
++    settle(source, reason) {
++      if (disposed) return;
++      if (source === "words") retrying = false;
++      state = settleTitle(state, source, reason); paint();
++    },
+     handleAction(action) { if (!open) return false; act(action); return true; },
+     onShow(fn) { shown.add(fn); return () => { shown.delete(fn); }; },
+     onHide(fn) { hidden.add(fn); return () => { hidden.delete(fn); }; },
+--- a/tests/app/idle-estimate.test.ts
++++ b/tests/app/idle-estimate.test.ts
+@@ -1,8 +1,19 @@
+ import { execFileSync } from "node:child_process";
+-import { readFileSync } from "node:fs";
+-import { resolve } from "node:path";
++import { existsSync, readFileSync, readdirSync, statSync } from "node:fs";
++import { join, resolve } from "node:path";
+ import { expect, it } from "vitest";
+ import { estimateIdle } from "../../scripts/balance/idle-estimate.mjs";
++
++const ROOT = resolve(__dirname, "../..");
++const CLI = join(ROOT, "scripts/balance/idle-estimate.mjs");
++// Hand-checked audit-format rows [ms, phase, wave, words, visibleWords, liveFoes, hp], kept in this repo (222 F4).
++const FIXTURE = join(ROOT, "tests/fixtures/idle-samples.json");
++// Optional check against a real audit, skipped when unset or missing:
++// DH_IDLE_AUDIT_SAMPLES=/abs/path/samples.json pnpm exec vitest run tests/app/idle-estimate.test.ts
++const AUDIT = process.env.DH_IDLE_AUDIT_SAMPLES ?? "";
++const cli = (path: string) => JSON.parse(execFileSync(process.execPath, [CLI, path], { encoding: "utf8" }));
++type Row = { lookaheadSeconds: number; speed: number; noWordPct: number };
++const row = (rows: Row[], lookahead: number, speed: number) => rows.find(r => r.lookaheadSeconds === lookahead && r.speed === speed)!;
+ it("keeps short gaps and reserves the last lookahead seconds in a long gap", () => {
+   // One-second idle, one-second word, four-second idle, one-second word.
+   const samples = [[0, 2, 1, 0, 0], [1000, 2, 1, 1, 1], [2000, 2, 1, 0, 0], [6000, 2, 1, 1, 1], [7000, 0, 1, 0, 0]];
+@@ -12,15 +23,40 @@
+   expect(result.before.noWordPct).toBe(50);
+   expect(result.sensitivity.find(r => r.lookaheadSeconds === 1.5 && r.speed === 1.75)).toMatchObject({ noWordPct: 50 });
+ });
+-it("reproduces the audit before figure through the offline command-line entrypoint", () => {
+-  const path = resolve("../dragon-hold/tmp/map1-audit/feel-35-1280/samples.json");
+-  const before = readFileSync(path);
+-  const result = JSON.parse(execFileSync(process.execPath, ["scripts/balance/idle-estimate.mjs", path], { encoding: "utf8" }));
++it("runs the offline command-line entrypoint on the in-repo fixture and leaves it untouched", () => {
++  const before = readFileSync(FIXTURE);
++  const result = cli(FIXTURE);
++  // 9 s of wave; idle gaps 1.0, 3.0 (a 2 s interval capped at 0.5 s), 0.5 (wave end), 2.0 (before a break), 1.0 (trailing).
++  expect(result.before).toEqual({ waveSeconds: 9, idleSeconds: 7.5, noWordPct: 83.3, gaps: 5 });
++  // 1.5 s at ×1, the rest at ×1.75: 1 + (1.5 + 1.5 / 1.75) + 0.5 + (1.5 + 0.5 / 1.75) + 1 = 6.64 s of 8.14 s.
++  expect(result.after).toMatchObject({ waveSeconds: 8.1, idleSeconds: 6.6, noWordPct: 81.6 });
++  expect(result.sensitivity).toHaveLength(8);
++  expect([row(result.sensitivity, 0, 1.75).noWordPct, row(result.sensitivity, 0, 2).noWordPct]).toEqual([74.1, 71.4]);
++  expect(result).toEqual(estimateIdle(JSON.parse(before.toString("utf8"))));
++  expect(readFileSync(FIXTURE)).toEqual(before);
++});
++it("keeps the normal suite inside the game repo: small fixture, no cwd-relative path climbing out", () => {
++  expect(FIXTURE.startsWith(ROOT + "/")).toBe(true);
++  expect(statSync(FIXTURE).size).toBeLessThan(50_000);
++  const climbing: string[] = [];
++  const scan = (dir: string): void => {
++    for (const name of readdirSync(dir, { withFileTypes: true })) {
++      const path = join(dir, name.name);
++      if (name.isDirectory()) scan(path);
++      else if (/\.(ts|mjs)$/.test(name.name) && /\b(?:resolve|join|readFileSync|existsSync)\(\s*["'`]\.\.\//.test(readFileSync(path, "utf8"))) climbing.push(path.slice(ROOT.length + 1));
++    }
++  };
++  scan(join(ROOT, "tests"));
++  expect(climbing).toEqual([]);
++});
++it.skipIf(!AUDIT || !existsSync(AUDIT))("optional: reproduces the map1 audit figures from DH_IDLE_AUDIT_SAMPLES", () => {
++  const before = readFileSync(AUDIT);
++  const result = cli(AUDIT);
+   expect(result.before.noWordPct).toBe(52.4);
+   expect(result.after.noWordPct).toBe(47.8);
+   expect(result.sensitivity).toHaveLength(8);
+-  expect(result.sensitivity.find((r: { lookaheadSeconds: number; speed: number }) => r.lookaheadSeconds === 0 && r.speed === 1.75).noWordPct).toBe(38.6);
+-  expect(readFileSync(path)).toEqual(before);
++  expect(row(result.sensitivity, 0, 1.75).noWordPct).toBe(38.6);
++  expect(readFileSync(AUDIT)).toEqual(before);
+ });
+ it("reserves 1.5 seconds only in long gaps and shrinks the wave denominator too", () => {
+   const samples = Array.from({ length: 71 }, (_, i) => [i * 100, i < 70 ? 2 : 0, 1, 0, i < 10 || (i >= 20 && i < 60) ? 0 : 1]);
+--- /dev/null
++++ b/tests/ui/title-css.test.ts
+@@ -0,0 +1,133 @@
++import { readFileSync, readdirSync } from "node:fs";
++import { join } from "node:path";
++import { afterEach, describe, expect, it, vi } from "vitest";
++import { createTitle } from "../../src/ui/title";
++
++// Reads the real stylesheets: a DOM stub has no cascade, which is how the title layout leaked (222 F2).
++interface Rule { readonly file: string; readonly selectors: readonly string[]; readonly decls: Readonly<Record<string, string>> }
++const SHEETS = ["src/ui/styles/dh.css", "src/ui/styles/title.css"];
++
++const splitTop = (text: string, sep: string): string[] => {
++  const out: string[] = []; let depth = 0, from = 0;
++  for (let i = 0; i < text.length; i += 1) {
++    const ch = text[i];
++    if (ch === "(" || ch === "[") depth += 1;
++    else if (ch === ")" || ch === "]") depth -= 1;
++    else if (ch === sep && depth === 0) { out.push(text.slice(from, i)); from = i + 1; }
++  }
++  out.push(text.slice(from));
++  return out.map(part => part.trim()).filter(Boolean);
++};
++function parseCss(file: string): Rule[] {
++  const css = readFileSync(file, "utf8").replace(/\/\*[\s\S]*?\*\//g, "");
++  const rules: Rule[] = [];
++  const walk = (src: string): void => {
++    let i = 0;
++    for (;;) {
++      const open = src.indexOf("{", i);
++      if (open < 0) return;
++      const raw = src.slice(i, open);
++      const prelude = raw.slice(raw.lastIndexOf(";") + 1).trim();
++      let depth = 1, j = open + 1;
++      for (; j < src.length && depth > 0; j += 1) depth += src[j] === "{" ? 1 : src[j] === "}" ? -1 : 0;
++      const body = src.slice(open + 1, j - 1);
++      if (/^@(media|supports|layer)\b/.test(prelude)) walk(body);
++      else if (!prelude.startsWith("@")) {
++        const decls: Record<string, string> = {};
++        for (const decl of splitTop(body, ";")) {
++          const colon = decl.indexOf(":");
++          if (colon > 0) decls[decl.slice(0, colon).trim().toLowerCase()] = decl.slice(colon + 1).trim();
++        }
++        rules.push({ file, selectors: splitTop(prelude, ","), decls });
++      }
++      i = j;
++    }
++  };
++  walk(css);
++  return rules;
++}
++/** The rightmost compound of a selector: the element the rule styles. */
++const subject = (selector: string): string => {
++  let depth = 0, from = 0;
++  for (let i = 0; i < selector.length; i += 1) {
++    const ch = selector[i]!;
++    if (ch === "(" || ch === "[") depth += 1;
++    else if (ch === ")" || ch === "]") depth -= 1;
++    else if (depth === 0 && /[\s>+~]/.test(ch)) from = i + 1;
++  }
++  return selector.slice(from);
++};
++/** Conservative: ancestors and pseudo-classes may match; ids, attributes and pseudo-elements never do. */
++function mayStyle(selector: string, tag: string, classes: readonly string[]): boolean {
++  const compound = subject(selector);
++  if (compound.includes("::") || compound.includes(":root") || /[\[#]/.test(compound.replace(/\([^)]*\)/g, ""))) return false;
++  const bare = compound.replace(/:[\w-]+(\([^)]*\))?/g, "");
++  const name = bare.match(/^[a-z][\w-]*|^\*/i)?.[0];
++  if (name && name !== "*" && name.toLowerCase() !== tag) return false;
++  return [...bare.matchAll(/\.([\w-]+)/g)].every(m => classes.includes(m[1]!));
++}
++const RULES = SHEETS.flatMap(parseCss);
++function declsFor(tag: string, classes: readonly string[]): Record<string, string> {
++  const out: Record<string, string> = {};
++  for (const rule of RULES) if (rule.selectors.some(s => mayStyle(s, tag, classes))) Object.assign(out, rule.decls);
++  return out;
++}
++
++/** Every shared heading the UI builds: `el(doc, "<tag>", "… dh-title …")` outside the title screen. */
++function headings(): { file: string; line: number; tag: string; classes: string[] }[] {
++  const out: { file: string; line: number; tag: string; classes: string[] }[] = [];
++  for (const dir of ["src/ui", "src/app"]) {
++    for (const name of readdirSync(dir)) {
++      const file = join(dir, name);
++      if (!name.endsWith(".ts") || file === join("src/ui", "title.ts")) continue;
++      readFileSync(file, "utf8").split("\n").forEach((text, index) => {
++        for (const m of text.matchAll(/el\(doc,\s*"(\w+)",\s*"([^"]*)"/g)) {
++          const classes = m[2]!.split(/\s+/).filter(Boolean);
++          if (classes.includes("dh-title")) out.push({ file, line: index + 1, tag: m[1]!, classes });
++        }
++      });
++    }
++  }
++  return out;
++}
++const FULL_SCREEN = ["position", "inset", "z-index", "background", "background-color", "background-image", "pointer-events"];
++
++afterEach(() => { vi.unstubAllEnvs(); vi.restoreAllMocks(); });
++
++describe("title screen CSS stays on its own root (222 F2)", () => {
++  it("leaves HUD, shop, wave card and results headings without the full-screen layer", () => {
++    const found = headings();
++    const count = (file: string) => found.filter(h => h.file === file).length;
++    // The six headings 222 named: hud 291, shop-strip 177, wave-card 145/161, results 232/249.
++    expect([count("src/ui/hud.ts"), count("src/ui/shop-strip.ts"), count("src/ui/wave-card.ts"), count("src/ui/results.ts")]).toEqual([1, 1, 2, 2]);
++    const leaks = found.flatMap(h => {
++      const decls = declsFor(h.tag, h.classes);
++      return FULL_SCREEN.filter(key => key in decls).map(key => `${h.file}:${h.line} ${key}: ${decls[key]}`);
++    });
++    expect(leaks).toEqual([]);
++  });
++
++  it("keeps .dh-title a typography class only (dh.css 87–95)", () => {
++    const typography = new Set(["font-family", "font-variant-numeric", "font-weight", "letter-spacing", "color", "text-shadow"]);
++    const keys = RULES.filter(rule => rule.selectors.includes(".dh-title")).flatMap(rule => Object.keys(rule.decls));
++    expect(keys.length).toBeGreaterThan(0);
++    expect(keys.filter(key => !typography.has(key))).toEqual([]);
++    const titleCss = readFileSync("src/ui/styles/title.css", "utf8").replace(/\/\*[\s\S]*?\*\//g, "");
++    expect(titleCss.match(/\.dh-title(?![\w-])/g) ?? []).toEqual([]);
++  });
++
++  it("still gives the title screen its own full-screen root", () => {
++    const root = declsFor("section", ["dh-title-screen"]);
++    expect(root).toMatchObject({ position: "absolute", inset: "0", "z-index": "40", "pointer-events": "auto" });
++    vi.stubEnv("VITE_PORTAL_URL", ""); vi.spyOn(console, "warn").mockImplementation(() => {});
++    const made: { className: string }[] = [];
++    const doc = { createElement: (): object => {
++      const node = { ownerDocument: doc, className: "", textContent: "", hidden: false, dataset: {}, children: [] as unknown[], classList: { toggle() {} },
++        append(...n: unknown[]) { this.children.push(...n); }, setAttribute() {}, addEventListener() {}, remove() {} };
++      made.push(node); return node;
++    } };
++    const title = createTitle(doc.createElement() as HTMLElement, { onStart: () => {} });
++    expect(made.filter(node => node.className.split(" ").includes("dh-title-screen"))).toHaveLength(1);
++    title.dispose();
++  });
++});
+--- /dev/null
++++ b/tests/ui/title-retry.test.ts
+@@ -0,0 +1,90 @@
++import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
++import { createTitle } from "../../src/ui/title";
++import { initialTitleState, retryTitle, settleTitle, wantsRetry, type TitleSource } from "../../src/ui/title-state";
++
++// Same DOM stub shape as title.test.ts: classes, hidden/disabled, events, clicks.
++class ElementStub {
++  className = ""; textContent = ""; innerHTML = ""; hidden = false; disabled = false; src = ""; alt = ""; href = ""; target = "";
++  dataset: Record<string, string> = {}; attributes: Record<string, string> = {}; children: ElementStub[] = [];
++  events = new Map<string, ((e: any) => void)[]>();
++  classList = { toggle: (name: string, on: boolean) => {
++    const names = new Set(this.className.split(" ")); if (on) names.add(name); else names.delete(name); this.className = [...names].join(" ");
++  } };
++  constructor(readonly ownerDocument: DocumentStub) {}
++  append(...nodes: ElementStub[]) { this.children.push(...nodes); }
++  setAttribute(key: string, value: string) { this.attributes[key] = value; }
++  addEventListener(key: string, fn: (e: any) => void) { this.events.set(key, [...this.events.get(key) ?? [], fn]); }
++  fire(key: string) { this.events.get(key)?.forEach(fn => fn({ preventDefault() {}, stopPropagation() {} })); }
++  click() { if (!this.disabled) { this.ownerDocument.clicked.push(this); this.fire("click"); } }
++  remove() {}
++}
++class DocumentStub {
++  nodes: ElementStub[] = []; clicked: ElementStub[] = [];
++  createElement() { const node = new ElementStub(this); this.nodes.push(node); return node; }
++  node(cls: string) { return this.nodes.find(node => node.className.split(" ").includes(cls))!; }
++}
++const others: TitleSource[] = ["models", "ground", "dragons"];
++function fixture(onRetry = vi.fn(() => true)) {
++  const doc = new DocumentStub(); const start = vi.fn();
++  const title = createTitle(doc.createElement() as unknown as HTMLElement, { onStart: start, onRetry });
++  title.show();
++  return { doc, title, start, onRetry, retry: () => doc.node("dh-title__retry"), startButton: () => doc.node("dh-title__start") };
++}
++beforeEach(() => { vi.stubEnv("VITE_PORTAL_URL", ""); vi.spyOn(console, "warn").mockImplementation(() => {}); });
++afterEach(() => { vi.unstubAllEnvs(); vi.restoreAllMocks(); });
++
++describe("title Retry (222 F3)", () => {
++  it("resets only the words source, and only from a blocked title", () => {
++    let state = settleTitle(initialTitleState(true), "words", "too-small");
++    for (const source of others) state = settleTitle(state, source);
++    const next = retryTitle(state);
++    expect(next).toMatchObject({ status: "loading", completed: others, portal: true, focus: 0 });
++    expect(next.reason).toBeUndefined();
++    expect(settleTitle(next, "words").status).toBe("ready");
++    expect(retryTitle(next)).toBe(next);
++    const ready = settleTitle(next, "words");
++    expect(retryTitle(ready)).toBe(ready);
++    expect(wantsRetry(state, "enter")).toBe(true);
++    expect([wantsRetry(state, "escape"), wantsRetry({ ...state, focus: 1 }, "enter"), wantsRetry(next, "enter"), wantsRetry(ready, "enter")]).toEqual([false, false, false, false]);
++  });
++
++  it.each(["load-failed", "empty", "too-small"] as const)("shows Retry for %s, with keys and mouse, and keeps Start off until words are valid", reason => {
++    const f = fixture();
++    expect(f.retry().hidden).toBe(true);
++    for (const source of others) f.title.settle(source);
++    f.title.settle("words", reason);
++    expect(f.retry().hidden).toBe(false); expect(f.retry().disabled).toBe(false);
++    expect(f.retry().innerHTML).toContain("Retry"); expect(f.retry().className).toContain("is-focused");
++    expect(f.startButton().disabled).toBe(true);
++    f.title.handleAction("enter"); expect(f.onRetry).toHaveBeenCalledOnce();
++    f.title.handleAction("enter"); f.retry().click();
++    expect(f.onRetry).toHaveBeenCalledOnce(); expect(f.start).not.toHaveBeenCalled();
++    expect(f.title.state).toBe("loading"); expect(f.startButton().disabled).toBe(true);
++    expect(f.retry().disabled).toBe(true); expect(f.retry().textContent).toBe("Loading words…");
++    f.title.settle("words", reason);
++    expect(f.title.state).toBe("blocked"); expect(f.retry().disabled).toBe(false);
++    f.retry().fire("pointerenter"); f.retry().click();
++    expect(f.onRetry).toHaveBeenCalledTimes(2);
++    f.title.settle("words");
++    expect(f.title.state).toBe("ready"); expect(f.retry().hidden).toBe(true);
++    expect(f.startButton().disabled).toBe(false); expect(f.startButton().className).toContain("is-focused");
++    f.title.handleAction("enter");
++    expect(f.start).toHaveBeenCalledOnce(); expect(f.onRetry).toHaveBeenCalledTimes(2);
++  });
++
++  it("keeps the portal reachable while blocked, and a refused retry leaves the title blocked", () => {
++    vi.stubEnv("VITE_PORTAL_URL", "https://portal.example/games");
++    const f = fixture(vi.fn(() => false));
++    f.title.settle("words", "load-failed");
++    f.title.handleAction("rotate-right"); f.title.handleAction("enter");
++    expect(f.doc.clicked).toContain(f.doc.node("dh-title__portal")); expect(f.onRetry).not.toHaveBeenCalled();
++    f.title.handleAction("rotate-left"); f.title.handleAction("enter");
++    expect(f.onRetry).toHaveBeenCalledOnce(); expect(f.title.state).toBe("blocked"); expect(f.retry().disabled).toBe(false);
++  });
++
++  it("ignores Retry after dispose", () => {
++    const f = fixture(); f.title.settle("words", "empty"); const retry = f.retry();
++    f.title.dispose(); retry.click(); f.title.handleAction("enter");
++    expect(f.onRetry).not.toHaveBeenCalled();
++  });
++});
+--- /dev/null
++++ b/tests/app/title-retry.test.ts
+@@ -0,0 +1,168 @@
++import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
++import { WORDS_100 } from "../typing-helpers";
++
++// The real app, title, loader, deck builder and world, as in deck-app.test.ts; graphics, audio and frames are stubbed.
++const h = vi.hoisted(() => {
++  const presenter = { dispose() {}, reset() {}, setLocator() {}, isOpen: false };
++  return { load: vi.fn(), presenter, openPace: vi.fn(), startLoop: vi.fn(), stopLoop: vi.fn() };
++});
++vi.mock("../../src/app/learning", async original => {
++  const actual = await original<typeof import("../../src/app/learning")>();
++  return { ...actual, createLearningClient: (options: any) => actual.createLearningClient({ ...options, loadEntries: h.load,
++    storage: { readJson: () => null, writeJson: () => true }, every: () => () => {} }) };
++});
++vi.mock("../../src/sim/world", async original => {
++  const actual = await original<typeof import("../../src/sim/world")>();
++  return { ...actual, createWorld: vi.fn(actual.createWorld) };
++});
++vi.mock("../../src/ui/skin", async original => ({ ...await original<typeof import("../../src/ui/skin")>(), installSkin: vi.fn() }));
++vi.mock("../../src/app/portal", async original => ({ ...await original<typeof import("../../src/app/portal")>(), createPortalBridge: () => ({
++  lookup: async () => { throw Error("offline"); }, requestFocus() {}, onSharedMusic: () => () => {}, dispose() {},
++}) }));
++vi.mock("../../src/app/pace-card", () => ({ createPaceCard: () => ({ ...h.presenter, open: h.openPace }) }));
++vi.mock("../../src/app/loop", () => ({ createLoop: vi.fn(() => ({ start: h.startLoop, stop: h.stopLoop })) }));
++vi.mock("../../src/app/input-router", () => ({ createInputRouter: vi.fn(() => ({ handlers: [], stats: {}, dispose() {} })) }));
++vi.mock("../../src/view/stage", () => ({ createMapStage: () => ({
++  stage: { layers: { ground: { children: [] }, actors: { children: [] }, fx: { children: [] } } },
++  groundBaked: undefined, rig: {}, render() {}, useModels() {}, dispose() {},
++}) }));
++vi.mock("../../src/view/models", () => ({ loadCrowdModels: () => ({ ...h.presenter, ready: undefined }) }));
++vi.mock("../../src/view/heroes", () => ({ createHeroes: () => ({ ...h.presenter, ready: undefined }) }));
++vi.mock("../../src/audio", () => ({ createAudio: () => h.presenter }));
++vi.mock("../../src/view/actors", () => ({ createActors: () => h.presenter }));
++vi.mock("../../src/view/telegraphs", () => ({ createTelegraphs: () => h.presenter }));
++vi.mock("../../src/view/banners", () => ({ createBanners: () => h.presenter }));
++vi.mock("../../src/view/hpbars", () => ({ createHpBars: () => h.presenter }));
++vi.mock("../../src/view/fx", () => ({ createFx: () => h.presenter }));
++vi.mock("../../src/view/lane-cue", () => ({ createLaneCue: () => h.presenter }));
++vi.mock("../../src/ui/tags", () => ({ createTags: () => h.presenter }));
++vi.mock("../../src/ui/hud", () => ({ createHud: () => h.presenter }));
++vi.mock("../../src/ui/learning-frame", () => ({ createLearningFrame: () => h.presenter, createPrelearn: () => h.presenter, createReviewCard: () => h.presenter }));
++vi.mock("../../src/ui/placement-ui", () => ({ createPlacementUi: () => h.presenter }));
++vi.mock("../../src/ui/wave-card", () => ({ createWaveCard: () => h.presenter }));
++vi.mock("../../src/ui/shop-strip", () => ({ createShopStrip: () => h.presenter }));
++vi.mock("../../src/ui/debut-card", () => ({ createDebutCard: () => h.presenter }));
++vi.mock("../../src/ui/results", () => ({ createResults: () => h.presenter, VICTORY_HOLD_MS: 2600 }));
++
++import { startApp } from "../../src/app/app";
++import { createDeckLoader } from "../../src/app/deck-boot";
++import { DeckBuildError } from "../../src/app/learning";
++import { STAGE_M0 } from "../../src/content/data/stages";
++import { createWorld } from "../../src/sim/world";
++import { createLoop } from "../../src/app/loop";
++import { createInputRouter } from "../../src/app/input-router";
++import type { WordDeck } from "../../src/content/types";
++
++class ElementStub {
++  className = ""; textContent = ""; innerHTML = ""; hidden = false; disabled = false; id = ""; href = ""; target = "";
++  dataset = {}; attributes: Record<string, string> = {}; children: ElementStub[] = [];
++  classList = { toggle() {}, add() {}, remove() {} };
++  events = new Map<string, Set<(e: any) => void>>();
++  constructor(readonly ownerDocument: DocumentStub) {}
++  append(...nodes: ElementStub[]) { this.children.push(...nodes); }
++  replaceChildren(...nodes: ElementStub[]) { this.children = nodes; }
++  remove() {}
++  setAttribute(key: string, value: string) { this.attributes[key] = value; }
++  addEventListener(key: string, fn: (e: any) => void) { if (!this.events.has(key)) this.events.set(key, new Set()); this.events.get(key)!.add(fn); }
++  removeEventListener(key: string, fn: (e: any) => void) { this.events.get(key)?.delete(fn); }
++  focus() {}
++  click() { if (!this.disabled) this.events.get("click")?.forEach(fn => fn({ preventDefault() {}, stopPropagation() {} })); }
++}
++class DocumentStub {
++  nodes: ElementStub[] = [];
++  defaultView: any = Object.assign(new ElementStub(this), { location: { search: "" }, performance: { now: () => 0 } });
++  overlay = this.createElement(); canvas = this.createElement();
++  createElement() { const node = new ElementStub(this); this.nodes.push(node); return node; }
++  getElementById(id: string) { return id === "dh-overlay" ? this.overlay : this.canvas; }
++  addEventListener() {} removeEventListener() {} hasFocus() { return true; }
++  node(cls: string) { return this.nodes.find(node => node.className.split(" ").includes(cls))!; }
++}
++const entries = WORDS_100.map(en => ({ id: en, en, vi: "", ipa: "" }));
++const failure = (reason: string) => async () => { if (reason === "load-failed") throw Error("network"); return reason === "empty" ? [] : entries.slice(0, 69); };
++const apps: ReturnType<typeof startApp>[] = [];
++async function settle() { for (let i = 0; i < 20; i += 1) await Promise.resolve(); }
++function boot() {
++  const doc = new DocumentStub(); const app = startApp(doc as unknown as Document, { typistWpm: 35 }); apps.push(app);
++  const intercept = vi.mocked(createInputRouter).mock.calls[0]![2]!.intercept!;
++  const key = (action: string) => intercept({} as KeyboardEvent, action, null);
++  return { doc, app, key, state: () => doc.defaultView.__dh.state().title, retry: () => doc.node("dh-title__retry"), start: () => doc.node("dh-title__start") };
++}
++beforeEach(() => { vi.clearAllMocks(); h.load.mockReset(); vi.spyOn(console, "warn").mockImplementation(() => {}); });
++afterEach(() => { apps.splice(0).forEach(app => app.dispose()); vi.restoreAllMocks(); vi.unstubAllEnvs(); });
++
++describe("default title recovers from a deck error (222 F3)", () => {
++  it.each(["load-failed", "empty", "too-small"])("after %s, Enter on Retry reloads once and Start opens the run", async reason => {
++    h.load.mockImplementationOnce(failure(reason)).mockResolvedValueOnce(entries);
++    const f = boot(); await settle();
++    expect(f.state()).toBe("blocked"); expect(f.start().disabled).toBe(true);
++    expect(f.retry().hidden).toBe(false); expect(f.retry().disabled).toBe(false);
++    // Two Retry presses in a row (keys and mouse) run one load.
++    expect(f.key("enter")).toBe(true); expect(h.load).toHaveBeenCalledTimes(2);
++    f.key("enter"); f.retry().click();
++    expect(h.load).toHaveBeenCalledTimes(2);
++    await settle();
++    expect(f.state()).toBe("ready"); expect(f.start().disabled).toBe(false); expect(f.retry().hidden).toBe(true);
++    f.retry().click(); f.key("enter"); await settle();
++    expect(h.load).toHaveBeenCalledTimes(2);
++    expect(f.state()).toBe("started");
++    expect(createWorld).toHaveBeenCalledOnce(); expect(createLoop).toHaveBeenCalledOnce(); expect(h.startLoop).toHaveBeenCalledOnce();
++    expect(f.doc.defaultView.__dh.state().ready).toBe(true);
++  });
++
++  it("blocks again after a second failure, then a mouse Retry succeeds", async () => {
++    let resolve!: (value: typeof entries) => void;
++    h.load.mockImplementationOnce(failure("load-failed")).mockImplementationOnce(failure("too-small"))
++      .mockImplementationOnce(() => new Promise(r => { resolve = r; }));
++    const f = boot(); await settle();
++    f.retry().click(); await settle();
++    expect(f.state()).toBe("blocked"); expect(f.start().disabled).toBe(true); expect(f.retry().disabled).toBe(false);
++    f.retry().click(); f.retry().click(); await settle();
++    expect(h.load).toHaveBeenCalledTimes(3); expect(f.state()).toBe("loading"); expect(f.start().disabled).toBe(true);
++    resolve(entries); await settle();
++    expect(f.state()).toBe("ready"); f.start().click();
++    expect(createWorld).toHaveBeenCalledOnce(); expect(h.load).toHaveBeenCalledTimes(3);
++  });
++
++  it("keeps a configured portal usable on the blocked title", async () => {
++    vi.stubEnv("VITE_PORTAL_URL", "https://portal.example/games");
++    h.load.mockImplementation(failure("empty"));
++    const f = boot(); await settle();
++    const portal = f.doc.node("dh-title__portal"); const click = vi.spyOn(portal, "click");
++    f.key("rotate-right"); f.key("enter");
++    expect(click).toHaveBeenCalledOnce(); expect(h.load).toHaveBeenCalledOnce(); expect(f.state()).toBe("blocked");
++  });
++
++  it("never settles or boots a deck that arrives after dispose", async () => {
++    let resolve!: (value: typeof entries) => void;
++    h.load.mockImplementationOnce(failure("load-failed")).mockImplementationOnce(() => new Promise(r => { resolve = r; }));
++    const f = boot(); await settle();
++    const retry = f.retry(); retry.click(); f.app.dispose(); resolve(entries); await settle();
++    retry.click(); await settle();
++    expect(h.load).toHaveBeenCalledTimes(2); expect(createWorld).not.toHaveBeenCalled(); expect(h.startLoop).not.toHaveBeenCalled();
++  });
++});
++
++describe("deck loader: the 195 recovery path shared by both boots", () => {
++  const deck = { words: [] } as unknown as WordDeck;
++  function loader(build: () => Promise<WordDeck>) {
++    const learning = { buildDeck: vi.fn(build) }; const ready = vi.fn(), failed = vi.fn(), started = vi.fn();
++    return { learning, ready, failed, started, loader: createDeckLoader(learning, STAGE_M0, { ready, failed, started }) };
++  }
++  it("runs one build at a time and none after a delivered deck", async () => {
++    let resolve!: (value: WordDeck) => void;
++    const f = loader(() => new Promise(r => { resolve = r; }));
++    expect(f.loader.load()).toBe(true); expect(f.loader.load()).toBe(false); expect(f.loader.busy).toBe(true);
++    resolve(deck); await settle();
++    expect(f.ready).toHaveBeenCalledExactlyOnceWith(deck); expect(f.loader.load()).toBe(false);
++    expect(f.learning.buildDeck).toHaveBeenCalledOnce(); expect(f.started).toHaveBeenCalledOnce();
++  });
++  it("reports failures as DeckBuildError, allows the next try, and stops after dispose", async () => {
++    const f = loader(async () => { throw Error("network"); });
++    f.loader.load(); await settle();
++    expect(f.failed).toHaveBeenCalledOnce(); expect(f.failed.mock.calls[0]![0]).toBeInstanceOf(DeckBuildError);
++    expect(f.failed.mock.calls[0]![0].reason).toBe("load-failed"); expect(f.loader.busy).toBe(false);
++    expect(f.loader.load()).toBe(true); f.loader.dispose(); await settle();
++    expect(f.failed).toHaveBeenCalledOnce(); expect(f.loader.load()).toBe(false);
++    expect(f.learning.buildDeck).toHaveBeenCalledTimes(2); expect(f.ready).not.toHaveBeenCalled();
++  });
++});
+--- /dev/null
++++ b/tests/fixtures/idle-samples.json
+@@ -0,0 +1,23 @@
++[
++  [0, 1, 1, 0, 0, 0, 469],
++  [500, 2, 1, 0, 0, 2, 469],
++  [1000, 2, 1, 0, 0, 2, 469],
++  [1500, 2, 1, 1, 1, 2, 469],
++  [2000, 2, 1, 1, 1, 2, 469],
++  [2500, 2, 1, 0, 0, 1, 469],
++  [3000, 2, 1, 0, 0, 1, 469],
++  [3500, 2, 1, 0, 0, 1, 469],
++  [4000, 2, 1, 0, 0, 1, 469],
++  [4500, 2, 1, 0, 0, 1, 469],
++  [5000, 2, 1, 0, 0, 1, 469],
++  [7000, 2, 1, 1, 1, 1, 469],
++  [7500, 2, 1, 0, 0, 0, 469],
++  [8000, 2, 2, 0, 0, 3, 469],
++  [8500, 2, 2, 0, 0, 3, 469],
++  [9000, 2, 2, 0, 0, 3, 469],
++  [9500, 2, 2, 0, 0, 3, 469],
++  [10000, 1, 2, 0, 0, 0, 469],
++  [10500, 2, 3, 0, 0, 1, 469],
++  [11000, 2, 3, 0, 0, 1, 469],
++  [11500, 2, 3, 0, 0, 1, 469]
++]
+--- /dev/null
++++ b/docs/changelog/2026-10-30-fix-222-title-retry-fixture.md
+@@ -0,0 +1,8 @@
++# 30/10/2026 · Sửa F2, F3, F4 của kiểm lại 222 (phiếu 235)
++
++- **F2 · CSS màn tựa:** bố cục phủ màn chuyển sang lớp gốc riêng `.dh-title-screen` (`src/ui/styles/title.css`). `.dh-title` chỉ còn kiểu chữ tiêu đề của `dh.css`. Tiêu đề ở HUD, Loadout, thẻ đợt, kết quả, Wordbook, thẻ ra mắt và bảng đặt không còn nhận `position:absolute`, `inset:0`, `z-index:40`, nền `#17130f`, `pointer-events:auto`. Gốc màn tựa vẫn giữ token `dh-title` để chữ trông như trước.
++- **F3 · Retry trên màn tựa:** khi bộ từ mặc định lỗi (mất mạng, rỗng, dưới 70 từ), màn tựa có nút **Retry** kèm ảnh `retry`. Enter, chuột và hover đều dùng được. Retry chỉ đặt lại nguồn `words`, ba nguồn còn lại giữ nguyên. Khi đang nạp lại, nút tắt và ghi "Loading words…". Start vẫn tắt tới khi bộ từ hợp lệ; Back to portal vẫn dùng được.
++- Hai đường khởi động dùng chung `createDeckLoader` trong `src/app/deck-boot.ts`, tức đường phục hồi của 195: mỗi lần chỉ một lượt nạp, không nạp sau khi đã có bộ từ, không nạp sau dispose. Bảng lỗi của `?title=0` giữ nguyên hành vi.
++- **F4 · Test độc lập:** `tests/app/idle-estimate.test.ts` dùng `tests/fixtures/idle-samples.json` (21 dòng, 633 byte, số tính tay). Phép đối chiếu với mẫu audit thật chỉ chạy khi đặt `DH_IDLE_AUDIT_SAMPLES=<đường tuyệt đối>`; thiếu file thì bỏ qua. Thêm test chặn mọi đường tương đối kiểu `resolve("../…")` trong `tests/`.
++
++Kiểm: `pnpm check` 73 file, 625 đạt + 1 bỏ qua (trước: 70 file, 607); kit 75; golden 10/10; English UI 9/9. `pnpm deploy:pack` production đạt 0 lỗi, 402 file. Bản chép sạch không có `tmp/map1-audit` vẫn xanh. Đột biến, số và bằng chứng ở `docs/codex-queue/235-report.md` và `235/` của repo cha. Còn chờ Claude xem trình duyệt ở 1280 và 1920, và thử Retry khi tắt mạng.

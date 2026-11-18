@@ -1,0 +1,62 @@
+{
+  "head": "50fbeab",
+  "branch": "dh-codex",
+  "initial_status": "clean",
+  "changed_file_count": 19,
+  "allowed_paths_only": true,
+  "violations": [],
+  "paths": [
+    "src/ui/results.ts",
+    "src/ui/styles/dh.css",
+    "docs/changelog/2026-10-29-results-portal.md",
+    "docs/codex-queue/105b-report.md",
+    "docs/codex-queue/105b/check-after.txt",
+    "docs/codex-queue/105b/check-before.txt",
+    "docs/codex-queue/105b/check-final.txt",
+    "docs/codex-queue/105b/diff-check.txt",
+    "docs/codex-queue/105b/golden-stat.txt",
+    "docs/codex-queue/105b/mutation-red.txt",
+    "docs/codex-queue/105b/mutation.patch",
+    "docs/codex-queue/105b/scope.json",
+    "docs/codex-queue/105b/status.txt",
+    "docs/codex-queue/105b/tags-bodies-retry-1.txt",
+    "docs/codex-queue/105b/tags-bodies-retry-2.txt",
+    "docs/codex-queue/105b/tags-bodies-retry-3.txt",
+    "docs/codex-queue/105b/tests-green.txt",
+    "docs/codex-queue/105b/tests-red.txt",
+    "tests/ui/results-screen.test.ts"
+  ],
+  "golden_stat_bytes": 0,
+  "diff_check_bytes": 0,
+  "right_key_handler_restored": true,
+  "check_before": {
+    "exit": 0,
+    "files_passed": 53,
+    "tests_passed": 465
+  },
+  "check_final": {
+    "exit": 0,
+    "files_passed": 54,
+    "tests_passed": 475
+  },
+  "mutation": {
+    "exit": 1,
+    "tests_failed": 4,
+    "tests_passed": 6
+  },
+  "tags_bodies_retries": [
+    {
+      "exit": 0,
+      "tests_passed": 21
+    },
+    {
+      "exit": 0,
+      "tests_passed": 21
+    },
+    {
+      "exit": 0,
+      "tests_passed": 21
+    }
+  ],
+  "browser_acceptance": "pending_claude"
+}

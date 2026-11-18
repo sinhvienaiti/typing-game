@@ -1,0 +1,53 @@
+$ tsc --noEmit && vite build && node scripts/bundle-budget.mjs
+vite v7.3.7 building client environment for production...
+transforming...
+✓ 108 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                                                    0.86 kB │ gzip:  0.51 kB
+dist/assets/baloo-2-vietnamese-800-normal-ConLnEgt.woff2           4.80 kB
+dist/assets/baloo-2-vietnamese-600-normal-C5EqHgu0.woff2           5.39 kB
+dist/assets/baloo-2-vietnamese-800-normal-GQACmpuv.woff            6.74 kB
+dist/assets/be-vietnam-pro-vietnamese-800-normal-CA0HL1e4.woff     6.85 kB
+dist/assets/be-vietnam-pro-vietnamese-500-normal-CfdwVo8-.woff     6.88 kB
+dist/assets/be-vietnam-pro-vietnamese-700-normal-By_5yT39.woff     6.89 kB
+dist/assets/baloo-2-vietnamese-600-normal-CGkk4Wtx.woff            7.34 kB
+dist/assets/be-vietnam-pro-latin-ext-800-normal-BvOXQlBN.woff      9.18 kB
+dist/assets/be-vietnam-pro-latin-ext-700-normal-4Hjo2OtD.woff      9.19 kB
+dist/assets/be-vietnam-pro-latin-ext-500-normal-CK0UkkKf.woff      9.20 kB
+dist/assets/be-vietnam-pro-vietnamese-500-normal-DREgrEoJ.woff2   12.17 kB
+dist/assets/be-vietnam-pro-vietnamese-800-normal-D4LFh2W4.woff2   12.40 kB
+dist/assets/be-vietnam-pro-vietnamese-700-normal-Csr0PCuG.woff2   12.47 kB
+dist/assets/be-vietnam-pro-latin-ext-500-normal-h0Fp6aX0.woff2    13.55 kB
+dist/assets/be-vietnam-pro-latin-ext-800-normal-GEpNgheG.woff2    13.75 kB
+dist/assets/be-vietnam-pro-latin-ext-700-normal-C8_gqRu2.woff2    13.85 kB
+dist/.vite/manifest.json                                          14.93 kB │ gzip:  1.37 kB
+dist/assets/baloo-2-latin-ext-800-normal-C_Iwmf1s.woff2           15.07 kB
+dist/assets/baloo-2-latin-ext-600-normal-DiVeaYrH.woff2           15.98 kB
+dist/assets/be-vietnam-pro-latin-700-normal-C2EtzaOi.woff         16.91 kB
+dist/assets/be-vietnam-pro-latin-800-normal-Cwp5p0gU.woff         16.99 kB
+dist/assets/be-vietnam-pro-latin-500-normal-BJkVuMHw.woff         17.00 kB
+dist/assets/baloo-2-latin-800-normal-BbF3Etk1.woff2               18.63 kB
+dist/assets/baloo-2-latin-600-normal-tIfxVoAe.woff2               19.50 kB
+dist/assets/baloo-2-latin-ext-800-normal-D-iCxxqE.woff            19.67 kB
+dist/assets/baloo-2-latin-ext-600-normal-CFaB2nBN.woff            20.39 kB
+dist/assets/be-vietnam-pro-latin-500-normal-B6LVzGNe.woff2        21.89 kB
+dist/assets/be-vietnam-pro-latin-700-normal-DlW1Zbsh.woff2        22.15 kB
+dist/assets/be-vietnam-pro-latin-800-normal-BpHZASpI.woff2        22.32 kB
+dist/assets/baloo-2-latin-800-normal-B8BXfZF7.woff                22.60 kB
+dist/assets/baloo-2-latin-600-normal-B4tNaogw.woff                23.54 kB
+dist/assets/index-JQROR5l-.css                                    29.81 kB │ gzip:  7.26 kB
+dist/assets/profile--2mLcMyF.js                                    1.57 kB │ gzip:  0.95 kB
+dist/assets/sandbox-CBq4dsvJ.js                                    1.74 kB │ gzip:  0.93 kB
+dist/assets/retry-DcVijqXT.js                                      1.94 kB │ gzip:  1.01 kB
+dist/assets/tips-CY6owy5j.js                                       2.05 kB │ gzip:  1.17 kB
+dist/assets/settings-R3R0SyHV.js                                   2.88 kB │ gzip:  1.31 kB
+dist/assets/dev-tools-CNcOyIIE.js                                  3.50 kB │ gzip:  1.52 kB
+dist/assets/sheets-HHwdCS9b.js                                     4.41 kB │ gzip:  2.28 kB
+dist/assets/learn-C7x11Ch9.js                                      8.00 kB │ gzip:  3.22 kB
+dist/assets/title-CRTWgStk.js                                     11.66 kB │ gzip:  4.67 kB
+dist/assets/audio-min-BOdfTlE2.js                                 11.68 kB │ gzip:  4.44 kB
+dist/assets/index-DFLYCWZH.js                                    214.61 kB │ gzip: 80.19 kB
+✓ built in 400ms
+bundle budget (BUILD_1B §20) /: start 84.86 kB gzip (entry + ui/title.ts) ≤ 85 kB, headroom 0.14 kB; later 16.83 kB (app/dev-tools.ts 1.52, app/learn.ts 3.22, app/retry.ts 1.01, app/sandbox.ts 0.93, ui/profile.ts 0.95, ui/settings.ts 1.31, ui/sheets.ts 2.28, ui/tips.ts 1.17, view/audio-min.ts 4.44); total 101.69 kB
+bundle budget (BUILD_1B §20) /?title=0: start 83.41 kB gzip (entry + app/learn.ts) ≤ 85 kB, headroom 1.59 kB; later 18.28 kB (app/dev-tools.ts 1.52, app/retry.ts 1.01, app/sandbox.ts 0.93, ui/profile.ts 0.95, ui/settings.ts 1.31, ui/sheets.ts 2.28, ui/tips.ts 1.17, ui/title.ts 4.67, view/audio-min.ts 4.44); total 101.69 kB

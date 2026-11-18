@@ -1,0 +1,5 @@
+Phiếu 226 — 2026-10-30T14:13:05.841193+07:00
+Đã xóa duy nhất games/typing-defense/tmp/codex-226 bằng shutil.rmtree với đường dẫn tuyệt đối cố định.
+Trước xóa đã kiểm: điều 6 là thư mục do phiếu tạo, không symlink, refs khớp, 26/26 file bằng chứng khớp SHA-256 nguồn và bản lưu, danh sách xóa đã ở trong báo cáo.
+Kiểm exists sau xóa: False.
+Lệnh rm -rf ban đầu bị cơ chế kiểm lệnh từ chối; không thực thi, không cần nâng quyền.

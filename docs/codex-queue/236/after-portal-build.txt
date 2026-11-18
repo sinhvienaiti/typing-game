@@ -1,0 +1,155 @@
+$ tsc --noEmit && vite build
+vite v7.3.6 building client environment for production...
+transforming...
+✓ 251 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                                                      0.45 kB │ gzip:   0.29 kB
+dist/assets/capture.worklet-CCbZ9Db7.js                              2.33 kB
+dist/assets/exo-2-vietnamese-700-normal-DXLQ-H9k.woff2               4.56 kB
+dist/assets/exo-2-vietnamese-600-normal-D_uNeL95.woff2               4.64 kB
+dist/assets/exo-2-vietnamese-800-normal-C3SSKP3N.woff2               4.67 kB
+dist/assets/exo-2-vietnamese-700-normal-DffI6dGw.woff                6.19 kB
+dist/assets/exo-2-vietnamese-800-normal-DDt4QIcX.woff                6.23 kB
+dist/assets/exo-2-vietnamese-600-normal-H3VyuMj8.woff                6.25 kB
+dist/assets/be-vietnam-pro-vietnamese-400-normal-BuGn0gnm.woff       6.57 kB
+dist/assets/be-vietnam-pro-vietnamese-600-normal-DkpCIyan.woff       6.88 kB
+dist/assets/be-vietnam-pro-vietnamese-500-normal-CfdwVo8-.woff       6.88 kB
+dist/assets/be-vietnam-pro-vietnamese-700-normal-By_5yT39.woff       6.89 kB
+dist/assets/exo-2-cyrillic-600-normal-CENMUrsM.woff2                 7.97 kB
+dist/assets/exo-2-cyrillic-700-normal-BWvdHNKb.woff2                 8.01 kB
+dist/assets/exo-2-cyrillic-800-normal-kTtRZlfn.woff2                 8.09 kB
+dist/assets/be-vietnam-pro-latin-ext-400-normal-DYBYyMQr.woff        8.90 kB
+dist/assets/precision-laser-mk1-BcapVJaK.webp                        9.04 kB
+dist/assets/kinetic-shell-mk1-xIpqvO_h.webp                          9.17 kB
+dist/assets/be-vietnam-pro-latin-ext-700-normal-4Hjo2OtD.woff        9.19 kB
+dist/assets/be-vietnam-pro-latin-ext-500-normal-CK0UkkKf.woff        9.20 kB
+dist/assets/be-vietnam-pro-latin-ext-600-normal-BeUwKxhG.woff        9.22 kB
+dist/assets/exo-2-cyrillic-800-normal-D_qtTeOm.woff                  9.65 kB
+dist/assets/exo-2-cyrillic-700-normal-BV2eOPIx.woff                  9.66 kB
+dist/assets/exo-2-cyrillic-600-normal-DUkGHFVI.woff                  9.68 kB
+dist/assets/exo-2-cyrillic-ext-600-normal-c2lTakb1.woff2            10.17 kB
+dist/assets/exo-2-cyrillic-ext-700-normal-Csksz6kL.woff2            10.20 kB
+dist/assets/exo-2-cyrillic-ext-800-normal-CQSPPdm5.woff2            10.21 kB
+dist/assets/targeting-module-mk1-CJiUNhGT.webp                      10.29 kB
+dist/assets/support-drone-mk1-D-6uofpJ.webp                         10.30 kB
+dist/assets/energy-cell-BKiTr-vb.webp                               10.47 kB
+dist/assets/assault-drone-mk1-DRzYoDAd.webp                         10.66 kB
+dist/assets/capacitor-shield-mk1-II4jSLgR.webp                      10.98 kB
+dist/assets/adaptive-armor-mk1-5CPg7jyn.webp                        11.33 kB
+dist/assets/oracle-mark-of-weakness-Bm02Smnu.webp                   11.40 kB
+dist/assets/compact-reactor-mk1-jcraX0Dd.webp                       11.48 kB
+dist/assets/be-vietnam-pro-vietnamese-400-normal-CRcqvyg1.woff2     11.53 kB
+dist/assets/deflector-shield-mk1-BQtLdSh_.webp                      11.55 kB
+dist/assets/overdrive-core-mk1-By_RdWyl.webp                        11.88 kB
+dist/assets/prism-shield-mk1-D2NW-1-s.webp                          11.94 kB
+dist/assets/celestial-stance-CoUdkxVA.webp                          11.95 kB
+dist/assets/salvage-module-mk1-CKWNm7xE.webp                        11.98 kB
+dist/assets/zenith-shift-C7mlFNno.webp                              12.04 kB
+dist/assets/be-vietnam-pro-vietnamese-500-normal-DREgrEoJ.woff2     12.17 kB
+dist/assets/be-vietnam-pro-vietnamese-600-normal-nyU-ZL2p.woff2     12.18 kB
+dist/assets/pulse-laser-mk1-CY9SMOrF.webp                           12.28 kB
+dist/assets/chain-lightning-D7QoSDxU.webp                           12.37 kB
+dist/assets/plasma-lance-mk3-BFDkM6Ul.webp                          12.47 kB
+dist/assets/be-vietnam-pro-vietnamese-700-normal-Csr0PCuG.woff2     12.47 kB
+dist/assets/ward-drone-mk1-Bx_GS-Zb.webp                            12.57 kB
+dist/assets/ion-cannon-mk1-sJuBS2sG.webp                            12.59 kB
+dist/assets/exo-2-cyrillic-ext-800-normal-CS0bXx4N.woff             12.66 kB
+dist/assets/exo-2-cyrillic-ext-700-normal-pInDkuOc.woff             12.73 kB
+dist/assets/efficient-reactor-mk2-DUdMLQHK.webp                     12.77 kB
+dist/assets/exo-2-cyrillic-ext-600-normal-Bva7FavC.woff             12.78 kB
+dist/assets/salvage-core-mk1-BtVUOx2X.webp                          12.93 kB
+dist/assets/escort-drone-mk2-Bbctlad8.webp                          12.97 kB
+dist/assets/be-vietnam-pro-latin-ext-400-normal-CiZNW1ec.woff2      13.06 kB
+dist/assets/bastion-guardian-matrix-WiAHVeQc.webp                   13.11 kB
+dist/assets/mark-of-weakness-CrUQZ8pe.webp                          13.26 kB
+dist/assets/interceptor-drone-mk2-B9LXlhH3.webp                     13.53 kB
+dist/assets/be-vietnam-pro-latin-ext-500-normal-h0Fp6aX0.woff2      13.55 kB
+dist/assets/balanced-core-mk1-Bj7b71ec.webp                         13.56 kB
+dist/assets/be-vietnam-pro-latin-ext-600-normal-BNd8euf0.woff2      13.61 kB
+dist/assets/arc-projector-mk2-Bsc-88Cx.webp                         13.77 kB
+dist/assets/be-vietnam-pro-latin-ext-700-normal-C8_gqRu2.woff2      13.85 kB
+dist/assets/guardian-drone-U_oTNcj6.webp                            13.86 kB
+dist/assets/exo-2-latin-ext-800-normal-HmSlm8nF.woff2               13.92 kB
+dist/assets/exo-2-latin-ext-700-normal-DLQkDG7N.woff2               13.92 kB
+dist/assets/exo-2-latin-ext-600-normal-70qtqWxx.woff2               13.96 kB
+dist/assets/railgun-DBU6QQ6n.webp                                   14.11 kB
+dist/assets/fortune-module-mk1-D5MR6PN_.webp                        14.23 kB
+dist/assets/wraith-phase-cloak-DFbzeu6n.webp                        14.29 kB
+dist/assets/hunter-killer-pod-mk2-BqhZ_3mP.webp                     14.29 kB
+dist/assets/tractor-beam-CrvHHEJ5.webp                              14.40 kB
+dist/assets/reaper-execute-DEzwEQMz.webp                            14.61 kB
+dist/assets/reflect-field-BGRHNx3G.webp                             14.63 kB
+dist/assets/emergency-repair-DtjL_gUU.webp                          14.63 kB
+dist/assets/barrier-39UgGFo6.webp                                   14.67 kB
+dist/assets/overcharge-module-mk3-oikvnXB6.webp                     14.72 kB
+dist/assets/fusion-reactor-mk1-CAfGVytF.webp                        14.88 kB
+dist/assets/volt-emp-burst-3tqUU-5i.webp                            14.92 kB
+dist/assets/ablative-plating-mk2-DzKiG0Wl.webp                      15.05 kB
+dist/assets/stage-revival-core-BkveP4Xr.webp                        15.15 kB
+dist/assets/plated-armor-mk1-HoPGdaaq.webp                          15.21 kB
+dist/assets/ignition-core-mk2-C30g8xOy.webp                         15.30 kB
+dist/assets/time-crystal-hFQItHPd.webp                              15.34 kB
+dist/assets/aegis-reflect-field-DGKGl5rs.webp                       15.59 kB
+dist/assets/rail-driver-mk2-D8AK5va7.webp                           15.67 kB
+dist/assets/shield-cell-giIh5vXI.webp                               15.75 kB
+dist/assets/reactive-armor-mk2-LDYUHjzn.webp                        15.99 kB
+dist/assets/arsenal-weapon-overclock-GOP-RUGK.webp                  16.15 kB
+dist/assets/emp-charge-D-wjBHzf.webp                                16.17 kB
+dist/assets/harmonic-shield-mk2-DxYwUH3x.webp                       16.25 kB
+dist/assets/overclock-reactor-mk1-DdoP5YFs.webp                     16.43 kB
+dist/assets/be-vietnam-pro-latin-400-normal-bXgqVju9.woff           16.43 kB
+dist/assets/sanctuary-CAP9lODh.webp                                 16.55 kB
+dist/assets/salvage-anchor-DUAxetF-.webp                            16.62 kB
+dist/assets/word-bomb-Cm04A9xp.webp                                 16.66 kB
+dist/assets/fortune-lucky-star-CZ-RpMkk.webp                        16.69 kB
+dist/assets/missile-swarm-Daurp75s.webp                             16.77 kB
+dist/assets/cleanse-CV9wQu6p.webp                                   16.77 kB
+dist/assets/wing-drones-mk3-BGx--cM2.webp                           16.86 kB
+dist/assets/threat-scanner-mk2-BHkPqqaf.webp                        16.88 kB
+dist/assets/be-vietnam-pro-latin-700-normal-C2EtzaOi.woff           16.91 kB
+dist/assets/be-vietnam-pro-latin-500-normal-BJkVuMHw.woff           17.00 kB
+dist/assets/be-vietnam-pro-latin-600-normal-5IO4e7bK.woff           17.02 kB
+dist/assets/meteor-DL4VuEXq.webp                                    17.16 kB
+dist/assets/phase-shield-mk3-D-ZS7-Nm.webp                          17.16 kB
+dist/assets/exo-2-latin-700-normal-OoACPC18.woff2                   17.22 kB
+dist/assets/exo-2-latin-600-normal-DOMk466V.woff2                   17.26 kB
+dist/assets/exo-2-latin-800-normal-CeuANCVN.woff2                   17.28 kB
+dist/assets/phoenix-core-Caxpka6X.webp                              17.34 kB
+dist/assets/siphon-reactor-mk2-DSCbkCTD.webp                        17.90 kB
+dist/assets/quantum-core-mk3-uQZagXWu.webp                          18.11 kB
+dist/assets/repair-kit-uAYCv-G2.webp                                18.33 kB
+dist/assets/momentum-core-mk2-D20zBj4D.webp                         18.56 kB
+dist/assets/exo-2-latin-ext-800-normal-D7VkW3TN.woff                18.95 kB
+dist/assets/exo-2-latin-ext-700-normal-BP27c6Zx.woff                18.98 kB
+dist/assets/exo-2-latin-ext-600-normal-DMfc7h1y.woff                19.12 kB
+dist/assets/nanoweave-hull-mk3-DOgE63dw.webp                        19.29 kB
+dist/assets/emp-burst-D585m0en.webp                                 19.37 kB
+dist/assets/discharge-shield-mk2-DYpq20NC.webp                      19.43 kB
+dist/assets/time-shell-C-yj6D2z.webp                                20.19 kB
+dist/assets/vanguard-barrier-pulse-CJP2RnmO.webp                    20.43 kB
+dist/assets/nova-bomb-B_-OlPg2.webp                                 20.57 kB
+dist/assets/gravity-well-CyQzzeam.webp                              20.77 kB
+dist/assets/supply-beacon-DVY-tHJM.webp                             21.12 kB
+dist/assets/be-vietnam-pro-latin-400-normal-PpnXBOrz.woff2          21.17 kB
+dist/assets/cryo-reactor-mk3-Dy-NGnXV.webp                          21.41 kB
+dist/assets/exo-2-latin-800-normal-CJzq8-0C.woff                    21.48 kB
+dist/assets/exo-2-latin-700-normal-CMe4g2cX.woff                    21.65 kB
+dist/assets/exo-2-latin-600-normal-DZPWd1Z-.woff                    21.69 kB
+dist/assets/be-vietnam-pro-latin-500-normal-B6LVzGNe.woff2          21.89 kB
+dist/assets/be-vietnam-pro-latin-600-normal-BZDkUTrt.woff2          22.03 kB
+dist/assets/be-vietnam-pro-latin-700-normal-DlW1Zbsh.woff2          22.15 kB
+dist/assets/lucky-dice-4a4rxsEv.webp                                24.67 kB
+dist/assets/vosk-worker-b9b3eb6909e3.js                          4,330.68 kB
+dist/assets/index-CsAWukQX.css                                     128.27 kB │ gzip:  22.93 kB
+dist/assets/bridge-B-LZQxDj.js                                       2.91 kB │ gzip:   1.15 kB
+dist/assets/protocol-DnS5HTDX.js                                     7.48 kB │ gzip:   2.19 kB
+dist/assets/host-factory-Bqy1D7Hu.js                                 9.46 kB │ gzip:   2.94 kB
+dist/assets/runtime-DV54L8ol.js                                     15.84 kB │ gzip:   5.77 kB
+dist/assets/index-Dxl41_Bo.js                                      615.63 kB │ gzip: 169.07 kB
+
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+✓ built in 577ms

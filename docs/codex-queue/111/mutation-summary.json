@@ -1,0 +1,12 @@
+{
+  "mutation": "Bỏ duy nhất vòng kiểm foreign-asset",
+  "sha256_before": "4794037f8b65e11a336e5bf9aaaa147ae18eeb5c44cb20aa1dcafae6e340363e",
+  "command": [
+    "node",
+    "--test",
+    "--test-name-pattern=^foreign-asset rejects",
+    "shared/game-kit/tools/deploy/check-pack.test.mjs"
+  ],
+  "mutated_exit_code": 1,
+  "sha256_restored": "4794037f8b65e11a336e5bf9aaaa147ae18eeb5c44cb20aa1dcafae6e340363e"
+}

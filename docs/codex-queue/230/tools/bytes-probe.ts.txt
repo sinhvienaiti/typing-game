@@ -1,0 +1,24 @@
+import { readFileSync } from "node:fs";
+import { screens206 } from "../../tests/ui-art-fixtures";
+import { artAttrs, gunRole } from "../../src/view/ui-art";
+console.warn = () => {};
+const m = JSON.parse(readFileSync("public/assets/typing-survival/ui/manifest.json", "utf8"));
+const bytes: Record<string, number> = {};
+for (const r of Object.values(m.roles) as any[]) for (const s of r.sizes) bytes[s.file] = s.bytes;
+const s = screens206();
+const bay = ["xung", "tia"].map((k) => artAttrs(gunRole(k), "bay")!);
+const html: Record<string, string> = { ...s, battle: bay.map((a) => `<img src="${a.src}"${a.srcset ? ` srcset="${a.srcset}"` : ""}>`).join("") };
+const file = (u: string) => u.split("/").pop()!.split("?")[0]!;
+const out: Record<string, unknown> = {};
+for (const [name, h] of Object.entries(html)) {
+  const one = new Set<string>(), two = new Set<string>();
+  for (const img of h.match(/<img\b[^>]*>/g) ?? []) {
+    const src = /src="([^"]+)"/.exec(img)![1]!;
+    const set = /srcset="([^"]+)"/.exec(img)?.[1];
+    one.add(file(src));
+    two.add(file(set ? set.split(", ").find((c) => c.endsWith(" 2x"))!.split(" ")[0]! : src));
+  }
+  const sum = (f: Set<string>) => [...f].reduce((a, x) => a + bytes[x]!, 0);
+  out[name] = { dpr1: sum(one), dpr2: sum(two), files1: [...one].sort(), files2: [...two].sort() };
+}
+process.stdout.write(JSON.stringify(out, null, 1) + "\n");

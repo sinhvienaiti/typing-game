@@ -3,12 +3,24 @@ import { readFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import test from "node:test";
-import { runWorldMusicPreview } from "./world-music-preview.mjs";
+import { parseWorldMusicPreviewOutput, runWorldMusicPreview } from "./world-music-preview.mjs";
 
 const rootDir = resolve(fileURLToPath(new URL("..", import.meta.url)));
 const contract = JSON.parse(
   await readFile(resolve(rootDir, "games/space-typing/contracts/space-typing-admin.v1.json"), "utf8"),
 );
+
+test("World Music preview parser ignores package-manager stdout preamble", () => {
+  const payload = parseWorldMusicPreviewOutput(
+    "? Verifying lockfile against supply-chain policies...\n{\n  \"protocolVersion\": 1,\n  \"worlds\": []\n}\n",
+  );
+  assert.equal(payload.protocolVersion, 1);
+  assert.deepEqual(payload.worlds, []);
+  assert.throws(
+    () => parseWorldMusicPreviewOutput("verification only, no protocol payload"),
+    /payload marker not found/,
+  );
+});
 
 test("parent Admin invokes the child canonical World Music preview protocol", async () => {
   const preview = await runWorldMusicPreview({ rootDir, contract });
@@ -45,4 +57,49 @@ test("published Admin policy is previewed by the same child resolver", async () 
   assert.equal(preview.configRevision, "parent-admin-test-v1");
   assert.equal(world01.states.normal.resolvedFrom, "world-01.published.normal");
   assert.deepEqual(world01.states.normal.badges, ["REPLACED"]);
+});
+
+
+test("B04.2 parent preview forwards Stage and resolves Galaxy fallback", async () => {
+  const stagePreview = await runWorldMusicPreview({
+    rootDir,
+    contract,
+    stageNumber: 101,
+    publishedPolicy: {
+      configRevision: "parent-stage-test-v1",
+      stages: {
+        "101": {
+          normal: {
+            kind: "replace",
+            trackIds: ["signal-in-the-void"],
+            selectionMode: "ordered",
+          },
+        },
+      },
+    },
+  });
+  assert.equal(stagePreview.stageNumber, 101);
+  const world06Stage = stagePreview.worlds.find((world) => world.worldId === "world-06");
+  assert.equal(world06Stage.states.normal.resolvedFrom, "stage-101.published.normal");
+  assert.ok(world06Stage.states.normal.badges.includes("STAGE OVERRIDE"));
+
+  const galaxyPreview = await runWorldMusicPreview({
+    rootDir,
+    contract,
+    publishedPolicy: {
+      configRevision: "parent-galaxy-test-v1",
+      galaxies: {
+        "3": {
+          normal: {
+            kind: "replace",
+            trackIds: ["signal-in-the-void"],
+            selectionMode: "ordered",
+          },
+        },
+      },
+    },
+  });
+  const world11Galaxy = galaxyPreview.worlds.find((world) => world.worldId === "world-11");
+  assert.equal(world11Galaxy.states.normal.resolvedFrom, "galaxy-3.published.normal");
+  assert.ok(world11Galaxy.states.normal.badges.includes("GALAXY FALLBACK"));
 });

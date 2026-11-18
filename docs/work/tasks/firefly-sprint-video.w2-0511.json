@@ -1,0 +1,691 @@
+{
+ "about": "05/11 02:50 W2 MATERIAL RUN (owner picked W2). Full 01:10 list: firefly-sprint-video.full-0110.json. Shape jobs wait for owner-picked stills (image-to-video).",
+ "created": "2026-11-05 00:30 +07",
+ "settings": {
+  "model": "adobe:firefly:colligo:video1",
+  "resolution": "1080",
+  "fps": "24",
+  "duration": "5",
+  "transparent": false,
+  "takes": 3
+ },
+ "jobs": [
+  {
+   "id": "fire-spark-spray-w2",
+   "ar": "sq",
+   "aspect": "{\"height\":1080,\"width\":1080}",
+   "source": "W2 material run 05/11 02:50 (owner \"Chạy W2\"); prompt from the 01:10 list, prefix swapped, negatives removed",
+   "use": "sparks with heads and tails (replaces round ember dots)",
+   "prompt": "High-end donghua animation effect, glowing, soft bloom, rich layered detail: A burst of fire sparks flies out from the centre in curved arcs and falls with gravity: each spark a white-gold head, a slender orange body and a thinning dark-red tail, in three lengths; a few ember chips bounce. They cool and vanish. Pure black background. Locked-off static camera; the effect stays inside the frame."
+  },
+  {
+   "id": "light-column-strike-w2",
+   "ar": "tall",
+   "aspect": "{\"height\":1920,\"width\":1080}",
+   "source": "W2 material run 05/11 02:50 (owner \"Chạy W2\"); prompt from the 01:10 list, prefix swapped, negatives removed",
+   "use": "LightStrips and pillar() (sword-rain.ts STRIP_FRAGMENT, fxkit BeamPool)",
+   "prompt": "High-end donghua animation effect, glowing, soft bloom, rich layered detail: A thin vertical white-hot light column with a cyan body slams down from the top edge to the bottom. Bright segments race down it, a flare of cyan light and thin rays bursts at its foot. It holds, then thins and breaks upward into sparkles. Pure black background. Locked-off static camera; the effect stays inside the frame."
+  },
+  {
+   "id": "light-column-loop-w2",
+   "ar": "tall",
+   "aspect": "{\"height\":1920,\"width\":1080}",
+   "source": "W2 material run 05/11 02:50 (owner \"Chạy W2\"); prompt from the 01:10 list, prefix swapped, negatives removed",
+   "use": "LightStrips hold (loop)",
+   "prompt": "High-end donghua animation effect, glowing, soft bloom, rich layered detail: A thin vertical white-hot light column with a cyan body runs from the top edge to the bottom; bright segments race down it continuously, a steady flare of cyan light and thin rays at its foot. Constant brightness, a seamless continuous loop. Pure black background. Locked-off static camera; the effect stays inside the frame."
+  },
+  {
+   "id": "twin-fire-spiral-charge-w2",
+   "ar": "sq",
+   "aspect": "{\"height\":1080,\"width\":1080}",
+   "source": "W2 material run 05/11 02:50 (owner \"Chạy W2\"); prompt from the 01:10 list, prefix swapped, negatives removed",
+   "use": "Twin Dragons charge: two counter-rotating flame wisps",
+   "prompt": "High-end donghua animation effect, glowing, soft bloom, rich layered detail: Two thin flame wisps spiral in opposite directions around an empty centre point, red-gold fire with white-gold edges, embers drawn inward, star glints at the wisp tips. A seamless continuous loop. Pure black background. Locked-off static camera; the effect stays inside the frame."
+  },
+  {
+   "id": "cutin-band-edge-light-loop-w2",
+   "ar": "wide",
+   "aspect": "{\"height\":1080,\"width\":1920}",
+   "source": "W2 material run 05/11 02:50 (owner \"Chạy W2\"); prompt from the 01:10 list, prefix swapped, negatives removed",
+   "use": "ink-light band frame edge",
+   "prompt": "High-end donghua animation effect, glowing, soft bloom, rich layered detail: A horizontal ink-brush edge line crosses the frame: ragged dark ink with a glowing gold inner rim, bright light streaks run along the rim from left to right, star glints twinkle at both ends, motes drift up off it. A seamless continuous loop. Pure black background. Locked-off static camera; the effect stays inside the frame."
+  },
+  {
+   "id": "cutin-callout-light-sweep-w2",
+   "ar": "wide",
+   "aspect": "{\"height\":1080,\"width\":1920}",
+   "source": "W2 material run 05/11 02:50 (owner \"Chạy W2\"); prompt from the 01:10 list, prefix swapped, negatives removed",
+   "use": "light sweep across the callout letters",
+   "prompt": "High-end donghua animation effect, glowing, soft bloom, rich layered detail: A thin bright glint of white-gold light travels horizontally from left to right across the centre of the frame, a sharp four-point star flare rides on it, a trail of glitter follows, then it vanishes at the right edge. Pure black background. Locked-off static camera; the effect stays inside the frame."
+  },
+  {
+   "id": "cutin-sparkle-motes-drift-w2",
+   "ar": "wide",
+   "aspect": "{\"height\":1080,\"width\":1920}",
+   "source": "W2 material run 05/11 02:50 (owner \"Chạy W2\"); prompt from the 01:10 list, prefix swapped, negatives removed",
+   "use": "motes drifting out of the band",
+   "prompt": "High-end donghua animation effect, glowing, soft bloom, rich layered detail: Sparkle motes and four-point star glints drift upward and outward, gold and cyan, twinkling at different rhythms, sparse with lots of dark space between them. A seamless continuous loop. Pure black background. Locked-off static camera; the effect stays inside the frame."
+  },
+  {
+   "id": "strip-metal-silk-flow-w2",
+   "ar": "wide",
+   "aspect": "{\"height\":1080,\"width\":1920}",
+   "source": "W2 material run 05/11 02:50 (owner \"Chạy W2\"); prompt from the 01:10 list, prefix swapped, negatives removed",
+   "use": "Metal sword-aura strip (fallback)",
+   "prompt": "High-end donghua animation effect, glowing, soft bloom, rich layered detail: Separated silver-blue silk energy strands flow lengthwise beside an empty black horizontal channel, peeling outward and reconnecting toward a fine needle on the right; silver highlights race along single strands; wide black gaps stay open. Graceful hand-painted energy, a seamless continuous loop. Pure black background. Locked-off static camera; the effect stays inside the frame."
+  },
+  {
+   "id": "strip-fire-sheath-flow-w2",
+   "ar": "wide",
+   "aspect": "{\"height\":1080,\"width\":1920}",
+   "source": "W2 material run 05/11 02:50 (owner \"Chạy W2\"); prompt from the 01:10 list, prefix swapped, negatives removed",
+   "use": "Fire sword-aura strip (fallback)",
+   "prompt": "High-end donghua animation effect, glowing, soft bloom, rich layered detail: Living orange-red flame tongues stream backward from right to left along both sides of an empty black horizontal channel, curling, splitting and retracting in irregular rhythms; a fine needle at the right, a thin white-gold heat thread now and then. A seamless continuous loop. Pure black background. Locked-off static camera; the effect stays inside the frame."
+  },
+  {
+   "id": "fire-embers-rising-loop-w2",
+   "ar": "tall",
+   "aspect": "{\"height\":1920,\"width\":1080}",
+   "source": "W2 material run 05/11 02:50 (owner \"Chạy W2\"); prompt from the 01:10 list, prefix swapped, negatives removed",
+   "use": "rising embers in aftermath (embers.ts)",
+   "prompt": "High-end donghua animation effect, glowing, soft bloom, rich layered detail: Embers and gold flecks rise and drift upward: irregular shapes, red-orange cooling specks, micro-streaks and a few four-point glimmers, sparse with lots of dark space. A seamless continuous loop. Pure black background. Locked-off static camera; the effect stays inside the frame."
+  },
+  {
+   "id": "fire-charge-gather-w2",
+   "ar": "sq",
+   "aspect": "{\"height\":1080,\"width\":1080}",
+   "source": "W2 material run 05/11 02:50 (owner \"Chạy W2\"); prompt from the 01:10 list, prefix swapped, negatives removed",
+   "use": "charge at the hand while typing (chargeKey)",
+   "prompt": "High-end donghua animation effect, glowing, soft bloom, rich layered detail: Embers and flame wisps spiral inward into a bright white-gold point in the centre, a thin heat ring pulses around it, star glints flicker. A seamless continuous loop. Pure black background. Locked-off static camera; the effect stays inside the frame."
+  },
+  {
+   "id": "fire-ground-burn-loop-w2",
+   "ar": "sq",
+   "aspect": "{\"height\":1080,\"width\":1080}",
+   "source": "W2 material run 05/11 02:50 (owner \"Chạy W2\"); prompt from the 01:10 list, prefix swapped, negatives removed",
+   "use": "ground fire that keeps burning (aftermath)",
+   "prompt": "High-end donghua animation effect, glowing, soft bloom, rich layered detail: Seen from a three-quarter top-down view, a low patch of fire burns in place: licking flame tongues, red-gold body, white-gold tips, floating embers. Constant intensity, a seamless continuous loop. Pure black background. Locked-off static camera; the effect stays inside the frame."
+  },
+  {
+   "id": "fire-smoke-roll-white-w2",
+   "ar": "sq",
+   "aspect": "{\"height\":1080,\"width\":1080}",
+   "source": "W2 material run 05/11 02:50 (owner \"Chạy W2\"); prompt from the 01:10 list, prefix swapped, negatives removed",
+   "use": "dark smoke underlay behind fire (normal blend)",
+   "prompt": "High-end donghua animation effect, glowing, soft bloom, rich layered detail: Thick dark charcoal smoke billows up from the lower centre, rolls and expands, then thins out and fades away completely. Pure white background. Locked-off static camera."
+  },
+  {
+   "id": "metal-sword-light-streak-w2",
+   "ar": "wide",
+   "aspect": "{\"height\":1080,\"width\":1920}",
+   "source": "W2 material run 05/11 02:50 (owner \"Chạy W2\"); prompt from the 01:10 list, prefix swapped, negatives removed",
+   "use": "sword-light streak behind a flying sword",
+   "prompt": "High-end donghua animation effect, glowing, soft bloom, rich layered detail: A single sword-light streak shoots from left to right: a razor-thin white-hot line with a silver-blue body tapering to a needle tip, light shimmering along it, sparkles shed behind. Pure black background. Locked-off static camera; the effect stays inside the frame."
+  },
+  {
+   "id": "metal-light-pillar-hit-w2",
+   "ar": "tall",
+   "aspect": "{\"height\":1920,\"width\":1080}",
+   "source": "W2 material run 05/11 02:50 (owner \"Chạy W2\"); prompt from the 01:10 list, prefix swapped, negatives removed",
+   "use": "Metal light pillar on big hits (pillar())",
+   "prompt": "High-end donghua animation effect, glowing, soft bloom, rich layered detail: A short pillar of silver-white light bursts upward from the bottom centre, thin cyan rays and a flat ring of light at its base, glitter rising. It holds, then thins and breaks into sparkles. Pure black background. Locked-off static camera; the effect stays inside the frame."
+  },
+  {
+   "id": "sword-rain-streaks-w2",
+   "ar": "tall",
+   "aspect": "{\"height\":1920,\"width\":1080}",
+   "source": "W2 material run 05/11 02:50 (owner \"Chạy W2\"); prompt from the 01:10 list, prefix swapped, negatives removed",
+   "use": "K6 sword rain falling streaks",
+   "prompt": "High-end donghua animation effect, glowing, soft bloom, rich layered detail: Many slim cyan-white sword-lights rain down from the top edge at a steep slant, each a thin blade of light with a white-hot tip and a tapering trail, sparkles shed behind them. Pure black background. Locked-off static camera; the effect stays inside the frame."
+  },
+  {
+   "id": "death-soul-threads-w2",
+   "ar": "tall",
+   "aspect": "{\"height\":1920,\"width\":1080}",
+   "source": "W2 material run 05/11 02:50 (owner \"Chạy W2\"); prompt from the 01:10 list, prefix swapped, negatives removed",
+   "use": "foe death: soul threads rising",
+   "prompt": "High-end donghua animation effect, glowing, soft bloom, rich layered detail: Thin threads of pale cyan light rise and unravel upward from the bottom centre, twisting and splitting into fine strands, sparkles at their tips. Then they dissolve into motes. Pure black background. Locked-off static camera; the effect stays inside the frame."
+  },
+  {
+   "id": "gold-dust-motes-loop-w2",
+   "ar": "wide",
+   "aspect": "{\"height\":1080,\"width\":1920}",
+   "source": "W2 material run 05/11 02:50 (owner \"Chạy W2\"); prompt from the 01:10 list, prefix swapped, negatives removed",
+   "use": "fine gold dust in aftermath",
+   "prompt": "High-end donghua animation effect, glowing, soft bloom, rich layered detail: Fine gold dust motes and glitter drift and swirl slowly, some catch the light and flash as four-point glints, sparse with lots of dark space. A seamless continuous loop. Pure black background. Locked-off static camera; the effect stays inside the frame."
+  }
+ ],
+ "status": {
+  "running": false,
+  "stop": false,
+  "state": "done",
+  "job": "gold-dust-motes-loop-w2",
+  "take": 3,
+  "attempt": 1,
+  "startedAt": "2026-11-05T01:29:10.756Z",
+  "updatedAt": "2026-11-05T03:28:32.529Z",
+  "saved": 54,
+  "failedTakes": [],
+  "results": {
+   "fire-spark-spray-w2#1": {
+    "bytes": 7818213,
+    "w": 1080,
+    "h": 1080,
+    "seed": "262641",
+    "secs": 88,
+    "saved": true
+   },
+   "fire-spark-spray-w2#2": {
+    "bytes": 6744957,
+    "w": 1080,
+    "h": 1080,
+    "seed": "289889",
+    "secs": 88,
+    "saved": true
+   },
+   "fire-spark-spray-w2#3": {
+    "bytes": 5970613,
+    "w": 1080,
+    "h": 1080,
+    "seed": "999320",
+    "secs": 83,
+    "saved": true
+   },
+   "light-column-strike-w2#1": {
+    "bytes": 5511171,
+    "w": 1080,
+    "h": 1920,
+    "seed": "634687",
+    "secs": 83,
+    "saved": true
+   },
+   "light-column-strike-w2#2": {
+    "bytes": 4466713,
+    "w": 1080,
+    "h": 1920,
+    "seed": "705066",
+    "secs": 83,
+    "saved": true
+   },
+   "light-column-strike-w2#3": {
+    "bytes": 3938081,
+    "w": 1080,
+    "h": 1920,
+    "seed": "947436",
+    "secs": 83,
+    "saved": true
+   },
+   "light-column-loop-w2#1": {
+    "bytes": 2416405,
+    "w": 1080,
+    "h": 1920,
+    "seed": "15248",
+    "secs": 84,
+    "saved": true
+   },
+   "light-column-loop-w2#2": {
+    "bytes": 2319961,
+    "w": 1080,
+    "h": 1920,
+    "seed": "413735",
+    "secs": 83,
+    "saved": true
+   },
+   "light-column-loop-w2#3": {
+    "bytes": 1827732,
+    "w": 1080,
+    "h": 1920,
+    "seed": "959105",
+    "secs": 85,
+    "saved": true
+   },
+   "twin-fire-spiral-charge-w2#1": {
+    "bytes": 4414174,
+    "w": 1080,
+    "h": 1080,
+    "seed": "433517",
+    "secs": 85,
+    "saved": true
+   },
+   "twin-fire-spiral-charge-w2#2": {
+    "bytes": 4550427,
+    "w": 1080,
+    "h": 1080,
+    "seed": "291201",
+    "secs": 92,
+    "saved": true
+   },
+   "twin-fire-spiral-charge-w2#3": {
+    "bytes": 3490024,
+    "w": 1080,
+    "h": 1080,
+    "seed": "392581",
+    "secs": 84,
+    "saved": true
+   },
+   "cutin-band-edge-light-loop-w2#1": {
+    "bytes": 2599395,
+    "w": 1920,
+    "h": 1080,
+    "seed": "373978",
+    "secs": 99,
+    "saved": true
+   },
+   "cutin-band-edge-light-loop-w2#2": {
+    "bytes": 1917819,
+    "w": 1920,
+    "h": 1080,
+    "seed": "782686",
+    "secs": 85,
+    "saved": true
+   },
+   "cutin-band-edge-light-loop-w2#3": {
+    "bytes": 1956891,
+    "w": 1920,
+    "h": 1080,
+    "seed": "713567",
+    "secs": 107,
+    "saved": true
+   },
+   "cutin-callout-light-sweep-w2#1": {
+    "bytes": 2647054,
+    "w": 1920,
+    "h": 1080,
+    "seed": "882833",
+    "secs": 95,
+    "saved": true
+   },
+   "cutin-callout-light-sweep-w2#2": {
+    "bytes": 2220245,
+    "w": 1920,
+    "h": 1080,
+    "seed": "903875",
+    "secs": 80,
+    "saved": true
+   },
+   "cutin-callout-light-sweep-w2#3": {
+    "bytes": 2513425,
+    "w": 1920,
+    "h": 1080,
+    "seed": "691452",
+    "secs": 96,
+    "saved": true
+   },
+   "cutin-sparkle-motes-drift-w2#1": {
+    "bytes": 6151172,
+    "w": 1920,
+    "h": 1080,
+    "seed": "122138",
+    "secs": 86,
+    "saved": true
+   },
+   "cutin-sparkle-motes-drift-w2#2": {
+    "bytes": 5031685,
+    "w": 1920,
+    "h": 1080,
+    "seed": "503129",
+    "secs": 103,
+    "saved": true
+   },
+   "cutin-sparkle-motes-drift-w2#3": {
+    "bytes": 9386531,
+    "w": 1920,
+    "h": 1080,
+    "seed": "407442",
+    "secs": 91,
+    "saved": true
+   },
+   "strip-metal-silk-flow-w2#1": {
+    "bytes": 3898153,
+    "w": 1920,
+    "h": 1080,
+    "seed": "758043",
+    "secs": 115,
+    "saved": true
+   },
+   "strip-metal-silk-flow-w2#2": {
+    "bytes": 4010556,
+    "w": 1920,
+    "h": 1080,
+    "seed": "256608",
+    "secs": 84,
+    "saved": true
+   },
+   "strip-metal-silk-flow-w2#3": {
+    "bytes": 6466658,
+    "w": 1920,
+    "h": 1080,
+    "seed": "349131",
+    "secs": 81,
+    "saved": true
+   },
+   "strip-fire-sheath-flow-w2#1": {
+    "bytes": 3595304,
+    "w": 1920,
+    "h": 1080,
+    "seed": "269715",
+    "secs": 96,
+    "saved": true
+   },
+   "strip-fire-sheath-flow-w2#2": {
+    "bytes": 6102963,
+    "w": 1920,
+    "h": 1080,
+    "seed": "729698",
+    "secs": 163,
+    "saved": true
+   },
+   "strip-fire-sheath-flow-w2#3": {
+    "bytes": 2710595,
+    "w": 1920,
+    "h": 1080,
+    "seed": "452917",
+    "secs": 161,
+    "saved": true
+   },
+   "fire-embers-rising-loop-w2#1": {
+    "bytes": 6514340,
+    "w": 1080,
+    "h": 1920,
+    "seed": "196057",
+    "secs": 189,
+    "saved": true
+   },
+   "fire-embers-rising-loop-w2#2": {
+    "bytes": 8228141,
+    "w": 1080,
+    "h": 1920,
+    "seed": "511775",
+    "secs": 87,
+    "saved": true
+   },
+   "fire-embers-rising-loop-w2#3": {
+    "bytes": 6725959,
+    "w": 1080,
+    "h": 1920,
+    "seed": "746372",
+    "secs": 86,
+    "saved": true
+   },
+   "fire-charge-gather-w2#1": {
+    "bytes": 3319489,
+    "w": 1080,
+    "h": 1080,
+    "seed": "324394",
+    "secs": 99,
+    "saved": true
+   },
+   "fire-charge-gather-w2#2": {
+    "bytes": 3593438,
+    "w": 1080,
+    "h": 1080,
+    "seed": "604398",
+    "secs": 98,
+    "saved": true
+   },
+   "fire-charge-gather-w2#3": {
+    "bytes": 3767355,
+    "w": 1080,
+    "h": 1080,
+    "seed": "852860",
+    "secs": 86,
+    "saved": true
+   },
+   "fire-ground-burn-loop-w2#1": {
+    "bytes": 1265528,
+    "w": 1080,
+    "h": 1080,
+    "seed": "395089",
+    "secs": 80,
+    "saved": true
+   },
+   "fire-ground-burn-loop-w2#2": {
+    "bytes": 4471325,
+    "w": 1080,
+    "h": 1080,
+    "seed": "741508",
+    "secs": 85,
+    "saved": true
+   },
+   "fire-ground-burn-loop-w2#3": {
+    "bytes": 4500518,
+    "w": 1080,
+    "h": 1080,
+    "seed": "460267",
+    "secs": 92,
+    "saved": true
+   },
+   "fire-smoke-roll-white-w2#1": {
+    "bytes": 2562487,
+    "w": 1080,
+    "h": 1080,
+    "seed": "252971",
+    "secs": 81,
+    "saved": true
+   },
+   "fire-smoke-roll-white-w2#2": {
+    "bytes": 2584903,
+    "w": 1080,
+    "h": 1080,
+    "seed": "741716",
+    "secs": 86,
+    "saved": true
+   },
+   "fire-smoke-roll-white-w2#3": {
+    "bytes": 1594240,
+    "w": 1080,
+    "h": 1080,
+    "seed": "382477",
+    "secs": 86,
+    "saved": true
+   },
+   "metal-sword-light-streak-w2#1": {
+    "bytes": 2202422,
+    "w": 1920,
+    "h": 1080,
+    "seed": "269418",
+    "secs": 81,
+    "saved": true
+   },
+   "metal-sword-light-streak-w2#2": {
+    "bytes": 2157096,
+    "w": 1920,
+    "h": 1080,
+    "seed": "230986",
+    "secs": 86,
+    "saved": true
+   },
+   "metal-sword-light-streak-w2#3": {
+    "bytes": 2010708,
+    "w": 1920,
+    "h": 1080,
+    "seed": "81838",
+    "secs": 85,
+    "saved": true
+   },
+   "metal-light-pillar-hit-w2#1": {
+    "bytes": 5526009,
+    "w": 1080,
+    "h": 1920,
+    "seed": "667073",
+    "secs": 114,
+    "saved": true
+   },
+   "metal-light-pillar-hit-w2#2": {
+    "bytes": 4389456,
+    "w": 1080,
+    "h": 1920,
+    "seed": "408371",
+    "secs": 86,
+    "saved": true
+   },
+   "metal-light-pillar-hit-w2#3": {
+    "bytes": 4795975,
+    "w": 1080,
+    "h": 1920,
+    "seed": "723071",
+    "secs": 98,
+    "saved": true
+   },
+   "sword-rain-streaks-w2#1": {
+    "bytes": 3480925,
+    "w": 1080,
+    "h": 1920,
+    "seed": "981966",
+    "secs": 131,
+    "saved": true
+   },
+   "sword-rain-streaks-w2#2": {
+    "bytes": 2970340,
+    "w": 1080,
+    "h": 1920,
+    "seed": "547579",
+    "secs": 96,
+    "saved": true
+   },
+   "sword-rain-streaks-w2#3": {
+    "bytes": 3595174,
+    "w": 1080,
+    "h": 1920,
+    "seed": "868778",
+    "secs": 99,
+    "saved": true
+   },
+   "death-soul-threads-w2#1": {
+    "bytes": 5445285,
+    "w": 1080,
+    "h": 1920,
+    "seed": "535736",
+    "secs": 114,
+    "saved": true
+   },
+   "death-soul-threads-w2#2": {
+    "bytes": 6118659,
+    "w": 1080,
+    "h": 1920,
+    "seed": "100301",
+    "secs": 122,
+    "saved": true
+   },
+   "death-soul-threads-w2#3": {
+    "bytes": 4549490,
+    "w": 1080,
+    "h": 1920,
+    "seed": "397423",
+    "secs": 92,
+    "saved": true
+   },
+   "gold-dust-motes-loop-w2#1": {
+    "bytes": 5390292,
+    "w": 1920,
+    "h": 1080,
+    "seed": "197841",
+    "secs": 122,
+    "saved": true
+   },
+   "gold-dust-motes-loop-w2#2": {
+    "bytes": 7179251,
+    "w": 1920,
+    "h": 1080,
+    "seed": "466282",
+    "secs": 161,
+    "saved": true
+   },
+   "gold-dust-motes-loop-w2#3": {
+    "bytes": 5794016,
+    "w": 1920,
+    "h": 1080,
+    "seed": "252800",
+    "secs": 86,
+    "saved": true
+   }
+  },
+  "events": [
+   "09:23:15 saved strip-fire-sheath-flow-w2/take1.mp4 3595304 B 1920x1080 seed 269715 in 96 s",
+   "09:23:38 click strip-fire-sheath-flow-w2 take2 (attempt 1)",
+   "09:26:21 saved strip-fire-sheath-flow-w2/take2.mp4 6102963 B 1920x1080 seed 729698 in 163 s",
+   "09:26:46 click strip-fire-sheath-flow-w2 take3 (attempt 1)",
+   "09:29:27 saved strip-fire-sheath-flow-w2/take3.mp4 2710595 B 1920x1080 seed 452917 in 161 s",
+   "09:29:56 click fire-embers-rising-loop-w2 take1 (attempt 1)",
+   "09:33:05 saved fire-embers-rising-loop-w2/take1.mp4 6514340 B 1080x1920 seed 196057 in 189 s",
+   "09:33:36 click fire-embers-rising-loop-w2 take2 (attempt 1)",
+   "09:35:03 saved fire-embers-rising-loop-w2/take2.mp4 8228141 B 1080x1920 seed 511775 in 87 s",
+   "09:35:28 click fire-embers-rising-loop-w2 take3 (attempt 1)",
+   "09:36:54 saved fire-embers-rising-loop-w2/take3.mp4 6725959 B 1080x1920 seed 746372 in 86 s",
+   "09:37:26 click fire-charge-gather-w2 take1 (attempt 1)",
+   "09:39:05 saved fire-charge-gather-w2/take1.mp4 3319489 B 1080x1080 seed 324394 in 99 s",
+   "09:39:35 click fire-charge-gather-w2 take2 (attempt 1)",
+   "09:41:13 saved fire-charge-gather-w2/take2.mp4 3593438 B 1080x1080 seed 604398 in 98 s",
+   "09:41:43 click fire-charge-gather-w2 take3 (attempt 1)",
+   "09:43:09 saved fire-charge-gather-w2/take3.mp4 3767355 B 1080x1080 seed 852860 in 86 s",
+   "09:43:40 click fire-ground-burn-loop-w2 take1 (attempt 1)",
+   "09:45:00 saved fire-ground-burn-loop-w2/take1.mp4 1265528 B 1080x1080 seed 395089 in 80 s",
+   "09:45:29 click fire-ground-burn-loop-w2 take2 (attempt 1)",
+   "09:46:54 saved fire-ground-burn-loop-w2/take2.mp4 4471325 B 1080x1080 seed 741508 in 85 s",
+   "09:47:22 click fire-ground-burn-loop-w2 take3 (attempt 1)",
+   "09:48:54 saved fire-ground-burn-loop-w2/take3.mp4 4500518 B 1080x1080 seed 460267 in 92 s",
+   "09:49:24 click fire-smoke-roll-white-w2 take1 (attempt 1)",
+   "09:50:45 saved fire-smoke-roll-white-w2/take1.mp4 2562487 B 1080x1080 seed 252971 in 81 s",
+   "09:51:13 click fire-smoke-roll-white-w2 take2 (attempt 1)",
+   "09:52:39 saved fire-smoke-roll-white-w2/take2.mp4 2584903 B 1080x1080 seed 741716 in 86 s",
+   "09:53:07 click fire-smoke-roll-white-w2 take3 (attempt 1)",
+   "09:54:33 saved fire-smoke-roll-white-w2/take3.mp4 1594240 B 1080x1080 seed 382477 in 86 s",
+   "09:55:00 click metal-sword-light-streak-w2 take1 (attempt 1)",
+   "09:56:21 saved metal-sword-light-streak-w2/take1.mp4 2202422 B 1920x1080 seed 269418 in 81 s",
+   "09:56:44 click metal-sword-light-streak-w2 take2 (attempt 1)",
+   "09:58:10 saved metal-sword-light-streak-w2/take2.mp4 2157096 B 1920x1080 seed 230986 in 86 s",
+   "09:58:41 click metal-sword-light-streak-w2 take3 (attempt 1)",
+   "10:00:06 saved metal-sword-light-streak-w2/take3.mp4 2010708 B 1920x1080 seed 81838 in 85 s",
+   "10:00:36 click metal-light-pillar-hit-w2 take1 (attempt 1)",
+   "10:02:30 saved metal-light-pillar-hit-w2/take1.mp4 5526009 B 1080x1920 seed 667073 in 114 s",
+   "10:03:02 click metal-light-pillar-hit-w2 take2 (attempt 1)",
+   "10:04:28 saved metal-light-pillar-hit-w2/take2.mp4 4389456 B 1080x1920 seed 408371 in 86 s",
+   "10:04:56 click metal-light-pillar-hit-w2 take3 (attempt 1)",
+   "10:06:34 saved metal-light-pillar-hit-w2/take3.mp4 4795975 B 1080x1920 seed 723071 in 98 s",
+   "10:07:06 click sword-rain-streaks-w2 take1 (attempt 1)",
+   "10:09:17 saved sword-rain-streaks-w2/take1.mp4 3480925 B 1080x1920 seed 981966 in 131 s",
+   "10:09:46 click sword-rain-streaks-w2 take2 (attempt 1)",
+   "10:11:22 saved sword-rain-streaks-w2/take2.mp4 2970340 B 1080x1920 seed 547579 in 96 s",
+   "10:11:54 click sword-rain-streaks-w2 take3 (attempt 1)",
+   "10:13:33 saved sword-rain-streaks-w2/take3.mp4 3595174 B 1080x1920 seed 868778 in 99 s",
+   "10:13:59 click death-soul-threads-w2 take1 (attempt 1)",
+   "10:15:53 saved death-soul-threads-w2/take1.mp4 5445285 B 1080x1920 seed 535736 in 114 s",
+   "10:16:23 click death-soul-threads-w2 take2 (attempt 1)",
+   "10:18:25 saved death-soul-threads-w2/take2.mp4 6118659 B 1080x1920 seed 100301 in 122 s",
+   "10:18:54 click death-soul-threads-w2 take3 (attempt 1)",
+   "10:20:26 saved death-soul-threads-w2/take3.mp4 4549490 B 1080x1920 seed 397423 in 92 s",
+   "10:21:00 click gold-dust-motes-loop-w2 take1 (attempt 1)",
+   "10:23:02 saved gold-dust-motes-loop-w2/take1.mp4 5390292 B 1920x1080 seed 197841 in 122 s",
+   "10:23:34 click gold-dust-motes-loop-w2 take2 (attempt 1)",
+   "10:26:15 saved gold-dust-motes-loop-w2/take2.mp4 7179251 B 1920x1080 seed 466282 in 161 s",
+   "10:26:45 click gold-dust-motes-loop-w2 take3 (attempt 1)",
+   "10:28:11 saved gold-dust-motes-loop-w2/take3.mp4 5794016 B 1920x1080 seed 252800 in 86 s",
+   "10:28:32 queue finished"
+  ],
+  "consecutiveFails": 0,
+  "queued": 54,
+  "doneTakes": 76,
+  "lastSettings": {
+   "model": "adobe:firefly:colligo:video1",
+   "res": "1080",
+   "ar": "{\"height\":1080,\"width\":1920}",
+   "fps": "24",
+   "dur": "5",
+   "shot": "none",
+   "angle": "none",
+   "transparent": false
+  },
+  "lastResult": {
+   "job": "gold-dust-motes-loop-w2",
+   "take": 3,
+   "bytes": 5794016,
+   "w": 1920,
+   "h": 1080,
+   "seed": "252800",
+   "secs": 86,
+   "saved": true
+  },
+  "lastError": "dialog FIREFLY-COMMUNITY-SUBMISSION:  | FIREFLY-COMMUNITY-SUBMISSION: "
+ },
+ "statusReceivedAt": "2026-11-05 10:28:32 +07"
+}

@@ -1,0 +1,61 @@
+import os,subprocess,json,hashlib,re
+from pathlib import Path
+dest=Path('docs/codex-queue/227');env={**os.environ,'GIT_OPTIONAL_LOCKS':'0'}
+sha=lambda b:hashlib.sha256(b).hexdigest()
+def blocks(text):
+ # Independent character scan; preserve the exact bytes between server and its closing brace.
+ out=[];depth=0;quote=None;comment=False;escape=False;start=None
+ for i,c in enumerate(text):
+  if comment:
+   if c=='\n':comment=False
+   continue
+  if escape:escape=False;continue
+  if c=='\\':escape=True;continue
+  if quote:
+   if c==quote:quote=None
+   continue
+  if c=='#':comment=True;continue
+  if c in ['"',"'"]:quote=c;continue
+  if c=='{':
+   if depth==0:
+    m=re.search(r'\bserver\s*$',text[:i]);start=m.start() if m else None
+   depth+=1
+  elif c=='}':
+   depth-=1
+   assert depth>=0
+   if depth==0 and start is not None:
+    b=text[start:i+1];host=re.search(r'\bserver_name\s+([^;]+);',b).group(1)
+    out.append((host,b));start=None
+ assert depth==0
+ return dict(out)
+result=[];fixtures=Path('tmp/codex-227/nginx');fixtures.mkdir()
+for mode in ['play','dev']:
+ p=f'infra/nginx/typing-game.local.{mode}.conf'
+ old=subprocess.check_output(['git','show',f'HEAD:{p}'],env=env).decode();now=Path(p).read_text()
+ a,b=blocks(old),blocks(now);assert a.keys()==b.keys()
+ rows=[]
+ for host in a:
+  changed=a[host]!=b[host];allowed=host in [x+'.typing-game.local' for x in ['dragon','td','survival']]
+  if changed:assert allowed
+  rows.append({'host':host,'shaBefore':sha(a[host].encode()),'shaNow':sha(b[host].encode()),'same':not changed,'allowed':allowed,'locationsBefore':len(re.findall(r'^\s*location\s',a[host],re.M)),'locationsNow':len(re.findall(r'^\s*location\s',b[host],re.M))})
+ host=('dragon' if mode=='play' else 'td')+'.typing-game.local';route='/vocabulary/' if mode=='play' else '/shared/typing-texts/'
+ extra=f'location {route} {{ alias __ROOT_DIR__/shared/vocabulary/; }}'
+ file=fixtures/(mode+'.conf');file.write_text(now.replace(f'server_name {host};',f'server_name {host};\n    '+extra))
+ args=['node','scripts/validate-play-mode.mjs',f'--{mode}-conf',str(file)]
+ run=subprocess.run(args,env=env,capture_output=True,text=True)
+ (dest/f'runs/nginx-injected-{mode}.txt').write_text('argv='+json.dumps(args)+'\nexit='+str(run.returncode)+'\n'+run.stdout+run.stderr)
+ assert run.returncode==1 and host in run.stderr and route in run.stderr
+ survival=b['survival.typing-game.local']
+ assert survival.count('location /assets/space-typing/models/')==1 and 'ticket 205' in survival
+ result.append({'mode':mode,'path':p,'blocks':rows,'serverCountBefore':len(a),'serverCountNow':len(b),'balanced':True,'injected':{'exit':run.returncode,'host':host,'route':route},'survivalModelLocations':1,'nonGameUnchanged':sum(r['same'] for r in rows)})
+(dest/'nginx-blocks.json').write_text(json.dumps(result,indent=2)+'\n')
+vocab=[]
+for game in ['dragon-hold','typing-defense','typing-survival']:
+ public=Path('games')/game/'public/vocabulary';dist=Path('games')/game/'dist/vocabulary'
+ manifest=json.loads((public/'vocab-manifest.json').read_text());a={str(p.relative_to(public)):sha(p.read_bytes()) for p in public.rglob('*') if p.is_file()};b={str(p.relative_to(dist)):sha(p.read_bytes()) for p in dist.rglob('*') if p.is_file()}
+ mismatches=[p for p,h in manifest['files'].items() if a.get(p)!=h]
+ r={'game':game,'pin':manifest['pin'],'manifestFiles':len(manifest['files']),'publicFiles':len(a),'distFiles':len(b),'publicManifestMismatches':mismatches,'distMismatches':[p for p in set(a)|set(b) if a.get(p)!=b.get(p)]}
+ assert r['pin']=='18338405eebd9cfdbd6d6bf666ea79361c00a564' and not mismatches and not r['distMismatches']
+ vocab.append(r)
+(dest/'vocab-self-serve.json').write_text(json.dumps(vocab,indent=2)+'\n')
+print(json.dumps({'command':'python3 tmp/codex-227/audit-216.py','exit':0,'blocks':[{k:r[k] for k in ['mode','serverCountBefore','serverCountNow','nonGameUnchanged','injected']} for r in result],'vocab':vocab}))

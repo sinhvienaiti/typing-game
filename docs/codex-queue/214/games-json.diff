@@ -1,0 +1,56 @@
+diff --git a/portal/public/games.json b/portal/public/games.json
+index 9c7a7466..44e19e36 100644
+--- a/portal/public/games.json
++++ b/portal/public/games.json
+@@ -47,30 +47,39 @@
+     },
+     {
+       "id": "dragon-hold",
+-      "name": "Rồng Giữ Ải",
+-      "description": "Hai Rồng giữ rừng sương: gõ từ trên đầu quái, đặt bẫy, lính chặn, nhà phép qua 520 ải.",
++      "name": "Dragonhold",
++      "description": "Type English words to unleash dragon fire and defend a misty forest from the Blight Horde.",
+       "path": "/dragon-hold",
+       "appUrl": "https://dragon.typing-game.local",
+-      "icon": "🐉",
+-      "group": "battle"
++      "group": "battle",
++      "art": {
++        "icon": "/assets/dragon-hold/portal/icon-192.png",
++        "cover": "/assets/dragon-hold/portal/cover-wide.webp"
++      }
+     },
+     {
+       "id": "typing-defense",
+-      "name": "Lời Gọi",
+-      "description": "Thủ thành làng chữ Văn Điền: giúp dân khi họ gọi, giữ làng khi đêm xuống.",
++      "name": "Wordwoven",
++      "description": "Type tower card words to power towers and defend a realm of mist and limestone peaks.",
+       "path": "/typing-defense",
+       "appUrl": "https://td.typing-game.local",
+-      "icon": "🏮",
+-      "group": "battle"
++      "group": "battle",
++      "art": {
++        "icon": "/assets/typing-defense/portal/icon-192.png",
++        "cover": "/assets/typing-defense/portal/cover-wide.webp"
++      }
+     },
+     {
+       "id": "typing-survival",
+-      "name": "Tuyến Cuối",
+-      "description": "Giữ hành lang cuối ở mép hố đen: gõ từ nạp đạn cho bến súng, quét biển quái.",
++      "name": "Last Line",
++      "description": "Type words to reload guns and repel the Black Hole Horde on a causeway at the edge of a black hole.",
+       "path": "/typing-survival",
+       "appUrl": "https://survival.typing-game.local",
+-      "icon": "☄️",
+-      "group": "battle"
++      "group": "battle",
++      "art": {
++        "icon": "/assets/typing-survival/portal/icon-192.png",
++        "cover": "/assets/typing-survival/portal/cover-wide.webp"
++      }
+     },
+     {
+       "id": "immortality-cultivation",

@@ -1,0 +1,58 @@
+.st-admin-asset-preview-panel {
+  display: grid;
+  gap: 14px;
+  margin: 16px 0;
+}
+
+.st-admin-asset-preview-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.st-admin-asset-preview-toolbar strong {
+  margin-right: 4px;
+}
+
+.st-admin-asset-preview-stage {
+  position: relative;
+  min-height: 360px;
+  overflow: hidden;
+  border: 1px solid rgba(111, 219, 255, 0.22);
+  border-radius: 14px;
+  background: #02060c;
+}
+
+.st-admin-asset-preview-frame {
+  display: block;
+  width: 100%;
+  min-height: 360px;
+  border: 0;
+  background: #02060c;
+}
+
+.st-admin-asset-preview-status {
+  min-height: 1.4em;
+  color: var(--st-admin-muted, #93a7bb);
+  font-size: 0.84rem;
+}
+
+.st-admin-asset-preview-status.good {
+  color: #8ce9bc;
+}
+
+.st-admin-asset-preview-status.bad {
+  color: #ff9a9a;
+}
+
+.st-admin-asset-preview-status.warn {
+  color: #ffd58c;
+}
+
+@media (max-width: 760px) {
+  .st-admin-asset-preview-stage,
+  .st-admin-asset-preview-frame {
+    min-height: 300px;
+  }
+}

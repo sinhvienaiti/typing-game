@@ -1,0 +1,112 @@
+{
+  "wave": "B",
+  "start": "2026-10-30T06:37:32.505Z",
+  "uptime": "13:37  2 users, load averages: 5.21 5.44 4.80",
+  "load": 5.21,
+  "limit": 4,
+  "tmpdir": "/Users/toandx/htdocs/typing-game/games/.wt-ts-codex/tmp/codex-220/tmpdir",
+  "jobs": [
+    {
+      "id": "f3",
+      "first": 1,
+      "set": "c1-s1.drainRate=2.4,MODE_SPECS.challenge.surge=1.0,MODE_SPECS.challenge.rate=1.06,FULL_BAY.boost=0.15",
+      "start": "2026-10-30T06:37:32.506Z",
+      "args": [
+        "-n",
+        "15",
+        "/opt/homebrew/Cellar/node@24/24.22.0/bin/node",
+        "--import",
+        "tsx",
+        "scripts/balance.ts",
+        "--stages=c1-s1",
+        "--seeds=100",
+        "--first=1",
+        "--g3c",
+        "--json=/Users/toandx/htdocs/typing-game/games/.wt-ts-codex/tmp/codex-220/runs/f3-s1.json",
+        "--out=/Users/toandx/htdocs/typing-game/games/.wt-ts-codex/tmp/codex-220/runs/f3-s1.md",
+        "--set=c1-s1.drainRate=2.4,MODE_SPECS.challenge.surge=1.0,MODE_SPECS.challenge.rate=1.06,FULL_BAY.boost=0.15"
+      ],
+      "pid": 7717,
+      "end": "2026-10-30T06:41:07.548Z",
+      "wallSeconds": 215.042,
+      "exit": 0
+    },
+    {
+      "id": "f3",
+      "first": 101,
+      "set": "c1-s1.drainRate=2.4,MODE_SPECS.challenge.surge=1.0,MODE_SPECS.challenge.rate=1.06,FULL_BAY.boost=0.15",
+      "start": "2026-10-30T06:37:32.507Z",
+      "args": [
+        "-n",
+        "15",
+        "/opt/homebrew/Cellar/node@24/24.22.0/bin/node",
+        "--import",
+        "tsx",
+        "scripts/balance.ts",
+        "--stages=c1-s1",
+        "--seeds=100",
+        "--first=101",
+        "--g3c",
+        "--json=/Users/toandx/htdocs/typing-game/games/.wt-ts-codex/tmp/codex-220/runs/f3-s101.json",
+        "--out=/Users/toandx/htdocs/typing-game/games/.wt-ts-codex/tmp/codex-220/runs/f3-s101.md",
+        "--set=c1-s1.drainRate=2.4,MODE_SPECS.challenge.surge=1.0,MODE_SPECS.challenge.rate=1.06,FULL_BAY.boost=0.15"
+      ],
+      "pid": 7727,
+      "end": "2026-10-30T06:41:10.156Z",
+      "wallSeconds": 217.649,
+      "exit": 0
+    },
+    {
+      "id": "f4",
+      "first": 1,
+      "set": "c1-s1.drainRate=2.4,MODE_SPECS.challenge.surge=1.0,MODE_SPECS.challenge.rate=1.06,FULL_BAY.boost=0.3",
+      "start": "2026-10-30T06:37:32.508Z",
+      "args": [
+        "-n",
+        "15",
+        "/opt/homebrew/Cellar/node@24/24.22.0/bin/node",
+        "--import",
+        "tsx",
+        "scripts/balance.ts",
+        "--stages=c1-s1",
+        "--seeds=100",
+        "--first=1",
+        "--g3c",
+        "--json=/Users/toandx/htdocs/typing-game/games/.wt-ts-codex/tmp/codex-220/runs/f4-s1.json",
+        "--out=/Users/toandx/htdocs/typing-game/games/.wt-ts-codex/tmp/codex-220/runs/f4-s1.md",
+        "--set=c1-s1.drainRate=2.4,MODE_SPECS.challenge.surge=1.0,MODE_SPECS.challenge.rate=1.06,FULL_BAY.boost=0.3"
+      ],
+      "pid": 7737,
+      "end": "2026-10-30T06:41:06.082Z",
+      "wallSeconds": 213.574,
+      "exit": 0
+    },
+    {
+      "id": "f4",
+      "first": 101,
+      "set": "c1-s1.drainRate=2.4,MODE_SPECS.challenge.surge=1.0,MODE_SPECS.challenge.rate=1.06,FULL_BAY.boost=0.3",
+      "start": "2026-10-30T06:37:32.509Z",
+      "args": [
+        "-n",
+        "15",
+        "/opt/homebrew/Cellar/node@24/24.22.0/bin/node",
+        "--import",
+        "tsx",
+        "scripts/balance.ts",
+        "--stages=c1-s1",
+        "--seeds=100",
+        "--first=101",
+        "--g3c",
+        "--json=/Users/toandx/htdocs/typing-game/games/.wt-ts-codex/tmp/codex-220/runs/f4-s101.json",
+        "--out=/Users/toandx/htdocs/typing-game/games/.wt-ts-codex/tmp/codex-220/runs/f4-s101.md",
+        "--set=c1-s1.drainRate=2.4,MODE_SPECS.challenge.surge=1.0,MODE_SPECS.challenge.rate=1.06,FULL_BAY.boost=0.3"
+      ],
+      "pid": 7747,
+      "end": "2026-10-30T06:41:09.147Z",
+      "wallSeconds": 216.638,
+      "exit": 0
+    }
+  ],
+  "peak": 4,
+  "end": "2026-10-30T06:41:10.156Z"
+}

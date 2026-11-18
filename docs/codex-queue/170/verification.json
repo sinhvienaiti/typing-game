@@ -1,0 +1,43 @@
+{
+  "head": "f9abfd09987dadd519233c2f38692758d35cefca",
+  "headUnchanged": true,
+  "branch": "td-codex",
+  "kitFiles": 34,
+  "kitMatchesCodexBaseline": true,
+  "kitMatchesSuppliedBefore": true,
+  "kitManifestFiles": 33,
+  "goldenUnchanged": true,
+  "goldenHashes": {
+    "tests/golden/td-1a.json": "d19dffacedde417fc19ab7d743f26c14ee5d8ce989a852173a27d5fa1c826f2b",
+    "tests/golden/td-1b-boss.json": "259bc9aecf8bfc061cca766506cab5451e25c08e8c6c0776e4f6070f28a545a8"
+  },
+  "simContentTypingClean": true,
+  "diffCheckExitCode": 0,
+  "changedNonKitPaths": [
+    "docs/td/BUILD_1B.md",
+    "docs/td/PLAYTEST_1B.md",
+    "package.json",
+    "scripts/td/b9.ts",
+    "src/app/retry.ts",
+    "tests/td-b9.test.ts",
+    "tests/td-flow.test.ts",
+    "README.md",
+    "docs/changelog/2026-10-29-pack-and-kit.md",
+    "tests/deploy-pack.test.ts"
+  ],
+  "unexpectedPaths": [],
+  "sourceAndTestHashes": {
+    "package.json": "e5cbe90c39ed552c933ffc91b1d877b79fd05ce362ad5f9715df4c0ea870b13f",
+    "scripts/td/b9.ts": "3a0c67e85d22f0cd3de6ff7ca66d71aaa804d75f883f563818503af01cb720b5",
+    "src/app/retry.ts": "9c46d9a10235cb9e542b48ba3cae01ff39c61aafbcb3f45c1cfdbaeb98cbd3df",
+    "tests/td-b9.test.ts": "e94d0bd501e0f9b99f88e59b2c9a0f24653adcd8fdf85a9d3feacd34b589e775",
+    "tests/td-flow.test.ts": "45c054acbf2b862cfb80f9ee7ac134ed677e168e597390c3ac12341da3200bbc",
+    "tests/deploy-pack.test.ts": "e1217f3e79c51fe00072671ee732238d0feeee22f5eb433075af2b142eea6191"
+  },
+  "environment": {
+    "node": "v24.22.0",
+    "pnpm": "11.21.0",
+    "macOS": "15.5",
+    "architecture": "arm64"
+  }
+}

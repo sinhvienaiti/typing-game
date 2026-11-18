@@ -1,0 +1,65 @@
+[
+  {
+    "command": [
+      "node",
+      "--check",
+      "games/typing-defense/art-src/_review/201/measure.mjs"
+    ],
+    "expectedExit": 0,
+    "actualExit": 0,
+    "pass": true,
+    "purpose": "Cú pháp script đo",
+    "diagnostic": ""
+  },
+  {
+    "command": [
+      "node",
+      "--check",
+      "games/typing-defense/art-src/_review/201/sheets.mjs"
+    ],
+    "expectedExit": 0,
+    "actualExit": 0,
+    "pass": true,
+    "purpose": "Cú pháp script tờ kiểm",
+    "diagnostic": ""
+  },
+  {
+    "command": [
+      "node",
+      "games/typing-defense/art-src/_review/201/measure.mjs",
+      "baseline"
+    ],
+    "expectedExit": 1,
+    "actualExit": 1,
+    "pass": true,
+    "purpose": "Từ chối ghi đè baseline.json",
+    "diagnostic": "Error: EEXIST: file already exists, open 'docs/codex-queue/201/baseline.json'"
+  },
+  {
+    "command": [
+      "node",
+      "games/typing-defense/art-src/_review/201/measure.mjs",
+      "try",
+      "grass-jade",
+      "1",
+      "--light=0.89"
+    ],
+    "expectedExit": 1,
+    "actualExit": 1,
+    "pass": true,
+    "purpose": "Từ chối hệ số sáng ngoài ±10%",
+    "diagnostic": "Error: Bad light/tag"
+  },
+  {
+    "command": [
+      "node",
+      "games/typing-defense/art-src/_review/201/sheets.mjs",
+      "--verdict=chưa, thiếu ảnh v3"
+    ],
+    "expectedExit": 1,
+    "actualExit": 1,
+    "pass": true,
+    "purpose": "Từ chối dựng tờ v3 khi thiếu bản chọn",
+    "diagnostic": "Error: Thiếu bản chọn: games/typing-defense/art-src/scenery/meadow/ground-v2/grass-jade.v3.png"
+  }
+]

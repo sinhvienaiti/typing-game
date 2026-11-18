@@ -1,0 +1,146 @@
+{
+ "$schema": "../../schemas/recipe.schema.json",
+ "schema": "audiolab.recipe/1",
+ "game": "typing-defense",
+ "id": "word-hit-bell",
+ "group": "rare-fixed",
+ "family": "thuong",
+ "description": "Lô 1 (BATCH1_BRIEF #22): chuông thêm khi Hoàn hảo, Chớp; 0,5 s; cố định. Ba ứng viên: 1) VCSL Hand Chimes C7 (2.093 Hz, đúng nốt mã đang dùng), 2) Hand Chimes A6, 3) VSCO-2-CE Tubular Bells C5 (chưa nghe; không đo được cao độ tin cậy). Nốt nào cũng gần dải giọng nên tách lớp như word-hit: tiếng 'ting' đủ dải chỉ giữ 100 ms, phần ngân dài chỉ còn trên 4 kHz (lọc cao bậc 4) và dưới 1 kHz (lọc thấp bậc 4; với chuông nhỏ gần như không còn gì). Không Hand Bells Nepalese.",
+ "channels": 1,
+ "layers": [
+  {
+   "id": "ting",
+   "role": "attack",
+   "trim": {
+    "endMs": 100
+   },
+   "fadeOutMs": 60,
+   "source": {
+    "sampler": {
+     "instrument": "hand-chimes",
+     "notes": "0:C7:0.6:90"
+    }
+   },
+   "vary": {
+    "swapMode": "cycle",
+    "swap": [
+     {
+      "sampler": {
+       "instrument": "hand-chimes",
+       "notes": "0:A6:0.6:90"
+      }
+     },
+     {
+      "library": "vsco2ce/Percussion/TB_hit_C5_v4_rr1.wav"
+     }
+    ]
+   }
+  },
+  {
+   "id": "ring-high",
+   "role": "tail",
+   "gainDb": -6,
+   "fadeOutMs": 250,
+   "filters": [
+    {
+     "type": "highpass",
+     "hz": 4000,
+     "order": 4
+    }
+   ],
+   "source": {
+    "sampler": {
+     "instrument": "hand-chimes",
+     "notes": "0:C7:0.6:90"
+    }
+   },
+   "vary": {
+    "swapMode": "cycle",
+    "swap": [
+     {
+      "sampler": {
+       "instrument": "hand-chimes",
+       "notes": "0:A6:0.6:90"
+      }
+     },
+     {
+      "library": "vsco2ce/Percussion/TB_hit_C5_v4_rr1.wav"
+     }
+    ]
+   }
+  },
+  {
+   "id": "ring-low",
+   "role": "tail",
+   "gainDb": -6,
+   "fadeOutMs": 250,
+   "filters": [
+    {
+     "type": "lowpass",
+     "hz": 1000,
+     "order": 4
+    }
+   ],
+   "source": {
+    "sampler": {
+     "instrument": "hand-chimes",
+     "notes": "0:C7:0.6:90"
+    }
+   },
+   "vary": {
+    "swapMode": "cycle",
+    "swap": [
+     {
+      "sampler": {
+       "instrument": "hand-chimes",
+       "notes": "0:A6:0.6:90"
+      }
+     },
+     {
+      "library": "vsco2ce/Percussion/TB_hit_C5_v4_rr1.wav"
+     }
+    ]
+   }
+  }
+ ],
+ "chain": {
+  "dcHpfHz": 60,
+  "headTrim": {
+   "thresholdDb": -50,
+   "preRollMs": 0.5
+  },
+  "maxLengthMs": 560,
+  "tail": {
+   "floorDb": -60,
+   "shape": "exp",
+   "kneeMs": 300
+  },
+  "normalise": {
+   "mode": "lufs-m-max",
+   "target": -20
+  },
+  "limiter": {
+   "ceilingDbtp": -1.0,
+   "releaseMs": 60,
+   "maxGrDb": 6
+  }
+ },
+ "variants": {
+  "count": 3,
+  "seed": 2201,
+  "includeBase": true,
+  "pitchCents": [
+   0,
+   0
+  ],
+  "gainDb": [
+   0,
+   0
+  ]
+ },
+ "export": {
+  "path": "sfx/reward/word-hit-bell",
+  "ogg": true,
+  "oggQuality": 0.6
+ }
+}

@@ -3,6 +3,10 @@ set -euo pipefail
 
 ROOT_DIR="$(cd "$(dirname "$0")" && pwd)"
 cd "$ROOT_DIR"
+source "$ROOT_DIR/scripts/local-env.sh"
+# Local Play keeps the private announcer/music files and the Admin QA Sandbox (Test Lab).
+# Public builds leave both out: see "Build flags" in games/space-typing/README.md.
+export SPACE_LOCAL_ASSETS=1 SPACE_TEST_LAB=1
 
 case "${1:-}" in
   "")
@@ -11,8 +15,9 @@ case "${1:-}" in
     echo "Usage: ./play.sh"
     echo
     echo "Play mode does not pull Git, update submodules, or install dependencies."
-    echo "It automatically refreshes local Space Typing source art when needed,"
-    echo "refreshes stale static builds, switches nginx to static Play mode,"
+    echo "It automatically refreshes local Space Typing source art, prepares the"
+    echo "verified offline Voice model when needed, refreshes stale static builds,"
+    echo "starts the Admin runtime bridge, switches nginx to static Play mode,"
     echo "and opens https://typing-game.local."
     exit 0
     ;;
@@ -83,6 +88,18 @@ build_if_needed() {
   pnpm "$script"
 }
 
+# New games may not be checked out yet; skip them until they exist.
+game_present() {
+  local name="$1"
+  local dir="$2"
+
+  if [[ -f "$dir/package.json" ]]; then
+    return 0
+  fi
+  echo "  • $name is not checked out yet ($dir); skipped."
+  return 1
+}
+
 prepare_space_art() {
   local game_dir="$ROOT_DIR/games/space-typing"
   local package_file="$game_dir/package.json"
@@ -107,13 +124,100 @@ prepare_space_art() {
   pnpm --dir "$game_dir" art:prepare
 }
 
-echo "[1/5] Stopping typing-game development servers..."
-bash scripts/cleanup-dev-ports.sh --project-only 3000 3001 3002 3003 3004 3100
+prepare_voice_assets() {
+  if ! command -v node >/dev/null 2>&1 || ! command -v pnpm >/dev/null 2>&1; then
+    echo "Node and pnpm are required to prepare the offline Voice model."
+    exit 1
+  fi
+  if ! command -v python3 >/dev/null 2>&1; then
+    echo "Python 3 is required to prepare the offline Voice model."
+    echo "On Ubuntu/WSL run: sudo apt update && sudo apt install -y python3"
+    exit 1
+  fi
+  if ! node -e 'require.resolve("vosk-browser")' >/dev/null 2>&1; then
+    echo "The Portal Voice dependency vosk-browser is not installed yet."
+    echo "After pulling this update, run once: pnpm install --frozen-lockfile"
+    echo "Then retry ./play.sh."
+    exit 1
+  fi
 
-echo "[2/5] Refreshing local Space Typing art..."
+  pnpm voice:prepare
+}
+
+print_admin_runtime_log() {
+  local log_file="$1"
+  if [[ -s "$log_file" ]]; then
+    echo
+    echo "--- Last 80 lines of $log_file ---"
+    tail -n 80 "$log_file" || true
+    echo "--- End Admin runtime log ---"
+  else
+    echo "Admin runtime log is empty: $log_file"
+  fi
+}
+
+ensure_admin_runtime_service() {
+  local endpoint="http://127.0.0.1:3199/api/runtime/space-typing/ships"
+  local log_dir="$ROOT_DIR/.local/admin"
+  local log_file="$log_dir/server.log"
+  local pid_file="$log_dir/server.pid"
+  local startup_attempts=80
+  local startup_sleep=0.25
+
+  mkdir -p "$log_dir"
+  rm -f "$pid_file"
+
+  # cleanup-dev-ports.sh intentionally leaves processes outside this repository alone.
+  # Detect that case explicitly so Node does not fail later with a vague EADDRINUSE.
+  local existing_pids
+  existing_pids="$(lsof -tiTCP:3199 -sTCP:LISTEN 2>/dev/null || true)"
+  if [[ -n "$existing_pids" ]]; then
+    echo "Port 3199 is still occupied after project cleanup; refusing to replace an unrelated process."
+    lsof -nP -iTCP:3199 -sTCP:LISTEN 2>/dev/null || true
+    echo "Stop the process using port 3199, then run ./play.sh again."
+    exit 1
+  fi
+
+  : >"$log_file"
+  nohup node "$ROOT_DIR/admin/server.mjs" >"$log_file" 2>&1 &
+  local server_pid="$!"
+  echo "$server_pid" >"$pid_file"
+
+  local attempt
+  for ((attempt = 1; attempt <= startup_attempts; attempt++)); do
+    sleep "$startup_sleep"
+
+    if ! kill -0 "$server_pid" 2>/dev/null; then
+      rm -f "$pid_file"
+      echo "Space Typing Admin runtime bridge exited before becoming ready (PID $server_pid)."
+      print_admin_runtime_log "$log_file"
+      exit 1
+    fi
+
+    if curl -fsS --max-time 1 "$endpoint" >/dev/null 2>&1; then
+      echo "  ✓ Admin runtime bridge started from current source (PID $server_pid)."
+      return
+    fi
+  done
+
+  rm -f "$pid_file"
+  kill "$server_pid" 2>/dev/null || true
+  echo "Timed out waiting for the Space Typing Admin runtime bridge on port 3199."
+  echo "The startup probe waits about 20 seconds to accommodate slower filesystems such as WSL-mounted drives."
+  print_admin_runtime_log "$log_file"
+  exit 1
+}
+
+echo "[1/6] Stopping typing-game development servers..."
+bash scripts/cleanup-dev-ports.sh --project-only 3000 3001 3002 3003 3004 3005 3006 3007 3008 3100 3199
+
+echo "[2/6] Refreshing local Space Typing art..."
 prepare_space_art
 
-echo "[3/5] Checking static builds..."
+echo "[3/6] Preparing verified offline Voice assets..."
+prepare_voice_assets
+
+echo "[4/6] Checking static builds..."
 node scripts/generate-music-index.mjs
 build_if_needed \
   "Portal" \
@@ -125,7 +229,12 @@ build_if_needed \
   "portal/package.json" \
   "portal/tsconfig.json" \
   "portal/vite.config.ts" \
-  "shared/learning"
+  "package.json" \
+  "pnpm-lock.yaml" \
+  "shared/learning" \
+  "shared/voice" \
+  "scripts/offline-vosk-plugin.mjs" \
+  "scripts/voice-model-middleware.mjs"
 
 build_if_needed \
   "Vocabulary Shooter" \
@@ -164,6 +273,7 @@ build_if_needed \
   "games/space-typing/src" \
   "games/space-typing/public" \
   "games/space-typing/art-src" \
+  "games/space-typing/.media-pulled" \
   "games/space-typing/scripts" \
   "games/space-typing/index.html" \
   "games/space-typing/package.json" \
@@ -185,9 +295,63 @@ build_if_needed \
   "games/monkeytype/pnpm-lock.yaml" \
   "games/monkeytype/turbo.json"
 
-echo "[4/5] Switching nginx to static Play mode..."
+if game_present "Rồng Giữ Ải" "games/dragon-hold"; then
+  build_if_needed \
+    "Rồng Giữ Ải" \
+    "games/dragon-hold/dist/index.html" \
+    "build:dragon" \
+    "games/dragon-hold/src" \
+    "games/dragon-hold/public" \
+    "games/dragon-hold/index.html" \
+    "games/dragon-hold/package.json" \
+    "games/dragon-hold/tsconfig.json" \
+    "games/dragon-hold/vite.config.ts"
+fi
+
+if game_present "Lời Gọi" "games/typing-defense"; then
+  build_if_needed \
+    "Lời Gọi" \
+    "games/typing-defense/dist/index.html" \
+    "build:td" \
+    "games/typing-defense/src" \
+    "games/typing-defense/public" \
+    "games/typing-defense/index.html" \
+    "games/typing-defense/package.json" \
+    "games/typing-defense/tsconfig.json" \
+    "games/typing-defense/vite.config.ts"
+fi
+
+if game_present "Tuyến Cuối" "games/typing-survival"; then
+  build_if_needed \
+    "Tuyến Cuối" \
+    "games/typing-survival/dist/index.html" \
+    "build:survival" \
+    "games/typing-survival/src" \
+    "games/typing-survival/public" \
+    "games/typing-survival/index.html" \
+    "games/typing-survival/package.json" \
+    "games/typing-survival/tsconfig.json" \
+    "games/typing-survival/vite.config.ts"
+fi
+
+if game_present "Tu Tiên Thủ Ải" "games/immortality-cultivation"; then
+  build_if_needed \
+    "Tu Tiên Thủ Ải" \
+    "games/immortality-cultivation/dist/index.html" \
+    "build:tutien" \
+    "games/immortality-cultivation/src" \
+    "games/immortality-cultivation/public" \
+    "games/immortality-cultivation/index.html" \
+    "games/immortality-cultivation/package.json" \
+    "games/immortality-cultivation/tsconfig.json" \
+    "games/immortality-cultivation/vite.config.ts"
+fi
+
+echo "[5/6] Starting runtime services and switching nginx to static Play mode..."
+ensure_admin_runtime_service
 bash scripts/setup-nginx.sh play
 node games/space-typing/scripts/local-duel.mjs start
+node games/space-typing/scripts/local-account.mjs start
 
-echo "[5/5] Opening typing games..."
+echo "[6/6] Opening typing games..."
 bash scripts/play.sh

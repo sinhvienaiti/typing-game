@@ -1,0 +1,205 @@
+# Thẻ spec âm thanh (AUDIO_PIPELINE §5.1 bước 1). Sinh bởi `pnpm audio:specs generate`; kiểm bằng `pnpm audio:specs validate`.
+# Sửa tay: thêm `manual: true` vào mục đã sửa, hoặc ghi đường dẫn (vd. duration.target_ms) vào manual_fields.
+# status, references, prompt.variants, notes luôn được giữ khi sinh lại. Comment YAML thì không: ghi chú để ở notes.
+schema: 1
+id: gun.xung.loop
+game: typing-survival
+status: proposed
+manual_fields: []
+when: 'BATCH1_BRIEF §3.2: nền cơ khí liên thanh chạy suốt loạt bắn Xung'
+purpose: ''
+category: ambience
+family: ban
+source_class: foley-other
+playback:
+  mode: loop
+  channels: mono
+  channels_basis: 'THEME_SOUND_LIST §2: mono (trừ nhạc và end.*)'
+  bus: guns
+  priority: null
+  min_gap_ms: null
+  limit_group: null
+  caps: {}
+  format: OGG Vorbis 48 kHz trong game; gốc WAV 48 kHz (§4.3.1, §11)
+duration:
+  manual: true
+  target_ms: 2500
+  tolerance_pct: null
+  tolerance_ms: null
+  min_ms: 2000
+  max_ms: 3000
+  basis: 'BATCH1_BRIEF §3.2: vòng lặp 2,0–3,0 s, liền mối'
+  category_range_ms: null
+  music: null
+onset:
+  class: loop
+  rise_max_ms: null
+  lead_silence_max_ms: null
+  basis: AUDIO_PIPELINE §4.3.1 (thời gian lên, im lặng ở đầu)
+variants:
+  target: 1
+  min: 1
+  max: 1
+  basis: AUDIO_PIPELINE §4.3.3 (Nền lặp)
+randomisation:
+  group: none
+  pitch_cents: 0
+  gain_db: 0
+  rules: [Không đổi ngẫu nhiên]
+  current_code: Tổng hợp trong mã; khi có file, SceneAudio của kit đổi ±5 % tốc độ phát cho mọi âm (§5.3)
+  basis: AUDIO_PIPELINE §5.3 (mã cần cho mỗi nhóm giá trị riêng, §6.3)
+frequency_role:
+  bands:
+    - band: sub
+      range_hz: [20, 120]
+      role: Sub súng, sub dùng chung hit.sub
+    - band: presence
+      range_hz: [4000, 8000]
+      role: Tách phím, lách tách điện, đầu tiếng hit.t1
+  voice_band: avoid
+  voice_band_text: Tránh dải 1–4 kHz
+  spectrum: Phần lớn năng lượng dưới 300 Hz và ở 4–10 kHz
+  basis: AUDIO_PIPELINE §6.4, AUDIO_PIPELINE §4.3.3
+loudness:
+  file:
+    metric: peak-dbtp
+    target: -1
+    basis: 'THEME_SOUND_LIST §2: đỉnh −1 dBFS'
+  proposal: null
+  bus: guns
+  bus_gain: 0.42
+  bus_gain_db: -7.54
+  gain_db: null
+  gain_basis: null
+  relative_db: null
+  pronunciation_duck_db: -6.02
+  mix_target:
+    metric: lufs-i
+    range: null
+    text: LUFS-I theo tài liệu game (nền −26)
+    weight: null
+    basis: AUDIO_PIPELINE §4.3.3 (mức trong bản trộn, bài A và B)
+prompt:
+  text: null
+  suffix: null
+  style_root: industrial, steel, close, punchy
+  sweetener: tia điện và thép ngân
+  variants:
+    - 'A: TrackType: SFX, continuous mechanical rattle of an ammunition feed belt and a turret motor running, steady, close, dry, industrial'
+    - 'B: Steady heavy machinery hum and fast metallic clatter, constant and even, inside a steel gun turret, industrial'
+    - 'C: TrackType: SFX, ambience, steady electric motor whine and low rumble of a rotating steel turret, constant mechanical hum, close, dry'
+  basis: docs/audio/THEME_SOUND_LIST.md; gốc prompt theo AUDIO_PIPELINE §5.2 (chốt sau bảng phong cách)
+pitches: null
+parts: null
+layer_plan:
+  builds_on: gun.xung
+  shares: []
+  summary: Nền cơ khí chạy suốt loạt bắn, dưới các phát đơn (BATCH1_BRIEF §3.2)
+  related: []
+references: []
+source_plan:
+  now: [cc0-layer, synth]
+  later: [model-later]
+  ranked:
+    - rank: 1
+      kinds: [cc0-layer]
+      detail: Ghép lớp CC0 (Kenney)
+    - rank: 2
+      kinds: [model-later]
+      detail: Stable Audio 3
+    - rank: 3
+      kinds: [owner-recording]
+      detail: Tự ghi foley
+    - rank: 4
+      kinds: [synth]
+      detail: Tổng hợp
+  needs_now: []
+  needs_later: [buoc-0]
+  note: Theo thứ tự chung của §3.1 A
+  batch1: null
+  style_board: false
+  sa3_trial: false
+  basis: AUDIO_PIPELINE §3.2 (nguồn theo loại âm), §10.1 (khi chưa có Stable Audio 3)
+licence:
+  allowed: [CC0-1.0, owner-original, project-code]
+  conditional:
+    - licence: CC0-1.0 (Freesound, người tải lên từ chối AI)
+      condition: Chỉ ghép tay, không vào bước AI nào, không vào LoRA (§10.2)
+    - licence: Stability-Community-2024
+      condition: 'Bước 0: đăng ký Community License, chấp nhận AUP và điều khoản Gemma; có licences/stability-registration.txt (§10.1)'
+    - licence: MIT (ACE-Step 1.5)
+      condition: Ghim phiên bản; kiểm giai điệu trước khi bán
+    - licence: Apache-2.0 (MOSS-SoundEffect)
+      condition: Chỉ khi bước 0 trả lời không
+    - licence: release-CC0-or-transfer
+      condition: 'Bản ghi của người khác: cần giấy đồng ý (§10.4)'
+  forbidden:
+    - non-commercial-weights
+    - freesound-cc-by-nc
+    - freesound-sampling-plus
+    - bbc-sound-effects
+    - pixabay
+    - sound-from-other-games
+    - sonniss-lot-1-2-and-any-ai-step
+    - elevenlabs-or-suno-free-tier-release
+  attribution_required: false
+  notes:
+    - Kenney, VCSL, VSCO-2-CE, Freesound CC0. Lưu LICENSE-<ngày>.txt kèm thư viện
+    - 'Chưa cài: chờ bước 0 của chủ dự án'
+    - Mã của dự án. pedalboard (GPL-3.0) chỉ import trên máy, không chép vào repo (§10.9)
+  record: art-src/audio/SOURCES.json và licences.jsonl (§10.5, §10.6); pnpm audio:licence-check chặn khi thiếu
+  basis: AUDIO_PIPELINE §10.2
+constraints:
+  - 'Không có đầu tiếng nổi lên: mọi đầu tiếng thấp hơn đỉnh phát đơn ít nhất 12 dB (BATCH1_BRIEF §3.2)'
+  - 'Không có chu kỳ rõ ở 5–15 Hz: tự tương quan đường bao ở độ trễ 60–220 ms dưới 0,3'
+  - 'Âm industrial: thép, súng nặng, điện, kim loại vỡ; khác tiếng laser và nhạc điện tử vũ trụ của Space Typing (THEME_SOUND_LIST)'
+board:
+  contexts: [mot-minh, trong-tran]
+  contexts_before_phase3: [mot-minh, lap-20]
+  dense: false
+  repeat_interval_ms: null
+  repeat_basis: null
+  loudness_match: lufs-m
+  basis: AUDIO_PIPELINE §7
+critic:
+  group: ambience
+  dirty: true
+  weights_batch1:
+    l2: 0.9
+    l3: 0.0
+    l4: 0.1
+    l5: 0.0
+  loop_eval:
+    enabled: false
+    length_s: null
+    plays: null
+    interval_ms: null
+  ast:
+    expected: []
+    forbid: []
+  loop: true
+  stereo: false
+  pitched: false
+  attack_max_ms: null
+  head_max_ms: null
+  rate_hz: null
+  bpm: null
+  bars: null
+  beats_per_bar: null
+  intent: 'BATCH1_BRIEF §3.2: nền cơ khí liên thanh chạy suốt loạt bắn Xung'
+  refs: []
+  basis: AUDIO_PIPELINE §4.4, §4.5 (L4 chỉ gắn cờ, trọng số tối đa 0,1)
+blocked_by: [sua-tai-lieu-game]
+origin:
+  code:
+    file: src/audio/theme-audio.ts
+    present: false
+    asset_stem: null
+    synth_in_code: false
+  sound_list:
+    file: docs/audio/THEME_SOUND_LIST.md
+    present: false
+    section: null
+  plan:
+    - 'BATCH1_BRIEF §3.2: nền cơ khí liên thanh chạy suốt loạt bắn Xung'
+notes: 'Q6 (24/10): đã soát: vòng lặp cơ khí dưới loạt bắn, không phải một đòn; không có chữ cấm, giữ nguyên. Ghi chú trước Q6: Lô 1 (24/10/2026, BATCH1_BRIEF.md): id đề xuất (mục 3.2), chờ thêm vào THEME_SOUND_LIST.md. Tạo 10 s rồi cắt vòng 2,5 s. Mức trong game thấp hơn đỉnh phát đơn 11–18 dB (bài thử chọn).'

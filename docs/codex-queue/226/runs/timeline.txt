@@ -1,0 +1,192 @@
+
+BEGIN base-smoke 2026-10-30T13:45:10.717447+07:00
+$ date '+%F %T'
+2026-10-30 13:45:10
+$ uptime
+13:45  2 users, load averages: 6.27 5.78 5.30
+$ sysctl -n vm.loadavg
+sysctl: sysctl fmt -1 1024 1: Operation not permitted
+sysctl_exit=1
+load_source=uptime (sysctl bị sandbox chặn); load1=6.27; threads=2
+$ nice -n 15 node --import tsx scripts/td/balance.ts --stage-seeds=2 --stage-sets=1 --quick --threads=2
+END base-smoke 2026-10-30T13:45:23.136163+07:00 exit=0 elapsed_seconds=12.418 headers_valid=True
+
+BEGIN pkg-smoke 2026-10-30T13:45:23.150721+07:00
+$ date '+%F %T'
+2026-10-30 13:45:23
+$ uptime
+13:45  2 users, load averages: 7.37 6.05 5.40
+$ sysctl -n vm.loadavg
+sysctl: sysctl fmt -1 1024 1: Operation not permitted
+sysctl_exit=1
+load_source=uptime (sysctl bị sandbox chặn); load1=7.37; threads=2
+$ nice -n 15 node --import tsx scripts/td/balance.ts --stage-seeds=2 --stage-sets=1 --quick --threads=2
+END pkg-smoke 2026-10-30T13:45:35.432160+07:00 exit=0 elapsed_seconds=12.282 headers_valid=True
+
+BEGIN base-balance160 2026-10-30T13:45:35.447865+07:00
+$ date '+%F %T'
+2026-10-30 13:45:35
+$ uptime
+13:45  2 users, load averages: 7.98 6.23 5.48
+$ sysctl -n vm.loadavg
+sysctl: sysctl fmt -1 1024 1: Operation not permitted
+sysctl_exit=1
+load_source=uptime (sysctl bị sandbox chặn); load1=7.98; threads=4
+$ nice -n 15 node --import tsx scripts/td/balance.ts --stage-seeds=80 --stage-sets=2 --threads=4
+END base-balance160 2026-10-30T13:54:31.245793+07:00 exit=0 elapsed_seconds=535.795 headers_valid=True
+
+BEGIN base-g12x20 2026-10-30T13:54:31.264522+07:00
+$ date '+%F %T'
+2026-10-30 13:54:31
+$ uptime
+13:54  2 users, load averages: 9.71 10.87 8.78
+$ sysctl -n vm.loadavg
+sysctl: sysctl fmt -1 1024 1: Operation not permitted
+sysctl_exit=1
+load_source=uptime (sysctl bị sandbox chặn); load1=9.71; threads=4
+$ nice -n 15 node --import tsx scripts/td/balance.ts --stage-seeds=12 --stage-sets=1 --seeds=20 --nights=4 --modes=balanced --threads=4
+END base-g12x20 2026-10-30T13:55:21.923426+07:00 exit=0 elapsed_seconds=50.659 headers_valid=True
+
+BEGIN base-pn-balanced 2026-10-30T13:55:21.939696+07:00
+$ date '+%F %T'
+2026-10-30 13:55:21
+$ uptime
+13:55  2 users, load averages: 8.41 10.36 8.71
+$ sysctl -n vm.loadavg
+sysctl: sysctl fmt -1 1024 1: Operation not permitted
+sysctl_exit=1
+load_source=uptime (sysctl bị sandbox chặn); load1=8.41; threads=1
+$ nice -n 15 node --import tsx probe/pernight.ts --from=24 --seeds=24 --modes=balanced
+END base-pn-balanced 2026-10-30T13:56:14.083455+07:00 exit=0 elapsed_seconds=52.143 headers_valid=True
+
+BEGIN base-pn-relax 2026-10-30T13:56:14.096113+07:00
+$ date '+%F %T'
+2026-10-30 13:56:14
+$ uptime
+13:56  2 users, load averages: 8.05 9.94 8.65
+$ sysctl -n vm.loadavg
+sysctl: sysctl fmt -1 1024 1: Operation not permitted
+sysctl_exit=1
+load_source=uptime (sysctl bị sandbox chặn); load1=8.05; threads=1
+$ nice -n 15 node --import tsx probe/pernight.ts --from=24 --seeds=24 --modes=relax
+END base-pn-relax 2026-10-30T13:57:18.502896+07:00 exit=0 elapsed_seconds=64.416 headers_valid=True
+
+BEGIN base-pn-challenge 2026-10-30T13:57:18.516166+07:00
+$ date '+%F %T'
+2026-10-30 13:57:18
+$ uptime
+13:57  2 users, load averages: 7.47 9.47 8.56
+$ sysctl -n vm.loadavg
+sysctl: sysctl fmt -1 1024 1: Operation not permitted
+sysctl_exit=1
+load_source=uptime (sysctl bị sandbox chặn); load1=7.47; threads=1
+$ nice -n 15 node --import tsx probe/pernight.ts --from=24 --seeds=24 --modes=challenge
+END base-pn-challenge 2026-10-30T13:58:02.370326+07:00 exit=0 elapsed_seconds=43.857 headers_valid=True
+
+BEGIN base-night1-40 2026-10-30T13:58:02.384633+07:00
+$ date '+%F %T'
+2026-10-30 13:58:02
+$ uptime
+13:58  2 users, load averages: 8.19 9.43 8.60
+$ sysctl -n vm.loadavg
+sysctl: sysctl fmt -1 1024 1: Operation not permitted
+sysctl_exit=1
+load_source=uptime (sysctl bị sandbox chặn); load1=8.19; threads=1
+$ nice -n 15 node --import tsx probe/night1.ts --seeds=40
+END base-night1-40 2026-10-30T13:58:10.990504+07:00 exit=0 elapsed_seconds=8.606 headers_valid=True
+
+BEGIN base-night1-160 2026-10-30T13:58:11.004039+07:00
+$ date '+%F %T'
+2026-10-30 13:58:10
+$ uptime
+13:58  2 users, load averages: 7.93 9.33 8.57
+$ sysctl -n vm.loadavg
+sysctl: sysctl fmt -1 1024 1: Operation not permitted
+sysctl_exit=1
+load_source=uptime (sysctl bị sandbox chặn); load1=7.93; threads=1
+$ nice -n 15 node --import tsx probe/night1.ts --seeds=160
+END base-night1-160 2026-10-30T13:58:43.248369+07:00 exit=0 elapsed_seconds=32.244 headers_valid=True
+
+BEGIN pkg-balance160 2026-10-30T13:58:43.257678+07:00
+$ date '+%F %T'
+2026-10-30 13:58:43
+$ uptime
+13:58  2 users, load averages: 7.23 9.03 8.49
+$ sysctl -n vm.loadavg
+sysctl: sysctl fmt -1 1024 1: Operation not permitted
+sysctl_exit=1
+load_source=uptime (sysctl bị sandbox chặn); load1=7.23; threads=4
+$ nice -n 15 node --import tsx scripts/td/balance.ts --stage-seeds=80 --stage-sets=2 --threads=4
+END pkg-balance160 2026-10-30T14:06:24.347039+07:00 exit=0 elapsed_seconds=461.088 headers_valid=True
+
+BEGIN pkg-g12x20 2026-10-30T14:06:24.355843+07:00
+$ date '+%F %T'
+2026-10-30 14:06:24
+$ uptime
+14:06  2 users, load averages: 10.26 10.34 9.25
+$ sysctl -n vm.loadavg
+sysctl: sysctl fmt -1 1024 1: Operation not permitted
+sysctl_exit=1
+load_source=uptime (sysctl bị sandbox chặn); load1=10.26; threads=2
+$ nice -n 15 node --import tsx scripts/td/balance.ts --stage-seeds=12 --stage-sets=1 --seeds=20 --nights=4 --modes=balanced --threads=2
+END pkg-g12x20 2026-10-30T14:07:12.296173+07:00 exit=0 elapsed_seconds=47.94 headers_valid=True
+
+BEGIN pkg-pn-balanced 2026-10-30T14:07:12.305176+07:00
+$ date '+%F %T'
+2026-10-30 14:07:12
+$ uptime
+14:07  2 users, load averages: 7.54 9.60 9.04
+$ sysctl -n vm.loadavg
+sysctl: sysctl fmt -1 1024 1: Operation not permitted
+sysctl_exit=1
+load_source=uptime (sysctl bị sandbox chặn); load1=7.54; threads=1
+$ nice -n 15 node --import tsx probe/pernight.ts --from=24 --seeds=24 --modes=balanced
+END pkg-pn-balanced 2026-10-30T14:07:55.393166+07:00 exit=0 elapsed_seconds=43.088 headers_valid=True
+
+BEGIN pkg-pn-relax 2026-10-30T14:07:55.400580+07:00
+$ date '+%F %T'
+2026-10-30 14:07:55
+$ uptime
+14:07  2 users, load averages: 5.85 8.87 8.80
+$ sysctl -n vm.loadavg
+sysctl: sysctl fmt -1 1024 1: Operation not permitted
+sysctl_exit=1
+load_source=uptime (sysctl bị sandbox chặn); load1=5.85; threads=1
+$ nice -n 15 node --import tsx probe/pernight.ts --from=24 --seeds=24 --modes=relax
+END pkg-pn-relax 2026-10-30T14:09:13.791383+07:00 exit=0 elapsed_seconds=78.391 headers_valid=True
+
+BEGIN pkg-pn-challenge 2026-10-30T14:09:13.824755+07:00
+$ date '+%F %T'
+2026-10-30 14:09:13
+$ uptime
+14:09  2 users, load averages: 16.76 10.92 9.54
+$ sysctl -n vm.loadavg
+sysctl: sysctl fmt -1 1024 1: Operation not permitted
+sysctl_exit=1
+load_source=uptime (sysctl bị sandbox chặn); load1=16.76; threads=1
+$ nice -n 15 node --import tsx probe/pernight.ts --from=24 --seeds=24 --modes=challenge
+END pkg-pn-challenge 2026-10-30T14:09:58.880964+07:00 exit=0 elapsed_seconds=45.057 headers_valid=True
+
+BEGIN pkg-night1-40 2026-10-30T14:09:58.890231+07:00
+$ date '+%F %T'
+2026-10-30 14:09:58
+$ uptime
+14:09  2 users, load averages: 14.40 11.28 9.75
+$ sysctl -n vm.loadavg
+sysctl: sysctl fmt -1 1024 1: Operation not permitted
+sysctl_exit=1
+load_source=uptime (sysctl bị sandbox chặn); load1=14.4; threads=1
+$ nice -n 15 node --import tsx probe/night1.ts --seeds=40
+END pkg-night1-40 2026-10-30T14:10:05.880281+07:00 exit=0 elapsed_seconds=6.99 headers_valid=True
+
+BEGIN pkg-night1-160 2026-10-30T14:10:05.889130+07:00
+$ date '+%F %T'
+2026-10-30 14:10:05
+$ uptime
+14:10  2 users, load averages: 12.96 11.08 9.70
+$ sysctl -n vm.loadavg
+sysctl: sysctl fmt -1 1024 1: Operation not permitted
+sysctl_exit=1
+load_source=uptime (sysctl bị sandbox chặn); load1=12.96; threads=1
+$ nice -n 15 node --import tsx probe/night1.ts --seeds=160
+END pkg-night1-160 2026-10-30T14:10:35.885332+07:00 exit=0 elapsed_seconds=29.996 headers_valid=True

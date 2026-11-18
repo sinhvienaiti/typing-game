@@ -1,0 +1,12 @@
+play.sh:298: if game_present "Rồng Giữ Ải" "games/dragon-hold"; then
+play.sh:300:     "Rồng Giữ Ải" \
+play.sh:311: if game_present "Lời Gọi" "games/typing-defense"; then
+play.sh:313:     "Lời Gọi" \
+play.sh:324: if game_present "Tuyến Cuối" "games/typing-survival"; then
+play.sh:326:     "Tuyến Cuối" \
+dev.sh:130:       install_if_present "$ROOT_DIR/games/dragon-hold" "Rồng Giữ Ải"
+dev.sh:131:       install_if_present "$ROOT_DIR/games/typing-defense" "Lời Gọi"
+dev.sh:132:       install_if_present "$ROOT_DIR/games/typing-survival" "Tuyến Cuối"
+dev.sh:152:       install_if_missing "$ROOT_DIR/games/dragon-hold" "Rồng Giữ Ải"
+dev.sh:155:       install_if_missing "$ROOT_DIR/games/typing-defense" "Lời Gọi"
+dev.sh:158:       install_if_missing "$ROOT_DIR/games/typing-survival" "Tuyến Cuối"

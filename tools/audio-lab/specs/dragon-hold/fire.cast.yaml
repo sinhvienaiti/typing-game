@@ -1,0 +1,211 @@
+# Thẻ spec âm thanh (AUDIO_PIPELINE §5.1 bước 1). Sinh bởi `pnpm audio:specs generate`; kiểm bằng `pnpm audio:specs validate`.
+# Sửa tay: thêm `manual: true` vào mục đã sửa, hoặc ghi đường dẫn (vd. duration.target_ms) vào manual_fields.
+# status, references, prompt.variants, notes luôn được giữ khi sinh lại. Comment YAML thì không: ghi chú để ở notes.
+schema: 1
+id: fire.cast
+game: dragon-hold
+status: draft
+manual_fields:
+  - purpose
+  - prompt.text
+  - critic.intent
+  - duration.target_ms
+  - duration.min_ms
+  - duration.max_ms
+when: 'Xong từ có mục tiêu: Hỏa Long khạc cầu lửa'
+purpose: Khè họng của thú lớn, lửa bắt cháy dưới áp lực rồi gầm, cầu lửa lao ra xa; vang thung lũng thấp
+category: word-reward
+family: thuong
+source_class: shot
+playback:
+  mode: one-shot
+  channels: mono
+  channels_basis: 'M0_SOUND_LIST §1: Tiếng lẻ mono. Nhạc và nền stereo'
+  bus: world
+  priority: 4
+  min_gap_ms: 45
+  limit_group: null
+  caps: {}
+  format: OGG Vorbis 48 kHz trong game; gốc WAV 48 kHz (§4.3.1, §11)
+duration:
+  target_ms: 750
+  tolerance_pct: 20
+  tolerance_ms: null
+  min_ms: 600
+  max_ms: 900
+  basis: src/audio/catalog.ts lengthMs (nguồn chuẩn của độ dài)
+  category_range_ms: [150, 900]
+  music: null
+onset:
+  class: other
+  rise_max_ms: null
+  lead_silence_max_ms: 5
+  basis: AUDIO_PIPELINE §4.3.1 (thời gian lên, im lặng ở đầu)
+variants:
+  target: 4
+  min: 1
+  max: 4
+  basis: 'AUDIO_PIPELINE §4.3.3 (Thưởng xong từ); §9 #1: 4'
+randomisation:
+  group: word-reward
+  pitch_cents: 30
+  gain_db: 1
+  rules: ['±20–30 cent, hoặc leo một bậc thang âm', Phát sau mỗi từ nên cần chút khác biệt]
+  current_code: ±4 % cao độ (khoảng ±68 cent), ±1,5 dB, lệch 0–12 ms (catalog vary)
+  basis: AUDIO_PIPELINE §5.3 (mã cần cho mỗi nhóm giá trị riêng, §6.3)
+frequency_role:
+  bands:
+    - band: pitched
+      range_hz: null
+      role: Chuông nhỏ và đàn hạc theo ngũ cung
+    - band: body
+      range_hz: [120, 800]
+      role: Thân lửa, thân quái
+    - band: sub
+      range_hz: [20, 120]
+      role: Thân gầm rồng, Bom Hạt Thông
+  voice_band: decay-15db-100ms
+  voice_band_text: Năng lượng 1–4 kHz giảm ít nhất 15 dB trong 100 ms sau đầu tiếng; phần ngân dưới 1 kHz hoặc trên 4 kHz (§6.2)
+  spectrum: Nốt đúng thang, lệch không quá 10 cent. Năng lượng 1–4 kHz giảm ít nhất 15 dB trong 100 ms sau đầu tiếng (§6.2)
+  basis: AUDIO_PIPELINE §6.4, AUDIO_PIPELINE §4.3.3
+loudness:
+  file:
+    metric: peak-dbtp
+    target: -1
+    basis: 'M0_SOUND_LIST §1: Tiếng lẻ chuẩn hóa đỉnh −1 dBTP'
+  proposal:
+    metric: lufs-m-max
+    target: -20
+    pad_s: 0.4
+    true_peak_max_dbtp: -1
+    basis: 'AUDIO_PIPELINE §4.3.3, §5.1 bước 4: đề xuất chuẩn hóa mọi âm ngắn về một mức chung; tài liệu game đang ghi chuẩn hóa đỉnh'
+  bus: world
+  bus_gain: 0.75
+  bus_gain_db: -2.5
+  gain_db: -3
+  gain_basis: src/audio/catalog.ts gainDb (mặc định 0 dB), mức trước bus
+  relative_db: -5.5
+  pronunciation_duck_db: -6.0
+  mix_target:
+    metric: lufs-m-max
+    range: [-22, -16]
+    text: Từ −22 (bậc C) đến −16 (bậc S)
+    weight: null
+    basis: AUDIO_PIPELINE §4.3.3 (mức trong bản trộn, bài A và B)
+prompt:
+  text: Large dragon throat huff into a pressurised flame ignition that roars, then a thick fireball whoosh travelling away, low valley echo tail, 750 ms
+  suffix: null
+  style_root: painterly fantasy forest, warm, organic, outdoor
+  sweetener: than hồng lách tách và đàn hạc
+  variants:
+    - 'E: TrackType: SFX, a huge dragon spits a fireball, a short throaty growl-huff from a large creature, a pressurised burst of flame igniting and roaring, a thick whoosh rushing away into a forest valley, low distant echo'
+    - 'F: A big beast breathes out a fireball, deep raspy throat exhale, gas flame ignites under pressure with a hard roar, the fire rushes off into the distance, dark low valley reverberation, outdoor'
+    - 'G: TrackType: SFX, fantasy dragon fire attack, heavy chest rumble and throat hiss, blowtorch-like flame burst roaring, fireball flying away with a dense whoosh, echo off pine hills, powerful, organic'
+    - 'H: Flamethrower burst recorded outdoors in a wide valley, a deep animal huff before it, pressurised flame roar, thick moving whoosh fading away, long low echo, weighty'
+  basis: docs/audio/M0_SOUND_LIST.md; gốc prompt theo AUDIO_PIPELINE §5.2 (chốt sau bảng phong cách)
+pitches: null
+parts: null
+layer_plan: null
+references: []
+source_plan:
+  now: [cc0-layer, synth]
+  later: [model-later]
+  ranked:
+    - rank: 1
+      kinds: [model-later, cc0-layer, synth]
+      detail: Stable Audio 3, cộng lớp cơ khí Kenney, cộng sub tổng hợp
+    - rank: 2
+      kinds: [synth]
+      detail: Tổng hợp thuần (ElevenLabs gói trả phí là việc của chủ dự án)
+  needs_now: []
+  needs_later: [buoc-0]
+  note: null
+  batch1:
+    n: 1
+    why: Phát sau mỗi từ
+    source: Stable Audio 3 (lửa). Lớp gầm thú thêm sau (Freesound CC0 do chủ dự án tải, hoặc tự gầm). Theo luật âm xong từ (mục 6.2)
+    variants: '4'
+  style_board: true
+  sa3_trial: false
+  basis: AUDIO_PIPELINE §3.2 (nguồn theo loại âm), §10.1 (khi chưa có Stable Audio 3)
+licence:
+  allowed: [CC0-1.0, project-code]
+  conditional:
+    - licence: Stability-Community-2024
+      condition: 'Bước 0: đăng ký Community License, chấp nhận AUP và điều khoản Gemma; có licences/stability-registration.txt (§10.1)'
+    - licence: MIT (ACE-Step 1.5)
+      condition: Ghim phiên bản; kiểm giai điệu trước khi bán
+    - licence: Apache-2.0 (MOSS-SoundEffect)
+      condition: Chỉ khi bước 0 trả lời không
+    - licence: CC0-1.0 (Freesound, người tải lên từ chối AI)
+      condition: Chỉ ghép tay, không vào bước AI nào, không vào LoRA (§10.2)
+  forbidden:
+    - non-commercial-weights
+    - freesound-cc-by-nc
+    - freesound-sampling-plus
+    - bbc-sound-effects
+    - pixabay
+    - sound-from-other-games
+    - sonniss-lot-1-2-and-any-ai-step
+    - elevenlabs-or-suno-free-tier-release
+  attribution_required: false
+  notes:
+    - 'Chưa cài: chờ bước 0 của chủ dự án'
+    - Kenney, VCSL, VSCO-2-CE, Freesound CC0. Lưu LICENSE-<ngày>.txt kèm thư viện
+    - Mã của dự án. pedalboard (GPL-3.0) chỉ import trên máy, không chép vào repo (§10.9)
+  record: art-src/audio/SOURCES.json và licences.jsonl (§10.5, §10.6); pnpm audio:licence-check chặn khi thiếu
+  basis: AUDIO_PIPELINE §10.2
+constraints:
+  - Theo luật âm xong từ (§6.2)
+  - Lớp gầm thú thêm sau (Freesound CC0 do chủ dự án tải, hoặc tự gầm) (§9)
+board:
+  contexts: [trong-tran, lap-20]
+  contexts_before_phase3: [lap-20]
+  dense: true
+  repeat_interval_ms: 1500
+  repeat_basis: Đề xuất theo bot 40 WPM (§6.1); chỉnh khi có nhịp thật của game
+  loudness_match: lufs-m
+  basis: AUDIO_PIPELINE §7
+critic:
+  group: reward
+  dirty: false
+  weights_batch1:
+    l2: 0.6
+    l3: 0.3
+    l4: 0.1
+    l5: 0.0
+  loop_eval:
+    enabled: false
+    length_s: null
+    plays: null
+    interval_ms: null
+  ast:
+    expected: [Fire]
+    forbid: []
+  loop: false
+  stereo: false
+  pitched: true
+  attack_max_ms: null
+  head_max_ms: 5
+  rate_hz: 0.667
+  bpm: null
+  bars: null
+  beats_per_bar: null
+  intent: Large dragon throat huff into a pressurised flame ignition that roars, then a thick fireball whoosh travelling away, low valley echo tail, 750 ms
+  refs: []
+  basis: AUDIO_PIPELINE §4.4, §4.5 (L4 chỉ gắn cờ, trọng số tối đa 0,1)
+blocked_by: []
+origin:
+  code:
+    file: src/audio/catalog.ts
+    present: true
+    asset_stem: sfx/dragon/fire-cast
+    synth_in_code: true
+  sound_list:
+    file: docs/audio/M0_SOUND_LIST.md
+    present: true
+    section: 5.2 Hỏa Long (bus `dragon`, trừ báo nguy ở `stingers`)
+  plan:
+    - 'AUDIO_PIPELINE §9 #1 (lô 1)'
+    - AUDIO_PIPELINE §9 (âm chữ ký của bảng phong cách)
+notes: 'Q6 (24/10): bốn phần theo ví dụ của chủ dự án: khè hoặc gầm họng ngắn của sinh vật lớn (chuẩn bị), lửa bắt dưới áp lực (phát), lửa gầm và cầu lửa lao xa với whoosh dày (thân), vang thung lũng, rừng thấp (đuôi). Dài 340 → 750 ms (catalog; Q6 đề xuất file 600–900 ms gồm vang sớm: đã chọn theo đề xuất, 750 ± 20 % đúng bằng 600–900 ms); bus world của game thêm vang chung cho đuôi dài. Khóa E–H thay A–D của lô 1 (A, C ''phụt tròn'', D ''fire puff'' bị Q6 bỏ; B ''close, dry'' trái luật đuôi). Âm phát sau mỗi từ: năng lượng 1–4 kHz chỉ ở đầu tiếng, đuôi dưới 1 kHz và thấp. Ghi chú trước Q6: Lô 1 (24/10/2026): A, C hướng ''phụt tròn''; B, D hướng ''khạc có hơi thở'' (bảng phong cách mục 9 bước 2). Không viết chữ phủ định trong prompt: ''no birds'' của amb.forest từng sinh ra tiếng chim.'

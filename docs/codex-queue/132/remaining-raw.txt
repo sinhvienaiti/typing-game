@@ -1,0 +1,442 @@
+src/app/dev-tools.ts:32:   /** The run's study lists (R3), and Học's store with the learning events sent and queued (td-1b-learn). */
+src/app/dev-tools.ts:62:     // Ages in ticks; the call is its id; review: a Từ Ôn (R3).
+src/app/dev-tools.ts:90:         // R2: Tối Thượng; the enemies with a mechanic (drumming until castEnd, stunned until stunUntil).
+src/app/dev-tools.ts:101:         // R3: the book with each word's due tick and times typed back (BUILD_1B §11.2), the plan's counts, the live Từ Ôn's slot.
+src/app/input.ts:15:   Equal: "ult", // BUILD_1B §8.2: Tối Thượng (no IME uses it)
+src/app/learn.ts:2:  * Học at the page (BUILD_1B §11.1, §11.3–§11.5, R3; docs/td/R3_PLAN.md §3.3), a chunk of its own. The store under
+src/app/prefs.ts:2:  * The settings kept under td.settings (SPLIT_PLAN D7): master, music and effects volumes 0–100, "Nhịp tự điều
+src/app/prefs.ts:3:  * theo cách bạn gõ" (BALANCE.md §4.2, on by default; a run keeps the value it started with) and the story's mode (BUILD_1B
+src/app/prefs.ts:18: /** The modes the settings card steps through, null ("theo hồ sơ") first. */
+src/app/prefs.ts:37: /** The story's mode (§14, R3): the one set, else by the profile: a child plays Thư giãn, anyone else Cân bằng (BALANCE §3). */
+src/app/retry.ts:2:  * "Chơi lại Ngày n" (BUILD_1B §4.3) and "Chép số chơi thử" (§14), a chunk of its own (R3 step 1, docs/td/R3_PLAN.md §3.1):
+src/app/retry.ts:24: /** The run the results card ends: what retryDay keeps, and the link of a fresh run of the page (`learn`: in Học). */
+src/app/retry.ts:68: /** "Chép số chơi thử" (BUILD_1B §14, §22): the play-test file saved (loi-goi-choi-thu-….json) and copied to the clipboard. */
+src/app/retry.ts:77: /** "Chơi lại Ngày n": the log up to the start of the lost night's day, and the hashes kept, for the next page load. */
+src/app/sandbox.ts:19:     seg("Speed", "sb:speed", ["0.75", "1", "2"], ["0,75×", "1×", "2×"], String(w.speed)) +
+src/app/sandbox.ts:21:     `<div class="td-row"><small>Day</small>${[2, 3, 4, 5].map((d) => button("sb:skipTo:" + d, String(d), "", " title=\"Skip to Day " + d + '"')).join("")}${button("sb:boss", "Boss", "", " title=\"Summon Mộc Tinh\"")}</div>` +
+src/app/sandbox.ts:24:     `<div class="td-row"><small>Pace</small><span>k ×${w.pace.k.toFixed(2).replace(".", ",")} · adaptive ${w.pace.director ? "On" : "Off"}</span></div>`
+src/app/selection.ts:50:   /** The field point under the pointer (null: off the map): where `=` casts Tối Thượng when within reach (BUILD_1B §8.2). */
+src/app/selection.ts:91:     // R3: a Đầu Đàn comes with a pack of 5 to lead (Neo needs 4 by it), on the same road at the same tick; a Tanuki's pack of 8
+src/app/session.ts:21:   /** The hash of the world as each day began (index n: day n), for "Chơi lại Ngày n" (BUILD_1B §4.3). */
+src/app/skill.ts:24: /** ℓ̄ at E: the middle of its word band (TK 6.3). */
+src/content/compile.ts:12: /** BUILD_1B §9.2: the direct calls' verbs (Ngắt, Neo, Phá Khiên), by index. */
+src/content/compile.ts:78: /** One shape for the three verbs: what a verb does not use is 0 (×1 for multipliers). */
+src/content/compile.ts:110: /** Wave n (from 1), its gaps × `gap` (the run's pace, BALANCE.md §4). Past the list, the last wave grows by `endlessGrowth` per wave. */
+src/content/compile.ts:116: /** Entries cut into packs (counts × `scale`), ground packs on lanes 0, 1, 2… in turn, flyers on −1; ticks from 0 (the boss's escort too). */
+src/content/rules.ts:2:  * Starting constants of Typing Defense: the 1A part of docs/td/TYPING_DEFENSE_DESIGN.md Phụ lục A, with step 1A.6 "Lời
+src/content/rules.ts:3:  * Gọi" (docs/td/BUILD_1A6.md) on top. This file is the source of truth: the bot retunes numbers here, never in the
+src/content/rules.ts:23: /** §2: dawn's length; building at night takes ×1.5 as long. */
+src/content/rules.ts:29:   { minE: 45, len: [4, 8] }, // R3 balance (BUILD_NOTES §7.9): [4, 7] → [4, 8], the Khá and Ẩu bots +13 points of wins
+src/content/rules.ts:45: /** §5.4: +1 a word that is not sloppy, ÷2 a sloppy one, nothing else. A tier multiplies a whole Perfect call's bonus, at most ×1.3. */
+src/content/rules.ts:66:  * word of an economy call of ≥ minCallWords words (one Từ Ôn a call, so ≤ 25 % of its words), one live at a time, typed back
+src/content/rules.ts:76: /** A power word's Word Shot (TK 6.11): D̄ × (0.8 + 1.2·Q) × lenF, lenF = clamp((len + 1)/6; 0.8; 1.2). */
+src/content/rules.ts:85:  * BUILD_1B §8: Tối Thượng's charge (0–max): a call's word +perWord·(0.5 + 0.5 Q), a direct word +DIRECT.ult, an enemy dying within
+src/content/rules.ts:86:  * ringM of Draconis +shard a Mảnh Chữ (SHARDS by tier; the boss's stagger `stagger`), +nightPerS a second by night; nothing while full;
+src/content/rules.ts:89:  * and round; none: the spot), landing ~fallS later in a blastM blast of `damage` magic; the boss takes ×bossMul and never burns; at the
+src/content/rules.ts:90:  * rain's end the enemies left in it burn burnS. Chữ Chiêu: a call of `words` known short words living lifeS; each word typed brings
+src/content/rules.ts:92:  * damage 25 → 21, the Khá bot's share of all damage 15–17 % → ~12 %; two feathers still fell a Cương Thi in Thử thách (2 × 21 ≥ 41.7).
+src/content/rules.ts:98: /** BUILD_1B §5.5 (R2): a helper within m of a building's rim when Rễ Trồi strikes runs to the Bastion and stands there s seconds. */
+src/content/rules.ts:132:  * miner carries 0.8 × the level's yield a trip (not the whole pile: then no pile would ever reach half, docs/td/BUILD_NOTES.md).
+src/content/rules.ts:147: /** §10 "Đặt sẵn": Bastion level, villagers, how many trees nearest the Bastion are marked; the farm's plots (stage, work) so it shows every stage at once. */
+src/content/rules.ts:152:  * 0.70 here since R3's balance, BUILD_NOTES §7.9: the Mới bot's k is 0.70, at 0.75 it won 62 %) divides the night's pack gaps,
+src/content/rules.ts:155:  * 1B R2 review: 0.2 → 0.3, Biên S of the slow and the fast bots towards each other, BUILD_NOTES §7.4).
+src/content/rules.ts:158:  * ×eliteHp at spawn), the peak and the lull ±3 s, a support drop near defeat (+supportLives lives, once a night);
+src/content/slice-1a.ts:2:  * Map 1 "Đồng Cỏ Thác Bạc" (`w1-silverfall`, BUILD_1B §4): the 1A sandbox field `td-sandbox` (docs/td/BUILD_NOW.md
+src/content/slice-1a.ts:4:  * the enemies (Mộc Tinh and its Mầm Gỗ from 1B R1, Tanuki and Nuppeppō from R2), Draconis, the three Thư Đồng, the waves, the boss and the
+src/content/slice-1a.ts:50:       view: { name: "Archer Tower", short: "🏹", color: ATTACK }, // test pass 27/10: "C" and "P" were Chấm's and Phẩy's letters too
+src/content/slice-1a.ts:105:       view: { name: "Mộc Tinh", short: "MT", color: "#6b4a2a" },
+src/content/slice-1a.ts:112:     // BUILD_1B §10 (R2; TK 22.6): Tanuki drums (Ngắt breaks it) only within 9 m of a tower's or the Bastion's rim (BUILD_NOTES
+src/content/slice-1a.ts:113:     // §7.3: by the rift no ring lit it), Nuppeppō splits in two unless a blast kills it. Melee: starting numbers. R2 review
+src/content/slice-1a.ts:131:     // BUILD_1B §9.2, §10 (R3; sandbox only, never in the story's waves): the Đầu Đàn hurries its pack (+20 % within 6 m;
+src/content/slice-1a.ts:132:     // Neo pins it 3 s), the Troll carries a stone dome by the towers (Phá Khiên breaks it). Melee: starting numbers.
+src/content/slice-1a.ts:154:     { id: "helper-cham", speed: 4.0, view: { name: "Chấm", short: "C", color: "#9B5DE5" } },
+src/content/slice-1a.ts:155:     { id: "helper-phay", speed: 4.0, view: { name: "Phẩy", short: "P", color: "#FF8FB1" } },
+src/content/slice-1a.ts:156:     { id: "helper-gach", speed: 4.0, view: { name: "Gạch", short: "G", color: "#B07A4F" } },
+src/content/slice-1a.ts:184:     // 12 + 2); night 3 brings Nuppeppō (the cannon's foe), night 4 three Tanuki (Ngắt) first, the packs after them catch
+src/content/slice-1a.ts:185:     // up, then (lane A1, 27/10: P 0.3–4.7 % → 15–24 %) Ma Trơi, a pack, Ma Trơi; a second Thuồng Luồng lost gate 4.
+src/content/slice-1a.ts:191:       // BUILD_1B §4.2: the first part of night 5, one pack of Thuồng Luồng (§6.5 round 1: 5 → 4; R1 review: 5; R2: 6); the boss peak follows it.
+src/content/slice-1a.ts:199:   // BUILD_1B §5: Mộc Tinh retreats at half its hit points; its own moves; Draconis' fireballs ×0.35 on its bark (heroMul).
+src/content/slice-1a.ts:200:   // k factor (R2 §7.4: 0.3 / 6.5, cap 1.46; R3 §7.9: 0.4 / 5.5, cap 1.42; A1: 0.4 / 7.5, 1.49), Thư giãn, Học ×0.78, Thử thách ×0.9.
+src/content/slice-1a.ts:201:   // R3: Rễ hút sinh khí, a life every 30 s of its fight (R3_PLAN §7.1; 20 s cost the slow bots 10–12 points of wins, §7.9).
+src/content/types.ts:28: /** A power word's Word Shot (TK 6.11): D̄ by level, extra targets, a wider blast. */
+src/content/types.ts:30: /** A powered shot (BUILD_1A6 §4.5): damage ×, extra targets, blast radius ×. */
+src/content/types.ts:77:   /** Blast damage multiplier (Ma Trơi takes ×1.5). */
+src/content/types.ts:80:   /** Soldiers fight it but never stop it (the boss); burning hurts it ×burnTakenMul. */
+src/content/types.ts:83:   /** BUILD_1B §9.2: a mechanic a direct call breaks; §10: what it splits into when no blast kills it (Nuppeppō). */
+src/content/types.ts:90:  * The three verbs of BUILD_1B §9.2, each a mechanic a direct call breaks (window T). Ngắt (interrupt): it stands and
+src/content/types.ts:92:  * stands freezeS and the leader takes ×takenMul for takenS; its aura ×auraSpeed within radiusM is always on. Phá Khiên
+src/content/types.ts:93:  * (shield, R3): a dome of domeM rides on it for T (shots from outside ×outsideMul); broken: stunned stunS, none for lockS.
+src/content/types.ts:116:   /** The sandbox's "Đặt sẵn" (§10): building id, x and z, put down at once. */
+src/content/types.ts:125:   /** Waves past the list repeat the last one, scaled by 1 + growth × (n − list length). */
+src/content/types.ts:133:  * points ×(1 + kHp·d + kHp2·max(0, d)²), d = k − 1 (both ways), up to kHpMax and ×modeHp of the run's mode, Draconis' own fireballs ×heroMul
+src/content/types.ts:134:  * ("Vỏ dày"), and its moves; the stagger's Dồn lửa calls ask round(E / burstPerE) words, 1 to burstWords.
+src/content/types.ts:150:   /** Building id, "keep2", "keep3", "upgrade" or "ult" (Tối Thượng, R2) → the day it opens. */
+src/kit/README.md:1: # src/kit — chép từ `shared/game-kit`
+src/kit/README.md:3: Thư mục này do `node scripts/sync-game-kit.mjs --target games/<id>` ở repo cha tạo ra.
+src/kit/README.md:5: - **Không sửa tay.** Mọi file được kiểm sha256 theo `kit-manifest.json`.
+src/kit/README.md:6: - `node src/kit/verify-kit.mjs` báo lỗi khi một file khác bản kê. Lệnh `check` của game chạy nó.
+src/kit/README.md:7: - Muốn đổi kit: sửa ở `shared/game-kit`, chạy `pnpm kit:test`, rồi `pnpm kit:sync --target games/<id>`.
+src/kit/README.md:8: - Chọn module trong `kit.config.json` của game.
+src/kit/balance/bands.ts:23: export const MODE_LABELS: { readonly [M in BandMode]: string } = { relax: "Thư giãn", balanced: "Cân bằng", challenge: "Thử thách" };
+src/kit/balance/bands.ts:25:   win: "Thắng",
+src/kit/balance/bands.ts:26:   s: "Biên S",
+src/kit/balance/bands.ts:27:   p: "Áp lực P",
+src/kit/balance/bands.ts:28:   i: "Nhàn I",
+src/kit/balance/bands.ts:29:   o: "Ngộp O",
+src/kit/balance/bands.ts:30:   n: "Gần thua N",
+src/kit/balance/bands.ts:31:   q: "Quãng Q",
+src/kit/balance/director.ts:4:  * 20 s window, works out a tension τ against the mode's band, and after 3 low
+src/kit/balance/director.ts:77:   /** τ that triggered the step, ‰ (> 0 too hot, < 0 too calm). */
+src/kit/balance/director.ts:102:  * τ in ‰: how far the window sits outside the band. Too hot (> 0): P above
+src/kit/balance/flow.ts:6:  * sliding window (4 × 300 ticks = 20 s) for the pace director and over the
+src/kit/balance/flow.ts:36:   /** Buckets in the window: 4 × 300 = 20 s at 60 Hz. */
+src/kit/balance/flow.ts:40:   /** This many dropped locks within `abandonTicks` is overload ("bỏ khóa liên tục"). */
+src/kit/balance/flow.ts:85:   /** Share of damage not done by typing ("phần phe ta"); null when the game reports no damage. */
+src/kit/balance/gates.ts:3:  * Balance gates B1–B9 (BALANCE.md §7). A game runs its bot × mode × seed
+src/kit/balance/gates.ts:87:   B1: "Cùng vùng cuốn",
+src/kit/balance/gates.ts:88:   B2: "Không quá dễ",
+src/kit/balance/gates.ts:89:   B3: "Không quá khó",
+src/kit/balance/gates.ts:90:   B4: "Chuẩn thắng ẩu",
+src/kit/balance/gates.ts:91:   B5: "Gõ là sức chính",
+src/kit/balance/gates.ts:92:   B6: "Chiến thuật có nghĩa",
+src/kit/balance/gates.ts:93:   B7: "Bộ điều nhịp nhẹ tay",
+src/kit/balance/gates.ts:94:   B8: "Học không bị lấn",
+src/kit/balance/gates.ts:95:   B9: "Khớp người thật",
+src/kit/balance/gates.ts:146:     threshold: off.length === 0 ? "trong dải" : "lệch: " + off.map((entry) => METRIC_LABELS[entry.metric] + " " + (entry.verdict === "below" ? "thấp" : entry.verdict === "above" ? "cao" : "thiếu")).join(", "),
+src/kit/balance/gates.ts:159:     if (row === undefined) missing.push(`${bot} · ${MODE_LABELS[mode]}${director ? "" : " · tắt nhịp"}`);
+src/kit/balance/gates.ts:172:         checks.push({ label: row.bot, measured: `S ${pct(row.s)}, I ${pct(row.i)}`, threshold: "không đồng thời S ≥ 90 % và I ≥ 20 %", pass: !(row.s >= 900 && row.i >= 200) });
+src/kit/balance/gates.ts:178:       if (novice !== undefined) checks.push({ label: "novice · Cân bằng", measured: "thắng " + pct(novice.win), threshold: "≥ 70 %", pass: novice.win >= 700 });
+src/kit/balance/gates.ts:179:       if (child !== undefined) checks.push({ label: "child · Thư giãn", measured: "thắng " + pct(child.win), threshold: "≥ 85 %", pass: child.win >= 850 });
+src/kit/balance/gates.ts:186:       if (steady !== undefined && sloppy !== undefined) checks.push({ label: "steady vs sloppy", measured: `S ${pct(steady.s)} vs ${pct(sloppy.s)}`, threshold: "S chậm chắc > S ẩu", pass: steady.s > sloppy.s });
+src/kit/balance/gates.ts:189:           checks.push({ label: "standard vs sloppy", measured: `hạ quái ${standard.killSeconds.toFixed(2)} s vs ${sloppy.killSeconds.toFixed(2)} s`, threshold: "chuẩn nhanh hơn", pass: standard.killSeconds < sloppy.killSeconds });
+src/kit/balance/gates.ts:191:           checks.push({ label: "standard vs sloppy", measured: `Q ${pct(standard.q)} vs ${pct(sloppy.q)}`, threshold: "chuẩn hạ sớm hơn (Q thấp hơn)", pass: standard.q < sloppy.q });
+src/kit/balance/gates.ts:192:         } else missing.push("standard/sloppy · thời gian hạ quái hoặc Q");
+src/kit/balance/gates.ts:202:         if (row !== undefined) checks.push({ label: "no-type · " + MODE_LABELS[mode], measured: "thắng " + pct(row.win), threshold: "≤ " + pct(maxWin), pass: row.win <= maxWin });
+src/kit/balance/gates.ts:212:           checks.push({ label: MODE_LABELS[mode], measured: `thắng ${pct(high.win)} vs ${pct(low.win)}`, threshold: "Tốt hơn Kém ≥ 10 điểm %", pass: high.win - low.win >= 100 });
+src/kit/balance/gates.ts:223:         checks.push({ label, measured: `${row.stepsPerWave.toFixed(2)} bậc/đợt, khoảng sinh ${pct(row.spawnMin)}–${pct(row.spawnMax)}`, threshold: `≤ ${maxSteps} bậc/đợt, trong ±${pct(cap)}`, pass: row.stepsPerWave <= maxSteps && row.spawnMin >= 1000 - cap && row.spawnMax <= 1000 + cap });
+src/kit/balance/gates.ts:225:       if (checks.length === 0) missing.push("nhật ký bộ điều nhịp");
+src/kit/balance/gates.ts:227:       if (off !== undefined) checks.push(inBandChecks(off, bands.balanced, "standard · tắt nhịp"));
+src/kit/balance/gates.ts:231:       for (const row of all.filter((entry) => entry.learnOk !== null)) checks.push({ label: `${row.bot} · ${MODE_LABELS[row.mode]}`, measured: row.learnOk ? "đạt" : "trượt", threshold: "cổng học của game", pass: row.learnOk === true });
+src/kit/balance/gates.ts:232:       if (checks.length === 0) missing.push("cổng học của game");
+src/kit/balance/gates.ts:247:         checks.push({ label: match.label, measured: measured.join(", "), threshold: off.length === 0 ? `lệch ≤ ${Math.round(tolerance * 100)} %` : "lệch: " + off.join(", "), pass: off.length === 0 });
+src/kit/balance/gates.ts:249:       if (checks.length === 0) missing.push("buổi chơi thử của người thật");
+src/kit/balance/gates.ts:260: const STATUS_TEXT: { readonly [S in GateStatus]: string } = { pass: "ĐẠT", fail: "TRƯỢT", skip: "THIẾU SỐ" };
+src/kit/balance/gates.ts:265:   const lines = ["| # | Cổng | Kết quả | Số đo |", "|---|---|---|---|"];
+src/kit/balance/gates.ts:268:     if (row.missing.length > 0) parts.push("thiếu: " + row.missing.join(", "));
+src/kit/balance/math.ts:4:  * + − × ÷ (Math.exp and Math.log may differ in the last bit between engines),
+src/kit/balance/pace.ts:19:  * E_eff = E × (0.6 + 0.4·a²) × (1 − 0.5·CV), held in [0.7E, E].
+src/kit/balance/pace.ts:20:  * In-session fatigue first lowers E itself: E × (1 − min(fatigue, 0.15)).
+src/kit/balance/pace.ts:29: /** C(E) = 60 / (0.45 + 12·(ℓ̄ + 1)/(E·d)) words a minute (dragon-hold 00 §4.3). */
+src/kit/balance/pace.ts:47: /** What the game supplies for k: ℓ̄ for this E, d, and its reference capacity C_ref. */
+src/kit/balance/pace.ts:52: /** Dragonhold's reference: 35 WPM, ℓ̄ 4.5, d 0.86 → ≈ 22.7 words a minute. */
+src/kit/balance/pace.ts:55: /** k = clamp(C(E_eff)/C_ref; 0.75; 1.30), rounded to 1/1000. Spawn gaps and wave clocks × 1/k. */
+src/kit/balance/pace.ts:82: /** Telegraph time × 0.85–1.5 from telegraph reflex: 0.35 → 1.5, 0.75 (default) → 1.0, 0.95 → 0.85, linear between. */
+src/kit/balance/pace.ts:110:   rest: "Tay bạn đang chậm dần: nghỉ vài phút rồi chơi tiếp nhé.",
+src/kit/balance/pace.ts:111:   "slow-down": "Bạn gõ nhanh nhưng hay sai: chậm lại một nhịp sẽ được Hoàn hảo nhiều hơn.",
+src/kit/balance/pace.ts:112:   accuracy: "Gõ chắc từng chữ trước, tốc độ sẽ tự lên.",
+src/kit/balance/pace.ts:113:   steady: "Nhịp gõ chưa đều: giữ một tốc độ vừa phải cho mọi từ.",
+src/kit/balance/pace.ts:114:   "new-words": "Từ mới còn lạ: đọc nghĩa và nghe phát âm trước khi gõ.",
+src/kit/balance/pace.ts:115:   crowd: "Khi đông quái, chọn một từ và gõ dứt điểm rồi mới sang từ khác.",
+src/kit/balance/pace.ts:116:   "keep-going": "Bạn đang tiến bộ đều. Giữ phong độ!",
+src/kit/balance/profile.ts:203: /** Defaults blended into measurements by confidence (BALANCE.md §2: "trộn dần sang số đo"). */
+src/kit/balance/typist.ts:84: /** BALANCE.md §6 "Bộ bot chuẩn". "Không gõ" has no a or CV: it never types (1 and 0 are placeholders). */
+src/kit/balance/typist.ts:86:   { id: "child", label: "Trẻ em", represents: "Hồ sơ trẻ em", wpm: 15, accuracy: 0.88, cv: 0.4, tactics: "poor", backspace: 0.7, abandon: 0.05, crowdDrop: 0.4, lookAway: [2.5, 5], fatigue: 0.08 },
+src/kit/balance/typist.ts:87:   { id: "novice", label: "Mới", represents: "Người mới tập gõ", wpm: 25, accuracy: 0.92, cv: 0.35, tactics: "fair", backspace: 0.85, abandon: 0.04, crowdDrop: 0.3, lookAway: [2, 4], fatigue: 0.05 },
+src/kit/balance/typist.ts:88:   { id: "steady", label: "Chậm chắc", represents: "Gõ chậm nhưng chuẩn", wpm: 25, accuracy: 0.99, cv: 0.2, tactics: "fair", backspace: 0.95, abandon: 0.01, crowdDrop: 0.25, lookAway: [1.5, 3], fatigue: 0.03 },
+src/kit/balance/typist.ts:89:   { id: "standard", label: "Chuẩn", represents: "Người chơi tham chiếu", wpm: 35, accuracy: 0.95, cv: 0.25, tactics: "fair", backspace: 0.9, abandon: 0.02, crowdDrop: 0.2, lookAway: [1.2, 2.5], fatigue: 0.03 },
+src/kit/balance/typist.ts:90:   { id: "skilled", label: "Khá", represents: "", wpm: 50, accuracy: 0.96, cv: 0.2, tactics: "good", backspace: 0.9, abandon: 0.02, crowdDrop: 0.15, lookAway: [1, 2], fatigue: 0.02 },
+src/kit/balance/typist.ts:91:   { id: "sloppy", label: "Ẩu", represents: "Gõ nhanh nhưng ẩu", wpm: 50, accuracy: 0.85, cv: 0.35, tactics: "fair", backspace: 0.6, abandon: 0.06, crowdDrop: 0.25, lookAway: [0.8, 1.6], fatigue: 0.04 },
+src/kit/balance/typist.ts:92:   { id: "fast", label: "Nhanh", represents: "Người gõ giỏi", wpm: 70, accuracy: 0.97, cv: 0.15, tactics: "good", backspace: 0.9, abandon: 0.01, crowdDrop: 0.1, lookAway: [0.6, 1.2], fatigue: 0.02 },
+src/kit/balance/typist.ts:93:   { id: "no-type", label: "Không gõ", represents: "Kiểm \"gõ là sức chính\"", wpm: 0, accuracy: 1, cv: 0, tactics: "good", backspace: 0, abandon: 0, crowdDrop: 0, lookAway: [1, 2], fatigue: 0 },
+src/kit/balance/typist.ts:94:   { id: "type-only", label: "Chỉ gõ", represents: "Kiểm \"hỗ trợ cần thiết\"", wpm: 35, accuracy: 0.95, cv: 0.25, tactics: "none", backspace: 0.9, abandon: 0.02, crowdDrop: 0.2, lookAway: [1.2, 2.5], fatigue: 0.03 },
+src/kit/input/keys.ts:10:  *    the 2D game does (src/main.ts keydown), so a press still composing "â"
+src/kit/input/keys.ts:14:  *    Backspace and the accented letter instead ("ô", "í", "ơ"). That key never
+src/kit/input/keys.ts:42: // Latin letters with Vietnamese marks, and đ, in both cases.
+src/kit/input/keys.ts:45:     "àáạảãâầấậẩẫăằắặẳẵ",
+src/kit/input/keys.ts:46:     "èéẹẻẽêềếệểễ",
+src/kit/input/keys.ts:47:     "ìíịỉĩ",
+src/kit/input/keys.ts:48:     "òóọỏõôồốộổỗơờớợởỡ",
+src/kit/input/keys.ts:49:     "ùúụủũưừứựửữ",
+src/kit/input/keys.ts:50:     "ỳýỵỷỹ",
+src/kit/input/keys.ts:51:     "đ",
+src/main.ts:2:  * Lời Gọi (index.html), step 1A "Cổng vui" (docs/td/BUILD_NOW.md) with 1A.6 "Lời Gọi" (docs/td/BUILD_1A6.md) and 1B's
+src/main.ts:3:  * map 1 with Mộc Tinh (docs/td/BUILD_1B.md) in the Văn Điền theme (SPLIT_PLAN D7): the title screen first (a link with
+src/main.ts:5:  * ?sandbox=1. A lost run may be played again from the day of the night it was lost ("Chơi lại Ngày n": the page
+src/main.ts:11:  * and Hồ sơ gõ cards, the pause and results cards, sound and the sandbox panel are chunks of their own (BUILD_1B §20):
+src/main.ts:15:  * (app/dev-tools.ts) and "Chơi lại Ngày n" with "Chép số chơi thử" (app/retry.ts) out of this entry too. Học (R3,
+src/main.ts:18:  * load plays with no lists. The teaching table (ui/tips.ts) is a chunk too: Bà Cú Mực's rows in the frame at the top,
+src/main.ts:71: /** A fresh run's mode: Học with ?learn=1, the sandbox Cân bằng (its panel switches), the story the settings' (R3, BUILD_1B §14). */
+src/main.ts:73: /** The run header from the profile and the "Nhịp tự điều" setting. */
+src/main.ts:75: /** Học (app/learn.ts): the run waits for it at tick 0 (its study lists go in the header); one that cannot load plays with none. */
+src/main.ts:84: // Hồ sơ gõ card when picked, its settings card when picked or with the pause card's chunk, which holds one, once the page
+src/main.ts:109:     if (shown === null) return void ((titleUp = false), tellLost("Màn đầu chưa tải được: vào thẳng ván · F5 để thử lại"));
+src/main.ts:114:  * "Chơi lại Ngày n" (BUILD_1B §4.3) kept by the last page under td.retry (app/retry.ts RETRY_KEY), read once. Its chunk
+src/main.ts:115:  * (app/retry.ts, with "Chép số chơi thử") loads at once when there is one, else once the page is usable for the results
+src/main.ts:135:   if (story) next.delete("sandbox"); // test pass 27/10: "Bắt đầu · Bản đồ 1" from the sandbox's title opened the sandbox
+src/main.ts:144: if (kept !== null && replay === null) tellLost("Chơi lại Ngày n chưa tải được: ván mới từ đầu · F5 để thử lại");
+src/main.ts:147: /** The run's mode at its start (the replay's header): Học with ?learn=1 or the title's choice, else the settings' (freshMode). */
+src/main.ts:157: // A run left mid-cycle counts as a quit (the trend keeps it; the measures do not); the title alone is no run. Học keeps its book.
+src/main.ts:166: /** The study lists the run plays (flags(), "Chơi lại Ngày n"): a replayed day's, else planned once app/learn.ts is in. */
+src/main.ts:211:  * when a card is wanted; without it the HUD says the pause or the end (R2 review fix 2). "Xem bản đồ" puts the results away.
+src/main.ts:223:       if (m === null) return tellLost((action === "copy" ? "Chép số chơi thử" : "Chơi lại Ngày n") + " chưa tải được · F5 để thử lại");
+src/main.ts:225:       if (action === "copy") (lost?.text.startsWith("Đã lưu") && performance.now() < lost.until) || (m.copyNumbers(run, profile, source), tellLost("Đã lưu file chơi thử và chép số"));
+src/main.ts:254:   // "Xem bản đồ" put the results away: Esc or Enter brings them back (test pass 27/10: it was one way, F5 only).
+src/main.ts:301:     selection.tactical ? "Tạm dừng chiến thuật · Space để chạy tiếp" : "", now < imeUntil ? "Tắt bộ gõ tiếng Việt để gõ" : "", over && mapOnly ? "Esc hoặc Enter: xem lại thẻ kết" : "",
+src/main.ts:302:     world.phase === "day" && world.wood >= 150 && world.gold < 50000 ? "Wood thừa: bán Wood ở thẻ Fort" : "", source === "fallback" ? "Từ dự phòng (máy chủ không có từ vựng)" : "",
+src/main.ts:304:     noCard ? (card === "pause" ? "Tạm dừng · Esc để chạy tiếp (thẻ tạm dừng chưa tải được) · F5 để thử lại" : "Hết ải · F5 để chơi lại (thẻ kết chưa tải được)") : "",
+src/main.ts:305:     card === "results" && retryChunk.failed ? "Chơi lại Ngày n chưa tải được · F5 để thử lại" : "",
+src/main.ts:306:     sandbox && selection.panel && panel.failed ? "Bảng hộp cát chưa tải được · F5 để thử lại" : "",
+src/sim/commands.ts:309: /** §10 "Đặt sẵn": the Bastion at level 3, the map's preset put down built and free (a farm's plots at every stage), 5 villagers, the 8 standing trees nearest the Bastion marked. */
+src/sim/events.ts:9: /** bossHit: damage on the boss, value = damage × 32 + damage type × 8 + its SOURCE. */
+src/sim/events.ts:50:   | { t: "ult"; x: number; z: number } // Tối Thượng cast (R2)
+src/sim/events.ts:52:   | { t: "direct"; enemy: number; ok: boolean; x: number; z: number; verb: number } // broken by its word, or let run; verb: Ngắt, Neo, Phá Khiên (VERBS)
+src/sim/events.ts:54:   | { t: "review"; item: number; redeemed: boolean } // a Từ Ôn typed (R3): item its deck index; redeemed out of the book
+src/sim/nav/astar.ts:106: /** The path pulled tight from (sx, sz) to (gx, gz) (TK 25.9 "kéo dây"): from each corner on to the furthest cell in a clear straight line. Writes ≤ max (x, z) points into `out` from `at`; returns how many, the goal last unless cut short. */
+src/sim/nav/connectivity.ts:2:  * Breadth-first reach on the walking grid (TK 12.5 "lối đi"): after a building goes down, every work socket must still
+src/sim/nav/grid.ts:2:  * The walking grid (docs/td/TYPING_DEFENSE_DESIGN.md 25.9): 1 m cells over the 96 × 96 m field. A cell is blocked by
+src/sim/nav/grid.ts:3:  * any painted water not on a bridge or by a building disc; Thư Đồng walk it, and placement checks that every work
+src/sim/stats.ts:11:   // BUILD_1B §15: damage on the boss (all, typed, Draconis' own), retreats, lives lost at the peak, buildings rooted, the chest, Dồn lửa words typed and asked.
+src/sim/stats.ts:13:   // R2: Tối Thượng's casts, feathers, damage on the boss; Mảnh Chữ; direct words typed and mechanics let run; helpers panicked.
+src/sim/stats.ts:15:   // R3 (BUILD_1B §11): Từ Ôn typed back, redeemed of them, fresh words of the study plan dealt.
+src/sim/stores/boss.ts:6:  * of the buildings Rễ Trồi aims at, its warning ending at `rootsEnd`; a slam aims along (slamX, slamZ).
+src/sim/stores/buildings.ts:12:  * within 5 s refunds; `spentGold`/`spentWood` everything it cost, what a sale refunds 60 % of (BUILD_1B §7). Rễ Trồi
+src/sim/stores/calls.ts:3: /** BUILD_1A6 §5.1, in the director's priority order (§5.3): power, build, then harvest = chop = mine, then quiz; 1B R2: Chữ Chiêu (ult) and direct calls. */
+src/sim/stores/calls.ts:5: /** Rank of each kind for the director: the economy three share one; Chữ Chiêu and direct calls rank with power (BUILD_1B §8.3, §9.1). */
+src/sim/stores/calls.ts:36:   /** A "Dồn lửa" power call of the boss's stagger (BUILD_1B §5.2). */
+src/sim/stores/calls.ts:40:   /** It had its Từ Ôn (R3, BUILD_1B §11.2: one a call). */
+src/sim/stores/enemies.ts:27:   /** The tick it came in; an elite affix of the pace director (BALANCE.md §4.2: hit points ×PACE.eliteHp). */
+src/sim/stores/enemies.ts:38:   /** R3 (BUILD_1B §9.2 Neo): it takes ×takenMul until this tick. */
+src/sim/stores/projectiles.ts:19:   /** Base × power × crit, before armour. */
+src/sim/stores/projectiles.ts:29:   /** Where it was launched (R3, BUILD_1B §9.2: a Troll's dome lets a shot from outside through at ×outsideMul). */
+src/sim/stores/ult.ts:2:  * Tối Thượng (BUILD_1B §8), hashed like every store: the charge (0–100), the last cast's tick, the rain (on: 1) at
+src/sim/stores/ult.ts:3:  * (x, z) with its feathers left to drop, the next drop and the last one, feathers due at dueAt (Chữ Chiêu), its call's
+src/sim/systems/agents.ts:3:  * BUILD_1A6 §6): Draconis flies, Thư Đồng and the NPC workers walk the A* path, pulled tight. Agents go to a
+src/sim/systems/agents.ts:111: /** Rễ Trồi struck building b (BUILD_1B §5.5, R2): a helper within 6 m of its rim panics and runs to the Bastion. */
+src/sim/systems/agents.ts:154: /** §6: economy work at (x, z) runs ×1.5 with an out helper within 6 m (never more for two). */
+src/sim/systems/attention.ts:99:   // Each round opens a queued call or lights one in a ring, so it ends; at the cap new calls wait queued (CHỜ),
+src/sim/systems/boss.ts:2:  * Mộc Tinh, the boss peak at the end of the stage (BUILD_1B §4.4, §5). Day 5 warns of it and picks the branch it will
+src/sim/systems/boss.ts:5:  * never blocked, and strikes after a warning: Rễ Trồi stuns the buildings within 8 m, Quật cành hits and knocks back
+src/sim/systems/boss.ts:6:  * the soldiers in front, at 70 % it staggers (5 s still and vulnerable, every stun lifted, "Dồn lửa" power calls on the
+src/sim/systems/boss.ts:7:  * nearest attack buildings in reach), in phase 2 it calls Mầm Gỗ, at the Bastion it strikes 3 lives a blow; from its
+src/sim/systems/boss.ts:42: /** Its hit points at spawn: the enemy's × the mode's (×its own mode factor) × (1 + kHp·d + kHp2·max(0, d)²), d = k − 1, at most ×kHpMax (§5.6; 1B R1 review). */
+src/sim/systems/boss.ts:93: /** The buildings (not the Bastion) whose rim lies within Rễ Trồi's reach of it, by id; written to S.targets when `keep`. */
+src/sim/systems/boss.ts:137: /** Quật cành: soldiers within reach of its rim, in the 120° in front of it (toward the nearest when it began). */
+src/sim/systems/boss.ts:175: /** Phase 2: Mầm Gỗ sprout at its feet (0.8 s), then walk on its road. */
+src/sim/systems/boss.ts:195:  * A blow on the Bastion after a warning: Quật Lũy once it stands at it (−3 lives a blow); Rễ hút sinh khí from anywhere, every
+src/sim/systems/boss.ts:221:  * At 70 %: 5 s still, vulnerable, the roots pulled back (every stun ends), and "Dồn lửa" (§5.2; 1B R1 review): attack
+src/sim/systems/boss.ts:235:   ultShards(w, E.x[e]!, E.z[e]!, SHARDS.stagger); // R2: its Mảnh Chữ, Draconis within 12 m
+src/sim/systems/boss.ts:297: /** A heavy foe (leak > 1, never the boss) on the roads' shared end, from the merge to the Bastion: Thuồng Luồng there reach it with the boss. */
+src/sim/systems/calls.ts:5:  * worker does alone (a sloppy one ×0.6). A locked call keeps its word, and gets the next one locked, until it is done
+src/sim/systems/calls.ts:45:  * the levels below the run's top only (Chữ Chiêu, direct calls: BUILD_1B §8.3, §9.1). The hook for word topics (§5.2,
+src/sim/systems/calls.ts:53: /** A call follows whoever makes it: its enemy (a direct call), its NPC, its helper (a quiz) or Draconis (Chữ Chiêu), else its building. */
+src/sim/systems/calls.ts:86:  * Gives bright call c its next word (tier 1 only: one first letter a live word), on the `call` kind's letters (Chữ Chiêu's and a
+src/sim/systems/calls.ts:88:  * An economy call's (build, harvest, chop, mine) may be a Từ Ôn, else a word of the study plan (R3, BUILD_1B §11.2, §11.4: learn.ts).
+src/sim/systems/calls.ts:261:  * end if it was there; a quiz typed right takes its word out; a Từ Ôn by learn.ts), the work pushed; the call goes on locked, or ends.
+src/sim/systems/calls.ts:279:   ultCharge(w, ULT.perWord * (0.5 + 0.5 * score.quality)); // BUILD_1B §8.1: every call's word charges Tối Thượng
+src/sim/systems/calls.ts:294:   // A call past its life gives no next word (R2: Chữ Chiêu lives 4 s, Dồn lửa 5 s, however its words go).
+src/sim/systems/calls.ts:324: /** Whether call c lies in a help ring now (or is the locked one, or a Dồn lửa call: 1B R1 review): bright. */
+src/sim/systems/combat.ts:5:  *   dmg = round(base × power × (1 − armour) × crit), at least 1
+src/sim/systems/combat.ts:10:  * fireballs ×heroMul (0.35, "Vỏ dày"), every hit ×1.25 while it staggers, and never dies of it (it retreats at 50 %);
+src/sim/systems/combat.ts:11:  * a hit stops at the stagger's line in phase 1 and at the retreat's till phase 2's first Mầm Gỗ sprout, so the
+src/sim/systems/combat.ts:12:  * stagger's burst never skips phase 2 (test pass row 26). A building Rễ Trồi stunned does not fire.
+src/sim/systems/combat.ts:21: /** `blast`: a blast's damage (a Nuppeppō it kills won't split, BUILD_1B §10); a Neo-pinned leader takes ×takenMul. */
+src/sim/systems/combat.ts:97: /** Burning (TK 10.3, Draconis' Word Shots from a cannon; Tối Thượng's rain): magic damage a second after resist, dealt in whole points, by who set it. */
+src/sim/systems/deaths.ts:3:  * flying to the HUD are only a picture), its Mảnh Chữ charge Tối Thượng near Draconis, and a Nuppeppō no blast killed
+src/sim/systems/direct.ts:2:  * Direct calls and their verbs (BUILD_1B §9; R2 Ngắt, R3 Neo and Phá Khiên), where the village fights (an attack
+src/sim/systems/direct.ts:4:  * stands and drums; a Đầu Đàn with 4 others within 6 m (20 m) calls its pack on; a Troll (25 m) raises a 4 m dome
+src/sim/systems/direct.ts:8:  * Typed: +2 gold (the leaf +5 more), Tối Thượng +3; the drum breaks (stunned 2 s), the pack stands 3 s and the leader
+src/sim/systems/direct.ts:9:  * takes ×1.3 for 6 s, or the dome breaks (stunned 1.5 s, none for 10 s). Let run: a drum heals 25 % within 6 m (never
+src/sim/systems/direct.ts:10:  * the boss); a pack walks on (the leader's +20 % aura, move.ts, is always on); a dome holds T (shots from outside ×0.3).
+src/sim/systems/direct.ts:44: /** The verb (VERBS) of call c's enemy: what typing it breaks (the view's icon and name); Ngắt when it has gone. */
+src/sim/systems/direct.ts:119: /** The domes up this tick (Phá Khiên let run: x, z, radius, ×outside a dome), into `out`. */
+src/sim/systems/direct.ts:130: /** A shot launched at (ox, oz) hurts at (x, z) ×outside when (x, z) is under a dome and (ox, oz) is not (BUILD_1B §9.2). */
+src/sim/systems/economy.ts:6:  * works ×1.5.
+src/sim/systems/economy.ts:70: /** The centre of plot p of farm b: a 2 × 2 grid 1.1 m off the centre. */
+src/sim/systems/economy.ts:256: /** §4.4: the pile fills as in 1A (×1.5 by a helper), the miner hauls a basket every 10 s, a half-full pile calls. */
+src/sim/systems/learn.ts:2:  * Học in the sim (BUILD_1B §11.2–§11.4, R3; docs/td/R3_PLAN.md §3.2). The run header carries three lists of deck ids that
+src/sim/systems/learn.ts:6:  * - a Từ Ôn: a book word due again 25–45 s after it went in, its letter free; one live, one a call of ≥ 4 words, typed
+src/sim/systems/learn.ts:7:  *   back twice a run at most. Typed clean or Good at least: "Chuộc lại", +1 knowledge, out of the book; else it stays
+src/sim/systems/learn.ts:29: /** The plan's lists as deck indices (a word dealt turns −1); counts; the live Từ Ôn's word slot (−1). */
+src/sim/systems/learn.ts:95: /** A Từ Ôn for economy call c (word × 4 + 1), −1 none (§11.2). */
+src/sim/systems/learn.ts:111: /** The first word of `list` not dealt yet that fits [lo, hi] and takes a free letter for call c: dealt now (word × 4 + 1), −1 none. */
+src/sim/systems/learn.ts:125: /** With a plan, the drawn part's word for economy call c in E's band [lo, hi] (word × 4 + 1); −1: the current levels' bag (§11.4). */
+src/sim/systems/learn.ts:141: /** A Từ Ôn typed (§11.2): redeemed (clean, or Good at least) leaves the book with +1 knowledge; a miss goes to its end; else due again later. */
+src/sim/systems/move.ts:5:  * (§9.2, §10 "dẫn bầy"): a Cương Thi Đầu Đàn hurries every enemy within its radius but the boss (×auraSpeed, itself
+src/sim/systems/move.ts:16: /** This tick's auras: x, z, radius², ×speed, the leader's road, distance along it and slot. */
+src/sim/systems/pace.ts:3:  * player's pace k and the "Nhịp tự điều" setting. k is the night's intensity and the day's call frequency: the pack
+src/sim/systems/pace.ts:4:  * gaps and the day (the wave clock) ÷ k, enemies walk ×(1 + speedK·(k − 1)), the quiz and mine calls come ÷ k sooner.
+src/sim/systems/pace.ts:5:  * A night (the wave, BALANCE.md §3 "thời gian đợt": the stage's flow) and a day each feed their FlowMeter: danger is
+src/sim/systems/pace.ts:42:     /** Enemies walk at ×foeSpeed: k's share of the night's clock (1 + speedK × (k − 1)). */
+src/sim/systems/pace.ts:59: /** The run's mode before its first step (the title's Học, a replay's header): the day's length, the directors' band, E's floor. */
+src/sim/systems/pace.ts:74: /** Spawn gaps at the run's pace: the night director's interval, ÷ k. */
+src/sim/systems/pace.ts:76: /** A call clock (seconds or a share) at the run's pace: the day director's scale, ÷ k. */
+src/sim/systems/projectile.ts:5:  * the centre down to the rim's share (cannon: 50 %), times the enemy's blast multiplier (Ma Trơi ×1.5); a single shot
+src/sim/systems/projectile.ts:7:  * fire. R3 (BUILD_1B §9.2): an enemy under a Troll's dome takes a shot launched outside it ×0.3 (Tối Thượng's feathers
+src/sim/systems/projectile.ts:25:   // ×1 with no dome up, so every run before R3's Troll multiplies exactly as it did.
+src/sim/systems/rewards.ts:7:  *   power = D̄ × (0.8 + 1.2·Q_w) × lenF,   lenF = clamp((len + 1)/6; 0.8; 1.2)
+src/sim/systems/rewards.ts:37:     // A "Dồn lửa" call's shot goes at the boss while it is in reach (BUILD_1B §5.2).
+src/sim/systems/spawn.ts:3:  * stream, with the mode's hit points (BUILD_1A6 §2). Enemies may also come up along a road (the boss, its Mầm Gỗ, a
+src/sim/systems/spawn.ts:4:  * Nuppeppō's halves) and packs be queued into the running wave.
+src/sim/systems/ult.ts:2:  * Tối Thượng, Mảnh Chữ and Chữ Chiêu (BUILD_1B §8; after step 7). The charge fills from typed words, broken mechanics,
+src/sim/systems/ult.ts:3:  * Mảnh Chữ (enemies dying within 12 m of Draconis, the boss's stagger) and the night itself, never past full. Cast
+src/sim/systems/ult.ts:4:  * (the `ult` command) within 20 m of Draconis once it is full and 45 s after the last: "Mưa Lông Lửa", a feather every
+src/sim/systems/ult.ts:6:  * round; none: the spot) in a 1.5 m blast of 25 magic (the boss ×0.25: combat.ts). The Chữ Chiêu call (3 known short
+src/sim/systems/ult.ts:32: /** `shards` Mảnh Chữ of something brought down at (x, z): charge, if Draconis is within 12 m. */
+src/sim/systems/ult.ts:54: /** Shut until the night of its unlock day (BUILD_1B §12 "dùng được từ Đêm 3"; test pass 27/10: day 3 already cast it). */
+src/sim/systems/ult.ts:74: /** Chữ Chiêu: `n` feathers more, 0.3 s from now. */
+src/sim/systems/waves.ts:4:  * every wave has spawned and no enemy is left: each wave pays 10 + 2 × its number; a 3 s dawn, then the next day.
+src/sim/systems/waves.ts:50: /** A day's ticks at pace k: the wave clock (BALANCE.md §4.1 "giờ đợt"), ÷ k. */
+src/sim/systems/waves.ts:72: /** The night falls: the next wave comes (the sandbox's "Sinh đêm" may add one to a night already running). */
+src/sim/world.ts:83:   /** Index n: the tick at which day n's world stands (after the step that began it): "Chơi lại Ngày n" replays to it. */
+src/sim/world.ts:128:   /** Tối Thượng (BUILD_1B §8, R2). */
+src/sim/world.ts:130:   /** Học (BUILD_1B §11, R3): the study plan from the run header, the live Từ Ôn. */
+src/sim/world.ts:213:   ultStep(w); // BUILD_1B §8 (R2): Tối Thượng's charge and its feathers
+src/typing/decks.ts:65:  * (review R2: "chưa bao giờ, không bao g…").
+src/typing/picker.ts:32:  * `last`: returns word × 4 + tier, or −1 when none fits (a letter jam).
+src/typing/scorer.ts:8:  *   L_w   = clamp(1.2 + 12·(len + 1)/(E·d); 3; 6) × k_L (the mode's)
+src/ui/build-menu.ts:20: const head = (title: string, sub: string): string => `<div class="td-row"><span><b>${title}</b> <small>${sub}</small></span>${button("close", "×", "", ' class="td-x" title="Esc"')}</div>`;
+src/ui/build-menu.ts:23: /** A building's "làm gì" line from the teaching table's chunk (none before it is in). */
+src/ui/build-menu.ts:40: /** A farm's plots by stage (§4.1): "Chín 1 · Lớn 2 · Trống 1". */
+src/ui/hud.ts:19: /** Mộc Tinh's own lines (TK 22.7); Bà Cú Mực's teaching table is ui/tips.ts, a chunk of its own (R3). */
+src/ui/hud.ts:32:   locked: "Not unlocked yet", keepMax: "Fort at this map's max level", bossBusy: "Mộc Tinh is awake",
+src/ui/hud.ts:45:  * Pause and sound; the resources and lives (BUILD_1A6 §9; a blow on the Bastion flashes "−3" there); "Ngày 2 · 0:41",
+src/ui/hud.ts:46:  * "Đêm 2 · còn 12 quái" or dawn; knowledge and the review book once there are any (§7); the early night call (§2).
+src/ui/hud.ts:67:  * empties with them, a pulse in the last 10 s; paused, "Đã dừng" where the time was.
+src/ui/hud.ts:96: /** Build and hire; Tối Thượng with its charge (BUILD_1B §8.2, R2); the tactical pause where the mode has it (§8). */
+src/ui/hud.ts:106:  * Bà Cú Mực's teaching rows and the boss bar (BUILD_1B §13.1: never in the middle of the screen, one line at a time): at
+src/ui/hud.ts:110:  * Mộc Tinh's lines and the stagger's call; a blow on the Bastion (R3: and each drain); the "ghost" health that follows a hit down 0.4 s late.
+src/ui/hud.ts:121:   private readonly said = new Set<string>(); // the moves whose line it has said (Rễ Trồi; R3: Rễ hút sinh khí)
+src/ui/hud.ts:144:     // replayed day (Chơi lại Ngày n drops its events) gets its row too (review R1); dawn and the end clear the chip. The
+src/ui/hud.ts:155:       if (e.t === "bossEmerge") this.say(now, ["Mộc Tinh: " + BOSS_LINES.rise, 3000]);
+src/ui/hud.ts:158:         const lines: [string, number][] = [["Mộc Tinh: " + BOSS_LINES[e.move], 2500], ...(e.move === "drain" ? [[`Roots drain ${e.count} life every ${w.c.content.boss!.drain.everyS} s: defeat him fast!`, 3000] as [string, number]] : [])];
+src/ui/hud.ts:161:       } else if (e.t === "bossPhase") this.say(now, ["Mộc Tinh stunned! Type Power!", 1200], ["Mộc Tinh: " + BOSS_LINES.stagger, 2500]);
+src/ui/hud.ts:162:       else if (e.t === "bossRetreat") this.say(now, ["Mộc Tinh: " + BOSS_LINES.retreat, 5000]);
+src/ui/hud.ts:168:   /** Bà Cú Mực's line, one sentence a line so it stays one line at 1280 × 720 (review R1); two at most (tests/td-tips.test.ts). */
+src/ui/hud.ts:170:     this.say(now, ...tip.line.split(/(?<=[.!?])\s+/).map((part): [string, number] => ["Bà Cú Mực: " + part, 3800]));
+src/ui/hud.ts:186:   /** The teaching frame while there is no boss (R3): the chip, then Bà Cú Mực's line. */
+src/ui/hud.ts:189:     // A chip wraps between its parts ("Gõ chữ đầu để chọn · Esc để thôi"), never inside one.
+src/ui/hud.ts:203:     if (S.stage === BOSS.warned) main = w.phase === "night" ? `<b>Mộc Tinh</b> <small>asleep${chip}</small>` : `<b>Night ${stage.boss.night} · Boss</b> <small>Mộc Tinh awakens${chip}</small>`;
+src/ui/hud.ts:204:     else if (S.stage === BOSS.lull) main = `<b>Mộc Tinh in ${Math.max(0, Math.ceil((S.lullEnd - w.tick) / TICK_HZ))} s</b>${heavyNear(w) ? " · waiting: foes near Fort" : ""}`;
+src/ui/hud.ts:205:     else if (S.stage === BOSS.emerge) main = `<b>Mộc Tinh is rising</b>`;
+src/ui/hud.ts:206:     else if (e < 0) main = `<b>Mộc Tinh retreats</b> <small>+${w.c.content.boss!.chestGold} Gold</small>`;
+src/ui/hud.ts:213:       main = `<div class="td-row"><b>Mộc Tinh</b><small>${phase} · ${left} m to Fort</small></div>` +
+src/ui/profile.ts:2:  * "Hồ sơ gõ" (docs/games/BALANCE.md §2): the card the title opens to show the player how they type, from the
+src/ui/profile.ts:46:       row("Next pace", k === null ? "Off" : "×" + fixed(k, 2), k === null ? "adaptive off" : k > 1.005 ? "above normal" : k < 0.995 ? "below normal" : "normal") +
+src/ui/settings.ts:3:  * "Nhịp tự điều theo cách bạn gõ" and the story's mode (BUILD_1B §14, R3: "Theo hồ sơ", Thư giãn, Cân bằng, Thử thách, Học;
+src/ui/settings.ts:16: /** The mode row's value: the mode's name, or "Theo hồ sơ" (a child plays Thư giãn, anyone else Cân bằng). */
+src/ui/sheets.ts:2:  * The pause and results cards (SPLIT_PLAN D7): dó paper in the middle of the map, never a HUD panel (the word cards do
+src/ui/sheets.ts:3:  * not part around them). Pause (Esc, the HUD's Ⅱ): Chơi tiếp, Cài đặt, Về màn đầu. Results (BUILD_1B §4.3, §13.1): "Giữ
+src/ui/sheets.ts:4:  * được làng" with its stars stamped one by one, or "Lũy đã vỡ" with a hint read off the run, and on a story won the
+src/ui/sheets.ts:5:  * best stars kept (R3: "Kỷ lục ★★", new or not); the numbers, "Từ cần ôn" (the review book's newest five with their
+src/ui/sheets.ts:6:  * meaning); Chơi lại Ngày n (after a night past the first was lost), Chơi lại (từ đầu), Chép số chơi thử, Xem bản đồ,
+src/ui/sheets.ts:7:  * Về màn đầu. Keyboard first: ↑ ↓ pick, Enter chooses, Esc goes back to the game (or closes the settings).
+src/ui/sheets.ts:20:  * The results card's run: a story or the sandbox, a "Chơi lại Ngày n" this run came from (0: none), whether its chunk is in
+src/ui/sheets.ts:28: /** The won card's record line: the best stars kept, "mới" when this win set them (none in the sandbox). */
+src/ui/sheets.ts:33:  * Pháo's fire once it opens: test pass 27/10); from the lull, enemies that got in when they took more lives than the boss's
+src/ui/sheets.ts:34:  * `blows` (counted by the page); it passed the merge with less than half of what had to come off; Dồn lửa words left
+src/ui/sheets.ts:43:   if (s[STAT.livesBoss]! - blows > blows || S.stage < BOSS.fight) return "Foes reached Fort as Mộc Tinh arrived: type Power at nearby towers.";
+src/ui/sheets.ts:94:         : (won ? `<h2>Village saved</h2><div class="td-stars">${[1, 2, 3].map((k) => `<i class="${k <= stars ? "on" : ""}">★</i>`).join("")}</div>${run.story ? recordLine(run.best ?? 0, run.record === true) : ""}<p>Mộc Tinh remembers his name and leaves.${run.retried > 0 ? " (retry Day " + run.retried + ")" : ""}</p>`
+src/ui/td.css:2:  * Lời Gọi in play: a top-down 2D map with dó paper and ink over it
+src/ui/td.css:22:  * The HUD (TK 23.5): dó paper panels edged in ink, in the map's side margins at 16:9
+src/ui/td.css:68: /* Test pass 27/10: at 1280 × 720 in Thư giãn and Học the actions (with Tạm dừng) ran over the word strip: below 1500 px
+src/ui/td.css:98: /* Tối Thượng's charge (R2, §13.3): a ring round Draconis' lantern that fills, glowing once full. */
+src/ui/td.css:133: /* R3 (BUILD_1B §12): the teaching frame before the boss, top right off the field: the phase's chip over Bà Cú Mực's line; a building's "làm gì" line. */
+src/ui/td.css:134: /* As wide as the room right of the field allows (16:9: 304 px at 1280 × 720, 444 px at 1920 × 1080), never under 284 px × hud. */
+src/ui/td.css:166: /* R3 (BUILD_1B §11.2): a Từ Ôn, jade all round with its "Ôn" tag; the stamp of a redeemed one. */
+src/ui/td.css:178: /* R2 (BUILD_1B §13.3): Chữ Chiêu glows Draconis' orange; a direct call is a scroll, rolled at both ends, its window a clock ring. */
+src/ui/td.css:214: /* A short screen (1280 × 720: a won card with 5 words to review was ~730 px): the numbers in two columns, tighter rows. */
+src/ui/team-bar.ts:2:  * The team bar (BUILD_NOW §5.3, BUILD_1A6 §9, TK 23.5, 23.7): Draconis and the Thư Đồng with their number keys and a
+src/ui/team-bar.ts:3:  * badge for the building each was sent to, a closed slot's Bastion level, and the "Đang gọi n/N" chip: bright calls
+src/ui/team-bar.ts:23:     // Draconis' lantern carries Tối Thượng's charge in a ring (BUILD_1B §13.3), in steps of 5 % so the HTML changes seldom.
+src/ui/theme.css:2:  * Lời Gọi's theme: Miền Văn Điền (TK 22.1, 23.3–23.5; SPLIT_PLAN §1.1–1.2).
+src/ui/theme.css:3:  * Terraced rice fields, a bamboo village, paper lanterns: dó paper panels,
+src/ui/theme.css:18:   /* Văn Điền palette */
+src/ui/theme.css:29:   /* dó paper: warm fibres over cream (an SVG noise drawn by the browser, no file) */
+src/ui/tips.ts:3:  * start of each story day and night Bà Cú Mực says the row's line (two sentences at most, one a line) and its tip chip stays
+src/ui/tips.ts:7:  * in. The sandbox skips the table but the boss's two rows (R1: its `boss` and `skipTo` warn Mộc Tinh).
+src/ui/tips.ts:20:   day3: { line: "Upgrade Fort to free Chấm. Helpers speed up work.", chip: "1–4 select · Enter send" },
+src/ui/tips.ts:24:   day5: { line: "Tonight Mộc Tinh awakens. Line the glowing root with towers.", chip: "Boss flees at 50% HP" },
+src/ui/title.css:2:  * The title screen (src/ui/title.ts) and the settings card: Văn Điền at dusk, tokens from theme.css.
+src/ui/title.css:55: /* "Nhịp tự điều theo cách bạn gõ": a switch, jade when on (jade is typing, TK 23.3). */
+src/ui/title.css:64: /* "Hồ sơ gõ" (BALANCE.md §2): the typing profile on dó paper, one jade line of advice. */
+src/ui/title.ts:2:  * The title screen (SPLIT_PLAN §1.2, D7; TK 22.1, 22.9): Văn Điền at dusk. The scene is painted in code as
+src/ui/title.ts:6:  * "Lời Gọi" is brushed in Baloo 2 by a vermilion seal. Keyboard first: ↑ ↓ pick, Enter or 1–5 choose, Esc
+src/ui/title.ts:8:  * "Hồ sơ gõ" opens the typing profile (BALANCE.md §2) in the menu's place, as "Cài đặt" opens the settings. Those two
+src/ui/title.ts:10:  * "Bắt đầu" shows the best stars of map 1 once it was won (td.campaign, BUILD_1B §4.3, R3).
+src/ui/title.ts:28: /** The best stars on "Bắt đầu" (none before a win). */
+src/ui/title.ts:105: /** The painted fallback scene, 1600 × 900, cut to the window. */
+src/ui/title.ts:192:   /** Shows the title; "Chơi tiếp" is open only with a run left to go back to; `best`: map 1's stars. Lanterns light one by one. */
+src/view/audio-min.ts:2:  * Lời Gọi's sound made in code (docs/td/BUILD_NOW.md §5.5, TK 24; SPLIT_PLAN §1.2), no files: bamboo, wood, bronze
+src/view/audio-min.ts:5:  * a limiter; the settings set master, music and effects. A call that lights up rings its kind's alert (power a trống
+src/view/audio-min.ts:6:  * cơm pair, build two bamboo taps, harvest a high bell, chop a low wood knock, mine a small clink, quiz a sáo call; at
+src/view/audio-min.ts:7:  * most 3 a second); a right key is a bamboo tick a semitone higher per letter, a wrong or stray one a dull "tóc" 12 dB
+src/view/audio-min.ts:8:  * lower; a finished word a đàn tranh note on the ngũ cung by chain tier (Perfect and Flash add a bell). Word Shots
+src/view/audio-min.ts:10:  * title adds far villagers calling across the fields. Mộc Tinh (BUILD_1B §13.2): day 5's two low wood beats; the lull's
+src/view/audio-min.ts:12:  * Rễ Trồi's creak through its warning, a wooden "cộp" as it lands; Quật cành's whoosh and thud; the stagger's bell and
+src/view/audio-min.ts:14:  * drum's thump (Ngắt), a bronze stroke and knock (Neo), a stone dome cracking (Phá Khiên).
+src/view/audio-min.ts:160:   /** Mộc Tinh's sounds (BUILD_1B §13.2); a warning's sound is never capped. */
+src/view/audio-min.ts:174:     else if (event.t === "bossStrike" && event.move === "drain") event.hit ? [go(world, t, 90, 0.45, 0.2), chuong(world, t + 0.05, 146.8, 0.08, 2.2)] : [rumble(world, t, (event.end - event.tick) / TICK_HZ, 0.25), giay(world, t, 0.1, (event.end - event.tick) / TICK_HZ, 180, 520)]; // R3: Rễ hút sinh khí draws in, then a knock and a low bell
+src/view/boss-2d.ts:2:  * Mộc Tinh on the 2D map (docs/td/BUILD_1B.md §13.1, R1): a placeholder in ink like everything on the map (a lumpy
+src/view/boss-2d.ts:4:  * the buildings: the warned branch's root vein (day 5 on), the lull's crack crawling to where it rises, Rễ Trồi's
+src/view/boss-2d.ts:6:  * its anticipation and follow-through (a bob and squash as it steps, the canopy lagging; leaning back before Quật
+src/view/boss-2d.ts:7:  * cành and overshooting after; sinking 5 % while it roots; tilting with stars in the stagger), the red arcs of Quật
+src/view/boss-2d.ts:8:  * cành and of the blow on the Bastion, Mầm Gỗ (a leafy dot that wobbles, wilting when it dies), the numbers its hits
+src/view/boss-2d.ts:12:  * R3: Rễ hút sinh khí's root crawling to the Bastion, its ring, the leaves drawn off. Particles come from the fixed pool
+src/view/boss-2d.ts:84:         // R2: stones fly, rootlets whip out past the bark (R2 review: big and inked enough to read at 1280 × 720).
+src/view/boss-2d.ts:92:         // R3, Rễ hút sinh khí: the life drawn off the Bastion, embers along the root to its canopy after the pulse (under()).
+src/view/boss-2d.ts:131:   /** Under the buildings: the root vein of the warned branch, the lull's crack, Rễ Trồi's rings, particles. */
+src/view/boss-2d.ts:161:     // Rễ Trồi's warning: under each building aimed at, a striped red ring and a sweep going round the warning's time.
+src/view/boss-2d.ts:188:     // R3, Rễ hút sinh khí: over its warning a root crawls from its feet to the Bastion, ink-edged so it reads on the road;
+src/view/boss-2d.ts:212:   /** Mộc Tinh's body and its warnings, Mầm Gỗ, the numbers. Over the other enemies. */
+src/view/boss-2d.ts:219:       // Mầm Gỗ: a leafy dot that wobbles as it walks.
+src/view/boss-2d.ts:229:     // R2: Quật cành's blow flashes the soldiers it threw white for 60 ms.
+src/view/boss-2d.ts:256:   /** Quật cành's arc, the blow on the Bastion's arc, the sprouts nudging up: red where it will land, darkening to the hit. */
+src/view/boss-2d.ts:300:         // Just outside the canopy (drawn 1.3× its body): four green nubs pushing up.
+src/view/boss-2d.ts:315:     // Drawn 1.3× its body radius (≈ 6.5 m across): it has to read at a glance among the towers (§13.1).
+src/view/boss-2d.ts:322:     // Quật cành: it leans back before, overshoots after (150 ms).
+src/view/boss-2d.ts:390:       pen.text("Burn ×1.25", x, z + r + 1.6, 12, "#c23b22", 800, "#c23b22"); // under it: the hits' numbers rise over it (test pass 27/10)
+src/view/boss-2d.ts:418:   /** Stunned buildings' marks, over the boss (review R1): a grey ring and "Tê N s" on a paper chip. */
+src/view/debug-2d.ts:9:  * player's hand. The camera zooms and pans. It reads the world and never changes it. Painted in the Văn Điền palette
+src/view/debug-2d.ts:32: /** The Văn Điền palette (theme.css --vd-*): paddies, bamboo, silver water, earth paths; the meaning colours as TK 23.3. */
+src/view/debug-2d.ts:91:   /** Mộc Tinh's layers (BUILD_1B §13.1) and R2's Tối Thượng and direct calls (§13.3); main.ts hands them each frame's events. */
+src/view/debug-2d.ts:119:   /** Zooms 1–2.5× (BUILD_NOW §5.4) about the point under (px, py). */
+src/view/debug-2d.ts:265:    * hedge (lũy tre) round the field.
+src/view/debug-2d.ts:327:   /** A hipped thatch roof from above, `w` × `d` m, its ridge east to west: a light north face, a dark south one. */
+src/view/debug-2d.ts:402:     // The rift: a pool of Mực Câm ink with splashes round it.
+src/view/debug-2d.ts:661:       const lift = def.altitude > 0 ? 1.1 + 0.35 * Math.sin(now * 0.005 + e) : 0; // test pass 27/10: Ma Trơi read as walkers
+src/view/debug-2d.ts:663:       if (def.boss || def.id === w.c.content.boss?.summon.enemy) continue; // boss-2d.ts draws Mộc Tinh and its sprouts
+src/view/debug-2d.ts:671:       // Đầu Đàn's aura ring and pennant (both pulse while Neo is open); a Troll's stone dome, dashed; a pinned pack's slate rim.
+src/view/debug-2d.ts:683:       if (E.takenUntil[e]! > w.tick) this.text("×" + String(a!.takenMul).replace(".", ","), x, z - def.radius - 1.4, 13, COLOR.seal, 900);
+src/view/debug-2d.ts:685:       if (def.def.split !== undefined) this.disc(x, z, def.radius * 0.45, "rgba(255, 244, 214, 0.7)", null); // Nuppeppō: two in one
+src/view/debug-2d.ts:690:   /** A Đầu Đàn: its aura's faint ring and a red pennant over it; `pulse` (0–1) brightens both while Neo is open. */
+src/view/debug-2d.ts:714:   /** A walker's path ahead, dashed; Thư Đồng as lettered discs, Draconis a winged triangle over its shadow. */
+src/view/debug-2d.ts:788:   /** A glowing jade head with the word's letters trailing behind it (test pass 27/10: 2–3× the old 6 px dot). */
+src/view/debug-2d.ts:797:   /** Where the action is, CSS px, which the word cards keep off (test pass 27/10): Mộc Tinh with 1.5 m round it, the rain of Tối Thượng, a word shot's target and where one landed in the last 0.7 s. */
+src/view/folk.ts:2:  * Văn Điền instruments made in code (TK 24.6, 24.8; SPLIT_PLAN §1.2), no files: a đàn tranh pluck, a sáo
+src/view/folk.ts:3:  * trúc note, a trống cơm hit, a bronze bell, a bamboo or wood knock, a paper puff and a far villager's
+src/view/folk.ts:9: /** Ngũ cung (Hò, Xự, Xang, Xê, Cống ≈ C D F G A): semitones over C. Typing notes and music share it (TK 24.8). */
+src/view/folk.ts:55: /** Đàn tranh: a bright string that darkens as it rings; `slide` bends up into the note (vuốt). */
+src/view/folk.ts:70: /** Sáo trúc: a breathy sine with a late vibrato, `length` s held. */
+src/view/folk.ts:90: /** Trống cơm: a tuned skin that drops in pitch, with a soft slap. */
+src/view/folk.ts:126: /** Mộc Tinh's roar: low noise and a falling saw through a lowpass. */
+src/view/folk.ts:134: /** A villager calling across the fields, far off: "Ơ… ơi!" (a voice through two vowel formants, rising, then falling). */
+src/view/fx-2d.ts:4:  * (inked chunks) and rootlets that whip out from where they start (the boss's rise: R2 review, seen at 1280 × 720).
+src/view/fx-2d.ts:5:  * Positions are metres; the pen draws in the map's transform. FxView (Tối Thượng, the direct calls' outcomes) lives in
+src/view/fx-2d.ts:32:   /** A particle of `kind` at (x, z) moving (vx, vz) m/s for `life` ms, `size` × its own (a stone's radius, a rootlet's length in m). */
+src/view/fx-pipe.ts:3:  * hits read from the combat ring for FxDraw. FxView (R2, BUILD_1B §13.3): Tối Thượng (Draconis' portrait sliding in
+src/view/music.ts:2:  * The music placeholder made in code (TK 24.8; SPLIT_PLAN §1.2), on its own bus: one tempo (84 BPM), one scale (ngũ
+src/view/music.ts:4:  * đàn tranh figures over a low string, a sáo trúc phrase every four bars. Tension (night): trống cơm, a low tranh
+src/view/music.ts:6:  * Before Mộc Tinh rises the music steps back; while it fights a steady low drum joins (BUILD_1B §13.2). Eighths are
+src/view/music.ts:37:   /** The sáo phrase being played: [eighth it starts on, scale step, eighths held]. */
+src/view/music.ts:77:     // Every fourth bar a sáo phrase: a short walk on the scale, held notes at its ends.
+src/view/words/cards.ts:5:  * (●●○), the meaning under it by the rule of BUILD_1B §11.1 (R3: meaningShown); a Từ Ôn is jade with its "Ôn" tag, its
+src/view/words/cards.ts:6:  * meaning always, "Chuộc lại" stamped when redeemed; a quiz shows the meaning and the first letter with blanks ("tốt;
+src/view/words/cards.ts:25: /** By call kind (CALL_KIND): power, build, harvest, chop, mine, quiz; R2: Chữ Chiêu, a direct call (Ngắt). */
+src/view/words/cards.ts:29: /** Call c's icon and name; a direct call's by its enemy's verb (R3: Ngắt, Neo, Phá Khiên). */
+src/view/words/cards.ts:36:  * BUILD_1B §11.1 (R3): the meaning under a word before it is typed: always in Học and Thư giãn and for a child, else
+src/view/words/cards.ts:37:  * while the word was seen at most twice (Cân bằng) or once (Thử thách), this sighting counted; `seen` null (Học's chunk
+src/view/words/cards.ts:38:  * not in) shows it. A quiz and a Từ Ôn always show it; 3 errors on a word show it again (the cards).
+src/view/words/cards.ts:83:   /** Học (R3): a child's profile, and the times a deck word was seen (app/learn.ts; null until it is in). */
+src/view/words/cards.ts:98:     // A Từ Ôn redeemed (its review event comes just before its wordHit) is stamped "Chuộc lại" in place of its grade (R3).
+src/view/words/cards.ts:137:     // A "Dồn lửa" call: amber (BUILD_1B §13.1); R2 (§13.3): Chữ Chiêu glows orange, a direct call is a scroll with its window's clock.
+src/view/words/lanes.ts:52:  * columns at neighbouring trees with a meaning strip at 1920 × 1080 need more than 240 px); a lane with `lo`–`hi` is put back

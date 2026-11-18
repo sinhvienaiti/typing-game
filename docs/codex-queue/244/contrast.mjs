@@ -1,0 +1,4 @@
+import fs from 'node:fs';import {im,raw,mask,lum,json,D} from './lib.mjs';
+const r=JSON.parse(fs.readFileSync(`${D}/processed.json`)).filter(r=>r.type==='icon'),panels={'dragon-hold':'ui/frames/panel-large.png','typing-defense':'ui/frames-epic/panel-large.v2.png'},out=[];
+for(const a of r){const s=a.name==='hud-settings'?28:24,b=raw(a.outputs[0].file,s),m=mask(b,128),samples=[];for(const y of [200,700]){const p=`games/${a.game}/art-src/${panels[a.game]}`,bg=im([p,'-crop',`${s}x${s}+208+${y+8}`,'+repage','-depth','8','rgba:-']);let sy=0,sb=0,n=0;for(let i=0;i<m.length;i++)if(m[i]){const j=i*4,al=b[j+3]/255;sy+=lum(b[j]*al+bg[j]*(1-al),b[j+1]*al+bg[j+1]*(1-al),b[j+2]*al+bg[j+2]*(1-al));sb+=lum(bg[j],bg[j+1],bg[j+2]);n++;}samples.push({crop:[208,y+8,s,s],objectLuma:sy/n,panelLuma:sb/n,delta:sy/n-sb/n});}out.push({game:a.game,name:a.name,samples});}
+json(`${D}/contrast-panels.json`,out);console.log(JSON.stringify(out,null,2));

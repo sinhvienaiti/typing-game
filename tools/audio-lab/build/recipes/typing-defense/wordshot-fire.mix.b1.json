@@ -1,0 +1,148 @@
+{
+ "$schema": "../../schemas/recipe.schema.json",
+ "schema": "audiolab.recipe/1",
+ "game": "typing-defense",
+ "id": "wordshot-fire.mix",
+ "group": "shot",
+ "family": "ban",
+ "description": "Lô 1 (BATCH1_BRIEF #23): Phát Chữ bay ra. Tiếng vút Stable Audio 3 (bốn bản đứng đầu L2, mỗi prompt một bản; cửa sổ đầu tiếng thật của chuỗi xử lý) cộng tiếng lật giấy Kenney RPG bookFlip3/bookFlip2 (cắt từ 25 ms, lọc cao 1,5 kHz, −9 dB, vào sau 8 ms), lọc cao 120 Hz (mục 4.3.3 'khạc, phóng': dưới 120 Hz thấp hơn ít nhất 12 dB). Biến thể n dùng tiếng vút n.",
+ "channels": 1,
+ "layers": [
+  {
+   "id": "whoosh",
+   "role": "body",
+   "fadeOutMs": 40,
+   "source": {
+    "gen": {
+     "tool": "stable-audio-3 (sa3_batch.py)",
+     "model": "stabilityai/stable-audio-3-optimized@08b17423649b5714b22eab20f96bf00751f2358a",
+     "licence": "LicenseRef-Stability-Community-2024",
+     "file": "/Users/toandx/AudioLab/work/typing-defense/wordshot-fire/b1/raw/wordshot-fire__C__s2006.f32.wav",
+     "record": "/Users/toandx/AudioLab/work/typing-defense/wordshot-fire/b1/raw/wordshot-fire__C__s2006.json",
+     "window": [
+      0.025,
+      0.169
+     ]
+    }
+   },
+   "vary": {
+    "swapMode": "cycle",
+    "swap": [
+     {
+      "gen": {
+       "tool": "stable-audio-3 (sa3_batch.py)",
+       "model": "stabilityai/stable-audio-3-optimized@08b17423649b5714b22eab20f96bf00751f2358a",
+       "licence": "LicenseRef-Stability-Community-2024",
+       "file": "/Users/toandx/AudioLab/work/typing-defense/wordshot-fire/b1/raw/wordshot-fire__A__s2002.f32.wav",
+       "record": "/Users/toandx/AudioLab/work/typing-defense/wordshot-fire/b1/raw/wordshot-fire__A__s2002.json",
+       "window": [
+        0.028,
+        0.172
+       ]
+      }
+     },
+     {
+      "gen": {
+       "tool": "stable-audio-3 (sa3_batch.py)",
+       "model": "stabilityai/stable-audio-3-optimized@08b17423649b5714b22eab20f96bf00751f2358a",
+       "licence": "LicenseRef-Stability-Community-2024",
+       "file": "/Users/toandx/AudioLab/work/typing-defense/wordshot-fire/b1/raw/wordshot-fire__B__s2006.f32.wav",
+       "record": "/Users/toandx/AudioLab/work/typing-defense/wordshot-fire/b1/raw/wordshot-fire__B__s2006.json",
+       "window": [
+        0.0225,
+        0.2385
+       ]
+      }
+     },
+     {
+      "gen": {
+       "tool": "stable-audio-3 (sa3_batch.py)",
+       "model": "stabilityai/stable-audio-3-optimized@08b17423649b5714b22eab20f96bf00751f2358a",
+       "licence": "LicenseRef-Stability-Community-2024",
+       "file": "/Users/toandx/AudioLab/work/typing-defense/wordshot-fire/b1/raw/wordshot-fire__D__s2001.f32.wav",
+       "record": "/Users/toandx/AudioLab/work/typing-defense/wordshot-fire/b1/raw/wordshot-fire__D__s2001.json",
+       "window": [
+        0.052,
+        0.245
+       ]
+      }
+     }
+    ]
+   }
+  },
+  {
+   "id": "paper",
+   "role": "sweetener",
+   "gainDb": -9,
+   "offsetMs": 8,
+   "trim": {
+    "startMs": 25,
+    "endMs": 190
+   },
+   "fadeOutMs": 60,
+   "filters": [
+    {
+     "type": "highpass",
+     "hz": 1500
+    }
+   ],
+   "source": {
+    "library": "kenney/rpg-audio/Audio/bookFlip3.ogg"
+   },
+   "vary": {
+    "swapMode": "cycle",
+    "swap": [
+     {
+      "library": "kenney/rpg-audio/Audio/bookFlip2.ogg"
+     },
+     {
+      "library": "kenney/rpg-audio/Audio/bookFlip3.ogg"
+     },
+     {
+      "library": "kenney/rpg-audio/Audio/bookFlip2.ogg"
+     }
+    ]
+   }
+  }
+ ],
+ "chain": {
+  "dcHpfHz": 120,
+  "headTrim": {
+   "thresholdDb": -50,
+   "preRollMs": 0.5
+  },
+  "maxLengthMs": 210,
+  "tail": {
+   "floorDb": -60,
+   "shape": "exp",
+   "kneeMs": 90
+  },
+  "normalise": {
+   "mode": "lufs-m-max",
+   "target": -20
+  },
+  "limiter": {
+   "ceilingDbtp": -1.0,
+   "releaseMs": 60,
+   "maxGrDb": 6
+  }
+ },
+ "variants": {
+  "count": 4,
+  "seed": 2301,
+  "includeBase": true,
+  "pitchCents": [
+   0,
+   0
+  ],
+  "gainDb": [
+   0,
+   0
+  ]
+ },
+ "export": {
+  "path": "sfx/battle/wordshot-fire",
+  "ogg": true,
+  "oggQuality": 0.6
+ }
+}

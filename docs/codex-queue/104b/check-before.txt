@@ -1,0 +1,101 @@
+$ node src/kit/verify-kit.mjs && pnpm test && pnpm build
+src/kit OK: 59 files match kit-manifest.json (kit 0.1.0, modules platform, input, vocab, speech, learning, three, tools, feedback, audio, balance)
+$ vitest run
+
+ RUN  v3.2.7 /Users/toandx/htdocs/typing-game/games/.wt-ts-codex
+
+ ✓ tests/ship-motion.test.ts (6 tests) 8ms
+ ✓ tests/type-feel.test.ts (6 tests) 15ms
+ ✓ tests/gun-feel.test.ts (6 tests) 27ms
+ ✓ tests/overrides.test.ts (5 tests) 18ms
+ ✓ tests/survival-input.test.ts (4 tests) 27ms
+ ✓ tests/boundary.test.ts (4 tests) 390ms
+ ✓ tests/theme.test.ts (9 tests) 13ms
+ ✓ tests/vocab-pin.test.ts (5 tests) 12ms
+ ✓ tests/small-labels.test.ts (3 tests) 4ms
+ ✓ tests/learning.test.ts (1 test) 3ms
+ ✓ tests/dev-handle.test.ts (9 tests) 6ms
+ ✓ tests/survival-boundary.test.ts (5 tests) 3174ms
+   ✓ Sinh Tồn boundary > the rules use no DOM, clock, storage, locale, Math.random, trigonometry or powers  2871ms
+ ✓ tests/guns.test.ts (25 tests) 569ms
+ ✓ tests/balance.test.ts (17 tests) 8770ms
+   ✓ skill profile (BALANCE.md §2) > learns from a played run: speed, accuracy, spread and seconds to the first key, by familiarity  1377ms
+   ✓ skill profile (BALANCE.md §2) > leaves quits, AFK runs, short runs and outliers out (the kit's rules), counting the trend  543ms
+   ✓ pace k and the run header (BALANCE.md §4.1) > scales spawn rates by k, surges' size by k, walking speed by half of it, all over the mode; the header is in the hash  2236ms
+   ✓ the pace director in the sim (BALANCE.md §4.2, this game's step table) > judges a whole run within the kit's caps and goes into the hash; off ('Tắt') it never steps  1230ms
+   ✓ bots and the report (BALANCE.md §6, §7) > bots press keys through the page's input path; the session's log replays to the same world  1182ms
+   ✓ bots and the report (BALANCE.md §6, §7) > summarises bot × mode cells and gives every gate B1–B9  2069ms
+stdout | tests/survival-sim.test.ts > step cost (BUILD_S0 §8, BUILD_S1 §17) > steps 700 foes and 2,000 rounds in ≤ 1.5 ms
+survival sim step (700 foes, ~2000 rounds): median 1.081 ms, p95 2.473 ms
+
+ ✓ tests/stage-rules.test.ts (16 tests) 9288ms
+   ✓ Săn Đầu Đàn (§7.1) > walks the leaders in at their times with an escort ahead and a horn; the director never adds or removes one  1437ms
+   ✓ Săn Đầu Đàn (§7.1) > is won once `need` leaders fall: the horde pulls back, harmless, for 2 s, then the stage ends  433ms
+   ✓ Săn Đầu Đàn (§7.1) > is lost when more leaders get through than it can spare (leaders − need)  588ms
+   ✓ Vết nứt (§7.2) > warns RIFT.warn s ahead on a wall at RIFT.zMin–zMax m (a telegraph), then pours its mines there over a second  337ms
+   ✓ the attention budget (§7.6) > never starts two telegraphs within 4 s, nor a rift in a surge's first seconds or in a storm: stages 1–4 × 20 seeds × 3 modes  4606ms
+   ✓ special packs (§8) > bring stage 1's first Trâu pack at 80 s (never before), and Khiên packs with their shields on stage 4  474ms
+   ✓ the skill profile on a hard learning rule (§7.3) > a Thiếu chữ run gives accuracy and seconds to the first key, never speed or spread  393ms
+   ✓ stage runs replay (G8) > a bot's stage run, replayed from its log with the same header, gives the same hash  810ms
+ ✓ tests/s0-trace.test.ts (18 tests) 9912ms
+   ✓ the S0 trial's event trace (golden) > novice seed 1  733ms
+   ✓ the S0 trial's event trace (golden) > novice seed 2  508ms
+   ✓ the S0 trial's event trace (golden) > novice seed 3  478ms
+   ✓ the S0 trial's event trace (golden) > novice seed 4  519ms
+   ✓ the S0 trial's event trace (golden) > novice seed 5  604ms
+   ✓ the S0 trial's event trace (golden) > novice seed 6  444ms
+   ✓ the S0 trial's event trace (golden) > standard seed 1  587ms
+   ✓ the S0 trial's event trace (golden) > standard seed 2  571ms
+   ✓ the S0 trial's event trace (golden) > standard seed 3  493ms
+   ✓ the S0 trial's event trace (golden) > standard seed 4  515ms
+   ✓ the S0 trial's event trace (golden) > standard seed 5  419ms
+   ✓ the S0 trial's event trace (golden) > standard seed 6  437ms
+   ✓ the S0 trial's event trace (golden) > fast seed 1  611ms
+   ✓ the S0 trial's event trace (golden) > fast seed 2  770ms
+   ✓ the S0 trial's event trace (golden) > fast seed 3  492ms
+   ✓ the S0 trial's event trace (golden) > fast seed 4  401ms
+   ✓ the S0 trial's event trace (golden) > fast seed 5  525ms
+   ✓ the S0 trial's event trace (golden) > fast seed 6  779ms
+stdout | tests/survival-sim.test.ts > step cost (BUILD_S0 §8, BUILD_S1 §17) > steps a chapter stage's peak (700 foes, 2,000 rounds, 63 shells + Pháo Sao's own, 32 shields, 3 bays firing) in ≤ 1.5 ms (§17)
+survival chapter step (before {"foes":700,"rounds":2000,"shells":63,"shields":32}, fewest after {"foes":513,"rounds":1543,"shells":54,"shields":26}, launches 5): median 1.871 ms, p95 3.122 ms
+
+ ❯ tests/survival-sim.test.ts (20 tests | 1 failed) 11501ms
+   ✓ determinism > the same seed and command log give the same hash; a replay matches the live run  563ms
+   ✓ determinism > matches tick by tick over a whole stage, hit stops and a flood included  1715ms
+   ✓ spawns (BUILD_S0 §4, the run's plan) > follow the plan: calm × tide, surges × their strength, lulls after them, all × mode and k; groups of 4–12  560ms
+   ✓ spawns (BUILD_S0 §4, the run's plan) > draw each run's tide and surge strengths from the seed: the same seed, the same plan; storms at their chance, within their spread  410ms
+   ✓ spawns (BUILD_S0 §4, the run's plan) > keep a group waiting at the gate while the field is at the cap, and never lose it 36ms
+   ✓ magazines (BUILD_S0 §5) > a word loads one magazine, stacking to two; Xung empties 24 rounds in 2.4 s 82ms
+   ✓ magazines (BUILD_S0 §5) > quality in the trial: Chuẩn ×1.06 damage and +4 % crit, Nhanh ×1.15 rate, both mark the magazine perfect (a chapter's stage: tests/guns.test.ts) 1ms
+   ✓ magazines (BUILD_S0 §5) > Tia burns 2.5 s per magazine, a pulse every 0.1 s, faster when Nhanh 258ms
+   ✓ magazines (BUILD_S0 §5) > typing a slot's word loads its gun; a wrong key is an error that keeps the word; Backspace to zero frees the lock 5ms
+   ✓ the grid > finds the same first foe along a segment as testing every foe (many seeds)  572ms
+   ✓ Tia aims at the crowd > lights its ray on the densest cluster in reach and sweeps it toward the next 6ms
+   ✓ Tia aims at the crowd > burns what its ray crosses, up to its length, and nothing beside it 2ms
+   ✓ the press (S0 review) > foes walk in at full stride and slow down as they close on the ship 1ms
+   ✓ the press (S0 review) > Xung holds its fire while every foe is out of its range, and opens up once one walks in 5ms
+   ✓ hit stops never drop keys > keys typed during a stop all reach the typing, in order, at full rate, while the world slows 4ms
+   ✓ hit stops never drop keys > holds the guns' fire during a stop: the rounds of a word finished in it wait 5ms
+   ✓ the stage plays > the standard bot (35 WPM, typed like a person, k = 1) sees 35–80 foes in the calm, a flood at a surge and far more at a storm, fights in the ship's half, and wins most runs  4176ms
+   ✓ the stage plays > an idle ship loses: foes breach the bottom line and hurt it 42ms
+   ✓ step cost (BUILD_S0 §8, BUILD_S1 §17) > steps 700 foes and 2,000 rounds in ≤ 1.5 ms  656ms
+   × step cost (BUILD_S0 §8, BUILD_S1 §17) > steps a chapter stage's peak (700 foes, 2,000 rounds, 63 shells + Pháo Sao's own, 32 shields, 3 bays firing) in ≤ 1.5 ms (§17) 2378ms
+     → expected 1.8708750000005239 to be less than or equal to 1.5
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/survival-sim.test.ts > step cost (BUILD_S0 §8, BUILD_S1 §17) > steps a chapter stage's peak (700 foes, 2,000 rounds, 63 shells + Pháo Sao's own, 32 shields, 3 bays firing) in ≤ 1.5 ms (§17)
+AssertionError: expected 1.8708750000005239 to be less than or equal to 1.5
+ ❯ tests/survival-sim.test.ts:536:25
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed | 16 passed (17)
+      Tests  1 failed | 158 passed (159)
+   Start at  23:47:39
+   Duration  16.07s (transform 6.39s, setup 0ms, collect 35.50s, tests 43.74s, environment 82ms, prepare 5.68s)
+
+[ELIFECYCLE] Test failed. See above for more details.
+[ELIFECYCLE] Command failed with exit code 1.

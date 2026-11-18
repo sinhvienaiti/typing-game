@@ -1,0 +1,161 @@
+
+ RUN  v3.2.7 /Users/toandx/htdocs/typing-game/games/.wt-ts-codex
+
+ ❯ tests/intro-key.test.ts (22 tests | 9 failed) 16ms
+   × stage card key decision > Escape from loadout goes back only to a known screen 4ms
+     → expected 'enter' to be 'back' // Object.is equality
+   × stage card key decision > Escape from journey goes back only to a known screen 0ms
+     → expected 'enter' to be 'back' // Object.is equality
+   × stage card key decision > Escape from direct goes back only to a known screen 0ms
+     → expected 'enter' to be 'none' // Object.is equality
+   ✓ stage card key decision > a still enters from every origin 0ms
+   ✓ stage card key decision > Enter still enters from every origin 0ms
+   ✓ stage card key decision >   still enters from every origin 0ms
+   ✓ stage card key decision > Space still enters from every origin 0ms
+   ✓ stage card key decision > ArrowLeft still enters from every origin 0ms
+   ✓ stage card key decision > 1 still enters from every origin 0ms
+   ✓ stage card key decision > Tab still enters from every origin 0ms
+   × actual stage card listeners > returns to the same stage and ordered loadout, consumes Escape, then accepts a changed loadout 2ms
+     → expected 'play' to be 'start' // Object.is equality
+   × actual stage card listeners > returns from journey to Journey focused on the same stage 1ms
+     → expected 'play' to be 'start' // Object.is equality
+   × actual stage card listeners > returns from replay to Journey focused on the same stage 1ms
+     → expected 'play' to be 'start' // Object.is equality
+   × actual stage card listeners > keeps a direct URL on the card, without unlocking audio or typing 0ms
+     → expected 'play' to be 'intro' // Object.is equality
+   × actual stage card listeners > consumes the origin once, and rejects a marker for different guns or a different stage 1ms
+     → expected 'play' to be 'intro' // Object.is equality
+   ✓ actual stage card listeners > a enters once, unlocks audio and never types the entry key 1ms
+   ✓ actual stage card listeners > Enter enters once, unlocks audio and never types the entry key 1ms
+   ✓ actual stage card listeners >   enters once, unlocks audio and never types the entry key 1ms
+   ✓ actual stage card listeners > 1 enters once, unlocks audio and never types the entry key 1ms
+   ✓ actual stage card listeners > ArrowLeft enters once, unlocks audio and never types the entry key 1ms
+   ✓ actual stage card listeners > Tab enters once, unlocks audio and never types the entry key 1ms
+   × actual stage card listeners > ignores held or untrusted card keys, and Escape works before assets are ready 1ms
+     → expected null to be 'loadout' // Object.is equality
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 9 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/intro-key.test.ts > stage card key decision > Escape from loadout goes back only to a known screen
+ FAIL  tests/intro-key.test.ts > stage card key decision > Escape from journey goes back only to a known screen
+AssertionError: expected 'enter' to be 'back' // Object.is equality
+
+Expected: "back"
+Received: "enter"
+
+ ❯ tests/intro-key.test.ts:14:38
+     12| describe("stage card key decision", () => {
+     13|   it.each(origins)("Escape from %s goes back only to a known screen", …
+     14|     expect(introKey("Escape", from)).toBe(from === "direct" ? "none" :…
+       |                                      ^
+     15|   });
+     16| 
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/9]⎯
+
+ FAIL  tests/intro-key.test.ts > stage card key decision > Escape from direct goes back only to a known screen
+AssertionError: expected 'enter' to be 'none' // Object.is equality
+
+Expected: "none"
+Received: "enter"
+
+ ❯ tests/intro-key.test.ts:14:38
+     12| describe("stage card key decision", () => {
+     13|   it.each(origins)("Escape from %s goes back only to a known screen", …
+     14|     expect(introKey("Escape", from)).toBe(from === "direct" ? "none" :…
+       |                                      ^
+     15|   });
+     16| 
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/9]⎯
+
+ FAIL  tests/intro-key.test.ts > actual stage card listeners > returns to the same stage and ordered loadout, consumes Escape, then accepts a changed loadout
+AssertionError: expected 'play' to be 'start' // Object.is equality
+
+Expected: "start"
+Received: "play"
+
+ ❯ tests/intro-key.test.ts:105:28
+    103|     const p = page(leave("loadout"));
+    104|     expect(p.fire("keydown", "Escape")).toEqual({ prevented: true, sto…
+    105|     expect(p.context.mode).toBe("start");
+       |                            ^
+    106|     expect(p.journey.screen).toBe("loadout");
+    107|     expect(p.journey.stage.id).toBe("c1-s4");
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/9]⎯
+
+ FAIL  tests/intro-key.test.ts > actual stage card listeners > returns from journey to Journey focused on the same stage
+ FAIL  tests/intro-key.test.ts > actual stage card listeners > returns from replay to Journey focused on the same stage
+AssertionError: expected 'play' to be 'start' // Object.is equality
+
+Expected: "start"
+Received: "play"
+
+ ❯ tests/intro-key.test.ts:121:28
+    119|     const p = page(leave(from));
+    120|     p.fire("keydown", "Escape");
+    121|     expect(p.context.mode).toBe("start");
+       |                            ^
+    122|     expect(p.journey.screen).toBe("stages");
+    123|     expect(p.journey.menu.current?.id).toBe("c1-s4");
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/9]⎯
+
+ FAIL  tests/intro-key.test.ts > actual stage card listeners > keeps a direct URL on the card, without unlocking audio or typing
+AssertionError: expected 'play' to be 'intro' // Object.is equality
+
+Expected: "intro"
+Received: "play"
+
+ ❯ tests/intro-key.test.ts:131:28
+    129|     const p = page();
+    130|     p.fire("keydown", "Escape");
+    131|     expect(p.context.mode).toBe("intro");
+       |                            ^
+    132|     expect(p.journey.active).toBe(false);
+    133|     expect(p.resumed()).toBe(0);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/9]⎯
+
+ FAIL  tests/intro-key.test.ts > actual stage card listeners > consumes the origin once, and rejects a marker for different guns or a different stage
+AssertionError: expected 'play' to be 'intro' // Object.is equality
+
+Expected: "intro"
+Received: "play"
+
+ ❯ tests/intro-key.test.ts:142:33
+    140|     const direct = page(store);
+    141|     direct.fire("keydown", "Escape");
+    142|     expect(direct.context.mode).toBe("intro");
+       |                                 ^
+    143|     const otherGuns = page(leave("loadout"), [GUN.tia, GUN.ray]);
+    144|     otherGuns.fire("keydown", "Escape");
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/9]⎯
+
+ FAIL  tests/intro-key.test.ts > actual stage card listeners > ignores held or untrusted card keys, and Escape works before assets are ready
+AssertionError: expected null to be 'loadout' // Object.is equality
+
+- Expected: 
+"loadout"
+
++ Received: 
+null
+
+ ❯ tests/intro-key.test.ts:170:30
+    168|     p.context.live = false;
+    169|     p.fire("keydown", "Escape");
+    170|     expect(p.journey.screen).toBe("loadout");
+       |                              ^
+    171|     expect(p.sent).toEqual([]);
+    172|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/9]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  9 failed | 13 passed (22)
+   Start at  23:50:32
+   Duration  469ms (transform 51ms, setup 0ms, collect 309ms, tests 16ms, environment 0ms, prepare 34ms)
+

@@ -1,0 +1,126 @@
+[
+  {
+    "id": "M2-output-types",
+    "step": "step 2: query/lookup output drops wrongly typed samples",
+    "file": "shared/learning/query.mjs",
+    "sha256": "ccbb59ffb7bf30c68fe06ec680c774d679f56da74aa977e7dd03bda88f87067b",
+    "restoredSha256": "ccbb59ffb7bf30c68fe06ec680c774d679f56da74aa977e7dd03bda88f87067b",
+    "mutated": {
+      "learning": {
+        "exit": 1,
+        "tests": 84,
+        "pass": 73,
+        "fail": 11,
+        "failed": [
+          "F2 types stored profile drops a sample whose occurredAt holds an object, lookup and query",
+          "F2 types stored profile drops a sample whose occurredAt holds an array, lookup and query",
+          "F2 types stored profile drops a sample whose gameId holds an object, lookup and query",
+          "F2 types stored profile drops a sample whose gameId holds an array, lookup and query",
+          "F2 types stored profile drops a sample whose activityType holds an object, lookup and query",
+          "F2 types stored profile drops a sample whose activityType holds an array, lookup and query",
+          "F2 types stored profile drops a sample whose result holds an object, lookup and query",
+          "F2 types stored profile drops a sample whose result holds an array, lookup and query",
+          "F2 types stored profile drops a sample whose hintUsed holds an object, lookup and query",
+          "F2 types stored profile drops a sample whose hintUsed holds an array, lookup and query",
+          "F2 types stored profile drops samples with a wrong primitive or a missing field"
+        ]
+      },
+      "portal": {
+        "exit": 1,
+        "tests": 70,
+        "pass": 60,
+        "fail": 10,
+        "failed": [
+          "F2 types lookup from a stored profile drops a sample whose occurredAt nests an answer",
+          "F2 types query from a stored profile drops a sample whose occurredAt nests an answer",
+          "F2 types lookup from a stored profile drops a sample whose gameId nests an answer",
+          "F2 types query from a stored profile drops a sample whose gameId nests an answer",
+          "F2 types lookup from a stored profile drops a sample whose activityType nests an answer",
+          "F2 types query from a stored profile drops a sample whose activityType nests an answer",
+          "F2 types lookup from a stored profile drops a sample whose result nests an answer",
+          "F2 types query from a stored profile drops a sample whose result nests an answer",
+          "F2 types lookup from a stored profile drops a sample whose hintUsed nests an answer",
+          "F2 types query from a stored profile drops a sample whose hintUsed nests an answer"
+        ]
+      }
+    },
+    "restored": {
+      "learning": {
+        "exit": 0,
+        "tests": 84,
+        "pass": 84,
+        "fail": 0,
+        "failed": []
+      },
+      "portal": {
+        "exit": 0,
+        "tests": 70,
+        "pass": 70,
+        "fail": 0,
+        "failed": []
+      }
+    }
+  },
+  {
+    "id": "M3-backup-types",
+    "step": "step 3: backup import drops wrongly typed samples",
+    "file": "shared/learning/profile-backup.mjs",
+    "sha256": "ac422e75f6fb8eb2d7d336811c7b872764612c766cacd99e5f8d483613761d3e",
+    "restoredSha256": "ac422e75f6fb8eb2d7d336811c7b872764612c766cacd99e5f8d483613761d3e",
+    "mutated": {
+      "learning": {
+        "exit": 1,
+        "tests": 84,
+        "pass": 73,
+        "fail": 11,
+        "failed": [
+          "F2 types backup import drops a sample whose occurredAt holds an object",
+          "F2 types backup import drops a sample whose occurredAt holds an array",
+          "F2 types backup import drops a sample whose gameId holds an object",
+          "F2 types backup import drops a sample whose gameId holds an array",
+          "F2 types backup import drops a sample whose activityType holds an object",
+          "F2 types backup import drops a sample whose activityType holds an array",
+          "F2 types backup import drops a sample whose result holds an object",
+          "F2 types backup import drops a sample whose result holds an array",
+          "F2 types backup import drops a sample whose hintUsed holds an object",
+          "F2 types backup import drops a sample whose hintUsed holds an array",
+          "F2 types backup import drops samples with a wrong primitive or a missing field"
+        ]
+      },
+      "portal": {
+        "exit": 1,
+        "tests": 70,
+        "pass": 60,
+        "fail": 10,
+        "failed": [
+          "F2 types lookup from a backup profile drops a sample whose occurredAt nests an answer",
+          "F2 types query from a backup profile drops a sample whose occurredAt nests an answer",
+          "F2 types lookup from a backup profile drops a sample whose gameId nests an answer",
+          "F2 types query from a backup profile drops a sample whose gameId nests an answer",
+          "F2 types lookup from a backup profile drops a sample whose activityType nests an answer",
+          "F2 types query from a backup profile drops a sample whose activityType nests an answer",
+          "F2 types lookup from a backup profile drops a sample whose result nests an answer",
+          "F2 types query from a backup profile drops a sample whose result nests an answer",
+          "F2 types lookup from a backup profile drops a sample whose hintUsed nests an answer",
+          "F2 types query from a backup profile drops a sample whose hintUsed nests an answer"
+        ]
+      }
+    },
+    "restored": {
+      "learning": {
+        "exit": 0,
+        "tests": 84,
+        "pass": 84,
+        "fail": 0,
+        "failed": []
+      },
+      "portal": {
+        "exit": 0,
+        "tests": 70,
+        "pass": 70,
+        "fail": 0,
+        "failed": []
+      }
+    }
+  }
+]

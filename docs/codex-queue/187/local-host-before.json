@@ -1,0 +1,41 @@
+{
+  "sources": [
+    {
+      "file": "src/kit/learning/contract.ts",
+      "line": 22,
+      "source": "export const PARENT_ORIGIN = \"https://typing-game.local\";"
+    },
+    {
+      "file": "src/app/portal.ts",
+      "line": 4,
+      "source": "  return (origin ?? \"https://typing-game.local\") + \"/\";"
+    },
+    {
+      "file": "src/app/app.ts",
+      "line": 221,
+      "source": "  const bridge = createLearningBridge({ gameId: \"dragon-hold\" });"
+    },
+    {
+      "file": "src/app/learning.ts",
+      "line": 246,
+      "source": "  const bridge = options.bridge ?? createLearningBridge({ gameId: GAME_ID });"
+    },
+    {
+      "file": "src/ui/results.ts",
+      "line": 256,
+      "source": "  portalButton.href = portalHome(import.meta.env.VITE_PORTAL_ORIGINS);"
+    }
+  ],
+  "bundle": [
+    {
+      "file": "assets/index-D6L5QOut.js",
+      "offset": 105152,
+      "context": "r\",N1=\"typing-game:shared-music\",U1=\"typing-game:speech\",H1=\"typing-game:request-focus\",G1=\"https://typing-game.local\",nh=200,V1=/^[a-z0-9][a-z0-9-]{0,63}$/;function Wu(t){if(typeof t!=\"string\"||!V1.test(t))throw new TypeError(\"ga"
+    },
+    {
+      "file": "assets/index-D6L5QOut.js",
+      "offset": 290327,
+      "context": "?.(!1,[]),delete t.dataset.placing,r.remove(),u.remove(),p.remove()}}}function uM(t){return\"https://typing-game.local/\"}const qh=[\"sloppy\",\"ok\",\"good\",\"perfect\",\"flash\"];function ml(t){return t.group===\"new\"&&t.clean>0?\"new\":t.err"
+    }
+  ]
+}

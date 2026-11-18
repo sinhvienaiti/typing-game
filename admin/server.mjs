@@ -1,22 +1,92 @@
+import { readSharedOverview } from "./shared-overview.mjs";
 import { createServer } from "node:http";
+import { existsSync, realpathSync } from "node:fs";
 import { readFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { fileURLToPath } from "node:url";
-import { RevisionStore, AdminConflictError, AdminValidationError } from "./store.mjs";
+import { AdminConflictError, AdminValidationError } from "./store.mjs";
+import { SpaceTypingRevisionStore } from "./space-typing-store.mjs";
 import { createDefaultSpaceTypingConfig } from "./default-config.mjs";
 import { runWorldMusicPreview, WorldMusicPreviewError } from "./world-music-preview.mjs";
+import { runShipRegistryPreview, ShipRegistryPreviewError } from "./ship-registry-preview.mjs";
+import { runEquipmentRegistryPreview, EquipmentRegistryPreviewError } from "./equipment-registry-preview.mjs";
+import { runSkillRegistryPreview, SkillRegistryPreviewError } from "./skill-registry-preview.mjs";
+import { runEnemyRegistryPreview, EnemyRegistryPreviewError } from "./enemy-registry-preview.mjs";
+import { runBossRegistryPreview, BossRegistryPreviewError } from "./boss-registry-preview.mjs";
+import { runWorldRegistryPreview, WorldRegistryPreviewError } from "./world-registry-preview.mjs";
+import { runStageConfigPreview, StageConfigPreviewError } from "./stage-config-preview.mjs";
+import { runShopConfigPreview, ShopConfigPreviewError } from "./shop-config-preview.mjs";
+import { createShipRuntimeEnvelope } from "./ship-runtime.mjs";
+import { createEquipmentRuntimeEnvelope } from "./equipment-runtime.mjs";
+import { createSkillRuntimeEnvelope } from "./skill-runtime.mjs";
+import { createEnemyRuntimeEnvelope } from "./enemy-runtime.mjs";
+import { createBossRuntimeEnvelope } from "./boss-runtime.mjs";
+import { createWorldRuntimeEnvelope } from "./world-runtime.mjs";
+import { createStageRuntimeEnvelope } from "./stage-runtime.mjs";
+import { createShopRuntimeEnvelope } from "./shop-runtime.mjs";
+import { queryTypingContentCatalog } from "./typing-content-catalog.mjs";
+import { createShopCapabilityManifest } from "./shop-capability.mjs";
+import { createCurrencyCapabilityManifest } from "./currency-capability.mjs";
+import { createDeveloperToolsManifest } from "./developer-tools.mjs";
 import { MAX_UPLOAD_BYTES, MusicAssetError, MusicAssetService } from "./music-assets.mjs";
+import { MediaAssetStore } from "./media-assets-v2.mjs";
+import { bootstrapMediaReferences } from "./media-bootstrap.mjs";
+import { createMediaV2HttpHandler } from "./media-http.mjs";
+import { createMediaRuntimeHttpHandler } from "./media-runtime.mjs";
+import { createAccountAdminHttpHandler } from "./account-bridge.mjs";
+import { startTypingFeel } from "./typing-feel/setup.mjs";
+import {
+  ADMIN_PERMISSIONS,
+  AdminAuthorizationError,
+  LocalAdminAuditLog,
+  createLocalAdminActorFromRequest,
+  describeConfigChangeScope,
+  isWeakAdminToken,
+  requireAdminPermission,
+  runAuthorizedAdminMutation,
+  sameAdminToken,
+} from "./admin-security.mjs";
 
 const root = resolve(fileURLToPath(new URL("..", import.meta.url)));
-const contractPath = resolve(root, "games/space-typing/contracts/space-typing-admin.v1.json");
-const contract = JSON.parse(await readFile(contractPath, "utf8"));
-const store = new RevisionStore({
-  rootDir: process.env.TYPING_GAME_ADMIN_DATA_DIR || resolve(root, ".local/admin/space-typing"),
-  contract,
-});
-const musicAssets = new MusicAssetService({ rootDir: root });
-await store.initialize(createDefaultSpaceTypingConfig(contract));
-
+const spaceDir = resolve(root, process.env.TYPING_GAME_ADMIN_SPACE_DIR || "games/space-typing");
+const adminDataDir = process.env.TYPING_GAME_ADMIN_DATA_DIR || resolve(root, ".local/admin/space-typing");
+const mediaAssetsV2 = new MediaAssetStore({ rootDir: adminDataDir });
+const auditLog = new LocalAdminAuditLog({ rootDir: adminDataDir });
+await mediaAssetsV2.initialize();
+let contract, shopContract, eventsContract, duelContract, rankedContract, alternativeModesContract, backgroundsContract, vfxContract, uiAssetsContract, qaContract, telemetryContract, expeditionContract, dailyWeeklyContract;
+let store, musicAssets;
+// "available", "not-checked-out" (no Space checkout at spaceDir) or "failed" (checkout present, start-up threw).
+let spaceStatus = "not-checked-out";
+const spaceContractPath = resolve(spaceDir, "contracts/space-typing-admin.v1.json");
+try {
+  contract = JSON.parse(await readFile(spaceContractPath, "utf8"));
+  shopContract = JSON.parse(await readFile(resolve(spaceDir, "contracts/space-typing-admin-shop.v1.json"), "utf8"));
+  eventsContract = JSON.parse(await readFile(resolve(spaceDir, "contracts/space-typing-admin-events.v1.json"), "utf8"));
+  duelContract = JSON.parse(await readFile(resolve(spaceDir, "contracts/space-typing-admin-duel.v1.json"), "utf8"));
+  rankedContract = JSON.parse(await readFile(resolve(spaceDir, "contracts/space-typing-admin-ranked.v1.json"), "utf8"));
+  alternativeModesContract = JSON.parse(await readFile(resolve(spaceDir, "contracts/space-typing-admin-alternative-modes.v1.json"), "utf8"));
+  backgroundsContract = JSON.parse(await readFile(resolve(spaceDir, "contracts/space-typing-admin-backgrounds.v1.json"), "utf8"));
+  vfxContract = JSON.parse(await readFile(resolve(spaceDir, "contracts/space-typing-admin-vfx.v1.json"), "utf8"));
+  uiAssetsContract = JSON.parse(await readFile(resolve(spaceDir, "contracts/space-typing-admin-ui-assets.v1.json"), "utf8"));
+  qaContract = JSON.parse(await readFile(resolve(spaceDir, "contracts/space-typing-admin-qa.v1.json"), "utf8"));
+  telemetryContract = JSON.parse(await readFile(resolve(spaceDir, "contracts/space-typing-admin-telemetry.v1.json"), "utf8"));
+  expeditionContract = JSON.parse(await readFile(resolve(spaceDir, "contracts/space-typing-admin-expedition.v1.json"), "utf8"));
+  dailyWeeklyContract = JSON.parse(await readFile(resolve(spaceDir, "contracts/space-typing-admin-daily-weekly.v1.json"), "utf8"));
+  store = new SpaceTypingRevisionStore({ rootDir: adminDataDir, contract, shopContract });
+  await store.initialize(createDefaultSpaceTypingConfig(contract));
+  musicAssets = new MusicAssetService({ rootDir: root, childRoot: spaceDir });
+  await bootstrapMediaReferences({ store: mediaAssetsV2, childRoot: spaceDir });
+  spaceStatus = "available";
+} catch (error) {
+  if (existsSync(spaceContractPath)) {
+    spaceStatus = "failed";
+    console.error("Space Typing failed to start; shared Admin and Media V2 remain available:", error?.stack ?? error);
+  } else {
+    console.warn(`Space Typing is not checked out at ${spaceDir}; shared Admin and Media V2 remain available.`);
+  }
+}
+const spaceAvailable = spaceStatus === "available";
+const spaceUnavailableBody = { error: spaceStatus === "failed" ? "space-typing-unavailable" : "space-typing-not-checked-out" };
 const host = "127.0.0.1";
 const port = Number.parseInt(process.env.TYPING_GAME_ADMIN_PORT || "3199", 10);
 const token = process.env.TYPING_GAME_ADMIN_TOKEN || "local-dev";
@@ -44,7 +114,7 @@ async function readBody(request, maxBytes) {
 
 async function body(request) {
   const buffer = await readBody(request, 1024 * 1024);
-  if (buffer.length === 0) return {};
+  if (!buffer.length) return {};
   try {
     return JSON.parse(buffer.toString("utf8"));
   } catch {
@@ -55,19 +125,114 @@ async function body(request) {
 function header(request, name, required = false) {
   const value = request.headers[name];
   const text = Array.isArray(value) ? value[0] : value;
-  if (required && (typeof text !== "string" || text.trim().length === 0)) {
+  if (required && (typeof text !== "string" || !text.trim())) {
     throw new AdminValidationError(`Missing ${name} header.`);
   }
   return typeof text === "string" ? text : undefined;
 }
 
 function authorized(request) {
-  return request.headers["x-typing-game-admin-token"] === token;
+  const given = request.headers["x-typing-game-admin-token"];
+  return sameAdminToken(Array.isArray(given) ? given[0] : given, token);
 }
 
-const server = createServer(async (request, response) => {
+// DNS rebinding: a page on another name that resolves to 127.0.0.1 reaches this
+// service with its own Host header and could send the default token. Admin routes
+// and the Typing Feel preview answer only local names: 127.0.0.1, localhost,
+// typing-game.local (nginx sends it) and their subdomains, plus
+// TYPING_GAME_ADMIN_ALLOWED_HOSTS (comma-separated). A request without Host
+// (HTTP/1.0, in-process tests) passes: every browser sends one.
+const allowedHosts = new Set(["127.0.0.1", "localhost", "::1", "typing-game.local", ...(process.env.TYPING_GAME_ADMIN_ALLOWED_HOSTS ?? "").split(",").map((name) => name.trim().toLowerCase()).filter(Boolean)]);
+export function localHostHeader(value) {
+  if (value === undefined) return true;
+  let hostname;
+  try {
+    hostname = new URL(`http://${Array.isArray(value) ? value[0] : value}`).hostname.toLowerCase().replace(/^\[|\]$/g, "");
+  } catch {
+    return false;
+  }
+  return allowedHosts.has(hostname) || hostname.endsWith(".localhost") || hostname.endsWith(".typing-game.local");
+}
+
+function reportAuditDegradation(error) {
+  console.error("Space Typing Admin audit append degraded after mutation:", error);
+}
+
+const mutationAuditBase = {
+  auditLog,
+  onAuditError: reportAuditDegradation,
+};
+const handleMediaV2Request = createMediaV2HttpHandler({
+  store: mediaAssetsV2,
+  auditLog,
+  onAuditError: reportAuditDegradation,
+});
+const handleMediaRuntimeRequest = createMediaRuntimeHttpHandler({ store: mediaAssetsV2 });
+const handleAccountAdminRequest = createAccountAdminHttpHandler({ auditLog, onAuditError: reportAuditDegradation, adminTokenWeak: isWeakAdminToken(token) });
+// All games → Typing Feel: its own store, export and routes; never needs Space Typing (§3.3, §3.12).
+const { typingFeel, handleTypingFeelRequest, handleTypingFeelRuntimeRequest } = await startTypingFeel({
+  root,
+  env: process.env,
+  mediaStore: mediaAssetsV2,
+  auditLog,
+  onAuditError: reportAuditDegradation,
+});
+
+async function revisionChangeScope(revisionId) {
+  const target = await store.getRevision(revisionId);
+  const base = target.parentRevision ? await store.getRevision(target.parentRevision) : null;
+  return describeConfigChangeScope({
+    baseRevision: base?.revision ?? null,
+    targetRevision: target.revision,
+    baseConfig: base?.config ?? {},
+    targetConfig: target.config,
+  });
+}
+
+async function rollbackChangeScope(targetRevision) {
+  const state = await store.getState();
+  const active = await store.getRevision(state.activeRevision);
+  const target = await store.getRevision(targetRevision);
+  return describeConfigChangeScope({
+    baseRevision: active.revision,
+    targetRevision: target.revision,
+    baseConfig: active.config,
+    targetConfig: target.config,
+  });
+}
+
+export const server = createServer(async (request, response) => {
   try {
     const url = new URL(request.url || "/", `http://${host}:${port}`);
+    if ((url.pathname.startsWith("/api/admin/") || url.pathname.startsWith("/api/runtime/typing-feel/")) && !localHostHeader(request.headers.host)) {
+      json(response, 403, { error: "forbidden-host", message: "The Admin service answers only local host names (127.0.0.1, localhost, typing-game.local)." });
+      return;
+    }
+    if (await handleMediaRuntimeRequest({ request, response, url })) return;
+    if (await handleTypingFeelRuntimeRequest({ request, response, url })) return;
+
+    if (!spaceAvailable && url.pathname.startsWith("/api/runtime/space-typing/")) {
+      json(response, 503, spaceUnavailableBody);
+      return;
+    }
+    const runtimeHandlers = {
+      "/api/runtime/space-typing/ships": (s, c) => createShipRuntimeEnvelope(s, c),
+      "/api/runtime/space-typing/equipment": (s, c) => createEquipmentRuntimeEnvelope(s, c),
+      "/api/runtime/space-typing/skills": (s, c) => createSkillRuntimeEnvelope(s, c, contract),
+      "/api/runtime/space-typing/enemies": (s, c) => createEnemyRuntimeEnvelope(s, c, contract),
+      "/api/runtime/space-typing/bosses": (s, c) => createBossRuntimeEnvelope(s, c, contract),
+      "/api/runtime/space-typing/worlds": (s, c) => createWorldRuntimeEnvelope(s, c, contract),
+      "/api/runtime/space-typing/stages": (s, c) => createStageRuntimeEnvelope(s, c, contract),
+      "/api/runtime/space-typing/shop": (s, c) => createShopRuntimeEnvelope(s, c),
+    };
+
+    if(request.method==="GET"&&runtimeHandlers[url.pathname]) {
+      const state = await store.getState();
+      const config = await store.getRuntimeConfig();
+      json(response, 200, runtimeHandlers[url.pathname](state, config));
+      return;
+    }
+
     if (!url.pathname.startsWith("/api/admin/")) {
       json(response, 404, { error: "not-found" });
       return;
@@ -77,86 +242,309 @@ const server = createServer(async (request, response) => {
       return;
     }
 
-    if (request.method === "GET" && url.pathname === "/api/admin/space-typing/contract") {
+    const actor = createLocalAdminActorFromRequest(request);
+    if (await handleMediaV2Request({ request, response, url, actor })) return;
+    if (await handleTypingFeelRequest({ request, response, url, actor })) return;
+    // Cheap availability probe for the shell: reads no Typing Feel or Space files.
+    if (request.method === "GET" && url.pathname === "/api/admin/shared/status") {
+      json(response, 200, { spaceAvailable, spaceStatus });
+      return;
+    }
+    if (request.method === "GET" && url.pathname === "/api/admin/shared/overview") {
+      json(response, 200, await readSharedOverview({ rootDir: root, spaceAvailable, spaceStatus, catalogueFile: typingFeel.locations.publicDir ? resolve(typingFeel.locations.publicDir, "v1/keys/keys-manifest.json") : undefined, typingFeelStatus: typingFeel.status }));
+      return;
+    }
+    if (request.method === "GET" && url.pathname === "/api/admin/shared/actor") {
+      json(response, 200, actor);
+      return;
+    }
+    // Keep the former learning-content URL as a shared, read-only API alias.
+    if (request.method === "GET" && ["/api/admin/shared/learning-content/catalog", "/api/admin/space-typing/typing-content/catalog"].includes(url.pathname)) {
+      json(response, 200, await queryTypingContentCatalog({ rootDir: root, searchParams: url.searchParams }));
+      return;
+    }
+    if (!spaceAvailable && url.pathname.startsWith("/api/admin/space-typing/")) {
+      json(response, 503, spaceUnavailableBody);
+      return;
+    }
+    if (await handleAccountAdminRequest({ request, response, url, actor })) return;
+
+    if(request.method==="GET"&&url.pathname==="/api/admin/space-typing/actor") {
+      json(response, 200, actor);
+      return;
+    }
+    if(request.method==="GET"&&url.pathname==="/api/admin/space-typing/audit") {
+      requireAdminPermission(actor, ADMIN_PERMISSIONS.AUDIT_READ);
+      const parsedLimit = Number.parseInt(url.searchParams.get("limit") || "100", 10);
+      const limit = Number.isFinite(parsedLimit) ? parsedLimit : 100;
+      json(response, 200, { events: await auditLog.list({ limit }) });
+      return;
+    }
+    if(request.method==="GET"&&url.pathname==="/api/admin/space-typing/developer-tools/manifest") {
+      requireAdminPermission(actor, ADMIN_PERMISSIONS.DEVELOPER_INSPECT);
+      json(response, 200, createDeveloperToolsManifest());
+      return;
+    }
+    if(request.method==="GET"&&url.pathname==="/api/admin/space-typing/contract") {
       json(response, 200, contract);
       return;
     }
-    if (request.method === "GET" && url.pathname === "/api/admin/space-typing/state") {
-      const state = await store.getState();
-      const active = await store.getActiveRevision();
-      const history = await store.listRevisions();
-      json(response, 200, { state, active, history });
+    if(request.method==="GET"&&url.pathname==="/api/admin/space-typing/shop/contract") {
+      json(response, 200, shopContract);
       return;
     }
-    if (request.method === "GET" && url.pathname === "/api/admin/space-typing/runtime") {
+    if(request.method==="GET"&&url.pathname==="/api/admin/space-typing/events/contract") {
+      json(response, 200, eventsContract);
+      return;
+    }
+    if(request.method==="GET"&&url.pathname==="/api/admin/space-typing/duel/contract") {
+      json(response, 200, duelContract);
+      return;
+    }
+    if(request.method==="GET"&&url.pathname==="/api/admin/space-typing/ranked/contract") {
+      json(response, 200, rankedContract);
+      return;
+    }
+    if(request.method==="GET"&&url.pathname==="/api/admin/space-typing/alternative-modes/contract") {
+      json(response, 200, alternativeModesContract);
+      return;
+    }
+    if(request.method==="GET"&&url.pathname==="/api/admin/space-typing/backgrounds/contract") {
+      json(response, 200, backgroundsContract);
+      return;
+    }
+    if(request.method==="GET"&&url.pathname==="/api/admin/space-typing/vfx/contract") {
+      json(response, 200, vfxContract);
+      return;
+    }
+    if(request.method==="GET"&&url.pathname==="/api/admin/space-typing/ui-assets/contract") {
+      json(response, 200, uiAssetsContract);
+      return;
+    }
+    if(request.method==="GET"&&url.pathname==="/api/admin/space-typing/qa/contract") {
+      json(response, 200, qaContract);
+      return;
+    }
+    if(request.method==="GET"&&url.pathname==="/api/admin/space-typing/telemetry/contract") {
+      json(response, 200, telemetryContract);
+      return;
+    }
+    if(request.method==="GET"&&url.pathname==="/api/admin/space-typing/expedition/contract") {
+      json(response, 200, expeditionContract);
+      return;
+    }
+    if(request.method==="GET"&&url.pathname==="/api/admin/space-typing/daily-weekly/contract") {
+      json(response, 200, dailyWeeklyContract);
+      return;
+    }
+    if(request.method==="GET"&&url.pathname==="/api/admin/space-typing/state") {
+      json(response, 200, {
+        state: await store.getState(),
+        active: await store.getActiveRevision(),
+        history: await store.listRevisions(),
+      });
+      return;
+    }
+    if(request.method==="GET"&&url.pathname==="/api/admin/space-typing/runtime") {
       json(response, 200, {
         activeRevision: (await store.getState()).activeRevision,
         config: await store.getRuntimeConfig(),
       });
       return;
     }
-    if (request.method === "GET" && url.pathname === "/api/admin/space-typing/music/library") {
+    if(request.method==="GET"&&url.pathname==="/api/admin/space-typing/shop/capabilities") {
+      json(response, 200, createShopCapabilityManifest(shopContract));
+      return;
+    }
+    if(request.method==="GET"&&url.pathname==="/api/admin/space-typing/currencies/capabilities") {
+      json(response, 200, createCurrencyCapabilityManifest());
+      return;
+    }
+    if(request.method==="GET"&&url.pathname==="/api/admin/space-typing/music/library") {
       json(response, 200, await musicAssets.list());
       return;
     }
-    if (request.method === "POST" && url.pathname === "/api/admin/space-typing/music/upload") {
-      const bytes = await readBody(request, MAX_UPLOAD_BYTES + 1);
-      const result = await musicAssets.upload({
-        bytes,
-        fileName: header(request, "x-music-file-name", true),
-        contentType: header(request, "content-type"),
-        trackId: header(request, "x-music-track-id", true),
-        title: header(request, "x-music-title", true),
-        worldId: header(request, "x-music-world-id", true),
-        durationSeconds: header(request, "x-music-duration-seconds", true),
-        mixOutSeconds: header(request, "x-music-mix-out-seconds"),
-        mood: header(request, "x-music-mood"),
+    if(request.method==="POST"&&url.pathname==="/api/admin/space-typing/change-scope") {
+      requireAdminPermission(actor, ADMIN_PERMISSIONS.CONFIG_DRAFT);
+      const input = await body(request);
+      json(response, 200, await revisionChangeScope(input.revision));
+      return;
+    }
+
+    if(request.method==="POST"&&url.pathname==="/api/admin/space-typing/music/upload") {
+      const trackId = header(request, "x-music-track-id");
+      const result = await runAuthorizedAdminMutation({
+        ...mutationAuditBase,
+        actor,
+        permission: ADMIN_PERMISSIONS.MEDIA_UPLOAD,
+        action: "media.music.upload",
+        domain: "media.music",
+        entityType: "music-track",
+        entityId: trackId ?? null,
+        changeScope: { model: "asset-mutation", operation: "upload", assetType: "music", assetId: trackId ?? null },
+        operation: async () => {
+          const bytes = await readBody(request, MAX_UPLOAD_BYTES + 1);
+          return musicAssets.upload({
+            bytes,
+            fileName: header(request, "x-music-file-name", true),
+            contentType: header(request, "content-type"),
+            trackId: header(request, "x-music-track-id", true),
+            title: header(request, "x-music-title", true),
+            worldId: header(request, "x-music-world-id", true),
+            durationSeconds: header(request, "x-music-duration-seconds", true),
+            mixOutSeconds: header(request, "x-music-mix-out-seconds"),
+            mood: header(request, "x-music-mood"),
+          });
+        },
       });
       json(response, 201, result);
       return;
     }
-    if (
-      request.method === "DELETE" &&
-      url.pathname.startsWith("/api/admin/space-typing/music/tracks/")
-    ) {
+
+    if(request.method==="DELETE"&&url.pathname.startsWith("/api/admin/space-typing/music/tracks/")) {
       const trackId = decodeURIComponent(url.pathname.slice("/api/admin/space-typing/music/tracks/".length));
-      json(response, 200, await musicAssets.remove(trackId));
+      const result = await runAuthorizedAdminMutation({
+        ...mutationAuditBase,
+        actor,
+        permission: ADMIN_PERMISSIONS.MEDIA_DELETE,
+        auditLog,
+        action: "media.music.delete",
+        domain: "media.music",
+        entityType: "music-track",
+        entityId: trackId,
+        changeScope: { model: "asset-mutation", operation: "delete", assetType: "music", assetId: trackId ?? null },
+        operation: () => musicAssets.remove(trackId),
+      });
+      json(response, 200, result);
       return;
     }
-    if (request.method === "POST" && url.pathname === "/api/admin/space-typing/world-music/preview") {
+
+    if(request.method==="POST"&&url.pathname==="/api/admin/space-typing/world-music/preview") {
       const input = await body(request);
-      const activeConfig = await store.getRuntimeConfig();
-      const publishedPolicy = input.publishedPolicy ?? activeConfig.worldMusic?.publishedPolicy;
-      const preview = await runWorldMusicPreview({
+      const active = await store.getRuntimeConfig();
+      json(response, 200, await runWorldMusicPreview({
         rootDir: root,
         contract,
-        publishedPolicy,
+        publishedPolicy: input.publishedPolicy ?? active.worldMusic?.publishedPolicy,
         musicMode: input.musicMode ?? "map",
-      });
-      json(response, 200, preview);
+        stageNumber: input.stageNumber,
+      }));
       return;
     }
-    if (request.method === "POST" && url.pathname === "/api/admin/space-typing/revisions") {
+
+    if(request.method==="POST"&&url.pathname==="/api/admin/space-typing/shop/preview") {
       const input = await body(request);
-      const revision = await store.createRevision(input);
+      const state = await store.getState();
+      const active = await store.getRuntimeConfig();
+      json(response, 200, await runShopConfigPreview({
+        rootDir: root,
+        contract: shopContract,
+        policy: input.policy ?? active.economy?.shop,
+        activeRevision: state.activeRevision,
+        shopType: input.shopType,
+        stage: input.stage,
+        worldKey: input.worldKey,
+        luck: input.luck,
+        progression: input.progression,
+        discovered: input.discovered,
+      }));
+      return;
+    }
+
+    const previewHandlers = {
+      "/api/admin/space-typing/ships/preview": [runShipRegistryPreview, "ships"],
+      "/api/admin/space-typing/equipment/preview": [runEquipmentRegistryPreview, "equipment"],
+      "/api/admin/space-typing/skills/preview": [runSkillRegistryPreview, "skills"],
+      "/api/admin/space-typing/enemies/preview": [runEnemyRegistryPreview, "enemies"],
+      "/api/admin/space-typing/bosses/preview": [runBossRegistryPreview, "bosses"],
+      "/api/admin/space-typing/worlds/preview": [runWorldRegistryPreview, "worlds"],
+      "/api/admin/space-typing/stages/preview": [runStageConfigPreview, "stages"],
+    };
+    if(request.method==="POST"&&previewHandlers[url.pathname]) {
+      const input = await body(request);
+      const active = await store.getRuntimeConfig();
+      const [run, key] = previewHandlers[url.pathname];
+      json(response, 200, await run({ rootDir: root, contract, policy: input.policy ?? active.content?.[key] }));
+      return;
+    }
+
+    if(request.method==="POST"&&url.pathname==="/api/admin/space-typing/validate-revision") {
+      const input = await body(request);
+      const validation = await store.validateRevision(input.revision);
+      json(response, 200, { ...validation, changeScope: await revisionChangeScope(input.revision) });
+      return;
+    }
+
+    if(request.method==="POST"&&url.pathname==="/api/admin/space-typing/revisions") {
+      const input = await body(request);
+      const baseRevision = await store.getRevision(input.baseRevision);
+      const draftScope = describeConfigChangeScope({
+        baseRevision: baseRevision.revision,
+        targetRevision: null,
+        baseConfig: baseRevision.config,
+        targetConfig: input.config,
+      });
+      const revision = await runAuthorizedAdminMutation({
+        ...mutationAuditBase,
+        actor,
+        permission: ADMIN_PERMISSIONS.CONFIG_DRAFT,
+        auditLog,
+        action: "revision.create",
+        domain: "config",
+        entityType: "revision",
+        changeScope: draftScope,
+        resolveEntityId: (created) => created.revision,
+        resolveChangeScope: (created) => ({ ...draftScope, targetRevision: created.revision }),
+        operation: () => store.createRevision({ ...input, author: actor.actorId }),
+      });
       json(response, 201, revision);
       return;
     }
-    if (request.method === "POST" && url.pathname === "/api/admin/space-typing/publish") {
+
+    if(request.method==="POST"&&url.pathname==="/api/admin/space-typing/publish") {
       const input = await body(request);
-      const state = await store.publish(input);
+      const changeScope = await revisionChangeScope(input.revision);
+      const state = await runAuthorizedAdminMutation({
+        ...mutationAuditBase,
+        actor,
+        permission: ADMIN_PERMISSIONS.CONFIG_PUBLISH,
+        auditLog,
+        action: "revision.publish",
+        domain: "config",
+        entityType: "revision",
+        entityId: input.revision,
+        changeScope,
+        operation: () => store.publish(input),
+      });
       json(response, 200, state);
       return;
     }
-    if (request.method === "POST" && url.pathname === "/api/admin/space-typing/rollback") {
+
+    if(request.method==="POST"&&url.pathname==="/api/admin/space-typing/rollback") {
       const input = await body(request);
-      const state = await store.rollback(input);
+      const changeScope = await rollbackChangeScope(input.targetRevision);
+      const state = await runAuthorizedAdminMutation({
+        ...mutationAuditBase,
+        actor,
+        permission: ADMIN_PERMISSIONS.CONFIG_ROLLBACK,
+        auditLog,
+        action: "revision.rollback",
+        domain: "config",
+        entityType: "revision",
+        entityId: input.targetRevision,
+        changeScope,
+        operation: () => store.rollback(input),
+      });
       json(response, 200, state);
       return;
     }
 
     json(response, 404, { error: "not-found" });
   } catch (error) {
+    if (error instanceof AdminAuthorizationError) {
+      json(response, 403, { error: "forbidden", message: error.message, permission: error.permission });
+      return;
+    }
     if (error instanceof AdminConflictError) {
       json(response, 409, { error: "conflict", message: error.message });
       return;
@@ -165,22 +553,47 @@ const server = createServer(async (request, response) => {
       json(response, 400, { error: "validation", message: error.message });
       return;
     }
+    if (error instanceof TypeError && String(error.message).startsWith("Unsupported typing-content kind:")) {
+      json(response, 400, { error: "validation", message: error.message });
+      return;
+    }
     if (error instanceof MusicAssetError) {
       json(response, error.status, { error: "music-asset", message: error.message });
       return;
     }
-    if (error instanceof WorldMusicPreviewError) {
-      json(response, 502, { error: "preview-error", message: error.message });
-      return;
+    const previews = [
+      [WorldMusicPreviewError, "preview-error"],
+      [ShipRegistryPreviewError, "ships-preview-error"],
+      [EquipmentRegistryPreviewError, "equipment-preview-error"],
+      [SkillRegistryPreviewError, "skills-preview-error"],
+      [EnemyRegistryPreviewError, "enemies-preview-error"],
+      [BossRegistryPreviewError, "bosses-preview-error"],
+      [WorldRegistryPreviewError, "worlds-preview-error"],
+      [StageConfigPreviewError, "stages-preview-error"],
+      [ShopConfigPreviewError, "shop-preview-error"],
+    ];
+    for (const [Type, code] of previews) {
+      if (error instanceof Type) {
+        json(response, 502, { error: code, message: error.message });
+        return;
+      }
     }
     console.error(error);
     json(response, 500, { error: "internal-error" });
   }
 });
 
-server.listen(port, host, () => {
-  console.log(`Space Typing Admin service: http://${host}:${port}`);
-  if (token === "local-dev") {
-    console.log("Admin auth token: local-dev (local development default)");
+// ESM resolves import.meta.url to the real path, so compare real paths: a symlinked launch path must still listen.
+function launchedDirectly() {
+  if (!process.argv[1]) return false;
+  try {
+    return realpathSync(process.argv[1]) === realpathSync(fileURLToPath(import.meta.url));
+  } catch {
+    return false;
   }
+}
+
+if (launchedDirectly()) server.listen(port, host, () => {
+  console.log(`Typing Game Admin service: http://${host}:${server.address().port}`);
+  if (token === "local-dev") console.log("Admin auth token: local-dev (local development default)");
 });

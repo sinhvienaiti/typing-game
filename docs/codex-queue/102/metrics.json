@@ -1,0 +1,67 @@
+{
+  "baseline": {
+    "passed": 673,
+    "total": 673,
+    "filesPassed": 45,
+    "exitCode": 0,
+    "log": "03-baseline-recheck.log"
+  },
+  "after": {
+    "passed": 700,
+    "total": 700,
+    "filesPassed": 46,
+    "exitCode": 0,
+    "log": "05-tests-green.log"
+  },
+  "restored": {
+    "passed": 700,
+    "total": 700,
+    "filesPassed": 46,
+    "exitCode": 0,
+    "log": "11-tests-restored.log"
+  },
+  "newTests": 27,
+  "typecheck": {
+    "exitCode": 0,
+    "errors": 0,
+    "log": "12-typecheck-final.log"
+  },
+  "syntax": {
+    "exitCode": 0,
+    "errors": 0,
+    "log": "07-syntax.log"
+  },
+  "randomSearch": {
+    "exitCode": 1,
+    "matchingLines": 0,
+    "log": "08-random-search.log"
+  },
+  "mutations": [
+    {
+      "log": "09-mutation-no-retry.log",
+      "exitCode": 1,
+      "failed": 2,
+      "passed": 25
+    },
+    {
+      "log": "10-mutation-no-env-range.log",
+      "exitCode": 1,
+      "failed": 4,
+      "passed": 23
+    }
+  ],
+  "helperRestored": true,
+  "kitStatus": {
+    "exitCode": 0,
+    "allowedOnly": true,
+    "fileCount": 4,
+    "paths": [
+      "shared/game-kit/DRIFT.md",
+      "shared/game-kit/tools/cdp-run.mjs",
+      "shared/game-kit/tools/cdp-port.mjs",
+      "shared/game-kit/tools/cdp-port.test.ts"
+    ]
+  },
+  "chromeRuns": 0,
+  "parallelChromeCheck": "Chờ Claude: 3 làn song song × 20 lượt, yêu cầu 0 lượt trùng cổng"
+}

@@ -1,0 +1,57 @@
+{
+  "trackedAndUntrackedFiles": 369,
+  "allBytesMatch": true,
+  "nodeModulesLinks": [
+    {
+      "name": ".pnpm",
+      "target": "/Users/toandx/htdocs/typing-game/games/.wt-td-scenery/node_modules/.pnpm"
+    },
+    {
+      "name": "@types",
+      "target": "/Users/toandx/htdocs/typing-game/games/.wt-td-scenery/node_modules/@types"
+    },
+    {
+      "name": ".modules.yaml",
+      "target": "/Users/toandx/htdocs/typing-game/games/.wt-td-scenery/node_modules/.modules.yaml"
+    },
+    {
+      "name": ".bin",
+      "target": "/Users/toandx/htdocs/typing-game/games/.wt-td-scenery/node_modules/.bin"
+    },
+    {
+      "name": "vitest",
+      "target": "/Users/toandx/htdocs/typing-game/games/.wt-td-scenery/node_modules/vitest"
+    },
+    {
+      "name": "tsx",
+      "target": "/Users/toandx/htdocs/typing-game/games/.wt-td-scenery/node_modules/tsx"
+    },
+    {
+      "name": "typescript",
+      "target": "/Users/toandx/htdocs/typing-game/games/.wt-td-scenery/node_modules/typescript"
+    },
+    {
+      "name": ".package-map.json",
+      "target": "/Users/toandx/htdocs/typing-game/games/.wt-td-scenery/node_modules/.package-map.json"
+    },
+    {
+      "name": "three",
+      "target": "/Users/toandx/htdocs/typing-game/games/.wt-td-scenery/node_modules/three"
+    },
+    {
+      "name": "@fontsource",
+      "target": "/Users/toandx/htdocs/typing-game/games/.wt-td-scenery/node_modules/@fontsource"
+    },
+    {
+      "name": "vite",
+      "target": "/Users/toandx/htdocs/typing-game/games/.wt-td-scenery/node_modules/vite"
+    }
+  ],
+  "sceneryIsRealDirectory": true,
+  "commands": [
+    "rsync -a --from0 --files-from=-",
+    "rsync -a public/",
+    "rsync -aL public/assets/typing-defense/scenery/meadow/"
+  ],
+  "linksMadeAbsolute": true
+}

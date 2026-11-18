@@ -1,0 +1,7 @@
+cwd=/Users/toandx/htdocs/typing-game
+argv=["pnpm", "validate:play-mode"]
+GIT_OPTIONAL_LOCKS=0 pnpm_config_verify_deps_before_run=false
+$ node scripts/validate-play-mode.mjs
+Play mode contract PASS: static apps, shared runtime data, Space Typing Admin API routing, Portal shared-learning rebuild dependency, and the dragon/td/survival/tutien hosts are covered; dragon, td, survival serve their own pinned vocabulary without shared data aliases.
+
+exit=0

@@ -1,0 +1,26 @@
+F.                                                                       [100%]
+=================================== FAILURES ===================================
+________________________ test_loop_auto_and_final_block ________________________
+
+tmp_path = PosixPath('/Users/toandx/htdocs/typing-game/tmp/firefly-ingest/pytest-tmp/test_loop_auto_and_final_block0')
+
+    def test_loop_auto_and_final_block(tmp_path):
+        inbox, out = tmp_path / 'in', tmp_path / 'out'
+        source = inbox / 'dragon-hold/amb.forest/loop.wav'
+        source.parent.mkdir(parents=True)
+        # Periodic broadband fixture, not a replacement game asset.
+        rng = np.random.default_rng(217)
+        unit = rng.normal(0, .04, (SR, 2))
+        sf.write(source, np.tile(unit, (6, 1)), SR, subtype='PCM_16')
+        args = ['ingest', '--game', 'dragon-hold', '--id', 'amb.forest', '--inbox', str(inbox),
+                '--out', str(out), '--run', 'loop']
+>       assert main(args) == 0
+E       AssertionError: assert 2 == 0
+E        +  where 2 = main(['ingest', '--game', 'dragon-hold', '--id', 'amb.forest', '--inbox', ...])
+
+firefly/tests/test_firefly.py:195: AssertionError
+----------------------------- Captured stderr call -----------------------------
+firefly: 'NoneType' object is not subscriptable
+=========================== short test summary info ============================
+FAILED firefly/tests/test_firefly.py::test_loop_auto_and_final_block - Assert...
+1 failed, 1 passed in 4.38s

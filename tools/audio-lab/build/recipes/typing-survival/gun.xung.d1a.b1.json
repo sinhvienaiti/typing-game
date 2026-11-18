@@ -1,0 +1,172 @@
+{
+ "$schema": "../../schemas/recipe.schema.json",
+ "schema": "audiolab.recipe/1",
+ "game": "typing-survival",
+ "id": "gun.xung.d1a",
+ "group": "shot",
+ "family": "ban",
+ "description": "Lô 1 (BATCH1_BRIEF §3.4, hướng 1 '0a nâng cấp'): công thức 0a (anh chấm 4/5) giữ nổ giòn nhiễu trắng và khóa nòng Kenney Impact Metal light; thân nhiễu hồng 150–520 Hz dày hơn khoảng 6 dB; lớp đuôi 160–650 Hz tắt dần (t60 900 ms: −20 dB ở khoảng 175 ms, −40 dB trước 330 ms) để phát trước còn khoảng −12 dB khi phát sau tới; sub 95→45 Hz bão hòa 8 dB để có họa âm nghe được trên loa nhỏ. Bộ A (nặng). Biến thể n dùng khóa nòng thứ n.",
+ "channels": 1,
+ "layers": [
+  {
+   "id": "crack",
+   "role": "attack",
+   "source": {
+    "synth": "noise_burst",
+    "params": {
+     "color": "white",
+     "durMs": 30,
+     "attackMs": 0.2,
+     "decayMs": 30,
+     "hpHz": 1800,
+     "lpHz": 9000
+    }
+   },
+   "gainDb": 8,
+   "vary": {
+    "gainDb": [
+     -1.0,
+     1.0
+    ]
+   }
+  },
+  {
+   "id": "breech",
+   "role": "mech",
+   "offsetMs": 12,
+   "gainDb": -9,
+   "filters": [
+    {
+     "type": "highpass",
+     "hz": 1200
+    },
+    {
+     "type": "peak",
+     "hz": 2500,
+     "gainDb": -4,
+     "q": 1.0
+    }
+   ],
+   "trim": {
+    "endMs": 35
+   },
+   "fadeOutMs": 25,
+   "vary": {
+    "offsetMs": [
+     -3,
+     4
+    ],
+    "swapMode": "cycle",
+    "swap": [
+     {
+      "library": "kenney/impact-sounds/Audio/impactMetal_light_001.ogg"
+     },
+     {
+      "library": "kenney/impact-sounds/Audio/impactMetal_light_002.ogg"
+     },
+     {
+      "library": "kenney/impact-sounds/Audio/impactMetal_light_003.ogg"
+     }
+    ]
+   },
+   "source": {
+    "library": "kenney/impact-sounds/Audio/impactMetal_light_000.ogg"
+   }
+  },
+  {
+   "id": "body",
+   "role": "body",
+   "source": {
+    "synth": "noise_burst",
+    "params": {
+     "color": "pink",
+     "durMs": 140,
+     "attackMs": 0.5,
+     "decayMs": 150,
+     "hpHz": 150,
+     "lpHz": 520,
+     "order": 4
+    }
+   },
+   "gainDb": 0
+  },
+  {
+   "id": "tail",
+   "role": "tail",
+   "source": {
+    "synth": "noise_burst",
+    "params": {
+     "color": "pink",
+     "durMs": 380,
+     "attackMs": 3,
+     "decayMs": 900,
+     "hpHz": 160,
+     "lpHz": 650,
+     "order": 4
+    }
+   },
+   "gainDb": -1
+  },
+  {
+   "id": "sub",
+   "role": "sub",
+   "source": {
+    "synth": "sub_thump",
+    "params": {
+     "startHz": 95,
+     "endHz": 45,
+     "glideMs": 45,
+     "durMs": 115,
+     "decayMs": 100,
+     "click": 0.2,
+     "driveDb": 8
+    }
+   },
+   "gainDb": -4
+  }
+ ],
+ "chain": {
+  "dcHpfHz": 35,
+  "saturation": {
+   "driveDb": 5,
+   "mix": 0.35
+  },
+  "headTrim": {
+   "thresholdDb": -50,
+   "preRollMs": 0.3
+  },
+  "maxLengthMs": 380,
+  "tail": {
+   "floorDb": -60,
+   "shape": "exp",
+   "kneeMs": 300
+  },
+  "normalise": {
+   "mode": "lufs-m-max",
+   "target": -20
+  },
+  "limiter": {
+   "ceilingDbtp": -1.0,
+   "releaseMs": 40,
+   "maxGrDb": 6
+  }
+ },
+ "variants": {
+  "count": 4,
+  "seed": 2501,
+  "includeBase": true,
+  "pitchCents": [
+   -20,
+   20
+  ],
+  "gainDb": [
+   -0.5,
+   0.5
+  ]
+ },
+ "export": {
+  "path": "sfx/guns/gun-xung-a",
+  "ogg": true,
+  "oggQuality": 0.6
+ }
+}

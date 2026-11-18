@@ -1,0 +1,819 @@
+{
+  "edge_semantics": "prerequisite -> dependent",
+  "nodes": [
+    {
+      "id": "BASE",
+      "phase": "V1",
+      "label": "Baseline repo, contract fixtures, migration inventory",
+      "sections": [
+        70,
+        69,
+        82
+      ]
+    },
+    {
+      "id": "ACCESS",
+      "phase": "V1",
+      "label": "Account, authorization, privacy policy",
+      "sections": [
+        30,
+        78
+      ]
+    },
+    {
+      "id": "SHELL",
+      "phase": "V1",
+      "label": "Shell, design tokens, budgets, mobile",
+      "sections": [
+        3,
+        39,
+        73,
+        74,
+        75
+      ]
+    },
+    {
+      "id": "OPS",
+      "phase": "V1",
+      "label": "Audit, publish tooling, support, restore",
+      "sections": [
+        78,
+        14
+      ]
+    },
+    {
+      "id": "CONTENT",
+      "phase": "V1",
+      "label": "Canonical content, rights, versions",
+      "sections": [
+        70,
+        71,
+        23
+      ]
+    },
+    {
+      "id": "MEDIA",
+      "phase": "V1",
+      "label": "Published learning media + manifest",
+      "sections": [
+        72,
+        40
+      ]
+    },
+    {
+      "id": "LESSON",
+      "phase": "V1",
+      "label": "Versioned lesson runner + resume",
+      "sections": [
+        12,
+        25
+      ]
+    },
+    {
+      "id": "EVIDENCE",
+      "phase": "V1",
+      "label": "Attempts, skill evidence, review queue",
+      "sections": [
+        27,
+        97
+      ]
+    },
+    {
+      "id": "BRIDGE",
+      "phase": "V1",
+      "label": "Adapters and server authority cutover",
+      "sections": [
+        26,
+        69,
+        70
+      ]
+    },
+    {
+      "id": "HOME",
+      "phase": "V1",
+      "label": "Learn-only UX and progress",
+      "sections": [
+        85,
+        28,
+        29
+      ]
+    },
+    {
+      "id": "G1",
+      "phase": "V1",
+      "label": "Core learning pilot gate",
+      "sections": [
+        83,
+        97
+      ]
+    },
+    {
+      "id": "SAFETY",
+      "phase": "V2",
+      "label": "Moderation queue, ACL enforcement, operators",
+      "sections": [
+        64,
+        30
+      ]
+    },
+    {
+      "id": "CLASS",
+      "phase": "V2",
+      "label": "Cohort, teacher, assignments, async class",
+      "sections": [
+        8,
+        9,
+        11,
+        15,
+        19
+      ]
+    },
+    {
+      "id": "CHAT",
+      "phase": "V2",
+      "label": "Private class text room",
+      "sections": [
+        64,
+        65
+      ]
+    },
+    {
+      "id": "GCLASS",
+      "phase": "V2",
+      "label": "Class-with-chat pilot gate",
+      "sections": [
+        86,
+        96
+      ]
+    },
+    {
+      "id": "CALENDAR",
+      "phase": "V2",
+      "label": "Class calendar read model",
+      "sections": [
+        13,
+        62
+      ]
+    },
+    {
+      "id": "AVATAR",
+      "phase": "V2",
+      "label": "Single-pose renderer, free preview, compatibility",
+      "sections": [
+        31,
+        32,
+        33,
+        34
+      ]
+    },
+    {
+      "id": "SIM",
+      "phase": "V2",
+      "label": "Reward rule core and simulator fixtures",
+      "sections": [
+        79,
+        43,
+        76
+      ]
+    },
+    {
+      "id": "ECON",
+      "phase": "V2",
+      "label": "Credit ledger, grants, catalog, entitlements",
+      "sections": [
+        50,
+        43,
+        47,
+        48
+      ]
+    },
+    {
+      "id": "SHOP",
+      "phase": "V2",
+      "label": "Fixed-price catalog, purchase, equip, receipt",
+      "sections": [
+        35,
+        49,
+        51,
+        52
+      ]
+    },
+    {
+      "id": "GECON",
+      "phase": "V2",
+      "label": "Economy and shop launch gate",
+      "sections": [
+        79,
+        76,
+        93
+      ]
+    },
+    {
+      "id": "IELTS",
+      "phase": "V2",
+      "label": "Curated R/L assessment adapter",
+      "sections": [
+        24,
+        23
+      ]
+    },
+    {
+      "id": "MENTOR",
+      "phase": "V2",
+      "label": "Scoped optional NPC context and text/voice",
+      "sections": [
+        10,
+        41,
+        95
+      ]
+    },
+    {
+      "id": "VERIFY",
+      "phase": "V3",
+      "label": "Competitive challenge, evidence review, appeals",
+      "sections": [
+        77,
+        26
+      ]
+    },
+    {
+      "id": "PRESTIGE",
+      "phase": "V3",
+      "label": "Rank rules, season finalization, award revisions",
+      "sections": [
+        54,
+        55,
+        57,
+        58,
+        59
+      ]
+    },
+    {
+      "id": "GPRESTIGE",
+      "phase": "V3",
+      "label": "Verified competition release gate",
+      "sections": [
+        77,
+        87
+      ]
+    },
+    {
+      "id": "LIVE",
+      "phase": "V3",
+      "label": "Async campaigns, occurrence jobs, cancellation",
+      "sections": [
+        61,
+        63,
+        81,
+        99
+      ]
+    },
+    {
+      "id": "TOURNAMENT",
+      "phase": "V3",
+      "label": "Tournament format and adjudication",
+      "sections": [
+        60,
+        20
+      ]
+    },
+    {
+      "id": "COMMUNITY",
+      "phase": "V3",
+      "label": "Invite-only clubs and study rooms",
+      "sections": [
+        17,
+        66,
+        67
+      ]
+    },
+    {
+      "id": "FULLIELTS",
+      "phase": "V3",
+      "label": "Full mock and calibrated W/S, conditional",
+      "sections": [
+        24,
+        60
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "from": "BASE",
+      "to": "ACCESS",
+      "kind": "hard",
+      "reason": "ACCESS cần capability BASE trong scope đã chọn"
+    },
+    {
+      "from": "BASE",
+      "to": "SHELL",
+      "kind": "hard",
+      "reason": "SHELL cần capability BASE trong scope đã chọn"
+    },
+    {
+      "from": "ACCESS",
+      "to": "OPS",
+      "kind": "hard",
+      "reason": "OPS cần capability ACCESS trong scope đã chọn"
+    },
+    {
+      "from": "OPS",
+      "to": "CONTENT",
+      "kind": "hard",
+      "reason": "CONTENT cần capability OPS trong scope đã chọn"
+    },
+    {
+      "from": "CONTENT",
+      "to": "MEDIA",
+      "kind": "hard",
+      "reason": "MEDIA cần capability CONTENT trong scope đã chọn"
+    },
+    {
+      "from": "SHELL",
+      "to": "MEDIA",
+      "kind": "hard",
+      "reason": "MEDIA cần capability SHELL trong scope đã chọn"
+    },
+    {
+      "from": "CONTENT",
+      "to": "LESSON",
+      "kind": "hard",
+      "reason": "LESSON cần capability CONTENT trong scope đã chọn"
+    },
+    {
+      "from": "MEDIA",
+      "to": "LESSON",
+      "kind": "hard",
+      "reason": "LESSON cần capability MEDIA trong scope đã chọn"
+    },
+    {
+      "from": "ACCESS",
+      "to": "LESSON",
+      "kind": "hard",
+      "reason": "LESSON cần capability ACCESS trong scope đã chọn"
+    },
+    {
+      "from": "SHELL",
+      "to": "LESSON",
+      "kind": "hard",
+      "reason": "LESSON cần capability SHELL trong scope đã chọn"
+    },
+    {
+      "from": "LESSON",
+      "to": "EVIDENCE",
+      "kind": "hard",
+      "reason": "EVIDENCE cần capability LESSON trong scope đã chọn"
+    },
+    {
+      "from": "ACCESS",
+      "to": "EVIDENCE",
+      "kind": "hard",
+      "reason": "EVIDENCE cần capability ACCESS trong scope đã chọn"
+    },
+    {
+      "from": "EVIDENCE",
+      "to": "BRIDGE",
+      "kind": "hard",
+      "reason": "BRIDGE cần capability EVIDENCE trong scope đã chọn"
+    },
+    {
+      "from": "BASE",
+      "to": "BRIDGE",
+      "kind": "hard",
+      "reason": "BRIDGE cần capability BASE trong scope đã chọn"
+    },
+    {
+      "from": "LESSON",
+      "to": "HOME",
+      "kind": "hard",
+      "reason": "HOME cần capability LESSON trong scope đã chọn"
+    },
+    {
+      "from": "EVIDENCE",
+      "to": "HOME",
+      "kind": "hard",
+      "reason": "HOME cần capability EVIDENCE trong scope đã chọn"
+    },
+    {
+      "from": "BRIDGE",
+      "to": "HOME",
+      "kind": "hard",
+      "reason": "HOME cần capability BRIDGE trong scope đã chọn"
+    },
+    {
+      "from": "HOME",
+      "to": "G1",
+      "kind": "hard",
+      "reason": "G1 cần capability HOME trong scope đã chọn"
+    },
+    {
+      "from": "OPS",
+      "to": "G1",
+      "kind": "hard",
+      "reason": "G1 cần capability OPS trong scope đã chọn"
+    },
+    {
+      "from": "MEDIA",
+      "to": "G1",
+      "kind": "hard",
+      "reason": "G1 cần capability MEDIA trong scope đã chọn"
+    },
+    {
+      "from": "SHELL",
+      "to": "G1",
+      "kind": "hard",
+      "reason": "G1 cần capability SHELL trong scope đã chọn"
+    },
+    {
+      "from": "G1",
+      "to": "SAFETY",
+      "kind": "hard",
+      "reason": "SAFETY cần capability G1 trong scope đã chọn"
+    },
+    {
+      "from": "ACCESS",
+      "to": "SAFETY",
+      "kind": "hard",
+      "reason": "SAFETY cần capability ACCESS trong scope đã chọn"
+    },
+    {
+      "from": "OPS",
+      "to": "SAFETY",
+      "kind": "hard",
+      "reason": "SAFETY cần capability OPS trong scope đã chọn"
+    },
+    {
+      "from": "G1",
+      "to": "CLASS",
+      "kind": "hard",
+      "reason": "CLASS cần capability G1 trong scope đã chọn"
+    },
+    {
+      "from": "LESSON",
+      "to": "CLASS",
+      "kind": "hard",
+      "reason": "CLASS cần capability LESSON trong scope đã chọn"
+    },
+    {
+      "from": "EVIDENCE",
+      "to": "CLASS",
+      "kind": "hard",
+      "reason": "CLASS cần capability EVIDENCE trong scope đã chọn"
+    },
+    {
+      "from": "OPS",
+      "to": "CLASS",
+      "kind": "hard",
+      "reason": "CLASS cần capability OPS trong scope đã chọn"
+    },
+    {
+      "from": "CLASS",
+      "to": "CHAT",
+      "kind": "hard",
+      "reason": "CHAT cần capability CLASS trong scope đã chọn"
+    },
+    {
+      "from": "SAFETY",
+      "to": "CHAT",
+      "kind": "hard",
+      "reason": "CHAT cần capability SAFETY trong scope đã chọn"
+    },
+    {
+      "from": "CLASS",
+      "to": "GCLASS",
+      "kind": "hard",
+      "reason": "GCLASS cần capability CLASS trong scope đã chọn"
+    },
+    {
+      "from": "CHAT",
+      "to": "GCLASS",
+      "kind": "hard",
+      "reason": "GCLASS cần capability CHAT trong scope đã chọn"
+    },
+    {
+      "from": "SAFETY",
+      "to": "GCLASS",
+      "kind": "hard",
+      "reason": "GCLASS cần capability SAFETY trong scope đã chọn"
+    },
+    {
+      "from": "CLASS",
+      "to": "CALENDAR",
+      "kind": "hard",
+      "reason": "CALENDAR cần capability CLASS trong scope đã chọn"
+    },
+    {
+      "from": "G1",
+      "to": "AVATAR",
+      "kind": "hard",
+      "reason": "AVATAR cần capability G1 trong scope đã chọn"
+    },
+    {
+      "from": "MEDIA",
+      "to": "AVATAR",
+      "kind": "hard",
+      "reason": "AVATAR cần capability MEDIA trong scope đã chọn"
+    },
+    {
+      "from": "SHELL",
+      "to": "AVATAR",
+      "kind": "hard",
+      "reason": "AVATAR cần capability SHELL trong scope đã chọn"
+    },
+    {
+      "from": "G1",
+      "to": "SIM",
+      "kind": "hard",
+      "reason": "SIM cần capability G1 trong scope đã chọn"
+    },
+    {
+      "from": "EVIDENCE",
+      "to": "SIM",
+      "kind": "hard",
+      "reason": "SIM cần capability EVIDENCE trong scope đã chọn"
+    },
+    {
+      "from": "OPS",
+      "to": "SIM",
+      "kind": "hard",
+      "reason": "SIM cần capability OPS trong scope đã chọn"
+    },
+    {
+      "from": "SIM",
+      "to": "ECON",
+      "kind": "hard",
+      "reason": "ECON cần capability SIM trong scope đã chọn"
+    },
+    {
+      "from": "EVIDENCE",
+      "to": "ECON",
+      "kind": "hard",
+      "reason": "ECON cần capability EVIDENCE trong scope đã chọn"
+    },
+    {
+      "from": "ACCESS",
+      "to": "ECON",
+      "kind": "hard",
+      "reason": "ECON cần capability ACCESS trong scope đã chọn"
+    },
+    {
+      "from": "OPS",
+      "to": "ECON",
+      "kind": "hard",
+      "reason": "ECON cần capability OPS trong scope đã chọn"
+    },
+    {
+      "from": "ECON",
+      "to": "SHOP",
+      "kind": "hard",
+      "reason": "SHOP cần capability ECON trong scope đã chọn"
+    },
+    {
+      "from": "AVATAR",
+      "to": "SHOP",
+      "kind": "hard",
+      "reason": "SHOP cần capability AVATAR trong scope đã chọn"
+    },
+    {
+      "from": "SIM",
+      "to": "GECON",
+      "kind": "hard",
+      "reason": "GECON cần capability SIM trong scope đã chọn"
+    },
+    {
+      "from": "ECON",
+      "to": "GECON",
+      "kind": "hard",
+      "reason": "GECON cần capability ECON trong scope đã chọn"
+    },
+    {
+      "from": "SHOP",
+      "to": "GECON",
+      "kind": "hard",
+      "reason": "GECON cần capability SHOP trong scope đã chọn"
+    },
+    {
+      "from": "G1",
+      "to": "IELTS",
+      "kind": "hard",
+      "reason": "IELTS cần capability G1 trong scope đã chọn"
+    },
+    {
+      "from": "CONTENT",
+      "to": "IELTS",
+      "kind": "hard",
+      "reason": "IELTS cần capability CONTENT trong scope đã chọn"
+    },
+    {
+      "from": "LESSON",
+      "to": "IELTS",
+      "kind": "hard",
+      "reason": "IELTS cần capability LESSON trong scope đã chọn"
+    },
+    {
+      "from": "EVIDENCE",
+      "to": "IELTS",
+      "kind": "hard",
+      "reason": "IELTS cần capability EVIDENCE trong scope đã chọn"
+    },
+    {
+      "from": "MEDIA",
+      "to": "IELTS",
+      "kind": "hard",
+      "reason": "IELTS cần capability MEDIA trong scope đã chọn"
+    },
+    {
+      "from": "G1",
+      "to": "MENTOR",
+      "kind": "hard",
+      "reason": "MENTOR cần capability G1 trong scope đã chọn"
+    },
+    {
+      "from": "EVIDENCE",
+      "to": "MENTOR",
+      "kind": "hard",
+      "reason": "MENTOR cần capability EVIDENCE trong scope đã chọn"
+    },
+    {
+      "from": "ACCESS",
+      "to": "MENTOR",
+      "kind": "hard",
+      "reason": "MENTOR cần capability ACCESS trong scope đã chọn"
+    },
+    {
+      "from": "MEDIA",
+      "to": "MENTOR",
+      "kind": "hard",
+      "reason": "MENTOR cần capability MEDIA trong scope đã chọn"
+    },
+    {
+      "from": "G1",
+      "to": "VERIFY",
+      "kind": "hard",
+      "reason": "VERIFY cần capability G1 trong scope đã chọn"
+    },
+    {
+      "from": "BRIDGE",
+      "to": "VERIFY",
+      "kind": "hard",
+      "reason": "VERIFY cần capability BRIDGE trong scope đã chọn"
+    },
+    {
+      "from": "ACCESS",
+      "to": "VERIFY",
+      "kind": "hard",
+      "reason": "VERIFY cần capability ACCESS trong scope đã chọn"
+    },
+    {
+      "from": "OPS",
+      "to": "VERIFY",
+      "kind": "hard",
+      "reason": "VERIFY cần capability OPS trong scope đã chọn"
+    },
+    {
+      "from": "VERIFY",
+      "to": "PRESTIGE",
+      "kind": "hard",
+      "reason": "PRESTIGE cần capability VERIFY trong scope đã chọn"
+    },
+    {
+      "from": "EVIDENCE",
+      "to": "PRESTIGE",
+      "kind": "hard",
+      "reason": "PRESTIGE cần capability EVIDENCE trong scope đã chọn"
+    },
+    {
+      "from": "OPS",
+      "to": "PRESTIGE",
+      "kind": "hard",
+      "reason": "PRESTIGE cần capability OPS trong scope đã chọn"
+    },
+    {
+      "from": "VERIFY",
+      "to": "GPRESTIGE",
+      "kind": "hard",
+      "reason": "GPRESTIGE cần capability VERIFY trong scope đã chọn"
+    },
+    {
+      "from": "PRESTIGE",
+      "to": "GPRESTIGE",
+      "kind": "hard",
+      "reason": "GPRESTIGE cần capability PRESTIGE trong scope đã chọn"
+    },
+    {
+      "from": "G1",
+      "to": "LIVE",
+      "kind": "hard",
+      "reason": "LIVE cần capability G1 trong scope đã chọn"
+    },
+    {
+      "from": "OPS",
+      "to": "LIVE",
+      "kind": "hard",
+      "reason": "LIVE cần capability OPS trong scope đã chọn"
+    },
+    {
+      "from": "CONTENT",
+      "to": "LIVE",
+      "kind": "hard",
+      "reason": "LIVE cần capability CONTENT trong scope đã chọn"
+    },
+    {
+      "from": "EVIDENCE",
+      "to": "LIVE",
+      "kind": "hard",
+      "reason": "LIVE cần capability EVIDENCE trong scope đã chọn"
+    },
+    {
+      "from": "GPRESTIGE",
+      "to": "TOURNAMENT",
+      "kind": "hard",
+      "reason": "TOURNAMENT cần capability GPRESTIGE trong scope đã chọn"
+    },
+    {
+      "from": "LIVE",
+      "to": "TOURNAMENT",
+      "kind": "hard",
+      "reason": "TOURNAMENT cần capability LIVE trong scope đã chọn"
+    },
+    {
+      "from": "GCLASS",
+      "to": "COMMUNITY",
+      "kind": "hard",
+      "reason": "COMMUNITY cần capability GCLASS trong scope đã chọn"
+    },
+    {
+      "from": "SAFETY",
+      "to": "COMMUNITY",
+      "kind": "hard",
+      "reason": "COMMUNITY cần capability SAFETY trong scope đã chọn"
+    },
+    {
+      "from": "IELTS",
+      "to": "FULLIELTS",
+      "kind": "hard",
+      "reason": "FULLIELTS cần capability IELTS trong scope đã chọn"
+    },
+    {
+      "from": "ACCESS",
+      "to": "FULLIELTS",
+      "kind": "hard",
+      "reason": "FULLIELTS cần capability ACCESS trong scope đã chọn"
+    },
+    {
+      "from": "OPS",
+      "to": "FULLIELTS",
+      "kind": "hard",
+      "reason": "FULLIELTS cần capability OPS trong scope đã chọn"
+    }
+  ],
+  "conditional_edges": [
+    {
+      "from": "GECON",
+      "to": "LIVE",
+      "condition": "Campaign cấp currency/item reward"
+    },
+    {
+      "from": "GPRESTIGE",
+      "to": "LIVE",
+      "condition": "Campaign trao competitive award"
+    },
+    {
+      "from": "GCLASS",
+      "to": "LIVE",
+      "condition": "Campaign gắn lớp có chat"
+    }
+  ],
+  "topological_order": [
+    "BASE",
+    "ACCESS",
+    "SHELL",
+    "OPS",
+    "CONTENT",
+    "MEDIA",
+    "LESSON",
+    "EVIDENCE",
+    "BRIDGE",
+    "HOME",
+    "G1",
+    "SAFETY",
+    "CLASS",
+    "AVATAR",
+    "SIM",
+    "IELTS",
+    "MENTOR",
+    "VERIFY",
+    "LIVE",
+    "CHAT",
+    "CALENDAR",
+    "ECON",
+    "FULLIELTS",
+    "PRESTIGE",
+    "GCLASS",
+    "SHOP",
+    "GPRESTIGE",
+    "COMMUNITY",
+    "GECON",
+    "TOURNAMENT"
+  ]
+}

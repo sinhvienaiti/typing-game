@@ -1,0 +1,26 @@
+{
+  "mutations": [
+    {
+      "mutation": "level-byte",
+      "exit_code": 1,
+      "bytes_changed": 1,
+      "restored_sha256": "d775598e98c47926d6f56079e98ba448db4029367dfa669cf3e5a7e6c200c07c",
+      "restored_exactly": true
+    },
+    {
+      "mutation": "manifest-attribution",
+      "exit_code": 1,
+      "bytes_changed": null,
+      "restored_sha256": "bc981715c00f4c3b1bb622b599186ffab884f2337a1009400fb353787baf8252",
+      "restored_exactly": true
+    },
+    {
+      "mutation": "config-pin",
+      "exit_code": 1,
+      "bytes_changed": 1,
+      "restored_sha256": "b38d60247bf5b5639577d6946e6f963a87b32756723d834c7826f0169ae0ff52",
+      "restored_exactly": true
+    }
+  ],
+  "restored_test_exit_code": 0
+}

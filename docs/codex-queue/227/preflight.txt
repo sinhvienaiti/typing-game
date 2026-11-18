@@ -1,0 +1,96 @@
+Phiếu 227 — kiểm trước khi chạy
+Điều 5 (chạy đầu tiên): tmp/codex-227 và docs/codex-queue/227 đều ABSENT; mã 0. Sau đó tạo marker và chụp snap-before trước các kiểm còn lại.
+Điều 1 — 214: report=True; last.md=.local/codex-runs/214-portal-english-names/last.md
+--- .local/codex-runs/214-portal-english-names/last.md ---
+Đã hoàn tất tên Dragonhold, Wordwoven, Last Line, mô tả tiếng Anh, đường ảnh và xử lý ảnh lỗi trong portal; cập nhật nhãn hai script.
+
+51/51 test qua; build, kiểm tra tích hợp và cú pháp đều đạt.
+
+[Báo cáo đầy đủ](docs/codex-queue/214-report.md) · [Changelog](docs/changelog/2026-10-30-portal-english-names.md)
+
+Không tạo ảnh hay chạy trình duyệt theo giới hạn phiếu. Claude cần duyệt ảnh 176/177, chạy `media:push` và kiểm bố cục 1280/1920. Báo cáo ghi rõ ngoại lệ status gồm năm file của phiếu 194. Chưa commit/push.
+Điều 1 — 215: report=True; last.md=.local/codex-runs/215-portal-learning-lookup/last.md, .local/codex-runs/215-portal-learning-lookup-prev-10301253/last.md, .local/codex-runs/215-portal-learning-lookup-prev-10301256/last.md
+--- .local/codex-runs/215-portal-learning-lookup/last.md ---
+Đã sửa lookup trong `shared/learning` và `portal/src/learning/bridge.ts`, thêm `recentSamples` và 55 test mới.
+
+- Learning **84/84**, portal **77/77**; build và kiểm cú pháp xanh.
+- Snapshot trước/sau giống hệt; lookup trung vị **0,188 ms**.
+- Báo cáo, log và danh sách bàn giao: [215-report.md](/Users/toandx/htdocs/typing-game/docs/codex-queue/215-report.md).
+
+Không sửa game, media hay phần của 214; chưa commit. Claude cần duyệt và kiểm Dragonhold qua trình duyệt theo phiếu.
+--- .local/codex-runs/215-portal-learning-lookup-prev-10301253/last.md ---
+Đã dừng đúng điều kiện của phiếu 215: có file bẩn ngoài danh sách 214 là `docs/changelog/2026-10-30-kit-audio-file-bank.md`.
+
+- Đã tạo [báo cáo 215](/Users/toandx/htdocs/typing-game/docs/codex-queue/215-report.md) và lưu nhánh, HEAD, trạng thái Git trong `docs/codex-queue/215/`.
+- Chưa sửa mã hoặc chạy test/build vì cổng kiểm ban đầu chưa đạt.
+- Chủ dự án cần xác nhận cho tiếp tục với file lạ này, hoặc chờ tác nhân sở hữu xử lý rồi chạy lại.
+--- .local/codex-runs/215-portal-learning-lookup-prev-10301256/last.md ---
+Đã cập nhật [báo cáo 215](docs/codex-queue/215-report.md) và lưu bằng chứng trong `docs/codex-queue/215/rerun-1258-*`.
+
+Dừng theo mục “Nơi làm”: có file chưa được theo dõi ngoài phiếu 214 là `docs/changelog/2026-10-30-audio-lab-firefly-ingest.md`.
+
+Chưa sửa mã, chưa chạy test/build. Điều phối cần xử lý hoặc cho phép rõ file này để tiếp tục. Phiếu 215 chưa hoàn tất.
+Điều 1 — 216: report=True; last.md=.local/codex-runs/216-nginx-game-aliases/last.md
+--- .local/codex-runs/216-nginx-game-aliases/last.md ---
+Hoàn tất phiếu 216:
+
+- Bỏ 16 alias dữ liệu trong hai conf; thêm bộ kiểm và test chống tái xuất hiện.
+- **94/94 test xanh**, hai validator qua; 16 khối server khác giữ nguyên SHA-256.
+- Giữ alias model survival theo phiếu 205. Không build game, cài/reload nginx hay commit.
+
+[Báo cáo và danh sách đầy đủ đường đã đổi](/Users/toandx/htdocs/typing-game/docs/codex-queue/216-report.md), kèm bằng chứng trong `docs/codex-queue/216/`.
+
+Sau khi Claude duyệt và commit, chủ dự án chạy `pnpm setup:play` hoặc `pnpm setup:dev`. Báo cáo ghi rõ lỗi hướng dẫn sudo trên macOS và rủi ro SPA fallback cần xem ở G7.
+Điều 1 — 217: report=True; last.md=.local/codex-runs/217-audio-lab-firefly-ingest/last.md
+--- .local/codex-runs/217-audio-lab-firefly-ingest/last.md ---
+Đã dựng `firefly ingest`, `listen`, `status` và lớp giấy phép Adobe trong [tools/audio-lab/firefly](/Users/toandx/htdocs/typing-game/tools/audio-lab/firefly/README.md).
+
+- **20 test mới qua**; bộ chính **539 qua**, giữ nguyên các lỗi và lượt bỏ qua ban đầu.
+- Demo hai id đạt; **10/10 file dựng lại giống SHA-256**, inbox nguyên hash và mtime.
+- Chưa nhận/nghe WAV thật hoặc gắn game. Claude cần xác nhận lớp giấy phép, model, `ai_input_allowed` và bổ sung điều khoản Adobe.
+
+[Báo cáo đầy đủ và từng đường đã đổi](/Users/toandx/htdocs/typing-game/docs/codex-queue/217-report.md). Không commit/push.
+Điều 2: GIT_OPTIONAL_LOCKS=0 git branch --show-current
+exit=0
+feat/space-typing-admin-uiux
+
+
+Điều 3: GIT_OPTIONAL_LOCKS=0 git rev-parse HEAD
+exit=0
+52005e3fb37424fcd8212670dd8eec728559ff6a
+
+
+Điều 4: GIT_OPTIONAL_LOCKS=0 git status --short -- portal shared/learning infra/nginx scripts/validate-play-mode.mjs scripts/game-dir.sh scripts/bootstrap.sh tools/audio-lab/firefly tools/audio-lab/build tools/audio-lab/common/launch.py tools/audio-lab/pytest.ini
+exit=0
+ M infra/nginx/typing-game.local.dev.conf
+ M infra/nginx/typing-game.local.play.conf
+ M portal/public/games.json
+ M portal/src/learning/bridge.ts
+ M portal/src/main.ts
+ M portal/src/styles.css
+ M scripts/bootstrap.sh
+ M scripts/game-dir.sh
+ M scripts/validate-play-mode.mjs
+ M shared/learning/README.md
+ M shared/learning/core.d.mts
+ M shared/learning/core.mjs
+ M shared/learning/message-contract.d.mts
+ M shared/learning/message-contract.mjs
+ M shared/learning/profile-backup.mjs
+ M shared/learning/query.d.mts
+ M shared/learning/query.mjs
+ M tools/audio-lab/build/licence_check.py
+ M tools/audio-lab/build/policy.py
+ M tools/audio-lab/common/launch.py
+ M tools/audio-lab/pytest.ini
+?? portal/src/game-card.ts
+?? portal/tests/fixtures/
+?? portal/tests/game-card.test.mjs
+?? portal/tests/learning-lookup.test.mjs
+?? shared/learning/lookup.test.mjs
+?? tools/audio-lab/build/tests/test_build_firefly_licence.py
+?? tools/audio-lab/firefly/
+
+
+Kết luận điều 1: cả bốn báo cáo hiện hành nói hoàn tất; 215 có hai lượt trước đã dừng, lượt thứ ba hiện hành đã xong. Không phiếu nào thiếu hoặc dừng ở trạng thái hiện hành.
+Điều 4: mỗi phiếu còn đường nguồn chưa commit; dùng diff HEAD → cây làm việc, không cần chọn commit thay thế. scripts/validate-play-mode.test.mjs là file mới chưa theo dõi (status riêng mã 0); không có trong lệnh status hẹp ban đầu vì lệnh đó chỉ nêu .mjs.

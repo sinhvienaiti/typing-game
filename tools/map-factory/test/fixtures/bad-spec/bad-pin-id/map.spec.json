@@ -1,0 +1,80 @@
+{
+  "format": "map-spec/0",
+  "id": "w1-silverfall",
+  "game": "typing-defense",
+  "title": "Đồng Cỏ Thác Bạc (Silverfall Meadow)",
+  "unit": "cm",
+  "seed": 20261027,
+  "generator": {
+    "factory": "0.1.0",
+    "layers": { "fields": 1, "height": 1, "water": 1, "paths": 1, "dressing": 1, "vegetation": 1, "paint": 1 }
+  },
+  "gameplay": { "adapter": "typing-defense@1", "commit": "10ce627ff4e1c91f29e808cb658c086f51bd97d6",
+                "hash": "7faeaa7c0d5bf39803019444b1ae8056c36d3914a916a74baaed834e76ef4b23" },
+  "registry": { "scan": "2026-10-27", "kit": "meadow@1" },
+  "extent": { "fieldHalfCm": 4800, "skirtCm": 4000, "cellCm": 50, "skirtCellCm": 200 },
+  "review": { "pitchesDeg": [55, 85, 15], "yawsDeg": [0, 90, 180, 270] },
+  "layers": {
+    "height": {
+      "reliefCm": 60,
+      "stamps": [
+        { "id": "rainbow-hill", "kind": "hill", "at": [200, -2100], "radiusCm": 800, "heightCm": 260, "rule": "td-hill-range" },
+        { "id": "silverfall-cliff", "kind": "cliff", "line": [[-4800, -5200], [1600, -5200]], "heightCm": 900, "outsideField": true }
+      ],
+      "flatten": [{ "under": "routes", "marginCm": 120 }, { "under": "keep", "radiusCm": 900 }]
+    },
+    "water": {
+      "streams": [{ "id": "silver-stream", "fromGameplay": "water/0", "wobbleCm": 40, "bankCm": 80 }],
+      "falls": [{ "id": "silverfall", "at": [-1000, -5200], "widthCm": 700, "dropCm": 900 }],
+      "ponds": []
+    },
+    "paths": {
+      "fromGameplay": "routes",
+      "footpaths": [
+        { "id": "fp-keep-ore", "from": "keep", "to": "node/1", "widthCm": 110 },
+        { "id": "fp-bridge-west", "from": "bridge/1", "to": [-3600, 3400], "widthCm": 100 }
+      ],
+      "wornEdgeCm": 90
+    },
+    "dressing": {
+      "along": [
+        { "proto": "lamp-post", "on": "routes", "everyCm": 1600, "sideCm": 280, "alternate": true, "clearOnBuild": true, "skipNearCm": { "bridge": 400, "gate": 800 } },
+        { "proto": "fence-segment", "on": "footpaths", "everyCm": 240, "sideCm": 160, "maxRun": 6, "clearOnBuild": true }
+      ],
+      "landmarks": [
+        { "proto": "wooden-bridge", "fit": "bridge/0" },
+        { "proto": "wooden-bridge", "fit": "bridge/1" },
+        { "proto": "silverfall-cliff", "at": [-1000, -5400], "yawDeg": 0 },
+        { "proto": "watchtower", "at": [5600, -2400], "yawDeg": 200, "note": "vòng ngoài; lên đồi khi sim có nền (6.4)" }
+      ]
+    },
+    "vegetation": {
+      "gameplayTrees": { "fromGameplay": "trees", "mix": { "mountain-pine": 2, "almond-tree": 1 }, "mark": "chop-chips" },
+      "decorTrees": { "where": "buildable", "clearOnBuild": true, "densityPermille": 120, "minGapToGameplayTreeCm": 400,
+                      "mix": { "bamboo-clump": 2, "almond-tree": 1, "mountain-pine": 1 } },
+      "groves": { "where": "noBuild", "count": [6, 9], "radiusCm": [500, 1000], "densityPermille": 600,
+                  "mix": { "mountain-pine": 3, "bamboo-clump": 2, "almond-tree": 1 } },
+      "edge": { "bandCm": 1400, "proto": "canopy-block", "densityPermille": 850 },
+      "clutter": { "where": "buildable", "densityPermille": 300, "clearOnBuild": true,
+                   "mix": { "raspberry-bush": 2, "tall-grass": 3, "fern": 1, "rock-small": 1, "rotten-log": 1 } },
+      "minGapCm": 220,
+      "cellCm": 800
+    },
+    "paint": {
+      "canopyDirtCm": 260, "junctionDirtCm": 450, "routeWornCm": 90, "tintNoiseCm": 4000,
+      "decals": { "wildflowers": 400, "pebbles": 150 },
+      "hints": [{ "kind": "alluvial", "at": [1600, 2800], "radiusCm": 700, "designOnly": true }]
+    }
+  },
+  "exclude": [
+    { "id": "keep-word-cards", "poly": [[-800, 3200], [800, 3200], [800, 4800], [-800, 4800]], "reason": "thẻ chữ của Lũy" }
+  ],
+  "pins": [
+    { "keep": "veg:groves:c-5-4:2" },
+    { "proto": "almond-tree", "at": [3800, -1200], "yawDeg": 40, "scalePermille": 1100, "variant": "red", "clearOnBuild": true }
+  ],
+  "budget": {
+    "high": { "propTriangles": 550000, "drawCalls": 40, "loadMs": 300 },
+    "medium": { "propTriangles": 300000, "drawCalls": 30, "loadMs": 300 }
+  }
+}

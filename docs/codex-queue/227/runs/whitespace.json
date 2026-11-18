@@ -1,0 +1,213 @@
+[
+  {
+    "command": [
+      "git",
+      "diff",
+      "--check",
+      "--",
+      "infra/nginx/typing-game.local.dev.conf",
+      "infra/nginx/typing-game.local.play.conf",
+      "portal/public/games.json",
+      "portal/src/learning/bridge.ts",
+      "portal/src/main.ts",
+      "portal/src/styles.css",
+      "scripts/bootstrap.sh",
+      "scripts/game-dir.sh",
+      "scripts/validate-play-mode.mjs",
+      "shared/learning/README.md",
+      "shared/learning/core.d.mts",
+      "shared/learning/core.mjs",
+      "shared/learning/message-contract.d.mts",
+      "shared/learning/message-contract.mjs",
+      "shared/learning/profile-backup.mjs",
+      "shared/learning/query.d.mts",
+      "shared/learning/query.mjs",
+      "tools/audio-lab/build/licence_check.py",
+      "tools/audio-lab/build/policy.py",
+      "tools/audio-lab/common/launch.py",
+      "tools/audio-lab/pytest.ini"
+    ],
+    "exit": 0,
+    "output": ""
+  },
+  {
+    "command": [
+      "git",
+      "diff",
+      "--no-index",
+      "--check",
+      "/dev/null",
+      "portal/src/game-card.ts"
+    ],
+    "exit": 1,
+    "output": ""
+  },
+  {
+    "command": [
+      "git",
+      "diff",
+      "--no-index",
+      "--check",
+      "/dev/null",
+      "portal/tests/fixtures/legacy-games.json"
+    ],
+    "exit": 1,
+    "output": ""
+  },
+  {
+    "command": [
+      "git",
+      "diff",
+      "--no-index",
+      "--check",
+      "/dev/null",
+      "portal/tests/game-card.test.mjs"
+    ],
+    "exit": 1,
+    "output": ""
+  },
+  {
+    "command": [
+      "git",
+      "diff",
+      "--no-index",
+      "--check",
+      "/dev/null",
+      "portal/tests/learning-lookup.test.mjs"
+    ],
+    "exit": 1,
+    "output": ""
+  },
+  {
+    "command": [
+      "git",
+      "diff",
+      "--no-index",
+      "--check",
+      "/dev/null",
+      "scripts/validate-play-mode.test.mjs"
+    ],
+    "exit": 1,
+    "output": ""
+  },
+  {
+    "command": [
+      "git",
+      "diff",
+      "--no-index",
+      "--check",
+      "/dev/null",
+      "shared/learning/lookup.test.mjs"
+    ],
+    "exit": 1,
+    "output": ""
+  },
+  {
+    "command": [
+      "git",
+      "diff",
+      "--no-index",
+      "--check",
+      "/dev/null",
+      "tools/audio-lab/build/tests/test_build_firefly_licence.py"
+    ],
+    "exit": 1,
+    "output": ""
+  },
+  {
+    "command": [
+      "git",
+      "diff",
+      "--no-index",
+      "--check",
+      "/dev/null",
+      "tools/audio-lab/firefly/README.md"
+    ],
+    "exit": 1,
+    "output": ""
+  },
+  {
+    "command": [
+      "git",
+      "diff",
+      "--no-index",
+      "--check",
+      "/dev/null",
+      "tools/audio-lab/firefly/__init__.py"
+    ],
+    "exit": 1,
+    "output": ""
+  },
+  {
+    "command": [
+      "git",
+      "diff",
+      "--no-index",
+      "--check",
+      "/dev/null",
+      "tools/audio-lab/firefly/__main__.py"
+    ],
+    "exit": 1,
+    "output": ""
+  },
+  {
+    "command": [
+      "git",
+      "diff",
+      "--no-index",
+      "--check",
+      "/dev/null",
+      "tools/audio-lab/firefly/cli.py"
+    ],
+    "exit": 1,
+    "output": ""
+  },
+  {
+    "command": [
+      "git",
+      "diff",
+      "--no-index",
+      "--check",
+      "/dev/null",
+      "tools/audio-lab/firefly/licences/adobe-firefly-owner-2026-10-29.txt"
+    ],
+    "exit": 1,
+    "output": ""
+  },
+  {
+    "command": [
+      "git",
+      "diff",
+      "--no-index",
+      "--check",
+      "/dev/null",
+      "tools/audio-lab/firefly/listening.py"
+    ],
+    "exit": 1,
+    "output": ""
+  },
+  {
+    "command": [
+      "git",
+      "diff",
+      "--no-index",
+      "--check",
+      "/dev/null",
+      "tools/audio-lab/firefly/pipeline.py"
+    ],
+    "exit": 1,
+    "output": ""
+  },
+  {
+    "command": [
+      "git",
+      "diff",
+      "--no-index",
+      "--check",
+      "/dev/null",
+      "tools/audio-lab/firefly/tests/test_firefly.py"
+    ],
+    "exit": 1,
+    "output": ""
+  }
+]

@@ -1,0 +1,35 @@
+$ git log -1 --format=%H -- docs/games/audio/firefly/schema.json docs/games/audio/firefly/README.md docs/codex-queue/212/check.mjs
+83217b53870b330d345d1ee8a97f82e0adee757d
+
+$ md5 docs/games/audio/firefly/schema.json docs/codex-queue/212/check.mjs docs/games/audio/firefly/README.md
+MD5 (docs/games/audio/firefly/schema.json) = c37879d9b6b4a85470c10b92f937b538
+MD5 (docs/codex-queue/212/check.mjs) = ffbeee75450361fe957bd6d4493cbc7d
+MD5 (docs/games/audio/firefly/README.md) = c0732e449f7e5e087460b796d686bb54
+
+$ grep -n '^export function' docs/codex-queue/212/check.mjs
+10:export function validateList(value, schema) {
+43:export function calculateTakes(row, assumptions) {
+50:export function calculateTotals(rows) {
+55:export function readSoundIds() {
+84:export function audit(list, schema, soundIds, specIds, md) {
+
+$ python3 -c 'import json; s=json.load(open("docs/games/audio/firefly/schema.json")); print("file:", list(s["properties"])); print("row:",list(s["properties"]["rows"]["items"]["properties"]))'
+file: ['game', 'stage', 'direction', 'assumptions', 'rows', 'excluded', 'retired', 'totals', 'sourceCommits']
+row: ['id', 'playerName', 'when', 'bus', 'vfxSync', 'priorityWhy', 'prompt', 'voiceHint', 'inbox', 'eraNote', 'specCard', 'phase', 'priority', 'shape', 'targetMs', 'variants', 'hitsPerTake', 'takes', 'loop', 'era', 'basis', 'branchOnly', 'clips', 'clipsWhy']
+
+$ git -C games/typing-defense branch --show-current
+a2-days
+
+$ git -C games/typing-defense rev-parse td-1c
+2a1f61d7da2ee6e6ca4abdc23f8775f872d9c9e7
+
+$ git -C games/typing-defense status --short
+
+$ ls tools/audio-lab/specs/typing-defense/*.yaml | wc -l
+      30
+
+$ python3 -c 'from pathlib import Path; ps=["docs/games/audio/firefly/typing-defense.md","docs/games/audio/firefly/typing-defense.json","docs/codex-queue/221-report.md"]; print("\n".join(p+": "+str(Path(p).exists()) for p in ps)); assert not any(Path(p).exists() for p in ps)'
+docs/games/audio/firefly/typing-defense.md: False
+docs/games/audio/firefly/typing-defense.json: False
+docs/codex-queue/221-report.md: False
+

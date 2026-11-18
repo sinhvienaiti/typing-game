@@ -1,0 +1,120 @@
+[
+  {
+    "id": "M2a",
+    "finding": "F2",
+    "file": "src/ui/styles/title.css",
+    "mutation": "title.css: root rule back on .dh-title",
+    "exit": 1,
+    "tests": "3 failed | 19 passed | 1 skipped (23)",
+    "red": [
+      "title screen CSS stays on its own root (222 F2) > leaves HUD, shop, wave card and results headings without the full-screen layer",
+      "title screen CSS stays on its own root (222 F2) > keeps .dh-title a typography class only (dh.css 87–95)",
+      "title screen CSS stays on its own root (222 F2) > still gives the title screen its own full-screen root"
+    ],
+    "restored": true
+  },
+  {
+    "id": "M2b",
+    "finding": "F2",
+    "file": "src/ui/title.ts",
+    "mutation": "title.ts: root class back to dh-title only",
+    "exit": 1,
+    "tests": "1 failed | 21 passed | 1 skipped (23)",
+    "red": [
+      "title screen CSS stays on its own root (222 F2) > still gives the title screen its own full-screen root"
+    ],
+    "restored": true
+  },
+  {
+    "id": "M3a",
+    "finding": "F3",
+    "file": "src/app/app.ts",
+    "mutation": "app.ts: no onRetry wired (no Retry button)",
+    "exit": 1,
+    "tests": "5 failed | 17 passed | 1 skipped (23)",
+    "red": [
+      "default title recovers from a deck error (222 F3) > after load-failed, Enter on Retry reloads once and Start opens the run",
+      "default title recovers from a deck error (222 F3) > after empty, Enter on Retry reloads once and Start opens the run",
+      "default title recovers from a deck error (222 F3) > after too-small, Enter on Retry reloads once and Start opens the run",
+      "default title recovers from a deck error (222 F3) > blocks again after a second failure, then a mouse Retry succeeds",
+      "default title recovers from a deck error (222 F3) > never settles or boots a deck that arrives after dispose"
+    ],
+    "restored": true
+  },
+  {
+    "id": "M3b",
+    "finding": "F3",
+    "file": "src/ui/title.ts",
+    "mutation": "title.ts: Enter no longer retries",
+    "exit": 1,
+    "tests": "7 failed | 15 passed | 1 skipped (23)",
+    "red": [
+      "title Retry (222 F3) > shows Retry for load-failed, with keys and mouse, and keeps Start off until words are valid",
+      "title Retry (222 F3) > shows Retry for empty, with keys and mouse, and keeps Start off until words are valid",
+      "title Retry (222 F3) > shows Retry for too-small, with keys and mouse, and keeps Start off until words are valid",
+      "title Retry (222 F3) > keeps the portal reachable while blocked, and a refused retry leaves the title blocked",
+      "default title recovers from a deck error (222 F3) > after load-failed, Enter on Retry reloads once and Start opens the run",
+      "default title recovers from a deck error (222 F3) > after empty, Enter on Retry reloads once and Start opens the run",
+      "default title recovers from a deck error (222 F3) > after too-small, Enter on Retry reloads once and Start opens the run"
+    ],
+    "restored": true
+  },
+  {
+    "id": "M3c",
+    "finding": "F3",
+    "file": "src/app/deck-boot.ts",
+    "mutation": "deck-boot.ts: no busy guard",
+    "exit": 1,
+    "tests": "1 failed | 21 passed | 1 skipped (23)",
+    "red": [
+      "deck loader: the 195 recovery path shared by both boots > runs one build at a time and none after a delivered deck"
+    ],
+    "restored": true
+  },
+  {
+    "id": "M3d",
+    "finding": "F3",
+    "file": "src/ui/title.ts",
+    "mutation": "title.ts: Retry allowed while not blocked (defence in depth)",
+    "exit": 0,
+    "tests": "22 passed | 1 skipped (23)",
+    "red": [],
+    "restored": true
+  },
+  {
+    "id": "M3e",
+    "finding": "F3",
+    "file": "src/app/deck-boot.ts",
+    "mutation": "deck-boot.ts: loader stays open after a delivered deck",
+    "exit": 1,
+    "tests": "1 failed | 21 passed | 1 skipped (23)",
+    "red": [
+      "deck loader: the 195 recovery path shared by both boots > runs one build at a time and none after a delivered deck"
+    ],
+    "restored": true
+  },
+  {
+    "id": "M3f",
+    "finding": "F3",
+    "file": "src/app/deck-boot.ts",
+    "mutation": "deck-boot.ts: dispose does not close the loader",
+    "exit": 1,
+    "tests": "1 failed | 21 passed | 1 skipped (23)",
+    "red": [
+      "deck loader: the 195 recovery path shared by both boots > reports failures as DeckBuildError, allows the next try, and stops after dispose"
+    ],
+    "restored": true
+  },
+  {
+    "id": "M4a",
+    "finding": "F4",
+    "file": "tests/app/idle-estimate.test.ts",
+    "mutation": "idle-estimate.test.ts: a cwd-relative read outside the repo comes back",
+    "exit": 1,
+    "tests": "1 failed | 21 passed | 1 skipped (23)",
+    "red": [
+      "keeps the normal suite inside the game repo: small fixture, no cwd-relative path climbing out"
+    ],
+    "restored": true
+  }
+]

@@ -1,0 +1,123 @@
+
+ RUN  v3.2.7 /Users/toandx/htdocs/typing-game/games/.wt-dh-codex
+
+ ❯ tests/ui/results-screen.test.ts (10 tests | 10 failed) 22ms
+   × results portal action (105b, DH-24 / G5) > renders two matching actions with portalHome(undefined) and target _top 11ms
+     → Cannot read properties of undefined (reading 'children')
+   × results portal action (105b, DH-24 / G5) > renders two matching actions with portalHome() and target _top 1ms
+     → Cannot read properties of undefined (reading 'children')
+   × results portal action (105b, DH-24 / G5) > renders two matching actions with portalHome( https://portal.example , https://other.example ) and target _top 1ms
+     → Cannot read properties of undefined (reading 'children')
+   × results portal action (105b, DH-24 / G5) > starts victory on retry; right + Enter clicks the portal, left + Enter retries 3ms
+     → expected false to be true // Object.is equality
+   × results portal action (105b, DH-24 / G5) > starts defeat on retry; right + Enter clicks the portal, left + Enter retries 1ms
+     → expected false to be true // Object.is equality
+   × results portal action (105b, DH-24 / G5) > keeps up/down word selection and Tab listening independent of the selected action 1ms
+     → Cannot read properties of undefined (reading 'classList')
+   × results portal action (105b, DH-24 / G5) > Escape skips the 2.6 s victory hold without activating an action 1ms
+     → expected false to be true // Object.is equality
+   × results portal action (105b, DH-24 / G5) > Enter skips the 2.6 s victory hold without activating an action 1ms
+     → expected false to be true // Object.is equality
+   × results portal action (105b, DH-24 / G5) > opens automatically after the hold and resets the selected action for a new run 1ms
+     → Cannot read properties of undefined (reading 'click')
+   × results portal action (105b, DH-24 / G5) > preserves the optional easier replay shortcut alongside the two actions 2ms
+     → Cannot read properties of undefined (reading 'click')
+
+⎯⎯⎯⎯⎯⎯ Failed Tests 10 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/ui/results-screen.test.ts > results portal action (105b, DH-24 / G5) > renders two matching actions with portalHome(undefined) and target _top
+ FAIL  tests/ui/results-screen.test.ts > results portal action (105b, DH-24 / G5) > renders two matching actions with portalHome() and target _top
+ FAIL  tests/ui/results-screen.test.ts > results portal action (105b, DH-24 / G5) > renders two matching actions with portalHome( https://portal.example , https://other.example ) and target _top
+TypeError: Cannot read properties of undefined (reading 'children')
+ ❯ tests/ui/results-screen.test.ts:85:40
+     83|     const retry = f.node("dh-retry");
+     84|     const portal = f.node("dh-results__portal");
+     85|     expect(f.node("dh-results__actions").children).toEqual([retry, por…
+       |                                        ^
+     86|     expect(retry.tagName).toBe("BUTTON");
+     87|     expect(portal.tagName).toBe("A");
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/10]⎯
+
+ FAIL  tests/ui/results-screen.test.ts > results portal action (105b, DH-24 / G5) > starts victory on retry; right + Enter clicks the portal, left + Enter retries
+ FAIL  tests/ui/results-screen.test.ts > results portal action (105b, DH-24 / G5) > starts defeat on retry; right + Enter clicks the portal, left + Enter retries
+AssertionError: expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ ❯ tests/ui/results-screen.test.ts:101:52
+     99|     const retry = f.node("dh-retry");
+    100|     const portal = f.node("dh-results__portal");
+    101|     expect(retry.classList.contains("is-focused")).toBe(true);
+       |                                                    ^
+    102|     f.key("Enter");
+    103|     expect(f.actions.retry).toHaveBeenCalledOnce();
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/10]⎯
+
+ FAIL  tests/ui/results-screen.test.ts > results portal action (105b, DH-24 / G5) > keeps up/down word selection and Tab listening independent of the selected action
+TypeError: Cannot read properties of undefined (reading 'classList')
+ ❯ tests/ui/results-screen.test.ts:134:39
+    132|     f.key("Tab");
+    133|     expect(f.actions.listen).toHaveBeenLastCalledWith("cat");
+    134|     expect(f.node("dh-results__portal").classList.contains("is-focused…
+       |                                       ^
+    135|     f.key("Escape");
+    136|     expect(f.node("dh-results").hidden).toBe(false);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/10]⎯
+
+ FAIL  tests/ui/results-screen.test.ts > results portal action (105b, DH-24 / G5) > Escape skips the 2.6 s victory hold without activating an action
+ FAIL  tests/ui/results-screen.test.ts > results portal action (105b, DH-24 / G5) > Enter skips the 2.6 s victory hold without activating an action
+AssertionError: expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ ❯ tests/ui/results-screen.test.ts:153:65
+    151|     expect(f.node("dh-results").hidden).toBe(false);
+    152|     expect(f.node("dh-victory").hidden).toBe(true);
+    153|     expect(f.node("dh-retry").classList.contains("is-focused")).toBe(t…
+       |                                                                 ^
+    154|     expect(f.actions.retry).not.toHaveBeenCalled();
+    155|     expect(f.node("dh-results__portal").click).not.toHaveBeenCalled();
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/10]⎯
+
+ FAIL  tests/ui/results-screen.test.ts > results portal action (105b, DH-24 / G5) > opens automatically after the hold and resets the selected action for a new run
+TypeError: Cannot read properties of undefined (reading 'click')
+ ❯ tests/ui/results-screen.test.ts:169:39
+    167|     f.key("Enter");
+    168|     expect(f.actions.retry).toHaveBeenCalledOnce();
+    169|     expect(f.node("dh-results__portal").click).not.toHaveBeenCalled();
+       |                                       ^
+    170|   });
+    171| 
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/10]⎯
+
+ FAIL  tests/ui/results-screen.test.ts > results portal action (105b, DH-24 / G5) > preserves the optional easier replay shortcut alongside the two actions
+TypeError: Cannot read properties of undefined (reading 'click')
+ ❯ tests/ui/results-screen.test.ts:181:39
+    179|     expect(f.actions.easier).toHaveBeenCalledOnce();
+    180|     f.key("Enter");
+    181|     expect(f.node("dh-results__portal").click).toHaveBeenCalledOnce();
+       |                                       ^
+    182|     expect(f.actions.retry).not.toHaveBeenCalled();
+    183|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/10]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  10 failed (10)
+   Start at  23:56:13
+   Duration  358ms (transform 76ms, setup 0ms, collect 104ms, tests 22ms, environment 0ms, prepare 38ms)
+

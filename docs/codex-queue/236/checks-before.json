@@ -1,0 +1,66 @@
+{
+  "portal-build": {
+    "command": "pnpm --dir portal build",
+    "exit": 0
+  },
+  "portal-test": {
+    "command": "pnpm --dir portal test",
+    "exit": 0
+  },
+  "admin-test": {
+    "command": "pnpm admin:test",
+    "exit": 1
+  },
+  "alternative-modes": {
+    "command": "node scripts/validate-space-admin-alternative-modes.mjs",
+    "exit": 0
+  },
+  "duel": {
+    "command": "node scripts/validate-space-admin-duel.mjs",
+    "exit": 0
+  },
+  "events": {
+    "command": "node scripts/validate-space-admin-events.mjs",
+    "exit": 0
+  },
+  "qa": {
+    "command": "node scripts/validate-space-admin-qa.mjs",
+    "exit": 1
+  },
+  "phase-b": {
+    "command": "node scripts/validate-space-admin-phase-b.mjs",
+    "exit": 0
+  },
+  "ranked": {
+    "command": "node scripts/validate-space-admin-ranked.mjs",
+    "exit": 0
+  },
+  "ui-assets": {
+    "command": "node scripts/validate-space-admin-ui-assets.mjs",
+    "exit": 0
+  },
+  "v2-design-system": {
+    "command": "node scripts/validate-space-admin-v2-design-system.mjs",
+    "exit": 0
+  },
+  "ui": {
+    "command": "node scripts/validate-space-admin-ui.mjs",
+    "exit": 1
+  },
+  "v2-media": {
+    "command": "node scripts/validate-space-admin-v2-media.mjs",
+    "exit": 0
+  },
+  "v2-shell": {
+    "command": "node scripts/validate-space-admin-v2-shell.mjs",
+    "exit": 1
+  },
+  "play-mode": {
+    "command": "node scripts/validate-play-mode.mjs",
+    "exit": 0
+  },
+  "play-mode-test": {
+    "command": "node --test scripts/validate-play-mode.test.mjs",
+    "exit": 0
+  }
+}

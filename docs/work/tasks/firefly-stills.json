@@ -1,0 +1,870 @@
+{
+ "about": "Phân loại 56 việc video Firefly (05/11/2026) và câu lệnh ảnh tĩnh khung đầu. shape = có ảnh tĩnh trước (ảnh → video); material = video từ chữ, chờ anh chọn kiểu câu lệnh (video/style-*). Ảnh lưu ở games/immortality-cultivation/art-src/lab/firefly-sprint-2026-11-05/stills/<id>/cand<N>.png.",
+ "stillStandard": {
+  "style": "Premium donghua mythic light-effect painting, radiant glow with volumetric depth, layered translucent light, rich gradients, fine filigree detail, glittering sparkles, organic asymmetric forms.",
+  "tail": "Centered with a wide empty black border all around, set against a solid pure black void, only the effect itself.",
+  "model": "Firefly Image (Adobe), 1 lần tạo = 4 ảnh"
+ },
+ "counts": {
+  "shape": 38,
+  "material": 18,
+  "toGenerate": 32
+ },
+ "shape": [
+  {
+   "id": "sky-gate-open-close",
+   "aspect": "1:1",
+   "approved": null,
+   "lastFrame": false,
+   "use": "K6 sword rain SkyGate (sword-rain.ts GATE_FRAGMENT)",
+   "stillPrompt": "Premium donghua mythic light-effect painting, radiant glow with volumetric depth, layered translucent light, rich gradients, fine filigree detail, glittering sparkles, organic asymmetric forms. A celestial ring gate fully open in the dark: a white-hot elliptical rim, a torn cyan corona of thin flickering light spikes of uneven length, a deep dark aperture inside, star glints racing along the rim. Centered with a wide empty black border all around, set against a solid pure black void, only the effect itself.",
+   "generate": true,
+   "styleRef": "c3",
+   "compRef": "seal-loop",
+   "refSources": {
+    "seal-loop": "games/immortality-cultivation/art-src/lab/vfx/fire/fire-halo-seal-loop.atlas.png cell 4 (col 4,row 0)",
+    "c3": "games/immortality-cultivation/art-src/skills/cutin/tt-cutin-c-shout-e3-head-skin-up2x.v2-try1-ffup.png (mặt C3 bản Firefly Upscaler)"
+   },
+   "styleStrength": 0,
+   "compStrength": 1,
+   "status": "4 candidates (Firefly Image 4)",
+   "recommend": {
+    "pick": "cand4",
+    "why": "round rim, clear dark aperture, even cyan corona (needs a smaller scale for margin)"
+   }
+  },
+  {
+   "id": "dragon-pearl-loop",
+   "aspect": "1:1",
+   "approved": null,
+   "lastFrame": "loop: khung cuối = chính ảnh khung đầu",
+   "use": "Twin Dragons burning pearl (hover loop)",
+   "stillPrompt": "Premium donghua mythic light-effect painting, radiant glow with volumetric depth, layered translucent light, rich gradients, fine filigree detail, glittering sparkles, organic asymmetric forms. A burning pearl floating in place: a white-gold sphere with swirling inner flame currents and a hot core, a hair-thin golden halo ring circling it at a slight tilt with one bright light point on the ring, four-point star glints on its surface. Centered with a wide empty black border all around, set against a solid pure black void, only the effect itself.",
+   "generate": true,
+   "styleRef": "v1a",
+   "compRef": "halo-ring",
+   "refSources": {
+    "halo-ring": "games/immortality-cultivation/art-src/lab/vfx/fire/fire-halo-ring.atlas.png cell 8 (col 2,row 1)",
+    "v1a": "games/immortality-cultivation/art-src/lab/vfx/fire/impact-k1-r2/fire-impact-k1-r2-v1a.try3.png"
+   },
+   "styleStrength": 50,
+   "compStrength": 1,
+   "status": "4 candidates (Firefly Image 4)",
+   "recommend": {
+    "pick": "cand3",
+    "why": "the only pearl with depth and a thin ring; faint cross lines from the ring reference"
+   }
+  },
+  {
+   "id": "fire-lotus-bloom-top",
+   "aspect": "1:1",
+   "approved": null,
+   "lastFrame": false,
+   "use": "Twin Dragons lotus burst (F51), top-down",
+   "stillPrompt": "Premium donghua mythic light-effect painting, radiant glow with volumetric depth, layered translucent light, rich gradients, fine filigree detail, glittering sparkles, organic asymmetric forms. Seen straight from above, a lotus formed of living fire at full bloom: eight pointed flame petals of uneven length with soft burning edges, two opposite petals stretched far longer, white-gold rims, orange-red translucent bodies, a deep crimson glowing heart, embers lifting off the tips. Centered with a wide empty black border all around, set against a solid pure black void, only the effect itself.",
+   "generate": true,
+   "styleRef": "v1a",
+   "compRef": null,
+   "refSources": {
+    "v1a": "games/immortality-cultivation/art-src/lab/vfx/fire/impact-k1-r2/fire-impact-k1-r2-v1a.try3.png"
+   },
+   "styleStrength": 50,
+   "compStrength": 1,
+   "status": "4 candidates (Firefly Image 4)",
+   "recommend": {
+    "pick": "cand3",
+    "why": "fully open flame petals with a crimson heart; seen at an angle, not straight down"
+   }
+  },
+  {
+   "id": "dragon-fire-body-ribbon",
+   "aspect": "16:9",
+   "approved": "games/immortality-cultivation/art-src/lab/vfx/dragon/head-r1/solar-ember-regent.png (đầu rồng hướng A, anh duyệt; dặn thêm chân trước thứ hai)",
+   "lastFrame": false,
+   "use": "fire dragon rear body and trail (bent along the path)",
+   "stillPrompt": null,
+   "generate": false,
+   "stillFrom": null,
+   "owner": "claude",
+   "note": "Claude làm trong Gemini từ đầu rồng A (điều phối 05/11); không làm ảnh tĩnh Firefly"
+  },
+  {
+   "id": "solar-ember-halo",
+   "aspect": "1:1",
+   "approved": null,
+   "lastFrame": "loop: khung cuối = chính ảnh khung đầu",
+   "use": "Solar Ember Regent head halo (direction A)",
+   "stillPrompt": "Premium donghua mythic light-effect painting, radiant glow with volumetric depth, layered translucent light, rich gradients, fine filigree detail, glittering sparkles, organic asymmetric forms. A royal sun-disc halo of red-gold fire: a thin bright gold ring, flame rays and ember spikes of uneven length radiating outward like a solar crown with open gaps, star glints at the ray tips, an empty dark centre. Centered with a wide empty black border all around, set against a solid pure black void, only the effect itself.",
+   "generate": true,
+   "styleRef": "v1a",
+   "compRef": "halo-ring",
+   "refSources": {
+    "halo-ring": "games/immortality-cultivation/art-src/lab/vfx/fire/fire-halo-ring.atlas.png cell 8 (col 2,row 1)",
+    "v1a": "games/immortality-cultivation/art-src/lab/vfx/fire/impact-k1-r2/fire-impact-k1-r2-v1a.try3.png"
+   },
+   "styleStrength": 50,
+   "compStrength": 1,
+   "status": "4 candidates (Firefly Image 4)",
+   "recommend": {
+    "pick": "cand1",
+    "why": "flame crown around a gold ring and inner star ring, reads royal"
+   }
+  },
+  {
+   "id": "dragon-pearl-shatter",
+   "aspect": "1:1",
+   "approved": null,
+   "lastFrame": false,
+   "use": "Twin Dragons jaws close on the pearl (F51)",
+   "stillPrompt": "Premium donghua mythic light-effect painting, radiant glow with volumetric depth, layered translucent light, rich gradients, fine filigree detail, glittering sparkles, organic asymmetric forms. A white-gold fire pearl at the instant it shatters: bright cracks of light across the sphere, fire shards and sparks flying outward in a ring, a thin golden shock ring expanding around it. Centered with a wide empty black border all around, set against a solid pure black void, only the effect itself.",
+   "generate": true,
+   "styleRef": "v1a",
+   "compRef": "halo-ring",
+   "refSources": {
+    "halo-ring": "games/immortality-cultivation/art-src/lab/vfx/fire/fire-halo-ring.atlas.png cell 8 (col 2,row 1)",
+    "v1a": "games/immortality-cultivation/art-src/lab/vfx/fire/impact-k1-r2/fire-impact-k1-r2-v1a.try3.png"
+   },
+   "styleStrength": 50,
+   "compStrength": 1,
+   "status": "4 candidates (Firefly Image 4)",
+   "recommend": {
+    "pick": "cand3",
+    "why": "bright core in flame; weak: no shards, nearly the pearl-loop image"
+   }
+  },
+  {
+   "id": "dragon-fire-mane",
+   "aspect": "16:9",
+   "approved": "games/immortality-cultivation/art-src/lab/vfx/dragon/head-r1/solar-ember-regent.png (đầu rồng hướng A, anh duyệt; dặn thêm chân trước thứ hai)",
+   "lastFrame": false,
+   "use": "fire dragon mane and whiskers",
+   "stillPrompt": null,
+   "generate": false,
+   "stillFrom": null,
+   "owner": "claude",
+   "note": "Claude làm trong Gemini từ đầu rồng A (điều phối 05/11); không làm ảnh tĩnh Firefly"
+  },
+  {
+   "id": "sky-gate-hold-loop",
+   "aspect": "1:1",
+   "approved": null,
+   "lastFrame": "loop: khung cuối = chính ảnh khung đầu",
+   "use": "SkyGate hold phase (loop)",
+   "stillPrompt": "Premium donghua mythic light-effect painting, radiant glow with volumetric depth, layered translucent light, rich gradients, fine filigree detail, glittering sparkles, organic asymmetric forms. A celestial ring gate hanging open: a white-hot rim, a torn cyan corona flaring outward in thin spikes, a deep dark aperture, star glints and light points spaced unevenly along the rim, faint cyan motes drifting. Centered with a wide empty black border all around, set against a solid pure black void, only the effect itself.",
+   "generate": true,
+   "styleRef": "c3",
+   "compRef": "seal-loop",
+   "refSources": {
+    "seal-loop": "games/immortality-cultivation/art-src/lab/vfx/fire/fire-halo-seal-loop.atlas.png cell 4 (col 4,row 0)",
+    "c3": "games/immortality-cultivation/art-src/skills/cutin/tt-cutin-c-shout-e3-head-skin-up2x.v2-try1-ffup.png (mặt C3 bản Firefly Upscaler)"
+   },
+   "styleStrength": 0,
+   "compStrength": 1,
+   "status": "4 candidates (Firefly Image 4)",
+   "recommend": {
+    "pick": "cand4",
+    "why": "same gate design as the open-close pick, so the two clips match"
+   }
+  },
+  {
+   "id": "fire-lotus-bloom-side",
+   "aspect": "16:9",
+   "approved": null,
+   "lastFrame": false,
+   "use": "Twin Dragons lotus burst, three-quarter view",
+   "stillPrompt": "Premium donghua mythic light-effect painting, radiant glow with volumetric depth, layered translucent light, rich gradients, fine filigree detail, glittering sparkles, organic asymmetric forms. A lotus formed of living fire bursting open, seen from a three-quarter high angle: pointed flame petals unfolding in a wide flat ring, two opposite petals reaching far to the left and right, white-gold rims, orange-red translucent bodies, sparks and star glints. Centered with a wide empty black border all around, set against a solid pure black void, only the effect itself.",
+   "generate": true,
+   "styleRef": "v1a",
+   "compRef": null,
+   "refSources": {
+    "v1a": "games/immortality-cultivation/art-src/lab/vfx/fire/impact-k1-r2/fire-impact-k1-r2-v1a.try3.png"
+   },
+   "styleStrength": 50,
+   "compStrength": 1,
+   "status": "4 candidates (Firefly Image 4)",
+   "recommend": {
+    "pick": "cand4",
+    "why": "the only one with volume and sparks; the others are flat outlines"
+   }
+  },
+  {
+   "id": "dragon-sky-tail-sweep",
+   "aspect": "16:9",
+   "approved": "games/immortality-cultivation/art-src/lab/vfx/dragon/head-r1/solar-ember-regent.png (đầu rồng hướng A, anh duyệt; dặn thêm chân trước thứ hai)",
+   "lastFrame": false,
+   "use": "Twin Dragons tail sweeps the sky corner (F30+)",
+   "stillPrompt": null,
+   "generate": false,
+   "stillFrom": null,
+   "owner": "claude",
+   "note": "Claude làm trong Gemini từ đầu rồng A (điều phối 05/11); không làm ảnh tĩnh Firefly"
+  },
+  {
+   "id": "dragon-scale-burn-trail",
+   "aspect": "16:9",
+   "approved": null,
+   "lastFrame": false,
+   "use": "scale-shaped burn trail on the two corridors (aftermath F65-F300)",
+   "stillPrompt": "Premium donghua mythic light-effect painting, radiant glow with volumetric depth, layered translucent light, rich gradients, fine filigree detail, glittering sparkles, organic asymmetric forms. Seen from above, a long path of overlapping scale-shaped burn marks crossing from left to right: each scale glowing white-gold at its rim, orange and crimson inside with pulsing ember cracks, cooling to charcoal toward the left end, sparse sparks rising. Centered with a wide empty black border all around, set against a solid pure black void, only the effect itself.",
+   "generate": true,
+   "styleRef": "v1a",
+   "compRef": null,
+   "refSources": {
+    "v1a": "games/immortality-cultivation/art-src/lab/vfx/fire/impact-k1-r2/fire-impact-k1-r2-v1a.try3.png"
+   },
+   "styleStrength": 50,
+   "compStrength": 1,
+   "status": "4 candidates (Firefly Image 4)",
+   "recommend": {
+    "pick": "cand4",
+    "why": "the only one with scale-like burn marks; the others are thin arcs"
+   }
+  },
+  {
+   "id": "cutin-ink-light-sweep-in",
+   "aspect": "16:9",
+   "approved": null,
+   "lastFrame": false,
+   "use": "cut-in band entry wipe",
+   "stillPrompt": "Premium donghua mythic light-effect painting, radiant glow with volumetric depth, layered translucent light, rich gradients, fine filigree detail, glittering sparkles, organic asymmetric forms. A single bold ink-brush stroke across the frame from left to right: dark indigo ink with dry-brush bristle texture, a bright white-gold leading rim, light streaks running along the edge, ink spatter and glinting motes flying off the bristle edge. Centered with a wide empty black border all around, set against a solid pure black void, only the effect itself.",
+   "generate": true,
+   "styleRef": "c3",
+   "compRef": null,
+   "refSources": {
+    "c3": "games/immortality-cultivation/art-src/skills/cutin/tt-cutin-c-shout-e3-head-skin-up2x.v2-try1-ffup.png (mặt C3 bản Firefly Upscaler)"
+   },
+   "styleStrength": 0,
+   "compStrength": 1,
+   "status": "4 candidates (Firefly Image 4)",
+   "recommend": {
+    "pick": "cand4",
+    "why": "one clear stroke with a light end; background fully painted"
+   }
+  },
+  {
+   "id": "cutin-swords-fly-out",
+   "aspect": "16:9",
+   "approved": null,
+   "lastFrame": false,
+   "use": "painted swords fly out of the band toward the impact point",
+   "stillPrompt": "Premium donghua mythic light-effect painting, radiant glow with volumetric depth, layered translucent light, rich gradients, fine filigree detail, glittering sparkles, organic asymmetric forms. A volley of seven slim sword-lights diving from the upper left toward the lower right: each a thin blade of light with a white-hot tip and a long tapering cyan trail, staggered lengths and spacing, sparkles shed behind. Centered with a wide empty black border all around, set against a solid pure black void, only the effect itself.",
+   "generate": true,
+   "styleRef": "c3",
+   "compRef": null,
+   "refSources": {
+    "c3": "games/immortality-cultivation/art-src/skills/cutin/tt-cutin-c-shout-e3-head-skin-up2x.v2-try1-ffup.png (mặt C3 bản Firefly Upscaler)"
+   },
+   "styleStrength": 0,
+   "compStrength": 1,
+   "status": "4 candidates (Firefly Image 4)",
+   "recommend": {
+    "pick": "cand1",
+    "why": "clean diagonal volley with white-hot tips"
+   }
+  },
+  {
+   "id": "cutin-light-slash-cut",
+   "aspect": "16:9",
+   "approved": null,
+   "lastFrame": false,
+   "use": "light-slash cut between gather and shout",
+   "stillPrompt": "Premium donghua mythic light-effect painting, radiant glow with volumetric depth, layered translucent light, rich gradients, fine filigree detail, glittering sparkles, organic asymmetric forms. A diagonal slash of pure light across the frame from upper left to lower right: a razor-thin white core, cyan and gold rims tapering to needle ends, a burst of star glints and light shards along the cut. Centered with a wide empty black border all around, set against a solid pure black void, only the effect itself.",
+   "generate": true,
+   "styleRef": "c3",
+   "compRef": null,
+   "refSources": {
+    "c3": "games/immortality-cultivation/art-src/skills/cutin/tt-cutin-c-shout-e3-head-skin-up2x.v2-try1-ffup.png (mặt C3 bản Firefly Upscaler)"
+   },
+   "styleStrength": 0,
+   "compStrength": 1,
+   "status": "4 candidates (Firefly Image 4)",
+   "recommend": {
+    "pick": "cand4",
+    "why": "one diagonal slash with glints, least clutter"
+   }
+  },
+  {
+   "id": "cutin-band-exit-dissolve",
+   "aspect": "16:9",
+   "approved": null,
+   "lastFrame": false,
+   "use": "band exit: ink and light stream down onto the field",
+   "stillPrompt": "Premium donghua mythic light-effect painting, radiant glow with volumetric depth, layered translucent light, rich gradients, fine filigree detail, glittering sparkles, organic asymmetric forms. A horizontal band of glowing ink and light breaking apart: flakes of dark indigo ink and streams of cyan and gold light pouring downward from it, glints sparkling along the torn edges. Centered with a wide empty black border all around, set against a solid pure black void, only the effect itself.",
+   "generate": true,
+   "styleRef": "c3",
+   "compRef": null,
+   "refSources": {
+    "c3": "games/immortality-cultivation/art-src/skills/cutin/tt-cutin-c-shout-e3-head-skin-up2x.v2-try1-ffup.png (mặt C3 bản Firefly Upscaler)"
+   },
+   "styleStrength": 0,
+   "compStrength": 1,
+   "status": "4 candidates (Firefly Image 4)",
+   "recommend": {
+    "pick": "cand2",
+    "why": "band breaking and dripping downward with gold"
+   }
+  },
+  {
+   "id": "cutin-cyan-landing-flash",
+   "aspect": "1:1",
+   "approved": null,
+   "lastFrame": false,
+   "use": "cyan flash when the sword rain lands",
+   "stillPrompt": "Premium donghua mythic light-effect painting, radiant glow with volumetric depth, layered translucent light, rich gradients, fine filigree detail, glittering sparkles, organic asymmetric forms. A cyan-white light flash at its peak: a sharp star burst with long thin rays of uneven length, a thin expanding light ring, glitter motes scattered around it. Centered with a wide empty black border all around, set against a solid pure black void, only the effect itself.",
+   "generate": true,
+   "styleRef": "c3",
+   "compRef": null,
+   "refSources": {
+    "c3": "games/immortality-cultivation/art-src/skills/cutin/tt-cutin-c-shout-e3-head-skin-up2x.v2-try1-ffup.png (mặt C3 bản Firefly Upscaler)"
+   },
+   "styleStrength": 0,
+   "compStrength": 1,
+   "status": "4 candidates (Firefly Image 4)",
+   "recommend": {
+    "pick": "cand4",
+    "why": "star burst inside a ring; the others carry frames and waves (crop a mark at bottom-left)"
+   }
+  },
+  {
+   "id": "cutin-halo-god-rays",
+   "aspect": "1:1",
+   "approved": null,
+   "lastFrame": "loop: khung cuối = chính ảnh khung đầu",
+   "use": "halo bloom and god rays behind her head",
+   "stillPrompt": "Premium donghua mythic light-effect painting, radiant glow with volumetric depth, layered translucent light, rich gradients, fine filigree detail, glittering sparkles, organic asymmetric forms. A radiant golden halo ring glowing with an empty dark middle, thin god rays fanning out behind it, sparkle motes drifting, star glints on the halo rim. Centered with a wide empty black border all around, set against a solid pure black void, only the effect itself.",
+   "generate": true,
+   "styleRef": "c3",
+   "compRef": "halo-ring",
+   "refSources": {
+    "halo-ring": "games/immortality-cultivation/art-src/lab/vfx/fire/fire-halo-ring.atlas.png cell 8 (col 2,row 1)",
+    "c3": "games/immortality-cultivation/art-src/skills/cutin/tt-cutin-c-shout-e3-head-skin-up2x.v2-try1-ffup.png (mặt C3 bản Firefly Upscaler)"
+   },
+   "styleStrength": 0,
+   "compStrength": 1,
+   "status": "4 candidates (Firefly Image 4)",
+   "recommend": {
+    "pick": "cand2",
+    "why": "gold halo with rays, closest to the C3 face light"
+   }
+  },
+  {
+   "id": "cutin-seal-ring-burst",
+   "aspect": "1:1",
+   "approved": null,
+   "lastFrame": false,
+   "use": "seal stamp ring burst on the callout",
+   "stillPrompt": "Premium donghua mythic light-effect painting, radiant glow with volumetric depth, layered translucent light, rich gradients, fine filigree detail, glittering sparkles, organic asymmetric forms. A blank vermilion square seal with carved bevelled edges landing with a punch: a ring burst of red-gold light expanding around it, thin rays and star glints, ink droplets and sparks scattering. Centered with a wide empty black border all around, set against a solid pure black void, only the effect itself.",
+   "generate": true,
+   "styleRef": "c3",
+   "compRef": "seal-loop",
+   "refSources": {
+    "c3": "games/immortality-cultivation/art-src/skills/cutin/tt-cutin-c-shout-e3-head-skin-up2x.v2-try1-ffup.png (mặt C3 bản Firefly Upscaler)",
+    "seal-loop": "games/immortality-cultivation/art-src/lab/vfx/fire/fire-halo-seal-loop.atlas.png cell 4 (col 4,row 0)"
+   },
+   "styleStrength": 0,
+   "compStrength": 1,
+   "status": "4 candidates (Firefly Image 4)",
+   "recommend": {
+    "pick": "cand3",
+    "why": "square seal centred in a clean ray burst, no corner mark"
+   }
+  },
+  {
+   "id": "fire-scorch-erosion",
+   "aspect": "1:1",
+   "approved": null,
+   "lastFrame": "cần: vết đã nguội, mép ăn mòn (vẽ sau khi anh chọn khung đầu)",
+   "use": "burn mark that cools by erosion (ground-decals PROCEDURAL)",
+   "stillPrompt": "Premium donghua mythic light-effect painting, radiant glow with volumetric depth, layered translucent light, rich gradients, fine filigree detail, glittering sparkles, organic asymmetric forms. Seen straight from above, a fresh burn mark: an irregular lobed shape with a crisp edge glowing white-gold and orange, a charred ring inside the edge, a network of pulsing ember cracks, patches already cooling to crimson and charcoal. Centered with a wide empty black border all around, set against a solid pure black void, only the effect itself.",
+   "generate": true,
+   "styleRef": "v1a",
+   "compRef": null,
+   "refSources": {
+    "v1a": "games/immortality-cultivation/art-src/lab/vfx/fire/impact-k1-r2/fire-impact-k1-r2-v1a.try3.png"
+   },
+   "styleStrength": 50,
+   "compStrength": 1,
+   "status": "4 candidates (Firefly Image 4)",
+   "recommend": {
+    "pick": "cand2",
+    "why": "irregular lobed burn with ember cracks; the others read as rings (crop a mark)"
+   }
+  },
+  {
+   "id": "fire-heat-ring-top",
+   "aspect": "1:1",
+   "approved": null,
+   "lastFrame": false,
+   "use": "heat ring on release and sword plant (heat-rings.ts)",
+   "stillPrompt": "Premium donghua mythic light-effect painting, radiant glow with volumetric depth, layered translucent light, rich gradients, fine filigree detail, glittering sparkles, organic asymmetric forms. Seen straight from above, a thin ring of living flame around a dark empty centre: licking flame tongues of uneven height along its rim, broken white-hot heat streaks running along it, sparks flying outward. Centered with a wide empty black border all around, set against a solid pure black void, only the effect itself.",
+   "generate": true,
+   "styleRef": "v1a",
+   "compRef": "seal-loop",
+   "refSources": {
+    "v1a": "games/immortality-cultivation/art-src/lab/vfx/fire/impact-k1-r2/fire-impact-k1-r2-v1a.try3.png",
+    "seal-loop": "games/immortality-cultivation/art-src/lab/vfx/fire/fire-halo-seal-loop.atlas.png cell 4 (col 4,row 0)"
+   },
+   "styleStrength": 50,
+   "compStrength": 1,
+   "status": "4 candidates (Firefly Image 4)",
+   "recommend": {
+    "pick": "cand1",
+    "why": "flame tongues of uneven height along the ring, deepest"
+   }
+  },
+  {
+   "id": "fire-point-star",
+   "aspect": "1:1",
+   "approved": null,
+   "lastFrame": false,
+   "use": "fire points on charge, launch, impact (fire-points.ts)",
+   "stillPrompt": "Premium donghua mythic light-effect painting, radiant glow with volumetric depth, layered translucent light, rich gradients, fine filigree detail, glittering sparkles, organic asymmetric forms. A sharp star-shaped flare of fire: seven flame tongues of unequal length shooting from a white-gold core, orange-red translucent tongues with dark red curling tips, two or three embers nearby. Centered with a wide empty black border all around, set against a solid pure black void, only the effect itself.",
+   "generate": true,
+   "styleRef": "v1a",
+   "compRef": null,
+   "refSources": {
+    "v1a": "games/immortality-cultivation/art-src/lab/vfx/fire/impact-k1-r2/fire-impact-k1-r2-v1a.try3.png"
+   },
+   "styleStrength": 50,
+   "compStrength": 1,
+   "status": "4 candidates (Firefly Image 4)",
+   "recommend": {
+    "pick": "cand2",
+    "why": "uneven flame tongues from a white core (cand4 has text \"ROHMY\": reject)"
+   }
+  },
+  {
+   "id": "fire-qi-burst",
+   "aspect": "1:1",
+   "approved": null,
+   "lastFrame": false,
+   "use": "fire release burst (keys 2-7)",
+   "stillPrompt": "Premium donghua mythic light-effect painting, radiant glow with volumetric depth, layered translucent light, rich gradients, fine filigree detail, glittering sparkles, organic asymmetric forms. A burst of fiery qi at its peak: a white-gold flash at the centre, a ring shockwave of flame tongues racing outward with ragged gaps, sparks and embers flying. Centered with a wide empty black border all around, set against a solid pure black void, only the effect itself.",
+   "generate": true,
+   "styleRef": "v1a",
+   "compRef": null,
+   "refSources": {
+    "v1a": "games/immortality-cultivation/art-src/lab/vfx/fire/impact-k1-r2/fire-impact-k1-r2-v1a.try3.png"
+   },
+   "styleStrength": 50,
+   "compStrength": 1,
+   "status": "4 candidates (Firefly Image 4)",
+   "recommend": {
+    "pick": "cand3",
+    "why": "flash plus ragged flame shock, the most energetic"
+   }
+  },
+  {
+   "id": "fire-impact-petals",
+   "aspect": "1:1",
+   "approved": "games/immortality-cultivation/art-src/lab/vfx/fire/impact-k1-r2/fire-impact-k1-r2-v1a.try3.png (khung đầu phím 1 đã duyệt; dùng được nếu phím 2-7 nhận cùng dáng)",
+   "lastFrame": false,
+   "use": "fire impact (keys 2-7)",
+   "stillPrompt": "Premium donghua mythic light-effect painting, radiant glow with volumetric depth, layered translucent light, rich gradients, fine filigree detail, glittering sparkles, organic asymmetric forms. A fire impact at its peak: a white-gold flash at the centre, layered flame petals bursting outward in a broken ring and curling at the tips, sparks flying in arcs, dark red embers. Centered with a wide empty black border all around, set against a solid pure black void, only the effect itself.",
+   "generate": true,
+   "styleRef": "v1a",
+   "compRef": "v1a",
+   "refSources": {
+    "v1a": "games/immortality-cultivation/art-src/lab/vfx/fire/impact-k1-r2/fire-impact-k1-r2-v1a.try3.png"
+   },
+   "styleStrength": 50,
+   "compStrength": 1,
+   "status": "4 candidates (Firefly Image 4)",
+   "recommend": {
+    "pick": "cand1",
+    "why": "layered petal flames with a flash, same family as the key-1 v1a"
+   }
+  },
+  {
+   "id": "fire-molten-seam",
+   "aspect": "16:9",
+   "approved": null,
+   "lastFrame": false,
+   "use": "molten seam of the key-7 finisher (cutSeam, finisher)",
+   "stillPrompt": "Premium donghua mythic light-effect painting, radiant glow with volumetric depth, layered translucent light, rich gradients, fine filigree detail, glittering sparkles, organic asymmetric forms. Seen from above, a long thin molten seam across the frame: a hair-thin white-hot line with orange edges, short branching side cracks, ember sparks, cooling to crimson near both ends. Centered with a wide empty black border all around, set against a solid pure black void, only the effect itself.",
+   "generate": true,
+   "styleRef": "sheath",
+   "compRef": null,
+   "refSources": {
+    "sheath": "games/immortality-cultivation/art-src/lab/vfx/aura/aura-fire-flame-sheath.atlas.png cell 0"
+   },
+   "styleStrength": 50,
+   "compStrength": 1,
+   "status": "4 candidates (Firefly Image 4)",
+   "recommend": {
+    "pick": "cand2",
+    "why": "thinnest hot line; weak: all read as a flame strip, not a seam"
+   }
+  },
+  {
+   "id": "fire-sword-plant-eruption",
+   "aspect": "1:1",
+   "approved": null,
+   "lastFrame": false,
+   "use": "flame eruption where a sword is planted",
+   "stillPrompt": "Premium donghua mythic light-effect painting, radiant glow with volumetric depth, layered translucent light, rich gradients, fine filigree detail, glittering sparkles, organic asymmetric forms. A column of flame erupting upward from one point near the bottom: twisting red-gold fire around a white-gold core, a flat ring of fire spreading around its base, sparks shooting upward. Centered with a wide empty black border all around, set against a solid pure black void, only the effect itself.",
+   "generate": true,
+   "styleRef": "v1a",
+   "compRef": null,
+   "refSources": {
+    "v1a": "games/immortality-cultivation/art-src/lab/vfx/fire/impact-k1-r2/fire-impact-k1-r2-v1a.try3.png"
+   },
+   "styleStrength": 50,
+   "compStrength": 1,
+   "status": "4 candidates (Firefly Image 4)",
+   "recommend": {
+    "pick": "cand3",
+    "why": "flame column with a flat fire ring at its base (cand2 looks like a \"1\": reject)"
+   }
+  },
+  {
+   "id": "fire-crescent-slash",
+   "aspect": "16:9",
+   "approved": null,
+   "lastFrame": false,
+   "use": "flame crescent slash (candidate beside ticket 275)",
+   "stillPrompt": "Premium donghua mythic light-effect painting, radiant glow with volumetric depth, layered translucent light, rich gradients, fine filigree detail, glittering sparkles, organic asymmetric forms. A crescent of flame slashing from left to right: a bright white-gold leading edge, a layered orange-red flame body, ragged flame tongues trailing behind, sparks flying off the tip. Centered with a wide empty black border all around, set against a solid pure black void, only the effect itself.",
+   "generate": true,
+   "styleRef": "v1a",
+   "compRef": "v1a",
+   "refSources": {
+    "v1a": "games/immortality-cultivation/art-src/lab/vfx/fire/impact-k1-r2/fire-impact-k1-r2-v1a.try3.png"
+   },
+   "styleStrength": 50,
+   "compStrength": 1,
+   "status": "not made: redo with GPT Image 2.5 Flare (coordinator 01:35)"
+  },
+  {
+   "id": "fire-clash-flash",
+   "aspect": "1:1",
+   "approved": null,
+   "lastFrame": false,
+   "use": "roar beat and jaws clash flash",
+   "stillPrompt": "Premium donghua mythic light-effect painting, radiant glow with volumetric depth, layered translucent light, rich gradients, fine filigree detail, glittering sparkles, organic asymmetric forms. Two jets of fire colliding in the centre from left and right: a white-gold flash at the contact point, a flat ring shockwave of flame, star glints and sparks flying out. Centered with a wide empty black border all around, set against a solid pure black void, only the effect itself.",
+   "generate": true,
+   "styleRef": "v1a",
+   "compRef": null,
+   "refSources": {
+    "v1a": "games/immortality-cultivation/art-src/lab/vfx/fire/impact-k1-r2/fire-impact-k1-r2-v1a.try3.png"
+   },
+   "styleStrength": 50,
+   "compStrength": 1,
+   "status": "not made: redo with GPT Image 2.5 Flare (coordinator 01:35)"
+  },
+  {
+   "id": "metal-impact-rays",
+   "aspect": "1:1",
+   "approved": null,
+   "lastFrame": false,
+   "use": "Metal hit rays (BeamPool rays(), 24 call sites)",
+   "stillPrompt": "Premium donghua mythic light-effect painting, radiant glow with volumetric depth, layered translucent light, rich gradients, fine filigree detail, glittering sparkles, organic asymmetric forms. A burst of thin white-cyan light rays snapping out from the centre at uneven angles and lengths, a bright four-point star at the core, glitter motes scattered around. Centered with a wide empty black border all around, set against a solid pure black void, only the effect itself.",
+   "generate": true,
+   "styleRef": "c3",
+   "compRef": null,
+   "refSources": {
+    "c3": "games/immortality-cultivation/art-src/skills/cutin/tt-cutin-c-shout-e3-head-skin-up2x.v2-try1-ffup.png (mặt C3 bản Firefly Upscaler)"
+   },
+   "styleStrength": 0,
+   "compStrength": 1,
+   "status": "not made: redo with GPT Image 2.5 Flare (coordinator 01:35)"
+  },
+  {
+   "id": "metal-qi-burst",
+   "aspect": "1:1",
+   "approved": null,
+   "lastFrame": false,
+   "use": "Metal release burst (keys 2-7)",
+   "stillPrompt": "Premium donghua mythic light-effect painting, radiant glow with volumetric depth, layered translucent light, rich gradients, fine filigree detail, glittering sparkles, organic asymmetric forms. A burst of silver-blue sword qi: a white flash at the centre, sharp crescent blades of light fanning outward at uneven angles, a thin light ring, glints and motes flying. Centered with a wide empty black border all around, set against a solid pure black void, only the effect itself.",
+   "generate": true,
+   "styleRef": "c3",
+   "compRef": null,
+   "refSources": {
+    "c3": "games/immortality-cultivation/art-src/skills/cutin/tt-cutin-c-shout-e3-head-skin-up2x.v2-try1-ffup.png (mặt C3 bản Firefly Upscaler)"
+   },
+   "styleStrength": 0,
+   "compStrength": 1,
+   "status": "not made: redo with GPT Image 2.5 Flare (coordinator 01:35)"
+  },
+  {
+   "id": "metal-qi-crescent-wave",
+   "aspect": "16:9",
+   "approved": null,
+   "lastFrame": false,
+   "use": "Metal crescent sword-qi wave",
+   "stillPrompt": "Premium donghua mythic light-effect painting, radiant glow with volumetric depth, layered translucent light, rich gradients, fine filigree detail, glittering sparkles, organic asymmetric forms. A wide crescent of silver-blue sword qi sweeping from left to right: a razor-thin white leading edge, translucent layered light trailing behind it, star glints along the edge. Centered with a wide empty black border all around, set against a solid pure black void, only the effect itself.",
+   "generate": true,
+   "styleRef": "c3",
+   "compRef": "v1a",
+   "refSources": {
+    "v1a": "games/immortality-cultivation/art-src/lab/vfx/fire/impact-k1-r2/fire-impact-k1-r2-v1a.try3.png",
+    "c3": "games/immortality-cultivation/art-src/skills/cutin/tt-cutin-c-shout-e3-head-skin-up2x.v2-try1-ffup.png (mặt C3 bản Firefly Upscaler)"
+   },
+   "styleStrength": 0,
+   "compStrength": 1,
+   "status": "not made: redo with GPT Image 2.5 Flare (coordinator 01:35)"
+  },
+  {
+   "id": "metal-crack-glow",
+   "aspect": "16:9",
+   "approved": null,
+   "lastFrame": false,
+   "use": "Metal glowing fissure (key 5 crack, finisher cut)",
+   "stillPrompt": "Premium donghua mythic light-effect painting, radiant glow with volumetric depth, layered translucent light, rich gradients, fine filigree detail, glittering sparkles, organic asymmetric forms. Seen from above, a hair-thin white-hot fissure across the frame from left to right: broken segments, branching side cracks, cyan light glowing inside, faint glints along it. Centered with a wide empty black border all around, set against a solid pure black void, only the effect itself.",
+   "generate": true,
+   "styleRef": "c3",
+   "compRef": null,
+   "refSources": {
+    "c3": "games/immortality-cultivation/art-src/skills/cutin/tt-cutin-c-shout-e3-head-skin-up2x.v2-try1-ffup.png (mặt C3 bản Firefly Upscaler)"
+   },
+   "styleStrength": 0,
+   "compStrength": 1,
+   "status": "not made: redo with GPT Image 2.5 Flare (coordinator 01:35)"
+  },
+  {
+   "id": "sword-rain-impact",
+   "aspect": "1:1",
+   "approved": null,
+   "lastFrame": false,
+   "use": "K6 sword landing burst",
+   "stillPrompt": "Premium donghua mythic light-effect painting, radiant glow with volumetric depth, layered translucent light, rich gradients, fine filigree detail, glittering sparkles, organic asymmetric forms. A lance of cyan-white light striking the centre from above: a sharp flash, a flat ring of light, star-shaped cracks of light spreading outward, glitter flying. Centered with a wide empty black border all around, set against a solid pure black void, only the effect itself.",
+   "generate": true,
+   "styleRef": "c3",
+   "compRef": null,
+   "refSources": {
+    "c3": "games/immortality-cultivation/art-src/skills/cutin/tt-cutin-c-shout-e3-head-skin-up2x.v2-try1-ffup.png (mặt C3 bản Firefly Upscaler)"
+   },
+   "styleStrength": 0,
+   "compStrength": 1,
+   "status": "not made: redo with GPT Image 2.5 Flare (coordinator 01:35)"
+  },
+  {
+   "id": "metal-seal-ignite",
+   "aspect": "1:1",
+   "approved": null,
+   "lastFrame": false,
+   "use": "caster seal lighting up (GroundSigil seal)",
+   "stillPrompt": "Premium donghua mythic light-effect painting, radiant glow with volumetric depth, layered translucent light, rich gradients, fine filigree detail, glittering sparkles, organic asymmetric forms. Seen straight from above, a circular sigil: two hair-thin broken rings of golden light around an empty centre, engraved ticks and cloud-hook ornaments glowing between them, needle glints at the ring breaks, abstract ornament only. Centered with a wide empty black border all around, set against a solid pure black void, only the effect itself.",
+   "generate": true,
+   "styleRef": "seal-loop",
+   "compRef": "seal-loop",
+   "refSources": {
+    "seal-loop": "games/immortality-cultivation/art-src/lab/vfx/fire/fire-halo-seal-loop.atlas.png cell 4 (col 4,row 0)"
+   },
+   "styleStrength": 50,
+   "compStrength": 1,
+   "status": "not made: redo with GPT Image 2.5 Flare (coordinator 01:35)"
+  },
+  {
+   "id": "metal-guard-arcs",
+   "aspect": "1:1",
+   "approved": null,
+   "lastFrame": "loop: khung cuối = chính ảnh khung đầu",
+   "use": "guard: three protective arcs of light",
+   "stillPrompt": "Premium donghua mythic light-effect painting, radiant glow with volumetric depth, layered translucent light, rich gradients, fine filigree detail, glittering sparkles, organic asymmetric forms. Seen straight from above, three curved arcs of silver-gold light forming a broken circle around an empty centre, light points along each arc, needle glints at the arc ends. Centered with a wide empty black border all around, set against a solid pure black void, only the effect itself.",
+   "generate": true,
+   "styleRef": "c3",
+   "compRef": "seal-loop",
+   "refSources": {
+    "seal-loop": "games/immortality-cultivation/art-src/lab/vfx/fire/fire-halo-seal-loop.atlas.png cell 4 (col 4,row 0)",
+    "c3": "games/immortality-cultivation/art-src/skills/cutin/tt-cutin-c-shout-e3-head-skin-up2x.v2-try1-ffup.png (mặt C3 bản Firefly Upscaler)"
+   },
+   "styleStrength": 0,
+   "compStrength": 1,
+   "status": "not made: redo with GPT Image 2.5 Flare (coordinator 01:35)"
+  },
+  {
+   "id": "sword-rift-strip",
+   "aspect": "16:9",
+   "approved": null,
+   "lastFrame": false,
+   "use": "K6 long rift on the ground",
+   "stillPrompt": "Premium donghua mythic light-effect painting, radiant glow with volumetric depth, layered translucent light, rich gradients, fine filigree detail, glittering sparkles, organic asymmetric forms. Seen from above, a long glowing rift torn open across the frame: jagged torn edges, side branches, cyan-white light welling inside, faint motes. Centered with a wide empty black border all around, set against a solid pure black void, only the effect itself.",
+   "generate": true,
+   "styleRef": "c3",
+   "compRef": null,
+   "refSources": {
+    "c3": "games/immortality-cultivation/art-src/skills/cutin/tt-cutin-c-shout-e3-head-skin-up2x.v2-try1-ffup.png (mặt C3 bản Firefly Upscaler)"
+   },
+   "styleStrength": 0,
+   "compStrength": 1,
+   "status": "not made: redo with GPT Image 2.5 Flare (coordinator 01:35)"
+  },
+  {
+   "id": "glint-star-twinkle",
+   "aspect": "1:1",
+   "approved": "games/immortality-cultivation/art-src/lab/vfx/fire/fire-twinkle-set.atlas.png (lô 1, sao C, anh chọn 05/11 00:20)",
+   "lastFrame": "loop: khung cuối = chính ảnh khung đầu",
+   "use": "star glints for every skill phase",
+   "stillPrompt": null,
+   "generate": false,
+   "status": "approved image used as first frame, no new still"
+  },
+  {
+   "id": "presence-ring-loop",
+   "aspect": "1:1",
+   "approved": "games/immortality-cultivation/art-src/lab/vfx/fire/fire-halo-seal-loop.atlas.png (lô 1, vòng dưới đất B, anh chọn 05/11 00:20)",
+   "lastFrame": "loop: khung cuối = chính ảnh khung đầu",
+   "use": "caster presence ring",
+   "stillPrompt": null,
+   "generate": false,
+   "status": "approved image used as first frame, no new still"
+  },
+  {
+   "id": "light-ring-pulse",
+   "aspect": "1:1",
+   "approved": "games/immortality-cultivation/art-src/lab/vfx/fire/fire-halo-ring.atlas.png (lô 1, vòng ở tay A, anh chọn 05/11 00:20)",
+   "lastFrame": "loop: khung cuối = chính ảnh khung đầu",
+   "use": "thin light rings for release and impact",
+   "stillPrompt": null,
+   "generate": false,
+   "status": "approved image used as first frame, no new still"
+  }
+ ],
+ "material": [
+  {
+   "id": "light-column-strike",
+   "aspect": "9:16",
+   "use": "LightStrips and pillar() (sword-rain.ts STRIP_FRAGMENT, fxkit BeamPool)",
+   "approved": null,
+   "waits": "anh chọn kiểu câu lệnh video/style-*"
+  },
+  {
+   "id": "light-column-loop",
+   "aspect": "9:16",
+   "use": "LightStrips hold (loop)",
+   "approved": null,
+   "waits": "anh chọn kiểu câu lệnh video/style-*"
+  },
+  {
+   "id": "twin-fire-spiral-charge",
+   "aspect": "1:1",
+   "use": "Twin Dragons charge: two counter-rotating flame wisps",
+   "approved": null,
+   "waits": "anh chọn kiểu câu lệnh video/style-*"
+  },
+  {
+   "id": "cutin-band-edge-light-loop",
+   "aspect": "16:9",
+   "use": "ink-light band frame edge",
+   "approved": null,
+   "waits": "anh chọn kiểu câu lệnh video/style-*"
+  },
+  {
+   "id": "cutin-callout-light-sweep",
+   "aspect": "16:9",
+   "use": "light sweep across the callout letters",
+   "approved": null,
+   "waits": "anh chọn kiểu câu lệnh video/style-*"
+  },
+  {
+   "id": "cutin-sparkle-motes-drift",
+   "aspect": "16:9",
+   "use": "motes drifting out of the band",
+   "approved": null,
+   "waits": "anh chọn kiểu câu lệnh video/style-*"
+  },
+  {
+   "id": "strip-metal-silk-flow",
+   "aspect": "16:9",
+   "use": "Metal sword-aura strip (fallback)",
+   "approved": "games/immortality-cultivation/art-src/lab/vfx/aura/aura-metal-windsilk.atlas.png (windsilk, Kim, anh chọn 04/11 19:40)",
+   "waits": "anh chọn kiểu câu lệnh video/style-*"
+  },
+  {
+   "id": "strip-fire-sheath-flow",
+   "aspect": "16:9",
+   "use": "Fire sword-aura strip (fallback)",
+   "approved": "games/immortality-cultivation/art-src/lab/vfx/aura/aura-fire-flame-sheath.atlas.png (fire-sheath, Hỏa, anh chọn 04/11 19:40)",
+   "waits": "anh chọn kiểu câu lệnh video/style-*"
+  },
+  {
+   "id": "fire-spark-spray",
+   "aspect": "1:1",
+   "use": "sparks with heads and tails (replaces round ember dots)",
+   "approved": null,
+   "waits": "anh chọn kiểu câu lệnh video/style-*"
+  },
+  {
+   "id": "fire-embers-rising-loop",
+   "aspect": "9:16",
+   "use": "rising embers in aftermath (embers.ts)",
+   "approved": null,
+   "waits": "anh chọn kiểu câu lệnh video/style-*"
+  },
+  {
+   "id": "fire-charge-gather",
+   "aspect": "1:1",
+   "use": "charge at the hand while typing (chargeKey)",
+   "approved": null,
+   "waits": "anh chọn kiểu câu lệnh video/style-*"
+  },
+  {
+   "id": "fire-ground-burn-loop",
+   "aspect": "1:1",
+   "use": "ground fire that keeps burning (aftermath)",
+   "approved": null,
+   "waits": "anh chọn kiểu câu lệnh video/style-*"
+  },
+  {
+   "id": "fire-smoke-roll-white",
+   "aspect": "1:1",
+   "use": "dark smoke underlay behind fire (normal blend)",
+   "approved": null,
+   "waits": "anh chọn kiểu câu lệnh video/style-*"
+  },
+  {
+   "id": "metal-sword-light-streak",
+   "aspect": "16:9",
+   "use": "sword-light streak behind a flying sword",
+   "approved": null,
+   "waits": "anh chọn kiểu câu lệnh video/style-*"
+  },
+  {
+   "id": "metal-light-pillar-hit",
+   "aspect": "9:16",
+   "use": "Metal light pillar on big hits (pillar())",
+   "approved": null,
+   "waits": "anh chọn kiểu câu lệnh video/style-*"
+  },
+  {
+   "id": "sword-rain-streaks",
+   "aspect": "9:16",
+   "use": "K6 sword rain falling streaks",
+   "approved": null,
+   "waits": "anh chọn kiểu câu lệnh video/style-*"
+  },
+  {
+   "id": "death-soul-threads",
+   "aspect": "9:16",
+   "use": "foe death: soul threads rising",
+   "approved": null,
+   "waits": "anh chọn kiểu câu lệnh video/style-*"
+  },
+  {
+   "id": "gold-dust-motes-loop",
+   "aspect": "16:9",
+   "use": "fine gold dust in aftermath",
+   "approved": null,
+   "waits": "anh chọn kiểu câu lệnh video/style-*"
+  }
+ ],
+ "refFiles": "refs served from scratchpad refs/ref-<key>.png (cells cut from the approved files in refSources)",
+ "run": {
+  "model": "adobe:firefly:colligo:image4",
+  "credits": "6468/10000 before and after (0 used)",
+  "sheets": "/Volumes/SS990TPRO/htdocs/typing-game-review/owner-review/2026-11-05/tu-tien/firefly-stills/stills-sheet-{1,2,3}.jpg",
+  "made": 22,
+  "left": [
+   "fire-crescent-slash",
+   "fire-clash-flash",
+   "metal-impact-rays",
+   "metal-qi-burst",
+   "metal-qi-crescent-wave",
+   "metal-crack-glow",
+   "sword-rain-impact",
+   "metal-seal-ignite",
+   "metal-guard-arcs",
+   "sword-rift-strip"
+  ]
+ }
+}

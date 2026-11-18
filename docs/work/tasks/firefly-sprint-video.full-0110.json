@@ -1,0 +1,643 @@
+{
+ "about": "Firefly sprint 05/11/2026, VIDEO part (Tu Tien). Firefly Video model adobe:firefly:colligo:video1 only, text-to-video, 1080p, 24 fps, 5 s, transparent background off. 3 takes per job, highest value first. Files: games/immortality-cultivation/art-src/lab/firefly-sprint-2026-11-05/video/<job-id>/take<N>.mp4 + take<N>.prompt.txt. Status is written by the in-page driver through the receiver (.local/ff-bridge/sprint-video-recv.py, 127.0.0.1:8841).",
+ "created": "2026-11-05 00:30 +07",
+ "settings": {
+  "model": "adobe:firefly:colligo:video1",
+  "resolution": "1080",
+  "fps": "24",
+  "duration": "5",
+  "transparent": false,
+  "takes": 3
+ },
+ "jobs": [
+  {
+   "id": "sky-gate-open-close",
+   "ar": "sq",
+   "aspect": "{\"height\":1080,\"width\":1080}",
+   "source": "CODE_DRAWN_AUDIT §2 B4",
+   "use": "K6 sword rain SkyGate (sword-rain.ts GATE_FRAGMENT)",
+   "prompt": "Anime xianxia game VFX element: a celestial ring gate tears open in empty darkness. A white-hot elliptical rim, a torn cyan corona of flickering light spikes, a dark aperture inside, star glints racing around the rim. It opens fast, holds strong at its peak, then closes inward and burns down into drifting cyan motes. No swords, no figures. Pure black background, nothing else in frame, no ground, no text. Locked-off static camera; the effect stays inside the frame."
+  },
+  {
+   "id": "light-column-strike",
+   "ar": "tall",
+   "aspect": "{\"height\":1920,\"width\":1080}",
+   "source": "CODE_DRAWN_AUDIT §2 B5",
+   "use": "LightStrips and pillar() (sword-rain.ts STRIP_FRAGMENT, fxkit BeamPool)",
+   "prompt": "Anime xianxia game VFX element: a thin vertical white-hot light column with a cyan body slams down from the top edge to the bottom. Bright segments race down it, a flare of cyan light and thin rays bursts at its foot. It holds, then thins and breaks upward into sparkles. Pure black background, nothing else in frame, no ground, no text. Locked-off static camera; the effect stays inside the frame."
+  },
+  {
+   "id": "dragon-pearl-loop",
+   "ar": "sq",
+   "aspect": "{\"height\":1080,\"width\":1080}",
+   "source": "DRAGON_SKILL §3A/§9.9",
+   "use": "Twin Dragons burning pearl (hover loop)",
+   "prompt": "Anime xianxia game VFX element: a burning dragon pearl floats in the centre: a white-gold sphere of fire with swirling inner flames, a hair-thin golden halo ring circles it with one bright light point running around the ring, four-point star glints flicker on its surface. Constant size and brightness, a seamless continuous loop. Pure black background, nothing else in frame, no ground, no text. Locked-off static camera; the effect stays inside the frame."
+  },
+  {
+   "id": "fire-lotus-bloom-top",
+   "ar": "sq",
+   "aspect": "{\"height\":1080,\"width\":1080}",
+   "source": "DRAGON_SKILL §3A/§9.9",
+   "use": "Twin Dragons lotus burst (F51), top-down",
+   "prompt": "Anime xianxia game VFX element: seen straight from above, a lotus made of fire blooms from the centre: eight pointed flame petals unfold outward fast, two opposite petals stretch far longer than the rest. White-gold petal rims, orange-red petal bodies, deep crimson heart. It holds at full bloom, then the petals burn down by erosion into glowing embers. Pure black background, nothing else in frame, no text. Locked-off static camera looking straight down."
+  },
+  {
+   "id": "dragon-fire-body-ribbon",
+   "ar": "wide",
+   "aspect": "{\"height\":1080,\"width\":1920}",
+   "source": "DRAGON_SKILL §3A/§9.9",
+   "use": "fire dragon rear body and trail (bent along the path)",
+   "prompt": "Anime xianxia game VFX element: the long body of a fire dragon made of flame streams horizontally from right to left across the whole frame, a band one quarter of the frame tall. Layered flame scales and curling tongues, a white-gold core line, saturated orange body, deep red ragged edges, embers peel off the outer edge. Same density all the time, a seamless continuous loop. No head. Pure black background, nothing else in frame, no ground, no text. Locked-off static camera; the effect stays inside the frame."
+  },
+  {
+   "id": "solar-ember-halo",
+   "ar": "sq",
+   "aspect": "{\"height\":1080,\"width\":1080}",
+   "source": "DRAGON_SKILL §3A/§9.9 §9.11 A",
+   "use": "Solar Ember Regent head halo (direction A)",
+   "prompt": "Anime xianxia game VFX element: a royal sun-disc halo of red-gold fire turns slowly: a thin bright gold ring, flame rays and ember spikes radiate outward like a solar crown, star glints at the ray tips, an empty dark centre. Constant size, a seamless continuous loop. Pure black background, nothing else in frame, no ground, no text. Locked-off static camera; the effect stays inside the frame."
+  },
+  {
+   "id": "dragon-pearl-shatter",
+   "ar": "sq",
+   "aspect": "{\"height\":1080,\"width\":1080}",
+   "source": "DRAGON_SKILL §3A/§9.9",
+   "use": "Twin Dragons jaws close on the pearl (F51)",
+   "prompt": "Anime xianxia game VFX element: a white-gold fire pearl in the centre cracks with lines of light, then bursts: a sharp flash, a ring of fire shards and sparks flies outward, a thin golden shock ring expands. Then embers and star glints drift and burn down slowly. Pure black background, nothing else in frame, no ground, no text. Locked-off static camera; the effect stays inside the frame."
+  },
+  {
+   "id": "dragon-fire-mane",
+   "ar": "wide",
+   "aspect": "{\"height\":1080,\"width\":1920}",
+   "source": "DRAGON_SKILL §3A/§9.9",
+   "use": "fire dragon mane and whiskers",
+   "prompt": "Anime xianxia game VFX element: a fiery mane streams backward from right to left: long separated flame locks curl and whip like hair in strong wind, royal red-gold fire with white-gold tips, glinting sparks shed from the ends. A seamless continuous loop. No head, no body. Pure black background, nothing else in frame, no ground, no text. Locked-off static camera; the effect stays inside the frame."
+  },
+  {
+   "id": "sky-gate-hold-loop",
+   "ar": "sq",
+   "aspect": "{\"height\":1080,\"width\":1080}",
+   "source": "CODE_DRAWN_AUDIT §2 B4",
+   "use": "SkyGate hold phase (loop)",
+   "prompt": "Anime xianxia game VFX element: a celestial ring gate hangs open in empty darkness: white-hot rim, a torn cyan corona flickering outward in thin spikes, a dark aperture, star glints and light points orbit along the rim. Constant size and brightness, a seamless continuous loop. No swords, no figures. Pure black background, nothing else in frame, no ground, no text. Locked-off static camera; the effect stays inside the frame."
+  },
+  {
+   "id": "light-column-loop",
+   "ar": "tall",
+   "aspect": "{\"height\":1920,\"width\":1080}",
+   "source": "CODE_DRAWN_AUDIT §2 B5",
+   "use": "LightStrips hold (loop)",
+   "prompt": "Anime xianxia game VFX element: a thin vertical white-hot light column with a cyan body runs from the top edge to the bottom; bright segments race down it continuously, a steady flare of cyan light and thin rays at its foot. Constant brightness, a seamless continuous loop. Pure black background, nothing else in frame, no ground, no text. Locked-off static camera; the effect stays inside the frame."
+  },
+  {
+   "id": "fire-lotus-bloom-side",
+   "ar": "wide",
+   "aspect": "{\"height\":1080,\"width\":1920}",
+   "source": "DRAGON_SKILL §3A/§9.9",
+   "use": "Twin Dragons lotus burst, three-quarter view",
+   "prompt": "Anime xianxia game VFX element: a lotus made of fire bursts open, seen from a three-quarter high angle: pointed flame petals unfold outward in a wide flat ring, two opposite petals shoot far to the left and right edges. White-gold rims, orange-red bodies, sparks and star glints. It holds, then burns down by erosion into embers. Pure black background, nothing else in frame, no ground, no text. Locked-off static camera; the effect stays inside the frame."
+  },
+  {
+   "id": "dragon-sky-tail-sweep",
+   "ar": "wide",
+   "aspect": "{\"height\":1080,\"width\":1920}",
+   "source": "DRAGON_SKILL §3A/§9.9",
+   "use": "Twin Dragons tail sweeps the sky corner (F30+)",
+   "prompt": "Anime xianxia game VFX element: a fire dragon's tail sweeps a wide arc of flame across the upper sky from left to right: a thick red-gold flame band with a white-gold leading edge, embers and flame scales scatter behind. Then the arc burns down by erosion into drifting embers. Pure black background, nothing else in frame, no ground, no text. Locked-off static camera; the effect stays inside the frame."
+  },
+  {
+   "id": "dragon-scale-burn-trail",
+   "ar": "wide",
+   "aspect": "{\"height\":1080,\"width\":1920}",
+   "source": "DRAGON_SKILL §3A/§9.9",
+   "use": "scale-shaped burn trail on the two corridors (aftermath F65-F300)",
+   "prompt": "Anime xianxia game VFX element: seen from above, a long path of scale-shaped burn marks crosses the frame from left to right. They glow white-gold, then cool to orange, crimson and charcoal by erosion from their edges, ember cracks pulse inside each scale, sparse sparks rise. Pure black background, nothing else in frame, no text. Locked-off static camera looking straight down."
+  },
+  {
+   "id": "twin-fire-spiral-charge",
+   "ar": "sq",
+   "aspect": "{\"height\":1080,\"width\":1080}",
+   "source": "DRAGON_SKILL §3A/§9.9",
+   "use": "Twin Dragons charge: two counter-rotating flame wisps",
+   "prompt": "Anime xianxia game VFX element: two thin flame wisps spiral in opposite directions around an empty centre point, red-gold fire with white-gold edges, embers drawn inward, star glints at the wisp tips. A seamless continuous loop. Pure black background, nothing else in frame, no ground, no text. Locked-off static camera; the effect stays inside the frame."
+  },
+  {
+   "id": "cutin-ink-light-sweep-in",
+   "ar": "wide",
+   "aspect": "{\"height\":1080,\"width\":1920}",
+   "source": "CUTIN_AUDIT §4-5 (entry sweep)",
+   "use": "cut-in band entry wipe",
+   "prompt": "Anime xianxia game VFX element: a single bold ink-brush stroke sweeps from left to right across the frame: dark indigo ink with a bright white-gold leading edge, light streaks run along its rim, ink spatter and glinting motes fly off the bristle edge. Fast entry, then it holds. Pure black background, nothing else in frame, no ground, no text. Locked-off static camera; the effect stays inside the frame."
+  },
+  {
+   "id": "cutin-swords-fly-out",
+   "ar": "wide",
+   "aspect": "{\"height\":1080,\"width\":1920}",
+   "source": "CUTIN_AUDIT §4-5 G7 (bridge to field)",
+   "use": "painted swords fly out of the band toward the impact point",
+   "prompt": "Anime xianxia game VFX element: a volley of slim glowing cyan sword-lights flies out from the upper left and dives toward the lower right: each a thin blade of light with a white-hot tip and a long tapering cyan trail, sparkles shed behind them. Pure black background, nothing else in frame, no ground, no text. Locked-off static camera; the effect stays inside the frame."
+  },
+  {
+   "id": "cutin-light-slash-cut",
+   "ar": "wide",
+   "aspect": "{\"height\":1080,\"width\":1920}",
+   "source": "CUTIN_AUDIT §4-5 (cut to shout)",
+   "use": "light-slash cut between gather and shout",
+   "prompt": "Anime xianxia game VFX element: a diagonal slash of pure light cuts across the frame from upper left to lower right in an instant: a razor-thin white core, cyan and gold rims, a burst of star glints and light shards. Then it thins and breaks into motes. Pure black background, nothing else in frame, no ground, no text. Locked-off static camera; the effect stays inside the frame."
+  },
+  {
+   "id": "cutin-band-exit-dissolve",
+   "ar": "wide",
+   "aspect": "{\"height\":1080,\"width\":1920}",
+   "source": "CUTIN_AUDIT §4-5 G6 (exit)",
+   "use": "band exit: ink and light stream down onto the field",
+   "prompt": "Anime xianxia game VFX element: a horizontal band of glowing ink and light dissolves: it breaks into flakes of dark ink and streams of cyan and gold light that pour downward out of the frame, glints sparkle as it burns away. Pure black background, nothing else in frame, no ground, no text. Locked-off static camera; the effect stays inside the frame."
+  },
+  {
+   "id": "cutin-band-edge-light-loop",
+   "ar": "wide",
+   "aspect": "{\"height\":1080,\"width\":1920}",
+   "source": "CUTIN_AUDIT §4-5 G3 (band frame light)",
+   "use": "ink-light band frame edge",
+   "prompt": "Anime xianxia game VFX element: a horizontal ink-brush edge line crosses the frame: ragged dark ink with a glowing gold inner rim, bright light streaks run along the rim from left to right, star glints twinkle at both ends, motes drift up off it. A seamless continuous loop. Pure black background, nothing else in frame, no ground, no text. Locked-off static camera; the effect stays inside the frame."
+  },
+  {
+   "id": "cutin-cyan-landing-flash",
+   "ar": "sq",
+   "aspect": "{\"height\":1080,\"width\":1080}",
+   "source": "CUTIN_AUDIT §4-5 G7",
+   "use": "cyan flash when the sword rain lands",
+   "prompt": "Anime xianxia game VFX element: a cyan-white light flash bursts in the centre: a sharp star burst with long thin rays, an expanding thin light ring, glitter motes. Then it burns down slowly into twinkles. Pure black background, nothing else in frame, no ground, no text. Locked-off static camera; the effect stays inside the frame."
+  },
+  {
+   "id": "cutin-halo-god-rays",
+   "ar": "sq",
+   "aspect": "{\"height\":1080,\"width\":1080}",
+   "source": "CUTIN_AUDIT §4-5 (light over paintings)",
+   "use": "halo bloom and god rays behind her head",
+   "prompt": "Anime xianxia game VFX element: a radiant golden halo ring glows in the centre, thin god rays of light fan out slowly behind it, sparkle motes drift, star glints twinkle on the halo rim. A seamless continuous loop. Pure black background, nothing else in frame, no ground, no text. Locked-off static camera; the effect stays inside the frame."
+  },
+  {
+   "id": "cutin-seal-ring-burst",
+   "ar": "sq",
+   "aspect": "{\"height\":1080,\"width\":1080}",
+   "source": "CUTIN_AUDIT §4-5 G5 (seal stamp)",
+   "use": "seal stamp ring burst on the callout",
+   "prompt": "Anime xianxia game VFX element: a vermilion square seal lands in the centre with a punch: a ring burst of red-gold light expands, thin rays and star glints flash, ink droplets and sparks scatter, then the ring thins and breaks apart. No characters or letters. Pure black background, nothing else in frame, no ground, no text. Locked-off static camera; the effect stays inside the frame."
+  },
+  {
+   "id": "cutin-callout-light-sweep",
+   "ar": "wide",
+   "aspect": "{\"height\":1080,\"width\":1920}",
+   "source": "CUTIN_AUDIT §4-5 G5 (callout sweep)",
+   "use": "light sweep across the callout letters",
+   "prompt": "Anime xianxia game VFX element: a thin bright glint of white-gold light travels horizontally from left to right across the centre of the frame, a sharp four-point star flare rides on it, a trail of glitter follows, then it vanishes at the right edge. Pure black background, nothing else in frame, no ground, no text. Locked-off static camera; the effect stays inside the frame."
+  },
+  {
+   "id": "cutin-sparkle-motes-drift",
+   "ar": "wide",
+   "aspect": "{\"height\":1080,\"width\":1920}",
+   "source": "CUTIN_AUDIT §4-5 G4",
+   "use": "motes drifting out of the band",
+   "prompt": "Anime xianxia game VFX element: sparkle motes and four-point star glints drift upward and outward, gold and cyan, twinkling at different rhythms, sparse with lots of dark space between them. A seamless continuous loop. Pure black background, nothing else in frame, no ground, no text. Locked-off static camera; the effect stays inside the frame."
+  },
+  {
+   "id": "strip-metal-silk-flow",
+   "ar": "wide",
+   "aspect": "{\"height\":1080,\"width\":1920}",
+   "source": "INTEGRATION_PLAN §4 A7",
+   "use": "Metal sword-aura strip (fallback)",
+   "prompt": "Anime xianxia game VFX element: separated silver-blue silk energy strands flow lengthwise beside an empty black horizontal channel, peeling outward and reconnecting toward a fine needle on the right; silver highlights race along single strands; wide black gaps stay open. Graceful hand-painted energy, a seamless continuous loop. No sword, feather, fern, solid plates or smoke. Pure black background, nothing else in frame, no ground, no text. Locked-off static camera; the effect stays inside the frame."
+  },
+  {
+   "id": "strip-fire-sheath-flow",
+   "ar": "wide",
+   "aspect": "{\"height\":1080,\"width\":1920}",
+   "source": "INTEGRATION_PLAN §4 A7",
+   "use": "Fire sword-aura strip (fallback)",
+   "prompt": "Anime xianxia game VFX element: living orange-red flame tongues stream backward from right to left along both sides of an empty black horizontal channel, curling, splitting and retracting in irregular rhythms; a fine needle at the right, a thin white-gold heat thread now and then. A seamless continuous loop. No sword, hilt blob, fireball or smoke. Pure black background, nothing else in frame, no ground, no text. Locked-off static camera; the effect stays inside the frame."
+  },
+  {
+   "id": "fire-spark-spray",
+   "ar": "sq",
+   "aspect": "{\"height\":1080,\"width\":1080}",
+   "source": "CODE_DRAWN_AUDIT §1 (Fire) #7 #11",
+   "use": "sparks with heads and tails (replaces round ember dots)",
+   "prompt": "Anime xianxia game VFX element: a burst of fire sparks flies out from the centre in curved arcs and falls with gravity: each spark a white-gold head, a slender orange body and a thinning dark-red tail, in three lengths; a few ember chips bounce. They cool and vanish. No round dots, no smoke. Pure black background, nothing else in frame, no ground, no text. Locked-off static camera; the effect stays inside the frame."
+  },
+  {
+   "id": "fire-scorch-erosion",
+   "ar": "sq",
+   "aspect": "{\"height\":1080,\"width\":1080}",
+   "source": "CODE_DRAWN_AUDIT §1 (Fire) #5",
+   "use": "burn mark that cools by erosion (ground-decals PROCEDURAL)",
+   "prompt": "Anime xianxia game VFX element: seen straight from above, a fresh burn mark: an irregular lobed shape with a crisp edge glows white-gold and orange, a charred ring inside the edge, a network of ember cracks pulsing. It cools slowly by erosion from the edges inward to crimson and charcoal. Never a star or a splat. Pure black background, nothing else in frame, no text. Locked-off static camera looking straight down."
+  },
+  {
+   "id": "fire-heat-ring-top",
+   "ar": "sq",
+   "aspect": "{\"height\":1080,\"width\":1080}",
+   "source": "CODE_DRAWN_AUDIT §1 (Fire) #10",
+   "use": "heat ring on release and sword plant (heat-rings.ts)",
+   "prompt": "Anime xianxia game VFX element: seen straight from above, a thin ring of flame expands from the centre: licking flame tongues ride its rim, broken white-hot heat streaks run along it, sparks fly outward. Then the ring breaks into embers. Pure black background, nothing else in frame, no text. Locked-off static camera looking straight down."
+  },
+  {
+   "id": "fire-point-star",
+   "ar": "sq",
+   "aspect": "{\"height\":1080,\"width\":1080}",
+   "source": "CODE_DRAWN_AUDIT §1 (Fire) #6",
+   "use": "fire points on charge, launch, impact (fire-points.ts)",
+   "prompt": "Anime xianxia game VFX element: a sharp star-shaped flare of fire bursts in the centre: six to eight flame tongues of unequal length shoot out from a white-gold core, orange-red tongues with dark red tips. It snaps open and curls closed in under a second, leaving two or three embers. Pure black background, nothing else in frame, no ground, no text. Locked-off static camera; the effect stays inside the frame."
+  },
+  {
+   "id": "fire-qi-burst",
+   "ar": "sq",
+   "aspect": "{\"height\":1080,\"width\":1080}",
+   "source": "CODE_DRAWN_AUDIT §1 (Fire)",
+   "use": "fire release burst (keys 2-7)",
+   "prompt": "Anime xianxia game VFX element: a burst of fiery qi explodes from the centre: a white-gold flash, a ring shockwave of flame tongues races outward, sparks and embers fly. Then it burns down slowly by erosion. Pure black background, nothing else in frame, no ground, no text. Locked-off static camera; the effect stays inside the frame."
+  },
+  {
+   "id": "fire-impact-petals",
+   "ar": "sq",
+   "aspect": "{\"height\":1080,\"width\":1080}",
+   "source": "CODE_DRAWN_AUDIT §1 (Fire)",
+   "use": "fire impact (keys 2-7)",
+   "prompt": "Anime xianxia game VFX element: a fire impact bursts in the centre: a white-gold flash, then layered flame petals burst outward in a ring, curl and break apart, sparks fly in arcs, dark red embers linger. Pure black background, nothing else in frame, no ground, no text. Locked-off static camera; the effect stays inside the frame."
+  },
+  {
+   "id": "fire-molten-seam",
+   "ar": "wide",
+   "aspect": "{\"height\":1080,\"width\":1920}",
+   "source": "CODE_DRAWN_AUDIT §1 (Fire) #9",
+   "use": "molten seam of the key-7 finisher (cutSeam, finisher)",
+   "prompt": "Anime xianxia game VFX element: seen from above, a long thin molten seam glows straight across the frame: a hair-thin white-hot line with orange edges, branching side cracks, ember sparks. It cools slowly from both ends to crimson and dark. Pure black background, nothing else in frame, no text. Locked-off static camera looking straight down."
+  },
+  {
+   "id": "fire-embers-rising-loop",
+   "ar": "tall",
+   "aspect": "{\"height\":1920,\"width\":1080}",
+   "source": "CODE_DRAWN_AUDIT §1 (Fire) #7",
+   "use": "rising embers in aftermath (embers.ts)",
+   "prompt": "Anime xianxia game VFX element: embers and gold flecks rise and drift upward: irregular shapes, red-orange cooling specks, micro-streaks and a few four-point glimmers, sparse with lots of dark space. A seamless continuous loop. No round dots, no bokeh. Pure black background, nothing else in frame, no ground, no text. Locked-off static camera; the effect stays inside the frame."
+  },
+  {
+   "id": "fire-charge-gather",
+   "ar": "sq",
+   "aspect": "{\"height\":1080,\"width\":1080}",
+   "source": "CODE_DRAWN_AUDIT §1 (Fire) #11",
+   "use": "charge at the hand while typing (chargeKey)",
+   "prompt": "Anime xianxia game VFX element: embers and flame wisps spiral inward into a bright white-gold point in the centre, a thin heat ring pulses around it, star glints flicker. A seamless continuous loop. Pure black background, nothing else in frame, no ground, no text. Locked-off static camera; the effect stays inside the frame."
+  },
+  {
+   "id": "fire-ground-burn-loop",
+   "ar": "sq",
+   "aspect": "{\"height\":1080,\"width\":1080}",
+   "source": "CODE_DRAWN_AUDIT §1 (Fire)",
+   "use": "ground fire that keeps burning (aftermath)",
+   "prompt": "Anime xianxia game VFX element: seen from a three-quarter top-down view, a low patch of fire burns in place: licking flame tongues, red-gold body, white-gold tips, floating embers. Constant intensity, a seamless continuous loop. Pure black background, nothing else in frame, no ground, no text. Locked-off static camera; the effect stays inside the frame."
+  },
+  {
+   "id": "fire-sword-plant-eruption",
+   "ar": "sq",
+   "aspect": "{\"height\":1080,\"width\":1080}",
+   "source": "CODE_DRAWN_AUDIT §1 (Fire) (key 7 plant)",
+   "use": "flame eruption where a sword is planted",
+   "prompt": "Anime xianxia game VFX element: a column of flame erupts upward from one point near the bottom of the frame, a ring of fire spreads flat around its base, sparks shoot up. Then it shrinks and burns down into embers. Pure black background, nothing else in frame, no ground, no text. Locked-off static camera; the effect stays inside the frame."
+  },
+  {
+   "id": "fire-crescent-slash",
+   "ar": "wide",
+   "aspect": "{\"height\":1080,\"width\":1920}",
+   "source": "CODE_DRAWN_AUDIT §1 (Fire) (key 7 finisher)",
+   "use": "flame crescent slash (candidate beside ticket 275)",
+   "prompt": "Anime xianxia game VFX element: a crescent of flame slashes from left to right across the frame: a bright white-gold leading edge, a layered orange-red flame body, ragged tongues trailing, sparks fly off the tip. Then it burns down by erosion. Pure black background, nothing else in frame, no ground, no text. Locked-off static camera; the effect stays inside the frame."
+  },
+  {
+   "id": "fire-clash-flash",
+   "ar": "sq",
+   "aspect": "{\"height\":1080,\"width\":1080}",
+   "source": "DRAGON_SKILL §3A/§9.9",
+   "use": "roar beat and jaws clash flash",
+   "prompt": "Anime xianxia game VFX element: two jets of fire collide in the centre: a white-gold flash, a flat ring shockwave of flame, star glints and sparks fly out. Then the fire curls back and burns down into embers. Pure black background, nothing else in frame, no ground, no text. Locked-off static camera; the effect stays inside the frame."
+  },
+  {
+   "id": "fire-smoke-roll-white",
+   "ar": "sq",
+   "aspect": "{\"height\":1080,\"width\":1080}",
+   "source": "CODE_DRAWN_AUDIT §1 (Fire) (smoke underlay)",
+   "use": "dark smoke underlay behind fire (normal blend)",
+   "prompt": "Anime xianxia game VFX element: thick dark charcoal smoke billows up from the lower centre, rolls and expands, then thins out and fades away completely. No fire, no sparks. Pure white background, nothing else in frame, no ground, no text. Locked-off static camera."
+  },
+  {
+   "id": "metal-impact-rays",
+   "ar": "sq",
+   "aspect": "{\"height\":1080,\"width\":1080}",
+   "source": "CODE_DRAWN_AUDIT §1 (Metal) #8",
+   "use": "Metal hit rays (BeamPool rays(), 24 call sites)",
+   "prompt": "Anime xianxia game VFX element: a burst of thin white-cyan light rays snaps out from the centre at uneven angles and lengths, a bright four-point star at the core, glitter motes. Then the rays retract and break into sparkles. Pure black background, nothing else in frame, no ground, no text. Locked-off static camera; the effect stays inside the frame."
+  },
+  {
+   "id": "metal-sword-light-streak",
+   "ar": "wide",
+   "aspect": "{\"height\":1080,\"width\":1920}",
+   "source": "CODE_DRAWN_AUDIT §1 (Metal) #15",
+   "use": "sword-light streak behind a flying sword",
+   "prompt": "Anime xianxia game VFX element: a single sword-light streak shoots from left to right: a razor-thin white-hot line with a silver-blue body tapering to a needle tip, light shimmering along it, sparkles shed behind. Pure black background, nothing else in frame, no ground, no text. Locked-off static camera; the effect stays inside the frame."
+  },
+  {
+   "id": "metal-light-pillar-hit",
+   "ar": "tall",
+   "aspect": "{\"height\":1920,\"width\":1080}",
+   "source": "CODE_DRAWN_AUDIT §1 (Metal) #8",
+   "use": "Metal light pillar on big hits (pillar())",
+   "prompt": "Anime xianxia game VFX element: a short pillar of silver-white light bursts upward from the bottom centre, thin cyan rays and a flat ring of light at its base, glitter rising. It holds, then thins and breaks into sparkles. Pure black background, nothing else in frame, no ground, no text. Locked-off static camera; the effect stays inside the frame."
+  },
+  {
+   "id": "metal-qi-burst",
+   "ar": "sq",
+   "aspect": "{\"height\":1080,\"width\":1080}",
+   "source": "CODE_DRAWN_AUDIT §1 (Metal)",
+   "use": "Metal release burst (keys 2-7)",
+   "prompt": "Anime xianxia game VFX element: a burst of silver-blue sword qi explodes from the centre: a white flash, sharp crescent blades of light fan outward, a thin light ring expands, glints and motes fly. Then it breaks into sparkles. Pure black background, nothing else in frame, no ground, no text. Locked-off static camera; the effect stays inside the frame."
+  },
+  {
+   "id": "metal-qi-crescent-wave",
+   "ar": "wide",
+   "aspect": "{\"height\":1080,\"width\":1920}",
+   "source": "CODE_DRAWN_AUDIT §1 (Metal) (key 2 line)",
+   "use": "Metal crescent sword-qi wave",
+   "prompt": "Anime xianxia game VFX element: a wide crescent of silver-blue sword qi sweeps from left to right: a razor-thin white leading edge, translucent layered light behind it, star glints along the edge. Then it thins and breaks into motes. Pure black background, nothing else in frame, no ground, no text. Locked-off static camera; the effect stays inside the frame."
+  },
+  {
+   "id": "metal-crack-glow",
+   "ar": "wide",
+   "aspect": "{\"height\":1080,\"width\":1920}",
+   "source": "CODE_DRAWN_AUDIT §1 (Metal) B7",
+   "use": "Metal glowing fissure (key 5 crack, finisher cut)",
+   "prompt": "Anime xianxia game VFX element: seen from above, a hair-thin white-hot fissure cracks open across the frame from left to right with broken segments and branching side cracks, cyan light glowing inside. It holds, then cools slowly to dark. Pure black background, nothing else in frame, no text. Locked-off static camera looking straight down."
+  },
+  {
+   "id": "sword-rain-streaks",
+   "ar": "tall",
+   "aspect": "{\"height\":1920,\"width\":1080}",
+   "source": "CODE_DRAWN_AUDIT §1 (Metal) (key 6)",
+   "use": "K6 sword rain falling streaks",
+   "prompt": "Anime xianxia game VFX element: many slim cyan-white sword-lights rain down from the top edge at a steep slant, each a thin blade of light with a white-hot tip and a tapering trail, sparkles shed behind them. Pure black background, nothing else in frame, no ground, no text. Locked-off static camera; the effect stays inside the frame."
+  },
+  {
+   "id": "sword-rain-impact",
+   "ar": "sq",
+   "aspect": "{\"height\":1080,\"width\":1080}",
+   "source": "CODE_DRAWN_AUDIT §1 (Metal) #3 (key 6)",
+   "use": "K6 sword landing burst",
+   "prompt": "Anime xianxia game VFX element: a lance of cyan-white light strikes the centre from above: a sharp flash, a flat ring of light expands, star-shaped cracks of light spread out, glitter flies. Then it burns down into twinkles. Pure black background, nothing else in frame, no ground, no text. Locked-off static camera; the effect stays inside the frame."
+  },
+  {
+   "id": "metal-seal-ignite",
+   "ar": "sq",
+   "aspect": "{\"height\":1080,\"width\":1080}",
+   "source": "CODE_DRAWN_AUDIT §1 (Metal) #1 B1",
+   "use": "caster seal lighting up (GroundSigil seal)",
+   "prompt": "Anime xianxia game VFX element: seen straight from above, two hair-thin broken rings of golden light draw themselves around an empty centre, engraved ticks and cloud hooks light up between them, needle glints at the ring breaks. It holds, then dims slowly. No letters. Pure black background, nothing else in frame, no text. Locked-off static camera looking straight down."
+  },
+  {
+   "id": "metal-guard-arcs",
+   "ar": "sq",
+   "aspect": "{\"height\":1080,\"width\":1080}",
+   "source": "CODE_DRAWN_AUDIT §1 (Metal) #2 (key 3)",
+   "use": "guard: three protective arcs of light",
+   "prompt": "Anime xianxia game VFX element: seen straight from above, three curved arcs of silver-gold light form a broken circle and turn slowly around an empty centre, light points run along each arc, glints at the ends. A seamless continuous loop. Pure black background, nothing else in frame, no text. Locked-off static camera looking straight down."
+  },
+  {
+   "id": "sword-rift-strip",
+   "ar": "wide",
+   "aspect": "{\"height\":1080,\"width\":1920}",
+   "source": "CODE_DRAWN_AUDIT §1 (Metal) #3 (MARK_RIFT)",
+   "use": "K6 long rift on the ground",
+   "prompt": "Anime xianxia game VFX element: seen from above, a long glowing rift tears open across the frame: torn edges, side branches, cyan-white light inside. It holds, then cools from the ends to dark. Pure black background, nothing else in frame, no text. Locked-off static camera looking straight down."
+  },
+  {
+   "id": "death-soul-threads",
+   "ar": "tall",
+   "aspect": "{\"height\":1920,\"width\":1080}",
+   "source": "CODE_DRAWN_AUDIT §1 (Metal) #16",
+   "use": "foe death: soul threads rising",
+   "prompt": "Anime xianxia game VFX element: thin threads of pale cyan light rise and unravel upward from the bottom centre, twisting and splitting into fine strands, sparkles at their tips. Then they dissolve into motes. Pure black background, nothing else in frame, no ground, no text. Locked-off static camera; the effect stays inside the frame."
+  },
+  {
+   "id": "glint-star-twinkle",
+   "ar": "sq",
+   "aspect": "{\"height\":1080,\"width\":1080}",
+   "source": "radiance (AGENTS.md, SKILL_RADIANCE)",
+   "use": "star glints for every skill phase",
+   "prompt": "Anime xianxia game VFX element: sharp four-point star glints flash and twinkle at scattered points, each with long needle arms and short diagonal arms, gold and white, offset rhythms, lots of dark space between them. A seamless continuous loop. Pure black background, nothing else in frame, no ground, no text. Locked-off static camera; the effect stays inside the frame."
+  },
+  {
+   "id": "gold-dust-motes-loop",
+   "ar": "wide",
+   "aspect": "{\"height\":1080,\"width\":1920}",
+   "source": "radiance (AGENTS.md, SKILL_RADIANCE)",
+   "use": "fine gold dust in aftermath",
+   "prompt": "Anime xianxia game VFX element: fine gold dust motes and glitter drift and swirl slowly, some catch the light and flash as four-point glints, sparse with lots of dark space. A seamless continuous loop. No bokeh discs. Pure black background, nothing else in frame, no ground, no text. Locked-off static camera; the effect stays inside the frame."
+  },
+  {
+   "id": "presence-ring-loop",
+   "ar": "sq",
+   "aspect": "{\"height\":1080,\"width\":1080}",
+   "source": "CODE_DRAWN_AUDIT §2 B8 #12",
+   "use": "caster presence ring",
+   "prompt": "Anime xianxia game VFX element: seen straight from above, a thin ring of pale gold light turns slowly, three arc marks glide along it, light points run around, needle glints flash at the arc ends. A seamless continuous loop. Pure black background, nothing else in frame, no text. Locked-off static camera looking straight down."
+  },
+  {
+   "id": "light-ring-pulse",
+   "ar": "sq",
+   "aspect": "{\"height\":1080,\"width\":1080}",
+   "source": "radiance (AGENTS.md, SKILL_RADIANCE)",
+   "use": "thin light rings for release and impact",
+   "prompt": "Anime xianxia game VFX element: thin rings of white-gold light pulse outward from the centre one after another, each with a shimmering rim and a few glints riding on it, fading as they widen. A seamless continuous loop. Pure black background, nothing else in frame, no ground, no text. Locked-off static camera; the effect stays inside the frame."
+  }
+ ],
+ "status": {
+  "running": false,
+  "stop": true,
+  "state": "stopped",
+  "job": "dragon-fire-body-ribbon",
+  "take": 3,
+  "attempt": 1,
+  "startedAt": "2026-11-04T17:32:36.974Z",
+  "updatedAt": "2026-11-04T18:02:04.630Z",
+  "saved": 14,
+  "failedTakes": [],
+  "results": {
+   "sky-gate-open-close#2": {
+    "bytes": 1913652,
+    "w": 1080,
+    "h": 1080,
+    "seed": "146368",
+    "secs": 83,
+    "saved": true
+   },
+   "sky-gate-open-close#3": {
+    "bytes": 1902238,
+    "w": 1080,
+    "h": 1080,
+    "seed": "174452",
+    "secs": 104,
+    "saved": true
+   },
+   "light-column-strike#1": {
+    "bytes": 3464550,
+    "w": 1080,
+    "h": 1920,
+    "seed": "604814",
+    "secs": 86,
+    "saved": true
+   },
+   "light-column-strike#2": {
+    "bytes": 3283731,
+    "w": 1080,
+    "h": 1920,
+    "seed": "46959",
+    "secs": 86,
+    "saved": true
+   },
+   "light-column-strike#3": {
+    "bytes": 3951407,
+    "w": 1080,
+    "h": 1920,
+    "seed": "415883",
+    "secs": 125,
+    "saved": true
+   },
+   "dragon-pearl-loop#1": {
+    "bytes": 1271703,
+    "w": 1080,
+    "h": 1080,
+    "seed": "390511",
+    "secs": 87,
+    "saved": true
+   },
+   "dragon-pearl-loop#2": {
+    "bytes": 1491186,
+    "w": 1080,
+    "h": 1080,
+    "seed": "361194",
+    "secs": 120,
+    "saved": true
+   },
+   "dragon-pearl-loop#3": {
+    "bytes": 1323917,
+    "w": 1080,
+    "h": 1080,
+    "seed": "939053",
+    "secs": 85,
+    "saved": true
+   },
+   "fire-lotus-bloom-top#1": {
+    "bytes": 2511728,
+    "w": 1080,
+    "h": 1080,
+    "seed": "955294",
+    "secs": 91,
+    "saved": true
+   },
+   "fire-lotus-bloom-top#2": {
+    "bytes": 2411277,
+    "w": 1080,
+    "h": 1080,
+    "seed": "65333",
+    "secs": 89,
+    "saved": true
+   },
+   "fire-lotus-bloom-top#3": {
+    "bytes": 2881079,
+    "w": 1080,
+    "h": 1080,
+    "seed": "75423",
+    "secs": 84,
+    "saved": true
+   },
+   "dragon-fire-body-ribbon#1": {
+    "bytes": 3555416,
+    "w": 1920,
+    "h": 1080,
+    "seed": "557628",
+    "secs": 80,
+    "saved": true
+   },
+   "dragon-fire-body-ribbon#2": {
+    "bytes": 4386885,
+    "w": 1920,
+    "h": 1080,
+    "seed": "869324",
+    "secs": 157,
+    "saved": true
+   },
+   "dragon-fire-body-ribbon#3": {
+    "bytes": 4386885,
+    "w": 1920,
+    "h": 1080,
+    "seed": "869324",
+    "secs": 126,
+    "saved": true
+   }
+  },
+  "events": [
+   "00:32:36 driver start",
+   "00:32:38 click sky-gate-open-close take2 (attempt 1)",
+   "00:34:01 saved sky-gate-open-close/take2.mp4 1913652 B 1080x1080 seed 146368 in 83 s",
+   "00:34:33 click sky-gate-open-close take3 (attempt 1)",
+   "00:36:17 saved sky-gate-open-close/take3.mp4 1902238 B 1080x1080 seed 174452 in 104 s",
+   "00:36:44 click light-column-strike take1 (attempt 1)",
+   "00:38:10 saved light-column-strike/take1.mp4 3464550 B 1080x1920 seed 604814 in 86 s",
+   "00:38:36 click light-column-strike take2 (attempt 1)",
+   "00:40:02 saved light-column-strike/take2.mp4 3283731 B 1080x1920 seed 46959 in 86 s",
+   "00:40:25 click light-column-strike take3 (attempt 1)",
+   "00:42:29 saved light-column-strike/take3.mp4 3951407 B 1080x1920 seed 415883 in 125 s",
+   "00:42:55 click dragon-pearl-loop take1 (attempt 1)",
+   "00:44:22 saved dragon-pearl-loop/take1.mp4 1271703 B 1080x1080 seed 390511 in 87 s",
+   "00:44:47 click dragon-pearl-loop take2 (attempt 1)",
+   "00:46:47 saved dragon-pearl-loop/take2.mp4 1491186 B 1080x1080 seed 361194 in 120 s",
+   "00:47:17 click dragon-pearl-loop take3 (attempt 1)",
+   "00:48:42 saved dragon-pearl-loop/take3.mp4 1323917 B 1080x1080 seed 939053 in 85 s",
+   "00:49:06 click fire-lotus-bloom-top take1 (attempt 1)",
+   "00:50:37 saved fire-lotus-bloom-top/take1.mp4 2511728 B 1080x1080 seed 955294 in 91 s",
+   "00:51:01 click fire-lotus-bloom-top take2 (attempt 1)",
+   "00:52:30 saved fire-lotus-bloom-top/take2.mp4 2411277 B 1080x1080 seed 65333 in 89 s",
+   "00:52:53 click fire-lotus-bloom-top take3 (attempt 1)",
+   "00:54:17 saved fire-lotus-bloom-top/take3.mp4 2881079 B 1080x1080 seed 75423 in 84 s",
+   "00:54:46 click dragon-fire-body-ribbon take1 (attempt 1)",
+   "00:56:06 saved dragon-fire-body-ribbon/take1.mp4 3555416 B 1920x1080 seed 557628 in 80 s",
+   "00:56:32 click dragon-fire-body-ribbon take2 (attempt 1)",
+   "00:59:10 saved dragon-fire-body-ribbon/take2.mp4 4386885 B 1920x1080 seed 869324 in 157 s",
+   "00:59:35 click dragon-fire-body-ribbon take3 (attempt 1)",
+   "01:01:41 saved dragon-fire-body-ribbon/take3.mp4 4386885 B 1920x1080 seed 869324 in 126 s"
+  ],
+  "consecutiveFails": 0,
+  "queued": 168,
+  "doneTakes": 14,
+  "lastSettings": {
+   "model": "adobe:firefly:colligo:video1",
+   "res": "1080",
+   "ar": "{\"height\":1080,\"width\":1920}",
+   "fps": "24",
+   "dur": "5",
+   "shot": "none",
+   "angle": "none",
+   "transparent": false
+  },
+  "lastResult": {
+   "job": "dragon-fire-body-ribbon",
+   "take": 3,
+   "bytes": 4386885,
+   "w": 1920,
+   "h": 1080,
+   "seed": "869324",
+   "secs": 126,
+   "saved": true
+  }
+ },
+ "statusReceivedAt": "2026-11-05 01:02:04 +07"
+}

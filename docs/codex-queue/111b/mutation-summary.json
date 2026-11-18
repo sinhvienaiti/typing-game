@@ -1,0 +1,14 @@
+{
+  "replacement": {
+    "from": "const hasVocabManifest = files.has(vocabManifest);",
+    "to": "const hasVocabManifest = false;"
+  },
+  "exitCode": 1,
+  "originalSha256": "38b86ef0714547a59c675b6df124596a55c25131bab67da742fa41e93edbd540",
+  "sourceAfterSha256": "38b86ef0714547a59c675b6df124596a55c25131bab67da742fa41e93edbd540",
+  "mutantSha256": "5ccb0a836f1f165a1752bb775f3dce4eada276c3c034e314a375f22227ec9265",
+  "tests": 1,
+  "passed": 0,
+  "failed": 1,
+  "sourceUntouched": true
+}

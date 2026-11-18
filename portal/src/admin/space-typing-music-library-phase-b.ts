@@ -1,0 +1,323 @@
+import { SpaceTypingAdminApi } from "./api";
+import { adminErrorMessage } from "./admin-http";
+import { renderAdminFailureState, setAdminStatus } from "./space-typing-admin-state";
+
+const api = new SpaceTypingAdminApi();
+
+type CatalogSource = { src: string; codec?: string };
+type CatalogPlayback =
+  | { kind: "single"; sources: CatalogSource[] }
+  | { kind: "stems"; calm: CatalogSource[]; intense: CatalogSource[]; syncGroup: string };
+type MusicCatalogTrack = {
+  id: string;
+  title: string;
+  playback: CatalogPlayback;
+  durationSeconds: number;
+  mixOutSeconds?: number;
+  loop: boolean;
+  trimGain?: number;
+  metadata?: Record<string, unknown>;
+  uploadedByAdmin: boolean;
+};
+type MusicCatalogPayload = {
+  schemaVersion: number;
+  manifestRevision: string;
+  tracks: MusicCatalogTrack[];
+};
+type GamesPayload = { games: Array<{ id: string; appUrl: string }> };
+
+function escapeHtml(value: unknown): string {
+  return String(value ?? "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+}
+
+function validCatalog(payload: MusicCatalogPayload): boolean {
+  return Number.isInteger(payload.schemaVersion) && typeof payload.manifestRevision === "string" && Array.isArray(payload.tracks);
+}
+
+async function loadCatalog(): Promise<MusicCatalogPayload> {
+  const payload = await api.requestJson<MusicCatalogPayload>("/api/admin/space-typing/music/library");
+  if (!validCatalog(payload)) throw new Error("Music catalog response does not match the canonical Admin contract.");
+  return payload;
+}
+
+async function resolveSpaceTypingAppUrl(): Promise<string> {
+  const payload = await api.requestJson<GamesPayload>("/games.json");
+  if (!payload || !Array.isArray(payload.games)) throw new Error("Game registry response is missing games[].");
+  const appUrl = payload.games.find((game) => game?.id === "space-typing" && typeof game.appUrl === "string")?.appUrl?.trim();
+  if (!appUrl) throw new Error("Space Typing appUrl is missing from the canonical game registry.");
+  return appUrl;
+}
+
+async function uploadTrack(input: {
+  file: File;
+  trackId: string;
+  title: string;
+  worldId: string;
+  durationSeconds: string;
+  mixOutSeconds: string;
+  mood: string;
+}): Promise<MusicCatalogPayload> {
+  const headers: Record<string, string> = {
+    "x-music-file-name": input.file.name,
+    "x-music-track-id": input.trackId.trim(),
+    "x-music-title": input.title.trim(),
+    "x-music-world-id": input.worldId,
+    "x-music-duration-seconds": input.durationSeconds.trim(),
+  };
+  if (input.file.type) headers["content-type"] = input.file.type;
+  if (input.mixOutSeconds.trim()) headers["x-music-mix-out-seconds"] = input.mixOutSeconds.trim();
+  if (input.mood.trim()) headers["x-music-mood"] = input.mood.trim();
+
+  const payload = await api.requestJson<{ catalog: MusicCatalogPayload }>("/api/admin/space-typing/music/upload", {
+    method: "POST",
+    headers,
+    body: input.file,
+  });
+  if (!payload.catalog || !validCatalog(payload.catalog)) {
+    throw new Error("Music upload completed without a valid canonical catalog response.");
+  }
+  return payload.catalog;
+}
+
+async function deleteTrack(trackId: string): Promise<MusicCatalogPayload> {
+  const payload = await api.requestJson<MusicCatalogPayload>(
+    `/api/admin/space-typing/music/tracks/${encodeURIComponent(trackId)}`,
+    { method: "DELETE" },
+  );
+  if (!validCatalog(payload)) throw new Error("Music delete completed without a valid canonical catalog response.");
+  return payload;
+}
+
+function playbackSummary(track: MusicCatalogTrack): string {
+  if (track.playback.kind === "single") return `single · ${track.playback.sources.length} source${track.playback.sources.length === 1 ? "" : "s"}`;
+  return `stems · ${track.playback.calm.length} calm / ${track.playback.intense.length} intense`;
+}
+
+function previewSource(track: MusicCatalogTrack): CatalogSource | null {
+  if (track.playback.kind === "single") return track.playback.sources[0] ?? null;
+  return track.playback.calm[0] ?? track.playback.intense[0] ?? null;
+}
+
+function sourceSummary(track: MusicCatalogTrack): string {
+  if (track.playback.kind === "single") {
+    return track.playback.sources.map((source) => source.src).join(" · ");
+  }
+  const calm = track.playback.calm[0]?.src ?? "—";
+  const intense = track.playback.intense[0]?.src ?? "—";
+  return `calm ${calm} · intense ${intense}`;
+}
+
+function productionMusicUrl(appUrl: string, source: string): string {
+  if (!source.startsWith("/assets/audio/music/") || source.includes("..")) {
+    throw new Error(`Refusing non-production Music path: ${source}`);
+  }
+  return new URL(source, appUrl).toString();
+}
+
+export function renderPhaseBMusicLibrary(): HTMLElement {
+  const root = document.createElement("section");
+  root.className = "space-admin-page space-admin-page--phase-b";
+  root.innerHTML = `
+    <header class="space-admin-page__header">
+      <div>
+        <p class="st-admin-eyebrow">Audio · Authored Asset Service · Phase B</p>
+        <h1>Music Library</h1>
+        <p>Manage authored tracks through the canonical World Music catalog. Upload/delete rebuilds the bundled catalog consumed by the production MusicController; Test Playback uses the exact catalog source served by Space Typing.</p>
+      </div>
+      <div class="space-admin-page__badges">
+        <span class="st-admin-badge">RUNTIME CATALOG · CONNECTED</span>
+        <span class="st-admin-badge">TEST PLAYBACK</span>
+        <span class="st-admin-badge">APPLY · CATALOG REBUILD</span>
+        <span class="st-admin-badge">DELETE · ADMIN UPLOADS ONLY</span>
+      </div>
+    </header>
+    <p class="st-admin-notice" data-music-status aria-live="polite">Loading canonical World Music catalog…</p>
+    <div class="space-admin-grid">
+      <article class="st-admin-card space-admin-card--wide">
+        <div class="st-admin-card__header"><div><p class="st-admin-eyebrow">Authoring</p><h2>Upload track</h2></div></div>
+        <div class="stx-grid">
+          <label class="stx-field"><span>Audio file</span><input data-music-file type="file" accept="audio/mpeg,audio/ogg,audio/wav,audio/mp4,.mp3,.ogg,.wav,.m4a"></label>
+          <label class="stx-field"><span>Track ID</span><input data-music-id placeholder="lowercase-track-id" maxlength="80"></label>
+          <label class="stx-field"><span>Title</span><input data-music-title maxlength="160"></label>
+          <label class="stx-field"><span>World</span><select data-music-world>${Array.from({ length: 50 }, (_, i) => `<option value="world-${String(i + 1).padStart(2, "0")}">World ${String(i + 1).padStart(2, "0")}</option>`).join("")}</select></label>
+          <label class="stx-field"><span>Duration (seconds)</span><input data-music-duration type="number" min="0.01" step="0.01"></label>
+          <label class="stx-field"><span>Mix-out (seconds, optional)</span><input data-music-mixout type="number" min="0.01" step="0.01"></label>
+          <label class="stx-field"><span>Mood (optional)</span><input data-music-mood maxlength="80"></label>
+        </div>
+        <p class="st-admin-notice">Accepted: mp3, ogg, wav, m4a · max 96 MiB. A successful upload writes one authored manifest, rebuilds <code>world-music-catalog.json</code>, and then becomes part of the bundled runtime catalog.</p>
+        <button class="st-admin-btn primary" type="button" data-music-upload disabled>Upload & rebuild catalog</button>
+      </article>
+      <article class="st-admin-card space-admin-card--wide">
+        <div class="st-admin-card__header"><div><p class="st-admin-eyebrow">Canonical catalog</p><h2>Tracks</h2></div><strong data-music-revision>—</strong></div>
+        <p class="st-admin-notice">Context assignments and enabled/disabled policy remain under World / Stage Music, their canonical owner. Catalog loop is shown as authored metadata; Test Playback does not mutate either policy or game state.</p>
+        <div data-music-list></div>
+      </article>
+    </div>
+  `;
+
+  const status = root.querySelector<HTMLElement>("[data-music-status]");
+  const list = root.querySelector<HTMLElement>("[data-music-list]");
+  const revision = root.querySelector<HTMLElement>("[data-music-revision]");
+  const uploadButton = root.querySelector<HTMLButtonElement>("[data-music-upload]");
+  const fileInput = root.querySelector<HTMLInputElement>("[data-music-file]");
+  const idInput = root.querySelector<HTMLInputElement>("[data-music-id]");
+  const titleInput = root.querySelector<HTMLInputElement>("[data-music-title]");
+  const worldInput = root.querySelector<HTMLSelectElement>("[data-music-world]");
+  const durationInput = root.querySelector<HTMLInputElement>("[data-music-duration]");
+  const mixoutInput = root.querySelector<HTMLInputElement>("[data-music-mixout]");
+  const moodInput = root.querySelector<HTMLInputElement>("[data-music-mood]");
+  if (!status || !list || !revision || !uploadButton || !fileInput || !idInput || !titleInput || !worldInput || !durationInput || !mixoutInput || !moodInput) return root;
+
+  let activeAudio: HTMLAudioElement | null = null;
+  let activePreviewButton: HTMLButtonElement | null = null;
+
+  const stopPlayback = (): void => {
+    if (activeAudio !== null) {
+      activeAudio.pause();
+      activeAudio.currentTime = 0;
+      activeAudio = null;
+    }
+    if (activePreviewButton !== null) {
+      activePreviewButton.textContent = "Test Playback";
+      activePreviewButton = null;
+    }
+  };
+
+  const render = (catalog: MusicCatalogPayload, appUrl: string): void => {
+    stopPlayback();
+    revision.textContent = `${catalog.tracks.length} tracks · ${catalog.manifestRevision.slice(0, 20)}…`;
+    setAdminStatus(status, `Catalog schema v${catalog.schemaVersion} loaded. Only tracks with provenance local-admin-upload can be deleted from this surface.`, "success");
+    uploadButton.disabled = false;
+    if (catalog.tracks.length === 0) {
+      list.innerHTML = '<p class="st-admin-notice">Catalog is empty. Upload an authored track to create the first Admin-managed catalog entry.</p>';
+      return;
+    }
+    list.innerHTML = `<div class="st-admin-table-wrap"><table class="st-admin-table"><thead><tr><th>ID</th><th>Title</th><th>Source</th><th>Playback</th><th>Duration</th><th>Loop</th><th>Provenance</th><th>Preview</th><th>Action</th></tr></thead><tbody>${catalog.tracks.map((track) => {
+      const provenance = String(track.metadata?.provenance ?? "catalog");
+      const source = previewSource(track);
+      return `<tr><td><code>${escapeHtml(track.id)}</code></td><td>${escapeHtml(track.title)}</td><td><code title="${escapeHtml(sourceSummary(track))}">${escapeHtml(source?.src ?? "—")}</code></td><td>${escapeHtml(playbackSummary(track))}</td><td>${escapeHtml(track.durationSeconds)}s</td><td><span class="st-admin-badge">${track.loop ? "LOOP" : "ONE-SHOT"}</span></td><td>${escapeHtml(provenance)}</td><td>${source ? `<button type="button" class="st-admin-btn" data-preview-track="${escapeHtml(track.id)}">Test Playback</button>` : '<span class="st-admin-badge">NO SOURCE</span>'}</td><td>${track.uploadedByAdmin ? `<button type="button" class="st-admin-btn danger" data-delete-track="${escapeHtml(track.id)}">Delete</button>` : '<span class="st-admin-badge">SOURCE-OWNED</span>'}</td></tr>`;
+    }).join("")}</tbody></table></div>`;
+
+    for (const previewButton of list.querySelectorAll<HTMLButtonElement>("[data-preview-track]")) {
+      previewButton.addEventListener("click", () => {
+        if (activePreviewButton === previewButton) {
+          stopPlayback();
+          return;
+        }
+        const trackId = previewButton.dataset.previewTrack ?? "";
+        const track = catalog.tracks.find((candidate) => candidate.id === trackId);
+        const source = track ? previewSource(track) : null;
+        if (!track || !source) return;
+        stopPlayback();
+        try {
+          const audio = new Audio(productionMusicUrl(appUrl, source.src));
+          audio.preload = "auto";
+          audio.loop = track.loop === true;
+          activeAudio = audio;
+          activePreviewButton = previewButton;
+          previewButton.textContent = "Stop";
+          const finish = (): void => {
+            if (activeAudio === audio) stopPlayback();
+          };
+          audio.addEventListener("ended", finish, { once: true });
+          audio.addEventListener("error", finish, { once: true });
+          void audio.play().catch(() => finish());
+        } catch {
+          stopPlayback();
+        }
+      });
+    }
+
+    for (const deleteButton of list.querySelectorAll<HTMLButtonElement>("[data-delete-track]")) {
+      deleteButton.addEventListener("click", () => {
+        const trackId = deleteButton.dataset.deleteTrack ?? "";
+        if (!trackId || !window.confirm(`Delete Admin-uploaded track ${trackId} and rebuild the catalog?`)) return;
+        stopPlayback();
+        deleteButton.disabled = true;
+        setAdminStatus(status, `Deleting ${trackId} and rebuilding canonical catalog…`, "loading");
+        void deleteTrack(trackId)
+          .then((catalog) => render(catalog, appUrl))
+          .catch((error) => {
+            setAdminStatus(status, adminErrorMessage(error, "The track could not be deleted. Try again."), "error");
+            deleteButton.disabled = false;
+          });
+      });
+    }
+  };
+
+  let appUrl = "";
+  uploadButton.addEventListener("click", () => {
+    const file = fileInput.files?.[0];
+    if (!file) {
+      setAdminStatus(status, "Choose an audio file first.", "error");
+      fileInput.focus();
+      return;
+    }
+    if (!idInput.value.trim() || !titleInput.value.trim() || !durationInput.value.trim()) {
+      setAdminStatus(status, "Track ID, title and duration are required before upload.", "error");
+      return;
+    }
+    if (!appUrl) {
+      setAdminStatus(status, "Space Typing runtime origin is unavailable. Reload the catalog before authoring.", "error");
+      return;
+    }
+    stopPlayback();
+    uploadButton.disabled = true;
+    setAdminStatus(status, "Uploading authored track and rebuilding canonical catalog…", "loading");
+    void uploadTrack({
+      file,
+      trackId: idInput.value,
+      title: titleInput.value,
+      worldId: worldInput.value,
+      durationSeconds: durationInput.value,
+      mixOutSeconds: mixoutInput.value,
+      mood: moodInput.value,
+    })
+      .then((catalog) => {
+        fileInput.value = "";
+        idInput.value = "";
+        titleInput.value = "";
+        durationInput.value = "";
+        mixoutInput.value = "";
+        moodInput.value = "";
+        render(catalog, appUrl);
+      })
+      .catch((error) => {
+        setAdminStatus(status, adminErrorMessage(error, "The authored track could not be uploaded. Check the form and try again."), "error");
+      })
+      .finally(() => { uploadButton.disabled = false; });
+  });
+
+  let loadGeneration = 0;
+  const load = (): void => {
+    const generation = ++loadGeneration;
+    stopPlayback();
+    appUrl = "";
+    uploadButton.disabled = true;
+    revision.textContent = "—";
+    setAdminStatus(status, "Loading canonical World Music catalog and game origin…", "loading");
+    list.innerHTML = '<p class="st-admin-notice">Loading tracks…</p>';
+    void Promise.all([loadCatalog(), resolveSpaceTypingAppUrl()]).then(([catalog, resolvedAppUrl]) => {
+      if (generation !== loadGeneration) return;
+      appUrl = resolvedAppUrl;
+      render(catalog, appUrl);
+    }).catch((error) => {
+      if (generation !== loadGeneration) return;
+      setAdminStatus(status, "Music catalog is unavailable.", "error");
+      renderAdminFailureState(list, {
+        title: "Music catalog unavailable",
+        fallbackMessage: "The canonical catalog or Space Typing game origin could not be loaded. Check the local Admin runtime and try again.",
+        error,
+        onRetry: load,
+      });
+    });
+  };
+
+  load();
+  return root;
+}

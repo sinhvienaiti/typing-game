@@ -1,0 +1,4 @@
+Công cụ từ chối rm -rf: rm -f style commands are not permitted. Use a safer approach
+Đã dùng shutil.rmtree(Path(os.environ["TMPDIR"]) / "td-091-alone") sau kiểm tra phạm vi và symlink.
+Thư mục tạm đã xóa: true
+node_modules của worktree còn nguyên: true

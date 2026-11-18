@@ -1,0 +1,132 @@
+{
+  "status_changes": [
+    "docs/changelog/2026-10-30-kit-audio-file-bank.md",
+    "docs/codex-queue/198-report.md",
+    "docs/codex-queue/198/checks.txt",
+    "docs/codex-queue/198/numstat-after.txt",
+    "docs/codex-queue/198/numstat-before.txt",
+    "docs/codex-queue/198/scope.json",
+    "docs/codex-queue/198/status-after.txt",
+    "docs/codex-queue/198/tests-after.txt",
+    "docs/codex-queue/198/tests-audio.txt",
+    "docs/codex-queue/198/tests-before.txt",
+    "docs/codex-queue/198/tests-edge-red.txt",
+    "docs/codex-queue/198/tests-red.txt",
+    "docs/codex-queue/198/typecheck.txt",
+    "docs/codex-queue/198/write-docs.py",
+    "shared/game-kit/DRIFT.md",
+    "shared/game-kit/README.md",
+    "shared/game-kit/audio/fake-audio.test-helper.ts",
+    "shared/game-kit/audio/file-bank.test.ts",
+    "shared/game-kit/audio/file-bank.ts",
+    "shared/game-kit/audio/index.ts",
+    "shared/game-kit/audio/manifest.test.ts",
+    "shared/game-kit/audio/manifest.ts",
+    "shared/game-kit/audio/scene-audio-files.test.ts",
+    "shared/game-kit/audio/scene-audio.ts",
+    "shared/game-kit/audio/variants.test.ts",
+    "shared/game-kit/audio/variants.ts"
+  ],
+  "numstat_changes": [
+    "shared/game-kit/DRIFT.md",
+    "shared/game-kit/README.md",
+    "shared/game-kit/audio/index.ts",
+    "shared/game-kit/audio/scene-audio.ts"
+  ],
+  "outside_task_changes": [],
+  "tf2": {
+    "shared/game-kit/feedback/typing-fx/audio.ts": {
+      "before": [
+        "136",
+        "77"
+      ],
+      "after": [
+        "136",
+        "77"
+      ],
+      "unchanged": true
+    },
+    "shared/game-kit/feedback/typing-fx/css.ts": {
+      "before": [
+        "1",
+        "1"
+      ],
+      "after": [
+        "1",
+        "1"
+      ],
+      "unchanged": true
+    },
+    "shared/game-kit/feedback/typing-fx/draw.ts": {
+      "before": [
+        "11",
+        "1"
+      ],
+      "after": [
+        "11",
+        "1"
+      ],
+      "unchanged": true
+    },
+    "shared/game-kit/feedback/typing-fx/index.ts": {
+      "before": [
+        "1",
+        "1"
+      ],
+      "after": [
+        "1",
+        "1"
+      ],
+      "unchanged": true
+    },
+    "shared/game-kit/ui/quick-settings/css.ts": {
+      "before": [
+        "2",
+        "2"
+      ],
+      "after": [
+        "2",
+        "2"
+      ],
+      "unchanged": true
+    },
+    "shared/game-kit/ui/quick-settings/keyboard-choices.ts": {
+      "before": [
+        "61",
+        "6"
+      ],
+      "after": [
+        "61",
+        "6"
+      ],
+      "unchanged": true
+    },
+    "shared/game-kit/ui/quick-settings/keyboard-sound.test.ts": {
+      "before": [
+        "2",
+        "2"
+      ],
+      "after": [
+        "2",
+        "2"
+      ],
+      "unchanged": true
+    }
+  },
+  "tf2_numstat_unchanged": true,
+  "new_test_files": 4,
+  "new_tests": 31,
+  "before": {
+    "files": 56,
+    "tests": 867
+  },
+  "after": {
+    "files": 60,
+    "tests": 898
+  },
+  "audio": {
+    "files": 6,
+    "tests": 41
+  },
+  "typecheck_errors": 0
+}

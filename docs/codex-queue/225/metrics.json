@@ -1,0 +1,972 @@
+{
+  "generatedAt": "2026-10-30T21:52:19.912Z",
+  "luma": "Y=0.2126 R+0.7152 G+0.0722 B; sRGB 0–1; trung bình pixel alpha >=128 sau composite nền",
+  "partialBand": "Mặt nạ alpha >=128; dải Chebyshev 3 px quanh biên",
+  "games": {
+    "dragon-hold": {
+      "palettes": [
+        "#2b2118",
+        "#f1e3c4"
+      ],
+      "images": {
+        "slider-track": {
+          "selected": true,
+          "source": "games/dragon-hold/art-src/ui/quick-settings/sliders/slider-track.png",
+          "alpha": [
+            {
+              "file": "games/dragon-hold/art-src/ui/quick-settings/sliders/slider-track.png",
+              "size": [
+                1024,
+                64
+              ],
+              "channels": "srgba",
+              "bboxAlphaGT16": [
+                0,
+                0,
+                1024,
+                64
+              ],
+              "coverageLongest": 1,
+              "centerDeviation": [
+                0,
+                0
+              ],
+              "partialOutside3px": 0,
+              "keyHuePixels": 1,
+              "visiblePixels": 60715,
+              "keyHuePercent": 0.0016470394465947459,
+              "centralOpaqueFraction": 0.9134703545232273,
+              "passAlpha": true
+            },
+            {
+              "file": "games/dragon-hold/art-src/ui/quick-settings/sliders/slider-track.512.png",
+              "size": [
+                512,
+                32
+              ],
+              "channels": "srgba",
+              "bboxAlphaGT16": [
+                0,
+                0,
+                512,
+                32
+              ],
+              "coverageLongest": 1,
+              "centerDeviation": [
+                0,
+                0
+              ],
+              "partialOutside3px": 0,
+              "keyHuePixels": 0,
+              "visiblePixels": 16104,
+              "keyHuePercent": 0,
+              "centralOpaqueFraction": 0.8802849264705882,
+              "passAlpha": true
+            }
+          ],
+          "passDimensions": true,
+          "pass": false,
+          "stretch": [
+            {
+              "size": [
+                90,
+                10
+              ],
+              "centralColumnLumaStd": 0.012575353693087822,
+              "pass": true
+            },
+            {
+              "size": [
+                210,
+                10
+              ],
+              "centralColumnLumaStd": 0.012832195000941711,
+              "pass": true
+            },
+            {
+              "size": [
+                290,
+                10
+              ],
+              "centralColumnLumaStd": 0.012988279209254506,
+              "pass": true
+            },
+            {
+              "size": [
+                135,
+                15
+              ],
+              "centralColumnLumaStd": 0.012152603384453604,
+              "pass": true
+            },
+            {
+              "size": [
+                315,
+                15
+              ],
+              "centralColumnLumaStd": 0.012655019216547646,
+              "pass": true
+            },
+            {
+              "size": [
+                435,
+                15
+              ],
+              "centralColumnLumaStd": 0.012764905542669494,
+              "pass": true
+            }
+          ],
+          "endcaps": {
+            "background": "#2b2118",
+            "centralMedian": 0.3419572410130718,
+            "leftPx": 85,
+            "rightPx": 110,
+            "pass": false
+          }
+        },
+        "slider-thumb": {
+          "selected": true,
+          "source": "games/dragon-hold/art-src/ui/quick-settings/sliders/slider-thumb.png",
+          "alpha": [
+            {
+              "file": "games/dragon-hold/art-src/ui/quick-settings/sliders/slider-thumb.png",
+              "size": [
+                1024,
+                1024
+              ],
+              "channels": "srgba",
+              "bboxAlphaGT16": [
+                154,
+                156,
+                716,
+                711
+              ],
+              "coverageLongest": 0.69921875,
+              "centerDeviation": [
+                0,
+                0.00048828125
+              ],
+              "partialOutside3px": 0,
+              "keyHuePixels": 26,
+              "visiblePixels": 399226,
+              "keyHuePercent": 0.006512601884646791,
+              "centralOpaqueFraction": 0.4732364570599022,
+              "passAlpha": true
+            },
+            {
+              "file": "games/dragon-hold/art-src/ui/quick-settings/sliders/slider-thumb.256.png",
+              "size": [
+                256,
+                256
+              ],
+              "channels": "srgba",
+              "bboxAlphaGT16": [
+                38,
+                39,
+                180,
+                178
+              ],
+              "coverageLongest": 0.703125,
+              "centerDeviation": [
+                0,
+                0
+              ],
+              "partialOutside3px": 0,
+              "keyHuePixels": 0,
+              "visiblePixels": 25469,
+              "keyHuePercent": 0,
+              "centralOpaqueFraction": 0.4645373774509804,
+              "passAlpha": true
+            },
+            {
+              "file": "games/dragon-hold/art-src/ui/quick-settings/sliders/slider-thumb.128.png",
+              "size": [
+                128,
+                128
+              ],
+              "channels": "srgba",
+              "bboxAlphaGT16": [
+                19,
+                19,
+                90,
+                90
+              ],
+              "coverageLongest": 0.703125,
+              "centerDeviation": [
+                0,
+                0
+              ],
+              "partialOutside3px": 0,
+              "keyHuePixels": 0,
+              "visiblePixels": 6536,
+              "keyHuePercent": 0,
+              "centralOpaqueFraction": 0.453125,
+              "passAlpha": true
+            },
+            {
+              "file": "games/dragon-hold/art-src/ui/quick-settings/sliders/slider-thumb.64.png",
+              "size": [
+                64,
+                64
+              ],
+              "channels": "srgba",
+              "bboxAlphaGT16": [
+                9,
+                9,
+                46,
+                46
+              ],
+              "coverageLongest": 0.71875,
+              "centerDeviation": [
+                0,
+                0
+              ],
+              "partialOutside3px": 0,
+              "keyHuePixels": 0,
+              "visiblePixels": 1712,
+              "keyHuePercent": 0,
+              "centralOpaqueFraction": 0.4428125,
+              "passAlpha": true
+            }
+          ],
+          "passDimensions": true,
+          "pass": true
+        }
+      },
+      "KA1": {
+        "beforeCount": 164,
+        "changed": [],
+        "added": [
+          "games/dragon-hold/art-src/ui/quick-settings/sliders/slider-thumb.128.png",
+          "games/dragon-hold/art-src/ui/quick-settings/sliders/slider-thumb.128.prompt.txt",
+          "games/dragon-hold/art-src/ui/quick-settings/sliders/slider-thumb.256.png",
+          "games/dragon-hold/art-src/ui/quick-settings/sliders/slider-thumb.256.prompt.txt",
+          "games/dragon-hold/art-src/ui/quick-settings/sliders/slider-thumb.64.png",
+          "games/dragon-hold/art-src/ui/quick-settings/sliders/slider-thumb.64.prompt.txt",
+          "games/dragon-hold/art-src/ui/quick-settings/sliders/slider-thumb.png",
+          "games/dragon-hold/art-src/ui/quick-settings/sliders/slider-thumb.prompt.txt",
+          "games/dragon-hold/art-src/ui/quick-settings/sliders/slider-thumb.try1.png",
+          "games/dragon-hold/art-src/ui/quick-settings/sliders/slider-thumb.try1.prompt.txt",
+          "games/dragon-hold/art-src/ui/quick-settings/sliders/slider-thumb.try2.png",
+          "games/dragon-hold/art-src/ui/quick-settings/sliders/slider-thumb.try2.prompt.txt",
+          "games/dragon-hold/art-src/ui/quick-settings/sliders/slider-track.512.png",
+          "games/dragon-hold/art-src/ui/quick-settings/sliders/slider-track.512.prompt.txt",
+          "games/dragon-hold/art-src/ui/quick-settings/sliders/slider-track.png",
+          "games/dragon-hold/art-src/ui/quick-settings/sliders/slider-track.prompt.txt",
+          "games/dragon-hold/art-src/ui/quick-settings/sliders/slider-track.try1.png",
+          "games/dragon-hold/art-src/ui/quick-settings/sliders/slider-track.try1.prompt.txt",
+          "games/dragon-hold/art-src/ui/quick-settings/sliders/slider-track.try2.png",
+          "games/dragon-hold/art-src/ui/quick-settings/sliders/slider-track.try2.prompt.txt"
+        ],
+        "pass": true
+      },
+      "readability": [
+        {
+          "scale": 1,
+          "background": "#2b2118",
+          "trackMeanLuma": 0.34289219313118224,
+          "thumbMeanLuma": 0.6026096364776091,
+          "panelLuma": 0.1352007843137255,
+          "thumbMinusTrack": 0.2597174433464269,
+          "trackMinusPanel": 0.20769140881745674,
+          "trackAbsPanel": 0.20769140881745674,
+          "passDark": true
+        },
+        {
+          "scale": 1.5,
+          "background": "#2b2118",
+          "trackMeanLuma": 0.34670245832590213,
+          "thumbMeanLuma": 0.6034715505547383,
+          "panelLuma": 0.1352007843137255,
+          "thumbMinusTrack": 0.2567690922288362,
+          "trackMinusPanel": 0.21150167401217662,
+          "trackAbsPanel": 0.21150167401217662,
+          "passDark": true
+        },
+        {
+          "scale": 1,
+          "background": "#f1e3c4",
+          "trackMeanLuma": 0.3887070326426806,
+          "thumbMeanLuma": 0.6317654720258095,
+          "panelLuma": 0.8930909803921567,
+          "thumbMinusTrack": 0.24305843938312888,
+          "trackMinusPanel": -0.5043839477494761,
+          "trackAbsPanel": 0.5043839477494761,
+          "passDark": false
+        },
+        {
+          "scale": 1.5,
+          "background": "#f1e3c4",
+          "trackMeanLuma": 0.3766188543352671,
+          "thumbMeanLuma": 0.6278203306420609,
+          "panelLuma": 0.8930909803921567,
+          "thumbMinusTrack": 0.2512014763067938,
+          "trackMinusPanel": -0.5164721260568896,
+          "trackAbsPanel": 0.5164721260568896,
+          "passDark": false
+        }
+      ],
+      "passReadability": true,
+      "pass": false
+    },
+    "typing-defense": {
+      "palettes": [
+        "#061e16",
+        "#b8aa94",
+        "#1f3b33",
+        "#e8e1cf"
+      ],
+      "images": {
+        "slider-track": {
+          "selected": true,
+          "source": "games/typing-defense/art-src/ui/quick-settings/sliders/slider-track.png",
+          "alpha": [
+            {
+              "file": "games/typing-defense/art-src/ui/quick-settings/sliders/slider-track.png",
+              "size": [
+                1024,
+                64
+              ],
+              "channels": "srgba",
+              "bboxAlphaGT16": [
+                0,
+                0,
+                1024,
+                64
+              ],
+              "coverageLongest": 1,
+              "centerDeviation": [
+                0,
+                0
+              ],
+              "partialOutside3px": 0,
+              "keyHuePixels": 0,
+              "visiblePixels": 64496,
+              "keyHuePercent": 0,
+              "centralOpaqueFraction": 0.984375,
+              "passAlpha": true
+            },
+            {
+              "file": "games/typing-defense/art-src/ui/quick-settings/sliders/slider-track.512.png",
+              "size": [
+                512,
+                32
+              ],
+              "channels": "srgba",
+              "bboxAlphaGT16": [
+                0,
+                0,
+                512,
+                32
+              ],
+              "coverageLongest": 1,
+              "centerDeviation": [
+                0,
+                0
+              ],
+              "partialOutside3px": 0,
+              "keyHuePixels": 0,
+              "visiblePixels": 16172,
+              "keyHuePercent": 0,
+              "centralOpaqueFraction": 1,
+              "passAlpha": true
+            }
+          ],
+          "passDimensions": true,
+          "pass": false,
+          "stretch": [
+            {
+              "size": [
+                90,
+                10
+              ],
+              "centralColumnLumaStd": 0.020208027526657114,
+              "pass": true
+            },
+            {
+              "size": [
+                210,
+                10
+              ],
+              "centralColumnLumaStd": 0.020209938481569267,
+              "pass": true
+            },
+            {
+              "size": [
+                290,
+                10
+              ],
+              "centralColumnLumaStd": 0.02020713840775564,
+              "pass": true
+            },
+            {
+              "size": [
+                135,
+                15
+              ],
+              "centralColumnLumaStd": 0.019867686737900625,
+              "pass": true
+            },
+            {
+              "size": [
+                315,
+                15
+              ],
+              "centralColumnLumaStd": 0.019907411069710584,
+              "pass": true
+            },
+            {
+              "size": [
+                435,
+                15
+              ],
+              "centralColumnLumaStd": 0.019890330734956354,
+              "pass": true
+            }
+          ],
+          "endcaps": {
+            "background": "#061e16",
+            "centralMedian": 0.33560120530565163,
+            "leftPx": 67,
+            "rightPx": 66,
+            "pass": false
+          }
+        },
+        "slider-thumb": {
+          "selected": true,
+          "source": "games/typing-defense/art-src/ui/quick-settings/sliders/slider-thumb.png",
+          "alpha": [
+            {
+              "file": "games/typing-defense/art-src/ui/quick-settings/sliders/slider-thumb.png",
+              "size": [
+                1024,
+                1024
+              ],
+              "channels": "srgba",
+              "bboxAlphaGT16": [
+                154,
+                155,
+                716,
+                713
+              ],
+              "coverageLongest": 0.69921875,
+              "centerDeviation": [
+                0,
+                0.00048828125
+              ],
+              "partialOutside3px": 0,
+              "keyHuePixels": 3,
+              "visiblePixels": 401502,
+              "keyHuePercent": 0.0007471942854581048,
+              "centralOpaqueFraction": 0.47600020056540343,
+              "passAlpha": true
+            },
+            {
+              "file": "games/typing-defense/art-src/ui/quick-settings/sliders/slider-thumb.256.png",
+              "size": [
+                256,
+                256
+              ],
+              "channels": "srgba",
+              "bboxAlphaGT16": [
+                38,
+                38,
+                180,
+                180
+              ],
+              "coverageLongest": 0.703125,
+              "centerDeviation": [
+                0,
+                0
+              ],
+              "partialOutside3px": 0,
+              "keyHuePixels": 0,
+              "visiblePixels": 25626,
+              "keyHuePercent": 0,
+              "centralOpaqueFraction": 0.4674479166666667,
+              "passAlpha": true
+            },
+            {
+              "file": "games/typing-defense/art-src/ui/quick-settings/sliders/slider-thumb.128.png",
+              "size": [
+                128,
+                128
+              ],
+              "channels": "srgba",
+              "bboxAlphaGT16": [
+                19,
+                19,
+                90,
+                90
+              ],
+              "coverageLongest": 0.703125,
+              "centerDeviation": [
+                0,
+                0
+              ],
+              "partialOutside3px": 0,
+              "keyHuePixels": 0,
+              "visiblePixels": 6566,
+              "keyHuePercent": 0,
+              "centralOpaqueFraction": 0.4560355392156863,
+              "passAlpha": true
+            },
+            {
+              "file": "games/typing-defense/art-src/ui/quick-settings/sliders/slider-thumb.64.png",
+              "size": [
+                64,
+                64
+              ],
+              "channels": "srgba",
+              "bboxAlphaGT16": [
+                9,
+                9,
+                46,
+                46
+              ],
+              "coverageLongest": 0.71875,
+              "centerDeviation": [
+                0,
+                0
+              ],
+              "partialOutside3px": 0,
+              "keyHuePixels": 0,
+              "visiblePixels": 1736,
+              "keyHuePercent": 0,
+              "centralOpaqueFraction": 0.444375,
+              "passAlpha": true
+            }
+          ],
+          "passDimensions": true,
+          "pass": true
+        }
+      },
+      "KA1": {
+        "beforeCount": 162,
+        "changed": [],
+        "added": [
+          "games/typing-defense/art-src/ui/quick-settings/sliders/slider-thumb.128.png",
+          "games/typing-defense/art-src/ui/quick-settings/sliders/slider-thumb.128.prompt.txt",
+          "games/typing-defense/art-src/ui/quick-settings/sliders/slider-thumb.256.png",
+          "games/typing-defense/art-src/ui/quick-settings/sliders/slider-thumb.256.prompt.txt",
+          "games/typing-defense/art-src/ui/quick-settings/sliders/slider-thumb.64.png",
+          "games/typing-defense/art-src/ui/quick-settings/sliders/slider-thumb.64.prompt.txt",
+          "games/typing-defense/art-src/ui/quick-settings/sliders/slider-thumb.png",
+          "games/typing-defense/art-src/ui/quick-settings/sliders/slider-thumb.prompt.txt",
+          "games/typing-defense/art-src/ui/quick-settings/sliders/slider-thumb.try1.png",
+          "games/typing-defense/art-src/ui/quick-settings/sliders/slider-thumb.try1.prompt.txt",
+          "games/typing-defense/art-src/ui/quick-settings/sliders/slider-thumb.try2.png",
+          "games/typing-defense/art-src/ui/quick-settings/sliders/slider-thumb.try2.prompt.txt",
+          "games/typing-defense/art-src/ui/quick-settings/sliders/slider-track.512.png",
+          "games/typing-defense/art-src/ui/quick-settings/sliders/slider-track.512.prompt.txt",
+          "games/typing-defense/art-src/ui/quick-settings/sliders/slider-track.png",
+          "games/typing-defense/art-src/ui/quick-settings/sliders/slider-track.prompt.txt",
+          "games/typing-defense/art-src/ui/quick-settings/sliders/slider-track.try1.png",
+          "games/typing-defense/art-src/ui/quick-settings/sliders/slider-track.try1.prompt.txt",
+          "games/typing-defense/art-src/ui/quick-settings/sliders/slider-track.try2.png",
+          "games/typing-defense/art-src/ui/quick-settings/sliders/slider-track.try2.prompt.txt",
+          "games/typing-defense/art-src/ui/quick-settings/sliders/slider-track.try3.png",
+          "games/typing-defense/art-src/ui/quick-settings/sliders/slider-track.try3.prompt.txt"
+        ],
+        "pass": true
+      },
+      "readability": [
+        {
+          "scale": 1,
+          "background": "#061e16",
+          "trackMeanLuma": 0.3568202802908195,
+          "thumbMeanLuma": 0.7059002803940074,
+          "panelLuma": 0.09537254901960784,
+          "thumbMinusTrack": 0.3490800001031879,
+          "trackMinusPanel": 0.2614477312712117,
+          "trackAbsPanel": 0.2614477312712117,
+          "passDark": true
+        },
+        {
+          "scale": 1.5,
+          "background": "#061e16",
+          "trackMeanLuma": 0.35189935703905006,
+          "thumbMeanLuma": 0.7134667694226862,
+          "panelLuma": 0.09537254901960784,
+          "thumbMinusTrack": 0.3615674123836361,
+          "trackMinusPanel": 0.2565268080194422,
+          "trackAbsPanel": 0.2565268080194422,
+          "passDark": true
+        },
+        {
+          "scale": 1,
+          "background": "#b8aa94",
+          "trackMeanLuma": 0.36304882141464073,
+          "thumbMeanLuma": 0.7310815106489279,
+          "panelLuma": 0.6721098039215686,
+          "thumbMinusTrack": 0.36803268923428717,
+          "trackMinusPanel": -0.3090609825069279,
+          "trackAbsPanel": 0.3090609825069279,
+          "passDark": false
+        },
+        {
+          "scale": 1.5,
+          "background": "#b8aa94",
+          "trackMeanLuma": 0.35782386722806164,
+          "thumbMeanLuma": 0.7299595585107495,
+          "panelLuma": 0.6721098039215686,
+          "thumbMinusTrack": 0.3721356912826878,
+          "trackMinusPanel": -0.31428593669350696,
+          "trackAbsPanel": 0.31428593669350696,
+          "passDark": false
+        },
+        {
+          "scale": 1,
+          "background": "#1f3b33",
+          "trackMeanLuma": 0.3580124562993267,
+          "thumbMeanLuma": 0.710720102239575,
+          "panelLuma": 0.20576313725490197,
+          "thumbMinusTrack": 0.35270764594024834,
+          "trackMinusPanel": 0.15224931904442474,
+          "trackAbsPanel": 0.15224931904442474,
+          "passDark": true
+        },
+        {
+          "scale": 1.5,
+          "background": "#1f3b33",
+          "trackMeanLuma": 0.35303333990423186,
+          "thumbMeanLuma": 0.7166235772647279,
+          "panelLuma": 0.20576313725490197,
+          "thumbMinusTrack": 0.36359023736049606,
+          "trackMinusPanel": 0.14727020264932988,
+          "trackAbsPanel": 0.14727020264932988,
+          "passDark": true
+        },
+        {
+          "scale": 1,
+          "background": "#e8e1cf",
+          "trackMeanLuma": 0.36532735413138556,
+          "thumbMeanLuma": 0.7402933398466652,
+          "panelLuma": 0.8830925490196078,
+          "thumbMinusTrack": 0.37496598571527967,
+          "trackMinusPanel": -0.5177651948882223,
+          "trackAbsPanel": 0.5177651948882223,
+          "passDark": false
+        },
+        {
+          "scale": 1.5,
+          "background": "#e8e1cf",
+          "trackMeanLuma": 0.3599911789673589,
+          "thumbMeanLuma": 0.7359929712763497,
+          "panelLuma": 0.8830925490196078,
+          "thumbMinusTrack": 0.3760017923089908,
+          "trackMinusPanel": -0.5231013700522489,
+          "trackAbsPanel": 0.5231013700522489,
+          "passDark": false
+        }
+      ],
+      "passReadability": true,
+      "pass": false
+    },
+    "typing-survival": {
+      "palettes": [
+        "#14181f",
+        "#8c96a3"
+      ],
+      "images": {
+        "slider-track": {
+          "selected": true,
+          "source": "games/typing-survival/art-src/ui/quick-settings/sliders/slider-track.png",
+          "alpha": [
+            {
+              "file": "games/typing-survival/art-src/ui/quick-settings/sliders/slider-track.png",
+              "size": [
+                1024,
+                64
+              ],
+              "channels": "srgba",
+              "bboxAlphaGT16": [
+                0,
+                0,
+                1024,
+                64
+              ],
+              "coverageLongest": 1,
+              "centerDeviation": [
+                0,
+                0
+              ],
+              "partialOutside3px": 0,
+              "keyHuePixels": 0,
+              "visiblePixels": 64312,
+              "keyHuePercent": 0,
+              "centralOpaqueFraction": 0.909554553789731,
+              "passAlpha": true
+            },
+            {
+              "file": "games/typing-survival/art-src/ui/quick-settings/sliders/slider-track.512.png",
+              "size": [
+                512,
+                32
+              ],
+              "channels": "srgba",
+              "bboxAlphaGT16": [
+                0,
+                0,
+                512,
+                32
+              ],
+              "coverageLongest": 1,
+              "centerDeviation": [
+                0,
+                0
+              ],
+              "partialOutside3px": 0,
+              "keyHuePixels": 0,
+              "visiblePixels": 16251,
+              "keyHuePercent": 0,
+              "centralOpaqueFraction": 0.8894761029411765,
+              "passAlpha": true
+            }
+          ],
+          "passDimensions": true,
+          "pass": true,
+          "stretch": [
+            {
+              "size": [
+                90,
+                10
+              ],
+              "centralColumnLumaStd": 0.017265253863877263,
+              "pass": true
+            },
+            {
+              "size": [
+                210,
+                10
+              ],
+              "centralColumnLumaStd": 0.017292477540587763,
+              "pass": true
+            },
+            {
+              "size": [
+                290,
+                10
+              ],
+              "centralColumnLumaStd": 0.017293543446070588,
+              "pass": true
+            },
+            {
+              "size": [
+                135,
+                15
+              ],
+              "centralColumnLumaStd": 0.01742664924080611,
+              "pass": true
+            },
+            {
+              "size": [
+                315,
+                15
+              ],
+              "centralColumnLumaStd": 0.017383119762583325,
+              "pass": true
+            },
+            {
+              "size": [
+                435,
+                15
+              ],
+              "centralColumnLumaStd": 0.01738387374756552,
+              "pass": true
+            }
+          ],
+          "endcaps": {
+            "background": "#14181f",
+            "centralMedian": 0.2812116631103421,
+            "leftPx": 43,
+            "rightPx": 42,
+            "pass": true
+          }
+        },
+        "slider-thumb": {
+          "selected": true,
+          "source": "games/typing-survival/art-src/ui/quick-settings/sliders/slider-thumb.png",
+          "alpha": [
+            {
+              "file": "games/typing-survival/art-src/ui/quick-settings/sliders/slider-thumb.png",
+              "size": [
+                1024,
+                1024
+              ],
+              "channels": "srgba",
+              "bboxAlphaGT16": [
+                154,
+                157,
+                716,
+                710
+              ],
+              "coverageLongest": 0.69921875,
+              "centerDeviation": [
+                0,
+                0
+              ],
+              "partialOutside3px": 0,
+              "keyHuePixels": 0,
+              "visiblePixels": 389070,
+              "keyHuePercent": 0,
+              "centralOpaqueFraction": 0.4564164215311736,
+              "passAlpha": true
+            },
+            {
+              "file": "games/typing-survival/art-src/ui/quick-settings/sliders/slider-thumb.256.png",
+              "size": [
+                256,
+                256
+              ],
+              "channels": "srgba",
+              "bboxAlphaGT16": [
+                38,
+                39,
+                180,
+                178
+              ],
+              "coverageLongest": 0.703125,
+              "centerDeviation": [
+                0,
+                0
+              ],
+              "partialOutside3px": 0,
+              "keyHuePixels": 0,
+              "visiblePixels": 24788,
+              "keyHuePercent": 0,
+              "centralOpaqueFraction": 0.4522250306372549,
+              "passAlpha": true
+            },
+            {
+              "file": "games/typing-survival/art-src/ui/quick-settings/sliders/slider-thumb.128.png",
+              "size": [
+                128,
+                128
+              ],
+              "channels": "srgba",
+              "bboxAlphaGT16": [
+                19,
+                19,
+                90,
+                90
+              ],
+              "coverageLongest": 0.703125,
+              "centerDeviation": [
+                0,
+                0
+              ],
+              "partialOutside3px": 0,
+              "keyHuePixels": 0,
+              "visiblePixels": 6367,
+              "keyHuePercent": 0,
+              "centralOpaqueFraction": 0.4404871323529412,
+              "passAlpha": true
+            },
+            {
+              "file": "games/typing-survival/art-src/ui/quick-settings/sliders/slider-thumb.64.png",
+              "size": [
+                64,
+                64
+              ],
+              "channels": "srgba",
+              "bboxAlphaGT16": [
+                9,
+                9,
+                46,
+                46
+              ],
+              "coverageLongest": 0.71875,
+              "centerDeviation": [
+                0,
+                0
+              ],
+              "partialOutside3px": 0,
+              "keyHuePixels": 0,
+              "visiblePixels": 1680,
+              "keyHuePercent": 0,
+              "centralOpaqueFraction": 0.42875,
+              "passAlpha": true
+            }
+          ],
+          "passDimensions": true,
+          "pass": true
+        }
+      },
+      "KA1": {
+        "beforeCount": 162,
+        "changed": [],
+        "added": [
+          "games/typing-survival/art-src/ui/quick-settings/sliders/slider-thumb.128.png",
+          "games/typing-survival/art-src/ui/quick-settings/sliders/slider-thumb.128.prompt.txt",
+          "games/typing-survival/art-src/ui/quick-settings/sliders/slider-thumb.256.png",
+          "games/typing-survival/art-src/ui/quick-settings/sliders/slider-thumb.256.prompt.txt",
+          "games/typing-survival/art-src/ui/quick-settings/sliders/slider-thumb.64.png",
+          "games/typing-survival/art-src/ui/quick-settings/sliders/slider-thumb.64.prompt.txt",
+          "games/typing-survival/art-src/ui/quick-settings/sliders/slider-thumb.png",
+          "games/typing-survival/art-src/ui/quick-settings/sliders/slider-thumb.prompt.txt",
+          "games/typing-survival/art-src/ui/quick-settings/sliders/slider-thumb.try1.png",
+          "games/typing-survival/art-src/ui/quick-settings/sliders/slider-thumb.try1.prompt.txt",
+          "games/typing-survival/art-src/ui/quick-settings/sliders/slider-track.512.png",
+          "games/typing-survival/art-src/ui/quick-settings/sliders/slider-track.512.prompt.txt",
+          "games/typing-survival/art-src/ui/quick-settings/sliders/slider-track.png",
+          "games/typing-survival/art-src/ui/quick-settings/sliders/slider-track.prompt.txt",
+          "games/typing-survival/art-src/ui/quick-settings/sliders/slider-track.try1.png",
+          "games/typing-survival/art-src/ui/quick-settings/sliders/slider-track.try1.prompt.txt",
+          "games/typing-survival/art-src/ui/quick-settings/sliders/slider-track.try2.png",
+          "games/typing-survival/art-src/ui/quick-settings/sliders/slider-track.try2.prompt.txt"
+        ],
+        "pass": true
+      },
+      "readability": [
+        {
+          "scale": 1,
+          "background": "#14181f",
+          "trackMeanLuma": 0.2984746108834916,
+          "thumbMeanLuma": 0.5558558858558674,
+          "panelLuma": 0.09276470588235293,
+          "thumbMinusTrack": 0.25738127497237584,
+          "trackMinusPanel": 0.20570990500113867,
+          "trackAbsPanel": 0.20570990500113867,
+          "passDark": true
+        },
+        {
+          "scale": 1.5,
+          "background": "#14181f",
+          "trackMeanLuma": 0.2981947538340593,
+          "thumbMeanLuma": 0.5628944017656746,
+          "panelLuma": 0.09276470588235293,
+          "thumbMinusTrack": 0.2646996479316153,
+          "trackMinusPanel": 0.20543004795170638,
+          "trackAbsPanel": 0.20543004795170638,
+          "passDark": true
+        },
+        {
+          "scale": 1,
+          "background": "#8c96a3",
+          "trackMeanLuma": 0.3136836084824585,
+          "thumbMeanLuma": 0.5751997363748984,
+          "panelLuma": 0.5835788235294117,
+          "thumbMinusTrack": 0.2615161278924399,
+          "trackMinusPanel": -0.2698952150469532,
+          "trackAbsPanel": 0.2698952150469532,
+          "passDark": false
+        },
+        {
+          "scale": 1.5,
+          "background": "#8c96a3",
+          "trackMeanLuma": 0.3142129218769958,
+          "thumbMeanLuma": 0.5733197918544666,
+          "panelLuma": 0.5835788235294117,
+          "thumbMinusTrack": 0.2591068699774708,
+          "trackMinusPanel": -0.2693659016524159,
+          "trackAbsPanel": 0.2693659016524159,
+          "passDark": false
+        }
+      ],
+      "passReadability": true,
+      "pass": true
+    }
+  },
+  "pass": false
+}

@@ -1,0 +1,540 @@
+[
+  {
+    "case": "symlink-dist",
+    "options": {
+      "symlink": "dist"
+    },
+    "exit": 1,
+    "stdout": "",
+    "stderr": "Refusing symlink: /Users/toandx/htdocs/typing-game/games/typing-defense/tmp/codex-224/tree/tmp/audit-prune-n_223uqu/alias-dist\n",
+    "dist_unchanged": true,
+    "outside_unchanged": true,
+    "dist_after": {
+      "index.html": "6ca5cab77e702c787b4c14b3d3bf26bad43da606be6eed04ab0b9720120ae081",
+      "keep.txt": "6ca7ea2feefc88ecb5ed6356ed963f47dc9137f82526fdd25d618ea626d0803f",
+      "assets/typing-defense/models/manifest.json": "75f1829d6383d71bf657fcdd1a8dbbd031f12c3ff1f2b7a15f4c059e606cb465",
+      "assets/typing-defense/models/discard.glb": "109fa9f54c849bb7c2e983911b0d3d75bd7e947c157dee7c012ea29648058191",
+      "assets/typing-defense/models/keep/high.glb": "6ef7c9b15ecdd69083724b84cfdc2100351963488b51b4ea2fcbddf493fbec94",
+      ".vite/manifest.json": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    }
+  },
+  {
+    "case": "symlink-ancestor",
+    "options": {
+      "symlink": "ancestor"
+    },
+    "exit": 1,
+    "stdout": "",
+    "stderr": "Refusing symlink: /Users/toandx/htdocs/typing-game/games/typing-defense/tmp/codex-224/tree/tmp/audit-prune-_h66qevy/alias\n",
+    "dist_unchanged": true,
+    "outside_unchanged": true,
+    "dist_after": {
+      "index.html": "6ca5cab77e702c787b4c14b3d3bf26bad43da606be6eed04ab0b9720120ae081",
+      "keep.txt": "6ca7ea2feefc88ecb5ed6356ed963f47dc9137f82526fdd25d618ea626d0803f",
+      "assets/typing-defense/models/manifest.json": "75f1829d6383d71bf657fcdd1a8dbbd031f12c3ff1f2b7a15f4c059e606cb465",
+      "assets/typing-defense/models/discard.glb": "109fa9f54c849bb7c2e983911b0d3d75bd7e947c157dee7c012ea29648058191",
+      "assets/typing-defense/models/keep/high.glb": "6ef7c9b15ecdd69083724b84cfdc2100351963488b51b4ea2fcbddf493fbec94",
+      ".vite/manifest.json": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    }
+  },
+  {
+    "case": "symlink-assets",
+    "options": {
+      "symlink": "assets"
+    },
+    "exit": 1,
+    "stdout": "",
+    "stderr": "Refusing symlink: /Users/toandx/htdocs/typing-game/games/typing-defense/tmp/codex-224/tree/tmp/audit-prune-158_l91a/real/dist/assets\n",
+    "dist_unchanged": true,
+    "outside_unchanged": true,
+    "dist_after": {
+      "assets": {
+        "symlink": "/Users/toandx/htdocs/typing-game/games/typing-defense/tmp/codex-224/tree/tmp/audit-prune-158_l91a/outside"
+      },
+      "index.html": "6ca5cab77e702c787b4c14b3d3bf26bad43da606be6eed04ab0b9720120ae081",
+      "keep.txt": "6ca7ea2feefc88ecb5ed6356ed963f47dc9137f82526fdd25d618ea626d0803f",
+      ".vite/manifest.json": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    }
+  },
+  {
+    "case": "symlink-game",
+    "options": {
+      "symlink": "game"
+    },
+    "exit": 1,
+    "stdout": "",
+    "stderr": "Refusing symlink: /Users/toandx/htdocs/typing-game/games/typing-defense/tmp/codex-224/tree/tmp/audit-prune-ul_fi479/real/dist/assets/typing-defense\n",
+    "dist_unchanged": true,
+    "outside_unchanged": true,
+    "dist_after": {
+      "index.html": "6ca5cab77e702c787b4c14b3d3bf26bad43da606be6eed04ab0b9720120ae081",
+      "keep.txt": "6ca7ea2feefc88ecb5ed6356ed963f47dc9137f82526fdd25d618ea626d0803f",
+      "assets/typing-defense": {
+        "symlink": "/Users/toandx/htdocs/typing-game/games/typing-defense/tmp/codex-224/tree/tmp/audit-prune-ul_fi479/outside"
+      },
+      ".vite/manifest.json": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    }
+  },
+  {
+    "case": "symlink-models",
+    "options": {
+      "symlink": "models"
+    },
+    "exit": 1,
+    "stdout": "",
+    "stderr": "Refusing symlink: /Users/toandx/htdocs/typing-game/games/typing-defense/tmp/codex-224/tree/tmp/audit-prune-3mubi5rj/real/dist/assets/typing-defense/models\n",
+    "dist_unchanged": true,
+    "outside_unchanged": true,
+    "dist_after": {
+      "index.html": "6ca5cab77e702c787b4c14b3d3bf26bad43da606be6eed04ab0b9720120ae081",
+      "keep.txt": "6ca7ea2feefc88ecb5ed6356ed963f47dc9137f82526fdd25d618ea626d0803f",
+      "assets/typing-defense/models": {
+        "symlink": "/Users/toandx/htdocs/typing-game/games/typing-defense/tmp/codex-224/tree/tmp/audit-prune-3mubi5rj/outside"
+      },
+      ".vite/manifest.json": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    }
+  },
+  {
+    "case": "symlink-models-deep",
+    "options": {
+      "symlink": "models-deep"
+    },
+    "exit": 1,
+    "stdout": "",
+    "stderr": "Refusing symlink: /Users/toandx/htdocs/typing-game/games/typing-defense/tmp/codex-224/tree/tmp/audit-prune-p641_qou/real/dist/assets/typing-defense/models/keep/link\n",
+    "dist_unchanged": true,
+    "outside_unchanged": true,
+    "dist_after": {
+      "index.html": "6ca5cab77e702c787b4c14b3d3bf26bad43da606be6eed04ab0b9720120ae081",
+      "keep.txt": "6ca7ea2feefc88ecb5ed6356ed963f47dc9137f82526fdd25d618ea626d0803f",
+      "assets/typing-defense/models/manifest.json": "75f1829d6383d71bf657fcdd1a8dbbd031f12c3ff1f2b7a15f4c059e606cb465",
+      "assets/typing-defense/models/discard.glb": "109fa9f54c849bb7c2e983911b0d3d75bd7e947c157dee7c012ea29648058191",
+      "assets/typing-defense/models/keep/link": {
+        "symlink": "/Users/toandx/htdocs/typing-game/games/typing-defense/tmp/codex-224/tree/tmp/audit-prune-p641_qou/outside"
+      },
+      "assets/typing-defense/models/keep/high.glb": "6ef7c9b15ecdd69083724b84cfdc2100351963488b51b4ea2fcbddf493fbec94",
+      ".vite/manifest.json": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    }
+  },
+  {
+    "case": "symlink-vite",
+    "options": {
+      "symlink": "vite"
+    },
+    "exit": 1,
+    "stdout": "",
+    "stderr": "Refusing symlink: /Users/toandx/htdocs/typing-game/games/typing-defense/tmp/codex-224/tree/tmp/audit-prune-7f358xwv/real/dist/.vite\n",
+    "dist_unchanged": true,
+    "outside_unchanged": true,
+    "dist_after": {
+      ".vite": {
+        "symlink": "/Users/toandx/htdocs/typing-game/games/typing-defense/tmp/codex-224/tree/tmp/audit-prune-7f358xwv/outside"
+      },
+      "index.html": "6ca5cab77e702c787b4c14b3d3bf26bad43da606be6eed04ab0b9720120ae081",
+      "keep.txt": "6ca7ea2feefc88ecb5ed6356ed963f47dc9137f82526fdd25d618ea626d0803f",
+      "assets/typing-defense/models/manifest.json": "75f1829d6383d71bf657fcdd1a8dbbd031f12c3ff1f2b7a15f4c059e606cb465",
+      "assets/typing-defense/models/discard.glb": "109fa9f54c849bb7c2e983911b0d3d75bd7e947c157dee7c012ea29648058191",
+      "assets/typing-defense/models/keep/high.glb": "6ef7c9b15ecdd69083724b84cfdc2100351963488b51b4ea2fcbddf493fbec94"
+    }
+  },
+  {
+    "case": "symlink-vite-deep",
+    "options": {
+      "symlink": "vite-deep"
+    },
+    "exit": 1,
+    "stdout": "",
+    "stderr": "Refusing symlink: /Users/toandx/htdocs/typing-game/games/typing-defense/tmp/codex-224/tree/tmp/audit-prune-v9xb4jie/real/dist/.vite/link\n",
+    "dist_unchanged": true,
+    "outside_unchanged": true,
+    "dist_after": {
+      "index.html": "6ca5cab77e702c787b4c14b3d3bf26bad43da606be6eed04ab0b9720120ae081",
+      "keep.txt": "6ca7ea2feefc88ecb5ed6356ed963f47dc9137f82526fdd25d618ea626d0803f",
+      "assets/typing-defense/models/manifest.json": "75f1829d6383d71bf657fcdd1a8dbbd031f12c3ff1f2b7a15f4c059e606cb465",
+      "assets/typing-defense/models/discard.glb": "109fa9f54c849bb7c2e983911b0d3d75bd7e947c157dee7c012ea29648058191",
+      "assets/typing-defense/models/keep/high.glb": "6ef7c9b15ecdd69083724b84cfdc2100351963488b51b4ea2fcbddf493fbec94",
+      ".vite/link": {
+        "symlink": "/Users/toandx/htdocs/typing-game/games/typing-defense/tmp/codex-224/tree/tmp/audit-prune-v9xb4jie/outside"
+      },
+      ".vite/manifest.json": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    }
+  },
+  {
+    "case": "symlink-index",
+    "options": {
+      "symlink": "index"
+    },
+    "exit": 1,
+    "stdout": "",
+    "stderr": "Not a package directory (missing index.html): /Users/toandx/htdocs/typing-game/games/typing-defense/tmp/codex-224/tree/tmp/audit-prune-ez0iwqvy/real/dist\n",
+    "dist_unchanged": true,
+    "outside_unchanged": true,
+    "dist_after": {
+      "index.html": {
+        "symlink": "/Users/toandx/htdocs/typing-game/games/typing-defense/tmp/codex-224/tree/tmp/audit-prune-ez0iwqvy/outside/sentinel"
+      },
+      "keep.txt": "6ca7ea2feefc88ecb5ed6356ed963f47dc9137f82526fdd25d618ea626d0803f",
+      "assets/typing-defense/models/manifest.json": "75f1829d6383d71bf657fcdd1a8dbbd031f12c3ff1f2b7a15f4c059e606cb465",
+      "assets/typing-defense/models/discard.glb": "109fa9f54c849bb7c2e983911b0d3d75bd7e947c157dee7c012ea29648058191",
+      "assets/typing-defense/models/keep/high.glb": "6ef7c9b15ecdd69083724b84cfdc2100351963488b51b4ea2fcbddf493fbec94",
+      ".vite/manifest.json": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    }
+  },
+  {
+    "case": "dangling-assets",
+    "options": {
+      "symlink": "assets",
+      "dangling": true
+    },
+    "exit": 0,
+    "stdout": "Pruned 1 files, 2 bytes; kept model keys: []\n",
+    "stderr": "",
+    "dist_unchanged": false,
+    "outside_unchanged": true,
+    "dist_after": {
+      "index.html": "6ca5cab77e702c787b4c14b3d3bf26bad43da606be6eed04ab0b9720120ae081",
+      "keep.txt": "6ca7ea2feefc88ecb5ed6356ed963f47dc9137f82526fdd25d618ea626d0803f",
+      "assets": {
+        "symlink": "/Users/toandx/htdocs/typing-game/games/typing-defense/tmp/codex-224/tree/tmp/audit-prune-1glhfkd4/outside/missing"
+      }
+    }
+  },
+  {
+    "case": "dangling-game",
+    "options": {
+      "symlink": "game",
+      "dangling": true
+    },
+    "exit": 0,
+    "stdout": "Pruned 1 files, 2 bytes; kept model keys: []\n",
+    "stderr": "",
+    "dist_unchanged": false,
+    "outside_unchanged": true,
+    "dist_after": {
+      "index.html": "6ca5cab77e702c787b4c14b3d3bf26bad43da606be6eed04ab0b9720120ae081",
+      "keep.txt": "6ca7ea2feefc88ecb5ed6356ed963f47dc9137f82526fdd25d618ea626d0803f",
+      "assets/typing-defense": {
+        "symlink": "/Users/toandx/htdocs/typing-game/games/typing-defense/tmp/codex-224/tree/tmp/audit-prune-av6m4xdx/outside/missing"
+      }
+    }
+  },
+  {
+    "case": "dangling-models",
+    "options": {
+      "symlink": "models",
+      "dangling": true
+    },
+    "exit": 0,
+    "stdout": "Pruned 1 files, 2 bytes; kept model keys: []\n",
+    "stderr": "",
+    "dist_unchanged": false,
+    "outside_unchanged": true,
+    "dist_after": {
+      "index.html": "6ca5cab77e702c787b4c14b3d3bf26bad43da606be6eed04ab0b9720120ae081",
+      "keep.txt": "6ca7ea2feefc88ecb5ed6356ed963f47dc9137f82526fdd25d618ea626d0803f",
+      "assets/typing-defense/models": {
+        "symlink": "/Users/toandx/htdocs/typing-game/games/typing-defense/tmp/codex-224/tree/tmp/audit-prune-0jy_v9x2/outside/missing"
+      }
+    }
+  },
+  {
+    "case": "dangling-models-deep",
+    "options": {
+      "symlink": "models-deep",
+      "dangling": true
+    },
+    "exit": 0,
+    "stdout": "Pruned 4 files, 131 bytes; kept model keys: []\n",
+    "stderr": "",
+    "dist_unchanged": false,
+    "outside_unchanged": true,
+    "dist_after": {
+      "index.html": "6ca5cab77e702c787b4c14b3d3bf26bad43da606be6eed04ab0b9720120ae081",
+      "keep.txt": "6ca7ea2feefc88ecb5ed6356ed963f47dc9137f82526fdd25d618ea626d0803f"
+    }
+  },
+  {
+    "case": "dangling-vite",
+    "options": {
+      "symlink": "vite",
+      "dangling": true
+    },
+    "exit": 0,
+    "stdout": "Pruned 3 files, 129 bytes; kept model keys: []\n",
+    "stderr": "",
+    "dist_unchanged": false,
+    "outside_unchanged": true,
+    "dist_after": {
+      "index.html": "6ca5cab77e702c787b4c14b3d3bf26bad43da606be6eed04ab0b9720120ae081",
+      "keep.txt": "6ca7ea2feefc88ecb5ed6356ed963f47dc9137f82526fdd25d618ea626d0803f"
+    }
+  },
+  {
+    "case": "dangling-vite-deep",
+    "options": {
+      "symlink": "vite-deep",
+      "dangling": true
+    },
+    "exit": 0,
+    "stdout": "Pruned 4 files, 131 bytes; kept model keys: []\n",
+    "stderr": "",
+    "dist_unchanged": false,
+    "outside_unchanged": true,
+    "dist_after": {
+      "index.html": "6ca5cab77e702c787b4c14b3d3bf26bad43da606be6eed04ab0b9720120ae081",
+      "keep.txt": "6ca7ea2feefc88ecb5ed6356ed963f47dc9137f82526fdd25d618ea626d0803f"
+    }
+  },
+  {
+    "case": "dangling-index",
+    "options": {
+      "symlink": "index",
+      "dangling": true
+    },
+    "exit": 1,
+    "stdout": "",
+    "stderr": "Not a package directory (missing index.html): /Users/toandx/htdocs/typing-game/games/typing-defense/tmp/codex-224/tree/tmp/audit-prune-lukn2hts/real/dist\n",
+    "dist_unchanged": true,
+    "outside_unchanged": true,
+    "dist_after": {
+      "index.html": {
+        "symlink": "/Users/toandx/htdocs/typing-game/games/typing-defense/tmp/codex-224/tree/tmp/audit-prune-lukn2hts/outside/missing"
+      },
+      "keep.txt": "6ca7ea2feefc88ecb5ed6356ed963f47dc9137f82526fdd25d618ea626d0803f",
+      "assets/typing-defense/models/manifest.json": "75f1829d6383d71bf657fcdd1a8dbbd031f12c3ff1f2b7a15f4c059e606cb465",
+      "assets/typing-defense/models/discard.glb": "109fa9f54c849bb7c2e983911b0d3d75bd7e947c157dee7c012ea29648058191",
+      "assets/typing-defense/models/keep/high.glb": "6ef7c9b15ecdd69083724b84cfdc2100351963488b51b4ea2fcbddf493fbec94",
+      ".vite/manifest.json": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    }
+  },
+  {
+    "case": "encoded-dotdot",
+    "options": {
+      "url": "/assets/typing-defense/models/%2e%2e/escape.glb",
+      "keys": [
+        "keep"
+      ]
+    },
+    "exit": 1,
+    "stdout": "",
+    "stderr": "Model keep: URL outside models/: /assets/typing-defense/models/%2e%2e/escape.glb\n",
+    "dist_unchanged": true,
+    "outside_unchanged": true,
+    "dist_after": {
+      "index.html": "6ca5cab77e702c787b4c14b3d3bf26bad43da606be6eed04ab0b9720120ae081",
+      "keep.txt": "6ca7ea2feefc88ecb5ed6356ed963f47dc9137f82526fdd25d618ea626d0803f",
+      "assets/typing-defense/models/manifest.json": "33289bb6c3714b44dda30d156abec7811d0e78a1faaeb964e06815a0767f15ec",
+      "assets/typing-defense/models/discard.glb": "109fa9f54c849bb7c2e983911b0d3d75bd7e947c157dee7c012ea29648058191",
+      "assets/typing-defense/models/keep/high.glb": "6ef7c9b15ecdd69083724b84cfdc2100351963488b51b4ea2fcbddf493fbec94",
+      ".vite/manifest.json": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    }
+  },
+  {
+    "case": "backslash",
+    "options": {
+      "url": "/assets/typing-defense/models/keep\\x.glb",
+      "keys": [
+        "keep"
+      ]
+    },
+    "exit": 1,
+    "stdout": "",
+    "stderr": "Model keep: URL outside models/: /assets/typing-defense/models/keep\\x.glb\n",
+    "dist_unchanged": true,
+    "outside_unchanged": true,
+    "dist_after": {
+      "index.html": "6ca5cab77e702c787b4c14b3d3bf26bad43da606be6eed04ab0b9720120ae081",
+      "keep.txt": "6ca7ea2feefc88ecb5ed6356ed963f47dc9137f82526fdd25d618ea626d0803f",
+      "assets/typing-defense/models/manifest.json": "5486297f31250de0330d2fec457ddea29166be5466950b6f4477bb30ab98b092",
+      "assets/typing-defense/models/discard.glb": "109fa9f54c849bb7c2e983911b0d3d75bd7e947c157dee7c012ea29648058191",
+      "assets/typing-defense/models/keep/high.glb": "6ef7c9b15ecdd69083724b84cfdc2100351963488b51b4ea2fcbddf493fbec94",
+      ".vite/manifest.json": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    }
+  },
+  {
+    "case": "query",
+    "options": {
+      "url": "/assets/typing-defense/models/keep/high.glb?v=hash",
+      "keys": [
+        "keep"
+      ]
+    },
+    "exit": 0,
+    "stdout": "Pruned 2 files, 9 bytes; kept model keys: [\"keep\"]\n",
+    "stderr": "",
+    "dist_unchanged": false,
+    "outside_unchanged": true,
+    "dist_after": {
+      "index.html": "6ca5cab77e702c787b4c14b3d3bf26bad43da606be6eed04ab0b9720120ae081",
+      "keep.txt": "6ca7ea2feefc88ecb5ed6356ed963f47dc9137f82526fdd25d618ea626d0803f",
+      "assets/typing-defense/models/manifest.json": "219c787d0cdf2641bb7a39982a21b78dd5ba3f23de39215fdad43c02da152ed6",
+      "assets/typing-defense/models/keep/high.glb": "6ef7c9b15ecdd69083724b84cfdc2100351963488b51b4ea2fcbddf493fbec94"
+    }
+  },
+  {
+    "case": "fragment",
+    "options": {
+      "url": "/assets/typing-defense/models/keep/high.glb#hash",
+      "keys": [
+        "keep"
+      ]
+    },
+    "exit": 0,
+    "stdout": "Pruned 2 files, 9 bytes; kept model keys: [\"keep\"]\n",
+    "stderr": "",
+    "dist_unchanged": false,
+    "outside_unchanged": true,
+    "dist_after": {
+      "index.html": "6ca5cab77e702c787b4c14b3d3bf26bad43da606be6eed04ab0b9720120ae081",
+      "keep.txt": "6ca7ea2feefc88ecb5ed6356ed963f47dc9137f82526fdd25d618ea626d0803f",
+      "assets/typing-defense/models/manifest.json": "b803b714595ce05b4a382c272b39910dcfd0a67db596f145dafb2f341459237b",
+      "assets/typing-defense/models/keep/high.glb": "6ef7c9b15ecdd69083724b84cfdc2100351963488b51b4ea2fcbddf493fbec94"
+    }
+  },
+  {
+    "case": "absolute",
+    "options": {
+      "url": "https://portal.example/assets/typing-defense/models/keep/high.glb",
+      "keys": [
+        "keep"
+      ]
+    },
+    "exit": 1,
+    "stdout": "",
+    "stderr": "Model keep: URL outside models/: https://portal.example/assets/typing-defense/models/keep/high.glb\n",
+    "dist_unchanged": true,
+    "outside_unchanged": true,
+    "dist_after": {
+      "index.html": "6ca5cab77e702c787b4c14b3d3bf26bad43da606be6eed04ab0b9720120ae081",
+      "keep.txt": "6ca7ea2feefc88ecb5ed6356ed963f47dc9137f82526fdd25d618ea626d0803f",
+      "assets/typing-defense/models/manifest.json": "2281d0438f1c83c67b23acc42edb9bdb81d7b95f1492193ec1b569aec7ca2e26",
+      "assets/typing-defense/models/discard.glb": "109fa9f54c849bb7c2e983911b0d3d75bd7e947c157dee7c012ea29648058191",
+      "assets/typing-defense/models/keep/high.glb": "6ef7c9b15ecdd69083724b84cfdc2100351963488b51b4ea2fcbddf493fbec94",
+      ".vite/manifest.json": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    }
+  },
+  {
+    "case": "double-encoding",
+    "options": {
+      "url": "/assets/typing-defense/models/%252e%252e/escape.glb",
+      "keys": [
+        "keep"
+      ]
+    },
+    "exit": 1,
+    "stdout": "",
+    "stderr": "Model keep: URL outside models/: /assets/typing-defense/models/%252e%252e/escape.glb\n",
+    "dist_unchanged": true,
+    "outside_unchanged": true,
+    "dist_after": {
+      "index.html": "6ca5cab77e702c787b4c14b3d3bf26bad43da606be6eed04ab0b9720120ae081",
+      "keep.txt": "6ca7ea2feefc88ecb5ed6356ed963f47dc9137f82526fdd25d618ea626d0803f",
+      "assets/typing-defense/models/manifest.json": "e3adf8488316295b6ee10f88afeb5d82e30543c7bbc78d5e8f7475f3418a8d47",
+      "assets/typing-defense/models/discard.glb": "109fa9f54c849bb7c2e983911b0d3d75bd7e947c157dee7c012ea29648058191",
+      "assets/typing-defense/models/keep/high.glb": "6ef7c9b15ecdd69083724b84cfdc2100351963488b51b4ea2fcbddf493fbec94",
+      ".vite/manifest.json": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    }
+  },
+  {
+    "case": "duplicate-keys",
+    "options": {
+      "keys": [
+        "keep",
+        "keep"
+      ]
+    },
+    "exit": 0,
+    "stdout": "Pruned 2 files, 9 bytes; kept model keys: [\"keep\"]\n",
+    "stderr": "",
+    "dist_unchanged": false,
+    "outside_unchanged": true,
+    "dist_after": {
+      "index.html": "6ca5cab77e702c787b4c14b3d3bf26bad43da606be6eed04ab0b9720120ae081",
+      "keep.txt": "6ca7ea2feefc88ecb5ed6356ed963f47dc9137f82526fdd25d618ea626d0803f",
+      "assets/typing-defense/models/manifest.json": "219c787d0cdf2641bb7a39982a21b78dd5ba3f23de39215fdad43c02da152ed6",
+      "assets/typing-defense/models/keep/high.glb": "6ef7c9b15ecdd69083724b84cfdc2100351963488b51b4ea2fcbddf493fbec94"
+    }
+  },
+  {
+    "case": "non-string",
+    "options": {
+      "keys": [
+        "keep",
+        42
+      ]
+    },
+    "exit": 1,
+    "stdout": "",
+    "stderr": "deploy-models.json must contain a models array of keys\n",
+    "dist_unchanged": true,
+    "outside_unchanged": true,
+    "dist_after": {
+      "index.html": "6ca5cab77e702c787b4c14b3d3bf26bad43da606be6eed04ab0b9720120ae081",
+      "keep.txt": "6ca7ea2feefc88ecb5ed6356ed963f47dc9137f82526fdd25d618ea626d0803f",
+      "assets/typing-defense/models/manifest.json": "75f1829d6383d71bf657fcdd1a8dbbd031f12c3ff1f2b7a15f4c059e606cb465",
+      "assets/typing-defense/models/discard.glb": "109fa9f54c849bb7c2e983911b0d3d75bd7e947c157dee7c012ea29648058191",
+      "assets/typing-defense/models/keep/high.glb": "6ef7c9b15ecdd69083724b84cfdc2100351963488b51b4ea2fcbddf493fbec94",
+      ".vite/manifest.json": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    }
+  },
+  {
+    "case": "missing-models-array",
+    "options": {
+      "list": {}
+    },
+    "exit": 1,
+    "stdout": "",
+    "stderr": "deploy-models.json must contain a models array of keys\n",
+    "dist_unchanged": true,
+    "outside_unchanged": true,
+    "dist_after": {
+      "index.html": "6ca5cab77e702c787b4c14b3d3bf26bad43da606be6eed04ab0b9720120ae081",
+      "keep.txt": "6ca7ea2feefc88ecb5ed6356ed963f47dc9137f82526fdd25d618ea626d0803f",
+      "assets/typing-defense/models/manifest.json": "75f1829d6383d71bf657fcdd1a8dbbd031f12c3ff1f2b7a15f4c059e606cb465",
+      "assets/typing-defense/models/discard.glb": "109fa9f54c849bb7c2e983911b0d3d75bd7e947c157dee7c012ea29648058191",
+      "assets/typing-defense/models/keep/high.glb": "6ef7c9b15ecdd69083724b84cfdc2100351963488b51b4ea2fcbddf493fbec94",
+      ".vite/manifest.json": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    }
+  },
+  {
+    "case": "manifest-no-models",
+    "options": {
+      "manifest": {},
+      "keys": [
+        "keep"
+      ]
+    },
+    "exit": 1,
+    "stdout": "",
+    "stderr": "Unknown model key: keep\n",
+    "dist_unchanged": true,
+    "outside_unchanged": true,
+    "dist_after": {
+      "index.html": "6ca5cab77e702c787b4c14b3d3bf26bad43da606be6eed04ab0b9720120ae081",
+      "keep.txt": "6ca7ea2feefc88ecb5ed6356ed963f47dc9137f82526fdd25d618ea626d0803f",
+      "assets/typing-defense/models/manifest.json": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+      "assets/typing-defense/models/discard.glb": "109fa9f54c849bb7c2e983911b0d3d75bd7e947c157dee7c012ea29648058191",
+      "assets/typing-defense/models/keep/high.glb": "6ef7c9b15ecdd69083724b84cfdc2100351963488b51b4ea2fcbddf493fbec94",
+      ".vite/manifest.json": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    }
+  },
+  {
+    "case": "list-relative-script",
+    "options": {
+      "keys": [
+        "keep"
+      ]
+    },
+    "exit": 0,
+    "stdout": "Pruned 2 files, 9 bytes; kept model keys: [\"keep\"]\n",
+    "stderr": "",
+    "dist_unchanged": false,
+    "outside_unchanged": true,
+    "dist_after": {
+      "index.html": "6ca5cab77e702c787b4c14b3d3bf26bad43da606be6eed04ab0b9720120ae081",
+      "keep.txt": "6ca7ea2feefc88ecb5ed6356ed963f47dc9137f82526fdd25d618ea626d0803f",
+      "assets/typing-defense/models/manifest.json": "219c787d0cdf2641bb7a39982a21b78dd5ba3f23de39215fdad43c02da152ed6",
+      "assets/typing-defense/models/keep/high.glb": "6ef7c9b15ecdd69083724b84cfdc2100351963488b51b4ea2fcbddf493fbec94"
+    }
+  }
+]

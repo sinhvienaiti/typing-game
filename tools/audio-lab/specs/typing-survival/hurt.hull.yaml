@@ -1,0 +1,198 @@
+# Thẻ spec âm thanh (AUDIO_PIPELINE §5.1 bước 1). Sinh bởi `pnpm audio:specs generate`; kiểm bằng `pnpm audio:specs validate`.
+# Sửa tay: thêm `manual: true` vào mục đã sửa, hoặc ghi đường dẫn (vd. duration.target_ms) vào manual_fields.
+# status, references, prompt.variants, notes luôn được giữ khi sinh lại. Comment YAML thì không: ghi chú để ở notes.
+schema: 1
+id: hurt.hull
+game: typing-survival
+status: draft
+manual_fields: [purpose, prompt.text, critic.intent]
+when: Đạn lính trúng tàu
+purpose: 'Tiếng thép bị đập mạnh: keng to có thân, ngân ngắn, rung trầm; vang hành lang thép'
+category: hit-heavy
+family: trung
+source_class: impact
+playback:
+  mode: one-shot
+  channels: mono
+  channels_basis: 'THEME_SOUND_LIST §2: mono (trừ nhạc và end.*)'
+  bus: alerts
+  priority: null
+  min_gap_ms: null
+  limit_group: null
+  caps: {}
+  format: OGG Vorbis 48 kHz trong game; gốc WAV 48 kHz (§4.3.1, §11)
+duration:
+  target_ms: 400
+  tolerance_pct: 20
+  tolerance_ms: null
+  min_ms: 320
+  max_ms: 480
+  basis: Prompt trong docs/audio/THEME_SOUND_LIST.md
+  category_range_ms: [120, 600]
+  music: null
+onset:
+  class: impact
+  rise_max_ms: 10
+  lead_silence_max_ms: 5
+  basis: 'AUDIO_PIPELINE §4.3.1 (thời gian lên, im lặng ở đầu); THEME_SOUND_LIST §2: cắt im lặng đầu file, tiếng phải bắt đầu ngay, dưới 5 ms'
+variants:
+  target: 3
+  min: 3
+  max: 6
+  basis: AUDIO_PIPELINE §4.3.3 (Trúng vừa, nặng)
+randomisation:
+  group: hit-heavy
+  pitch_cents: 80
+  gain_db: 1
+  rules: [Hạ tiếng trúng nhỏ 3–6 dB trong 150 ms]
+  current_code: Tổng hợp trong mã; khi có file, SceneAudio của kit đổi ±5 % tốc độ phát cho mọi âm (§5.3)
+  basis: AUDIO_PIPELINE §5.3 (mã cần cho mỗi nhóm giá trị riêng, §6.3)
+frequency_role:
+  bands:
+    - band: body
+      range_hz: [120, 800]
+      role: Thân súng, thân tiếng trúng
+    - band: sub
+      range_hz: [20, 120]
+      role: Sub súng, sub dùng chung hit.sub
+  voice_band: onset-only
+  voice_band_text: Chỉ đầu tiếng rất ngắn ở 1–4 kHz; không ngân ở dải giọng đọc (§6.4)
+  spectrum: Tiếng nặng có sub 40–90 Hz, dài không quá 150 ms
+  basis: AUDIO_PIPELINE §6.4, AUDIO_PIPELINE §4.3.3
+loudness:
+  file:
+    metric: peak-dbtp
+    target: -1
+    basis: 'THEME_SOUND_LIST §2: đỉnh −1 dBFS'
+  proposal:
+    metric: lufs-m-max
+    target: -20
+    pad_s: 0.4
+    true_peak_max_dbtp: -1
+    basis: 'AUDIO_PIPELINE §4.3.3, §5.1 bước 4: đề xuất chuẩn hóa mọi âm ngắn về một mức chung; tài liệu game đang ghi chuẩn hóa đỉnh'
+  bus: alerts
+  bus_gain: 0.8
+  bus_gain_db: -1.94
+  gain_db: 0
+  gain_basis: 'Mã không có mức riêng cho từng id: voice() nối thẳng vào bus, mức nằm trong mã tổng hợp. File phát ở 0 dB vào bus'
+  relative_db: -1.94
+  pronunciation_duck_db: -1.94
+  mix_target:
+    metric: lufs-m-max
+    range: [-16, -14]
+    text: 'Vừa: −19 đến −17. Nặng: −16 đến −14'
+    weight: heavy
+    basis: AUDIO_PIPELINE §4.3.3 (mức trong bản trộn, bài A và B)
+prompt:
+  text: 'Heavy blow on a ship''s steel hull: a loud clang with a dense body, a short ring and a low rumble, steel corridor echo, 400 ms.'
+  suffix: null
+  style_root: industrial, steel, close, punchy
+  sweetener: tia điện và thép ngân
+  variants:
+    - 'A: TrackType: SFX, heavy blow on a steel hull, loud clang with a dense metal body, short ring, low rumble, echo in a steel corridor, industrial'
+    - 'B: Large projectile smashing into a ship''s armored wall, hard bang and resonant clang, shuddering steel, metallic hall reverberation'
+    - 'C: TrackType: SFX, metal impact, massive strike on a bulkhead, crisp crack, ringing body, low shake, short steel room tail'
+    - 'D: Steel plating hit by an energy blast, loud metallic slam, vibrating ring, rumble fading down a corridor'
+  basis: docs/audio/THEME_SOUND_LIST.md; gốc prompt theo AUDIO_PIPELINE §5.2 (chốt sau bảng phong cách)
+pitches: null
+parts: null
+layer_plan: null
+references: []
+source_plan:
+  now: [cc0-layer, synth]
+  later: [model-later]
+  ranked:
+    - rank: 1
+      kinds: [cc0-layer, model-later]
+      detail: 'Ghép lớp: lớp đầu từ Kenney Impact (CC0), thân và đuôi từ Stable Audio 3'
+    - rank: 2
+      kinds: [model-later]
+      detail: Stable Audio 3 nguyên khối, tạo lại thân hoặc đuôi bằng inpaint
+    - rank: 3
+      kinds: [synth]
+      detail: Tổng hợp
+  needs_now: []
+  needs_later: [buoc-0]
+  note: 'Khi chưa có Stable Audio 3: lớp đầu Kenney Impact + thân tổng hợp (§10.1)'
+  batch1: null
+  style_board: false
+  sa3_trial: false
+  basis: AUDIO_PIPELINE §3.2 (nguồn theo loại âm), §10.1 (khi chưa có Stable Audio 3)
+licence:
+  allowed: [CC0-1.0, project-code]
+  conditional:
+    - licence: CC0-1.0 (Freesound, người tải lên từ chối AI)
+      condition: Chỉ ghép tay, không vào bước AI nào, không vào LoRA (§10.2)
+    - licence: Stability-Community-2024
+      condition: 'Bước 0: đăng ký Community License, chấp nhận AUP và điều khoản Gemma; có licences/stability-registration.txt (§10.1)'
+    - licence: MIT (ACE-Step 1.5)
+      condition: Ghim phiên bản; kiểm giai điệu trước khi bán
+    - licence: Apache-2.0 (MOSS-SoundEffect)
+      condition: Chỉ khi bước 0 trả lời không
+  forbidden:
+    - non-commercial-weights
+    - freesound-cc-by-nc
+    - freesound-sampling-plus
+    - bbc-sound-effects
+    - pixabay
+    - sound-from-other-games
+    - sonniss-lot-1-2-and-any-ai-step
+    - elevenlabs-or-suno-free-tier-release
+  attribution_required: false
+  notes:
+    - Kenney, VCSL, VSCO-2-CE, Freesound CC0. Lưu LICENSE-<ngày>.txt kèm thư viện
+    - 'Chưa cài: chờ bước 0 của chủ dự án'
+    - Mã của dự án. pedalboard (GPL-3.0) chỉ import trên máy, không chép vào repo (§10.9)
+  record: art-src/audio/SOURCES.json và licences.jsonl (§10.5, §10.6); pnpm audio:licence-check chặn khi thiếu
+  basis: AUDIO_PIPELINE §10.2
+constraints:
+  - 'Âm industrial: thép, súng nặng, điện, kim loại vỡ; khác tiếng laser và nhạc điện tử vũ trụ của Space Typing (THEME_SOUND_LIST)'
+board:
+  contexts: [trong-tran, lap-20]
+  contexts_before_phase3: [lap-20]
+  dense: true
+  repeat_interval_ms: 600
+  repeat_basis: Đề xuất theo bot 40 WPM (§6.1); chỉnh khi có nhịp thật của game
+  loudness_match: lufs-m
+  basis: AUDIO_PIPELINE §7
+critic:
+  group: hit_heavy
+  dirty: false
+  weights_batch1:
+    l2: 0.6
+    l3: 0.3
+    l4: 0.1
+    l5: 0.0
+  loop_eval:
+    enabled: false
+    length_s: null
+    plays: null
+    interval_ms: null
+  ast:
+    expected: []
+    forbid: []
+  loop: false
+  stereo: false
+  pitched: false
+  attack_max_ms: 10
+  head_max_ms: 5
+  rate_hz: 1.667
+  bpm: null
+  bars: null
+  beats_per_bar: null
+  intent: 'Heavy blow on a ship''s steel hull: a loud clang with a dense body, a short ring and a low rumble, steel corridor echo, 400 ms.'
+  refs: []
+  basis: AUDIO_PIPELINE §4.4, §4.5 (L4 chỉ gắn cờ, trọng số tối đa 0,1)
+blocked_by: []
+origin:
+  code:
+    file: src/audio/theme-audio.ts
+    present: true
+    asset_stem: null
+    synth_in_code: true
+  sound_list:
+    file: docs/audio/THEME_SOUND_LIST.md
+    present: true
+    section: 6. Tuyến bị đánh, cảnh báo, kết trận
+  plan: []
+notes: 'Q6 (24/10): bỏ ''low thud''; đập (phát), keng có thân (thân), rung và vang hành lang (đuôi).'

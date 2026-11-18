@@ -1,0 +1,6 @@
+$ grep -nF "tower card words" games/typing-defense/src/ui/sheets.ts
+42:  if (S.stage < BOSS.lull) return !tower ? "Build Archer Towers by roads: Fort needs help." : s[STAT.callWords] === 0 ? "Type tower card words (Power) as foes approach." : "Type Power as foes approach towers" + (locked(w, "cannon") ? "; add towers by roads." : "; Cannon Tower's Word Shot near Draconis burns foes.");
+$ grep -nF "Blight Horde" games/dragon-hold/index.html
+6:    <meta name="description" content="Dragonhold: type English words to unleash dragon fire and defend the Dragon Platform from the Blight Horde." />
+$ grep -nF "Black Hole Horde" games/typing-survival/src/app/main.ts
+282:        lead: "The Black Hole Horde is coming. Type words to reload your guns; they fire on their own. Flawless words pierce armor and crit.",
