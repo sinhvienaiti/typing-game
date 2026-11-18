@@ -54,8 +54,8 @@ Mỗi làn ghi rõ ai làm (Codex hay agent Claude) ngay ở tiêu đề; khi b�
 - [x] 436j | docs/codex-queue/436j-tt-heroine-base-v6-allure.md | high
 - [x] 436k | docs/codex-queue/436k-tt-heroine-hair-card-atlas.md | high
 - [x] 452 | docs/codex-queue/452-tt-star-constellation.md | high
-- [~] 452b | docs/codex-queue/452b-tt-star-meteor.md | high
-- [ ] 452c | docs/codex-queue/452c-tt-star-diamond.md | high
+- [x] 452b | docs/codex-queue/452b-tt-star-meteor.md | high
+- [x] 452c | docs/codex-queue/452c-tt-star-diamond.md | high
 
 ## Làn A (game) · Codex
 - [x] 394 | docs/codex-queue/394-tt-typing-ui-layout-build.md | ultra
@@ -124,7 +124,10 @@ Mỗi làn ghi rõ ai làm (Codex hay agent Claude) ngay ở tiêu đề; khi b�
 - [x] 447 | docs/codex-queue/447-tt-void-blackhole-lab.md | ultra (full-access, chạy tay)
 - [x] 447b | docs/codex-queue/447b-tt-void-blackhole-3d-core.md | ultra (full-access, chạy tay)
 - [x] 453 | docs/codex-queue/453-tt-light-ult-art-swap.md | ultra (full-access, chạy tay)
-- [~] 453b | docs/codex-queue/453b-tt-light-mirror-size.md | ultra (full-access, chạy tay)
+- [x] 453b | docs/codex-queue/453b-tt-light-mirror-size.md | ultra (full-access, chạy tay)
+- [x] 453c | docs/codex-queue/453c-tt-light-mirror-smaller.md | ultra (full-access, chạy tay)
+- [x] 454 | docs/codex-queue/454-tt-star-ult-lab-blockin.md | ultra (full-access, chạy tay sau 453c)
+- [x] 434l | docs/codex-queue/434l-tt-thunder-cloud-veins.md | ultra (full-access, chạy tay)
 
 ## Cần Claude viết phiếu (chưa vào hàng)
 - Codex còn 14 % (16/11 22:30): chỉ phiếu ảnh. 428 (cắt máu -v4) giữ [h] đến khi hạn mức reset; khi đó đổi [h] → [ ].

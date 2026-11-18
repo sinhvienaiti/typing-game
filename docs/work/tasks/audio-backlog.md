@@ -58,3 +58,17 @@ Ký hiệu: Nguồn = tệp đã đọc. "Chọn" = đã chọn bản và chuẩ
 - **Việc Firefly hôm nay:** BOARD ghi giới hạn ≈ 70 bản/ngày và bộ chạy chưa sửa cho giao diện mới; không kiểm trạng thái tài khoản.
 - **Tiếng hô cũ so với mới:** `SOUND_AUDIT` nói thiếu k1/dash/ult; `SOUND_IDS` vẫn chưa có chúng, nhưng có thể được nối ở `skills-main.ts` (chưa đọc kỹ).
 - **Thiên Kiếp và mục `world`:** coi là "chưa nối" vì không thấy trong `SPRINT_TAKES` hoặc `FIREFLY_LEVELS`; chưa tìm chỗ gọi khác ngoài `sound.ts`, `sound-tiers.ts`, `showcase.ts`, `clip-skills.ts`.
+
+
+## 7. Tinh Tú — phiếu 454 (18/11/2026)
+
+| Sự kiện | Nguyên liệu Firefly đang nối trong lab | Nhịp / nhóm | Trạng thái |
+|---|---|---|---|
+| `star-ult.gather` | `tt-sfx-star-charge-long`, take 1–4 | 0,00 s; impact, bus world; tụ lực 1,2 s | Đã đo ebur128 và nối; chưa nghe/chấm mù |
+| `star-ult.release` | `tt-sfx-star-cast`, take 1–4 | 1,10 s; impact, bus world; phát ở tay | Đã đo ebur128 và nối; chưa nghe/chấm mù |
+| `star-ult.draw` | `tt-sfx-el-star-seal`, take 1–4 | 1,20 s; bus world; chòm sao hiện dần | Đã đo ebur128 và nối; chưa nghe/chấm mù |
+| `star-ult.node` | `tt-sfx-twin-glint-shimmer`, take 1–4 | 7 nút cách 0,16 s; cao độ 0,94→1,10; impact | Đã đo ebur128 và nối; chưa nghe/chấm mù |
+| `star-ult.launch` | `tt-sfx-el-star-comet`, take 1–4 | 2,60 + 0,38·k s (k=0..5), viên 7 lúc 5,40 s; impact | Đã đo ebur128 và nối; chưa nghe/chấm mù |
+| `star-ult.hit` | `tt-sfx-star-hit-light`, take 1–4 | 0,42 s sau khi rời nút; 6 cú cách nhau 0,38 s, lớn hơn cửa sổ gom 0,05 s; impact | Đã đo ebur128 và nối; chưa nghe/chấm mù |
+| `star-ult.climax` | `tt-sfx-star-big-burst` + `tt-sfx-star-hit-heavy`, mỗi lớp take 1–4 | 5,82 s; hai nguyên liệu cùng khung, big, bus world | Đã đo ebur128 và nối; chưa nghe/chấm mù |
+| `star-ult.tail` | `tt-sfx-star-tail`, take 1–4 | 6,30 s; bus world, send 0,15 | Đã đo ebur128 và nối; chưa nghe/chấm mù |

@@ -160,3 +160,13 @@ Nguồn: ảnh mặt Firefly chủ dự án chọn (`art-src/heroine/face/head-f
 | `tt-head-v8` (task `a97ea184`) | `models3d/v8/src/head-{front,left}.png` | 40.000 | 490 → 450 (40) | `models3d/v8/out/tripo-out/tt-head-v8-a97ea184/model.glb`; ghép thân v6B (cùng thông số ghép v6B): `models3d/v8/heroine-v8.assembled.glb` |
 
 Ảnh: `typing-game-review/owner-review/2026-11-18/tu-tien/heroine-head-firefly-tripo/`. Chờ chủ dự án xem.
+
+### Tu Tiên, nữ chính v8: thử Smart Mesh trên đầu (18/11/2026)
+
+Chủ dự án duyệt một lần thử (35 credit). Dry-run (`tripo make a97ea184… --then decimate --dry-run`) hợp lệ, 0 lỗi. Lệnh: `tripo mesh decimate a97ea184… --model v3.0 --face-limit 20000 --smart-uv` (bake mặc định bật).
+
+| Việc | Nguồn | face_limit | Credit | Kết quả |
+|---|---|---|---|---|
+| `tt-head-v8-smartmesh` (task `352ede3a`) | task `a97ea184` (đầu v8, 39.386 tam giác) | 20.000 | 450 → 415 (35) | 19.288 tam giác; `models3d/v8/smartmesh/tripo-out/tt-head-v8-smartmesh-352ede3a/model.glb` |
+
+Kết quả: lưới đều và sạch hơn, nhưng texture nướng lại làm mặt mất chi tiết (da loang vệt, đường nối, môi méo và mất bóng, một lọn tóc dính màu da). Không dùng cho đầu. Ảnh: `typing-game-review/owner-review/2026-11-18/tu-tien/heroine-v8-smartmesh/`.

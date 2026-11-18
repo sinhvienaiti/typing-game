@@ -170,3 +170,6 @@
 | 18/11/2026 | Tripo | Owner duyệt bảo kính Nhật Luân v2 (451d) và thân nền v5B v2 (436i) để dựng 3D | owner |
 | 18/11/2026 | Nữ chính v6 | Chọn v6B (436j). Không dùng công cụ trả phí; chỉ Tripo (credit sẵn), Firefly, Blender | owner |
 | 18/11/2026 | Chòm sao Tinh Tú | A tinh vân chàm (452) | owner |
+| 18/11/2026 | Bảo kính Ánh Sáng | Thu nhỏ ~60% (453c) | owner theo đề xuất |
+| 18/11/2026 | Sao băng Tinh Tú | Đầu A 4 cánh + đuôi A dải liền (452b) | owner theo đề xuất |
+| 18/11/2026 | Ánh kim cương Tinh Tú | B khúc xạ (452c) | owner theo đề xuất |
