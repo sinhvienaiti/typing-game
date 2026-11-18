@@ -1,0 +1,11 @@
+## git diff --check (tracked files)
+exit: 0
+## git diff --no-index --check /dev/null shared/learning/lookup.test.mjs
+exit: 1
+## git diff --no-index --check /dev/null docs/changelog/2026-10-30-learning-sample-types.md
+exit: 1
+## git diff --no-index --check /dev/null docs/codex-queue/234/mutate.mjs
+exit: 1
+## task.diff whitespace
+matches: 0
+note: --no-index exits 1 when files differ and no whitespace issue; a whitespace error gives exit 3 with messages. 0 messages above.

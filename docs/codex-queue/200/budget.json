@@ -1,0 +1,48 @@
+{
+  "unit": "decimal bytes (1000 B = 1 kB)",
+  "budgetBytes": 85000,
+  "baselineCommit": "2a1f61d",
+  "baselineMethod": "git archive 2a1f61d, extracted under this worktree tmp; identical installed dependencies via node_modules symlink",
+  "baselineBuild": {
+    "command": "node node_modules/typescript/bin/tsc --noEmit && node node_modules/vite/bin/vite.js build && node scripts/bundle-budget.mjs",
+    "exit": 0,
+    "note": "pnpm build in the archive refused the shared node_modules symlink during its automatic dependency check. Ran the identical package build steps directly, without installing dependencies or using the network."
+  },
+  "before": {
+    "root": "/Users/toandx/htdocs/typing-game/games/.wt-td-ui/tmp/200-baseline-2a1f61d",
+    "startBytes": 81583,
+    "startKB": 81.583,
+    "headroomBytes": 3417,
+    "withinBudget": true,
+    "files": [
+      {
+        "file": "assets/index-Bp8lva72.js",
+        "gzipBytes": 79824
+      },
+      {
+        "file": "assets/title-Bq34DST6.js",
+        "gzipBytes": 1759
+      }
+    ],
+    "directRunBytes": 83041
+  },
+  "after": {
+    "root": "/Users/toandx/htdocs/typing-game/games/.wt-td-ui",
+    "startBytes": 82314,
+    "startKB": 82.314,
+    "headroomBytes": 2686,
+    "withinBudget": true,
+    "files": [
+      {
+        "file": "assets/index-BYxZIrkO.js",
+        "gzipBytes": 80537
+      },
+      {
+        "file": "assets/title-9SnDozbO.js",
+        "gzipBytes": 1777
+      }
+    ],
+    "directRunBytes": 83754
+  },
+  "deltaBytes": 731
+}

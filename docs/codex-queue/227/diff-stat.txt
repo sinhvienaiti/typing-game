@@ -1,0 +1,37 @@
+GIT_OPTIONAL_LOCKS=0 git diff --stat
+exit=0
+ docs/MEDIA_STORAGE.md                      |   2 +
+ docs/codex-queue/118-report.md             | 207 ++++++++---
+ docs/codex-queue/119-report.md             | 226 +++++++++---
+ docs/codex-queue/120-report.md             | 214 ++++++++----
+ docs/games/THIRD_PARTY.md                  |  49 +++
+ docs/games/dragon-lane/06-other-systems.md |   3 +-
+ games/monkeytype                           |   2 +-
+ infra/nginx/typing-game.local.dev.conf     |  44 +--
+ infra/nginx/typing-game.local.play.conf    |  44 +--
+ media/media.config.json                    |   8 +
+ portal/public/games.json                   |  33 +-
+ portal/src/learning/bridge.ts              |  56 ++-
+ portal/src/main.ts                         |  66 +++-
+ portal/src/styles.css                      |  10 +
+ scripts/bootstrap.sh                       |  18 +-
+ scripts/game-dir.sh                        |   6 +-
+ scripts/media/lib/plan.mjs                 |   4 +-
+ scripts/media/lib/sets.mjs                 |  12 +-
+ scripts/validate-play-mode.mjs             | 543 ++++++++++++++++++-----------
+ shared/game-kit/feedback/typing-fx/css.ts  |   2 +-
+ shared/game-kit/feedback/typing-fx/draw.ts |  12 +-
+ shared/game-kit/ui/quick-settings/css.ts   |   4 +-
+ shared/learning/README.md                  |  54 +++
+ shared/learning/core.d.mts                 |   9 +
+ shared/learning/core.mjs                   |  11 +
+ shared/learning/message-contract.d.mts     |  25 +-
+ shared/learning/message-contract.mjs       |  13 +-
+ shared/learning/profile-backup.mjs         |   3 +
+ shared/learning/query.d.mts                |  18 +-
+ shared/learning/query.mjs                  |  85 ++++-
+ tools/audio-lab/build/licence_check.py     |   7 +
+ tools/audio-lab/build/policy.py            |  11 +
+ tools/audio-lab/common/launch.py           |   1 +
+ tools/audio-lab/pytest.ini                 |   2 +-
+ 34 files changed, 1277 insertions(+), 527 deletions(-)

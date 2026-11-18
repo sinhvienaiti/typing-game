@@ -1,0 +1,463 @@
+diff --git a/scripts/visual/scenarios/survival-s1-loadout.mjs b/scripts/visual/scenarios/survival-s1-loadout.mjs
+index cd5a676..326b6fe 100644
+--- a/scripts/visual/scenarios/survival-s1-loadout.mjs
++++ b/scripts/visual/scenarios/survival-s1-loadout.mjs
+@@ -26,6 +26,7 @@ export default async function (page) {
+     await page.sleep(250);
+   }
+   await page.eval("localStorage.removeItem('survival.stages'); true");
++  await page.eval("localStorage.setItem('survival.guide', JSON.stringify({started:true,hint:true})); true");
+   const screen = () => page.eval(sv("return { mode: t.mode(), screen: document.querySelector('.sv-overlay').dataset.screen, journey: t.journey(), title: document.querySelector('.sv-overlay h1')?.textContent ?? '', items: [...document.querySelectorAll('.sv-overlay .sv-item b')].map((n) => n.textContent) };"));
+   const log = [];
+   log.push(["title", await screen()]);
+diff --git a/src/app/journey.ts b/src/app/journey.ts
+index 0395806..f039322 100644
+--- a/src/app/journey.ts
++++ b/src/app/journey.ts
+@@ -16,6 +16,7 @@ import type { Mode } from "../content/balance";
+ import type { KeyAction } from "./input";
+ import { Menu, type MenuItem } from "./menu";
+ import type { TextStore } from "./skill";
++import { loadGuide, markStarted, RECOMMENDED } from "./guide";
+ 
+ export const NEXT_KEY = "survival.next";
+ export const STAGES_KEY = "survival.stages";
+@@ -101,7 +102,7 @@ export type JourneyHost = {
+   back(): void;
+ };
+ 
+-export type CardView = { readonly gun: GunId; readonly key: string; readonly name: string; readonly title: string; readonly magazine: string; readonly range: string; readonly heavy: boolean; readonly good: string; readonly poor: string; readonly picked: number; readonly level: number; readonly on: boolean };
++export type CardView = { readonly recommended: boolean; readonly gun: GunId; readonly key: string; readonly name: string; readonly title: string; readonly magazine: string; readonly range: string; readonly heavy: boolean; readonly good: string; readonly poor: string; readonly picked: number; readonly level: number; readonly on: boolean };
+ export type ThreatView = { readonly label: string; readonly weight: number; readonly counters: string; readonly covered: boolean };
+ 
+ /** The journey's state machine: which screen, the selected stage, the loadout's cursor and picks. */
+@@ -111,6 +112,7 @@ export class Journey {
+   stage: Stage = CHAPTER_1[0]!;
+   cursor = 0;
+   picked: GunId[] = [];
++  private preselected = false;
+ 
+   constructor(private readonly host: JourneyHost) {}
+ 
+@@ -150,9 +152,19 @@ export class Journey {
+     this.screen = "loadout";
+     this.cursor = 0;
+     this.picked = this.picked.filter((gun) => GUN_IDS.includes(gun)).slice(0, this.stage.kit.bays);
++    const recommended = RECOMMENDED[this.stage.id];
++    if (!this.preselected && !loadGuide(this.host.store).started && this.picked.length === 0 && recommended !== undefined) {
++      this.picked = recommended.slice(0, this.stage.kit.bays);
++      this.cursor = GUN_IDS.length;
++      this.preselected = true;
++    }
+     this.host.draw();
+   }
+ 
++  get showStartNote(): boolean {
++    return this.ready && !loadGuide(this.host.store).started;
++  }
++
+   close(): void {
+     this.screen = null;
+   }
+@@ -162,6 +174,7 @@ export class Journey {
+     return GUN_SPECS.map((spec, gun) => {
+       const order = this.picked.indexOf(gun as GunId);
+       return {
++        recommended: RECOMMENDED[this.stage.id]?.includes(gun as GunId) ?? false,
+         gun: gun as GunId,
+         key: spec.key,
+         name: spec.name,
+@@ -259,6 +272,7 @@ export class Journey {
+   begin(): void {
+     if (!this.ready) return;
+     this.host.sound("select");
++    markStarted(this.host.store);
+     this.host.start({ stage: this.stage.id, guns: this.picked.slice() });
+   }
+ 
+diff --git a/src/view/hud.ts b/src/view/hud.ts
+index a18f0e9..83aa1a2 100644
+--- a/src/view/hud.ts
++++ b/src/view/hud.ts
+@@ -112,6 +112,7 @@ export class Hud {
+   private bounceAt = -1e9;
+   private streakHot = false;
+   private readonly at = new THREE.Vector3();
++  loads = 0;
+   reduced = false;
+   /** Where layout() put things (CSS px): the stripes' far edge, the red line's glow edge, Xung's reach (z 11.7 m). */
+   readonly placed = { stripes: 0, glow: 0, reach: 0 };
+@@ -217,6 +218,7 @@ export class Hud {
+ 
+   /** A word finished on `slot` (`full`: its bay took no magazine): the line shows it with its meaning, the bay flashes (or its LEDs blink when full). */
+   wordDone(slot: number, index: number, perfect: boolean, full: boolean, now: number): void {
++    if (!full) this.loads += 1;
+     const word = this.words(index);
+     this.strip.finished(word.en, word.vi, this.slots[slot]?.gun ?? 0, full, now);
+     const bay = this.slots[slot];
+@@ -242,7 +244,8 @@ export class Hud {
+     this.bannerUntil = now + 2200;
+   }
+ 
+-  setNotice(value: string): void {
++  setNotice(value: string, kind: "warn" | "hint" = "warn"): void {
++    this.notice.classList.toggle("is-hint", kind === "hint");
+     text(this.notice, value);
+     this.notice.hidden = value === "";
+   }
+diff --git a/src/view/screens-journey.ts b/src/view/screens-journey.ts
+index 5d2615c..15f6940 100644
+--- a/src/view/screens-journey.ts
++++ b/src/view/screens-journey.ts
+@@ -8,6 +8,7 @@
+  * Rèn level the stage gives), the stage's threats with a yellow mark where
+  * the picked guns answer nothing, and the start button.
+  */
++import { START_NOTE } from "../app/guide";
+ import type { Journey } from "../app/journey";
+ import { counterTag, objectiveText } from "../app/journey";
+ import { FOES, KIND } from "../content/foes";
+@@ -90,6 +91,7 @@ export function renderJourney(journey: Journey): string {
+             (card, n) =>
+               '<section class="sv-gun-card sv-' + card.key + (card.on ? " is-on" : "") + (card.picked >= 0 ? " is-picked" : "") + '" data-card="' + n + '">' +
+               '<header><kbd>' + (n + 1) + "</kbd><b>" + escapeHtml(card.name) + "</b>" + (card.picked >= 0 ? '<em>BAY ' + (card.picked + 1) + (card.level > 1 ? " · FORGE " + card.level : "") + "</em>" : "") + "</header>" +
++              (card.recommended ? '<i class="sv-rec">Recommended</i>' : "") +
+               "<small>" + escapeHtml(card.title) + "</small>" +
+               "<p>" + escapeHtml(card.magazine) + " · range " + escapeHtml(card.range) + (card.heavy ? " · words +1 letter" : "") + "</p>" +
+               '<p class="sv-good">Strong: ' + escapeHtml(card.good || "—") + "</p>" +
+@@ -105,6 +107,7 @@ export function renderJourney(journey: Journey): string {
+         // No "fit %" here: the threat score ranked pairs against their measured wins (G3c) the wrong way on stages 2 and 4 (test pass 27/10); the open rows carry ⚠.
+         (journey.ready ? "START" + (threats.some((threat) => !threat.covered) ? " · ⚠ UNCOVERED" : "") : "PICK " + (bays - journey.picked.length) + (bays - journey.picked.length === 1 ? " GUN" : " GUNS")) +
+         "</div>" +
++        (journey.showStartNote ? '<p class="sv-note sv-start-note">' + START_NOTE + "</p>" : "") +
+         hints("<kbd>1</kbd>–<kbd>5</kbd> toggle · <kbd>←</kbd><kbd>→</kbd> move · <kbd>Enter</kbd> select · <kbd>Esc</kbd> briefing") +
+         "</div>"
+       );
+diff --git a/src/view/survival.css b/src/view/survival.css
+index 0859875..902a9fa 100644
+--- a/src/view/survival.css
++++ b/src/view/survival.css
+@@ -58,6 +58,8 @@ html, body { margin: 0; height: 100%; overflow: hidden; background: var(--page);
+ /* An input notice (Vietnamese IME on, fallback words): just above the word line (hud.ts sets its top), big enough to see while typing. */
+ .sv-notice { position: absolute; top: calc(360px * var(--ui)); left: 50%; transform: translateX(-50%); padding: calc(7px * var(--ui)) calc(16px * var(--ui)); border: 2px solid var(--danger); background: var(--notice); box-shadow: 0 0 18px var(--danger-glow); font: 700 calc(20px * var(--ui)) var(--font-battle); white-space: nowrap; color: var(--text); }
+ .sv-notice::before { content: "⌨ "; }
++.sv-notice.is-hint { border-color: var(--volt); background: var(--screen); box-shadow: 0 0 18px var(--volt-glow); color: var(--soft); }
++.sv-notice.is-hint::before { content: none; }
+ 
+ /* The objective's plate (top centre, fixed: only its numbers change). */
+ .sv-goal { align-self: flex-start; padding: calc(7px * var(--ui)) calc(18px * var(--ui)); font: 700 calc(16px * var(--ui)) var(--font-title); letter-spacing: 0.14em; color: var(--led); text-shadow: 0 0 10px var(--led-glow); background-color: var(--screen); }
+@@ -236,6 +238,9 @@ html, body { margin: 0; height: 100%; overflow: hidden; background: var(--page);
+ .sv-cards .sv-gun-card kbd { font: 700 calc(12px * var(--ui)) var(--font-title); padding: 0 5px; border: 1px solid var(--line-strong); color: var(--soft); }
+ /* The bay tag rides the card's top edge: inline it wrapped under long names at 1280 ("Star Mortar · BAY 1 · FORGE 2", layout pass 29/10). */
+ .sv-cards .sv-gun-card em { position: absolute; top: calc(-8px * var(--ui)); right: calc(8px * var(--ui)); white-space: nowrap; font: 700 calc(12px * var(--ui)) var(--font-title); letter-spacing: 0.1em; color: var(--ink); background: var(--gun); padding: 1px 5px; font-style: normal; }
++/* The recommendation and bay tags share the top edge with room between them. */
++.sv-cards .sv-gun-card .sv-rec { position: absolute; top: calc(-8px * var(--ui)); left: calc(8px * var(--ui)); white-space: nowrap; font: 700 calc(10px * var(--ui)) var(--font-title); color: var(--ink); background: var(--typing); padding: 2px 4px; font-style: normal; }
++.sv-loadout .sv-start-note { white-space: nowrap; }
+ .sv-cards .sv-gun-card small { display: block; font: 600 calc(12px * var(--ui)) var(--font-battle); color: var(--muted); }
+ .sv-cards .sv-gun-card p { margin: 5px 0 0 !important; font-size: calc(13px * var(--ui)) !important; line-height: 1.35; color: var(--soft) !important; }
+ .sv-cards .sv-gun-card .sv-good { color: var(--typing) !important; }
+--- a/src/app/main.ts
++++ b/src/app/main.ts
+@@ -31,6 +31,7 @@
+ import { TypeFeel } from "../view/typing-feel";
+ import { warmPrograms } from "../view/warm";
+ import { FrameCosts, bays, devHandleWanted, eventCounts, installDevHandle, numberBoxes, runState, snapshot } from "./dev";
++import { LoadHint, noticeFor } from "./guide";
+ import { Journey, NEXT_KEY, introKey, objectiveText, recordStage, starsOf, takeChoice, type RunChoice } from "./journey";
+ import { adviceText, countedText, profileView, runStats, runWords } from "./results";
+ import { ImeNotice, installAutoPause, installKeys, type KeyAction } from "./input";
+@@ -154,6 +155,7 @@
+ /** The ship and quality the settings screen picked (they take a new page). */
+ const chosen = { pilot, tier };
+ const imeNotice = new ImeNotice();
++const loadHint = new LoadHint(safeLocalStorage);
+ const spoken = new Set<string>();
+ let lastSpeak = -1e9;
+ let clock = 0;
+@@ -632,7 +634,7 @@
+   typing.read(world, now);
+   hud.update(world, combat.killsWithin(now, 3000), now);
+   typing.land(now);
+-  hud.setNotice(imeNotice.on(now) ? "Switch to an English keyboard" : vocab.source === "fallback" ? "Offline word list (server words unavailable)" : "");
++  const notice = noticeFor(imeNotice.on(now), vocab.source === "fallback", loadHint.text(mode, hud.loads)); hud.setNotice(notice.text, notice.kind);
+   // The floor glows red as the press reaches the ship (inside the guns' reach and closing); the music rises with the horde.
+   let near = 0;
+   let shown = 0;
+--- /dev/null
++++ b/src/app/guide.ts
+@@ -0,0 +1,57 @@
++import { GUN, type GunId } from "../content/guns";
++import { loadProgress } from "./journey";
++import type { TextStore } from "./skill";
++
++export const GUIDE_KEY = "survival.guide";
++export const RECOMMENDED: Readonly<Partial<Record<string, readonly GunId[]>>> = { "c1-s1": [GUN.xung, GUN.tia] };
++export const START_NOTE = "Press Enter to start. Guns fire on their own; type words to load them.";
++export const LOAD_HINT = "Type a word on a bay to load its gun";
++type Guide = { started: boolean; hint: boolean };
++
++export function loadGuide(store: TextStore): Guide {
++  if (Object.keys(loadProgress(store).passed).length > 0) return { started: true, hint: true };
++  try {
++    const data: unknown = JSON.parse(store.getItem(GUIDE_KEY) ?? "null");
++    if (data !== null && typeof data === "object" && "started" in data && "hint" in data && typeof data.started === "boolean" && typeof data.hint === "boolean") {
++      return { started: data.started, hint: data.hint };
++    }
++  } catch {
++    // Unavailable storage or a broken record starts over.
++  }
++  return { started: false, hint: false };
++}
++
++function mark(store: TextStore, field: keyof Guide): void {
++  const data = loadGuide(store);
++  data[field] = true;
++  try {
++    store.setItem(GUIDE_KEY, JSON.stringify(data));
++  } catch {
++    // Guidance must not block play when storage is full.
++  }
++}
++
++export const markStarted = (store: TextStore): void => mark(store, "started");
++export const markHintDone = (store: TextStore): void => mark(store, "hint");
++
++/** One page's loading hint, with one persistence attempt after two loads. */
++export class LoadHint {
++  private done: boolean;
++  constructor(private readonly store: TextStore) {
++    this.done = loadGuide(store).hint;
++  }
++
++  text(mode: string, loads: number): string {
++    if (!this.done && loads >= 2) {
++      this.done = true;
++      markHintDone(this.store);
++    }
++    return !this.done && mode === "play" && loads < 2 ? LOAD_HINT : "";
++  }
++}
++
++export function noticeFor(ime: boolean, offline: boolean, hint: string): { text: string; kind: "warn" | "hint" } {
++  if (ime) return { text: "Switch to an English keyboard", kind: "warn" };
++  if (offline) return { text: "Offline word list (server words unavailable)", kind: "warn" };
++  return { text: hint, kind: hint === "" ? "warn" : "hint" };
++}
+--- /dev/null
++++ b/tests/guide.test.ts
+@@ -0,0 +1,118 @@
++import { describe, expect, it, vi } from "vitest";
++import { Journey, STAGES_KEY } from "../src/app/journey";
++import { CHAPTER_1 } from "../src/content/chapter-1";
++import { GUN, GUN_IDS } from "../src/content/guns";
++import type { TextStore } from "../src/app/skill";
++import { renderJourney } from "../src/view/screens-journey";
++
++const KEY = "survival.guide";
++const HINT = "Type a word on a bay to load its gun";
++const NOTE = "Press Enter to start. Guns fire on their own; type words to load them.";
++const guide = () => import("../src/app/guide");
++function storage(record?: unknown) {
++  const data = new Map<string, string>();
++  if (record !== undefined) data.set(KEY, JSON.stringify(record));
++  const store = { getItem: (key: string) => data.get(key) ?? null, setItem: vi.fn((key: string, value: string) => { data.set(key, value); }) };
++  return { data, store };
++}
++function page(store: TextStore = storage().store, index = 0) {
++  const start = vi.fn();
++  const journey = new Journey({ store, mode: () => "balanced", sound: () => {}, draw: () => {}, back: () => {}, start });
++  journey.brief(CHAPTER_1[index]!);
++  return { journey, start };
++}
++
++describe("guide record", () => {
++  it("defaults an empty store", async () => { expect((await guide()).loadGuide(storage().store)).toEqual({ started: false, hint: false }); });
++  it.each(["{", "null", "[]", '{"started":"yes","hint":1}'])("rejects broken record %s", async (raw) => {
++    const { data, store } = storage(); data.set(KEY, raw);
++    expect((await guide()).loadGuide(store)).toEqual({ started: false, hint: false });
++  });
++  it("exempts returning players even with a broken guide", async () => {
++    const { data, store } = storage(); data.set(STAGES_KEY, JSON.stringify({ passed: { "c1-s1": true } })); data.set(KEY, "{");
++    expect((await guide()).loadGuide(store)).toEqual({ started: true, hint: true });
++  });
++  it("merges both marks in either order", async () => {
++    const { loadGuide, markStarted, markHintDone } = await guide();
++    for (const marks of [[markStarted, markHintDone], [markHintDone, markStarted]]) {
++      const { store } = storage(); marks[0]!(store);
++      expect(loadGuide(store)).toEqual({ started: marks[0] === markStarted, hint: marks[0] === markHintDone });
++      marks[1]!(store);
++      expect(loadGuide(store)).toEqual({ started: true, hint: true });
++    }
++  });
++  it.each([false, "throw"])("tolerates a failed write: %s", async (failure) => {
++    const { markStarted, markHintDone } = await guide();
++    const store = { getItem: () => null, setItem: () => { if (failure === "throw") throw Error("full"); return false; } };
++    expect(() => { markStarted(store); markHintDone(store); }).not.toThrow();
++  });
++});
++
++describe("first loadout", () => {
++  it("preselects the ordered pair, ready with START focused; Enter starts", () => {
++    const { journey, start } = page(); journey.loadout();
++    expect(journey.picked).toEqual([GUN.xung, GUN.tia]); expect(journey.ready).toBe(true); expect(journey.cursor).toBe(GUN_IDS.length);
++    journey.act("enter"); expect(start).toHaveBeenCalledWith({ stage: "c1-s1", guns: [GUN.xung, GUN.tia] });
++  });
++  it("does not preselect after starting", () => { const { journey } = page(storage({ started: true, hint: false }).store); journey.loadout(); expect(journey.picked).toEqual([]); });
++  it("does not preselect stage 2", () => { const { journey } = page(undefined, 1); journey.loadout(); expect(journey.picked).toEqual([]); });
++  it("keeps existing picks and order on return", () => {
++    const { journey } = page(); journey.picked = [GUN.tia, GUN.xung]; journey.loadout(); journey.close(); journey.loadout();
++    expect(journey.picked).toEqual([GUN.tia, GUN.xung]);
++  });
++  it("does not refill after deselecting all, Escape and return", () => {
++    const { journey } = page(); journey.loadout(); journey.pick(1); journey.pick(2); journey.act("pause"); journey.loadout(); expect(journey.picked).toEqual([]);
++  });
++  it("marks started before the host starts", async () => {
++    const { store } = storage(); const { loadGuide } = await guide();
++    const journey = new Journey({ store, mode: () => "balanced", sound: () => {}, draw: () => {}, back: () => {}, start: () => expect(loadGuide(store).started).toBe(true) });
++    journey.picked = [GUN.xung, GUN.tia]; journey.begin(); expect(loadGuide(store).started).toBe(true);
++  });
++  it("limits recommendations to the stage 1 pair at all times", () => {
++    const { journey } = page(storage({ started: true, hint: true }).store); journey.loadout();
++    expect(journey.cards().map((card) => card.recommended)).toEqual([true, true, false, false, false]);
++    journey.brief(CHAPTER_1[1]!); expect(journey.cards().map((card) => card.recommended)).toEqual([false, false, false, false, false]);
++  });
++});
++
++describe("loadout markup", () => {
++  it("renders two separate labels and exactly one START note", () => {
++    const { journey } = page(); journey.loadout(); const html = renderJourney(journey);
++    expect(html.match(/class="sv-rec"/g)).toHaveLength(2); expect(html.split(NOTE)).toHaveLength(2);
++    expect(html).toMatch(/data-start="1">[\s\S]*?<\/div><p class="sv-note[^\"]*">Press Enter/);
++    expect([...html.matchAll(/<em>[\s\S]*?<\/em>/g)].every(([tag]) => !tag.includes("sv-rec"))).toBe(true);
++  });
++  it("keeps recommendations but hides the note after starting", () => {
++    const { journey } = page(storage({ started: true, hint: false }).store); journey.picked = [GUN.xung, GUN.tia]; journey.loadout();
++    const html = renderJourney(journey); expect(html.match(/class="sv-rec"/g)).toHaveLength(2); expect(html).not.toContain(NOTE);
++  });
++  it("has no recommendations on stage 2", () => { const { journey } = page(undefined, 1); journey.loadout(); expect(renderJourney(journey)).not.toContain("sv-rec"); });
++  it("hides the note until ready", () => { const { journey } = page(); journey.loadout(); journey.picked = [GUN.xung]; expect(renderJourney(journey)).not.toContain(NOTE); });
++});
++
++describe("load hint", () => {
++  it("shows for loads 0 and 1, saves once at 2, and stays done across pages", async () => {
++    const { LoadHint } = await guide(); const { store } = storage(); const hint = new LoadHint(store);
++    expect(hint.text("play", 0)).toBe(HINT); expect(hint.text("play", 1)).toBe(HINT); expect(store.setItem).not.toHaveBeenCalled();
++    expect(hint.text("play", 2)).toBe(""); expect(hint.text("play", 3)).toBe(""); expect(hint.text("play", 2)).toBe("");
++    expect(store.setItem).toHaveBeenCalledTimes(1); expect(store.setItem).toHaveBeenCalledWith(KEY, JSON.stringify({ started: false, hint: true }));
++    expect(new LoadHint(store).text("play", 0)).toBe("");
++  });
++  it.each(["intro", "pause", "end", "start"])("hides in %s", async (mode) => { const { LoadHint } = await guide(); expect(new LoadHint(storage().store).text(mode, 0)).toBe(""); });
++  it("hides from the start when the hint is done", async () => { const { LoadHint } = await guide(); expect(new LoadHint(storage({ started: false, hint: true }).store).text("play", 0)).toBe(""); });
++  it("attempts a failed save only once per page", async () => {
++    const { LoadHint } = await guide(); const setItem = vi.fn(() => { throw Error("full"); }); const hint = new LoadHint({ getItem: () => null, setItem });
++    expect(hint.text("play", 2)).toBe(""); expect(hint.text("play", 4)).toBe(""); expect(setItem).toHaveBeenCalledTimes(1);
++  });
++});
++
++describe("notice priority", () => {
++  it.each([
++    [true, true, HINT, "Switch to an English keyboard", "warn"],
++    [false, true, HINT, "Offline word list (server words unavailable)", "warn"],
++    [false, false, HINT, HINT, "hint"],
++    [false, false, "", "", "warn"],
++  ] as const)("resolves IME %s / offline %s", async (ime, offline, hint, text, kind) => {
++    expect((await guide()).noticeFor(ime, offline, hint)).toEqual({ text, kind });
++  });
++});
+--- /dev/null
++++ b/scripts/visual/scenarios/survival-s1-first-run.mjs
+@@ -0,0 +1,60 @@
++// Fresh profile: recommended loadout, START note, then the first loading hint.
++// Claude checks two real loads and the subsequent reload manually.
++// Run from the game root; captures default to tmp/visual via common.mjs.
++import { DEV_URL, out } from "./common.mjs";
++import { sv } from "./survival-s0-lib.mjs";
++
++const key = (page, code) => page.key(code, { code });
++const HINT = "Type a word on a bay to load its gun";
++const NOTE = "Press Enter to start. Guns fire on their own; type words to load them.";
++
++export default async function (page) {
++  const size = page.width + "x" + page.height;
++  const url = DEV_URL.replace(/\/$/, "") + "/index.html?seed=2";
++  const shots = [];
++  const ready = async () => {
++    for (let w = 0; w < 80; w += 1) {
++      if ((await page.eval(sv("return t.ready();"))) === true) return;
++      await page.sleep(250);
++    }
++    throw new Error("Last Line assets did not become ready");
++  };
++  await page.goto(url, { settle: 300 });
++  await page.eval("localStorage.removeItem('survival.stages'); localStorage.removeItem('survival.guide'); sessionStorage.removeItem('survival.next'); true");
++  // Recreate the page's hint state after clearing the record.
++  await page.goto(url, { settle: 300 });
++  await ready();
++  for (let n = 0; n < 3; n += 1) {
++    await key(page, "Enter");
++    await page.sleep(250);
++  }
++  const loadout = await page.eval(sv(`return { ...t.journey(), labels: document.querySelectorAll('.sv-rec').length, note: document.querySelector('.sv-start-note')?.textContent ?? '' };`));
++  shots.push(await page.shot(out("survival-s1-first-run-loadout-" + size + ".png")));
++  await key(page, "Enter");
++  await ready();
++  let card;
++  for (let w = 0; w < 80; w += 1) {
++    card = await page.eval(sv("return { mode: t.mode(), tick: t.state().tick };"));
++    if (card?.mode === "intro") break;
++    await page.sleep(250);
++  }
++  if (card?.mode !== "intro") throw new Error("First-run stage card did not open");
++  await page.key("q", { code: "KeyQ", text: "q" });
++  await page.sleep(300);
++  const fight = await page.eval(sv("const notice = document.querySelector('.sv-notice'); return { mode: t.mode(), text: notice.textContent, className: notice.className, hidden: notice.hidden };"));
++  shots.push(await page.shot(out("survival-s1-first-run-hint-" + size + ".png")));
++  const checks = {
++    recommendedPair: JSON.stringify(loadout.picked) === "[0,1]" && loadout.ready === true,
++    startFocused: loadout.cursor === 5,
++    twoLabels: loadout.labels === 2,
++    startNote: loadout.note === NOTE,
++    stageCard: card.mode === "intro" && card.tick === 0,
++    loadingHint: fight.mode === "play" && fight.text === HINT && fight.className.split(/\s+/).includes("is-hint") && !fight.hidden,
++    noConsoleErrors: page.logs.filter((line) => line.startsWith("error")).length === 0,
++    noExceptions: page.exceptions.length === 0,
++  };
++  const pass = Object.values(checks).every(Boolean);
++  if (!pass) process.exitCode = 1;
++  // Leave the fight open; do not finish words automatically.
++  return { pass, checks, loadout, card, fight, shots, manual: "Load two words, verify the hint hides, then reload and verify it stays hidden. Also check Escape from the stage card preserves both guns in order." };
++}
+--- /dev/null
++++ b/docs/changelog/2026-10-30-first-run-guide.md
+@@ -0,0 +1,31 @@
++# Hướng dẫn lần đầu · TS-M1-11, cổng G5
++
++Last Line chọn sẵn Pulse Gun rồi Heat Beam khi người chơi mới mở Loadout
++của ải 1, đặt con trỏ lên START để một lần Enter mở thẻ ải. Việc chọn sẵn
++chỉ diễn ra một lần trong trang; bỏ chọn hết rồi Esc và quay lại vẫn trống.
++Bộ súng đang có giữ nguyên thứ tự, kể cả khi quay về từ thẻ ải.
++
++Hai súng này luôn có nhãn `Recommended` ở ải 1. Người chơi chưa từng bắt đầu
++ải và đã chọn đủ súng thấy một dòng dưới START:
++`Press Enter to start. Guns fire on their own; type words to load them.`
++
++Trong trận, ô thông báo có thể hiện
++`Type a word on a bay to load its gun`. Gợi ý tắt sau hai lần nạp thật;
++gõ khi bến đầy không tính. Cảnh báo bàn phím và danh sách từ ngoại tuyến
++được ưu tiên trước gợi ý. Gợi ý không hiện ở thẻ ải, lúc tạm dừng hay kết quả.
++
++Bản ghi mới `survival.guide` có dạng `{ "started": boolean, "hint": boolean }`.
++Bắt đầu ải ghi `started`, nạp thật hai lần ghi `hint`, mỗi thao tác giữ cờ
++còn lại. Người đã qua bất kỳ ải nào được coi là đã xong hướng dẫn. Kho trống
++hoặc dữ liệu hỏng bắt đầu với hai cờ false; lỗi ghi kho không chặn chơi.
++
++Trước sửa: `pnpm check` đạt **265 test / 25 file**, kit **61/61**.
++31 test mới viết trước mã: **26 đỏ, 5 xanh**; sau sửa **31/31 xanh**.
++Sau sửa: **296 test / 26 file**, kit **61/61**, TypeScript và build đạt.
++Đột biến bỏ chọn sẵn: **3 đỏ**; bỏ lưu gợi ý: **2 đỏ**; trả mã lại:
++**58/58 xanh** gồm test mới, Esc thẻ ải và chữ tiếng Anh.
++Luật chơi, ván vàng, 152 mã băm chương và bộ bài `7f073fa2` giữ nguyên.
++
++Kịch bản trình duyệt đã viết, chỉ kiểm cú pháp; Claude kiểm ở 1280 và 1920,
++gõ tay hai lần nạp và kiểm tải lại. Chưa kết luận về cảm quan hoặc độ vừa
++của chữ trên trình duyệt.

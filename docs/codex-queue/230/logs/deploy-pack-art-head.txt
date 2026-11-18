@@ -1,0 +1,61 @@
+$ pnpm build && node src/kit/tools/deploy/check-pack.mjs dist --game typing-survival
+$ tsc --noEmit && vite build
+vite v7.3.7 building client environment for production...
+transforming...
+✓ 149 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                                                    0.94 kB │ gzip:   0.53 kB
+dist/assets/chakra-petch-vietnamese-700-normal-gQuUA8Wu.woff       5.08 kB
+dist/assets/chakra-petch-vietnamese-600-normal-Pvj4qcw_.woff       5.11 kB
+dist/assets/chakra-petch-vietnamese-500-normal-BVzUBLGs.woff       5.12 kB
+dist/assets/be-vietnam-pro-vietnamese-800-normal-CA0HL1e4.woff     6.85 kB
+dist/assets/be-vietnam-pro-vietnamese-600-normal-DkpCIyan.woff     6.88 kB
+dist/assets/be-vietnam-pro-vietnamese-500-normal-CfdwVo8-.woff     6.88 kB
+dist/assets/chakra-petch-thai-700-normal-B7WL5pBr.woff2            7.29 kB
+dist/assets/chakra-petch-thai-500-normal-DeexCGiz.woff2            7.51 kB
+dist/assets/chakra-petch-thai-600-normal-C620THcd.woff2            7.56 kB
+dist/assets/chakra-petch-latin-ext-500-normal-gA6791b0.woff2       9.03 kB
+dist/assets/chakra-petch-latin-ext-600-normal-CdGvbdDU.woff2       9.06 kB
+dist/assets/chakra-petch-latin-ext-700-normal-DAkvJhej.woff2       9.07 kB
+dist/assets/be-vietnam-pro-latin-ext-800-normal-BvOXQlBN.woff      9.18 kB
+dist/assets/be-vietnam-pro-latin-ext-500-normal-CK0UkkKf.woff      9.20 kB
+dist/assets/be-vietnam-pro-latin-ext-600-normal-BeUwKxhG.woff      9.22 kB
+dist/assets/chakra-petch-thai-700-normal-vZLZ_5L8.woff             9.70 kB
+dist/assets/chakra-petch-latin-700-normal-CnDBPjkL.woff2           9.90 kB
+dist/assets/chakra-petch-thai-500-normal-CJG_V2_m.woff             9.91 kB
+dist/assets/chakra-petch-thai-600-normal-BiM5MXH8.woff             9.95 kB
+dist/assets/chakra-petch-latin-500-normal-BR1ody1F.woff2           9.96 kB
+dist/assets/chakra-petch-latin-600-normal-DVQm9bgb.woff2           9.97 kB
+dist/assets/be-vietnam-pro-vietnamese-500-normal-DREgrEoJ.woff2   12.17 kB
+dist/assets/chakra-petch-latin-ext-700-normal-BeviJPUl.woff       12.17 kB
+dist/assets/be-vietnam-pro-vietnamese-600-normal-nyU-ZL2p.woff2   12.18 kB
+dist/assets/chakra-petch-latin-ext-500-normal-BCHeNDEx.woff       12.18 kB
+dist/assets/chakra-petch-latin-ext-600-normal-nL80L4xU.woff       12.22 kB
+dist/assets/be-vietnam-pro-vietnamese-800-normal-D4LFh2W4.woff2   12.40 kB
+dist/assets/chakra-petch-latin-700-normal-D1s_c2du.woff           13.33 kB
+dist/assets/chakra-petch-latin-500-normal-CnUQnZ4D.woff           13.41 kB
+dist/assets/chakra-petch-latin-600-normal-DQKfcdKo.woff           13.43 kB
+dist/assets/be-vietnam-pro-latin-ext-500-normal-h0Fp6aX0.woff2    13.55 kB
+dist/assets/be-vietnam-pro-latin-ext-600-normal-BNd8euf0.woff2    13.61 kB
+dist/assets/be-vietnam-pro-latin-ext-800-normal-GEpNgheG.woff2    13.75 kB
+dist/assets/be-vietnam-pro-latin-800-normal-Cwp5p0gU.woff         16.99 kB
+dist/assets/be-vietnam-pro-latin-500-normal-BJkVuMHw.woff         17.00 kB
+dist/assets/be-vietnam-pro-latin-600-normal-5IO4e7bK.woff         17.02 kB
+dist/assets/be-vietnam-pro-latin-500-normal-B6LVzGNe.woff2        21.89 kB
+dist/assets/be-vietnam-pro-latin-600-normal-BZDkUTrt.woff2        22.03 kB
+dist/assets/be-vietnam-pro-latin-800-normal-BpHZASpI.woff2        22.32 kB
+dist/assets/index-9NyalvVU.css                                    53.20 kB │ gzip:  18.60 kB
+dist/assets/meshopt_decoder.module-BbCP70j-.js                    22.41 kB │ gzip:   5.94 kB
+dist/assets/GLTFLoader-BM60796l.js                                45.05 kB │ gzip:  13.32 kB
+dist/assets/index-CLt-HYPd.js                                    340.06 kB │ gzip: 121.33 kB
+dist/assets/BufferGeometryUtils-Dnx6px1C.js                      547.18 kB │ gzip: 138.52 kB
+
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+✓ built in 808ms
+foreign-asset: assets/index-CLt-HYPd.js: References /assets/space-typing/ from typing-survival
+local-host: assets/index-CLt-HYPd.js: Contains typing-game.local
+[ELIFECYCLE] Command failed with exit code 1.

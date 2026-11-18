@@ -1,0 +1,6 @@
+cwd=/Users/toandx/htdocs/typing-game
+argv=["pnpm", "learning:check"]
+GIT_OPTIONAL_LOCKS=0 pnpm_config_verify_deps_before_run=false
+$ node --check shared/learning/core.mjs && node --check shared/learning/browser-store.mjs && node --check shared/learning/query.mjs && node --check shared/learning/message-contract.mjs && node --check shared/learning/review-session.mjs && node --check shared/learning/monkey-review-dataset.mjs && node --check shared/learning/recall-review-dataset.mjs && node --check shared/learning/shooter-review-dataset.mjs && node --check shared/learning/space-review-dataset.mjs && node --check shared/learning/karaoke-review-dataset.mjs && node --check shared/learning/mixed-review.mjs && node --check shared/learning/adaptive-mix.mjs && node --check shared/learning/profile-backup.mjs && node --check shared/learning/review-lifecycle.mjs
+
+exit=0

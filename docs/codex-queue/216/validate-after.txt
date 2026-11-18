@@ -1,0 +1,35 @@
+[
+  {
+    "command": [
+      "node",
+      "scripts/validate-play-mode.mjs"
+    ],
+    "exitCode": 0,
+    "stdout": "Play mode contract PASS: static apps, shared runtime data, Space Typing Admin API routing, Portal shared-learning rebuild dependency, and the dragon/td/survival/tutien hosts are covered; dragon, td, survival serve their own pinned vocabulary without shared data aliases.\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "node",
+      "scripts/validate-space-integration.mjs"
+    ],
+    "exitCode": 0,
+    "stdout": "Space Typing integration contract is valid; existing game routes remain unchanged.\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "git",
+      "diff",
+      "--check",
+      "--",
+      "infra/nginx/typing-game.local.play.conf",
+      "infra/nginx/typing-game.local.dev.conf",
+      "scripts/validate-play-mode.mjs",
+      "scripts/validate-play-mode.test.mjs"
+    ],
+    "exitCode": 0,
+    "stdout": "",
+    "stderr": ""
+  }
+]

@@ -1,0 +1,373 @@
+
+2026-10-30T06:32:13.235900+00:00 · R2 spillTarget always -1 · exit=1
+
+ RUN  v3.2.7 /Users/toandx/htdocs/typing-game/games/.wt-ts-codex
+
+ ❯ tests/full-bay.test.ts (21 tests | 6 failed) 15ms
+   ✓ full-bay candidates (220; defaults stay off) > exports three zero defaults and keeps a full word inert 3ms
+   ✓ full-bay candidates (220; defaults stay off) > R1 floors and clamps extra=1 at creation 1ms
+   ✓ full-bay candidates (220; defaults stay off) > R1 floors and clamps extra=2 at creation 1ms
+   ✓ full-bay candidates (220; defaults stay off) > R1 floors and clamps extra=1.9 at creation 1ms
+   ✓ full-bay candidates (220; defaults stay off) > R1 floors and clamps extra=-1 at creation 0ms
+   ✓ full-bay candidates (220; defaults stay off) > R1 floors and clamps extra=-0.1 at creation 1ms
+   × full-bay candidates (220; defaults stay off) > R2 transfers the word's clean/fast quality to the receiving gun (dirty=false) 3ms
+     → expected [ 2, +0 ] to deeply equal [ 2, 1 ]
+   × full-bay candidates (220; defaults stay off) > R2 transfers the word's clean/fast quality to the receiving gun (dirty=true) 0ms
+     → expected [ 2, +0 ] to deeply equal [ 2, 1 ]
+   ✓ full-bay candidates (220; defaults stay off) > R2 has no effect when every gun is full 0ms
+   × full-bay candidates (220; defaults stay off) > R2 chooses least magazines, then lowest bay, and never an empty socket 0ms
+     → expected -1 to be 2 // Object.is equality
+   ✓ full-bay candidates (220; defaults stay off) > S0 keeps its full-bay rule with FULL_BAY.spill=1 0ms
+   ✓ full-bay candidates (220; defaults stay off) > S0 keeps its full-bay rule with FULL_BAY.boost=0.3 0ms
+   ✓ full-bay candidates (220; defaults stay off) > S0 keeps its full-bay rule with FULL_BAY.spill=1,FULL_BAY.boost=0.3 0ms
+   ✓ full-bay candidates (220; defaults stay off) > R3 boosts the tail once, shifts its mark, and resets a newly loaded tail 0ms
+   × full-bay candidates (220; defaults stay off) > R2 precedes R3; R3 applies only after all other bays fill 0ms
+     → expected 1.2 to be 7 // Object.is equality
+   ✓ full-bay candidates (220; defaults stay off) > --set extra is read at call time and undo restores new worlds 0ms
+   × full-bay candidates (220; defaults stay off) > --set spill is read at call time and undo restores new worlds 0ms
+     → expected +0 to be 1 // Object.is equality
+   ✓ full-bay candidates (220; defaults stay off) > --set boost is read at call time and undo restores new worlds 0ms
+   ✓ full-bay candidates (220; defaults stay off) > R1 counts 2/3 as live and gives the bot a positive value 0ms
+   × full-bay candidates (220; defaults stay off) > R2 live/value follows the receiving gun, and stops with no receiver 1ms
+     → expected 1 to be 2 // Object.is equality
+   ✓ full-bay candidates (220; defaults stay off) > R3 live/value exists only for an unboosted tail; empty sockets never count 0ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 6 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/full-bay.test.ts > full-bay candidates (220; defaults stay off) > R2 transfers the word's clean/fast quality to the receiving gun (dirty=false)
+ FAIL  tests/full-bay.test.ts > full-bay candidates (220; defaults stay off) > R2 transfers the word's clean/fast quality to the receiving gun (dirty=true)
+AssertionError: expected [ 2, +0 ] to deeply equal [ 2, 1 ]
+
+- Expected
++ Received
+
+  [
+    2,
+-   1,
++   0,
+  ]
+
+ ❯ tests/full-bay.test.ts:57:37
+     55|     const before = fields.slice(1).map((k) => Array.from(w.guns[k]).sl…
+     56|     const index = w.typing.word[0]!, from = typeWord(w, 0, dirty);
+     57|     expect(Array.from(w.guns.mags)).toEqual([2, 1]);
+       |                                     ^
+     58|     expect(fields.slice(1).map((k) => Array.from(w.guns[k]).slice(0, M…
+     59|     const i = MAG_CAP;
+ ❯ knob tests/full-bay.test.ts:16:9
+ ❯ tests/full-bay.test.ts:53:115
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/6]⎯
+
+ FAIL  tests/full-bay.test.ts > full-bay candidates (220; defaults stay off) > R2 chooses least magazines, then lowest bay, and never an empty socket
+AssertionError: expected -1 to be 2 // Object.is equality
+
+- Expected
++ Received
+
+- 2
++ -1
+
+ ❯ tests/full-bay.test.ts:83:31
+     81|   it("R2 chooses least magazines, then lowest bay, and never an empty …
+     82|     const w = world("c1-s1", [1, 1, 1], true); fill(w, 0); fill(w, 1, …
+     83|     expect(spillTarget(w, 0)).toBe(2);
+       |                               ^
+     84|     fill(w, 2, 1);
+     85|     expect(spillTarget(w, 0)).toBe(1);
+ ❯ knob tests/full-bay.test.ts:16:9
+ ❯ tests/full-bay.test.ts:81:86
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/6]⎯
+
+ FAIL  tests/full-bay.test.ts > full-bay candidates (220; defaults stay off) > R2 precedes R3; R3 applies only after all other bays fill
+AssertionError: expected 1.2 to be 7 // Object.is equality
+
+- Expected
++ Received
+
+- 7
++ 1.2
+
+ ❯ tests/full-bay.test.ts:126:34
+    124|   it("R2 precedes R3; R3 applies only after all other bays fill", () =…
+    125|     const w = world(); fill(w, 0); fill(w, 1, 1);
+    126|     expect(bayValue(w, 0, need)).toBe(7);
+       |                                  ^
+    127|     typeWord(w);
+    128|     expect(w.guns.mags[1]).toBe(2);
+ ❯ knob tests/full-bay.test.ts:16:9
+ ❯ tests/full-bay.test.ts:124:73
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/6]⎯
+
+ FAIL  tests/full-bay.test.ts > full-bay candidates (220; defaults stay off) > --set spill is read at call time and undo restores new worlds
+AssertionError: expected +0 to be 1 // Object.is equality
+
+- Expected
++ Received
+
+- 1
++ 0
+
+ ❯ check tests/full-bay.test.ts:139:66
+    137|       const w = world(); fill(w, 0, 2);
+    138|       if (key === 'extra') expect(w.guns.cap[0]).toBe(on ? 3 : 2);
+    139|       if (key === 'spill') { typeWord(w); expect(w.guns.mags[1]).toBe(…
+       |                                                                  ^
+    140|       if (key === 'boost') { typeWord(w); expect(w.guns.damage[1]).toB…
+    141|     };
+ ❯ tests/full-bay.test.ts:145:66
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/6]⎯
+
+ FAIL  tests/full-bay.test.ts > full-bay candidates (220; defaults stay off) > R2 live/value follows the receiving gun, and stops with no receiver
+AssertionError: expected 1 to be 2 // Object.is equality
+
+- Expected
++ Received
+
+- 2
++ 1
+
+ ❯ tests/full-bay.test.ts:161:34
+    159|   it("R2 live/value follows the receiving gun, and stops with no recei…
+    160|     const w = world(); fill(w, 0);
+    161|     expect(flowSnapshot(w).live).toBe(2);
+       |                                  ^
+    162|     expect(bayValue(w, 0, need)).toBe(14);
+    163|     fill(w, 1, 1);
+ ❯ knob tests/full-bay.test.ts:16:9
+ ❯ tests/full-bay.test.ts:159:83
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/6]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  6 failed | 15 passed (21)
+   Start at  13:32:12
+   Duration  301ms (transform 113ms, setup 0ms, collect 149ms, tests 15ms, environment 0ms, prepare 33ms)
+
+
+2026-10-30T06:32:14.045045+00:00 · R3 canBoost always false · exit=1
+
+ RUN  v3.2.7 /Users/toandx/htdocs/typing-game/games/.wt-ts-codex
+
+ ❯ tests/full-bay.test.ts (21 tests | 4 failed) 16ms
+   ✓ full-bay candidates (220; defaults stay off) > exports three zero defaults and keeps a full word inert 3ms
+   ✓ full-bay candidates (220; defaults stay off) > R1 floors and clamps extra=1 at creation 1ms
+   ✓ full-bay candidates (220; defaults stay off) > R1 floors and clamps extra=2 at creation 1ms
+   ✓ full-bay candidates (220; defaults stay off) > R1 floors and clamps extra=1.9 at creation 1ms
+   ✓ full-bay candidates (220; defaults stay off) > R1 floors and clamps extra=-1 at creation 0ms
+   ✓ full-bay candidates (220; defaults stay off) > R1 floors and clamps extra=-0.1 at creation 1ms
+   ✓ full-bay candidates (220; defaults stay off) > R2 transfers the word's clean/fast quality to the receiving gun (dirty=false) 1ms
+   ✓ full-bay candidates (220; defaults stay off) > R2 transfers the word's clean/fast quality to the receiving gun (dirty=true) 0ms
+   ✓ full-bay candidates (220; defaults stay off) > R2 has no effect when every gun is full 0ms
+   ✓ full-bay candidates (220; defaults stay off) > R2 chooses least magazines, then lowest bay, and never an empty socket 0ms
+   ✓ full-bay candidates (220; defaults stay off) > S0 keeps its full-bay rule with FULL_BAY.spill=1 0ms
+   ✓ full-bay candidates (220; defaults stay off) > S0 keeps its full-bay rule with FULL_BAY.boost=0.3 0ms
+   ✓ full-bay candidates (220; defaults stay off) > S0 keeps its full-bay rule with FULL_BAY.spill=1,FULL_BAY.boost=0.3 0ms
+   × full-bay candidates (220; defaults stay off) > R3 boosts the tail once, shifts its mark, and resets a newly loaded tail 2ms
+     → expected 1 to be close to 1.3, received difference is 0.30000000000000004, but expected 0.005
+   × full-bay candidates (220; defaults stay off) > R2 precedes R3; R3 applies only after all other bays fill 0ms
+     → expected 1 to be close to 1.3, received difference is 0.30000000000000004, but expected 0.005
+   ✓ full-bay candidates (220; defaults stay off) > --set extra is read at call time and undo restores new worlds 1ms
+   ✓ full-bay candidates (220; defaults stay off) > --set spill is read at call time and undo restores new worlds 0ms
+   × full-bay candidates (220; defaults stay off) > --set boost is read at call time and undo restores new worlds 0ms
+     → expected 1 to be close to 1.3, received difference is 0.30000000000000004, but expected 0.005
+   ✓ full-bay candidates (220; defaults stay off) > R1 counts 2/3 as live and gives the bot a positive value 0ms
+   ✓ full-bay candidates (220; defaults stay off) > R2 live/value follows the receiving gun, and stops with no receiver 0ms
+   × full-bay candidates (220; defaults stay off) > R3 live/value exists only for an unboosted tail; empty sockets never count 2ms
+     → expected +0 to be 2 // Object.is equality
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 4 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/full-bay.test.ts > full-bay candidates (220; defaults stay off) > R3 boosts the tail once, shifts its mark, and resets a newly loaded tail
+AssertionError: expected 1 to be close to 1.3, received difference is 0.30000000000000004, but expected 0.005
+ ❯ tests/full-bay.test.ts:106:30
+    104|     const w = world(); fill(w, 0); fill(w, 1);
+    105|     const before = w.guns.damage[1]!, from = typeWord(w);
+    106|     expect(w.guns.damage[1]).toBeCloseTo(before * 1.3);
+       |                              ^
+    107|     expect(w.guns.damage[0]).toBe(1);
+    108|     expect(events(w, from, EV.load)).toHaveLength(0);
+ ❯ knob tests/full-bay.test.ts:16:9
+ ❯ tests/full-bay.test.ts:103:88
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/4]⎯
+
+ FAIL  tests/full-bay.test.ts > full-bay candidates (220; defaults stay off) > R2 precedes R3; R3 applies only after all other bays fill
+AssertionError: expected 1 to be close to 1.3, received difference is 0.30000000000000004, but expected 0.005
+ ❯ tests/full-bay.test.ts:132:30
+    130|     expect(w.guns.fullBay.boosted[1]).toBe(0);
+    131|     typeWord(w);
+    132|     expect(w.guns.damage[1]).toBeCloseTo(1.3);
+       |                              ^
+    133|   }));
+    134| 
+ ❯ knob tests/full-bay.test.ts:16:9
+ ❯ tests/full-bay.test.ts:124:73
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/4]⎯
+
+ FAIL  tests/full-bay.test.ts > full-bay candidates (220; defaults stay off) > --set boost is read at call time and undo restores new worlds
+AssertionError: expected 1 to be close to 1.3, received difference is 0.30000000000000004, but expected 0.005
+ ❯ check tests/full-bay.test.ts:140:68
+    138|       if (key === 'extra') expect(w.guns.cap[0]).toBe(on ? 3 : 2);
+    139|       if (key === 'spill') { typeWord(w); expect(w.guns.mags[1]).toBe(…
+    140|       if (key === 'boost') { typeWord(w); expect(w.guns.damage[1]).toB…
+       |                                                                    ^
+    141|     };
+    142|     const existing = world(); fill(existing, 0);
+ ❯ tests/full-bay.test.ts:145:66
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/4]⎯
+
+ FAIL  tests/full-bay.test.ts > full-bay candidates (220; defaults stay off) > R3 live/value exists only for an unboosted tail; empty sockets never count
+AssertionError: expected +0 to be 2 // Object.is equality
+
+- Expected
++ Received
+
+- 2
++ 0
+
+ ❯ tests/full-bay.test.ts:172:34
+    170|   it("R3 live/value exists only for an unboosted tail; empty sockets n…
+    171|     const w = world(); fill(w, 0); fill(w, 1);
+    172|     expect(flowSnapshot(w).live).toBe(2);
+       |                                  ^
+    173|     expect(bayValue(w, 0, need)).toBeCloseTo(4 * 0.3);
+    174|     typeWord(w);
+ ❯ knob tests/full-bay.test.ts:16:9
+ ❯ tests/full-bay.test.ts:170:90
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/4]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  4 failed | 17 passed (21)
+   Start at  13:32:13
+   Duration  369ms (transform 135ms, setup 0ms, collect 196ms, tests 16ms, environment 0ms, prepare 33ms)
+
+
+2026-10-30T06:32:14.808233+00:00 · R1 remove extra · exit=1
+
+ RUN  v3.2.7 /Users/toandx/htdocs/typing-game/games/.wt-ts-codex
+
+ ❯ tests/full-bay.test.ts (21 tests | 5 failed) 15ms
+   ✓ full-bay candidates (220; defaults stay off) > exports three zero defaults and keeps a full word inert 3ms
+   × full-bay candidates (220; defaults stay off) > R1 floors and clamps extra=1 at creation 4ms
+     → expected [ 2, 2 ] to deeply equal [ 3, 3 ]
+   × full-bay candidates (220; defaults stay off) > R1 floors and clamps extra=2 at creation 1ms
+     → expected [ 2, 2 ] to deeply equal [ 3, 3 ]
+   × full-bay candidates (220; defaults stay off) > R1 floors and clamps extra=1.9 at creation 0ms
+     → expected [ 2, 2 ] to deeply equal [ 3, 3 ]
+   ✓ full-bay candidates (220; defaults stay off) > R1 floors and clamps extra=-1 at creation 1ms
+   ✓ full-bay candidates (220; defaults stay off) > R1 floors and clamps extra=-0.1 at creation 1ms
+   ✓ full-bay candidates (220; defaults stay off) > R2 transfers the word's clean/fast quality to the receiving gun (dirty=false) 0ms
+   ✓ full-bay candidates (220; defaults stay off) > R2 transfers the word's clean/fast quality to the receiving gun (dirty=true) 0ms
+   ✓ full-bay candidates (220; defaults stay off) > R2 has no effect when every gun is full 0ms
+   ✓ full-bay candidates (220; defaults stay off) > R2 chooses least magazines, then lowest bay, and never an empty socket 0ms
+   ✓ full-bay candidates (220; defaults stay off) > S0 keeps its full-bay rule with FULL_BAY.spill=1 0ms
+   ✓ full-bay candidates (220; defaults stay off) > S0 keeps its full-bay rule with FULL_BAY.boost=0.3 0ms
+   ✓ full-bay candidates (220; defaults stay off) > S0 keeps its full-bay rule with FULL_BAY.spill=1,FULL_BAY.boost=0.3 0ms
+   ✓ full-bay candidates (220; defaults stay off) > R3 boosts the tail once, shifts its mark, and resets a newly loaded tail 0ms
+   ✓ full-bay candidates (220; defaults stay off) > R2 precedes R3; R3 applies only after all other bays fill 0ms
+   × full-bay candidates (220; defaults stay off) > --set extra is read at call time and undo restores new worlds 1ms
+     → expected 2 to be 3 // Object.is equality
+   ✓ full-bay candidates (220; defaults stay off) > --set spill is read at call time and undo restores new worlds 0ms
+   ✓ full-bay candidates (220; defaults stay off) > --set boost is read at call time and undo restores new worlds 0ms
+   × full-bay candidates (220; defaults stay off) > R1 counts 2/3 as live and gives the bot a positive value 0ms
+     → expected +0 to be 1 // Object.is equality
+   ✓ full-bay candidates (220; defaults stay off) > R2 live/value follows the receiving gun, and stops with no receiver 0ms
+   ✓ full-bay candidates (220; defaults stay off) > R3 live/value exists only for an unboosted tail; empty sockets never count 0ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 5 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/full-bay.test.ts > full-bay candidates (220; defaults stay off) > R1 floors and clamps extra=1 at creation
+ FAIL  tests/full-bay.test.ts > full-bay candidates (220; defaults stay off) > R1 floors and clamps extra=2 at creation
+ FAIL  tests/full-bay.test.ts > full-bay candidates (220; defaults stay off) > R1 floors and clamps extra=1.9 at creation
+AssertionError: expected [ 2, 2 ] to deeply equal [ 3, 3 ]
+
+- Expected
++ Received
+
+  [
+-   3,
+-   3,
++   2,
++   2,
+  ]
+
+ ❯ tests/full-bay.test.ts:48:42
+     46| 
+     47|   it.each([1, 2, 1.9, -1, -0.1])("R1 floors and clamps extra=%s at cre…
+     48|     expect(Array.from(world().guns.cap)).toEqual(extra >= 1 ? [3, 3] :…
+       |                                          ^
+     49|     expect(Array.from(world("c1-s1", [1, 3]).guns.cap)).toEqual(extra …
+     50|     expect(Array.from(world("s0").guns.cap)).toEqual([2, 2]);
+ ❯ knob tests/full-bay.test.ts:16:9
+ ❯ tests/full-bay.test.ts:47:90
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/5]⎯
+
+ FAIL  tests/full-bay.test.ts > full-bay candidates (220; defaults stay off) > --set extra is read at call time and undo restores new worlds
+AssertionError: expected 2 to be 3 // Object.is equality
+
+- Expected
++ Received
+
+- 3
++ 2
+
+ ❯ check tests/full-bay.test.ts:138:50
+    136|     const check = (on: boolean) => {
+    137|       const w = world(); fill(w, 0, 2);
+    138|       if (key === 'extra') expect(w.guns.cap[0]).toBe(on ? 3 : 2);
+       |                                                  ^
+    139|       if (key === 'spill') { typeWord(w); expect(w.guns.mags[1]).toBe(…
+    140|       if (key === 'boost') { typeWord(w); expect(w.guns.damage[1]).toB…
+ ❯ tests/full-bay.test.ts:145:66
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/5]⎯
+
+ FAIL  tests/full-bay.test.ts > full-bay candidates (220; defaults stay off) > R1 counts 2/3 as live and gives the bot a positive value
+AssertionError: expected +0 to be 1 // Object.is equality
+
+- Expected
++ Received
+
+- 1
++ 0
+
+ ❯ tests/full-bay.test.ts:155:34
+    153|   it("R1 counts 2/3 as live and gives the bot a positive value", () =>…
+    154|     const w = world(); fill(w, 0, 2); fill(w, 1);
+    155|     expect(flowSnapshot(w).live).toBe(1);
+       |                                  ^
+    156|     expect(bayValue(w, 0, need)).toBe(4);
+    157|   }));
+ ❯ knob tests/full-bay.test.ts:16:9
+ ❯ tests/full-bay.test.ts:153:72
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/5]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  5 failed | 16 passed (21)
+   Start at  13:32:14
+   Duration  321ms (transform 119ms, setup 0ms, collect 164ms, tests 15ms, environment 0ms, prepare 35ms)
+
+
+Restored · exit=0
+
+ RUN  v3.2.7 /Users/toandx/htdocs/typing-game/games/.wt-ts-codex
+
+ ✓ tests/full-bay.test.ts (21 tests) 12ms
+
+ Test Files  1 passed (1)
+      Tests  21 passed (21)
+   Start at  13:32:15
+   Duration  331ms (transform 116ms, setup 0ms, collect 159ms, tests 12ms, environment 0ms, prepare 29ms)
+

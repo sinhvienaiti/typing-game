@@ -1,0 +1,29 @@
+{
+  "exit": 1,
+  "passed": 539,
+  "failed": 6,
+  "errors": 10,
+  "skipped": 6,
+  "failingTests": [
+    "common/tests/test_env.py::test_paths_outside_repo",
+    "common/tests/test_env.py::test_shell_env_matches_python_env",
+    "common/tests/test_env.py::test_running_python_is_audiolab_venv",
+    "board/tests/test_server.py::test_port_fallback_when_busy",
+    "specs/tests/test_generate.py::test_every_game_has_cards_that_validate",
+    "specs/tests/test_generate.py::test_cli_report_and_validate",
+    "board/tests/test_rendered_ctx.py::test_rendered_context_needs_a_file_for_every_candidate",
+    "board/tests/test_rendered_ctx.py::test_ctx_route_serves_the_render_and_rejects_others",
+    "board/tests/test_rendered_ctx.py::test_rating_keeps_the_scene_context_and_its_files",
+    "board/tests/test_review_fixes.py::test_calibration_session_hides_source_and_reveals_at_the_end",
+    "board/tests/test_server.py::test_api_flow",
+    "board/tests/test_server.py::test_security_rules",
+    "board/tests/test_server.py::test_anchors_inserted_from_earlier_sessions",
+    "board/tests/test_server.py::test_anchors_not_added_mid_session",
+    "board/tests/test_server.py::test_an_opened_session_skips_anchors_the_batch_offers",
+    "board/tests/test_server.py::test_two_sessions_of_a_batch_draw_different_anchor_pairs"
+  ],
+  "matches217Counts": true,
+  "sameFailingTests": true,
+  "onlyNow": [],
+  "only217": []
+}

@@ -1,0 +1,50 @@
+$ node --test --test-name-pattern=F[2-5] portal/tests/learning-lookup.test.mjs portal/tests/game-card.test.mjs shared/learning/lookup.test.mjs
+cwd: /Users/toandx/htdocs/typing-game
+
+✔ F5 rejects fully decoded unsafe art %2e%2e/a.png (29.635041ms)
+✔ F5 rejects fully decoded unsafe art %2E%2E/a.png (0.165333ms)
+✔ F5 rejects fully decoded unsafe art %2F/a.png (0.129125ms)
+✔ F5 rejects fully decoded unsafe art %2e%2e%2F%2e%2e%2Fspace-typing/portal/icon.png (0.1065ms)
+✔ F5 rejects fully decoded unsafe art %2E%2E%2f%2E%2E%2fspace-typing/portal/icon.png (0.10075ms)
+✔ F5 rejects fully decoded unsafe art %2e%2e%5C%2e%2e%5Cspace-typing/portal/icon.png (0.067792ms)
+✔ F5 rejects fully decoded unsafe art %2e%2e%2F%2e%2e%5cspace-typing/portal/icon.png (0.074041ms)
+✔ F5 rejects fully decoded unsafe art %252e%252e%252F%252e%252e%252Fspace-typing/portal/icon.png (0.090625ms)
+✔ F5 rejects fully decoded unsafe art %252e%252e%255C%252e%252e%255Cspace-typing/portal/icon.png (0.095ms)
+✔ F5 rejects fully decoded unsafe art %252e%2e%252f%2e%252e%5Cspace-typing/portal/icon.png (0.111167ms)
+✔ F5 rejects fully decoded unsafe art %25252e%25252e%25252fspace-typing/portal/icon.png (0.089834ms)
+✔ F5 rejects fully decoded unsafe art a%2Fb.png (0.074791ms)
+✔ F5 rejects fully decoded unsafe art a%5Cb.png (0.059625ms)
+✔ F5 rejects fully decoded unsafe art a%252Fb.png (0.075292ms)
+✔ F5 rejects fully decoded unsafe art a%255Cb.png (0.083375ms)
+✔ F5 rejects fully decoded unsafe art a.png%253Fsize=192 (0.084917ms)
+✔ F5 rejects fully decoded unsafe art a.png%2523icon (0.074834ms)
+✔ F5 rejects fully decoded unsafe art %zz.png (0.083375ms)
+✔ F5 preserves safe encoded filenames within the game prefix (0.085ms)
+✔ F2 lookup sends only contracted sample fields from a vocabulary backup (3.624917ms)
+✔ F2 query sends only contracted sample fields from a vocabulary backup (0.519583ms)
+✔ F2 lookup sends only contracted sample fields from a grammar backup (0.282833ms)
+✔ F2 query sends only contracted sample fields from a grammar backup (0.263375ms)
+✔ F2 lookup sends only contracted sample fields from a sentence backup (0.33975ms)
+✔ F2 query sends only contracted sample fields from a sentence backup (0.331333ms)
+✔ F3 lookup returns only query-failed for a private load error (0.296834ms)
+✔ F3 lookup returns only query-failed for a private profile version error (0.188041ms)
+✔ F3 query returns only query-failed for a private load error (0.292667ms)
+✔ F3 query returns only query-failed for a private profile version error (0.339167ms)
+✔ F4 lookup accepts 100 ligatures after one normalization (0.741709ms)
+✔ F4 lookup accepts ligatures and a combining accent after one normalization (0.209042ms)
+✔ F4 lookup accepts a combining accent after one normalization (0.155041ms)
+✔ F2 vocabulary lookup projects sample fields from an existing stored profile (1.990292ms)
+✔ F2 grammar lookup projects sample fields from an existing stored profile (0.481125ms)
+✔ F2 sentence lookup projects sample fields from an existing stored profile (0.11825ms)
+✔ F3 error contract supports code-only replies and preserves explicit public messages (0.165833ms)
+✔ F4 parsed lookup accepts an NFKC-expanded id while raw lookup retains validation (0.29675ms)
+ℹ tests 37
+ℹ suites 0
+ℹ pass 37
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 79.41275
+
+exit: 0

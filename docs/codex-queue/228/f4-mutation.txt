@@ -1,0 +1,61 @@
+$ node --test --test-name-pattern=F4 portal/tests/learning-lookup.test.mjs shared/learning/lookup.test.mjs
+cwd: /Users/toandx/htdocs/typing-game
+
+✖ F4 lookup accepts 100 ligatures after one normalization (2.645292ms)
+✖ F4 lookup accepts ligatures and a combining accent after one normalization (0.546625ms)
+✔ F4 lookup accepts a combining accent after one normalization (0.728542ms)
+✔ F4 parsed lookup accepts an NFKC-expanded id while raw lookup retains validation (2.221667ms)
+ℹ tests 4
+ℹ suites 0
+ℹ pass 2
+ℹ fail 2
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 68.581583
+
+✖ failing tests:
+
+test at portal/tests/learning-lookup.test.mjs:238:3
+✖ F4 lookup accepts 100 ligatures after one normalization (2.645292ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+
+  + 'typing-game:learning:v1:error'
+  - 'typing-game:learning:v1:query-result'
+                             ^
+
+      at expectResult (file:///Users/toandx/htdocs/typing-game/portal/tests/learning-lookup.test.mjs:39:10)
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/portal/tests/learning-lookup.test.mjs:244:22)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'typing-game:learning:v1:error',
+    expected: 'typing-game:learning:v1:query-result',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at portal/tests/learning-lookup.test.mjs:238:3
+✖ F4 lookup accepts ligatures and a combining accent after one normalization (0.546625ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+
+  + 'typing-game:learning:v1:error'
+  - 'typing-game:learning:v1:query-result'
+                             ^
+
+      at expectResult (file:///Users/toandx/htdocs/typing-game/portal/tests/learning-lookup.test.mjs:39:10)
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/portal/tests/learning-lookup.test.mjs:244:22)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'typing-game:learning:v1:error',
+    expected: 'typing-game:learning:v1:query-result',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+exit: 1

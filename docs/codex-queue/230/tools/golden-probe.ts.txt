@@ -1,0 +1,5 @@
+import { screens206, plain206 } from "./tests/ui-art-fixtures";
+const warn = console.warn; console.warn = () => {};
+const s = screens206();
+console.warn = warn;
+process.stdout.write(JSON.stringify(Object.fromEntries(Object.entries(s).map(([k, v]) => [k, plain206(v)])), null, 2) + "\n");

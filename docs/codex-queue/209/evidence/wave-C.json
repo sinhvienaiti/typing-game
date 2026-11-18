@@ -1,0 +1,62 @@
+{
+  "wave": "C",
+  "start": "2026-10-30T03:17:29.087Z",
+  "uptime": "10:17  2 users, load averages: 4.74 6.36 5.94",
+  "load": 4.74,
+  "limit": 6,
+  "tmpdir": "/Users/toandx/htdocs/typing-game/games/typing-survival/tmp/codex-209/tmpdir",
+  "jobs": [
+    {
+      "id": "v6",
+      "first": 1,
+      "set": "c1-s1.drainRate=2.4,MODE_SPECS.challenge.surge=1.0,MODE_SPECS.challenge.rate=1.06",
+      "start": "2026-10-30T03:17:29.088Z",
+      "args": [
+        "-n",
+        "15",
+        "/opt/homebrew/Cellar/node@24/24.22.0/bin/node",
+        "--import",
+        "tsx",
+        "scripts/balance.ts",
+        "--stages=c1-s1",
+        "--seeds=100",
+        "--first=1",
+        "--g3c",
+        "--json=../runs/v6-s1.json",
+        "--out=../runs/v6-s1.md",
+        "--set=c1-s1.drainRate=2.4,MODE_SPECS.challenge.surge=1.0,MODE_SPECS.challenge.rate=1.06"
+      ],
+      "pid": 54216,
+      "end": "2026-10-30T03:20:39.382Z",
+      "wallSeconds": 190.294,
+      "exit": 0
+    },
+    {
+      "id": "v6",
+      "first": 101,
+      "set": "c1-s1.drainRate=2.4,MODE_SPECS.challenge.surge=1.0,MODE_SPECS.challenge.rate=1.06",
+      "start": "2026-10-30T03:17:29.095Z",
+      "args": [
+        "-n",
+        "15",
+        "/opt/homebrew/Cellar/node@24/24.22.0/bin/node",
+        "--import",
+        "tsx",
+        "scripts/balance.ts",
+        "--stages=c1-s1",
+        "--seeds=100",
+        "--first=101",
+        "--g3c",
+        "--json=../runs/v6-s101.json",
+        "--out=../runs/v6-s101.md",
+        "--set=c1-s1.drainRate=2.4,MODE_SPECS.challenge.surge=1.0,MODE_SPECS.challenge.rate=1.06"
+      ],
+      "pid": 54226,
+      "end": "2026-10-30T03:20:42.072Z",
+      "wallSeconds": 192.977,
+      "exit": 0
+    }
+  ],
+  "peak": 2,
+  "end": "2026-10-30T03:20:42.073Z"
+}

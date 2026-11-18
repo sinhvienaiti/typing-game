@@ -1,0 +1,20 @@
+[
+  {
+    "run": 1,
+    "command": "pnpm exec vitest run tests/td-b9.test.ts -t the B9 CLI reads both",
+    "exitCode": 0,
+    "seconds": 4.075196417000001
+  },
+  {
+    "run": 2,
+    "command": "pnpm exec vitest run tests/td-b9.test.ts -t the B9 CLI reads both",
+    "exitCode": 0,
+    "seconds": 3.3624105
+  },
+  {
+    "run": 3,
+    "command": "pnpm exec vitest run tests/td-b9.test.ts -t the B9 CLI reads both",
+    "exitCode": 0,
+    "seconds": 3.592781875000001
+  }
+]

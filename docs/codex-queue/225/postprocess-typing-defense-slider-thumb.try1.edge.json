@@ -1,0 +1,35 @@
+{
+  "game": "typing-defense",
+  "name": "slider-thumb",
+  "tryNumber": 1,
+  "sourceSize": [
+    1254,
+    1254
+  ],
+  "bboxAlphaGT16": [
+    138,
+    121,
+    977,
+    965
+  ],
+  "bboxRatio": 1.0124352331606217,
+  "ratioDeviationFrom16": null,
+  "scaleXY": [
+    0.7328556806550666,
+    0.7328556806550666
+  ],
+  "processed": "games/typing-defense/tmp/codex-225/slider-thumb.try1.edge.processed.png",
+  "operations": [
+    "games/typing-defense/tmp/codex-225/slider-thumb.try1.edge.crop.png",
+    "-filter",
+    "Lanczos",
+    "-resize",
+    "716x716",
+    "-gravity",
+    "center",
+    "-background",
+    "none",
+    "-extent",
+    "1024x1024"
+  ]
+}

@@ -1,0 +1,192 @@
+[
+ {
+  "id": "M1",
+  "fix": "A1",
+  "file": "src/view/words/safe.ts",
+  "from": "ps.some(p => x > p[0] && x < p[2] && y > p[1] && y < p[3])",
+  "to": "false",
+  "tests": [
+   "tests/td-c10-r5.test.ts"
+  ],
+  "exit": 1,
+  "passed": 11,
+  "failed": 7,
+  "failedNames": [
+   "203 A1: nearest safe boxes, including every moving frame grid stays in 1280 x 720, unchanged if already valid",
+   "203 A1: nearest safe boxes, including every moving frame grid stays in 1920 x 1080, unchanged if already valid",
+   "203 A1: nearest safe boxes, including every moving frame chooses the minimum translation, and flags an impossible layout",
+   "203 A1: nearest safe boxes, including every moving frame combo keeps its side if valid, flips, goes above, then clamps at 720",
+   "203 A1: nearest safe boxes, including every moving frame combo keeps its side if valid, flips, goes above, then clamps at 1080",
+   "203 A2: one symmetric 90 degree V at all four edges 4 edges x 3 headings at 720",
+   "203 A2: one symmetric 90 degree V at all four edges 4 edges x 3 headings at 1080"
+  ],
+  "caught": true,
+  "restored": true
+ },
+ {
+  "id": "M2",
+  "fix": "A1 wiring",
+  "file": "src/view/words/cards.ts",
+  "from": "const [dx, dy] = fitElement(card.el, safe, card.height * 0.12 + 12);",
+  "to": "const [dx, dy] = [0, 0];",
+  "tests": [
+   "tests/td-c10-r5.test.ts",
+   "tests/td-card-art.test.ts",
+   "tests/td-c10-r3.test.ts"
+  ],
+  "exit": 0,
+  "passed": 22,
+  "failed": 0,
+  "failedNames": [],
+  "caught": false,
+  "restored": true
+ },
+ {
+  "id": "M3",
+  "fix": "A2",
+  "file": "src/view/words/tray.ts",
+  "from": "clamp(delta, -Math.PI / 3, Math.PI / 3)",
+  "to": "clamp(delta, -Math.PI / 2, Math.PI / 2)",
+  "tests": [
+   "tests/td-c10-r5.test.ts"
+  ],
+  "exit": 1,
+  "passed": 17,
+  "failed": 1,
+  "failedNames": [
+   "203 A2: one symmetric 90 degree V at all four edges limits a tangential direction to 60 degrees from the edge normal"
+  ],
+  "caught": true,
+  "restored": true
+ },
+ {
+  "id": "M4",
+  "fix": "A2 shape",
+  "file": "src/view/words/tray.ts",
+  "from": "[-size / 2, -size], [-size / 2, size]",
+  "to": "[-size / 2, -size], [-size / 2, size * 0.8]",
+  "tests": [
+   "tests/td-c10-r5.test.ts"
+  ],
+  "exit": 1,
+  "passed": 16,
+  "failed": 2,
+  "failedNames": [
+   "203 A2: one symmetric 90 degree V at all four edges 4 edges x 3 headings at 720",
+   "203 A2: one symmetric 90 degree V at all four edges 4 edges x 3 headings at 1080"
+  ],
+  "caught": true,
+  "restored": true
+ },
+ {
+  "id": "M5",
+  "fix": "A3",
+  "file": "src/view/words/cards.ts",
+  "from": "const typed = typedShown(card.word, W.typed[s]!, w.typing.router.group);",
+  "to": "const typed = W.typed[s]!;",
+  "tests": [
+   "tests/td-c10-r5.test.ts"
+  ],
+  "exit": 1,
+  "passed": 17,
+  "failed": 1,
+  "failedNames": [
+   "203 runtime wiring without a DOM library draw keeps both t prefixes for 50 frames and clears the excluded card on the e frame"
+  ],
+  "caught": true,
+  "restored": true
+ },
+ {
+  "id": "M6",
+  "fix": "A4",
+  "file": "src/view/words/steps.ts",
+  "from": "blur: t < 34 ? 0 : 28 * ui",
+  "to": "blur: t < 17 ? 0 : 28 * ui",
+  "tests": [
+   "tests/td-c10-r5.test.ts"
+  ],
+  "exit": 1,
+  "passed": 16,
+  "failed": 2,
+  "failedNames": [
+   "203 A4: hard first two rim frames, then exponential glow 0, 17, 34, 100, 194 ms at 720",
+   "203 A4: hard first two rim frames, then exponential glow 0, 17, 34, 100, 194 ms at 1080"
+  ],
+  "caught": true,
+  "restored": true
+ },
+ {
+  "id": "M7",
+  "fix": "A4 wiring",
+  "file": "src/view/words/cards.ts",
+  "from": "el.style.outline = r.light && !r.blur ? `${r.width}px solid ${r.color}` : \"\";",
+  "to": "el.style.outline = \"\";",
+  "tests": [
+   "tests/td-c10-r5.test.ts",
+   "tests/td-c10-r3.test.ts"
+  ],
+  "exit": 0,
+  "passed": 20,
+  "failed": 0,
+  "failedNames": [],
+  "caught": false,
+  "restored": true
+ },
+ {
+  "id": "M8",
+  "fix": "A5",
+  "file": "src/view/words/steps.ts",
+  "from": "opacity: t >= 0 && t < 66 ? 1 : 0",
+  "to": "opacity: t >= 0 && t < 67 ? 1 : 0",
+  "tests": [
+   "tests/td-c10-r5.test.ts"
+  ],
+  "exit": 1,
+  "passed": 15,
+  "failed": 3,
+  "failedNames": [
+   "203 A5: synchronous stamp without a hole in the original word steps 2.4, 1.8, 1.3, 1 in 50 ms and disappears before 67 ms",
+   "203 runtime wiring without a DOM library draw writes the first stamp pose immediately, including the final letter (reduced motion false)",
+   "203 runtime wiring without a DOM library draw writes the first stamp pose immediately, including the final letter (reduced motion true)"
+  ],
+  "caught": true,
+  "restored": true
+ },
+ {
+  "id": "M9",
+  "fix": "A5 wiring",
+  "file": "src/view/words/cards.ts",
+  "from": "card.stamp = key = { el, at: now, source };",
+  "to": "card.stamp = key = { el, at: now + 17, source };",
+  "tests": [
+   "tests/td-c10-r5.test.ts"
+  ],
+  "exit": 1,
+  "passed": 16,
+  "failed": 2,
+  "failedNames": [
+   "203 runtime wiring without a DOM library draw writes the first stamp pose immediately, including the final letter (reduced motion false)",
+   "203 runtime wiring without a DOM library draw writes the first stamp pose immediately, including the final letter (reduced motion true)"
+  ],
+  "caught": true,
+  "restored": true
+ },
+ {
+  "id": "M10",
+  "fix": "200 lost crest",
+  "file": "src/ui/sheets.ts",
+  "from": "kind === \"results\" ? \" is-lost\" : \"\"",
+  "to": "\"\"",
+  "tests": [
+   "tests/td-ui-art.test.ts"
+  ],
+  "exit": 1,
+  "passed": 12,
+  "failed": 1,
+  "failedNames": [
+   "200: rendered HTML without a DOM library defeat: only results create decorative images, inside the card"
+  ],
+  "caught": true,
+  "restored": true
+ }
+]

@@ -1,0 +1,28 @@
+{
+  "ok": false,
+  "command": "pnpm deploy:pack",
+  "commandExit": 2,
+  "failedStage": "tsc --noEmit",
+  "distRebuilt": false,
+  "packCheckerRun": false,
+  "errors": [
+    {
+      "ticket": "195",
+      "file": "tests/app/idle-estimate.test.ts:5",
+      "code": "TS2307",
+      "message": "Missing scripts/balance/idle-estimate.mjs"
+    },
+    {
+      "ticket": "195",
+      "file": "tests/app/idle-speed.test.ts:43",
+      "code": "TS2345",
+      "message": "StatusSet passed instead of EntityRef"
+    },
+    {
+      "ticket": "195",
+      "file": "tests/app/idle-speed.test.ts:44",
+      "code": "TS2345",
+      "message": "StatusSet passed instead of EntityRef"
+    }
+  ]
+}

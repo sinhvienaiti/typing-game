@@ -1,0 +1,6 @@
+Phiếu 226 · hạn chế môi trường được phát hiện khi chạy
+
+- sysctl -n vm.loadavg: sandbox trả «Operation not permitted», mã 1. Từng lần thử được giữ nguyên trong runs/timeline.txt và runs/commands.json. Tải 1 phút để chọn luồng lấy từ uptime.
+- ps -axo pid,comm,args: sandbox trả «operation not permitted: ps», mã 1. Không quan sát được tiến trình balance.ts của làn khác. Runner phiếu này chỉ chạy một tiến trình đo tại mỗi thời điểm, cả ba pernight cũng chạy lần lượt.
+- Mọi lệnh đo đều gọi nice -n 15 như phiếu. macOS/sandbox in «nice: setpriority: Operation not permitted» rồi tiếp tục Node. Do đó không xác nhận được hạ ưu tiên thật xuống nice 15; không ghi là đã hạ thành công. Lỗi được giữ trong .err hoặc .md tương ứng.
+- Không có yêu cầu nâng quyền, không dùng heavy.sh, không ghi ngoài ba đường dẫn được phép.

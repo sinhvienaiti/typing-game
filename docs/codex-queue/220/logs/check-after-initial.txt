@@ -1,0 +1,91 @@
+$ node src/kit/verify-kit.mjs && pnpm test && pnpm build
+src/kit OK: 61 files match kit-manifest.json (kit 0.1.0, modules platform, input, vocab, speech, learning, three, tools, feedback, audio, balance)
+$ vitest run
+
+ RUN  v3.2.7 /Users/toandx/htdocs/typing-game/games/.wt-ts-codex
+
+ ✓ tests/portal-build.test.ts (11 tests) 739ms
+ ✓ tests/english-ui.test.ts (5 tests) 376ms
+   ✓ English player text (ticket 130) > has no Vietnamese literals outside kit and vocabulary meanings  373ms
+ ✓ tests/survival-boundary.test.ts (5 tests) 881ms
+   ✓ Sinh Tồn boundary > the rules use no DOM, clock, storage, locale, Math.random, trigonometry or powers  793ms
+ ✓ tests/portal.test.ts (18 tests) 73ms
+stdout | tests/first-frame.test.ts > first frame > 1: a three-frame star starts whole and fades once per frame
+035 star3F [1,0.444444,0.111111,0]
+
+stdout | tests/first-frame.test.ts > first frame > 2: two to six-frame bursts have exactly one full frame and their designed visible life
+035 burst 2F [1,0.25,0,0]
+035 burst 3F [1,0.444444,0.111111,0,0]
+035 burst 4F [1,0.5625,0.25,0.0625,0,0]
+035 burst 5F [1,0.64,0.36,0.16,0.04,0,0]
+035 burst 6F [1,0.694444,0.444444,0.25,0.111111,0.027778,0,0]
+
+stdout | tests/first-frame.test.ts > first frame > 7: each flash matches held power at age zero and then follows lightLevel
+035 light xung [1,0.444444,0.111111,0,0]
+035 light xungFirst [1,0.626736,0.340278,0.140625,0.027778,0,0]
+035 light tiaPrime [1,0.626736,0.340278,0.140625,0.027778,0,0]
+035 light tan [1,0.626736,0.340278,0.140625,0.027778,0,0]
+035 light ray [1,0.694444,0.444444,0.25,0.111111,0.027778,0,0]
+035 light phao [1,0.741512,0.521605,0.340278,0.197531,0.093364,0.027778,0.000772,0,0]
+035 light big [1,0.790123,0.604938,0.444444,0.308642,0.197531,0.111111,0.049383,0.012346,0,0]
+
+ ✓ tests/first-frame.test.ts (9 tests) 15ms
+ ✓ tests/boundary.test.ts (4 tests) 134ms
+ ✓ tests/own-models.test.ts (30 tests) 10ms
+ ✓ tests/deploy-pack.test.ts (8 tests) 1566ms
+   ✓ deployment package commands > deploy:pack builds before checking dist  418ms
+ ✓ tests/full-bay.test.ts (21 tests) 20ms
+ ✓ tests/guide.test.ts (31 tests) 12ms
+ ✓ tests/vocab-pin.test.ts (5 tests) 7ms
+ ✓ tests/ship-motion.test.ts (6 tests) 11ms
+ ✓ tests/intro-key.test.ts (22 tests) 17ms
+ ✓ tests/overrides.test.ts (5 tests) 6ms
+ ✓ tests/small-labels.test.ts (3 tests) 4ms
+ ✓ tests/gun-feel.test.ts (6 tests) 5ms
+ ✓ tests/survival-input.test.ts (4 tests) 6ms
+ ✓ tests/type-feel.test.ts (6 tests) 6ms
+ ✓ tests/theme.test.ts (9 tests) 8ms
+ ✓ tests/learning.test.ts (1 test) 2ms
+ ✓ tests/dev-handle.test.ts (9 tests) 3ms
+ ✓ tests/vfx-pair.test.ts (3 tests) 3ms
+ ✓ tests/guns.test.ts (25 tests) 267ms
+ ✓ tests/balance.test.ts (17 tests) 4197ms
+   ✓ skill profile (BALANCE.md §2) > learns from a played run: speed, accuracy, spread and seconds to the first key, by familiarity  652ms
+   ✓ skill profile (BALANCE.md §2) > leaves quits, AFK runs, short runs and outliers out (the kit's rules), counting the trend  356ms
+   ✓ pace k and the run header (BALANCE.md §4.1) > scales spawn rates by k, surges' size by k, walking speed by half of it, all over the mode; the header is in the hash  1192ms
+   ✓ the pace director in the sim (BALANCE.md §4.2, this game's step table) > judges a whole run within the kit's caps and goes into the hash; off ('Tắt') it never steps  527ms
+   ✓ bots and the report (BALANCE.md §6, §7) > bots press keys through the page's input path; the session's log replays to the same world  550ms
+   ✓ bots and the report (BALANCE.md §6, §7) > summarises bot × mode cells and gives every gate B1–B9  863ms
+stdout | tests/survival-sim.test.ts > step cost (BUILD_S0 §8, BUILD_S1 §17) > steps 700 foes and 2,000 rounds in ≤ 1.5 ms
+survival sim step (700 foes, ~2000 rounds): median 0.544 ms, p95 1.217 ms
+
+ ✓ tests/stage-rules.test.ts (16 tests) 4474ms
+   ✓ Săn Đầu Đàn (§7.1) > walks the leaders in at their times with an escort ahead and a horn; the director never adds or removes one  622ms
+   ✓ Săn Đầu Đàn (§7.1) > is won once `need` leaders fall: the horde pulls back, harmless, for 2 s, then the stage ends  309ms
+   ✓ Săn Đầu Đàn (§7.1) > is lost when more leaders get through than it can spare (leaders − need)  479ms
+   ✓ the attention budget (§7.6) > never starts two telegraphs within 4 s, nor a rift in a surge's first seconds or in a storm: stages 1–4 × 20 seeds × 3 modes  2052ms
+   ✓ stage runs replay (G8) > a bot's stage run, replayed from its log with the same header, gives the same hash  372ms
+stdout | tests/survival-sim.test.ts > step cost (BUILD_S0 §8, BUILD_S1 §17) > steps a chapter stage's peak (700 foes, 2,000 rounds, 63 shells + Pháo Sao's own, 32 shields, 3 bays firing) in ≤ 1.5 ms (§17)
+survival chapter step (before {"foes":700,"rounds":2000,"shells":63,"shields":32}, fewest after {"foes":513,"rounds":1543,"shells":54,"shields":26}, launches 5): median 0.862 ms, p95 1.815 ms
+
+ ✓ tests/survival-sim.test.ts (20 tests) 4518ms
+   ✓ determinism > matches tick by tick over a whole stage, hit stops and a flood included  1048ms
+   ✓ spawns (BUILD_S0 §4, the run's plan) > follow the plan: calm × tide, surges × their strength, lulls after them, all × mode and k; groups of 4–12  457ms
+   ✓ the stage plays > the standard bot (35 WPM, typed like a person, k = 1) sees 35–80 foes in the calm, a flood at a surge and far more at a storm, fights in the ship's half, and wins most runs  1702ms
+   ✓ step cost (BUILD_S0 §8, BUILD_S1 §17) > steps 700 foes and 2,000 rounds in ≤ 1.5 ms  358ms
+ ✓ tests/s0-trace.test.ts (18 tests) 4510ms
+   ✓ the S0 trial's event trace (golden) > novice seed 1  366ms
+   ✓ the S0 trial's event trace (golden) > novice seed 2  362ms
+   ✓ the S0 trial's event trace (golden) > novice seed 3  377ms
+   ✓ the S0 trial's event trace (golden) > novice seed 6  340ms
+
+ Test Files  27 passed (27)
+      Tests  317 passed (317)
+   Start at  13:32:16
+   Duration  5.12s (transform 1.12s, setup 0ms, collect 8.07s, tests 21.87s, environment 2ms, prepare 1.17s)
+
+$ tsc --noEmit && vite build
+tests/survival/typist-bot.ts(167,39): error TS2345: Argument of type 'Float64Array<ArrayBufferLike>' is not assignable to parameter of type 'readonly number[]'.
+  Type 'Float64Array<ArrayBufferLike>' is missing the following properties from type 'readonly number[]': concat, flatMap, flat, [Symbol.unscopables]
+[ELIFECYCLE] Command failed with exit code 2.
+[ELIFECYCLE] Command failed with exit code 2.

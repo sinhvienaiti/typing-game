@@ -1,0 +1,12 @@
+{
+  "command": [
+    "node",
+    "scripts/td/media-budget.mjs",
+    "--json"
+  ],
+  "cwd": "/Users/toandx/htdocs/typing-game/games/typing-defense/tmp/codex-231/tree",
+  "exit": 0,
+  "elapsedSeconds": 0.05128754200000074,
+  "stdout": "{\n \"rows\": {\n  \"high\": {\n   \"models\": 10081928,\n   \"ground\": 1133898,\n   \"scenery\": 4032026,\n   \"vfx\": 0,\n   \"total\": 15247852\n  },\n  \"medium\": {\n   \"models\": 5612428,\n   \"ground\": 308618,\n   \"scenery\": 1332774,\n   \"vfx\": 0,\n   \"total\": 7253820\n  }\n },\n \"starter\": 3422868,\n \"night1\": 4065425,\n \"missing\": [\n  \"enemies/moc-tinh\",\n  \"units/worker-base\",\n  \"heroes/draconis\",\n  \"helpers/helper-owlet\"\n ],\n \"listed\": 53,\n \"over\": []\n}\n",
+  "stderr": ""
+}

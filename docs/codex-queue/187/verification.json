@@ -1,0 +1,40 @@
+{
+  "initialStatusClean": true,
+  "headUnchanged": true,
+  "protectedFileCount": 110,
+  "protectedCounts": {
+    "src/kit": 76,
+    "src/sim": 20,
+    "src/typing": 4,
+    "src/content": 8,
+    "tests/golden": 2
+  },
+  "changedProtectedFiles": [],
+  "goldenSHA256": {
+    "tests/golden/m0.json": "c0f9770cf32f033988576c0da8a17b7ae817b20c676a7ae3cd78ef2860562b82",
+    "tests/golden/golden.test.ts": "c41bd1dbdcff4895ab2e6ab4f9b3b110e1d3e90ad051c61c8e6afb222668f618"
+  },
+  "check": {
+    "exitCode": 0,
+    "testFiles": 57,
+    "testsPassed": 509,
+    "goldenPassed": 10,
+    "kitManifestFilesMatched": 75,
+    "timingTestPassed": true
+  },
+  "unexpectedPaths": [],
+  "missingTaskPaths": [],
+  "taskFileCount": 10,
+  "diffCheck": 0,
+  "finalProductionMatchesCheckedInventory": true,
+  "finalPackOK": true,
+  "finalLocalHostCount": 0,
+  "reportLinks": 32,
+  "missingReportLinks": [],
+  "commands": {
+    "gitWrites": 0,
+    "servers": 0,
+    "browsers": 0,
+    "network": 0
+  }
+}

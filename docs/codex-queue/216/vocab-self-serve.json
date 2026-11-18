@@ -1,0 +1,90 @@
+[
+  {
+    "game": "dragon-hold",
+    "pin": "18338405eebd9cfdbd6d6bf666ea79361c00a564",
+    "pinMatches": true,
+    "manifestFiles": 102,
+    "publicFiles": 103,
+    "publicManifestMismatches": [],
+    "distExists": true,
+    "distFiles": 103,
+    "distMismatches": [],
+    "typingTexts": {
+      "src": [],
+      "distJs": []
+    },
+    "scannedFiles": {
+      "src": 96,
+      "distJs": 4
+    },
+    "vite": {
+      "publicDirDisabled": false,
+      "serveSharedFolders": false,
+      "routesEmpty": false,
+      "vocabularyUrl": false,
+      "typingTextsUrl": false,
+      "sharedDataMounts": [],
+      "publicDir": "default public/ (no publicDir override)"
+    },
+    "distExtraFiles": []
+  },
+  {
+    "game": "typing-defense",
+    "pin": "18338405eebd9cfdbd6d6bf666ea79361c00a564",
+    "pinMatches": true,
+    "manifestFiles": 7,
+    "publicFiles": 8,
+    "publicManifestMismatches": [],
+    "distExists": true,
+    "distFiles": 8,
+    "distMismatches": [],
+    "typingTexts": {
+      "src": [],
+      "distJs": []
+    },
+    "scannedFiles": {
+      "src": 85,
+      "distJs": 12
+    },
+    "vite": {
+      "publicDirDisabled": false,
+      "serveSharedFolders": false,
+      "routesEmpty": false,
+      "vocabularyUrl": false,
+      "typingTextsUrl": false,
+      "sharedDataMounts": [],
+      "publicDir": "default public/ (no publicDir override)"
+    },
+    "distExtraFiles": []
+  },
+  {
+    "game": "typing-survival",
+    "pin": "18338405eebd9cfdbd6d6bf666ea79361c00a564",
+    "pinMatches": true,
+    "manifestFiles": 5,
+    "publicFiles": 6,
+    "publicManifestMismatches": [],
+    "distExists": true,
+    "distFiles": 6,
+    "distMismatches": [],
+    "typingTexts": {
+      "src": [],
+      "distJs": []
+    },
+    "scannedFiles": {
+      "src": 72,
+      "distJs": 4
+    },
+    "vite": {
+      "publicDirDisabled": false,
+      "serveSharedFolders": true,
+      "routesEmpty": true,
+      "vocabularyUrl": true,
+      "typingTextsUrl": false,
+      "sharedDataMounts": [],
+      "publicDir": "default public/ (no publicDir override)",
+      "pluginMountEvidence": "src/kit/tools/vite-shared-plugin.ts: Object.entries(options.routes ?? DEFAULT_SHARED_ROUTES); routes: {} disables shared data routes; only modelsDir is mounted."
+    },
+    "distExtraFiles": []
+  }
+]

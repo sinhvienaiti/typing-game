@@ -1,0 +1,13 @@
+ docs/changelog/README.md                 |  1 +
+ index.html                               |  7 +--
+ scripts/visual/scenarios/td-1c-words.mjs | 47 ++++++++++++++++---
+ scripts/visual/scenarios/td-theme.mjs    | 24 ++++++++--
+ src/main.ts                              |  3 ++
+ src/ui/sheets.ts                         | 10 ++--
+ src/ui/td.css                            | 22 +++++++++
+ src/ui/title.css                         | 15 +++---
+ src/ui/title.ts                          | 26 ++++-------
+ src/view/3d/words.ts                     | 66 ++++++++++++++------------
+ src/view/words/cards.ts                  | 80 ++++++++++++++++++++++++--------
+ src/view/words/feel.css                  | 31 ++-----------
+ 12 files changed, 215 insertions(+), 117 deletions(-)

@@ -1,0 +1,748 @@
+{
+  "consumerCount": 46,
+  "consumers": [
+    {
+      "file": "src/view/models.ts",
+      "line": 7,
+      "text": "import { ModelLibrary, SPACE_MODEL_MANIFEST_URL, loadModel, pickModelTier, type ModelKind } from \"../kit/three\";",
+      "exactOldLineRemains": false,
+      "status": "Đã chuyển sang bộ riêng",
+      "reason": "ModelLibrary dùng manifest Last Line; bảng id bỏ dự phòng, yêu cầu bậc theo chất lượng; đạn theo bộ súng."
+    },
+    {
+      "file": "src/view/models.ts",
+      "line": 9,
+      "text": "export const models = new ModelLibrary({ manifests: SPACE_MODEL_MANIFEST_URL });",
+      "exactOldLineRemains": false,
+      "status": "Đã chuyển sang bộ riêng",
+      "reason": "ModelLibrary dùng manifest Last Line; bảng id bỏ dự phòng, yêu cầu bậc theo chất lượng; đạn theo bộ súng."
+    },
+    {
+      "file": "src/view/models.ts",
+      "line": 35,
+      "text": "export async function loadMesh(kind: ModelKind, ids: readonly string[], tier: \"high\" | \"medium\" = \"high\"): Promise<{ geometry: THREE.BufferGeometry; material: THREE.MeshStandardMaterial } | null> {",
+      "exactOldLineRemains": true,
+      "status": "Đã chuyển sang bộ riêng",
+      "reason": "ModelLibrary dùng manifest Last Line; bảng id bỏ dự phòng, yêu cầu bậc theo chất lượng; đạn theo bộ súng."
+    },
+    {
+      "file": "src/view/models.ts",
+      "line": 37,
+      "text": "    const entry = await models.entry(kind, id);",
+      "exactOldLineRemains": true,
+      "status": "Đã chuyển sang bộ riêng",
+      "reason": "ModelLibrary dùng manifest Last Line; bảng id bỏ dự phòng, yêu cầu bậc theo chất lượng; đạn theo bộ súng."
+    },
+    {
+      "file": "src/view/models.ts",
+      "line": 38,
+      "text": "    const url = entry === null ? null : pickModelTier(entry, tier);",
+      "exactOldLineRemains": true,
+      "status": "Đã chuyển sang bộ riêng",
+      "reason": "ModelLibrary dùng manifest Last Line; bảng id bỏ dự phòng, yêu cầu bậc theo chất lượng; đạn theo bộ súng."
+    },
+    {
+      "file": "src/view/ship.ts",
+      "line": 17,
+      "text": "import { Hero, damp, loadModel, pickModelTier } from \"../kit/three\";",
+      "exactOldLineRemains": true,
+      "status": "Đã chuyển sang bộ riêng",
+      "reason": "ModelLibrary dùng manifest Last Line; bảng id bỏ dự phòng, yêu cầu bậc theo chất lượng; đạn theo bộ súng."
+    },
+    {
+      "file": "src/view/ship.ts",
+      "line": 23,
+      "text": "import { models } from \"./models\";",
+      "exactOldLineRemains": false,
+      "status": "Đã chuyển sang bộ riêng",
+      "reason": "ModelLibrary dùng manifest Last Line; bảng id bỏ dự phòng, yêu cầu bậc theo chất lượng; đạn theo bộ súng."
+    },
+    {
+      "file": "src/view/ship.ts",
+      "line": 27,
+      "text": "export type Pilot = \"vanguard\" | \"draconis\";",
+      "exactOldLineRemains": true,
+      "status": "Đã chuyển sang bộ riêng",
+      "reason": "ModelLibrary dùng manifest Last Line; bảng id bỏ dự phòng, yêu cầu bậc theo chất lượng; đạn theo bộ súng."
+    },
+    {
+      "file": "src/view/ship.ts",
+      "line": 30,
+      "text": "const SOCKETS = [\"FX_MUZZLE\", \"FX_MUZZLE_L\", \"FX_MUZZLE_R\", \"FX_CORE\"] as const;",
+      "exactOldLineRemains": true,
+      "status": "Đã chuyển sang bộ riêng",
+      "reason": "ModelLibrary dùng manifest Last Line; bảng id bỏ dự phòng, yêu cầu bậc theo chất lượng; đạn theo bộ súng."
+    },
+    {
+      "file": "src/view/ship.ts",
+      "line": 32,
+      "text": "const ANCHORS: readonly (readonly [number, number, number])[] = [[0, 0.05, -1.5], [-0.45, 0.05, -1.5], [0.45, 0.05, -1.5], [0, 0.35, -0.2]];",
+      "exactOldLineRemains": true,
+      "status": "Đã chuyển sang bộ riêng",
+      "reason": "ModelLibrary dùng manifest Last Line; bảng id bỏ dự phòng, yêu cầu bậc theo chất lượng; đạn theo bộ súng."
+    },
+    {
+      "file": "src/view/ship.ts",
+      "line": 33,
+      "text": "const ENGINES = [\"FX_ENGINE_L\", \"FX_ENGINE_R\", \"FX_ENGINE_C\"] as const;",
+      "exactOldLineRemains": true,
+      "status": "Đã chuyển sang bộ riêng",
+      "reason": "ModelLibrary dùng manifest Last Line; bảng id bỏ dự phòng, yêu cầu bậc theo chất lượng; đạn theo bộ súng."
+    },
+    {
+      "file": "src/view/ship.ts",
+      "line": 107,
+      "text": "  async load(scene: THREE.Scene): Promise<void> {",
+      "exactOldLineRemains": false,
+      "status": "Đã chuyển sang bộ riêng",
+      "reason": "ModelLibrary dùng manifest Last Line; bảng id bỏ dự phòng, yêu cầu bậc theo chất lượng; đạn theo bộ súng."
+    },
+    {
+      "file": "src/view/ship.ts",
+      "line": 108,
+      "text": "    const kind = this.pilot === \"vanguard\" ? \"ships\" : \"heroes\";",
+      "exactOldLineRemains": false,
+      "status": "Đã chuyển sang bộ riêng",
+      "reason": "ModelLibrary dùng manifest Last Line; bảng id bỏ dự phòng, yêu cầu bậc theo chất lượng; đạn theo bộ súng."
+    },
+    {
+      "file": "src/view/ship.ts",
+      "line": 109,
+      "text": "    for (const id of this.pilot === \"vanguard\" ? [\"vanguard\"] : [\"draconis-v3\", \"draconis-v2\", \"draconis\"]) {",
+      "exactOldLineRemains": false,
+      "status": "Đã chuyển sang bộ riêng",
+      "reason": "ModelLibrary dùng manifest Last Line; bảng id bỏ dự phòng, yêu cầu bậc theo chất lượng; đạn theo bộ súng."
+    },
+    {
+      "file": "src/view/ship.ts",
+      "line": 110,
+      "text": "      const entry = await models.entry(kind, id);",
+      "exactOldLineRemains": false,
+      "status": "Đã chuyển sang bộ riêng",
+      "reason": "ModelLibrary dùng manifest Last Line; bảng id bỏ dự phòng, yêu cầu bậc theo chất lượng; đạn theo bộ súng."
+    },
+    {
+      "file": "src/view/ship.ts",
+      "line": 111,
+      "text": "      const url = entry === null ? null : pickModelTier(entry, \"high\");",
+      "exactOldLineRemains": false,
+      "status": "Đã chuyển sang bộ riêng",
+      "reason": "ModelLibrary dùng manifest Last Line; bảng id bỏ dự phòng, yêu cầu bậc theo chất lượng; đạn theo bộ súng."
+    },
+    {
+      "file": "src/view/ship.ts",
+      "line": 114,
+      "text": "        const gltf = await loadModel(url);",
+      "exactOldLineRemains": true,
+      "status": "Đã chuyển sang bộ riêng",
+      "reason": "ModelLibrary dùng manifest Last Line; bảng id bỏ dự phòng, yêu cầu bậc theo chất lượng; đạn theo bộ súng."
+    },
+    {
+      "file": "src/view/crowd.ts",
+      "line": 22,
+      "text": "import { loadMesh } from \"./models\";",
+      "exactOldLineRemains": false,
+      "status": "Đã chuyển sang bộ riêng",
+      "reason": "ModelLibrary dùng manifest Last Line; bảng id bỏ dự phòng, yêu cầu bậc theo chất lượng; đạn theo bộ súng."
+    },
+    {
+      "file": "src/view/crowd.ts",
+      "line": 36,
+      "text": "  { size: 1.55, lift: 0.75, model: [\"rainbow-mine-3d\", \"rainbow-mine-lod\"] },",
+      "exactOldLineRemains": false,
+      "status": "Đã chuyển sang bộ riêng",
+      "reason": "ModelLibrary dùng manifest Last Line; bảng id bỏ dự phòng, yêu cầu bậc theo chất lượng; đạn theo bộ súng."
+    },
+    {
+      "file": "src/view/crowd.ts",
+      "line": 37,
+      "text": "  { size: 2.3, lift: 1.0, model: [\"rainbow-scout-3d\", \"rainbow-scout-lod\"] },",
+      "exactOldLineRemains": false,
+      "status": "Đã chuyển sang bộ riêng",
+      "reason": "ModelLibrary dùng manifest Last Line; bảng id bỏ dự phòng, yêu cầu bậc theo chất lượng; đạn theo bộ súng."
+    },
+    {
+      "file": "src/view/crowd.ts",
+      "line": 38,
+      "text": "  { size: 3.0, lift: 1.35, model: [\"rainbow-tank-3d\"] },",
+      "exactOldLineRemains": false,
+      "status": "Đã chuyển sang bộ riêng",
+      "reason": "ModelLibrary dùng manifest Last Line; bảng id bỏ dự phòng, yêu cầu bậc theo chất lượng; đạn theo bộ súng."
+    },
+    {
+      "file": "src/view/crowd.ts",
+      "line": 39,
+      "text": "  { size: 2.3, lift: 1.05, model: [\"rainbow-shield-3d\"] },",
+      "exactOldLineRemains": false,
+      "status": "Đã chuyển sang bộ riêng",
+      "reason": "ModelLibrary dùng manifest Last Line; bảng id bỏ dự phòng, yêu cầu bậc theo chất lượng; đạn theo bộ súng."
+    },
+    {
+      "file": "src/view/crowd.ts",
+      "line": 40,
+      "text": "  { size: 1.9, lift: 0.9, model: [\"rainbow-splitter-3d\"] },",
+      "exactOldLineRemains": false,
+      "status": "Đã chuyển sang bộ riêng",
+      "reason": "ModelLibrary dùng manifest Last Line; bảng id bỏ dự phòng, yêu cầu bậc theo chất lượng; đạn theo bộ súng."
+    },
+    {
+      "file": "src/view/crowd.ts",
+      "line": 41,
+      "text": "  { size: 1.0, lift: 0.55, model: [\"rainbow-splitter-3d\"] },",
+      "exactOldLineRemains": false,
+      "status": "Đã chuyển sang bộ riêng",
+      "reason": "ModelLibrary dùng manifest Last Line; bảng id bỏ dự phòng, yêu cầu bậc theo chất lượng; đạn theo bộ súng."
+    },
+    {
+      "file": "src/view/crowd.ts",
+      "line": 42,
+      "text": "  { size: 3.75, lift: 1.7, model: [\"rainbow-tank-3d\"] },",
+      "exactOldLineRemains": false,
+      "status": "Đã chuyển sang bộ riêng",
+      "reason": "ModelLibrary dùng manifest Last Line; bảng id bỏ dự phòng, yêu cầu bậc theo chất lượng; đạn theo bộ súng."
+    },
+    {
+      "file": "src/view/crowd.ts",
+      "line": 180,
+      "text": "        const found = await loadMesh(\"enemies\", LOOK[kind]!.model);",
+      "exactOldLineRemains": false,
+      "status": "Đã chuyển sang bộ riêng",
+      "reason": "ModelLibrary dùng manifest Last Line; bảng id bỏ dự phòng, yêu cầu bậc theo chất lượng; đạn theo bộ súng."
+    },
+    {
+      "file": "src/view/bolts.ts",
+      "line": 14,
+      "text": "import { loadMesh } from \"./models\";",
+      "exactOldLineRemains": false,
+      "status": "Đã chuyển sang bộ riêng",
+      "reason": "ModelLibrary dùng manifest Last Line; bảng id bỏ dự phòng, yêu cầu bậc theo chất lượng; đạn theo bộ súng."
+    },
+    {
+      "file": "src/view/bolts.ts",
+      "line": 19,
+      "text": "  { ids: [\"vanguard-bolt\"], cap: 32, length: 1.4, glow: 2.5 },",
+      "exactOldLineRemains": false,
+      "status": "Đã chuyển sang bộ riêng",
+      "reason": "ModelLibrary dùng manifest Last Line; bảng id bỏ dự phòng, yêu cầu bậc theo chất lượng; đạn theo bộ súng."
+    },
+    {
+      "file": "src/view/bolts.ts",
+      "line": 20,
+      "text": "  { ids: [\"solar-lance-bolt\"], cap: 28, length: 0.6, glow: 2.5 },",
+      "exactOldLineRemains": false,
+      "status": "Đã chuyển sang bộ riêng",
+      "reason": "ModelLibrary dùng manifest Last Line; bảng id bỏ dự phòng, yêu cầu bậc theo chất lượng; đạn theo bộ súng."
+    },
+    {
+      "file": "src/view/bolts.ts",
+      "line": 21,
+      "text": "  { ids: [\"frost-seraph-bolt\"], cap: 2, length: 0.9, glow: 2.5 },",
+      "exactOldLineRemains": false,
+      "status": "Đã chuyển sang bộ riêng",
+      "reason": "ModelLibrary dùng manifest Last Line; bảng id bỏ dự phòng, yêu cầu bậc theo chất lượng; đạn theo bộ súng."
+    },
+    {
+      "file": "src/view/bolts.ts",
+      "line": 22,
+      "text": "  { ids: [\"crimson-talon-bolt\"], cap: 8, length: 1, glow: 2.5 },",
+      "exactOldLineRemains": false,
+      "status": "Đã chuyển sang bộ riêng",
+      "reason": "ModelLibrary dùng manifest Last Line; bảng id bỏ dự phòng, yêu cầu bậc theo chất lượng; đạn theo bộ súng."
+    },
+    {
+      "file": "src/view/bolts.ts",
+      "line": 24,
+      "text": "const FIREBALL = { ids: [\"dragon-fireball\"], cap: 32, length: 1.2, glow: 1.6 } as const;",
+      "exactOldLineRemains": true,
+      "status": "Đã chuyển sang bộ riêng",
+      "reason": "ModelLibrary dùng manifest Last Line; bảng id bỏ dự phòng, yêu cầu bậc theo chất lượng; đạn theo bộ súng."
+    },
+    {
+      "file": "src/view/bolts.ts",
+      "line": 47,
+      "text": "          const spec = kind === BOLT.xung && this.draconis ? FIREBALL : base;",
+      "exactOldLineRemains": false,
+      "status": "Đã chuyển sang bộ riêng",
+      "reason": "ModelLibrary dùng manifest Last Line; bảng id bỏ dự phòng, yêu cầu bậc theo chất lượng; đạn theo bộ súng."
+    },
+    {
+      "file": "src/view/bolts.ts",
+      "line": 48,
+      "text": "          const found = await loadMesh(\"skills\", spec.ids, this.tier === \"medium\" ? \"medium\" : \"high\");",
+      "exactOldLineRemains": false,
+      "status": "Đã chuyển sang bộ riêng",
+      "reason": "ModelLibrary dùng manifest Last Line; bảng id bỏ dự phòng, yêu cầu bậc theo chất lượng; đạn theo bộ súng."
+    },
+    {
+      "file": "src/app/main.ts",
+      "line": 66,
+      "text": "const PILOTS = [\"vanguard\", \"draconis\"] as const satisfies readonly Pilot[];",
+      "exactOldLineRemains": true,
+      "status": "Dùng bộ riêng qua loader",
+      "reason": "Giữ phi công; truyền tier qua load(), truyền world.header.kit.guns qua Combat vào Bolts."
+    },
+    {
+      "file": "src/app/main.ts",
+      "line": 68,
+      "text": "const PILOT_NAMES: Record<Pilot, string> = { vanguard: \"Vanguard\", draconis: \"Draconis\" };",
+      "exactOldLineRemains": true,
+      "status": "Dùng bộ riêng qua loader",
+      "reason": "Giữ phi công; truyền tier qua load(), truyền world.header.kit.guns qua Combat vào Bolts."
+    },
+    {
+      "file": "src/app/main.ts",
+      "line": 81,
+      "text": "const pilot: Pilot = pick(params.get(\"pilot\"), PILOTS) ?? pick(safeLocalStorage.getItem(PILOT_KEY), PILOTS) ?? \"vanguard\";",
+      "exactOldLineRemains": true,
+      "status": "Dùng bộ riêng qua loader",
+      "reason": "Giữ phi công; truyền tier qua load(), truyền world.header.kit.guns qua Combat vào Bolts."
+    },
+    {
+      "file": "src/app/main.ts",
+      "line": 135,
+      "text": "const ship = new Ship(stage.scene, pilot, motionReduced());",
+      "exactOldLineRemains": true,
+      "status": "Dùng bộ riêng qua loader",
+      "reason": "Giữ phi công; truyền tier qua load(), truyền world.header.kit.guns qua Combat vào Bolts."
+    },
+    {
+      "file": "src/view/combat.ts",
+      "line": 107,
+      "text": "    this.bolts = new Bolts(stage.scene, tierName, pilot === \"draconis\");",
+      "exactOldLineRemains": false,
+      "status": "Dùng bộ riêng qua loader",
+      "reason": "Giữ phi công; truyền tier qua load(), truyền world.header.kit.guns qua Combat vào Bolts."
+    },
+    {
+      "file": "src/view/shots.ts",
+      "line": 86,
+      "text": "  private readonly draconis: boolean;",
+      "exactOldLineRemains": true,
+      "status": "Giữ hành vi trình bày",
+      "reason": "Cờ Draconis ở shots.ts chọn màu/hiệu ứng, không đọc file hay URL Space."
+    },
+    {
+      "file": "src/view/shots.ts",
+      "line": 89,
+      "text": "    this.draconis = p.pilot === \"draconis\";",
+      "exactOldLineRemains": true,
+      "status": "Giữ hành vi trình bày",
+      "reason": "Cờ Draconis ở shots.ts chọn màu/hiệu ứng, không đọc file hay URL Space."
+    },
+    {
+      "file": "src/view/shots.ts",
+      "line": 409,
+      "text": "      if (this.draconis) {",
+      "exactOldLineRemains": true,
+      "status": "Giữ hành vi trình bày",
+      "reason": "Cờ Draconis ở shots.ts chọn màu/hiệu ứng, không đọc file hay URL Space."
+    },
+    {
+      "file": "vite.config.ts",
+      "line": 15,
+      "text": "const spaceModels = env(\"SPACE_MODELS_DIR\") ?? join(root, \"..\", \"space-typing\", \"public\", \"assets\", \"space-typing\", \"models\");",
+      "exactOldLineRemains": false,
+      "status": "Đã bỏ",
+      "reason": "Bỏ plugin và alias sang Space; Vite phục vụ public của game."
+    },
+    {
+      "file": "vite.config.ts",
+      "line": 23,
+      "text": "  plugins: [serveSharedFolders({ routes: {}, modelsDir: spaceModels, modelsUrl: \"/assets/space-typing/models/\" })],",
+      "exactOldLineRemains": false,
+      "status": "Đã bỏ",
+      "reason": "Bỏ plugin và alias sang Space; Vite phục vụ public của game."
+    },
+    {
+      "file": "src/kit/three/model-loader.ts",
+      "line": 21,
+      "text": "export const SPACE_MODEL_MANIFEST_URL = \"/assets/space-typing/models/manifest.json\";",
+      "exactOldLineRemains": true,
+      "status": "Giữ trong kit, game không còn dùng",
+      "reason": "Hằng và export hợp đồng kit; cấm sửa kit. Build loại hằng không dùng khỏi dist."
+    },
+    {
+      "file": "src/kit/three/index.ts",
+      "line": 19,
+      "text": "  SPACE_MODEL_MANIFEST_URL,",
+      "exactOldLineRemains": true,
+      "status": "Giữ trong kit, game không còn dùng",
+      "reason": "Hằng và export hợp đồng kit; cấm sửa kit. Build loại hằng không dùng khỏi dist."
+    }
+  ],
+  "consumerSummary": {
+    "Đã chuyển sang bộ riêng": 34,
+    "Dùng bộ riêng qua loader": 5,
+    "Giữ hành vi trình bày": 3,
+    "Đã bỏ": 2,
+    "Giữ trong kit, game không còn dùng": 2
+  },
+  "literalCount": 52,
+  "literalLinesRetained": 46,
+  "literalReferences": [
+    {
+      "file": "scripts/visual/scenarios/common.mjs",
+      "line": 1,
+      "text": "// Source: games/space-typing/scripts/visual/scenarios/common.mjs (trimmed to what the survival-s0 scenarios use)",
+      "exactOldLineRemains": true,
+      "reason": "Chú thích xuất xứ, hằng/export kit, danh sách id hợp lệ của bộ kiểm hoặc fixture kiểm ranh giới; không phải request từ game."
+    },
+    {
+      "file": "src/app/motion.ts",
+      "line": 1,
+      "text": "// Source: games/space-typing/src/ui/motion-preference.ts (trimmed: no matchMedia override; own key; the settings row is main.ts's)",
+      "exactOldLineRemains": true,
+      "reason": "Chú thích xuất xứ, hằng/export kit, danh sách id hợp lệ của bộ kiểm hoặc fixture kiểm ranh giới; không phải request từ game."
+    },
+    {
+      "file": "src/kit/audio/dragon-voice.ts",
+      "line": 1,
+      "text": "// Source: games/space-typing/src/scene3d/sfx.ts (dragon voice part; audio base is a parameter; log fixes in shared/game-kit/DRIFT.md)",
+      "exactOldLineRemains": true,
+      "reason": "Chú thích xuất xứ, hằng/export kit, danh sách id hợp lệ của bộ kiểm hoặc fixture kiểm ranh giới; không phải request từ game."
+    },
+    {
+      "file": "src/kit/audio/mix.ts",
+      "line": 1,
+      "text": "// Source: games/space-typing/src/audio/mix.ts (kit copy: bus table is a parameter; log fixes in shared/game-kit/DRIFT.md)",
+      "exactOldLineRemains": true,
+      "reason": "Chú thích xuất xứ, hằng/export kit, danh sách id hợp lệ của bộ kiểm hoặc fixture kiểm ranh giới; không phải request từ game."
+    },
+    {
+      "file": "src/kit/audio/scene-audio.ts",
+      "line": 1,
+      "text": "// Source: games/space-typing/src/scene3d/sfx.ts (SceneAudio; kit copy: game sound table, one gain node per bus; log fixes in shared/game-kit/DRIFT.md)",
+      "exactOldLineRemains": true,
+      "reason": "Chú thích xuất xứ, hằng/export kit, danh sách id hợp lệ của bộ kiểm hoặc fixture kiểm ranh giới; không phải request từ game."
+    },
+    {
+      "file": "src/kit/audio/util.ts",
+      "line": 1,
+      "text": "// Source: games/space-typing/src/scene3d/util.ts (clamp, rand) plus the audio URL rule.",
+      "exactOldLineRemains": true,
+      "reason": "Chú thích xuất xứ, hằng/export kit, danh sách id hợp lệ của bộ kiểm hoặc fixture kiểm ranh giới; không phải request từ game."
+    },
+    {
+      "file": "src/kit/feedback/audio-cues.ts",
+      "line": 1,
+      "text": "// Source: games/space-typing@survival-s0 src/feedback/audio-cues.ts (kit copy: per-game profile, shared context, generic bus and method names, wood keys; log fixes in shared/game-kit/DRIFT.md)",
+      "exactOldLineRemains": true,
+      "reason": "Chú thích xuất xứ, hằng/export kit, danh sách id hợp lệ của bộ kiểm hoặc fixture kiểm ranh giới; không phải request từ game."
+    },
+    {
+      "file": "src/kit/feedback/debris.ts",
+      "line": 1,
+      "text": "// Source: games/space-typing@survival-s0 src/feedback/debris.ts (kit copy: rest and fade from the profile, random passed in; log fixes in shared/game-kit/DRIFT.md)",
+      "exactOldLineRemains": true,
+      "reason": "Chú thích xuất xứ, hằng/export kit, danh sách id hợp lệ của bộ kiểm hoặc fixture kiểm ranh giới; không phải request từ game."
+    },
+    {
+      "file": "src/kit/feedback/hitstop.ts",
+      "line": 1,
+      "text": "// Source: games/space-typing@survival-s0 src/feedback/hitstop.ts (kit copy: per-game profile, world scale, held blows; log fixes in shared/game-kit/DRIFT.md)",
+      "exactOldLineRemains": true,
+      "reason": "Chú thích xuất xứ, hằng/export kit, danh sách id hợp lệ của bộ kiểm hoặc fixture kiểm ranh giới; không phải request từ game."
+    },
+    {
+      "file": "src/kit/feedback/kill-translation.ts",
+      "line": 1,
+      "text": "// Source: games/space-typing@survival-s0 src/feedback/kill-translation.ts (kit copy: any word with en / vi / ipa; log fixes in shared/game-kit/DRIFT.md)",
+      "exactOldLineRemains": true,
+      "reason": "Chú thích xuất xứ, hằng/export kit, danh sách id hợp lệ của bộ kiểm hoặc fixture kiểm ranh giới; không phải request từ game."
+    },
+    {
+      "file": "src/kit/feedback/numbers.ts",
+      "line": 1,
+      "text": "// Source: games/space-typing@survival-s0 src/feedback/numbers.ts (kit copy: windows, colours and label from the profile; log fixes in shared/game-kit/DRIFT.md)",
+      "exactOldLineRemains": true,
+      "reason": "Chú thích xuất xứ, hằng/export kit, danh sách id hợp lệ của bộ kiểm hoặc fixture kiểm ranh giới; không phải request từ game."
+    },
+    {
+      "file": "src/kit/feedback/quads.ts",
+      "line": 1,
+      "text": "// Source: games/space-typing@survival-s0 src/feedback/quads.ts (kit copy; log fixes in shared/game-kit/DRIFT.md)",
+      "exactOldLineRemains": true,
+      "reason": "Chú thích xuất xứ, hằng/export kit, danh sách id hợp lệ của bộ kiểm hoặc fixture kiểm ranh giới; không phải request từ game."
+    },
+    {
+      "file": "src/kit/feedback/reaction.ts",
+      "line": 1,
+      "text": "// Source: games/space-typing@survival-s0 src/feedback/reaction.ts (kit copy: tiers from the profile; log fixes in shared/game-kit/DRIFT.md)",
+      "exactOldLineRemains": true,
+      "reason": "Chú thích xuất xứ, hằng/export kit, danh sách id hợp lệ của bộ kiểm hoặc fixture kiểm ranh giới; không phải request từ game."
+    },
+    {
+      "file": "src/kit/feedback/tiers.ts",
+      "line": 1,
+      "text": "// Source: games/space-typing@survival-s0 src/feedback/tiers.ts (kit copy; log fixes in shared/game-kit/DRIFT.md)",
+      "exactOldLineRemains": true,
+      "reason": "Chú thích xuất xứ, hằng/export kit, danh sách id hợp lệ của bộ kiểm hoặc fixture kiểm ranh giới; không phải request từ game."
+    },
+    {
+      "file": "src/kit/feedback/trauma.ts",
+      "line": 1,
+      "text": "// Source: games/space-typing@survival-s0 src/feedback/trauma.ts (kit copy: numbers from the profile, random passed in; log fixes in shared/game-kit/DRIFT.md)",
+      "exactOldLineRemains": true,
+      "reason": "Chú thích xuất xứ, hằng/export kit, danh sách id hợp lệ của bộ kiểm hoặc fixture kiểm ranh giới; không phải request từ game."
+    },
+    {
+      "file": "src/kit/input/keys.ts",
+      "line": 1,
+      "text": "// Source: games/space-typing/src/scene3d/keys.ts (kit copy; log fixes in shared/game-kit/DRIFT.md)",
+      "exactOldLineRemains": true,
+      "reason": "Chú thích xuất xứ, hằng/export kit, danh sách id hợp lệ của bộ kiểm hoặc fixture kiểm ranh giới; không phải request từ game."
+    },
+    {
+      "file": "src/kit/input/text.ts",
+      "line": 1,
+      "text": "// Source: games/space-typing/src/logic.ts (kit copy without Space's Enemy type; log fixes in shared/game-kit/DRIFT.md)",
+      "exactOldLineRemains": true,
+      "reason": "Chú thích xuất xứ, hằng/export kit, danh sách id hợp lệ của bộ kiểm hoặc fixture kiểm ranh giới; không phải request từ game."
+    },
+    {
+      "file": "src/kit/learning/contract.ts",
+      "line": 1,
+      "text": "// Source: shared/learning/message-contract.mjs + games/space-typing/src/learning/shared.ts (message names; log fixes in shared/game-kit/DRIFT.md)",
+      "exactOldLineRemains": true,
+      "reason": "Chú thích xuất xứ, hằng/export kit, danh sách id hợp lệ của bộ kiểm hoặc fixture kiểm ranh giới; không phải request từ game."
+    },
+    {
+      "file": "src/kit/learning/events.ts",
+      "line": 1,
+      "text": "// Source: games/space-typing/src/learning/shared.ts (kit copy: gameId is a required parameter; log fixes in shared/game-kit/DRIFT.md)",
+      "exactOldLineRemains": true,
+      "reason": "Chú thích xuất xứ, hằng/export kit, danh sách id hợp lệ của bộ kiểm hoặc fixture kiểm ranh giới; không phải request từ game."
+    },
+    {
+      "file": "src/kit/platform/canvas-state.ts",
+      "line": 1,
+      "text": "// Source: games/space-typing/src/platform/canvas-state.ts (kit copy; log fixes in shared/game-kit/DRIFT.md)",
+      "exactOldLineRemains": true,
+      "reason": "Chú thích xuất xứ, hằng/export kit, danh sách id hợp lệ của bộ kiểm hoặc fixture kiểm ranh giới; không phải request từ game."
+    },
+    {
+      "file": "src/kit/platform/frame-loop.ts",
+      "line": 1,
+      "text": "// Source: games/space-typing/src/platform/frame-loop.ts (kit copy; log fixes in shared/game-kit/DRIFT.md)",
+      "exactOldLineRemains": true,
+      "reason": "Chú thích xuất xứ, hằng/export kit, danh sách id hợp lệ của bộ kiểm hoặc fixture kiểm ranh giới; không phải request từ game."
+    },
+    {
+      "file": "src/kit/platform/rng.ts",
+      "line": 1,
+      "text": "// Source: games/space-typing/src/platform/rng.ts (kit copy; log fixes in shared/game-kit/DRIFT.md)",
+      "exactOldLineRemains": true,
+      "reason": "Chú thích xuất xứ, hằng/export kit, danh sách id hợp lệ của bộ kiểm hoặc fixture kiểm ranh giới; không phải request từ game."
+    },
+    {
+      "file": "src/kit/platform/safe-storage.ts",
+      "line": 1,
+      "text": "// Source: games/space-typing/src/platform/safe-storage.ts (kit copy; log fixes in shared/game-kit/DRIFT.md)",
+      "exactOldLineRemains": true,
+      "reason": "Chú thích xuất xứ, hằng/export kit, danh sách id hợp lệ của bộ kiểm hoặc fixture kiểm ranh giới; không phải request từ game."
+    },
+    {
+      "file": "src/kit/speech/speech.ts",
+      "line": 1,
+      "text": "// Source: games/space-typing/src/speech.ts (kit copy: narrow SpeechSettings, neutral event name; log fixes in shared/game-kit/DRIFT.md)",
+      "exactOldLineRemains": true,
+      "reason": "Chú thích xuất xứ, hằng/export kit, danh sách id hợp lệ của bộ kiểm hoặc fixture kiểm ranh giới; không phải request từ game."
+    },
+    {
+      "file": "src/kit/three/guide-scene.ts",
+      "line": 1,
+      "text": "// Source: games/space-typing/src/ui/title-guide-scene.ts (kit copy: the model comes from a library or a URL, clips and framing are options; log fixes in shared/game-kit/DRIFT.md)",
+      "exactOldLineRemains": true,
+      "reason": "Chú thích xuất xứ, hằng/export kit, danh sách id hợp lệ của bộ kiểm hoặc fixture kiểm ranh giới; không phải request từ game."
+    },
+    {
+      "file": "src/kit/three/hero.ts",
+      "line": 1,
+      "text": "// Source: games/space-typing/src/scene3d/hero.ts (kit copy: clip names are an option; log fixes in shared/game-kit/DRIFT.md)",
+      "exactOldLineRemains": true,
+      "reason": "Chú thích xuất xứ, hằng/export kit, danh sách id hợp lệ của bộ kiểm hoặc fixture kiểm ranh giới; không phải request từ game."
+    },
+    {
+      "file": "src/kit/three/index.ts",
+      "line": 19,
+      "text": "  SPACE_MODEL_MANIFEST_URL,",
+      "exactOldLineRemains": true,
+      "reason": "Chú thích xuất xứ, hằng/export kit, danh sách id hợp lệ của bộ kiểm hoặc fixture kiểm ranh giới; không phải request từ game."
+    },
+    {
+      "file": "src/kit/three/materials.ts",
+      "line": 1,
+      "text": "// Source: games/space-typing/src/scene3d/materials.ts (kit copy; log fixes in shared/game-kit/DRIFT.md)",
+      "exactOldLineRemains": true,
+      "reason": "Chú thích xuất xứ, hằng/export kit, danh sách id hợp lệ của bộ kiểm hoặc fixture kiểm ranh giới; không phải request từ game."
+    },
+    {
+      "file": "src/kit/three/model-contracts.ts",
+      "line": 1,
+      "text": "// Source: games/space-typing/src/render3d/model-contracts.ts (kit copy: kinds units and props, head sockets, no fixed manifest URL; log fixes in shared/game-kit/DRIFT.md)",
+      "exactOldLineRemains": true,
+      "reason": "Chú thích xuất xứ, hằng/export kit, danh sách id hợp lệ của bộ kiểm hoặc fixture kiểm ranh giới; không phải request từ game."
+    },
+    {
+      "file": "src/kit/three/model-loader.ts",
+      "line": 1,
+      "text": "// Source: games/space-typing/src/render3d/model-loader.ts (kit copy: manifest URLs are a parameter, several manifests, URLs resolved; log fixes in shared/game-kit/DRIFT.md)",
+      "exactOldLineRemains": true,
+      "reason": "Chú thích xuất xứ, hằng/export kit, danh sách id hợp lệ của bộ kiểm hoặc fixture kiểm ranh giới; không phải request từ game."
+    },
+    {
+      "file": "src/kit/three/model-loader.ts",
+      "line": 21,
+      "text": "export const SPACE_MODEL_MANIFEST_URL = \"/assets/space-typing/models/manifest.json\";",
+      "exactOldLineRemains": true,
+      "reason": "Chú thích xuất xứ, hằng/export kit, danh sách id hợp lệ của bộ kiểm hoặc fixture kiểm ranh giới; không phải request từ game."
+    },
+    {
+      "file": "src/kit/three/particles.ts",
+      "line": 1,
+      "text": "// Source: games/space-typing/src/scene3d/particles.ts (kit copy: no star streaks, random passed in, drift optional; log fixes in shared/game-kit/DRIFT.md)",
+      "exactOldLineRemains": true,
+      "reason": "Chú thích xuất xứ, hằng/export kit, danh sách id hợp lệ của bộ kiểm hoặc fixture kiểm ranh giới; không phải request từ game."
+    },
+    {
+      "file": "src/kit/three/stage.ts",
+      "line": 1,
+      "text": "// Source: games/space-typing/src/scene3d/space.ts (SpaceStage's stage only: renderer, lights, bloom, resize; kit copy, no starfield, no flight cameras; log fixes in shared/game-kit/DRIFT.md)",
+      "exactOldLineRemains": true,
+      "reason": "Chú thích xuất xứ, hằng/export kit, danh sách id hợp lệ của bộ kiểm hoặc fixture kiểm ranh giới; không phải request từ game."
+    },
+    {
+      "file": "src/kit/three/textures.ts",
+      "line": 1,
+      "text": "// Source: games/space-typing/src/scene3d/textures.ts (kit copy: the fire photos' folder is a parameter; log fixes in shared/game-kit/DRIFT.md)",
+      "exactOldLineRemains": true,
+      "reason": "Chú thích xuất xứ, hằng/export kit, danh sách id hợp lệ của bộ kiểm hoặc fixture kiểm ranh giới; không phải request từ game."
+    },
+    {
+      "file": "src/kit/three/util.ts",
+      "line": 1,
+      "text": "// Source: games/space-typing/src/scene3d/util.ts (kit copy: random draws take an optional source; log fixes in shared/game-kit/DRIFT.md)",
+      "exactOldLineRemains": true,
+      "reason": "Chú thích xuất xứ, hằng/export kit, danh sách id hợp lệ của bộ kiểm hoặc fixture kiểm ranh giới; không phải request từ game."
+    },
+    {
+      "file": "src/kit/tools/cdp-run.mjs",
+      "line": 2,
+      "text": "// Source: games/space-typing/scripts/visual/cdp-run.mjs (kit copy; log fixes in shared/game-kit/DRIFT.md)",
+      "exactOldLineRemains": true,
+      "reason": "Chú thích xuất xứ, hằng/export kit, danh sách id hợp lệ của bộ kiểm hoặc fixture kiểm ranh giới; không phải request từ game."
+    },
+    {
+      "file": "src/kit/tools/cdp-run.mjs",
+      "line": 16,
+      "text": " * from nodejs.org is enough, Node 22+), from games/space-typing. Dev servers in",
+      "exactOldLineRemains": true,
+      "reason": "Chú thích xuất xứ, hằng/export kit, danh sách id hợp lệ của bộ kiểm hoặc fixture kiểm ranh giới; không phải request từ game."
+    },
+    {
+      "file": "src/kit/tools/deploy/check-pack.mjs",
+      "line": 7,
+      "text": "  'space-typing', 'dragon-hold', 'typing-defense', 'typing-survival', 'immortality-cultivation',",
+      "exactOldLineRemains": true,
+      "reason": "Chú thích xuất xứ, hằng/export kit, danh sách id hợp lệ của bộ kiểm hoặc fixture kiểm ranh giới; không phải request từ game."
+    },
+    {
+      "file": "src/kit/tools/vite-shared-plugin.ts",
+      "line": 1,
+      "text": "// Source: games/space-typing/scripts/dev/vite.worktree.config.ts (the /vocabulary/ middleware; kit copy adds /typing-texts/ and shared models)",
+      "exactOldLineRemains": true,
+      "reason": "Chú thích xuất xứ, hằng/export kit, danh sách id hợp lệ của bộ kiểm hoặc fixture kiểm ranh giới; không phải request từ game."
+    },
+    {
+      "file": "src/kit/vocab/types.ts",
+      "line": 1,
+      "text": "// Source: games/space-typing/src/types.ts (vocabulary and learning shapes only; log fixes in shared/game-kit/DRIFT.md)",
+      "exactOldLineRemains": true,
+      "reason": "Chú thích xuất xứ, hằng/export kit, danh sách id hợp lệ của bộ kiểm hoặc fixture kiểm ranh giới; không phải request từ game."
+    },
+    {
+      "file": "src/kit/vocab/vocabulary.ts",
+      "line": 1,
+      "text": "// Source: games/space-typing/src/vocabulary.ts (kit copy: baseUrl option, sensitive/mature filter; log fixes in shared/game-kit/DRIFT.md)",
+      "exactOldLineRemains": true,
+      "reason": "Chú thích xuất xứ, hằng/export kit, danh sách id hợp lệ của bộ kiểm hoặc fixture kiểm ranh giới; không phải request từ game."
+    },
+    {
+      "file": "src/kit/vocab/words.ts",
+      "line": 1,
+      "text": "// Source: games/space-typing/src/scene3d/words.ts (kit copy: drops flagged words; log fixes in shared/game-kit/DRIFT.md)",
+      "exactOldLineRemains": true,
+      "reason": "Chú thích xuất xứ, hằng/export kit, danh sách id hợp lệ của bộ kiểm hoặc fixture kiểm ranh giới; không phải request từ game."
+    },
+    {
+      "file": "src/view/models.ts",
+      "line": 3,
+      "text": " * /assets/space-typing/models/ (the Vite plugin in dev, an nginx alias in",
+      "exactOldLineRemains": false,
+      "reason": "Đã bỏ đường hoặc import Space trong mã game/Vite."
+    },
+    {
+      "file": "src/view/models.ts",
+      "line": 7,
+      "text": "import { ModelLibrary, SPACE_MODEL_MANIFEST_URL, loadModel, pickModelTier, type ModelKind } from \"../kit/three\";",
+      "exactOldLineRemains": false,
+      "reason": "Đã bỏ đường hoặc import Space trong mã game/Vite."
+    },
+    {
+      "file": "src/view/models.ts",
+      "line": 9,
+      "text": "export const models = new ModelLibrary({ manifests: SPACE_MODEL_MANIFEST_URL });",
+      "exactOldLineRemains": false,
+      "reason": "Đã bỏ đường hoặc import Space trong mã game/Vite."
+    },
+    {
+      "file": "tests/boundary.test.ts",
+      "line": 48,
+      "text": "        .filter((target) => /space-typing|\\/src\\/(survival|scene3d|render3d|platform|feedback\\/kill)/.test(target))",
+      "exactOldLineRemains": true,
+      "reason": "Chú thích xuất xứ, hằng/export kit, danh sách id hợp lệ của bộ kiểm hoặc fixture kiểm ranh giới; không phải request từ game."
+    },
+    {
+      "file": "tests/boundary.test.ts",
+      "line": 66,
+      "text": "    expect(probe(\"src/app/x.ts\", 'import { a } from \"../../../space-typing/src/logic\";\\nimport \"react\";')).toEqual([\"../space-typing/src/logic\", \"react\"]);",
+      "exactOldLineRemains": true,
+      "reason": "Chú thích xuất xứ, hằng/export kit, danh sách id hợp lệ của bộ kiểm hoặc fixture kiểm ranh giới; không phải request từ game."
+    },
+    {
+      "file": "tests/deploy-pack.test.ts",
+      "line": 53,
+      "text": "    const result = pack(command, '<script>const url = \"/assets/space-typing/models/manifest.json\";</script>');",
+      "exactOldLineRemains": true,
+      "reason": "Chú thích xuất xứ, hằng/export kit, danh sách id hợp lệ của bộ kiểm hoặc fixture kiểm ranh giới; không phải request từ game."
+    },
+    {
+      "file": "tests/survival/blank.ts",
+      "line": 1,
+      "text": "// Source: games/space-typing/tests/td/source-scan.ts (blank only)",
+      "exactOldLineRemains": true,
+      "reason": "Chú thích xuất xứ, hằng/export kit, danh sách id hợp lệ của bộ kiểm hoặc fixture kiểm ranh giới; không phải request từ game."
+    },
+    {
+      "file": "vite.config.ts",
+      "line": 12,
+      "text": " * /assets/space-typing/models/ (docs/games/SPLIT_PLAN.md §5): this plugin in",
+      "exactOldLineRemains": false,
+      "reason": "Đã bỏ đường hoặc import Space trong mã game/Vite."
+    },
+    {
+      "file": "vite.config.ts",
+      "line": 15,
+      "text": "const spaceModels = env(\"SPACE_MODELS_DIR\") ?? join(root, \"..\", \"space-typing\", \"public\", \"assets\", \"space-typing\", \"models\");",
+      "exactOldLineRemains": false,
+      "reason": "Đã bỏ đường hoặc import Space trong mã game/Vite."
+    },
+    {
+      "file": "vite.config.ts",
+      "line": 23,
+      "text": "  plugins: [serveSharedFolders({ routes: {}, modelsDir: spaceModels, modelsUrl: \"/assets/space-typing/models/\" })],",
+      "exactOldLineRemains": false,
+      "reason": "Đã bỏ đường hoặc import Space trong mã game/Vite."
+    }
+  ]
+}

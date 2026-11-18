@@ -1,0 +1,58 @@
+{
+  "revision": "2a1f61d7da2ee6e6ca4abdc23f8775f872d9c9e7 + dirty files listed in scope-final.json",
+  "check": {
+    "exit": 0,
+    "files": 44,
+    "passed": 474,
+    "failed": 0,
+    "skipped": 0,
+    "vitestSeconds": 10.07,
+    "viteSeconds": 0.949,
+    "bundleGzipKB": {
+      "titleStart": 81.58,
+      "directStart": 83.04,
+      "view3D": 171.83
+    }
+  },
+  "golden": {
+    "exit": 0,
+    "same": [
+      true,
+      true
+    ]
+  },
+  "buildFirst": {
+    "command": "pnpm td:scenery",
+    "exit": 0,
+    "wallSeconds": 81.261913
+  },
+  "buildSecond": {
+    "command": "pnpm td:scenery",
+    "exit": 0,
+    "wallSeconds": 0.433831,
+    "stdout": "scenery accepted: fresh; 0 files written; 0.047 s\n",
+    "stderr": "$ node scripts/td/prepare-scenery.mjs\n",
+    "rewritten": [],
+    "contentChanged": []
+  },
+  "readOnlyCheck": {
+    "command": "pnpm td:scenery --check",
+    "exit": 0,
+    "wallSeconds": 0.421299,
+    "stdout": "scenery accepted: fresh; 0 files written; 0.036 s\n",
+    "stderr": "$ node scripts/td/prepare-scenery.mjs --check\n",
+    "rewritten": [],
+    "contentChanged": []
+  },
+  "pending": {
+    "exit": 0,
+    "buildSeconds": 67.748,
+    "sprites": 26,
+    "density": 72,
+    "occupancyPercent": 54.026508,
+    "edgeKeyPixels": 483
+  },
+  "mediaBudgetExit": 0,
+  "remainingVisualReviewPixels": 14,
+  "policyDecision": "2026-10-30 13:28"
+}

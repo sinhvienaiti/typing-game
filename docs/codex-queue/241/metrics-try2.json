@@ -1,0 +1,176 @@
+{
+  "attempt": "2",
+  "track": "games/dragon-hold/art-src/ui/quick-settings/sliders/slider-track.c2-try2.processed.png",
+  "thumb": "games/dragon-hold/art-src/ui/quick-settings/sliders/slider-thumb.png",
+  "alpha": [
+    {
+      "file": "games/dragon-hold/art-src/ui/quick-settings/sliders/slider-track.c2-try2.processed.png",
+      "size": [
+        1024,
+        64
+      ],
+      "channels": "srgba",
+      "bboxAlphaGT16": [
+        138,
+        0,
+        748,
+        64
+      ],
+      "coverageLongest": 0.73046875,
+      "centerDeviation": [
+        0,
+        0
+      ],
+      "partialOutside3px": 0,
+      "keyHuePixels": 18,
+      "visiblePixels": 47159,
+      "keyHuePercent": 0.03816874827710511,
+      "centralOpaqueFraction": 0.8159382640586798,
+      "passAlpha": true
+    },
+    {
+      "file": "games/dragon-hold/art-src/ui/quick-settings/sliders/slider-track.c2-try2.512.processed.png",
+      "size": [
+        512,
+        32
+      ],
+      "channels": "srgba",
+      "bboxAlphaGT16": [
+        69,
+        0,
+        374,
+        32
+      ],
+      "coverageLongest": 0.73046875,
+      "centerDeviation": [
+        0,
+        0
+      ],
+      "partialOutside3px": 0,
+      "keyHuePixels": 29,
+      "visiblePixels": 11824,
+      "keyHuePercent": 0.2452638700947226,
+      "centralOpaqueFraction": 0.8881740196078431,
+      "passAlpha": false
+    }
+  ],
+  "stretch": [
+    {
+      "size": [
+        90,
+        10
+      ],
+      "centralColumnLumaStd": 0.0668401768167323,
+      "pass": false
+    },
+    {
+      "size": [
+        210,
+        10
+      ],
+      "centralColumnLumaStd": 0.0697051398807079,
+      "pass": false
+    },
+    {
+      "size": [
+        290,
+        10
+      ],
+      "centralColumnLumaStd": 0.07131953200700049,
+      "pass": false
+    },
+    {
+      "size": [
+        135,
+        15
+      ],
+      "centralColumnLumaStd": 0.06454675391747655,
+      "pass": false
+    },
+    {
+      "size": [
+        315,
+        15
+      ],
+      "centralColumnLumaStd": 0.06946723220668968,
+      "pass": false
+    },
+    {
+      "size": [
+        435,
+        15
+      ],
+      "centralColumnLumaStd": 0.07016847722357361,
+      "pass": false
+    }
+  ],
+  "endcaps": {
+    "background": "#2b2118",
+    "centralMedian": 0.3481815923202614,
+    "leftPx": 179,
+    "rightPx": 177,
+    "pass": false
+  },
+  "readability": [
+    {
+      "scale": 1,
+      "background": "#2b2118",
+      "trackMeanLuma": 0.3526597043692153,
+      "thumbMeanLuma": 0.6026096364776091,
+      "panelLuma": 0.1352007843137255,
+      "thumbMinusTrack": 0.24994993210839384,
+      "trackMinusPanel": 0.21745892005548978,
+      "trackAbsPanel": 0.21745892005548978,
+      "passDark": false
+    },
+    {
+      "scale": 1.5,
+      "background": "#2b2118",
+      "trackMeanLuma": 0.3501266934063448,
+      "thumbMeanLuma": 0.6034715505547383,
+      "panelLuma": 0.1352007843137255,
+      "thumbMinusTrack": 0.25334485714839355,
+      "trackMinusPanel": 0.21492590909261927,
+      "trackAbsPanel": 0.21492590909261927,
+      "passDark": true
+    },
+    {
+      "scale": 1,
+      "background": "#f1e3c4",
+      "trackMeanLuma": 0.36767889633541745,
+      "thumbMeanLuma": 0.6317654720258095,
+      "panelLuma": 0.8930909803921567,
+      "thumbMinusTrack": 0.264086575690392,
+      "trackMinusPanel": -0.5254120840567393,
+      "trackAbsPanel": 0.5254120840567393,
+      "passDark": false
+    },
+    {
+      "scale": 1.5,
+      "background": "#f1e3c4",
+      "trackMeanLuma": 0.36254541781185584,
+      "thumbMeanLuma": 0.6278203306420609,
+      "panelLuma": 0.8930909803921567,
+      "thumbMinusTrack": 0.26527491283020505,
+      "trackMinusPanel": -0.5305455625803008,
+      "trackAbsPanel": 0.5305455625803008,
+      "passDark": false
+    }
+  ],
+  "checks": {
+    "KA1": {
+      "changed": [],
+      "allowed": [
+        "games/dragon-hold/art-src/ui/quick-settings/sliders/slider-track.png",
+        "games/dragon-hold/art-src/ui/quick-settings/sliders/slider-track.512.png",
+        "games/dragon-hold/art-src/ui/quick-settings/sliders/slider-track.prompt.txt"
+      ],
+      "pass": true
+    },
+    "dimensions": true,
+    "alpha": false,
+    "stretch": false,
+    "readability": false
+  },
+  "pass": false
+}

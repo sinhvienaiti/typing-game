@@ -1,0 +1,357 @@
+{
+  "command": "python3 tmp/codex-227/audit-217.py",
+  "exit": 0,
+  "scan": {
+    "AudioLab": [],
+    "expanduser": [
+      {
+        "path": "tools/audio-lab/firefly/cli.py",
+        "line": 79,
+        "text": "        out = args.out.expanduser().resolve()"
+      },
+      {
+        "path": "tools/audio-lab/firefly/cli.py",
+        "line": 82,
+        "text": "        inbox = args.inbox.expanduser().resolve() if hasattr(args, 'inbox') else None"
+      },
+      {
+        "path": "tools/audio-lab/firefly/cli.py",
+        "line": 119,
+        "text": "                write_json(under(out, args.json.expanduser()), report)"
+      },
+      {
+        "path": "tools/audio-lab/firefly/cli.py",
+        "line": 150,
+        "text": "            slots[component(sid)] = Path(filename).expanduser().resolve()"
+      }
+    ],
+    "Path.home": [],
+    "env.WORK": [],
+    "env.STAGING": [],
+    "urllib": [],
+    "requests": [],
+    "http": [],
+    "socket": [],
+    "subprocess": []
+  },
+  "media": [],
+  "repeatHashTestLines": [
+    {
+      "line": 30,
+      "text": "    sf.write(path, x, SR, subtype='PCM_16')"
+    },
+    {
+      "line": 92,
+      "text": "    assert ingest(inbox, out) == 0"
+    },
+    {
+      "line": 114,
+      "text": "    hashes = {str(p.relative_to(run)): ledger.sha256_file(p) for p in run.rglob('*') if p.suffix in ('.wav', '.ogg')}"
+    },
+    {
+      "line": 115,
+      "text": "    assert ingest(inbox, out) == 0"
+    },
+    {
+      "line": 116,
+      "text": "    assert hashes == {str(p.relative_to(run)): ledger.sha256_file(p) for p in run.rglob('*') if p.suffix in ('.wav', '.ogg')}"
+    },
+    {
+      "line": 117,
+      "text": "    assert before == (ledger.sha256_file(path), path.stat().st_mtime_ns)"
+    },
+    {
+      "line": 153,
+      "text": "    assert list(forbidden.iterdir()) == []"
+    },
+    {
+      "line": 168,
+      "text": "    assert ingest(inbox, out) == 0"
+    },
+    {
+      "line": 178,
+      "text": "            sf.write(voices.path_for(voice, word), .05 * impact(123, ms=250), SR, subtype='PCM_16')"
+    },
+    {
+      "line": 192,
+      "text": "    sf.write(source, np.tile(unit, (6, 1)), SR, subtype='PCM_16')"
+    },
+    {
+      "line": 207,
+      "text": "    sf.write(p, x, sr, subtype='PCM_16')"
+    },
+    {
+      "line": 234,
+      "text": "    sf.write(path, .2 * impact(1, ms=120), SR, subtype='PCM_16')"
+    },
+    {
+      "line": 250,
+      "text": "    assert ingest(inbox, out) == 0"
+    }
+  ],
+  "releases": [
+    {
+      "fixturePath": "tmp/codex-227/audiolab/pytest-tmp/test_firefly_render_release_li0/out/art-src/audio/SOURCES.json",
+      "sourceSha256": "c78f2f21cb097725d42fe62096942bdceecadbfd4b4a6b9c3397d1ef81e80863",
+      "licenceRows": [
+        {
+          "ai_input_allowed": true,
+          "attribution_required": false,
+          "author": "project owner",
+          "commercial_ok": true,
+          "date": "2026-10-30",
+          "derivedFrom": {
+            "endMs": 4633.166666666667,
+            "file": "owner.wav",
+            "sha256": "6c54ac3a4c76c724ab1e5be889108b49426f7f81420ca3acb507d26ff47fa877",
+            "startMs": 4094.9999999999995
+          },
+          "file": "fire.impact.a-t03.wav",
+          "generator": "Adobe Firefly Generate Sound Effects",
+          "key": "sha256:9c10caf5206b420ea6793493a379c7d53e318bcac7f0fe44029efa43cecfd4af",
+          "kind": "source",
+          "licence": "LicenseRef-Adobe-Firefly-owner",
+          "licenceCopy": "licences/adobe-firefly-owner-2026-10-29.txt",
+          "licenceUrl": "licences/adobe-firefly-owner-2026-10-29.txt",
+          "model": "Adobe Firefly Audio Model",
+          "origin": "generated",
+          "raw_redistribution_allowed": false,
+          "schema": "audiolab.licence/1",
+          "sha256": "9c10caf5206b420ea6793493a379c7d53e318bcac7f0fe44029efa43cecfd4af"
+        },
+        {
+          "ai_input_allowed": true,
+          "attribution_required": false,
+          "author": "project owner",
+          "commercial_ok": true,
+          "date": "2026-10-30",
+          "derivedFrom": {
+            "endMs": 10033.0625,
+            "file": "owner.wav",
+            "sha256": "6c54ac3a4c76c724ab1e5be889108b49426f7f81420ca3acb507d26ff47fa877",
+            "startMs": 9495.0
+          },
+          "file": "fire.impact.a-t06.wav",
+          "generator": "Adobe Firefly Generate Sound Effects",
+          "key": "sha256:84ef7f8682098bce7f83c4ac629fa7c5d0c638eafbe70215e321fd2629381a38",
+          "kind": "source",
+          "licence": "LicenseRef-Adobe-Firefly-owner",
+          "licenceCopy": "licences/adobe-firefly-owner-2026-10-29.txt",
+          "licenceUrl": "licences/adobe-firefly-owner-2026-10-29.txt",
+          "model": "Adobe Firefly Audio Model",
+          "origin": "generated",
+          "raw_redistribution_allowed": false,
+          "schema": "audiolab.licence/1",
+          "sha256": "84ef7f8682098bce7f83c4ac629fa7c5d0c638eafbe70215e321fd2629381a38"
+        },
+        {
+          "ai_input_allowed": true,
+          "attribution_required": false,
+          "author": "project owner",
+          "commercial_ok": true,
+          "date": "2026-10-30",
+          "derivedFrom": {
+            "endMs": 2833.0416666666665,
+            "file": "owner.wav",
+            "sha256": "6c54ac3a4c76c724ab1e5be889108b49426f7f81420ca3acb507d26ff47fa877",
+            "startMs": 2295.0
+          },
+          "file": "fire.impact.a-t02.wav",
+          "generator": "Adobe Firefly Generate Sound Effects",
+          "key": "sha256:9bcbe047aa34aa9cdef545fda0a48ba4f7686a5f322925e744faad88d8737804",
+          "kind": "source",
+          "licence": "LicenseRef-Adobe-Firefly-owner",
+          "licenceCopy": "licences/adobe-firefly-owner-2026-10-29.txt",
+          "licenceUrl": "licences/adobe-firefly-owner-2026-10-29.txt",
+          "model": "Adobe Firefly Audio Model",
+          "origin": "generated",
+          "raw_redistribution_allowed": false,
+          "schema": "audiolab.licence/1",
+          "sha256": "9bcbe047aa34aa9cdef545fda0a48ba4f7686a5f322925e744faad88d8737804"
+        },
+        {
+          "ai_input_allowed": true,
+          "attribution_required": false,
+          "author": "project owner",
+          "commercial_ok": true,
+          "date": "2026-10-30",
+          "derivedFrom": {
+            "endMs": 8227.4375,
+            "file": "owner.wav",
+            "sha256": "6c54ac3a4c76c724ab1e5be889108b49426f7f81420ca3acb507d26ff47fa877",
+            "startMs": 7695.0
+          },
+          "file": "fire.impact.a-t05.wav",
+          "generator": "Adobe Firefly Generate Sound Effects",
+          "key": "sha256:722508d844c85e6d339fd5c901c7bb5d37ebd7fcfca9bb5447ae1678838460ba",
+          "kind": "source",
+          "licence": "LicenseRef-Adobe-Firefly-owner",
+          "licenceCopy": "licences/adobe-firefly-owner-2026-10-29.txt",
+          "licenceUrl": "licences/adobe-firefly-owner-2026-10-29.txt",
+          "model": "Adobe Firefly Audio Model",
+          "origin": "generated",
+          "raw_redistribution_allowed": false,
+          "schema": "audiolab.licence/1",
+          "sha256": "722508d844c85e6d339fd5c901c7bb5d37ebd7fcfca9bb5447ae1678838460ba"
+        }
+      ],
+      "sourceRecords": [
+        {
+          "key": "firefly/fire.impact.a-1.ogg",
+          "models": [],
+          "aiSteps": [],
+          "aiInputAllowed": true,
+          "layers": [
+            {
+              "id": "firefly",
+              "role": "whole",
+              "kind": "file",
+              "source": "fire.impact.a-t03.wav",
+              "sourceSha256": "9c10caf5206b420ea6793493a379c7d53e318bcac7f0fe44029efa43cecfd4af",
+              "ledgerKey": "sha256:9c10caf5206b420ea6793493a379c7d53e318bcac7f0fe44029efa43cecfd4af",
+              "licence": "LicenseRef-Adobe-Firefly-owner",
+              "settings": {
+                "offsetMs": 0.0,
+                "gainDb": 0.0,
+                "pitchSemitones": 0.0,
+                "pitchMode": "varispeed",
+                "fold": "mid"
+              },
+              "rawQa": {
+                "check": "clip trong file gốc (mục 4.3.1): 3 mẫu ≥ 0,999 FS hoặc 4 mẫu đỉnh phẳng",
+                "verdict": "PASS",
+                "files": [
+                  {
+                    "file": "fire.impact.a-t03.wav",
+                    "subtype": "PCM_16",
+                    "fullRuns": 0,
+                    "flatRuns": 0,
+                    "ok": true
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "key": "firefly/fire.impact.a-2.ogg",
+          "models": [],
+          "aiSteps": [],
+          "aiInputAllowed": true,
+          "layers": [
+            {
+              "id": "firefly",
+              "role": "whole",
+              "kind": "file",
+              "source": "fire.impact.a-t06.wav",
+              "sourceSha256": "84ef7f8682098bce7f83c4ac629fa7c5d0c638eafbe70215e321fd2629381a38",
+              "ledgerKey": "sha256:84ef7f8682098bce7f83c4ac629fa7c5d0c638eafbe70215e321fd2629381a38",
+              "licence": "LicenseRef-Adobe-Firefly-owner",
+              "settings": {
+                "offsetMs": 0.0,
+                "gainDb": 0.0,
+                "pitchSemitones": 0.0,
+                "pitchMode": "varispeed",
+                "fold": "mid",
+                "swap": 1
+              },
+              "rawQa": {
+                "check": "clip trong file gốc (mục 4.3.1): 3 mẫu ≥ 0,999 FS hoặc 4 mẫu đỉnh phẳng",
+                "verdict": "PASS",
+                "files": [
+                  {
+                    "file": "fire.impact.a-t06.wav",
+                    "subtype": "PCM_16",
+                    "fullRuns": 0,
+                    "flatRuns": 0,
+                    "ok": true
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "key": "firefly/fire.impact.a-3.ogg",
+          "models": [],
+          "aiSteps": [],
+          "aiInputAllowed": true,
+          "layers": [
+            {
+              "id": "firefly",
+              "role": "whole",
+              "kind": "file",
+              "source": "fire.impact.a-t02.wav",
+              "sourceSha256": "9bcbe047aa34aa9cdef545fda0a48ba4f7686a5f322925e744faad88d8737804",
+              "ledgerKey": "sha256:9bcbe047aa34aa9cdef545fda0a48ba4f7686a5f322925e744faad88d8737804",
+              "licence": "LicenseRef-Adobe-Firefly-owner",
+              "settings": {
+                "offsetMs": 0.0,
+                "gainDb": 0.0,
+                "pitchSemitones": 0.0,
+                "pitchMode": "varispeed",
+                "fold": "mid",
+                "swap": 2
+              },
+              "rawQa": {
+                "check": "clip trong file gốc (mục 4.3.1): 3 mẫu ≥ 0,999 FS hoặc 4 mẫu đỉnh phẳng",
+                "verdict": "PASS",
+                "files": [
+                  {
+                    "file": "fire.impact.a-t02.wav",
+                    "subtype": "PCM_16",
+                    "fullRuns": 0,
+                    "flatRuns": 0,
+                    "ok": true
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "key": "firefly/fire.impact.a-4.ogg",
+          "models": [],
+          "aiSteps": [],
+          "aiInputAllowed": true,
+          "layers": [
+            {
+              "id": "firefly",
+              "role": "whole",
+              "kind": "file",
+              "source": "fire.impact.a-t05.wav",
+              "sourceSha256": "722508d844c85e6d339fd5c901c7bb5d37ebd7fcfca9bb5447ae1678838460ba",
+              "ledgerKey": "sha256:722508d844c85e6d339fd5c901c7bb5d37ebd7fcfca9bb5447ae1678838460ba",
+              "licence": "LicenseRef-Adobe-Firefly-owner",
+              "settings": {
+                "offsetMs": 0.0,
+                "gainDb": 0.0,
+                "pitchSemitones": 0.0,
+                "pitchMode": "varispeed",
+                "fold": "mid",
+                "swap": 3
+              },
+              "rawQa": {
+                "check": "clip trong file gốc (mục 4.3.1): 3 mẫu ≥ 0,999 FS hoặc 4 mẫu đỉnh phẳng",
+                "verdict": "PASS",
+                "files": [
+                  {
+                    "file": "fire.impact.a-t05.wav",
+                    "subtype": "PCM_16",
+                    "fullRuns": 0,
+                    "flatRuns": 0,
+                    "ok": true
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ],
+      "licenceCopyMatches": true
+    }
+  ],
+  "requiredProjectAttribution": "Adobe Firefly Generate Sound Effects, generated by the project owner (Adobe model)",
+  "directExternalPrograms": [],
+  "dependencyUncertainty": "firefly nhập mp3/corr_max từ keys.firefly_build; không mở keys/** theo lệnh cấm của 227. Chưa chắc toàn bộ chuỗi chương trình ngoài ở helper đó; Claude cần kiểm helper và encoder tại môi trường thật. Không có urllib/requests/http/socket/subprocess trực tiếp trong firefly/*.py."
+}

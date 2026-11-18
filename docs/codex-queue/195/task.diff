@@ -1,0 +1,966 @@
+--- a/src/app/app.css
++++ b/src/app/app.css
+@@ -277,3 +277,20 @@
+   background: rgba(32, 24, 17, 0.8);
+   pointer-events: none;
+ }
++
++
++/* Pre-router deck recovery uses the existing game panel and authored Retry art. */
++.dh-deck-notice {
++  position: absolute;
++  left: 50%;
++  top: 50%;
++  transform: translate(-50%, -50%);
++  width: min(calc(460px * var(--ui)), 90vw);
++  padding: calc(24px * var(--ui));
++  pointer-events: auto;
++  z-index: 80;
++}
++.dh-deck-notice__actions { display: flex; flex-wrap: wrap; gap: calc(12px * var(--ui)); }
++.dh-deck-notice .dh-btn:focus-visible { outline: calc(2px * var(--ui)) solid var(--dh-cream); outline-offset: calc(3px * var(--ui)); }
++.dh-ff { display: flex; align-items: center; gap: calc(4px * var(--ui)); }
++.dh-ff__rate { font-size: calc(12px * var(--ui)); }
+--- a/src/app/app.ts
++++ b/src/app/app.ts
+@@ -23,6 +23,9 @@
+ import { RINGS, URGENT } from "../content/rules";
+ import type { Difficulty, FoeId, MapDef, SimCommand, SimEvent, StageDef, WordDeck } from "../content/types";
+ import { createPortalBridge } from "./portal";
++import { startDeckBoot } from "./deck-boot";
++import { normalizeQuality } from "./quality";
++import { createIdleSpeed, frameTimeScale } from "./idle-speed";
+ import { safeLocalStorage } from "../kit/platform";
+ import { setSpeechGate } from "../kit/speech";
+ import { mmToU, uToM } from "../sim/fixed";
+@@ -34,7 +37,7 @@
+ import { VICTORY_HOLD_MS, createResults } from "../ui/results";
+ import { createShopStrip } from "../ui/shop-strip";
+ import { createDebutCard } from "../ui/debut-card";
+-import { el, installSkin, keyLabel, setShown, uiButton } from "../ui/skin";
++import { el, icon, installSkin, keyLabel, setShown, uiButton } from "../ui/skin";
+ import { createTags } from "../ui/tags";
+ import { createWaveCard } from "../ui/wave-card";
+ import { createActors, type ActorsView } from "../view/actors";
+@@ -73,7 +76,6 @@
+   readonly tagSizePct?: number;
+ }
+ 
+-const QUALITIES: readonly Quality[] = ["low", "medium", "high", "ultra"];
+ const DIFFICULTIES: readonly Difficulty[] = ["easy", "normal", "hard"];
+ /** One level easier (00 §4.10), and the levels' names (00 §4.10 table). */
+ const EASIER: Readonly<Record<Difficulty, Difficulty | null>> = { hard: "normal", normal: "easy", easy: null };
+@@ -99,7 +101,7 @@
+   };
+   const speed = num("speed");
+   return {
+-    quality: q && QUALITIES.includes(q) ? q : undefined,
++    quality: normalizeQuality(q, !dev),
+     difficulty: d && DIFFICULTIES.includes(d) ? d : undefined,
+     seed: num("seed"),
+     // A whole WPM in 10–120: the world keeps integers only.
+@@ -185,7 +187,7 @@
+   const dev = import.meta.env.DEV;
+   const options: AppOptions = given ?? optionsFromUrl(view.location.search, dev);
+   const stage = options.stage ?? STAGE_M0;
+-  const quality: Quality = options.quality ?? "high";
++  const quality: Quality = normalizeQuality(options.quality, !dev) ?? "high";
+   const seed = options.seed ?? stage.seed;
+   /** The typing speed of the next run: from ?wpm=, else unset until the speed card is answered. */
+   const urlWpm = clampWpm(options.typistWpm);
+@@ -240,7 +242,10 @@
+   const notice2 = el(doc, "div", "dh-notice");
+   notice2.setAttribute("role", "status");
+   setShown(notice2, false);
+-  const ffBadge = el(doc, "div", "dh-ff", "×2");
++  const ffBadge = el(doc, "div", "dh-ff");
++  ffBadge.innerHTML = icon("fast-forward");
++  const ffRate = el(doc, "small", "dh-ff__rate");
++  ffBadge.append(ffRate);
+   setShown(ffBadge, false);
+   /** Pause menu and 3-2-1: a plain dim layer, words and the learning frame hidden (01 §3.9 "Tạm dừng che chữ"). */
+   const hush = el(doc, "div", "dh-hush");
+@@ -273,6 +278,9 @@
+   let veilMode: "none" | "focus" | "soft" = "none";
+   let countdownUntil = 0;
+   let fastForward = false;
++  const idleLatch = createIdleSpeed();
++  let idleSpeed = false;
++  let lastTimeScale = 1;
+   let hurtUntil = 0;
+   let seepUntil = 0;
+   let seepStrong = false;
+@@ -627,6 +635,8 @@
+     learning.flush();
+     audio.resetRun();
+     fastForward = false;
++    idleLatch.reset();
++    idleSpeed = false;
+     countdownUntil = 0;
+     if (victoryTurn !== null) map.rig.reset();
+     victoryTurn = null;
+@@ -819,7 +829,11 @@
+ 
+     if (veilMode === "soft") setShown(veil, activePanel() === null);
+     if (fastForward && !fastForwardAllowed(world)) fastForward = false;
+-    setShown(ffBadge, fastForward);
++    const speedBlocked = isPaused || run.placement.mode !== "idle";
++    idleSpeed = idleLatch.update(world, now, speedBlocked);
++    setShown(ffBadge, !speedBlocked && (fastForward || idleSpeed));
++    ffRate.textContent = fastForward ? "×2" : "×1.75";
++    ffBadge.setAttribute("aria-label", fastForward ? "Fast forward ×2" : "Fast forward ×1.75: no words on screen");
+     hurt.classList.toggle("is-on", now < hurtUntil);
+     seep.classList.toggle("is-on", now < seepUntil);
+     seep.classList.toggle("is-strong", now < seepUntil && seepStrong);
+@@ -865,7 +879,9 @@
+     if (!run) return 1;
+     const stop = run.fx.timeScale(now);
+     if (stop < 1) slowFrames += 1;
+-    return stop * (fastForward ? 2 : 1) * speed;
++    const blocked = paused(now) || run.placement.mode !== "idle";
++    idleSpeed = idleLatch.update(run.world, now, blocked);
++    return lastTimeScale = frameTimeScale(stop, speed, fastForward && fastForwardAllowed(run.world), idleSpeed, blocked);
+   };
+ 
+   // ── Boot: deck, world, loop, router ──
+@@ -885,7 +901,7 @@
+     }
+     ready = true;
+   };
+-  void learning.buildDeck(stage).then((built) => {
++  const deckBoot = startDeckBoot(overlay, notice, learning, stage, (built) => {
+     if (disposed) return;
+     deck = built;
+     notice.remove();
+@@ -917,7 +933,7 @@
+     world: () => run!.world,
+     state: () => {
+       const world = run?.world;
+-      if (!world) return { ready, paceCard: paceCard.isOpen };
++      if (!world) return { ready, paceCard: paceCard.isOpen, idleSpeed, timeScale: lastTimeScale };
+       return {
+         ready,
+         pace: { ...run!.header, kPm: world.pace.kPm, marginPm: world.pace.marginPm, graceTicks: world.pace.graceTicks },
+@@ -948,6 +964,8 @@
+         veil: veilMode,
+         countdown: countdownUntil > view.performance.now(),
+         fastForward,
++        idleSpeed,
++        timeScale: lastTimeScale,
+         placement: run!.placement.mode + ":" + (run!.placement.item ?? ""),
+         panel: handle.panel(),
+         slots: world.slots.map((slot) => (slot.item ? slot.def.id + "=" + slot.item + "@" + slot.level : null)).filter(Boolean),
+@@ -1091,6 +1109,7 @@
+   return {
+     dispose(): void {
+       disposed = true;
++      deckBoot.dispose();
+       learning.flush();
+       loop?.stop();
+       router?.dispose();
+--- a/src/app/learning.ts
++++ b/src/app/learning.ts
+@@ -12,7 +12,7 @@
+ import { buildCombatLearningEvent, normalizeLearningEntityId, type LearningBridge, type LearningEvent } from "../kit/learning";
+ import { createRng, safeLocalStorage } from "../kit/platform";
+ import { speakEnglish } from "../kit/speech";
+-import { filterVocabularyEntries, loadVocabularyIndex, loadVocabularyLevel, textHasBlockedWord, type VocabularyEntry } from "../kit/vocab";
++import { clearVocabularyRuntimeCache, filterVocabularyEntries, loadVocabularyIndex, loadVocabularyLevel, textHasBlockedWord, type VocabularyEntry } from "../kit/vocab";
+ import { buildWordDeck, isDeckText, type DeckCandidate } from "../typing/deck";
+ import type { Gloss } from "../ui/learning-frame";
+ import { createPortalBridge } from "./portal";
+@@ -118,6 +118,16 @@
+   readonly ipa: string;
+   /** "listen": hear then type; "meaning": read the meaning then type. */
+   readonly mode: "listen" | "meaning";
++}
++
++export type DeckFailureReason = "load-failed" | "empty" | "too-small";
++
++/** A failed stage deck never reaches world creation. Count is the usable deck size. */
++export class DeckBuildError extends Error {
++  constructor(readonly reason: DeckFailureReason, readonly count: number) {
++    super("dragon-hold: vocabulary " + reason + " (" + count + " words)");
++    this.name = "DeckBuildError";
++  }
+ }
+ 
+ export interface LearningClient {
+@@ -234,7 +244,15 @@
+   const lists = await Promise.all(
+     levels
+       .filter((level) => index.levels.some((item) => item.level === level))
+-      .map(async (level) => (await loadVocabularyLevel(level, index, { excludeMature })).map((entry) => ({ ...entry, level }))),
++      .map(async (level) => {
++        try {
++          return (await loadVocabularyLevel(level, index, { excludeMature })).map((entry) => ({ ...entry, level }));
++        } catch (error) {
++          // The kit rejects an empty document; preserve the app's empty-vs-network distinction.
++          if (error instanceof Error && error.message === "Vocabulary level " + level + " has no valid entries.") return [];
++          throw error;
++        }
++      }),
+   );
+   return lists.flat();
+ }
+@@ -319,7 +337,17 @@
+       try {
+         entries = await (options.loadEntries ? options.loadEntries(levels) : defaultEntries(levels, excludeMature));
+       } catch (error) {
++        deck = null;
++        if (!options.loadEntries) clearVocabularyRuntimeCache();
+         console.warn("dragon-hold: vocabulary did not load", error);
++        throw new DeckBuildError("load-failed", 0);
++      }
++      if (entries.length === 0) {
++        deck = null;
++        if (!options.loadEntries) clearVocabularyRuntimeCache();
++        const error = new DeckBuildError("empty", 0);
++        console.warn("dragon-hold: vocabulary did not load", error);
++        throw error;
+       }
+       for (const entry of entries) {
+         const text = normalizeLearningEntityId(entry.en);
+@@ -342,6 +370,14 @@
+       deck = buildWordDeck(candidatesFrom(entries, records, excludeMature), level, (min, max) => rng.words.int(min, max), {
+         newMax: stageDef.type === "boss" ? LEARNING.newPerBossStage : LEARNING.newPerStage,
+       });
++      if (deck.words.length < LEARNING.deckSize[0]) {
++        const error = new DeckBuildError("too-small", deck.words.length);
++        deck = null;
++        // A repaired server response must be fetched again by Retry, including successful short loads.
++        if (!options.loadEntries) clearVocabularyRuntimeCache();
++        console.warn("dragon-hold: vocabulary did not load", error);
++        throw error;
++      }
+       byText.clear();
+       for (const word of deck.words) byText.set(word.text, word);
+       stage.clear();
+--- a/src/app/deck-boot.ts
++++ b/src/app/deck-boot.ts
+@@ -0,0 +1,93 @@
++import type { StageDef, WordDeck } from "../content/types";
++import { el, icon } from "../ui/skin";
++import { DeckBuildError, type LearningClient } from "./learning";
++import { portalHome } from "./portal";
++
++/** Owns pre-router input and the single deck-to-boot transition. */
++export function startDeckBoot(root: HTMLElement, notice: HTMLElement, learning: Pick<LearningClient, "buildDeck">, stage: StageDef, ready: (deck: WordDeck) => void): { dispose(): void } {
++  const doc = root.ownerDocument;
++  const view = doc.defaultView!;
++  let panel: HTMLElement | null = null;
++  let retry: HTMLButtonElement | null = null;
++  let actions: HTMLElement[] = [];
++  let busy = false;
++  let closed = false;
++  let index = 0;
++
++  const onKey = (event: KeyboardEvent): void => {
++    if (closed || !panel || !["Enter", "Tab", "ArrowLeft", "ArrowRight"].includes(event.code)) return;
++    event.preventDefault();
++    event.stopPropagation();
++    if (busy) return;
++    if (event.code === "Enter") actions[index]?.click();
++    else {
++      const delta = event.code === "ArrowLeft" || (event.code === "Tab" && event.shiftKey) ? -1 : 1;
++      index = (index + delta + actions.length) % actions.length;
++      actions[index]?.focus();
++    }
++  };
++  const dispose = (): void => {
++    closed = true;
++    view.removeEventListener("keydown", onKey, true);
++    panel?.remove();
++  };
++  const show = (error: DeckBuildError): void => {
++    if (!panel) {
++      notice.remove();
++      panel = el(doc, "section", "dh-panel dh-deck-notice");
++      panel.setAttribute("role", "alertdialog");
++      panel.setAttribute("aria-modal", "true");
++      panel.setAttribute("aria-labelledby", "dh-deck-notice-title");
++      panel.setAttribute("aria-describedby", "dh-deck-notice-lead");
++      const title = el(doc, "h1", "dh-pausemenu__title dh-deck-notice__title", "Words could not load");
++      title.id = "dh-deck-notice-title";
++      lead = el(doc, "p", "dh-deck-notice__lead");
++      lead.id = "dh-deck-notice-lead";
++      const row = el(doc, "div", "dh-deck-notice__actions");
++      retry = el(doc, "button", "dh-btn dh-deck-notice__retry");
++      retry.type = "button";
++      retry.addEventListener("click", () => { void load(); });
++      row.append(retry);
++      actions = [retry];
++      const home = portalHome(import.meta.env.VITE_PORTAL_URL);
++      if (home) {
++        const portal = el(doc, "a", "dh-btn dh-deck-notice__portal", "Back to portal");
++        portal.href = home;
++        portal.target = "_top";
++        row.append(portal);
++        actions.push(portal);
++      }
++      // Track pointer/native focus too, so Enter always activates the focused action.
++      actions.forEach((action, i) => action.addEventListener("focus", () => { index = i; }));
++      panel.append(title, lead, row);
++      root.append(panel);
++      view.addEventListener("keydown", onKey, true);
++    }
++    lead!.textContent = error.reason === "load-failed" ? "Check your connection and try again." : "Not enough words arrived for this stage.";
++    retry!.disabled = false;
++    retry!.innerHTML = icon("retry") + "Retry";
++    index = 0;
++    retry!.focus();
++  };
++  let lead: HTMLElement | null = null;
++  const load = async (): Promise<void> => {
++    if (closed || busy) return;
++    busy = true;
++    if (retry) { retry.disabled = true; retry.textContent = "Loading words…"; }
++    let built: WordDeck;
++    try {
++      built = await learning.buildDeck(stage);
++    } catch (error) {
++      busy = false;
++      if (!closed) show(error instanceof DeckBuildError ? error : new DeckBuildError("load-failed", 0));
++      return;
++    }
++    busy = false;
++    if (closed) return;
++    notice.remove();
++    dispose();
++    ready(built);
++  };
++  void load();
++  return { dispose };
++}
+--- a/src/app/idle-speed.ts
++++ b/src/app/idle-speed.ts
+@@ -0,0 +1,77 @@
++import { GENERALS } from "../content/data/generals";
++import { DIFFICULTY } from "../content/rules";
++import { TICK_HZ, mToU, mmToU } from "../sim/fixed";
++import { pointAt } from "../sim/lanes";
++import { stopAlongFor, traitBit } from "../sim/spawn";
++import { foeDefOf } from "../sim/waves";
++import { inWordZone } from "../sim/words";
++import type { EnemyState, World } from "../sim/world";
++
++const LOOKAHEAD = 1.5 * TICK_HZ;
++
++/** The same x/z placement as movement.ts, including sky lanes; altitude is not part of the word ring. */
++function approaching(world: World, enemy: EnemyState, ticks: number, queued = false): boolean {
++  if (inWordZone(world, enemy)) return true;
++  const along = Math.min(enemy.stopAt, enemy.along + enemy.speed * ticks);
++  const lane = world.lanes[enemy.lane]!;
++  const point = pointAt(lane, along, enemy.lateral, { x: 0, z: 0 });
++  if (queued) {
++    // Spawn lateral is random. Preview the closest possible side, without consuming RNG.
++    const side = pointAt(lane, along, mToU(1), { x: 0, z: 0 });
++    const dx = side.x - point.x, dz = side.z - point.z;
++    const room = lane.halfWidth + mToU(1);
++    const lateral = Math.max(-room, Math.min(room, Math.round(-(point.x * dx + point.z * dz) * mToU(1) / (dx * dx + dz * dz))));
++    pointAt(lane, along, lateral, point);
++  }
++  return inWordZone(world, { ...enemy, along, x: point.x, z: point.z });
++}
++
++/** Read-only, conservative base-speed preview; freezes and slows must never delay cancellation. */
++export function idleSpeedUp(world: World): boolean {
++  if (world.phase !== "wave" || world.words.live.some((word) => word !== null)) return false;
++  for (const enemy of world.enemies.list) if (enemy.alive && approaching(world, enemy, LOOKAHEAD)) return false;
++  // Ignore gate/cap delays conservatively: a queued foe may arrive earlier, never later, in this preview.
++  for (const group of world.spawn.queue) {
++    for (let i = group.next; i < group.members.length; i += 1) {
++      const member = group.members[i]!;
++      const at = group.startedAt < 0 ? group.at + member.offset : group.startedAt + member.offset;
++      const ticks = LOOKAHEAD - Math.max(0, at - world.tick);
++      if (ticks < 0) continue;
++      const lane = world.lanes[group.lane]!;
++      const def = foeDefOf(member.foe);
++      const general = member.foe in GENERALS;
++      const elite = group.elite && member.foe === group.foe;
++      const clustered = member.heads > 1 && "cluster" in def && def.cluster;
++      const traits = elite || clustered ? group.traits : 0;
++      const swift = (traits & traitBit("swift")) !== 0 ? 125 : 100;
++      const speed = Math.round((def.speedMmS * DIFFICULTY[world.difficulty].enemySpeedPm * swift) / 100_000);
++      // Spawn jitter is at most twice the cluster spread; preview the furthest head.
++      const along = clustered ? mmToU(clustered.spreadMm) * 2 : 0;
++      const point = pointAt(lane, along, 0, { x: 0, z: 0 });
++      const enemy = { foe: member.foe, general, elite, cluster: member.heads > 1 ? 0 : -1,
++        lane: group.lane, along, stopAt: stopAlongFor(lane, def, general), speed, lateral: 0,
++        x: point.x, z: point.z, blockedBy: -1, mode: "walk",
++      } as EnemyState;
++      if (approaching(world, enemy, ticks, true)) return false;
++    }
++  }
++  return true;
++}
++
++/** Real-time latch shared by the scale callback and the post-step frame, so a new word cancels immediately. */
++export function createIdleSpeed(): { update(world: World, now: number, blocked: boolean): boolean; reset(): void } {
++  let since: number | null = null;
++  return {
++    update(world, now, blocked) {
++      if (blocked || !idleSpeedUp(world)) { since = null; return false; }
++      since ??= now;
++      return now - since >= 300;
++    },
++    reset() { since = null; },
++  };
++}
++
++/** Only the sim accumulator receives this multiplier; audio and presentation keep their own clocks. */
++export function frameTimeScale(hitStop: number, speed: number, manual: boolean, idle: boolean, blocked: boolean): number {
++  return hitStop * (blocked ? 1 : manual ? 2 : idle ? 1.75 : 1) * speed;
++}
+--- a/src/app/quality.ts
++++ b/src/app/quality.ts
+@@ -0,0 +1,12 @@
++import type { Quality } from "./contracts";
++
++/** The release build never exposes the prototype Low tier. */
++export function allowedQualities(prod: boolean): readonly Quality[] {
++  return prod ? ["medium", "high", "ultra"] : ["low", "medium", "high", "ultra"];
++}
++
++/** Unknown values keep the caller's default; release Low is promoted to Medium. */
++export function normalizeQuality(value: unknown, prod: boolean): Quality | undefined {
++  if (value === "low" && prod) return "medium";
++  return allowedQualities(prod).find((quality) => quality === value);
++}
+--- a/scripts/balance/idle-estimate.mjs
++++ b/scripts/balance/idle-estimate.mjs
+@@ -0,0 +1,43 @@
++import { readFileSync } from "node:fs";
++import { resolve } from "node:path";
++import { fileURLToPath } from "node:url";
++
++const round = value => Math.round(value * 10) / 10;
++const pct = (part, total) => round(100 * part / Math.max(1e-9, total));
++
++/** Offline estimate from the audit's [ms, phase, wave, words, visibleWords, liveFoes, hp] rows. */
++export function estimateIdle(samples) {
++  let waveSeconds = 0;
++  let idleSeconds = 0;
++  let gap = 0;
++  const gaps = [];
++  const endGap = () => { if (gap > 0) gaps.push(gap); gap = 0; };
++  for (let i = 0; i < samples.length - 1; i += 1) {
++    const [ms, phase, wave, , visible] = samples[i];
++    const next = samples[i + 1];
++    // Preserve the original audit's 500 ms interval cap and visible-word definition.
++    const dt = Math.min(500, next[0] - ms) / 1000;
++    if (phase !== 2) { endGap(); continue; }
++    waveSeconds += dt;
++    if (visible === 0) { gap += dt; idleSeconds += dt; }
++    else endGap();
++    if (next[1] !== 2 || next[2] !== wave) endGap();
++  }
++  endGap();
++  const scenario = (lookaheadSeconds, speed) => {
++    const shortened = gaps.reduce((sum, g) => sum + Math.min(g, lookaheadSeconds) + Math.max(0, g - lookaheadSeconds) / speed, 0);
++    const total = waveSeconds - idleSeconds + shortened;
++    return { lookaheadSeconds, speed, waveSeconds: round(total), idleSeconds: round(shortened), noWordPct: pct(shortened, total) };
++  };
++  return {
++    assumption: "Samples contain no foe positions. Visible words stand in for foes entering the Word Zone. Only wave gaps shrink; the final lookahead seconds run at ×1. The 0.3 s activation latch and manual ×2 are not modelled.",
++    before: { waveSeconds: Math.round(waveSeconds), idleSeconds: round(idleSeconds), noWordPct: pct(idleSeconds, waveSeconds), gaps: gaps.length },
++    after: scenario(1.5, 1.75),
++    sensitivity: [0, 0.5, 1, 1.5].flatMap(lookahead => [1.75, 2].map(speed => scenario(lookahead, speed))),
++  };
++}
++
++if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
++  if (!process.argv[2]) { console.error("Usage: node scripts/balance/idle-estimate.mjs <samples.json>"); process.exitCode = 1; }
++  else console.log(JSON.stringify(estimateIdle(JSON.parse(readFileSync(process.argv[2], "utf8"))), null, 2));
++}
+--- a/scripts/balance/idle-estimate.d.mts
++++ b/scripts/balance/idle-estimate.d.mts
+@@ -0,0 +1,13 @@
++export interface IdleScenario {
++  lookaheadSeconds: number;
++  speed: number;
++  waveSeconds: number;
++  idleSeconds: number;
++  noWordPct: number;
++}
++export function estimateIdle(samples: readonly (readonly number[])[]): {
++  assumption: string;
++  before: { waveSeconds: number; idleSeconds: number; noWordPct: number; gaps: number };
++  after: IdleScenario;
++  sensitivity: IdleScenario[];
++};
+--- a/tests/app/deck-app.test.ts
++++ b/tests/app/deck-app.test.ts
+@@ -0,0 +1,100 @@
++import { afterEach, beforeEach, expect, it, vi } from "vitest";
++import { WORDS_100 } from "../typing-helpers";
++
++// Keep the real app, loader, deck builder and world; replace graphics/audio and frame scheduling only.
++const h = vi.hoisted(() => {
++  const presenter = { dispose() {}, reset() {}, setLocator() {}, isOpen: false };
++  return { load: vi.fn(), presenter, openPace: vi.fn(), startLoop: vi.fn(), stopLoop: vi.fn() };
++});
++vi.mock("../../src/app/learning", async original => {
++  const actual = await original<typeof import("../../src/app/learning")>();
++  return { ...actual, createLearningClient: (options: any) => actual.createLearningClient({ ...options, loadEntries: h.load,
++    storage: { readJson: () => null, writeJson: () => true }, every: () => () => {} }) };
++});
++vi.mock("../../src/sim/world", async original => {
++  const actual = await original<typeof import("../../src/sim/world")>();
++  return { ...actual, createWorld: vi.fn(actual.createWorld) };
++});
++vi.mock("../../src/ui/skin", async original => ({ ...await original<typeof import("../../src/ui/skin")>(), installSkin: vi.fn() }));
++vi.mock("../../src/app/portal", async original => ({ ...await original<typeof import("../../src/app/portal")>(), createPortalBridge: () => ({
++  lookup: async () => { throw Error("offline"); }, requestFocus() {}, onSharedMusic: () => () => {}, dispose() {},
++}) }));
++vi.mock("../../src/app/pace-card", () => ({ createPaceCard: () => ({ ...h.presenter, open: h.openPace }) }));
++vi.mock("../../src/app/loop", () => ({ createLoop: vi.fn(() => ({ start: h.startLoop, stop: h.stopLoop })) }));
++vi.mock("../../src/app/input-router", () => ({ createInputRouter: vi.fn(() => ({ handlers: [], stats: {}, dispose() {} })) }));
++vi.mock("../../src/view/stage", () => ({ createMapStage: () => ({
++  stage: { layers: { ground: { children: [] }, actors: { children: [] }, fx: { children: [] } } },
++  rig: {}, render() {}, useModels() {}, dispose() {},
++}) }));
++vi.mock("../../src/view/models", () => ({ loadCrowdModels: () => h.presenter }));
++vi.mock("../../src/view/heroes", () => ({ createHeroes: () => h.presenter }));
++vi.mock("../../src/audio", () => ({ createAudio: () => h.presenter }));
++vi.mock("../../src/view/actors", () => ({ createActors: () => h.presenter }));
++vi.mock("../../src/view/telegraphs", () => ({ createTelegraphs: () => h.presenter }));
++vi.mock("../../src/view/banners", () => ({ createBanners: () => h.presenter }));
++vi.mock("../../src/view/hpbars", () => ({ createHpBars: () => h.presenter }));
++vi.mock("../../src/view/fx", () => ({ createFx: () => h.presenter }));
++vi.mock("../../src/view/lane-cue", () => ({ createLaneCue: () => h.presenter }));
++vi.mock("../../src/ui/tags", () => ({ createTags: () => h.presenter }));
++vi.mock("../../src/ui/hud", () => ({ createHud: () => h.presenter }));
++vi.mock("../../src/ui/learning-frame", () => ({ createLearningFrame: () => h.presenter, createPrelearn: () => h.presenter, createReviewCard: () => h.presenter }));
++vi.mock("../../src/ui/placement-ui", () => ({ createPlacementUi: () => h.presenter }));
++vi.mock("../../src/ui/wave-card", () => ({ createWaveCard: () => h.presenter }));
++vi.mock("../../src/ui/shop-strip", () => ({ createShopStrip: () => h.presenter }));
++vi.mock("../../src/ui/debut-card", () => ({ createDebutCard: () => h.presenter }));
++vi.mock("../../src/ui/results", () => ({ createResults: () => h.presenter, VICTORY_HOLD_MS: 2600 }));
++
++import { startApp } from "../../src/app/app";
++import { createWorld } from "../../src/sim/world";
++import { createLoop } from "../../src/app/loop";
++import { createInputRouter } from "../../src/app/input-router";
++
++class ElementStub {
++  className = ""; textContent = ""; innerHTML = ""; hidden = false; disabled = false; id = "";
++  dataset = {}; attributes: Record<string, string> = {}; children: ElementStub[] = [];
++  classList = { toggle() {}, add() {}, remove() {} };
++  events = new Map<string, Set<(e: any) => void>>();
++  constructor(readonly ownerDocument: DocumentStub) {}
++  append(...nodes: ElementStub[]) { this.children.push(...nodes); }
++  replaceChildren(...nodes: ElementStub[]) { this.children = nodes; }
++  remove() { this.ownerDocument.removed.add(this); }
++  setAttribute(key: string, value: string) { this.attributes[key] = value; }
++  addEventListener(key: string, fn: (e: any) => void) { if (!this.events.has(key)) this.events.set(key, new Set()); this.events.get(key)!.add(fn); }
++  removeEventListener(key: string, fn: (e: any) => void) { this.events.get(key)?.delete(fn); }
++  focus() {}
++  click() { if (!this.disabled) this.events.get("click")?.forEach(fn => fn({})); }
++}
++class DocumentStub {
++  nodes: ElementStub[] = []; removed = new Set<ElementStub>();
++  defaultView: any = Object.assign(new ElementStub(this), { location: { search: "" }, performance: { now: () => 0 } });
++  overlay = this.createElement(); canvas = this.createElement();
++  createElement() { const node = new ElementStub(this); this.nodes.push(node); return node; }
++  getElementById(id: string) { return id === "dh-overlay" ? this.overlay : this.canvas; }
++  addEventListener() {} removeEventListener() {} hasFocus() { return true; }
++  node(cls: string) { return this.nodes.find(node => node.className.split(" ").includes(cls))!; }
++}
++const entries = WORDS_100.map(en => ({ id: en, en, vi: "", ipa: "" }));
++const apps: ReturnType<typeof startApp>[] = [];
++async function settle() { for (let i = 0; i < 20; i += 1) await Promise.resolve(); }
++beforeEach(() => { vi.clearAllMocks(); h.load.mockReset(); vi.spyOn(console, "warn").mockImplementation(() => {}); });
++afterEach(() => { apps.splice(0).forEach(app => app.dispose()); vi.restoreAllMocks(); });
++
++it.each(["load-failed", "empty", "too-small"])("the actual app cannot create a run, router, loop or wave after %s", async reason => {
++  h.load.mockImplementation(async () => { if (reason === "load-failed") throw Error("network"); return reason === "empty" ? [] : entries.slice(0, 69); });
++  const doc = new DocumentStub(); apps.push(startApp(doc as unknown as Document)); await settle();
++  expect(doc.node("dh-deck-notice").attributes.role).toBe("alertdialog");
++  expect(createWorld).not.toHaveBeenCalled(); expect(createLoop).not.toHaveBeenCalled(); expect(createInputRouter).not.toHaveBeenCalled();
++  expect(h.openPace).not.toHaveBeenCalled(); expect(h.startLoop).not.toHaveBeenCalled();
++  expect(doc.defaultView.__dh.state().ready).toBe(false);
++  expect(doc.defaultView.__dh.events().tally["wave-start"] ?? 0).toBe(0);
++});
++it("the actual app boots exactly one run/router/loop after recovery, and removes its error keys", async () => {
++  h.load.mockRejectedValueOnce(Error("network")).mockResolvedValueOnce(entries);
++  const doc = new DocumentStub(); apps.push(startApp(doc as unknown as Document, { typistWpm: 35 })); await settle();
++  const retry = doc.node("dh-deck-notice__retry"); retry.click(); retry.click(); await settle(); retry.click(); await settle();
++  expect(createWorld).toHaveBeenCalledOnce(); expect(createInputRouter).toHaveBeenCalledOnce(); expect(createLoop).toHaveBeenCalledOnce();
++  expect(h.startLoop).toHaveBeenCalledOnce(); expect(h.load).toHaveBeenCalledTimes(2);
++  expect(doc.defaultView.__dh.state().ready).toBe(true);
++  expect(doc.removed.has(doc.node("dh-deck-notice"))).toBe(true);
++  expect(doc.defaultView.events.get("keydown")?.size ?? 0).toBe(0);
++});
+--- a/tests/app/deck-boot.test.ts
++++ b/tests/app/deck-boot.test.ts
+@@ -0,0 +1,110 @@
++import { afterEach, describe, expect, it, vi } from "vitest";
++import { startDeckBoot } from "../../src/app/deck-boot";
++import { createLearningClient, DeckBuildError } from "../../src/app/learning";
++import { STAGE_M0 } from "../../src/content/data/stages";
++import type { LearningBridge } from "../../src/kit/learning";
++import { WORDS_100 } from "../typing-helpers";
++import { clearVocabularyRuntimeCache } from "../../src/kit/vocab";
++
++class NodeStub {
++  className = ""; textContent = ""; innerHTML = ""; hidden = false; disabled = false;
++  href = ""; target = ""; tabIndex = 0; id = "";
++  dataset = {}; attributes: Record<string, string> = {}; children: NodeStub[] = [];
++  listeners = new Map<string, Set<(e: any) => void>>();
++  constructor(readonly ownerDocument: DocStub) {}
++  append(...nodes: NodeStub[]) { this.children.push(...nodes); }
++  remove() { this.ownerDocument.removed.add(this); }
++  setAttribute(k: string, v: string) { this.attributes[k] = v; }
++  focus() { this.ownerDocument.activeElement = this; }
++  addEventListener(k: string, f: (e: any) => void) { if (!this.listeners.has(k)) this.listeners.set(k, new Set()); this.listeners.get(k)!.add(f); }
++  removeEventListener(k: string, f: (e: any) => void) { this.listeners.get(k)?.delete(f); }
++  click() { if (!this.disabled) this.listeners.get("click")?.forEach(f => f({ preventDefault() {}, stopPropagation() {} })); }
++}
++class DocStub {
++  nodes: NodeStub[] = []; removed = new Set<NodeStub>(); activeElement: NodeStub | null = null;
++  defaultView = new NodeStub(this);
++  createElement() { const n = new NodeStub(this); this.nodes.push(n); return n; }
++}
++const entries = WORDS_100.map(en => ({ id: en, en, vi: "", ipa: "" }));
++function learning(loadEntries?: () => Promise<typeof entries>) {
++  return createLearningClient({ loadEntries, bridge: { lookup: async () => { throw Error("offline"); }, dispose() {} } as unknown as LearningBridge,
++    storage: { readJson: () => null, writeJson: () => true }, every: () => () => {},
++  });
++}
++async function settle() { for (let i = 0; i < 12; i += 1) await Promise.resolve(); }
++afterEach(() => { vi.restoreAllMocks(); vi.unstubAllEnvs(); vi.unstubAllGlobals(); clearVocabularyRuntimeCache(); });
++function fixture(load: () => Promise<typeof entries>, portal = "") {
++  vi.stubEnv("VITE_PORTAL_URL", portal); vi.spyOn(console, "warn").mockImplementation(() => {});
++  const doc = new DocStub(); const root = doc.createElement(); const notice = doc.createElement();
++  const client = learning(load); const ready = vi.fn();
++  const boot = startDeckBoot(root as unknown as HTMLElement, notice as unknown as HTMLElement, client, STAGE_M0, ready);
++  const node = (cls: string) => doc.nodes.find(n => n.className.split(" ").includes(cls))!;
++  const key = (code: string, shiftKey = false) => doc.defaultView.listeners.get("keydown")?.forEach(f => f({ code, shiftKey, preventDefault() {}, stopPropagation() {} }));
++  return { doc, client, ready, boot, node, key };
++}
++describe("deck failures and boot gate", () => {
++  it.each([0, 69])("retries the real vocabulary adapter after %i cached usable words", async count => {
++    clearVocabularyRuntimeCache();
++    const index = { version: 1, plannedLevels: 100, availableLevels: 1, totalEntries: 100,
++      levels: [{ level: 1, label: "Level 1", file: "level-1.json", count: 100 }] };
++    let repaired = false;
++    const fetcher = vi.fn(async (url: string) => ({ ok: true, json: async () => url.endsWith("index.json") ? index : { entries: repaired ? entries : entries.slice(0, count) } }));
++    vi.stubGlobal("fetch", fetcher);
++    vi.spyOn(console, "warn").mockImplementation(() => {});
++    const client = learning();
++    try {
++      await expect(client.buildDeck(STAGE_M0)).rejects.toMatchObject({ reason: count === 0 ? "empty" : "too-small", count });
++      repaired = true;
++      expect((await client.buildDeck(STAGE_M0)).words).toHaveLength(90);
++      expect(fetcher.mock.calls.filter(([url]) => !url.endsWith("index.json"))).toHaveLength(2);
++    } finally { client.dispose(); }
++  });
++  it.each(["load-failed", "empty", "too-small"] as const)("reports %s and never starts a run/wave/router/loop/pace card", async reason => {
++    const load = async () => { if (reason === "load-failed") throw Error("network"); return reason === "empty" ? [] : entries.slice(0, 69); };
++    const c = learning(load); const warn = vi.spyOn(console, "warn").mockImplementation(() => {});
++    await expect(c.buildDeck(STAGE_M0)).rejects.toMatchObject({ reason, count: reason === "too-small" ? 69 : 0 });
++    expect(c.deck).toBeNull(); expect(warn).toHaveBeenCalled();
++    const f = fixture(load); await settle();
++    expect(f.ready).not.toHaveBeenCalled();
++    const panel = f.node("dh-deck-notice");
++    expect(panel.attributes.role).toBe("alertdialog"); expect(panel.attributes["aria-labelledby"]).toBe(f.node("dh-deck-notice__title").id);
++    expect(f.node("dh-deck-notice__title").textContent).toBe("Words could not load");
++    expect(f.node("dh-deck-notice__lead").textContent).toBe(reason === "load-failed" ? "Check your connection and try again." : "Not enough words arrived for this stage.");
++    expect(f.doc.activeElement).toBe(f.node("dh-deck-notice__retry"));
++    f.boot.dispose(); c.dispose(); f.client.dispose();
++  });
++  it("retries once while loading, then closes and boots once with no key listener left", async () => {
++    let resolve!: (value: typeof entries) => void;
++    const load = vi.fn().mockRejectedValueOnce(new DeckBuildError("load-failed", 0)).mockImplementationOnce(() => new Promise(r => resolve = r));
++    const f = fixture(load); await settle();
++    f.key("Enter"); f.key("Enter"); await settle();
++    const retry = f.node("dh-deck-notice__retry");
++    expect(retry.disabled).toBe(true); expect(retry.textContent).toBe("Loading words…"); expect(load).toHaveBeenCalledTimes(2);
++    resolve(entries); await settle();
++    expect(f.ready).toHaveBeenCalledOnce(); expect(f.doc.removed.has(f.node("dh-deck-notice"))).toBe(true);
++    expect(f.doc.defaultView.listeners.get("keydown")?.size ?? 0).toBe(0);
++    f.boot.dispose(); f.client.dispose();
++  });
++  it("keeps the panel and re-enables retry after a second failure; dispose cancels late boot", async () => {
++    const f = fixture(async () => []); await settle(); f.key("Enter"); await settle();
++    expect(f.ready).not.toHaveBeenCalled(); expect(f.node("dh-deck-notice__retry").disabled).toBe(false);
++    expect(f.doc.removed.has(f.node("dh-deck-notice"))).toBe(false); f.boot.dispose(); f.client.dispose();
++    let resolve!: (value: typeof entries) => void;
++    const late = fixture(() => new Promise(r => resolve = r)); late.boot.dispose(); resolve(entries); await settle();
++    expect(late.ready).not.toHaveBeenCalled(); late.client.dispose();
++  });
++  it.each(["", "https://portal.example/learn/?game=dh#home"])("conditionally links portal and cycles native focus: %s", async portal => {
++    const f = fixture(async () => [], portal); await settle(); const retry = f.node("dh-deck-notice__retry");
++    const link = f.node("dh-deck-notice__portal");
++    if (!portal) { expect(link).toBeUndefined(); f.key("Tab"); expect(f.doc.activeElement).toBe(retry); }
++    else {
++      expect(link.href).toBe(portal); expect(link.target).toBe("_top");
++      f.key("Tab"); expect(f.doc.activeElement).toBe(link);
++      f.key("ArrowLeft"); expect(f.doc.activeElement).toBe(retry);
++      f.key("ArrowRight"); expect(f.doc.activeElement).toBe(link);
++      f.key("Tab", true); expect(f.doc.activeElement).toBe(retry);
++      const click = vi.spyOn(link, "click"); f.key("ArrowRight"); f.key("Enter"); expect(click).toHaveBeenCalledOnce();
++    }
++    f.boot.dispose(); f.client.dispose();
++  });
++});
+--- a/tests/app/idle-estimate.test.ts
++++ b/tests/app/idle-estimate.test.ts
+@@ -0,0 +1,37 @@
++import { execFileSync } from "node:child_process";
++import { readFileSync } from "node:fs";
++import { resolve } from "node:path";
++import { expect, it } from "vitest";
++import { estimateIdle } from "../../scripts/balance/idle-estimate.mjs";
++it("keeps short gaps and reserves the last lookahead seconds in a long gap", () => {
++  // One-second idle, one-second word, four-second idle, one-second word.
++  const samples = [[0, 2, 1, 0, 0], [1000, 2, 1, 1, 1], [2000, 2, 1, 0, 0], [6000, 2, 1, 1, 1], [7000, 0, 1, 0, 0]];
++  // Source intervals are capped at 500 ms, just like the original audit.
++  const result = estimateIdle(samples);
++  expect(result.before.waveSeconds).toBe(2);
++  expect(result.before.noWordPct).toBe(50);
++  expect(result.sensitivity.find(r => r.lookaheadSeconds === 1.5 && r.speed === 1.75)).toMatchObject({ noWordPct: 50 });
++});
++it("reproduces the audit before figure through the offline command-line entrypoint", () => {
++  const path = resolve("../dragon-hold/tmp/map1-audit/feel-35-1280/samples.json");
++  const before = readFileSync(path);
++  const result = JSON.parse(execFileSync(process.execPath, ["scripts/balance/idle-estimate.mjs", path], { encoding: "utf8" }));
++  expect(result.before.noWordPct).toBe(52.4);
++  expect(result.after.noWordPct).toBe(47.8);
++  expect(result.sensitivity).toHaveLength(8);
++  expect(result.sensitivity.find((r: { lookaheadSeconds: number; speed: number }) => r.lookaheadSeconds === 0 && r.speed === 1.75).noWordPct).toBe(38.6);
++  expect(readFileSync(path)).toEqual(before);
++});
++it("reserves 1.5 seconds only in long gaps and shrinks the wave denominator too", () => {
++  const samples = Array.from({ length: 71 }, (_, i) => [i * 100, i < 70 ? 2 : 0, 1, 0, i < 10 || (i >= 20 && i < 60) ? 0 : 1]);
++  const result = estimateIdle(samples);
++  // Five idle seconds: 1 + (1.5 + 2.5 / 1.75). Two word seconds remain unchanged.
++  expect(result.before.noWordPct).toBe(71.4);
++  expect(result.after.noWordPct).toBe(66.3);
++  expect(result.after.waveSeconds).toBeCloseTo(5.9, 1);
++});
++it("keeps idle gaps separate at wave boundaries and includes a trailing gap", () => {
++  const samples = Array.from({ length: 21 }, (_, i) => [i * 100, 2, i < 10 ? 1 : 2, 0, 0]);
++  expect(estimateIdle(samples).after.waveSeconds).toBe(2);
++  expect(estimateIdle(samples).before.gaps).toBe(2);
++});
+--- a/tests/app/idle-speed.test.ts
++++ b/tests/app/idle-speed.test.ts
+@@ -0,0 +1,162 @@
++import { describe, expect, it } from "vitest";
++import { idleSpeedUp, createIdleSpeed, frameTimeScale } from "../../src/app/idle-speed";
++import { STAGE_M0 } from "../../src/content/data/stages";
++import type { Phase } from "../../src/content/types";
++import { mToU, mmToU } from "../../src/sim/fixed";
++import { pointAt } from "../../src/sim/lanes";
++import { scheduleWave, spawnFoe, traitBit } from "../../src/sim/spawn";
++import { ENEMIES } from "../../src/content/data/enemies";
++import { createWorld } from "../../src/sim/world";
++import { applyStatus } from "../../src/sim/status";
++import { inWordZone } from "../../src/sim/words";
++import { createLoop } from "../../src/app/loop";
++
++function world() { const w = createWorld(STAGE_M0, 1); w.phase = "wave"; return w; }
++function boundary(ticks: number, sky = false) {
++  const w = world();
++  const e = spawnFoe(w, sky ? "thorn-wasp" : "moss-grunt", sky ? 2 : 0, 1)!;
++  e.lateral = 0;
++  // Put the T_a boundary comfortably inside the ring, then approach it at base speed.
++  e.stopAt = mToU(18); e.speed = 1000; Object.assign(w.pace, { approachTicks: 60 });
++  e.along = e.stopAt - e.speed * (w.pace.approachTicks + ticks);
++  const p = pointAt(w.lanes[e.lane]!, e.along, e.lateral, { x: 0, z: 0 });
++  e.x = p.x; e.z = p.z;
++  return { w, e };
++}
++
++describe("idle acceleration eligibility", () => {
++  it.each([89, 90, 91])("looks ahead exactly 90 ticks (%i)", (ticks) => {
++    const { w } = boundary(ticks);
++    expect(idleSpeedUp(w)).toBe(ticks > 90);
++  });
++  it("projects flyers along the sky lane using x/z, regardless of altitude", () => {
++    const { w, e } = boundary(90, true); e.y = mToU(3);
++    expect(idleSpeedUp(w)).toBe(false);
++    const snapshot = JSON.stringify(w);
++    idleSpeedUp(w);
++    expect(JSON.stringify(w)).toBe(snapshot);
++  });
++  it.each(["attack", "blocked"] as const)("counts a foe %s inside 26 m immediately", (mode) => {
++    const { w, e } = boundary(91); e.x = mToU(25); e.z = 0; e.mode = mode;
++    expect(inWordZone(w, e)).toBe(true);
++    expect(idleSpeedUp(w)).toBe(false);
++  });
++  it("uses base speed for a frozen/slowed foe, and ignores dead foes", () => {
++    const { w, e } = boundary(90); applyStatus(w, { kind: "enemy", slot: e.slot, serial: e.serial }, e.statuses, { id: "freeze", durationMs: 10000 });
++    applyStatus(w, { kind: "enemy", slot: e.slot, serial: e.serial }, e.statuses, { id: "slow", durationMs: 10000, value: 80 });
++    expect(idleSpeedUp(w)).toBe(false);
++    e.alive = false;
++    expect(idleSpeedUp(w)).toBe(true);
++  });
++  it("never speeds through one live word", () => {
++    const w = world(); w.words.live[0] = { text: "tree" } as never;
++    expect(idleSpeedUp(w)).toBe(false);
++  });
++  it.each<Phase>(["prep", "warning", "break", "victory", "defeat"])("keeps %s at normal pace", (phase) => {
++    const w = world(); w.phase = phase; expect(idleSpeedUp(w)).toBe(false);
++  });
++  it("respects the ring and clamps projection to stopAt", () => {
++    const { w, e } = boundary(0); e.stopAt = 0; e.along = 0;
++    const p = pointAt(w.lanes[e.lane]!, 0, e.lateral, { x: 0, z: 0 });
++    e.x = p.x; e.z = p.z;
++    expect(idleSpeedUp(w)).toBe(true);
++  });
++  it("uses the actual ring at the 89/90/91 tick boundary, including a held foe", () => {
++    for (const ticks of [89, 90, 91]) {
++      const w = world();
++      Object.assign(w.lanes[0]!, { xs: [mToU(30), mToU(6)], zs: [0, 0], cum: [0, mToU(24)], length: mToU(24) });
++      const e = spawnFoe(w, "moss-grunt", 0, 1, { lateral: 0 })!;
++      e.speed = 1000; e.along = mToU(4) - ticks * e.speed;
++      const p = pointAt(w.lanes[0]!, e.along, 0, { x: 0, z: 0 }); e.x = p.x; e.z = p.z;
++      Object.assign(w.pace, { approachTicks: 2000 });
++      expect(idleSpeedUp(w)).toBe(ticks > 90);
++      e.blockedBy = 0;
++      expect(idleSpeedUp(w)).toBe(ticks > 90);
++    }
++  });
++  it.each([0, 1])("looks ahead to queued foes, accounting for spawn delay %i", delay => {
++    const w = world();
++    Object.assign(w.lanes[0]!, { xs: [mToU(29), mToU(6)], zs: [0, 0], cum: [0, mToU(23)], length: mToU(23) });
++    Object.assign(w.pace, { approachTicks: 2000 });
++    scheduleWave(w, { ...STAGE_M0.waves[0]!, groups: [{ atMs: 0, lane: "cau", shape: "single", foe: "moss-grunt", count: 1 }] });
++    w.spawn.queue[0]!.at = w.tick + delay;
++    const snapshot = JSON.stringify(w);
++    expect(idleSpeedUp(w)).toBe(delay > 0);
++    expect(JSON.stringify(w)).toBe(snapshot);
++  });
++  it("uses chain length and the run's pace rather than the ring alone", () => {
++    const w = world(); const e = spawnFoe(w, "moss-banner", 0, 1)!;
++    e.x = mToU(20); e.z = 0; e.speed = 1000; e.stopAt = e.along + 1000 * 1000;
++    Object.assign(w.pace, { approachTicks: 60, wordTicks: 200 });
++    expect(inWordZone(w, e)).toBe(true);
++    expect(idleSpeedUp(w)).toBe(false);
++  });
++  it("cancels for upcoming map-1 wolves even when spawn lateral reaches the ring first", () => {
++    const w = world();
++    Object.assign(w.pace, { approachTicks: 2000 });
++    scheduleWave(w, { ...STAGE_M0.waves[0]!, groups: [{ atMs: 0, lane: "cau", shape: "single", foe: "blight-wolf", count: 1 }] });
++    const e = spawnFoe(w, "blight-wolf", 0, 1, { lateral: 0 })!; e.alive = false;
++    for (let delay = 0; delay <= 90; delay += 1) {
++      w.spawn.queue[0]!.at = w.tick + delay;
++      const along = e.speed * (90 - delay);
++      for (const lateral of [-mToU(1.1), 0, mToU(1.1)]) {
++        const p = pointAt(w.lanes[0]!, along, lateral, { x: 0, z: 0 });
++        if (inWordZone(w, { ...e, along, lateral, ...p })) expect(idleSpeedUp(w), "spawn delay " + delay + ", lateral " + lateral).toBe(false);
++      }
++    }
++  });
++  it("includes swift cluster spawn jitter without waiting for a live foe", () => {
++    const w = world();
++    Object.assign(w.lanes[0]!, { xs: [mToU(29), mToU(6)], zs: [0, 0], cum: [0, mToU(23)], length: mToU(23) });
++    Object.assign(w.pace, { approachTicks: 2000 });
++    scheduleWave(w, { ...STAGE_M0.waves[0]!, groups: [{ atMs: 0, lane: "cau", shape: "cluster", foe: "thorn-ant", count: 6, traits: ["swift"] }] });
++    const e = spawnFoe(w, "thorn-ant", 0, 1, { cluster: 1, traits: traitBit("swift"), along: mmToU(ENEMIES["thorn-ant"].cluster!.spreadMm) * 2, lateral: 0 })!;
++    e.alive = false;
++    for (let delay = 0; delay <= 90; delay += 1) {
++      w.spawn.queue[0]!.at = w.tick + delay;
++      const along = e.along + e.speed * (90 - delay), p = pointAt(w.lanes[0]!, along, 0, { x: 0, z: 0 });
++      if (inWordZone(w, { ...e, along, ...p })) expect(idleSpeedUp(w), "spawn delay " + delay).toBe(false);
++    }
++  });
++});
++
++describe("frame acceleration", () => {
++  it("scales the real loop's sim steps, keeps presentation dt and cancels on the first word frame", () => {
++    let pending: ((now: number) => void) | null = null;
++    let steps = 0;
++    const w = world(); const latch = createIdleSpeed();
++    const frames: { dt: number; worldDt: number }[] = [];
++    const loop = createLoop({ step: () => { steps += 1; }, frame: info => { frames.push(info); latch.update(w, info.now, false); },
++      timeScale: now => frameTimeScale(1, 1, false, latch.update(w, now, false), false),
++    }, { scheduler: { request: cb => { pending = cb; return 1; }, cancel: () => { pending = null; } } });
++    const draw = (now: number) => { const cb = pending!; pending = null; cb(now); };
++    loop.start(); draw(0); draw(100); draw(200);
++    const before = steps; draw(300);
++    expect(steps - before).toBe(10);
++    expect(frames.at(-1)!.dt).toBe(0.1);
++    expect(frames.at(-1)!.worldDt).toBeCloseTo(0.175);
++    w.words.live[0] = { text: "tree" } as never;
++    draw(400);
++    expect(frames.at(-1)!.worldDt).toBe(0.1);
++    loop.stop();
++  });
++  it("waits 0.3 real seconds, cancels on the first word frame and waits again", () => {
++    const speed = createIdleSpeed(); const w = world();
++    expect(speed.update(w, 0, false)).toBe(false);
++    expect(speed.update(w, 299, false)).toBe(false);
++    expect(speed.update(w, 300, false)).toBe(true);
++    w.words.live[0] = { text: "tree" } as never;
++    expect(speed.update(w, 301, false)).toBe(false);
++    w.words.live[0] = null;
++    expect(speed.update(w, 400, false)).toBe(false);
++    expect(speed.update(w, 700, false)).toBe(true);
++    expect(speed.update(w, 701, true)).toBe(false);
++    expect(speed.update(w, 1000, false)).toBe(false);
++  });
++  it("manual ×2 wins; both multiply hit-stop and dev speed once", () => {
++    expect(frameTimeScale(1, 1, false, true, false)).toBe(1.75);
++    expect(frameTimeScale(0.2, 3, true, true, false)).toBeCloseTo(1.2);
++    expect(frameTimeScale(0.2, 3, false, true, false)).toBeCloseTo(1.05);
++    expect(frameTimeScale(1, 1, true, true, true)).toBe(1);
++  });
++});
+--- a/tests/app/pinned-deck.test.ts
++++ b/tests/app/pinned-deck.test.ts
+@@ -0,0 +1,24 @@
++import { readFileSync } from "node:fs";
++import { resolve } from "node:path";
++import { afterEach, expect, it, vi } from "vitest";
++import { createLearningClient } from "../../src/app/learning";
++import { STAGE_M0 } from "../../src/content/data/stages";
++import { clearVocabularyRuntimeCache } from "../../src/kit/vocab";
++import type { LearningBridge } from "../../src/kit/learning";
++
++afterEach(() => { vi.unstubAllGlobals(); clearVocabularyRuntimeCache(); });
++it("builds cold decks of at least 70 from pinned vocabulary at levels 1–100, with both mature filters", async () => {
++  vi.stubGlobal("fetch", async (url: string) => ({ ok: true, json: async () => JSON.parse(readFileSync(resolve("public", url.replace(/^\//, "")), "utf8")) }));
++  const counts: { level: number; excludeMature: boolean; count: number }[] = [];
++  for (const excludeMature of [false, true]) for (let level = 1; level <= 100; level += 1) {
++    clearVocabularyRuntimeCache();
++    const client = createLearningClient({ vocabLevel: level, excludeMature,
++      bridge: { dispose: () => {}, lookup: async () => { throw Error("offline"); } } as unknown as LearningBridge,
++      storage: { readJson: () => null, writeJson: () => true }, every: () => () => {},
++    });
++    try { counts.push({ level, excludeMature, count: (await client.buildDeck(STAGE_M0)).words.length }); }
++    finally { client.dispose(); }
++  }
++  console.log("Pinned cold deck counts: " + JSON.stringify(counts));
++  expect(counts.filter(({ count }) => count < 70)).toEqual([]);
++});
+--- a/tests/app/quality.test.ts
++++ b/tests/app/quality.test.ts
+@@ -0,0 +1,12 @@
++import { expect, it } from "vitest";
++import { allowedQualities, normalizeQuality } from "../../src/app/quality";
++import { optionsFromUrl } from "../../src/app/app";
++it("allows Low only in development, including URL and explicit quality", () => {
++  expect(allowedQualities(true)).toEqual(["medium", "high", "ultra"]);
++  expect(allowedQualities(false)).toEqual(["low", "medium", "high", "ultra"]);
++  expect(normalizeQuality("low", true)).toBe("medium");
++  expect(normalizeQuality("strange", true)).toBeUndefined();
++  expect(optionsFromUrl("?q=low", false).quality).toBe("medium");
++  expect(optionsFromUrl("?q=low", true).quality).toBe("low");
++  expect(optionsFromUrl("?q=strange", false).quality).toBeUndefined();
++});
+--- a/docs/changelog/2026-10-30-deck-notice-and-idle-speed.md
++++ b/docs/changelog/2026-10-30-deck-notice-and-idle-speed.md
+@@ -0,0 +1,9 @@
++# 30/10/2026 · Báo bộ từ lỗi, chặn Low và tự tua khi hết chữ
++
++- **DH-02:** Bộ từ tải lỗi, rỗng hoặc dưới 70 từ chặn khởi động trận. Bảng tiếng Anh có Retry và Back to portal khi có URL hợp lệ. Retry nạp lại cả bộ thiếu đã được cache; chỉ khởi động một lần khi đủ từ. Giữ cảnh báo console, lý do lỗi và số từ cho app.
++- **DH-18:** Bản phát hành chỉ cho Medium, High, Ultra. `?q=low` chuyển thành Medium; dev vẫn cho Low. Settings của phiếu 192 cần dùng `allowedQualities` khi gộp.
++- **DH-05, bước 0:** Trong đợt, hết chữ và không quái nào ở hay sắp vào Vùng Chữ trong 90 tick thì tự tua ×1,75 sau 0,3 giây. Tính cả quái sắp xuất hiện và quái bay. Có chữ, mở bảng, đặt/sửa món hoặc dừng thì tắt. Alt + → vẫn bật/tắt ×2 và thắng tự tua.
++- Dấu tua dùng ảnh `fast-forward` của phiếu 194, số nhỏ và nhãn hỗ trợ tiếng Anh. Debug thêm `idleSpeed` và `timeScale`.
++- Chỉ đổi số bước sim mỗi khung. Giữ nguyên mã sim, tick, golden, nhạc và đồng hồ VFX. Script ước tính ngoại tuyến cho 52,4% trước và 47,8% sau với tầm nhìn 1,5 giây; đây là mô hình từ mẫu, chưa phải số đo trình duyệt.
++
++Kiểm: `pnpm check` xanh 568/568 test; golden 10/10; English UI 9/9. 200 bộ từ ghim ở cấp 1–100 đều có 90 từ. `pnpm deploy:pack` và JSON kiểm gói đạt 0 lỗi. Báo cáo cùng bằng chứng ở `docs/codex-queue/195-report.md` và `195/` của repo cha. Claude còn duyệt diff và đo trình duyệt 1280/1920 trước khi commit.

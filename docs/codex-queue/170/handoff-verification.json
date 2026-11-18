@@ -1,0 +1,58 @@
+{
+  "checkedAt": "2026-10-29T07:38:12.313098+00:00",
+  "note": "Kiểm tra nhận lại phiếu; mã và bằng chứng đã có sẵn. Không chạy lại build hay bộ test.",
+  "worktree": "/Users/toandx/htdocs/typing-game/games/.wt-td-codex",
+  "head": "f9abfd09987dadd519233c2f38692758d35cefca",
+  "branch": "td-codex",
+  "headUnchanged": true,
+  "statusMatchesPreviousVerification": true,
+  "sourceAndTestHashesMatch": {
+    "package.json": "e5cbe90c39ed552c933ffc91b1d877b79fd05ce362ad5f9715df4c0ea870b13f",
+    "scripts/td/b9.ts": "3a0c67e85d22f0cd3de6ff7ca66d71aaa804d75f883f563818503af01cb720b5",
+    "src/app/retry.ts": "9c46d9a10235cb9e542b48ba3cae01ff39c61aafbcb3f45c1cfdbaeb98cbd3df",
+    "tests/td-b9.test.ts": "e94d0bd501e0f9b99f88e59b2c9a0f24653adcd8fdf85a9d3feacd34b589e775",
+    "tests/td-flow.test.ts": "45c054acbf2b862cfb80f9ee7ac134ed677e168e597390c3ac12341da3200bbc",
+    "tests/deploy-pack.test.ts": "e1217f3e79c51fe00072671ee732238d0feeee22f5eb433075af2b142eea6191"
+  },
+  "kitFilesUnchanged": 34,
+  "goldenUnchanged": true,
+  "simContentTypingClean": true,
+  "distMatchesRecordedInventory": true,
+  "distFiles": 55,
+  "distBytes": 1205337,
+  "previousCheck": {
+    "command": "pnpm check",
+    "exitCode": 0,
+    "seconds": 24.421862333
+  },
+  "previousTestsPassed": 380,
+  "previousTestFilesPassed": 37,
+  "previousDeployPack": {
+    "command": "pnpm deploy:pack",
+    "exitCode": 1,
+    "seconds": 4.12967275
+  },
+  "freshChecker": {
+    "command": "node src/kit/tools/deploy/check-pack.mjs dist --game typing-defense --json",
+    "exitCode": 1,
+    "matchesPreviousJSON": true,
+    "problemsByCode": {
+      "local-host": 1,
+      "missing-model": 68
+    }
+  },
+  "allFindingsMatchDiagnostics": true,
+  "missingModelsConfirmedAbsent": 68,
+  "diffCheckExitCode": 0,
+  "evidenceSHA256": {
+    "check.log": "82112c45a463a1cf948e76e472489be5ea167fb0cc795dbdca6451d8a2c47ffa",
+    "check.json": "ba63ec3fac497e4efc736b970100cbfbbf7a00b42f8a38325214e32056e0867d",
+    "deploy-pack.log": "568bff8554cd964b8001b3e8d7bfc2de0a043199bb7fef5f4e42b6168d0b0eaf",
+    "deploy-pack-run.json": "ad2bfc87ece1b7f40280987994088b0b215baa187f9ae5019962c24e1cb349d2",
+    "check-pack.json": "603d94122786977512ad712cd89e1e66c00c7a3b7b9a737944387e7fbc992fc7",
+    "deploy-findings.json": "00389c642d82ee1114538bd3610e4fde5c0ccea9aee169caeb378bf15b846fa7",
+    "dist-inventory.json": "a93d8a522fe829f05ad898115de26fdeb10be3d03de50a78e845dca4a0b2be60",
+    "baseline-flow.log": "72d5efbff40c693af8962b4835ad480d56533d4b1d6c14f5b19dfa9d491a6f60",
+    "tests-before.log": "dd7607c9e533acb102e863ea4b53c12bcdf02d339e5cfcb27389ae98c0e57e64"
+  }
+}

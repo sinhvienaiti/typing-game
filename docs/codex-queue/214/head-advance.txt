@@ -1,0 +1,9 @@
+$ git log --oneline 7afe7933bbd49155cea58e66c806a86a89f1c256..HEAD
+b646d855 docs: handoff - Claude paused (owner 30/10 11:20): where each paused job stopped and how to resume; Codex on three lanes s7, s8, s9
+
+$ git diff --stat 7afe7933bbd49155cea58e66c806a86a89f1c256 HEAD
+ docs/HANDOFF_CURRENT.md | 21 +++++++++++++++++++++
+ 1 file changed, 21 insertions(+)
+
+$ git diff 7afe7933bbd49155cea58e66c806a86a89f1c256 HEAD -- portal scripts/game-dir.sh scripts/bootstrap.sh package.json scripts/validate-space-integration.mjs scripts/validate-play-mode.mjs
+(no relevant source changes)

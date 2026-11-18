@@ -1,0 +1,40 @@
+[
+  {
+    "id": "P1-01",
+    "severity": "P1",
+    "location": "vite.config.ts:48",
+    "scenario": "VITE_PORTAL_URL vắng, import src/kit/learning/contract.ts?v=123 hoặc ?import (hoặc nạp vite.config.ts qua symlink) → Vite build mã 0, chunk vẫn export https://typing-game.local; plugin không báo việc transform bị bỏ qua.",
+    "evidence": "vite-probes.json: realBuilds.queryV, queryImport, symlinkConfig đều success=true/localHost=true; canonical localHost=false. Đồ thị không đi qua contract cũng build thành công; plugin chỉ có transform, không guard kết thúc.",
+    "proposal": "Chuẩn hóa id trước so sánh: bỏ query, chuẩn hóa dấu phân cách và canonicalize đường thật của cả hai phía; tránh lowercase mù trên filesystem phân biệt hoa thường. Theo dõi contract đã được thay trong lượt build và dừng rõ nếu gói game không đi qua phép thay mong đợi. Giữ kit trên đĩa nguyên.",
+    "test": "Thêm Vite build thật với ?v=, ?import, cấu hình qua symlink; khẳng định origin rỗng/cấu hình đúng và thiếu transform làm build dừng. Giữ các ca 0/2 declaration và CRLF.",
+    "limit": "Build chuẩn hiện tại và ba deploy gốc đều đạt; deploy checker production vẫn bắt local-host nếu nó lọt ra gói. Đây là lỗ của bảo đảm build/plugin, chưa phải chứng cứ gói chuẩn hiện tại hỏng."
+  },
+  {
+    "id": "P1-02",
+    "severity": "P1",
+    "location": "scripts/deploy/prune.mjs:8",
+    "scenario": "Đặt symlink đứt ở assets, assets/typing-defense, models, models/keep/link, .vite hoặc .vite/link → existsSync=false khiến script bỏ qua symlink, trả 0 và vẫn xóa file/thư mục khác; trái bảo đảm từ chối symlink trước mọi thay đổi. Cùng mẫu sai ở dòng 49.",
+    "evidence": "prune-probes.json: 6 ca dangling trả 0 và dist_unchanged=false; ví dụ dangling-models-deep vẫn xóa models/. Sentinel ngoài dist không đổi trong cả 27 ca.",
+    "proposal": "Dùng lstatSync(path, { throwIfNoEntry: false }) hoặc lstat với catch chỉ ENOENT; kiểm isSymbolicLink trước quyết định đường không tồn tại, áp dụng cả assets/game ancestors. Hoàn tất kế hoạch và kiểm mọi nhánh trước ghi/xóa.",
+    "test": "Thêm dangling symlink ở models/.vite và sâu dưới chúng, cả assets và game; khẳng định mã 1, chẩn đoán symlink, dist và sentinel ngoài dist giữ nguyên.",
+    "limit": "Chưa thấy ghi/xóa ra ngoài dist trong probe; lỗi đã đo là bỏ sót từ chối symlink và tiếp tục thay đổi gói."
+  },
+  {
+    "id": "P2-01",
+    "severity": "P2",
+    "location": "tests/deploy-prune.test.ts:94",
+    "scenario": "M5 vô hiệu hóa riêng chặn symlink ở dist/tổ tiên trong prune.mjs:37 → cả 11 test deploy-prune vẫn xanh, dù script cho phép dist qua symlink tổ tiên và có thể sửa đích ngoài đường truyền theo cú pháp.",
+    "evidence": "mutations.json: M5 mutated 0 đỏ/11 xanh; restored 0 đỏ/11 xanh. Probe mã gốc chặn dist/ancestor đúng, nên đây là hở test, không phải lỗi đang có của guard này.",
+    "proposal": "Mở rộng fixture để gọi script qua dist symlink và một tổ tiên symlink tới thư mục sentinel; khẳng định từ chối trước thay đổi.",
+    "test": "M5 phải làm ít nhất một test mới đỏ; khi trả guard thì tất cả xanh."
+  },
+  {
+    "id": "P2-02",
+    "severity": "P2",
+    "location": "tests/portal.test.ts:77",
+    "scenario": "M6 đổi learning.ts:27 thành createPortalBridge() ngay khi import → 14 test portal vẫn xanh. Test tên lazy singleton chỉ kiểm cùng object và parentOrigin, không kiểm thời điểm tạo.",
+    "evidence": "mutations.json: M6 mutated 0 đỏ/14 xanh; restored 0 đỏ/14 xanh. Mã gốc hiện tại dùng null và ??=, thực sự lười.",
+    "proposal": "Kiểm import module chưa đăng ký listener/chưa tạo bridge, lần gọi learningBridge đầu mới tạo một lần; reset module/env và kiểm cleanup để không phụ thuộc thứ tự test.",
+    "test": "M6 phải làm test thời điểm khởi tạo đỏ; giữ test bridge thật và gửi/nhận đúng origin hiện có."
+  }
+]

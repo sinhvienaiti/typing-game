@@ -1,0 +1,234 @@
+✔ F2 original and eight-sample nested-extra variant vocabulary/lookup (4.163375ms)
+✔ F2 original and eight-sample nested-extra variant vocabulary/query (0.638875ms)
+✔ F2 original and eight-sample nested-extra variant grammar/lookup (0.757791ms)
+✔ F2 original and eight-sample nested-extra variant grammar/query (0.327084ms)
+✔ F2 original and eight-sample nested-extra variant sentence/lookup (0.3505ms)
+✔ F2 original and eight-sample nested-extra variant sentence/query (0.270333ms)
+✖ F2 allowed field with nested answer occurredAt/lookup (0.467375ms)
+✖ F2 allowed field with nested answer occurredAt/query (0.4635ms)
+✖ F2 allowed field with nested answer gameId/lookup (0.304125ms)
+✖ F2 allowed field with nested answer gameId/query (0.344291ms)
+✖ F2 allowed field with nested answer activityType/lookup (0.309041ms)
+✖ F2 allowed field with nested answer activityType/query (0.310833ms)
+✖ F2 allowed field with nested answer result/lookup (0.584083ms)
+✖ F2 allowed field with nested answer result/query (0.293334ms)
+✖ F2 allowed field with nested answer hintUsed/lookup (0.259542ms)
+✖ F2 allowed field with nested answer hintUsed/query (0.264458ms)
+✔ F3 additional thrown value lookup/non-Error (0.267875ms)
+✔ F3 additional thrown value lookup/cause (0.178041ms)
+✔ F3 additional thrown value lookup/oversized (0.117625ms)
+✔ F3 additional thrown value query/non-Error (0.115792ms)
+✔ F3 additional thrown value query/cause (0.121208ms)
+✔ F3 additional thrown value query/oversized (0.129542ms)
+✔ F4 boundary/trim/dedup 200 (0.179584ms)
+✔ F4 boundary/trim/dedup 200 (0.14775ms)
+✔ F4 boundary/trim/dedup 5 (0.113792ms)
+✔ F4 rejects 201 raw characters before reading storage (0.155625ms)
+✔ F5 independent separator/depth ..\outside.png (0.102ms)
+✔ F5 independent separator/depth folder\icon.png (0.025083ms)
+✔ F5 independent separator/depth folder/\icon.png (0.018292ms)
+✔ F5 independent separator/depth %2e%2e%2f%2e%2e%2fspace-typing/portal/icon.png (0.052ms)
+✔ F5 independent separator/depth %252e%252e%252f%252e%252e%252fspace-typing/portal/icon.png (0.032083ms)
+✔ F5 independent separator/depth %25252e%25252e%25252f%25252e%25252e%25252fspace-typing/portal/icon.png (0.026791ms)
+✔ F5 independent separator/depth %2525252e%2525252e%2525252f%2525252e%2525252e%2525252fspace-typing/portal/icon.png (0.025708ms)
+✔ F5 independent separator/depth %252525252e%252525252e%252525252f%252525252e%252525252e%252525252fspace-typing/portal/icon.png (0.024792ms)
+✔ F5 independent separator/depth %25252525252e%25252525252e%25252525252f%25252525252e%25252525252e%25252525252fspace-typing/portal/icon.png (0.026167ms)
+✔ F5 independent separator/depth %2e%2e%2F%2e%2e%2Fspace-typing/portal/icon.png (0.01375ms)
+✔ F5 independent separator/depth %252e%252e%252F%252e%252e%252Fspace-typing/portal/icon.png (0.016125ms)
+✔ F5 independent separator/depth %25252e%25252e%25252F%25252e%25252e%25252Fspace-typing/portal/icon.png (0.027166ms)
+✔ F5 independent separator/depth %2525252e%2525252e%2525252F%2525252e%2525252e%2525252Fspace-typing/portal/icon.png (0.029ms)
+✔ F5 independent separator/depth %252525252e%252525252e%252525252F%252525252e%252525252e%252525252Fspace-typing/portal/icon.png (0.026958ms)
+✔ F5 independent separator/depth %25252525252e%25252525252e%25252525252F%25252525252e%25252525252e%25252525252Fspace-typing/portal/icon.png (0.026ms)
+✔ F5 independent separator/depth %2e%2e%5c%2e%2e%5cspace-typing/portal/icon.png (0.014042ms)
+✔ F5 independent separator/depth %252e%252e%255c%252e%252e%255cspace-typing/portal/icon.png (0.016208ms)
+✔ F5 independent separator/depth %25252e%25252e%25255c%25252e%25252e%25255cspace-typing/portal/icon.png (0.02425ms)
+✔ F5 independent separator/depth %2525252e%2525252e%2525255c%2525252e%2525252e%2525255cspace-typing/portal/icon.png (0.024375ms)
+✔ F5 independent separator/depth %252525252e%252525252e%252525255c%252525252e%252525252e%252525255cspace-typing/portal/icon.png (0.040791ms)
+✔ F5 independent separator/depth %25252525252e%25252525252e%25252525255c%25252525252e%25252525252e%25252525255cspace-typing/portal/icon.png (0.032917ms)
+✔ F5 independent separator/depth %2e%2e%5C%2e%2e%5Cspace-typing/portal/icon.png (0.0175ms)
+✔ F5 independent separator/depth %252e%252e%255C%252e%252e%255Cspace-typing/portal/icon.png (0.021416ms)
+✔ F5 independent separator/depth %25252e%25252e%25255C%25252e%25252e%25255Cspace-typing/portal/icon.png (0.025209ms)
+✔ F5 independent separator/depth %2525252e%2525252e%2525255C%2525252e%2525252e%2525255Cspace-typing/portal/icon.png (0.028042ms)
+✔ F5 independent separator/depth %252525252e%252525252e%252525255C%252525252e%252525252e%252525255Cspace-typing/portal/icon.png (0.026333ms)
+✔ F5 independent separator/depth %25252525252e%25252525252e%25252525255C%25252525252e%25252525252e%25252525255Cspace-typing/portal/icon.png (0.041292ms)
+ℹ tests 53
+ℹ suites 0
+ℹ pass 43
+ℹ fail 10
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 82.863792
+
+✖ failing tests:
+
+test at docs/codex-queue/233/parent-probe.mjs:55:3
+✖ F2 allowed field with nested answer occurredAt/lookup (0.467375ms)
+  AssertionError [ERR_ASSERTION]: The input was expected to not match the regular expression /PRIVATE_NESTED_/. Input:
+
+  '{"type":"typing-game:learning:v1:query-result","requestId":"233-probe","result":{"entityType":"vocabulary","items":[{"recentSamples":[{"occurredAt":{"userAnswer":"PRIVATE_NESTED_USER_ANSWER","expectedAnswer":"PRIVATE_NESTED_EXPECTED_ANSWER"},"gameId":"dragon-hold","activityType":"meaning-recall","result":"correct","hintUsed":false}],"wordKey":"lantern","attempts":1,"correct":1,"wrong":0,"hints":0,"replays":0,"avgResponseMs":null,"responseSamples":0,"correctStreak":1,"lastSeenAt":"2026-10-30T06:00:00.000Z","lastCorrectAt":"2026-10-30T06:00:00.000Z","lastWrongAt":null,"mastery":79,"reviewPriority":12,"nextReviewAt":"2026-11-02T06:00:00.000Z","sourceGames":["dragon-hold"],"recentMistakes":[],"entityType":"vocabulary","entityId":"lantern","status":"improving"}]}}'
+
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/docs/codex-queue/233/parent-probe.mjs:63:12)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: '{"type":"typing-game:learning:v1:query-result","requestId":"233-probe","result":{"entityType":"vocabulary","items":[{"recentSamples":[{"occurredAt":{"userAnswer":"PRIVATE_NESTED_USER_ANSWER","expectedAnswer":"PRIVATE_NESTED_EXPECTED_ANSWER"},"gameId":"dragon-hold","activityType":"meaning-recall","result":"correct","hintUsed":false}],"wordKey":"lantern","attempts":1,"correct":1,"wrong":0,"hints":0,"replays":0,"avgResponseMs":null,"responseSamples":0,"correctStreak":1,"lastSeenAt":"2026-10-30T06:00:00.000Z","lastCorrectAt":"2026-10-30T06:00:00.000Z","lastWrongAt":null,"mastery":79,"reviewPriority":12,"nextReviewAt":"2026-11-02T06:00:00.000Z","sourceGames":["dragon-hold"],"recentMistakes":[],"entityType":"vocabulary","entityId":"lantern","status":"improving"}]}}',
+    expected: /PRIVATE_NESTED_/,
+    operator: 'doesNotMatch',
+    diff: 'simple'
+  }
+
+test at docs/codex-queue/233/parent-probe.mjs:55:3
+✖ F2 allowed field with nested answer occurredAt/query (0.4635ms)
+  AssertionError [ERR_ASSERTION]: The input was expected to not match the regular expression /PRIVATE_NESTED_/. Input:
+
+  '{"type":"typing-game:learning:v1:query-result","requestId":"233-probe","result":{"items":[{"wordKey":"lantern","attempts":1,"correct":1,"wrong":0,"hints":0,"replays":0,"avgResponseMs":null,"responseSamples":0,"correctStreak":1,"lastSeenAt":"2026-10-30T06:00:00.000Z","lastCorrectAt":"2026-10-30T06:00:00.000Z","lastWrongAt":null,"mastery":79,"reviewPriority":12,"nextReviewAt":"2026-11-02T06:00:00.000Z","sourceGames":["dragon-hold"],"recentMistakes":[],"recentSamples":[{"occurredAt":{"userAnswer":"PRIVATE_NESTED_USER_ANSWER","expectedAnswer":"PRIVATE_NESTED_EXPECTED_ANSWER"},"gameId":"dragon-hold","activityType":"meaning-recall","result":"correct","hintUsed":false}],"entityType":"vocabulary","entityId":"lantern","status":"improving"}],"page":1,"pageSize":25,"totalItems":1,"totalPages":1}}'
+
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/docs/codex-queue/233/parent-probe.mjs:63:12)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: '{"type":"typing-game:learning:v1:query-result","requestId":"233-probe","result":{"items":[{"wordKey":"lantern","attempts":1,"correct":1,"wrong":0,"hints":0,"replays":0,"avgResponseMs":null,"responseSamples":0,"correctStreak":1,"lastSeenAt":"2026-10-30T06:00:00.000Z","lastCorrectAt":"2026-10-30T06:00:00.000Z","lastWrongAt":null,"mastery":79,"reviewPriority":12,"nextReviewAt":"2026-11-02T06:00:00.000Z","sourceGames":["dragon-hold"],"recentMistakes":[],"recentSamples":[{"occurredAt":{"userAnswer":"PRIVATE_NESTED_USER_ANSWER","expectedAnswer":"PRIVATE_NESTED_EXPECTED_ANSWER"},"gameId":"dragon-hold","activityType":"meaning-recall","result":"correct","hintUsed":false}],"entityType":"vocabulary","entityId":"lantern","status":"improving"}],"page":1,"pageSize":25,"totalItems":1,"totalPages":1}}',
+    expected: /PRIVATE_NESTED_/,
+    operator: 'doesNotMatch',
+    diff: 'simple'
+  }
+
+test at docs/codex-queue/233/parent-probe.mjs:55:3
+✖ F2 allowed field with nested answer gameId/lookup (0.304125ms)
+  AssertionError [ERR_ASSERTION]: The input was expected to not match the regular expression /PRIVATE_NESTED_/. Input:
+
+  '{"type":"typing-game:learning:v1:query-result","requestId":"233-probe","result":{"entityType":"vocabulary","items":[{"recentSamples":[{"occurredAt":"2026-10-30T06:00:00.000Z","gameId":{"userAnswer":"PRIVATE_NESTED_USER_ANSWER","expectedAnswer":"PRIVATE_NESTED_EXPECTED_ANSWER"},"activityType":"meaning-recall","result":"correct","hintUsed":false}],"wordKey":"lantern","attempts":1,"correct":1,"wrong":0,"hints":0,"replays":0,"avgResponseMs":null,"responseSamples":0,"correctStreak":1,"lastSeenAt":"2026-10-30T06:00:00.000Z","lastCorrectAt":"2026-10-30T06:00:00.000Z","lastWrongAt":null,"mastery":79,"reviewPriority":12,"nextReviewAt":"2026-11-02T06:00:00.000Z","sourceGames":["dragon-hold"],"recentMistakes":[],"entityType":"vocabulary","entityId":"lantern","status":"improving"}]}}'
+
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/docs/codex-queue/233/parent-probe.mjs:63:12)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: '{"type":"typing-game:learning:v1:query-result","requestId":"233-probe","result":{"entityType":"vocabulary","items":[{"recentSamples":[{"occurredAt":"2026-10-30T06:00:00.000Z","gameId":{"userAnswer":"PRIVATE_NESTED_USER_ANSWER","expectedAnswer":"PRIVATE_NESTED_EXPECTED_ANSWER"},"activityType":"meaning-recall","result":"correct","hintUsed":false}],"wordKey":"lantern","attempts":1,"correct":1,"wrong":0,"hints":0,"replays":0,"avgResponseMs":null,"responseSamples":0,"correctStreak":1,"lastSeenAt":"2026-10-30T06:00:00.000Z","lastCorrectAt":"2026-10-30T06:00:00.000Z","lastWrongAt":null,"mastery":79,"reviewPriority":12,"nextReviewAt":"2026-11-02T06:00:00.000Z","sourceGames":["dragon-hold"],"recentMistakes":[],"entityType":"vocabulary","entityId":"lantern","status":"improving"}]}}',
+    expected: /PRIVATE_NESTED_/,
+    operator: 'doesNotMatch',
+    diff: 'simple'
+  }
+
+test at docs/codex-queue/233/parent-probe.mjs:55:3
+✖ F2 allowed field with nested answer gameId/query (0.344291ms)
+  AssertionError [ERR_ASSERTION]: The input was expected to not match the regular expression /PRIVATE_NESTED_/. Input:
+
+  '{"type":"typing-game:learning:v1:query-result","requestId":"233-probe","result":{"items":[{"wordKey":"lantern","attempts":1,"correct":1,"wrong":0,"hints":0,"replays":0,"avgResponseMs":null,"responseSamples":0,"correctStreak":1,"lastSeenAt":"2026-10-30T06:00:00.000Z","lastCorrectAt":"2026-10-30T06:00:00.000Z","lastWrongAt":null,"mastery":79,"reviewPriority":12,"nextReviewAt":"2026-11-02T06:00:00.000Z","sourceGames":["dragon-hold"],"recentMistakes":[],"recentSamples":[{"occurredAt":"2026-10-30T06:00:00.000Z","gameId":{"userAnswer":"PRIVATE_NESTED_USER_ANSWER","expectedAnswer":"PRIVATE_NESTED_EXPECTED_ANSWER"},"activityType":"meaning-recall","result":"correct","hintUsed":false}],"entityType":"vocabulary","entityId":"lantern","status":"improving"}],"page":1,"pageSize":25,"totalItems":1,"totalPages":1}}'
+
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/docs/codex-queue/233/parent-probe.mjs:63:12)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: '{"type":"typing-game:learning:v1:query-result","requestId":"233-probe","result":{"items":[{"wordKey":"lantern","attempts":1,"correct":1,"wrong":0,"hints":0,"replays":0,"avgResponseMs":null,"responseSamples":0,"correctStreak":1,"lastSeenAt":"2026-10-30T06:00:00.000Z","lastCorrectAt":"2026-10-30T06:00:00.000Z","lastWrongAt":null,"mastery":79,"reviewPriority":12,"nextReviewAt":"2026-11-02T06:00:00.000Z","sourceGames":["dragon-hold"],"recentMistakes":[],"recentSamples":[{"occurredAt":"2026-10-30T06:00:00.000Z","gameId":{"userAnswer":"PRIVATE_NESTED_USER_ANSWER","expectedAnswer":"PRIVATE_NESTED_EXPECTED_ANSWER"},"activityType":"meaning-recall","result":"correct","hintUsed":false}],"entityType":"vocabulary","entityId":"lantern","status":"improving"}],"page":1,"pageSize":25,"totalItems":1,"totalPages":1}}',
+    expected: /PRIVATE_NESTED_/,
+    operator: 'doesNotMatch',
+    diff: 'simple'
+  }
+
+test at docs/codex-queue/233/parent-probe.mjs:55:3
+✖ F2 allowed field with nested answer activityType/lookup (0.309041ms)
+  AssertionError [ERR_ASSERTION]: The input was expected to not match the regular expression /PRIVATE_NESTED_/. Input:
+
+  '{"type":"typing-game:learning:v1:query-result","requestId":"233-probe","result":{"entityType":"vocabulary","items":[{"recentSamples":[{"occurredAt":"2026-10-30T06:00:00.000Z","gameId":"dragon-hold","activityType":{"userAnswer":"PRIVATE_NESTED_USER_ANSWER","expectedAnswer":"PRIVATE_NESTED_EXPECTED_ANSWER"},"result":"correct","hintUsed":false}],"wordKey":"lantern","attempts":1,"correct":1,"wrong":0,"hints":0,"replays":0,"avgResponseMs":null,"responseSamples":0,"correctStreak":1,"lastSeenAt":"2026-10-30T06:00:00.000Z","lastCorrectAt":"2026-10-30T06:00:00.000Z","lastWrongAt":null,"mastery":79,"reviewPriority":12,"nextReviewAt":"2026-11-02T06:00:00.000Z","sourceGames":["dragon-hold"],"recentMistakes":[],"entityType":"vocabulary","entityId":"lantern","status":"improving"}]}}'
+
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/docs/codex-queue/233/parent-probe.mjs:63:12)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: '{"type":"typing-game:learning:v1:query-result","requestId":"233-probe","result":{"entityType":"vocabulary","items":[{"recentSamples":[{"occurredAt":"2026-10-30T06:00:00.000Z","gameId":"dragon-hold","activityType":{"userAnswer":"PRIVATE_NESTED_USER_ANSWER","expectedAnswer":"PRIVATE_NESTED_EXPECTED_ANSWER"},"result":"correct","hintUsed":false}],"wordKey":"lantern","attempts":1,"correct":1,"wrong":0,"hints":0,"replays":0,"avgResponseMs":null,"responseSamples":0,"correctStreak":1,"lastSeenAt":"2026-10-30T06:00:00.000Z","lastCorrectAt":"2026-10-30T06:00:00.000Z","lastWrongAt":null,"mastery":79,"reviewPriority":12,"nextReviewAt":"2026-11-02T06:00:00.000Z","sourceGames":["dragon-hold"],"recentMistakes":[],"entityType":"vocabulary","entityId":"lantern","status":"improving"}]}}',
+    expected: /PRIVATE_NESTED_/,
+    operator: 'doesNotMatch',
+    diff: 'simple'
+  }
+
+test at docs/codex-queue/233/parent-probe.mjs:55:3
+✖ F2 allowed field with nested answer activityType/query (0.310833ms)
+  AssertionError [ERR_ASSERTION]: The input was expected to not match the regular expression /PRIVATE_NESTED_/. Input:
+
+  '{"type":"typing-game:learning:v1:query-result","requestId":"233-probe","result":{"items":[{"wordKey":"lantern","attempts":1,"correct":1,"wrong":0,"hints":0,"replays":0,"avgResponseMs":null,"responseSamples":0,"correctStreak":1,"lastSeenAt":"2026-10-30T06:00:00.000Z","lastCorrectAt":"2026-10-30T06:00:00.000Z","lastWrongAt":null,"mastery":79,"reviewPriority":12,"nextReviewAt":"2026-11-02T06:00:00.000Z","sourceGames":["dragon-hold"],"recentMistakes":[],"recentSamples":[{"occurredAt":"2026-10-30T06:00:00.000Z","gameId":"dragon-hold","activityType":{"userAnswer":"PRIVATE_NESTED_USER_ANSWER","expectedAnswer":"PRIVATE_NESTED_EXPECTED_ANSWER"},"result":"correct","hintUsed":false}],"entityType":"vocabulary","entityId":"lantern","status":"improving"}],"page":1,"pageSize":25,"totalItems":1,"totalPages":1}}'
+
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/docs/codex-queue/233/parent-probe.mjs:63:12)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: '{"type":"typing-game:learning:v1:query-result","requestId":"233-probe","result":{"items":[{"wordKey":"lantern","attempts":1,"correct":1,"wrong":0,"hints":0,"replays":0,"avgResponseMs":null,"responseSamples":0,"correctStreak":1,"lastSeenAt":"2026-10-30T06:00:00.000Z","lastCorrectAt":"2026-10-30T06:00:00.000Z","lastWrongAt":null,"mastery":79,"reviewPriority":12,"nextReviewAt":"2026-11-02T06:00:00.000Z","sourceGames":["dragon-hold"],"recentMistakes":[],"recentSamples":[{"occurredAt":"2026-10-30T06:00:00.000Z","gameId":"dragon-hold","activityType":{"userAnswer":"PRIVATE_NESTED_USER_ANSWER","expectedAnswer":"PRIVATE_NESTED_EXPECTED_ANSWER"},"result":"correct","hintUsed":false}],"entityType":"vocabulary","entityId":"lantern","status":"improving"}],"page":1,"pageSize":25,"totalItems":1,"totalPages":1}}',
+    expected: /PRIVATE_NESTED_/,
+    operator: 'doesNotMatch',
+    diff: 'simple'
+  }
+
+test at docs/codex-queue/233/parent-probe.mjs:55:3
+✖ F2 allowed field with nested answer result/lookup (0.584083ms)
+  AssertionError [ERR_ASSERTION]: The input was expected to not match the regular expression /PRIVATE_NESTED_/. Input:
+
+  '{"type":"typing-game:learning:v1:query-result","requestId":"233-probe","result":{"entityType":"vocabulary","items":[{"recentSamples":[{"occurredAt":"2026-10-30T06:00:00.000Z","gameId":"dragon-hold","activityType":"meaning-recall","result":{"userAnswer":"PRIVATE_NESTED_USER_ANSWER","expectedAnswer":"PRIVATE_NESTED_EXPECTED_ANSWER"},"hintUsed":false}],"wordKey":"lantern","attempts":1,"correct":1,"wrong":0,"hints":0,"replays":0,"avgResponseMs":null,"responseSamples":0,"correctStreak":1,"lastSeenAt":"2026-10-30T06:00:00.000Z","lastCorrectAt":"2026-10-30T06:00:00.000Z","lastWrongAt":null,"mastery":79,"reviewPriority":12,"nextReviewAt":"2026-11-02T06:00:00.000Z","sourceGames":["dragon-hold"],"recentMistakes":[],"entityType":"vocabulary","entityId":"lantern","status":"improving"}]}}'
+
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/docs/codex-queue/233/parent-probe.mjs:63:12)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: '{"type":"typing-game:learning:v1:query-result","requestId":"233-probe","result":{"entityType":"vocabulary","items":[{"recentSamples":[{"occurredAt":"2026-10-30T06:00:00.000Z","gameId":"dragon-hold","activityType":"meaning-recall","result":{"userAnswer":"PRIVATE_NESTED_USER_ANSWER","expectedAnswer":"PRIVATE_NESTED_EXPECTED_ANSWER"},"hintUsed":false}],"wordKey":"lantern","attempts":1,"correct":1,"wrong":0,"hints":0,"replays":0,"avgResponseMs":null,"responseSamples":0,"correctStreak":1,"lastSeenAt":"2026-10-30T06:00:00.000Z","lastCorrectAt":"2026-10-30T06:00:00.000Z","lastWrongAt":null,"mastery":79,"reviewPriority":12,"nextReviewAt":"2026-11-02T06:00:00.000Z","sourceGames":["dragon-hold"],"recentMistakes":[],"entityType":"vocabulary","entityId":"lantern","status":"improving"}]}}',
+    expected: /PRIVATE_NESTED_/,
+    operator: 'doesNotMatch',
+    diff: 'simple'
+  }
+
+test at docs/codex-queue/233/parent-probe.mjs:55:3
+✖ F2 allowed field with nested answer result/query (0.293334ms)
+  AssertionError [ERR_ASSERTION]: The input was expected to not match the regular expression /PRIVATE_NESTED_/. Input:
+
+  '{"type":"typing-game:learning:v1:query-result","requestId":"233-probe","result":{"items":[{"wordKey":"lantern","attempts":1,"correct":1,"wrong":0,"hints":0,"replays":0,"avgResponseMs":null,"responseSamples":0,"correctStreak":1,"lastSeenAt":"2026-10-30T06:00:00.000Z","lastCorrectAt":"2026-10-30T06:00:00.000Z","lastWrongAt":null,"mastery":79,"reviewPriority":12,"nextReviewAt":"2026-11-02T06:00:00.000Z","sourceGames":["dragon-hold"],"recentMistakes":[],"recentSamples":[{"occurredAt":"2026-10-30T06:00:00.000Z","gameId":"dragon-hold","activityType":"meaning-recall","result":{"userAnswer":"PRIVATE_NESTED_USER_ANSWER","expectedAnswer":"PRIVATE_NESTED_EXPECTED_ANSWER"},"hintUsed":false}],"entityType":"vocabulary","entityId":"lantern","status":"improving"}],"page":1,"pageSize":25,"totalItems":1,"totalPages":1}}'
+
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/docs/codex-queue/233/parent-probe.mjs:63:12)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: '{"type":"typing-game:learning:v1:query-result","requestId":"233-probe","result":{"items":[{"wordKey":"lantern","attempts":1,"correct":1,"wrong":0,"hints":0,"replays":0,"avgResponseMs":null,"responseSamples":0,"correctStreak":1,"lastSeenAt":"2026-10-30T06:00:00.000Z","lastCorrectAt":"2026-10-30T06:00:00.000Z","lastWrongAt":null,"mastery":79,"reviewPriority":12,"nextReviewAt":"2026-11-02T06:00:00.000Z","sourceGames":["dragon-hold"],"recentMistakes":[],"recentSamples":[{"occurredAt":"2026-10-30T06:00:00.000Z","gameId":"dragon-hold","activityType":"meaning-recall","result":{"userAnswer":"PRIVATE_NESTED_USER_ANSWER","expectedAnswer":"PRIVATE_NESTED_EXPECTED_ANSWER"},"hintUsed":false}],"entityType":"vocabulary","entityId":"lantern","status":"improving"}],"page":1,"pageSize":25,"totalItems":1,"totalPages":1}}',
+    expected: /PRIVATE_NESTED_/,
+    operator: 'doesNotMatch',
+    diff: 'simple'
+  }
+
+test at docs/codex-queue/233/parent-probe.mjs:55:3
+✖ F2 allowed field with nested answer hintUsed/lookup (0.259542ms)
+  AssertionError [ERR_ASSERTION]: The input was expected to not match the regular expression /PRIVATE_NESTED_/. Input:
+
+  '{"type":"typing-game:learning:v1:query-result","requestId":"233-probe","result":{"entityType":"vocabulary","items":[{"recentSamples":[{"occurredAt":"2026-10-30T06:00:00.000Z","gameId":"dragon-hold","activityType":"meaning-recall","result":"correct","hintUsed":{"userAnswer":"PRIVATE_NESTED_USER_ANSWER","expectedAnswer":"PRIVATE_NESTED_EXPECTED_ANSWER"}}],"wordKey":"lantern","attempts":1,"correct":1,"wrong":0,"hints":0,"replays":0,"avgResponseMs":null,"responseSamples":0,"correctStreak":1,"lastSeenAt":"2026-10-30T06:00:00.000Z","lastCorrectAt":"2026-10-30T06:00:00.000Z","lastWrongAt":null,"mastery":79,"reviewPriority":12,"nextReviewAt":"2026-11-02T06:00:00.000Z","sourceGames":["dragon-hold"],"recentMistakes":[],"entityType":"vocabulary","entityId":"lantern","status":"improving"}]}}'
+
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/docs/codex-queue/233/parent-probe.mjs:63:12)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: '{"type":"typing-game:learning:v1:query-result","requestId":"233-probe","result":{"entityType":"vocabulary","items":[{"recentSamples":[{"occurredAt":"2026-10-30T06:00:00.000Z","gameId":"dragon-hold","activityType":"meaning-recall","result":"correct","hintUsed":{"userAnswer":"PRIVATE_NESTED_USER_ANSWER","expectedAnswer":"PRIVATE_NESTED_EXPECTED_ANSWER"}}],"wordKey":"lantern","attempts":1,"correct":1,"wrong":0,"hints":0,"replays":0,"avgResponseMs":null,"responseSamples":0,"correctStreak":1,"lastSeenAt":"2026-10-30T06:00:00.000Z","lastCorrectAt":"2026-10-30T06:00:00.000Z","lastWrongAt":null,"mastery":79,"reviewPriority":12,"nextReviewAt":"2026-11-02T06:00:00.000Z","sourceGames":["dragon-hold"],"recentMistakes":[],"entityType":"vocabulary","entityId":"lantern","status":"improving"}]}}',
+    expected: /PRIVATE_NESTED_/,
+    operator: 'doesNotMatch',
+    diff: 'simple'
+  }
+
+test at docs/codex-queue/233/parent-probe.mjs:55:3
+✖ F2 allowed field with nested answer hintUsed/query (0.264458ms)
+  AssertionError [ERR_ASSERTION]: The input was expected to not match the regular expression /PRIVATE_NESTED_/. Input:
+
+  '{"type":"typing-game:learning:v1:query-result","requestId":"233-probe","result":{"items":[{"wordKey":"lantern","attempts":1,"correct":1,"wrong":0,"hints":0,"replays":0,"avgResponseMs":null,"responseSamples":0,"correctStreak":1,"lastSeenAt":"2026-10-30T06:00:00.000Z","lastCorrectAt":"2026-10-30T06:00:00.000Z","lastWrongAt":null,"mastery":79,"reviewPriority":12,"nextReviewAt":"2026-11-02T06:00:00.000Z","sourceGames":["dragon-hold"],"recentMistakes":[],"recentSamples":[{"occurredAt":"2026-10-30T06:00:00.000Z","gameId":"dragon-hold","activityType":"meaning-recall","result":"correct","hintUsed":{"userAnswer":"PRIVATE_NESTED_USER_ANSWER","expectedAnswer":"PRIVATE_NESTED_EXPECTED_ANSWER"}}],"entityType":"vocabulary","entityId":"lantern","status":"improving"}],"page":1,"pageSize":25,"totalItems":1,"totalPages":1}}'
+
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/docs/codex-queue/233/parent-probe.mjs:63:12)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: '{"type":"typing-game:learning:v1:query-result","requestId":"233-probe","result":{"items":[{"wordKey":"lantern","attempts":1,"correct":1,"wrong":0,"hints":0,"replays":0,"avgResponseMs":null,"responseSamples":0,"correctStreak":1,"lastSeenAt":"2026-10-30T06:00:00.000Z","lastCorrectAt":"2026-10-30T06:00:00.000Z","lastWrongAt":null,"mastery":79,"reviewPriority":12,"nextReviewAt":"2026-11-02T06:00:00.000Z","sourceGames":["dragon-hold"],"recentMistakes":[],"recentSamples":[{"occurredAt":"2026-10-30T06:00:00.000Z","gameId":"dragon-hold","activityType":"meaning-recall","result":"correct","hintUsed":{"userAnswer":"PRIVATE_NESTED_USER_ANSWER","expectedAnswer":"PRIVATE_NESTED_EXPECTED_ANSWER"}}],"entityType":"vocabulary","entityId":"lantern","status":"improving"}],"page":1,"pageSize":25,"totalItems":1,"totalPages":1}}',
+    expected: /PRIVATE_NESTED_/,
+    operator: 'doesNotMatch',
+    diff: 'simple'
+  }
+exit: 1

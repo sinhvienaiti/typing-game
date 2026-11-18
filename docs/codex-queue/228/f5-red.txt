@@ -1,0 +1,386 @@
+$ node --test --test-name-pattern=F5 portal/tests/game-card.test.mjs
+cwd: /Users/toandx/htdocs/typing-game
+
+✔ F5 rejects fully decoded unsafe art %2e%2e/a.png (27.727667ms)
+✔ F5 rejects fully decoded unsafe art %2E%2E/a.png (0.153125ms)
+✖ F5 rejects fully decoded unsafe art %2F/a.png (0.56725ms)
+✖ F5 rejects fully decoded unsafe art %2e%2e%2F%2e%2e%2Fspace-typing/portal/icon.png (0.13475ms)
+✖ F5 rejects fully decoded unsafe art %2E%2E%2f%2E%2E%2fspace-typing/portal/icon.png (0.130292ms)
+✖ F5 rejects fully decoded unsafe art %2e%2e%5C%2e%2e%5Cspace-typing/portal/icon.png (0.123834ms)
+✖ F5 rejects fully decoded unsafe art %2e%2e%2F%2e%2e%5cspace-typing/portal/icon.png (0.109125ms)
+✖ F5 rejects fully decoded unsafe art %252e%252e%252F%252e%252e%252Fspace-typing/portal/icon.png (0.097792ms)
+✖ F5 rejects fully decoded unsafe art %252e%252e%255C%252e%252e%255Cspace-typing/portal/icon.png (0.084667ms)
+✖ F5 rejects fully decoded unsafe art %252e%2e%252f%2e%252e%5Cspace-typing/portal/icon.png (0.108083ms)
+✖ F5 rejects fully decoded unsafe art %25252e%25252e%25252fspace-typing/portal/icon.png (0.106583ms)
+✖ F5 rejects fully decoded unsafe art a%2Fb.png (0.080625ms)
+✖ F5 rejects fully decoded unsafe art a%5Cb.png (0.064625ms)
+✖ F5 rejects fully decoded unsafe art a%252Fb.png (0.05925ms)
+✖ F5 rejects fully decoded unsafe art a%255Cb.png (0.08075ms)
+✖ F5 rejects fully decoded unsafe art a.png%253Fsize=192 (0.104792ms)
+✖ F5 rejects fully decoded unsafe art a.png%2523icon (0.069917ms)
+✖ F5 rejects fully decoded unsafe art %zz.png (0.057084ms)
+✔ F5 preserves safe encoded filenames within the game prefix (0.066625ms)
+ℹ tests 19
+ℹ suites 0
+ℹ pass 3
+ℹ fail 16
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 68.382458
+
+✖ failing tests:
+
+test at portal/tests/game-card.test.mjs:215:3
+✖ F5 rejects fully decoded unsafe art %2F/a.png (0.56725ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+
+    {
+      cover: 'https://dragon.typing-game.local/assets/dragon-hold/portal/cover-wide.webp',
+  +   icon: 'https://dragon.typing-game.local/assets/dragon-hold/portal/%2F/a.png'
+  -   icon: null
+    }
+
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/portal/tests/game-card.test.mjs:219:14)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: { icon: 'https://dragon.typing-game.local/assets/dragon-hold/portal/%2F/a.png', cover: 'https://dragon.typing-game.local/assets/dragon-hold/portal/cover-wide.webp' },
+    expected: { icon: null, cover: 'https://dragon.typing-game.local/assets/dragon-hold/portal/cover-wide.webp' },
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at portal/tests/game-card.test.mjs:215:3
+✖ F5 rejects fully decoded unsafe art %2e%2e%2F%2e%2e%2Fspace-typing/portal/icon.png (0.13475ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+
+    {
+      cover: 'https://dragon.typing-game.local/assets/dragon-hold/portal/cover-wide.webp',
+  +   icon: 'https://dragon.typing-game.local/assets/dragon-hold/portal/%2e%2e%2F%2e%2e%2Fspace-typing/portal/icon.png'
+  -   icon: null
+    }
+
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/portal/tests/game-card.test.mjs:219:14)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: { icon: 'https://dragon.typing-game.local/assets/dragon-hold/portal/%2e%2e%2F%2e%2e%2Fspace-typing/portal/icon.png', cover: 'https://dragon.typing-game.local/assets/dragon-hold/portal/cover-wide.webp' },
+    expected: { icon: null, cover: 'https://dragon.typing-game.local/assets/dragon-hold/portal/cover-wide.webp' },
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at portal/tests/game-card.test.mjs:215:3
+✖ F5 rejects fully decoded unsafe art %2E%2E%2f%2E%2E%2fspace-typing/portal/icon.png (0.130292ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+
+    {
+      cover: 'https://dragon.typing-game.local/assets/dragon-hold/portal/cover-wide.webp',
+  +   icon: 'https://dragon.typing-game.local/assets/dragon-hold/portal/%2E%2E%2f%2E%2E%2fspace-typing/portal/icon.png'
+  -   icon: null
+    }
+
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/portal/tests/game-card.test.mjs:219:14)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: { icon: 'https://dragon.typing-game.local/assets/dragon-hold/portal/%2E%2E%2f%2E%2E%2fspace-typing/portal/icon.png', cover: 'https://dragon.typing-game.local/assets/dragon-hold/portal/cover-wide.webp' },
+    expected: { icon: null, cover: 'https://dragon.typing-game.local/assets/dragon-hold/portal/cover-wide.webp' },
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at portal/tests/game-card.test.mjs:215:3
+✖ F5 rejects fully decoded unsafe art %2e%2e%5C%2e%2e%5Cspace-typing/portal/icon.png (0.123834ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+
+    {
+      cover: 'https://dragon.typing-game.local/assets/dragon-hold/portal/cover-wide.webp',
+  +   icon: 'https://dragon.typing-game.local/assets/dragon-hold/portal/%2e%2e%5C%2e%2e%5Cspace-typing/portal/icon.png'
+  -   icon: null
+    }
+
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/portal/tests/game-card.test.mjs:219:14)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: { icon: 'https://dragon.typing-game.local/assets/dragon-hold/portal/%2e%2e%5C%2e%2e%5Cspace-typing/portal/icon.png', cover: 'https://dragon.typing-game.local/assets/dragon-hold/portal/cover-wide.webp' },
+    expected: { icon: null, cover: 'https://dragon.typing-game.local/assets/dragon-hold/portal/cover-wide.webp' },
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at portal/tests/game-card.test.mjs:215:3
+✖ F5 rejects fully decoded unsafe art %2e%2e%2F%2e%2e%5cspace-typing/portal/icon.png (0.109125ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+
+    {
+      cover: 'https://dragon.typing-game.local/assets/dragon-hold/portal/cover-wide.webp',
+  +   icon: 'https://dragon.typing-game.local/assets/dragon-hold/portal/%2e%2e%2F%2e%2e%5cspace-typing/portal/icon.png'
+  -   icon: null
+    }
+
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/portal/tests/game-card.test.mjs:219:14)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: { icon: 'https://dragon.typing-game.local/assets/dragon-hold/portal/%2e%2e%2F%2e%2e%5cspace-typing/portal/icon.png', cover: 'https://dragon.typing-game.local/assets/dragon-hold/portal/cover-wide.webp' },
+    expected: { icon: null, cover: 'https://dragon.typing-game.local/assets/dragon-hold/portal/cover-wide.webp' },
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at portal/tests/game-card.test.mjs:215:3
+✖ F5 rejects fully decoded unsafe art %252e%252e%252F%252e%252e%252Fspace-typing/portal/icon.png (0.097792ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+
+    {
+      cover: 'https://dragon.typing-game.local/assets/dragon-hold/portal/cover-wide.webp',
+  +   icon: 'https://dragon.typing-game.local/assets/dragon-hold/portal/%252e%252e%252F%252e%252e%252Fspace-typing/portal/icon.png'
+  -   icon: null
+    }
+
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/portal/tests/game-card.test.mjs:219:14)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: { icon: 'https://dragon.typing-game.local/assets/dragon-hold/portal/%252e%252e%252F%252e%252e%252Fspace-typing/portal/icon.png', cover: 'https://dragon.typing-game.local/assets/dragon-hold/portal/cover-wide.webp' },
+    expected: { icon: null, cover: 'https://dragon.typing-game.local/assets/dragon-hold/portal/cover-wide.webp' },
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at portal/tests/game-card.test.mjs:215:3
+✖ F5 rejects fully decoded unsafe art %252e%252e%255C%252e%252e%255Cspace-typing/portal/icon.png (0.084667ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+
+    {
+      cover: 'https://dragon.typing-game.local/assets/dragon-hold/portal/cover-wide.webp',
+  +   icon: 'https://dragon.typing-game.local/assets/dragon-hold/portal/%252e%252e%255C%252e%252e%255Cspace-typing/portal/icon.png'
+  -   icon: null
+    }
+
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/portal/tests/game-card.test.mjs:219:14)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: { icon: 'https://dragon.typing-game.local/assets/dragon-hold/portal/%252e%252e%255C%252e%252e%255Cspace-typing/portal/icon.png', cover: 'https://dragon.typing-game.local/assets/dragon-hold/portal/cover-wide.webp' },
+    expected: { icon: null, cover: 'https://dragon.typing-game.local/assets/dragon-hold/portal/cover-wide.webp' },
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at portal/tests/game-card.test.mjs:215:3
+✖ F5 rejects fully decoded unsafe art %252e%2e%252f%2e%252e%5Cspace-typing/portal/icon.png (0.108083ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+
+    {
+      cover: 'https://dragon.typing-game.local/assets/dragon-hold/portal/cover-wide.webp',
+  +   icon: 'https://dragon.typing-game.local/assets/dragon-hold/portal/%252e%2e%252f%2e%252e%5Cspace-typing/portal/icon.png'
+  -   icon: null
+    }
+
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/portal/tests/game-card.test.mjs:219:14)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: { icon: 'https://dragon.typing-game.local/assets/dragon-hold/portal/%252e%2e%252f%2e%252e%5Cspace-typing/portal/icon.png', cover: 'https://dragon.typing-game.local/assets/dragon-hold/portal/cover-wide.webp' },
+    expected: { icon: null, cover: 'https://dragon.typing-game.local/assets/dragon-hold/portal/cover-wide.webp' },
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at portal/tests/game-card.test.mjs:215:3
+✖ F5 rejects fully decoded unsafe art %25252e%25252e%25252fspace-typing/portal/icon.png (0.106583ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+
+    {
+      cover: 'https://dragon.typing-game.local/assets/dragon-hold/portal/cover-wide.webp',
+  +   icon: 'https://dragon.typing-game.local/assets/dragon-hold/portal/%25252e%25252e%25252fspace-typing/portal/icon.png'
+  -   icon: null
+    }
+
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/portal/tests/game-card.test.mjs:219:14)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: { icon: 'https://dragon.typing-game.local/assets/dragon-hold/portal/%25252e%25252e%25252fspace-typing/portal/icon.png', cover: 'https://dragon.typing-game.local/assets/dragon-hold/portal/cover-wide.webp' },
+    expected: { icon: null, cover: 'https://dragon.typing-game.local/assets/dragon-hold/portal/cover-wide.webp' },
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at portal/tests/game-card.test.mjs:215:3
+✖ F5 rejects fully decoded unsafe art a%2Fb.png (0.080625ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+
+    {
+      cover: 'https://dragon.typing-game.local/assets/dragon-hold/portal/cover-wide.webp',
+  +   icon: 'https://dragon.typing-game.local/assets/dragon-hold/portal/a%2Fb.png'
+  -   icon: null
+    }
+
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/portal/tests/game-card.test.mjs:219:14)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: { icon: 'https://dragon.typing-game.local/assets/dragon-hold/portal/a%2Fb.png', cover: 'https://dragon.typing-game.local/assets/dragon-hold/portal/cover-wide.webp' },
+    expected: { icon: null, cover: 'https://dragon.typing-game.local/assets/dragon-hold/portal/cover-wide.webp' },
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at portal/tests/game-card.test.mjs:215:3
+✖ F5 rejects fully decoded unsafe art a%5Cb.png (0.064625ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+
+    {
+      cover: 'https://dragon.typing-game.local/assets/dragon-hold/portal/cover-wide.webp',
+  +   icon: 'https://dragon.typing-game.local/assets/dragon-hold/portal/a%5Cb.png'
+  -   icon: null
+    }
+
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/portal/tests/game-card.test.mjs:219:14)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: { icon: 'https://dragon.typing-game.local/assets/dragon-hold/portal/a%5Cb.png', cover: 'https://dragon.typing-game.local/assets/dragon-hold/portal/cover-wide.webp' },
+    expected: { icon: null, cover: 'https://dragon.typing-game.local/assets/dragon-hold/portal/cover-wide.webp' },
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at portal/tests/game-card.test.mjs:215:3
+✖ F5 rejects fully decoded unsafe art a%252Fb.png (0.05925ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+
+    {
+      cover: 'https://dragon.typing-game.local/assets/dragon-hold/portal/cover-wide.webp',
+  +   icon: 'https://dragon.typing-game.local/assets/dragon-hold/portal/a%252Fb.png'
+  -   icon: null
+    }
+
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/portal/tests/game-card.test.mjs:219:14)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: { icon: 'https://dragon.typing-game.local/assets/dragon-hold/portal/a%252Fb.png', cover: 'https://dragon.typing-game.local/assets/dragon-hold/portal/cover-wide.webp' },
+    expected: { icon: null, cover: 'https://dragon.typing-game.local/assets/dragon-hold/portal/cover-wide.webp' },
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at portal/tests/game-card.test.mjs:215:3
+✖ F5 rejects fully decoded unsafe art a%255Cb.png (0.08075ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+
+    {
+      cover: 'https://dragon.typing-game.local/assets/dragon-hold/portal/cover-wide.webp',
+  +   icon: 'https://dragon.typing-game.local/assets/dragon-hold/portal/a%255Cb.png'
+  -   icon: null
+    }
+
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/portal/tests/game-card.test.mjs:219:14)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: { icon: 'https://dragon.typing-game.local/assets/dragon-hold/portal/a%255Cb.png', cover: 'https://dragon.typing-game.local/assets/dragon-hold/portal/cover-wide.webp' },
+    expected: { icon: null, cover: 'https://dragon.typing-game.local/assets/dragon-hold/portal/cover-wide.webp' },
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at portal/tests/game-card.test.mjs:215:3
+✖ F5 rejects fully decoded unsafe art a.png%253Fsize=192 (0.104792ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+
+    {
+      cover: 'https://dragon.typing-game.local/assets/dragon-hold/portal/cover-wide.webp',
+  +   icon: 'https://dragon.typing-game.local/assets/dragon-hold/portal/a.png%253Fsize=192'
+  -   icon: null
+    }
+
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/portal/tests/game-card.test.mjs:219:14)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: { icon: 'https://dragon.typing-game.local/assets/dragon-hold/portal/a.png%253Fsize=192', cover: 'https://dragon.typing-game.local/assets/dragon-hold/portal/cover-wide.webp' },
+    expected: { icon: null, cover: 'https://dragon.typing-game.local/assets/dragon-hold/portal/cover-wide.webp' },
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at portal/tests/game-card.test.mjs:215:3
+✖ F5 rejects fully decoded unsafe art a.png%2523icon (0.069917ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+
+    {
+      cover: 'https://dragon.typing-game.local/assets/dragon-hold/portal/cover-wide.webp',
+  +   icon: 'https://dragon.typing-game.local/assets/dragon-hold/portal/a.png%2523icon'
+  -   icon: null
+    }
+
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/portal/tests/game-card.test.mjs:219:14)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: { icon: 'https://dragon.typing-game.local/assets/dragon-hold/portal/a.png%2523icon', cover: 'https://dragon.typing-game.local/assets/dragon-hold/portal/cover-wide.webp' },
+    expected: { icon: null, cover: 'https://dragon.typing-game.local/assets/dragon-hold/portal/cover-wide.webp' },
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at portal/tests/game-card.test.mjs:215:3
+✖ F5 rejects fully decoded unsafe art %zz.png (0.057084ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+
+    {
+      cover: 'https://dragon.typing-game.local/assets/dragon-hold/portal/cover-wide.webp',
+  +   icon: 'https://dragon.typing-game.local/assets/dragon-hold/portal/%zz.png'
+  -   icon: null
+    }
+
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/portal/tests/game-card.test.mjs:219:14)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: { icon: 'https://dragon.typing-game.local/assets/dragon-hold/portal/%zz.png', cover: 'https://dragon.typing-game.local/assets/dragon-hold/portal/cover-wide.webp' },
+    expected: { icon: null, cover: 'https://dragon.typing-game.local/assets/dragon-hold/portal/cover-wide.webp' },
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+exit: 1

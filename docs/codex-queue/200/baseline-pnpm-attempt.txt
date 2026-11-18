@@ -1,0 +1,14 @@
+[ERR_PNPM_UNSAFE_MODULES_DIR] Refusing to remove the modules directory at "/Users/toandx/htdocs/typing-game/games/.wt-td-ui/node_modules" because its resolved target is not a strict subdirectory of the project root at "/Users/toandx/htdocs/typing-game/games/.wt-td-ui/tmp/200-baseline-2a1f61d".
+[ERROR] Command failed with exit code 1: '/opt/homebrew/Cellar/node@24/24.22.0/bin/node' /Users/toandx/.cache/node/corepack/v1/pnpm/11.21.0/bin/pnpm.mjs install
+
+pnpm: Command failed with exit code 1: '/opt/homebrew/Cellar/node@24/24.22.0/bin/node' /Users/toandx/.cache/node/corepack/v1/pnpm/11.21.0/bin/pnpm.mjs install
+    at getFinalError (file:///Users/toandx/.cache/node/corepack/v1/pnpm/11.21.0/dist/pnpm.mjs:89024:14)
+    at makeError (file:///Users/toandx/.cache/node/corepack/v1/pnpm/11.21.0/dist/pnpm.mjs:91331:21)
+    at getSyncResult (file:///Users/toandx/.cache/node/corepack/v1/pnpm/11.21.0/dist/pnpm.mjs:93175:10)
+    at spawnSubprocessSync (file:///Users/toandx/.cache/node/corepack/v1/pnpm/11.21.0/dist/pnpm.mjs:93135:14)
+    at execaCoreSync (file:///Users/toandx/.cache/node/corepack/v1/pnpm/11.21.0/dist/pnpm.mjs:93065:23)
+    at callBoundExeca (file:///Users/toandx/.cache/node/corepack/v1/pnpm/11.21.0/dist/pnpm.mjs:95593:23)
+    at boundExeca (file:///Users/toandx/.cache/node/corepack/v1/pnpm/11.21.0/dist/pnpm.mjs:95570:49)
+    at sync2 (file:///Users/toandx/.cache/node/corepack/v1/pnpm/11.21.0/dist/pnpm.mjs:95729:10)
+    at runPnpmCli (file:///Users/toandx/.cache/node/corepack/v1/pnpm/11.21.0/dist/pnpm.mjs:269872:5)
+    at runDepsStatusCheck (file:///Users/toandx/.cache/node/corepack/v1/pnpm/11.21.0/dist/pnpm.mjs:271638:7)

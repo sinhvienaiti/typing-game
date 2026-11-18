@@ -1,0 +1,62 @@
+{
+  "head": "b646d8550b71ddb9f39bdd77ffbbf43941cafcb9",
+  "branch": "feat/space-typing-admin-uiux",
+  "legacy_entries_unchanged": 6,
+  "changed_registry_fields": {
+    "dragon-hold": [
+      "art",
+      "description",
+      "icon",
+      "name"
+    ],
+    "typing-defense": [
+      "art",
+      "description",
+      "icon",
+      "name"
+    ],
+    "typing-survival": [
+      "art",
+      "description",
+      "icon",
+      "name"
+    ]
+  },
+  "descriptions": {
+    "dragon-hold": {
+      "text": "Type English words to unleash dragon fire and defend a misty forest from the Blight Horde.",
+      "characters": 90
+    },
+    "typing-defense": {
+      "text": "Type tower card words to power towers and defend a realm of mist and limestone peaks.",
+      "characters": 85
+    },
+    "typing-survival": {
+      "text": "Type words to reload guns and repel the Black Hole Horde on a causeway at the edge of a black hole.",
+      "characters": 99
+    }
+  },
+  "old_names_in_scripts": 0,
+  "tu_tien_labels_unchanged": [
+    "scripts/game-dir.sh:24:   immortality-cultivation) LABEL=\"Tu Tiên Thủ Ải (immortality-cultivation)\" ;;",
+    "scripts/bootstrap.sh:17:   echo \"  • Tu Tiên Thủ Ải is not checked out yet; skipped.\"",
+    "scripts/bootstrap.sh:124:     update_new_game \"games/immortality-cultivation\" \"Tu Tiên Thủ Ải\"",
+    "scripts/bootstrap.sh:151:     require_new_game \"games/immortality-cultivation\" \"Tu Tiên Thủ Ải\"",
+    "scripts/bootstrap.sh:218:     install_new_game \"games/immortality-cultivation\" \"Tu Tiên Thủ Ải\"",
+    "scripts/bootstrap.sh:245:     install_new_game \"games/immortality-cultivation\" \"Tu Tiên Thủ Ải\""
+  ],
+  "last_line_asset_directory_exists": false,
+  "tracked_whitespace_exit_code": 0,
+  "untracked_whitespace_checks": 38,
+  "outside_scope_since_resume": [
+    "?? docs/codex-queue/194/resume3-preserved.json",
+    "?? docs/codex-queue/194/verification-previous.json"
+  ],
+  "outside_scope_since_original_baseline": [
+    "?? docs/codex-queue/194/resume3-before.json",
+    "?? docs/codex-queue/194/resume3-preserved.json",
+    "?? docs/codex-queue/194/resume3-start-status.txt",
+    "?? docs/codex-queue/194/resume3-start.diff",
+    "?? docs/codex-queue/194/verification-previous.json"
+  ]
+}

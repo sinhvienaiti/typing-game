@@ -1,0 +1,90 @@
+$ git -C games/.wt-td-ui status --short -uall
+ M docs/changelog/README.md
+ M index.html
+ M scripts/visual/scenarios/td-1c-words.mjs
+ M scripts/visual/scenarios/td-theme.mjs
+ M src/main.ts
+ M src/ui/sheets.ts
+ M src/ui/td.css
+ M src/ui/title.css
+ M src/ui/title.ts
+ M src/view/3d/words.ts
+ M src/view/words/cards.ts
+ M src/view/words/feel.css
+?? docs/changelog/2026-10-30-c10-fixes-and-card-icons.md
+?? docs/changelog/2026-10-30-title-results-art.md
+?? scripts/td/prepare-ui.mjs
+?? scripts/td/ui-picks.json
+?? src/ui/art.ts
+?? src/view/words/dom.ts
+?? src/view/words/safe.ts
+?? src/view/words/steps.ts
+?? src/view/words/tray.ts
+?? tests/td-c10-r5.test.ts
+?? tests/td-card-art.test.ts
+?? tests/td-no-emoji.test.ts
+?? tests/td-ui-art.test.ts
+exit=0
+
+$ git -C games/.wt-td-ui diff --stat
+ docs/changelog/README.md                 |  1 +
+ index.html                               |  7 +--
+ scripts/visual/scenarios/td-1c-words.mjs | 47 ++++++++++++++++---
+ scripts/visual/scenarios/td-theme.mjs    | 24 ++++++++--
+ src/main.ts                              |  3 ++
+ src/ui/sheets.ts                         | 10 ++--
+ src/ui/td.css                            | 22 +++++++++
+ src/ui/title.css                         | 15 +++---
+ src/ui/title.ts                          | 26 ++++-------
+ src/view/3d/words.ts                     | 66 ++++++++++++++------------
+ src/view/words/cards.ts                  | 80 ++++++++++++++++++++++++--------
+ src/view/words/feel.css                  | 31 ++-----------
+ 12 files changed, 215 insertions(+), 117 deletions(-)
+exit=0
+
+$ git -C games/.wt-td-ui diff --quiet -- src/kit src/sim src/typing src/content
+exit=0
+
+$ git -C games/.wt-td-ui diff --check
+exit=0
+
+Known 200 paths (13), untouched by 203:
+docs/changelog/README.md
+index.html
+scripts/visual/scenarios/td-theme.mjs
+src/main.ts
+src/ui/sheets.ts
+src/ui/td.css
+src/ui/title.css
+src/ui/title.ts
+docs/changelog/2026-10-30-title-results-art.md
+scripts/td/prepare-ui.mjs
+scripts/td/ui-picks.json
+src/ui/art.ts
+tests/td-ui-art.test.ts
+
+203 paths (12):
+docs/changelog/2026-10-30-c10-fixes-and-card-icons.md
+scripts/visual/scenarios/td-1c-words.mjs
+src/view/3d/words.ts
+src/view/words/cards.ts
+src/view/words/feel.css
+src/view/words/dom.ts
+src/view/words/safe.ts
+src/view/words/steps.ts
+src/view/words/tray.ts
+tests/td-c10-r5.test.ts
+tests/td-card-art.test.ts
+tests/td-no-emoji.test.ts
+
+New files omitted by git diff --stat (line counts):
+docs/changelog/2026-10-30-c10-fixes-and-card-icons.md: 30 lines
+src/view/words/dom.ts: 13 lines
+src/view/words/safe.ts: 23 lines
+src/view/words/steps.ts: 14 lines
+src/view/words/tray.ts: 32 lines
+tests/td-c10-r5.test.ts: 176 lines
+tests/td-card-art.test.ts: 13 lines
+tests/td-no-emoji.test.ts: 18 lines
+
+Unexpected paths: []

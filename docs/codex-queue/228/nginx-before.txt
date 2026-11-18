@@ -1,0 +1,119 @@
+$ node --test scripts/validate-play-mode.test.mjs
+cwd: /Users/toandx/htdocs/typing-game
+
+✔ import exposes pure checks without running the CLI or reading repo files (26.457792ms)
+✔ play: real configs have no shared data aliases in the three hosts (3.288292ms)
+✔ play: catches dragon.typing-game.local /vocabulary/ (0.432708ms)
+✔ play: catches dragon.typing-game.local /typing-texts/ (0.391583ms)
+✔ play: catches dragon.typing-game.local /shared/typing-texts/ (0.2935ms)
+✔ play: catches dragon.typing-game.local variant location ^~ /vocabulary/ { alias __ROOT_DIR__/shared/vocabulary/; } (0.365916ms)
+✔ play: catches dragon.typing-game.local variant location = /vocabulary { alias __ROOT_DIR__/shared/vocabulary/; } (0.277583ms)
+✔ play: catches dragon.typing-game.local variant location ~ /typing-texts/ { alias __ROOT_DIR__/shared/typing-texts/; } (0.441583ms)
+✔ play: catches dragon.typing-game.local variant location ~* /shared/typing-texts/ { alias __ROOT_DIR__/shared/typing-texts/; } (0.2975ms)
+✔ play: catches dragon.typing-game.local variant location	 ^~	 /vocabulary/	{
+	alias	__ROOT_DIR__/shared/vocabulary/;
+} (0.427833ms)
+✔ play: catches dragon.typing-game.local variant location /words/ { alias __ROOT_DIR__/shared/vocabulary/; } (0.284625ms)
+✔ play: catches dragon.typing-game.local variant location /words/ { root __ROOT_DIR__/shared/vocabulary/; } (0.560875ms)
+✔ play: catches dragon.typing-game.local variant location "/words/" { root "__ROOT_DIR__/shared/vocabulary/"; } (0.257333ms)
+✔ play: catches dragon.typing-game.local variant location /vocabulary/ { try_files $uri =404; } (0.355875ms)
+✔ play: ignores commented locations for dragon.typing-game.local (0.267375ms)
+✔ play: catches td.typing-game.local /vocabulary/ (0.388791ms)
+✔ play: catches td.typing-game.local /typing-texts/ (0.2735ms)
+✔ play: catches td.typing-game.local /shared/typing-texts/ (0.395459ms)
+✔ play: catches td.typing-game.local variant location ^~ /vocabulary/ { alias __ROOT_DIR__/shared/vocabulary/; } (0.254292ms)
+✔ play: catches td.typing-game.local variant location = /vocabulary { alias __ROOT_DIR__/shared/vocabulary/; } (0.349083ms)
+✔ play: catches td.typing-game.local variant location ~ /typing-texts/ { alias __ROOT_DIR__/shared/typing-texts/; } (0.256666ms)
+✔ play: catches td.typing-game.local variant location ~* /shared/typing-texts/ { alias __ROOT_DIR__/shared/typing-texts/; } (0.360666ms)
+✔ play: catches td.typing-game.local variant location	 ^~	 /vocabulary/	{
+	alias	__ROOT_DIR__/shared/vocabulary/;
+} (0.249625ms)
+✔ play: catches td.typing-game.local variant location /words/ { alias __ROOT_DIR__/shared/vocabulary/; } (0.510584ms)
+✔ play: catches td.typing-game.local variant location /words/ { root __ROOT_DIR__/shared/vocabulary/; } (0.249583ms)
+✔ play: catches td.typing-game.local variant location "/words/" { root "__ROOT_DIR__/shared/vocabulary/"; } (0.264666ms)
+✔ play: catches td.typing-game.local variant location /vocabulary/ { try_files $uri =404; } (0.301333ms)
+✔ play: ignores commented locations for td.typing-game.local (0.454333ms)
+✔ play: catches survival.typing-game.local /vocabulary/ (0.262ms)
+✔ play: catches survival.typing-game.local /typing-texts/ (0.318875ms)
+✔ play: catches survival.typing-game.local /shared/typing-texts/ (0.304ms)
+✔ play: catches survival.typing-game.local variant location ^~ /vocabulary/ { alias __ROOT_DIR__/shared/vocabulary/; } (0.381792ms)
+✔ play: catches survival.typing-game.local variant location = /vocabulary { alias __ROOT_DIR__/shared/vocabulary/; } (0.248666ms)
+✔ play: catches survival.typing-game.local variant location ~ /typing-texts/ { alias __ROOT_DIR__/shared/typing-texts/; } (0.249167ms)
+✔ play: catches survival.typing-game.local variant location ~* /shared/typing-texts/ { alias __ROOT_DIR__/shared/typing-texts/; } (0.26675ms)
+✔ play: catches survival.typing-game.local variant location	 ^~	 /vocabulary/	{
+	alias	__ROOT_DIR__/shared/vocabulary/;
+} (0.319416ms)
+✔ play: catches survival.typing-game.local variant location /words/ { alias __ROOT_DIR__/shared/vocabulary/; } (0.315459ms)
+✔ play: catches survival.typing-game.local variant location /words/ { root __ROOT_DIR__/shared/vocabulary/; } (0.203792ms)
+✔ play: catches survival.typing-game.local variant location "/words/" { root "__ROOT_DIR__/shared/vocabulary/"; } (0.200708ms)
+✔ play: catches survival.typing-game.local variant location /vocabulary/ { try_files $uri =404; } (0.2015ms)
+✔ play: ignores commented locations for survival.typing-game.local (0.267417ms)
+✔ play: other hosts and survival models stay allowed (1.996584ms)
+✔ play: rejects missing and early closing braces (0.558542ms)
+✔ play: ignores comments and quoted braces, including escaped quotes (0.436542ms)
+✔ play: each game host must have exactly one server block (5.264ms)
+✔ dev: real configs have no shared data aliases in the three hosts (2.796208ms)
+✔ dev: catches dragon.typing-game.local /vocabulary/ (0.882334ms)
+✔ dev: catches dragon.typing-game.local /typing-texts/ (0.705708ms)
+✔ dev: catches dragon.typing-game.local /shared/typing-texts/ (0.709167ms)
+✔ dev: catches dragon.typing-game.local variant location ^~ /vocabulary/ { alias __ROOT_DIR__/shared/vocabulary/; } (0.708167ms)
+✔ dev: catches dragon.typing-game.local variant location = /vocabulary { alias __ROOT_DIR__/shared/vocabulary/; } (0.9555ms)
+✔ dev: catches dragon.typing-game.local variant location ~ /typing-texts/ { alias __ROOT_DIR__/shared/typing-texts/; } (0.70875ms)
+✔ dev: catches dragon.typing-game.local variant location ~* /shared/typing-texts/ { alias __ROOT_DIR__/shared/typing-texts/; } (0.30525ms)
+✔ dev: catches dragon.typing-game.local variant location	 ^~	 /vocabulary/	{
+	alias	__ROOT_DIR__/shared/vocabulary/;
+} (1.110792ms)
+✔ dev: catches dragon.typing-game.local variant location /words/ { alias __ROOT_DIR__/shared/vocabulary/; } (0.247166ms)
+✔ dev: catches dragon.typing-game.local variant location /words/ { root __ROOT_DIR__/shared/vocabulary/; } (0.23875ms)
+✔ dev: catches dragon.typing-game.local variant location "/words/" { root "__ROOT_DIR__/shared/vocabulary/"; } (0.23425ms)
+✔ dev: catches dragon.typing-game.local variant location /vocabulary/ { try_files $uri =404; } (0.3695ms)
+✔ dev: ignores commented locations for dragon.typing-game.local (0.222417ms)
+✔ dev: catches td.typing-game.local /vocabulary/ (0.238583ms)
+✔ dev: catches td.typing-game.local /typing-texts/ (0.227541ms)
+✔ dev: catches td.typing-game.local /shared/typing-texts/ (0.320416ms)
+✔ dev: catches td.typing-game.local variant location ^~ /vocabulary/ { alias __ROOT_DIR__/shared/vocabulary/; } (0.224458ms)
+✔ dev: catches td.typing-game.local variant location = /vocabulary { alias __ROOT_DIR__/shared/vocabulary/; } (0.228625ms)
+✔ dev: catches td.typing-game.local variant location ~ /typing-texts/ { alias __ROOT_DIR__/shared/typing-texts/; } (0.290125ms)
+✔ dev: catches td.typing-game.local variant location ~* /shared/typing-texts/ { alias __ROOT_DIR__/shared/typing-texts/; } (0.220666ms)
+✔ dev: catches td.typing-game.local variant location	 ^~	 /vocabulary/	{
+	alias	__ROOT_DIR__/shared/vocabulary/;
+} (0.220708ms)
+✔ dev: catches td.typing-game.local variant location /words/ { alias __ROOT_DIR__/shared/vocabulary/; } (0.221833ms)
+✔ dev: catches td.typing-game.local variant location /words/ { root __ROOT_DIR__/shared/vocabulary/; } (0.337042ms)
+✔ dev: catches td.typing-game.local variant location "/words/" { root "__ROOT_DIR__/shared/vocabulary/"; } (0.224334ms)
+✔ dev: catches td.typing-game.local variant location /vocabulary/ { try_files $uri =404; } (0.22075ms)
+✔ dev: ignores commented locations for td.typing-game.local (0.218292ms)
+✔ dev: catches survival.typing-game.local /vocabulary/ (0.301542ms)
+✔ dev: catches survival.typing-game.local /typing-texts/ (0.227125ms)
+✔ dev: catches survival.typing-game.local /shared/typing-texts/ (0.226458ms)
+✔ dev: catches survival.typing-game.local variant location ^~ /vocabulary/ { alias __ROOT_DIR__/shared/vocabulary/; } (0.2265ms)
+✔ dev: catches survival.typing-game.local variant location = /vocabulary { alias __ROOT_DIR__/shared/vocabulary/; } (0.278125ms)
+✔ dev: catches survival.typing-game.local variant location ~ /typing-texts/ { alias __ROOT_DIR__/shared/typing-texts/; } (0.226542ms)
+✔ dev: catches survival.typing-game.local variant location ~* /shared/typing-texts/ { alias __ROOT_DIR__/shared/typing-texts/; } (0.227666ms)
+✔ dev: catches survival.typing-game.local variant location	 ^~	 /vocabulary/	{
+	alias	__ROOT_DIR__/shared/vocabulary/;
+} (0.369708ms)
+✔ dev: catches survival.typing-game.local variant location /words/ { alias __ROOT_DIR__/shared/vocabulary/; } (0.23875ms)
+✔ dev: catches survival.typing-game.local variant location /words/ { root __ROOT_DIR__/shared/vocabulary/; } (0.230333ms)
+✔ dev: catches survival.typing-game.local variant location "/words/" { root "__ROOT_DIR__/shared/vocabulary/"; } (0.226708ms)
+✔ dev: catches survival.typing-game.local variant location /vocabulary/ { try_files $uri =404; } (0.298334ms)
+✔ dev: ignores commented locations for survival.typing-game.local (0.222792ms)
+✔ dev: other hosts and survival models stay allowed (2.358875ms)
+✔ dev: rejects missing and early closing braces (0.399083ms)
+✔ dev: ignores comments and quoted braces, including escaped quotes (0.437375ms)
+✔ dev: each game host must have exactly one server block (3.278334ms)
+✔ CLI on the repo prints PASS and exits 0 (38.460375ms)
+✔ CLI --play-conf catches dragon.typing-game.local /vocabulary/ (41.491916ms)
+✔ CLI --dev-conf catches td.typing-game.local /shared/typing-texts/ (39.924791ms)
+✔ CLI rejects unknown options and missing paths with usage and exit 2 (149.109208ms)
+✔ CLI rejects malformed braces and duplicate hosts in either config (169.32175ms)
+ℹ tests 94
+ℹ suites 0
+ℹ pass 94
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 563.447333
+
+exit: 0

@@ -1,0 +1,1547 @@
+GIT_OPTIONAL_LOCKS=0 git diff -- <product-paths.json>
+exit=0
+diff --git a/infra/nginx/typing-game.local.dev.conf b/infra/nginx/typing-game.local.dev.conf
+index ec4c63c1..4c3ab4cc 100644
+--- a/infra/nginx/typing-game.local.dev.conf
++++ b/infra/nginx/typing-game.local.dev.conf
+@@ -195,16 +195,6 @@ server {
+     ssl_certificate __SSL_CERT__;
+     ssl_certificate_key __SSL_KEY__;
+     gzip off;
+-    location /vocabulary/ {
+-        alias __ROOT_DIR__/shared/vocabulary/;
+-        add_header Access-Control-Allow-Origin "*" always;
+-        add_header Cache-Control "no-cache" always;
+-    }
+-    location /typing-texts/ {
+-        alias __ROOT_DIR__/shared/typing-texts/;
+-        add_header Access-Control-Allow-Origin "*" always;
+-        add_header Cache-Control "no-cache" always;
+-    }
+     location / {
+         proxy_pass http://127.0.0.1:3005;
+         proxy_http_version 1.1;
+@@ -226,22 +216,6 @@ server {
+     ssl_certificate __SSL_CERT__;
+     ssl_certificate_key __SSL_KEY__;
+     gzip off;
+-    location /vocabulary/ {
+-        alias __ROOT_DIR__/shared/vocabulary/;
+-        add_header Access-Control-Allow-Origin "*" always;
+-        add_header Cache-Control "no-cache" always;
+-    }
+-    location /typing-texts/ {
+-        alias __ROOT_DIR__/shared/typing-texts/;
+-        add_header Access-Control-Allow-Origin "*" always;
+-        add_header Cache-Control "no-cache" always;
+-    }
+-    # Typing-text base inherited from Space Typing code.
+-    location /shared/typing-texts/ {
+-        alias __ROOT_DIR__/shared/typing-texts/;
+-        add_header Access-Control-Allow-Origin "*" always;
+-        add_header Cache-Control "no-cache" always;
+-    }
+     location / {
+         proxy_pass http://127.0.0.1:3006;
+         proxy_http_version 1.1;
+@@ -263,23 +237,7 @@ server {
+     ssl_certificate __SSL_CERT__;
+     ssl_certificate_key __SSL_KEY__;
+     gzip off;
+-    location /vocabulary/ {
+-        alias __ROOT_DIR__/shared/vocabulary/;
+-        add_header Access-Control-Allow-Origin "*" always;
+-        add_header Cache-Control "no-cache" always;
+-    }
+-    location /typing-texts/ {
+-        alias __ROOT_DIR__/shared/typing-texts/;
+-        add_header Access-Control-Allow-Origin "*" always;
+-        add_header Cache-Control "no-cache" always;
+-    }
+-    # Typing-text base inherited from Space Typing code.
+-    location /shared/typing-texts/ {
+-        alias __ROOT_DIR__/shared/typing-texts/;
+-        add_header Access-Control-Allow-Origin "*" always;
+-        add_header Cache-Control "no-cache" always;
+-    }
+-    # Shared model library still lives in Space Typing.
++    # Temporary: Space Typing models until ticket 205 (own models) is merged; Claude removes this block then.
+     location /assets/space-typing/models/ {
+         alias __ROOT_DIR__/games/space-typing/public/assets/space-typing/models/;
+         add_header Cache-Control "no-cache" always;
+diff --git a/infra/nginx/typing-game.local.play.conf b/infra/nginx/typing-game.local.play.conf
+index 487e8b4b..d227195a 100644
+--- a/infra/nginx/typing-game.local.play.conf
++++ b/infra/nginx/typing-game.local.play.conf
+@@ -148,16 +148,6 @@ server {
+     ssl_certificate_key __SSL_KEY__;
+     root __ROOT_DIR__/games/dragon-hold/dist;
+     index index.html;
+-    location /vocabulary/ {
+-        alias __ROOT_DIR__/shared/vocabulary/;
+-        add_header Access-Control-Allow-Origin "*" always;
+-        add_header Cache-Control "no-cache" always;
+-    }
+-    location /typing-texts/ {
+-        alias __ROOT_DIR__/shared/typing-texts/;
+-        add_header Access-Control-Allow-Origin "*" always;
+-        add_header Cache-Control "no-cache" always;
+-    }
+     # Unhashed game media; hashed bundles stay immutable below.
+     location /assets/dragon-hold/ { try_files $uri =404; add_header Cache-Control "no-cache" always; }
+     location /assets/ { try_files $uri =404; expires 30d; add_header Cache-Control "public, immutable"; }
+@@ -171,22 +161,6 @@ server {
+     ssl_certificate_key __SSL_KEY__;
+     root __ROOT_DIR__/games/typing-defense/dist;
+     index index.html;
+-    location /vocabulary/ {
+-        alias __ROOT_DIR__/shared/vocabulary/;
+-        add_header Access-Control-Allow-Origin "*" always;
+-        add_header Cache-Control "no-cache" always;
+-    }
+-    location /typing-texts/ {
+-        alias __ROOT_DIR__/shared/typing-texts/;
+-        add_header Access-Control-Allow-Origin "*" always;
+-        add_header Cache-Control "no-cache" always;
+-    }
+-    # Typing-text base inherited from Space Typing code.
+-    location /shared/typing-texts/ {
+-        alias __ROOT_DIR__/shared/typing-texts/;
+-        add_header Access-Control-Allow-Origin "*" always;
+-        add_header Cache-Control "no-cache" always;
+-    }
+     # Unhashed game media; hashed bundles stay immutable below.
+     location /assets/typing-defense/ { try_files $uri =404; add_header Cache-Control "no-cache" always; }
+     location /assets/ { try_files $uri =404; expires 30d; add_header Cache-Control "public, immutable"; }
+@@ -200,23 +174,7 @@ server {
+     ssl_certificate_key __SSL_KEY__;
+     root __ROOT_DIR__/games/typing-survival/dist;
+     index index.html;
+-    location /vocabulary/ {
+-        alias __ROOT_DIR__/shared/vocabulary/;
+-        add_header Access-Control-Allow-Origin "*" always;
+-        add_header Cache-Control "no-cache" always;
+-    }
+-    location /typing-texts/ {
+-        alias __ROOT_DIR__/shared/typing-texts/;
+-        add_header Access-Control-Allow-Origin "*" always;
+-        add_header Cache-Control "no-cache" always;
+-    }
+-    # Typing-text base inherited from Space Typing code.
+-    location /shared/typing-texts/ {
+-        alias __ROOT_DIR__/shared/typing-texts/;
+-        add_header Access-Control-Allow-Origin "*" always;
+-        add_header Cache-Control "no-cache" always;
+-    }
+-    # Shared model library still lives in Space Typing.
++    # Temporary: Space Typing models until ticket 205 (own models) is merged; Claude removes this block then.
+     location /assets/space-typing/models/ {
+         alias __ROOT_DIR__/games/space-typing/public/assets/space-typing/models/;
+         add_header Cache-Control "no-cache" always;
+diff --git a/portal/public/games.json b/portal/public/games.json
+index 9c7a7466..44e19e36 100644
+--- a/portal/public/games.json
++++ b/portal/public/games.json
+@@ -47,30 +47,39 @@
+     },
+     {
+       "id": "dragon-hold",
+-      "name": "Rồng Giữ Ải",
+-      "description": "Hai Rồng giữ rừng sương: gõ từ trên đầu quái, đặt bẫy, lính chặn, nhà phép qua 520 ải.",
++      "name": "Dragonhold",
++      "description": "Type English words to unleash dragon fire and defend a misty forest from the Blight Horde.",
+       "path": "/dragon-hold",
+       "appUrl": "https://dragon.typing-game.local",
+-      "icon": "🐉",
+-      "group": "battle"
++      "group": "battle",
++      "art": {
++        "icon": "/assets/dragon-hold/portal/icon-192.png",
++        "cover": "/assets/dragon-hold/portal/cover-wide.webp"
++      }
+     },
+     {
+       "id": "typing-defense",
+-      "name": "Lời Gọi",
+-      "description": "Thủ thành làng chữ Văn Điền: giúp dân khi họ gọi, giữ làng khi đêm xuống.",
++      "name": "Wordwoven",
++      "description": "Type tower card words to power towers and defend a realm of mist and limestone peaks.",
+       "path": "/typing-defense",
+       "appUrl": "https://td.typing-game.local",
+-      "icon": "🏮",
+-      "group": "battle"
++      "group": "battle",
++      "art": {
++        "icon": "/assets/typing-defense/portal/icon-192.png",
++        "cover": "/assets/typing-defense/portal/cover-wide.webp"
++      }
+     },
+     {
+       "id": "typing-survival",
+-      "name": "Tuyến Cuối",
+-      "description": "Giữ hành lang cuối ở mép hố đen: gõ từ nạp đạn cho bến súng, quét biển quái.",
++      "name": "Last Line",
++      "description": "Type words to reload guns and repel the Black Hole Horde on a causeway at the edge of a black hole.",
+       "path": "/typing-survival",
+       "appUrl": "https://survival.typing-game.local",
+-      "icon": "☄️",
+-      "group": "battle"
++      "group": "battle",
++      "art": {
++        "icon": "/assets/typing-survival/portal/icon-192.png",
++        "cover": "/assets/typing-survival/portal/cover-wide.webp"
++      }
+     },
+     {
+       "id": "immortality-cultivation",
+diff --git a/portal/src/learning/bridge.ts b/portal/src/learning/bridge.ts
+index fb8ca399..8d778669 100644
+--- a/portal/src/learning/bridge.ts
++++ b/portal/src/learning/bridge.ts
+@@ -1,12 +1,19 @@
+ import { BrowserLearningProfileStore } from "../../../shared/learning/browser-store.mjs";
+ import {
++  LEARNING_ATTEMPT_MESSAGE,
++  LEARNING_LOOKUP_MESSAGE,
++  LEARNING_QUERY_MESSAGE,
+   isLearningMessage,
+   makeLearningAck,
+   makeLearningError,
+   makeLearningQueryResult,
+   parseLearningMessage,
+ } from "../../../shared/learning/message-contract.mjs";
+-import { queryLearningProfile } from "../../../shared/learning/query.mjs";
++import {
++  lookupLearningRecords,
++  queryLearningProfile,
++  type LearningLookup,
++} from "../../../shared/learning/query.mjs";
+ import type { LearningEvent } from "../../../shared/learning/core.mjs";
+ 
+ type GameTarget = {
+@@ -81,7 +88,7 @@ export class ParentLearningBridge {
+ 
+     try {
+       const message = parseLearningMessage(event.data);
+-      if ("event" in message) {
++      if (message.type === LEARNING_ATTEMPT_MESSAGE) {
+         if (message.event.gameId !== currentGame.id) {
+           throw new TypeError(
+             "learning event gameId does not match the active game",
+@@ -97,12 +104,21 @@ export class ParentLearningBridge {
+         return true;
+       }
+ 
+-      void this.#handleQuery(
+-        message.requestId,
+-        message.query,
+-        frameWindow,
+-        expectedOrigin,
+-      );
++      if (message.type === LEARNING_QUERY_MESSAGE) {
++        void this.#handleQuery(
++          message.requestId,
++          message.query,
++          frameWindow,
++          expectedOrigin,
++        );
++      } else if (message.type === LEARNING_LOOKUP_MESSAGE) {
++        void this.#handleLookup(
++          message.requestId,
++          message.lookup,
++          frameWindow,
++          expectedOrigin,
++        );
++      }
+     } catch (error) {
+       const requestId = safeRequestId(event.data);
+       if (requestId !== null) {
+@@ -164,6 +180,30 @@ export class ParentLearningBridge {
+     }
+   }
+ 
++  async #handleLookup(
++    requestId: string,
++    lookup: LearningLookup,
++    target: Window,
++    targetOrigin: string,
++  ): Promise<void> {
++    try {
++      await this.flush();
++      const profile = await this.#store.load();
++      const result = lookupLearningRecords(profile, lookup);
++      this.#post(
++        target,
++        targetOrigin,
++        makeLearningQueryResult(requestId, result),
++      );
++    } catch (error) {
++      this.#post(
++        target,
++        targetOrigin,
++        makeLearningError(requestId, "query-failed", errorText(error)),
++      );
++    }
++  }
++
+   async #drain(): Promise<void> {
+     while (this.#pending.length > 0) {
+       const batch = this.#pending.splice(0, MAX_BATCH_SIZE);
+diff --git a/portal/src/main.ts b/portal/src/main.ts
+index 601eb1af..208a4fe6 100644
+--- a/portal/src/main.ts
++++ b/portal/src/main.ts
+@@ -1,4 +1,6 @@
+ import "./styles.css";
++import { gameCardModel, hideImageOnError } from "./game-card";
++import type { GameArtImage } from "./game-card";
+ import { SpaceTypingAdmin } from "./admin/space-typing";
+ import { ParentLearningBridge } from "./learning/bridge";
+ import { SharedMusicPlayer } from "./music";
+@@ -52,7 +54,8 @@ type Game = {
+   description: string;
+   path: string;
+   appUrl: string;
+-  icon: string;
++  icon?: string;
++  art?: { icon?: string; cover?: string };
+   group?: string;
+ };
+ 
+@@ -239,15 +242,33 @@ function makeButton(label: string, path: string): HTMLButtonElement {
+   return button;
+ }
+ 
++function makeGameImage(art: GameArtImage, className: string, onHide?: () => void): HTMLImageElement {
++  const img = document.createElement("img");
++  img.className = className;
++  img.alt = art.alt;
++  img.width = art.width;
++  img.height = art.height;
++  img.loading = "lazy";
++  img.decoding = "async";
++  hideImageOnError(img, onHide);
++  img.src = art.src;
++  return img;
++}
++
+ function makeGameButton(game: Game): HTMLButtonElement {
++  const model = gameCardModel(game);
+   const button = document.createElement("button");
+   button.className = "nav-game";
+   const icon = document.createElement("span");
+   icon.className = "nav-game-icon";
+   icon.setAttribute("aria-hidden", "true");
+-  icon.textContent = game.icon;
++  if (model.icon !== null) {
++    icon.append(makeGameImage(model.icon, "nav-game-art-icon"));
++  } else if (model.glyph !== null) {
++    icon.textContent = model.glyph;
++  }
+   const label = document.createElement("span");
+-  label.textContent = game.name;
++  label.textContent = model.title;
+   button.append(icon, label);
+   button.addEventListener("click", () => navigate(game.path));
+   navButtons.set(game.path, button);
+@@ -467,26 +488,51 @@ function renderHome(): HTMLElement {
+   const grid = document.createElement("section");
+   grid.className = "game-grid";
+   for (const game of registry.games) {
++    const model = gameCardModel(game);
+     const card = document.createElement("button");
+     card.className = "game-card";
+ 
+-    const icon = document.createElement("div");
+-    icon.className = "game-icon";
+-    icon.textContent = game.icon;
++    if (model.cover !== null) {
++      const cover = document.createElement("div");
++      cover.className = "game-cover";
++      card.classList.add("has-game-cover");
++      cover.append(makeGameImage(model.cover, "game-cover-image", () => {
++        cover.hidden = true;
++        card.classList.remove("has-game-cover");
++      }));
++      card.append(cover);
++    }
++
++    if (model.glyph !== null) {
++      const icon = document.createElement("div");
++      icon.className = "game-icon";
++      icon.textContent = model.glyph;
++      card.append(icon);
++    } else {
++      card.classList.add("game-card-art");
++    }
+ 
+     const copy = document.createElement("div");
+     copy.className = "game-copy";
+     const title = document.createElement("h2");
+-    title.textContent = game.name;
++    title.textContent = model.title;
+     const desc = document.createElement("p");
+-    desc.textContent = game.description;
+-    copy.append(title, desc);
++    desc.textContent = model.description;
++    if (model.glyph === null) {
++      const heading = document.createElement("div");
++      heading.className = "game-card-heading";
++      if (model.icon !== null) heading.append(makeGameImage(model.icon, "game-art-icon"));
++      heading.append(title);
++      copy.append(heading, desc);
++    } else {
++      copy.append(title, desc);
++    }
+ 
+     const play = document.createElement("div");
+     play.className = "play";
+     play.textContent = "PLAY →";
+ 
+-    card.append(icon, copy, play);
++    card.append(copy, play);
+     card.addEventListener("click", () => navigate(game.path));
+     grid.append(card);
+   }
+diff --git a/portal/src/styles.css b/portal/src/styles.css
+index de3e2e45..04b8aa8c 100644
+--- a/portal/src/styles.css
++++ b/portal/src/styles.css
+@@ -46,6 +46,16 @@ button { font: inherit; }
+ .game-card { min-height: 230px; display: grid; grid-template-rows: auto 1fr auto; gap: 1rem; padding: 1.35rem; text-align: left; border: 1px solid rgba(255,255,255,.065); border-radius: 18px; color: #eef6ff; background: linear-gradient(145deg,rgba(255,255,255,.045),rgba(255,255,255,.018)); cursor: pointer; transition: .17s ease; }
+ .game-card:hover { transform: translateY(-4px); border-color: rgba(113,215,255,.25); }
+ .game-icon { font-size: 2rem; }
++.game-card-art { grid-template-rows: 1fr auto; }
++.game-card.has-game-cover { grid-template-rows: auto 1fr auto; }
++.game-cover { aspect-ratio: 16 / 9; overflow: hidden; border-radius: 17px 17px 0 0; margin: -1.35rem -1.35rem 0; }
++.game-cover-image { display: block; width: 100%; height: 100%; object-fit: cover; }
++.game-card-heading { display: flex; align-items: center; gap: .75rem; margin-bottom: .5rem; }
++.game-copy .game-card-heading h2 { margin: 0; }
++.game-art-icon { flex: 0 0 48px; width: 48px; height: 48px; object-fit: contain; }
++.nav-game-art-icon { width: 1.25em; height: 1.25em; object-fit: contain; vertical-align: middle; }
++.global-nav.nav-compact .nav-game-icon { flex-shrink: 0; }
++.game-cover[hidden], .game-cover-image[hidden], .game-art-icon[hidden], .nav-game-art-icon[hidden] { display: none; }
+ .game-copy h2 { margin: 0 0 .5rem; font-size: 1.15rem; }
+ .game-copy p { margin: 0; color: #798aa2; font-size: .8rem; line-height: 1.55; }
+ .play { color: #7edfff; font-size: .7rem; font-weight: 900; letter-spacing: .11em; }
+diff --git a/scripts/bootstrap.sh b/scripts/bootstrap.sh
+index 690befa9..305729ae 100755
+--- a/scripts/bootstrap.sh
++++ b/scripts/bootstrap.sh
+@@ -139,13 +139,13 @@ case "$TARGET" in
+     update_space_submodule
+     ;;
+   dragon)
+-    require_new_game "games/dragon-hold" "Rồng Giữ Ải"
++    require_new_game "games/dragon-hold" "Dragonhold"
+     ;;
+   td)
+-    require_new_game "games/typing-defense" "Lời Gọi"
++    require_new_game "games/typing-defense" "Wordwoven"
+     ;;
+   survival)
+-    require_new_game "games/typing-survival" "Tuyến Cuối"
++    require_new_game "games/typing-survival" "Last Line"
+     ;;
+   tutien)
+     require_new_game "games/immortality-cultivation" "Tu Tiên Thủ Ải"
+@@ -212,9 +212,9 @@ case "$TARGET" in
+     install_karaoke
+     install_space
+     install_monkeytype
+-    install_new_game "games/dragon-hold" "Rồng Giữ Ải"
+-    install_new_game "games/typing-defense" "Lời Gọi"
+-    install_new_game "games/typing-survival" "Tuyến Cuối"
++    install_new_game "games/dragon-hold" "Dragonhold"
++    install_new_game "games/typing-defense" "Wordwoven"
++    install_new_game "games/typing-survival" "Last Line"
+     install_new_game "games/immortality-cultivation" "Tu Tiên Thủ Ải"
+     ;;
+   monkeytype)
+@@ -233,13 +233,13 @@ case "$TARGET" in
+     install_space
+     ;;
+   dragon)
+-    install_new_game "games/dragon-hold" "Rồng Giữ Ải"
++    install_new_game "games/dragon-hold" "Dragonhold"
+     ;;
+   td)
+-    install_new_game "games/typing-defense" "Lời Gọi"
++    install_new_game "games/typing-defense" "Wordwoven"
+     ;;
+   survival)
+-    install_new_game "games/typing-survival" "Tuyến Cuối"
++    install_new_game "games/typing-survival" "Last Line"
+     ;;
+   tutien)
+     install_new_game "games/immortality-cultivation" "Tu Tiên Thủ Ải"
+diff --git a/scripts/game-dir.sh b/scripts/game-dir.sh
+index dd131f4f..05f62ab4 100755
+--- a/scripts/game-dir.sh
++++ b/scripts/game-dir.sh
+@@ -18,9 +18,9 @@ usage() {
+ shift 2
+ 
+ case "$DIR" in
+-  dragon-hold) LABEL="Rồng Giữ Ải (dragon-hold)" ;;
+-  typing-defense) LABEL="Lời Gọi (typing-defense)" ;;
+-  typing-survival) LABEL="Tuyến Cuối (typing-survival)" ;;
++  dragon-hold) LABEL="Dragonhold (dragon-hold)" ;;
++  typing-defense) LABEL="Wordwoven (typing-defense)" ;;
++  typing-survival) LABEL="Last Line (typing-survival)" ;;
+   immortality-cultivation) LABEL="Tu Tiên Thủ Ải (immortality-cultivation)" ;;
+   *) LABEL="$DIR" ;;
+ esac
+diff --git a/scripts/validate-play-mode.mjs b/scripts/validate-play-mode.mjs
+index ad2db24a..171c3df9 100644
+--- a/scripts/validate-play-mode.mjs
++++ b/scripts/validate-play-mode.mjs
+@@ -1,247 +1,388 @@
+ import { existsSync } from "node:fs";
+ import { readFile } from "node:fs/promises";
++import { resolve } from "node:path";
++import { fileURLToPath } from "node:url";
+ 
+-const play = await readFile("play.sh", "utf8");
+-const nginx = await readFile(
+-  "infra/nginx/typing-game.local.play.conf",
+-  "utf8",
+-);
+-
+-const setupNginx = await readFile("scripts/setup-nginx.sh", "utf8");
+-const leafPlay = await readFile("scripts/play.sh", "utf8");
+-const devNginx = await readFile(
+-  "infra/nginx/typing-game.local.dev.conf",
+-  "utf8",
+-);
++export const SELF_SERVED_HOSTS = [
++  "dragon.typing-game.local",
++  "td.typing-game.local",
++  "survival.typing-game.local",
++];
++export const SHARED_DATA_ROUTES = ["/vocabulary/", "/typing-texts/", "/shared/typing-texts/"];
+ 
+-const failures = [];
++// Tokenize nginx directives while keeping source offsets and ignoring comments.
++// Quoted or escaped braces are values, never block delimiters.
++function configTree(config) {
++  const tokens = [];
++  let line = 1;
++  for (let index = 0; index < config.length;) {
++    const char = config[index];
++    if (/\s/.test(char)) {
++      if (char === "\n") line += 1;
++      index += 1;
++    } else if (char === "#") {
++      while (index < config.length && config[index] !== "\n") index += 1;
++    } else if ("{};".includes(char)) {
++      tokens.push({ value: char, delimiter: true, start: index, end: index + 1, line });
++      index += 1;
++    } else {
++      const start = index;
++      const startLine = line;
++      let value = "";
++      let quote = null;
++      while (index < config.length) {
++        const next = config[index];
++        if (next === "\\" && index + 1 < config.length) {
++          index += 1;
++          value += config[index];
++          if (config[index] === "\n") line += 1;
++          index += 1;
++        } else if (quote) {
++          if (next === quote) quote = null;
++          else value += next;
++          if (next === "\n") line += 1;
++          index += 1;
++        } else if (next === '"' || next === "'") {
++          quote = next;
++          index += 1;
++        } else if (/\s/.test(next) || "{};#".includes(next)) {
++          break;
++        } else {
++          value += next;
++          index += 1;
++        }
++      }
++      tokens.push({ value, start, end: index, line: startLine });
++    }
++  }
++  const root = { children: [] };
++  const stack = [root];
++  const errors = [];
++  let pending = [];
++  for (const token of tokens) {
++    if (!token.delimiter) {
++      pending.push(token);
++    } else if (token.value === "}" ) {
++      if (stack.length === 1) errors.push(`unexpected closing brace (line ${token.line})`);
++      else stack.pop().end = token.end;
++      pending = [];
++    } else {
++      const node = {
++        name: pending[0]?.value,
++        args: pending.slice(1).map((part) => part.value),
++        start: pending[0]?.start ?? token.start,
++        line: pending[0]?.line ?? token.line,
++        end: token.end,
++        children: [],
++      };
++      stack.at(-1).children.push(node);
++      pending = [];
++      if (token.value === "{") stack.push(node);
++    }
++  }
++  for (const node of stack.slice(1)) errors.push(`unclosed opening brace (line ${node.line})`);
++  return { servers: root.children.filter((node) => node.name === "server"), errors };
++}
+ 
+-function serverBlockFor(config, serverName) {
+-  const marker = `server_name ${serverName};`;
+-  const markerIndex = config.indexOf(marker);
+-  if (markerIndex < 0) return null;
+-  const start = config.lastIndexOf("server {", markerIndex);
+-  if (start < 0) return null;
+-  let depth = 0;
+-  for (let index = start; index < config.length; index += 1) {
+-    if (config[index] === "{") depth += 1;
+-    if (config[index] === "}") {
+-      depth -= 1;
+-      if (depth === 0) return config.slice(start, index + 1);
+-    }
+-  }
+-  return null;
++function namesHost(server, host) {
++  return server.children.some((node) => node.name === "server_name" &&
++    node.args.length === 1 && node.args[0] === host);
+ }
+ 
+-// Games split out of Space Typing; their directories may not exist yet.
+-const NEW_GAMES = [
+-  { dir: "dragon-hold", host: "dragon.typing-game.local", port: 3005, script: "dragon" },
+-  { dir: "typing-defense", host: "td.typing-game.local", port: 3006, script: "td" },
+-  {
+-    dir: "typing-survival",
+-    host: "survival.typing-game.local",
+-    port: 3007,
+-    script: "survival",
+-    aliases: ["/assets/space-typing/models/"],
+-  },
+-  {
+-    dir: "immortality-cultivation",
+-    host: "tutien.typing-game.local",
+-    port: 3008,
+-    script: "tutien",
+-    aliases: ["/assets/space-typing/models/"],
+-  },
+-];
++export function configStructureErrors(config) {
++  const { servers, errors } = configTree(config);
++  for (const host of [...SELF_SERVED_HOSTS, "tutien.typing-game.local"]) {
++    const count = servers.filter((server) => namesHost(server, host)).length;
++    if (count !== 1) errors.push(`must have exactly one server_name ${host}; block (found ${count})`);
++  }
++  return errors;
++}
+ 
+-const packageJson = JSON.parse(await readFile("package.json", "utf8"));
+-function httpRedirectBlock(config) {
+-  const listen = config.indexOf("listen 80;");
+-  if (listen < 0) return "";
+-  return config.slice(config.lastIndexOf("server {", listen), config.indexOf("}", listen) + 1);
++function serverBlockFor(config, serverName) {
++  const server = configTree(config).servers.find((node) => namesHost(node, serverName) &&
++    node.children.some((child) => child.name === "listen" && child.args.includes("443")));
++  return server ? config.slice(server.start, server.end) : null;
+ }
+-const redirectServer = httpRedirectBlock(nginx);
+-const devRedirectServer = httpRedirectBlock(devNginx);
+ 
+-for (const game of NEW_GAMES) {
+-  const output = `games/${game.dir}/dist/index.html`;
+-  if (!play.includes(`"${output}"`)) {
+-    failures.push(`Play mode does not build ${game.dir}: ${output}`);
++export function sharedDataAliases(config, host) {
++  const block = serverBlockFor(config, host);
++  if (block === null) return [];
++  const offset = config.slice(0, config.indexOf(block)).split("\n").length - 1;
++  const found = [];
++  function visit(nodes, location = null) {
++    for (const node of nodes) {
++      if (node.name === "location") {
++        const route = node.args.filter((arg) => !["=", "^~", "~", "~*"].includes(arg)).join(" ");
++        const entry = { host, route, line: offset + node.line };
++        const forbidden = SHARED_DATA_ROUTES.some((prefix) => route.startsWith(prefix.slice(0, -1)));
++        const sharedTarget = (children) => children.some((child) =>
++          (["alias", "root"].includes(child.name) && child.args[0]?.startsWith("__ROOT_DIR__/shared/")) ||
++          (child.name !== "location" && sharedTarget(child.children)));
++        if (forbidden || sharedTarget(node.children)) found.push(entry);
++        visit(node.children, entry);
++      } else {
++        // A server-level shared root also violates self-serving, without a location.
++        if (!location && ["alias", "root"].includes(node.name) &&
++            node.args[0]?.startsWith("__ROOT_DIR__/shared/")) {
++          found.push({ host, route: "/", line: offset + node.line });
++        }
++        visit(node.children, location);
++      }
++    }
+   }
+-  if (!leafPlay.includes(`/${output}`)) {
+-    failures.push(`scripts/play.sh does not check ${output}`);
++  visit(configTree(block).servers[0].children);
++  return found;
++}
++
++export async function main(args = process.argv.slice(2)) {
++  const paths = {
++    "--play-conf": "infra/nginx/typing-game.local.play.conf",
++    "--dev-conf": "infra/nginx/typing-game.local.dev.conf",
++  };
++  for (let index = 0; index < args.length; index += 2) {
++    if (!Object.hasOwn(paths, args[index]) || !args[index + 1] || args[index + 1].startsWith("--")) {
++      console.error("Usage: node scripts/validate-play-mode.mjs [--play-conf <path>] [--dev-conf <path>]");
++      return 2;
++    }
++    paths[args[index]] = args[index + 1];
+   }
+-  if (!setupNginx.includes(`"${game.host}"`)) {
+-    failures.push(`setup-nginx.sh HOSTS is missing ${game.host}`);
++  const play = await readFile("play.sh", "utf8");
++  const nginx = await readFile(
++    paths["--play-conf"],
++    "utf8",
++  );
++
++  const setupNginx = await readFile("scripts/setup-nginx.sh", "utf8");
++  const leafPlay = await readFile("scripts/play.sh", "utf8");
++  const devNginx = await readFile(
++    paths["--dev-conf"],
++    "utf8",
++  );
++
++  const failures = [];
++
++  // Games split out of Space Typing; their directories may not exist yet.
++  const NEW_GAMES = [
++    { dir: "dragon-hold", host: "dragon.typing-game.local", port: 3005, script: "dragon" },
++    { dir: "typing-defense", host: "td.typing-game.local", port: 3006, script: "td" },
++    {
++      dir: "typing-survival",
++      host: "survival.typing-game.local",
++      port: 3007,
++      script: "survival",
++      // Remove with the nginx alias once ticket 205 (own models) is merged.
++      aliases: ["/assets/space-typing/models/"],
++    },
++    {
++      dir: "immortality-cultivation",
++      host: "tutien.typing-game.local",
++      port: 3008,
++      script: "tutien",
++      aliases: ["/assets/space-typing/models/"],
++    },
++  ];
++
++  const packageJson = JSON.parse(await readFile("package.json", "utf8"));
++  function httpRedirectBlock(config) {
++    const listen = config.indexOf("listen 80;");
++    if (listen < 0) return "";
++    return config.slice(config.lastIndexOf("server {", listen), config.indexOf("}", listen) + 1);
+   }
+-  for (const [name, redirect] of [["play", redirectServer], ["dev", devRedirectServer]]) {
+-    if (!redirect.includes(` ${game.host}`)) {
+-      failures.push(`${name} nginx HTTP redirect is missing ${game.host}`);
++  const redirectServer = httpRedirectBlock(nginx);
++  const devRedirectServer = httpRedirectBlock(devNginx);
++
++  for (const game of NEW_GAMES) {
++    const output = `games/${game.dir}/dist/index.html`;
++    if (!play.includes(`"${output}"`)) {
++      failures.push(`Play mode does not build ${game.dir}: ${output}`);
++    }
++    if (!leafPlay.includes(`/${output}`)) {
++      failures.push(`scripts/play.sh does not check ${output}`);
++    }
++    if (!setupNginx.includes(`"${game.host}"`)) {
++      failures.push(`setup-nginx.sh HOSTS is missing ${game.host}`);
++    }
++    for (const [name, redirect] of [["play", redirectServer], ["dev", devRedirectServer]]) {
++      if (!redirect.includes(` ${game.host}`)) {
++        failures.push(`${name} nginx HTTP redirect is missing ${game.host}`);
++      }
+     }
+-  }
+ 
+-  const playServer = serverBlockFor(nginx, game.host);
+-  if (playServer === null) {
+-    failures.push(`Play nginx is missing the ${game.host} HTTPS server block.`);
+-  } else {
+-    if (!playServer.includes(`root __ROOT_DIR__/games/${game.dir}/dist;`)) {
+-      failures.push(`Play nginx ${game.host} does not serve games/${game.dir}/dist`);
++    const playServer = serverBlockFor(nginx, game.host);
++    if (playServer === null) {
++      failures.push(`Play nginx is missing the ${game.host} HTTPS server block.`);
++    } else {
++      if (!playServer.includes(`root __ROOT_DIR__/games/${game.dir}/dist;`)) {
++        failures.push(`Play nginx ${game.host} does not serve games/${game.dir}/dist`);
++      }
++      for (const route of [...(game.host === "tutien.typing-game.local" ? ["/vocabulary/", "/typing-texts/"] : []), ...(game.aliases ?? [])]) {
++        if (!playServer.includes(`location ${route} `)) {
++          failures.push(`Play nginx ${game.host} does not expose ${route}`);
++        }
++      }
+     }
+-    for (const route of ["/vocabulary/", "/typing-texts/", ...(game.aliases ?? [])]) {
+-      if (!playServer.includes(`location ${route} `)) {
+-        failures.push(`Play nginx ${game.host} does not expose ${route}`);
++
++    const devServer = serverBlockFor(devNginx, game.host);
++    if (devServer === null) {
++      failures.push(`Dev nginx is missing the ${game.host} HTTPS server block.`);
++    } else {
++      if (!devServer.includes(`proxy_pass http://127.0.0.1:${game.port};`)) {
++        failures.push(`Dev nginx ${game.host} does not proxy to port ${game.port}`);
++      }
++      if (!devServer.includes('proxy_set_header Upgrade $http_upgrade;')) {
++        failures.push(`Dev nginx ${game.host} does not forward the Vite HMR WebSocket`);
++      }
++      for (const route of [...(game.host === "tutien.typing-game.local" ? ["/vocabulary/", "/typing-texts/"] : []), ...(game.aliases ?? [])]) {
++        if (!devServer.includes(`location ${route} `)) {
++          failures.push(`Dev nginx ${game.host} does not expose ${route}`);
++        }
+       }
+     }
+-  }
+ 
+-  const devServer = serverBlockFor(devNginx, game.host);
+-  if (devServer === null) {
+-    failures.push(`Dev nginx is missing the ${game.host} HTTPS server block.`);
+-  } else {
+-    if (!devServer.includes(`proxy_pass http://127.0.0.1:${game.port};`)) {
+-      failures.push(`Dev nginx ${game.host} does not proxy to port ${game.port}`);
++    const scripts = packageJson.scripts ?? {};
++    const appScript = scripts[`dev:${game.script}:app`] ?? "";
++    if (!appScript.includes(`DEV_ALLOWED_HOSTS=${game.host}`) ||
++        !appScript.includes(`DEV_HMR_HOST=${game.host}`)) {
++      failures.push(`package.json dev:${game.script}:app does not target ${game.host}`);
+     }
+-    if (!devServer.includes('proxy_set_header Upgrade $http_upgrade;')) {
+-      failures.push(`Dev nginx ${game.host} does not forward the Vite HMR WebSocket`);
++    if (typeof scripts[`dev:${game.script}`] !== "string" ||
++        typeof scripts[`build:${game.script}`] !== "string") {
++      failures.push(`package.json is missing dev:${game.script} or build:${game.script}`);
+     }
+-    for (const route of ["/vocabulary/", "/typing-texts/", ...(game.aliases ?? [])]) {
+-      if (!devServer.includes(`location ${route} `)) {
+-        failures.push(`Dev nginx ${game.host} does not expose ${route}`);
+-      }
++    if (!(scripts.dev ?? "").includes(`pnpm dev:${game.script}:app`) ||
++        !(scripts.dev ?? "").includes(String(game.port))) {
++      failures.push(`package.json dev does not start or clean up ${game.dir}`);
++    }
++    if (!(scripts["build:local"] ?? "").includes(`pnpm build:${game.script}`)) {
++      failures.push(`package.json build:local does not build ${game.dir}`);
+     }
+-  }
+ 
+-  const scripts = packageJson.scripts ?? {};
+-  const appScript = scripts[`dev:${game.script}:app`] ?? "";
+-  if (!appScript.includes(`DEV_ALLOWED_HOSTS=${game.host}`) ||
+-      !appScript.includes(`DEV_HMR_HOST=${game.host}`)) {
+-    failures.push(`package.json dev:${game.script}:app does not target ${game.host}`);
+-  }
+-  if (typeof scripts[`dev:${game.script}`] !== "string" ||
+-      typeof scripts[`build:${game.script}`] !== "string") {
+-    failures.push(`package.json is missing dev:${game.script} or build:${game.script}`);
+-  }
+-  if (!(scripts.dev ?? "").includes(`pnpm dev:${game.script}:app`) ||
+-      !(scripts.dev ?? "").includes(String(game.port))) {
+-    failures.push(`package.json dev does not start or clean up ${game.dir}`);
+-  }
+-  if (!(scripts["build:local"] ?? "").includes(`pnpm build:${game.script}`)) {
+-    failures.push(`package.json build:local does not build ${game.dir}`);
++    if (!existsSync(`games/${game.dir}/package.json`)) {
++      console.warn(
++        `WARN games/${game.dir} is not checked out yet; its config is checked, its build is skipped.`,
++      );
++    }
+   }
+ 
+-  if (!existsSync(`games/${game.dir}/package.json`)) {
+-    console.warn(
+-      `WARN games/${game.dir} is not checked out yet; its config is checked, its build is skipped.`,
+-    );
++  for (const output of [
++    "portal/dist/index.html",
++    "games/vocab-shooter/dist/index.html",
++    "games/recall-typing/dist/index.html",
++    "games/karaoke-typing/dist/index.html",
++    "games/space-typing/dist/index.html",
++    "games/monkeytype/frontend/dist/index.html",
++  ]) {
++    if (!play.includes(output)) {
++      failures.push(`Play mode does not track static output: ${output}`);
++    }
+   }
+-}
+ 
+-for (const output of [
+-  "portal/dist/index.html",
+-  "games/vocab-shooter/dist/index.html",
+-  "games/recall-typing/dist/index.html",
+-  "games/karaoke-typing/dist/index.html",
+-  "games/space-typing/dist/index.html",
+-  "games/monkeytype/frontend/dist/index.html",
+-]) {
+-  if (!play.includes(output)) {
+-    failures.push(`Play mode does not track static output: ${output}`);
++  if (!play.includes('"shared/learning"')) {
++    failures.push(
++      "Portal stale-build detection does not include shared/learning",
++    );
+   }
+-}
+ 
+-if (!play.includes('"shared/learning"')) {
+-  failures.push(
+-    "Portal stale-build detection does not include shared/learning",
+-  );
+-}
+-
+-for (const route of ["/vocabulary/", "/typing-texts/", "/music/"]) {
+-  if (!nginx.includes(`location ${route}`)) {
+-    failures.push(`Play nginx does not expose runtime shared data: ${route}`);
++  for (const route of ["/vocabulary/", "/typing-texts/", "/music/"]) {
++    if (!nginx.includes(`location ${route}`)) {
++      failures.push(`Play nginx does not expose runtime shared data: ${route}`);
++    }
+   }
+-}
+ 
+-for (const host of [
+-  "typing-game.local",
+-  "monkeytype.typing-game.local",
+-  "shooter.typing-game.local",
+-  "recall.typing-game.local",
+-  "karaoke.typing-game.local",
+-  "space.typing-game.local",
+-  ...NEW_GAMES.map((game) => game.host),
+-]) {
+-  if (!nginx.includes(`server_name ${host}`) &&
+-      !nginx.includes(` ${host}`)) {
+-    failures.push(`Play nginx is missing host: ${host}`);
++  for (const host of [
++    "typing-game.local",
++    "monkeytype.typing-game.local",
++    "shooter.typing-game.local",
++    "recall.typing-game.local",
++    "karaoke.typing-game.local",
++    "space.typing-game.local",
++    ...NEW_GAMES.map((game) => game.host),
++  ]) {
++    if (!nginx.includes(`server_name ${host}`) &&
++        !nginx.includes(` ${host}`)) {
++      failures.push(`Play nginx is missing host: ${host}`);
++    }
+   }
+-}
+ 
+-const portalPlayServer = serverBlockFor(nginx, "typing-game.local");
+-if (portalPlayServer === null) {
+-  failures.push("Play nginx is missing the typing-game.local HTTPS server block.");
+-} else {
+-  const adminLocation = "location /api/admin/space-typing/";
+-  const spaFallback = "location / { try_files $uri $uri/ /index.html; }";
+-  const adminLocationIndex = portalPlayServer.indexOf(adminLocation);
+-  const spaFallbackIndex = portalPlayServer.indexOf(spaFallback);
++  const portalPlayServer = serverBlockFor(nginx, "typing-game.local");
++  if (portalPlayServer === null) {
++    failures.push("Play nginx is missing the typing-game.local HTTPS server block.");
++  } else {
++    const adminLocation = "location /api/admin/space-typing/";
++    const spaFallback = "location / { try_files $uri $uri/ /index.html; }";
++    const adminLocationIndex = portalPlayServer.indexOf(adminLocation);
++    const spaFallbackIndex = portalPlayServer.indexOf(spaFallback);
+ 
+-  if (adminLocationIndex < 0) {
+-    failures.push("Play nginx does not proxy Space Typing Admin API requests.");
+-  }
+-  if (!portalPlayServer.includes("proxy_pass http://127.0.0.1:3199;")) {
+-    failures.push("Play nginx Space Typing Admin API does not target the Admin service on port 3199.");
+-  }
+-  if (spaFallbackIndex < 0) {
+-    failures.push("Play nginx Portal server is missing its SPA fallback.");
+-  } else if (adminLocationIndex >= 0 && adminLocationIndex > spaFallbackIndex) {
+-    failures.push("Play nginx Admin API proxy must be declared before the Portal SPA fallback.");
++    if (adminLocationIndex < 0) {
++      failures.push("Play nginx does not proxy Space Typing Admin API requests.");
++    }
++    if (!portalPlayServer.includes("proxy_pass http://127.0.0.1:3199;")) {
++      failures.push("Play nginx Space Typing Admin API does not target the Admin service on port 3199.");
++    }
++    if (spaFallbackIndex < 0) {
++      failures.push("Play nginx Portal server is missing its SPA fallback.");
++    } else if (adminLocationIndex >= 0 && adminLocationIndex > spaFallbackIndex) {
++      failures.push("Play nginx Admin API proxy must be declared before the Portal SPA fallback.");
++    }
+   }
+-}
+ 
+-for (const [name, config] of [
+-  ["play", nginx],
+-  ["dev", devNginx],
+-]) {
+-  if (config.includes("/Users/jokerit/")) {
+-    failures.push(`${name} nginx config still hard-codes the old macOS project path`);
+-  }
+-  if (!config.includes("__ROOT_DIR__")) {
+-    failures.push(`${name} nginx config is missing the runtime project-root token`);
++  for (const [name, config] of [
++    ["play", nginx],
++    ["dev", devNginx],
++  ]) {
++    for (const error of configStructureErrors(config)) failures.push(`${name} nginx ${error}`);
++    for (const host of SELF_SERVED_HOSTS) {
++      for (const { route, line } of sharedDataAliases(config, host)) {
++        failures.push(`${name} nginx ${host} must serve its own pinned vocabulary; remove ${route} (line ${line})`);
++      }
++    }
++    if (config.includes("/Users/jokerit/")) {
++      failures.push(`${name} nginx config still hard-codes the old macOS project path`);
++    }
++    if (!config.includes("__ROOT_DIR__")) {
++      failures.push(`${name} nginx config is missing the runtime project-root token`);
++    }
++    if (!config.includes("__SSL_CERT__") || !config.includes("__SSL_KEY__")) {
++      failures.push(`${name} nginx config is missing portable TLS tokens`);
++    }
+   }
+-  if (!config.includes("__SSL_CERT__") || !config.includes("__SSL_KEY__")) {
+-    failures.push(`${name} nginx config is missing portable TLS tokens`);
++
++  for (const required of [
++    'PLATFORM="macos"',
++    'PLATFORM="linux"',
++    'NGINX_BASE="/etc/nginx"',
++    '--prefix',
++    "render_config",
++    "migrate_legacy_linux_certificate",
++    "sudo nginx -t",
++    'sudo "$NGINX_BIN" -t',
++  ]) {
++    if (!setupNginx.includes(required)) {
++      failures.push(`setup-nginx.sh is missing cross-platform contract: ${required}`);
++    }
+   }
+-}
+ 
+-for (const required of [
+-  'PLATFORM="macos"',
+-  'PLATFORM="linux"',
+-  'NGINX_BASE="/etc/nginx"',
+-  '--prefix',
+-  "render_config",
+-  "migrate_legacy_linux_certificate",
+-  "sudo nginx -t",
+-  'sudo "$NGINX_BIN" -t',
+-]) {
+-  if (!setupNginx.includes(required)) {
+-    failures.push(`setup-nginx.sh is missing cross-platform contract: ${required}`);
++  if (!play.includes("bash scripts/setup-nginx.sh play")) {
++    failures.push("Top-level play.sh does not use the platform-aware nginx setup.");
+   }
+-}
+ 
+-if (!play.includes("bash scripts/setup-nginx.sh play")) {
+-  failures.push("Top-level play.sh does not use the platform-aware nginx setup.");
+-}
++  for (const opener of ["open", "wslview", "cmd.exe", "powershell.exe", "xdg-open"]) {
++    if (!leafPlay.includes(opener)) {
++      failures.push(`scripts/play.sh is missing URL opener fallback: ${opener}`);
++    }
++  }
+ 
+-for (const opener of ["open", "wslview", "cmd.exe", "powershell.exe", "xdg-open"]) {
+-  if (!leafPlay.includes(opener)) {
+-    failures.push(`scripts/play.sh is missing URL opener fallback: ${opener}`);
++  if (failures.length > 0) {
++    for (const failure of failures) console.error(failure);
++    return 1;
+   }
+-}
+ 
+-if (failures.length > 0) {
+-  for (const failure of failures) console.error(failure);
+-  process.exit(1);
++  console.log(
++    "Play mode contract PASS: static apps, shared runtime data, Space Typing Admin API routing, Portal shared-learning rebuild dependency, and the dragon/td/survival/tutien hosts are covered; dragon, td, survival serve their own pinned vocabulary without shared data aliases.",
++  );
++  return 0;
+ }
+ 
+-console.log(
+-  "Play mode contract PASS: static apps, shared runtime data, Space Typing Admin API routing, Portal shared-learning rebuild dependency, and the dragon/td/survival/tutien hosts are covered.",
+-);
++if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
++  process.exitCode = await main();
++}
+diff --git a/shared/learning/README.md b/shared/learning/README.md
+index edac9ce4..3ec2e4c7 100644
+--- a/shared/learning/README.md
++++ b/shared/learning/README.md
+@@ -38,6 +38,13 @@ Common aggregates include attempts, correct/wrong counts, hint/replay counts, av
+ 
+ Grammar/sentence records also keep bounded error classifications. Sentence records keep bounded recent answers.
+ 
++Mỗi sự kiện ở cả ba loại thực thể còn thêm một mẫu vào `recentSamples`:
++`{ occurredAt, gameId, activityType, result, hintUsed }`. `hintUsed` luôn là
++boolean; mẫu không chứa `userAnswer` hay `expectedAnswer`. Danh sách theo
++thời gian, giữ tối đa tám mẫu mới nhất, kể cả khi sự kiện đến muộn.
++Bản ghi và bản sao lưu v1 cũ không có trường này vẫn đọc/nhập được;
++lookup trả `[]` cho bản ghi cũ. Không dựng lại các mẫu lịch sử bị thiếu.
++
+ ## Mastery v1
+ 
+ Mastery is deterministic and clamped to 0-100. It is a learning-strength indicator, not a literal percentage of knowledge.
+@@ -99,6 +106,7 @@ Child games communicate through the versioned namespace:
+ ```text
+ typing-game:learning:v1:attempt
+ typing-game:learning:v1:query
++typing-game:learning:v1:lookup
+ 
+ typing-game:learning:v1:ack
+ typing-game:learning:v1:query-result
+@@ -125,6 +133,52 @@ Current query contract supports:
+ 
+ Child-specific adapters are added only in their integration milestones. L02 defines and validates the parent transport; it does not duplicate Smart Review logic in children.
+ 
++### Tra bản ghi theo danh sách id
++
++Mọi game đang mở trong iframe, có nguồn khớp `appUrl` trong registry, có
++thể gửi lookup. Tin không mang `gameId`; portal dùng game đang mở để kiểm
++nguồn, giống attempt và query.
++
++```json
++{
++  "type": "typing-game:learning:v1:lookup",
++  "requestId": "lookup-1",
++  "query": {
++    "entityType": "vocabulary",
++    "entityIds": ["Lantern ", "dragon"]
++  }
++}
++```
++
++`entityType` bắt buộc là `vocabulary`, `grammar` hoặc `sentence`.
++`entityIds` chứa 1–200 chuỗi **trước khi bỏ trùng**; mỗi chuỗi tối đa
++200 ký tự sau `trim()`. Từ vựng chuẩn hóa theo quy tắc NFKC ở trên;
++grammar/sentence chỉ `trim()`. Bỏ id rỗng và trùng, giữ thứ tự lần đầu;
++danh sách còn rỗng là lỗi. Các trường lạ trong `query` được bỏ qua.
++
++Portal ghi hết attempt đang chờ trước khi đọc hồ sơ. Tra cứu dùng khóa
++trực tiếp, bỏ id chưa có và các khóa nguyên mẫu như `constructor`,
++`__proto__`, `toString`. Tin trả có cùng `requestId` và dạng sau
++(`items` là mảng item đầy đủ, ví dụ rỗng khi chưa học từ nào):
++
++```json
++{
++  "type": "typing-game:learning:v1:query-result",
++  "requestId": "lookup-1",
++  "result": { "entityType": "vocabulary", "items": [] }
++}
++```
++
++Mỗi item gồm các trường bản ghi, `entityType`, `entityId`, `mastery`,
++`reviewPriority`, `status` và luôn có `recentSamples`. Điểm được tính
++lại tại thời điểm tra cứu; ngày ôn và các bộ đếm giữ nguyên. Thứ tự item
++theo id yêu cầu đã chuẩn hóa. Lookup chỉ đọc hồ sơ, không gọi `onApplied`.
++
++Tin hỏng nhận `typing-game:learning:v1:error` với cùng `requestId`,
++`error: { code: "invalid-request", message: "..." }`. Kho lỗi khi đọc
++nhận cùng dạng với mã `query-failed`. Thông báo lỗi là tiếng Anh.
++`requestId` hỏng, sai cửa sổ/nguồn hoặc chưa mở game thì không trả lời.
++
+ ## Smart Review Dashboard
+ 
+ The parent Portal exposes `/review` as the canonical Smart Review inspection screen.
+diff --git a/shared/learning/core.d.mts b/shared/learning/core.d.mts
+index a89bc4f5..435bb475 100644
+--- a/shared/learning/core.d.mts
++++ b/shared/learning/core.d.mts
+@@ -1,6 +1,14 @@
+ export type LearningEntityType = "vocabulary" | "grammar" | "sentence";
+ export type LearningResult = "correct" | "wrong";
+ 
++export type LearningSample = {
++  occurredAt: string;
++  gameId: string;
++  activityType: string;
++  result: LearningResult;
++  hintUsed: boolean;
++};
++
+ export type LearningEvent = {
+   version: 1;
+   entityType: LearningEntityType;
+@@ -33,6 +41,7 @@ export type LearningRecord = {
+   reviewPriority: number;
+   nextReviewAt: string | null;
+   sourceGames: string[];
++  recentSamples?: LearningSample[];
+   recentMistakes?: Array<Record<string, unknown>>;
+   recentAnswers?: Array<Record<string, unknown>>;
+   errorTypes?: Record<string, number>;
+diff --git a/shared/learning/core.mjs b/shared/learning/core.mjs
+index 230ba3da..6320ed2a 100644
+--- a/shared/learning/core.mjs
++++ b/shared/learning/core.mjs
+@@ -288,6 +288,17 @@ function applyParsedLearningEvent(next, event) {
+     record.sourceGames = [...record.sourceGames, event.gameId];
+   }
+ 
++  record.recentSamples = boundedAppendChronological(
++    record.recentSamples ?? [],
++    {
++      occurredAt: event.occurredAt,
++      gameId: event.gameId,
++      activityType: event.activityType,
++      result: event.result,
++      hintUsed: event.hintUsed,
++    },
++  );
++
+   if (event.result === "wrong") {
+     record.recentMistakes = boundedAppendChronological(
+       record.recentMistakes ?? [],
+diff --git a/shared/learning/message-contract.d.mts b/shared/learning/message-contract.d.mts
+index 1634b022..4ebc033a 100644
+--- a/shared/learning/message-contract.d.mts
++++ b/shared/learning/message-contract.d.mts
+@@ -2,25 +2,34 @@ import type { LearningEvent } from "./core.mjs";
+ import type {
+   LearningQuery,
+   LearningQueryResult,
++  LearningLookup,
++  LearningLookupResult,
+ } from "./query.mjs";
+ 
+ export const LEARNING_MESSAGE_NAMESPACE: string;
+-export const LEARNING_ATTEMPT_MESSAGE: string;
+-export const LEARNING_QUERY_MESSAGE: string;
++export const LEARNING_ATTEMPT_MESSAGE: "typing-game:learning:v1:attempt";
++export const LEARNING_QUERY_MESSAGE: "typing-game:learning:v1:query";
++export const LEARNING_LOOKUP_MESSAGE: "typing-game:learning:v1:lookup";
++export const LOOKUP_MAX_IDS: 200;
+ export const LEARNING_ACK_MESSAGE: string;
+ export const LEARNING_QUERY_RESULT_MESSAGE: string;
+ export const LEARNING_ERROR_MESSAGE: string;
+ 
+ export type ParsedLearningMessage =
+   | {
+-      type: string;
++      type: typeof LEARNING_ATTEMPT_MESSAGE;
+       requestId: string;
+       event: LearningEvent;
+     }
+   | {
+-      type: string;
++      type: typeof LEARNING_QUERY_MESSAGE;
+       requestId: string;
+       query: LearningQuery;
++    }
++  | {
++      type: typeof LEARNING_LOOKUP_MESSAGE;
++      requestId: string;
++      lookup: LearningLookup;
+     };
+ 
+ export function isLearningMessage(
+@@ -31,13 +40,15 @@ export function makeLearningAck(requestId: string): {
+   type: string;
+   requestId: string;
+ };
+-export function makeLearningQueryResult(
++export function makeLearningQueryResult<
++  Result extends LearningQueryResult | LearningLookupResult,
++>(
+   requestId: string,
+-  result: LearningQueryResult,
++  result: Result,
+ ): {
+   type: string;
+   requestId: string;
+-  result: LearningQueryResult;
++  result: Result;
+ };
+ export function makeLearningError(
+   requestId: string,
+diff --git a/shared/learning/message-contract.mjs b/shared/learning/message-contract.mjs
+index 16b8b836..b7f4274c 100644
+--- a/shared/learning/message-contract.mjs
++++ b/shared/learning/message-contract.mjs
+@@ -1,11 +1,15 @@
+ import { parseLearningEvent } from "./core.mjs";
+-import { parseLearningQuery } from "./query.mjs";
++import { parseLearningLookup, parseLearningQuery } from "./query.mjs";
++
++export { LOOKUP_MAX_IDS } from "./query.mjs";
+ 
+ export const LEARNING_MESSAGE_NAMESPACE = "typing-game:learning:v1";
+ export const LEARNING_ATTEMPT_MESSAGE =
+   `${LEARNING_MESSAGE_NAMESPACE}:attempt`;
+ export const LEARNING_QUERY_MESSAGE =
+   `${LEARNING_MESSAGE_NAMESPACE}:query`;
++export const LEARNING_LOOKUP_MESSAGE =
++  `${LEARNING_MESSAGE_NAMESPACE}:lookup`;
+ export const LEARNING_ACK_MESSAGE = `${LEARNING_MESSAGE_NAMESPACE}:ack`;
+ export const LEARNING_QUERY_RESULT_MESSAGE =
+   `${LEARNING_MESSAGE_NAMESPACE}:query-result`;
+@@ -54,6 +58,13 @@ export function parseLearningMessage(value) {
+       query: parseLearningQuery(value.query),
+     };
+   }
++  if (value.type === LEARNING_LOOKUP_MESSAGE) {
++    return {
++      type: LEARNING_LOOKUP_MESSAGE,
++      requestId: id,
++      lookup: parseLearningLookup(value.query),
++    };
++  }
+   throw new TypeError("learning message type is not supported");
+ }
+ 
+diff --git a/shared/learning/profile-backup.mjs b/shared/learning/profile-backup.mjs
+index 88d0d053..aa102ca7 100644
+--- a/shared/learning/profile-backup.mjs
++++ b/shared/learning/profile-backup.mjs
+@@ -127,6 +127,9 @@ function validateRecord(entityType, key, record) {
+   }
+ 
+   validateSamples(record.recentMistakes ?? [], "recentMistakes");
++  if (record.recentSamples !== undefined) {
++    validateSamples(record.recentSamples, "recentSamples");
++  }
+ 
+   if (entityType === "sentence") {
+     validateSamples(record.recentAnswers ?? [], "recentAnswers");
+diff --git a/shared/learning/query.d.mts b/shared/learning/query.d.mts
+index f4dabd62..b48e14c9 100644
+--- a/shared/learning/query.d.mts
++++ b/shared/learning/query.d.mts
+@@ -1,4 +1,20 @@
+-import type { LearningEntityType } from "./core.mjs";
++import type { LearningEntityType, LearningSample } from "./core.mjs";
++
++export const LOOKUP_MAX_IDS: 200;
++export type LearningLookup = {
++  entityType: LearningEntityType;
++  entityIds: string[];
++};
++export type LearningLookupResult = {
++  entityType: LearningEntityType;
++  items: Array<LearningQueryItem & { recentSamples: LearningSample[] }>;
++};
++export function parseLearningLookup(input: unknown): LearningLookup;
++export function lookupLearningRecords(
++  profileInput: unknown,
++  lookupInput: unknown,
++  now?: string,
++): LearningLookupResult;
+ 
+ export type LearningStatus =
+   | "needs-review"
+diff --git a/shared/learning/query.mjs b/shared/learning/query.mjs
+index 01dad299..1d303d29 100644
+--- a/shared/learning/query.mjs
++++ b/shared/learning/query.mjs
+@@ -1,6 +1,7 @@
+ import {
+   calculateMastery,
+   calculateReviewPriority,
++  normalizeVocabularyKey,
+   viewLearningProfile,
+ } from "./core.mjs";
+ 
+@@ -17,6 +18,11 @@ export const REVIEW_SORTS = new Set([
+ ]);
+ 
+ const ENTITY_TYPES = new Set(["vocabulary", "grammar", "sentence"]);
++export const LOOKUP_MAX_IDS = 200;
++const PROTOTYPE_IDS = new Set(
++  Object.getOwnPropertyNames(Object.prototype)
++    .flatMap((id) => [id, normalizeVocabularyKey(id)]),
++);
+ const PAGE_SIZES = new Set([10, 25, 50, 100]);
+ const STATUS_VALUES = new Set([
+   "needs-review",
+@@ -55,6 +61,41 @@ function parseDate(value, field) {
+   return new Date(timestamp).toISOString();
+ }
+ 
++export function parseLearningLookup(input) {
++  if (
++    !plainObject(input) ||
++    (Object.getPrototypeOf(input) !== Object.prototype &&
++      Object.getPrototypeOf(input) !== null)
++  ) {
++    throw new TypeError("learning lookup must be a plain object");
++  }
++  if (!ENTITY_TYPES.has(input.entityType)) {
++    throw new TypeError("entityType is not supported");
++  }
++  if (
++    !Array.isArray(input.entityIds) ||
++    input.entityIds.length < 1 ||
++    input.entityIds.length > LOOKUP_MAX_IDS
++  ) {
++    throw new TypeError(`entityIds must contain 1 to ${LOOKUP_MAX_IDS} ids`);
++  }
++
++  const ids = new Set();
++  for (const value of input.entityIds) {
++    if (typeof value !== "string") {
++      throw new TypeError("entityIds must contain strings");
++    }
++    const trimmed = value.trim();
++    if (trimmed.length > 200) throw new TypeError("entityId is too long");
++    const id = input.entityType === "vocabulary"
++      ? normalizeVocabularyKey(trimmed)
++      : trimmed;
++    if (id !== "") ids.add(id);
++  }
++  if (ids.size === 0) throw new TypeError("entityIds must contain a non-empty id");
++  return { entityType: input.entityType, entityIds: [...ids] };
++}
++
+ export function parseLearningQuery(input) {
+   if (!plainObject(input)) throw new TypeError("learning query must be an object");
+ 
+@@ -229,6 +270,38 @@ function collectionFor(profile, entityType) {
+   return profile.sentences;
+ }
+ 
++function queryItem(record, entityType, now) {
++  const mastery = calculateMastery(record, now);
++  return {
++    ...record,
++    entityType,
++    entityId: entityId(record, entityType),
++    mastery,
++    reviewPriority: calculateReviewPriority(record, now),
++    status: statusForMastery(mastery),
++  };
++}
++
++export function lookupLearningRecords(
++  profileInput,
++  lookupInput,
++  now = new Date().toISOString(),
++) {
++  const profile = viewLearningProfile(profileInput);
++  const lookup = parseLearningLookup(lookupInput);
++  const collection = collectionFor(profile, lookup.entityType);
++  const items = [];
++  for (const id of lookup.entityIds) {
++    if (PROTOTYPE_IDS.has(id) || !Object.hasOwn(collection, id)) continue;
++    const record = collection[id];
++    items.push({
++      ...queryItem(record, lookup.entityType, now),
++      recentSamples: record.recentSamples ?? [],
++    });
++  }
++  return { entityType: lookup.entityType, items };
++}
++
+ function dateValue(value, fallback) {
+   if (value == null) return fallback;
+   const parsed = Date.parse(value);
+@@ -282,17 +355,7 @@ export function queryLearningProfile(
+   const source = Object.values(collectionFor(profile, query.entityType));
+ 
+   const items = source
+-    .map((record) => {
+-      const mastery = calculateMastery(record, now);
+-      return {
+-        ...record,
+-        entityType: query.entityType,
+-        entityId: entityId(record, query.entityType),
+-        mastery,
+-        reviewPriority: calculateReviewPriority(record, now),
+-        status: statusForMastery(mastery),
+-      };
+-    })
++    .map((record) => queryItem(record, query.entityType, now))
+     .filter((item) => {
+       const filters = query.filters;
+       if (
+diff --git a/tools/audio-lab/build/licence_check.py b/tools/audio-lab/build/licence_check.py
+index 1a662f99..6fcb9d19 100644
+--- a/tools/audio-lab/build/licence_check.py
++++ b/tools/audio-lab/build/licence_check.py
+@@ -218,6 +218,13 @@ class Checker:
+                 self.err("missing-release", where, "bản ghi của người khác chưa có giấy đồng ý (mục 10.4)")
+         if cond == "subscription" and not row.get("subscription"):
+             self.err("missing-record", where, "âm ElevenLabs cần ghi kỳ đăng ký gói trả phí (subscription)")
++        if cond == "adobe-model":
++            # Adobe-owned models only; match the approved family at the start.
++            model = row.get("model")
++            if not policy.adobe_model_allowed(model):
++                self.err("adobe-model", where, "thiếu model hoặc model không thuộc danh sách Adobe được phép")
++            if row.get("raw_redistribution_allowed") is True:
++                self.err("adobe-raw", where, "âm Firefly không được phát lại hay bán file thô")
+         lib_key = row.get("libraryKey")
+         if lib_key and lib_key not in self._rows:
+             self.err("missing-record", where, f"thiếu dòng thư viện {lib_key} trong licences.jsonl")
+diff --git a/tools/audio-lab/build/policy.py b/tools/audio-lab/build/policy.py
+index 3e37e63a..25d7af47 100644
+--- a/tools/audio-lab/build/policy.py
++++ b/tools/audio-lab/build/policy.py
+@@ -19,6 +19,9 @@ ALLOWED: dict[str, dict] = {
+     # Project synth code (build/synth.py) and the owner's own recordings.
+     "LicenseRef-AudioLab-code": {"url": "tools/audio-lab", "attribution": False},
+     "LicenseRef-owner-recording": {"url": "licences/owner-recordings.txt", "attribution": False},
++    # owner decision 29/10, Claude confirms
++    "LicenseRef-Adobe-Firefly-owner": {"url": "licences/adobe-firefly-owner-2026-10-29.txt",
++                                      "attribution": False, "cond": "adobe-model"},
+     # Conditional (§10.2).
+     "LicenseRef-other-recording": {"url": "licences/release-<name>-<date>.txt", "attribution": False,
+                                    "cond": "release"},
+@@ -30,6 +33,14 @@ ALLOWED: dict[str, dict] = {
+                                    "cond": "no-ai"},
+ }
+ 
++# Adobe-owned audio model allowlist, anchored at the start (owner decision 29/10, Claude confirms).
++ADOBE_AUDIO_MODELS = (re.compile(r"^Adobe Firefly Audio Model(?:[ -]v?\d+(?:\.\d+)*)?$"),)
++
++
++def adobe_model_allowed(model: str | None) -> bool:
++    return isinstance(model, str) and any(p.fullmatch(model) for p in ADOBE_AUDIO_MODELS)
++
++
+ # Aliases seen in older rows or in the plan's examples.
+ ALIASES = {
+     "CC0": "CC0-1.0",
+diff --git a/tools/audio-lab/common/launch.py b/tools/audio-lab/common/launch.py
+index 3773cf67..3ecd215f 100644
+--- a/tools/audio-lab/common/launch.py
++++ b/tools/audio-lab/common/launch.py
+@@ -19,6 +19,7 @@ from common import env  # noqa: E402
+ 
+ # One place to map pnpm script names to code. "node:" runs a Node script with the same env.
+ ENTRYPOINTS = {
++    "firefly": "firefly",
+     "critic": "critic",                       # critic/__main__.py
+     "board": "board",                         # board/__main__.py (or "node:board/server.mjs")
+     "specs": "specs",                         # specs/__main__.py
+diff --git a/tools/audio-lab/pytest.ini b/tools/audio-lab/pytest.ini
+index ef59bbab..c8b4fb71 100644
+--- a/tools/audio-lab/pytest.ini
++++ b/tools/audio-lab/pytest.ini
+@@ -1,5 +1,5 @@
+ [pytest]
+-testpaths = common critic gen build sampler board harness specs
++testpaths = common critic gen build sampler board harness specs firefly
+ pythonpath = .
+ addopts = --import-mode=importlib
+ cache_dir = $AUDIOLAB_HOME/cache/pytest

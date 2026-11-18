@@ -1,0 +1,101 @@
+{
+  "exit": 0,
+  "patched_files": 12,
+  "patch_artifacts": [],
+  "deleted_new_208": {
+    "src/app/portal.ts": true,
+    "deploy-models.json": true,
+    "scripts/deploy/prune.mjs": true,
+    "tests/portal.test.ts": true,
+    "tests/portal-build.test.ts": true,
+    "tests/deploy-prune.test.ts": true,
+    "docs/changelog/2026-10-30-deploy-pack.md": true
+  },
+  "same_head": {
+    "src/app/learning.ts": true,
+    "vite.config.ts": true
+  },
+  "same_before": {
+    "package.json": true,
+    "README.md": true,
+    "tests/deploy-pack.test.ts": true
+  },
+  "changed_170": [
+    {
+      "path": "README.md",
+      "type": "new"
+    },
+    {
+      "path": "docs/changelog/2026-10-29-pack-and-kit.md",
+      "type": "new"
+    },
+    {
+      "path": "docs/td/BUILD_1B.md",
+      "type": "modified"
+    },
+    {
+      "path": "docs/td/PLAYTEST_1B.md",
+      "type": "modified"
+    },
+    {
+      "path": "package.json",
+      "type": "modified"
+    },
+    {
+      "path": "scripts/td/b9.ts",
+      "type": "modified"
+    },
+    {
+      "path": "src/app/retry.ts",
+      "type": "modified"
+    },
+    {
+      "path": "src/kit/balance/bands.ts",
+      "type": "modified"
+    },
+    {
+      "path": "src/kit/balance/gates.ts",
+      "type": "modified"
+    },
+    {
+      "path": "src/kit/balance/index.ts",
+      "type": "modified"
+    },
+    {
+      "path": "src/kit/balance/pace.ts",
+      "type": "modified"
+    },
+    {
+      "path": "src/kit/balance/typist.ts",
+      "type": "modified"
+    },
+    {
+      "path": "src/kit/kit-manifest.json",
+      "type": "modified"
+    },
+    {
+      "path": "src/kit/tools/cdp-port.mjs",
+      "type": "new"
+    },
+    {
+      "path": "src/kit/tools/cdp-run.mjs",
+      "type": "modified"
+    },
+    {
+      "path": "src/kit/tools/deploy/check-pack.mjs",
+      "type": "new"
+    },
+    {
+      "path": "tests/deploy-pack.test.ts",
+      "type": "new"
+    },
+    {
+      "path": "tests/td-b9.test.ts",
+      "type": "modified"
+    },
+    {
+      "path": "tests/td-flow.test.ts",
+      "type": "modified"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "command": [
+    "pnpm",
+    "exec",
+    "tsx",
+    "tmp/audit-probe.mts"
+  ],
+  "cwd": "games/typing-defense/tmp/codex-224/tree",
+  "env": {
+    "VITE_PORTAL_URL": "(absent)",
+    "pnpm_config_verify_deps_before_run": "false",
+    "TMPDIR": "/Users/toandx/htdocs/typing-game/games/typing-defense/tmp/codex-224/tmpdir"
+  },
+  "exit": 1,
+  "seconds": 0.6836
+}

@@ -1,0 +1,42 @@
+{
+  "command": "import configStructureErrors/sharedDataAliases; read both configs",
+  "exit": 0,
+  "result": [
+    {
+      "mode": "play",
+      "errors": [],
+      "aliases": [
+        {
+          "host": "dragon.typing-game.local",
+          "found": []
+        },
+        {
+          "host": "td.typing-game.local",
+          "found": []
+        },
+        {
+          "host": "survival.typing-game.local",
+          "found": []
+        }
+      ]
+    },
+    {
+      "mode": "dev",
+      "errors": [],
+      "aliases": [
+        {
+          "host": "dragon.typing-game.local",
+          "found": []
+        },
+        {
+          "host": "td.typing-game.local",
+          "found": []
+        },
+        {
+          "host": "survival.typing-game.local",
+          "found": []
+        }
+      ]
+    }
+  ]
+}

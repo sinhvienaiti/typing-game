@@ -1,0 +1,36 @@
+{
+  "ok": false,
+  "problems": [
+    {
+      "code": "foreign-asset",
+      "path": "assets/index-Bn7Gth-2.js",
+      "detail": "References /assets/space-typing/ from typing-survival"
+    },
+    {
+      "code": "local-host",
+      "path": "assets/index-Bn7Gth-2.js",
+      "detail": "Contains typing-game.local"
+    }
+  ],
+  "report": {
+    "files": 101,
+    "bytes": 4317155,
+    "localHost": 1,
+    "vocabularyNotShipped": {
+      "count": 97,
+      "examples": [
+        "levels/004.json",
+        "levels/005.json",
+        "levels/006.json",
+        "levels/007.json",
+        "levels/008.json"
+      ]
+    },
+    "external": [
+      {
+        "host": "kit.invalid",
+        "count": 1
+      }
+    ]
+  }
+}

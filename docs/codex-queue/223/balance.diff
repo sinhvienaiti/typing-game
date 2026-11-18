@@ -1,0 +1,121 @@
+diff --git a/scripts/balance/bot.ts b/scripts/balance/bot.ts
+index e246b7f..016d656 100644
+--- a/scripts/balance/bot.ts
++++ b/scripts/balance/bot.ts
+@@ -8,7 +8,7 @@
+  * (a system that does nothing yet: the report says which).
+  * Owner: bot-balance (LANES.md).
+  */
+-import { createRng } from "../../src/kit/platform";
++import { createRng, type RngStream } from "../../src/kit/platform";
+ import { RECOGNIZE, STANDARD_BOTS, TARGET_MIX, type BotSpec as KitBotSpec, type PaceSummary } from "../../src/kit/balance";
+ import { STAGE_M0 } from "../../src/content/data/stages";
+ import { FLOW } from "../../src/content/rules";
+@@ -19,11 +19,19 @@ import { BASE_LATENCY_MS, Hands, type HandsSpec } from "./hands";
+ import type { Arrival } from "./load";
+ import { Meter, type RunMetrics } from "./meter";
+ import { Plan, type PolicySpec } from "./policy";
+-import { readTyping, type Aim } from "./reader";
++import { readTyping, type Aim, type TypingView } from "./reader";
+ import { Typist, type TargetMix, type TypistStats } from "./typist";
+ 
+ export const TICK_MS = 1000 / 60;
+ 
++export interface BotTypist {
++  readonly busy: boolean;
++  readonly stats: TypistStats;
++  hold(nowMs: number, ms: number): void;
++  act(view: TypingView, nowMs: number, world: World, commands: readonly SimCommand[]): SimCommand | null;
++  observe?(world: World, events: readonly SimEvent[], commands: readonly SimCommand[]): void;
++}
++
+ export interface BotSpec {
+   readonly name: string;
+   readonly label: string;
+@@ -37,6 +45,8 @@ export interface BotSpec {
+   readonly directorOff?: boolean;
+   /** BALANCE.md §6 id this bot stands for in the B gates (with "@good", "@poor", "@off" variants). */
+   readonly standard?: string;
++  /** Opt-in typist; absent preserves the original dice and typing path. */
++  readonly typist?: (rng: RngStream) => BotTypist;
+ }
+ 
+ /** A human-like typist (BALANCE.md §6): raw E (slips cost key time), a, CV, recognition by familiarity, crowd drop, drops a lock now and then. */
+@@ -195,7 +205,7 @@ export function createBotWorld(spec: BotSpec, options: RunOptions): World {
+ export function runBot(spec: BotSpec, options: RunOptions): BotRun {
+   const world = createBotWorld(spec, options);
+   const dice = createRng((options.seed ^ nameSeed(spec.name)) >>> 0);
+-  const typist = spec.hands === null ? null : new Typist(new Hands(spec.hands, dice.ai), spec.mix ?? null);
++  const typist: BotTypist | null = spec.typist ? spec.typist(dice.ai) : spec.hands === null ? null : new Typist(new Hands(spec.hands, dice.ai), spec.mix ?? null);
+   const plan = new Plan(spec.policy);
+   const meter = new Meter(world);
+   const maxTicks = options.maxTicks ?? DEFAULT_MAX_TICKS;
+@@ -222,7 +232,7 @@ export function runBot(spec: BotSpec, options: RunOptions): BotRun {
+     view.nowMs = world.tick * TICK_MS;
+     plan.tick(view);
+     if (typist && world.phase !== "prep") {
+-      const key = typist.act(readTyping(world, spec.aim, pair), view.nowMs);
++      const key = typist.act(readTyping(world, spec.aim, pair), view.nowMs, world, queue);
+       if (key) queue.push(key);
+     }
+     const commands = queue.splice(0);
+@@ -238,6 +248,7 @@ export function runBot(spec: BotSpec, options: RunOptions): BotRun {
+       if (event.type === "wave-end") wavesEnded += 1;
+       if (event.type === "victory") stars = event.stars;
+     }
++    typist?.observe?.(world, events, commands);
+     meter.read(world, events);
+     meter.scan(world, typist?.busy ?? false, typist?.stats.releases ?? 0);
+     options.onTick?.(world, events, typist?.busy ?? false);
+diff --git a/scripts/balance/run.ts b/scripts/balance/run.ts
+index 2edce8b..4fa26dc 100644
+--- a/scripts/balance/run.ts
++++ b/scripts/balance/run.ts
+@@ -25,12 +25,13 @@ import { M0_GATES } from "../../src/content/rules";
+ import type { Difficulty } from "../../src/content/types";
+ import { BAND_MODES, type BandMode } from "../../src/kit/balance";
+ import { BAND_MODE } from "../../src/sim/director";
++import { findBot, type HumanBotName } from "./human";
+ import { BOT_NAMES, BOTS, M0_BOTS, createBotWorld, runBot, type BotName, type BotRun } from "./bot";
+ import { pacedStage } from "./variants";
+ import { bandGates, m0Gates, mapNotes, markdown, planRows, readiness, summarize, type BotSummary } from "./report";
+ 
+ interface Task {
+-  readonly bot: BotName;
++  readonly bot: BotName | HumanBotName;
+   readonly seed: number;
+   readonly difficulty: Difficulty;
+ }
+@@ -53,7 +54,7 @@ const num = (name: string, fallback: number): number => {
+ 
+ /** One run with its log dropped (reports never need it). */
+ function runTask(task: Task, maxTicks: number, pace: number): BotRun & { difficulty: Difficulty } {
+-  return { ...runBot(BOTS[task.bot], { seed: task.seed, maxTicks, timeSteps: true, stage: pacedStage(STAGE_M0, pace), difficulty: task.difficulty }), difficulty: task.difficulty };
++  return { ...runBot(findBot(task.bot)!, { seed: task.seed, maxTicks, timeSteps: true, stage: pacedStage(STAGE_M0, pace), difficulty: task.difficulty }), difficulty: task.difficulty };
+ }
+ 
+ const trace = arg("trace");
+@@ -69,8 +70,8 @@ if (args.includes("--worker")) {
+   });
+ } else if (trace) {
+   const [bot, seed] = trace.split(":") as [BotName, string?];
+-  if (!(bot in BOTS)) throw new Error("không có bot " + bot + "; có: " + BOT_NAMES.join(", "));
+-  const run = runBot(BOTS[bot], { seed: Number(seed ?? STAGE_M0.seed), maxTicks: Math.round(num("max-minutes", 60) * 3600), timeSteps: true });
++  if (!findBot(bot)) throw new Error("không có bot " + bot + "; có: " + BOT_NAMES.join(", "));
++  const run = runBot(findBot(bot)!, { seed: Number(seed ?? STAGE_M0.seed), maxTicks: Math.round(num("max-minutes", 60) * 3600), timeSteps: true });
+   const { arrivals, log, hashes, ...rest } = run;
+   console.log(JSON.stringify({ ...rest, arrivals: arrivals.length, w: arrivals.reduce((sum, a) => sum + a.w, 0) }, null, 1));
+ } else {
+@@ -87,9 +88,9 @@ async function main(): Promise<void> {
+   const pace = num("pace", 1);
+   const modes = (arg("modes")?.split(",") ?? [...BAND_MODES]).filter((mode): mode is BandMode => (BAND_MODES as readonly string[]).includes(mode));
+   // Every bot by default: the M0 gate bots and BALANCE.md §6's set with the B6, B7 variants (`--set=m0`: the gate bots only).
+-  const bots = (arg("bots")?.split(",") ?? (arg("set") === "m0" ? [...M0_BOTS] : BOT_NAMES)).filter((name): name is BotName => {
+-    if (!(name in BOTS)) console.error("không có bot " + name + "; có: " + BOT_NAMES.join(", "));
+-    return name in BOTS;
++  const bots = (arg("bots")?.split(",") ?? (arg("set") === "m0" ? [...M0_BOTS] : BOT_NAMES)).filter((name): name is BotName | HumanBotName => {
++    if (!findBot(name)) console.error("không có bot " + name + "; có: " + BOT_NAMES.join(", "));
++    return !!findBot(name);
+   });
+   const tasks: Task[] = modes.flatMap((mode) =>
+     bots.flatMap((bot) => bases.flatMap((first) => Array.from({ length: seeds }, (_, k) => ({ bot, seed: first + k, difficulty: DIFFICULTY_OF[mode] })))),

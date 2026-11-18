@@ -1,0 +1,19 @@
+{
+  "size": 32,
+  "threshold": 128,
+  "full_alpha_iou": 0.9235474006116208,
+  "exposed_plate_roi_pixels": 48,
+  "roi": {
+    "center": [
+      16,
+      16
+    ],
+    "radius_px": [
+      7.8,
+      10.4
+    ],
+    "angle_from_nearest_tooth_axis_min_deg": 16
+  },
+  "iou_outside_exposed_plate_roi": 0.9550173010380623,
+  "limitation": "ROI tám khe giữa răng, cùng ROI cho hai hình; không tách vật liệu tự động. Phép kiểm full alpha cũng đạt >= 0,90."
+}

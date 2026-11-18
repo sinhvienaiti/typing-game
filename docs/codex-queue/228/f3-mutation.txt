@@ -1,0 +1,120 @@
+$ node --test --test-name-pattern=F3 portal/tests/learning-lookup.test.mjs shared/learning/lookup.test.mjs
+cwd: /Users/toandx/htdocs/typing-game
+
+✖ F3 lookup returns only query-failed for a private load error (3.26075ms)
+✖ F3 lookup returns only query-failed for a private profile version error (0.681542ms)
+✖ F3 query returns only query-failed for a private load error (0.57125ms)
+✖ F3 query returns only query-failed for a private profile version error (0.417708ms)
+✔ F3 error contract supports code-only replies and preserves explicit public messages (0.755833ms)
+ℹ tests 5
+ℹ suites 0
+ℹ pass 1
+ℹ fail 4
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 70.06425
+
+✖ failing tests:
+
+test at portal/tests/learning-lookup.test.mjs:215:5
+✖ F3 lookup returns only query-failed for a private load error (3.26075ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+
+    {
+      error: {
+        code: 'query-failed',
+  +     message: 'PROFILE_SECRET: unrequested-word / private answer'
+      },
+      requestId: 'lookup-1',
+      type: 'typing-game:learning:v1:error'
+    }
+
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/portal/tests/learning-lookup.test.mjs:225:14)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: { type: 'typing-game:learning:v1:error', requestId: 'lookup-1', error: { code: 'query-failed', message: 'PROFILE_SECRET: unrequested-word / private answer' } },
+    expected: { type: 'typing-game:learning:v1:error', requestId: 'lookup-1', error: { code: 'query-failed' } },
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at portal/tests/learning-lookup.test.mjs:215:5
+✖ F3 lookup returns only query-failed for a private profile version error (0.681542ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+
+    {
+      error: {
+        code: 'query-failed',
+  +     message: 'unsupported learning profile version: PRIVATE_PROFILE_VALUE'
+      },
+      requestId: 'lookup-1',
+      type: 'typing-game:learning:v1:error'
+    }
+
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/portal/tests/learning-lookup.test.mjs:225:14)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: { type: 'typing-game:learning:v1:error', requestId: 'lookup-1', error: { code: 'query-failed', message: 'unsupported learning profile version: PRIVATE_PROFILE_VALUE' } },
+    expected: { type: 'typing-game:learning:v1:error', requestId: 'lookup-1', error: { code: 'query-failed' } },
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at portal/tests/learning-lookup.test.mjs:215:5
+✖ F3 query returns only query-failed for a private load error (0.57125ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+
+    {
+      error: {
+        code: 'query-failed',
+  +     message: 'PROFILE_SECRET: unrequested-word / private answer'
+      },
+      requestId: 'lookup-1',
+      type: 'typing-game:learning:v1:error'
+    }
+
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/portal/tests/learning-lookup.test.mjs:225:14)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: { type: 'typing-game:learning:v1:error', requestId: 'lookup-1', error: { code: 'query-failed', message: 'PROFILE_SECRET: unrequested-word / private answer' } },
+    expected: { type: 'typing-game:learning:v1:error', requestId: 'lookup-1', error: { code: 'query-failed' } },
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at portal/tests/learning-lookup.test.mjs:215:5
+✖ F3 query returns only query-failed for a private profile version error (0.417708ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+
+    {
+      error: {
+        code: 'query-failed',
+  +     message: 'unsupported learning profile version: PRIVATE_PROFILE_VALUE'
+      },
+      requestId: 'lookup-1',
+      type: 'typing-game:learning:v1:error'
+    }
+
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/portal/tests/learning-lookup.test.mjs:225:14)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: { type: 'typing-game:learning:v1:error', requestId: 'lookup-1', error: { code: 'query-failed', message: 'unsupported learning profile version: PRIVATE_PROFILE_VALUE' } },
+    expected: { type: 'typing-game:learning:v1:error', requestId: 'lookup-1', error: { code: 'query-failed' } },
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+exit: 1

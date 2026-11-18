@@ -1,0 +1,1401 @@
+{
+  "timeUtc": "2026-10-30T07:15:51.494103+00:00",
+  "checks": {
+    "beforeCheckExit": 0,
+    "afterCheckExit": 0,
+    "testsBefore": true,
+    "testsAfter": true,
+    "goldenBefore": "42e4e5a9534bc78a0c252353ea7ee4670a1bec9e43eb42ef38c886aade530eea",
+    "goldenAfter": "42e4e5a9534bc78a0c252353ea7ee4670a1bec9e43eb42ef38c886aade530eea",
+    "chapterLinesBefore": 152,
+    "chapterLinesAfter": 152,
+    "chapterMatch": true,
+    "variantCount": 4,
+    "singleReports": 10,
+    "fourStageReports": 6,
+    "rawFilesMatch": true,
+    "allExit0": true,
+    "waveStartLimits": true,
+    "loadRoseAbove10With4Reports": true,
+    "liveLimitDuringRiseGuaranteed": false,
+    "summaryOverridesValid": true,
+    "worktreeHead": "ba6d70e9d6978eb4b430d119c409f3d47f9a364e",
+    "onlyAllowedWorktreePaths": true,
+    "protectedDiff": {
+      "exit": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "diffCheck": {
+      "exit": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "contentDiff": {
+      "exit": 0,
+      "stdout": "src/content/guns.ts\n",
+      "stderr": ""
+    },
+    "worldNumstat": {
+      "exit": 0,
+      "stdout": "1\t1\tsrc/sim/world.ts\n",
+      "stderr": ""
+    },
+    "tmpdirRemoved": true,
+    "tmpRunsRemain": true
+  },
+  "raw": [
+    {
+      "id": "f1-s1",
+      "stages": [
+        "c1-s1"
+      ],
+      "cells": 36,
+      "cellCounts": {
+        "c1-s1": 36
+      },
+      "allRuns100": true,
+      "g3cPairs": 10,
+      "niceDenied": true,
+      "unexpectedStderr": [],
+      "seconds": 205
+    },
+    {
+      "id": "f1-s101",
+      "stages": [
+        "c1-s1"
+      ],
+      "cells": 36,
+      "cellCounts": {
+        "c1-s1": 36
+      },
+      "allRuns100": true,
+      "g3cPairs": 10,
+      "niceDenied": true,
+      "unexpectedStderr": [],
+      "seconds": 207
+    },
+    {
+      "id": "f2-s1",
+      "stages": [
+        "c1-s1"
+      ],
+      "cells": 36,
+      "cellCounts": {
+        "c1-s1": 36
+      },
+      "allRuns100": true,
+      "g3cPairs": 10,
+      "niceDenied": true,
+      "unexpectedStderr": [],
+      "seconds": 207
+    },
+    {
+      "id": "f2-s101",
+      "stages": [
+        "c1-s1"
+      ],
+      "cells": 36,
+      "cellCounts": {
+        "c1-s1": 36
+      },
+      "allRuns100": true,
+      "g3cPairs": 10,
+      "niceDenied": true,
+      "unexpectedStderr": [],
+      "seconds": 206
+    },
+    {
+      "id": "f3-s1",
+      "stages": [
+        "c1-s1"
+      ],
+      "cells": 36,
+      "cellCounts": {
+        "c1-s1": 36
+      },
+      "allRuns100": true,
+      "g3cPairs": 10,
+      "niceDenied": true,
+      "unexpectedStderr": [],
+      "seconds": 215
+    },
+    {
+      "id": "f3-s101",
+      "stages": [
+        "c1-s1"
+      ],
+      "cells": 36,
+      "cellCounts": {
+        "c1-s1": 36
+      },
+      "allRuns100": true,
+      "g3cPairs": 10,
+      "niceDenied": true,
+      "unexpectedStderr": [],
+      "seconds": 218
+    },
+    {
+      "id": "f4-s1",
+      "stages": [
+        "c1-s1"
+      ],
+      "cells": 36,
+      "cellCounts": {
+        "c1-s1": 36
+      },
+      "allRuns100": true,
+      "g3cPairs": 10,
+      "niceDenied": true,
+      "unexpectedStderr": [],
+      "seconds": 213
+    },
+    {
+      "id": "f4-s101",
+      "stages": [
+        "c1-s1"
+      ],
+      "cells": 36,
+      "cellCounts": {
+        "c1-s1": 36
+      },
+      "allRuns100": true,
+      "g3cPairs": 10,
+      "niceDenied": true,
+      "unexpectedStderr": [],
+      "seconds": 217
+    },
+    {
+      "id": "v6-s1",
+      "stages": [
+        "c1-s1"
+      ],
+      "cells": 36,
+      "cellCounts": {
+        "c1-s1": 36
+      },
+      "allRuns100": true,
+      "g3cPairs": 10,
+      "niceDenied": true,
+      "unexpectedStderr": [],
+      "seconds": 191
+    },
+    {
+      "id": "v6-s101",
+      "stages": [
+        "c1-s1"
+      ],
+      "cells": 36,
+      "cellCounts": {
+        "c1-s1": 36
+      },
+      "allRuns100": true,
+      "g3cPairs": 10,
+      "niceDenied": true,
+      "unexpectedStderr": [],
+      "seconds": 193
+    },
+    {
+      "id": "x-f4-s1",
+      "stages": [
+        "c1-s1",
+        "c1-s2",
+        "c1-s3",
+        "c1-s4"
+      ],
+      "cells": 144,
+      "cellCounts": {
+        "c1-s1": 36,
+        "c1-s2": 36,
+        "c1-s3": 36,
+        "c1-s4": 36
+      },
+      "allRuns100": true,
+      "g3cPairs": 40,
+      "niceDenied": true,
+      "unexpectedStderr": [],
+      "seconds": 831
+    },
+    {
+      "id": "x-f4-s101",
+      "stages": [
+        "c1-s1",
+        "c1-s2",
+        "c1-s3",
+        "c1-s4"
+      ],
+      "cells": 144,
+      "cellCounts": {
+        "c1-s1": 36,
+        "c1-s2": 36,
+        "c1-s3": 36,
+        "c1-s4": 36
+      },
+      "allRuns100": true,
+      "g3cPairs": 40,
+      "niceDenied": true,
+      "unexpectedStderr": [],
+      "seconds": 846
+    },
+    {
+      "id": "x-v0-s1",
+      "stages": [
+        "c1-s1",
+        "c1-s2",
+        "c1-s3",
+        "c1-s4"
+      ],
+      "cells": 144,
+      "cellCounts": {
+        "c1-s1": 36,
+        "c1-s2": 36,
+        "c1-s3": 36,
+        "c1-s4": 36
+      },
+      "allRuns100": true,
+      "g3cPairs": 40,
+      "niceDenied": true,
+      "unexpectedStderr": [],
+      "seconds": 925
+    },
+    {
+      "id": "x-v0-s101",
+      "stages": [
+        "c1-s1",
+        "c1-s2",
+        "c1-s3",
+        "c1-s4"
+      ],
+      "cells": 144,
+      "cellCounts": {
+        "c1-s1": 36,
+        "c1-s2": 36,
+        "c1-s3": 36,
+        "c1-s4": 36
+      },
+      "allRuns100": true,
+      "g3cPairs": 40,
+      "niceDenied": true,
+      "unexpectedStderr": [],
+      "seconds": 948
+    },
+    {
+      "id": "x-v6-s1",
+      "stages": [
+        "c1-s1",
+        "c1-s2",
+        "c1-s3",
+        "c1-s4"
+      ],
+      "cells": 144,
+      "cellCounts": {
+        "c1-s1": 36,
+        "c1-s2": 36,
+        "c1-s3": 36,
+        "c1-s4": 36
+      },
+      "allRuns100": true,
+      "g3cPairs": 40,
+      "niceDenied": true,
+      "unexpectedStderr": [],
+      "seconds": 911
+    },
+    {
+      "id": "x-v6-s101",
+      "stages": [
+        "c1-s1",
+        "c1-s2",
+        "c1-s3",
+        "c1-s4"
+      ],
+      "cells": 144,
+      "cellCounts": {
+        "c1-s1": 36,
+        "c1-s2": 36,
+        "c1-s3": 36,
+        "c1-s4": 36
+      },
+      "allRuns100": true,
+      "g3cPairs": 40,
+      "niceDenied": true,
+      "unexpectedStderr": [],
+      "seconds": 933
+    }
+  ],
+  "copies": [
+    {
+      "name": "f1-s1.err",
+      "sha256": "4c6d03081dc8025cb8123c42b4348a81087c1677ab41943603aa3c31ca92557d",
+      "copySha256": "4c6d03081dc8025cb8123c42b4348a81087c1677ab41943603aa3c31ca92557d",
+      "match": true
+    },
+    {
+      "name": "f1-s1.json",
+      "sha256": "98ff9dc8d6ed9e8ce4e1e5b70868cde8add5a40c1547e398b1e0965755748085",
+      "copySha256": "98ff9dc8d6ed9e8ce4e1e5b70868cde8add5a40c1547e398b1e0965755748085",
+      "match": true
+    },
+    {
+      "name": "f1-s1.md",
+      "sha256": "37f369c29a48d3594f8d27e9d519cd1554990b95cd856310c1a0def9ebf44174",
+      "copySha256": "37f369c29a48d3594f8d27e9d519cd1554990b95cd856310c1a0def9ebf44174",
+      "match": true
+    },
+    {
+      "name": "f1-s101.err",
+      "sha256": "4c6d03081dc8025cb8123c42b4348a81087c1677ab41943603aa3c31ca92557d",
+      "copySha256": "4c6d03081dc8025cb8123c42b4348a81087c1677ab41943603aa3c31ca92557d",
+      "match": true
+    },
+    {
+      "name": "f1-s101.json",
+      "sha256": "b0feb73c6ccc63d469885fbdc806c4654f1c1f6f58688651c2a8e1767ba91f2f",
+      "copySha256": "b0feb73c6ccc63d469885fbdc806c4654f1c1f6f58688651c2a8e1767ba91f2f",
+      "match": true
+    },
+    {
+      "name": "f1-s101.md",
+      "sha256": "21e406806c10546a18f78bda3cbac4405becd6ff93d6db50e68b30653abf0d53",
+      "copySha256": "21e406806c10546a18f78bda3cbac4405becd6ff93d6db50e68b30653abf0d53",
+      "match": true
+    },
+    {
+      "name": "f2-s1.err",
+      "sha256": "4dde321c829c9bd8d692cee598eb4cb9890a1efdd7a2bc35a140a95e10fbdf23",
+      "copySha256": "4dde321c829c9bd8d692cee598eb4cb9890a1efdd7a2bc35a140a95e10fbdf23",
+      "match": true
+    },
+    {
+      "name": "f2-s1.json",
+      "sha256": "7f773a44b37b8f1d0339574d48afbeeb1f1541774b94468e23c9be7a2d3e8c84",
+      "copySha256": "7f773a44b37b8f1d0339574d48afbeeb1f1541774b94468e23c9be7a2d3e8c84",
+      "match": true
+    },
+    {
+      "name": "f2-s1.md",
+      "sha256": "b64e31c0627b9a1421ecac2e4b79ec9514f96aa2797d3818485635aaca867bfb",
+      "copySha256": "b64e31c0627b9a1421ecac2e4b79ec9514f96aa2797d3818485635aaca867bfb",
+      "match": true
+    },
+    {
+      "name": "f2-s101.err",
+      "sha256": "4dde321c829c9bd8d692cee598eb4cb9890a1efdd7a2bc35a140a95e10fbdf23",
+      "copySha256": "4dde321c829c9bd8d692cee598eb4cb9890a1efdd7a2bc35a140a95e10fbdf23",
+      "match": true
+    },
+    {
+      "name": "f2-s101.json",
+      "sha256": "ee4a8e3d552d0a1956155b6d09f8d5465ab63bbb67fc2c75689a0c2c7198763f",
+      "copySha256": "ee4a8e3d552d0a1956155b6d09f8d5465ab63bbb67fc2c75689a0c2c7198763f",
+      "match": true
+    },
+    {
+      "name": "f2-s101.md",
+      "sha256": "033bd32ddc74cb81ac2d910b58572cf1111341ed5c7babd284e50fec04ed6dcd",
+      "copySha256": "033bd32ddc74cb81ac2d910b58572cf1111341ed5c7babd284e50fec04ed6dcd",
+      "match": true
+    },
+    {
+      "name": "f3-s1.err",
+      "sha256": "73bd3dac5bff65fd88e7baa4204f772d586e73dcced610fe021c3b283c30306b",
+      "copySha256": "73bd3dac5bff65fd88e7baa4204f772d586e73dcced610fe021c3b283c30306b",
+      "match": true
+    },
+    {
+      "name": "f3-s1.json",
+      "sha256": "2afcca4d60b40e2adf856d3628f57566dadb4256ae2ec9b8e7642bcdd8864157",
+      "copySha256": "2afcca4d60b40e2adf856d3628f57566dadb4256ae2ec9b8e7642bcdd8864157",
+      "match": true
+    },
+    {
+      "name": "f3-s1.md",
+      "sha256": "06ba501adfc68c165ab075c55ed8f6288514795c83997709092928b0f4b880c9",
+      "copySha256": "06ba501adfc68c165ab075c55ed8f6288514795c83997709092928b0f4b880c9",
+      "match": true
+    },
+    {
+      "name": "f3-s101.err",
+      "sha256": "73bd3dac5bff65fd88e7baa4204f772d586e73dcced610fe021c3b283c30306b",
+      "copySha256": "73bd3dac5bff65fd88e7baa4204f772d586e73dcced610fe021c3b283c30306b",
+      "match": true
+    },
+    {
+      "name": "f3-s101.json",
+      "sha256": "1e43efc2aa84879d10bd351ea1ef004396131e385af79a7090b6c68363fd80c8",
+      "copySha256": "1e43efc2aa84879d10bd351ea1ef004396131e385af79a7090b6c68363fd80c8",
+      "match": true
+    },
+    {
+      "name": "f3-s101.md",
+      "sha256": "276bc5cf46d4a67df4c80940360cd12e21093737b8e6cc370473cf97aa59a743",
+      "copySha256": "276bc5cf46d4a67df4c80940360cd12e21093737b8e6cc370473cf97aa59a743",
+      "match": true
+    },
+    {
+      "name": "f4-s1.err",
+      "sha256": "1f94ed8949733ebad53955e47768a86ad2cc752ef890ca21ea0e4cf0378aff23",
+      "copySha256": "1f94ed8949733ebad53955e47768a86ad2cc752ef890ca21ea0e4cf0378aff23",
+      "match": true
+    },
+    {
+      "name": "f4-s1.json",
+      "sha256": "69ec97e3cdd3f0a1dbbf28f84f83aff33009b32651b777a26a7cbb8a621e9ab8",
+      "copySha256": "69ec97e3cdd3f0a1dbbf28f84f83aff33009b32651b777a26a7cbb8a621e9ab8",
+      "match": true
+    },
+    {
+      "name": "f4-s1.md",
+      "sha256": "9984b428ba0fc941d8df2221fc52d938c1fa88ae69be72f02cccd9d38ce27b76",
+      "copySha256": "9984b428ba0fc941d8df2221fc52d938c1fa88ae69be72f02cccd9d38ce27b76",
+      "match": true
+    },
+    {
+      "name": "f4-s101.err",
+      "sha256": "1f94ed8949733ebad53955e47768a86ad2cc752ef890ca21ea0e4cf0378aff23",
+      "copySha256": "1f94ed8949733ebad53955e47768a86ad2cc752ef890ca21ea0e4cf0378aff23",
+      "match": true
+    },
+    {
+      "name": "f4-s101.json",
+      "sha256": "5ad5aac379368744549f68b4428837858200e24b9490995bd17f634350fec6e2",
+      "copySha256": "5ad5aac379368744549f68b4428837858200e24b9490995bd17f634350fec6e2",
+      "match": true
+    },
+    {
+      "name": "f4-s101.md",
+      "sha256": "3496396e16186e394ea65cd921bf576a976a122ecacbe9fd3ba6974a4ca966cd",
+      "copySha256": "3496396e16186e394ea65cd921bf576a976a122ecacbe9fd3ba6974a4ca966cd",
+      "match": true
+    },
+    {
+      "name": "v6-s1.err",
+      "sha256": "df35b523ea6a5a29baea765b3f09f80ed69295968550c9ffc7d5a408b2f78e04",
+      "copySha256": "df35b523ea6a5a29baea765b3f09f80ed69295968550c9ffc7d5a408b2f78e04",
+      "match": true
+    },
+    {
+      "name": "v6-s1.json",
+      "sha256": "c7ada6119676b44bc7cd38c24ce626f9da374706fd5cd4cc40bc054c2ddfc407",
+      "copySha256": "c7ada6119676b44bc7cd38c24ce626f9da374706fd5cd4cc40bc054c2ddfc407",
+      "match": true
+    },
+    {
+      "name": "v6-s1.md",
+      "sha256": "d32837843028146fbf9dde437b895b6d8b9bc27d5f803d093cb948927dc8f598",
+      "copySha256": "d32837843028146fbf9dde437b895b6d8b9bc27d5f803d093cb948927dc8f598",
+      "match": true
+    },
+    {
+      "name": "v6-s101.err",
+      "sha256": "df35b523ea6a5a29baea765b3f09f80ed69295968550c9ffc7d5a408b2f78e04",
+      "copySha256": "df35b523ea6a5a29baea765b3f09f80ed69295968550c9ffc7d5a408b2f78e04",
+      "match": true
+    },
+    {
+      "name": "v6-s101.json",
+      "sha256": "df4cb59c36fc3163630a9a5993cf8963c7c9a1aced7c8420fd8b43ecf6d97fc3",
+      "copySha256": "df4cb59c36fc3163630a9a5993cf8963c7c9a1aced7c8420fd8b43ecf6d97fc3",
+      "match": true
+    },
+    {
+      "name": "v6-s101.md",
+      "sha256": "ade0f3b3870ee07d243b8be8d47aad1b22249e69bdf0810b2b67458e6d430bb1",
+      "copySha256": "ade0f3b3870ee07d243b8be8d47aad1b22249e69bdf0810b2b67458e6d430bb1",
+      "match": true
+    },
+    {
+      "name": "x-f4-s1.err",
+      "sha256": "1f94ed8949733ebad53955e47768a86ad2cc752ef890ca21ea0e4cf0378aff23",
+      "copySha256": "1f94ed8949733ebad53955e47768a86ad2cc752ef890ca21ea0e4cf0378aff23",
+      "match": true
+    },
+    {
+      "name": "x-f4-s1.json",
+      "sha256": "eb66f0dc8b4f0ef7e437697e254314fb65c6b4af02e0ef1390b48dbd65511a8f",
+      "copySha256": "eb66f0dc8b4f0ef7e437697e254314fb65c6b4af02e0ef1390b48dbd65511a8f",
+      "match": true
+    },
+    {
+      "name": "x-f4-s1.md",
+      "sha256": "2cac5870eee9b21ecebd8a5ef724aabc065c241906bf1492aab90091e4fb9e83",
+      "copySha256": "2cac5870eee9b21ecebd8a5ef724aabc065c241906bf1492aab90091e4fb9e83",
+      "match": true
+    },
+    {
+      "name": "x-f4-s101.err",
+      "sha256": "1f94ed8949733ebad53955e47768a86ad2cc752ef890ca21ea0e4cf0378aff23",
+      "copySha256": "1f94ed8949733ebad53955e47768a86ad2cc752ef890ca21ea0e4cf0378aff23",
+      "match": true
+    },
+    {
+      "name": "x-f4-s101.json",
+      "sha256": "3dc5d0797220868461d5490fcce91a27a5cf3a1c545580849edf780e7b824acd",
+      "copySha256": "3dc5d0797220868461d5490fcce91a27a5cf3a1c545580849edf780e7b824acd",
+      "match": true
+    },
+    {
+      "name": "x-f4-s101.md",
+      "sha256": "7357a12c3cb124d3bc383e6dc64330a373e93e7bc72b68413bd0b4d1c7f908e4",
+      "copySha256": "7357a12c3cb124d3bc383e6dc64330a373e93e7bc72b68413bd0b4d1c7f908e4",
+      "match": true
+    },
+    {
+      "name": "x-v0-s1.err",
+      "sha256": "1ae2ce53f6c4a3265acd385e7e4a21d827a2b5594337d0d9ae68b92a856b30dc",
+      "copySha256": "1ae2ce53f6c4a3265acd385e7e4a21d827a2b5594337d0d9ae68b92a856b30dc",
+      "match": true
+    },
+    {
+      "name": "x-v0-s1.json",
+      "sha256": "7839952c0e829400e17a8aee36c6cfebbb3b6eba2b5322db10d00f85513a9114",
+      "copySha256": "7839952c0e829400e17a8aee36c6cfebbb3b6eba2b5322db10d00f85513a9114",
+      "match": true
+    },
+    {
+      "name": "x-v0-s1.md",
+      "sha256": "561a0e591973717f9da717db91db05c90c4db4711be8c07ce46e756aebe76791",
+      "copySha256": "561a0e591973717f9da717db91db05c90c4db4711be8c07ce46e756aebe76791",
+      "match": true
+    },
+    {
+      "name": "x-v0-s101.err",
+      "sha256": "1ae2ce53f6c4a3265acd385e7e4a21d827a2b5594337d0d9ae68b92a856b30dc",
+      "copySha256": "1ae2ce53f6c4a3265acd385e7e4a21d827a2b5594337d0d9ae68b92a856b30dc",
+      "match": true
+    },
+    {
+      "name": "x-v0-s101.json",
+      "sha256": "02f34ae1f303a5694a10c159ee643fad7c3427ab88608890a5da9c9bf69158f3",
+      "copySha256": "02f34ae1f303a5694a10c159ee643fad7c3427ab88608890a5da9c9bf69158f3",
+      "match": true
+    },
+    {
+      "name": "x-v0-s101.md",
+      "sha256": "b8420ff5294b647588b868414c4662c083f5009b873baa7d86b9666c70b28f00",
+      "copySha256": "b8420ff5294b647588b868414c4662c083f5009b873baa7d86b9666c70b28f00",
+      "match": true
+    },
+    {
+      "name": "x-v6-s1.err",
+      "sha256": "df35b523ea6a5a29baea765b3f09f80ed69295968550c9ffc7d5a408b2f78e04",
+      "copySha256": "df35b523ea6a5a29baea765b3f09f80ed69295968550c9ffc7d5a408b2f78e04",
+      "match": true
+    },
+    {
+      "name": "x-v6-s1.json",
+      "sha256": "af169927681fe03e8b9e1b6f449783044a1695a494ee5b7aa72b70a31ee02a00",
+      "copySha256": "af169927681fe03e8b9e1b6f449783044a1695a494ee5b7aa72b70a31ee02a00",
+      "match": true
+    },
+    {
+      "name": "x-v6-s1.md",
+      "sha256": "28bea0e6e8a062c691a37e2b32fbaecfc1e3249f9771c5fbcc792ee512d33601",
+      "copySha256": "28bea0e6e8a062c691a37e2b32fbaecfc1e3249f9771c5fbcc792ee512d33601",
+      "match": true
+    },
+    {
+      "name": "x-v6-s101.err",
+      "sha256": "df35b523ea6a5a29baea765b3f09f80ed69295968550c9ffc7d5a408b2f78e04",
+      "copySha256": "df35b523ea6a5a29baea765b3f09f80ed69295968550c9ffc7d5a408b2f78e04",
+      "match": true
+    },
+    {
+      "name": "x-v6-s101.json",
+      "sha256": "32f83ae4c27c4f8091ec6779461ad1c04de985ad434c1ddc312c587bd19c2438",
+      "copySha256": "32f83ae4c27c4f8091ec6779461ad1c04de985ad434c1ddc312c587bd19c2438",
+      "match": true
+    },
+    {
+      "name": "x-v6-s101.md",
+      "sha256": "df9d5d2c310ccc5a0390fc8e01cec58d3f1b896c0713b9dbbe6140f868231ec1",
+      "copySha256": "df9d5d2c310ccc5a0390fc8e01cec58d3f1b896c0713b9dbbe6140f868231ec1",
+      "match": true
+    }
+  ],
+  "waves": [
+    {
+      "wave": "A",
+      "start": "2026-10-30T06:33:19.698Z",
+      "uptime": "13:33  2 users, load averages: 4.65 4.72 4.36",
+      "load": 4.65,
+      "limit": 4,
+      "tmpdir": "/Users/toandx/htdocs/typing-game/games/.wt-ts-codex/tmp/codex-220/tmpdir",
+      "jobs": [
+        {
+          "id": "f1",
+          "first": 1,
+          "set": "c1-s1.drainRate=2.4,MODE_SPECS.challenge.surge=1.0,MODE_SPECS.challenge.rate=1.06,FULL_BAY.extra=1",
+          "start": "2026-10-30T06:33:19.699Z",
+          "args": [
+            "-n",
+            "15",
+            "/opt/homebrew/Cellar/node@24/24.22.0/bin/node",
+            "--import",
+            "tsx",
+            "scripts/balance.ts",
+            "--stages=c1-s1",
+            "--seeds=100",
+            "--first=1",
+            "--g3c",
+            "--json=/Users/toandx/htdocs/typing-game/games/.wt-ts-codex/tmp/codex-220/runs/f1-s1.json",
+            "--out=/Users/toandx/htdocs/typing-game/games/.wt-ts-codex/tmp/codex-220/runs/f1-s1.md",
+            "--set=c1-s1.drainRate=2.4,MODE_SPECS.challenge.surge=1.0,MODE_SPECS.challenge.rate=1.06,FULL_BAY.extra=1"
+          ],
+          "pid": 6273,
+          "end": "2026-10-30T06:36:44.614Z",
+          "wallSeconds": 204.915,
+          "exit": 0
+        },
+        {
+          "id": "f1",
+          "first": 101,
+          "set": "c1-s1.drainRate=2.4,MODE_SPECS.challenge.surge=1.0,MODE_SPECS.challenge.rate=1.06,FULL_BAY.extra=1",
+          "start": "2026-10-30T06:33:19.700Z",
+          "args": [
+            "-n",
+            "15",
+            "/opt/homebrew/Cellar/node@24/24.22.0/bin/node",
+            "--import",
+            "tsx",
+            "scripts/balance.ts",
+            "--stages=c1-s1",
+            "--seeds=100",
+            "--first=101",
+            "--g3c",
+            "--json=/Users/toandx/htdocs/typing-game/games/.wt-ts-codex/tmp/codex-220/runs/f1-s101.json",
+            "--out=/Users/toandx/htdocs/typing-game/games/.wt-ts-codex/tmp/codex-220/runs/f1-s101.md",
+            "--set=c1-s1.drainRate=2.4,MODE_SPECS.challenge.surge=1.0,MODE_SPECS.challenge.rate=1.06,FULL_BAY.extra=1"
+          ],
+          "pid": 6283,
+          "end": "2026-10-30T06:36:47.004Z",
+          "wallSeconds": 207.304,
+          "exit": 0
+        },
+        {
+          "id": "f2",
+          "first": 1,
+          "set": "c1-s1.drainRate=2.4,MODE_SPECS.challenge.surge=1.0,MODE_SPECS.challenge.rate=1.06,FULL_BAY.spill=1",
+          "start": "2026-10-30T06:33:19.701Z",
+          "args": [
+            "-n",
+            "15",
+            "/opt/homebrew/Cellar/node@24/24.22.0/bin/node",
+            "--import",
+            "tsx",
+            "scripts/balance.ts",
+            "--stages=c1-s1",
+            "--seeds=100",
+            "--first=1",
+            "--g3c",
+            "--json=/Users/toandx/htdocs/typing-game/games/.wt-ts-codex/tmp/codex-220/runs/f2-s1.json",
+            "--out=/Users/toandx/htdocs/typing-game/games/.wt-ts-codex/tmp/codex-220/runs/f2-s1.md",
+            "--set=c1-s1.drainRate=2.4,MODE_SPECS.challenge.surge=1.0,MODE_SPECS.challenge.rate=1.06,FULL_BAY.spill=1"
+          ],
+          "pid": 6293,
+          "end": "2026-10-30T06:36:46.434Z",
+          "wallSeconds": 206.733,
+          "exit": 0
+        },
+        {
+          "id": "f2",
+          "first": 101,
+          "set": "c1-s1.drainRate=2.4,MODE_SPECS.challenge.surge=1.0,MODE_SPECS.challenge.rate=1.06,FULL_BAY.spill=1",
+          "start": "2026-10-30T06:33:19.702Z",
+          "args": [
+            "-n",
+            "15",
+            "/opt/homebrew/Cellar/node@24/24.22.0/bin/node",
+            "--import",
+            "tsx",
+            "scripts/balance.ts",
+            "--stages=c1-s1",
+            "--seeds=100",
+            "--first=101",
+            "--g3c",
+            "--json=/Users/toandx/htdocs/typing-game/games/.wt-ts-codex/tmp/codex-220/runs/f2-s101.json",
+            "--out=/Users/toandx/htdocs/typing-game/games/.wt-ts-codex/tmp/codex-220/runs/f2-s101.md",
+            "--set=c1-s1.drainRate=2.4,MODE_SPECS.challenge.surge=1.0,MODE_SPECS.challenge.rate=1.06,FULL_BAY.spill=1"
+          ],
+          "pid": 6303,
+          "end": "2026-10-30T06:36:46.284Z",
+          "wallSeconds": 206.582,
+          "exit": 0
+        }
+      ],
+      "peak": 4,
+      "end": "2026-10-30T06:36:47.004Z"
+    },
+    {
+      "wave": "B",
+      "start": "2026-10-30T06:37:32.505Z",
+      "uptime": "13:37  2 users, load averages: 5.21 5.44 4.80",
+      "load": 5.21,
+      "limit": 4,
+      "tmpdir": "/Users/toandx/htdocs/typing-game/games/.wt-ts-codex/tmp/codex-220/tmpdir",
+      "jobs": [
+        {
+          "id": "f3",
+          "first": 1,
+          "set": "c1-s1.drainRate=2.4,MODE_SPECS.challenge.surge=1.0,MODE_SPECS.challenge.rate=1.06,FULL_BAY.boost=0.15",
+          "start": "2026-10-30T06:37:32.506Z",
+          "args": [
+            "-n",
+            "15",
+            "/opt/homebrew/Cellar/node@24/24.22.0/bin/node",
+            "--import",
+            "tsx",
+            "scripts/balance.ts",
+            "--stages=c1-s1",
+            "--seeds=100",
+            "--first=1",
+            "--g3c",
+            "--json=/Users/toandx/htdocs/typing-game/games/.wt-ts-codex/tmp/codex-220/runs/f3-s1.json",
+            "--out=/Users/toandx/htdocs/typing-game/games/.wt-ts-codex/tmp/codex-220/runs/f3-s1.md",
+            "--set=c1-s1.drainRate=2.4,MODE_SPECS.challenge.surge=1.0,MODE_SPECS.challenge.rate=1.06,FULL_BAY.boost=0.15"
+          ],
+          "pid": 7717,
+          "end": "2026-10-30T06:41:07.548Z",
+          "wallSeconds": 215.042,
+          "exit": 0
+        },
+        {
+          "id": "f3",
+          "first": 101,
+          "set": "c1-s1.drainRate=2.4,MODE_SPECS.challenge.surge=1.0,MODE_SPECS.challenge.rate=1.06,FULL_BAY.boost=0.15",
+          "start": "2026-10-30T06:37:32.507Z",
+          "args": [
+            "-n",
+            "15",
+            "/opt/homebrew/Cellar/node@24/24.22.0/bin/node",
+            "--import",
+            "tsx",
+            "scripts/balance.ts",
+            "--stages=c1-s1",
+            "--seeds=100",
+            "--first=101",
+            "--g3c",
+            "--json=/Users/toandx/htdocs/typing-game/games/.wt-ts-codex/tmp/codex-220/runs/f3-s101.json",
+            "--out=/Users/toandx/htdocs/typing-game/games/.wt-ts-codex/tmp/codex-220/runs/f3-s101.md",
+            "--set=c1-s1.drainRate=2.4,MODE_SPECS.challenge.surge=1.0,MODE_SPECS.challenge.rate=1.06,FULL_BAY.boost=0.15"
+          ],
+          "pid": 7727,
+          "end": "2026-10-30T06:41:10.156Z",
+          "wallSeconds": 217.649,
+          "exit": 0
+        },
+        {
+          "id": "f4",
+          "first": 1,
+          "set": "c1-s1.drainRate=2.4,MODE_SPECS.challenge.surge=1.0,MODE_SPECS.challenge.rate=1.06,FULL_BAY.boost=0.3",
+          "start": "2026-10-30T06:37:32.508Z",
+          "args": [
+            "-n",
+            "15",
+            "/opt/homebrew/Cellar/node@24/24.22.0/bin/node",
+            "--import",
+            "tsx",
+            "scripts/balance.ts",
+            "--stages=c1-s1",
+            "--seeds=100",
+            "--first=1",
+            "--g3c",
+            "--json=/Users/toandx/htdocs/typing-game/games/.wt-ts-codex/tmp/codex-220/runs/f4-s1.json",
+            "--out=/Users/toandx/htdocs/typing-game/games/.wt-ts-codex/tmp/codex-220/runs/f4-s1.md",
+            "--set=c1-s1.drainRate=2.4,MODE_SPECS.challenge.surge=1.0,MODE_SPECS.challenge.rate=1.06,FULL_BAY.boost=0.3"
+          ],
+          "pid": 7737,
+          "end": "2026-10-30T06:41:06.082Z",
+          "wallSeconds": 213.574,
+          "exit": 0
+        },
+        {
+          "id": "f4",
+          "first": 101,
+          "set": "c1-s1.drainRate=2.4,MODE_SPECS.challenge.surge=1.0,MODE_SPECS.challenge.rate=1.06,FULL_BAY.boost=0.3",
+          "start": "2026-10-30T06:37:32.509Z",
+          "args": [
+            "-n",
+            "15",
+            "/opt/homebrew/Cellar/node@24/24.22.0/bin/node",
+            "--import",
+            "tsx",
+            "scripts/balance.ts",
+            "--stages=c1-s1",
+            "--seeds=100",
+            "--first=101",
+            "--g3c",
+            "--json=/Users/toandx/htdocs/typing-game/games/.wt-ts-codex/tmp/codex-220/runs/f4-s101.json",
+            "--out=/Users/toandx/htdocs/typing-game/games/.wt-ts-codex/tmp/codex-220/runs/f4-s101.md",
+            "--set=c1-s1.drainRate=2.4,MODE_SPECS.challenge.surge=1.0,MODE_SPECS.challenge.rate=1.06,FULL_BAY.boost=0.3"
+          ],
+          "pid": 7747,
+          "end": "2026-10-30T06:41:09.147Z",
+          "wallSeconds": 216.638,
+          "exit": 0
+        }
+      ],
+      "peak": 4,
+      "end": "2026-10-30T06:41:10.156Z"
+    },
+    {
+      "wave": "C",
+      "start": "2026-10-30T06:43:05.475Z",
+      "uptime": "13:43  2 users, load averages: 2.94 5.33 5.10",
+      "load": 2.94,
+      "limit": 4,
+      "tmpdir": "/Users/toandx/htdocs/typing-game/games/.wt-ts-codex/tmp/codex-220/tmpdir",
+      "jobs": [
+        {
+          "id": "x-v0",
+          "first": 1,
+          "set": "",
+          "start": "2026-10-30T06:43:05.476Z",
+          "args": [
+            "-n",
+            "15",
+            "/opt/homebrew/Cellar/node@24/24.22.0/bin/node",
+            "--import",
+            "tsx",
+            "scripts/balance.ts",
+            "--stages=c1-s1,c1-s2,c1-s3,c1-s4",
+            "--seeds=100",
+            "--first=1",
+            "--g3c",
+            "--json=/Users/toandx/htdocs/typing-game/games/.wt-ts-codex/tmp/codex-220/runs/x-v0-s1.json",
+            "--out=/Users/toandx/htdocs/typing-game/games/.wt-ts-codex/tmp/codex-220/runs/x-v0-s1.md"
+          ],
+          "pid": 11801,
+          "end": "2026-10-30T06:58:30.847Z",
+          "wallSeconds": 925.371,
+          "exit": 0
+        },
+        {
+          "id": "x-v0",
+          "first": 101,
+          "set": "",
+          "start": "2026-10-30T06:43:05.481Z",
+          "args": [
+            "-n",
+            "15",
+            "/opt/homebrew/Cellar/node@24/24.22.0/bin/node",
+            "--import",
+            "tsx",
+            "scripts/balance.ts",
+            "--stages=c1-s1,c1-s2,c1-s3,c1-s4",
+            "--seeds=100",
+            "--first=101",
+            "--g3c",
+            "--json=/Users/toandx/htdocs/typing-game/games/.wt-ts-codex/tmp/codex-220/runs/x-v0-s101.json",
+            "--out=/Users/toandx/htdocs/typing-game/games/.wt-ts-codex/tmp/codex-220/runs/x-v0-s101.md"
+          ],
+          "pid": 11811,
+          "end": "2026-10-30T06:58:53.671Z",
+          "wallSeconds": 948.19,
+          "exit": 0
+        },
+        {
+          "id": "x-v6",
+          "first": 1,
+          "set": "c1-s1.drainRate=2.4,MODE_SPECS.challenge.surge=1.0,MODE_SPECS.challenge.rate=1.06",
+          "start": "2026-10-30T06:43:05.482Z",
+          "args": [
+            "-n",
+            "15",
+            "/opt/homebrew/Cellar/node@24/24.22.0/bin/node",
+            "--import",
+            "tsx",
+            "scripts/balance.ts",
+            "--stages=c1-s1,c1-s2,c1-s3,c1-s4",
+            "--seeds=100",
+            "--first=1",
+            "--g3c",
+            "--json=/Users/toandx/htdocs/typing-game/games/.wt-ts-codex/tmp/codex-220/runs/x-v6-s1.json",
+            "--out=/Users/toandx/htdocs/typing-game/games/.wt-ts-codex/tmp/codex-220/runs/x-v6-s1.md",
+            "--set=c1-s1.drainRate=2.4,MODE_SPECS.challenge.surge=1.0,MODE_SPECS.challenge.rate=1.06"
+          ],
+          "pid": 11821,
+          "end": "2026-10-30T06:58:16.308Z",
+          "wallSeconds": 910.826,
+          "exit": 0
+        },
+        {
+          "id": "x-v6",
+          "first": 101,
+          "set": "c1-s1.drainRate=2.4,MODE_SPECS.challenge.surge=1.0,MODE_SPECS.challenge.rate=1.06",
+          "start": "2026-10-30T06:43:05.483Z",
+          "args": [
+            "-n",
+            "15",
+            "/opt/homebrew/Cellar/node@24/24.22.0/bin/node",
+            "--import",
+            "tsx",
+            "scripts/balance.ts",
+            "--stages=c1-s1,c1-s2,c1-s3,c1-s4",
+            "--seeds=100",
+            "--first=101",
+            "--g3c",
+            "--json=/Users/toandx/htdocs/typing-game/games/.wt-ts-codex/tmp/codex-220/runs/x-v6-s101.json",
+            "--out=/Users/toandx/htdocs/typing-game/games/.wt-ts-codex/tmp/codex-220/runs/x-v6-s101.md",
+            "--set=c1-s1.drainRate=2.4,MODE_SPECS.challenge.surge=1.0,MODE_SPECS.challenge.rate=1.06"
+          ],
+          "pid": 11831,
+          "end": "2026-10-30T06:58:39.032Z",
+          "wallSeconds": 933.549,
+          "exit": 0
+        },
+        {
+          "id": "x-f4",
+          "first": 1,
+          "set": "c1-s1.drainRate=2.4,MODE_SPECS.challenge.surge=1.0,MODE_SPECS.challenge.rate=1.06,FULL_BAY.boost=0.3",
+          "start": "2026-10-30T06:58:16.309Z",
+          "args": [
+            "-n",
+            "15",
+            "/opt/homebrew/Cellar/node@24/24.22.0/bin/node",
+            "--import",
+            "tsx",
+            "scripts/balance.ts",
+            "--stages=c1-s1,c1-s2,c1-s3,c1-s4",
+            "--seeds=100",
+            "--first=1",
+            "--g3c",
+            "--json=/Users/toandx/htdocs/typing-game/games/.wt-ts-codex/tmp/codex-220/runs/x-f4-s1.json",
+            "--out=/Users/toandx/htdocs/typing-game/games/.wt-ts-codex/tmp/codex-220/runs/x-f4-s1.md",
+            "--set=c1-s1.drainRate=2.4,MODE_SPECS.challenge.surge=1.0,MODE_SPECS.challenge.rate=1.06,FULL_BAY.boost=0.3"
+          ],
+          "pid": 17059,
+          "end": "2026-10-30T07:12:07.802Z",
+          "wallSeconds": 831.493,
+          "exit": 0
+        },
+        {
+          "id": "x-f4",
+          "first": 101,
+          "set": "c1-s1.drainRate=2.4,MODE_SPECS.challenge.surge=1.0,MODE_SPECS.challenge.rate=1.06,FULL_BAY.boost=0.3",
+          "start": "2026-10-30T06:58:30.848Z",
+          "args": [
+            "-n",
+            "15",
+            "/opt/homebrew/Cellar/node@24/24.22.0/bin/node",
+            "--import",
+            "tsx",
+            "scripts/balance.ts",
+            "--stages=c1-s1,c1-s2,c1-s3,c1-s4",
+            "--seeds=100",
+            "--first=101",
+            "--g3c",
+            "--json=/Users/toandx/htdocs/typing-game/games/.wt-ts-codex/tmp/codex-220/runs/x-f4-s101.json",
+            "--out=/Users/toandx/htdocs/typing-game/games/.wt-ts-codex/tmp/codex-220/runs/x-f4-s101.md",
+            "--set=c1-s1.drainRate=2.4,MODE_SPECS.challenge.surge=1.0,MODE_SPECS.challenge.rate=1.06,FULL_BAY.boost=0.3"
+          ],
+          "pid": 17123,
+          "end": "2026-10-30T07:12:37.034Z",
+          "wallSeconds": 846.186,
+          "exit": 0
+        }
+      ],
+      "peak": 4,
+      "end": "2026-10-30T07:12:37.034Z"
+    },
+    {
+      "wave": "repro",
+      "start": "2026-10-30T06:26:26.727Z",
+      "uptime": "13:26  2 users, load averages: 5.27 4.03 4.03",
+      "load": 5.27,
+      "limit": 4,
+      "tmpdir": "/Users/toandx/htdocs/typing-game/games/.wt-ts-codex/tmp/codex-220/tmpdir",
+      "jobs": [
+        {
+          "id": "v6",
+          "first": 1,
+          "set": "c1-s1.drainRate=2.4,MODE_SPECS.challenge.surge=1.0,MODE_SPECS.challenge.rate=1.06",
+          "start": "2026-10-30T06:26:26.727Z",
+          "args": [
+            "-n",
+            "15",
+            "/opt/homebrew/Cellar/node@24/24.22.0/bin/node",
+            "--import",
+            "tsx",
+            "scripts/balance.ts",
+            "--stages=c1-s1",
+            "--seeds=100",
+            "--first=1",
+            "--g3c",
+            "--json=/Users/toandx/htdocs/typing-game/games/.wt-ts-codex/tmp/codex-220/runs/v6-s1.json",
+            "--out=/Users/toandx/htdocs/typing-game/games/.wt-ts-codex/tmp/codex-220/runs/v6-s1.md",
+            "--set=c1-s1.drainRate=2.4,MODE_SPECS.challenge.surge=1.0,MODE_SPECS.challenge.rate=1.06"
+          ],
+          "pid": 1759,
+          "end": "2026-10-30T06:29:37.448Z",
+          "wallSeconds": 190.721,
+          "exit": 0
+        },
+        {
+          "id": "v6",
+          "first": 101,
+          "set": "c1-s1.drainRate=2.4,MODE_SPECS.challenge.surge=1.0,MODE_SPECS.challenge.rate=1.06",
+          "start": "2026-10-30T06:26:26.728Z",
+          "args": [
+            "-n",
+            "15",
+            "/opt/homebrew/Cellar/node@24/24.22.0/bin/node",
+            "--import",
+            "tsx",
+            "scripts/balance.ts",
+            "--stages=c1-s1",
+            "--seeds=100",
+            "--first=101",
+            "--g3c",
+            "--json=/Users/toandx/htdocs/typing-game/games/.wt-ts-codex/tmp/codex-220/runs/v6-s101.json",
+            "--out=/Users/toandx/htdocs/typing-game/games/.wt-ts-codex/tmp/codex-220/runs/v6-s101.md",
+            "--set=c1-s1.drainRate=2.4,MODE_SPECS.challenge.surge=1.0,MODE_SPECS.challenge.rate=1.06"
+          ],
+          "pid": 1769,
+          "end": "2026-10-30T06:29:40.180Z",
+          "wallSeconds": 193.452,
+          "exit": 0
+        }
+      ],
+      "peak": 2,
+      "end": "2026-10-30T06:29:40.180Z"
+    }
+  ],
+  "machineSeconds": 7466,
+  "machineHours": 2.073888888888889,
+  "processWallSeconds": 7468.225000000001,
+  "measurementSpanSeconds": 2770.307,
+  "parentChanges": {
+    "added": [
+      "?? docs/codex-queue/199/build-second.json",
+      "?? docs/codex-queue/199/decoded-dimensions.json",
+      "?? docs/codex-queue/199/manifest-final.json",
+      "?? docs/codex-queue/199/media-push.json",
+      "?? docs/codex-queue/199/preflight-1328.json",
+      "?? docs/codex-queue/199/prune-1328-apply.json",
+      "?? docs/codex-queue/199/prune-1328-dry.json",
+      "?? docs/codex-queue/199/test-first-1328.md",
+      "?? docs/codex-queue/202/manifest-contract.json",
+      "?? docs/codex-queue/220-report.md",
+      "?? docs/codex-queue/220/chapter-after.txt",
+      "?? docs/codex-queue/220/chapter-before.txt",
+      "?? docs/codex-queue/220/decision.md",
+      "?? docs/codex-queue/220/evidence/baselines-after-code.json",
+      "?? docs/codex-queue/220/evidence/chapter-diff.exit",
+      "?? docs/codex-queue/220/evidence/chapter.diff",
+      "?? docs/codex-queue/220/evidence/four-stage-repro.json",
+      "?? docs/codex-queue/220/evidence/golden-after.txt",
+      "?? docs/codex-queue/220/evidence/golden-before.txt",
+      "?? docs/codex-queue/220/evidence/load-rise.json",
+      "?? docs/codex-queue/220/evidence/load-samples.json",
+      "?? docs/codex-queue/220/evidence/parent-status-after.txt",
+      "?? docs/codex-queue/220/evidence/parent-status-before.txt",
+      "?? docs/codex-queue/220/evidence/parent-status-changes.json",
+      "?? docs/codex-queue/220/evidence/restricted-hunks.diff",
+      "?? docs/codex-queue/220/evidence/summarizer-v6-against-209.json",
+      "?? docs/codex-queue/220/evidence/summary-first-sha256.json",
+      "?? docs/codex-queue/220/evidence/summary-repro.json",
+      "?? docs/codex-queue/220/evidence/v6-repro.json",
+      "?? docs/codex-queue/220/evidence/wave-A.json",
+      "?? docs/codex-queue/220/evidence/wave-B.json",
+      "?? docs/codex-queue/220/evidence/wave-C.json",
+      "?? docs/codex-queue/220/evidence/wave-repro.json",
+      "?? docs/codex-queue/220/evidence/worktree-status-after.txt",
+      "?? docs/codex-queue/220/evidence/worktree.commit",
+      "?? docs/codex-queue/220/logs/check-after-initial.txt",
+      "?? docs/codex-queue/220/logs/check-after.exit",
+      "?? docs/codex-queue/220/logs/check-after.txt",
+      "?? docs/codex-queue/220/logs/check-before.exit",
+      "?? docs/codex-queue/220/logs/check-before.txt",
+      "?? docs/codex-queue/220/logs/load-guard.txt",
+      "?? docs/codex-queue/220/logs/mutations.txt",
+      "?? docs/codex-queue/220/logs/summarize-A.txt",
+      "?? docs/codex-queue/220/logs/summarize-B.txt",
+      "?? docs/codex-queue/220/logs/summarize-C-baselines.txt",
+      "?? docs/codex-queue/220/logs/summarize-before-last.txt",
+      "?? docs/codex-queue/220/logs/summarize-current.txt",
+      "?? docs/codex-queue/220/logs/summarize-final.txt",
+      "?? docs/codex-queue/220/logs/summarize-initial.txt",
+      "?? docs/codex-queue/220/logs/summarize-repeat.txt",
+      "?? docs/codex-queue/220/logs/tests-green.exit",
+      "?? docs/codex-queue/220/logs/tests-green.txt",
+      "?? docs/codex-queue/220/logs/tests-red.exit",
+      "?? docs/codex-queue/220/logs/tests-red.txt",
+      "?? docs/codex-queue/220/logs/verification-before-cleanup.txt",
+      "?? docs/codex-queue/220/logs/verification-final.txt",
+      "?? docs/codex-queue/220/logs/wave-A.txt",
+      "?? docs/codex-queue/220/logs/wave-B.txt",
+      "?? docs/codex-queue/220/logs/wave-C.txt",
+      "?? docs/codex-queue/220/logs/wave-repro.txt",
+      "?? docs/codex-queue/220/method.md",
+      "?? docs/codex-queue/220/runs/f1-s1.err",
+      "?? docs/codex-queue/220/runs/f1-s1.json",
+      "?? docs/codex-queue/220/runs/f1-s1.md",
+      "?? docs/codex-queue/220/runs/f1-s101.err",
+      "?? docs/codex-queue/220/runs/f1-s101.json",
+      "?? docs/codex-queue/220/runs/f1-s101.md",
+      "?? docs/codex-queue/220/runs/f2-s1.err",
+      "?? docs/codex-queue/220/runs/f2-s1.json",
+      "?? docs/codex-queue/220/runs/f2-s1.md",
+      "?? docs/codex-queue/220/runs/f2-s101.err",
+      "?? docs/codex-queue/220/runs/f2-s101.json",
+      "?? docs/codex-queue/220/runs/f2-s101.md",
+      "?? docs/codex-queue/220/runs/f3-s1.err",
+      "?? docs/codex-queue/220/runs/f3-s1.json",
+      "?? docs/codex-queue/220/runs/f3-s1.md",
+      "?? docs/codex-queue/220/runs/f3-s101.err",
+      "?? docs/codex-queue/220/runs/f3-s101.json",
+      "?? docs/codex-queue/220/runs/f3-s101.md",
+      "?? docs/codex-queue/220/runs/f4-s1.err",
+      "?? docs/codex-queue/220/runs/f4-s1.json",
+      "?? docs/codex-queue/220/runs/f4-s1.md",
+      "?? docs/codex-queue/220/runs/f4-s101.err",
+      "?? docs/codex-queue/220/runs/f4-s101.json",
+      "?? docs/codex-queue/220/runs/f4-s101.md",
+      "?? docs/codex-queue/220/runs/v6-s1.err",
+      "?? docs/codex-queue/220/runs/v6-s1.json",
+      "?? docs/codex-queue/220/runs/v6-s1.md",
+      "?? docs/codex-queue/220/runs/v6-s101.err",
+      "?? docs/codex-queue/220/runs/v6-s101.json",
+      "?? docs/codex-queue/220/runs/v6-s101.md",
+      "?? docs/codex-queue/220/runs/x-f4-s1.err",
+      "?? docs/codex-queue/220/runs/x-f4-s1.json",
+      "?? docs/codex-queue/220/runs/x-f4-s1.md",
+      "?? docs/codex-queue/220/runs/x-f4-s101.err",
+      "?? docs/codex-queue/220/runs/x-f4-s101.json",
+      "?? docs/codex-queue/220/runs/x-f4-s101.md",
+      "?? docs/codex-queue/220/runs/x-v0-s1.err",
+      "?? docs/codex-queue/220/runs/x-v0-s1.json",
+      "?? docs/codex-queue/220/runs/x-v0-s1.md",
+      "?? docs/codex-queue/220/runs/x-v0-s101.err",
+      "?? docs/codex-queue/220/runs/x-v0-s101.json",
+      "?? docs/codex-queue/220/runs/x-v0-s101.md",
+      "?? docs/codex-queue/220/runs/x-v6-s1.err",
+      "?? docs/codex-queue/220/runs/x-v6-s1.json",
+      "?? docs/codex-queue/220/runs/x-v6-s1.md",
+      "?? docs/codex-queue/220/runs/x-v6-s101.err",
+      "?? docs/codex-queue/220/runs/x-v6-s101.json",
+      "?? docs/codex-queue/220/runs/x-v6-s101.md",
+      "?? docs/codex-queue/220/summary.json",
+      "?? docs/codex-queue/220/summary.md",
+      "?? docs/codex-queue/220/tools/changes-from-209.diff",
+      "?? docs/codex-queue/220/tools/compare.py",
+      "?? docs/codex-queue/220/tools/load-guard.py",
+      "?? docs/codex-queue/220/tools/run-wave.mjs",
+      "?? docs/codex-queue/220/tools/summarize.mjs",
+      "?? docs/codex-queue/220/tools/verify.py",
+      "?? docs/codex-queue/220/tools/write-report.py",
+      "?? docs/codex-queue/220/variants.json",
+      "?? docs/codex-queue/220/verification.json",
+      "?? docs/codex-queue/221-report.md",
+      "?? docs/codex-queue/221/check-selftest.json",
+      "?? docs/codex-queue/221/check-selftest.txt",
+      "?? docs/codex-queue/221/check.json",
+      "?? docs/codex-queue/221/check.mjs",
+      "?? docs/codex-queue/221/check.txt",
+      "?? docs/codex-queue/221/fired-ids.json",
+      "?? docs/codex-queue/221/game-after.txt",
+      "?? docs/codex-queue/221/make-data.mjs",
+      "?? docs/codex-queue/221/make-report.py",
+      "?? docs/codex-queue/221/source-checks.txt",
+      "?? docs/codex-queue/221/source-evidence.json",
+      "?? docs/codex-queue/221/state-check.json",
+      "?? docs/codex-queue/221/status-after.txt",
+      "?? docs/codex-queue/224/audit.py",
+      "?? docs/codex-queue/224/before.json",
+      "?? docs/codex-queue/224/build-only.json",
+      "?? docs/codex-queue/224/check-170-run.json",
+      "?? docs/codex-queue/224/check-run.json",
+      "?? docs/codex-queue/224/copy.json",
+      "?? docs/codex-queue/224/deploy-170-run.json",
+      "?? docs/codex-queue/224/deploy-absent-run.json",
+      "?? docs/codex-queue/224/deploy-empty-run.json",
+      "?? docs/codex-queue/224/deploy-local-run.json",
+      "?? docs/codex-queue/224/dist-170-comparison.json",
+      "?? docs/codex-queue/224/dist-170.json",
+      "?? docs/codex-queue/224/dist-absent.json",
+      "?? docs/codex-queue/224/dist-empty-comparison.json",
+      "?? docs/codex-queue/224/dist-empty.json",
+      "?? docs/codex-queue/224/dist-local.json",
+      "?? docs/codex-queue/224/findings.json",
+      "?? docs/codex-queue/224/golden-run.json",
+      "?? docs/codex-queue/224/kit-generator-attempt1-run.json",
+      "?? docs/codex-queue/224/kit-generator-run.json",
+      "?? docs/codex-queue/224/kit.json",
+      "?? docs/codex-queue/224/manifest-paths.json",
+      "?? docs/codex-queue/224/mutate.py",
+      "?? docs/codex-queue/224/mutation-M1-run.json",
+      "?? docs/codex-queue/224/mutation-M2-run.json",
+      "?? docs/codex-queue/224/mutation-M3-run.json",
+      "?? docs/codex-queue/224/mutation-M4-run.json",
+      "?? docs/codex-queue/224/mutation-M5-run.json",
+      "?? docs/codex-queue/224/mutation-M6-run.json",
+      "?? docs/codex-queue/224/mutations.json",
+      "?? docs/codex-queue/224/pack-170-local-run.json",
+      "?? docs/codex-queue/224/pack-170-local.json",
+      "?? docs/codex-queue/224/pack-170-run.json",
+      "?? docs/codex-queue/224/pack-170.json",
+      "?? docs/codex-queue/224/pack-absent-run.json",
+      "?? docs/codex-queue/224/pack-absent.json",
+      "?? docs/codex-queue/224/pack-empty-run.json",
+      "?? docs/codex-queue/224/pack-empty.json",
+      "?? docs/codex-queue/224/pack-local-production-run.json",
+      "?? docs/codex-queue/224/pack-local-production.json",
+      "?? docs/codex-queue/224/pack-local-run.json",
+      "?? docs/codex-queue/224/pack-local.json",
+      "?? docs/codex-queue/224/parent-before.txt",
+      "?? docs/codex-queue/224/paths.json",
+      "?? docs/codex-queue/224/preflight.txt",
+      "?? docs/codex-queue/224/probe.mts",
+      "?? docs/codex-queue/224/prune-probes.json",
+      "?? docs/codex-queue/224/requirements.md",
+      "?? docs/codex-queue/224/restored-M1-run.json",
+      "?? docs/codex-queue/224/restored-M2-run.json",
+      "?? docs/codex-queue/224/restored-M3-run.json",
+      "?? docs/codex-queue/224/restored-M4-run.json",
+      "?? docs/codex-queue/224/restored-M5-run.json",
+      "?? docs/codex-queue/224/restored-M6-run.json",
+      "?? docs/codex-queue/224/run.py",
+      "?? docs/codex-queue/224/scan.json",
+      "?? docs/codex-queue/224/split.json",
+      "?? docs/codex-queue/224/tree-restored.json",
+      "?? docs/codex-queue/224/vite-probes-attempt1-run.json",
+      "?? docs/codex-queue/224/vite-probes-prior-run.json",
+      "?? docs/codex-queue/224/vite-probes-prior.json",
+      "?? docs/codex-queue/224/vite-probes-run.json",
+      "?? docs/codex-queue/224/vite-probes.json",
+      "?? docs/codex-queue/226-report.md",
+      "?? docs/codex-queue/226/a2-package-v2.patch",
+      "?? docs/codex-queue/226/base-pkg.diff",
+      "?? docs/codex-queue/226/check2.json",
+      "?? docs/codex-queue/226/cleanup-check.txt",
+      "?? docs/codex-queue/226/delete-list.txt",
+      "?? docs/codex-queue/226/diff-lines.txt",
+      "?? docs/codex-queue/226/execution-checks.json",
+      "?? docs/codex-queue/226/execution-limitations.txt",
+      "?? docs/codex-queue/226/git-after.txt",
+      "?? docs/codex-queue/226/git-before.txt",
+      "?? docs/codex-queue/226/git-final.txt",
+      "?? docs/codex-queue/226/git-parent-after.txt",
+      "?? docs/codex-queue/226/old-runs.sha256",
+      "?? docs/codex-queue/226/old-runs/base-night1.md",
+      "?? docs/codex-queue/226/old-runs/r22-balance.md",
+      "?? docs/codex-queue/226/old-runs/r22-g12x20.md",
+      "?? docs/codex-queue/226/old-runs/r22-pn-balanced.md",
+      "?? docs/codex-queue/226/old-runs/r22-pn-challenge.md",
+      "?? docs/codex-queue/226/old-runs/r22-pn-relax.md",
+      "?? docs/codex-queue/226/old-runs/v1-g12x20.md",
+      "?? docs/codex-queue/226/old-runs/v1-night1.md",
+      "?? docs/codex-queue/226/old-runs/v1-pn-balanced.md",
+      "?? docs/codex-queue/226/old-runs/v1-pn-challenge.md",
+      "?? docs/codex-queue/226/old-runs/v1-pn-relax.md",
+      "?? docs/codex-queue/226/old-runs/v2-balance.md",
+      "?? docs/codex-queue/226/patch-lines.txt",
+      "?? docs/codex-queue/226/patch-log.txt",
+      "?? docs/codex-queue/226/pct-check.json",
+      "?? docs/codex-queue/226/preflight.txt",
+      "?? docs/codex-queue/226/runs.sha256",
+      "?? docs/codex-queue/226/runs/base-balance160.err",
+      "?? docs/codex-queue/226/runs/base-balance160.md",
+      "?? docs/codex-queue/226/runs/base-g12x20.err",
+      "?? docs/codex-queue/226/runs/base-g12x20.md",
+      "?? docs/codex-queue/226/runs/base-night1-160.md",
+      "?? docs/codex-queue/226/runs/base-night1-40.md",
+      "?? docs/codex-queue/226/runs/base-pn-balanced.md",
+      "?? docs/codex-queue/226/runs/base-pn-challenge.md",
+      "?? docs/codex-queue/226/runs/base-pn-relax.md",
+      "?? docs/codex-queue/226/runs/base-smoke.err",
+      "?? docs/codex-queue/226/runs/base-smoke.md",
+      "?? docs/codex-queue/226/runs/commands.json",
+      "?? docs/codex-queue/226/runs/pkg-balance160.err",
+      "?? docs/codex-queue/226/runs/pkg-balance160.md",
+      "?? docs/codex-queue/226/runs/pkg-g12x20.err",
+      "?? docs/codex-queue/226/runs/pkg-g12x20.md",
+      "?? docs/codex-queue/226/runs/pkg-night1-160.md",
+      "?? docs/codex-queue/226/runs/pkg-night1-40.md",
+      "?? docs/codex-queue/226/runs/pkg-pn-balanced.md",
+      "?? docs/codex-queue/226/runs/pkg-pn-challenge.md",
+      "?? docs/codex-queue/226/runs/pkg-pn-relax.md",
+      "?? docs/codex-queue/226/runs/pkg-smoke.err",
+      "?? docs/codex-queue/226/runs/pkg-smoke.md",
+      "?? docs/codex-queue/226/runs/refs.txt",
+      "?? docs/codex-queue/226/runs/timeline.txt",
+      "?? docs/codex-queue/226/summary-repro.json",
+      "?? docs/codex-queue/226/summary.json",
+      "?? docs/codex-queue/226/summary.md",
+      "?? docs/codex-queue/226/tools/collect.py",
+      "?? docs/codex-queue/226/tools/measure.py",
+      "?? docs/codex-queue/226/tools/report.py",
+      "?? docs/codex-queue/226/tools/summarize.mjs",
+      "?? docs/codex-queue/227-report.md",
+      "?? docs/codex-queue/227/audio-summary.json",
+      "?? docs/codex-queue/227/audit-214.json",
+      "?? docs/codex-queue/227/audit-215.json",
+      "?? docs/codex-queue/227/audit-217.json",
+      "?? docs/codex-queue/227/audit-sources/audit-214-215.mjs.txt",
+      "?? docs/codex-queue/227/audit-sources/audit-216.py.txt",
+      "?? docs/codex-queue/227/audit-sources/audit-217.py.txt",
+      "?? docs/codex-queue/227/audit-sources/paths.py.txt",
+      "?? docs/codex-queue/227/audit-sources/run-commands.py.txt",
+      "?? docs/codex-queue/227/audit-sources/run-tests-217.py.txt",
+      "?? docs/codex-queue/227/audit-sources/snap.mjs.txt",
+      "?? docs/codex-queue/227/bundle-bytes.json",
+      "?? docs/codex-queue/227/cleanup.json",
+      "?? docs/codex-queue/227/core-now.json",
+      "?? docs/codex-queue/227/diff-stat.txt",
+      "?? docs/codex-queue/227/newer.txt",
+      "?? docs/codex-queue/227/nginx-blocks.json",
+      "?? docs/codex-queue/227/nginx-validator.json",
+      "?? docs/codex-queue/227/paths.json",
+      "?? docs/codex-queue/227/paths.md",
+      "?? docs/codex-queue/227/preflight.txt",
+      "?? docs/codex-queue/227/product-diff.txt",
+      "?? docs/codex-queue/227/product-paths.json",
+      "?? docs/codex-queue/227/runs/audio-all.json",
+      "?? docs/codex-queue/227/runs/audio-all.txt",
+      "?? docs/codex-queue/227/runs/audio-new.json",
+      "?? docs/codex-queue/227/runs/audio-new.txt",
+      "?? docs/codex-queue/227/runs/audit-214-215.txt",
+      "?? docs/codex-queue/227/runs/audit-216.txt",
+      "?? docs/codex-queue/227/runs/audit-217.txt",
+      "?? docs/codex-queue/227/runs/bootstrap-syntax.json",
+      "?? docs/codex-queue/227/runs/bootstrap-syntax.txt",
+      "?? docs/codex-queue/227/runs/core-snapshot.json",
+      "?? docs/codex-queue/227/runs/game-dir-syntax.json",
+      "?? docs/codex-queue/227/runs/game-dir-syntax.txt",
+      "?? docs/codex-queue/227/runs/learning-check.json",
+      "?? docs/codex-queue/227/runs/learning-check.txt",
+      "?? docs/codex-queue/227/runs/learning-test.json",
+      "?? docs/codex-queue/227/runs/learning-test.txt",
+      "?? docs/codex-queue/227/runs/nginx-injected-dev.txt",
+      "?? docs/codex-queue/227/runs/nginx-injected-play.txt",
+      "?? docs/codex-queue/227/runs/nginx-structure.txt",
+      "?? docs/codex-queue/227/runs/play-mode.json",
+      "?? docs/codex-queue/227/runs/play-mode.txt",
+      "?? docs/codex-queue/227/runs/portal-test.json",
+      "?? docs/codex-queue/227/runs/portal-test.txt",
+      "?? docs/codex-queue/227/runs/space-integration.json",
+      "?? docs/codex-queue/227/runs/space-integration.txt",
+      "?? docs/codex-queue/227/runs/test-216.json",
+      "?? docs/codex-queue/227/runs/test-216.txt",
+      "?? docs/codex-queue/227/runs/tsc.json",
+      "?? docs/codex-queue/227/runs/tsc.txt",
+      "?? docs/codex-queue/227/runs/vite.json",
+      "?? docs/codex-queue/227/runs/vite.txt",
+      "?? docs/codex-queue/227/runs/whitespace-all-new.json",
+      "?? docs/codex-queue/227/runs/whitespace.json",
+      "?? docs/codex-queue/227/snap-after.json",
+      "?? docs/codex-queue/227/snap-before.json",
+      "?? docs/codex-queue/227/snap-delta.json",
+      "?? docs/codex-queue/227/tmp-inventory.txt",
+      "?? docs/codex-queue/227/tmp-summary.json",
+      "?? docs/codex-queue/227/vocab-self-serve.json",
+      "?? docs/games/audio/firefly/typing-defense.json",
+      "?? docs/games/audio/firefly/typing-defense.md"
+    ],
+    "removed": []
+  },
+  "taskStartUtc": "2026-10-30T06:25:55.892443+00:00",
+  "taskSpanSeconds": 2995.6017377376556,
+  "artifactErrors": [],
+  "resourceCaveat": "Tải giữa đợt C tăng >10; sandbox từ chối SIGSTOP. Chỉ xác nhận trần theo tải đầu đợt, xem load-rise.json."
+}

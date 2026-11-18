@@ -1,0 +1,16 @@
+{
+  "name": "pack-local",
+  "argv": [
+    "node",
+    "src/kit/tools/deploy/check-pack.mjs",
+    "dist",
+    "--game",
+    "typing-defense",
+    "--json",
+    "--allow-local-host"
+  ],
+  "cwd": "/Users/toandx/htdocs/typing-game/games/typing-defense/tmp/codex-233/tree",
+  "portal_url": "https://typing-game.local/",
+  "exit": 0,
+  "seconds": 0.039
+}

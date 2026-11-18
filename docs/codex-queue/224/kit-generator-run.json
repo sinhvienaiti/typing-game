@@ -1,0 +1,16 @@
+{
+  "command": [
+    "node",
+    "--input-type=module",
+    "--eval",
+    "import {readFileSync} from 'node:fs';\nimport {VERIFY_SOURCE} from \"file:///Users/toandx/htdocs/typing-game/scripts/sync-game-kit.mjs\";\nconst source=readFileSync(\"/Users/toandx/htdocs/typing-game/scripts/sync-game-kit.mjs\",'utf8');\nconst expr=source.match(/const README_TEXT = ([\\s\\S]*?);\\n\\nexport const VERIFY_SOURCE/)[1];\nconst generated=Function('MANIFEST_FILE','VERIFY_FILE','return '+expr)('kit-manifest.json','verify-kit.mjs');\nconsole.log(JSON.stringify({verify:Buffer.from(VERIFY_SOURCE).equals(readFileSync('src/kit/verify-kit.mjs')),readme:Buffer.from(generated).equals(readFileSync('src/kit/README.md'))}));"
+  ],
+  "cwd": "games/typing-defense/tmp/codex-224/tree",
+  "env": {
+    "VITE_PORTAL_URL": "(absent)",
+    "pnpm_config_verify_deps_before_run": "false",
+    "TMPDIR": "/Users/toandx/htdocs/typing-game/games/typing-defense/tmp/codex-224/tmpdir"
+  },
+  "exit": 0,
+  "seconds": 0.0312
+}

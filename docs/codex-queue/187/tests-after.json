@@ -1,0 +1,18 @@
+{
+  "command": [
+    "pnpm",
+    "exec",
+    "vitest",
+    "run",
+    "tests/app/portal.test.ts",
+    "tests/ui/results-screen.test.ts",
+    "tests/portal-build.test.ts",
+    "--reporter=default",
+    "--reporter=json",
+    "--outputFile=/Users/toandx/htdocs/typing-game/docs/codex-queue/187/tests-after-results.json"
+  ],
+  "cwd": "/Users/toandx/htdocs/typing-game/games/.wt-dh-codex",
+  "VITE_PORTAL_URL": null,
+  "exitCode": 0,
+  "seconds": 1.133
+}

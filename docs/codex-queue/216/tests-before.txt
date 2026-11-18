@@ -1,0 +1,1310 @@
+Play mode contract PASS: static apps, shared runtime data, Space Typing Admin API routing, Portal shared-learning rebuild dependency, and the dragon/td/survival/tutien hosts are covered.
+✖ import exposes pure checks without running the CLI or reading repo files (25.073292ms)
+✖ play: real configs have no shared data aliases in the three hosts (0.064334ms)
+✖ play: catches dragon.typing-game.local /vocabulary/ (0.078792ms)
+✖ play: catches dragon.typing-game.local /typing-texts/ (0.034292ms)
+✖ play: catches dragon.typing-game.local /shared/typing-texts/ (0.03475ms)
+✖ play: catches dragon.typing-game.local variant location ^~ /vocabulary/ { alias __ROOT_DIR__/shared/vocabulary/; } (0.039ms)
+✖ play: catches dragon.typing-game.local variant location = /vocabulary { alias __ROOT_DIR__/shared/vocabulary/; } (0.031917ms)
+✖ play: catches dragon.typing-game.local variant location ~ /typing-texts/ { alias __ROOT_DIR__/shared/typing-texts/; } (0.028208ms)
+✖ play: catches dragon.typing-game.local variant location ~* /shared/typing-texts/ { alias __ROOT_DIR__/shared/typing-texts/; } (0.040167ms)
+✖ play: catches dragon.typing-game.local variant location	 ^~	 /vocabulary/	{
+	alias	__ROOT_DIR__/shared/vocabulary/;
+} (0.065ms)
+✖ play: catches dragon.typing-game.local variant location /words/ { alias __ROOT_DIR__/shared/vocabulary/; } (0.03875ms)
+✖ play: catches dragon.typing-game.local variant location /words/ { root __ROOT_DIR__/shared/vocabulary/; } (0.029958ms)
+✖ play: catches dragon.typing-game.local variant location "/words/" { root "__ROOT_DIR__/shared/vocabulary/"; } (0.023292ms)
+✖ play: catches dragon.typing-game.local variant location /vocabulary/ { try_files $uri =404; } (0.024083ms)
+✖ play: ignores commented locations for dragon.typing-game.local (0.026375ms)
+✖ play: catches td.typing-game.local /vocabulary/ (0.019916ms)
+✖ play: catches td.typing-game.local /typing-texts/ (0.01925ms)
+✖ play: catches td.typing-game.local /shared/typing-texts/ (0.019625ms)
+✖ play: catches td.typing-game.local variant location ^~ /vocabulary/ { alias __ROOT_DIR__/shared/vocabulary/; } (0.020167ms)
+✖ play: catches td.typing-game.local variant location = /vocabulary { alias __ROOT_DIR__/shared/vocabulary/; } (0.019625ms)
+✖ play: catches td.typing-game.local variant location ~ /typing-texts/ { alias __ROOT_DIR__/shared/typing-texts/; } (0.019667ms)
+✖ play: catches td.typing-game.local variant location ~* /shared/typing-texts/ { alias __ROOT_DIR__/shared/typing-texts/; } (0.020833ms)
+✖ play: catches td.typing-game.local variant location	 ^~	 /vocabulary/	{
+	alias	__ROOT_DIR__/shared/vocabulary/;
+} (0.019417ms)
+✖ play: catches td.typing-game.local variant location /words/ { alias __ROOT_DIR__/shared/vocabulary/; } (0.024167ms)
+✖ play: catches td.typing-game.local variant location /words/ { root __ROOT_DIR__/shared/vocabulary/; } (0.045083ms)
+✖ play: catches td.typing-game.local variant location "/words/" { root "__ROOT_DIR__/shared/vocabulary/"; } (0.041625ms)
+✖ play: catches td.typing-game.local variant location /vocabulary/ { try_files $uri =404; } (0.034875ms)
+✖ play: ignores commented locations for td.typing-game.local (0.032709ms)
+✖ play: catches survival.typing-game.local /vocabulary/ (0.03325ms)
+✖ play: catches survival.typing-game.local /typing-texts/ (0.03375ms)
+✖ play: catches survival.typing-game.local /shared/typing-texts/ (0.032541ms)
+✖ play: catches survival.typing-game.local variant location ^~ /vocabulary/ { alias __ROOT_DIR__/shared/vocabulary/; } (0.032125ms)
+✖ play: catches survival.typing-game.local variant location = /vocabulary { alias __ROOT_DIR__/shared/vocabulary/; } (0.03225ms)
+✖ play: catches survival.typing-game.local variant location ~ /typing-texts/ { alias __ROOT_DIR__/shared/typing-texts/; } (0.03225ms)
+✖ play: catches survival.typing-game.local variant location ~* /shared/typing-texts/ { alias __ROOT_DIR__/shared/typing-texts/; } (0.033417ms)
+✖ play: catches survival.typing-game.local variant location	 ^~	 /vocabulary/	{
+	alias	__ROOT_DIR__/shared/vocabulary/;
+} (0.034ms)
+✖ play: catches survival.typing-game.local variant location /words/ { alias __ROOT_DIR__/shared/vocabulary/; } (0.034084ms)
+✖ play: catches survival.typing-game.local variant location /words/ { root __ROOT_DIR__/shared/vocabulary/; } (0.035833ms)
+✖ play: catches survival.typing-game.local variant location "/words/" { root "__ROOT_DIR__/shared/vocabulary/"; } (0.033709ms)
+✖ play: catches survival.typing-game.local variant location /vocabulary/ { try_files $uri =404; } (0.032291ms)
+✖ play: ignores commented locations for survival.typing-game.local (0.042625ms)
+✖ play: other hosts and survival models stay allowed (0.057584ms)
+✖ play: rejects missing and early closing braces (0.041208ms)
+✖ play: ignores comments and quoted braces, including escaped quotes (0.063125ms)
+✖ play: each game host must have exactly one server block (0.06175ms)
+✖ dev: real configs have no shared data aliases in the three hosts (0.030167ms)
+✖ dev: catches dragon.typing-game.local /vocabulary/ (0.041334ms)
+✖ dev: catches dragon.typing-game.local /typing-texts/ (0.036334ms)
+✖ dev: catches dragon.typing-game.local /shared/typing-texts/ (0.032958ms)
+✖ dev: catches dragon.typing-game.local variant location ^~ /vocabulary/ { alias __ROOT_DIR__/shared/vocabulary/; } (0.0315ms)
+✖ dev: catches dragon.typing-game.local variant location = /vocabulary { alias __ROOT_DIR__/shared/vocabulary/; } (0.031584ms)
+✖ dev: catches dragon.typing-game.local variant location ~ /typing-texts/ { alias __ROOT_DIR__/shared/typing-texts/; } (0.046833ms)
+✖ dev: catches dragon.typing-game.local variant location ~* /shared/typing-texts/ { alias __ROOT_DIR__/shared/typing-texts/; } (0.043166ms)
+✖ dev: catches dragon.typing-game.local variant location	 ^~	 /vocabulary/	{
+	alias	__ROOT_DIR__/shared/vocabulary/;
+} (0.051333ms)
+✖ dev: catches dragon.typing-game.local variant location /words/ { alias __ROOT_DIR__/shared/vocabulary/; } (0.033958ms)
+✖ dev: catches dragon.typing-game.local variant location /words/ { root __ROOT_DIR__/shared/vocabulary/; } (0.040458ms)
+✖ dev: catches dragon.typing-game.local variant location "/words/" { root "__ROOT_DIR__/shared/vocabulary/"; } (0.044625ms)
+✖ dev: catches dragon.typing-game.local variant location /vocabulary/ { try_files $uri =404; } (0.031709ms)
+✖ dev: ignores commented locations for dragon.typing-game.local (0.030917ms)
+✖ dev: catches td.typing-game.local /vocabulary/ (0.032084ms)
+✖ dev: catches td.typing-game.local /typing-texts/ (0.03175ms)
+✖ dev: catches td.typing-game.local /shared/typing-texts/ (0.031916ms)
+✖ dev: catches td.typing-game.local variant location ^~ /vocabulary/ { alias __ROOT_DIR__/shared/vocabulary/; } (0.031708ms)
+✖ dev: catches td.typing-game.local variant location = /vocabulary { alias __ROOT_DIR__/shared/vocabulary/; } (0.054125ms)
+✖ dev: catches td.typing-game.local variant location ~ /typing-texts/ { alias __ROOT_DIR__/shared/typing-texts/; } (0.043375ms)
+✖ dev: catches td.typing-game.local variant location ~* /shared/typing-texts/ { alias __ROOT_DIR__/shared/typing-texts/; } (0.043584ms)
+✖ dev: catches td.typing-game.local variant location	 ^~	 /vocabulary/	{
+	alias	__ROOT_DIR__/shared/vocabulary/;
+} (0.035291ms)
+✖ dev: catches td.typing-game.local variant location /words/ { alias __ROOT_DIR__/shared/vocabulary/; } (0.06325ms)
+✖ dev: catches td.typing-game.local variant location /words/ { root __ROOT_DIR__/shared/vocabulary/; } (0.044ms)
+✖ dev: catches td.typing-game.local variant location "/words/" { root "__ROOT_DIR__/shared/vocabulary/"; } (0.036125ms)
+✖ dev: catches td.typing-game.local variant location /vocabulary/ { try_files $uri =404; } (0.033666ms)
+✖ dev: ignores commented locations for td.typing-game.local (0.032417ms)
+✖ dev: catches survival.typing-game.local /vocabulary/ (0.032834ms)
+✖ dev: catches survival.typing-game.local /typing-texts/ (0.031125ms)
+✖ dev: catches survival.typing-game.local /shared/typing-texts/ (0.030708ms)
+✖ dev: catches survival.typing-game.local variant location ^~ /vocabulary/ { alias __ROOT_DIR__/shared/vocabulary/; } (0.030292ms)
+✖ dev: catches survival.typing-game.local variant location = /vocabulary { alias __ROOT_DIR__/shared/vocabulary/; } (0.030625ms)
+✖ dev: catches survival.typing-game.local variant location ~ /typing-texts/ { alias __ROOT_DIR__/shared/typing-texts/; } (0.030292ms)
+✖ dev: catches survival.typing-game.local variant location ~* /shared/typing-texts/ { alias __ROOT_DIR__/shared/typing-texts/; } (0.030375ms)
+✖ dev: catches survival.typing-game.local variant location	 ^~	 /vocabulary/	{
+	alias	__ROOT_DIR__/shared/vocabulary/;
+} (0.039917ms)
+✖ dev: catches survival.typing-game.local variant location /words/ { alias __ROOT_DIR__/shared/vocabulary/; } (0.039917ms)
+✖ dev: catches survival.typing-game.local variant location /words/ { root __ROOT_DIR__/shared/vocabulary/; } (0.034625ms)
+✖ dev: catches survival.typing-game.local variant location "/words/" { root "__ROOT_DIR__/shared/vocabulary/"; } (0.047542ms)
+✖ dev: catches survival.typing-game.local variant location /vocabulary/ { try_files $uri =404; } (0.03225ms)
+✖ dev: ignores commented locations for survival.typing-game.local (0.030167ms)
+✖ dev: other hosts and survival models stay allowed (0.042375ms)
+✖ dev: rejects missing and early closing braces (0.029958ms)
+✖ dev: ignores comments and quoted braces, including escaped quotes (0.034792ms)
+✖ dev: each game host must have exactly one server block (0.036125ms)
+✖ CLI on the repo prints PASS and exits 0 (25.589458ms)
+✖ CLI --play-conf catches dragon.typing-game.local /vocabulary/ (25.307541ms)
+✖ CLI --dev-conf catches td.typing-game.local /shared/typing-texts/ (24.564041ms)
+✖ CLI rejects unknown options and missing paths with usage and exit 2 (25.205292ms)
+✖ CLI rejects malformed braces and duplicate hosts in either config (25.404208ms)
+ℹ tests 94
+ℹ suites 0
+ℹ pass 0
+ℹ fail 94
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 207.12725
+
+✖ failing tests:
+
+test at scripts/validate-play-mode.test.mjs:49:1
+✖ import exposes pure checks without running the CLI or reading repo files (25.073292ms)
+  AssertionError [ERR_ASSERTION]: node:internal/fs/promises:1345
+    return new FileHandle(await PromisePrototypeThen(
+                          ^
+
+  Error: ENOENT: no such file or directory, open 'play.sh'
+      at async open (node:internal/fs/promises:1345:25)
+      at async readFile (node:internal/fs/promises:2003:14)
+      at async file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.mjs:4:14 {
+    errno: -2,
+    code: 'ENOENT',
+    syscall: 'open',
+    path: 'play.sh'
+  }
+
+  Node.js v24.22.0
+
+
+  1 !== 0
+
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:53:10)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 1,
+    expected: 0,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at scripts/validate-play-mode.test.mjs:59:3
+✖ play: real configs have no shared data aliases in the three hosts (0.064334ms)
+  TypeError [Error]: validator.sharedDataAliases is not a function
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:60:58)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3)
+
+test at scripts/validate-play-mode.test.mjs:65:7
+✖ play: catches dragon.typing-game.local /vocabulary/ (0.078792ms)
+  TypeError [Error]: validator.sharedDataAliases is not a function
+      at expectAlias (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:44:27)
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:66:9)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+
+test at scripts/validate-play-mode.test.mjs:65:7
+✖ play: catches dragon.typing-game.local /typing-texts/ (0.034292ms)
+  TypeError [Error]: validator.sharedDataAliases is not a function
+      at expectAlias (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:44:27)
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:66:9)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+
+test at scripts/validate-play-mode.test.mjs:65:7
+✖ play: catches dragon.typing-game.local /shared/typing-texts/ (0.03475ms)
+  TypeError [Error]: validator.sharedDataAliases is not a function
+      at expectAlias (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:44:27)
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:66:9)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+
+test at scripts/validate-play-mode.test.mjs:81:7
+✖ play: catches dragon.typing-game.local variant location ^~ /vocabulary/ { alias __ROOT_DIR__/shared/vocabulary/; } (0.039ms)
+  TypeError [Error]: validator.sharedDataAliases is not a function
+      at expectAlias (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:44:27)
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:81:67)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+
+test at scripts/validate-play-mode.test.mjs:81:7
+✖ play: catches dragon.typing-game.local variant location = /vocabulary { alias __ROOT_DIR__/shared/vocabulary/; } (0.031917ms)
+  TypeError [Error]: validator.sharedDataAliases is not a function
+      at expectAlias (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:44:27)
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:81:67)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+
+test at scripts/validate-play-mode.test.mjs:81:7
+✖ play: catches dragon.typing-game.local variant location ~ /typing-texts/ { alias __ROOT_DIR__/shared/typing-texts/; } (0.028208ms)
+  TypeError [Error]: validator.sharedDataAliases is not a function
+      at expectAlias (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:44:27)
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:81:67)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+
+test at scripts/validate-play-mode.test.mjs:81:7
+✖ play: catches dragon.typing-game.local variant location ~* /shared/typing-texts/ { alias __ROOT_DIR__/shared/typing-texts/; } (0.040167ms)
+  TypeError [Error]: validator.sharedDataAliases is not a function
+      at expectAlias (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:44:27)
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:81:67)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+
+test at scripts/validate-play-mode.test.mjs:81:7
+✖ play: catches dragon.typing-game.local variant location	 ^~	 /vocabulary/	{
+	alias	__ROOT_DIR__/shared/vocabulary/;
+} (0.065ms)
+  TypeError [Error]: validator.sharedDataAliases is not a function
+      at expectAlias (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:44:27)
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:81:67)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+
+test at scripts/validate-play-mode.test.mjs:81:7
+✖ play: catches dragon.typing-game.local variant location /words/ { alias __ROOT_DIR__/shared/vocabulary/; } (0.03875ms)
+  TypeError [Error]: validator.sharedDataAliases is not a function
+      at expectAlias (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:44:27)
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:81:67)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+
+test at scripts/validate-play-mode.test.mjs:81:7
+✖ play: catches dragon.typing-game.local variant location /words/ { root __ROOT_DIR__/shared/vocabulary/; } (0.029958ms)
+  TypeError [Error]: validator.sharedDataAliases is not a function
+      at expectAlias (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:44:27)
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:81:67)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+
+test at scripts/validate-play-mode.test.mjs:81:7
+✖ play: catches dragon.typing-game.local variant location "/words/" { root "__ROOT_DIR__/shared/vocabulary/"; } (0.023292ms)
+  TypeError [Error]: validator.sharedDataAliases is not a function
+      at expectAlias (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:44:27)
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:81:67)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+
+test at scripts/validate-play-mode.test.mjs:81:7
+✖ play: catches dragon.typing-game.local variant location /vocabulary/ { try_files $uri =404; } (0.024083ms)
+  TypeError [Error]: validator.sharedDataAliases is not a function
+      at expectAlias (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:44:27)
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:81:67)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+
+test at scripts/validate-play-mode.test.mjs:83:5
+✖ play: ignores commented locations for dragon.typing-game.local (0.026375ms)
+  TypeError [Error]: validator.sharedDataAliases is not a function
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:84:34)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+
+test at scripts/validate-play-mode.test.mjs:65:7
+✖ play: catches td.typing-game.local /vocabulary/ (0.019916ms)
+  TypeError [Error]: validator.sharedDataAliases is not a function
+      at expectAlias (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:44:27)
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:66:9)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+
+test at scripts/validate-play-mode.test.mjs:65:7
+✖ play: catches td.typing-game.local /typing-texts/ (0.01925ms)
+  TypeError [Error]: validator.sharedDataAliases is not a function
+      at expectAlias (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:44:27)
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:66:9)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+
+test at scripts/validate-play-mode.test.mjs:65:7
+✖ play: catches td.typing-game.local /shared/typing-texts/ (0.019625ms)
+  TypeError [Error]: validator.sharedDataAliases is not a function
+      at expectAlias (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:44:27)
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:66:9)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+
+test at scripts/validate-play-mode.test.mjs:81:7
+✖ play: catches td.typing-game.local variant location ^~ /vocabulary/ { alias __ROOT_DIR__/shared/vocabulary/; } (0.020167ms)
+  TypeError [Error]: validator.sharedDataAliases is not a function
+      at expectAlias (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:44:27)
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:81:67)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+
+test at scripts/validate-play-mode.test.mjs:81:7
+✖ play: catches td.typing-game.local variant location = /vocabulary { alias __ROOT_DIR__/shared/vocabulary/; } (0.019625ms)
+  TypeError [Error]: validator.sharedDataAliases is not a function
+      at expectAlias (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:44:27)
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:81:67)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+
+test at scripts/validate-play-mode.test.mjs:81:7
+✖ play: catches td.typing-game.local variant location ~ /typing-texts/ { alias __ROOT_DIR__/shared/typing-texts/; } (0.019667ms)
+  TypeError [Error]: validator.sharedDataAliases is not a function
+      at expectAlias (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:44:27)
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:81:67)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+
+test at scripts/validate-play-mode.test.mjs:81:7
+✖ play: catches td.typing-game.local variant location ~* /shared/typing-texts/ { alias __ROOT_DIR__/shared/typing-texts/; } (0.020833ms)
+  TypeError [Error]: validator.sharedDataAliases is not a function
+      at expectAlias (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:44:27)
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:81:67)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+
+test at scripts/validate-play-mode.test.mjs:81:7
+✖ play: catches td.typing-game.local variant location	 ^~	 /vocabulary/	{
+	alias	__ROOT_DIR__/shared/vocabulary/;
+} (0.019417ms)
+  TypeError [Error]: validator.sharedDataAliases is not a function
+      at expectAlias (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:44:27)
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:81:67)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+
+test at scripts/validate-play-mode.test.mjs:81:7
+✖ play: catches td.typing-game.local variant location /words/ { alias __ROOT_DIR__/shared/vocabulary/; } (0.024167ms)
+  TypeError [Error]: validator.sharedDataAliases is not a function
+      at expectAlias (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:44:27)
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:81:67)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+
+test at scripts/validate-play-mode.test.mjs:81:7
+✖ play: catches td.typing-game.local variant location /words/ { root __ROOT_DIR__/shared/vocabulary/; } (0.045083ms)
+  TypeError [Error]: validator.sharedDataAliases is not a function
+      at expectAlias (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:44:27)
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:81:67)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+
+test at scripts/validate-play-mode.test.mjs:81:7
+✖ play: catches td.typing-game.local variant location "/words/" { root "__ROOT_DIR__/shared/vocabulary/"; } (0.041625ms)
+  TypeError [Error]: validator.sharedDataAliases is not a function
+      at expectAlias (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:44:27)
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:81:67)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+
+test at scripts/validate-play-mode.test.mjs:81:7
+✖ play: catches td.typing-game.local variant location /vocabulary/ { try_files $uri =404; } (0.034875ms)
+  TypeError [Error]: validator.sharedDataAliases is not a function
+      at expectAlias (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:44:27)
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:81:67)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+
+test at scripts/validate-play-mode.test.mjs:83:5
+✖ play: ignores commented locations for td.typing-game.local (0.032709ms)
+  TypeError [Error]: validator.sharedDataAliases is not a function
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:84:34)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+
+test at scripts/validate-play-mode.test.mjs:65:7
+✖ play: catches survival.typing-game.local /vocabulary/ (0.03325ms)
+  TypeError [Error]: validator.sharedDataAliases is not a function
+      at expectAlias (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:44:27)
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:66:9)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+
+test at scripts/validate-play-mode.test.mjs:65:7
+✖ play: catches survival.typing-game.local /typing-texts/ (0.03375ms)
+  TypeError [Error]: validator.sharedDataAliases is not a function
+      at expectAlias (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:44:27)
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:66:9)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+
+test at scripts/validate-play-mode.test.mjs:65:7
+✖ play: catches survival.typing-game.local /shared/typing-texts/ (0.032541ms)
+  TypeError [Error]: validator.sharedDataAliases is not a function
+      at expectAlias (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:44:27)
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:66:9)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+
+test at scripts/validate-play-mode.test.mjs:81:7
+✖ play: catches survival.typing-game.local variant location ^~ /vocabulary/ { alias __ROOT_DIR__/shared/vocabulary/; } (0.032125ms)
+  TypeError [Error]: validator.sharedDataAliases is not a function
+      at expectAlias (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:44:27)
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:81:67)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+
+test at scripts/validate-play-mode.test.mjs:81:7
+✖ play: catches survival.typing-game.local variant location = /vocabulary { alias __ROOT_DIR__/shared/vocabulary/; } (0.03225ms)
+  TypeError [Error]: validator.sharedDataAliases is not a function
+      at expectAlias (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:44:27)
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:81:67)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+
+test at scripts/validate-play-mode.test.mjs:81:7
+✖ play: catches survival.typing-game.local variant location ~ /typing-texts/ { alias __ROOT_DIR__/shared/typing-texts/; } (0.03225ms)
+  TypeError [Error]: validator.sharedDataAliases is not a function
+      at expectAlias (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:44:27)
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:81:67)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+
+test at scripts/validate-play-mode.test.mjs:81:7
+✖ play: catches survival.typing-game.local variant location ~* /shared/typing-texts/ { alias __ROOT_DIR__/shared/typing-texts/; } (0.033417ms)
+  TypeError [Error]: validator.sharedDataAliases is not a function
+      at expectAlias (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:44:27)
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:81:67)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+
+test at scripts/validate-play-mode.test.mjs:81:7
+✖ play: catches survival.typing-game.local variant location	 ^~	 /vocabulary/	{
+	alias	__ROOT_DIR__/shared/vocabulary/;
+} (0.034ms)
+  TypeError [Error]: validator.sharedDataAliases is not a function
+      at expectAlias (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:44:27)
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:81:67)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+
+test at scripts/validate-play-mode.test.mjs:81:7
+✖ play: catches survival.typing-game.local variant location /words/ { alias __ROOT_DIR__/shared/vocabulary/; } (0.034084ms)
+  TypeError [Error]: validator.sharedDataAliases is not a function
+      at expectAlias (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:44:27)
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:81:67)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+
+test at scripts/validate-play-mode.test.mjs:81:7
+✖ play: catches survival.typing-game.local variant location /words/ { root __ROOT_DIR__/shared/vocabulary/; } (0.035833ms)
+  TypeError [Error]: validator.sharedDataAliases is not a function
+      at expectAlias (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:44:27)
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:81:67)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+
+test at scripts/validate-play-mode.test.mjs:81:7
+✖ play: catches survival.typing-game.local variant location "/words/" { root "__ROOT_DIR__/shared/vocabulary/"; } (0.033709ms)
+  TypeError [Error]: validator.sharedDataAliases is not a function
+      at expectAlias (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:44:27)
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:81:67)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+
+test at scripts/validate-play-mode.test.mjs:81:7
+✖ play: catches survival.typing-game.local variant location /vocabulary/ { try_files $uri =404; } (0.032291ms)
+  TypeError [Error]: validator.sharedDataAliases is not a function
+      at expectAlias (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:44:27)
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:81:67)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+
+test at scripts/validate-play-mode.test.mjs:83:5
+✖ play: ignores commented locations for survival.typing-game.local (0.042625ms)
+  TypeError [Error]: validator.sharedDataAliases is not a function
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:84:34)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+
+test at scripts/validate-play-mode.test.mjs:88:3
+✖ play: other hosts and survival models stay allowed (0.057584ms)
+  TypeError [Error]: validator.sharedDataAliases is not a function
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:92:62)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+
+test at scripts/validate-play-mode.test.mjs:99:3
+✖ play: rejects missing and early closing braces (0.041208ms)
+  TypeError [Error]: validator.configStructureErrors is not a function
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:100:28)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+
+test at scripts/validate-play-mode.test.mjs:103:3
+✖ play: ignores comments and quoted braces, including escaped quotes (0.063125ms)
+  TypeError [Error]: validator.configStructureErrors is not a function
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:107:32)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+
+test at scripts/validate-play-mode.test.mjs:109:3
+✖ play: each game host must have exactly one server block (0.06175ms)
+  TypeError [Error]: validator.configStructureErrors is not a function
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:113:27)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+
+test at scripts/validate-play-mode.test.mjs:59:3
+✖ dev: real configs have no shared data aliases in the three hosts (0.030167ms)
+  TypeError [Error]: validator.sharedDataAliases is not a function
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:60:58)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+
+test at scripts/validate-play-mode.test.mjs:65:7
+✖ dev: catches dragon.typing-game.local /vocabulary/ (0.041334ms)
+  TypeError [Error]: validator.sharedDataAliases is not a function
+      at expectAlias (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:44:27)
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:66:9)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+
+test at scripts/validate-play-mode.test.mjs:65:7
+✖ dev: catches dragon.typing-game.local /typing-texts/ (0.036334ms)
+  TypeError [Error]: validator.sharedDataAliases is not a function
+      at expectAlias (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:44:27)
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:66:9)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+
+test at scripts/validate-play-mode.test.mjs:65:7
+✖ dev: catches dragon.typing-game.local /shared/typing-texts/ (0.032958ms)
+  TypeError [Error]: validator.sharedDataAliases is not a function
+      at expectAlias (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:44:27)
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:66:9)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+
+test at scripts/validate-play-mode.test.mjs:81:7
+✖ dev: catches dragon.typing-game.local variant location ^~ /vocabulary/ { alias __ROOT_DIR__/shared/vocabulary/; } (0.0315ms)
+  TypeError [Error]: validator.sharedDataAliases is not a function
+      at expectAlias (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:44:27)
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:81:67)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+
+test at scripts/validate-play-mode.test.mjs:81:7
+✖ dev: catches dragon.typing-game.local variant location = /vocabulary { alias __ROOT_DIR__/shared/vocabulary/; } (0.031584ms)
+  TypeError [Error]: validator.sharedDataAliases is not a function
+      at expectAlias (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:44:27)
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:81:67)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+
+test at scripts/validate-play-mode.test.mjs:81:7
+✖ dev: catches dragon.typing-game.local variant location ~ /typing-texts/ { alias __ROOT_DIR__/shared/typing-texts/; } (0.046833ms)
+  TypeError [Error]: validator.sharedDataAliases is not a function
+      at expectAlias (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:44:27)
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:81:67)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+
+test at scripts/validate-play-mode.test.mjs:81:7
+✖ dev: catches dragon.typing-game.local variant location ~* /shared/typing-texts/ { alias __ROOT_DIR__/shared/typing-texts/; } (0.043166ms)
+  TypeError [Error]: validator.sharedDataAliases is not a function
+      at expectAlias (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:44:27)
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:81:67)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+
+test at scripts/validate-play-mode.test.mjs:81:7
+✖ dev: catches dragon.typing-game.local variant location	 ^~	 /vocabulary/	{
+	alias	__ROOT_DIR__/shared/vocabulary/;
+} (0.051333ms)
+  TypeError [Error]: validator.sharedDataAliases is not a function
+      at expectAlias (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:44:27)
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:81:67)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+
+test at scripts/validate-play-mode.test.mjs:81:7
+✖ dev: catches dragon.typing-game.local variant location /words/ { alias __ROOT_DIR__/shared/vocabulary/; } (0.033958ms)
+  TypeError [Error]: validator.sharedDataAliases is not a function
+      at expectAlias (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:44:27)
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:81:67)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+
+test at scripts/validate-play-mode.test.mjs:81:7
+✖ dev: catches dragon.typing-game.local variant location /words/ { root __ROOT_DIR__/shared/vocabulary/; } (0.040458ms)
+  TypeError [Error]: validator.sharedDataAliases is not a function
+      at expectAlias (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:44:27)
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:81:67)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+
+test at scripts/validate-play-mode.test.mjs:81:7
+✖ dev: catches dragon.typing-game.local variant location "/words/" { root "__ROOT_DIR__/shared/vocabulary/"; } (0.044625ms)
+  TypeError [Error]: validator.sharedDataAliases is not a function
+      at expectAlias (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:44:27)
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:81:67)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+
+test at scripts/validate-play-mode.test.mjs:81:7
+✖ dev: catches dragon.typing-game.local variant location /vocabulary/ { try_files $uri =404; } (0.031709ms)
+  TypeError [Error]: validator.sharedDataAliases is not a function
+      at expectAlias (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:44:27)
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:81:67)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+
+test at scripts/validate-play-mode.test.mjs:83:5
+✖ dev: ignores commented locations for dragon.typing-game.local (0.030917ms)
+  TypeError [Error]: validator.sharedDataAliases is not a function
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:84:34)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+
+test at scripts/validate-play-mode.test.mjs:65:7
+✖ dev: catches td.typing-game.local /vocabulary/ (0.032084ms)
+  TypeError [Error]: validator.sharedDataAliases is not a function
+      at expectAlias (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:44:27)
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:66:9)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+
+test at scripts/validate-play-mode.test.mjs:65:7
+✖ dev: catches td.typing-game.local /typing-texts/ (0.03175ms)
+  TypeError [Error]: validator.sharedDataAliases is not a function
+      at expectAlias (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:44:27)
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:66:9)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+
+test at scripts/validate-play-mode.test.mjs:65:7
+✖ dev: catches td.typing-game.local /shared/typing-texts/ (0.031916ms)
+  TypeError [Error]: validator.sharedDataAliases is not a function
+      at expectAlias (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:44:27)
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:66:9)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+
+test at scripts/validate-play-mode.test.mjs:81:7
+✖ dev: catches td.typing-game.local variant location ^~ /vocabulary/ { alias __ROOT_DIR__/shared/vocabulary/; } (0.031708ms)
+  TypeError [Error]: validator.sharedDataAliases is not a function
+      at expectAlias (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:44:27)
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:81:67)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+
+test at scripts/validate-play-mode.test.mjs:81:7
+✖ dev: catches td.typing-game.local variant location = /vocabulary { alias __ROOT_DIR__/shared/vocabulary/; } (0.054125ms)
+  TypeError [Error]: validator.sharedDataAliases is not a function
+      at expectAlias (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:44:27)
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:81:67)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+
+test at scripts/validate-play-mode.test.mjs:81:7
+✖ dev: catches td.typing-game.local variant location ~ /typing-texts/ { alias __ROOT_DIR__/shared/typing-texts/; } (0.043375ms)
+  TypeError [Error]: validator.sharedDataAliases is not a function
+      at expectAlias (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:44:27)
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:81:67)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+
+test at scripts/validate-play-mode.test.mjs:81:7
+✖ dev: catches td.typing-game.local variant location ~* /shared/typing-texts/ { alias __ROOT_DIR__/shared/typing-texts/; } (0.043584ms)
+  TypeError [Error]: validator.sharedDataAliases is not a function
+      at expectAlias (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:44:27)
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:81:67)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+
+test at scripts/validate-play-mode.test.mjs:81:7
+✖ dev: catches td.typing-game.local variant location	 ^~	 /vocabulary/	{
+	alias	__ROOT_DIR__/shared/vocabulary/;
+} (0.035291ms)
+  TypeError [Error]: validator.sharedDataAliases is not a function
+      at expectAlias (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:44:27)
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:81:67)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+
+test at scripts/validate-play-mode.test.mjs:81:7
+✖ dev: catches td.typing-game.local variant location /words/ { alias __ROOT_DIR__/shared/vocabulary/; } (0.06325ms)
+  TypeError [Error]: validator.sharedDataAliases is not a function
+      at expectAlias (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:44:27)
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:81:67)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+
+test at scripts/validate-play-mode.test.mjs:81:7
+✖ dev: catches td.typing-game.local variant location /words/ { root __ROOT_DIR__/shared/vocabulary/; } (0.044ms)
+  TypeError [Error]: validator.sharedDataAliases is not a function
+      at expectAlias (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:44:27)
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:81:67)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+
+test at scripts/validate-play-mode.test.mjs:81:7
+✖ dev: catches td.typing-game.local variant location "/words/" { root "__ROOT_DIR__/shared/vocabulary/"; } (0.036125ms)
+  TypeError [Error]: validator.sharedDataAliases is not a function
+      at expectAlias (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:44:27)
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:81:67)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+
+test at scripts/validate-play-mode.test.mjs:81:7
+✖ dev: catches td.typing-game.local variant location /vocabulary/ { try_files $uri =404; } (0.033666ms)
+  TypeError [Error]: validator.sharedDataAliases is not a function
+      at expectAlias (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:44:27)
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:81:67)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+
+test at scripts/validate-play-mode.test.mjs:83:5
+✖ dev: ignores commented locations for td.typing-game.local (0.032417ms)
+  TypeError [Error]: validator.sharedDataAliases is not a function
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:84:34)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+
+test at scripts/validate-play-mode.test.mjs:65:7
+✖ dev: catches survival.typing-game.local /vocabulary/ (0.032834ms)
+  TypeError [Error]: validator.sharedDataAliases is not a function
+      at expectAlias (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:44:27)
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:66:9)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+
+test at scripts/validate-play-mode.test.mjs:65:7
+✖ dev: catches survival.typing-game.local /typing-texts/ (0.031125ms)
+  TypeError [Error]: validator.sharedDataAliases is not a function
+      at expectAlias (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:44:27)
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:66:9)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+
+test at scripts/validate-play-mode.test.mjs:65:7
+✖ dev: catches survival.typing-game.local /shared/typing-texts/ (0.030708ms)
+  TypeError [Error]: validator.sharedDataAliases is not a function
+      at expectAlias (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:44:27)
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:66:9)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+
+test at scripts/validate-play-mode.test.mjs:81:7
+✖ dev: catches survival.typing-game.local variant location ^~ /vocabulary/ { alias __ROOT_DIR__/shared/vocabulary/; } (0.030292ms)
+  TypeError [Error]: validator.sharedDataAliases is not a function
+      at expectAlias (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:44:27)
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:81:67)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+
+test at scripts/validate-play-mode.test.mjs:81:7
+✖ dev: catches survival.typing-game.local variant location = /vocabulary { alias __ROOT_DIR__/shared/vocabulary/; } (0.030625ms)
+  TypeError [Error]: validator.sharedDataAliases is not a function
+      at expectAlias (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:44:27)
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:81:67)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+
+test at scripts/validate-play-mode.test.mjs:81:7
+✖ dev: catches survival.typing-game.local variant location ~ /typing-texts/ { alias __ROOT_DIR__/shared/typing-texts/; } (0.030292ms)
+  TypeError [Error]: validator.sharedDataAliases is not a function
+      at expectAlias (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:44:27)
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:81:67)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+
+test at scripts/validate-play-mode.test.mjs:81:7
+✖ dev: catches survival.typing-game.local variant location ~* /shared/typing-texts/ { alias __ROOT_DIR__/shared/typing-texts/; } (0.030375ms)
+  TypeError [Error]: validator.sharedDataAliases is not a function
+      at expectAlias (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:44:27)
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:81:67)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+
+test at scripts/validate-play-mode.test.mjs:81:7
+✖ dev: catches survival.typing-game.local variant location	 ^~	 /vocabulary/	{
+	alias	__ROOT_DIR__/shared/vocabulary/;
+} (0.039917ms)
+  TypeError [Error]: validator.sharedDataAliases is not a function
+      at expectAlias (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:44:27)
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:81:67)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+
+test at scripts/validate-play-mode.test.mjs:81:7
+✖ dev: catches survival.typing-game.local variant location /words/ { alias __ROOT_DIR__/shared/vocabulary/; } (0.039917ms)
+  TypeError [Error]: validator.sharedDataAliases is not a function
+      at expectAlias (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:44:27)
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:81:67)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+
+test at scripts/validate-play-mode.test.mjs:81:7
+✖ dev: catches survival.typing-game.local variant location /words/ { root __ROOT_DIR__/shared/vocabulary/; } (0.034625ms)
+  TypeError [Error]: validator.sharedDataAliases is not a function
+      at expectAlias (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:44:27)
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:81:67)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+
+test at scripts/validate-play-mode.test.mjs:81:7
+✖ dev: catches survival.typing-game.local variant location "/words/" { root "__ROOT_DIR__/shared/vocabulary/"; } (0.047542ms)
+  TypeError [Error]: validator.sharedDataAliases is not a function
+      at expectAlias (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:44:27)
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:81:67)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+
+test at scripts/validate-play-mode.test.mjs:81:7
+✖ dev: catches survival.typing-game.local variant location /vocabulary/ { try_files $uri =404; } (0.03225ms)
+  TypeError [Error]: validator.sharedDataAliases is not a function
+      at expectAlias (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:44:27)
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:81:67)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+
+test at scripts/validate-play-mode.test.mjs:83:5
+✖ dev: ignores commented locations for survival.typing-game.local (0.030167ms)
+  TypeError [Error]: validator.sharedDataAliases is not a function
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:84:34)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+
+test at scripts/validate-play-mode.test.mjs:88:3
+✖ dev: other hosts and survival models stay allowed (0.042375ms)
+  TypeError [Error]: validator.sharedDataAliases is not a function
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:92:62)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+
+test at scripts/validate-play-mode.test.mjs:99:3
+✖ dev: rejects missing and early closing braces (0.029958ms)
+  TypeError [Error]: validator.configStructureErrors is not a function
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:100:28)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+
+test at scripts/validate-play-mode.test.mjs:103:3
+✖ dev: ignores comments and quoted braces, including escaped quotes (0.034792ms)
+  TypeError [Error]: validator.configStructureErrors is not a function
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:107:32)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+
+test at scripts/validate-play-mode.test.mjs:109:3
+✖ dev: each game host must have exactly one server block (0.036125ms)
+  TypeError [Error]: validator.configStructureErrors is not a function
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:113:27)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+
+test at scripts/validate-play-mode.test.mjs:119:1
+✖ CLI on the repo prints PASS and exits 0 (25.589458ms)
+  AssertionError [ERR_ASSERTION]: The input did not match the regular expression /pinned vocabulary/. Input:
+
+  'Play mode contract PASS: static apps, shared runtime data, Space Typing Admin API routing, Portal shared-learning rebuild dependency, and the dragon/td/survival/tutien hosts are covered.\n'
+
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:123:10)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'Play mode contract PASS: static apps, shared runtime data, Space Typing Admin API routing, Portal shared-learning rebuild dependency, and the dragon/td/survival/tutien hosts are covered.\n',
+    expected: /pinned vocabulary/,
+    operator: 'match',
+    diff: 'simple'
+  }
+
+test at scripts/validate-play-mode.test.mjs:126:3
+✖ CLI --play-conf catches dragon.typing-game.local /vocabulary/ (25.307541ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+  0 !== 1
+
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:129:12)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 0,
+    expected: 1,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at scripts/validate-play-mode.test.mjs:126:3
+✖ CLI --dev-conf catches td.typing-game.local /shared/typing-texts/ (24.564041ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+  0 !== 1
+
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:129:12)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 0,
+    expected: 1,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at scripts/validate-play-mode.test.mjs:135:1
+✖ CLI rejects unknown options and missing paths with usage and exit 2 (25.205292ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+  0 !== 2
+
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:138:12)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 0,
+    expected: 2,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at scripts/validate-play-mode.test.mjs:142:1
+✖ CLI rejects malformed braces and duplicate hosts in either config (25.404208ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+  0 !== 1
+
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/scripts/validate-play-mode.test.mjs:146:14)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 0,
+    expected: 1,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+Exit code: 1

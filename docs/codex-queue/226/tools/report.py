@@ -1,0 +1,50 @@
+#!/usr/bin/env python3
+"""Soạn báo cáo từ bảng số đã kiểm; không chạy sim, không xóa thư mục."""
+from pathlib import Path
+import json,math
+ROOT=Path(__file__).resolve().parents[4];D=ROOT/'docs/codex-queue/226';s=json.loads((D/'summary.json').read_text());k=json.loads((D/'execution-checks.json').read_text());patch=json.loads((D/'check2.json').read_text());o=[]
+def put(x=''):o.append(x)
+def names(c):return ', '.join(r['label'] for r in s[c]['tight'] if not r['pass']) or 'không có'
+def failgate(c,i):return ', '.join(r['id'] for r in s[c]['gates'][i] if 'TRƯỢT' in r['status']) or 'không có'
+def g(c,key):return next(r for r in s[c]['g12_20'] if r['key']==key)
+put('# Phiếu 226 · Wordwoven · A3 · Kết luận cho lựa chọn (a)\n')
+ks=s['known_stats'];put(f"**Đối chiếu số cũ trước khi kết luận:** {ks['matched']}/{ks['cells']} ô khớp ngưỡng, {ks['mismatched']} ô lệch; sai lệch lớn nhất {ks['max_delta']['giây']} s, {ks['max_delta']['điểm %']} điểm %, {ks['max_delta']['mạng']} mạng, {ks['max_delta']['ván']} ván thắng. Các bảng số cũ được lưu nguyên văn, kiểm SHA-256 trong `226/old-runs.sha256`. Không có ô lệch cần truy nguyên thêm.\n")
+put('**Lựa chọn (a) đã đo: gói chưa đạt dải chặt trên 160 seed. Chậm chắc 146/160 vượt trần 140 ván, không còn là chênh đúng một ván như lần đo 80 seed; Nhanh 140/160 sát trần đúng một ván.**\n')
+for c in ['pkg']:
+ rows=s[c]['tight'];n=sum(r['pass'] for r in rows)
+ put(f"- **Gói trên 160 ván:** đạt cả thắng 78–88 % và Biên S ở **{n}/6 bot**. Bot trượt: **{names(c)}**. Số ván thắng hợp lệ là 125–140/160; bảng dưới giữ cả ‰ và ô % in.")
+ for r in rows:
+  edge=(f"cách sàn {r['lower_to_fail']} ván, cách trần {r['upper_to_fail']} ván" if r['win_pass'] else f"cần đảo {r['wins'][2]-140 if r['wins'][2]>140 else 125-r['wins'][2]} kết quả để vào dải thắng")
+  put(f"- {r['label']}: {r['wins'][0]}/80 + {r['wins'][1]}/80 = **{r['wins'][2]}/160 ({r['milli'][2]} ‰)**, S {r['s_printed'][2]}; {edge}; {'đạt' if r['pass'] else 'TRƯỢT'}.")
+put(f"- **B1–B8 của gói:** bộ 1 đạt đầy đủ B1–B8; bộ 2 trượt {failgate('pkg',1)}; gộp trượt {failgate('pkg',2)}. Chỉ số và nguyên câu của từng cổng trượt nằm ở bảng B1–B8. B9 cả ba bảng: **THIẾU SỐ**.")
+p=s['pkg']['g12_20'];life=p[0];put(f"- **§12 trên 20 seed của gói:** {sum(r['status']=='Đạt' for r in p)}/{len(p)} hàng cổng đạt (gồm 5a theo ba chế độ khác). Cổng 4 còn thấp nhất **{life['minimum']} mạng**, seed **{', '.join(map(str,life['minimum_seeds']))}**. 5a {g('pkg','5a')['value']}, 5b {g('pkg','5b')['value']}, 5c {g('pkg','5c')['value']}; cổng 6 {g('pkg','6')['value']}, cổng 7 {g('pkg','7')['value']}.")
+put('\nBiên §12 của gói: 5a dưới trần 8 s **0,05 s**; 5b trên sàn 30 % **0,1 điểm %**; 5c trên sàn 15 % **0,5 điểm %**. B7 gộp của gói: Chuẩn tắt điều nhịp **70 + 72 = 142/160 (888 ‰)**, vượt trần 140 ván. Bộ 2 B1 trượt vì Chậm chắc **75/80 (938 ‰)**, cao hơn dải BALANCE §3 75–90 %.\n')
+put(f"- **Base:** 5a {g('base','5a')['value']} ({g('base','5a')['status']}) và 5b {g('base','5b')['value']} ({g('base','5b')['status']}) trên 20 seed. Trên 160 ván, {sum(r['pass'] for r in s['base']['tight'])}/6 bot đạt cả thắng và S; bot trượt: {names('base')}. Sáu tỉ lệ thắng đều trong dải, nhưng Mới S gộp 70 % vượt 65 %; Ẩu thắng 125/160 (781 ‰), mất một ván thắng nữa là 124/160 (775 ‰), trượt sàn. B1 gộp và B7 gộp trượt.")
+put('\nSai số chuẩn nhị thức ở tỉ lệ 83 % là √(0,83 × 0,17 / n): **2,97 điểm % trên 160 ván**, **4,20 điểm % trên 80 ván**. Đây là độ bất định lấy mẫu, không thay đổi ngưỡng chấm. Mỗi kết quả đảo trên 160 ván đổi 0,625 điểm %. Bảng “cách mép” chỉ rõ bot nào phụ thuộc một ván; 140/160 = 875 ‰ đạt, thêm một thắng thành 141/160 = 881 ‰ thì trượt dù cả hai cùng in “88 %”. Gói cũ có Chậm chắc 71/80 = 888 ‰, cao hơn trần đúng một ván; kết quả 160 ván ở trên dùng thêm đúng seed 81–160. Báo cáo gốc không xuất kết quả thắng/thua từng seed, nên phiếu không gán một số seed cụ thể cho ván quyết định.\n')
+put('**Vẫn chờ chủ dự án:** (1) h0, “gặt ban Đêm không lời gọi”, mở rộng luật gỗ của chủ dự án, cần chủ dự án đồng ý trước khi vào luật; (2) gói làm Đêm 3 nhàn hơn: ở Cân bằng, Chuẩn **20,1 → 31,1 %**, Ẩu **20,1 → 34,6 %**, Chậm chắc **14,2 → 24,5 %**. Gói “/” theo `open-items.md` là **84.996 byte, còn 4 byte**; đây là số lịch sử của gói, phiếu này không build để đo lại. Không đề xuất đổi số.\n')
+put('Mọi số trong phiếu là của **bot**. **B9 cần người thật chơi**. Phiếu **không đổi game**, chỉ áp gói trong bản chép tạm rồi xóa; h0 chưa được đưa vào luật.\n')
+put('## Mốc, gói và phạm vi\n')
+put('`a2-days`: `'+s['refs'][0]+'`; `td-1c`: `'+s['refs'][1]+'`. Hai ref đúng mốc giao phiếu. `git diff --stat a2-days td-1c -- src/sim src/content`: **0 dòng, 0 file khác**, mã 0. Số đo tương ứng với sim/content của td-1c ở mốc đã kiểm. Đầu ra đầy đủ ở [preflight.txt](226/preflight.txt), [refs.txt](226/runs/refs.txt).\n')
+put('Gói: **11.086 byte**, SHA-256 `'+s['patch_sha256']+'`; bản lưu [a2-package-v2.patch](226/a2-package-v2.patch). Áp bằng `patch -p1 -F2 --verbose --no-backup-if-mismatch`, mã 0, 11 dòng khối thành công; chỉ `slice-1a.ts`, khối 1: `Hunk #1 succeeded at 99 with fuzz 1.` Không `.orig`, `.rej`; không chép tay. Xem [bản log nguyên byte](226/patch-log.txt); `226/runs/patch.log` cũng được giữ đúng tên. Quy tắc `*.log` của repo bỏ qua file này khi Git liệt kê, nên bản `patch-log.txt` giữ cùng nội dung trong các file hiện ở `git status` để bàn giao.\n')
+put('Kiểm diff trước khi chép đầu dò: đúng **5 file, 11 khối, +45/−15**; `cmp` hai danh sách dòng đổi đã sắp xếp mã **0**. Kiểm lại cuối lượt bằng diff bỏ `node_modules` và `probe` vẫn đúng. [Diff](226/base-pkg.diff), [số kiểm](226/check2.json), [dòng diff](226/diff-lines.txt), [dòng gói](226/patch-lines.txt).\n')
+put('| File | + | − | Khối |\n|---|---|---|---|')
+for f,v in patch['files'].items():put(f'| `{f}` | {v[0]} | {v[1]} | {v[2]} |')
+put('\nKhông worktree, không `git apply`, không cài gói, không build/test suite, không dev server/trình duyệt/mạng. Chỉ chạy hai lượt khói và 14 lệnh M1–M4 trong bản chép. Ba pernight chạy tuần tự. Không đọc tmp của phiếu khác.\n')
+put('## Tám mục kiểm\n')
+put(f"1. **Nguồn:** sim/content a2-days so td-1c: 0 file khác; ref và SHA gói đạt; đủ tsx; df đầu lượt còn 52 GB. Điều 6 kiểm trước mọi ghi: cả hai thư mục chưa có.")
+put('2. **Áp gói:** 5 file, 11 khối, +45/−15; dòng đổi khớp gói, cmp 0, 0 file orig/rej. Diff cuối lượt mã 1 là bình thường (hai cây khác nhau).')
+put(f"3. **Số cũ:** {ks['matched']}/{ks['cells']} ô khớp, {ks['mismatched']} lệch; lớn nhất 0 s, 0 điểm %, 0 mạng; thắng đúng từng ván. Bảng nhóm và từng ô trong summary.md/summary.json. Base M3 so mọi hàng, cả Đêm 5 và kết ải; pkg M3 chỉ Ngày 1–5, Đêm 1–4 vì v1 khác boss.")
+put(f"4. **Lệnh:** {k['exit0']}/{k['commands']} mã 0; 14/14 báo cáo M1–M4 đúng seed/bộ; 2/2 khói đúng seed 1–2 và cuối file 2 luồng. Tối đa {k['max_threads']} luồng; không có hai lệnh của phiếu chạy cùng lúc. Các lệnh có tải > 10: {'; '.join(r['tag']+': tải '+str(r['load1'])+', '+str(r['threads'])+' luồng' for r in k['load_gt10_commands'])}. Ngoại lệ quyền hệ thống nêu riêng bên dưới.")
+put('5. **Bảng:** đủ dải chặt sáu bot, B1–B8 từng bộ và gộp, boss/G2/G3/G5/G6/G8, §12 5 và 20 seed, Đêm 1, Đêm 3 và Thử thách. **12/12 ô thắng gộp** tái tính khớp tổng số ván, pct và cột đạt/trượt gồm S. `pct-check.json`: 40 và 80 ván không trùng; 160 ván có 54 cặp trùng.')
+put(f"6. **Git game:** trước/sau status và tên nhánh {'giống hệt, sạch, nhánh a2-days' if k['game_status_and_branch_unchanged'] else 'khác; xem git-before.txt và git-after.txt để phân biệt thay đổi của làn khác'}. Không lệnh Git có ghi.")
+put(f"7. **Chép/dọn:** {k['sha256_matched']}/{k['copied_files']} file mới chép khớp SHA-256 từng cặp, gồm mọi file runs, .err, patch.log, timeline.txt và refs.txt. Xem `runs.sha256`. Danh sách xóa ở cuối báo cáo. Đã xác nhận thư mục tạm không còn; kiểm trong `cleanup-check.txt`. Chỉ đường dẫn này bị xóa, bằng thao tác có kiểm nguồn và SHA-256 trước xóa. Bản `patch-log.txt` bổ sung giống từng byte với `runs/patch.log`.")
+put('8. **Repo cha:** đầu ra `git status --short -uall -- docs/codex-queue` lưu ở `226/git-parent-after.txt`; phần phiếu này chỉ `226-report.md` và `226/`. Không commit/push/reset/clean/stash.\n')
+put('## Hạn chế quyền hệ thống và cách ghi nhận\n')
+put(f"Sandbox chặn **sysctl ở {k['sysctl_denied_count']}/{k['commands']} lệnh**; timeline lưu lỗi và mã thoát, tải dùng **uptime**. Sandbox chặn `ps`, nên không kiểm được balance.ts của làn khác; phiếu chỉ bảo đảm các lệnh của mình chạy tuần tự. Mọi lệnh gọi đúng **nice -n 15**, nhưng **{k['nice_denied_count']}/{k['commands']} lệnh** in `nice: setpriority: Operation not permitted` rồi tiếp tục Node, do đó **không xác nhận được ưu tiên thực là nice 15**. Không xin nâng quyền, không dùng heavy.sh. Đây là sai khác thực thi cần đọc cùng số thời gian; không báo các điều này là đã kiểm đạt. Chi tiết ở `226/execution-limitations.txt`.\n")
+put(f"Tổng thời gian các lệnh: **{k['wall_seconds']:.3f} s ({k['wall_seconds']/60:.2f} phút)**. Giờ, tải và số luồng từng lệnh nằm trong bảng dưới và `runs/timeline.txt`.\n")
+put((D/'summary.md').read_text().replace('# Phiếu 226 · Bảng số\n','',1))
+put('## Chạy lại phần tổng hợp\n\nTừ repo cha: `node docs/codex-queue/226/tools/summarize.mjs`. Chỉ đọc các báo cáo đã lưu; không chạy lại game. Các file summary được kiểm chạy lại cùng byte. `measure.py` lưu đúng cách chạy đã dùng; `collect.py` lưu cách kiểm và chép, không phải lệnh để chạy sau khi đã dọn.\n')
+put('## Danh sách bản chép đã dùng để dọn\n\nChỉ xóa `games/typing-defense/tmp/codex-226/` do phiếu này tạo. Đây là đầu ra `find "$W" -maxdepth 2 | sort` trước khi xóa:\n\n```text\n'+(D/'delete-list.txt').read_text()+'```\n')
+put('## File bằng chứng\n\n```text\n'+'\n'.join(str(p.relative_to(D)) for p in sorted(D.rglob('*')) if p.is_file())+'\n```\n')
+(ROOT/'docs/codex-queue/226-report.md').write_text('\n'.join(o)+'\n')
+print('Đã soạn docs/codex-queue/226-report.md')

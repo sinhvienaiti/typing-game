@@ -1,0 +1,60 @@
+{
+  "wave": "V0",
+  "start": "2026-10-30T03:02:36.269Z",
+  "uptime": "10:02  2 users, load averages: 5.10 4.70 4.37",
+  "load": 5.1,
+  "limit": 6,
+  "tmpdir": "/Users/toandx/htdocs/typing-game/games/typing-survival/tmp/codex-209/tmpdir",
+  "jobs": [
+    {
+      "id": "v0",
+      "first": 1,
+      "set": "",
+      "start": "2026-10-30T03:02:36.270Z",
+      "args": [
+        "-n",
+        "15",
+        "/opt/homebrew/Cellar/node@24/24.22.0/bin/node",
+        "--import",
+        "tsx",
+        "scripts/balance.ts",
+        "--stages=c1-s1",
+        "--seeds=100",
+        "--first=1",
+        "--g3c",
+        "--json=../runs/v0-s1.json",
+        "--out=../runs/v0-s1.md"
+      ],
+      "pid": 29268,
+      "end": "2026-10-30T03:05:59.388Z",
+      "wallSeconds": 203.118,
+      "exit": 0
+    },
+    {
+      "id": "v0",
+      "first": 101,
+      "set": "",
+      "start": "2026-10-30T03:02:36.271Z",
+      "args": [
+        "-n",
+        "15",
+        "/opt/homebrew/Cellar/node@24/24.22.0/bin/node",
+        "--import",
+        "tsx",
+        "scripts/balance.ts",
+        "--stages=c1-s1",
+        "--seeds=100",
+        "--first=101",
+        "--g3c",
+        "--json=../runs/v0-s101.json",
+        "--out=../runs/v0-s101.md"
+      ],
+      "pid": 29278,
+      "end": "2026-10-30T03:06:00.665Z",
+      "wallSeconds": 204.394,
+      "exit": 0
+    }
+  ],
+  "peak": 2,
+  "end": "2026-10-30T03:06:00.665Z"
+}

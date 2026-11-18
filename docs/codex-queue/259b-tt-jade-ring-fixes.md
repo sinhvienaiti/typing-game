@@ -1,6 +1,6 @@
 # Phiếu 259b · Tu Tiên · Code: vòng ngọc, bổ sung phần phiếu 259 sửa sau và mở tham số để Claude chỉnh cho giống ảnh đã duyệt
 
-**Loại việc:** code (`gpt-6.1-sol`, mức `xhigh`). Phiếu ngắn theo luật làm gọn (05/11). Chờ một lượt phản biện PASS.
+**Loại việc:** code (`gpt-6.1-sol`, mức `xhigh`). Phiếu ngắn theo luật làm gọn (05/11). Không cần phản biện: theo luật làm gọn 05/11 (skill `agent-orchestration`, "Working lean" mục 6), phiếu code ngắn, chỉ phần nhìn, không đụng sim, canon hay cân bằng thì Claude soát là đủ; lần dừng trước của Codex là đúng theo phiếu cũ. Claude bỏ điều kiện này lúc 01:38 ngày 05/11. Làm ngay.
 
 **Báo cáo:** `docs/codex-queue/259b-report.md`.
 

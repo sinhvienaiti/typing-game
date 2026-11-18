@@ -1,0 +1,290 @@
+[
+  {
+    "file": "infra/nginx/typing-game.local.play.conf",
+    "line": 14,
+    "host": "typing-game.local",
+    "route": "/vocabulary/",
+    "directive": "alias",
+    "path": "__ROOT_DIR__/shared/vocabulary/"
+  },
+  {
+    "file": "infra/nginx/typing-game.local.play.conf",
+    "line": 19,
+    "host": "typing-game.local",
+    "route": "/typing-texts/",
+    "directive": "alias",
+    "path": "__ROOT_DIR__/shared/typing-texts/"
+  },
+  {
+    "file": "infra/nginx/typing-game.local.play.conf",
+    "line": 24,
+    "host": "typing-game.local",
+    "route": "/music/",
+    "directive": "alias",
+    "path": "__ROOT_DIR__/shared/music/"
+  },
+  {
+    "file": "infra/nginx/typing-game.local.play.conf",
+    "line": 128,
+    "host": "space.typing-game.local",
+    "route": "/vocabulary/",
+    "directive": "alias",
+    "path": "__ROOT_DIR__/shared/vocabulary/"
+  },
+  {
+    "file": "infra/nginx/typing-game.local.play.conf",
+    "line": 133,
+    "host": "space.typing-game.local",
+    "route": "/shared/typing-texts/",
+    "directive": "alias",
+    "path": "__ROOT_DIR__/shared/typing-texts/"
+  },
+  {
+    "file": "infra/nginx/typing-game.local.play.conf",
+    "line": 151,
+    "host": "dragon.typing-game.local",
+    "route": "/vocabulary/",
+    "directive": "alias",
+    "path": "__ROOT_DIR__/shared/vocabulary/"
+  },
+  {
+    "file": "infra/nginx/typing-game.local.play.conf",
+    "line": 156,
+    "host": "dragon.typing-game.local",
+    "route": "/typing-texts/",
+    "directive": "alias",
+    "path": "__ROOT_DIR__/shared/typing-texts/"
+  },
+  {
+    "file": "infra/nginx/typing-game.local.play.conf",
+    "line": 174,
+    "host": "td.typing-game.local",
+    "route": "/vocabulary/",
+    "directive": "alias",
+    "path": "__ROOT_DIR__/shared/vocabulary/"
+  },
+  {
+    "file": "infra/nginx/typing-game.local.play.conf",
+    "line": 179,
+    "host": "td.typing-game.local",
+    "route": "/typing-texts/",
+    "directive": "alias",
+    "path": "__ROOT_DIR__/shared/typing-texts/"
+  },
+  {
+    "file": "infra/nginx/typing-game.local.play.conf",
+    "line": 185,
+    "host": "td.typing-game.local",
+    "route": "/shared/typing-texts/",
+    "directive": "alias",
+    "path": "__ROOT_DIR__/shared/typing-texts/"
+  },
+  {
+    "file": "infra/nginx/typing-game.local.play.conf",
+    "line": 203,
+    "host": "survival.typing-game.local",
+    "route": "/vocabulary/",
+    "directive": "alias",
+    "path": "__ROOT_DIR__/shared/vocabulary/"
+  },
+  {
+    "file": "infra/nginx/typing-game.local.play.conf",
+    "line": 208,
+    "host": "survival.typing-game.local",
+    "route": "/typing-texts/",
+    "directive": "alias",
+    "path": "__ROOT_DIR__/shared/typing-texts/"
+  },
+  {
+    "file": "infra/nginx/typing-game.local.play.conf",
+    "line": 214,
+    "host": "survival.typing-game.local",
+    "route": "/shared/typing-texts/",
+    "directive": "alias",
+    "path": "__ROOT_DIR__/shared/typing-texts/"
+  },
+  {
+    "file": "infra/nginx/typing-game.local.play.conf",
+    "line": 220,
+    "host": "survival.typing-game.local",
+    "route": "/assets/space-typing/models/",
+    "directive": "alias",
+    "path": "__ROOT_DIR__/games/space-typing/public/assets/space-typing/models/"
+  },
+  {
+    "file": "infra/nginx/typing-game.local.play.conf",
+    "line": 237,
+    "host": "tutien.typing-game.local",
+    "route": "/vocabulary/",
+    "directive": "alias",
+    "path": "__ROOT_DIR__/shared/vocabulary/"
+  },
+  {
+    "file": "infra/nginx/typing-game.local.play.conf",
+    "line": 242,
+    "host": "tutien.typing-game.local",
+    "route": "/typing-texts/",
+    "directive": "alias",
+    "path": "__ROOT_DIR__/shared/typing-texts/"
+  },
+  {
+    "file": "infra/nginx/typing-game.local.play.conf",
+    "line": 248,
+    "host": "tutien.typing-game.local",
+    "route": "/shared/typing-texts/",
+    "directive": "alias",
+    "path": "__ROOT_DIR__/shared/typing-texts/"
+  },
+  {
+    "file": "infra/nginx/typing-game.local.play.conf",
+    "line": 254,
+    "host": "tutien.typing-game.local",
+    "route": "/assets/space-typing/models/",
+    "directive": "alias",
+    "path": "__ROOT_DIR__/games/space-typing/public/assets/space-typing/models/"
+  },
+  {
+    "file": "infra/nginx/typing-game.local.dev.conf",
+    "line": 13,
+    "host": "typing-game.local",
+    "route": "/vocabulary/",
+    "directive": "alias",
+    "path": "__ROOT_DIR__/shared/vocabulary/"
+  },
+  {
+    "file": "infra/nginx/typing-game.local.dev.conf",
+    "line": 18,
+    "host": "typing-game.local",
+    "route": "/typing-texts/",
+    "directive": "alias",
+    "path": "__ROOT_DIR__/shared/typing-texts/"
+  },
+  {
+    "file": "infra/nginx/typing-game.local.dev.conf",
+    "line": 23,
+    "host": "typing-game.local",
+    "route": "/music/",
+    "directive": "alias",
+    "path": "__ROOT_DIR__/shared/music/"
+  },
+  {
+    "file": "infra/nginx/typing-game.local.dev.conf",
+    "line": 166,
+    "host": "space.typing-game.local",
+    "route": "/vocabulary/",
+    "directive": "alias",
+    "path": "__ROOT_DIR__/shared/vocabulary/"
+  },
+  {
+    "file": "infra/nginx/typing-game.local.dev.conf",
+    "line": 171,
+    "host": "space.typing-game.local",
+    "route": "/shared/typing-texts/",
+    "directive": "alias",
+    "path": "__ROOT_DIR__/shared/typing-texts/"
+  },
+  {
+    "file": "infra/nginx/typing-game.local.dev.conf",
+    "line": 198,
+    "host": "dragon.typing-game.local",
+    "route": "/vocabulary/",
+    "directive": "alias",
+    "path": "__ROOT_DIR__/shared/vocabulary/"
+  },
+  {
+    "file": "infra/nginx/typing-game.local.dev.conf",
+    "line": 203,
+    "host": "dragon.typing-game.local",
+    "route": "/typing-texts/",
+    "directive": "alias",
+    "path": "__ROOT_DIR__/shared/typing-texts/"
+  },
+  {
+    "file": "infra/nginx/typing-game.local.dev.conf",
+    "line": 229,
+    "host": "td.typing-game.local",
+    "route": "/vocabulary/",
+    "directive": "alias",
+    "path": "__ROOT_DIR__/shared/vocabulary/"
+  },
+  {
+    "file": "infra/nginx/typing-game.local.dev.conf",
+    "line": 234,
+    "host": "td.typing-game.local",
+    "route": "/typing-texts/",
+    "directive": "alias",
+    "path": "__ROOT_DIR__/shared/typing-texts/"
+  },
+  {
+    "file": "infra/nginx/typing-game.local.dev.conf",
+    "line": 240,
+    "host": "td.typing-game.local",
+    "route": "/shared/typing-texts/",
+    "directive": "alias",
+    "path": "__ROOT_DIR__/shared/typing-texts/"
+  },
+  {
+    "file": "infra/nginx/typing-game.local.dev.conf",
+    "line": 266,
+    "host": "survival.typing-game.local",
+    "route": "/vocabulary/",
+    "directive": "alias",
+    "path": "__ROOT_DIR__/shared/vocabulary/"
+  },
+  {
+    "file": "infra/nginx/typing-game.local.dev.conf",
+    "line": 271,
+    "host": "survival.typing-game.local",
+    "route": "/typing-texts/",
+    "directive": "alias",
+    "path": "__ROOT_DIR__/shared/typing-texts/"
+  },
+  {
+    "file": "infra/nginx/typing-game.local.dev.conf",
+    "line": 277,
+    "host": "survival.typing-game.local",
+    "route": "/shared/typing-texts/",
+    "directive": "alias",
+    "path": "__ROOT_DIR__/shared/typing-texts/"
+  },
+  {
+    "file": "infra/nginx/typing-game.local.dev.conf",
+    "line": 283,
+    "host": "survival.typing-game.local",
+    "route": "/assets/space-typing/models/",
+    "directive": "alias",
+    "path": "__ROOT_DIR__/games/space-typing/public/assets/space-typing/models/"
+  },
+  {
+    "file": "infra/nginx/typing-game.local.dev.conf",
+    "line": 308,
+    "host": "tutien.typing-game.local",
+    "route": "/vocabulary/",
+    "directive": "alias",
+    "path": "__ROOT_DIR__/shared/vocabulary/"
+  },
+  {
+    "file": "infra/nginx/typing-game.local.dev.conf",
+    "line": 313,
+    "host": "tutien.typing-game.local",
+    "route": "/typing-texts/",
+    "directive": "alias",
+    "path": "__ROOT_DIR__/shared/typing-texts/"
+  },
+  {
+    "file": "infra/nginx/typing-game.local.dev.conf",
+    "line": 319,
+    "host": "tutien.typing-game.local",
+    "route": "/shared/typing-texts/",
+    "directive": "alias",
+    "path": "__ROOT_DIR__/shared/typing-texts/"
+  },
+  {
+    "file": "infra/nginx/typing-game.local.dev.conf",
+    "line": 325,
+    "host": "tutien.typing-game.local",
+    "route": "/assets/space-typing/models/",
+    "directive": "alias",
+    "path": "__ROOT_DIR__/games/space-typing/public/assets/space-typing/models/"
+  }
+]

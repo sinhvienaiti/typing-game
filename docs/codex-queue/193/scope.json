@@ -1,0 +1,27 @@
+{
+  "branch": "td-keys",
+  "head": "81baf468fbbe79f5b6d5203ddea890878507a305",
+  "basedOnA2Days": true,
+  "reviewEvidence": [
+    "9f7cac0f feat(audio-lab): keyboard sets from the owner's Firefly typing WAVs - survey and build (one set per folder, 7 sets, 1 s preview each), tests (Codex 189, reviewed)",
+    "7b677b5a feat(kit): keyboard sound picker from a catalogue with a 1 s hover/focus preview, listbox, Listen button for touch, Lab uses the same component; 840 kit tests (Codex 190, reviewed in the Lab at 1280x720)"
+  ],
+  "unchangedDeterministicPaths": true,
+  "goldens": [
+    {
+      "path": "tests/golden/td-1a.json",
+      "sha256": "d19dffacedde417fc19ab7d743f26c14ee5d8ce989a852173a27d5fa1c826f2b",
+      "matchesHEAD": true
+    },
+    {
+      "path": "tests/golden/td-1b-boss.json",
+      "sha256": "259bc9aecf8bfc061cca766506cab5451e25c08e8c6c0776e4f6070f28a545a8",
+      "matchesHEAD": true
+    }
+  ],
+  "sourceLinesExcludingKit": 10850,
+  "binaryFilesIgnored": 108,
+  "binaryFilesExpected": 108,
+  "headSourceLinesExcludingKit": 10772,
+  "sourceLineDelta": 78
+}

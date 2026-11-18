@@ -1,0 +1,163 @@
+diff --git a/src/content/rules.ts b/src/content/rules.ts
+index 65c089d..f29923a 100644
+--- a/src/content/rules.ts
++++ b/src/content/rules.ts
+@@ -16,7 +16,7 @@ export const CAP = { soldiers: 64, agents: 4, streamLiveMax: 12, streamLiveMin:
+ /** lifeK scales a word's scoring clock (TK 6.4's k_L); powerCdS §4.5's cooldown; warnK, directK BUILD_1B §5.2, §9.1. */
+ export const MODES = {
+   relax: { dayS: 120, open: 2, typeS: 6, slipS: 2.2, hpMul: 0.5, floorE: 12, lifeK: 1.25, powerCdS: 12, pause: true, warnK: 1.33, directK: 2.8 },
+-  balanced: { dayS: 75, open: 3, typeS: 8, slipS: 1.35, hpMul: 1, floorE: 20, lifeK: 1.0, powerCdS: 9, pause: false, warnK: 1, directK: 2.2 },
++  balanced: { dayS: 75, open: 3, typeS: 8, slipS: 1.8, hpMul: 1, floorE: 20, lifeK: 1.0, powerCdS: 9, pause: false, warnK: 1, directK: 2.2 },
+   challenge: { dayS: 50, open: 4, typeS: 10, slipS: 1.35, hpMul: 1.19, floorE: 30, lifeK: 0.9, powerCdS: 10, pause: false, warnK: 0.8, directK: 1.6 },
+   learn: { dayS: 120, open: 2, typeS: 6, slipS: 2.2, hpMul: 0.5, floorE: 12, lifeK: 1.25, powerCdS: 12, pause: true, warnK: 1.33, directK: 2.8 },
+ } as const;
+@@ -55,7 +55,7 @@ export const CHAIN = {
+  * helper's quiz every 25 s by day; the review book holds 20 words, a word with 2 errors goes in like a sloppy one.
+  * The director's word budget (review R3, docs/td/BUILD_NOTES.md §5): a word's lock time at E and the mode's slipS
+  * must fit the 20 s window (the bot at 35 WPM, 95 %: no window past typeS, 30 % of the day typed; slipS 1.1 → 1.15 →
+- * 1.35 s for chains of chop words, BUILD_NOTES §7.3, §7.8; by mode since lane A2, §7.10).
++ * 1.35 s for chains of chop words, BUILD_NOTES §7.3, §7.8; by mode since lane A2, Cân bằng 1.8 with chop calls at daybreak, §7.10).
+  */
+ export const CALL = {
+   words: { harvest: 3, chop: 4, mine: 2, power: 1, quiz: 1, upgrade: 3, build: { S: 2, M: 3, L: 4, XL: 4 } },
+diff --git a/src/content/slice-1a.ts b/src/content/slice-1a.ts
+index 42d1b1f..9ceafdb 100644
+--- a/src/content/slice-1a.ts
++++ b/src/content/slice-1a.ts
+@@ -99,8 +99,8 @@ export const SLICE_1A: Content = {
+       view: { name: "Thuồng Luồng", short: "TL", color: "#3e2766" },
+     },
+     {
+-      // BUILD_1B §6.5 round 1 (docs/td/BUILD_NOTES.md §7.1): 3,200 → 3,400 hit points, 0.9 → 0.8 m/s (G3); R1 review: 3,800; R2 (§7.3): 4,200.
+-      id: "moc-tinh", tier: "boss", hp: 4200, armorPct: 30, resistPct: 0, speed: 0.8, altitude: "ground", leak: 0, gold: 0,
++      // BUILD_1B §6.5 round 1 (docs/td/BUILD_NOTES.md §7.1): 3,200 → 3,400 hit points, 0.9 → 0.8 m/s (G3); R1 review: 3,800; R2 (§7.3): 4,200; lane A2: 4,550.
++      id: "moc-tinh", tier: "boss", hp: 4550, armorPct: 30, resistPct: 0, speed: 0.8, altitude: "ground", leak: 0, gold: 0,
+       blockWeight: 3, radiusM: 2.5, packSize: 1, unblockable: true, burnTakenMul: 1.25,
+       view: { name: "Mộc Tinh", short: "MT", color: "#6b4a2a" },
+     },
+@@ -197,16 +197,16 @@ export const SLICE_1A: Content = {
+     memberGapS: 0.45,
+   },
+   // BUILD_1B §5: Mộc Tinh retreats at half its hit points; its own moves; Draconis' fireballs ×0.35 on its bark (heroMul).
+-  // k factor (R2 §7.4: 0.3 / 6.5, cap 1.46; R3 §7.9: 0.4 / 5.5, cap 1.42; A1: 0.4 / 7.5, 1.49), Thư giãn, Học ×0.78, Thử thách ×0.9.
+-  // R3: Rễ hút sinh khí, a life every 30 s of its fight (R3_PLAN §7.1; 20 s cost the slow bots 10–12 points of wins, §7.9).
++  // k factor (R2 §7.4: 0.3 / 6.5, cap 1.46; R3 §7.9: 0.4 / 5.5, cap 1.42; A1: 0.4 / 7.5, 1.49; A2: 0.32 / 12, 1.4), Thư giãn, Học ×0.78, Thử thách ×0.9.
++  // Rễ hút sinh khí, a life every 20 s of its fight (R3: 30 s, R3_PLAN §7.1; lane A2: 20 s once night harvests went silent).
+   boss: {
+-    enemy: "moc-tinh", retreatPct: 50, kHp: 0.4, kHp2: 7.5, kHpMax: 1.49, modeHp: { relax: 0.78, learn: 0.78, challenge: 0.9 }, retreatS: 2, chestGold: 150, heroMul: 0.35,
++    enemy: "moc-tinh", retreatPct: 50, kHp: 0.32, kHp2: 12, kHpMax: 1.4, modeHp: { relax: 0.78, learn: 0.78, challenge: 0.9 }, retreatS: 2, chestGold: 150, heroMul: 0.35,
+     roots: { everyS: 12, firstS: 6, warnS: 1.5, radiusM: 8, stunS: 3 },
+     slam: { damage: [40, 60], reachM: 3, everyS: 2.5, warnS: 1.2, knockM: 1.5 },
+     stagger: { atPct: 70, stunS: 5, vulnerable: 1.25, burstLifeS: 5, burstReachM: 2, burstWords: 3, burstPerE: 20 },
+     summon: { enemy: "mam-go", count: 4, everyS: 15, firstS: 3, warnS: 0.8 },
+     keep: { lives: 3, everyS: 2.5, warnS: 1.2, stopM: 1.5 },
+-    drain: { lives: 1, everyS: 30, warnS: 1.2 },
++    drain: { lives: 1, everyS: 20, warnS: 1.2 },
+   },
+   // BUILD_1B §4, §12: five nights, the boss at the end of the fifth; what opens on which day.
+   stage: {
+diff --git a/src/sim/systems/economy.ts b/src/sim/systems/economy.ts
+index 8299d3c..68fedd1 100644
+--- a/src/sim/systems/economy.ts
++++ b/src/sim/systems/economy.ts
+@@ -94,7 +94,7 @@ function choosePlot(w: World, b: number): number {
+   return -1;
+ }
+ 
+-/** §4.1: plots grow by themselves; the farmer walks inside the farm to a plot, sows it (2 s) or harvests it (12 s, a 3-word call). */
++/** §4.1: plots grow by themselves; the farmer walks inside the farm to a plot, sows it (2 s) or harvests it (12 s, a 3-word call by day). */
+ function farm(w: World, b: number): void {
+   const B = w.buildings;
+   const N = w.npcs;
+@@ -119,7 +119,7 @@ function farm(w: World, b: number): void {
+   if (N.task[n] === TASK.going) {
+     if (toward(N, n, N.gx[n]!, N.gz[n]!, FARM_STEP) < 0) return;
+     N.task[n] = TASK.working;
+-    if (B.plot[at + p] === PLOT.ripe) N.call[n] = makeCall(w, CALL_KIND.harvest, CALL.words.harvest, n, b, -1, p);
++    if (B.plot[at + p] === PLOT.ripe && w.phase !== "night") N.call[n] = makeCall(w, CALL_KIND.harvest, CALL.words.harvest, n, b, -1, p);
+   }
+   const ripe = B.plot[at + p] === PLOT.ripe;
+   if (addAt(B.plotWork, at + p, passive(w, N.x[n]!, N.z[n]!) / (ripe ? HARVEST : SOW)) < DONE) return;
+@@ -158,8 +158,8 @@ function chooseTree(w: World, n: number): number {
+ 
+ /**
+  * §4.2: an idle villager walks (A*) to its tree and chops it, 45 s a 4-word call (none by night: trees that never run out
+- * made chop words crowd out the towers' calls), its wood paid as it goes; then it picks a tree again (a mark may call it
+- * away). A tree with no way to it is left (−2) until marked again.
++ * made chop words crowd out the towers' calls; a chop begun by night calls at daybreak), its wood paid as it goes; then it
++ * picks a tree again (a mark may call it away). A tree with no way to it is left (−2) until marked again.
+  */
+ function villager(w: World, n: number): void {
+   const N = w.npcs;
+@@ -182,7 +182,7 @@ function villager(w: World, n: number): void {
+     if (N.mode[n] === MODE.walk) return;
+     N.task[n] = TASK.working;
+     N.call[n] = w.phase === "night" ? -1 : makeCall(w, CALL_KIND.chop, CALL.words.chop, n, -1, t, -1);
+-  }
++  } else if (N.call[n]! < 0 && w.tick === w.dayStarts[w.day]) N.call[n] = makeCall(w, CALL_KIND.chop, CALL.words.chop, n, -1, t, -1);
+   if (!chopTree(w, t, passive(w, N.x[n]!, N.z[n]!) / CHOP)) return;
+   T.progress[t] = 0;
+   if (T.left[t] === 0) return fell(w, t);
+diff --git a/src/sim/systems/waves.ts b/src/sim/systems/waves.ts
+index fa21eda..3908eec 100644
+--- a/src/sim/systems/waves.ts
++++ b/src/sim/systems/waves.ts
+@@ -17,8 +17,8 @@ export function enter(w: World, phase: "day" | "night" | "dawn", length: number)
+   w.phaseEnd = length < 0 ? -1 : w.tick + length;
+   if (phase === "day") w.dayStarts[w.day] = w.tick + 1;
+   if (phase === "day") regrow(w);
+-  // Night falls: a chop call left open lives a power call's time; the villagers chop on alone (economy.ts: no new one by night).
+-  for (const c of phase === "night" ? w.calls.live() : []) if (w.calls.kind[c] === CALL_KIND.chop) w.calls.expire[c] = w.tick + ticks(CALL.powerLifeS);
++  // Night falls: a chop or harvest call left open lives a power call's time; villagers and farmers work on alone (economy.ts).
++  for (const c of phase === "night" ? w.calls.live() : []) if (w.calls.kind[c] === CALL_KIND.chop || w.calls.kind[c] === CALL_KIND.harvest) w.calls.expire[c] = w.tick + ticks(CALL.powerLifeS);
+   w.events.rare.push({ t: "phase", tick: w.tick, phase, day: w.day });
+ }
+ 
+diff --git a/tests/td-sim-economy.test.ts b/tests/td-sim-economy.test.ts
+index 0e3ccb6..4507234 100644
+--- a/tests/td-sim-economy.test.ts
++++ b/tests/td-sim-economy.test.ts
+@@ -133,6 +133,21 @@ describe("farms (§4.1)", () => {
+     expect(w.buildings.plot[farm * FARM.plots]).not.toBe(PLOT.ripe);
+   });
+ 
++  it("by night a farmer harvests without a call; a harvest call left open at nightfall lives a power call's time (lane A2)", () => {
++    const { w, plot } = farmWorld();
++    until(w, () => plot(0) === PLOT.growing);
++    until(w, () => w.calls.live().some((c) => w.calls.kind[c] === CALL_KIND.harvest), T(60));
++    const open = w.calls.live().find((c) => w.calls.kind[c] === CALL_KIND.harvest)!;
++    send(w, { t: "callNight" });
++    expect(w.calls.expire[open]).toBe(w.tick - 1 + T(CALL.powerLifeS));
++    w.waveLeft[1] = w.waveLeft[1]! + 1000; // the night held open
++    const food = w.food;
++    const made: number[] = [];
++    for (let k = 0; k < T(60) && w.phase === "night"; k += 1) made.push(...send(w).filter((event) => event.t === "call" && event.kind === CALL_KIND.harvest && event.state === "made").map(() => w.tick));
++    expect([w.phase, w.calls.used[open], made]).toEqual(["night", 0, []]);
++    expect(w.food - food).toBeGreaterThanOrEqual(3 * FARM.food); // the ripe plots harvested all the same
++  });
++
+   it("a farmer walks inside his farm, off the grid: a building put down elsewhere never moves him", () => {
+     const { w, farmer } = farmWorld();
+     until(w, () => w.npcs.task[farmer] === TASK.working);
+@@ -269,6 +284,21 @@ describe("villagers and trees (§4.2)", () => {
+     expect(w.wood - wood).toBeGreaterThanOrEqual(2 * TREE.wood - 2); // both villagers chopped a whole chop alone
+   });
+ 
++  it("a chop begun by night calls at daybreak: by day every villager at work has its chop call (lane A2, gate 5b)", () => {
++    const w = world();
++    until(w, () => w.calls.live().some((c) => w.calls.kind[c] === CALL_KIND.chop));
++    send(w, { t: "callNight" });
++    const working = () => w.npcs.live().filter((n) => w.npcs.kind[n] === NPC_KIND.villager && w.npcs.task[n] === TASK.working);
++    until(w, () => w.phase === "night" && w.calls.live().every((c) => w.calls.kind[c] !== CALL_KIND.chop) && working().length > 0, T(60));
++    expect(working().every((n) => w.npcs.call[n]! < 0)).toBe(true); // chopping alone by night
++    clearNight(w);
++    until(w, () => w.phase === "day", T(10));
++    run(w, 1); // the day's first tick
++    const at = working();
++    expect(at.length).toBeGreaterThan(0);
++    expect(at.every((n) => w.npcs.call[n]! >= 0 && w.calls.kind[w.npcs.call[n]!] === CALL_KIND.chop)).toBe(true);
++  });
++
+   it("a marked tree nearest the villager comes first; a mark toggles; a stump takes none", () => {
+     const w = world();
+     const far = 0; // west of the gate

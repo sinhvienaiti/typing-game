@@ -1,0 +1,292 @@
+--- a/shared/learning/query.mjs
++++ b/shared/learning/query.mjs
+@@ -35,6 +35,39 @@
+   return value !== null && typeof value === "object" && !Array.isArray(value);
+ }
+ 
++const SAMPLE_RESULTS = new Set(["correct", "wrong"]);
++
++// LearningSample in core.d.mts: three strings, a known result and a boolean.
++export function isLearningSample(sample) {
++  return (
++    plainObject(sample) &&
++    typeof sample.occurredAt === "string" &&
++    typeof sample.gameId === "string" &&
++    typeof sample.activityType === "string" &&
++    SAMPLE_RESULTS.has(sample.result) &&
++    typeof sample.hintUsed === "boolean"
++  );
++}
++
++// Rebuild each sample from the five contract fields; drop a whole sample
++// with a wrong type instead of coercing it.
++function contractSamples(samples) {
++  if (!Array.isArray(samples)) return [];
++  const result = [];
++  for (const sample of samples) {
++    if (!plainObject(sample)) continue;
++    const projected = {
++      occurredAt: sample.occurredAt,
++      gameId: sample.gameId,
++      activityType: sample.activityType,
++      result: sample.result,
++      hintUsed: sample.hintUsed,
++    };
++    if (isLearningSample(projected)) result.push(projected);
++  }
++  return result;
++}
++
+ function optionalString(value, field, max = 200) {
+   if (value === undefined || value === null || value === "") return undefined;
+   if (typeof value !== "string") throw new TypeError(`${field} must be a string`);
+@@ -275,13 +308,7 @@
+   return {
+     ...record,
+     ...(record.recentSamples === undefined ? {} : {
+-      recentSamples: record.recentSamples.map((sample) => ({
+-        occurredAt: sample.occurredAt,
+-        gameId: sample.gameId,
+-        activityType: sample.activityType,
+-        result: sample.result,
+-        hintUsed: sample.hintUsed,
+-      })),
++      recentSamples: contractSamples(record.recentSamples),
+     }),
+     entityType,
+     entityId: entityId(record, entityType),
+--- a/shared/learning/profile-backup.mjs
++++ b/shared/learning/profile-backup.mjs
+@@ -3,6 +3,7 @@
+   migrateLearningProfile,
+   normalizeVocabularyKey,
+ } from "./core.mjs";
++import { isLearningSample } from "./query.mjs";
+ 
+ export const LEARNING_BACKUP_FORMAT = "typing-game-learning-profile";
+ export const LEARNING_BACKUP_VERSION = 1;
+@@ -129,6 +130,8 @@
+   validateSamples(record.recentMistakes ?? [], "recentMistakes");
+   if (record.recentSamples !== undefined) {
+     validateSamples(record.recentSamples, "recentSamples");
++    // Drop samples that break LearningSample types; record is a clone.
++    record.recentSamples = record.recentSamples.filter(isLearningSample);
+   }
+ 
+   if (entityType === "sentence") {
+--- a/shared/learning/query.d.mts
++++ b/shared/learning/query.d.mts
+@@ -1,6 +1,8 @@
+ import type { LearningEntityType, LearningSample } from "./core.mjs";
+ 
+ export const LOOKUP_MAX_IDS: 200;
++/** True when every LearningSample field has its declared type. */
++export function isLearningSample(sample: unknown): sample is LearningSample;
+ export type LearningLookup = {
+   entityType: LearningEntityType;
+   entityIds: string[];
+--- a/shared/learning/lookup.test.mjs
++++ b/shared/learning/lookup.test.mjs
+@@ -115,7 +115,9 @@
+ 
+ test("backup accepts eight samples and a legacy record without samples", () => {
+   const profile = applyLearningEvents(null, [event()]);
+-  profile.vocabulary.lantern.recentSamples = Array.from({ length: 8 }, () => ({ occurredAt: NOW }));
++  profile.vocabulary.lantern.recentSamples = Array.from({ length: 8 }, () => ({
++    occurredAt: NOW, gameId: "recall-typing", activityType: "meaning-recall", result: "correct", hintUsed: false,
++  }));
+   assert.deepEqual(parseLearningProfileBackup(JSON.stringify(profile)), profile);
+   delete profile.vocabulary.lantern.recentSamples;
+   assert.deepEqual(parseLearningProfileBackup(profile), profile);
+@@ -141,6 +143,110 @@
+   });
+ }
+ 
++// 233 P1-233-01: a contract field holding an object or array must not reach a game.
++const SAMPLE_FIELDS = ["occurredAt", "gameId", "activityType", "result", "hintUsed"];
++const NESTED = {
++  object: () => ({ userAnswer: "PRIVATE_NESTED_USER_ANSWER", expectedAnswer: "PRIVATE_NESTED_EXPECTED_ANSWER" }),
++  array: () => [{ userAnswer: "PRIVATE_NESTED_USER_ANSWER", expectedAnswer: "PRIVATE_NESTED_EXPECTED_ANSWER" }],
++};
++const COLLECTIONS = [["vocabulary", "vocabulary"], ["grammar", "grammar"], ["sentence", "sentences"]];
++// Two samples: tests corrupt the first; the second must come back unchanged.
++function twoSampleProfile(entityType = "vocabulary") {
++  return applyLearningEvents(null, [
++    event("lantern", { entityType }),
++    event("lantern", { entityType, occurredAt: "2026-10-30T06:01:00.000Z", activityType: "listening", hintUsed: true }),
++  ]);
++}
++function bothRoutes(profile, entityType = "vocabulary") {
++  return [
++    query.lookupLearningRecords(profile, lookup(["lantern"], entityType), NOW).items[0],
++    query.queryLearningProfile(profile, { entityType }, NOW).items[0],
++  ];
++}
++
++for (const field of SAMPLE_FIELDS) {
++  for (const [kind, nested] of Object.entries(NESTED)) {
++    test(`F2 types stored profile drops a sample whose ${field} holds an ${kind}, lookup and query`, () => {
++      for (const [entityType, collection] of COLLECTIONS) {
++        const profile = twoSampleProfile(entityType);
++        const kept = structuredClone(profile[collection].lantern.recentSamples[1]);
++        profile[collection].lantern.recentSamples[0][field] = nested();
++        const before = structuredClone(profile);
++        for (const item of bothRoutes(profile, entityType)) {
++          assert.deepEqual(item.recentSamples, [kept], entityType);
++          assert.doesNotMatch(JSON.stringify(item), /PRIVATE_NESTED_/);
++        }
++        assert.deepEqual(profile, before);
++      }
++    });
++
++    test(`F2 types backup import drops a sample whose ${field} holds an ${kind}`, () => {
++      for (const [entityType, collection] of COLLECTIONS) {
++        const profile = twoSampleProfile(entityType);
++        const kept = structuredClone(profile[collection].lantern.recentSamples[1]);
++        profile[collection].lantern.recentSamples[0][field] = nested();
++        const before = structuredClone(profile);
++        for (const input of [JSON.stringify(profile), profile]) {
++          const imported = parseLearningProfileBackup(input);
++          assert.deepEqual(imported[collection].lantern.recentSamples, [kept], entityType);
++          assert.doesNotMatch(JSON.stringify(imported), /PRIVATE_NESTED_/);
++          for (const item of bothRoutes(imported, entityType)) assert.deepEqual(item.recentSamples, [kept]);
++        }
++        assert.deepEqual(profile, before);
++      }
++    });
++  }
++}
++
++const MISSING = Symbol("missing");
++const WRONG_PRIMITIVES = [
++  ["occurredAt", 1793340000000], ["occurredAt", null], ["gameId", 7], ["gameId", true],
++  ["activityType", false], ["result", "maybe"], ["result", 1], ["hintUsed", "true"], ["hintUsed", 0], ["hintUsed", null],
++  ...SAMPLE_FIELDS.map((field) => [field, MISSING]),
++];
++function corruptFirstSample(field, value) {
++  const profile = twoSampleProfile();
++  const kept = structuredClone(profile.vocabulary.lantern.recentSamples[1]);
++  if (value === MISSING) delete profile.vocabulary.lantern.recentSamples[0][field];
++  else profile.vocabulary.lantern.recentSamples[0][field] = value;
++  return { profile, kept };
++}
++
++test("F2 types stored profile drops samples with a wrong primitive or a missing field", () => {
++  for (const [field, value] of WRONG_PRIMITIVES) {
++    const { profile, kept } = corruptFirstSample(field, value);
++    for (const item of bothRoutes(profile)) assert.deepEqual(item.recentSamples, [kept], `${field}=${String(value)}`);
++  }
++});
++
++test("F2 types backup import drops samples with a wrong primitive or a missing field", () => {
++  for (const [field, value] of WRONG_PRIMITIVES) {
++    const { profile, kept } = corruptFirstSample(field, value);
++    const imported = parseLearningProfileBackup(JSON.stringify(profile));
++    assert.deepEqual(imported.vocabulary.lantern.recentSamples, [kept], `${field}=${String(value)}`);
++  }
++});
++
++test("F2 types stored profile drops non-object samples and reads a non-list as no samples", () => {
++  for (const bad of [null, "PRIVATE_NESTED_STRING", 5, ["PRIVATE_NESTED_ARRAY"]]) {
++    const profile = twoSampleProfile();
++    const kept = structuredClone(profile.vocabulary.lantern.recentSamples[1]);
++    profile.vocabulary.lantern.recentSamples[0] = bad;
++    for (const item of bothRoutes(profile)) {
++      assert.deepEqual(item.recentSamples, [kept], String(bad));
++      assert.doesNotMatch(JSON.stringify(item), /PRIVATE_NESTED_/);
++    }
++  }
++  for (const list of [{ 0: { userAnswer: "PRIVATE_NESTED_LIST" } }, "PRIVATE_NESTED_LIST", null]) {
++    const profile = twoSampleProfile();
++    profile.vocabulary.lantern.recentSamples = list;
++    for (const item of bothRoutes(profile)) {
++      assert.deepEqual(item.recentSamples, [], String(list));
++      assert.doesNotMatch(JSON.stringify(item), /PRIVATE_NESTED_/);
++    }
++  }
++});
++
+ test("F3 error contract supports code-only replies and preserves explicit public messages", () => {
+   assert.deepEqual(contract.makeLearningError("lookup-1", "query-failed"), {
+     type: contract.LEARNING_ERROR_MESSAGE, requestId: "lookup-1", error: { code: "query-failed" },
+--- a/portal/tests/learning-bridge.test.mjs
++++ b/portal/tests/learning-bridge.test.mjs
+@@ -1,6 +1,8 @@
+ import assert from "node:assert/strict";
+ import { readFile } from "node:fs/promises";
+ import test from "node:test";
++import { applyLearningEvents } from "../../shared/learning/core.mjs";
++import { parseLearningProfileBackup } from "../../shared/learning/profile-backup.mjs";
+ 
+ // The bridge schedules flushes through window timers.
+ globalThis.window ??= globalThis;
+@@ -191,3 +193,69 @@
+   assert.equal(frame.posted.length, 0);
+   assert.equal(stranger.posted.length, 0);
+ });
++
++// 233 P1-233-01: an answer nested inside a sample field must not reach the game frame.
++const PREFIX = "typing-game:learning:v1:";
++const SAMPLE_FIELDS = ["occurredAt", "gameId", "activityType", "result", "hintUsed"];
++const NESTED = {
++  object: () => ({ userAnswer: "PRIVATE_NESTED_USER_ANSWER", expectedAnswer: "PRIVATE_NESTED_EXPECTED_ANSWER" }),
++  array: () => [{ userAnswer: "PRIVATE_NESTED_USER_ANSWER", expectedAnswer: "PRIVATE_NESTED_EXPECTED_ANSWER" }],
++};
++
++function twoSampleProfile() {
++  const sample = { version: 1, entityType: "vocabulary", entityId: "lantern", gameId: "dragon-hold" };
++  return applyLearningEvents(null, [
++    { ...sample, activityType: "meaning-recall", result: "correct", occurredAt: "2026-10-30T06:00:00.000Z" },
++    { ...sample, activityType: "listening", result: "correct", occurredAt: "2026-10-30T06:01:00.000Z", hintUsed: true },
++  ]);
++}
++
++async function askFromFrame(profile, type) {
++  const game = registeredGame("dragon-hold");
++  const origin = new URL(game.appUrl).origin;
++  const frame = makeFrame();
++  const store = {
++    profile, loads: 0,
++    async load() { this.loads++; return this.profile; },
++    async applyMany() { throw new Error("unexpected write"); },
++  };
++  const query = type === "lookup" ? { entityType: "vocabulary", entityIds: ["lantern"] } : { entityType: "vocabulary" };
++  new ParentLearningBridge(store).handleMessage(
++    { data: { type: PREFIX + type, requestId: "f2-types", query }, origin, source: frame.contentWindow },
++    frame,
++    game,
++  );
++  // Query handlers are fire-and-forget; one turn drains them.
++  await new Promise((resolve) => setImmediate(resolve));
++  assert.equal(frame.posted.length, 1);
++  assert.equal(frame.posted[0].targetOrigin, origin);
++  assert.equal(frame.posted[0].message.type, PREFIX + "query-result");
++  assert.equal(frame.posted[0].message.requestId, "f2-types");
++  assert.equal(store.loads, 1);
++  return frame.posted;
++}
++
++for (const source of ["stored", "backup"]) {
++  for (const field of SAMPLE_FIELDS) {
++    for (const type of ["lookup", "query"]) {
++      test(`F2 types ${type} from a ${source} profile drops a sample whose ${field} nests an answer`, async () => {
++        for (const [kind, nested] of Object.entries(NESTED)) {
++          let profile = twoSampleProfile();
++          const kept = structuredClone(profile.vocabulary.lantern.recentSamples[1]);
++          profile.vocabulary.lantern.recentSamples[0][field] = nested();
++          if (source === "backup") {
++            profile = parseLearningProfileBackup(JSON.stringify(profile));
++            assert.deepEqual(profile.vocabulary.lantern.recentSamples, [kept], kind);
++          }
++          const before = structuredClone(profile);
++          const posted = await askFromFrame(profile, type);
++          const samples = posted[0].message.result.items[0].recentSamples;
++          assert.deepEqual(samples, [kept], kind);
++          assert.deepEqual(Object.keys(samples[0]).sort(), [...SAMPLE_FIELDS].sort());
++          assert.doesNotMatch(JSON.stringify(posted), /PRIVATE_NESTED_/, kind);
++          assert.deepEqual(profile, before, kind);
++        }
++      });
++    }
++  }
++}

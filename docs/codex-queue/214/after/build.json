@@ -1,0 +1,11 @@
+{
+  "command": [
+    "env",
+    "pnpm_config_verify_deps_before_run=false",
+    "pnpm",
+    "--dir",
+    "portal",
+    "build"
+  ],
+  "exit_code": 0
+}

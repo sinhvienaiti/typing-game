@@ -1,0 +1,221 @@
+{
+  "command": "node tmp/codex-227/audit-214-215.mjs",
+  "exit": 0,
+  "cases": [
+    {
+      "label": "correct origin, wrong window",
+      "loads": 0,
+      "writes": 0,
+      "callbacks": 0,
+      "posted": []
+    },
+    {
+      "label": "wrong origin, correct window",
+      "loads": 0,
+      "writes": 0,
+      "callbacks": 0,
+      "posted": []
+    },
+    {
+      "label": "no active game",
+      "loads": 0,
+      "writes": 0,
+      "callbacks": 0,
+      "posted": []
+    },
+    {
+      "label": "valid",
+      "loads": 1,
+      "writes": 0,
+      "callbacks": 0,
+      "posted": [
+        {
+          "message": {
+            "type": "typing-game:learning:v1:query-result",
+            "requestId": "review-227",
+            "result": {
+              "entityType": "vocabulary",
+              "items": [
+                {
+                  "wordKey": "lantern",
+                  "attempts": 1,
+                  "correct": 1,
+                  "wrong": 0,
+                  "hints": 0,
+                  "replays": 0,
+                  "avgResponseMs": null,
+                  "responseSamples": 0,
+                  "correctStreak": 1,
+                  "lastSeenAt": "2026-10-30T06:00:00.000Z",
+                  "lastCorrectAt": "2026-10-30T06:00:00.000Z",
+                  "lastWrongAt": null,
+                  "mastery": 79,
+                  "reviewPriority": 12,
+                  "nextReviewAt": "2026-11-02T06:00:00.000Z",
+                  "sourceGames": [
+                    "recall-typing"
+                  ],
+                  "recentMistakes": [],
+                  "recentSamples": [
+                    {
+                      "occurredAt": "2026-10-30T06:00:00.000Z",
+                      "gameId": "recall-typing",
+                      "activityType": "meaning-recall",
+                      "result": "correct",
+                      "hintUsed": false
+                    }
+                  ],
+                  "entityType": "vocabulary",
+                  "entityId": "lantern",
+                  "status": "improving"
+                }
+              ]
+            }
+          },
+          "targetOrigin": "https://dragon.typing-game.local"
+        }
+      ]
+    },
+    {
+      "label": "201 duplicates",
+      "loads": 0,
+      "writes": 0,
+      "callbacks": 0,
+      "posted": [
+        {
+          "message": {
+            "type": "typing-game:learning:v1:error",
+            "requestId": "review-227",
+            "error": {
+              "code": "invalid-request",
+              "message": "entityIds must contain 1 to 200 ids"
+            }
+          },
+          "targetOrigin": "https://dragon.typing-game.local"
+        }
+      ]
+    },
+    {
+      "label": "storage error includes profile data",
+      "loads": 1,
+      "writes": 0,
+      "callbacks": 0,
+      "posted": [
+        {
+          "message": {
+            "type": "typing-game:learning:v1:error",
+            "requestId": "review-227",
+            "error": {
+              "code": "query-failed",
+              "message": "PROFILE_SECRET: unrequested-word / private answer"
+            }
+          },
+          "targetOrigin": "https://dragon.typing-game.local"
+        }
+      ]
+    },
+    {
+      "label": "accepted backup contains answer fields in recentSamples",
+      "loads": 1,
+      "writes": 0,
+      "callbacks": 0,
+      "posted": [
+        {
+          "message": {
+            "type": "typing-game:learning:v1:query-result",
+            "requestId": "review-227",
+            "result": {
+              "entityType": "vocabulary",
+              "items": [
+                {
+                  "wordKey": "lantern",
+                  "attempts": 1,
+                  "correct": 1,
+                  "wrong": 0,
+                  "hints": 0,
+                  "replays": 0,
+                  "avgResponseMs": null,
+                  "responseSamples": 0,
+                  "correctStreak": 1,
+                  "lastSeenAt": "2026-10-30T06:00:00.000Z",
+                  "lastCorrectAt": "2026-10-30T06:00:00.000Z",
+                  "lastWrongAt": null,
+                  "mastery": 79,
+                  "reviewPriority": 12,
+                  "nextReviewAt": "2026-11-02T06:00:00.000Z",
+                  "sourceGames": [
+                    "recall-typing"
+                  ],
+                  "recentMistakes": [],
+                  "recentSamples": [
+                    {
+                      "occurredAt": "2026-10-30T06:00:00.000Z",
+                      "gameId": "recall-typing",
+                      "activityType": "meaning-recall",
+                      "result": "correct",
+                      "hintUsed": false,
+                      "userAnswer": "PRIVATE_USER_ANSWER",
+                      "expectedAnswer": "PRIVATE_EXPECTED_ANSWER"
+                    }
+                  ],
+                  "entityType": "vocabulary",
+                  "entityId": "lantern",
+                  "status": "improving"
+                }
+              ]
+            }
+          },
+          "targetOrigin": "https://dragon.typing-game.local"
+        }
+      ]
+    },
+    {
+      "label": "100 ligatures expand to 300 characters on second parse",
+      "loads": 1,
+      "writes": 0,
+      "callbacks": 0,
+      "posted": [
+        {
+          "message": {
+            "type": "typing-game:learning:v1:error",
+            "requestId": "review-227",
+            "error": {
+              "code": "query-failed",
+              "message": "entityId is too long"
+            }
+          },
+          "targetOrigin": "https://dragon.typing-game.local"
+        }
+      ]
+    },
+    {
+      "label": "stored profile version is echoed in query-failed",
+      "loads": 1,
+      "writes": 0,
+      "callbacks": 0,
+      "posted": [
+        {
+          "message": {
+            "type": "typing-game:learning:v1:error",
+            "requestId": "review-227",
+            "error": {
+              "code": "query-failed",
+              "message": "unsupported learning profile version: PRIVATE_PROFILE_VALUE"
+            }
+          },
+          "targetOrigin": "https://dragon.typing-game.local"
+        }
+      ]
+    }
+  ],
+  "unknownFieldsDropped": {
+    "type": "typing-game:learning:v1:lookup",
+    "requestId": "review-227",
+    "lookup": {
+      "entityType": "vocabulary",
+      "entityIds": [
+        "lantern"
+      ]
+    }
+  }
+}

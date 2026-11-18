@@ -1,0 +1,285 @@
+[
+  {
+    "name": "wave-horn",
+    "accepted": "137",
+    "locations": [
+      "src/ui/hud.ts:244"
+    ],
+    "reason": null
+  },
+  {
+    "name": "chain",
+    "accepted": "137",
+    "locations": [
+      "src/ui/hud.ts:249"
+    ],
+    "reason": null
+  },
+  {
+    "name": "dragon-rage",
+    "accepted": "137",
+    "locations": [
+      "src/ui/hud.ts:337",
+      "src/ui/wave-card.ts:367"
+    ],
+    "reason": null
+  },
+  {
+    "name": "shield",
+    "accepted": "137",
+    "locations": [
+      "src/ui/hud.ts:299"
+    ],
+    "reason": null
+  },
+  {
+    "name": "phase-prep",
+    "accepted": "137",
+    "locations": [
+      "src/ui/hud.ts:443"
+    ],
+    "reason": null
+  },
+  {
+    "name": "phase-fight",
+    "accepted": "137",
+    "locations": [
+      "src/ui/hud.ts:443"
+    ],
+    "reason": null
+  },
+  {
+    "name": "phase-break",
+    "accepted": "137",
+    "locations": [
+      "src/ui/hud.ts:443",
+      "src/ui/wave-card.ts:291"
+    ],
+    "reason": null
+  },
+  {
+    "name": "fast-forward",
+    "accepted": "137",
+    "locations": [],
+    "reason": "Phiếu 194 chỉ chuẩn bị: src/app ngoài phạm vi; chỗ gọi hiện có ở src/app/app.ts:246 thuộc phiếu 195, giữ nguyên."
+  },
+  {
+    "name": "pause",
+    "accepted": "138",
+    "locations": [
+      "src/ui/hud.ts:261"
+    ],
+    "reason": null
+  },
+  {
+    "name": "camera-reset",
+    "accepted": "138",
+    "locations": [
+      "src/ui/hud.ts:268"
+    ],
+    "reason": null
+  },
+  {
+    "name": "keyboard",
+    "accepted": "138",
+    "locations": [],
+    "reason": "Chỉ chuẩn bị: chỗ dùng ở src/app, ngoài phạm vi."
+  },
+  {
+    "name": "speaker",
+    "accepted": "138",
+    "locations": [
+      "src/ui/learning-frame.ts:184",
+      "src/ui/learning-frame.ts:194",
+      "src/ui/results.ts:357"
+    ],
+    "reason": null
+  },
+  {
+    "name": "check",
+    "accepted": "138",
+    "locations": [
+      "src/ui/learning-frame.ts:189",
+      "src/ui/results.ts:341"
+    ],
+    "reason": null
+  },
+  {
+    "name": "new-word",
+    "accepted": "138",
+    "locations": [
+      "src/ui/learning-frame.ts:190"
+    ],
+    "reason": null
+  },
+  {
+    "name": "deny",
+    "accepted": "138",
+    "locations": [
+      "src/ui/hud.ts:373"
+    ],
+    "reason": null
+  },
+  {
+    "name": "lock",
+    "accepted": "138",
+    "locations": [],
+    "reason": "Chỉ chuẩn bị: chưa có giao diện khóa."
+  },
+  {
+    "name": "upgrade",
+    "accepted": "138",
+    "locations": [
+      "src/ui/placement-ui.ts:531"
+    ],
+    "reason": null
+  },
+  {
+    "name": "sell",
+    "accepted": "138",
+    "locations": [
+      "src/ui/placement-ui.ts:537"
+    ],
+    "reason": null
+  },
+  {
+    "name": "lane-bridge",
+    "accepted": "139",
+    "locations": [
+      "src/ui/wave-card.ts:249"
+    ],
+    "reason": null
+  },
+  {
+    "name": "lane-stream",
+    "accepted": "139",
+    "locations": [
+      "src/ui/wave-card.ts:249"
+    ],
+    "reason": null
+  },
+  {
+    "name": "lane-sky",
+    "accepted": "139",
+    "locations": [
+      "src/ui/wave-card.ts:249",
+      "src/ui/wave-card.ts:260"
+    ],
+    "reason": null
+  },
+  {
+    "name": "slot-trap",
+    "accepted": "139",
+    "locations": [
+      "src/ui/placement-ui.ts:419"
+    ],
+    "reason": null
+  },
+  {
+    "name": "slot-house",
+    "accepted": "139",
+    "locations": [
+      "src/ui/placement-ui.ts:419"
+    ],
+    "reason": null
+  },
+  {
+    "name": "slot-hold",
+    "accepted": "139",
+    "locations": [
+      "src/ui/placement-ui.ts:419"
+    ],
+    "reason": null
+  },
+  {
+    "name": "seal-lit",
+    "accepted": "139",
+    "locations": [],
+    "reason": "Chỉ chuẩn bị: src/ui/tags.ts bị cấm sửa."
+  },
+  {
+    "name": "seal-unlit",
+    "accepted": "139",
+    "locations": [],
+    "reason": "Chỉ chuẩn bị: src/ui/tags.ts bị cấm sửa."
+  },
+  {
+    "name": "edge-arrow",
+    "accepted": "139",
+    "locations": [],
+    "reason": "Chỉ chuẩn bị: src/ui/tags.ts bị cấm sửa."
+  },
+  {
+    "name": "star-lit",
+    "accepted": "140",
+    "locations": [
+      "src/ui/results.ts:322"
+    ],
+    "reason": null
+  },
+  {
+    "name": "star-unlit",
+    "accepted": "140",
+    "locations": [
+      "src/ui/results.ts:239",
+      "src/ui/results.ts:322"
+    ],
+    "reason": null
+  },
+  {
+    "name": "stat-accuracy",
+    "accepted": "140",
+    "locations": [
+      "src/ui/results.ts:329"
+    ],
+    "reason": null
+  },
+  {
+    "name": "stat-new-words",
+    "accepted": "140",
+    "locations": [
+      "src/ui/results.ts:330"
+    ],
+    "reason": null
+  },
+  {
+    "name": "stat-words-seen",
+    "accepted": "140",
+    "locations": [
+      "src/ui/results.ts:331"
+    ],
+    "reason": null
+  },
+  {
+    "name": "retry",
+    "accepted": "140",
+    "locations": [
+      "src/ui/results.ts:365"
+    ],
+    "reason": null
+  },
+  {
+    "name": "status-learned",
+    "accepted": "140",
+    "locations": [
+      "src/ui/results.ts:341"
+    ],
+    "reason": null
+  },
+  {
+    "name": "status-review",
+    "accepted": "140",
+    "locations": [
+      "src/ui/results.ts:341"
+    ],
+    "reason": null
+  },
+  {
+    "name": "status-new",
+    "accepted": "140",
+    "locations": [
+      "src/ui/results.ts:341"
+    ],
+    "reason": null
+  }
+]

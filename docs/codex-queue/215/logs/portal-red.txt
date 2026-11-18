@@ -1,0 +1,275 @@
+$ pnpm --dir portal test
+$ node --test tests/*.test.mjs
+✔ dragon-hold has its English name (0.49925ms)
+✔ dragon-hold has one English description of 50–110 characters (0.140833ms)
+✔ dragon-hold has game-owned art paths and no legacy icon field (0.323125ms)
+✔ dragon-hold model contains only images with the required metadata (31.2115ms)
+✔ typing-defense has its English name (0.052041ms)
+✔ typing-defense has one English description of 50–110 characters (0.098958ms)
+✔ typing-defense has game-owned art paths and no legacy icon field (0.038042ms)
+✔ typing-defense model contains only images with the required metadata (0.079ms)
+✔ typing-survival has its English name (0.0415ms)
+✔ typing-survival has one English description of 50–110 characters (0.073791ms)
+✔ typing-survival has game-owned art paths and no legacy icon field (0.046333ms)
+✔ typing-survival model contains only images with the required metadata (0.087209ms)
+✔ the six legacy entries keep every value and their order (0.072459ms)
+✔ all registry ids retain their original order (0.031208ms)
+✔ new entries retain routes, origins and groups (0.051208ms)
+✔ valid art resolves to absolute game-origin URLs without mutating input (0.083167ms)
+✔ resolveGameArt rejects missing art (0.051875ms)
+✔ resolveGameArt rejects null art (0.036875ms)
+✔ resolveGameArt rejects empty art (0.051084ms)
+✔ resolveGameArt rejects numeric values art (0.042959ms)
+✔ resolveGameArt rejects unsafe path "/assets/space-typing/portal/a.png" independently (0.073375ms)
+✔ resolveGameArt rejects unsafe path "/assets/dragon-hold/portal-other/a.png" independently (0.043041ms)
+✔ resolveGameArt rejects unsafe path "https://evil.example/a.png" independently (0.044167ms)
+✔ resolveGameArt rejects unsafe path "//evil.example/a.png" independently (0.038125ms)
+✔ resolveGameArt rejects unsafe path "/assets/dragon-hold/portal/../a.png" independently (0.044208ms)
+✔ resolveGameArt rejects unsafe path "/assets/dragon-hold/portal/a\\b.png" independently (0.0385ms)
+✔ resolveGameArt rejects unsafe path "/assets/dragon-hold/portal//a.png" independently (0.037958ms)
+✔ resolveGameArt rejects unsafe path "/assets/dragon-hold/portal/a.png?size=192" independently (0.047917ms)
+✔ resolveGameArt rejects unsafe path "/assets/dragon-hold/portal/a.png#icon" independently (0.036292ms)
+✔ resolveGameArt rejects unsafe path "/assets/dragon-hold/portal/%2e%2e/a.png" independently (0.04125ms)
+✔ appUrl suffix / retains the origin and root asset path (0.056792ms)
+✔ appUrl suffix /play/session retains the origin and root asset path (0.039083ms)
+✔ appUrl suffix /play/session/ retains the origin and root asset path (0.031833ms)
+✔ invalid appUrl yields no images (0.053875ms)
+✔ art suppresses a legacy glyph even when images are invalid or absent (0.058042ms)
+✔ legacy entries retain their glyph, title and description without art (0.050917ms)
+✔ an entry without art or a legacy icon has no glyph (0.045792ms)
+✔ image error hides the image and its cover frame exactly once (0.096542ms)
+✔ image error needs no optional callback (0.033333ms)
+✔ main.ts does not read game.icon directly (5.299291ms)
+✔ registry groups every game and lists the new games (0.722334ms)
+✔ bridge accepts dragon-hold events from its registered origin (1.464667ms)
+✔ bridge rejects dragon-hold events from a wrong origin (0.098542ms)
+✔ bridge accepts typing-defense events from its registered origin (0.093791ms)
+✔ bridge rejects typing-defense events from a wrong origin (0.060708ms)
+✔ bridge accepts typing-survival events from its registered origin (0.088083ms)
+✔ bridge rejects typing-survival events from a wrong origin (0.05525ms)
+✔ bridge accepts immortality-cultivation events from its registered origin (0.077667ms)
+✔ bridge rejects immortality-cultivation events from a wrong origin (0.052166ms)
+✔ bridge rejects a gameId that does not match the active game (0.152792ms)
+✔ bridge ignores messages from a window other than the game frame (0.079875ms)
+✖ lookup replies once to registered dragon-hold (3.751083ms)
+✖ lookup replies once to registered typing-defense (0.523708ms)
+✖ lookup replies once to registered typing-survival (0.333ms)
+✔ lookup silently ignores space origin without loading (0.67125ms)
+✔ lookup silently ignores hostile origin without loading (0.34375ms)
+✔ lookup silently ignores http origin without loading (0.17625ms)
+✔ lookup silently ignores stranger without loading (0.219208ms)
+✔ lookup silently ignores no frame without loading (0.243334ms)
+✔ lookup silently ignores no game without loading (0.262583ms)
+✖ lookup accepts 200 ids (2.291875ms)
+✔ lookup rejects 201 ids before loading, even duplicates (0.279792ms)
+✖ lookup omits new words and constructor, normalizing known words (0.185084ms)
+✔ lookup rejects not object with matching requestId (0.204792ms)
+✔ lookup rejects array query with matching requestId (0.161ms)
+✔ lookup rejects ids not array with matching requestId (0.165333ms)
+✔ lookup rejects non-string id with matching requestId (0.12925ms)
+✔ lookup rejects long id with matching requestId (0.117958ms)
+✔ lookup rejects unknown type with matching requestId (0.209125ms)
+✔ lookup rejects empty array with matching requestId (0.197209ms)
+✔ lookup rejects empty ids with matching requestId (0.154292ms)
+✔ lookup does not reply to invalid requestId (0.15375ms)
+✖ lookup flushes an attempt from the same turn before reading (0.28575ms)
+✖ lookup returns query-failed when the store cannot load (0.283667ms)
+✖ lookup leaves the profile intact and never calls onApplied (0.263416ms)
+✖ lookup matches Dragonhold recall reader with two independent right recalls (0.294ms)
+✔ existing query dispatch still flushes and returns paginated records (0.479917ms)
+ℹ tests 77
+ℹ suites 0
+ℹ pass 68
+ℹ fail 9
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 241.705083
+
+✖ failing tests:
+
+test at tests/learning-lookup.test.mjs:51:3
+✖ lookup replies once to registered dragon-hold (3.751083ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+
+  + 'typing-game:learning:v1:error'
+  - 'typing-game:learning:v1:query-result'
+                             ^
+
+      at expectResult (file:///Users/toandx/htdocs/typing-game/portal/tests/learning-lookup.test.mjs:38:10)
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/portal/tests/learning-lookup.test.mjs:55:18)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'typing-game:learning:v1:error',
+    expected: 'typing-game:learning:v1:query-result',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/learning-lookup.test.mjs:51:3
+✖ lookup replies once to registered typing-defense (0.523708ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+
+  + 'typing-game:learning:v1:error'
+  - 'typing-game:learning:v1:query-result'
+                             ^
+
+      at expectResult (file:///Users/toandx/htdocs/typing-game/portal/tests/learning-lookup.test.mjs:38:10)
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/portal/tests/learning-lookup.test.mjs:55:18)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'typing-game:learning:v1:error',
+    expected: 'typing-game:learning:v1:query-result',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/learning-lookup.test.mjs:51:3
+✖ lookup replies once to registered typing-survival (0.333ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+
+  + 'typing-game:learning:v1:error'
+  - 'typing-game:learning:v1:query-result'
+                             ^
+
+      at expectResult (file:///Users/toandx/htdocs/typing-game/portal/tests/learning-lookup.test.mjs:38:10)
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/portal/tests/learning-lookup.test.mjs:55:18)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'typing-game:learning:v1:error',
+    expected: 'typing-game:learning:v1:query-result',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/learning-lookup.test.mjs:69:1
+✖ lookup accepts 200 ids (2.291875ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+
+  + 'typing-game:learning:v1:error'
+  - 'typing-game:learning:v1:query-result'
+                             ^
+
+      at expectResult (file:///Users/toandx/htdocs/typing-game/portal/tests/learning-lookup.test.mjs:38:10)
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/portal/tests/learning-lookup.test.mjs:74:16)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'typing-game:learning:v1:error',
+    expected: 'typing-game:learning:v1:query-result',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/learning-lookup.test.mjs:83:1
+✖ lookup omits new words and constructor, normalizing known words (0.185084ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+
+  + 'typing-game:learning:v1:error'
+  - 'typing-game:learning:v1:query-result'
+                             ^
+
+      at expectResult (file:///Users/toandx/htdocs/typing-game/portal/tests/learning-lookup.test.mjs:38:10)
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/portal/tests/learning-lookup.test.mjs:87:20)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'typing-game:learning:v1:error',
+    expected: 'typing-game:learning:v1:query-result',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/learning-lookup.test.mjs:112:1
+✖ lookup flushes an attempt from the same turn before reading (0.28575ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+  1 !== 2
+
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/portal/tests/learning-lookup.test.mjs:117:10)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 1,
+    expected: 2,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/learning-lookup.test.mjs:124:1
+✖ lookup returns query-failed when the store cannot load (0.283667ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+
+  + 'invalid-request'
+  - 'query-failed'
+
+      at expectError (file:///Users/toandx/htdocs/typing-game/portal/tests/learning-lookup.test.mjs:47:10)
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/portal/tests/learning-lookup.test.mjs:129:3)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'invalid-request',
+    expected: 'query-failed',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/learning-lookup.test.mjs:131:1
+✖ lookup leaves the profile intact and never calls onApplied (0.263416ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+
+  + 'typing-game:learning:v1:error'
+  - 'typing-game:learning:v1:query-result'
+                             ^
+
+      at expectResult (file:///Users/toandx/htdocs/typing-game/portal/tests/learning-lookup.test.mjs:38:10)
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/portal/tests/learning-lookup.test.mjs:136:3)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'typing-game:learning:v1:error',
+    expected: 'typing-game:learning:v1:query-result',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/learning-lookup.test.mjs:168:1
+✖ lookup matches Dragonhold recall reader with two independent right recalls (0.294ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+
+  + 'typing-game:learning:v1:error'
+  - 'typing-game:learning:v1:query-result'
+                             ^
+
+      at expectResult (file:///Users/toandx/htdocs/typing-game/portal/tests/learning-lookup.test.mjs:38:10)
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/portal/tests/learning-lookup.test.mjs:176:18)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'typing-game:learning:v1:error',
+    expected: 'typing-game:learning:v1:query-result',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+[ELIFECYCLE] Test failed. See above for more details.
+[ELIFECYCLE] Command failed with exit code 1.

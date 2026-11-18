@@ -1,0 +1,47 @@
+{
+ "worktree": "games/.wt-td-ui",
+ "branch": "td-ui",
+ "head": "2a1f61d7da2ee6e6ca4abdc23f8775f872d9c9e7",
+ "statusLines": 25,
+ "paths200": [
+  "docs/changelog/2026-10-30-title-results-art.md",
+  "docs/changelog/README.md",
+  "index.html",
+  "scripts/td/prepare-ui.mjs",
+  "scripts/td/ui-picks.json",
+  "scripts/visual/scenarios/td-theme.mjs",
+  "src/main.ts",
+  "src/ui/art.ts",
+  "src/ui/sheets.ts",
+  "src/ui/td.css",
+  "src/ui/title.css",
+  "src/ui/title.ts",
+  "tests/td-ui-art.test.ts"
+ ],
+ "paths203": [
+  "docs/changelog/2026-10-30-c10-fixes-and-card-icons.md",
+  "scripts/visual/scenarios/td-1c-words.mjs",
+  "src/view/3d/words.ts",
+  "src/view/words/cards.ts",
+  "src/view/words/dom.ts",
+  "src/view/words/feel.css",
+  "src/view/words/safe.ts",
+  "src/view/words/steps.ts",
+  "src/view/words/tray.ts",
+  "tests/td-c10-r5.test.ts",
+  "tests/td-card-art.test.ts",
+  "tests/td-no-emoji.test.ts"
+ ],
+ "unexpected": [],
+ "missing": [],
+ "lsFilesCo": 372,
+ "sha256": "base/wt-sha-before (372 files), equal after",
+ "hashes203MatchReport": "11/11 sourceSha256 of 203/verification.json",
+ "td_css_matches_203_snapshot": true,
+ "diffCheckExit": 0,
+ "protectedDiffExit": "git diff --quiet -- src/kit src/sim src/typing src/content tests/golden -> 0; 0 untracked there",
+ "partialRunDeleted": [
+  "games/typing-defense/tmp/codex-232/ (70 MB, run 15:13-15:20)",
+  "docs/codex-queue/232/ (43 files)"
+ ]
+}

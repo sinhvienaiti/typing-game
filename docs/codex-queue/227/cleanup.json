@@ -1,0 +1,13 @@
+{
+  "cleanupCommand": "python3: shutil.rmtree(Path(\"tmp/codex-227\"))",
+  "exit": 0,
+  "deletedFiles": 4565,
+  "tmpCodex227Exists": false,
+  "tmpValidatePlayModeTestExists": false,
+  "newerCommand": "find portal shared tools/audio-lab scripts infra -path '*/node_modules/.pnpm' -prune -o -newer tmp/codex-227/marker -print",
+  "newerExit": 0,
+  "newerLines": 0,
+  "headAtCleanup": "52005e3fb37424fcd8212670dd8eec728559ff6a",
+  "sourceProductsUnchanged": 36,
+  "allowedArtifactExtensionsOnly": true
+}

@@ -1,0 +1,421 @@
+✔ registry groups every game and lists the new games (0.924417ms)
+✔ bridge accepts dragon-hold events from its registered origin (1.664917ms)
+✔ bridge rejects dragon-hold events from a wrong origin (0.21775ms)
+✔ bridge accepts typing-defense events from its registered origin (0.196459ms)
+✔ bridge rejects typing-defense events from a wrong origin (0.132416ms)
+✔ bridge accepts typing-survival events from its registered origin (0.17075ms)
+✔ bridge rejects typing-survival events from a wrong origin (0.128875ms)
+✔ bridge accepts immortality-cultivation events from its registered origin (0.240084ms)
+✔ bridge rejects immortality-cultivation events from a wrong origin (0.160958ms)
+✔ bridge rejects a gameId that does not match the active game (0.351209ms)
+✔ bridge ignores messages from a window other than the game frame (0.147875ms)
+✖ F2 types lookup from a stored profile drops a sample whose occurredAt nests an answer (7.568709ms)
+✖ F2 types query from a stored profile drops a sample whose occurredAt nests an answer (2.12525ms)
+✖ F2 types lookup from a stored profile drops a sample whose gameId nests an answer (0.891541ms)
+✖ F2 types query from a stored profile drops a sample whose gameId nests an answer (0.718542ms)
+✖ F2 types lookup from a stored profile drops a sample whose activityType nests an answer (0.650458ms)
+✖ F2 types query from a stored profile drops a sample whose activityType nests an answer (0.915542ms)
+✖ F2 types lookup from a stored profile drops a sample whose result nests an answer (0.844667ms)
+✖ F2 types query from a stored profile drops a sample whose result nests an answer (0.755125ms)
+✖ F2 types lookup from a stored profile drops a sample whose hintUsed nests an answer (0.791ms)
+✖ F2 types query from a stored profile drops a sample whose hintUsed nests an answer (0.778042ms)
+✔ F2 types lookup from a backup profile drops a sample whose occurredAt nests an answer (1.667459ms)
+✔ F2 types query from a backup profile drops a sample whose occurredAt nests an answer (1.619833ms)
+✔ F2 types lookup from a backup profile drops a sample whose gameId nests an answer (0.754ms)
+✔ F2 types query from a backup profile drops a sample whose gameId nests an answer (0.576584ms)
+✔ F2 types lookup from a backup profile drops a sample whose activityType nests an answer (0.539042ms)
+✔ F2 types query from a backup profile drops a sample whose activityType nests an answer (0.534708ms)
+✔ F2 types lookup from a backup profile drops a sample whose result nests an answer (0.572625ms)
+✔ F2 types query from a backup profile drops a sample whose result nests an answer (0.56375ms)
+✔ F2 types lookup from a backup profile drops a sample whose hintUsed nests an answer (0.553084ms)
+✔ F2 types query from a backup profile drops a sample whose hintUsed nests an answer (0.640791ms)
+✔ lookup replies once to registered dragon-hold (5.747167ms)
+✔ lookup replies once to registered typing-defense (0.682334ms)
+✔ lookup replies once to registered typing-survival (0.4705ms)
+✔ lookup silently ignores space origin without loading (1.088625ms)
+✔ lookup silently ignores hostile origin without loading (0.518584ms)
+✔ lookup silently ignores http origin without loading (0.442959ms)
+✔ lookup silently ignores stranger without loading (0.464958ms)
+✔ lookup silently ignores no frame without loading (0.415ms)
+✔ lookup silently ignores no game without loading (0.473375ms)
+✔ lookup accepts 200 ids (5.604041ms)
+✔ lookup rejects 201 ids before loading, even duplicates (0.579625ms)
+✔ lookup omits new words and constructor, normalizing known words (0.569875ms)
+✔ lookup rejects not object with matching requestId (0.298625ms)
+✔ lookup rejects array query with matching requestId (0.397167ms)
+✔ lookup rejects ids not array with matching requestId (0.361125ms)
+✔ lookup rejects non-string id with matching requestId (0.399125ms)
+✔ lookup rejects long id with matching requestId (0.365167ms)
+✔ lookup rejects unknown type with matching requestId (0.762292ms)
+✔ lookup rejects empty array with matching requestId (0.252125ms)
+✔ lookup rejects empty ids with matching requestId (0.378542ms)
+✔ lookup does not reply to invalid requestId (0.403125ms)
+✔ lookup flushes an attempt from the same turn before reading (0.64225ms)
+✔ lookup returns query-failed when the store cannot load (0.433625ms)
+✔ lookup leaves the profile intact and never calls onApplied (0.464459ms)
+✔ lookup matches Dragonhold recall reader with two independent right recalls (0.557125ms)
+✔ existing query dispatch still flushes and returns paginated records (0.851625ms)
+✔ F2 lookup sends only contracted sample fields from a vocabulary backup (1.007208ms)
+✔ F2 query sends only contracted sample fields from a vocabulary backup (0.485708ms)
+✔ F2 lookup sends only contracted sample fields from a grammar backup (0.52725ms)
+✔ F2 query sends only contracted sample fields from a grammar backup (0.465209ms)
+✔ F2 lookup sends only contracted sample fields from a sentence backup (0.451666ms)
+✔ F2 query sends only contracted sample fields from a sentence backup (0.47325ms)
+✔ F3 lookup returns only query-failed for a private load error (0.349208ms)
+✔ F3 lookup returns only query-failed for a private profile version error (0.494916ms)
+✔ F3 query returns only query-failed for a private load error (0.340208ms)
+✔ F3 query returns only query-failed for a private profile version error (0.345917ms)
+✔ F4 lookup accepts 100 ligatures after one normalization (0.496667ms)
+✔ F4 lookup accepts ligatures and a combining accent after one normalization (1.088709ms)
+✔ F4 lookup accepts a combining accent after one normalization (0.291875ms)
+ℹ tests 70
+ℹ suites 0
+ℹ pass 60
+ℹ fail 10
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 132.687166
+
+✖ failing tests:
+
+test at portal/tests/learning-bridge.test.mjs:241:7
+✖ F2 types lookup from a stored profile drops a sample whose occurredAt nests an answer (7.568709ms)
+  AssertionError [ERR_ASSERTION]: object
+  + actual - expected
+
+    [
+      {
+  +     activityType: 'meaning-recall',
+  +     gameId: 'dragon-hold',
+  +     hintUsed: false,
+  +     occurredAt: {
+  +       expectedAnswer: 'PRIVATE_NESTED_EXPECTED_ANSWER',
+  +       userAnswer: 'PRIVATE_NESTED_USER_ANSWER'
+  +     },
+  +     result: 'correct'
+  +   },
+  +   {
+        activityType: 'listening',
+        gameId: 'dragon-hold',
+        hintUsed: true,
+        occurredAt: '2026-10-30T06:01:00.000Z',
+        result: 'correct'
+
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/portal/tests/learning-bridge.test.mjs:253:18)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ { occurredAt: [Object], gameId: 'dragon-hold', activityType: 'meaning-recall', result: 'correct', hintUsed: false }, { occurredAt: '2026-10-30T06:01:00.000Z', gameId: 'dragon-hold', activityType: 'listening', result: 'correct', hintUsed: true } ],
+    expected: [ { occurredAt: '2026-10-30T06:01:00.000Z', gameId: 'dragon-hold', activityType: 'listening', result: 'correct', hintUsed: true } ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at portal/tests/learning-bridge.test.mjs:241:7
+✖ F2 types query from a stored profile drops a sample whose occurredAt nests an answer (2.12525ms)
+  AssertionError [ERR_ASSERTION]: object
+  + actual - expected
+
+    [
+      {
+  +     activityType: 'meaning-recall',
+  +     gameId: 'dragon-hold',
+  +     hintUsed: false,
+  +     occurredAt: {
+  +       expectedAnswer: 'PRIVATE_NESTED_EXPECTED_ANSWER',
+  +       userAnswer: 'PRIVATE_NESTED_USER_ANSWER'
+  +     },
+  +     result: 'correct'
+  +   },
+  +   {
+        activityType: 'listening',
+        gameId: 'dragon-hold',
+        hintUsed: true,
+        occurredAt: '2026-10-30T06:01:00.000Z',
+        result: 'correct'
+
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/portal/tests/learning-bridge.test.mjs:253:18)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ { occurredAt: [Object], gameId: 'dragon-hold', activityType: 'meaning-recall', result: 'correct', hintUsed: false }, { occurredAt: '2026-10-30T06:01:00.000Z', gameId: 'dragon-hold', activityType: 'listening', result: 'correct', hintUsed: true } ],
+    expected: [ { occurredAt: '2026-10-30T06:01:00.000Z', gameId: 'dragon-hold', activityType: 'listening', result: 'correct', hintUsed: true } ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at portal/tests/learning-bridge.test.mjs:241:7
+✖ F2 types lookup from a stored profile drops a sample whose gameId nests an answer (0.891541ms)
+  AssertionError [ERR_ASSERTION]: object
+  + actual - expected
+
+    [
+      {
+  +     activityType: 'meaning-recall',
+  +     gameId: {
+  +       expectedAnswer: 'PRIVATE_NESTED_EXPECTED_ANSWER',
+  +       userAnswer: 'PRIVATE_NESTED_USER_ANSWER'
+  +     },
+  +     hintUsed: false,
+  +     occurredAt: '2026-10-30T06:00:00.000Z',
+  +     result: 'correct'
+  +   },
+  +   {
+        activityType: 'listening',
+        gameId: 'dragon-hold',
+        hintUsed: true,
+        occurredAt: '2026-10-30T06:01:00.000Z',
+        result: 'correct'
+
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/portal/tests/learning-bridge.test.mjs:253:18)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ { occurredAt: '2026-10-30T06:00:00.000Z', gameId: [Object], activityType: 'meaning-recall', result: 'correct', hintUsed: false }, { occurredAt: '2026-10-30T06:01:00.000Z', gameId: 'dragon-hold', activityType: 'listening', result: 'correct', hintUsed: true } ],
+    expected: [ { occurredAt: '2026-10-30T06:01:00.000Z', gameId: 'dragon-hold', activityType: 'listening', result: 'correct', hintUsed: true } ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at portal/tests/learning-bridge.test.mjs:241:7
+✖ F2 types query from a stored profile drops a sample whose gameId nests an answer (0.718542ms)
+  AssertionError [ERR_ASSERTION]: object
+  + actual - expected
+
+    [
+      {
+  +     activityType: 'meaning-recall',
+  +     gameId: {
+  +       expectedAnswer: 'PRIVATE_NESTED_EXPECTED_ANSWER',
+  +       userAnswer: 'PRIVATE_NESTED_USER_ANSWER'
+  +     },
+  +     hintUsed: false,
+  +     occurredAt: '2026-10-30T06:00:00.000Z',
+  +     result: 'correct'
+  +   },
+  +   {
+        activityType: 'listening',
+        gameId: 'dragon-hold',
+        hintUsed: true,
+        occurredAt: '2026-10-30T06:01:00.000Z',
+        result: 'correct'
+
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/portal/tests/learning-bridge.test.mjs:253:18)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ { occurredAt: '2026-10-30T06:00:00.000Z', gameId: [Object], activityType: 'meaning-recall', result: 'correct', hintUsed: false }, { occurredAt: '2026-10-30T06:01:00.000Z', gameId: 'dragon-hold', activityType: 'listening', result: 'correct', hintUsed: true } ],
+    expected: [ { occurredAt: '2026-10-30T06:01:00.000Z', gameId: 'dragon-hold', activityType: 'listening', result: 'correct', hintUsed: true } ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at portal/tests/learning-bridge.test.mjs:241:7
+✖ F2 types lookup from a stored profile drops a sample whose activityType nests an answer (0.650458ms)
+  AssertionError [ERR_ASSERTION]: object
+  + actual - expected
+
+    [
+      {
+  +     activityType: {
+  +       expectedAnswer: 'PRIVATE_NESTED_EXPECTED_ANSWER',
+  +       userAnswer: 'PRIVATE_NESTED_USER_ANSWER'
+  +     },
+  +     gameId: 'dragon-hold',
+  +     hintUsed: false,
+  +     occurredAt: '2026-10-30T06:00:00.000Z',
+  +     result: 'correct'
+  +   },
+  +   {
+        activityType: 'listening',
+        gameId: 'dragon-hold',
+        hintUsed: true,
+        occurredAt: '2026-10-30T06:01:00.000Z',
+        result: 'correct'
+
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/portal/tests/learning-bridge.test.mjs:253:18)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ { occurredAt: '2026-10-30T06:00:00.000Z', gameId: 'dragon-hold', activityType: [Object], result: 'correct', hintUsed: false }, { occurredAt: '2026-10-30T06:01:00.000Z', gameId: 'dragon-hold', activityType: 'listening', result: 'correct', hintUsed: true } ],
+    expected: [ { occurredAt: '2026-10-30T06:01:00.000Z', gameId: 'dragon-hold', activityType: 'listening', result: 'correct', hintUsed: true } ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at portal/tests/learning-bridge.test.mjs:241:7
+✖ F2 types query from a stored profile drops a sample whose activityType nests an answer (0.915542ms)
+  AssertionError [ERR_ASSERTION]: object
+  + actual - expected
+
+    [
+      {
+  +     activityType: {
+  +       expectedAnswer: 'PRIVATE_NESTED_EXPECTED_ANSWER',
+  +       userAnswer: 'PRIVATE_NESTED_USER_ANSWER'
+  +     },
+  +     gameId: 'dragon-hold',
+  +     hintUsed: false,
+  +     occurredAt: '2026-10-30T06:00:00.000Z',
+  +     result: 'correct'
+  +   },
+  +   {
+        activityType: 'listening',
+        gameId: 'dragon-hold',
+        hintUsed: true,
+        occurredAt: '2026-10-30T06:01:00.000Z',
+        result: 'correct'
+
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/portal/tests/learning-bridge.test.mjs:253:18)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ { occurredAt: '2026-10-30T06:00:00.000Z', gameId: 'dragon-hold', activityType: [Object], result: 'correct', hintUsed: false }, { occurredAt: '2026-10-30T06:01:00.000Z', gameId: 'dragon-hold', activityType: 'listening', result: 'correct', hintUsed: true } ],
+    expected: [ { occurredAt: '2026-10-30T06:01:00.000Z', gameId: 'dragon-hold', activityType: 'listening', result: 'correct', hintUsed: true } ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at portal/tests/learning-bridge.test.mjs:241:7
+✖ F2 types lookup from a stored profile drops a sample whose result nests an answer (0.844667ms)
+  AssertionError [ERR_ASSERTION]: object
+  + actual - expected
+
+    [
+      {
+  +     activityType: 'meaning-recall',
+  +     gameId: 'dragon-hold',
+  +     hintUsed: false,
+  +     occurredAt: '2026-10-30T06:00:00.000Z',
+  +     result: {
+  +       expectedAnswer: 'PRIVATE_NESTED_EXPECTED_ANSWER',
+  +       userAnswer: 'PRIVATE_NESTED_USER_ANSWER'
+  +     }
+  +   },
+  +   {
+        activityType: 'listening',
+        gameId: 'dragon-hold',
+        hintUsed: true,
+        occurredAt: '2026-10-30T06:01:00.000Z',
+        result: 'correct'
+
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/portal/tests/learning-bridge.test.mjs:253:18)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ { occurredAt: '2026-10-30T06:00:00.000Z', gameId: 'dragon-hold', activityType: 'meaning-recall', result: [Object], hintUsed: false }, { occurredAt: '2026-10-30T06:01:00.000Z', gameId: 'dragon-hold', activityType: 'listening', result: 'correct', hintUsed: true } ],
+    expected: [ { occurredAt: '2026-10-30T06:01:00.000Z', gameId: 'dragon-hold', activityType: 'listening', result: 'correct', hintUsed: true } ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at portal/tests/learning-bridge.test.mjs:241:7
+✖ F2 types query from a stored profile drops a sample whose result nests an answer (0.755125ms)
+  AssertionError [ERR_ASSERTION]: object
+  + actual - expected
+
+    [
+      {
+  +     activityType: 'meaning-recall',
+  +     gameId: 'dragon-hold',
+  +     hintUsed: false,
+  +     occurredAt: '2026-10-30T06:00:00.000Z',
+  +     result: {
+  +       expectedAnswer: 'PRIVATE_NESTED_EXPECTED_ANSWER',
+  +       userAnswer: 'PRIVATE_NESTED_USER_ANSWER'
+  +     }
+  +   },
+  +   {
+        activityType: 'listening',
+        gameId: 'dragon-hold',
+        hintUsed: true,
+        occurredAt: '2026-10-30T06:01:00.000Z',
+        result: 'correct'
+
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/portal/tests/learning-bridge.test.mjs:253:18)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ { occurredAt: '2026-10-30T06:00:00.000Z', gameId: 'dragon-hold', activityType: 'meaning-recall', result: [Object], hintUsed: false }, { occurredAt: '2026-10-30T06:01:00.000Z', gameId: 'dragon-hold', activityType: 'listening', result: 'correct', hintUsed: true } ],
+    expected: [ { occurredAt: '2026-10-30T06:01:00.000Z', gameId: 'dragon-hold', activityType: 'listening', result: 'correct', hintUsed: true } ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at portal/tests/learning-bridge.test.mjs:241:7
+✖ F2 types lookup from a stored profile drops a sample whose hintUsed nests an answer (0.791ms)
+  AssertionError [ERR_ASSERTION]: object
+  + actual - expected
+
+    [
+      {
+  +     activityType: 'meaning-recall',
+  +     gameId: 'dragon-hold',
+  +     hintUsed: {
+  +       expectedAnswer: 'PRIVATE_NESTED_EXPECTED_ANSWER',
+  +       userAnswer: 'PRIVATE_NESTED_USER_ANSWER'
+  +     },
+  +     occurredAt: '2026-10-30T06:00:00.000Z',
+  +     result: 'correct'
+  +   },
+  +   {
+        activityType: 'listening',
+        gameId: 'dragon-hold',
+        hintUsed: true,
+        occurredAt: '2026-10-30T06:01:00.000Z',
+        result: 'correct'
+
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/portal/tests/learning-bridge.test.mjs:253:18)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ { occurredAt: '2026-10-30T06:00:00.000Z', gameId: 'dragon-hold', activityType: 'meaning-recall', result: 'correct', hintUsed: [Object] }, { occurredAt: '2026-10-30T06:01:00.000Z', gameId: 'dragon-hold', activityType: 'listening', result: 'correct', hintUsed: true } ],
+    expected: [ { occurredAt: '2026-10-30T06:01:00.000Z', gameId: 'dragon-hold', activityType: 'listening', result: 'correct', hintUsed: true } ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at portal/tests/learning-bridge.test.mjs:241:7
+✖ F2 types query from a stored profile drops a sample whose hintUsed nests an answer (0.778042ms)
+  AssertionError [ERR_ASSERTION]: object
+  + actual - expected
+
+    [
+      {
+  +     activityType: 'meaning-recall',
+  +     gameId: 'dragon-hold',
+  +     hintUsed: {
+  +       expectedAnswer: 'PRIVATE_NESTED_EXPECTED_ANSWER',
+  +       userAnswer: 'PRIVATE_NESTED_USER_ANSWER'
+  +     },
+  +     occurredAt: '2026-10-30T06:00:00.000Z',
+  +     result: 'correct'
+  +   },
+  +   {
+        activityType: 'listening',
+        gameId: 'dragon-hold',
+        hintUsed: true,
+        occurredAt: '2026-10-30T06:01:00.000Z',
+        result: 'correct'
+
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/portal/tests/learning-bridge.test.mjs:253:18)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ { occurredAt: '2026-10-30T06:00:00.000Z', gameId: 'dragon-hold', activityType: 'meaning-recall', result: 'correct', hintUsed: [Object] }, { occurredAt: '2026-10-30T06:01:00.000Z', gameId: 'dragon-hold', activityType: 'listening', result: 'correct', hintUsed: true } ],
+    expected: [ { occurredAt: '2026-10-30T06:01:00.000Z', gameId: 'dragon-hold', activityType: 'listening', result: 'correct', hintUsed: true } ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+exit: 1

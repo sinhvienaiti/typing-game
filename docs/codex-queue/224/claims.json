@@ -1,0 +1,200 @@
+[
+  {
+    "ticket": "170",
+    "check": "Luồng trước sửa",
+    "reported": "1 đỏ / 6 xanh",
+    "measured": "Tests  1 failed | 6 passed (7)",
+    "match": "khớp hồ sơ",
+    "explanation": "Chỉ đọc lại log lịch sử; không tái hiện trạng thái và tải máy của phiên trước.",
+    "evidence": "historical-evidence.json"
+  },
+  {
+    "ticket": "170",
+    "check": "Test mới trước sửa mã",
+    "reported": "9 đỏ / 4 xanh",
+    "measured": "Tests  9 failed | 4 passed (13)",
+    "match": "khớp hồ sơ",
+    "explanation": "Chỉ đọc lại log lịch sử; không tái hiện trạng thái và tải máy của phiên trước.",
+    "evidence": "historical-evidence.json"
+  },
+  {
+    "ticket": "170",
+    "check": "Check lần đầu",
+    "reported": "378 xanh / 2 đỏ; CLI 7,858 s",
+    "measured": "Tests  2 failed | 378 passed (380)",
+    "match": "khớp hồ sơ",
+    "explanation": "Chỉ đọc lại log lịch sử; không tái hiện trạng thái và tải máy của phiên trước.",
+    "evidence": "historical-evidence.json"
+  },
+  {
+    "ticket": "170",
+    "check": "CLI riêng ba lần trước đổi timeout",
+    "reported": "3/3 xanh; test 1,834/1,913/2,015 s; cả lệnh 4,075/3,362/3,593 s",
+    "measured": "Log cũ 3/3 xanh; CLI mới trong check-170 3,485 s",
+    "match": "khớp hồ sơ",
+    "explanation": "Không có lỗi thời gian ở lượt mới nên không kích hoạt chạy lặp ba lần. Thời gian cũ không phải số tái đo.",
+    "evidence": "historical-evidence.json; check-170.log"
+  },
+  {
+    "ticket": "170",
+    "check": "Check cuối",
+    "reported": "37 file / 380 test; mã 0; 24,422 s",
+    "measured": "37/380; mã 0; 17.4121 s",
+    "match": "khớp",
+    "explanation": "Thời gian thay đổi theo tải máy.",
+    "evidence": "check-170.log; check-170-run.json"
+  },
+  {
+    "ticket": "170",
+    "check": "Kit",
+    "reported": "33/33",
+    "measured": "33/33",
+    "match": "khớp",
+    "explanation": "34 file kit gồm manifest; verifier kiểm 33 file được manifest liệt kê.",
+    "evidence": "check-170.log; kit.json"
+  },
+  {
+    "ticket": "170",
+    "check": "Golden trong check",
+    "reported": "6/6; hai hash giữ nguyên",
+    "measured": "6/6; 2/2 hash giữ nguyên",
+    "match": "khớp",
+    "explanation": "Không cập nhật golden.",
+    "evidence": "check-170.log; integrity.json"
+  },
+  {
+    "ticket": "170",
+    "check": "Sim ≤2 ms",
+    "reported": "0,064 / 0,057 / 0,232 ms",
+    "measured": "[0.069, 0.053, 0.104] ms",
+    "match": "đạt ngưỡng",
+    "explanation": "Số mới 0,069/0,053/0,104 ms; không yêu cầu trùng thời gian cũ.",
+    "evidence": "check-170.log"
+  },
+  {
+    "ticket": "170",
+    "check": "Ngân sách hai trang ≤85 kB",
+    "reported": "79,60 / 81,07 kB",
+    "measured": "79,60 / 81,07 kB",
+    "match": "khớp",
+    "explanation": "Cùng nguồn nền 170.",
+    "evidence": "check-170.log"
+  },
+  {
+    "ticket": "170",
+    "check": "Whitespace và phạm vi",
+    "reported": "diff --check=0; sim/content/typing sạch",
+    "measured": "mã 0; 19 đường, 0 ở ba thư mục đó",
+    "match": "khớp",
+    "explanation": "14 sửa/5 mới; kit/golden được kiểm hash.",
+    "evidence": "diff-check-run.json; split.json; integrity.json"
+  },
+  {
+    "ticket": "170",
+    "check": "Production",
+    "reported": "mã 1; 69 lỗi = 1 local-host + 68 missing-model",
+    "measured": "mã 1; 69 = 1 + 68",
+    "match": "khớp",
+    "explanation": "Không báo nhầm về tồn tại model.",
+    "evidence": "pack-170.json; deploy-170-run.json"
+  },
+  {
+    "ticket": "170",
+    "check": "Checker local trên cùng gói",
+    "reported": "mã 1; 68 missing-model",
+    "measured": "mã 1; 68 missing-model",
+    "match": "khớp",
+    "explanation": "Chỉ local-host được miễn.",
+    "evidence": "pack-170-local.json"
+  },
+  {
+    "ticket": "170",
+    "check": "Inventory",
+    "reported": "55 file / 1.205.337 byte",
+    "measured": "55 file / 1.206.837 byte; 54/55 hash trùng",
+    "match": "khớp sau giải thích",
+    "explanation": "Chỉ .vite/manifest.json 15.155→16.655 byte: 60 × tiền tố ../../../../.wt-td-codex/ dài 25 = 1.500 byte.",
+    "evidence": "dist-170-comparison.json; manifest-paths.json"
+  },
+  {
+    "ticket": "170",
+    "check": "Thông tin bộ kiểm",
+    "reported": "95 level không ghim; external 0; GLB thiếu 68",
+    "measured": "95; external []; 68 missing-model",
+    "match": "khớp",
+    "explanation": "95 là thông tin, không thuộc lỗi.",
+    "evidence": "pack-170.json"
+  },
+  {
+    "ticket": "208",
+    "check": "Kiểm 1 · check",
+    "reported": "40/414; kit 33; mã 0; 12,297 s",
+    "measured": "40/414; kit 33; mã 0; 18.3881 s",
+    "match": "khớp",
+    "explanation": "Thêm 3 file/32 test; deploy-pack thêm 2 test: tổng tăng 34.",
+    "evidence": "check.log; test-growth.json"
+  },
+  {
+    "ticket": "208",
+    "check": "Kiểm 2 · golden",
+    "reported": "2/2 same=true; 19.660/5.695 tick",
+    "measured": "2/2; 19.660/5.695; 0 problems/rejected",
+    "match": "khớp",
+    "explanation": "Lệnh check không ghi golden.",
+    "evidence": "golden.log"
+  },
+  {
+    "ticket": "208",
+    "check": "Kiểm 3 · ngân sách/chunk",
+    "reported": "79,60 / 81,30 kB; bridge chỉ trong Học",
+    "measured": "Vắng 79,60/81,16; trống 79,60/81,30; entry 0 giao thức học",
+    "match": "khớp theo biến",
+    "explanation": "Vắng biến gập hằng portalHome(undefined), learn ít hơn 264 byte. Cả hai ≤85.",
+    "evidence": "check.log; deploy-empty.log; chunks.json"
+  },
+  {
+    "ticket": "208",
+    "check": "Kiểm 4 · production",
+    "reported": "0 lỗi; 53 / 1.167.750; 0 host nhà",
+    "measured": "Trống: đúng số và 53/53 hash; vắng: 53 / 1.167.486",
+    "match": "khớp theo biến",
+    "explanation": "Mỗi gói 21 file văn bản, 0 host nhà; 0 GLB/GLTF/BIN, không models/.vite.",
+    "evidence": "pack-empty.json; dist-empty-comparison.json; scan.json"
+  },
+  {
+    "ticket": "208",
+    "check": "Kiểm 5 · demo/kiểm chéo",
+    "reported": "demo mã 0, 0 lỗi; production 1 local-host",
+    "measured": "đúng; demo 53 file / 1.167.801 byte",
+    "match": "khớp",
+    "explanation": "Checker production mã 1, chỉ 1 local-host.",
+    "evidence": "pack-local.json; pack-local-production.json"
+  },
+  {
+    "ticket": "208",
+    "check": "Kiểm 6 · trước/sau",
+    "reported": "69→0; 55→53; 1.205.337→1.167.750 (−37.587)",
+    "measured": "69→0; 55→53; 1.206.837→1.167.750 (−39.087)",
+    "match": "khớp sau giải thích",
+    "explanation": "Lọc bỏ 2 file/39.623 byte, hơn số cũ 1.500 do manifest Vite; JS nguồn tăng 536 byte. Trừ phần đường môi trường thì giảm đúng 37.587.",
+    "evidence": "deploy-empty.log; dist-170.json; dist-empty.json"
+  },
+  {
+    "ticket": "208",
+    "check": "Kiểm 7 · bảo toàn/whitespace",
+    "reported": "37/37; diff --check=0",
+    "measured": "37/37; 329/329; mã 0",
+    "match": "khớp",
+    "explanation": "Kit, golden và public manifest nguyên byte.",
+    "evidence": "integrity.json; kit.json"
+  },
+  {
+    "ticket": "208",
+    "check": "Kiểm 8 · phạm vi",
+    "reported": "28 = 19 + 12 − 3; HEAD không đổi",
+    "measured": "28, đúng 3 dùng chung; 0 đường lạ; HEAD không đổi",
+    "match": "khớp",
+    "explanation": "Patch ngược 12 file sạch, 7 file mới xóa đúng, ba bản before khớp.",
+    "evidence": "paths.json; split.json; integrity.json"
+  }
+]

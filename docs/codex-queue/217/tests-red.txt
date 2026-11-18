@@ -1,0 +1,21 @@
+
+==================================== ERRORS ====================================
+________________ ERROR collecting firefly/tests/test_firefly.py ________________
+ImportError while importing test module '/Users/toandx/htdocs/typing-game/tools/audio-lab/firefly/tests/test_firefly.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+firefly/tests/test_firefly.py:11: in <module>
+    from firefly import main
+E   ImportError: cannot import name 'main' from 'firefly' (unknown location)
+__________ ERROR collecting build/tests/test_build_firefly_licence.py __________
+ImportError while importing test module '/Users/toandx/htdocs/typing-game/tools/audio-lab/build/tests/test_build_firefly_licence.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+build/tests/test_build_firefly_licence.py:8: in <module>
+    from firefly import main
+E   ImportError: cannot import name 'main' from 'firefly' (unknown location)
+=========================== short test summary info ============================
+ERROR firefly/tests/test_firefly.py
+ERROR build/tests/test_build_firefly_licence.py
+!!!!!!!!!!!!!!!!!!! Interrupted: 2 errors during collection !!!!!!!!!!!!!!!!!!!!
+2 errors in 1.25s

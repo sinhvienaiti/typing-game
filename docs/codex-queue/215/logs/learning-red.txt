@@ -1,0 +1,817 @@
+$ node --test shared/learning/*.test.mjs
+✔ Adaptive Mix maps explicit weakness types to transparent activities (0.547042ms)
+✔ Adaptive Mix keeps grammar and contextual listening on capable games (0.123333ms)
+✔ Adaptive Mix session groups assignments into deterministic concrete segments (2.617666ms)
+✔ vocabulary normalization matches the shared library contract (1.190958ms)
+✔ event parser validates and canonicalizes learning events (2.30325ms)
+✔ vocabulary aggregates are deterministic and keep source games unique (2.041709ms)
+✔ recent mistakes are bounded (1.092583ms)
+✔ grammar keeps error classifications separate from vocabulary spelling (0.3305ms)
+✔ sentence answers are bounded and keep accepted-result history (0.770375ms)
+✔ weak and stale records receive higher review priority (0.1235ms)
+✔ batched events are applied in event-time order without rolling current state backward (0.203709ms)
+✔ batched learning updates keep the input profile immutable (0.175ms)
+✔ prototype-like entity ids are stored as own learning records safely (0.114917ms)
+✔ Karaoke review dataset keeps reliable sentence and word text (5.8685ms)
+✔ Karaoke review dataset rejects unsupported entity plans (0.304916ms)
+✖ lookup contract constants match the kit text and parse the nested query (11.210208ms)
+✖ lookup parser normalizes vocabulary, deduplicates and preserves first order (0.105208ms)
+✖ lookup parser rejects null (0.37425ms)
+✖ lookup parser rejects array (0.093667ms)
+✖ lookup parser rejects string (0.058333ms)
+✖ lookup parser rejects date (0.048292ms)
+✖ lookup parser rejects custom prototype (0.045791ms)
+✖ lookup parser rejects missing type (0.050417ms)
+✖ lookup parser rejects unknown type (0.062375ms)
+✖ lookup parser rejects ids not array (0.091125ms)
+✖ lookup parser rejects non-string id (0.060125ms)
+✖ lookup parser rejects long id (0.044ms)
+✖ lookup parser rejects empty array (0.041958ms)
+✖ lookup parser rejects empty ids (0.034083ms)
+✖ lookup parser rejects 201 repeated ids (0.031084ms)
+✖ lookup directly reads requested records in order, recalculating query item metrics (1.407167ms)
+✖ lookup vocabulary excludes prototype keys, including own records, and supports legacy samples (0.138459ms)
+✖ lookup grammar excludes prototype keys, including own records, and supports legacy samples (0.093416ms)
+✖ lookup sentence excludes prototype keys, including own records, and supports legacy samples (0.0845ms)
+✖ core vocabulary keeps eight chronological samples with five fields, including a late event (0.955792ms)
+✖ core grammar keeps eight chronological samples with five fields, including a late event (0.411125ms)
+✖ core sentence keeps eight chronological samples with five fields, including a late event (0.411042ms)
+✔ backup accepts eight samples and a legacy record without samples (0.5545ms)
+✖ backup rejects nine samples (0.159417ms)
+✖ backup rejects null sample (0.086584ms)
+✖ backup rejects array sample (0.076542ms)
+✖ backup rejects string sample (0.07525ms)
+✖ backup rejects non-array (0.0815ms)
+✖ backup rejects null list (0.066958ms)
+✔ Mixed Review balances items deterministically across compatible games (2.414459ms)
+✔ Mixed Review segment plan keeps parent metadata but targets one concrete game (0.290166ms)
+✔ Mixed Review progress advances only on persisted events from the active game/item (1.756542ms)
+✔ Monkey review dataset keeps parent order and bounded reconstruction context (12.473584ms)
+✔ Monkey review dataset rejects plans for another game (0.400667ms)
+✔ learning profile backup round-trips through JSON (4.933416ms)
+✔ import accepts a validated raw v1 profile for recovery compatibility (0.255084ms)
+✔ import rejects malformed records before IndexedDB replacement (0.305708ms)
+✔ import rejects partial v1 profiles instead of silently filling collections (0.190083ms)
+✔ import rejects non-canonical vocabulary keys (0.16525ms)
+✔ selected reset clears only requested collections (0.16825ms)
+✔ reset all returns a fresh empty profile (0.065291ms)
+✔ import rejects internally inconsistent learning counters (0.143834ms)
+✔ import rejects out-of-range derived scores (3.766667ms)
+✔ import rejects fractional counters and impossible error totals (0.989458ms)
+✔ learning message contract accepts only supported versioned messages (2.809625ms)
+✔ learning query message validates the nested query (0.407125ms)
+✔ query parser enforces bounded pagination, filters and sort values (0.452375ms)
+✔ expanded dashboard filters remain bounded and validated (0.371292ms)
+✔ batched learning events preserve every event in order (1.12225ms)
+✔ profile query filters, sorts and paginates bounded results (1.654375ms)
+✔ large learning profiles remain page-bounded and navigable (100.08925ms)
+✔ Recall review dataset preserves parent queue order and metadata (12.624208ms)
+✔ Recall review dataset rejects another game (0.32225ms)
+✔ Recall review dataset rejects non-vocabulary queue content (0.097583ms)
+✔ ready acknowledgement retains a pending dataset for browser refresh (0.350292ms)
+✔ same game refresh keeps review state while route exit abandons it (0.127208ms)
+✔ review plan input rejects invalid content and amount (1.021ms)
+✔ Due Now returns priority-sorted compatible items (6.920666ms)
+✔ capability matching excludes unsupported grammar from Space Typing (0.263458ms)
+✔ source filter and amount limit are deterministic (0.230417ms)
+✔ Quick Review uses a 15-minute Adaptive Mix plan (0.1965ms)
+✔ compatibility helper keeps grammar on capable games only (0.354291ms)
+✔ Monkey goal compatibility narrows content before dataset launch (0.224625ms)
+✔ cross-game capability matrix exposes only concrete review executors (0.052625ms)
+✔ persisted review plan validation rejects stale malformed session data (1.139916ms)
+✔ Shooter review dataset preserves the parent-selected vocabulary set (8.661333ms)
+✔ Shooter review dataset rejects incompatible game plans (0.296583ms)
+✔ Space review dataset preserves selected vocabulary metadata (10.348125ms)
+✔ Space review dataset rejects incompatible game plans (0.300875ms)
+ℹ tests 84
+ℹ suites 0
+ℹ pass 56
+ℹ fail 28
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 181.034875
+
+✖ failing tests:
+
+test at shared/learning/lookup.test.mjs:23:1
+✖ lookup contract constants match the kit text and parse the nested query (11.210208ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+
+  + undefined
+  - 'typing-game:learning:v1:lookup'
+
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/shared/learning/lookup.test.mjs:25:10)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: 'typing-game:learning:v1:lookup',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at shared/learning/lookup.test.mjs:32:1
+✖ lookup parser normalizes vocabulary, deduplicates and preserves first order (0.105208ms)
+  TypeError [Error]: query.parseLearningLookup is not a function
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/shared/learning/lookup.test.mjs:33:26)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3)
+
+test at shared/learning/lookup.test.mjs:50:3
+✖ lookup parser rejects null (0.37425ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+
+  + 'undefined'
+  - 'function'
+
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/shared/learning/lookup.test.mjs:51:12)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'undefined',
+    expected: 'function',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at shared/learning/lookup.test.mjs:50:3
+✖ lookup parser rejects array (0.093667ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+
+  + 'undefined'
+  - 'function'
+
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/shared/learning/lookup.test.mjs:51:12)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'undefined',
+    expected: 'function',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at shared/learning/lookup.test.mjs:50:3
+✖ lookup parser rejects string (0.058333ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+
+  + 'undefined'
+  - 'function'
+
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/shared/learning/lookup.test.mjs:51:12)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'undefined',
+    expected: 'function',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at shared/learning/lookup.test.mjs:50:3
+✖ lookup parser rejects date (0.048292ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+
+  + 'undefined'
+  - 'function'
+
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/shared/learning/lookup.test.mjs:51:12)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'undefined',
+    expected: 'function',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at shared/learning/lookup.test.mjs:50:3
+✖ lookup parser rejects custom prototype (0.045791ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+
+  + 'undefined'
+  - 'function'
+
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/shared/learning/lookup.test.mjs:51:12)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'undefined',
+    expected: 'function',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at shared/learning/lookup.test.mjs:50:3
+✖ lookup parser rejects missing type (0.050417ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+
+  + 'undefined'
+  - 'function'
+
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/shared/learning/lookup.test.mjs:51:12)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'undefined',
+    expected: 'function',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at shared/learning/lookup.test.mjs:50:3
+✖ lookup parser rejects unknown type (0.062375ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+
+  + 'undefined'
+  - 'function'
+
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/shared/learning/lookup.test.mjs:51:12)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'undefined',
+    expected: 'function',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at shared/learning/lookup.test.mjs:50:3
+✖ lookup parser rejects ids not array (0.091125ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+
+  + 'undefined'
+  - 'function'
+
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/shared/learning/lookup.test.mjs:51:12)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'undefined',
+    expected: 'function',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at shared/learning/lookup.test.mjs:50:3
+✖ lookup parser rejects non-string id (0.060125ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+
+  + 'undefined'
+  - 'function'
+
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/shared/learning/lookup.test.mjs:51:12)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'undefined',
+    expected: 'function',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at shared/learning/lookup.test.mjs:50:3
+✖ lookup parser rejects long id (0.044ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+
+  + 'undefined'
+  - 'function'
+
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/shared/learning/lookup.test.mjs:51:12)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'undefined',
+    expected: 'function',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at shared/learning/lookup.test.mjs:50:3
+✖ lookup parser rejects empty array (0.041958ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+
+  + 'undefined'
+  - 'function'
+
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/shared/learning/lookup.test.mjs:51:12)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'undefined',
+    expected: 'function',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at shared/learning/lookup.test.mjs:50:3
+✖ lookup parser rejects empty ids (0.034083ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+
+  + 'undefined'
+  - 'function'
+
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/shared/learning/lookup.test.mjs:51:12)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'undefined',
+    expected: 'function',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at shared/learning/lookup.test.mjs:50:3
+✖ lookup parser rejects 201 repeated ids (0.031084ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+
+  + 'undefined'
+  - 'function'
+
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/shared/learning/lookup.test.mjs:51:12)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'undefined',
+    expected: 'function',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at shared/learning/lookup.test.mjs:56:1
+✖ lookup directly reads requested records in order, recalculating query item metrics (1.407167ms)
+  TypeError [Error]: query.lookupLearningRecords is not a function
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/shared/learning/lookup.test.mjs:60:24)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+
+test at shared/learning/lookup.test.mjs:75:3
+✖ lookup vocabulary excludes prototype keys, including own records, and supports legacy samples (0.138459ms)
+  TypeError [Error]: query.lookupLearningRecords is not a function
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/shared/learning/lookup.test.mjs:81:26)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+
+test at shared/learning/lookup.test.mjs:75:3
+✖ lookup grammar excludes prototype keys, including own records, and supports legacy samples (0.093416ms)
+  TypeError [Error]: query.lookupLearningRecords is not a function
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/shared/learning/lookup.test.mjs:81:26)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+
+test at shared/learning/lookup.test.mjs:75:3
+✖ lookup sentence excludes prototype keys, including own records, and supports legacy samples (0.0845ms)
+  TypeError [Error]: query.lookupLearningRecords is not a function
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/shared/learning/lookup.test.mjs:81:26)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+
+test at shared/learning/lookup.test.mjs:90:3
+✖ core vocabulary keeps eight chronological samples with five fields, including a late event (0.955792ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+
+  + undefined
+  - [
+  -   {
+  -     activityType: 'listening',
+  -     gameId: 'recall-typing',
+  -     hintUsed: true,
+  -     occurredAt: '2026-10-30T06:03:00.000Z',
+  -     result: 'correct'
+  -   },
+  -   {
+  -     activityType: 'review-card',
+  -     gameId: 'recall-typing',
+  -     hintUsed: false,
+  -     occurredAt: '2026-10-30T06:04:00.000Z',
+  -     result: 'wrong'
+  -   },
+  -   {
+  -     activityType: 'typing-attack',
+  -     gameId: 'recall-typing',
+  -     hintUsed: true,
+  -     occurredAt: '2026-10-30T06:05:00.000Z',
+  -     result: 'correct'
+  -   },
+  -   {
+  -     activityType: 'meaning-recall',
+  -     gameId: 'recall-typing',
+  -     hintUsed: false,
+  -     occurredAt: '2026-10-30T06:06:00.000Z',
+  -     result: 'correct'
+  -   },
+  -   {
+  -     activityType: 'listening',
+  -     gameId: 'recall-typing',
+  -     hintUsed: true,
+  -     occurredAt: '2026-10-30T06:07:00.000Z',
+  -     result: 'wrong'
+  -   },
+  -   {
+  -     activityType: 'review-card',
+  -     gameId: 'recall-typing',
+  -     hintUsed: false,
+  -     occurredAt: '2026-10-30T06:08:00.000Z',
+  -     result: 'correct'
+  -   },
+  -   {
+  -     activityType: 'meaning-recall',
+  -     gameId: 'recall-typing',
+  -     hintUsed: false,
+  -     occurredAt: '2026-10-30T06:09:00.000Z',
+  -     result: 'wrong'
+  -   },
+  -   {
+  -     activityType: 'typing-attack',
+  -     gameId: 'recall-typing',
+  -     hintUsed: true,
+  -     occurredAt: '2026-10-30T06:10:00.000Z',
+  -     result: 'correct'
+  -   }
+  - ]
+
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/shared/learning/lookup.test.mjs:106:12)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: [ { occurredAt: '2026-10-30T06:03:00.000Z', gameId: 'recall-typing', activityType: 'listening', result: 'correct', hintUsed: true }, { occurredAt: '2026-10-30T06:04:00.000Z', gameId: 'recall-typing', activityType: 'review-card', result: 'wrong', hintUsed: false }, { occurredAt: '2026-10-30T06:05:00.000Z', gameId: 'recall-typing', activityType: 'typing-attack', result: 'correct', hintUsed: true }, { occurredAt: '2026-10-30T06:06:00.000Z', gameId: 'recall-typing', activityType: 'meaning-recall', result: 'correct', hintUsed: false }, { occurredAt: '2026-10-30T06:07:00.000Z', gameId: 'recall-typing', activityType: 'listening', result: 'wrong', hintUsed: true }, { occurredAt: '2026-10-30T06:08:00.000Z', gameId: 'recall-typing', activityType: 'review-card', result: 'correct', hintUsed: false }, { occurredAt: '2026-10-30T06:09:00.000Z', gameId: 'recall-typing', activityType: 'meaning-recall', result: 'wrong', hintUsed: false }, { occurredAt: '2026-10-30T06:10:00.000Z', gameId: 'recall-typing', activityType: 'typing-attack', result: 'correct', hintUsed: true } ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at shared/learning/lookup.test.mjs:90:3
+✖ core grammar keeps eight chronological samples with five fields, including a late event (0.411125ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+
+  + undefined
+  - [
+  -   {
+  -     activityType: 'listening',
+  -     gameId: 'recall-typing',
+  -     hintUsed: true,
+  -     occurredAt: '2026-10-30T06:03:00.000Z',
+  -     result: 'correct'
+  -   },
+  -   {
+  -     activityType: 'review-card',
+  -     gameId: 'recall-typing',
+  -     hintUsed: false,
+  -     occurredAt: '2026-10-30T06:04:00.000Z',
+  -     result: 'wrong'
+  -   },
+  -   {
+  -     activityType: 'typing-attack',
+  -     gameId: 'recall-typing',
+  -     hintUsed: true,
+  -     occurredAt: '2026-10-30T06:05:00.000Z',
+  -     result: 'correct'
+  -   },
+  -   {
+  -     activityType: 'meaning-recall',
+  -     gameId: 'recall-typing',
+  -     hintUsed: false,
+  -     occurredAt: '2026-10-30T06:06:00.000Z',
+  -     result: 'correct'
+  -   },
+  -   {
+  -     activityType: 'listening',
+  -     gameId: 'recall-typing',
+  -     hintUsed: true,
+  -     occurredAt: '2026-10-30T06:07:00.000Z',
+  -     result: 'wrong'
+  -   },
+  -   {
+  -     activityType: 'review-card',
+  -     gameId: 'recall-typing',
+  -     hintUsed: false,
+  -     occurredAt: '2026-10-30T06:08:00.000Z',
+  -     result: 'correct'
+  -   },
+  -   {
+  -     activityType: 'meaning-recall',
+  -     gameId: 'recall-typing',
+  -     hintUsed: false,
+  -     occurredAt: '2026-10-30T06:09:00.000Z',
+  -     result: 'wrong'
+  -   },
+  -   {
+  -     activityType: 'typing-attack',
+  -     gameId: 'recall-typing',
+  -     hintUsed: true,
+  -     occurredAt: '2026-10-30T06:10:00.000Z',
+  -     result: 'correct'
+  -   }
+  - ]
+
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/shared/learning/lookup.test.mjs:106:12)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: [ { occurredAt: '2026-10-30T06:03:00.000Z', gameId: 'recall-typing', activityType: 'listening', result: 'correct', hintUsed: true }, { occurredAt: '2026-10-30T06:04:00.000Z', gameId: 'recall-typing', activityType: 'review-card', result: 'wrong', hintUsed: false }, { occurredAt: '2026-10-30T06:05:00.000Z', gameId: 'recall-typing', activityType: 'typing-attack', result: 'correct', hintUsed: true }, { occurredAt: '2026-10-30T06:06:00.000Z', gameId: 'recall-typing', activityType: 'meaning-recall', result: 'correct', hintUsed: false }, { occurredAt: '2026-10-30T06:07:00.000Z', gameId: 'recall-typing', activityType: 'listening', result: 'wrong', hintUsed: true }, { occurredAt: '2026-10-30T06:08:00.000Z', gameId: 'recall-typing', activityType: 'review-card', result: 'correct', hintUsed: false }, { occurredAt: '2026-10-30T06:09:00.000Z', gameId: 'recall-typing', activityType: 'meaning-recall', result: 'wrong', hintUsed: false }, { occurredAt: '2026-10-30T06:10:00.000Z', gameId: 'recall-typing', activityType: 'typing-attack', result: 'correct', hintUsed: true } ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at shared/learning/lookup.test.mjs:90:3
+✖ core sentence keeps eight chronological samples with five fields, including a late event (0.411042ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+
+  + undefined
+  - [
+  -   {
+  -     activityType: 'listening',
+  -     gameId: 'recall-typing',
+  -     hintUsed: true,
+  -     occurredAt: '2026-10-30T06:03:00.000Z',
+  -     result: 'correct'
+  -   },
+  -   {
+  -     activityType: 'review-card',
+  -     gameId: 'recall-typing',
+  -     hintUsed: false,
+  -     occurredAt: '2026-10-30T06:04:00.000Z',
+  -     result: 'wrong'
+  -   },
+  -   {
+  -     activityType: 'typing-attack',
+  -     gameId: 'recall-typing',
+  -     hintUsed: true,
+  -     occurredAt: '2026-10-30T06:05:00.000Z',
+  -     result: 'correct'
+  -   },
+  -   {
+  -     activityType: 'meaning-recall',
+  -     gameId: 'recall-typing',
+  -     hintUsed: false,
+  -     occurredAt: '2026-10-30T06:06:00.000Z',
+  -     result: 'correct'
+  -   },
+  -   {
+  -     activityType: 'listening',
+  -     gameId: 'recall-typing',
+  -     hintUsed: true,
+  -     occurredAt: '2026-10-30T06:07:00.000Z',
+  -     result: 'wrong'
+  -   },
+  -   {
+  -     activityType: 'review-card',
+  -     gameId: 'recall-typing',
+  -     hintUsed: false,
+  -     occurredAt: '2026-10-30T06:08:00.000Z',
+  -     result: 'correct'
+  -   },
+  -   {
+  -     activityType: 'meaning-recall',
+  -     gameId: 'recall-typing',
+  -     hintUsed: false,
+  -     occurredAt: '2026-10-30T06:09:00.000Z',
+  -     result: 'wrong'
+  -   },
+  -   {
+  -     activityType: 'typing-attack',
+  -     gameId: 'recall-typing',
+  -     hintUsed: true,
+  -     occurredAt: '2026-10-30T06:10:00.000Z',
+  -     result: 'correct'
+  -   }
+  - ]
+
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/shared/learning/lookup.test.mjs:106:12)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: [ { occurredAt: '2026-10-30T06:03:00.000Z', gameId: 'recall-typing', activityType: 'listening', result: 'correct', hintUsed: true }, { occurredAt: '2026-10-30T06:04:00.000Z', gameId: 'recall-typing', activityType: 'review-card', result: 'wrong', hintUsed: false }, { occurredAt: '2026-10-30T06:05:00.000Z', gameId: 'recall-typing', activityType: 'typing-attack', result: 'correct', hintUsed: true }, { occurredAt: '2026-10-30T06:06:00.000Z', gameId: 'recall-typing', activityType: 'meaning-recall', result: 'correct', hintUsed: false }, { occurredAt: '2026-10-30T06:07:00.000Z', gameId: 'recall-typing', activityType: 'listening', result: 'wrong', hintUsed: true }, { occurredAt: '2026-10-30T06:08:00.000Z', gameId: 'recall-typing', activityType: 'review-card', result: 'correct', hintUsed: false }, { occurredAt: '2026-10-30T06:09:00.000Z', gameId: 'recall-typing', activityType: 'meaning-recall', result: 'wrong', hintUsed: false }, { occurredAt: '2026-10-30T06:10:00.000Z', gameId: 'recall-typing', activityType: 'typing-attack', result: 'correct', hintUsed: true } ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at shared/learning/lookup.test.mjs:121:3
+✖ backup rejects nine samples (0.159417ms)
+  AssertionError [ERR_ASSERTION]: Missing expected exception.
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/shared/learning/lookup.test.mjs:124:12)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: /recentSamples/,
+    operator: 'throws',
+    diff: 'simple'
+  }
+
+test at shared/learning/lookup.test.mjs:121:3
+✖ backup rejects null sample (0.086584ms)
+  AssertionError [ERR_ASSERTION]: Missing expected exception.
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/shared/learning/lookup.test.mjs:124:12)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: /recentSamples/,
+    operator: 'throws',
+    diff: 'simple'
+  }
+
+test at shared/learning/lookup.test.mjs:121:3
+✖ backup rejects array sample (0.076542ms)
+  AssertionError [ERR_ASSERTION]: Missing expected exception.
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/shared/learning/lookup.test.mjs:124:12)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: /recentSamples/,
+    operator: 'throws',
+    diff: 'simple'
+  }
+
+test at shared/learning/lookup.test.mjs:121:3
+✖ backup rejects string sample (0.07525ms)
+  AssertionError [ERR_ASSERTION]: Missing expected exception.
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/shared/learning/lookup.test.mjs:124:12)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: /recentSamples/,
+    operator: 'throws',
+    diff: 'simple'
+  }
+
+test at shared/learning/lookup.test.mjs:121:3
+✖ backup rejects non-array (0.0815ms)
+  AssertionError [ERR_ASSERTION]: Missing expected exception.
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/shared/learning/lookup.test.mjs:124:12)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: /recentSamples/,
+    operator: 'throws',
+    diff: 'simple'
+  }
+
+test at shared/learning/lookup.test.mjs:121:3
+✖ backup rejects null list (0.066958ms)
+  AssertionError [ERR_ASSERTION]: Missing expected exception.
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/shared/learning/lookup.test.mjs:124:12)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: /recentSamples/,
+    operator: 'throws',
+    diff: 'simple'
+  }
+[ELIFECYCLE] Command failed with exit code 1.

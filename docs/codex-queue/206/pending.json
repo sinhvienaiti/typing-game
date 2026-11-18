@@ -1,0 +1,949 @@
+{
+  "summary": {
+    "files": 61,
+    "totalBytes": 8625740,
+    "byWidth": {
+      "64": 41550,
+      "128": 133858,
+      "192": 52188,
+      "256": 313522,
+      "384": 192496,
+      "768": 707110,
+      "1280": 2056262,
+      "1536": 5128754
+    },
+    "minPsnr": {
+      "bg": 33.4101,
+      "portrait": 35.1402,
+      "icon": 35.545,
+      "stage": 29.6997
+    },
+    "lossless": [
+      "foe-brute.64.webp",
+      "foe-brute.128.webp",
+      "foe-scout.64.webp",
+      "foe-scout.128.webp",
+      "foe-shield-guard.64.webp",
+      "foe-shield-guard.128.webp",
+      "foe-shield-guard.256.webp",
+      "foe-splitter.64.webp",
+      "foe-splitter.128.webp",
+      "foe-swarm.64.webp",
+      "foe-swarm.128.webp",
+      "foe-swarm.256.webp",
+      "gun-phao.64.webp",
+      "gun-phao.128.webp",
+      "gun-phao.256.webp",
+      "gun-ray.64.webp",
+      "gun-ray.128.webp",
+      "gun-ray.256.webp",
+      "gun-tan.64.webp",
+      "gun-tan.128.webp",
+      "gun-tia.64.webp",
+      "gun-tia.128.webp",
+      "gun-tia.256.webp",
+      "gun-xung.64.webp",
+      "gun-xung.128.webp",
+      "gun-xung.256.webp"
+    ],
+    "q92": [
+      "bg-briefing.1280.webp",
+      "bg-briefing.1536.webp",
+      "bg-journey.1280.webp",
+      "bg-journey.1536.webp",
+      "bg-loadout.1280.webp",
+      "bg-loadout.1536.webp",
+      "bg-menu.1280.webp",
+      "bg-menu.1536.webp",
+      "bg-results-lose.1280.webp",
+      "bg-results-lose.1536.webp",
+      "bg-results-win.1280.webp",
+      "bg-results-win.1536.webp",
+      "stage-c1-s1.192.webp",
+      "stage-c1-s1.384.webp",
+      "stage-c1-s1.768.webp",
+      "stage-c1-s1.1536.webp",
+      "stage-c1-s2.192.webp",
+      "stage-c1-s2.384.webp",
+      "stage-c1-s2.768.webp",
+      "stage-c1-s2.1536.webp",
+      "stage-c1-s3.192.webp",
+      "stage-c1-s3.384.webp",
+      "stage-c1-s3.768.webp",
+      "stage-c1-s3.1536.webp",
+      "stage-c1-s4.192.webp",
+      "stage-c1-s4.384.webp",
+      "stage-c1-s4.768.webp",
+      "stage-c1-s4.1536.webp"
+    ],
+    "below35": [
+      "bg-loadout.1280.webp",
+      "bg-loadout.1536.webp",
+      "bg-menu.1280.webp",
+      "bg-results-win.1280.webp",
+      "bg-results-win.1536.webp",
+      "stage-c1-s1.192.webp",
+      "stage-c1-s1.384.webp",
+      "stage-c1-s1.768.webp",
+      "stage-c1-s1.1536.webp",
+      "stage-c1-s2.192.webp",
+      "stage-c1-s2.384.webp",
+      "stage-c1-s2.768.webp",
+      "stage-c1-s2.1536.webp",
+      "stage-c1-s3.192.webp",
+      "stage-c1-s3.384.webp",
+      "stage-c1-s3.768.webp",
+      "stage-c1-s3.1536.webp",
+      "stage-c1-s4.192.webp",
+      "stage-c1-s4.384.webp",
+      "stage-c1-s4.768.webp",
+      "stage-c1-s4.1536.webp"
+    ]
+  },
+  "roles": {
+    "bg-briefing": {
+      "ticket": "121",
+      "source": "ui/screens-epic/briefing-bg",
+      "sourceFiles": {
+        "ui/screens-epic/briefing-bg.png": "aadad5fe009a3c3c1f93f86e546faf7f"
+      },
+      "sourceMd5": "aadad5fe009a3c3c1f93f86e546faf7f",
+      "sizes": [
+        {
+          "file": "bg-briefing.1280.webp",
+          "width": 1280,
+          "height": 720,
+          "bytes": 300998,
+          "md5": "26b2534e1331a7db0335cbbb59cce60e",
+          "psnr": 35.4185,
+          "lossless": false,
+          "quality": 92
+        },
+        {
+          "file": "bg-briefing.1536.webp",
+          "width": 1536,
+          "height": 864,
+          "bytes": 413560,
+          "md5": "426a26e00b81ccdeb306a74be19d265b",
+          "psnr": 36.2624,
+          "lossless": false,
+          "quality": 92
+        }
+      ]
+    },
+    "bg-journey": {
+      "ticket": "121",
+      "source": "ui/screens-epic/journey-bg",
+      "sourceFiles": {
+        "ui/screens-epic/journey-bg.png": "fa5733efd3cac50e98a69a42bebbc41a"
+      },
+      "sourceMd5": "fa5733efd3cac50e98a69a42bebbc41a",
+      "sizes": [
+        {
+          "file": "bg-journey.1280.webp",
+          "width": 1280,
+          "height": 720,
+          "bytes": 353540,
+          "md5": "36550098f2c628dbc4a2bfe2a81cd128",
+          "psnr": 35.5684,
+          "lossless": false,
+          "quality": 92
+        },
+        {
+          "file": "bg-journey.1536.webp",
+          "width": 1536,
+          "height": 864,
+          "bytes": 483300,
+          "md5": "2f091e87d9e4fccb957791397914593a",
+          "psnr": 36.444,
+          "lossless": false,
+          "quality": 92
+        }
+      ]
+    },
+    "bg-loadout": {
+      "ticket": "121",
+      "source": "ui/screens-epic/loadout-bg",
+      "sourceFiles": {
+        "ui/screens-epic/loadout-bg.png": "b00f115412b8bf9a7165c3a408773b02"
+      },
+      "sourceMd5": "b00f115412b8bf9a7165c3a408773b02",
+      "sizes": [
+        {
+          "file": "bg-loadout.1280.webp",
+          "width": 1280,
+          "height": 720,
+          "bytes": 330700,
+          "md5": "afb4ba69411b4ec530f61c0518b3782b",
+          "psnr": 34.3968,
+          "lossless": false,
+          "quality": 92
+        },
+        {
+          "file": "bg-loadout.1536.webp",
+          "width": 1536,
+          "height": 864,
+          "bytes": 446028,
+          "md5": "facac6ebe6637547609aa842c87bc0bb",
+          "psnr": 34.9558,
+          "lossless": false,
+          "quality": 92
+        }
+      ]
+    },
+    "bg-menu": {
+      "ticket": "121",
+      "source": "ui/screens-epic/menu-bg",
+      "sourceFiles": {
+        "ui/screens-epic/menu-bg.png": "ecc901c98c97e9f7bf80624b1b4cf91a"
+      },
+      "sourceMd5": "ecc901c98c97e9f7bf80624b1b4cf91a",
+      "sizes": [
+        {
+          "file": "bg-menu.1280.webp",
+          "width": 1280,
+          "height": 720,
+          "bytes": 328420,
+          "md5": "87a262fe2ba34e343413d375019c44fb",
+          "psnr": 34.1931,
+          "lossless": false,
+          "quality": 92
+        },
+        {
+          "file": "bg-menu.1536.webp",
+          "width": 1536,
+          "height": 864,
+          "bytes": 452046,
+          "md5": "7dd7aae49b45da632185d8963c83f7d1",
+          "psnr": 35.1261,
+          "lossless": false,
+          "quality": 92
+        }
+      ]
+    },
+    "bg-results-lose": {
+      "ticket": "121",
+      "source": "ui/screens-epic/results-lose-bg",
+      "sourceFiles": {
+        "ui/screens-epic/results-lose-bg.png": "54602b1c80811ac869d8b1c5f70a37a9"
+      },
+      "sourceMd5": "54602b1c80811ac869d8b1c5f70a37a9",
+      "sizes": [
+        {
+          "file": "bg-results-lose.1280.webp",
+          "width": 1280,
+          "height": 720,
+          "bytes": 333212,
+          "md5": "102437357e00e1aa9a1fb1243139701f",
+          "psnr": 35.7417,
+          "lossless": false,
+          "quality": 92
+        },
+        {
+          "file": "bg-results-lose.1536.webp",
+          "width": 1536,
+          "height": 864,
+          "bytes": 448322,
+          "md5": "7d1dbeb3f5a4c3e81e8609e99e28573c",
+          "psnr": 36.5361,
+          "lossless": false,
+          "quality": 92
+        }
+      ]
+    },
+    "bg-results-win": {
+      "ticket": "121",
+      "source": "ui/screens-epic/results-win-bg",
+      "sourceFiles": {
+        "ui/screens-epic/results-win-bg.png": "af96f5366890984d315eaa844dfcc791"
+      },
+      "sourceMd5": "af96f5366890984d315eaa844dfcc791",
+      "sizes": [
+        {
+          "file": "bg-results-win.1280.webp",
+          "width": 1280,
+          "height": 720,
+          "bytes": 409392,
+          "md5": "44941bbf280897becc673439b28fe30a",
+          "psnr": 33.4101,
+          "lossless": false,
+          "quality": 92
+        },
+        {
+          "file": "bg-results-win.1536.webp",
+          "width": 1536,
+          "height": 864,
+          "bytes": 556780,
+          "md5": "be2c7f6caf77f5f85fe40e997aeef56b",
+          "psnr": 34.1157,
+          "lossless": false,
+          "quality": 92
+        }
+      ]
+    },
+    "foe-brute": {
+      "ticket": "157",
+      "source": "ui/foes/brute.v2",
+      "sourceFiles": {
+        "ui/foes/brute.v2.128.png": "c3f4bac7e3b120211b391b75670b44e6",
+        "ui/foes/brute.v2.256.png": "306cf83580bb8c43ee5928f40bf993e2",
+        "ui/foes/brute.v2.64.png": "c167483964ef40d7f4bd1fc0fc41404f"
+      },
+      "sourceMd5": "b1b7071cef916a53ac9196c4070bcc2a",
+      "sizes": [
+        {
+          "file": "foe-brute.64.webp",
+          "width": 64,
+          "height": 64,
+          "bytes": 4816,
+          "md5": "e469fc8a5c32f6b6bbc7870fdc863817",
+          "psnr": 120,
+          "lossless": true,
+          "quality": null
+        },
+        {
+          "file": "foe-brute.128.webp",
+          "width": 128,
+          "height": 128,
+          "bytes": 15594,
+          "md5": "7dd32de72dfd459b24445469a0f615b7",
+          "psnr": 120,
+          "lossless": true,
+          "quality": null
+        },
+        {
+          "file": "foe-brute.256.webp",
+          "width": 256,
+          "height": 256,
+          "bytes": 17836,
+          "md5": "3c371b8a17140f28b186ff9d6380d12f",
+          "psnr": 35.1402,
+          "lossless": false,
+          "quality": 90
+        }
+      ]
+    },
+    "foe-pack-leader": {
+      "ticket": "157",
+      "source": "ui/foes/pack-leader.v2",
+      "sourceFiles": {
+        "ui/foes/pack-leader.v2.128.png": "e9d07a99e59d9e907ce9ccc14dac2306",
+        "ui/foes/pack-leader.v2.256.png": "8f33f72a63c3b023eb3f2c268e4d5acf",
+        "ui/foes/pack-leader.v2.64.png": "47a73c50392b6f64982b453bd38454f7"
+      },
+      "sourceMd5": "8969851ce6f18f63819b97876747f72c",
+      "sizes": [
+        {
+          "file": "foe-pack-leader.64.webp",
+          "width": 64,
+          "height": 64,
+          "bytes": 1870,
+          "md5": "4c730850a5a3c7930ae4e8f312b2c431",
+          "psnr": 36.2224,
+          "lossless": false,
+          "quality": 90
+        },
+        {
+          "file": "foe-pack-leader.128.webp",
+          "width": 128,
+          "height": 128,
+          "bytes": 4730,
+          "md5": "a1a1cbae2a51bf0c446b45cedc79c7c2",
+          "psnr": 36.3843,
+          "lossless": false,
+          "quality": 90
+        },
+        {
+          "file": "foe-pack-leader.256.webp",
+          "width": 256,
+          "height": 256,
+          "bytes": 12916,
+          "md5": "85376a72b6a285dfc3c7aec705251347",
+          "psnr": 37.23,
+          "lossless": false,
+          "quality": 90
+        }
+      ]
+    },
+    "foe-scout": {
+      "ticket": "157",
+      "source": "ui/foes/scout.v2",
+      "sourceFiles": {
+        "ui/foes/scout.v2.128.png": "86e822236c77a4c9d4721a21ee0d78d9",
+        "ui/foes/scout.v2.256.png": "babda20f2169d1c415795bf17c124693",
+        "ui/foes/scout.v2.64.png": "35e3d7ce6d74aaa85f53c73b61810e10"
+      },
+      "sourceMd5": "ad90a81cb15bc4ed815c36baefee9242",
+      "sizes": [
+        {
+          "file": "foe-scout.64.webp",
+          "width": 64,
+          "height": 64,
+          "bytes": 3814,
+          "md5": "1b7f6a7879a9c6e61557d154a2247779",
+          "psnr": 120,
+          "lossless": true,
+          "quality": null
+        },
+        {
+          "file": "foe-scout.128.webp",
+          "width": 128,
+          "height": 128,
+          "bytes": 11544,
+          "md5": "ee4b5fe14dd06f6644c0179fba793927",
+          "psnr": 120,
+          "lossless": true,
+          "quality": null
+        },
+        {
+          "file": "foe-scout.256.webp",
+          "width": 256,
+          "height": 256,
+          "bytes": 15624,
+          "md5": "02d8501da73e44fd6f4a7861f134c42f",
+          "psnr": 36.7527,
+          "lossless": false,
+          "quality": 90
+        }
+      ]
+    },
+    "foe-shield-guard": {
+      "ticket": "157",
+      "source": "ui/foes/shield-guard.v2",
+      "sourceFiles": {
+        "ui/foes/shield-guard.v2.128.png": "7bfef9930279a93764b418e0e8f8a1c8",
+        "ui/foes/shield-guard.v2.256.png": "db292cb83276def7588888507cd73086",
+        "ui/foes/shield-guard.v2.64.png": "0c34817282eda15e59adf7097003ee38"
+      },
+      "sourceMd5": "2303c5b489e87e68adc81f590327ba22",
+      "sizes": [
+        {
+          "file": "foe-shield-guard.64.webp",
+          "width": 64,
+          "height": 64,
+          "bytes": 4978,
+          "md5": "e368d35890dd6ffa5e848ca903d657c8",
+          "psnr": 120,
+          "lossless": true,
+          "quality": null
+        },
+        {
+          "file": "foe-shield-guard.128.webp",
+          "width": 128,
+          "height": 128,
+          "bytes": 16494,
+          "md5": "daba299a3a03aefd42acc2f35b8995a4",
+          "psnr": 120,
+          "lossless": true,
+          "quality": null
+        },
+        {
+          "file": "foe-shield-guard.256.webp",
+          "width": 256,
+          "height": 256,
+          "bytes": 49090,
+          "md5": "637efe97d339c9bc2a19d554d34e9dd4",
+          "psnr": 120,
+          "lossless": true,
+          "quality": null
+        }
+      ]
+    },
+    "foe-splitter": {
+      "ticket": "157",
+      "source": "ui/foes/splitter.v2",
+      "sourceFiles": {
+        "ui/foes/splitter.v2.128.png": "b0b32f9cb11d21cafbdc59f9e5f25f85",
+        "ui/foes/splitter.v2.256.png": "23073dd1a56253699106d411c774ca62",
+        "ui/foes/splitter.v2.64.png": "e66705bdc7a189d0766fbe3b79d03517"
+      },
+      "sourceMd5": "7d7f30e3a3e097348ec043f6bbe1c599",
+      "sizes": [
+        {
+          "file": "foe-splitter.64.webp",
+          "width": 64,
+          "height": 64,
+          "bytes": 3348,
+          "md5": "85fed59a00ff5bd10501346fbd6050a4",
+          "psnr": 120,
+          "lossless": true,
+          "quality": null
+        },
+        {
+          "file": "foe-splitter.128.webp",
+          "width": 128,
+          "height": 128,
+          "bytes": 10698,
+          "md5": "a0e5e64139a69fe08aeff97f3deaf388",
+          "psnr": 120,
+          "lossless": true,
+          "quality": null
+        },
+        {
+          "file": "foe-splitter.256.webp",
+          "width": 256,
+          "height": 256,
+          "bytes": 12958,
+          "md5": "948707f50aeb5b822af7b489b0a67cd2",
+          "psnr": 35.4342,
+          "lossless": false,
+          "quality": 90
+        }
+      ]
+    },
+    "foe-swarm": {
+      "ticket": "157",
+      "source": "ui/foes/swarm.v2",
+      "sourceFiles": {
+        "ui/foes/swarm.v2.128.png": "fcb0359ec6fb09bba5e050a04644a721",
+        "ui/foes/swarm.v2.256.png": "833029d2f9bbc685c9818d20cb90113e",
+        "ui/foes/swarm.v2.64.png": "7500af283b11b9dce2696e71343656b4"
+      },
+      "sourceMd5": "641aef1ac785c9168ff25ab918f43cf7",
+      "sizes": [
+        {
+          "file": "foe-swarm.64.webp",
+          "width": 64,
+          "height": 64,
+          "bytes": 4340,
+          "md5": "53ca309747ea70a8161b8a67e9ac08bf",
+          "psnr": 120,
+          "lossless": true,
+          "quality": null
+        },
+        {
+          "file": "foe-swarm.128.webp",
+          "width": 128,
+          "height": 128,
+          "bytes": 14332,
+          "md5": "6e6ab26590b6680b7878ae14fec8c573",
+          "psnr": 120,
+          "lossless": true,
+          "quality": null
+        },
+        {
+          "file": "foe-swarm.256.webp",
+          "width": 256,
+          "height": 256,
+          "bytes": 43586,
+          "md5": "413c6fd3a8434a42b159c7801bbd4bdc",
+          "psnr": 120,
+          "lossless": true,
+          "quality": null
+        }
+      ]
+    },
+    "gun-phao": {
+      "ticket": "157",
+      "source": "ui/icons/gun-phao-sao.v2",
+      "sourceFiles": {
+        "ui/icons/gun-phao-sao.v2.128.png": "ae0bb8f6d474e4a9036f076fca0326ef",
+        "ui/icons/gun-phao-sao.v2.256.png": "5b5d70a366958a0f75d664b3e8300052",
+        "ui/icons/gun-phao-sao.v2.64.png": "dc3f9bf6b0277e3f6b3b197d21fff6d1"
+      },
+      "sourceMd5": "242324bd831be8ff09fb0dfe61f74cf5",
+      "sizes": [
+        {
+          "file": "gun-phao.64.webp",
+          "width": 64,
+          "height": 64,
+          "bytes": 4208,
+          "md5": "550b679f3f9c0a4dd78c0c414ffea535",
+          "psnr": 120,
+          "lossless": true,
+          "quality": null
+        },
+        {
+          "file": "gun-phao.128.webp",
+          "width": 128,
+          "height": 128,
+          "bytes": 14178,
+          "md5": "0ebfd118b563203158505d7cb8ee6b77",
+          "psnr": 120,
+          "lossless": true,
+          "quality": null
+        },
+        {
+          "file": "gun-phao.256.webp",
+          "width": 256,
+          "height": 256,
+          "bytes": 41850,
+          "md5": "e13a6d1492b720814a0a5d69d9a845a6",
+          "psnr": 120,
+          "lossless": true,
+          "quality": null
+        }
+      ]
+    },
+    "gun-ray": {
+      "ticket": "157",
+      "source": "ui/icons/gun-ray.v2",
+      "sourceFiles": {
+        "ui/icons/gun-ray.v2.128.png": "3a436c3fb231e7ed83fc21a0b2b64b7a",
+        "ui/icons/gun-ray.v2.256.png": "c5173f783a44e71e6eceaa74a4366e91",
+        "ui/icons/gun-ray.v2.64.png": "86ee1cad90eb6c4aff62e288a1a6d7d4"
+      },
+      "sourceMd5": "412a23477c685748cf9a732a7cad4d0a",
+      "sizes": [
+        {
+          "file": "gun-ray.64.webp",
+          "width": 64,
+          "height": 64,
+          "bytes": 3076,
+          "md5": "809189a0f4eecb45e24e815a01e1dc04",
+          "psnr": 120,
+          "lossless": true,
+          "quality": null
+        },
+        {
+          "file": "gun-ray.128.webp",
+          "width": 128,
+          "height": 128,
+          "bytes": 9802,
+          "md5": "f376831c31f898ab76492288456bf4c7",
+          "psnr": 120,
+          "lossless": true,
+          "quality": null
+        },
+        {
+          "file": "gun-ray.256.webp",
+          "width": 256,
+          "height": 256,
+          "bytes": 33208,
+          "md5": "3a5b23f22d481df3620c5e60b3c3131e",
+          "psnr": 120,
+          "lossless": true,
+          "quality": null
+        }
+      ]
+    },
+    "gun-tan": {
+      "ticket": "157",
+      "source": "ui/icons/gun-tan.v2",
+      "sourceFiles": {
+        "ui/icons/gun-tan.v2.128.png": "db14bee0e9f2084c4efbaedc296d5c38",
+        "ui/icons/gun-tan.v2.256.png": "a8b8c542881fd8dc802fc41b81a577b2",
+        "ui/icons/gun-tan.v2.64.png": "2ddfc6de494d8215dc7998cdb07bffac"
+      },
+      "sourceMd5": "0a4bbd932611ac70c4e052c960a07fca",
+      "sizes": [
+        {
+          "file": "gun-tan.64.webp",
+          "width": 64,
+          "height": 64,
+          "bytes": 3500,
+          "md5": "3188c1fe5ed04aab4a9aa7fcb579ed44",
+          "psnr": 120,
+          "lossless": true,
+          "quality": null
+        },
+        {
+          "file": "gun-tan.128.webp",
+          "width": 128,
+          "height": 128,
+          "bytes": 11530,
+          "md5": "f044f2145da404d3002529b731d5c088",
+          "psnr": 120,
+          "lossless": true,
+          "quality": null
+        },
+        {
+          "file": "gun-tan.256.webp",
+          "width": 256,
+          "height": 256,
+          "bytes": 12058,
+          "md5": "768701983f4b2a11c8c86dc57f79b3a3",
+          "psnr": 35.545,
+          "lossless": false,
+          "quality": 90
+        }
+      ]
+    },
+    "gun-tia": {
+      "ticket": "157",
+      "source": "ui/icons/gun-tia.v2",
+      "sourceFiles": {
+        "ui/icons/gun-tia.v2.128.png": "0418845f16d4b83f3ae6ecc5f31d106b",
+        "ui/icons/gun-tia.v2.256.png": "17cd31e1589e455ed969583b230788a0",
+        "ui/icons/gun-tia.v2.64.png": "3c10d1536d657e46e788961115088eeb"
+      },
+      "sourceMd5": "4a05c2b0d3f498ce2c8f95d350e23f99",
+      "sizes": [
+        {
+          "file": "gun-tia.64.webp",
+          "width": 64,
+          "height": 64,
+          "bytes": 3706,
+          "md5": "d310b59be2471014139d2ca6960a2a58",
+          "psnr": 120,
+          "lossless": true,
+          "quality": null
+        },
+        {
+          "file": "gun-tia.128.webp",
+          "width": 128,
+          "height": 128,
+          "bytes": 12176,
+          "md5": "5789f5192397841968ac8c2982f4d7b6",
+          "psnr": 120,
+          "lossless": true,
+          "quality": null
+        },
+        {
+          "file": "gun-tia.256.webp",
+          "width": 256,
+          "height": 256,
+          "bytes": 36410,
+          "md5": "b7fc4dfdd4d994c5da4ab57652cd3a96",
+          "psnr": 120,
+          "lossless": true,
+          "quality": null
+        }
+      ]
+    },
+    "gun-xung": {
+      "ticket": "157",
+      "source": "ui/icons/gun-xung.v2",
+      "sourceFiles": {
+        "ui/icons/gun-xung.v2.128.png": "afe05f9ea0a44b2f6e718451b0814a6b",
+        "ui/icons/gun-xung.v2.256.png": "18c472861edd884864ec443abdacd4fa",
+        "ui/icons/gun-xung.v2.64.png": "9056c2b74e6d1419663a1713b1d971ce"
+      },
+      "sourceMd5": "e054e81e0d70d0b3632cbe3c47ab60b1",
+      "sizes": [
+        {
+          "file": "gun-xung.64.webp",
+          "width": 64,
+          "height": 64,
+          "bytes": 3894,
+          "md5": "f9161b5bbf151a674d839e75bcf909c7",
+          "psnr": 120,
+          "lossless": true,
+          "quality": null
+        },
+        {
+          "file": "gun-xung.128.webp",
+          "width": 128,
+          "height": 128,
+          "bytes": 12780,
+          "md5": "8e7563d053bfcb43292c25095ef44c96",
+          "psnr": 120,
+          "lossless": true,
+          "quality": null
+        },
+        {
+          "file": "gun-xung.256.webp",
+          "width": 256,
+          "height": 256,
+          "bytes": 37986,
+          "md5": "e9c66bb5b883a7f4ae5a8717e48d5be6",
+          "psnr": 120,
+          "lossless": true,
+          "quality": null
+        }
+      ]
+    },
+    "stage-c1-s1": {
+      "ticket": "126",
+      "source": "ui/stages-v2/c1-s1",
+      "sourceFiles": {
+        "ui/stages-v2/c1-s1.png": "738ca77cf2c86ed9a12923b62a2cb783"
+      },
+      "sourceMd5": "738ca77cf2c86ed9a12923b62a2cb783",
+      "sizes": [
+        {
+          "file": "stage-c1-s1.192.webp",
+          "width": 192,
+          "height": 108,
+          "bytes": 12768,
+          "md5": "bfa6654901f495eadca68c58106105e9",
+          "psnr": 30.2985,
+          "lossless": false,
+          "quality": 92
+        },
+        {
+          "file": "stage-c1-s1.384.webp",
+          "width": 384,
+          "height": 216,
+          "bytes": 46468,
+          "md5": "b3c70e27b1e0cdb884c328c737b86faf",
+          "psnr": 30.7637,
+          "lossless": false,
+          "quality": 92
+        },
+        {
+          "file": "stage-c1-s1.768.webp",
+          "width": 768,
+          "height": 432,
+          "bytes": 171958,
+          "md5": "2fbfeea48b27358e95a19549cf9d6f2b",
+          "psnr": 31.2316,
+          "lossless": false,
+          "quality": 92
+        },
+        {
+          "file": "stage-c1-s1.1536.webp",
+          "width": 1536,
+          "height": 864,
+          "bytes": 558830,
+          "md5": "e9ae0c74057c4826994c0b7e9550564a",
+          "psnr": 33.471,
+          "lossless": false,
+          "quality": 92
+        }
+      ]
+    },
+    "stage-c1-s2": {
+      "ticket": "126",
+      "source": "ui/stages-v2/c1-s2",
+      "sourceFiles": {
+        "ui/stages-v2/c1-s2.png": "d36a2396b76de35842d59307b6c8cf9f"
+      },
+      "sourceMd5": "d36a2396b76de35842d59307b6c8cf9f",
+      "sizes": [
+        {
+          "file": "stage-c1-s2.192.webp",
+          "width": 192,
+          "height": 108,
+          "bytes": 12996,
+          "md5": "1aaa2dd0183247c1be262d0231706822",
+          "psnr": 30.7811,
+          "lossless": false,
+          "quality": 92
+        },
+        {
+          "file": "stage-c1-s2.384.webp",
+          "width": 384,
+          "height": 216,
+          "bytes": 49480,
+          "md5": "8eb4c754e4051e0be8cd168281861532",
+          "psnr": 31.286,
+          "lossless": false,
+          "quality": 92
+        },
+        {
+          "file": "stage-c1-s2.768.webp",
+          "width": 768,
+          "height": 432,
+          "bytes": 182308,
+          "md5": "87b0d202f5fb3db227efe5812dcad447",
+          "psnr": 31.5872,
+          "lossless": false,
+          "quality": 92
+        },
+        {
+          "file": "stage-c1-s2.1536.webp",
+          "width": 1536,
+          "height": 864,
+          "bytes": 612198,
+          "md5": "733feaade17bbc4160f90313491dbf6c",
+          "psnr": 33.8445,
+          "lossless": false,
+          "quality": 92
+        }
+      ]
+    },
+    "stage-c1-s3": {
+      "ticket": "126",
+      "source": "ui/stages-v2/c1-s3",
+      "sourceFiles": {
+        "ui/stages-v2/c1-s3.png": "2c68fb8e8957051415d4eadf0088eec2"
+      },
+      "sourceMd5": "2c68fb8e8957051415d4eadf0088eec2",
+      "sizes": [
+        {
+          "file": "stage-c1-s3.192.webp",
+          "width": 192,
+          "height": 108,
+          "bytes": 12978,
+          "md5": "66999e162dd0fd503ae81fef03ac5b1e",
+          "psnr": 29.8485,
+          "lossless": false,
+          "quality": 92
+        },
+        {
+          "file": "stage-c1-s3.384.webp",
+          "width": 384,
+          "height": 216,
+          "bytes": 46448,
+          "md5": "7c48fdfea10ee574521c9fe5f401a0b7",
+          "psnr": 30.6742,
+          "lossless": false,
+          "quality": 92
+        },
+        {
+          "file": "stage-c1-s3.768.webp",
+          "width": 768,
+          "height": 432,
+          "bytes": 169656,
+          "md5": "2bcdd63414fe906a6cf753fb9a93e120",
+          "psnr": 31.5477,
+          "lossless": false,
+          "quality": 92
+        },
+        {
+          "file": "stage-c1-s3.1536.webp",
+          "width": 1536,
+          "height": 864,
+          "bytes": 545436,
+          "md5": "96286df322ed32bcea72aa6ffd798a1f",
+          "psnr": 34.1305,
+          "lossless": false,
+          "quality": 92
+        }
+      ]
+    },
+    "stage-c1-s4": {
+      "ticket": "126",
+      "source": "ui/stages-v2/c1-s4",
+      "sourceFiles": {
+        "ui/stages-v2/c1-s4.png": "6323be901d6a0108f3736ac696488c82"
+      },
+      "sourceMd5": "6323be901d6a0108f3736ac696488c82",
+      "sizes": [
+        {
+          "file": "stage-c1-s4.192.webp",
+          "width": 192,
+          "height": 108,
+          "bytes": 13446,
+          "md5": "f9581563f3090a6c5660118540764668",
+          "psnr": 29.6997,
+          "lossless": false,
+          "quality": 92
+        },
+        {
+          "file": "stage-c1-s4.384.webp",
+          "width": 384,
+          "height": 216,
+          "bytes": 50100,
+          "md5": "7d562e50a59429beef55ad7d61d1dd11",
+          "psnr": 30.4701,
+          "lossless": false,
+          "quality": 92
+        },
+        {
+          "file": "stage-c1-s4.768.webp",
+          "width": 768,
+          "height": 432,
+          "bytes": 183188,
+          "md5": "40df74cddf0401edf70057858b8a3bca",
+          "psnr": 31.0179,
+          "lossless": false,
+          "quality": 92
+        },
+        {
+          "file": "stage-c1-s4.1536.webp",
+          "width": 1536,
+          "height": 864,
+          "bytes": 612254,
+          "md5": "1877b575c68ea8793ab0a83812bbf0ff",
+          "psnr": 33.5161,
+          "lossless": false,
+          "quality": 92
+        }
+      ]
+    }
+  },
+  "totalIfAllReplacementsAccepted": 8625740,
+  "note": "21 vai chờ có nguồn thay thế 15 vai hiện tại và thêm 6 nền; Shard chưa có nguồn. Không cộng hai hướng cho cùng vai."
+}

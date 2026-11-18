@@ -1,0 +1,21 @@
+import os,sys,json,time,subprocess,hashlib,re
+from pathlib import Path
+repo=Path(__file__).resolve().parents[2]
+runs=repo/'docs/codex-queue/227/runs';runs.mkdir(exist_ok=True)
+env={**os.environ,'GIT_OPTIONAL_LOCKS':'0','pnpm_config_verify_deps_before_run':'false'}
+groups={
+ 'node': [('portal-test',['pnpm','portal:test']),('learning-test',['pnpm','learning:test']),('learning-check',['pnpm','learning:check']),('test-216',['node','--test','scripts/validate-play-mode.test.mjs']),('play-mode',['pnpm','validate:play-mode']),('space-integration',['pnpm','validate:space-integration']),('game-dir-syntax',['bash','-n','scripts/game-dir.sh']),('bootstrap-syntax',['bash','-n','scripts/bootstrap.sh'])],
+ 'audio': [('audio-new',['/Users/toandx/AudioLab/.venv/bin/python','-I','tmp/codex-227/run-tests-217.py','firefly','build/tests/test_build_firefly_licence.py']),('audio-all',['/Users/toandx/AudioLab/.venv/bin/python','-I','tmp/codex-227/run-tests-217.py'])],
+ 'build': [('tsc',['./node_modules/.bin/tsc','--noEmit'],'portal'),('vite',['./node_modules/.bin/vite','build','--configLoader','runner','--outDir','../tmp/codex-227/portal-dist','--emptyOutDir'],'portal')]
+}
+for item in groups[sys.argv[1]]:
+ name,args,*where=item;cwd=repo/where[0] if where else repo;t=time.time()
+ with (runs/(name+'.txt')).open('w') as out:
+  out.write('cwd='+str(cwd)+'\nargv='+json.dumps(args,ensure_ascii=False)+'\nGIT_OPTIONAL_LOCKS=0 pnpm_config_verify_deps_before_run=false\n');out.flush()
+  p=subprocess.run(args,cwd=cwd,env=env,stdout=out,stderr=subprocess.STDOUT)
+  out.write('\nexit='+str(p.returncode)+'\n')
+ text=(runs/(name+'.txt')).read_text()
+ meta={'command':args,'cwd':str(cwd),'exit':p.returncode,'seconds':round(time.time()-t,3),'log':name+'.txt'}
+ meta['counts']={k:int(v) for k,v in re.findall(r'^ℹ (tests|pass|fail|cancelled|skipped|todo) (\d+)',text,re.M)}
+ (runs/(name+'.json')).write_text(json.dumps(meta,ensure_ascii=False,indent=2)+'\n')
+ print(json.dumps(meta,ensure_ascii=False),flush=True)

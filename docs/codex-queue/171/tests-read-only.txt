@@ -1,0 +1,24 @@
+✔ runtime JSON: lock validation allows only asset JSON outside cache/temp for every configured game (1.91925ms)
+✔ args: a leading -- from pnpm is dropped, everything else fails closed (1.097917ms)
+✔ glob: ** spans zero or more folders, braces pick alternatives (0.559125ms)
+✔ lock: md5sum format, sorted by path, LF only, strict parsing (0.478708ms)
+✔ lock history: every md5 a path had in git log -p (0.106042ms)
+✔ classify: a path the lock once had with these bytes is removedElsewhere, never added or a rename target (0.150416ms)
+✔ classify: new, edited, stale, missing and renames (0.100208ms)
+✔ quota: refuse when free < upload + reserve; no limit reported is not a refusal (0.097209ms)
+✔ stamps: a new lock copy is always newer than every copy on Drive, even with a clock behind (0.147208ms)
+✔ drift: newest Drive copies first, stop at the first copy this clone fully knows (0.202333ms)
+✔ rclone allowlist: copy-style commands only, dedupe only in skip mode (0.356625ms)
+✔ redact: tokens and secrets never reach the terminal (0.438625ms)
+✔ rclone check --combined report parsing (0.07225ms)
+✔ setup: the client secret is never an rclone argument (0.143417ms)
+✔ lock keys stay inside their set (locks come from a public repo and from Drive) (0.656542ms)
+✔ config: games[] keeps Space first with the exact lock, Drive folder and lock copy it had (0.301375ms)
+ℹ tests 16
+ℹ suites 0
+ℹ pass 16
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 59.560792

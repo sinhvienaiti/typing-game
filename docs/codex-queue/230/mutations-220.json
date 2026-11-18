@@ -1,0 +1,422 @@
+[
+ {
+  "id": "M1",
+  "file": "src/sim/weapons.ts",
+  "what": "R1 drops the chapter-only condition",
+  "tests": [
+   "tests/full-bay.test.ts"
+  ],
+  "mutated": {
+   "exit": 1,
+   "failed": 3,
+   "passed": 18,
+   "total": 21,
+   "failingFiles": [
+    "tests/full-bay.test.ts"
+   ],
+   "seconds": 0.54
+  },
+  "restored": {
+   "exit": 0,
+   "failed": 0,
+   "passed": 21,
+   "total": 21,
+   "failingFiles": [],
+   "seconds": 0.52
+  },
+  "restoredSha256Match": true
+ },
+ {
+  "id": "M2",
+  "file": "src/sim/weapons.ts",
+  "what": "R2 drops the chapter-only condition",
+  "tests": [
+   "tests/full-bay.test.ts"
+  ],
+  "mutated": {
+   "exit": 1,
+   "failed": 2,
+   "passed": 19,
+   "total": 21,
+   "failingFiles": [
+    "tests/full-bay.test.ts"
+   ],
+   "seconds": 0.53
+  },
+  "restored": {
+   "exit": 0,
+   "failed": 0,
+   "passed": 21,
+   "total": 21,
+   "failingFiles": [],
+   "seconds": 0.54
+  },
+  "restoredSha256Match": true
+ },
+ {
+  "id": "M3",
+  "file": "src/sim/weapons.ts",
+  "what": "R3 drops the chapter-only condition",
+  "tests": [
+   "tests/full-bay.test.ts"
+  ],
+  "mutated": {
+   "exit": 1,
+   "failed": 2,
+   "passed": 19,
+   "total": 21,
+   "failingFiles": [
+    "tests/full-bay.test.ts"
+   ],
+   "seconds": 0.54
+  },
+  "restored": {
+   "exit": 0,
+   "failed": 0,
+   "passed": 21,
+   "total": 21,
+   "failingFiles": [],
+   "seconds": 0.54
+  },
+  "restoredSha256Match": true
+ },
+ {
+  "id": "M4",
+  "file": "src/content/guns.ts",
+  "what": "R3 knob on by default (boost 0.3)",
+  "tests": "all",
+  "mutated": {
+   "exit": 1,
+   "failed": 7,
+   "passed": 310,
+   "total": 317,
+   "failingFiles": [
+    "tests/full-bay.test.ts"
+   ],
+   "seconds": 5.46
+  },
+  "restored": {
+   "exit": 0,
+   "failed": 0,
+   "passed": 317,
+   "total": 317,
+   "failingFiles": [],
+   "seconds": 4.8
+  },
+  "restoredSha256Match": true
+ },
+ {
+  "id": "M5",
+  "file": "src/content/guns.ts",
+  "what": "R2 knob on by default (spill 1)",
+  "tests": "all",
+  "mutated": {
+   "exit": 1,
+   "failed": 5,
+   "passed": 312,
+   "total": 317,
+   "failingFiles": [
+    "tests/full-bay.test.ts"
+   ],
+   "seconds": 4.88
+  },
+  "restored": {
+   "exit": 0,
+   "failed": 0,
+   "passed": 317,
+   "total": 317,
+   "failingFiles": [],
+   "seconds": 5.61
+  },
+  "restoredSha256Match": true
+ },
+ {
+  "id": "M6",
+  "file": "src/sim/weapons.ts",
+  "what": "nextMagazine no longer shifts the boost mark",
+  "tests": [
+   "tests/full-bay.test.ts"
+  ],
+  "mutated": {
+   "exit": 1,
+   "failed": 1,
+   "passed": 20,
+   "total": 21,
+   "failingFiles": [
+    "tests/full-bay.test.ts"
+   ],
+   "seconds": 0.53
+  },
+  "restored": {
+   "exit": 0,
+   "failed": 0,
+   "passed": 21,
+   "total": 21,
+   "failingFiles": [],
+   "seconds": 0.53
+  },
+  "restoredSha256Match": true
+ },
+ {
+  "id": "M7",
+  "file": "src/sim/weapons.ts",
+  "what": "loadMagazine no longer clears the boost mark",
+  "tests": [
+   "tests/full-bay.test.ts"
+  ],
+  "mutated": {
+   "exit": 0,
+   "failed": 0,
+   "passed": 21,
+   "total": 21,
+   "failingFiles": [],
+   "seconds": 0.53
+  },
+  "restored": {
+   "exit": 0,
+   "failed": 0,
+   "passed": 21,
+   "total": 21,
+   "failingFiles": [],
+   "seconds": 0.53
+  },
+  "restoredSha256Match": true
+ },
+ {
+  "id": "M8",
+  "file": "src/sim/weapons.ts",
+  "what": "R3 before R2 (precedence swapped)",
+  "tests": [
+   "tests/full-bay.test.ts"
+  ],
+  "mutated": {
+   "exit": 1,
+   "failed": 1,
+   "passed": 20,
+   "total": 21,
+   "failingFiles": [
+    "tests/full-bay.test.ts"
+   ],
+   "seconds": 0.54
+  },
+  "restored": {
+   "exit": 0,
+   "failed": 0,
+   "passed": 21,
+   "total": 21,
+   "failingFiles": [],
+   "seconds": 0.53
+  },
+  "restoredSha256Match": true
+ },
+ {
+  "id": "M9",
+  "file": "src/sim/weapons.ts",
+  "what": "R2 tie goes to the higher bay",
+  "tests": [
+   "tests/full-bay.test.ts"
+  ],
+  "mutated": {
+   "exit": 1,
+   "failed": 1,
+   "passed": 20,
+   "total": 21,
+   "failingFiles": [
+    "tests/full-bay.test.ts"
+   ],
+   "seconds": 0.54
+  },
+  "restored": {
+   "exit": 0,
+   "failed": 0,
+   "passed": 21,
+   "total": 21,
+   "failingFiles": [],
+   "seconds": 0.53
+  },
+  "restoredSha256Match": true
+ },
+ {
+  "id": "M10",
+  "file": "src/sim/pace.ts",
+  "what": "flowSnapshot ignores R3",
+  "tests": [
+   "tests/full-bay.test.ts"
+  ],
+  "mutated": {
+   "exit": 1,
+   "failed": 1,
+   "passed": 20,
+   "total": 21,
+   "failingFiles": [
+    "tests/full-bay.test.ts"
+   ],
+   "seconds": 0.55
+  },
+  "restored": {
+   "exit": 0,
+   "failed": 0,
+   "passed": 21,
+   "total": 21,
+   "failingFiles": [],
+   "seconds": 0.52
+  },
+  "restoredSha256Match": true
+ },
+ {
+  "id": "M11",
+  "file": "src/sim/weapons.ts",
+  "what": "bot value ignores R3",
+  "tests": [
+   "tests/full-bay.test.ts"
+  ],
+  "mutated": {
+   "exit": 1,
+   "failed": 1,
+   "passed": 20,
+   "total": 21,
+   "failingFiles": [
+    "tests/full-bay.test.ts"
+   ],
+   "seconds": 0.54
+  },
+  "restored": {
+   "exit": 0,
+   "failed": 0,
+   "passed": 21,
+   "total": 21,
+   "failingFiles": [],
+   "seconds": 0.53
+  },
+  "restoredSha256Match": true
+ },
+ {
+  "id": "M12",
+  "file": "src/sim/words.ts",
+  "what": "R2 emits no EV.load for the receiver",
+  "tests": [
+   "tests/full-bay.test.ts"
+  ],
+  "mutated": {
+   "exit": 1,
+   "failed": 2,
+   "passed": 19,
+   "total": 21,
+   "failingFiles": [
+    "tests/full-bay.test.ts"
+   ],
+   "seconds": 0.71
+  },
+  "restored": {
+   "exit": 0,
+   "failed": 0,
+   "passed": 21,
+   "total": 21,
+   "failingFiles": [],
+   "seconds": 0.69
+  },
+  "restoredSha256Match": true
+ },
+ {
+  "id": "M13",
+  "file": "src/sim/world.ts",
+  "what": "world.ts line 119 reverted (R1 never reaches a world)",
+  "tests": [
+   "tests/full-bay.test.ts"
+  ],
+  "mutated": {
+   "exit": 1,
+   "failed": 5,
+   "passed": 16,
+   "total": 21,
+   "failingFiles": [
+    "tests/full-bay.test.ts"
+   ],
+   "seconds": 0.65
+  },
+  "restored": {
+   "exit": 0,
+   "failed": 0,
+   "passed": 21,
+   "total": 21,
+   "failingFiles": [],
+   "seconds": 0.64
+  },
+  "restoredSha256Match": true
+ },
+ {
+  "id": "M14",
+  "file": "src/sim/weapons.ts",
+  "what": "a top-level typed array next to the nested mark (enters hashWorld)",
+  "tests": "all",
+  "mutated": {
+   "exit": 0,
+   "failed": 0,
+   "passed": 317,
+   "total": 317,
+   "failingFiles": [],
+   "seconds": 4.87
+  },
+  "restored": {
+   "exit": 0,
+   "failed": 0,
+   "passed": 317,
+   "total": 317,
+   "failingFiles": [],
+   "seconds": 4.82
+  },
+  "restoredSha256Match": true
+ },
+ {
+  "id": "M15",
+  "file": "src/sim/weapons.ts",
+  "what": "R2 may pick an empty socket",
+  "tests": [
+   "tests/full-bay.test.ts"
+  ],
+  "mutated": {
+   "exit": 0,
+   "failed": 0,
+   "passed": 21,
+   "total": 21,
+   "failingFiles": [],
+   "seconds": 0.53
+  },
+  "restored": {
+   "exit": 0,
+   "failed": 0,
+   "passed": 21,
+   "total": 21,
+   "failingFiles": [],
+   "seconds": 0.52
+  },
+  "restoredSha256Match": true
+ },
+ {
+  "id": "M16",
+  "file": "src/sim/weapons.ts",
+  "what": "R3 multiplies by 1 + 2 x boost",
+  "tests": [
+   "tests/full-bay.test.ts"
+  ],
+  "mutated": {
+   "exit": 1,
+   "failed": 3,
+   "passed": 18,
+   "total": 21,
+   "failingFiles": [
+    "tests/full-bay.test.ts"
+   ],
+   "seconds": 0.54
+  },
+  "restored": {
+   "exit": 0,
+   "failed": 0,
+   "passed": 21,
+   "total": 21,
+   "failingFiles": [],
+   "seconds": 0.53
+  },
+  "restoredSha256Match": true
+ }
+]

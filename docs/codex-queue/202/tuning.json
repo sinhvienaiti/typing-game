@@ -1,0 +1,190 @@
+{
+  "FOOT": {
+    "tree": 0.075,
+    "bamboo": 0.075,
+    "canopy": 0.22,
+    "bush": 0.22,
+    "grass": 0.08,
+    "flower": 0.14,
+    "rock": 0.32,
+    "log": 0.38,
+    "stump": 0.3
+  },
+  "SCENERY_TUNING": {
+    "borderM": 40,
+    "vergeM": 0.8,
+    "fallbackRoadK": 1.5,
+    "keepYardM": 7,
+    "yardSoftM": 1.5,
+    "oreMinM": 3.7,
+    "oreBaseM": 2.2,
+    "oreRichnessK": 0.5,
+    "treeClearM": 4,
+    "gateHalfM": 6,
+    "slopeSpanM": 2,
+    "slopeRiseM": 1.4,
+    "bankM": 0.6,
+    "scaleMin": 0.85,
+    "scaleRange": 0.3,
+    "tintMin": 0.96,
+    "tintRange": 0.08,
+    "forestRows": 4,
+    "forestFrontM": 5,
+    "forestRowM": 7,
+    "forestStepM": 6,
+    "forestCornerM": 10,
+    "forestPhase": 0.25,
+    "forestStagger": 0.5,
+    "forestGrowth": 1.12,
+    "forestShade": 0.92,
+    "forestJitterMin": 0.97,
+    "forestJitterRange": 0.06,
+    "clusterMinM": 20,
+    "clusterRangeM": 10,
+    "densityCut": 0.56,
+    "poissonK": 0.8,
+    "poissonCandidateFootM": 0.7,
+    "poissonTries": 24,
+    "reseedTries": 18000,
+    "crossTries": 24000,
+    "gridM": 8,
+    "roadIndexReachM": 12,
+    "fieldTallRoadM": 6
+  },
+  "SCENERY_TYPES": [
+    [
+      "almond-tree",
+      "tree",
+      18,
+      3
+    ],
+    [
+      "mountain-pine",
+      "tree",
+      14,
+      3
+    ],
+    [
+      "bamboo-clump",
+      "bamboo",
+      16,
+      4
+    ],
+    [
+      "canopy-block",
+      "canopy",
+      14,
+      0
+    ],
+    [
+      "fern",
+      "bush",
+      2.3,
+      25
+    ],
+    [
+      "reed-clump",
+      "grass",
+      3,
+      0
+    ],
+    [
+      "tall-grass",
+      "grass",
+      2.5,
+      0
+    ],
+    [
+      "wildflowers",
+      "flower",
+      1,
+      0
+    ],
+    [
+      "raspberry-bush",
+      "bush",
+      1.8,
+      25
+    ],
+    [
+      "rock-medium",
+      "rock",
+      3.4,
+      8
+    ],
+    [
+      "rock-small",
+      "rock",
+      0.664719,
+      20
+    ],
+    [
+      "rotten-log",
+      "log",
+      2.462413,
+      6
+    ],
+    [
+      "tree-stump",
+      "stump",
+      2.3,
+      6
+    ]
+  ],
+  "SCENERY_MIX": {
+    "forestFront": [
+      [
+        "canopy-block",
+        70
+      ],
+      [
+        "almond-tree",
+        10
+      ],
+      [
+        "mountain-pine",
+        10
+      ],
+      [
+        "bamboo-clump",
+        10
+      ]
+    ],
+    "forestBack": [
+      [
+        "canopy-block",
+        100
+      ]
+    ],
+    "crossField": [
+      [
+        "tall-grass",
+        65
+      ],
+      [
+        "wildflowers",
+        35
+      ]
+    ],
+    "crossWater": [
+      [
+        "reed-clump",
+        100
+      ]
+    ]
+  },
+  "SCENERY_BUDGET": {
+    "low": {
+      "large": 600,
+      "cross": 0
+    },
+    "medium": {
+      "large": 1000,
+      "cross": 1600
+    },
+    "high": {
+      "large": 1500,
+      "cross": 4000
+    }
+  }
+}

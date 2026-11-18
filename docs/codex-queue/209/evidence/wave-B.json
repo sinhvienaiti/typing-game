@@ -1,0 +1,112 @@
+{
+  "wave": "B",
+  "start": "2026-10-30T03:12:22.742Z",
+  "uptime": "10:12  2 users, load averages: 6.25 7.05 5.85",
+  "load": 6.25,
+  "limit": 6,
+  "tmpdir": "/Users/toandx/htdocs/typing-game/games/typing-survival/tmp/codex-209/tmpdir",
+  "jobs": [
+    {
+      "id": "v4",
+      "first": 1,
+      "set": "c1-s1.calm.0.rate=4.8,MODE_SPECS.challenge.surge=1.0,MODE_SPECS.challenge.rate=1.06",
+      "start": "2026-10-30T03:12:22.743Z",
+      "args": [
+        "-n",
+        "15",
+        "/opt/homebrew/Cellar/node@24/24.22.0/bin/node",
+        "--import",
+        "tsx",
+        "scripts/balance.ts",
+        "--stages=c1-s1",
+        "--seeds=100",
+        "--first=1",
+        "--g3c",
+        "--json=../runs/v4-s1.json",
+        "--out=../runs/v4-s1.md",
+        "--set=c1-s1.calm.0.rate=4.8,MODE_SPECS.challenge.surge=1.0,MODE_SPECS.challenge.rate=1.06"
+      ],
+      "pid": 50854,
+      "end": "2026-10-30T03:16:15.401Z",
+      "wallSeconds": 232.658,
+      "exit": 0
+    },
+    {
+      "id": "v4",
+      "first": 101,
+      "set": "c1-s1.calm.0.rate=4.8,MODE_SPECS.challenge.surge=1.0,MODE_SPECS.challenge.rate=1.06",
+      "start": "2026-10-30T03:12:22.748Z",
+      "args": [
+        "-n",
+        "15",
+        "/opt/homebrew/Cellar/node@24/24.22.0/bin/node",
+        "--import",
+        "tsx",
+        "scripts/balance.ts",
+        "--stages=c1-s1",
+        "--seeds=100",
+        "--first=101",
+        "--g3c",
+        "--json=../runs/v4-s101.json",
+        "--out=../runs/v4-s101.md",
+        "--set=c1-s1.calm.0.rate=4.8,MODE_SPECS.challenge.surge=1.0,MODE_SPECS.challenge.rate=1.06"
+      ],
+      "pid": 50864,
+      "end": "2026-10-30T03:16:20.111Z",
+      "wallSeconds": 237.363,
+      "exit": 0
+    },
+    {
+      "id": "v5",
+      "first": 1,
+      "set": "c1-s1.calm.0.rate=4.8,PACE_GAIN.surge=0.7",
+      "start": "2026-10-30T03:12:22.748Z",
+      "args": [
+        "-n",
+        "15",
+        "/opt/homebrew/Cellar/node@24/24.22.0/bin/node",
+        "--import",
+        "tsx",
+        "scripts/balance.ts",
+        "--stages=c1-s1",
+        "--seeds=100",
+        "--first=1",
+        "--g3c",
+        "--json=../runs/v5-s1.json",
+        "--out=../runs/v5-s1.md",
+        "--set=c1-s1.calm.0.rate=4.8,PACE_GAIN.surge=0.7"
+      ],
+      "pid": 50874,
+      "end": "2026-10-30T03:16:16.953Z",
+      "wallSeconds": 234.205,
+      "exit": 0
+    },
+    {
+      "id": "v5",
+      "first": 101,
+      "set": "c1-s1.calm.0.rate=4.8,PACE_GAIN.surge=0.7",
+      "start": "2026-10-30T03:12:22.749Z",
+      "args": [
+        "-n",
+        "15",
+        "/opt/homebrew/Cellar/node@24/24.22.0/bin/node",
+        "--import",
+        "tsx",
+        "scripts/balance.ts",
+        "--stages=c1-s1",
+        "--seeds=100",
+        "--first=101",
+        "--g3c",
+        "--json=../runs/v5-s101.json",
+        "--out=../runs/v5-s101.md",
+        "--set=c1-s1.calm.0.rate=4.8,PACE_GAIN.surge=0.7"
+      ],
+      "pid": 50884,
+      "end": "2026-10-30T03:16:21.019Z",
+      "wallSeconds": 238.27,
+      "exit": 0
+    }
+  ],
+  "peak": 4,
+  "end": "2026-10-30T03:16:21.019Z"
+}

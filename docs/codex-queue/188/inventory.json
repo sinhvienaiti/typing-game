@@ -1,0 +1,4227 @@
+[
+  {
+    "base": "games/dragon-hold",
+    "manifest": {
+      "name": "dragon-hold",
+      "version": "0.1.0",
+      "private": true,
+      "type": "module",
+      "description": "Rồng Giữ Ải (Dragonhold): 3D typing lane defense.",
+      "scripts": {
+        "dev": "vite --host 127.0.0.1 --port 3005 --strictPort",
+        "build": "tsc --noEmit && vite build",
+        "deploy:pack": "pnpm build && node src/kit/tools/deploy/check-pack.mjs dist --game dragon-hold",
+        "deploy:pack:local": "pnpm build && node src/kit/tools/deploy/check-pack.mjs dist --game dragon-hold --allow-local-host",
+        "preview": "vite preview --host 127.0.0.1 --port 3005 --strictPort",
+        "test": "vitest run",
+        "check": "node src/kit/verify-kit.mjs && pnpm test && pnpm build",
+        "dh:balance": "tsx scripts/balance/run.ts",
+        "dh:golden:update": "tsx scripts/balance/golden.ts --update",
+        "visual": "node scripts/visual/cdp-run.mjs",
+        "prepare-ground": "node scripts/assets/prepare-ground.mjs",
+        "prepare-decals": "node scripts/assets/prepare-decals.mjs"
+      },
+      "dependencies": {
+        "@fontsource/be-vietnam-pro": "^5.3.0",
+        "@fontsource/cormorant-garamond": "^5.2.0",
+        "@fontsource/noto-sans": "^5.3.0",
+        "three": "0.170.0"
+      },
+      "devDependencies": {
+        "@types/node": "^24.19.0",
+        "@types/three": "0.170.0",
+        "tsx": "^4.23.15",
+        "typescript": "^6.0.2",
+        "vite": "^7.1.7",
+        "vitest": "^3.2.4"
+      },
+      "packageManager": "pnpm@11.21.0"
+    },
+    "lock": {
+      "dependencies": {
+        "@fontsource/be-vietnam-pro": "5.3.0",
+        "@fontsource/cormorant-garamond": "5.3.0",
+        "@fontsource/noto-sans": "5.3.0",
+        "three": "0.170.0"
+      },
+      "devDependencies": {
+        "@types/node": "24.19.2",
+        "@types/three": "0.170.0",
+        "tsx": "4.23.15",
+        "typescript": "6.0.3",
+        "vite": "7.3.7(@types/node@24.19.2)(tsx@4.23.15)",
+        "vitest": "3.2.7(@types/node@24.19.2)(tsx@4.23.15)"
+      },
+      "snapshots": {
+        "@esbuild/aix-ppc64@0.28.2": {},
+        "@esbuild/android-arm64@0.28.2": {},
+        "@esbuild/android-arm@0.28.2": {},
+        "@esbuild/android-x64@0.28.2": {},
+        "@esbuild/darwin-arm64@0.28.2": {},
+        "@esbuild/darwin-x64@0.28.2": {},
+        "@esbuild/freebsd-arm64@0.28.2": {},
+        "@esbuild/freebsd-x64@0.28.2": {},
+        "@esbuild/linux-arm64@0.28.2": {},
+        "@esbuild/linux-arm@0.28.2": {},
+        "@esbuild/linux-ia32@0.28.2": {},
+        "@esbuild/linux-loong64@0.28.2": {},
+        "@esbuild/linux-mips64el@0.28.2": {},
+        "@esbuild/linux-ppc64@0.28.2": {},
+        "@esbuild/linux-riscv64@0.28.2": {},
+        "@esbuild/linux-s390x@0.28.2": {},
+        "@esbuild/linux-x64@0.28.2": {},
+        "@esbuild/netbsd-arm64@0.28.2": {},
+        "@esbuild/netbsd-x64@0.28.2": {},
+        "@esbuild/openbsd-arm64@0.28.2": {},
+        "@esbuild/openbsd-x64@0.28.2": {},
+        "@esbuild/openharmony-arm64@0.28.2": {},
+        "@esbuild/sunos-x64@0.28.2": {},
+        "@esbuild/win32-arm64@0.28.2": {},
+        "@esbuild/win32-ia32@0.28.2": {},
+        "@esbuild/win32-x64@0.28.2": {},
+        "@fontsource/be-vietnam-pro@5.3.0": {},
+        "@fontsource/cormorant-garamond@5.3.0": {},
+        "@fontsource/noto-sans@5.3.0": {},
+        "@jridgewell/sourcemap-codec@1.6.0": {},
+        "@napi-rs/lzma-linux-x64-gnu@1.5.1": {},
+        "@rollup/rollup-android-arm-eabi@4.64.12": {},
+        "@rollup/rollup-android-arm64@4.64.12": {},
+        "@rollup/rollup-darwin-arm64@4.64.12": {},
+        "@rollup/rollup-darwin-x64@4.64.12": {},
+        "@rollup/rollup-freebsd-arm64@4.64.12": {},
+        "@rollup/rollup-freebsd-x64@4.64.12": {},
+        "@rollup/rollup-linux-arm-gnueabihf@4.64.12": {},
+        "@rollup/rollup-linux-arm-musleabihf@4.64.12": {},
+        "@rollup/rollup-linux-arm64-gnu@4.64.12": {},
+        "@rollup/rollup-linux-arm64-musl@4.64.12": {},
+        "@rollup/rollup-linux-loong64-gnu@4.64.12": {},
+        "@rollup/rollup-linux-loong64-musl@4.64.12": {},
+        "@rollup/rollup-linux-ppc64-gnu@4.64.12": {},
+        "@rollup/rollup-linux-ppc64-musl@4.64.12": {},
+        "@rollup/rollup-linux-riscv64-gnu@4.64.12": {},
+        "@rollup/rollup-linux-riscv64-musl@4.64.12": {},
+        "@rollup/rollup-linux-s390x-gnu@4.64.12": {},
+        "@rollup/rollup-linux-x64-gnu@4.64.12": {},
+        "@rollup/rollup-linux-x64-musl@4.64.12": {},
+        "@rollup/rollup-openbsd-x64@4.64.12": {},
+        "@rollup/rollup-openharmony-arm64@4.64.12": {},
+        "@rollup/rollup-win32-arm64-msvc@4.64.12": {},
+        "@rollup/rollup-win32-ia32-msvc@4.64.12": {},
+        "@rollup/rollup-win32-x64-gnu@4.64.12": {},
+        "@rollup/rollup-win32-x64-msvc@4.64.12": {},
+        "@tweenjs/tween.js@23.1.3": {},
+        "@types/chai@5.2.3": {
+          "@types/deep-eql": "4.0.2",
+          "assertion-error": "2.0.1"
+        },
+        "@types/deep-eql@4.0.2": {},
+        "@types/estree@1.0.9": {},
+        "@types/node@24.19.2": {
+          "undici-types": "7.24.6"
+        },
+        "@types/stats.js@0.17.4": {},
+        "@types/three@0.170.0": {
+          "@tweenjs/tween.js": "23.1.3",
+          "@types/stats.js": "0.17.4",
+          "@types/webxr": "0.5.24",
+          "@webgpu/types": "0.1.74",
+          "fflate": "0.8.3",
+          "meshoptimizer": "0.18.1"
+        },
+        "@types/webxr@0.5.24": {},
+        "@vitest/expect@3.2.7": {
+          "@types/chai": "5.2.3",
+          "@vitest/spy": "3.2.7",
+          "@vitest/utils": "3.2.7",
+          "chai": "5.3.3",
+          "tinyrainbow": "2.0.0"
+        },
+        "@vitest/mocker@3.2.7(vite@7.3.7(@types/node@24.19.2)(tsx@4.23.15))": {
+          "@vitest/spy": "3.2.7",
+          "estree-walker": "3.0.3",
+          "magic-string": "0.30.21",
+          "vite": "7.3.7(@types/node@24.19.2)(tsx@4.23.15)"
+        },
+        "@vitest/pretty-format@3.2.7": {
+          "tinyrainbow": "2.0.0"
+        },
+        "@vitest/runner@3.2.7": {
+          "@vitest/utils": "3.2.7",
+          "pathe": "2.0.3",
+          "strip-literal": "3.1.0"
+        },
+        "@vitest/snapshot@3.2.7": {
+          "@vitest/pretty-format": "3.2.7",
+          "magic-string": "0.30.21",
+          "pathe": "2.0.3"
+        },
+        "@vitest/spy@3.2.7": {
+          "tinyspy": "4.0.6"
+        },
+        "@vitest/utils@3.2.7": {
+          "@vitest/pretty-format": "3.2.7",
+          "loupe": "3.2.1",
+          "tinyrainbow": "2.0.0"
+        },
+        "@webgpu/types@0.1.74": {},
+        "assertion-error@2.0.1": {},
+        "cac@6.7.14": {},
+        "chai@5.3.3": {
+          "assertion-error": "2.0.1",
+          "check-error": "2.1.3",
+          "deep-eql": "5.0.2",
+          "loupe": "3.2.1",
+          "pathval": "2.0.1"
+        },
+        "check-error@2.1.3": {},
+        "debug@4.4.3": {
+          "ms": "2.1.3"
+        },
+        "deep-eql@5.0.2": {},
+        "es-module-lexer@1.7.0": {},
+        "esbuild@0.28.2": {
+          "@esbuild/aix-ppc64": "0.28.2",
+          "@esbuild/android-arm": "0.28.2",
+          "@esbuild/android-arm64": "0.28.2",
+          "@esbuild/android-x64": "0.28.2",
+          "@esbuild/darwin-arm64": "0.28.2",
+          "@esbuild/darwin-x64": "0.28.2",
+          "@esbuild/freebsd-arm64": "0.28.2",
+          "@esbuild/freebsd-x64": "0.28.2",
+          "@esbuild/linux-arm": "0.28.2",
+          "@esbuild/linux-arm64": "0.28.2",
+          "@esbuild/linux-ia32": "0.28.2",
+          "@esbuild/linux-loong64": "0.28.2",
+          "@esbuild/linux-mips64el": "0.28.2",
+          "@esbuild/linux-ppc64": "0.28.2",
+          "@esbuild/linux-riscv64": "0.28.2",
+          "@esbuild/linux-s390x": "0.28.2",
+          "@esbuild/linux-x64": "0.28.2",
+          "@esbuild/netbsd-arm64": "0.28.2",
+          "@esbuild/netbsd-x64": "0.28.2",
+          "@esbuild/openbsd-arm64": "0.28.2",
+          "@esbuild/openbsd-x64": "0.28.2",
+          "@esbuild/openharmony-arm64": "0.28.2",
+          "@esbuild/sunos-x64": "0.28.2",
+          "@esbuild/win32-arm64": "0.28.2",
+          "@esbuild/win32-ia32": "0.28.2",
+          "@esbuild/win32-x64": "0.28.2"
+        },
+        "estree-walker@3.0.3": {
+          "@types/estree": "1.0.9"
+        },
+        "expect-type@1.4.0": {},
+        "fdir@6.5.0(picomatch@4.0.7)": {
+          "picomatch": "4.0.7"
+        },
+        "fflate@0.8.3": {},
+        "fsevents@2.3.3": {},
+        "js-tokens@9.0.1": {},
+        "loupe@3.2.1": {},
+        "magic-string@0.30.21": {
+          "@jridgewell/sourcemap-codec": "1.6.0"
+        },
+        "meshoptimizer@0.18.1": {},
+        "ms@2.1.3": {},
+        "nanoid@3.3.20": {},
+        "pathe@2.0.3": {},
+        "pathval@2.0.1": {},
+        "picocolors@1.1.1": {},
+        "picomatch@4.0.7": {},
+        "postcss@8.5.31": {
+          "nanoid": "3.3.20",
+          "picocolors": "1.1.1",
+          "source-map-js": "1.2.2"
+        },
+        "rollup@4.64.12": {
+          "@types/estree": "1.0.9",
+          "@napi-rs/lzma-linux-x64-gnu": "1.5.1",
+          "@rollup/rollup-android-arm-eabi": "4.64.12",
+          "@rollup/rollup-android-arm64": "4.64.12",
+          "@rollup/rollup-darwin-arm64": "4.64.12",
+          "@rollup/rollup-darwin-x64": "4.64.12",
+          "@rollup/rollup-freebsd-arm64": "4.64.12",
+          "@rollup/rollup-freebsd-x64": "4.64.12",
+          "@rollup/rollup-linux-arm-gnueabihf": "4.64.12",
+          "@rollup/rollup-linux-arm-musleabihf": "4.64.12",
+          "@rollup/rollup-linux-arm64-gnu": "4.64.12",
+          "@rollup/rollup-linux-arm64-musl": "4.64.12",
+          "@rollup/rollup-linux-loong64-gnu": "4.64.12",
+          "@rollup/rollup-linux-loong64-musl": "4.64.12",
+          "@rollup/rollup-linux-ppc64-gnu": "4.64.12",
+          "@rollup/rollup-linux-ppc64-musl": "4.64.12",
+          "@rollup/rollup-linux-riscv64-gnu": "4.64.12",
+          "@rollup/rollup-linux-riscv64-musl": "4.64.12",
+          "@rollup/rollup-linux-s390x-gnu": "4.64.12",
+          "@rollup/rollup-linux-x64-gnu": "4.64.12",
+          "@rollup/rollup-linux-x64-musl": "4.64.12",
+          "@rollup/rollup-openbsd-x64": "4.64.12",
+          "@rollup/rollup-openharmony-arm64": "4.64.12",
+          "@rollup/rollup-win32-arm64-msvc": "4.64.12",
+          "@rollup/rollup-win32-ia32-msvc": "4.64.12",
+          "@rollup/rollup-win32-x64-gnu": "4.64.12",
+          "@rollup/rollup-win32-x64-msvc": "4.64.12",
+          "fsevents": "2.3.3"
+        },
+        "siginfo@2.0.0": {},
+        "source-map-js@1.2.2": {},
+        "stackback@0.0.2": {},
+        "std-env@3.10.0": {},
+        "strip-literal@3.1.0": {
+          "js-tokens": "9.0.1"
+        },
+        "three@0.170.0": {},
+        "tinybench@2.9.0": {},
+        "tinyexec@0.3.2": {},
+        "tinyglobby@0.2.17": {
+          "fdir": "6.5.0(picomatch@4.0.7)",
+          "picomatch": "4.0.7"
+        },
+        "tinypool@1.1.1": {},
+        "tinyrainbow@2.0.0": {},
+        "tinyspy@4.0.6": {},
+        "tsx@4.23.15": {
+          "esbuild": "0.28.2",
+          "fsevents": "2.3.3"
+        },
+        "typescript@6.0.3": {},
+        "undici-types@7.24.6": {},
+        "vite-node@3.2.4(@types/node@24.19.2)(tsx@4.23.15)": {
+          "cac": "6.7.14",
+          "debug": "4.4.3",
+          "es-module-lexer": "1.7.0",
+          "pathe": "2.0.3",
+          "vite": "7.3.7(@types/node@24.19.2)(tsx@4.23.15)"
+        },
+        "vite@7.3.7(@types/node@24.19.2)(tsx@4.23.15)": {
+          "esbuild": "0.28.2",
+          "fdir": "6.5.0(picomatch@4.0.7)",
+          "picomatch": "4.0.7",
+          "postcss": "8.5.31",
+          "rollup": "4.64.12",
+          "tinyglobby": "0.2.17",
+          "@types/node": "24.19.2",
+          "fsevents": "2.3.3",
+          "tsx": "4.23.15"
+        },
+        "vitest@3.2.7(@types/node@24.19.2)(tsx@4.23.15)": {
+          "@types/chai": "5.2.3",
+          "@vitest/expect": "3.2.7",
+          "@vitest/mocker": "3.2.7(vite@7.3.7(@types/node@24.19.2)(tsx@4.23.15))",
+          "@vitest/pretty-format": "3.2.7",
+          "@vitest/runner": "3.2.7",
+          "@vitest/snapshot": "3.2.7",
+          "@vitest/spy": "3.2.7",
+          "@vitest/utils": "3.2.7",
+          "chai": "5.3.3",
+          "debug": "4.4.3",
+          "expect-type": "1.4.0",
+          "magic-string": "0.30.21",
+          "pathe": "2.0.3",
+          "picomatch": "4.0.7",
+          "std-env": "3.10.0",
+          "tinybench": "2.9.0",
+          "tinyexec": "0.3.2",
+          "tinyglobby": "0.2.17",
+          "tinypool": "1.1.1",
+          "tinyrainbow": "2.0.0",
+          "vite": "7.3.7(@types/node@24.19.2)(tsx@4.23.15)",
+          "vite-node": "3.2.4(@types/node@24.19.2)(tsx@4.23.15)",
+          "why-is-node-running": "2.3.0",
+          "@types/node": "24.19.2"
+        },
+        "why-is-node-running@2.3.0": {
+          "siginfo": "2.0.0",
+          "stackback": "0.0.2"
+        }
+      }
+    },
+    "records": [
+      {
+        "name": "@fontsource/be-vietnam-pro",
+        "version": "5.3.0",
+        "installedVersion": "5.3.0",
+        "kind": "dependency",
+        "parent": "games/dragon-hold",
+        "license": "OFL-1.1",
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/fontsource/font-files.git",
+          "directory": "fonts/google/be-vietnam-pro"
+        },
+        "dependencies": {},
+        "packageJson": "games/dragon-hold/node_modules/@fontsource/be-vietnam-pro/package.json",
+        "packageJsonSha256": "132dbddcd8a999ea860335de61c0eaa4c15490c1a5fe1de7f3d6576d59266ca4",
+        "notices": [
+          {
+            "path": "games/dragon-hold/node_modules/@fontsource/be-vietnam-pro/LICENSE",
+            "sha256": "0bd4db1cda123af9d91794b0f98324b7d7d81aef0fcaf78c433160153f2c6f25",
+            "text": "Copyright 2021 The Be Vietnam Pro Project Authors (https://github.com/bettergui/BeVietnamPro) BeVietnamPro-ThinItalic.ttf: Copyright 2021 The Be Vietnam Pro Project Authors (https://github.com/bettergui/BeVietnamPro) BeVietnamPro-ExtraLight.ttf: Copyright 2021 The Be Vietnam Pro Project Authors (https://github.com/bettergui/BeVietnamPro) BeVietnamPro-ExtraLightItalic.ttf: Copyright 2021 The Be Vietnam Pro Project Authors (https://github.com/bettergui/BeVietnamPro) BeVietnamPro-Light.ttf: Copyright 2021 The Be Vietnam Pro Project Authors (https://github.com/bettergui/BeVietnamPro) BeVietnamPro-LightItalic.ttf: Copyright 2021 The Be Vietnam Pro Project Authors (https://github.com/bettergui/BeVietnamPro) BeVietnamPro-Regular.ttf: Copyright 2021 The Be Vietnam Pro Project Authors (https://github.com/bettergui/BeVietnamPro) BeVietnamPro-Italic.ttf: Copyright 2021 The Be Vietnam Pro Project Authors (https://github.com/bettergui/BeVietnamPro) BeVietnamPro-Medium.ttf: Copyright 2021 The Be Vietnam Pro Project Authors (https://github.com/bettergui/BeVietnamPro) BeVietnamPro-MediumItalic.ttf: Copyright 2021 The Be Vietnam Pro Project Authors (https://github.com/bettergui/BeVietnamPro) BeVietnamPro-SemiBold.ttf: Copyright 2021 The Be Vietnam Pro Project Authors (https://github.com/bettergui/BeVietnamPro) BeVietnamPro-SemiBoldItalic.ttf: Copyright 2021 The Be Vietnam Pro Project Authors (https://github.com/bettergui/BeVietnamPro) BeVietnamPro-Bold.ttf: Copyright 2021 The Be Vietnam Pro Project Authors (https://github.com/bettergui/BeVietnamPro) BeVietnamPro-BoldItalic.ttf: Copyright 2021 The Be Vietnam Pro Project Authors (https://github.com/bettergui/BeVietnamPro) BeVietnamPro-ExtraBold.ttf: Copyright 2021 The Be Vietnam Pro Project Authors (https://github.com/bettergui/BeVietnamPro) BeVietnamPro-ExtraBoldItalic.ttf: Copyright 2021 The Be Vietnam Pro Project Authors (https://github.com/bettergui/BeVietnamPro) BeVietnamPro-Black.ttf: Copyright 2021 The Be Vietnam Pro Project Authors (https://github.com/bettergui/BeVietnamPro) BeVietnamPro-BlackItalic.ttf: Copyright 2021 The Be Vietnam Pro Project Authors (https://github.com/bettergui/BeVietnamPro)\n\nThis Font Software is licensed under the SIL Open Font License, Version 1.1.\nThis license is copied below, and is also available with a FAQ at:\nhttp://scripts.sil.org/OFL\n\n\n-----------------------------------------------------------\nSIL OPEN FONT LICENSE Version 1.1 - 26 February 2007\n-----------------------------------------------------------\n\nPREAMBLE\nThe goals of the Open Font License (OFL) are to stimulate worldwide\ndevelopment of collaborative font projects, to support the font creation\nefforts of academic and linguistic communities, and to provide a free and\nopen framework in which fonts may be shared and improved in partnership\nwith others.\n\nThe OFL allows the licensed fonts to be used, studied, modified and\nredistributed freely as long as they are not sold by themselves. The\nfonts, including any derivative works, can be bundled, embedded,\nredistributed and/or sold with any software provided that any reserved\nnames are not used by derivative works. The fonts and derivatives,\nhowever, cannot be released under any other type of license. The\nrequirement for fonts to remain under this license does not apply\nto any document created using the fonts or their derivatives.\n\nDEFINITIONS\n\"Font Software\" refers to the set of files released by the Copyright\nHolder(s) under this license and clearly marked as such. This may\ninclude source files, build scripts and documentation.\n\n\"Reserved Font Name\" refers to any names specified as such after the\ncopyright statement(s).\n\n\"Original Version\" refers to the collection of Font Software components as\ndistributed by the Copyright Holder(s).\n\n\"Modified Version\" refers to any derivative made by adding to, deleting,\nor substituting -- in part or in whole -- any of the components of the\nOriginal Version, by changing formats or by porting the Font Software to a\nnew environment.\n\n\"Author\" refers to any designer, engineer, programmer, technical\nwriter or other person who contributed to the Font Software.\n\nPERMISSION & CONDITIONS\nPermission is hereby granted, free of charge, to any person obtaining\na copy of the Font Software, to use, study, copy, merge, embed, modify,\nredistribute, and sell modified and unmodified copies of the Font\nSoftware, subject to the following conditions:\n\n1) Neither the Font Software nor any of its individual components,\nin Original or Modified Versions, may be sold by itself.\n\n2) Original or Modified Versions of the Font Software may be bundled,\nredistributed and/or sold with any software, provided that each copy\ncontains the above copyright notice and this license. These can be\nincluded either as stand-alone text files, human-readable headers or\nin the appropriate machine-readable metadata fields within text or\nbinary files as long as those fields can be easily viewed by the user.\n\n3) No Modified Version of the Font Software may use the Reserved Font\nName(s) unless explicit written permission is granted by the corresponding\nCopyright Holder. This restriction only applies to the primary font name as\npresented to the users.\n\n4) The name(s) of the Copyright Holder(s) or the Author(s) of the Font\nSoftware shall not be used to promote, endorse or advertise any\nModified Version, except to acknowledge the contribution(s) of the\nCopyright Holder(s) and the Author(s) or with their explicit written\npermission.\n\n5) The Font Software, modified or unmodified, in part or in whole,\nmust be distributed entirely under this license, and must not be\ndistributed under any other license. The requirement for fonts to\nremain under this license does not apply to any document created\nusing the Font Software.\n\nTERMINATION\nThis license becomes null and void if any of the above conditions are\nnot met.\n\nDISCLAIMER\nTHE FONT SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND,\nEXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO ANY WARRANTIES OF\nMERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT\nOF COPYRIGHT, PATENT, TRADEMARK, OR OTHER RIGHT. IN NO EVENT SHALL THE\nCOPYRIGHT HOLDER BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,\nINCLUDING ANY GENERAL, SPECIAL, INDIRECT, INCIDENTAL, OR CONSEQUENTIAL\nDAMAGES, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING\nFROM, OUT OF THE USE OR INABILITY TO USE THE FONT SOFTWARE OR FROM\nOTHER DEALINGS IN THE FONT SOFTWARE.\n"
+          }
+        ]
+      },
+      {
+        "name": "@fontsource/cormorant-garamond",
+        "version": "5.3.0",
+        "installedVersion": "5.3.0",
+        "kind": "dependency",
+        "parent": "games/dragon-hold",
+        "license": "OFL-1.1",
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/fontsource/font-files.git",
+          "directory": "fonts/google/cormorant-garamond"
+        },
+        "dependencies": {},
+        "packageJson": "games/dragon-hold/node_modules/@fontsource/cormorant-garamond/package.json",
+        "packageJsonSha256": "40c8ed840753ab213b7f07c3cc835d1075b6ad345ace39f729759abd18b385f7",
+        "notices": [
+          {
+            "path": "games/dragon-hold/node_modules/@fontsource/cormorant-garamond/LICENSE",
+            "sha256": "732f37009943e7f4378cf37113c9bcc4716af002a8583511aa91ed5d37683e73",
+            "text": "Copyright 2015 The Cormorant Project Authors (github.com/CatharsisFonts/Cormorant) CormorantGaramond-Italic[wght].ttf: Copyright 2015 The Cormorant Project Authors (github.com/CatharsisFonts/Cormorant)\n\nThis Font Software is licensed under the SIL Open Font License, Version 1.1.\nThis license is copied below, and is also available with a FAQ at:\nhttp://scripts.sil.org/OFL\n\n\n-----------------------------------------------------------\nSIL OPEN FONT LICENSE Version 1.1 - 26 February 2007\n-----------------------------------------------------------\n\nPREAMBLE\nThe goals of the Open Font License (OFL) are to stimulate worldwide\ndevelopment of collaborative font projects, to support the font creation\nefforts of academic and linguistic communities, and to provide a free and\nopen framework in which fonts may be shared and improved in partnership\nwith others.\n\nThe OFL allows the licensed fonts to be used, studied, modified and\nredistributed freely as long as they are not sold by themselves. The\nfonts, including any derivative works, can be bundled, embedded,\nredistributed and/or sold with any software provided that any reserved\nnames are not used by derivative works. The fonts and derivatives,\nhowever, cannot be released under any other type of license. The\nrequirement for fonts to remain under this license does not apply\nto any document created using the fonts or their derivatives.\n\nDEFINITIONS\n\"Font Software\" refers to the set of files released by the Copyright\nHolder(s) under this license and clearly marked as such. This may\ninclude source files, build scripts and documentation.\n\n\"Reserved Font Name\" refers to any names specified as such after the\ncopyright statement(s).\n\n\"Original Version\" refers to the collection of Font Software components as\ndistributed by the Copyright Holder(s).\n\n\"Modified Version\" refers to any derivative made by adding to, deleting,\nor substituting -- in part or in whole -- any of the components of the\nOriginal Version, by changing formats or by porting the Font Software to a\nnew environment.\n\n\"Author\" refers to any designer, engineer, programmer, technical\nwriter or other person who contributed to the Font Software.\n\nPERMISSION & CONDITIONS\nPermission is hereby granted, free of charge, to any person obtaining\na copy of the Font Software, to use, study, copy, merge, embed, modify,\nredistribute, and sell modified and unmodified copies of the Font\nSoftware, subject to the following conditions:\n\n1) Neither the Font Software nor any of its individual components,\nin Original or Modified Versions, may be sold by itself.\n\n2) Original or Modified Versions of the Font Software may be bundled,\nredistributed and/or sold with any software, provided that each copy\ncontains the above copyright notice and this license. These can be\nincluded either as stand-alone text files, human-readable headers or\nin the appropriate machine-readable metadata fields within text or\nbinary files as long as those fields can be easily viewed by the user.\n\n3) No Modified Version of the Font Software may use the Reserved Font\nName(s) unless explicit written permission is granted by the corresponding\nCopyright Holder. This restriction only applies to the primary font name as\npresented to the users.\n\n4) The name(s) of the Copyright Holder(s) or the Author(s) of the Font\nSoftware shall not be used to promote, endorse or advertise any\nModified Version, except to acknowledge the contribution(s) of the\nCopyright Holder(s) and the Author(s) or with their explicit written\npermission.\n\n5) The Font Software, modified or unmodified, in part or in whole,\nmust be distributed entirely under this license, and must not be\ndistributed under any other license. The requirement for fonts to\nremain under this license does not apply to any document created\nusing the Font Software.\n\nTERMINATION\nThis license becomes null and void if any of the above conditions are\nnot met.\n\nDISCLAIMER\nTHE FONT SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND,\nEXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO ANY WARRANTIES OF\nMERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT\nOF COPYRIGHT, PATENT, TRADEMARK, OR OTHER RIGHT. IN NO EVENT SHALL THE\nCOPYRIGHT HOLDER BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,\nINCLUDING ANY GENERAL, SPECIAL, INDIRECT, INCIDENTAL, OR CONSEQUENTIAL\nDAMAGES, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING\nFROM, OUT OF THE USE OR INABILITY TO USE THE FONT SOFTWARE OR FROM\nOTHER DEALINGS IN THE FONT SOFTWARE.\n"
+          }
+        ]
+      },
+      {
+        "name": "@fontsource/noto-sans",
+        "version": "5.3.0",
+        "installedVersion": "5.3.0",
+        "kind": "dependency",
+        "parent": "games/dragon-hold",
+        "license": "OFL-1.1",
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/fontsource/font-files.git",
+          "directory": "fonts/google/noto-sans"
+        },
+        "dependencies": {},
+        "packageJson": "games/dragon-hold/node_modules/@fontsource/noto-sans/package.json",
+        "packageJsonSha256": "d3aa6cc072dee67c984cf25897071c74acfc5940cc2338258b74e46678c06b5b",
+        "notices": [
+          {
+            "path": "games/dragon-hold/node_modules/@fontsource/noto-sans/LICENSE",
+            "sha256": "54ec7b5a35310ad66f9f3091426f7028484cbf9ae1ab5da30122ee412a3009e1",
+            "text": "Copyright 2022 The Noto Project Authors (https://github.com/notofonts/latin-greek-cyrillic) NotoSans-Italic[wdth,wght].ttf: Copyright 2022 The Noto Project Authors (https://github.com/notofonts/latin-greek-cyrillic)\n\nThis Font Software is licensed under the SIL Open Font License, Version 1.1.\nThis license is copied below, and is also available with a FAQ at:\nhttp://scripts.sil.org/OFL\n\n\n-----------------------------------------------------------\nSIL OPEN FONT LICENSE Version 1.1 - 26 February 2007\n-----------------------------------------------------------\n\nPREAMBLE\nThe goals of the Open Font License (OFL) are to stimulate worldwide\ndevelopment of collaborative font projects, to support the font creation\nefforts of academic and linguistic communities, and to provide a free and\nopen framework in which fonts may be shared and improved in partnership\nwith others.\n\nThe OFL allows the licensed fonts to be used, studied, modified and\nredistributed freely as long as they are not sold by themselves. The\nfonts, including any derivative works, can be bundled, embedded,\nredistributed and/or sold with any software provided that any reserved\nnames are not used by derivative works. The fonts and derivatives,\nhowever, cannot be released under any other type of license. The\nrequirement for fonts to remain under this license does not apply\nto any document created using the fonts or their derivatives.\n\nDEFINITIONS\n\"Font Software\" refers to the set of files released by the Copyright\nHolder(s) under this license and clearly marked as such. This may\ninclude source files, build scripts and documentation.\n\n\"Reserved Font Name\" refers to any names specified as such after the\ncopyright statement(s).\n\n\"Original Version\" refers to the collection of Font Software components as\ndistributed by the Copyright Holder(s).\n\n\"Modified Version\" refers to any derivative made by adding to, deleting,\nor substituting -- in part or in whole -- any of the components of the\nOriginal Version, by changing formats or by porting the Font Software to a\nnew environment.\n\n\"Author\" refers to any designer, engineer, programmer, technical\nwriter or other person who contributed to the Font Software.\n\nPERMISSION & CONDITIONS\nPermission is hereby granted, free of charge, to any person obtaining\na copy of the Font Software, to use, study, copy, merge, embed, modify,\nredistribute, and sell modified and unmodified copies of the Font\nSoftware, subject to the following conditions:\n\n1) Neither the Font Software nor any of its individual components,\nin Original or Modified Versions, may be sold by itself.\n\n2) Original or Modified Versions of the Font Software may be bundled,\nredistributed and/or sold with any software, provided that each copy\ncontains the above copyright notice and this license. These can be\nincluded either as stand-alone text files, human-readable headers or\nin the appropriate machine-readable metadata fields within text or\nbinary files as long as those fields can be easily viewed by the user.\n\n3) No Modified Version of the Font Software may use the Reserved Font\nName(s) unless explicit written permission is granted by the corresponding\nCopyright Holder. This restriction only applies to the primary font name as\npresented to the users.\n\n4) The name(s) of the Copyright Holder(s) or the Author(s) of the Font\nSoftware shall not be used to promote, endorse or advertise any\nModified Version, except to acknowledge the contribution(s) of the\nCopyright Holder(s) and the Author(s) or with their explicit written\npermission.\n\n5) The Font Software, modified or unmodified, in part or in whole,\nmust be distributed entirely under this license, and must not be\ndistributed under any other license. The requirement for fonts to\nremain under this license does not apply to any document created\nusing the Font Software.\n\nTERMINATION\nThis license becomes null and void if any of the above conditions are\nnot met.\n\nDISCLAIMER\nTHE FONT SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND,\nEXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO ANY WARRANTIES OF\nMERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT\nOF COPYRIGHT, PATENT, TRADEMARK, OR OTHER RIGHT. IN NO EVENT SHALL THE\nCOPYRIGHT HOLDER BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,\nINCLUDING ANY GENERAL, SPECIAL, INDIRECT, INCIDENTAL, OR CONSEQUENTIAL\nDAMAGES, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING\nFROM, OUT OF THE USE OR INABILITY TO USE THE FONT SOFTWARE OR FROM\nOTHER DEALINGS IN THE FONT SOFTWARE.\n"
+          }
+        ]
+      },
+      {
+        "name": "three",
+        "version": "0.170.0",
+        "installedVersion": "0.170.0",
+        "kind": "dependency",
+        "parent": "games/dragon-hold",
+        "license": "MIT",
+        "repository": {
+          "type": "git",
+          "url": "https://github.com/mrdoob/three.js"
+        },
+        "dependencies": {},
+        "packageJson": "games/dragon-hold/node_modules/three/package.json",
+        "packageJsonSha256": "2caf5d31ca4368c7e39e7e598dd95774fe1bdaae7cfbc5b073c8dcb5ec7e25da",
+        "notices": [
+          {
+            "path": "games/dragon-hold/node_modules/three/LICENSE",
+            "sha256": "4c40a1ef62450b857c3b2aaf294936304cd552d965fbcd9d32d4c5bcf4ba4454",
+            "text": "The MIT License\n\nCopyright © 2010-2024 three.js authors\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in\nall copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\nTHE SOFTWARE.\n"
+          }
+        ]
+      },
+      {
+        "name": "@types/node",
+        "version": "24.19.2",
+        "kind": "devDependency",
+        "installedVersion": "24.19.2"
+      },
+      {
+        "name": "@types/three",
+        "version": "0.170.0",
+        "kind": "devDependency",
+        "installedVersion": "0.170.0"
+      },
+      {
+        "name": "tsx",
+        "version": "4.23.15",
+        "kind": "devDependency",
+        "installedVersion": "4.23.15"
+      },
+      {
+        "name": "typescript",
+        "version": "6.0.3",
+        "kind": "devDependency",
+        "installedVersion": "6.0.3"
+      },
+      {
+        "name": "vite",
+        "version": "7.3.7",
+        "kind": "devDependency",
+        "installedVersion": "7.3.7"
+      },
+      {
+        "name": "vitest",
+        "version": "3.2.7",
+        "kind": "devDependency",
+        "installedVersion": "3.2.7"
+      }
+    ],
+    "runtime": {
+      "files": [
+        "games/dragon-hold/src/app/app.css",
+        "games/dragon-hold/src/app/app.ts",
+        "games/dragon-hold/src/app/input-router.ts",
+        "games/dragon-hold/src/app/learning.ts",
+        "games/dragon-hold/src/app/loop.ts",
+        "games/dragon-hold/src/app/pace-card.ts",
+        "games/dragon-hold/src/app/portal.ts",
+        "games/dragon-hold/src/app/typing-pace.ts",
+        "games/dragon-hold/src/audio/bank.ts",
+        "games/dragon-hold/src/audio/beds.ts",
+        "games/dragon-hold/src/audio/catalog.ts",
+        "games/dragon-hold/src/audio/engine.ts",
+        "games/dragon-hold/src/audio/index.ts",
+        "games/dragon-hold/src/audio/limiter.ts",
+        "games/dragon-hold/src/audio/map-events.ts",
+        "games/dragon-hold/src/audio/mix.ts",
+        "games/dragon-hold/src/audio/mixer.ts",
+        "games/dragon-hold/src/audio/music-plan.ts",
+        "games/dragon-hold/src/audio/music.ts",
+        "games/dragon-hold/src/audio/synth.ts",
+        "games/dragon-hold/src/content/data/enemies.ts",
+        "games/dragon-hold/src/content/data/generals.ts",
+        "games/dragon-hold/src/content/data/maps.ts",
+        "games/dragon-hold/src/content/data/our-side.ts",
+        "games/dragon-hold/src/content/data/stages.ts",
+        "games/dragon-hold/src/content/data/waves.ts",
+        "games/dragon-hold/src/content/rules.ts",
+        "games/dragon-hold/src/kit/audio/dragon-voice.ts",
+        "games/dragon-hold/src/kit/audio/index.ts",
+        "games/dragon-hold/src/kit/audio/mix.ts",
+        "games/dragon-hold/src/kit/audio/scene-audio.ts",
+        "games/dragon-hold/src/kit/audio/util.ts",
+        "games/dragon-hold/src/kit/balance/bands.ts",
+        "games/dragon-hold/src/kit/balance/director.ts",
+        "games/dragon-hold/src/kit/balance/flow.ts",
+        "games/dragon-hold/src/kit/balance/gates.ts",
+        "games/dragon-hold/src/kit/balance/index.ts",
+        "games/dragon-hold/src/kit/balance/math.ts",
+        "games/dragon-hold/src/kit/balance/pace.ts",
+        "games/dragon-hold/src/kit/balance/profile.ts",
+        "games/dragon-hold/src/kit/balance/typist.ts",
+        "games/dragon-hold/src/kit/feedback/audio-cues.ts",
+        "games/dragon-hold/src/kit/feedback/debris.ts",
+        "games/dragon-hold/src/kit/feedback/hitstop.ts",
+        "games/dragon-hold/src/kit/feedback/index.ts",
+        "games/dragon-hold/src/kit/feedback/kill-translation.ts",
+        "games/dragon-hold/src/kit/feedback/numbers.ts",
+        "games/dragon-hold/src/kit/feedback/profiles.ts",
+        "games/dragon-hold/src/kit/feedback/quads.ts",
+        "games/dragon-hold/src/kit/feedback/reaction.ts",
+        "games/dragon-hold/src/kit/feedback/tiers.ts",
+        "games/dragon-hold/src/kit/feedback/trauma.ts",
+        "games/dragon-hold/src/kit/input/index.ts",
+        "games/dragon-hold/src/kit/input/keys.ts",
+        "games/dragon-hold/src/kit/input/text.ts",
+        "games/dragon-hold/src/kit/learning/bridge.ts",
+        "games/dragon-hold/src/kit/learning/contract.ts",
+        "games/dragon-hold/src/kit/learning/events.ts",
+        "games/dragon-hold/src/kit/learning/index.ts",
+        "games/dragon-hold/src/kit/platform/canvas-state.ts",
+        "games/dragon-hold/src/kit/platform/frame-loop.ts",
+        "games/dragon-hold/src/kit/platform/index.ts",
+        "games/dragon-hold/src/kit/platform/rng.ts",
+        "games/dragon-hold/src/kit/platform/safe-storage.ts",
+        "games/dragon-hold/src/kit/speech/index.ts",
+        "games/dragon-hold/src/kit/speech/speech.ts",
+        "games/dragon-hold/src/kit/three/guide-scene.ts",
+        "games/dragon-hold/src/kit/three/hero.ts",
+        "games/dragon-hold/src/kit/three/index.ts",
+        "games/dragon-hold/src/kit/three/materials.ts",
+        "games/dragon-hold/src/kit/three/model-contracts.ts",
+        "games/dragon-hold/src/kit/three/model-loader.ts",
+        "games/dragon-hold/src/kit/three/particles.ts",
+        "games/dragon-hold/src/kit/three/stage.ts",
+        "games/dragon-hold/src/kit/three/textures.ts",
+        "games/dragon-hold/src/kit/three/util.ts",
+        "games/dragon-hold/src/kit/typing/budget.ts",
+        "games/dragon-hold/src/kit/typing/config.ts",
+        "games/dragon-hold/src/kit/typing/decks.ts",
+        "games/dragon-hold/src/kit/typing/distance.ts",
+        "games/dragon-hold/src/kit/typing/index.ts",
+        "games/dragon-hold/src/kit/typing/letters.ts",
+        "games/dragon-hold/src/kit/typing/picker.ts",
+        "games/dragon-hold/src/kit/typing/router.ts",
+        "games/dragon-hold/src/kit/typing/scorer.ts",
+        "games/dragon-hold/src/kit/typing/session.ts",
+        "games/dragon-hold/src/kit/typing/tempo.ts",
+        "games/dragon-hold/src/kit/ui/index.ts",
+        "games/dragon-hold/src/kit/ui/styles.ts",
+        "games/dragon-hold/src/kit/ui/tokens.ts",
+        "games/dragon-hold/src/kit/vocab/content-filter.ts",
+        "games/dragon-hold/src/kit/vocab/index.ts",
+        "games/dragon-hold/src/kit/vocab/vocabulary.ts",
+        "games/dragon-hold/src/kit/vocab/words.ts",
+        "games/dragon-hold/src/main.ts",
+        "games/dragon-hold/src/sim/auras.ts",
+        "games/dragon-hold/src/sim/boss.ts",
+        "games/dragon-hold/src/sim/combat.ts",
+        "games/dragon-hold/src/sim/director.ts",
+        "games/dragon-hold/src/sim/economy.ts",
+        "games/dragon-hold/src/sim/events.ts",
+        "games/dragon-hold/src/sim/fixed.ts",
+        "games/dragon-hold/src/sim/hash.ts",
+        "games/dragon-hold/src/sim/houses.ts",
+        "games/dragon-hold/src/sim/lanes.ts",
+        "games/dragon-hold/src/sim/movement.ts",
+        "games/dragon-hold/src/sim/placement.ts",
+        "games/dragon-hold/src/sim/shop.ts",
+        "games/dragon-hold/src/sim/spawn.ts",
+        "games/dragon-hold/src/sim/status.ts",
+        "games/dragon-hold/src/sim/traps.ts",
+        "games/dragon-hold/src/sim/units.ts",
+        "games/dragon-hold/src/sim/waves.ts",
+        "games/dragon-hold/src/sim/words.ts",
+        "games/dragon-hold/src/sim/world.ts",
+        "games/dragon-hold/src/typing/config.ts",
+        "games/dragon-hold/src/typing/deck.ts",
+        "games/dragon-hold/src/typing/grading.ts",
+        "games/dragon-hold/src/typing/lengths.ts",
+        "games/dragon-hold/src/ui/debut-card.ts",
+        "games/dragon-hold/src/ui/hud.ts",
+        "games/dragon-hold/src/ui/learning-frame.ts",
+        "games/dragon-hold/src/ui/placement-ui.ts",
+        "games/dragon-hold/src/ui/results.ts",
+        "games/dragon-hold/src/ui/screen-zones.ts",
+        "games/dragon-hold/src/ui/shop-strip.ts",
+        "games/dragon-hold/src/ui/skin.ts",
+        "games/dragon-hold/src/ui/styles/dh.css",
+        "games/dragon-hold/src/ui/tags.ts",
+        "games/dragon-hold/src/ui/ui-preview.ts",
+        "games/dragon-hold/src/ui/wave-card.ts",
+        "games/dragon-hold/src/view/actors.ts",
+        "games/dragon-hold/src/view/banners.ts",
+        "games/dragon-hold/src/view/camera.ts",
+        "games/dragon-hold/src/view/crowd-rig.ts",
+        "games/dragon-hold/src/view/crowd.ts",
+        "games/dragon-hold/src/view/foe-look.ts",
+        "games/dragon-hold/src/view/fx.ts",
+        "games/dragon-hold/src/view/heroes.ts",
+        "games/dragon-hold/src/view/hpbars.ts",
+        "games/dragon-hold/src/view/impostor.ts",
+        "games/dragon-hold/src/view/lane-cue.ts",
+        "games/dragon-hold/src/view/layout.ts",
+        "games/dragon-hold/src/view/maps/L2-cau.map.json",
+        "games/dragon-hold/src/view/maps/scene.ts",
+        "games/dragon-hold/src/view/model-specs.ts",
+        "games/dragon-hold/src/view/models.ts",
+        "games/dragon-hold/src/view/motion.ts",
+        "games/dragon-hold/src/view/paint.ts",
+        "games/dragon-hold/src/view/paths.ts",
+        "games/dragon-hold/src/view/scatter.ts",
+        "games/dragon-hold/src/view/stage.ts",
+        "games/dragon-hold/src/view/telegraphs.ts",
+        "games/dragon-hold/src/view/terrain.ts",
+        "games/dragon-hold/src/view/water.ts"
+      ],
+      "external": [
+        {
+          "file": "games/dragon-hold/src/app/app.ts",
+          "spec": "three",
+          "line": 19
+        },
+        {
+          "file": "games/dragon-hold/src/kit/feedback/debris.ts",
+          "spec": "three",
+          "line": 10
+        },
+        {
+          "file": "games/dragon-hold/src/kit/feedback/numbers.ts",
+          "spec": "three",
+          "line": 24
+        },
+        {
+          "file": "games/dragon-hold/src/kit/feedback/quads.ts",
+          "spec": "three",
+          "line": 2
+        },
+        {
+          "file": "games/dragon-hold/src/ui/skin.ts",
+          "spec": "@fontsource/be-vietnam-pro/400.css",
+          "line": 9
+        },
+        {
+          "file": "games/dragon-hold/src/ui/skin.ts",
+          "spec": "@fontsource/be-vietnam-pro/700.css",
+          "line": 10
+        },
+        {
+          "file": "games/dragon-hold/src/ui/skin.ts",
+          "spec": "@fontsource/be-vietnam-pro/800.css",
+          "line": 11
+        },
+        {
+          "file": "games/dragon-hold/src/ui/skin.ts",
+          "spec": "@fontsource/cormorant-garamond/700.css",
+          "line": 12
+        },
+        {
+          "file": "games/dragon-hold/src/ui/skin.ts",
+          "spec": "@fontsource/noto-sans/latin-400.css",
+          "line": 14
+        },
+        {
+          "file": "games/dragon-hold/src/ui/skin.ts",
+          "spec": "@fontsource/noto-sans/latin-ext-400.css",
+          "line": 15
+        },
+        {
+          "file": "games/dragon-hold/src/ui/skin.ts",
+          "spec": "@fontsource/noto-sans/greek-400.css",
+          "line": 16
+        },
+        {
+          "file": "games/dragon-hold/src/view/actors.ts",
+          "spec": "three",
+          "line": 17
+        },
+        {
+          "file": "games/dragon-hold/src/view/crowd.ts",
+          "spec": "three",
+          "line": 24
+        },
+        {
+          "file": "games/dragon-hold/src/view/banners.ts",
+          "spec": "three",
+          "line": 15
+        },
+        {
+          "file": "games/dragon-hold/src/view/telegraphs.ts",
+          "spec": "three",
+          "line": 15
+        },
+        {
+          "file": "games/dragon-hold/src/view/fx.ts",
+          "spec": "three",
+          "line": 19
+        },
+        {
+          "file": "games/dragon-hold/src/kit/three/model-loader.ts",
+          "spec": "three/examples/jsm/loaders/GLTFLoader.js",
+          "line": 187
+        },
+        {
+          "file": "games/dragon-hold/src/kit/three/model-loader.ts",
+          "spec": "three/examples/jsm/libs/meshopt_decoder.module.js",
+          "line": 188
+        },
+        {
+          "file": "games/dragon-hold/src/kit/three/stage.ts",
+          "spec": "three",
+          "line": 2
+        },
+        {
+          "file": "games/dragon-hold/src/kit/three/stage.ts",
+          "spec": "three/examples/jsm/postprocessing/EffectComposer.js",
+          "line": 3
+        },
+        {
+          "file": "games/dragon-hold/src/kit/three/stage.ts",
+          "spec": "three/examples/jsm/postprocessing/RenderPass.js",
+          "line": 4
+        },
+        {
+          "file": "games/dragon-hold/src/kit/three/stage.ts",
+          "spec": "three/examples/jsm/postprocessing/UnrealBloomPass.js",
+          "line": 5
+        },
+        {
+          "file": "games/dragon-hold/src/kit/three/stage.ts",
+          "spec": "three/examples/jsm/postprocessing/OutputPass.js",
+          "line": 6
+        },
+        {
+          "file": "games/dragon-hold/src/kit/three/stage.ts",
+          "spec": "three/examples/jsm/environments/RoomEnvironment.js",
+          "line": 7
+        },
+        {
+          "file": "games/dragon-hold/src/kit/three/util.ts",
+          "spec": "three",
+          "line": 2
+        },
+        {
+          "file": "games/dragon-hold/src/kit/three/hero.ts",
+          "spec": "three",
+          "line": 2
+        },
+        {
+          "file": "games/dragon-hold/src/kit/three/particles.ts",
+          "spec": "three",
+          "line": 2
+        },
+        {
+          "file": "games/dragon-hold/src/kit/three/materials.ts",
+          "spec": "three",
+          "line": 2
+        },
+        {
+          "file": "games/dragon-hold/src/kit/three/textures.ts",
+          "spec": "three",
+          "line": 2
+        },
+        {
+          "file": "games/dragon-hold/src/kit/three/guide-scene.ts",
+          "spec": "three",
+          "line": 2
+        },
+        {
+          "file": "games/dragon-hold/src/kit/three/guide-scene.ts",
+          "spec": "three/examples/jsm/environments/RoomEnvironment.js",
+          "line": 3
+        },
+        {
+          "file": "games/dragon-hold/src/view/heroes.ts",
+          "spec": "three",
+          "line": 28
+        },
+        {
+          "file": "games/dragon-hold/src/view/heroes.ts",
+          "spec": "three/examples/jsm/environments/RoomEnvironment.js",
+          "line": 29
+        },
+        {
+          "file": "games/dragon-hold/src/view/hpbars.ts",
+          "spec": "three",
+          "line": 8
+        },
+        {
+          "file": "games/dragon-hold/src/view/stage.ts",
+          "spec": "three",
+          "line": 15
+        },
+        {
+          "file": "games/dragon-hold/src/view/stage.ts",
+          "spec": "three/examples/jsm/postprocessing/EffectComposer.js",
+          "line": 16
+        },
+        {
+          "file": "games/dragon-hold/src/view/stage.ts",
+          "spec": "three/examples/jsm/postprocessing/RenderPass.js",
+          "line": 17
+        },
+        {
+          "file": "games/dragon-hold/src/view/stage.ts",
+          "spec": "three/examples/jsm/postprocessing/ShaderPass.js",
+          "line": 18
+        },
+        {
+          "file": "games/dragon-hold/src/view/stage.ts",
+          "spec": "three/examples/jsm/postprocessing/UnrealBloomPass.js",
+          "line": 19
+        },
+        {
+          "file": "games/dragon-hold/src/view/stage.ts",
+          "spec": "three/examples/jsm/shaders/FXAAShader.js",
+          "line": 20
+        },
+        {
+          "file": "games/dragon-hold/src/view/models.ts",
+          "spec": "three",
+          "line": 16
+        },
+        {
+          "file": "games/dragon-hold/src/view/crowd-rig.ts",
+          "spec": "three",
+          "line": 19
+        },
+        {
+          "file": "games/dragon-hold/src/view/paths.ts",
+          "spec": "three",
+          "line": 18
+        },
+        {
+          "file": "games/dragon-hold/src/view/terrain.ts",
+          "spec": "three",
+          "line": 11
+        },
+        {
+          "file": "games/dragon-hold/src/view/paint.ts",
+          "spec": "three",
+          "line": 21
+        },
+        {
+          "file": "games/dragon-hold/src/view/scatter.ts",
+          "spec": "three",
+          "line": 18
+        },
+        {
+          "file": "games/dragon-hold/src/view/impostor.ts",
+          "spec": "three",
+          "line": 12
+        },
+        {
+          "file": "games/dragon-hold/src/view/water.ts",
+          "spec": "three",
+          "line": 9
+        }
+      ],
+      "unresolved": []
+    },
+    "allExternal": [
+      {
+        "file": "games/dragon-hold/src/app/app.ts",
+        "spec": "three",
+        "line": 19
+      },
+      {
+        "file": "games/dragon-hold/src/kit/feedback/debris.ts",
+        "spec": "three",
+        "line": 10
+      },
+      {
+        "file": "games/dragon-hold/src/kit/feedback/numbers.ts",
+        "spec": "three",
+        "line": 24
+      },
+      {
+        "file": "games/dragon-hold/src/kit/feedback/quads.ts",
+        "spec": "three",
+        "line": 2
+      },
+      {
+        "file": "games/dragon-hold/src/kit/three/guide-scene.ts",
+        "spec": "three",
+        "line": 2
+      },
+      {
+        "file": "games/dragon-hold/src/kit/three/guide-scene.ts",
+        "spec": "three/examples/jsm/environments/RoomEnvironment.js",
+        "line": 3
+      },
+      {
+        "file": "games/dragon-hold/src/kit/three/hero.ts",
+        "spec": "three",
+        "line": 2
+      },
+      {
+        "file": "games/dragon-hold/src/kit/three/materials.ts",
+        "spec": "three",
+        "line": 2
+      },
+      {
+        "file": "games/dragon-hold/src/kit/three/model-loader.ts",
+        "spec": "three/examples/jsm/loaders/GLTFLoader.js",
+        "line": 187
+      },
+      {
+        "file": "games/dragon-hold/src/kit/three/model-loader.ts",
+        "spec": "three/examples/jsm/libs/meshopt_decoder.module.js",
+        "line": 188
+      },
+      {
+        "file": "games/dragon-hold/src/kit/three/particles.ts",
+        "spec": "three",
+        "line": 2
+      },
+      {
+        "file": "games/dragon-hold/src/kit/three/stage.ts",
+        "spec": "three",
+        "line": 2
+      },
+      {
+        "file": "games/dragon-hold/src/kit/three/stage.ts",
+        "spec": "three/examples/jsm/postprocessing/EffectComposer.js",
+        "line": 3
+      },
+      {
+        "file": "games/dragon-hold/src/kit/three/stage.ts",
+        "spec": "three/examples/jsm/postprocessing/RenderPass.js",
+        "line": 4
+      },
+      {
+        "file": "games/dragon-hold/src/kit/three/stage.ts",
+        "spec": "three/examples/jsm/postprocessing/UnrealBloomPass.js",
+        "line": 5
+      },
+      {
+        "file": "games/dragon-hold/src/kit/three/stage.ts",
+        "spec": "three/examples/jsm/postprocessing/OutputPass.js",
+        "line": 6
+      },
+      {
+        "file": "games/dragon-hold/src/kit/three/stage.ts",
+        "spec": "three/examples/jsm/environments/RoomEnvironment.js",
+        "line": 7
+      },
+      {
+        "file": "games/dragon-hold/src/kit/three/textures.ts",
+        "spec": "three",
+        "line": 2
+      },
+      {
+        "file": "games/dragon-hold/src/kit/three/util.ts",
+        "spec": "three",
+        "line": 2
+      },
+      {
+        "file": "games/dragon-hold/src/kit/tools/cdp-port.mjs",
+        "spec": "node:fs/promises",
+        "line": 1
+      },
+      {
+        "file": "games/dragon-hold/src/kit/tools/cdp-port.mjs",
+        "spec": "node:path",
+        "line": 2
+      },
+      {
+        "file": "games/dragon-hold/src/kit/tools/cdp-run.mjs",
+        "spec": "node:child_process",
+        "line": 20
+      },
+      {
+        "file": "games/dragon-hold/src/kit/tools/cdp-run.mjs",
+        "spec": "node:fs",
+        "line": 21
+      },
+      {
+        "file": "games/dragon-hold/src/kit/tools/cdp-run.mjs",
+        "spec": "node:os",
+        "line": 22
+      },
+      {
+        "file": "games/dragon-hold/src/kit/tools/cdp-run.mjs",
+        "spec": "node:path",
+        "line": 23
+      },
+      {
+        "file": "games/dragon-hold/src/kit/tools/cdp-run.mjs",
+        "spec": "node:url",
+        "line": 24
+      },
+      {
+        "file": "games/dragon-hold/src/kit/tools/deploy/check-pack.mjs",
+        "spec": "node:crypto",
+        "line": 1
+      },
+      {
+        "file": "games/dragon-hold/src/kit/tools/deploy/check-pack.mjs",
+        "spec": "node:fs",
+        "line": 2
+      },
+      {
+        "file": "games/dragon-hold/src/kit/tools/deploy/check-pack.mjs",
+        "spec": "node:path",
+        "line": 3
+      },
+      {
+        "file": "games/dragon-hold/src/kit/tools/deploy/check-pack.mjs",
+        "spec": "node:url",
+        "line": 4
+      },
+      {
+        "file": "games/dragon-hold/src/kit/tools/vite-shared-plugin.ts",
+        "spec": "node:fs",
+        "line": 12
+      },
+      {
+        "file": "games/dragon-hold/src/kit/tools/vite-shared-plugin.ts",
+        "spec": "node:path",
+        "line": 13
+      },
+      {
+        "file": "games/dragon-hold/src/kit/verify-kit.mjs",
+        "spec": "node:crypto",
+        "line": 4
+      },
+      {
+        "file": "games/dragon-hold/src/kit/verify-kit.mjs",
+        "spec": "node:fs",
+        "line": 5
+      },
+      {
+        "file": "games/dragon-hold/src/kit/verify-kit.mjs",
+        "spec": "node:path",
+        "line": 6
+      },
+      {
+        "file": "games/dragon-hold/src/kit/verify-kit.mjs",
+        "spec": "node:url",
+        "line": 7
+      },
+      {
+        "file": "games/dragon-hold/src/ui/skin.ts",
+        "spec": "@fontsource/be-vietnam-pro/400.css",
+        "line": 9
+      },
+      {
+        "file": "games/dragon-hold/src/ui/skin.ts",
+        "spec": "@fontsource/be-vietnam-pro/700.css",
+        "line": 10
+      },
+      {
+        "file": "games/dragon-hold/src/ui/skin.ts",
+        "spec": "@fontsource/be-vietnam-pro/800.css",
+        "line": 11
+      },
+      {
+        "file": "games/dragon-hold/src/ui/skin.ts",
+        "spec": "@fontsource/cormorant-garamond/700.css",
+        "line": 12
+      },
+      {
+        "file": "games/dragon-hold/src/ui/skin.ts",
+        "spec": "@fontsource/noto-sans/latin-400.css",
+        "line": 14
+      },
+      {
+        "file": "games/dragon-hold/src/ui/skin.ts",
+        "spec": "@fontsource/noto-sans/latin-ext-400.css",
+        "line": 15
+      },
+      {
+        "file": "games/dragon-hold/src/ui/skin.ts",
+        "spec": "@fontsource/noto-sans/greek-400.css",
+        "line": 16
+      },
+      {
+        "file": "games/dragon-hold/src/view/actors.ts",
+        "spec": "three",
+        "line": 17
+      },
+      {
+        "file": "games/dragon-hold/src/view/banners.ts",
+        "spec": "three",
+        "line": 15
+      },
+      {
+        "file": "games/dragon-hold/src/view/bench.ts",
+        "spec": "three",
+        "line": 17
+      },
+      {
+        "file": "games/dragon-hold/src/view/crowd-rig.ts",
+        "spec": "three",
+        "line": 19
+      },
+      {
+        "file": "games/dragon-hold/src/view/crowd.ts",
+        "spec": "three",
+        "line": 24
+      },
+      {
+        "file": "games/dragon-hold/src/view/fx.ts",
+        "spec": "three",
+        "line": 19
+      },
+      {
+        "file": "games/dragon-hold/src/view/heroes.ts",
+        "spec": "three",
+        "line": 28
+      },
+      {
+        "file": "games/dragon-hold/src/view/heroes.ts",
+        "spec": "three/examples/jsm/environments/RoomEnvironment.js",
+        "line": 29
+      },
+      {
+        "file": "games/dragon-hold/src/view/hpbars.ts",
+        "spec": "three",
+        "line": 8
+      },
+      {
+        "file": "games/dragon-hold/src/view/impostor.ts",
+        "spec": "three",
+        "line": 12
+      },
+      {
+        "file": "games/dragon-hold/src/view/models.ts",
+        "spec": "three",
+        "line": 16
+      },
+      {
+        "file": "games/dragon-hold/src/view/paint.ts",
+        "spec": "three",
+        "line": 21
+      },
+      {
+        "file": "games/dragon-hold/src/view/paths.ts",
+        "spec": "three",
+        "line": 18
+      },
+      {
+        "file": "games/dragon-hold/src/view/scatter.ts",
+        "spec": "three",
+        "line": 18
+      },
+      {
+        "file": "games/dragon-hold/src/view/stage.ts",
+        "spec": "three",
+        "line": 15
+      },
+      {
+        "file": "games/dragon-hold/src/view/stage.ts",
+        "spec": "three/examples/jsm/postprocessing/EffectComposer.js",
+        "line": 16
+      },
+      {
+        "file": "games/dragon-hold/src/view/stage.ts",
+        "spec": "three/examples/jsm/postprocessing/RenderPass.js",
+        "line": 17
+      },
+      {
+        "file": "games/dragon-hold/src/view/stage.ts",
+        "spec": "three/examples/jsm/postprocessing/ShaderPass.js",
+        "line": 18
+      },
+      {
+        "file": "games/dragon-hold/src/view/stage.ts",
+        "spec": "three/examples/jsm/postprocessing/UnrealBloomPass.js",
+        "line": 19
+      },
+      {
+        "file": "games/dragon-hold/src/view/stage.ts",
+        "spec": "three/examples/jsm/shaders/FXAAShader.js",
+        "line": 20
+      },
+      {
+        "file": "games/dragon-hold/src/view/studio.ts",
+        "spec": "three",
+        "line": 10
+      },
+      {
+        "file": "games/dragon-hold/src/view/telegraphs.ts",
+        "spec": "three",
+        "line": 15
+      },
+      {
+        "file": "games/dragon-hold/src/view/terrain.ts",
+        "spec": "three",
+        "line": 11
+      },
+      {
+        "file": "games/dragon-hold/src/view/water.ts",
+        "spec": "three",
+        "line": 9
+      }
+    ],
+    "vendorGraph": {
+      "files": [
+        "games/dragon-hold/node_modules/three/build/three.module.js",
+        "games/dragon-hold/node_modules/three/examples/jsm/environments/RoomEnvironment.js",
+        "games/dragon-hold/node_modules/three/examples/jsm/libs/meshopt_decoder.module.js",
+        "games/dragon-hold/node_modules/three/examples/jsm/loaders/GLTFLoader.js",
+        "games/dragon-hold/node_modules/three/examples/jsm/postprocessing/EffectComposer.js",
+        "games/dragon-hold/node_modules/three/examples/jsm/postprocessing/MaskPass.js",
+        "games/dragon-hold/node_modules/three/examples/jsm/postprocessing/OutputPass.js",
+        "games/dragon-hold/node_modules/three/examples/jsm/postprocessing/Pass.js",
+        "games/dragon-hold/node_modules/three/examples/jsm/postprocessing/RenderPass.js",
+        "games/dragon-hold/node_modules/three/examples/jsm/postprocessing/ShaderPass.js",
+        "games/dragon-hold/node_modules/three/examples/jsm/postprocessing/UnrealBloomPass.js",
+        "games/dragon-hold/node_modules/three/examples/jsm/shaders/CopyShader.js",
+        "games/dragon-hold/node_modules/three/examples/jsm/shaders/FXAAShader.js",
+        "games/dragon-hold/node_modules/three/examples/jsm/shaders/LuminosityHighPassShader.js",
+        "games/dragon-hold/node_modules/three/examples/jsm/shaders/OutputShader.js",
+        "games/dragon-hold/node_modules/three/examples/jsm/utils/BufferGeometryUtils.js"
+      ],
+      "external": [
+        {
+          "file": "games/dragon-hold/node_modules/three/examples/jsm/loaders/GLTFLoader.js",
+          "spec": "three",
+          "line": 1
+        },
+        {
+          "file": "games/dragon-hold/node_modules/three/examples/jsm/utils/BufferGeometryUtils.js",
+          "spec": "three",
+          "line": 1
+        },
+        {
+          "file": "games/dragon-hold/node_modules/three/examples/jsm/postprocessing/EffectComposer.js",
+          "spec": "three",
+          "line": 1
+        },
+        {
+          "file": "games/dragon-hold/node_modules/three/examples/jsm/postprocessing/ShaderPass.js",
+          "spec": "three",
+          "line": 1
+        },
+        {
+          "file": "games/dragon-hold/node_modules/three/examples/jsm/postprocessing/Pass.js",
+          "spec": "three",
+          "line": 1
+        },
+        {
+          "file": "games/dragon-hold/node_modules/three/examples/jsm/postprocessing/RenderPass.js",
+          "spec": "three",
+          "line": 1
+        },
+        {
+          "file": "games/dragon-hold/node_modules/three/examples/jsm/postprocessing/UnrealBloomPass.js",
+          "spec": "three",
+          "line": 1
+        },
+        {
+          "file": "games/dragon-hold/node_modules/three/examples/jsm/shaders/LuminosityHighPassShader.js",
+          "spec": "three",
+          "line": 1
+        },
+        {
+          "file": "games/dragon-hold/node_modules/three/examples/jsm/postprocessing/OutputPass.js",
+          "spec": "three",
+          "line": 1
+        },
+        {
+          "file": "games/dragon-hold/node_modules/three/examples/jsm/environments/RoomEnvironment.js",
+          "spec": "three",
+          "line": 5
+        },
+        {
+          "file": "games/dragon-hold/node_modules/three/examples/jsm/shaders/FXAAShader.js",
+          "spec": "three",
+          "line": 1
+        }
+      ],
+      "unresolved": []
+    },
+    "vendorNotices": [
+      {
+        "file": "games/dragon-hold/node_modules/three/build/three.module.js",
+        "line": 2,
+        "text": " * @license"
+      },
+      {
+        "file": "games/dragon-hold/node_modules/three/build/three.module.js",
+        "line": 3,
+        "text": " * Copyright 2010-2024 Three.js Authors"
+      },
+      {
+        "file": "games/dragon-hold/node_modules/three/build/three.module.js",
+        "line": 4,
+        "text": " * SPDX-License-Identifier: MIT"
+      },
+      {
+        "file": "games/dragon-hold/node_modules/three/build/three.module.js",
+        "line": 8498,
+        "text": "\t\t// under the accompanying license; see chapter 5.1.5 for detailed explanation."
+      },
+      {
+        "file": "games/dragon-hold/node_modules/three/examples/jsm/libs/meshopt_decoder.module.js",
+        "line": 1,
+        "text": "// This file is part of meshoptimizer library and is distributed under the terms of MIT License."
+      },
+      {
+        "file": "games/dragon-hold/node_modules/three/examples/jsm/libs/meshopt_decoder.module.js",
+        "line": 2,
+        "text": "// Copyright (C) 2016-2022, by Arseny Kapoulkine (arseny.kapoulkine@gmail.com)"
+      }
+    ],
+    "hashes": {
+      "games/dragon-hold/package.json": "44eecc6a99ea35ee63c791e144faa461051bad3a39a120ded798d730f1be0bc2",
+      "games/dragon-hold/pnpm-lock.yaml": "55e9cd3c2e71e585e56e9767cdd92284e1a325ec171e7cf5170b97015a834d67"
+    }
+  },
+  {
+    "base": "games/typing-defense",
+    "manifest": {
+      "name": "typing-defense",
+      "version": "0.1.0",
+      "private": true,
+      "type": "module",
+      "description": "Lời Gọi (Wordwoven): a typing-assisted village defense.",
+      "scripts": {
+        "dev": "vite --host 127.0.0.1 --port 3006 --strictPort",
+        "build": "tsc --noEmit && vite build && node scripts/bundle-budget.mjs",
+        "preview": "vite preview --host 127.0.0.1 --port 3006 --strictPort",
+        "test": "vitest run",
+        "check": "node src/kit/verify-kit.mjs && pnpm test && pnpm build",
+        "td:balance": "node --import tsx scripts/td/balance.ts",
+        "td:golden:update": "node --import tsx scripts/td/golden.ts && node --import tsx scripts/td/golden.ts --boss",
+        "td:golden:check": "node --import tsx scripts/td/golden.ts --check && node --import tsx scripts/td/golden.ts --boss --check",
+        "td:replay": "node --import tsx scripts/td/replay.ts",
+        "visual": "node src/kit/tools/cdp-run.mjs"
+      },
+      "dependencies": {
+        "@fontsource/baloo-2": "5.3.0",
+        "@fontsource/be-vietnam-pro": "^5.3.0",
+        "three": "0.170.0"
+      },
+      "devDependencies": {
+        "@types/node": "^24.19.0",
+        "@types/three": "0.170.0",
+        "tsx": "^4.23.15",
+        "typescript": "^6.0.2",
+        "vite": "^7.1.7",
+        "vitest": "^3.2.4"
+      },
+      "packageManager": "pnpm@11.21.0"
+    },
+    "lock": {
+      "dependencies": {
+        "@fontsource/baloo-2": "5.3.0",
+        "@fontsource/be-vietnam-pro": "5.3.0",
+        "three": "0.170.0"
+      },
+      "devDependencies": {
+        "@types/node": "24.19.2",
+        "@types/three": "0.170.0",
+        "tsx": "4.23.15",
+        "typescript": "6.0.3",
+        "vite": "7.3.7(@types/node@24.19.2)(tsx@4.23.15)",
+        "vitest": "3.2.7(@types/node@24.19.2)(tsx@4.23.15)"
+      },
+      "snapshots": {
+        "@esbuild/aix-ppc64@0.28.2": {},
+        "@esbuild/android-arm64@0.28.2": {},
+        "@esbuild/android-arm@0.28.2": {},
+        "@esbuild/android-x64@0.28.2": {},
+        "@esbuild/darwin-arm64@0.28.2": {},
+        "@esbuild/darwin-x64@0.28.2": {},
+        "@esbuild/freebsd-arm64@0.28.2": {},
+        "@esbuild/freebsd-x64@0.28.2": {},
+        "@esbuild/linux-arm64@0.28.2": {},
+        "@esbuild/linux-arm@0.28.2": {},
+        "@esbuild/linux-ia32@0.28.2": {},
+        "@esbuild/linux-loong64@0.28.2": {},
+        "@esbuild/linux-mips64el@0.28.2": {},
+        "@esbuild/linux-ppc64@0.28.2": {},
+        "@esbuild/linux-riscv64@0.28.2": {},
+        "@esbuild/linux-s390x@0.28.2": {},
+        "@esbuild/linux-x64@0.28.2": {},
+        "@esbuild/netbsd-arm64@0.28.2": {},
+        "@esbuild/netbsd-x64@0.28.2": {},
+        "@esbuild/openbsd-arm64@0.28.2": {},
+        "@esbuild/openbsd-x64@0.28.2": {},
+        "@esbuild/openharmony-arm64@0.28.2": {},
+        "@esbuild/sunos-x64@0.28.2": {},
+        "@esbuild/win32-arm64@0.28.2": {},
+        "@esbuild/win32-ia32@0.28.2": {},
+        "@esbuild/win32-x64@0.28.2": {},
+        "@fontsource/baloo-2@5.3.0": {},
+        "@fontsource/be-vietnam-pro@5.3.0": {},
+        "@jridgewell/sourcemap-codec@1.6.0": {},
+        "@napi-rs/lzma-linux-x64-gnu@1.5.1": {},
+        "@rollup/rollup-android-arm-eabi@4.64.12": {},
+        "@rollup/rollup-android-arm64@4.64.12": {},
+        "@rollup/rollup-darwin-arm64@4.64.12": {},
+        "@rollup/rollup-darwin-x64@4.64.12": {},
+        "@rollup/rollup-freebsd-arm64@4.64.12": {},
+        "@rollup/rollup-freebsd-x64@4.64.12": {},
+        "@rollup/rollup-linux-arm-gnueabihf@4.64.12": {},
+        "@rollup/rollup-linux-arm-musleabihf@4.64.12": {},
+        "@rollup/rollup-linux-arm64-gnu@4.64.12": {},
+        "@rollup/rollup-linux-arm64-musl@4.64.12": {},
+        "@rollup/rollup-linux-loong64-gnu@4.64.12": {},
+        "@rollup/rollup-linux-loong64-musl@4.64.12": {},
+        "@rollup/rollup-linux-ppc64-gnu@4.64.12": {},
+        "@rollup/rollup-linux-ppc64-musl@4.64.12": {},
+        "@rollup/rollup-linux-riscv64-gnu@4.64.12": {},
+        "@rollup/rollup-linux-riscv64-musl@4.64.12": {},
+        "@rollup/rollup-linux-s390x-gnu@4.64.12": {},
+        "@rollup/rollup-linux-x64-gnu@4.64.12": {},
+        "@rollup/rollup-linux-x64-musl@4.64.12": {},
+        "@rollup/rollup-openbsd-x64@4.64.12": {},
+        "@rollup/rollup-openharmony-arm64@4.64.12": {},
+        "@rollup/rollup-win32-arm64-msvc@4.64.12": {},
+        "@rollup/rollup-win32-ia32-msvc@4.64.12": {},
+        "@rollup/rollup-win32-x64-gnu@4.64.12": {},
+        "@rollup/rollup-win32-x64-msvc@4.64.12": {},
+        "@tweenjs/tween.js@23.1.3": {},
+        "@types/chai@5.2.3": {
+          "@types/deep-eql": "4.0.2",
+          "assertion-error": "2.0.1"
+        },
+        "@types/deep-eql@4.0.2": {},
+        "@types/estree@1.0.9": {},
+        "@types/node@24.19.2": {
+          "undici-types": "7.24.6"
+        },
+        "@types/stats.js@0.17.4": {},
+        "@types/three@0.170.0": {
+          "@tweenjs/tween.js": "23.1.3",
+          "@types/stats.js": "0.17.4",
+          "@types/webxr": "0.5.24",
+          "@webgpu/types": "0.1.74",
+          "fflate": "0.8.3",
+          "meshoptimizer": "0.18.1"
+        },
+        "@types/webxr@0.5.24": {},
+        "@vitest/expect@3.2.7": {
+          "@types/chai": "5.2.3",
+          "@vitest/spy": "3.2.7",
+          "@vitest/utils": "3.2.7",
+          "chai": "5.3.3",
+          "tinyrainbow": "2.0.0"
+        },
+        "@vitest/mocker@3.2.7(vite@7.3.7(@types/node@24.19.2)(tsx@4.23.15))": {
+          "@vitest/spy": "3.2.7",
+          "estree-walker": "3.0.3",
+          "magic-string": "0.30.21",
+          "vite": "7.3.7(@types/node@24.19.2)(tsx@4.23.15)"
+        },
+        "@vitest/pretty-format@3.2.7": {
+          "tinyrainbow": "2.0.0"
+        },
+        "@vitest/runner@3.2.7": {
+          "@vitest/utils": "3.2.7",
+          "pathe": "2.0.3",
+          "strip-literal": "3.1.0"
+        },
+        "@vitest/snapshot@3.2.7": {
+          "@vitest/pretty-format": "3.2.7",
+          "magic-string": "0.30.21",
+          "pathe": "2.0.3"
+        },
+        "@vitest/spy@3.2.7": {
+          "tinyspy": "4.0.6"
+        },
+        "@vitest/utils@3.2.7": {
+          "@vitest/pretty-format": "3.2.7",
+          "loupe": "3.2.1",
+          "tinyrainbow": "2.0.0"
+        },
+        "@webgpu/types@0.1.74": {},
+        "assertion-error@2.0.1": {},
+        "cac@6.7.14": {},
+        "chai@5.3.3": {
+          "assertion-error": "2.0.1",
+          "check-error": "2.1.3",
+          "deep-eql": "5.0.2",
+          "loupe": "3.2.1",
+          "pathval": "2.0.1"
+        },
+        "check-error@2.1.3": {},
+        "debug@4.4.3": {
+          "ms": "2.1.3"
+        },
+        "deep-eql@5.0.2": {},
+        "es-module-lexer@1.7.0": {},
+        "esbuild@0.28.2": {
+          "@esbuild/aix-ppc64": "0.28.2",
+          "@esbuild/android-arm": "0.28.2",
+          "@esbuild/android-arm64": "0.28.2",
+          "@esbuild/android-x64": "0.28.2",
+          "@esbuild/darwin-arm64": "0.28.2",
+          "@esbuild/darwin-x64": "0.28.2",
+          "@esbuild/freebsd-arm64": "0.28.2",
+          "@esbuild/freebsd-x64": "0.28.2",
+          "@esbuild/linux-arm": "0.28.2",
+          "@esbuild/linux-arm64": "0.28.2",
+          "@esbuild/linux-ia32": "0.28.2",
+          "@esbuild/linux-loong64": "0.28.2",
+          "@esbuild/linux-mips64el": "0.28.2",
+          "@esbuild/linux-ppc64": "0.28.2",
+          "@esbuild/linux-riscv64": "0.28.2",
+          "@esbuild/linux-s390x": "0.28.2",
+          "@esbuild/linux-x64": "0.28.2",
+          "@esbuild/netbsd-arm64": "0.28.2",
+          "@esbuild/netbsd-x64": "0.28.2",
+          "@esbuild/openbsd-arm64": "0.28.2",
+          "@esbuild/openbsd-x64": "0.28.2",
+          "@esbuild/openharmony-arm64": "0.28.2",
+          "@esbuild/sunos-x64": "0.28.2",
+          "@esbuild/win32-arm64": "0.28.2",
+          "@esbuild/win32-ia32": "0.28.2",
+          "@esbuild/win32-x64": "0.28.2"
+        },
+        "estree-walker@3.0.3": {
+          "@types/estree": "1.0.9"
+        },
+        "expect-type@1.4.0": {},
+        "fdir@6.5.0(picomatch@4.0.7)": {
+          "picomatch": "4.0.7"
+        },
+        "fflate@0.8.3": {},
+        "fsevents@2.3.3": {},
+        "js-tokens@9.0.1": {},
+        "loupe@3.2.1": {},
+        "magic-string@0.30.21": {
+          "@jridgewell/sourcemap-codec": "1.6.0"
+        },
+        "meshoptimizer@0.18.1": {},
+        "ms@2.1.3": {},
+        "nanoid@3.3.20": {},
+        "pathe@2.0.3": {},
+        "pathval@2.0.1": {},
+        "picocolors@1.1.1": {},
+        "picomatch@4.0.7": {},
+        "postcss@8.5.31": {
+          "nanoid": "3.3.20",
+          "picocolors": "1.1.1",
+          "source-map-js": "1.2.2"
+        },
+        "rollup@4.64.12": {
+          "@types/estree": "1.0.9",
+          "@napi-rs/lzma-linux-x64-gnu": "1.5.1",
+          "@rollup/rollup-android-arm-eabi": "4.64.12",
+          "@rollup/rollup-android-arm64": "4.64.12",
+          "@rollup/rollup-darwin-arm64": "4.64.12",
+          "@rollup/rollup-darwin-x64": "4.64.12",
+          "@rollup/rollup-freebsd-arm64": "4.64.12",
+          "@rollup/rollup-freebsd-x64": "4.64.12",
+          "@rollup/rollup-linux-arm-gnueabihf": "4.64.12",
+          "@rollup/rollup-linux-arm-musleabihf": "4.64.12",
+          "@rollup/rollup-linux-arm64-gnu": "4.64.12",
+          "@rollup/rollup-linux-arm64-musl": "4.64.12",
+          "@rollup/rollup-linux-loong64-gnu": "4.64.12",
+          "@rollup/rollup-linux-loong64-musl": "4.64.12",
+          "@rollup/rollup-linux-ppc64-gnu": "4.64.12",
+          "@rollup/rollup-linux-ppc64-musl": "4.64.12",
+          "@rollup/rollup-linux-riscv64-gnu": "4.64.12",
+          "@rollup/rollup-linux-riscv64-musl": "4.64.12",
+          "@rollup/rollup-linux-s390x-gnu": "4.64.12",
+          "@rollup/rollup-linux-x64-gnu": "4.64.12",
+          "@rollup/rollup-linux-x64-musl": "4.64.12",
+          "@rollup/rollup-openbsd-x64": "4.64.12",
+          "@rollup/rollup-openharmony-arm64": "4.64.12",
+          "@rollup/rollup-win32-arm64-msvc": "4.64.12",
+          "@rollup/rollup-win32-ia32-msvc": "4.64.12",
+          "@rollup/rollup-win32-x64-gnu": "4.64.12",
+          "@rollup/rollup-win32-x64-msvc": "4.64.12",
+          "fsevents": "2.3.3"
+        },
+        "siginfo@2.0.0": {},
+        "source-map-js@1.2.2": {},
+        "stackback@0.0.2": {},
+        "std-env@3.10.0": {},
+        "strip-literal@3.1.0": {
+          "js-tokens": "9.0.1"
+        },
+        "three@0.170.0": {},
+        "tinybench@2.9.0": {},
+        "tinyexec@0.3.2": {},
+        "tinyglobby@0.2.17": {
+          "fdir": "6.5.0(picomatch@4.0.7)",
+          "picomatch": "4.0.7"
+        },
+        "tinypool@1.1.1": {},
+        "tinyrainbow@2.0.0": {},
+        "tinyspy@4.0.6": {},
+        "tsx@4.23.15": {
+          "esbuild": "0.28.2",
+          "fsevents": "2.3.3"
+        },
+        "typescript@6.0.3": {},
+        "undici-types@7.24.6": {},
+        "vite-node@3.2.4(@types/node@24.19.2)(tsx@4.23.15)": {
+          "cac": "6.7.14",
+          "debug": "4.4.3",
+          "es-module-lexer": "1.7.0",
+          "pathe": "2.0.3",
+          "vite": "7.3.7(@types/node@24.19.2)(tsx@4.23.15)"
+        },
+        "vite@7.3.7(@types/node@24.19.2)(tsx@4.23.15)": {
+          "esbuild": "0.28.2",
+          "fdir": "6.5.0(picomatch@4.0.7)",
+          "picomatch": "4.0.7",
+          "postcss": "8.5.31",
+          "rollup": "4.64.12",
+          "tinyglobby": "0.2.17",
+          "@types/node": "24.19.2",
+          "fsevents": "2.3.3",
+          "tsx": "4.23.15"
+        },
+        "vitest@3.2.7(@types/node@24.19.2)(tsx@4.23.15)": {
+          "@types/chai": "5.2.3",
+          "@vitest/expect": "3.2.7",
+          "@vitest/mocker": "3.2.7(vite@7.3.7(@types/node@24.19.2)(tsx@4.23.15))",
+          "@vitest/pretty-format": "3.2.7",
+          "@vitest/runner": "3.2.7",
+          "@vitest/snapshot": "3.2.7",
+          "@vitest/spy": "3.2.7",
+          "@vitest/utils": "3.2.7",
+          "chai": "5.3.3",
+          "debug": "4.4.3",
+          "expect-type": "1.4.0",
+          "magic-string": "0.30.21",
+          "pathe": "2.0.3",
+          "picomatch": "4.0.7",
+          "std-env": "3.10.0",
+          "tinybench": "2.9.0",
+          "tinyexec": "0.3.2",
+          "tinyglobby": "0.2.17",
+          "tinypool": "1.1.1",
+          "tinyrainbow": "2.0.0",
+          "vite": "7.3.7(@types/node@24.19.2)(tsx@4.23.15)",
+          "vite-node": "3.2.4(@types/node@24.19.2)(tsx@4.23.15)",
+          "why-is-node-running": "2.3.0",
+          "@types/node": "24.19.2"
+        },
+        "why-is-node-running@2.3.0": {
+          "siginfo": "2.0.0",
+          "stackback": "0.0.2"
+        }
+      }
+    },
+    "records": [
+      {
+        "name": "@fontsource/baloo-2",
+        "version": "5.3.0",
+        "installedVersion": "5.3.0",
+        "kind": "dependency",
+        "parent": "games/typing-defense",
+        "license": "OFL-1.1",
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/fontsource/font-files.git",
+          "directory": "fonts/google/baloo-2"
+        },
+        "dependencies": {},
+        "packageJson": "games/typing-defense/node_modules/@fontsource/baloo-2/package.json",
+        "packageJsonSha256": "7ae0810623eb7c63d74bd68103958f84badeb2c6be2879fc9922f39d89a9260c",
+        "notices": [
+          {
+            "path": "games/typing-defense/node_modules/@fontsource/baloo-2/LICENSE",
+            "sha256": "273d4bb4d30d7f7011adfa11ee858b1d70a6b1f94cae89e6fa261ed8f1b8839a",
+            "text": "Copyright 2019 The Baloo 2 Project Authors (https://github.com/EkType/Baloo2)\n\nThis Font Software is licensed under the SIL Open Font License, Version 1.1.\nThis license is copied below, and is also available with a FAQ at:\nhttp://scripts.sil.org/OFL\n\n\n-----------------------------------------------------------\nSIL OPEN FONT LICENSE Version 1.1 - 26 February 2007\n-----------------------------------------------------------\n\nPREAMBLE\nThe goals of the Open Font License (OFL) are to stimulate worldwide\ndevelopment of collaborative font projects, to support the font creation\nefforts of academic and linguistic communities, and to provide a free and\nopen framework in which fonts may be shared and improved in partnership\nwith others.\n\nThe OFL allows the licensed fonts to be used, studied, modified and\nredistributed freely as long as they are not sold by themselves. The\nfonts, including any derivative works, can be bundled, embedded,\nredistributed and/or sold with any software provided that any reserved\nnames are not used by derivative works. The fonts and derivatives,\nhowever, cannot be released under any other type of license. The\nrequirement for fonts to remain under this license does not apply\nto any document created using the fonts or their derivatives.\n\nDEFINITIONS\n\"Font Software\" refers to the set of files released by the Copyright\nHolder(s) under this license and clearly marked as such. This may\ninclude source files, build scripts and documentation.\n\n\"Reserved Font Name\" refers to any names specified as such after the\ncopyright statement(s).\n\n\"Original Version\" refers to the collection of Font Software components as\ndistributed by the Copyright Holder(s).\n\n\"Modified Version\" refers to any derivative made by adding to, deleting,\nor substituting -- in part or in whole -- any of the components of the\nOriginal Version, by changing formats or by porting the Font Software to a\nnew environment.\n\n\"Author\" refers to any designer, engineer, programmer, technical\nwriter or other person who contributed to the Font Software.\n\nPERMISSION & CONDITIONS\nPermission is hereby granted, free of charge, to any person obtaining\na copy of the Font Software, to use, study, copy, merge, embed, modify,\nredistribute, and sell modified and unmodified copies of the Font\nSoftware, subject to the following conditions:\n\n1) Neither the Font Software nor any of its individual components,\nin Original or Modified Versions, may be sold by itself.\n\n2) Original or Modified Versions of the Font Software may be bundled,\nredistributed and/or sold with any software, provided that each copy\ncontains the above copyright notice and this license. These can be\nincluded either as stand-alone text files, human-readable headers or\nin the appropriate machine-readable metadata fields within text or\nbinary files as long as those fields can be easily viewed by the user.\n\n3) No Modified Version of the Font Software may use the Reserved Font\nName(s) unless explicit written permission is granted by the corresponding\nCopyright Holder. This restriction only applies to the primary font name as\npresented to the users.\n\n4) The name(s) of the Copyright Holder(s) or the Author(s) of the Font\nSoftware shall not be used to promote, endorse or advertise any\nModified Version, except to acknowledge the contribution(s) of the\nCopyright Holder(s) and the Author(s) or with their explicit written\npermission.\n\n5) The Font Software, modified or unmodified, in part or in whole,\nmust be distributed entirely under this license, and must not be\ndistributed under any other license. The requirement for fonts to\nremain under this license does not apply to any document created\nusing the Font Software.\n\nTERMINATION\nThis license becomes null and void if any of the above conditions are\nnot met.\n\nDISCLAIMER\nTHE FONT SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND,\nEXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO ANY WARRANTIES OF\nMERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT\nOF COPYRIGHT, PATENT, TRADEMARK, OR OTHER RIGHT. IN NO EVENT SHALL THE\nCOPYRIGHT HOLDER BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,\nINCLUDING ANY GENERAL, SPECIAL, INDIRECT, INCIDENTAL, OR CONSEQUENTIAL\nDAMAGES, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING\nFROM, OUT OF THE USE OR INABILITY TO USE THE FONT SOFTWARE OR FROM\nOTHER DEALINGS IN THE FONT SOFTWARE.\n"
+          }
+        ]
+      },
+      {
+        "name": "@fontsource/be-vietnam-pro",
+        "version": "5.3.0",
+        "installedVersion": "5.3.0",
+        "kind": "dependency",
+        "parent": "games/typing-defense",
+        "license": "OFL-1.1",
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/fontsource/font-files.git",
+          "directory": "fonts/google/be-vietnam-pro"
+        },
+        "dependencies": {},
+        "packageJson": "games/typing-defense/node_modules/@fontsource/be-vietnam-pro/package.json",
+        "packageJsonSha256": "132dbddcd8a999ea860335de61c0eaa4c15490c1a5fe1de7f3d6576d59266ca4",
+        "notices": [
+          {
+            "path": "games/typing-defense/node_modules/@fontsource/be-vietnam-pro/LICENSE",
+            "sha256": "0bd4db1cda123af9d91794b0f98324b7d7d81aef0fcaf78c433160153f2c6f25",
+            "text": "Copyright 2021 The Be Vietnam Pro Project Authors (https://github.com/bettergui/BeVietnamPro) BeVietnamPro-ThinItalic.ttf: Copyright 2021 The Be Vietnam Pro Project Authors (https://github.com/bettergui/BeVietnamPro) BeVietnamPro-ExtraLight.ttf: Copyright 2021 The Be Vietnam Pro Project Authors (https://github.com/bettergui/BeVietnamPro) BeVietnamPro-ExtraLightItalic.ttf: Copyright 2021 The Be Vietnam Pro Project Authors (https://github.com/bettergui/BeVietnamPro) BeVietnamPro-Light.ttf: Copyright 2021 The Be Vietnam Pro Project Authors (https://github.com/bettergui/BeVietnamPro) BeVietnamPro-LightItalic.ttf: Copyright 2021 The Be Vietnam Pro Project Authors (https://github.com/bettergui/BeVietnamPro) BeVietnamPro-Regular.ttf: Copyright 2021 The Be Vietnam Pro Project Authors (https://github.com/bettergui/BeVietnamPro) BeVietnamPro-Italic.ttf: Copyright 2021 The Be Vietnam Pro Project Authors (https://github.com/bettergui/BeVietnamPro) BeVietnamPro-Medium.ttf: Copyright 2021 The Be Vietnam Pro Project Authors (https://github.com/bettergui/BeVietnamPro) BeVietnamPro-MediumItalic.ttf: Copyright 2021 The Be Vietnam Pro Project Authors (https://github.com/bettergui/BeVietnamPro) BeVietnamPro-SemiBold.ttf: Copyright 2021 The Be Vietnam Pro Project Authors (https://github.com/bettergui/BeVietnamPro) BeVietnamPro-SemiBoldItalic.ttf: Copyright 2021 The Be Vietnam Pro Project Authors (https://github.com/bettergui/BeVietnamPro) BeVietnamPro-Bold.ttf: Copyright 2021 The Be Vietnam Pro Project Authors (https://github.com/bettergui/BeVietnamPro) BeVietnamPro-BoldItalic.ttf: Copyright 2021 The Be Vietnam Pro Project Authors (https://github.com/bettergui/BeVietnamPro) BeVietnamPro-ExtraBold.ttf: Copyright 2021 The Be Vietnam Pro Project Authors (https://github.com/bettergui/BeVietnamPro) BeVietnamPro-ExtraBoldItalic.ttf: Copyright 2021 The Be Vietnam Pro Project Authors (https://github.com/bettergui/BeVietnamPro) BeVietnamPro-Black.ttf: Copyright 2021 The Be Vietnam Pro Project Authors (https://github.com/bettergui/BeVietnamPro) BeVietnamPro-BlackItalic.ttf: Copyright 2021 The Be Vietnam Pro Project Authors (https://github.com/bettergui/BeVietnamPro)\n\nThis Font Software is licensed under the SIL Open Font License, Version 1.1.\nThis license is copied below, and is also available with a FAQ at:\nhttp://scripts.sil.org/OFL\n\n\n-----------------------------------------------------------\nSIL OPEN FONT LICENSE Version 1.1 - 26 February 2007\n-----------------------------------------------------------\n\nPREAMBLE\nThe goals of the Open Font License (OFL) are to stimulate worldwide\ndevelopment of collaborative font projects, to support the font creation\nefforts of academic and linguistic communities, and to provide a free and\nopen framework in which fonts may be shared and improved in partnership\nwith others.\n\nThe OFL allows the licensed fonts to be used, studied, modified and\nredistributed freely as long as they are not sold by themselves. The\nfonts, including any derivative works, can be bundled, embedded,\nredistributed and/or sold with any software provided that any reserved\nnames are not used by derivative works. The fonts and derivatives,\nhowever, cannot be released under any other type of license. The\nrequirement for fonts to remain under this license does not apply\nto any document created using the fonts or their derivatives.\n\nDEFINITIONS\n\"Font Software\" refers to the set of files released by the Copyright\nHolder(s) under this license and clearly marked as such. This may\ninclude source files, build scripts and documentation.\n\n\"Reserved Font Name\" refers to any names specified as such after the\ncopyright statement(s).\n\n\"Original Version\" refers to the collection of Font Software components as\ndistributed by the Copyright Holder(s).\n\n\"Modified Version\" refers to any derivative made by adding to, deleting,\nor substituting -- in part or in whole -- any of the components of the\nOriginal Version, by changing formats or by porting the Font Software to a\nnew environment.\n\n\"Author\" refers to any designer, engineer, programmer, technical\nwriter or other person who contributed to the Font Software.\n\nPERMISSION & CONDITIONS\nPermission is hereby granted, free of charge, to any person obtaining\na copy of the Font Software, to use, study, copy, merge, embed, modify,\nredistribute, and sell modified and unmodified copies of the Font\nSoftware, subject to the following conditions:\n\n1) Neither the Font Software nor any of its individual components,\nin Original or Modified Versions, may be sold by itself.\n\n2) Original or Modified Versions of the Font Software may be bundled,\nredistributed and/or sold with any software, provided that each copy\ncontains the above copyright notice and this license. These can be\nincluded either as stand-alone text files, human-readable headers or\nin the appropriate machine-readable metadata fields within text or\nbinary files as long as those fields can be easily viewed by the user.\n\n3) No Modified Version of the Font Software may use the Reserved Font\nName(s) unless explicit written permission is granted by the corresponding\nCopyright Holder. This restriction only applies to the primary font name as\npresented to the users.\n\n4) The name(s) of the Copyright Holder(s) or the Author(s) of the Font\nSoftware shall not be used to promote, endorse or advertise any\nModified Version, except to acknowledge the contribution(s) of the\nCopyright Holder(s) and the Author(s) or with their explicit written\npermission.\n\n5) The Font Software, modified or unmodified, in part or in whole,\nmust be distributed entirely under this license, and must not be\ndistributed under any other license. The requirement for fonts to\nremain under this license does not apply to any document created\nusing the Font Software.\n\nTERMINATION\nThis license becomes null and void if any of the above conditions are\nnot met.\n\nDISCLAIMER\nTHE FONT SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND,\nEXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO ANY WARRANTIES OF\nMERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT\nOF COPYRIGHT, PATENT, TRADEMARK, OR OTHER RIGHT. IN NO EVENT SHALL THE\nCOPYRIGHT HOLDER BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,\nINCLUDING ANY GENERAL, SPECIAL, INDIRECT, INCIDENTAL, OR CONSEQUENTIAL\nDAMAGES, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING\nFROM, OUT OF THE USE OR INABILITY TO USE THE FONT SOFTWARE OR FROM\nOTHER DEALINGS IN THE FONT SOFTWARE.\n"
+          }
+        ]
+      },
+      {
+        "name": "three",
+        "version": "0.170.0",
+        "installedVersion": "0.170.0",
+        "kind": "dependency",
+        "parent": "games/typing-defense",
+        "license": "MIT",
+        "repository": {
+          "type": "git",
+          "url": "https://github.com/mrdoob/three.js"
+        },
+        "dependencies": {},
+        "packageJson": "games/typing-defense/node_modules/three/package.json",
+        "packageJsonSha256": "2caf5d31ca4368c7e39e7e598dd95774fe1bdaae7cfbc5b073c8dcb5ec7e25da",
+        "notices": [
+          {
+            "path": "games/typing-defense/node_modules/three/LICENSE",
+            "sha256": "4c40a1ef62450b857c3b2aaf294936304cd552d965fbcd9d32d4c5bcf4ba4454",
+            "text": "The MIT License\n\nCopyright © 2010-2024 three.js authors\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in\nall copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\nTHE SOFTWARE.\n"
+          }
+        ]
+      },
+      {
+        "name": "@types/node",
+        "version": "24.19.2",
+        "kind": "devDependency",
+        "installedVersion": "24.19.2"
+      },
+      {
+        "name": "@types/three",
+        "version": "0.170.0",
+        "kind": "devDependency",
+        "installedVersion": "0.170.0"
+      },
+      {
+        "name": "tsx",
+        "version": "4.23.15",
+        "kind": "devDependency",
+        "installedVersion": "4.23.15"
+      },
+      {
+        "name": "typescript",
+        "version": "6.0.3",
+        "kind": "devDependency",
+        "installedVersion": "6.0.3"
+      },
+      {
+        "name": "vite",
+        "version": "7.3.7",
+        "kind": "devDependency",
+        "installedVersion": "7.3.7"
+      },
+      {
+        "name": "vitest",
+        "version": "3.2.7",
+        "kind": "devDependency",
+        "installedVersion": "3.2.7"
+      }
+    ],
+    "runtime": {
+      "files": [
+        "games/typing-defense/src/app/chunks.ts",
+        "games/typing-defense/src/app/dev-tools.ts",
+        "games/typing-defense/src/app/input.ts",
+        "games/typing-defense/src/app/learn.ts",
+        "games/typing-defense/src/app/learning.ts",
+        "games/typing-defense/src/app/prefs.ts",
+        "games/typing-defense/src/app/retry.ts",
+        "games/typing-defense/src/app/sandbox.ts",
+        "games/typing-defense/src/app/selection.ts",
+        "games/typing-defense/src/app/session.ts",
+        "games/typing-defense/src/app/skill.ts",
+        "games/typing-defense/src/app/vocab.ts",
+        "games/typing-defense/src/content/compile.ts",
+        "games/typing-defense/src/content/rules.ts",
+        "games/typing-defense/src/content/slice-1a.ts",
+        "games/typing-defense/src/kit/balance/bands.ts",
+        "games/typing-defense/src/kit/balance/director.ts",
+        "games/typing-defense/src/kit/balance/flow.ts",
+        "games/typing-defense/src/kit/balance/gates.ts",
+        "games/typing-defense/src/kit/balance/index.ts",
+        "games/typing-defense/src/kit/balance/math.ts",
+        "games/typing-defense/src/kit/balance/pace.ts",
+        "games/typing-defense/src/kit/balance/profile.ts",
+        "games/typing-defense/src/kit/balance/typist.ts",
+        "games/typing-defense/src/kit/input/index.ts",
+        "games/typing-defense/src/kit/input/keys.ts",
+        "games/typing-defense/src/kit/input/text.ts",
+        "games/typing-defense/src/kit/learning/bridge.ts",
+        "games/typing-defense/src/kit/learning/contract.ts",
+        "games/typing-defense/src/kit/learning/events.ts",
+        "games/typing-defense/src/kit/learning/index.ts",
+        "games/typing-defense/src/kit/platform/canvas-state.ts",
+        "games/typing-defense/src/kit/platform/frame-loop.ts",
+        "games/typing-defense/src/kit/platform/index.ts",
+        "games/typing-defense/src/kit/platform/rng.ts",
+        "games/typing-defense/src/kit/platform/safe-storage.ts",
+        "games/typing-defense/src/kit/vocab/content-filter.ts",
+        "games/typing-defense/src/kit/vocab/index.ts",
+        "games/typing-defense/src/kit/vocab/vocabulary.ts",
+        "games/typing-defense/src/kit/vocab/words.ts",
+        "games/typing-defense/src/main.ts",
+        "games/typing-defense/src/sim/commands.ts",
+        "games/typing-defense/src/sim/events.ts",
+        "games/typing-defense/src/sim/hash.ts",
+        "games/typing-defense/src/sim/lanes.ts",
+        "games/typing-defense/src/sim/nav/astar.ts",
+        "games/typing-defense/src/sim/nav/connectivity.ts",
+        "games/typing-defense/src/sim/nav/grid.ts",
+        "games/typing-defense/src/sim/placement.ts",
+        "games/typing-defense/src/sim/stats.ts",
+        "games/typing-defense/src/sim/stores/agents.ts",
+        "games/typing-defense/src/sim/stores/boss.ts",
+        "games/typing-defense/src/sim/stores/buildings.ts",
+        "games/typing-defense/src/sim/stores/calls.ts",
+        "games/typing-defense/src/sim/stores/enemies.ts",
+        "games/typing-defense/src/sim/stores/npcs.ts",
+        "games/typing-defense/src/sim/stores/projectiles.ts",
+        "games/typing-defense/src/sim/stores/slots.ts",
+        "games/typing-defense/src/sim/stores/trees.ts",
+        "games/typing-defense/src/sim/stores/ult.ts",
+        "games/typing-defense/src/sim/stores/units.ts",
+        "games/typing-defense/src/sim/stores/walkers.ts",
+        "games/typing-defense/src/sim/stores/words.ts",
+        "games/typing-defense/src/sim/systems/agents.ts",
+        "games/typing-defense/src/sim/systems/attention.ts",
+        "games/typing-defense/src/sim/systems/block.ts",
+        "games/typing-defense/src/sim/systems/boss.ts",
+        "games/typing-defense/src/sim/systems/calls.ts",
+        "games/typing-defense/src/sim/systems/chain.ts",
+        "games/typing-defense/src/sim/systems/combat.ts",
+        "games/typing-defense/src/sim/systems/deaths.ts",
+        "games/typing-defense/src/sim/systems/direct.ts",
+        "games/typing-defense/src/sim/systems/economy.ts",
+        "games/typing-defense/src/sim/systems/learn.ts",
+        "games/typing-defense/src/sim/systems/move.ts",
+        "games/typing-defense/src/sim/systems/pace.ts",
+        "games/typing-defense/src/sim/systems/projectile.ts",
+        "games/typing-defense/src/sim/systems/rewards.ts",
+        "games/typing-defense/src/sim/systems/spawn.ts",
+        "games/typing-defense/src/sim/systems/ult.ts",
+        "games/typing-defense/src/sim/systems/waves.ts",
+        "games/typing-defense/src/sim/world.ts",
+        "games/typing-defense/src/typing/decks.ts",
+        "games/typing-defense/src/typing/distance.ts",
+        "games/typing-defense/src/typing/letters.ts",
+        "games/typing-defense/src/typing/picker.ts",
+        "games/typing-defense/src/typing/router.ts",
+        "games/typing-defense/src/typing/scorer.ts",
+        "games/typing-defense/src/ui/build-menu.ts",
+        "games/typing-defense/src/ui/hud.ts",
+        "games/typing-defense/src/ui/profile.ts",
+        "games/typing-defense/src/ui/settings.ts",
+        "games/typing-defense/src/ui/sheets.ts",
+        "games/typing-defense/src/ui/td.css",
+        "games/typing-defense/src/ui/team-bar.ts",
+        "games/typing-defense/src/ui/theme.css",
+        "games/typing-defense/src/ui/tips.ts",
+        "games/typing-defense/src/ui/title.css",
+        "games/typing-defense/src/ui/title.ts",
+        "games/typing-defense/src/view/audio-min.ts",
+        "games/typing-defense/src/view/boss-2d.ts",
+        "games/typing-defense/src/view/debug-2d.ts",
+        "games/typing-defense/src/view/folk.ts",
+        "games/typing-defense/src/view/fx-2d.ts",
+        "games/typing-defense/src/view/fx-pipe.ts",
+        "games/typing-defense/src/view/music.ts",
+        "games/typing-defense/src/view/words/cards.ts",
+        "games/typing-defense/src/view/words/lanes.ts"
+      ],
+      "external": [
+        {
+          "file": "games/typing-defense/src/ui/td.css",
+          "spec": "@fontsource/be-vietnam-pro/500.css",
+          "line": 7
+        },
+        {
+          "file": "games/typing-defense/src/ui/td.css",
+          "spec": "@fontsource/be-vietnam-pro/700.css",
+          "line": 8
+        },
+        {
+          "file": "games/typing-defense/src/ui/td.css",
+          "spec": "@fontsource/be-vietnam-pro/800.css",
+          "line": 9
+        },
+        {
+          "file": "games/typing-defense/src/ui/theme.css",
+          "spec": "@fontsource/baloo-2/vietnamese-600.css",
+          "line": 10
+        },
+        {
+          "file": "games/typing-defense/src/ui/theme.css",
+          "spec": "@fontsource/baloo-2/latin-ext-600.css",
+          "line": 11
+        },
+        {
+          "file": "games/typing-defense/src/ui/theme.css",
+          "spec": "@fontsource/baloo-2/latin-600.css",
+          "line": 12
+        },
+        {
+          "file": "games/typing-defense/src/ui/theme.css",
+          "spec": "@fontsource/baloo-2/vietnamese-800.css",
+          "line": 13
+        },
+        {
+          "file": "games/typing-defense/src/ui/theme.css",
+          "spec": "@fontsource/baloo-2/latin-ext-800.css",
+          "line": 14
+        },
+        {
+          "file": "games/typing-defense/src/ui/theme.css",
+          "spec": "@fontsource/baloo-2/latin-800.css",
+          "line": 15
+        }
+      ],
+      "unresolved": []
+    },
+    "allExternal": [
+      {
+        "file": "games/typing-defense/src/kit/tools/cdp-run.mjs",
+        "spec": "node:child_process",
+        "line": 20
+      },
+      {
+        "file": "games/typing-defense/src/kit/tools/cdp-run.mjs",
+        "spec": "node:fs",
+        "line": 21
+      },
+      {
+        "file": "games/typing-defense/src/kit/tools/cdp-run.mjs",
+        "spec": "node:os",
+        "line": 22
+      },
+      {
+        "file": "games/typing-defense/src/kit/tools/cdp-run.mjs",
+        "spec": "node:path",
+        "line": 23
+      },
+      {
+        "file": "games/typing-defense/src/kit/tools/cdp-run.mjs",
+        "spec": "node:url",
+        "line": 24
+      },
+      {
+        "file": "games/typing-defense/src/kit/tools/vite-shared-plugin.ts",
+        "spec": "node:fs",
+        "line": 12
+      },
+      {
+        "file": "games/typing-defense/src/kit/tools/vite-shared-plugin.ts",
+        "spec": "node:path",
+        "line": 13
+      },
+      {
+        "file": "games/typing-defense/src/kit/verify-kit.mjs",
+        "spec": "node:crypto",
+        "line": 4
+      },
+      {
+        "file": "games/typing-defense/src/kit/verify-kit.mjs",
+        "spec": "node:fs",
+        "line": 5
+      },
+      {
+        "file": "games/typing-defense/src/kit/verify-kit.mjs",
+        "spec": "node:path",
+        "line": 6
+      },
+      {
+        "file": "games/typing-defense/src/kit/verify-kit.mjs",
+        "spec": "node:url",
+        "line": 7
+      },
+      {
+        "file": "games/typing-defense/src/ui/td.css",
+        "spec": "@fontsource/be-vietnam-pro/500.css",
+        "line": 7
+      },
+      {
+        "file": "games/typing-defense/src/ui/td.css",
+        "spec": "@fontsource/be-vietnam-pro/700.css",
+        "line": 8
+      },
+      {
+        "file": "games/typing-defense/src/ui/td.css",
+        "spec": "@fontsource/be-vietnam-pro/800.css",
+        "line": 9
+      },
+      {
+        "file": "games/typing-defense/src/ui/theme.css",
+        "spec": "@fontsource/baloo-2/vietnamese-600.css",
+        "line": 10
+      },
+      {
+        "file": "games/typing-defense/src/ui/theme.css",
+        "spec": "@fontsource/baloo-2/latin-ext-600.css",
+        "line": 11
+      },
+      {
+        "file": "games/typing-defense/src/ui/theme.css",
+        "spec": "@fontsource/baloo-2/latin-600.css",
+        "line": 12
+      },
+      {
+        "file": "games/typing-defense/src/ui/theme.css",
+        "spec": "@fontsource/baloo-2/vietnamese-800.css",
+        "line": 13
+      },
+      {
+        "file": "games/typing-defense/src/ui/theme.css",
+        "spec": "@fontsource/baloo-2/latin-ext-800.css",
+        "line": 14
+      },
+      {
+        "file": "games/typing-defense/src/ui/theme.css",
+        "spec": "@fontsource/baloo-2/latin-800.css",
+        "line": 15
+      }
+    ],
+    "vendorGraph": {
+      "files": [],
+      "external": [],
+      "unresolved": []
+    },
+    "vendorNotices": [],
+    "hashes": {
+      "games/typing-defense/package.json": "a83a0a5bf9ad76b588458fc9b403681f3a563e1bfffd004028b206982c594d3e",
+      "games/typing-defense/pnpm-lock.yaml": "22b15d5826132e45351178868b3cb5ac4b97f6b077a8da8bb76601550e8e8891"
+    }
+  },
+  {
+    "base": "games/typing-survival",
+    "manifest": {
+      "name": "typing-survival",
+      "version": "0.1.0",
+      "private": true,
+      "type": "module",
+      "description": "Tuyến Cuối (Last Line): typing survival, words load the guns that hold the corridor.",
+      "scripts": {
+        "dev": "vite --host 127.0.0.1 --port 3007 --strictPort",
+        "build": "tsc --noEmit && vite build",
+        "deploy:pack": "pnpm build && node src/kit/tools/deploy/check-pack.mjs dist --game typing-survival",
+        "deploy:pack:local": "pnpm build && node src/kit/tools/deploy/check-pack.mjs dist --game typing-survival --allow-local-host",
+        "preview": "vite preview --host 127.0.0.1 --port 3007 --strictPort",
+        "test": "vitest run",
+        "check": "node src/kit/verify-kit.mjs && pnpm test && pnpm build",
+        "survival:balance": "node --import tsx scripts/balance.ts",
+        "survival:replay": "node --import tsx scripts/replay.ts",
+        "visual": "node src/kit/tools/cdp-run.mjs"
+      },
+      "dependencies": {
+        "@fontsource/be-vietnam-pro": "^5.3.0",
+        "@fontsource/chakra-petch": "^5.3.0",
+        "three": "0.170.0"
+      },
+      "devDependencies": {
+        "@types/node": "^24.19.0",
+        "@types/three": "0.170.0",
+        "tsx": "^4.23.15",
+        "typescript": "^6.0.2",
+        "vite": "^7.1.7",
+        "vitest": "^3.2.4"
+      },
+      "packageManager": "pnpm@11.21.0"
+    },
+    "lock": {
+      "dependencies": {
+        "@fontsource/be-vietnam-pro": "5.3.0",
+        "@fontsource/chakra-petch": "5.3.0",
+        "three": "0.170.0"
+      },
+      "devDependencies": {
+        "@types/node": "24.19.2",
+        "@types/three": "0.170.0",
+        "tsx": "4.23.15",
+        "typescript": "6.0.3",
+        "vite": "7.3.7(@types/node@24.19.2)(tsx@4.23.15)",
+        "vitest": "3.2.7(@types/node@24.19.2)(tsx@4.23.15)"
+      },
+      "snapshots": {
+        "@esbuild/aix-ppc64@0.28.2": {},
+        "@esbuild/android-arm64@0.28.2": {},
+        "@esbuild/android-arm@0.28.2": {},
+        "@esbuild/android-x64@0.28.2": {},
+        "@esbuild/darwin-arm64@0.28.2": {},
+        "@esbuild/darwin-x64@0.28.2": {},
+        "@esbuild/freebsd-arm64@0.28.2": {},
+        "@esbuild/freebsd-x64@0.28.2": {},
+        "@esbuild/linux-arm64@0.28.2": {},
+        "@esbuild/linux-arm@0.28.2": {},
+        "@esbuild/linux-ia32@0.28.2": {},
+        "@esbuild/linux-loong64@0.28.2": {},
+        "@esbuild/linux-mips64el@0.28.2": {},
+        "@esbuild/linux-ppc64@0.28.2": {},
+        "@esbuild/linux-riscv64@0.28.2": {},
+        "@esbuild/linux-s390x@0.28.2": {},
+        "@esbuild/linux-x64@0.28.2": {},
+        "@esbuild/netbsd-arm64@0.28.2": {},
+        "@esbuild/netbsd-x64@0.28.2": {},
+        "@esbuild/openbsd-arm64@0.28.2": {},
+        "@esbuild/openbsd-x64@0.28.2": {},
+        "@esbuild/openharmony-arm64@0.28.2": {},
+        "@esbuild/sunos-x64@0.28.2": {},
+        "@esbuild/win32-arm64@0.28.2": {},
+        "@esbuild/win32-ia32@0.28.2": {},
+        "@esbuild/win32-x64@0.28.2": {},
+        "@fontsource/be-vietnam-pro@5.3.0": {},
+        "@fontsource/chakra-petch@5.3.0": {},
+        "@jridgewell/sourcemap-codec@1.6.0": {},
+        "@napi-rs/lzma-linux-x64-gnu@1.5.1": {},
+        "@rollup/rollup-android-arm-eabi@4.64.12": {},
+        "@rollup/rollup-android-arm64@4.64.12": {},
+        "@rollup/rollup-darwin-arm64@4.64.12": {},
+        "@rollup/rollup-darwin-x64@4.64.12": {},
+        "@rollup/rollup-freebsd-arm64@4.64.12": {},
+        "@rollup/rollup-freebsd-x64@4.64.12": {},
+        "@rollup/rollup-linux-arm-gnueabihf@4.64.12": {},
+        "@rollup/rollup-linux-arm-musleabihf@4.64.12": {},
+        "@rollup/rollup-linux-arm64-gnu@4.64.12": {},
+        "@rollup/rollup-linux-arm64-musl@4.64.12": {},
+        "@rollup/rollup-linux-loong64-gnu@4.64.12": {},
+        "@rollup/rollup-linux-loong64-musl@4.64.12": {},
+        "@rollup/rollup-linux-ppc64-gnu@4.64.12": {},
+        "@rollup/rollup-linux-ppc64-musl@4.64.12": {},
+        "@rollup/rollup-linux-riscv64-gnu@4.64.12": {},
+        "@rollup/rollup-linux-riscv64-musl@4.64.12": {},
+        "@rollup/rollup-linux-s390x-gnu@4.64.12": {},
+        "@rollup/rollup-linux-x64-gnu@4.64.12": {},
+        "@rollup/rollup-linux-x64-musl@4.64.12": {},
+        "@rollup/rollup-openbsd-x64@4.64.12": {},
+        "@rollup/rollup-openharmony-arm64@4.64.12": {},
+        "@rollup/rollup-win32-arm64-msvc@4.64.12": {},
+        "@rollup/rollup-win32-ia32-msvc@4.64.12": {},
+        "@rollup/rollup-win32-x64-gnu@4.64.12": {},
+        "@rollup/rollup-win32-x64-msvc@4.64.12": {},
+        "@tweenjs/tween.js@23.1.3": {},
+        "@types/chai@5.2.3": {
+          "@types/deep-eql": "4.0.2",
+          "assertion-error": "2.0.1"
+        },
+        "@types/deep-eql@4.0.2": {},
+        "@types/estree@1.0.9": {},
+        "@types/node@24.19.2": {
+          "undici-types": "7.24.6"
+        },
+        "@types/stats.js@0.17.4": {},
+        "@types/three@0.170.0": {
+          "@tweenjs/tween.js": "23.1.3",
+          "@types/stats.js": "0.17.4",
+          "@types/webxr": "0.5.24",
+          "@webgpu/types": "0.1.74",
+          "fflate": "0.8.3",
+          "meshoptimizer": "0.18.1"
+        },
+        "@types/webxr@0.5.24": {},
+        "@vitest/expect@3.2.7": {
+          "@types/chai": "5.2.3",
+          "@vitest/spy": "3.2.7",
+          "@vitest/utils": "3.2.7",
+          "chai": "5.3.3",
+          "tinyrainbow": "2.0.0"
+        },
+        "@vitest/mocker@3.2.7(vite@7.3.7(@types/node@24.19.2)(tsx@4.23.15))": {
+          "@vitest/spy": "3.2.7",
+          "estree-walker": "3.0.3",
+          "magic-string": "0.30.21",
+          "vite": "7.3.7(@types/node@24.19.2)(tsx@4.23.15)"
+        },
+        "@vitest/pretty-format@3.2.7": {
+          "tinyrainbow": "2.0.0"
+        },
+        "@vitest/runner@3.2.7": {
+          "@vitest/utils": "3.2.7",
+          "pathe": "2.0.3",
+          "strip-literal": "3.1.0"
+        },
+        "@vitest/snapshot@3.2.7": {
+          "@vitest/pretty-format": "3.2.7",
+          "magic-string": "0.30.21",
+          "pathe": "2.0.3"
+        },
+        "@vitest/spy@3.2.7": {
+          "tinyspy": "4.0.6"
+        },
+        "@vitest/utils@3.2.7": {
+          "@vitest/pretty-format": "3.2.7",
+          "loupe": "3.2.1",
+          "tinyrainbow": "2.0.0"
+        },
+        "@webgpu/types@0.1.74": {},
+        "assertion-error@2.0.1": {},
+        "cac@6.7.14": {},
+        "chai@5.3.3": {
+          "assertion-error": "2.0.1",
+          "check-error": "2.1.3",
+          "deep-eql": "5.0.2",
+          "loupe": "3.2.1",
+          "pathval": "2.0.1"
+        },
+        "check-error@2.1.3": {},
+        "debug@4.4.3": {
+          "ms": "2.1.3"
+        },
+        "deep-eql@5.0.2": {},
+        "es-module-lexer@1.7.0": {},
+        "esbuild@0.28.2": {
+          "@esbuild/aix-ppc64": "0.28.2",
+          "@esbuild/android-arm": "0.28.2",
+          "@esbuild/android-arm64": "0.28.2",
+          "@esbuild/android-x64": "0.28.2",
+          "@esbuild/darwin-arm64": "0.28.2",
+          "@esbuild/darwin-x64": "0.28.2",
+          "@esbuild/freebsd-arm64": "0.28.2",
+          "@esbuild/freebsd-x64": "0.28.2",
+          "@esbuild/linux-arm": "0.28.2",
+          "@esbuild/linux-arm64": "0.28.2",
+          "@esbuild/linux-ia32": "0.28.2",
+          "@esbuild/linux-loong64": "0.28.2",
+          "@esbuild/linux-mips64el": "0.28.2",
+          "@esbuild/linux-ppc64": "0.28.2",
+          "@esbuild/linux-riscv64": "0.28.2",
+          "@esbuild/linux-s390x": "0.28.2",
+          "@esbuild/linux-x64": "0.28.2",
+          "@esbuild/netbsd-arm64": "0.28.2",
+          "@esbuild/netbsd-x64": "0.28.2",
+          "@esbuild/openbsd-arm64": "0.28.2",
+          "@esbuild/openbsd-x64": "0.28.2",
+          "@esbuild/openharmony-arm64": "0.28.2",
+          "@esbuild/sunos-x64": "0.28.2",
+          "@esbuild/win32-arm64": "0.28.2",
+          "@esbuild/win32-ia32": "0.28.2",
+          "@esbuild/win32-x64": "0.28.2"
+        },
+        "estree-walker@3.0.3": {
+          "@types/estree": "1.0.9"
+        },
+        "expect-type@1.4.0": {},
+        "fdir@6.5.0(picomatch@4.0.7)": {
+          "picomatch": "4.0.7"
+        },
+        "fflate@0.8.3": {},
+        "fsevents@2.3.3": {},
+        "js-tokens@9.0.1": {},
+        "loupe@3.2.1": {},
+        "magic-string@0.30.21": {
+          "@jridgewell/sourcemap-codec": "1.6.0"
+        },
+        "meshoptimizer@0.18.1": {},
+        "ms@2.1.3": {},
+        "nanoid@3.3.20": {},
+        "pathe@2.0.3": {},
+        "pathval@2.0.1": {},
+        "picocolors@1.1.1": {},
+        "picomatch@4.0.7": {},
+        "postcss@8.5.31": {
+          "nanoid": "3.3.20",
+          "picocolors": "1.1.1",
+          "source-map-js": "1.2.2"
+        },
+        "rollup@4.64.12": {
+          "@types/estree": "1.0.9",
+          "@napi-rs/lzma-linux-x64-gnu": "1.5.1",
+          "@rollup/rollup-android-arm-eabi": "4.64.12",
+          "@rollup/rollup-android-arm64": "4.64.12",
+          "@rollup/rollup-darwin-arm64": "4.64.12",
+          "@rollup/rollup-darwin-x64": "4.64.12",
+          "@rollup/rollup-freebsd-arm64": "4.64.12",
+          "@rollup/rollup-freebsd-x64": "4.64.12",
+          "@rollup/rollup-linux-arm-gnueabihf": "4.64.12",
+          "@rollup/rollup-linux-arm-musleabihf": "4.64.12",
+          "@rollup/rollup-linux-arm64-gnu": "4.64.12",
+          "@rollup/rollup-linux-arm64-musl": "4.64.12",
+          "@rollup/rollup-linux-loong64-gnu": "4.64.12",
+          "@rollup/rollup-linux-loong64-musl": "4.64.12",
+          "@rollup/rollup-linux-ppc64-gnu": "4.64.12",
+          "@rollup/rollup-linux-ppc64-musl": "4.64.12",
+          "@rollup/rollup-linux-riscv64-gnu": "4.64.12",
+          "@rollup/rollup-linux-riscv64-musl": "4.64.12",
+          "@rollup/rollup-linux-s390x-gnu": "4.64.12",
+          "@rollup/rollup-linux-x64-gnu": "4.64.12",
+          "@rollup/rollup-linux-x64-musl": "4.64.12",
+          "@rollup/rollup-openbsd-x64": "4.64.12",
+          "@rollup/rollup-openharmony-arm64": "4.64.12",
+          "@rollup/rollup-win32-arm64-msvc": "4.64.12",
+          "@rollup/rollup-win32-ia32-msvc": "4.64.12",
+          "@rollup/rollup-win32-x64-gnu": "4.64.12",
+          "@rollup/rollup-win32-x64-msvc": "4.64.12",
+          "fsevents": "2.3.3"
+        },
+        "siginfo@2.0.0": {},
+        "source-map-js@1.2.2": {},
+        "stackback@0.0.2": {},
+        "std-env@3.10.0": {},
+        "strip-literal@3.1.0": {
+          "js-tokens": "9.0.1"
+        },
+        "three@0.170.0": {},
+        "tinybench@2.9.0": {},
+        "tinyexec@0.3.2": {},
+        "tinyglobby@0.2.17": {
+          "fdir": "6.5.0(picomatch@4.0.7)",
+          "picomatch": "4.0.7"
+        },
+        "tinypool@1.1.1": {},
+        "tinyrainbow@2.0.0": {},
+        "tinyspy@4.0.6": {},
+        "tsx@4.23.15": {
+          "esbuild": "0.28.2",
+          "fsevents": "2.3.3"
+        },
+        "typescript@6.0.3": {},
+        "undici-types@7.24.6": {},
+        "vite-node@3.2.4(@types/node@24.19.2)(tsx@4.23.15)": {
+          "cac": "6.7.14",
+          "debug": "4.4.3",
+          "es-module-lexer": "1.7.0",
+          "pathe": "2.0.3",
+          "vite": "7.3.7(@types/node@24.19.2)(tsx@4.23.15)"
+        },
+        "vite@7.3.7(@types/node@24.19.2)(tsx@4.23.15)": {
+          "esbuild": "0.28.2",
+          "fdir": "6.5.0(picomatch@4.0.7)",
+          "picomatch": "4.0.7",
+          "postcss": "8.5.31",
+          "rollup": "4.64.12",
+          "tinyglobby": "0.2.17",
+          "@types/node": "24.19.2",
+          "fsevents": "2.3.3",
+          "tsx": "4.23.15"
+        },
+        "vitest@3.2.7(@types/node@24.19.2)(tsx@4.23.15)": {
+          "@types/chai": "5.2.3",
+          "@vitest/expect": "3.2.7",
+          "@vitest/mocker": "3.2.7(vite@7.3.7(@types/node@24.19.2)(tsx@4.23.15))",
+          "@vitest/pretty-format": "3.2.7",
+          "@vitest/runner": "3.2.7",
+          "@vitest/snapshot": "3.2.7",
+          "@vitest/spy": "3.2.7",
+          "@vitest/utils": "3.2.7",
+          "chai": "5.3.3",
+          "debug": "4.4.3",
+          "expect-type": "1.4.0",
+          "magic-string": "0.30.21",
+          "pathe": "2.0.3",
+          "picomatch": "4.0.7",
+          "std-env": "3.10.0",
+          "tinybench": "2.9.0",
+          "tinyexec": "0.3.2",
+          "tinyglobby": "0.2.17",
+          "tinypool": "1.1.1",
+          "tinyrainbow": "2.0.0",
+          "vite": "7.3.7(@types/node@24.19.2)(tsx@4.23.15)",
+          "vite-node": "3.2.4(@types/node@24.19.2)(tsx@4.23.15)",
+          "why-is-node-running": "2.3.0",
+          "@types/node": "24.19.2"
+        },
+        "why-is-node-running@2.3.0": {
+          "siginfo": "2.0.0",
+          "stackback": "0.0.2"
+        }
+      }
+    },
+    "records": [
+      {
+        "name": "@fontsource/be-vietnam-pro",
+        "version": "5.3.0",
+        "installedVersion": "5.3.0",
+        "kind": "dependency",
+        "parent": "games/typing-survival",
+        "license": "OFL-1.1",
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/fontsource/font-files.git",
+          "directory": "fonts/google/be-vietnam-pro"
+        },
+        "dependencies": {},
+        "packageJson": "games/typing-survival/node_modules/@fontsource/be-vietnam-pro/package.json",
+        "packageJsonSha256": "132dbddcd8a999ea860335de61c0eaa4c15490c1a5fe1de7f3d6576d59266ca4",
+        "notices": [
+          {
+            "path": "games/typing-survival/node_modules/@fontsource/be-vietnam-pro/LICENSE",
+            "sha256": "0bd4db1cda123af9d91794b0f98324b7d7d81aef0fcaf78c433160153f2c6f25",
+            "text": "Copyright 2021 The Be Vietnam Pro Project Authors (https://github.com/bettergui/BeVietnamPro) BeVietnamPro-ThinItalic.ttf: Copyright 2021 The Be Vietnam Pro Project Authors (https://github.com/bettergui/BeVietnamPro) BeVietnamPro-ExtraLight.ttf: Copyright 2021 The Be Vietnam Pro Project Authors (https://github.com/bettergui/BeVietnamPro) BeVietnamPro-ExtraLightItalic.ttf: Copyright 2021 The Be Vietnam Pro Project Authors (https://github.com/bettergui/BeVietnamPro) BeVietnamPro-Light.ttf: Copyright 2021 The Be Vietnam Pro Project Authors (https://github.com/bettergui/BeVietnamPro) BeVietnamPro-LightItalic.ttf: Copyright 2021 The Be Vietnam Pro Project Authors (https://github.com/bettergui/BeVietnamPro) BeVietnamPro-Regular.ttf: Copyright 2021 The Be Vietnam Pro Project Authors (https://github.com/bettergui/BeVietnamPro) BeVietnamPro-Italic.ttf: Copyright 2021 The Be Vietnam Pro Project Authors (https://github.com/bettergui/BeVietnamPro) BeVietnamPro-Medium.ttf: Copyright 2021 The Be Vietnam Pro Project Authors (https://github.com/bettergui/BeVietnamPro) BeVietnamPro-MediumItalic.ttf: Copyright 2021 The Be Vietnam Pro Project Authors (https://github.com/bettergui/BeVietnamPro) BeVietnamPro-SemiBold.ttf: Copyright 2021 The Be Vietnam Pro Project Authors (https://github.com/bettergui/BeVietnamPro) BeVietnamPro-SemiBoldItalic.ttf: Copyright 2021 The Be Vietnam Pro Project Authors (https://github.com/bettergui/BeVietnamPro) BeVietnamPro-Bold.ttf: Copyright 2021 The Be Vietnam Pro Project Authors (https://github.com/bettergui/BeVietnamPro) BeVietnamPro-BoldItalic.ttf: Copyright 2021 The Be Vietnam Pro Project Authors (https://github.com/bettergui/BeVietnamPro) BeVietnamPro-ExtraBold.ttf: Copyright 2021 The Be Vietnam Pro Project Authors (https://github.com/bettergui/BeVietnamPro) BeVietnamPro-ExtraBoldItalic.ttf: Copyright 2021 The Be Vietnam Pro Project Authors (https://github.com/bettergui/BeVietnamPro) BeVietnamPro-Black.ttf: Copyright 2021 The Be Vietnam Pro Project Authors (https://github.com/bettergui/BeVietnamPro) BeVietnamPro-BlackItalic.ttf: Copyright 2021 The Be Vietnam Pro Project Authors (https://github.com/bettergui/BeVietnamPro)\n\nThis Font Software is licensed under the SIL Open Font License, Version 1.1.\nThis license is copied below, and is also available with a FAQ at:\nhttp://scripts.sil.org/OFL\n\n\n-----------------------------------------------------------\nSIL OPEN FONT LICENSE Version 1.1 - 26 February 2007\n-----------------------------------------------------------\n\nPREAMBLE\nThe goals of the Open Font License (OFL) are to stimulate worldwide\ndevelopment of collaborative font projects, to support the font creation\nefforts of academic and linguistic communities, and to provide a free and\nopen framework in which fonts may be shared and improved in partnership\nwith others.\n\nThe OFL allows the licensed fonts to be used, studied, modified and\nredistributed freely as long as they are not sold by themselves. The\nfonts, including any derivative works, can be bundled, embedded,\nredistributed and/or sold with any software provided that any reserved\nnames are not used by derivative works. The fonts and derivatives,\nhowever, cannot be released under any other type of license. The\nrequirement for fonts to remain under this license does not apply\nto any document created using the fonts or their derivatives.\n\nDEFINITIONS\n\"Font Software\" refers to the set of files released by the Copyright\nHolder(s) under this license and clearly marked as such. This may\ninclude source files, build scripts and documentation.\n\n\"Reserved Font Name\" refers to any names specified as such after the\ncopyright statement(s).\n\n\"Original Version\" refers to the collection of Font Software components as\ndistributed by the Copyright Holder(s).\n\n\"Modified Version\" refers to any derivative made by adding to, deleting,\nor substituting -- in part or in whole -- any of the components of the\nOriginal Version, by changing formats or by porting the Font Software to a\nnew environment.\n\n\"Author\" refers to any designer, engineer, programmer, technical\nwriter or other person who contributed to the Font Software.\n\nPERMISSION & CONDITIONS\nPermission is hereby granted, free of charge, to any person obtaining\na copy of the Font Software, to use, study, copy, merge, embed, modify,\nredistribute, and sell modified and unmodified copies of the Font\nSoftware, subject to the following conditions:\n\n1) Neither the Font Software nor any of its individual components,\nin Original or Modified Versions, may be sold by itself.\n\n2) Original or Modified Versions of the Font Software may be bundled,\nredistributed and/or sold with any software, provided that each copy\ncontains the above copyright notice and this license. These can be\nincluded either as stand-alone text files, human-readable headers or\nin the appropriate machine-readable metadata fields within text or\nbinary files as long as those fields can be easily viewed by the user.\n\n3) No Modified Version of the Font Software may use the Reserved Font\nName(s) unless explicit written permission is granted by the corresponding\nCopyright Holder. This restriction only applies to the primary font name as\npresented to the users.\n\n4) The name(s) of the Copyright Holder(s) or the Author(s) of the Font\nSoftware shall not be used to promote, endorse or advertise any\nModified Version, except to acknowledge the contribution(s) of the\nCopyright Holder(s) and the Author(s) or with their explicit written\npermission.\n\n5) The Font Software, modified or unmodified, in part or in whole,\nmust be distributed entirely under this license, and must not be\ndistributed under any other license. The requirement for fonts to\nremain under this license does not apply to any document created\nusing the Font Software.\n\nTERMINATION\nThis license becomes null and void if any of the above conditions are\nnot met.\n\nDISCLAIMER\nTHE FONT SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND,\nEXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO ANY WARRANTIES OF\nMERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT\nOF COPYRIGHT, PATENT, TRADEMARK, OR OTHER RIGHT. IN NO EVENT SHALL THE\nCOPYRIGHT HOLDER BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,\nINCLUDING ANY GENERAL, SPECIAL, INDIRECT, INCIDENTAL, OR CONSEQUENTIAL\nDAMAGES, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING\nFROM, OUT OF THE USE OR INABILITY TO USE THE FONT SOFTWARE OR FROM\nOTHER DEALINGS IN THE FONT SOFTWARE.\n"
+          }
+        ]
+      },
+      {
+        "name": "@fontsource/chakra-petch",
+        "version": "5.3.0",
+        "installedVersion": "5.3.0",
+        "kind": "dependency",
+        "parent": "games/typing-survival",
+        "license": "OFL-1.1",
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/fontsource/font-files.git",
+          "directory": "fonts/google/chakra-petch"
+        },
+        "dependencies": {},
+        "packageJson": "games/typing-survival/node_modules/@fontsource/chakra-petch/package.json",
+        "packageJsonSha256": "c08805392bb2a4298a9f8ffadb65205cdb7f08cb51499ca4628f6252c6356064",
+        "notices": [
+          {
+            "path": "games/typing-survival/node_modules/@fontsource/chakra-petch/LICENSE",
+            "sha256": "8f32c96ea465c5916489845361238b31b365414228bc2e4e45e3ae98ba1d311a",
+            "text": "Copyright 2018 The Chakra Petch Project Authors (https://github.com/m4rc1e/Chakra-Petch.git) ChakraPetch-LightItalic.ttf: Copyright 2018 The Chakra Petch Project Authors (https://github.com/m4rc1e/Chakra-Petch.git) ChakraPetch-Regular.ttf: Copyright 2018 The Chakra Petch Project Authors (https://github.com/m4rc1e/Chakra-Petch.git) ChakraPetch-Italic.ttf: Copyright 2018 The Chakra Petch Project Authors (https://github.com/m4rc1e/Chakra-Petch.git) ChakraPetch-Medium.ttf: Copyright 2018 The Chakra Petch Project Authors (https://github.com/m4rc1e/Chakra-Petch.git) ChakraPetch-MediumItalic.ttf: Copyright 2018 The Chakra Petch Project Authors (https://github.com/m4rc1e/Chakra-Petch.git) ChakraPetch-SemiBold.ttf: Copyright 2018 The Chakra Petch Project Authors (https://github.com/m4rc1e/Chakra-Petch.git) ChakraPetch-SemiBoldItalic.ttf: Copyright 2018 The Chakra Petch Project Authors (https://github.com/m4rc1e/Chakra-Petch.git) ChakraPetch-Bold.ttf: Copyright 2018 The Chakra Petch Project Authors (https://github.com/m4rc1e/Chakra-Petch.git) ChakraPetch-BoldItalic.ttf: Copyright 2018 The Chakra Petch Project Authors (https://github.com/m4rc1e/Chakra-Petch.git)\n\nThis Font Software is licensed under the SIL Open Font License, Version 1.1.\nThis license is copied below, and is also available with a FAQ at:\nhttp://scripts.sil.org/OFL\n\n\n-----------------------------------------------------------\nSIL OPEN FONT LICENSE Version 1.1 - 26 February 2007\n-----------------------------------------------------------\n\nPREAMBLE\nThe goals of the Open Font License (OFL) are to stimulate worldwide\ndevelopment of collaborative font projects, to support the font creation\nefforts of academic and linguistic communities, and to provide a free and\nopen framework in which fonts may be shared and improved in partnership\nwith others.\n\nThe OFL allows the licensed fonts to be used, studied, modified and\nredistributed freely as long as they are not sold by themselves. The\nfonts, including any derivative works, can be bundled, embedded,\nredistributed and/or sold with any software provided that any reserved\nnames are not used by derivative works. The fonts and derivatives,\nhowever, cannot be released under any other type of license. The\nrequirement for fonts to remain under this license does not apply\nto any document created using the fonts or their derivatives.\n\nDEFINITIONS\n\"Font Software\" refers to the set of files released by the Copyright\nHolder(s) under this license and clearly marked as such. This may\ninclude source files, build scripts and documentation.\n\n\"Reserved Font Name\" refers to any names specified as such after the\ncopyright statement(s).\n\n\"Original Version\" refers to the collection of Font Software components as\ndistributed by the Copyright Holder(s).\n\n\"Modified Version\" refers to any derivative made by adding to, deleting,\nor substituting -- in part or in whole -- any of the components of the\nOriginal Version, by changing formats or by porting the Font Software to a\nnew environment.\n\n\"Author\" refers to any designer, engineer, programmer, technical\nwriter or other person who contributed to the Font Software.\n\nPERMISSION & CONDITIONS\nPermission is hereby granted, free of charge, to any person obtaining\na copy of the Font Software, to use, study, copy, merge, embed, modify,\nredistribute, and sell modified and unmodified copies of the Font\nSoftware, subject to the following conditions:\n\n1) Neither the Font Software nor any of its individual components,\nin Original or Modified Versions, may be sold by itself.\n\n2) Original or Modified Versions of the Font Software may be bundled,\nredistributed and/or sold with any software, provided that each copy\ncontains the above copyright notice and this license. These can be\nincluded either as stand-alone text files, human-readable headers or\nin the appropriate machine-readable metadata fields within text or\nbinary files as long as those fields can be easily viewed by the user.\n\n3) No Modified Version of the Font Software may use the Reserved Font\nName(s) unless explicit written permission is granted by the corresponding\nCopyright Holder. This restriction only applies to the primary font name as\npresented to the users.\n\n4) The name(s) of the Copyright Holder(s) or the Author(s) of the Font\nSoftware shall not be used to promote, endorse or advertise any\nModified Version, except to acknowledge the contribution(s) of the\nCopyright Holder(s) and the Author(s) or with their explicit written\npermission.\n\n5) The Font Software, modified or unmodified, in part or in whole,\nmust be distributed entirely under this license, and must not be\ndistributed under any other license. The requirement for fonts to\nremain under this license does not apply to any document created\nusing the Font Software.\n\nTERMINATION\nThis license becomes null and void if any of the above conditions are\nnot met.\n\nDISCLAIMER\nTHE FONT SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND,\nEXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO ANY WARRANTIES OF\nMERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT\nOF COPYRIGHT, PATENT, TRADEMARK, OR OTHER RIGHT. IN NO EVENT SHALL THE\nCOPYRIGHT HOLDER BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,\nINCLUDING ANY GENERAL, SPECIAL, INDIRECT, INCIDENTAL, OR CONSEQUENTIAL\nDAMAGES, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING\nFROM, OUT OF THE USE OR INABILITY TO USE THE FONT SOFTWARE OR FROM\nOTHER DEALINGS IN THE FONT SOFTWARE.\n"
+          }
+        ]
+      },
+      {
+        "name": "three",
+        "version": "0.170.0",
+        "installedVersion": "0.170.0",
+        "kind": "dependency",
+        "parent": "games/typing-survival",
+        "license": "MIT",
+        "repository": {
+          "type": "git",
+          "url": "https://github.com/mrdoob/three.js"
+        },
+        "dependencies": {},
+        "packageJson": "games/typing-survival/node_modules/three/package.json",
+        "packageJsonSha256": "2caf5d31ca4368c7e39e7e598dd95774fe1bdaae7cfbc5b073c8dcb5ec7e25da",
+        "notices": [
+          {
+            "path": "games/typing-survival/node_modules/three/LICENSE",
+            "sha256": "4c40a1ef62450b857c3b2aaf294936304cd552d965fbcd9d32d4c5bcf4ba4454",
+            "text": "The MIT License\n\nCopyright © 2010-2024 three.js authors\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in\nall copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\nTHE SOFTWARE.\n"
+          }
+        ]
+      },
+      {
+        "name": "@types/node",
+        "version": "24.19.2",
+        "kind": "devDependency",
+        "installedVersion": "24.19.2"
+      },
+      {
+        "name": "@types/three",
+        "version": "0.170.0",
+        "kind": "devDependency",
+        "installedVersion": "0.170.0"
+      },
+      {
+        "name": "tsx",
+        "version": "4.23.15",
+        "kind": "devDependency",
+        "installedVersion": "4.23.15"
+      },
+      {
+        "name": "typescript",
+        "version": "6.0.3",
+        "kind": "devDependency",
+        "installedVersion": "6.0.3"
+      },
+      {
+        "name": "vite",
+        "version": "7.3.7",
+        "kind": "devDependency",
+        "installedVersion": "7.3.7"
+      },
+      {
+        "name": "vitest",
+        "version": "3.2.7",
+        "kind": "devDependency",
+        "installedVersion": "3.2.7"
+      }
+    ],
+    "runtime": {
+      "files": [
+        "games/typing-survival/src/app/dev.ts",
+        "games/typing-survival/src/app/english.ts",
+        "games/typing-survival/src/app/input.ts",
+        "games/typing-survival/src/app/journey.ts",
+        "games/typing-survival/src/app/learning.ts",
+        "games/typing-survival/src/app/main.ts",
+        "games/typing-survival/src/app/menu.ts",
+        "games/typing-survival/src/app/motion.ts",
+        "games/typing-survival/src/app/results.ts",
+        "games/typing-survival/src/app/session.ts",
+        "games/typing-survival/src/app/skill.ts",
+        "games/typing-survival/src/app/vocab.ts",
+        "games/typing-survival/src/audio/gun-audio.ts",
+        "games/typing-survival/src/audio/music.ts",
+        "games/typing-survival/src/audio/synth.ts",
+        "games/typing-survival/src/audio/theme-audio.ts",
+        "games/typing-survival/src/audio/type-audio.ts",
+        "games/typing-survival/src/content/balance.ts",
+        "games/typing-survival/src/content/chapter-1.ts",
+        "games/typing-survival/src/content/deck.ts",
+        "games/typing-survival/src/content/foes.ts",
+        "games/typing-survival/src/content/guns.ts",
+        "games/typing-survival/src/content/rules.ts",
+        "games/typing-survival/src/content/stage-rules.ts",
+        "games/typing-survival/src/content/stage-s0.ts",
+        "games/typing-survival/src/content/threat.ts",
+        "games/typing-survival/src/kit/audio/dragon-voice.ts",
+        "games/typing-survival/src/kit/audio/index.ts",
+        "games/typing-survival/src/kit/audio/mix.ts",
+        "games/typing-survival/src/kit/audio/scene-audio.ts",
+        "games/typing-survival/src/kit/audio/util.ts",
+        "games/typing-survival/src/kit/balance/bands.ts",
+        "games/typing-survival/src/kit/balance/director.ts",
+        "games/typing-survival/src/kit/balance/flow.ts",
+        "games/typing-survival/src/kit/balance/gates.ts",
+        "games/typing-survival/src/kit/balance/index.ts",
+        "games/typing-survival/src/kit/balance/math.ts",
+        "games/typing-survival/src/kit/balance/pace.ts",
+        "games/typing-survival/src/kit/balance/profile.ts",
+        "games/typing-survival/src/kit/balance/typist.ts",
+        "games/typing-survival/src/kit/feedback/audio-cues.ts",
+        "games/typing-survival/src/kit/feedback/debris.ts",
+        "games/typing-survival/src/kit/feedback/hitstop.ts",
+        "games/typing-survival/src/kit/feedback/index.ts",
+        "games/typing-survival/src/kit/feedback/kill-translation.ts",
+        "games/typing-survival/src/kit/feedback/numbers.ts",
+        "games/typing-survival/src/kit/feedback/profiles.ts",
+        "games/typing-survival/src/kit/feedback/quads.ts",
+        "games/typing-survival/src/kit/feedback/reaction.ts",
+        "games/typing-survival/src/kit/feedback/tiers.ts",
+        "games/typing-survival/src/kit/feedback/trauma.ts",
+        "games/typing-survival/src/kit/input/index.ts",
+        "games/typing-survival/src/kit/input/keys.ts",
+        "games/typing-survival/src/kit/input/text.ts",
+        "games/typing-survival/src/kit/learning/bridge.ts",
+        "games/typing-survival/src/kit/learning/contract.ts",
+        "games/typing-survival/src/kit/learning/events.ts",
+        "games/typing-survival/src/kit/learning/index.ts",
+        "games/typing-survival/src/kit/platform/canvas-state.ts",
+        "games/typing-survival/src/kit/platform/frame-loop.ts",
+        "games/typing-survival/src/kit/platform/index.ts",
+        "games/typing-survival/src/kit/platform/rng.ts",
+        "games/typing-survival/src/kit/platform/safe-storage.ts",
+        "games/typing-survival/src/kit/speech/index.ts",
+        "games/typing-survival/src/kit/speech/speech.ts",
+        "games/typing-survival/src/kit/three/guide-scene.ts",
+        "games/typing-survival/src/kit/three/hero.ts",
+        "games/typing-survival/src/kit/three/index.ts",
+        "games/typing-survival/src/kit/three/materials.ts",
+        "games/typing-survival/src/kit/three/model-contracts.ts",
+        "games/typing-survival/src/kit/three/model-loader.ts",
+        "games/typing-survival/src/kit/three/particles.ts",
+        "games/typing-survival/src/kit/three/stage.ts",
+        "games/typing-survival/src/kit/three/textures.ts",
+        "games/typing-survival/src/kit/three/util.ts",
+        "games/typing-survival/src/kit/vocab/content-filter.ts",
+        "games/typing-survival/src/kit/vocab/index.ts",
+        "games/typing-survival/src/kit/vocab/vocabulary.ts",
+        "games/typing-survival/src/kit/vocab/words.ts",
+        "games/typing-survival/src/sim/events.ts",
+        "games/typing-survival/src/sim/guns/aim.ts",
+        "games/typing-survival/src/sim/guns/phao.ts",
+        "games/typing-survival/src/sim/guns/ray.ts",
+        "games/typing-survival/src/sim/guns/tan.ts",
+        "games/typing-survival/src/sim/guns/tia.ts",
+        "games/typing-survival/src/sim/guns/xung.ts",
+        "games/typing-survival/src/sim/hash.ts",
+        "games/typing-survival/src/sim/hazards.ts",
+        "games/typing-survival/src/sim/hits.ts",
+        "games/typing-survival/src/sim/move.ts",
+        "games/typing-survival/src/sim/pace.ts",
+        "games/typing-survival/src/sim/plan.ts",
+        "games/typing-survival/src/sim/projectiles.ts",
+        "games/typing-survival/src/sim/spawn.ts",
+        "games/typing-survival/src/sim/stage.ts",
+        "games/typing-survival/src/sim/stores.ts",
+        "games/typing-survival/src/sim/weapons.ts",
+        "games/typing-survival/src/sim/words.ts",
+        "games/typing-survival/src/sim/world.ts",
+        "games/typing-survival/src/view/beams.ts",
+        "games/typing-survival/src/view/bolts.ts",
+        "games/typing-survival/src/view/chunks.ts",
+        "games/typing-survival/src/view/combat.ts",
+        "games/typing-survival/src/view/crowd.ts",
+        "games/typing-survival/src/view/fx.ts",
+        "games/typing-survival/src/view/gun-rules.ts",
+        "games/typing-survival/src/view/gunfx.ts",
+        "games/typing-survival/src/view/hazard-fx.ts",
+        "games/typing-survival/src/view/hud.ts",
+        "games/typing-survival/src/view/lights.ts",
+        "games/typing-survival/src/view/models.ts",
+        "games/typing-survival/src/view/probes.ts",
+        "games/typing-survival/src/view/scene.ts",
+        "games/typing-survival/src/view/screens-journey.ts",
+        "games/typing-survival/src/view/screens.ts",
+        "games/typing-survival/src/view/ship-rules.ts",
+        "games/typing-survival/src/view/ship.ts",
+        "games/typing-survival/src/view/shots.ts",
+        "games/typing-survival/src/view/strip.ts",
+        "games/typing-survival/src/view/survival.css",
+        "games/typing-survival/src/view/theme.css",
+        "games/typing-survival/src/view/theme.ts",
+        "games/typing-survival/src/view/type-rules.ts",
+        "games/typing-survival/src/view/typing-feel.ts",
+        "games/typing-survival/src/view/warm.ts"
+      ],
+      "external": [
+        {
+          "file": "games/typing-survival/src/app/main.ts",
+          "spec": "@fontsource/chakra-petch/500.css",
+          "line": 3
+        },
+        {
+          "file": "games/typing-survival/src/app/main.ts",
+          "spec": "@fontsource/chakra-petch/600.css",
+          "line": 4
+        },
+        {
+          "file": "games/typing-survival/src/app/main.ts",
+          "spec": "@fontsource/chakra-petch/700.css",
+          "line": 5
+        },
+        {
+          "file": "games/typing-survival/src/app/main.ts",
+          "spec": "@fontsource/be-vietnam-pro/500.css",
+          "line": 6
+        },
+        {
+          "file": "games/typing-survival/src/app/main.ts",
+          "spec": "@fontsource/be-vietnam-pro/600.css",
+          "line": 7
+        },
+        {
+          "file": "games/typing-survival/src/app/main.ts",
+          "spec": "@fontsource/be-vietnam-pro/800.css",
+          "line": 8
+        },
+        {
+          "file": "games/typing-survival/src/kit/feedback/debris.ts",
+          "spec": "three",
+          "line": 10
+        },
+        {
+          "file": "games/typing-survival/src/kit/feedback/numbers.ts",
+          "spec": "three",
+          "line": 24
+        },
+        {
+          "file": "games/typing-survival/src/kit/feedback/quads.ts",
+          "spec": "three",
+          "line": 2
+        },
+        {
+          "file": "games/typing-survival/src/view/combat.ts",
+          "spec": "three",
+          "line": 12
+        },
+        {
+          "file": "games/typing-survival/src/kit/three/model-loader.ts",
+          "spec": "three/examples/jsm/loaders/GLTFLoader.js",
+          "line": 187
+        },
+        {
+          "file": "games/typing-survival/src/kit/three/model-loader.ts",
+          "spec": "three/examples/jsm/libs/meshopt_decoder.module.js",
+          "line": 188
+        },
+        {
+          "file": "games/typing-survival/src/kit/three/stage.ts",
+          "spec": "three",
+          "line": 2
+        },
+        {
+          "file": "games/typing-survival/src/kit/three/stage.ts",
+          "spec": "three/examples/jsm/postprocessing/EffectComposer.js",
+          "line": 3
+        },
+        {
+          "file": "games/typing-survival/src/kit/three/stage.ts",
+          "spec": "three/examples/jsm/postprocessing/RenderPass.js",
+          "line": 4
+        },
+        {
+          "file": "games/typing-survival/src/kit/three/stage.ts",
+          "spec": "three/examples/jsm/postprocessing/UnrealBloomPass.js",
+          "line": 5
+        },
+        {
+          "file": "games/typing-survival/src/kit/three/stage.ts",
+          "spec": "three/examples/jsm/postprocessing/OutputPass.js",
+          "line": 6
+        },
+        {
+          "file": "games/typing-survival/src/kit/three/stage.ts",
+          "spec": "three/examples/jsm/environments/RoomEnvironment.js",
+          "line": 7
+        },
+        {
+          "file": "games/typing-survival/src/kit/three/util.ts",
+          "spec": "three",
+          "line": 2
+        },
+        {
+          "file": "games/typing-survival/src/kit/three/hero.ts",
+          "spec": "three",
+          "line": 2
+        },
+        {
+          "file": "games/typing-survival/src/kit/three/particles.ts",
+          "spec": "three",
+          "line": 2
+        },
+        {
+          "file": "games/typing-survival/src/kit/three/materials.ts",
+          "spec": "three",
+          "line": 2
+        },
+        {
+          "file": "games/typing-survival/src/kit/three/textures.ts",
+          "spec": "three",
+          "line": 2
+        },
+        {
+          "file": "games/typing-survival/src/kit/three/guide-scene.ts",
+          "spec": "three",
+          "line": 2
+        },
+        {
+          "file": "games/typing-survival/src/kit/three/guide-scene.ts",
+          "spec": "three/examples/jsm/environments/RoomEnvironment.js",
+          "line": 3
+        },
+        {
+          "file": "games/typing-survival/src/view/bolts.ts",
+          "spec": "three",
+          "line": 12
+        },
+        {
+          "file": "games/typing-survival/src/view/models.ts",
+          "spec": "three",
+          "line": 6
+        },
+        {
+          "file": "games/typing-survival/src/view/chunks.ts",
+          "spec": "three",
+          "line": 12
+        },
+        {
+          "file": "games/typing-survival/src/view/chunks.ts",
+          "spec": "three/examples/jsm/utils/BufferGeometryUtils.js",
+          "line": 13
+        },
+        {
+          "file": "games/typing-survival/src/view/theme.ts",
+          "spec": "three",
+          "line": 7
+        },
+        {
+          "file": "games/typing-survival/src/view/fx.ts",
+          "spec": "three",
+          "line": 11
+        },
+        {
+          "file": "games/typing-survival/src/view/gunfx.ts",
+          "spec": "three",
+          "line": 15
+        },
+        {
+          "file": "games/typing-survival/src/view/hazard-fx.ts",
+          "spec": "three",
+          "line": 12
+        },
+        {
+          "file": "games/typing-survival/src/view/lights.ts",
+          "spec": "three",
+          "line": 10
+        },
+        {
+          "file": "games/typing-survival/src/view/scene.ts",
+          "spec": "three",
+          "line": 15
+        },
+        {
+          "file": "games/typing-survival/src/view/scene.ts",
+          "spec": "three/examples/jsm/postprocessing/EffectComposer.js",
+          "line": 16
+        },
+        {
+          "file": "games/typing-survival/src/view/scene.ts",
+          "spec": "three/examples/jsm/postprocessing/OutputPass.js",
+          "line": 17
+        },
+        {
+          "file": "games/typing-survival/src/view/scene.ts",
+          "spec": "three/examples/jsm/postprocessing/RenderPass.js",
+          "line": 18
+        },
+        {
+          "file": "games/typing-survival/src/view/scene.ts",
+          "spec": "three/examples/jsm/postprocessing/UnrealBloomPass.js",
+          "line": 19
+        },
+        {
+          "file": "games/typing-survival/src/view/shots.ts",
+          "spec": "three",
+          "line": 12
+        },
+        {
+          "file": "games/typing-survival/src/view/beams.ts",
+          "spec": "three",
+          "line": 13
+        },
+        {
+          "file": "games/typing-survival/src/view/ship.ts",
+          "spec": "three",
+          "line": 16
+        },
+        {
+          "file": "games/typing-survival/src/view/crowd.ts",
+          "spec": "three",
+          "line": 17
+        },
+        {
+          "file": "games/typing-survival/src/view/crowd.ts",
+          "spec": "three/examples/jsm/utils/BufferGeometryUtils.js",
+          "line": 18
+        },
+        {
+          "file": "games/typing-survival/src/view/hud.ts",
+          "spec": "three",
+          "line": 24
+        },
+        {
+          "file": "games/typing-survival/src/view/strip.ts",
+          "spec": "three",
+          "line": 20
+        },
+        {
+          "file": "games/typing-survival/src/view/probes.ts",
+          "spec": "three",
+          "line": 5
+        },
+        {
+          "file": "games/typing-survival/src/view/typing-feel.ts",
+          "spec": "three",
+          "line": 18
+        }
+      ],
+      "unresolved": []
+    },
+    "allExternal": [
+      {
+        "file": "games/typing-survival/src/app/main.ts",
+        "spec": "@fontsource/chakra-petch/500.css",
+        "line": 3
+      },
+      {
+        "file": "games/typing-survival/src/app/main.ts",
+        "spec": "@fontsource/chakra-petch/600.css",
+        "line": 4
+      },
+      {
+        "file": "games/typing-survival/src/app/main.ts",
+        "spec": "@fontsource/chakra-petch/700.css",
+        "line": 5
+      },
+      {
+        "file": "games/typing-survival/src/app/main.ts",
+        "spec": "@fontsource/be-vietnam-pro/500.css",
+        "line": 6
+      },
+      {
+        "file": "games/typing-survival/src/app/main.ts",
+        "spec": "@fontsource/be-vietnam-pro/600.css",
+        "line": 7
+      },
+      {
+        "file": "games/typing-survival/src/app/main.ts",
+        "spec": "@fontsource/be-vietnam-pro/800.css",
+        "line": 8
+      },
+      {
+        "file": "games/typing-survival/src/kit/feedback/debris.ts",
+        "spec": "three",
+        "line": 10
+      },
+      {
+        "file": "games/typing-survival/src/kit/feedback/numbers.ts",
+        "spec": "three",
+        "line": 24
+      },
+      {
+        "file": "games/typing-survival/src/kit/feedback/quads.ts",
+        "spec": "three",
+        "line": 2
+      },
+      {
+        "file": "games/typing-survival/src/kit/three/guide-scene.ts",
+        "spec": "three",
+        "line": 2
+      },
+      {
+        "file": "games/typing-survival/src/kit/three/guide-scene.ts",
+        "spec": "three/examples/jsm/environments/RoomEnvironment.js",
+        "line": 3
+      },
+      {
+        "file": "games/typing-survival/src/kit/three/hero.ts",
+        "spec": "three",
+        "line": 2
+      },
+      {
+        "file": "games/typing-survival/src/kit/three/materials.ts",
+        "spec": "three",
+        "line": 2
+      },
+      {
+        "file": "games/typing-survival/src/kit/three/model-loader.ts",
+        "spec": "three/examples/jsm/loaders/GLTFLoader.js",
+        "line": 187
+      },
+      {
+        "file": "games/typing-survival/src/kit/three/model-loader.ts",
+        "spec": "three/examples/jsm/libs/meshopt_decoder.module.js",
+        "line": 188
+      },
+      {
+        "file": "games/typing-survival/src/kit/three/particles.ts",
+        "spec": "three",
+        "line": 2
+      },
+      {
+        "file": "games/typing-survival/src/kit/three/stage.ts",
+        "spec": "three",
+        "line": 2
+      },
+      {
+        "file": "games/typing-survival/src/kit/three/stage.ts",
+        "spec": "three/examples/jsm/postprocessing/EffectComposer.js",
+        "line": 3
+      },
+      {
+        "file": "games/typing-survival/src/kit/three/stage.ts",
+        "spec": "three/examples/jsm/postprocessing/RenderPass.js",
+        "line": 4
+      },
+      {
+        "file": "games/typing-survival/src/kit/three/stage.ts",
+        "spec": "three/examples/jsm/postprocessing/UnrealBloomPass.js",
+        "line": 5
+      },
+      {
+        "file": "games/typing-survival/src/kit/three/stage.ts",
+        "spec": "three/examples/jsm/postprocessing/OutputPass.js",
+        "line": 6
+      },
+      {
+        "file": "games/typing-survival/src/kit/three/stage.ts",
+        "spec": "three/examples/jsm/environments/RoomEnvironment.js",
+        "line": 7
+      },
+      {
+        "file": "games/typing-survival/src/kit/three/textures.ts",
+        "spec": "three",
+        "line": 2
+      },
+      {
+        "file": "games/typing-survival/src/kit/three/util.ts",
+        "spec": "three",
+        "line": 2
+      },
+      {
+        "file": "games/typing-survival/src/kit/tools/cdp-port.mjs",
+        "spec": "node:fs/promises",
+        "line": 1
+      },
+      {
+        "file": "games/typing-survival/src/kit/tools/cdp-port.mjs",
+        "spec": "node:path",
+        "line": 2
+      },
+      {
+        "file": "games/typing-survival/src/kit/tools/cdp-run.mjs",
+        "spec": "node:child_process",
+        "line": 20
+      },
+      {
+        "file": "games/typing-survival/src/kit/tools/cdp-run.mjs",
+        "spec": "node:fs",
+        "line": 21
+      },
+      {
+        "file": "games/typing-survival/src/kit/tools/cdp-run.mjs",
+        "spec": "node:os",
+        "line": 22
+      },
+      {
+        "file": "games/typing-survival/src/kit/tools/cdp-run.mjs",
+        "spec": "node:path",
+        "line": 23
+      },
+      {
+        "file": "games/typing-survival/src/kit/tools/cdp-run.mjs",
+        "spec": "node:url",
+        "line": 24
+      },
+      {
+        "file": "games/typing-survival/src/kit/tools/deploy/check-pack.mjs",
+        "spec": "node:crypto",
+        "line": 1
+      },
+      {
+        "file": "games/typing-survival/src/kit/tools/deploy/check-pack.mjs",
+        "spec": "node:fs",
+        "line": 2
+      },
+      {
+        "file": "games/typing-survival/src/kit/tools/deploy/check-pack.mjs",
+        "spec": "node:path",
+        "line": 3
+      },
+      {
+        "file": "games/typing-survival/src/kit/tools/deploy/check-pack.mjs",
+        "spec": "node:url",
+        "line": 4
+      },
+      {
+        "file": "games/typing-survival/src/kit/tools/vite-shared-plugin.ts",
+        "spec": "node:fs",
+        "line": 12
+      },
+      {
+        "file": "games/typing-survival/src/kit/tools/vite-shared-plugin.ts",
+        "spec": "node:path",
+        "line": 13
+      },
+      {
+        "file": "games/typing-survival/src/kit/verify-kit.mjs",
+        "spec": "node:crypto",
+        "line": 4
+      },
+      {
+        "file": "games/typing-survival/src/kit/verify-kit.mjs",
+        "spec": "node:fs",
+        "line": 5
+      },
+      {
+        "file": "games/typing-survival/src/kit/verify-kit.mjs",
+        "spec": "node:path",
+        "line": 6
+      },
+      {
+        "file": "games/typing-survival/src/kit/verify-kit.mjs",
+        "spec": "node:url",
+        "line": 7
+      },
+      {
+        "file": "games/typing-survival/src/view/beams.ts",
+        "spec": "three",
+        "line": 13
+      },
+      {
+        "file": "games/typing-survival/src/view/bolts.ts",
+        "spec": "three",
+        "line": 12
+      },
+      {
+        "file": "games/typing-survival/src/view/chunks.ts",
+        "spec": "three",
+        "line": 12
+      },
+      {
+        "file": "games/typing-survival/src/view/chunks.ts",
+        "spec": "three/examples/jsm/utils/BufferGeometryUtils.js",
+        "line": 13
+      },
+      {
+        "file": "games/typing-survival/src/view/combat.ts",
+        "spec": "three",
+        "line": 12
+      },
+      {
+        "file": "games/typing-survival/src/view/crowd.ts",
+        "spec": "three",
+        "line": 17
+      },
+      {
+        "file": "games/typing-survival/src/view/crowd.ts",
+        "spec": "three/examples/jsm/utils/BufferGeometryUtils.js",
+        "line": 18
+      },
+      {
+        "file": "games/typing-survival/src/view/fx.ts",
+        "spec": "three",
+        "line": 11
+      },
+      {
+        "file": "games/typing-survival/src/view/gunfx.ts",
+        "spec": "three",
+        "line": 15
+      },
+      {
+        "file": "games/typing-survival/src/view/hazard-fx.ts",
+        "spec": "three",
+        "line": 12
+      },
+      {
+        "file": "games/typing-survival/src/view/hud.ts",
+        "spec": "three",
+        "line": 24
+      },
+      {
+        "file": "games/typing-survival/src/view/lights.ts",
+        "spec": "three",
+        "line": 10
+      },
+      {
+        "file": "games/typing-survival/src/view/models.ts",
+        "spec": "three",
+        "line": 6
+      },
+      {
+        "file": "games/typing-survival/src/view/probes.ts",
+        "spec": "three",
+        "line": 5
+      },
+      {
+        "file": "games/typing-survival/src/view/scene.ts",
+        "spec": "three",
+        "line": 15
+      },
+      {
+        "file": "games/typing-survival/src/view/scene.ts",
+        "spec": "three/examples/jsm/postprocessing/EffectComposer.js",
+        "line": 16
+      },
+      {
+        "file": "games/typing-survival/src/view/scene.ts",
+        "spec": "three/examples/jsm/postprocessing/OutputPass.js",
+        "line": 17
+      },
+      {
+        "file": "games/typing-survival/src/view/scene.ts",
+        "spec": "three/examples/jsm/postprocessing/RenderPass.js",
+        "line": 18
+      },
+      {
+        "file": "games/typing-survival/src/view/scene.ts",
+        "spec": "three/examples/jsm/postprocessing/UnrealBloomPass.js",
+        "line": 19
+      },
+      {
+        "file": "games/typing-survival/src/view/ship.ts",
+        "spec": "three",
+        "line": 16
+      },
+      {
+        "file": "games/typing-survival/src/view/shots.ts",
+        "spec": "three",
+        "line": 12
+      },
+      {
+        "file": "games/typing-survival/src/view/strip.ts",
+        "spec": "three",
+        "line": 20
+      },
+      {
+        "file": "games/typing-survival/src/view/theme.ts",
+        "spec": "three",
+        "line": 7
+      },
+      {
+        "file": "games/typing-survival/src/view/typing-feel.ts",
+        "spec": "three",
+        "line": 18
+      }
+    ],
+    "vendorGraph": {
+      "files": [
+        "games/typing-survival/node_modules/three/build/three.module.js",
+        "games/typing-survival/node_modules/three/examples/jsm/environments/RoomEnvironment.js",
+        "games/typing-survival/node_modules/three/examples/jsm/libs/meshopt_decoder.module.js",
+        "games/typing-survival/node_modules/three/examples/jsm/loaders/GLTFLoader.js",
+        "games/typing-survival/node_modules/three/examples/jsm/postprocessing/EffectComposer.js",
+        "games/typing-survival/node_modules/three/examples/jsm/postprocessing/MaskPass.js",
+        "games/typing-survival/node_modules/three/examples/jsm/postprocessing/OutputPass.js",
+        "games/typing-survival/node_modules/three/examples/jsm/postprocessing/Pass.js",
+        "games/typing-survival/node_modules/three/examples/jsm/postprocessing/RenderPass.js",
+        "games/typing-survival/node_modules/three/examples/jsm/postprocessing/ShaderPass.js",
+        "games/typing-survival/node_modules/three/examples/jsm/postprocessing/UnrealBloomPass.js",
+        "games/typing-survival/node_modules/three/examples/jsm/shaders/CopyShader.js",
+        "games/typing-survival/node_modules/three/examples/jsm/shaders/LuminosityHighPassShader.js",
+        "games/typing-survival/node_modules/three/examples/jsm/shaders/OutputShader.js",
+        "games/typing-survival/node_modules/three/examples/jsm/utils/BufferGeometryUtils.js"
+      ],
+      "external": [
+        {
+          "file": "games/typing-survival/node_modules/three/examples/jsm/loaders/GLTFLoader.js",
+          "spec": "three",
+          "line": 1
+        },
+        {
+          "file": "games/typing-survival/node_modules/three/examples/jsm/utils/BufferGeometryUtils.js",
+          "spec": "three",
+          "line": 1
+        },
+        {
+          "file": "games/typing-survival/node_modules/three/examples/jsm/postprocessing/EffectComposer.js",
+          "spec": "three",
+          "line": 1
+        },
+        {
+          "file": "games/typing-survival/node_modules/three/examples/jsm/postprocessing/ShaderPass.js",
+          "spec": "three",
+          "line": 1
+        },
+        {
+          "file": "games/typing-survival/node_modules/three/examples/jsm/postprocessing/Pass.js",
+          "spec": "three",
+          "line": 1
+        },
+        {
+          "file": "games/typing-survival/node_modules/three/examples/jsm/postprocessing/RenderPass.js",
+          "spec": "three",
+          "line": 1
+        },
+        {
+          "file": "games/typing-survival/node_modules/three/examples/jsm/postprocessing/UnrealBloomPass.js",
+          "spec": "three",
+          "line": 1
+        },
+        {
+          "file": "games/typing-survival/node_modules/three/examples/jsm/shaders/LuminosityHighPassShader.js",
+          "spec": "three",
+          "line": 1
+        },
+        {
+          "file": "games/typing-survival/node_modules/three/examples/jsm/postprocessing/OutputPass.js",
+          "spec": "three",
+          "line": 1
+        },
+        {
+          "file": "games/typing-survival/node_modules/three/examples/jsm/environments/RoomEnvironment.js",
+          "spec": "three",
+          "line": 5
+        }
+      ],
+      "unresolved": []
+    },
+    "vendorNotices": [
+      {
+        "file": "games/typing-survival/node_modules/three/build/three.module.js",
+        "line": 2,
+        "text": " * @license"
+      },
+      {
+        "file": "games/typing-survival/node_modules/three/build/three.module.js",
+        "line": 3,
+        "text": " * Copyright 2010-2024 Three.js Authors"
+      },
+      {
+        "file": "games/typing-survival/node_modules/three/build/three.module.js",
+        "line": 4,
+        "text": " * SPDX-License-Identifier: MIT"
+      },
+      {
+        "file": "games/typing-survival/node_modules/three/build/three.module.js",
+        "line": 8498,
+        "text": "\t\t// under the accompanying license; see chapter 5.1.5 for detailed explanation."
+      },
+      {
+        "file": "games/typing-survival/node_modules/three/examples/jsm/libs/meshopt_decoder.module.js",
+        "line": 1,
+        "text": "// This file is part of meshoptimizer library and is distributed under the terms of MIT License."
+      },
+      {
+        "file": "games/typing-survival/node_modules/three/examples/jsm/libs/meshopt_decoder.module.js",
+        "line": 2,
+        "text": "// Copyright (C) 2016-2022, by Arseny Kapoulkine (arseny.kapoulkine@gmail.com)"
+      }
+    ],
+    "hashes": {
+      "games/typing-survival/package.json": "0f44c39e02128927c415268c53a1422eae8cea88fbc621fd0f9baed4994948fb",
+      "games/typing-survival/pnpm-lock.yaml": "ca869e86fd610bdd90964a7d00b61bf97be85d7022d028e7efdbcb1d7da8e0f0"
+    }
+  },
+  {
+    "base": "shared/game-kit",
+    "manifest": {
+      "name": "@typing-game/game-kit",
+      "version": "0.1.0",
+      "private": true,
+      "type": "module",
+      "description": "Shared game kit copied into each game's src/kit by scripts/sync-game-kit.mjs.",
+      "scripts": {
+        "test": "vitest run",
+        "typecheck": "tsc -p tsconfig.json --noEmit"
+      },
+      "devDependencies": {
+        "@types/node": "^24.19.0",
+        "@types/three": "0.170.0",
+        "happy-dom": "^21.0.4",
+        "three": "0.170.0",
+        "typescript": "^6.0.2",
+        "vite": "^7.1.7",
+        "vitest": "^3.2.4"
+      },
+      "packageManager": "pnpm@11.21.0",
+      "dependencies": {
+        "a11y-dialog": "8.1.5"
+      }
+    },
+    "lock": {
+      "dependencies": {
+        "a11y-dialog": "8.1.5"
+      },
+      "devDependencies": {
+        "@types/node": "24.19.2",
+        "@types/three": "0.170.0",
+        "happy-dom": "21.0.4",
+        "three": "0.170.0",
+        "typescript": "6.0.3",
+        "vite": "7.3.7(@types/node@24.19.2)",
+        "vitest": "3.2.7(@types/node@24.19.2)(happy-dom@21.0.4)"
+      },
+      "snapshots": {
+        "@esbuild/aix-ppc64@0.28.2": {},
+        "@esbuild/android-arm64@0.28.2": {},
+        "@esbuild/android-arm@0.28.2": {},
+        "@esbuild/android-x64@0.28.2": {},
+        "@esbuild/darwin-arm64@0.28.2": {},
+        "@esbuild/darwin-x64@0.28.2": {},
+        "@esbuild/freebsd-arm64@0.28.2": {},
+        "@esbuild/freebsd-x64@0.28.2": {},
+        "@esbuild/linux-arm64@0.28.2": {},
+        "@esbuild/linux-arm@0.28.2": {},
+        "@esbuild/linux-ia32@0.28.2": {},
+        "@esbuild/linux-loong64@0.28.2": {},
+        "@esbuild/linux-mips64el@0.28.2": {},
+        "@esbuild/linux-ppc64@0.28.2": {},
+        "@esbuild/linux-riscv64@0.28.2": {},
+        "@esbuild/linux-s390x@0.28.2": {},
+        "@esbuild/linux-x64@0.28.2": {},
+        "@esbuild/netbsd-arm64@0.28.2": {},
+        "@esbuild/netbsd-x64@0.28.2": {},
+        "@esbuild/openbsd-arm64@0.28.2": {},
+        "@esbuild/openbsd-x64@0.28.2": {},
+        "@esbuild/openharmony-arm64@0.28.2": {},
+        "@esbuild/sunos-x64@0.28.2": {},
+        "@esbuild/win32-arm64@0.28.2": {},
+        "@esbuild/win32-ia32@0.28.2": {},
+        "@esbuild/win32-x64@0.28.2": {},
+        "@jridgewell/sourcemap-codec@1.6.0": {},
+        "@napi-rs/lzma-linux-x64-gnu@1.5.1": {},
+        "@rollup/rollup-android-arm-eabi@4.64.12": {},
+        "@rollup/rollup-android-arm64@4.64.12": {},
+        "@rollup/rollup-darwin-arm64@4.64.12": {},
+        "@rollup/rollup-darwin-x64@4.64.12": {},
+        "@rollup/rollup-freebsd-arm64@4.64.12": {},
+        "@rollup/rollup-freebsd-x64@4.64.12": {},
+        "@rollup/rollup-linux-arm-gnueabihf@4.64.12": {},
+        "@rollup/rollup-linux-arm-musleabihf@4.64.12": {},
+        "@rollup/rollup-linux-arm64-gnu@4.64.12": {},
+        "@rollup/rollup-linux-arm64-musl@4.64.12": {},
+        "@rollup/rollup-linux-loong64-gnu@4.64.12": {},
+        "@rollup/rollup-linux-loong64-musl@4.64.12": {},
+        "@rollup/rollup-linux-ppc64-gnu@4.64.12": {},
+        "@rollup/rollup-linux-ppc64-musl@4.64.12": {},
+        "@rollup/rollup-linux-riscv64-gnu@4.64.12": {},
+        "@rollup/rollup-linux-riscv64-musl@4.64.12": {},
+        "@rollup/rollup-linux-s390x-gnu@4.64.12": {},
+        "@rollup/rollup-linux-x64-gnu@4.64.12": {},
+        "@rollup/rollup-linux-x64-musl@4.64.12": {},
+        "@rollup/rollup-openbsd-x64@4.64.12": {},
+        "@rollup/rollup-openharmony-arm64@4.64.12": {},
+        "@rollup/rollup-win32-arm64-msvc@4.64.12": {},
+        "@rollup/rollup-win32-ia32-msvc@4.64.12": {},
+        "@rollup/rollup-win32-x64-gnu@4.64.12": {},
+        "@rollup/rollup-win32-x64-msvc@4.64.12": {},
+        "@tweenjs/tween.js@23.1.3": {},
+        "@types/chai@5.2.3": {
+          "@types/deep-eql": "4.0.2",
+          "assertion-error": "2.0.1"
+        },
+        "@types/deep-eql@4.0.2": {},
+        "@types/estree@1.0.9": {},
+        "@types/node@24.19.2": {
+          "undici-types": "7.24.6"
+        },
+        "@types/stats.js@0.17.4": {},
+        "@types/three@0.170.0": {
+          "@tweenjs/tween.js": "23.1.3",
+          "@types/stats.js": "0.17.4",
+          "@types/webxr": "0.5.24",
+          "@webgpu/types": "0.1.74",
+          "fflate": "0.8.3",
+          "meshoptimizer": "0.18.1"
+        },
+        "@types/webxr@0.5.24": {},
+        "@types/whatwg-mimetype@3.0.2": {},
+        "@types/ws@8.18.2": {
+          "@types/node": "24.19.2"
+        },
+        "@vitest/expect@3.2.7": {
+          "@types/chai": "5.2.3",
+          "@vitest/spy": "3.2.7",
+          "@vitest/utils": "3.2.7",
+          "chai": "5.3.3",
+          "tinyrainbow": "2.0.0"
+        },
+        "@vitest/mocker@3.2.7(vite@7.3.7(@types/node@24.19.2))": {
+          "@vitest/spy": "3.2.7",
+          "estree-walker": "3.0.3",
+          "magic-string": "0.30.21",
+          "vite": "7.3.7(@types/node@24.19.2)"
+        },
+        "@vitest/pretty-format@3.2.7": {
+          "tinyrainbow": "2.0.0"
+        },
+        "@vitest/runner@3.2.7": {
+          "@vitest/utils": "3.2.7",
+          "pathe": "2.0.3",
+          "strip-literal": "3.1.0"
+        },
+        "@vitest/snapshot@3.2.7": {
+          "@vitest/pretty-format": "3.2.7",
+          "magic-string": "0.30.21",
+          "pathe": "2.0.3"
+        },
+        "@vitest/spy@3.2.7": {
+          "tinyspy": "4.0.6"
+        },
+        "@vitest/utils@3.2.7": {
+          "@vitest/pretty-format": "3.2.7",
+          "loupe": "3.2.1",
+          "tinyrainbow": "2.0.0"
+        },
+        "@webgpu/types@0.1.74": {},
+        "a11y-dialog@8.1.5": {
+          "focusable-selectors": "0.8.4"
+        },
+        "assertion-error@2.0.1": {},
+        "buffer-image-size@0.6.4": {
+          "@types/node": "24.19.2"
+        },
+        "cac@6.7.14": {},
+        "chai@5.3.3": {
+          "assertion-error": "2.0.1",
+          "check-error": "2.1.3",
+          "deep-eql": "5.0.2",
+          "loupe": "3.2.1",
+          "pathval": "2.0.1"
+        },
+        "check-error@2.1.3": {},
+        "debug@4.4.3": {
+          "ms": "2.1.3"
+        },
+        "deep-eql@5.0.2": {},
+        "entities@7.0.1": {},
+        "es-module-lexer@1.7.0": {},
+        "esbuild@0.28.2": {
+          "@esbuild/aix-ppc64": "0.28.2",
+          "@esbuild/android-arm": "0.28.2",
+          "@esbuild/android-arm64": "0.28.2",
+          "@esbuild/android-x64": "0.28.2",
+          "@esbuild/darwin-arm64": "0.28.2",
+          "@esbuild/darwin-x64": "0.28.2",
+          "@esbuild/freebsd-arm64": "0.28.2",
+          "@esbuild/freebsd-x64": "0.28.2",
+          "@esbuild/linux-arm": "0.28.2",
+          "@esbuild/linux-arm64": "0.28.2",
+          "@esbuild/linux-ia32": "0.28.2",
+          "@esbuild/linux-loong64": "0.28.2",
+          "@esbuild/linux-mips64el": "0.28.2",
+          "@esbuild/linux-ppc64": "0.28.2",
+          "@esbuild/linux-riscv64": "0.28.2",
+          "@esbuild/linux-s390x": "0.28.2",
+          "@esbuild/linux-x64": "0.28.2",
+          "@esbuild/netbsd-arm64": "0.28.2",
+          "@esbuild/netbsd-x64": "0.28.2",
+          "@esbuild/openbsd-arm64": "0.28.2",
+          "@esbuild/openbsd-x64": "0.28.2",
+          "@esbuild/openharmony-arm64": "0.28.2",
+          "@esbuild/sunos-x64": "0.28.2",
+          "@esbuild/win32-arm64": "0.28.2",
+          "@esbuild/win32-ia32": "0.28.2",
+          "@esbuild/win32-x64": "0.28.2"
+        },
+        "estree-walker@3.0.3": {
+          "@types/estree": "1.0.9"
+        },
+        "expect-type@1.4.0": {},
+        "fdir@6.5.0(picomatch@4.0.7)": {
+          "picomatch": "4.0.7"
+        },
+        "fflate@0.8.3": {},
+        "focusable-selectors@0.8.4": {},
+        "fsevents@2.3.3": {},
+        "happy-dom@21.0.4": {
+          "@types/node": "24.19.2",
+          "@types/whatwg-mimetype": "3.0.2",
+          "@types/ws": "8.18.2",
+          "buffer-image-size": "0.6.4",
+          "entities": "7.0.1",
+          "whatwg-mimetype": "3.0.0",
+          "ws": "8.22.0"
+        },
+        "js-tokens@9.0.1": {},
+        "loupe@3.2.1": {},
+        "magic-string@0.30.21": {
+          "@jridgewell/sourcemap-codec": "1.6.0"
+        },
+        "meshoptimizer@0.18.1": {},
+        "ms@2.1.3": {},
+        "nanoid@3.3.20": {},
+        "pathe@2.0.3": {},
+        "pathval@2.0.1": {},
+        "picocolors@1.1.1": {},
+        "picomatch@4.0.7": {},
+        "postcss@8.5.31": {
+          "nanoid": "3.3.20",
+          "picocolors": "1.1.1",
+          "source-map-js": "1.2.2"
+        },
+        "rollup@4.64.12": {
+          "@types/estree": "1.0.9",
+          "@napi-rs/lzma-linux-x64-gnu": "1.5.1",
+          "@rollup/rollup-android-arm-eabi": "4.64.12",
+          "@rollup/rollup-android-arm64": "4.64.12",
+          "@rollup/rollup-darwin-arm64": "4.64.12",
+          "@rollup/rollup-darwin-x64": "4.64.12",
+          "@rollup/rollup-freebsd-arm64": "4.64.12",
+          "@rollup/rollup-freebsd-x64": "4.64.12",
+          "@rollup/rollup-linux-arm-gnueabihf": "4.64.12",
+          "@rollup/rollup-linux-arm-musleabihf": "4.64.12",
+          "@rollup/rollup-linux-arm64-gnu": "4.64.12",
+          "@rollup/rollup-linux-arm64-musl": "4.64.12",
+          "@rollup/rollup-linux-loong64-gnu": "4.64.12",
+          "@rollup/rollup-linux-loong64-musl": "4.64.12",
+          "@rollup/rollup-linux-ppc64-gnu": "4.64.12",
+          "@rollup/rollup-linux-ppc64-musl": "4.64.12",
+          "@rollup/rollup-linux-riscv64-gnu": "4.64.12",
+          "@rollup/rollup-linux-riscv64-musl": "4.64.12",
+          "@rollup/rollup-linux-s390x-gnu": "4.64.12",
+          "@rollup/rollup-linux-x64-gnu": "4.64.12",
+          "@rollup/rollup-linux-x64-musl": "4.64.12",
+          "@rollup/rollup-openbsd-x64": "4.64.12",
+          "@rollup/rollup-openharmony-arm64": "4.64.12",
+          "@rollup/rollup-win32-arm64-msvc": "4.64.12",
+          "@rollup/rollup-win32-ia32-msvc": "4.64.12",
+          "@rollup/rollup-win32-x64-gnu": "4.64.12",
+          "@rollup/rollup-win32-x64-msvc": "4.64.12",
+          "fsevents": "2.3.3"
+        },
+        "siginfo@2.0.0": {},
+        "source-map-js@1.2.2": {},
+        "stackback@0.0.2": {},
+        "std-env@3.10.0": {},
+        "strip-literal@3.1.0": {
+          "js-tokens": "9.0.1"
+        },
+        "three@0.170.0": {},
+        "tinybench@2.9.0": {},
+        "tinyexec@0.3.2": {},
+        "tinyglobby@0.2.17": {
+          "fdir": "6.5.0(picomatch@4.0.7)",
+          "picomatch": "4.0.7"
+        },
+        "tinypool@1.1.1": {},
+        "tinyrainbow@2.0.0": {},
+        "tinyspy@4.0.6": {},
+        "typescript@6.0.3": {},
+        "undici-types@7.24.6": {},
+        "vite-node@3.2.4(@types/node@24.19.2)": {
+          "cac": "6.7.14",
+          "debug": "4.4.3",
+          "es-module-lexer": "1.7.0",
+          "pathe": "2.0.3",
+          "vite": "7.3.7(@types/node@24.19.2)"
+        },
+        "vite@7.3.7(@types/node@24.19.2)": {
+          "esbuild": "0.28.2",
+          "fdir": "6.5.0(picomatch@4.0.7)",
+          "picomatch": "4.0.7",
+          "postcss": "8.5.31",
+          "rollup": "4.64.12",
+          "tinyglobby": "0.2.17",
+          "@types/node": "24.19.2",
+          "fsevents": "2.3.3"
+        },
+        "vitest@3.2.7(@types/node@24.19.2)(happy-dom@21.0.4)": {
+          "@types/chai": "5.2.3",
+          "@vitest/expect": "3.2.7",
+          "@vitest/mocker": "3.2.7(vite@7.3.7(@types/node@24.19.2))",
+          "@vitest/pretty-format": "3.2.7",
+          "@vitest/runner": "3.2.7",
+          "@vitest/snapshot": "3.2.7",
+          "@vitest/spy": "3.2.7",
+          "@vitest/utils": "3.2.7",
+          "chai": "5.3.3",
+          "debug": "4.4.3",
+          "expect-type": "1.4.0",
+          "magic-string": "0.30.21",
+          "pathe": "2.0.3",
+          "picomatch": "4.0.7",
+          "std-env": "3.10.0",
+          "tinybench": "2.9.0",
+          "tinyexec": "0.3.2",
+          "tinyglobby": "0.2.17",
+          "tinypool": "1.1.1",
+          "tinyrainbow": "2.0.0",
+          "vite": "7.3.7(@types/node@24.19.2)",
+          "vite-node": "3.2.4(@types/node@24.19.2)",
+          "why-is-node-running": "2.3.0",
+          "@types/node": "24.19.2",
+          "happy-dom": "21.0.4"
+        },
+        "whatwg-mimetype@3.0.0": {},
+        "why-is-node-running@2.3.0": {
+          "siginfo": "2.0.0",
+          "stackback": "0.0.2"
+        },
+        "ws@8.22.0": {}
+      }
+    },
+    "records": [
+      {
+        "name": "a11y-dialog",
+        "version": "8.1.5",
+        "installedVersion": "8.1.5",
+        "kind": "dependency",
+        "parent": "shared/game-kit",
+        "license": "MIT",
+        "repository": {
+          "type": "git",
+          "url": "https://github.com/KittyGiraudel/a11y-dialog"
+        },
+        "dependencies": {
+          "focusable-selectors": "^0.8.0"
+        },
+        "packageJson": "shared/game-kit/node_modules/a11y-dialog/package.json",
+        "packageJsonSha256": "33008c5526968115c3a1a3e95ef99db3e6dc9540a46528f016250df1d61d3d6e",
+        "notices": [
+          {
+            "path": "shared/game-kit/node_modules/a11y-dialog/LICENSE",
+            "sha256": "8792afd04f9a65eb981d796da0bd1a700081629ed83d00c6e378e0136cb77ab0",
+            "text": "The MIT License (MIT)\n\nCopyright (c) 2025 Kitty Giraudel\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n"
+          }
+        ]
+      },
+      {
+        "name": "focusable-selectors",
+        "version": "0.8.4",
+        "installedVersion": "0.8.4",
+        "kind": "transitive",
+        "parent": "a11y-dialog@8.1.5",
+        "license": "MIT",
+        "repository": {
+          "type": "git",
+          "url": "https://github.com/KittyGiraudel/focusable-selectors.git"
+        },
+        "dependencies": {},
+        "packageJson": "shared/game-kit/node_modules/.pnpm/focusable-selectors@0.8.4/node_modules/focusable-selectors/package.json",
+        "packageJsonSha256": "912c94917dec017b435716dbf3ee4a5617fc80b9359e4f6c6444cc746e77a177",
+        "notices": [
+          {
+            "path": "shared/game-kit/node_modules/.pnpm/focusable-selectors@0.8.4/node_modules/focusable-selectors/LICENSE",
+            "sha256": "fbcd624c8a7ecdf806a320ee49f08f72d51b65e568c0b9467454ab7444314c9d",
+            "text": "The MIT License (MIT)\nCopyright (c) 2021 Kitty Giraudel\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n"
+          }
+        ]
+      },
+      {
+        "name": "three",
+        "version": "0.170.0",
+        "installedVersion": "0.170.0",
+        "kind": "devDependency-runtime",
+        "parent": "shared/game-kit",
+        "license": "MIT",
+        "repository": {
+          "type": "git",
+          "url": "https://github.com/mrdoob/three.js"
+        },
+        "dependencies": {},
+        "packageJson": "shared/game-kit/node_modules/three/package.json",
+        "packageJsonSha256": "2caf5d31ca4368c7e39e7e598dd95774fe1bdaae7cfbc5b073c8dcb5ec7e25da",
+        "notices": [
+          {
+            "path": "shared/game-kit/node_modules/three/LICENSE",
+            "sha256": "4c40a1ef62450b857c3b2aaf294936304cd552d965fbcd9d32d4c5bcf4ba4454",
+            "text": "The MIT License\n\nCopyright © 2010-2024 three.js authors\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in\nall copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\nTHE SOFTWARE.\n"
+          }
+        ]
+      },
+      {
+        "name": "@types/node",
+        "version": "24.19.2",
+        "kind": "devDependency",
+        "installedVersion": "24.19.2"
+      },
+      {
+        "name": "@types/three",
+        "version": "0.170.0",
+        "kind": "devDependency",
+        "installedVersion": "0.170.0"
+      },
+      {
+        "name": "happy-dom",
+        "version": "21.0.4",
+        "kind": "devDependency",
+        "installedVersion": "21.0.4"
+      },
+      {
+        "name": "three",
+        "version": "0.170.0",
+        "kind": "devDependency",
+        "installedVersion": "0.170.0"
+      },
+      {
+        "name": "typescript",
+        "version": "6.0.3",
+        "kind": "devDependency",
+        "installedVersion": "6.0.3"
+      },
+      {
+        "name": "vite",
+        "version": "7.3.7",
+        "kind": "devDependency",
+        "installedVersion": "7.3.7"
+      },
+      {
+        "name": "vitest",
+        "version": "3.2.7",
+        "kind": "devDependency",
+        "installedVersion": "3.2.7"
+      }
+    ],
+    "runtime": {
+      "files": [
+        "shared/game-kit/audio/dragon-voice.ts",
+        "shared/game-kit/audio/index.ts",
+        "shared/game-kit/audio/mix.ts",
+        "shared/game-kit/audio/scene-audio.ts",
+        "shared/game-kit/audio/util.ts",
+        "shared/game-kit/balance/bands.ts",
+        "shared/game-kit/balance/director.ts",
+        "shared/game-kit/balance/flow.ts",
+        "shared/game-kit/balance/gates.ts",
+        "shared/game-kit/balance/index.ts",
+        "shared/game-kit/balance/math.ts",
+        "shared/game-kit/balance/pace.ts",
+        "shared/game-kit/balance/profile.ts",
+        "shared/game-kit/balance/typist.ts",
+        "shared/game-kit/feedback/audio-cues.ts",
+        "shared/game-kit/feedback/debris.ts",
+        "shared/game-kit/feedback/hitstop.ts",
+        "shared/game-kit/feedback/index.ts",
+        "shared/game-kit/feedback/kill-translation.ts",
+        "shared/game-kit/feedback/numbers.ts",
+        "shared/game-kit/feedback/profiles.ts",
+        "shared/game-kit/feedback/quads.ts",
+        "shared/game-kit/feedback/reaction.ts",
+        "shared/game-kit/feedback/tiers.ts",
+        "shared/game-kit/feedback/trauma.ts",
+        "shared/game-kit/feedback/typing-fx/audio.ts",
+        "shared/game-kit/feedback/typing-fx/css.ts",
+        "shared/game-kit/feedback/typing-fx/draw.ts",
+        "shared/game-kit/feedback/typing-fx/driver.ts",
+        "shared/game-kit/feedback/typing-fx/index.ts",
+        "shared/game-kit/feedback/typing-fx/intensity.ts",
+        "shared/game-kit/feedback/typing-fx/pool.ts",
+        "shared/game-kit/feedback/typing-fx/settings.ts",
+        "shared/game-kit/feedback/typing-fx/strip.ts",
+        "shared/game-kit/feedback/typing-fx/styles.ts",
+        "shared/game-kit/input/index.ts",
+        "shared/game-kit/input/keys.ts",
+        "shared/game-kit/input/text.ts",
+        "shared/game-kit/learning/bridge.ts",
+        "shared/game-kit/learning/contract.ts",
+        "shared/game-kit/learning/events.ts",
+        "shared/game-kit/learning/index.ts",
+        "shared/game-kit/map/along.ts",
+        "shared/game-kit/map/edt.ts",
+        "shared/game-kit/map/hash.ts",
+        "shared/game-kit/map/index.ts",
+        "shared/game-kit/map/raster.ts",
+        "shared/game-kit/map/seeds.ts",
+        "shared/game-kit/map/sha256.ts",
+        "shared/game-kit/map/spec.ts",
+        "shared/game-kit/platform/canvas-state.ts",
+        "shared/game-kit/platform/fake-context-2d.test-helper.ts",
+        "shared/game-kit/platform/frame-loop.ts",
+        "shared/game-kit/platform/index.ts",
+        "shared/game-kit/platform/rng.ts",
+        "shared/game-kit/platform/safe-storage.ts",
+        "shared/game-kit/speech/index.ts",
+        "shared/game-kit/speech/speech.ts",
+        "shared/game-kit/three/guide-scene.ts",
+        "shared/game-kit/three/hero.ts",
+        "shared/game-kit/three/index.ts",
+        "shared/game-kit/three/materials.ts",
+        "shared/game-kit/three/model-contracts.ts",
+        "shared/game-kit/three/model-loader.ts",
+        "shared/game-kit/three/particles.ts",
+        "shared/game-kit/three/stage.ts",
+        "shared/game-kit/three/textures.ts",
+        "shared/game-kit/three/util.ts",
+        "shared/game-kit/typing/budget.ts",
+        "shared/game-kit/typing/config.ts",
+        "shared/game-kit/typing/decks.ts",
+        "shared/game-kit/typing/distance.ts",
+        "shared/game-kit/typing/index.ts",
+        "shared/game-kit/typing/letters.ts",
+        "shared/game-kit/typing/picker.ts",
+        "shared/game-kit/typing/router.ts",
+        "shared/game-kit/typing/scorer.ts",
+        "shared/game-kit/typing/session.ts",
+        "shared/game-kit/typing/tempo.ts",
+        "shared/game-kit/ui/index.ts",
+        "shared/game-kit/ui/quick-settings/css.ts",
+        "shared/game-kit/ui/quick-settings/index.ts",
+        "shared/game-kit/ui/quick-settings/keyboard-choices.ts",
+        "shared/game-kit/ui/quick-settings/logic.ts",
+        "shared/game-kit/ui/quick-settings/quick-settings.ts",
+        "shared/game-kit/ui/quick-settings/rows.ts",
+        "shared/game-kit/ui/quick-settings/types.ts",
+        "shared/game-kit/ui/styles.ts",
+        "shared/game-kit/ui/tokens.ts",
+        "shared/game-kit/vocab/content-filter.ts",
+        "shared/game-kit/vocab/index.ts",
+        "shared/game-kit/vocab/types.ts",
+        "shared/game-kit/vocab/vocabulary.ts",
+        "shared/game-kit/vocab/words.ts"
+      ],
+      "external": [
+        {
+          "file": "shared/game-kit/feedback/debris.ts",
+          "spec": "three",
+          "line": 10
+        },
+        {
+          "file": "shared/game-kit/feedback/numbers.ts",
+          "spec": "three",
+          "line": 24
+        },
+        {
+          "file": "shared/game-kit/feedback/quads.ts",
+          "spec": "three",
+          "line": 2
+        },
+        {
+          "file": "shared/game-kit/three/guide-scene.ts",
+          "spec": "three",
+          "line": 2
+        },
+        {
+          "file": "shared/game-kit/three/guide-scene.ts",
+          "spec": "three/examples/jsm/environments/RoomEnvironment.js",
+          "line": 3
+        },
+        {
+          "file": "shared/game-kit/three/model-loader.ts",
+          "spec": "three/examples/jsm/loaders/GLTFLoader.js",
+          "line": 193
+        },
+        {
+          "file": "shared/game-kit/three/model-loader.ts",
+          "spec": "three/examples/jsm/libs/meshopt_decoder.module.js",
+          "line": 194
+        },
+        {
+          "file": "shared/game-kit/three/model-loader.ts",
+          "spec": "three/examples/jsm/loaders/KTX2Loader.js",
+          "line": 203
+        },
+        {
+          "file": "shared/game-kit/three/hero.ts",
+          "spec": "three",
+          "line": 2
+        },
+        {
+          "file": "shared/game-kit/three/particles.ts",
+          "spec": "three",
+          "line": 2
+        },
+        {
+          "file": "shared/game-kit/three/materials.ts",
+          "spec": "three",
+          "line": 2
+        },
+        {
+          "file": "shared/game-kit/three/util.ts",
+          "spec": "three",
+          "line": 2
+        },
+        {
+          "file": "shared/game-kit/three/stage.ts",
+          "spec": "three",
+          "line": 2
+        },
+        {
+          "file": "shared/game-kit/three/stage.ts",
+          "spec": "three/examples/jsm/postprocessing/EffectComposer.js",
+          "line": 3
+        },
+        {
+          "file": "shared/game-kit/three/stage.ts",
+          "spec": "three/examples/jsm/postprocessing/RenderPass.js",
+          "line": 4
+        },
+        {
+          "file": "shared/game-kit/three/stage.ts",
+          "spec": "three/examples/jsm/postprocessing/UnrealBloomPass.js",
+          "line": 5
+        },
+        {
+          "file": "shared/game-kit/three/stage.ts",
+          "spec": "three/examples/jsm/postprocessing/OutputPass.js",
+          "line": 6
+        },
+        {
+          "file": "shared/game-kit/three/stage.ts",
+          "spec": "three/examples/jsm/environments/RoomEnvironment.js",
+          "line": 7
+        },
+        {
+          "file": "shared/game-kit/three/textures.ts",
+          "spec": "three",
+          "line": 2
+        },
+        {
+          "file": "shared/game-kit/ui/quick-settings/quick-settings.ts",
+          "spec": "a11y-dialog",
+          "line": 14
+        }
+      ],
+      "unresolved": []
+    },
+    "allExternal": [
+      {
+        "file": "shared/game-kit/feedback/debris.ts",
+        "spec": "three",
+        "line": 10
+      },
+      {
+        "file": "shared/game-kit/feedback/numbers.ts",
+        "spec": "three",
+        "line": 24
+      },
+      {
+        "file": "shared/game-kit/feedback/quads.ts",
+        "spec": "three",
+        "line": 2
+      },
+      {
+        "file": "shared/game-kit/three/guide-scene.ts",
+        "spec": "three",
+        "line": 2
+      },
+      {
+        "file": "shared/game-kit/three/guide-scene.ts",
+        "spec": "three/examples/jsm/environments/RoomEnvironment.js",
+        "line": 3
+      },
+      {
+        "file": "shared/game-kit/three/hero.ts",
+        "spec": "three",
+        "line": 2
+      },
+      {
+        "file": "shared/game-kit/three/materials.ts",
+        "spec": "three",
+        "line": 2
+      },
+      {
+        "file": "shared/game-kit/three/model-loader.ts",
+        "spec": "three/examples/jsm/loaders/GLTFLoader.js",
+        "line": 193
+      },
+      {
+        "file": "shared/game-kit/three/model-loader.ts",
+        "spec": "three/examples/jsm/libs/meshopt_decoder.module.js",
+        "line": 194
+      },
+      {
+        "file": "shared/game-kit/three/model-loader.ts",
+        "spec": "three/examples/jsm/loaders/KTX2Loader.js",
+        "line": 203
+      },
+      {
+        "file": "shared/game-kit/three/particles.ts",
+        "spec": "three",
+        "line": 2
+      },
+      {
+        "file": "shared/game-kit/three/stage.ts",
+        "spec": "three",
+        "line": 2
+      },
+      {
+        "file": "shared/game-kit/three/stage.ts",
+        "spec": "three/examples/jsm/postprocessing/EffectComposer.js",
+        "line": 3
+      },
+      {
+        "file": "shared/game-kit/three/stage.ts",
+        "spec": "three/examples/jsm/postprocessing/RenderPass.js",
+        "line": 4
+      },
+      {
+        "file": "shared/game-kit/three/stage.ts",
+        "spec": "three/examples/jsm/postprocessing/UnrealBloomPass.js",
+        "line": 5
+      },
+      {
+        "file": "shared/game-kit/three/stage.ts",
+        "spec": "three/examples/jsm/postprocessing/OutputPass.js",
+        "line": 6
+      },
+      {
+        "file": "shared/game-kit/three/stage.ts",
+        "spec": "three/examples/jsm/environments/RoomEnvironment.js",
+        "line": 7
+      },
+      {
+        "file": "shared/game-kit/three/textures.ts",
+        "spec": "three",
+        "line": 2
+      },
+      {
+        "file": "shared/game-kit/three/util.ts",
+        "spec": "three",
+        "line": 2
+      },
+      {
+        "file": "shared/game-kit/tools/cdp-port.mjs",
+        "spec": "node:fs/promises",
+        "line": 1
+      },
+      {
+        "file": "shared/game-kit/tools/cdp-port.mjs",
+        "spec": "node:path",
+        "line": 2
+      },
+      {
+        "file": "shared/game-kit/tools/cdp-run.mjs",
+        "spec": "node:child_process",
+        "line": 20
+      },
+      {
+        "file": "shared/game-kit/tools/cdp-run.mjs",
+        "spec": "node:fs",
+        "line": 21
+      },
+      {
+        "file": "shared/game-kit/tools/cdp-run.mjs",
+        "spec": "node:os",
+        "line": 22
+      },
+      {
+        "file": "shared/game-kit/tools/cdp-run.mjs",
+        "spec": "node:path",
+        "line": 23
+      },
+      {
+        "file": "shared/game-kit/tools/cdp-run.mjs",
+        "spec": "node:url",
+        "line": 24
+      },
+      {
+        "file": "shared/game-kit/tools/deploy/check-pack.mjs",
+        "spec": "node:crypto",
+        "line": 1
+      },
+      {
+        "file": "shared/game-kit/tools/deploy/check-pack.mjs",
+        "spec": "node:fs",
+        "line": 2
+      },
+      {
+        "file": "shared/game-kit/tools/deploy/check-pack.mjs",
+        "spec": "node:path",
+        "line": 3
+      },
+      {
+        "file": "shared/game-kit/tools/deploy/check-pack.mjs",
+        "spec": "node:url",
+        "line": 4
+      },
+      {
+        "file": "shared/game-kit/tools/vite-shared-plugin.ts",
+        "spec": "node:fs",
+        "line": 12
+      },
+      {
+        "file": "shared/game-kit/tools/vite-shared-plugin.ts",
+        "spec": "node:path",
+        "line": 13
+      },
+      {
+        "file": "shared/game-kit/ui/quick-settings/quick-settings.ts",
+        "spec": "a11y-dialog",
+        "line": 14
+      },
+      {
+        "file": "shared/game-kit/vitest.config.ts",
+        "spec": "vitest/config",
+        "line": 1
+      }
+    ],
+    "vendorGraph": {
+      "files": [
+        "shared/game-kit/node_modules/three/build/three.module.js",
+        "shared/game-kit/node_modules/three/examples/jsm/environments/RoomEnvironment.js",
+        "shared/game-kit/node_modules/three/examples/jsm/libs/ktx-parse.module.js",
+        "shared/game-kit/node_modules/three/examples/jsm/libs/meshopt_decoder.module.js",
+        "shared/game-kit/node_modules/three/examples/jsm/libs/zstddec.module.js",
+        "shared/game-kit/node_modules/three/examples/jsm/loaders/GLTFLoader.js",
+        "shared/game-kit/node_modules/three/examples/jsm/loaders/KTX2Loader.js",
+        "shared/game-kit/node_modules/three/examples/jsm/math/ColorSpaces.js",
+        "shared/game-kit/node_modules/three/examples/jsm/postprocessing/EffectComposer.js",
+        "shared/game-kit/node_modules/three/examples/jsm/postprocessing/MaskPass.js",
+        "shared/game-kit/node_modules/three/examples/jsm/postprocessing/OutputPass.js",
+        "shared/game-kit/node_modules/three/examples/jsm/postprocessing/Pass.js",
+        "shared/game-kit/node_modules/three/examples/jsm/postprocessing/RenderPass.js",
+        "shared/game-kit/node_modules/three/examples/jsm/postprocessing/ShaderPass.js",
+        "shared/game-kit/node_modules/three/examples/jsm/postprocessing/UnrealBloomPass.js",
+        "shared/game-kit/node_modules/three/examples/jsm/shaders/CopyShader.js",
+        "shared/game-kit/node_modules/three/examples/jsm/shaders/LuminosityHighPassShader.js",
+        "shared/game-kit/node_modules/three/examples/jsm/shaders/OutputShader.js",
+        "shared/game-kit/node_modules/three/examples/jsm/utils/BufferGeometryUtils.js",
+        "shared/game-kit/node_modules/three/examples/jsm/utils/WorkerPool.js"
+      ],
+      "external": [
+        {
+          "file": "shared/game-kit/node_modules/three/examples/jsm/environments/RoomEnvironment.js",
+          "spec": "three",
+          "line": 5
+        },
+        {
+          "file": "shared/game-kit/node_modules/three/examples/jsm/loaders/GLTFLoader.js",
+          "spec": "three",
+          "line": 1
+        },
+        {
+          "file": "shared/game-kit/node_modules/three/examples/jsm/utils/BufferGeometryUtils.js",
+          "spec": "three",
+          "line": 1
+        },
+        {
+          "file": "shared/game-kit/node_modules/three/examples/jsm/loaders/KTX2Loader.js",
+          "spec": "three",
+          "line": 15
+        },
+        {
+          "file": "shared/game-kit/node_modules/three/examples/jsm/math/ColorSpaces.js",
+          "spec": "three",
+          "line": 1
+        },
+        {
+          "file": "shared/game-kit/node_modules/three/examples/jsm/postprocessing/EffectComposer.js",
+          "spec": "three",
+          "line": 1
+        },
+        {
+          "file": "shared/game-kit/node_modules/three/examples/jsm/postprocessing/ShaderPass.js",
+          "spec": "three",
+          "line": 1
+        },
+        {
+          "file": "shared/game-kit/node_modules/three/examples/jsm/postprocessing/Pass.js",
+          "spec": "three",
+          "line": 1
+        },
+        {
+          "file": "shared/game-kit/node_modules/three/examples/jsm/postprocessing/RenderPass.js",
+          "spec": "three",
+          "line": 1
+        },
+        {
+          "file": "shared/game-kit/node_modules/three/examples/jsm/postprocessing/UnrealBloomPass.js",
+          "spec": "three",
+          "line": 1
+        },
+        {
+          "file": "shared/game-kit/node_modules/three/examples/jsm/shaders/LuminosityHighPassShader.js",
+          "spec": "three",
+          "line": 1
+        },
+        {
+          "file": "shared/game-kit/node_modules/three/examples/jsm/postprocessing/OutputPass.js",
+          "spec": "three",
+          "line": 1
+        }
+      ],
+      "unresolved": []
+    },
+    "vendorNotices": [
+      {
+        "file": "shared/game-kit/node_modules/three/build/three.module.js",
+        "line": 2,
+        "text": " * @license"
+      },
+      {
+        "file": "shared/game-kit/node_modules/three/build/three.module.js",
+        "line": 3,
+        "text": " * Copyright 2010-2024 Three.js Authors"
+      },
+      {
+        "file": "shared/game-kit/node_modules/three/build/three.module.js",
+        "line": 4,
+        "text": " * SPDX-License-Identifier: MIT"
+      },
+      {
+        "file": "shared/game-kit/node_modules/three/build/three.module.js",
+        "line": 8498,
+        "text": "\t\t// under the accompanying license; see chapter 5.1.5 for detailed explanation."
+      },
+      {
+        "file": "shared/game-kit/node_modules/three/examples/jsm/libs/meshopt_decoder.module.js",
+        "line": 1,
+        "text": "// This file is part of meshoptimizer library and is distributed under the terms of MIT License."
+      },
+      {
+        "file": "shared/game-kit/node_modules/three/examples/jsm/libs/meshopt_decoder.module.js",
+        "line": 2,
+        "text": "// Copyright (C) 2016-2022, by Arseny Kapoulkine (arseny.kapoulkine@gmail.com)"
+      }
+    ],
+    "hashes": {
+      "shared/game-kit/package.json": "b673eaec8ee1be41b14c12283755ec22acd180ecf63b2601a0e3a11c108239ec",
+      "shared/game-kit/pnpm-lock.yaml": "c5d04300ad74c1e20c01023e032b5fdb9086cdb92c4e10d86180eaf7c1f73a1f"
+    }
+  }
+]

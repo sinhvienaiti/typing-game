@@ -1,0 +1,164 @@
+Already up to date
+Done in 164ms using pnpm v11.21.0
+$ node src/kit/verify-kit.mjs && pnpm test && pnpm build
+src/kit OK: 42 files match kit-manifest.json (kit 0.1.0, modules platform, input, vocab, learning, tools, balance, three)
+$ vitest run
+
+ RUN  v3.2.7 /Users/toandx/htdocs/typing-game/games/.wt-td-ui
+
+ ✓ tests/td-boss.test.ts (21 tests) 691ms
+ ✓ tests/td-input.test.ts (24 tests) 802ms
+   ✓ the sandbox preset and the suggested spots > offers mines the free nodes, and others the places by the road canPlace allows (gold aside), nearest a bend first, both ways round  424ms
+ ✓ tests/td-pace.test.ts (12 tests) 835ms
+   ✓ the run header and pace k (BALANCE.md §4.1) > keeps the attention budget at every k: the R3 typist at 35 WPM never types more than 8 s in 20 s, director on  613ms
+ ✓ tests/boundary.test.ts (17 tests) 1272ms
+   ✓ Lời Gọi boundary (TK 25.3, SPLIT_PLAN §3) > the rules use no clock, host global, storage, locale, Math.random, trigonometry, powers or logarithms  1036ms
+ ✓ tests/td-sim-combat.test.ts (11 tests) 344ms
+stdout | tests/td-fx-pipe.test.ts > 036 FxPipe > 5 matches an independent scan of the golden run
+036 golden counts {"ticks":19660,"muzzle":133,"arrow":90,"shell":1,"bolt":11,"fireball":23,"wordShot":8,"feather":0,"hit":102,"crit":12,"stats":{"read":489,"fire":133,"hit":102,"lost":0}}
+
+ ✓ tests/td-fx-pipe.test.ts (5 tests) 546ms
+   ✓ 036 FxPipe > 5 matches an independent scan of the golden run  464ms
+stdout | tests/td-sim-perf.test.ts > simulation step cost > steps 300 enemies, 9 soldiers, 200 shots, 10 buildings, 4 farms, 9 villagers and 20 trees in ≤ 2 ms
+td sim step (300 enemies): median 0.046 ms, p95 0.203 ms
+
+ ✓ tests/td-learn-app.test.ts (9 tests) 345ms
+   ✓ the store and the plan (§11.3, §11.4) > counts a word seen up to 3 times; past 3,000 ids the oldest goes  313ms
+stdout | tests/td-sim-perf.test.ts > simulation step cost > steps TK 25.12's full load (640 enemies, 64 soldiers, 512 shots, 20 buildings) in ≤ 2 ms
+td sim step (640 enemies, 64 soldiers, 512 shots, 20 buildings): median 0.055 ms, p95 0.267 ms
+
+stdout | tests/td-sim-perf.test.ts > simulation step cost > steps Mộc Tinh's peak under a flood of 300 (its Mầm Gỗ among them) with Tối Thượng's rain falling (BUILD_1B §20) in ≤ 2 ms
+td sim step (boss, 300 flooded, Tối Thượng): median 0.125 ms, p95 0.946 ms
+
+ ✓ tests/td-sim-perf.test.ts (4 tests) 359ms
+ ✓ tests/td-flow.test.ts (7 tests) 2105ms
+   ✓ the stage matrix and its report (BALANCE.md §3, §7) > types through the commands at the bot's own speed and accuracy, and measures every run (flow, pace, kill time, the learning gate)  785ms
+   ✓ the stage matrix and its report (BALANCE.md §3, §7) > plays Học as the page plans it (R3, BUILD_1B §18.1): the cold start deals fresh words, the 20-word book brings Từ Ôn back; B8 R3 holds (≤ 8 fresh, none in a call that runs out or on the boss night)  305ms
+   ✓ the stage matrix and its report (BALANCE.md §3, §7) > folds a cell into the kit's summary and prints the §3 table and every gate (missing cells are THIẾU SỐ, never ĐẠT)  1012ms
+ ✓ tests/td-golden.test.ts (6 tests) 617ms
+   ✓ golden run > runs the same twice, and its command log replays to the same hashes  528ms
+ ✓ tests/td-calls.test.ts (20 tests) 2215ms
+   ✓ invariants (§12 gate 6) and replay > random play on the real vocabulary: bright ≤ cap, one lock on a bright call, one word a bright call, distinct first letters; the log replays to the same hash  1131ms
+   ✓ invariants (§12 gate 6) and replay > ignoring every call (Chữ Chiêu and direct calls too, BUILD_1B §21.3) never lowers the chain and loses nothing: gold falls only by seeds bought, food only by soldiers' meals, wood never  853ms
+ ✓ tests/english-ui.test.ts (2 tests) 301ms
+   ✓ keeps source literals and generated labels in English, preserving vocabulary meanings and proper names  300ms
+ ✓ tests/td-3d-road.test.ts (3 tests) 252ms
+ ✓ tests/td-stage.test.ts (5 tests) 202ms
+ ✓ tests/td-learn.test.ts (20 tests) 283ms
+ ✓ tests/td-tips.test.ts (6 tests) 208ms
+ ✓ tests/td-agents.test.ts (11 tests) 119ms
+ ✓ tests/td-hud.test.ts (13 tests) 210ms
+ ✓ tests/td-placement.test.ts (12 tests) 212ms
+ ✓ tests/td-chunks.test.ts (4 tests) 137ms
+ ✓ tests/td-view.test.ts (5 tests) 73ms
+ ✓ tests/td-sim-block.test.ts (9 tests) 68ms
+ ✓ tests/td-rewards.test.ts (7 tests) 70ms
+ ✓ tests/td-r2.test.ts (14 tests) 141ms
+ ✓ tests/td-test-pass.test.ts (8 tests) 62ms
+stdout | tests/td-lanes.test.ts > the lane spreader > lays out 20 cards in ≤ 0.3 ms
+td lanes: 0.0131 ms a frame for 20 cards
+
+ ✓ tests/td-lanes.test.ts (10 tests) 43ms
+ ✓ tests/td-c10-r5.test.ts (13 tests) 73ms
+ ✓ tests/td-r3-abilities.test.ts (6 tests) 44ms
+ ✓ tests/td-sim-economy.test.ts (29 tests) 3346ms
+   ✓ sites and builders (§4.3) > no sequence of builds, upgrades (the Bastion's too), sales at 60 %, undos and free sandbox levels makes gold or wood (property; BUILD_1B §7, G7)  2668ms
+stdout | tests/td-content.test.ts > 1A content > every word can be typed in its scoring clock (TK 25.4): L_w ≥ 1.2 + 12·(len + 1)/(E·d) at every E, mode and band
+td life: 128 (mode, E, length) cells below 1.2 s + typing time, all in challenge; first: challenge E30 3 letters: 2.70 s, challenge E30 4 letters: 2.88 s, challenge E30 5 letters: 3.24 s
+
+ ✓ tests/td-content.test.ts (13 tests) 36ms
+ ✓ tests/td-scorer.test.ts (7 tests) 33ms
+ ✓ tests/td-router.test.ts (9 tests) 33ms
+ ✓ tests/vocab-pin.test.ts (5 tests) 16ms
+ ✓ tests/td-ui-art.test.ts (13 tests) 26ms
+ ✓ tests/td-b9.test.ts (3 tests) 3046ms
+   ✓ the play-test file and B9 (BUILD_1B §22, BALANCE.md §7 B9) > holds the numbers B9 reads and the run in the replay's shape; replayed on Node it reaches the page's hash  316ms
+   ✓ the play-test file and B9 (BUILD_1B §22, BALANCE.md §7 B9) > grades B9 against a bot typing at the owner's measured E, a and CV (an old file with the numbers alone too)  2635ms
+ ✓ tests/td-3d-camera.test.ts (5 tests) 14ms
+ ✓ tests/td-sheet-cards.test.ts (8 tests) 24ms
+ ✓ tests/td-letters.test.ts (7 tests) 3ms
+ ✓ tests/td-3d-ground.test.ts (5 tests) 28ms
+ ✓ tests/td-card-art.test.ts (2 tests) 12ms
+ ✓ tests/td-c10-r3.test.ts (2 tests) 3ms
+ ✓ tests/td-sound-map.test.ts (2 tests) 2ms
+ ✓ tests/td-no-emoji.test.ts (1 test) 3ms
+ ✓ tests/td-settings.test.ts (6 tests) 4ms
+stdout | tests/td-nav.test.ts > A* on the walking grid (TK 25.9) > one search takes ≤ 0.5 ms (TK 25.12): the longest ways on the sandbox field, across the stream
+td A*: median 0.148 ms, p95 0.517 ms
+
+ ✓ tests/td-nav.test.ts (10 tests) 4009ms
+   ✓ A* on the walking grid (TK 25.9) > a helper built over beside the stream, by the bridge, never lands in the water and still reaches the mine  3389ms
+ ✓ tests/td-balance-gates.test.ts (10 tests) 4ms
+
+ Test Files  46 passed (46)
+      Tests  421 passed (421)
+   Start at  14:23:01
+   Duration  8.64s (transform 1.49s, setup 0ms, collect 12.25s, tests 23.27s, environment 4ms, prepare 1.78s)
+
+$ tsc --noEmit && vite build && node scripts/bundle-budget.mjs
+vite v7.3.7 building client environment for production...
+transforming...
+✓ 146 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                                                    1.57 kB │ gzip:   0.71 kB
+dist/assets/baloo-2-vietnamese-800-normal-ConLnEgt.woff2           4.80 kB
+dist/assets/baloo-2-vietnamese-600-normal-C5EqHgu0.woff2           5.39 kB
+dist/assets/baloo-2-vietnamese-800-normal-GQACmpuv.woff            6.74 kB
+dist/assets/be-vietnam-pro-vietnamese-800-normal-CA0HL1e4.woff     6.85 kB
+dist/assets/be-vietnam-pro-vietnamese-500-normal-CfdwVo8-.woff     6.88 kB
+dist/assets/be-vietnam-pro-vietnamese-700-normal-By_5yT39.woff     6.89 kB
+dist/assets/baloo-2-vietnamese-600-normal-CGkk4Wtx.woff            7.34 kB
+dist/assets/be-vietnam-pro-latin-ext-800-normal-BvOXQlBN.woff      9.18 kB
+dist/assets/be-vietnam-pro-latin-ext-700-normal-4Hjo2OtD.woff      9.19 kB
+dist/assets/be-vietnam-pro-latin-ext-500-normal-CK0UkkKf.woff      9.20 kB
+dist/assets/be-vietnam-pro-vietnamese-500-normal-DREgrEoJ.woff2   12.17 kB
+dist/assets/be-vietnam-pro-vietnamese-800-normal-D4LFh2W4.woff2   12.40 kB
+dist/assets/be-vietnam-pro-vietnamese-700-normal-Csr0PCuG.woff2   12.47 kB
+dist/assets/be-vietnam-pro-latin-ext-500-normal-h0Fp6aX0.woff2    13.55 kB
+dist/assets/be-vietnam-pro-latin-ext-800-normal-GEpNgheG.woff2    13.75 kB
+dist/assets/be-vietnam-pro-latin-ext-700-normal-C8_gqRu2.woff2    13.85 kB
+dist/assets/baloo-2-latin-ext-800-normal-C_Iwmf1s.woff2           15.07 kB
+dist/assets/baloo-2-latin-ext-600-normal-DiVeaYrH.woff2           15.98 kB
+dist/.vite/manifest.json                                          16.51 kB │ gzip:   1.58 kB
+dist/assets/be-vietnam-pro-latin-700-normal-C2EtzaOi.woff         16.91 kB
+dist/assets/be-vietnam-pro-latin-800-normal-Cwp5p0gU.woff         16.99 kB
+dist/assets/be-vietnam-pro-latin-500-normal-BJkVuMHw.woff         17.00 kB
+dist/assets/baloo-2-latin-800-normal-BbF3Etk1.woff2               18.63 kB
+dist/assets/baloo-2-latin-600-normal-tIfxVoAe.woff2               19.50 kB
+dist/assets/baloo-2-latin-ext-800-normal-D-iCxxqE.woff            19.67 kB
+dist/assets/baloo-2-latin-ext-600-normal-CFaB2nBN.woff            20.39 kB
+dist/assets/be-vietnam-pro-latin-500-normal-B6LVzGNe.woff2        21.89 kB
+dist/assets/be-vietnam-pro-latin-700-normal-DlW1Zbsh.woff2        22.15 kB
+dist/assets/be-vietnam-pro-latin-800-normal-BpHZASpI.woff2        22.32 kB
+dist/assets/baloo-2-latin-800-normal-B8BXfZF7.woff                22.60 kB
+dist/assets/baloo-2-latin-600-normal-B4tNaogw.woff                23.54 kB
+dist/assets/index-BNHgDdO-.css                                    31.93 kB │ gzip:   7.62 kB
+dist/assets/sandbox-BdAZty0_.js                                    1.65 kB │ gzip:   0.83 kB
+dist/assets/tips-EXhDW9-7.js                                       1.73 kB │ gzip:   1.02 kB
+dist/assets/retry-DCDv7ov4.js                                      1.94 kB │ gzip:   1.01 kB
+dist/assets/profile-B68cv-1m.js                                    1.96 kB │ gzip:   1.09 kB
+dist/assets/settings-S5w1aIBj.js                                   2.81 kB │ gzip:   1.22 kB
+dist/assets/title-Dvb4H8_K.js                                      4.18 kB │ gzip:   1.78 kB
+dist/assets/dev-tools-DlatXPHk.js                                  4.20 kB │ gzip:   1.84 kB
+dist/assets/fx-pipe-C7zz0xLO.js                                    4.33 kB │ gzip:   1.93 kB
+dist/assets/sheets-C86DTsER.js                                     4.44 kB │ gzip:   2.18 kB
+dist/assets/learn-7-gkHOCp.js                                      8.00 kB │ gzip:   3.22 kB
+dist/assets/audio-min-DevDNLZ-.js                                 14.36 kB │ gzip:   5.54 kB
+dist/assets/meshopt_decoder.module-BbCP70j-.js                    22.41 kB │ gzip:   5.94 kB
+dist/assets/GLTFLoader-DebP8cHs.js                                46.04 kB │ gzip:  13.64 kB
+dist/assets/view-3d-SeHngFBB.js                                  121.65 kB │ gzip:  39.81 kB
+dist/assets/index-B6IpRZY6.js                                    219.81 kB │ gzip:  82.24 kB
+dist/assets/three.module-Zn6Hw7gT.js                             525.46 kB │ gzip: 132.07 kB
+
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+✓ built in 913ms
+bundle budget (BUILD_1B §20) /: start 84.02 kB gzip (entry + ui/title.ts) ≤ 85 kB, headroom 0.98 kB; later 211.33 kB (_three.module-Zn6Hw7gT.js 132.07, node_modules/.pnpm/three@0.170.0/node_modules/three/examples/jsm/libs/meshopt_decoder.module.js 5.94, node_modules/.pnpm/three@0.170.0/node_modules/three/examples/jsm/loaders/GLTFLoader.js 13.64, app/dev-tools.ts 1.84, app/learn.ts 3.22, app/retry.ts 1.01, app/sandbox.ts 0.83, ui/profile.ts 1.09, ui/settings.ts 1.22, ui/sheets.ts 2.18, ui/tips.ts 1.02, view/3d/view-3d.ts 39.80, view/audio-min.ts 5.54, view/fx-pipe.ts 1.93); total 295.35 kB
+bundle budget (BUILD_1B §20) /?title=0: start 85.46 kB gzip (entry + app/learn.ts) ≤ 85 kB, headroom -0.46 kB; later 209.89 kB (_three.module-Zn6Hw7gT.js 132.07, node_modules/.pnpm/three@0.170.0/node_modules/three/examples/jsm/libs/meshopt_decoder.module.js 5.94, node_modules/.pnpm/three@0.170.0/node_modules/three/examples/jsm/loaders/GLTFLoader.js 13.64, app/dev-tools.ts 1.84, app/retry.ts 1.01, app/sandbox.ts 0.83, ui/profile.ts 1.09, ui/settings.ts 1.22, ui/sheets.ts 2.18, ui/tips.ts 1.02, ui/title.ts 1.78, view/3d/view-3d.ts 39.80, view/audio-min.ts 5.54, view/fx-pipe.ts 1.93); total 295.35 kB
+bundle budget: /?title=0 needs 85.46 kB gzip before it is usable, over 85 kB
+bundle budget (BUILD_1C_MAP1 §4) 3D view: 171.87 kB gzip (view/3d/view-3d.ts + _three.module-Zn6Hw7gT.js) ≤ 260 kB, headroom 88.13 kB
+[ELIFECYCLE] Command failed with exit code 1.
+[ELIFECYCLE] Command failed with exit code 1.

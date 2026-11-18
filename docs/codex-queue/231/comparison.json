@@ -1,0 +1,163 @@
+{
+  "rows": [
+    {
+      "metric": "pnpm check: test files",
+      "reported199": 44,
+      "reported202": 44,
+      "rerun": 44,
+      "exit": 0
+    },
+    {
+      "metric": "pnpm check: passed tests",
+      "reported199": 474,
+      "reported202": 475,
+      "rerun": 475,
+      "note": "202 có thêm 1 test hợp đồng manifest; 199 báo số ở mốc trước."
+    },
+    {
+      "metric": "tests/td-scenery-layout.test.ts: passed tests",
+      "reported202": 73,
+      "rerun": 73,
+      "exit": 0
+    },
+    {
+      "metric": "scenery golden hashes",
+      "reported202": 9,
+      "rerun": 9,
+      "note": "73 tests bao gồm so 9 hash; oracle độc lập ở layout-audit.json."
+    },
+    {
+      "metric": "gameplay golden same:true",
+      "reported199": 2,
+      "reported202": 2,
+      "rerun": 2,
+      "exit": 0
+    },
+    {
+      "metric": "prepare-scenery --check files changed",
+      "reported199": 0,
+      "rerun": 0,
+      "exit": 0
+    },
+    {
+      "metric": "scenery High bytes",
+      "reported199": 4032026,
+      "reported202": 4032026,
+      "rerun": 4032026,
+      "target": 2500000
+    },
+    {
+      "metric": "scenery Medium bytes",
+      "reported199": 1332774,
+      "reported202": 1332774,
+      "rerun": 1332774,
+      "target": 800000
+    },
+    {
+      "metric": "total High bytes",
+      "reported199": 15247852,
+      "reported202": 15247852,
+      "rerun": 15247852,
+      "limit": 16000000
+    },
+    {
+      "metric": "total Medium bytes",
+      "reported199": 7253820,
+      "reported202": 7253820,
+      "rerun": 7253820,
+      "limit": 9000000
+    },
+    {
+      "metric": "starter bytes",
+      "reported199": 3422868,
+      "reported202": 3422868,
+      "rerun": 3422868,
+      "limit": 3500000
+    }
+  ],
+  "checkKit": "42/42 match kit-manifest.json",
+  "checkSeconds": 12.842592333,
+  "prepareCheckSeconds": 0.0733623339999987,
+  "layoutTestsSeconds": 3.7222937499999986,
+  "gameplayGoldens": [
+    {
+      "same": true,
+      "changed": {},
+      "firstMovedAtTick": null,
+      "content": "f2a21037",
+      "deck": "9c9b91d8",
+      "ticks": 19660,
+      "commands": 389,
+      "problems": 0,
+      "rejected": 0,
+      "summary": {
+        "kills": 51,
+        "livesLost": 4,
+        "wavesCleared": 3,
+        "calls": 64,
+        "callWords": 66,
+        "callsPerfect": 21,
+        "keys": 318,
+        "keyErrors": 14,
+        "gold": 29.8,
+        "wood": 87,
+        "food": 29,
+        "bossDamage": 0,
+        "bossRetreats": 0,
+        "lives": 16,
+        "ultCasts": 1,
+        "ultFeathers": 22,
+        "directOk": 0,
+        "directMissed": 1,
+        "reviewBack": 7,
+        "reviewRedeemed": 5,
+        "freshWords": 8
+      }
+    },
+    {
+      "same": true,
+      "changed": {},
+      "firstMovedAtTick": null,
+      "content": "f2a21037",
+      "deck": "9c9b91d8",
+      "ticks": 5695,
+      "commands": 49,
+      "problems": 0,
+      "rejected": 0,
+      "summary": {
+        "kills": 9,
+        "livesLost": 2,
+        "wavesCleared": 0,
+        "calls": 15,
+        "callWords": 9,
+        "callsPerfect": 4,
+        "keys": 39,
+        "keyErrors": 3,
+        "gold": 416.6,
+        "wood": 160,
+        "food": 18,
+        "bossDamage": 2110,
+        "bossRetreats": 1,
+        "lives": 18,
+        "ultCasts": 1,
+        "ultFeathers": 21,
+        "directOk": 0,
+        "directMissed": 0,
+        "reviewBack": 0,
+        "reviewRedeemed": 0,
+        "freshWords": 0
+      }
+    }
+  ],
+  "build": {
+    "typecheck": "exit 0 (pnpm check)",
+    "viteModules": 142,
+    "startGzipKB": 81.58,
+    "noTitleGzipKB": 83.04,
+    "threeGzipKB": 171.83,
+    "startLimitKB": 85,
+    "threeLimitKB": 260,
+    "totalJSGzipKB": 292.75,
+    "warning": "Vite chunk >500 kB minified; gzip budgets pass"
+  }
+}

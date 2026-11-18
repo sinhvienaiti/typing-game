@@ -1,0 +1,63 @@
+[
+  {
+    "file": "docs/codex-queue/170/baseline-flow.log",
+    "sha256": "72d5efbff40c693af8962b4835ad480d56533d4b1d6c14f5b19dfa9d491a6f60",
+    "tests": "Tests  1 failed | 6 passed (7)",
+    "files": "Test Files  1 failed (1)",
+    "cli_lines": []
+  },
+  {
+    "file": "docs/codex-queue/170/tests-before.log",
+    "sha256": "dd7607c9e533acb102e863ea4b53c12bcdf02d339e5cfcb27389ae98c0e57e64",
+    "tests": "Tests  9 failed | 4 passed (13)",
+    "files": "Test Files  2 failed (2)",
+    "cli_lines": [
+      "✓ the play-test file and B9 (BUILD_1B §22, BALANCE.md §7 B9) > the B9 CLI reads both legacy and English filenames and replays both to the same hash  2258ms"
+    ]
+  },
+  {
+    "file": "docs/codex-queue/170/check-first.log",
+    "sha256": "0193e5d3c30b774b78b39ab037d4321ef1deab14b9b10061b6d24139a43c4dcf",
+    "tests": "Tests  2 failed | 378 passed (380)",
+    "files": "Test Files  2 failed | 35 passed (37)",
+    "cli_lines": [
+      "× the play-test file and B9 (BUILD_1B §22, BALANCE.md §7 B9) > the B9 CLI reads both legacy and English filenames and replays both to the same hash 7858ms"
+    ]
+  },
+  {
+    "file": "docs/codex-queue/170/cli-timing-1.log",
+    "sha256": "895783e128bc90b2dace15db20ee8b6acc435d25ee2019cf391a980bf3f84ad2",
+    "tests": "Tests  1 passed | 4 skipped (5)",
+    "files": "Test Files  1 passed (1)",
+    "cli_lines": [
+      "✓ the play-test file and B9 (BUILD_1B §22, BALANCE.md §7 B9) > the B9 CLI reads both legacy and English filenames and replays both to the same hash  1834ms"
+    ]
+  },
+  {
+    "file": "docs/codex-queue/170/cli-timing-2.log",
+    "sha256": "887f285949405e58a68f1322129a54e9c735bf33b7a16cc2eefefcb1673fb7fd",
+    "tests": "Tests  1 passed | 4 skipped (5)",
+    "files": "Test Files  1 passed (1)",
+    "cli_lines": [
+      "✓ the play-test file and B9 (BUILD_1B §22, BALANCE.md §7 B9) > the B9 CLI reads both legacy and English filenames and replays both to the same hash  1913ms"
+    ]
+  },
+  {
+    "file": "docs/codex-queue/170/cli-timing-3.log",
+    "sha256": "c91899477176ad6712f46f3e8fa3e02a8c7ce4d1b1890b772d5dff1ced15409e",
+    "tests": "Tests  1 passed | 4 skipped (5)",
+    "files": "Test Files  1 passed (1)",
+    "cli_lines": [
+      "✓ the play-test file and B9 (BUILD_1B §22, BALANCE.md §7 B9) > the B9 CLI reads both legacy and English filenames and replays both to the same hash  2015ms"
+    ]
+  },
+  {
+    "file": "docs/codex-queue/170/check.log",
+    "sha256": "82112c45a463a1cf948e76e472489be5ea167fb0cc795dbdca6451d8a2c47ffa",
+    "tests": "Tests  380 passed (380)",
+    "files": "Test Files  37 passed (37)",
+    "cli_lines": [
+      "✓ the play-test file and B9 (BUILD_1B §22, BALANCE.md §7 B9) > the B9 CLI reads both legacy and English filenames and replays both to the same hash  9627ms"
+    ]
+  }
+]

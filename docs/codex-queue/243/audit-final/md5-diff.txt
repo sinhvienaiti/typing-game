@@ -1,0 +1,201 @@
+--- before
++++ after
+@@ -1,3 +1,5 @@
++45b9044d09d80945ac5f84bca6773dc7 games/typing-survival/art-src/_review/243-sheet-v2.jpg
++b2db9bb029046e473c89c453df36a610 games/typing-survival/art-src/_review/243-sheet.jpg
+ 4426a842a97379b79422a121cd8e7eb0 games/typing-survival/art-src/ui/icons/armour.128.png
+ bc59fd854188b43dd4aca84b7118a08e games/typing-survival/art-src/ui/icons/armour.256.png
+ b9eca57677534dba30b361b6f4d4c43e games/typing-survival/art-src/ui/icons/armour.64.png
+@@ -70,6 +72,16 @@
+ 4d4319c7b07d3694cfe67aafc8fd4bcb games/typing-survival/art-src/ui/icons/clock.r2.prompt.txt
+ 7fde3e2aae4f0ee7f3332c13005cd4dc games/typing-survival/art-src/ui/icons/clock.try1.png
+ a195c43af58cc8f0c36cb01bbca207ad games/typing-survival/art-src/ui/icons/clock.try1.prompt.txt
++39891222f3435b7b4702c37b568b1b85 games/typing-survival/art-src/ui/icons/effect-strength.128.png
++684b57172370fcc8d5caa3978c42d37a games/typing-survival/art-src/ui/icons/effect-strength.128.prompt.txt
++20df871c2de300c124b09e04196c1ad0 games/typing-survival/art-src/ui/icons/effect-strength.256.png
++684b57172370fcc8d5caa3978c42d37a games/typing-survival/art-src/ui/icons/effect-strength.256.prompt.txt
++d5214429355229694d6c0e38960bdd0a games/typing-survival/art-src/ui/icons/effect-strength.64.png
++684b57172370fcc8d5caa3978c42d37a games/typing-survival/art-src/ui/icons/effect-strength.64.prompt.txt
++da945a024ffaa32e0b3c01318c47019f games/typing-survival/art-src/ui/icons/effect-strength.png
++684b57172370fcc8d5caa3978c42d37a games/typing-survival/art-src/ui/icons/effect-strength.prompt.txt
++3dc4abedb82c5ae191123bfc39681ef2 games/typing-survival/art-src/ui/icons/effect-strength.try1.png
++684b57172370fcc8d5caa3978c42d37a games/typing-survival/art-src/ui/icons/effect-strength.try1.prompt.txt
+ a3fd06974ef803553a4fe9b4556b8a8d games/typing-survival/art-src/ui/icons/equipment.128.png
+ 873c1ca0a02a699aec9581f57b6007c3 games/typing-survival/art-src/ui/icons/equipment.128.prompt.txt
+ 84aaf3386cbbb967c3b47cdb99c47be1 games/typing-survival/art-src/ui/icons/equipment.256.png
+@@ -236,6 +248,16 @@
+ 235fa2bab12c60f679f7b8d47226199d games/typing-survival/art-src/ui/icons/learning-rule.prompt.txt
+ fd9d704740d3987560967c4778ece9f2 games/typing-survival/art-src/ui/icons/learning-rule.try1.png
+ 235fa2bab12c60f679f7b8d47226199d games/typing-survival/art-src/ui/icons/learning-rule.try1.prompt.txt
++07f570479f973e747ac87bcc1e7afb18 games/typing-survival/art-src/ui/icons/letter-style.128.png
++296a3219694a2e0d320fb9ad625381a4 games/typing-survival/art-src/ui/icons/letter-style.128.prompt.txt
++e38a52fdb67a9cd626933f5098e74838 games/typing-survival/art-src/ui/icons/letter-style.256.png
++296a3219694a2e0d320fb9ad625381a4 games/typing-survival/art-src/ui/icons/letter-style.256.prompt.txt
++378ae72211fac6a4083ed77deb985eb5 games/typing-survival/art-src/ui/icons/letter-style.64.png
++296a3219694a2e0d320fb9ad625381a4 games/typing-survival/art-src/ui/icons/letter-style.64.prompt.txt
++29a78f9ac2ac1074b53c97eea4c7ac3f games/typing-survival/art-src/ui/icons/letter-style.png
++296a3219694a2e0d320fb9ad625381a4 games/typing-survival/art-src/ui/icons/letter-style.prompt.txt
++26d4f62132b5a2798bdec8314dc00ff9 games/typing-survival/art-src/ui/icons/letter-style.try1.png
++296a3219694a2e0d320fb9ad625381a4 games/typing-survival/art-src/ui/icons/letter-style.try1.prompt.txt
+ d78ed3d5ea5c5a8b25064933d23bb721 games/typing-survival/art-src/ui/icons/load-guns.128.png
+ b223453c86804e9dd46a7dd28ab6056c games/typing-survival/art-src/ui/icons/load-guns.128.prompt.txt
+ 5155bcaf773c015964066cd86834a474 games/typing-survival/art-src/ui/icons/load-guns.256.png
+@@ -316,6 +338,16 @@
+ 387454b79b0e940f548138fbdad8b8a4 games/typing-survival/art-src/ui/icons/menu-settings.64.png
+ 82ce28048816f4026dc9ff33593ad7f4 games/typing-survival/art-src/ui/icons/menu-settings.png
+ de001d84b1d3dfb475e81377a52ca629 games/typing-survival/art-src/ui/icons/menu-settings.prompt.txt
++5a8751c69eb9e2bc98fc1f35c1c6069f games/typing-survival/art-src/ui/icons/menu-settings.r2-try1.png
++eb9fa10eac500e44f37f7a2f307b4711 games/typing-survival/art-src/ui/icons/menu-settings.r2-try1.prompt.txt
++cb636aec07bf33865445c3d106417fba games/typing-survival/art-src/ui/icons/menu-settings.r2.128.png
++eb9fa10eac500e44f37f7a2f307b4711 games/typing-survival/art-src/ui/icons/menu-settings.r2.128.prompt.txt
++44c281d8b38c58fe359966879df265c9 games/typing-survival/art-src/ui/icons/menu-settings.r2.256.png
++eb9fa10eac500e44f37f7a2f307b4711 games/typing-survival/art-src/ui/icons/menu-settings.r2.256.prompt.txt
++c103368cb53ceecd3ef77df5f3725855 games/typing-survival/art-src/ui/icons/menu-settings.r2.64.png
++eb9fa10eac500e44f37f7a2f307b4711 games/typing-survival/art-src/ui/icons/menu-settings.r2.64.prompt.txt
++9d921388dbcdc80cf86f0d7f27f35bf2 games/typing-survival/art-src/ui/icons/menu-settings.r2.png
++eb9fa10eac500e44f37f7a2f307b4711 games/typing-survival/art-src/ui/icons/menu-settings.r2.prompt.txt
+ bacba5f4aa450e33c002f1dd2682d50c games/typing-survival/art-src/ui/icons/menu-settings.try1.png
+ e9621c7c2e118205569b32f43a868ece games/typing-survival/art-src/ui/icons/menu-settings.try1.prompt.txt
+ cdb7b0f5b8b199983e3593c4c351e2db games/typing-survival/art-src/ui/icons/menu-settings.try2.png
+@@ -392,6 +424,16 @@
+ 02462e9756b8e3ec2ce6dad16ac62031 games/typing-survival/art-src/ui/icons/pace-director.64.png
+ 4035bd83f79ea6827878da83a7ac0d04 games/typing-survival/art-src/ui/icons/pace-director.png
+ 086666fd80ab7f32217af655b80b38f3 games/typing-survival/art-src/ui/icons/pace-director.prompt.txt
++c1837cf6a2e7b10c46c9a75332a98623 games/typing-survival/art-src/ui/icons/pace-director.r2-try1.png
++bd30978511daae306e3832cec88e8a66 games/typing-survival/art-src/ui/icons/pace-director.r2-try1.prompt.txt
++bc5f4884475c4e782632238a88fc73c0 games/typing-survival/art-src/ui/icons/pace-director.r2.128.png
++bd30978511daae306e3832cec88e8a66 games/typing-survival/art-src/ui/icons/pace-director.r2.128.prompt.txt
++2e6e00956deaed4ee8c6a04fca11974a games/typing-survival/art-src/ui/icons/pace-director.r2.256.png
++bd30978511daae306e3832cec88e8a66 games/typing-survival/art-src/ui/icons/pace-director.r2.256.prompt.txt
++9c0e601fc5cf75f601e0d3724fe386b9 games/typing-survival/art-src/ui/icons/pace-director.r2.64.png
++bd30978511daae306e3832cec88e8a66 games/typing-survival/art-src/ui/icons/pace-director.r2.64.prompt.txt
++d9fe3f9278e16ef27e8604f34b519f18 games/typing-survival/art-src/ui/icons/pace-director.r2.png
++bd30978511daae306e3832cec88e8a66 games/typing-survival/art-src/ui/icons/pace-director.r2.prompt.txt
+ 0b41259485a5b9245c9ecdeb1f100414 games/typing-survival/art-src/ui/icons/pace-director.try1.png
+ 086666fd80ab7f32217af655b80b38f3 games/typing-survival/art-src/ui/icons/pace-director.try1.prompt.txt
+ fe1a67c6c0c4e15271396edf5cac3b10 games/typing-survival/art-src/ui/icons/pace-director.try2.png
+@@ -489,6 +531,16 @@
+ aae71974a311e8475be16d292babe10a games/typing-survival/art-src/ui/icons/shake.c2-try1.prompt.txt
+ 48187a19c6cd76fe02d1a9b2086fbe97 games/typing-survival/art-src/ui/icons/shake.png
+ aae71974a311e8475be16d292babe10a games/typing-survival/art-src/ui/icons/shake.prompt.txt
++1ec572ee86e3199ae5b7537bdf944a7a games/typing-survival/art-src/ui/icons/shake.r2-try1.png
++efd6e5e8806a08351bc9cb6beebc672c games/typing-survival/art-src/ui/icons/shake.r2-try1.prompt.txt
++cbacbab80f6bdc1211ac8740e2cb9281 games/typing-survival/art-src/ui/icons/shake.r2.128.png
++efd6e5e8806a08351bc9cb6beebc672c games/typing-survival/art-src/ui/icons/shake.r2.128.prompt.txt
++e7342643486d2ecbed7c05c5f0524836 games/typing-survival/art-src/ui/icons/shake.r2.256.png
++efd6e5e8806a08351bc9cb6beebc672c games/typing-survival/art-src/ui/icons/shake.r2.256.prompt.txt
++72e18681e82df0580daa797b344553c4 games/typing-survival/art-src/ui/icons/shake.r2.64.png
++efd6e5e8806a08351bc9cb6beebc672c games/typing-survival/art-src/ui/icons/shake.r2.64.prompt.txt
++787ad390bc454aad9d619d084123ce9c games/typing-survival/art-src/ui/icons/shake.r2.png
++efd6e5e8806a08351bc9cb6beebc672c games/typing-survival/art-src/ui/icons/shake.r2.prompt.txt
+ 3665ac0425e01f4286473ab81ab942a0 games/typing-survival/art-src/ui/icons/shake.try1.png
+ aa13ce74d447cf33e792419173a44286 games/typing-survival/art-src/ui/icons/shake.try1.prompt.txt
+ e67df48c6419d9e56be242387b172f21 games/typing-survival/art-src/ui/icons/shake.try2.png
+@@ -500,6 +552,16 @@
+ 8eb8b8464398abaf7f038550d3009789 games/typing-survival/art-src/ui/icons/shard.prompt.txt
+ 19f8ba463240984a73d82beeee91e8db games/typing-survival/art-src/ui/icons/shard.try2.png
+ 8eb8b8464398abaf7f038550d3009789 games/typing-survival/art-src/ui/icons/shard.try2.prompt.txt
++6b4e787dae8ea717d98e14d3cdd40d64 games/typing-survival/art-src/ui/icons/ship.128.png
++314cbb5c0d03896b01662667b4b9d458 games/typing-survival/art-src/ui/icons/ship.128.prompt.txt
++9da942734d47098c8b92f806cfe49f02 games/typing-survival/art-src/ui/icons/ship.256.png
++314cbb5c0d03896b01662667b4b9d458 games/typing-survival/art-src/ui/icons/ship.256.prompt.txt
++ecdf665c289df0036d2fce25391e6fb8 games/typing-survival/art-src/ui/icons/ship.64.png
++314cbb5c0d03896b01662667b4b9d458 games/typing-survival/art-src/ui/icons/ship.64.prompt.txt
++d7eba8f549b21cfee3a2937f8df8520e games/typing-survival/art-src/ui/icons/ship.png
++314cbb5c0d03896b01662667b4b9d458 games/typing-survival/art-src/ui/icons/ship.prompt.txt
++46e1369e1fd84c153964605abcacf85b games/typing-survival/art-src/ui/icons/ship.try1.png
++314cbb5c0d03896b01662667b4b9d458 games/typing-survival/art-src/ui/icons/ship.try1.prompt.txt
+ b662911d2ba87064a77ee99576bbfc63 games/typing-survival/art-src/ui/icons/star-lit.128.png
+ 0353c7198d38862cbec781facad70fe6 games/typing-survival/art-src/ui/icons/star-lit.256.png
+ 2e11dcc77e2d9df3336c69058f0a8079 games/typing-survival/art-src/ui/icons/star-lit.64.png
+@@ -654,6 +716,16 @@
+ 9a6c02eb5fa0731ef67c9517d095bbb9 games/typing-survival/art-src/ui/icons/warning.prompt.txt
+ afbed38217c45e8f0d25efea8d70c41c games/typing-survival/art-src/ui/icons/warning.try1.png
+ 9a6c02eb5fa0731ef67c9517d095bbb9 games/typing-survival/art-src/ui/icons/warning.try1.prompt.txt
++6414afefb4b21e9d0275eda1259a505b games/typing-survival/art-src/ui/icons/word-size.128.png
++c2f063b75794e4e776f8031bc268e761 games/typing-survival/art-src/ui/icons/word-size.128.prompt.txt
++144f3459305a504b9994da4327d97dae games/typing-survival/art-src/ui/icons/word-size.256.png
++c2f063b75794e4e776f8031bc268e761 games/typing-survival/art-src/ui/icons/word-size.256.prompt.txt
++eaf9fa02cd2d47d89e767c3647124b7e games/typing-survival/art-src/ui/icons/word-size.64.png
++c2f063b75794e4e776f8031bc268e761 games/typing-survival/art-src/ui/icons/word-size.64.prompt.txt
++7e7666bdb9dca81fd2a5a7106f0ad1fe games/typing-survival/art-src/ui/icons/word-size.png
++c2f063b75794e4e776f8031bc268e761 games/typing-survival/art-src/ui/icons/word-size.prompt.txt
++a3ba2f96396ed698a83121a5d0e0bec4 games/typing-survival/art-src/ui/icons/word-size.try1.png
++c2f063b75794e4e776f8031bc268e761 games/typing-survival/art-src/ui/icons/word-size.try1.prompt.txt
+ 8d3ddbd092b4e89805c387a329fc83d5 games/typing-survival/art-src/ui/quick-settings/hud-settings.128.png
+ 2fa881540996e81c7381e6e04c0d81ff games/typing-survival/art-src/ui/quick-settings/hud-settings.128.prompt.txt
+ cbb4041179607a645dc9d5b9dff5496c games/typing-survival/art-src/ui/quick-settings/hud-settings.256.png
+@@ -662,6 +734,8 @@
+ 2fa881540996e81c7381e6e04c0d81ff games/typing-survival/art-src/ui/quick-settings/hud-settings.64.prompt.txt
+ 2731e1bb20931acd8101776341abab4b games/typing-survival/art-src/ui/quick-settings/hud-settings.png
+ 2fa881540996e81c7381e6e04c0d81ff games/typing-survival/art-src/ui/quick-settings/hud-settings.prompt.txt
++713ca5a10e8a17aa774ab11feee5e4e8 games/typing-survival/art-src/ui/quick-settings/hud-settings.r2-try1.png
++462f9813c4207aea40ba3883bfe3345f games/typing-survival/art-src/ui/quick-settings/hud-settings.r2-try1.prompt.txt
+ 6de240669db3d9c76bb1c0d8690e95ea games/typing-survival/art-src/ui/quick-settings/hud-settings.try1.png
+ 2fa881540996e81c7381e6e04c0d81ff games/typing-survival/art-src/ui/quick-settings/hud-settings.try1.prompt.txt
+ 6217bf4f24f9baecf49a708e292a14f7 games/typing-survival/art-src/ui/quick-settings/hud-sound-muted.128.png
+@@ -692,6 +766,14 @@
+ 2fa881540996e81c7381e6e04c0d81ff games/typing-survival/art-src/ui/quick-settings/selected/hud-settings.64.prompt.txt
+ b3b031dacb3662de71758c78677b72de games/typing-survival/art-src/ui/quick-settings/selected/hud-settings.png
+ 2fa881540996e81c7381e6e04c0d81ff games/typing-survival/art-src/ui/quick-settings/selected/hud-settings.prompt.txt
++33115c2856089c276dc363344a1cc13a games/typing-survival/art-src/ui/quick-settings/selected/hud-settings.r2.128.png
++462f9813c4207aea40ba3883bfe3345f games/typing-survival/art-src/ui/quick-settings/selected/hud-settings.r2.128.prompt.txt
++2918786e2f5bac3720d1a1a7cf8d82f9 games/typing-survival/art-src/ui/quick-settings/selected/hud-settings.r2.256.png
++462f9813c4207aea40ba3883bfe3345f games/typing-survival/art-src/ui/quick-settings/selected/hud-settings.r2.256.prompt.txt
++83971df3308340156ac0d3b039d6c3bb games/typing-survival/art-src/ui/quick-settings/selected/hud-settings.r2.64.png
++462f9813c4207aea40ba3883bfe3345f games/typing-survival/art-src/ui/quick-settings/selected/hud-settings.r2.64.prompt.txt
++b5d23b6cb002c8b284ae52c1fb472964 games/typing-survival/art-src/ui/quick-settings/selected/hud-settings.r2.png
++462f9813c4207aea40ba3883bfe3345f games/typing-survival/art-src/ui/quick-settings/selected/hud-settings.r2.prompt.txt
+ 62a0ecbe6a9fd9656d5f02f149bff7f3 games/typing-survival/art-src/ui/quick-settings/selected/hud-sound-muted.128.png
+ 6d89de04e65e29de2c83130b39ac9120 games/typing-survival/art-src/ui/quick-settings/selected/hud-sound-muted.128.prompt.txt
+ a6543d1a4ba654b21a8b401707f19b66 games/typing-survival/art-src/ui/quick-settings/selected/hud-sound-muted.256.png
+@@ -716,6 +798,14 @@
+ 69748b4e3c892e71a2e1675a3e7c1b99 games/typing-survival/art-src/ui/quick-settings/selected/vol-effects.64.prompt.txt
+ ca0580abfafea3dbad9c5417e70f7363 games/typing-survival/art-src/ui/quick-settings/selected/vol-effects.png
+ 69748b4e3c892e71a2e1675a3e7c1b99 games/typing-survival/art-src/ui/quick-settings/selected/vol-effects.prompt.txt
++907af43c2daa4c9a562b9dda90eabf48 games/typing-survival/art-src/ui/quick-settings/selected/vol-effects.r2.128.png
++65f60e6f7b95a3147731d940feff78b9 games/typing-survival/art-src/ui/quick-settings/selected/vol-effects.r2.128.prompt.txt
++a60af7751a4f43af91ee704b14acad95 games/typing-survival/art-src/ui/quick-settings/selected/vol-effects.r2.256.png
++65f60e6f7b95a3147731d940feff78b9 games/typing-survival/art-src/ui/quick-settings/selected/vol-effects.r2.256.prompt.txt
++e8c4d94cc26b13fcb4887c8518fdb34f games/typing-survival/art-src/ui/quick-settings/selected/vol-effects.r2.64.png
++65f60e6f7b95a3147731d940feff78b9 games/typing-survival/art-src/ui/quick-settings/selected/vol-effects.r2.64.prompt.txt
++9d5f520bcd47b6c00dc3e374439d425b games/typing-survival/art-src/ui/quick-settings/selected/vol-effects.r2.png
++65f60e6f7b95a3147731d940feff78b9 games/typing-survival/art-src/ui/quick-settings/selected/vol-effects.r2.prompt.txt
+ 864c5e95d55fc15fd6461b5196996c4d games/typing-survival/art-src/ui/quick-settings/selected/vol-interface.128.png
+ 22b06d4457324fff5e3691c55a737be9 games/typing-survival/art-src/ui/quick-settings/selected/vol-interface.128.prompt.txt
+ 201773206f33d611cb51dffc2711d77d games/typing-survival/art-src/ui/quick-settings/selected/vol-interface.256.png
+@@ -724,6 +814,14 @@
+ 22b06d4457324fff5e3691c55a737be9 games/typing-survival/art-src/ui/quick-settings/selected/vol-interface.64.prompt.txt
+ 3e63b628157272e08452b53e7fa83cad games/typing-survival/art-src/ui/quick-settings/selected/vol-interface.png
+ 22b06d4457324fff5e3691c55a737be9 games/typing-survival/art-src/ui/quick-settings/selected/vol-interface.prompt.txt
++40424d4d68170e59e68e3f13b0993c90 games/typing-survival/art-src/ui/quick-settings/selected/vol-interface.r2.128.png
++16b4ff5af76cf668d24efe5ab8750015 games/typing-survival/art-src/ui/quick-settings/selected/vol-interface.r2.128.prompt.txt
++de74143f824846afc0fb085c276f28e8 games/typing-survival/art-src/ui/quick-settings/selected/vol-interface.r2.256.png
++16b4ff5af76cf668d24efe5ab8750015 games/typing-survival/art-src/ui/quick-settings/selected/vol-interface.r2.256.prompt.txt
++b2aee74660de971124815976178abbbf games/typing-survival/art-src/ui/quick-settings/selected/vol-interface.r2.64.png
++16b4ff5af76cf668d24efe5ab8750015 games/typing-survival/art-src/ui/quick-settings/selected/vol-interface.r2.64.prompt.txt
++b85acc8d1fa6b93c2f603df7609c56a4 games/typing-survival/art-src/ui/quick-settings/selected/vol-interface.r2.png
++16b4ff5af76cf668d24efe5ab8750015 games/typing-survival/art-src/ui/quick-settings/selected/vol-interface.r2.prompt.txt
+ b0236cb9ec2d572ba517cf12f1337f29 games/typing-survival/art-src/ui/quick-settings/selected/vol-keyboard.128.png
+ 7049b310b8849072bf526b4147caaf47 games/typing-survival/art-src/ui/quick-settings/selected/vol-keyboard.128.prompt.txt
+ 9f42bcdcff6a3fd03e76120fe42d9fb2 games/typing-survival/art-src/ui/quick-settings/selected/vol-keyboard.256.png
+@@ -782,6 +880,10 @@
+ 69748b4e3c892e71a2e1675a3e7c1b99 games/typing-survival/art-src/ui/quick-settings/vol-effects.64.prompt.txt
+ e5477b99e5546968628294aa0319e2e0 games/typing-survival/art-src/ui/quick-settings/vol-effects.png
+ 69748b4e3c892e71a2e1675a3e7c1b99 games/typing-survival/art-src/ui/quick-settings/vol-effects.prompt.txt
++d885c081ad80d9f1473b915e7305f78d games/typing-survival/art-src/ui/quick-settings/vol-effects.r2-try1.png
++5f46b9a1fb307f204d12b4b665fac317 games/typing-survival/art-src/ui/quick-settings/vol-effects.r2-try1.prompt.txt
++68fc69718a39ac3b5c82403edc1cab51 games/typing-survival/art-src/ui/quick-settings/vol-effects.r2-try2.png
++65f60e6f7b95a3147731d940feff78b9 games/typing-survival/art-src/ui/quick-settings/vol-effects.r2-try2.prompt.txt
+ 3cc6c086f9c79592e0865bc5ef4e3604 games/typing-survival/art-src/ui/quick-settings/vol-effects.try1.png
+ 69748b4e3c892e71a2e1675a3e7c1b99 games/typing-survival/art-src/ui/quick-settings/vol-effects.try1.prompt.txt
+ af45b47eb26c558dec19d249ae34c87b games/typing-survival/art-src/ui/quick-settings/vol-interface.128.png
+@@ -792,6 +894,8 @@
+ 22b06d4457324fff5e3691c55a737be9 games/typing-survival/art-src/ui/quick-settings/vol-interface.64.prompt.txt
+ 91cc1e158439f3d4b4785acd2c1eff07 games/typing-survival/art-src/ui/quick-settings/vol-interface.png
+ 22b06d4457324fff5e3691c55a737be9 games/typing-survival/art-src/ui/quick-settings/vol-interface.prompt.txt
++f5b44bf941f256f1046c26010df33ec9 games/typing-survival/art-src/ui/quick-settings/vol-interface.r2-try1.png
++16b4ff5af76cf668d24efe5ab8750015 games/typing-survival/art-src/ui/quick-settings/vol-interface.r2-try1.prompt.txt
+ 1ffa0ad344ce4f1d8652b0b56a40efd7 games/typing-survival/art-src/ui/quick-settings/vol-interface.try1.png
+ 22b06d4457324fff5e3691c55a737be9 games/typing-survival/art-src/ui/quick-settings/vol-interface.try1.prompt.txt
+ e1d2f1c8384921a5886c315793c57e20 games/typing-survival/art-src/ui/quick-settings/vol-keyboard.128.png

@@ -1,0 +1,16 @@
+{
+  "name": "f7-read-only",
+  "argv": [
+    "git",
+    "--no-optional-locks",
+    "diff",
+    "--no-index",
+    "--check",
+    "/dev/null",
+    "/Users/toandx/htdocs/typing-game/docs/codex-queue/216/tests-before.txt"
+  ],
+  "cwd": "/Users/toandx/htdocs/typing-game",
+  "portal_url": null,
+  "exit": 3,
+  "seconds": 0.005
+}

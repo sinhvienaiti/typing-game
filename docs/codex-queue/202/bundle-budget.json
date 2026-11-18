@@ -1,0 +1,29 @@
+{
+  "command": "pnpm build (tsc --noEmit && vite build && node scripts/bundle-budget.mjs)",
+  "exit": 0,
+  "units": "kB gzip = 1000 bytes",
+  "start": {
+    "/": {
+      "actual": 81.58,
+      "limit": 85,
+      "headroom": 3.42
+    },
+    "/?title=0": {
+      "actual": 83.04,
+      "limit": 85,
+      "headroom": 1.96
+    }
+  },
+  "view3d": {
+    "actual": 171.83,
+    "limit": 260,
+    "headroom": 88.17
+  },
+  "totalJs": 292.75,
+  "layoutIntegratedInRenderer": false,
+  "output": [
+    "bundle budget (BUILD_1B §20) /: start 81.58 kB gzip (entry + ui/title.ts) ≤ 85 kB, headroom 3.42 kB; later 211.17 kB (_three.module-Zn6Hw7gT.js 132.07, node_modules/.pnpm/three@0.170.0/node_modules/three/examples/jsm/libs/meshopt_decoder.module.js 5.94, node_modules/.pnpm/three@0.170.0/node_modules/three/examples/jsm/loaders/GLTFLoader.js 13.64, app/dev-tools.ts 1.84, app/learn.ts 3.22, app/retry.ts 1.01, app/sandbox.ts 0.82, ui/profile.ts 1.09, ui/settings.ts 1.22, ui/sheets.ts 2.07, ui/tips.ts 1.01, view/3d/view-3d.ts 39.77, view/audio-min.ts 5.54, view/fx-pipe.ts 1.92); total 292.75 kB",
+    "bundle budget (BUILD_1B §20) /?title=0: start 83.04 kB gzip (entry + app/learn.ts) ≤ 85 kB, headroom 1.96 kB; later 209.71 kB (_three.module-Zn6Hw7gT.js 132.07, node_modules/.pnpm/three@0.170.0/node_modules/three/examples/jsm/libs/meshopt_decoder.module.js 5.94, node_modules/.pnpm/three@0.170.0/node_modules/three/examples/jsm/loaders/GLTFLoader.js 13.64, app/dev-tools.ts 1.84, app/retry.ts 1.01, app/sandbox.ts 0.82, ui/profile.ts 1.09, ui/settings.ts 1.22, ui/sheets.ts 2.07, ui/tips.ts 1.01, ui/title.ts 1.76, view/3d/view-3d.ts 39.77, view/audio-min.ts 5.54, view/fx-pipe.ts 1.92); total 292.75 kB",
+    "bundle budget (BUILD_1C_MAP1 §4) 3D view: 171.83 kB gzip (view/3d/view-3d.ts + _three.module-Zn6Hw7gT.js) ≤ 260 kB, headroom 88.17 kB"
+  ]
+}

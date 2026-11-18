@@ -1,0 +1,22 @@
+$ node --test --test-name-pattern=F2 portal/tests/learning-lookup.test.mjs shared/learning/lookup.test.mjs
+cwd: /Users/toandx/htdocs/typing-game
+
+✔ F2 lookup sends only contracted sample fields from a vocabulary backup (2.992791ms)
+✔ F2 query sends only contracted sample fields from a vocabulary backup (0.577209ms)
+✔ F2 lookup sends only contracted sample fields from a grammar backup (0.325625ms)
+✔ F2 query sends only contracted sample fields from a grammar backup (0.379792ms)
+✔ F2 lookup sends only contracted sample fields from a sentence backup (0.320834ms)
+✔ F2 query sends only contracted sample fields from a sentence backup (0.228208ms)
+✔ F2 vocabulary lookup projects sample fields from an existing stored profile (1.809667ms)
+✔ F2 grammar lookup projects sample fields from an existing stored profile (0.492458ms)
+✔ F2 sentence lookup projects sample fields from an existing stored profile (0.124833ms)
+ℹ tests 9
+ℹ suites 0
+ℹ pass 9
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 70.017084
+
+exit: 0

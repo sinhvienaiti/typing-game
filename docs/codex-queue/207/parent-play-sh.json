@@ -1,0 +1,53 @@
+{
+  "file": "play.sh",
+  "matches": [
+    {
+      "line": 324,
+      "text": "if game_present \"Tuyến Cuối\" \"games/typing-survival\"; then"
+    },
+    {
+      "line": 325,
+      "text": "  build_if_needed \\"
+    },
+    {
+      "line": 326,
+      "text": "    \"Tuyến Cuối\" \\"
+    },
+    {
+      "line": 327,
+      "text": "    \"games/typing-survival/dist/index.html\" \\"
+    },
+    {
+      "line": 328,
+      "text": "    \"build:survival\" \\"
+    },
+    {
+      "line": 329,
+      "text": "    \"games/typing-survival/src\" \\"
+    },
+    {
+      "line": 330,
+      "text": "    \"games/typing-survival/public\" \\"
+    },
+    {
+      "line": 331,
+      "text": "    \"games/typing-survival/index.html\" \\"
+    },
+    {
+      "line": 332,
+      "text": "    \"games/typing-survival/package.json\" \\"
+    },
+    {
+      "line": 333,
+      "text": "    \"games/typing-survival/tsconfig.json\" \\"
+    },
+    {
+      "line": 334,
+      "text": "    \"games/typing-survival/vite.config.ts\""
+    },
+    {
+      "line": 335,
+      "text": "fi"
+    }
+  ]
+}

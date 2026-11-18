@@ -1,0 +1,86 @@
+{
+  "recordedBeforeRun": "2026-10-30T03:17:29.041663+00:00",
+  "set": "c1-s1.drainRate=2.4,MODE_SPECS.challenge.surge=1.0,MODE_SPECS.challenge.rate=1.06",
+  "localParent": "v1",
+  "challengeIdeaFrom": "v4",
+  "reason": "Ghép rỉ của V1 (giữ B3 và B6 trên cả hai bộ) với nới hệ số Thử thách của V4; không giữ dòng nền 4,8 của nền B vì B3 Trẻ em đã xuống 84/84. Đây là một ứng viên ghép cuối, không có lượt thử ngắn.",
+  "evidence": {
+    "v1": {
+      "B3Novice": [
+        86,
+        85
+      ],
+      "B3Child": [
+        91,
+        89
+      ],
+      "B6Balanced": [
+        12,
+        11
+      ],
+      "B6Challenge": [
+        38,
+        31
+      ],
+      "B1MissCells": [
+        4,
+        3
+      ],
+      "idleSkilled": [
+        14.9,
+        15.1
+      ],
+      "G3cBest": [
+        98,
+        90
+      ]
+    },
+    "v2": {
+      "B3Child": [
+        84,
+        84
+      ],
+      "challengeNovice": [
+        40,
+        45
+      ],
+      "challengeFast": [
+        17,
+        25
+      ]
+    },
+    "v4": {
+      "challengeNovice": [
+        64,
+        59
+      ],
+      "challengeFast": [
+        44,
+        50
+      ],
+      "fastGainFromV2": [
+        27,
+        25
+      ]
+    },
+    "v5": {
+      "B3Child": [
+        82,
+        80
+      ],
+      "challengeNovice": [
+        36,
+        34
+      ],
+      "challengeFast": [
+        17,
+        21
+      ],
+      "fastGainFromV2": [
+        0,
+        -4
+      ]
+    }
+  },
+  "remainingKnownRisks": "Không kỳ vọng đã đóng B1/B7: rỉ không giải quyết I Khá 14,9/15,1 và tắt nhịp S 72,5/67,5. G3c tốt nhất V1 98 ở bộ đầu vượt trần 97. Không dùng TIA_DUTY vì biến thể này dành để kiểm hai ý đã có số, không đổi súng. Thứ bậc Thử thách vẫn phải đo, không suy từ thắng tăng."
+}

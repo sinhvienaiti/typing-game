@@ -1,0 +1,379 @@
+{
+  "settings": "WebP lossy q90, alpha_q=100, exact, m=6; no artwork changes",
+  "baseline": {
+    "high": 58,
+    "medium": 16
+  },
+  "profiles": [
+    {
+      "profile": "flat",
+      "tier": "high",
+      "args": [
+        "-sns",
+        "0",
+        "-f",
+        "0",
+        "-segments",
+        "1",
+        "-sharp_yuv"
+      ],
+      "exit": 0,
+      "seconds": 9.49,
+      "bytes": 2894674,
+      "error": ""
+    },
+    {
+      "profile": "flat",
+      "tier": "medium",
+      "args": [
+        "-sns",
+        "0",
+        "-f",
+        "0",
+        "-segments",
+        "1",
+        "-sharp_yuv"
+      ],
+      "exit": 0,
+      "seconds": 4.678,
+      "bytes": 1042766,
+      "error": ""
+    },
+    {
+      "profile": "default",
+      "tier": "high",
+      "args": [],
+      "exit": 0,
+      "seconds": 7.981,
+      "bytes": 2479660,
+      "error": ""
+    },
+    {
+      "profile": "default",
+      "tier": "medium",
+      "args": [],
+      "exit": 0,
+      "seconds": 3.671,
+      "bytes": 908362,
+      "error": ""
+    },
+    {
+      "profile": "filtered",
+      "tier": "high",
+      "args": [
+        "-sns",
+        "0",
+        "-f",
+        "60",
+        "-sharpness",
+        "0",
+        "-sharp_yuv"
+      ],
+      "exit": 0,
+      "seconds": 8.223,
+      "bytes": 2904662,
+      "error": ""
+    },
+    {
+      "profile": "filtered",
+      "tier": "medium",
+      "args": [
+        "-sns",
+        "0",
+        "-f",
+        "60",
+        "-sharpness",
+        "0",
+        "-sharp_yuv"
+      ],
+      "exit": 0,
+      "seconds": 3.814,
+      "bytes": 1045448,
+      "error": ""
+    }
+  ],
+  "flat": [
+    {
+      "tier": "high",
+      "metrics": [
+        {
+          "id": "almond-tree-v3",
+          "count": 1,
+          "exempt": 1
+        },
+        {
+          "id": "almond-tree-v4",
+          "count": 0,
+          "exempt": 0
+        },
+        {
+          "id": "bamboo-clump-v3",
+          "count": 13,
+          "exempt": 2
+        },
+        {
+          "id": "bamboo-clump-v4",
+          "count": 2,
+          "exempt": 0
+        },
+        {
+          "id": "canopy-block-v3",
+          "count": 11,
+          "exempt": 0
+        },
+        {
+          "id": "canopy-block-v4",
+          "count": 3,
+          "exempt": 0
+        },
+        {
+          "id": "mountain-pine-v3",
+          "count": 7,
+          "exempt": 1
+        },
+        {
+          "id": "mountain-pine-v4",
+          "count": 10,
+          "exempt": 2
+        }
+      ],
+      "key": 47
+    },
+    {
+      "tier": "medium",
+      "metrics": [
+        {
+          "id": "almond-tree-v3",
+          "count": 0,
+          "exempt": 0
+        },
+        {
+          "id": "almond-tree-v4",
+          "count": 0,
+          "exempt": 0
+        },
+        {
+          "id": "bamboo-clump-v3",
+          "count": 6,
+          "exempt": 0
+        },
+        {
+          "id": "bamboo-clump-v4",
+          "count": 0,
+          "exempt": 0
+        },
+        {
+          "id": "canopy-block-v3",
+          "count": 2,
+          "exempt": 0
+        },
+        {
+          "id": "canopy-block-v4",
+          "count": 0,
+          "exempt": 0
+        },
+        {
+          "id": "mountain-pine-v3",
+          "count": 1,
+          "exempt": 0
+        },
+        {
+          "id": "mountain-pine-v4",
+          "count": 5,
+          "exempt": 0
+        }
+      ],
+      "key": 14
+    }
+  ],
+  "other": [
+    {
+      "profile": "default",
+      "tier": "high",
+      "metrics": [
+        {
+          "id": "almond-tree-v3",
+          "count": 1,
+          "exempt": 0
+        },
+        {
+          "id": "almond-tree-v4",
+          "count": 0,
+          "exempt": 0
+        },
+        {
+          "id": "bamboo-clump-v3",
+          "count": 8,
+          "exempt": 1
+        },
+        {
+          "id": "bamboo-clump-v4",
+          "count": 0,
+          "exempt": 0
+        },
+        {
+          "id": "canopy-block-v3",
+          "count": 8,
+          "exempt": 2
+        },
+        {
+          "id": "canopy-block-v4",
+          "count": 0,
+          "exempt": 0
+        },
+        {
+          "id": "mountain-pine-v3",
+          "count": 3,
+          "exempt": 3
+        },
+        {
+          "id": "mountain-pine-v4",
+          "count": 14,
+          "exempt": 3
+        }
+      ],
+      "key": 34
+    },
+    {
+      "profile": "default",
+      "tier": "medium",
+      "metrics": [
+        {
+          "id": "almond-tree-v3",
+          "count": 0,
+          "exempt": 0
+        },
+        {
+          "id": "almond-tree-v4",
+          "count": 0,
+          "exempt": 0
+        },
+        {
+          "id": "bamboo-clump-v3",
+          "count": 2,
+          "exempt": 0
+        },
+        {
+          "id": "bamboo-clump-v4",
+          "count": 0,
+          "exempt": 0
+        },
+        {
+          "id": "canopy-block-v3",
+          "count": 0,
+          "exempt": 0
+        },
+        {
+          "id": "canopy-block-v4",
+          "count": 0,
+          "exempt": 0
+        },
+        {
+          "id": "mountain-pine-v3",
+          "count": 1,
+          "exempt": 0
+        },
+        {
+          "id": "mountain-pine-v4",
+          "count": 5,
+          "exempt": 0
+        }
+      ],
+      "key": 8
+    },
+    {
+      "profile": "filtered",
+      "tier": "high",
+      "metrics": [
+        {
+          "id": "almond-tree-v3",
+          "count": 1,
+          "exempt": 1
+        },
+        {
+          "id": "almond-tree-v4",
+          "count": 0,
+          "exempt": 0
+        },
+        {
+          "id": "bamboo-clump-v3",
+          "count": 13,
+          "exempt": 2
+        },
+        {
+          "id": "bamboo-clump-v4",
+          "count": 2,
+          "exempt": 0
+        },
+        {
+          "id": "canopy-block-v3",
+          "count": 11,
+          "exempt": 0
+        },
+        {
+          "id": "canopy-block-v4",
+          "count": 3,
+          "exempt": 0
+        },
+        {
+          "id": "mountain-pine-v3",
+          "count": 7,
+          "exempt": 1
+        },
+        {
+          "id": "mountain-pine-v4",
+          "count": 10,
+          "exempt": 2
+        }
+      ],
+      "key": 47
+    },
+    {
+      "profile": "filtered",
+      "tier": "medium",
+      "metrics": [
+        {
+          "id": "almond-tree-v3",
+          "count": 0,
+          "exempt": 0
+        },
+        {
+          "id": "almond-tree-v4",
+          "count": 0,
+          "exempt": 0
+        },
+        {
+          "id": "bamboo-clump-v3",
+          "count": 6,
+          "exempt": 0
+        },
+        {
+          "id": "bamboo-clump-v4",
+          "count": 0,
+          "exempt": 0
+        },
+        {
+          "id": "canopy-block-v3",
+          "count": 2,
+          "exempt": 0
+        },
+        {
+          "id": "canopy-block-v4",
+          "count": 0,
+          "exempt": 0
+        },
+        {
+          "id": "mountain-pine-v3",
+          "count": 1,
+          "exempt": 0
+        },
+        {
+          "id": "mountain-pine-v4",
+          "count": 5,
+          "exempt": 0
+        }
+      ],
+      "key": 14
+    }
+  ]
+}

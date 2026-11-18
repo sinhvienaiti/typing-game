@@ -1,0 +1,62 @@
+{
+  "wave": "repro",
+  "start": "2026-10-30T06:26:26.727Z",
+  "uptime": "13:26  2 users, load averages: 5.27 4.03 4.03",
+  "load": 5.27,
+  "limit": 4,
+  "tmpdir": "/Users/toandx/htdocs/typing-game/games/.wt-ts-codex/tmp/codex-220/tmpdir",
+  "jobs": [
+    {
+      "id": "v6",
+      "first": 1,
+      "set": "c1-s1.drainRate=2.4,MODE_SPECS.challenge.surge=1.0,MODE_SPECS.challenge.rate=1.06",
+      "start": "2026-10-30T06:26:26.727Z",
+      "args": [
+        "-n",
+        "15",
+        "/opt/homebrew/Cellar/node@24/24.22.0/bin/node",
+        "--import",
+        "tsx",
+        "scripts/balance.ts",
+        "--stages=c1-s1",
+        "--seeds=100",
+        "--first=1",
+        "--g3c",
+        "--json=/Users/toandx/htdocs/typing-game/games/.wt-ts-codex/tmp/codex-220/runs/v6-s1.json",
+        "--out=/Users/toandx/htdocs/typing-game/games/.wt-ts-codex/tmp/codex-220/runs/v6-s1.md",
+        "--set=c1-s1.drainRate=2.4,MODE_SPECS.challenge.surge=1.0,MODE_SPECS.challenge.rate=1.06"
+      ],
+      "pid": 1759,
+      "end": "2026-10-30T06:29:37.448Z",
+      "wallSeconds": 190.721,
+      "exit": 0
+    },
+    {
+      "id": "v6",
+      "first": 101,
+      "set": "c1-s1.drainRate=2.4,MODE_SPECS.challenge.surge=1.0,MODE_SPECS.challenge.rate=1.06",
+      "start": "2026-10-30T06:26:26.728Z",
+      "args": [
+        "-n",
+        "15",
+        "/opt/homebrew/Cellar/node@24/24.22.0/bin/node",
+        "--import",
+        "tsx",
+        "scripts/balance.ts",
+        "--stages=c1-s1",
+        "--seeds=100",
+        "--first=101",
+        "--g3c",
+        "--json=/Users/toandx/htdocs/typing-game/games/.wt-ts-codex/tmp/codex-220/runs/v6-s101.json",
+        "--out=/Users/toandx/htdocs/typing-game/games/.wt-ts-codex/tmp/codex-220/runs/v6-s101.md",
+        "--set=c1-s1.drainRate=2.4,MODE_SPECS.challenge.surge=1.0,MODE_SPECS.challenge.rate=1.06"
+      ],
+      "pid": 1769,
+      "end": "2026-10-30T06:29:40.180Z",
+      "wallSeconds": 193.452,
+      "exit": 0
+    }
+  ],
+  "peak": 2,
+  "end": "2026-10-30T06:29:40.180Z"
+}

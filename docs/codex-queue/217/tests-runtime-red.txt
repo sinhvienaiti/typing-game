@@ -1,0 +1,25 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+_____________________ test_runtime_loudness_and_true_peak ______________________
+
+setup = (PosixPath('/Users/toandx/htdocs/typing-game/tmp/firefly-ingest/quality-test/test_runtime_loudness_and_true0/inbox'), ...yping-game/tmp/firefly-ingest/quality-test/test_runtime_loudness_and_true0/inbox/dragon-hold/fire.impact.a/owner.wav'))
+
+    def test_runtime_loudness_and_true_peak(setup):
+        inbox, out, _ = setup
+        assert ingest(inbox, out) == 0
+        run = out / 'dragon-hold' / SID / 'test'
+        report = json.loads((run / 'render.json').read_text())
+        for v in report['variants']:
+            x, sr = sf.read(run / 'runtime' / v['runtime'], always_2d=True)
+>           assert abs(measure.lufs_m_max(x, sr) - report['idLevel']) <= .5
+E           assert 0.5738711048457859 <= 0.5
+E            +  where 0.5738711048457859 = abs((-20.953871104845785 - -20.38))
+E            +    where -20.953871104845785 = <function lufs_m_max at 0x1288845e0>(array([[-6.28895173e-03],\n       [-4.29566996e-03],\n       [ 2.16096640e-02],\n       ...,\n       [-1.10352730e-05],\n       [-1.64411776e-05],\n       [-1.70453714e-05]], shape=(23729, 1)), 48000)
+E            +      where <function lufs_m_max at 0x1288845e0> = measure.lufs_m_max
+
+firefly/tests/test_firefly.py:255: AssertionError
+----------------------------- Captured stdout call -----------------------------
+fire.impact.a: 6 take, 6 qua, 4 chọn; final=PASS
+=========================== short test summary info ============================
+FAILED firefly/tests/test_firefly.py::test_runtime_loudness_and_true_peak - a...
+1 failed in 3.40s

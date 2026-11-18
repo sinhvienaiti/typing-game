@@ -1,0 +1,25 @@
+date: 2026-10-30T08:23:42Z
+branch: feat/space-typing-admin-uiux
+head: 5742e1a89749118e9b50feb6f457efff1058e0ac
+node: v24.22.0
+pnpm: 11.21.0
+docs/codex-queue/228-report.md
+docs/codex-queue/233-report.md
+--- git status --short -uall -- shared/learning portal
+ M portal/public/games.json
+ M portal/src/learning/bridge.ts
+ M portal/src/main.ts
+ M portal/src/styles.css
+ M shared/learning/README.md
+ M shared/learning/core.d.mts
+ M shared/learning/core.mjs
+ M shared/learning/message-contract.d.mts
+ M shared/learning/message-contract.mjs
+ M shared/learning/profile-backup.mjs
+ M shared/learning/query.d.mts
+ M shared/learning/query.mjs
+?? portal/src/game-card.ts
+?? portal/tests/fixtures/legacy-games.json
+?? portal/tests/game-card.test.mjs
+?? portal/tests/learning-lookup.test.mjs
+?? shared/learning/lookup.test.mjs

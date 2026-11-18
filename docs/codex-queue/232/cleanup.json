@@ -1,0 +1,17 @@
+{
+ "copyFolder": "games/typing-defense/tmp/codex-232 (197 MB: tree, tree-200, tree-base, regen 16 files, tmpdir) deleted with rm -rf; ls shows it gone; no capture frames, so no capture-prune",
+ "findNewerMarker": "find games/.wt-td-ui games/typing-defense/public -newer marker -> 0 lines (before delete); again 0 lines against 232/status-before.txt after delete",
+ "worktree": "status 25 lines before = after; 372/372 sha256 equal; HEAD 2a1f61d; node_modules 14 entries equal; .vite/vitest results.json mtime 1793345802 unchanged",
+ "mainCheckoutUi": "17 files md5 equal before/after; art-src ui/title-epic, ui/frames-epic, _review/113: 0 files newer than marker",
+ "tmpListing": "games/typing-defense/tmp = start listing minus codex-232 (the partial run deleted per the re-run note)",
+ "parentStatusNewByThisTicket": [
+  "docs/codex-queue/232/*",
+  "docs/codex-queue/232-report.md"
+ ],
+ "parentStatusNewByOtherLanes": [
+  "docs/codex-queue/230/* (17+3 files, ticket 230)",
+  "docs/codex-queue/234-report.md, 234/* (28 files)",
+  "docs/changelog/2026-10-30-learning-sample-types.md",
+  "portal/tests/learning-bridge.test.mjs (M)"
+ ]
+}

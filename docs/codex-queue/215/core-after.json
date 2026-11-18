@@ -1,0 +1,176 @@
+{
+  "version": 1,
+  "updatedAt": "2026-10-30T06:11:00.000Z",
+  "vocabulary": {
+    "lantern": {
+      "wordKey": "lantern",
+      "attempts": 4,
+      "correct": 3,
+      "wrong": 1,
+      "hints": 0,
+      "replays": 1,
+      "avgResponseMs": 1388,
+      "responseSamples": 4,
+      "correctStreak": 3,
+      "lastSeenAt": "2026-10-30T06:07:00.000Z",
+      "lastCorrectAt": "2026-10-30T06:07:00.000Z",
+      "lastWrongAt": "2026-10-30T06:03:00.000Z",
+      "mastery": 77,
+      "reviewPriority": 18,
+      "nextReviewAt": "2026-11-02T06:07:00.000Z",
+      "sourceGames": [
+        "dragon-hold",
+        "recall-typing"
+      ],
+      "recentMistakes": [
+        {
+          "occurredAt": "2026-10-30T06:03:00.000Z",
+          "userAnswer": "mistake",
+          "expectedAnswer": "lantern",
+          "errorType": "spelling",
+          "activityType": "meaning-recall",
+          "gameId": "dragon-hold"
+        }
+      ]
+    },
+    "dragon": {
+      "wordKey": "dragon",
+      "attempts": 3,
+      "correct": 2,
+      "wrong": 1,
+      "hints": 2,
+      "replays": 0,
+      "avgResponseMs": 1550,
+      "responseSamples": 3,
+      "correctStreak": 0,
+      "lastSeenAt": "2026-10-30T06:08:00.000Z",
+      "lastCorrectAt": "2026-10-30T06:05:00.000Z",
+      "lastWrongAt": "2026-10-30T06:08:00.000Z",
+      "mastery": 55,
+      "reviewPriority": 32,
+      "nextReviewAt": "2026-10-31T06:08:00.000Z",
+      "sourceGames": [
+        "recall-typing",
+        "dragon-hold"
+      ],
+      "recentMistakes": [
+        {
+          "occurredAt": "2026-10-30T06:08:00.000Z",
+          "userAnswer": "mistake",
+          "expectedAnswer": "dragon",
+          "errorType": "spelling",
+          "activityType": "typing-attack",
+          "gameId": "recall-typing"
+        }
+      ]
+    },
+    "river": {
+      "wordKey": "river",
+      "attempts": 3,
+      "correct": 2,
+      "wrong": 1,
+      "hints": 1,
+      "replays": 2,
+      "avgResponseMs": 1767,
+      "responseSamples": 3,
+      "correctStreak": 2,
+      "lastSeenAt": "2026-10-30T06:11:00.000Z",
+      "lastCorrectAt": "2026-10-30T06:11:00.000Z",
+      "lastWrongAt": "2026-10-30T06:03:00.000Z",
+      "mastery": 62,
+      "reviewPriority": 30,
+      "nextReviewAt": "2026-10-31T06:11:00.000Z",
+      "sourceGames": [
+        "dragon-hold",
+        "recall-typing"
+      ],
+      "recentMistakes": [
+        {
+          "occurredAt": "2026-10-30T06:03:00.000Z",
+          "userAnswer": "mistake",
+          "expectedAnswer": "river",
+          "errorType": "spelling",
+          "activityType": "listening",
+          "gameId": "dragon-hold"
+        }
+      ]
+    }
+  },
+  "grammar": {
+    "present.simple": {
+      "grammarId": "present.simple",
+      "attempts": 1,
+      "correct": 0,
+      "wrong": 1,
+      "hints": 0,
+      "replays": 1,
+      "avgResponseMs": 2070,
+      "responseSamples": 1,
+      "correctStreak": 0,
+      "lastSeenAt": "2026-10-30T06:09:00.000Z",
+      "lastCorrectAt": null,
+      "lastWrongAt": "2026-10-30T06:09:00.000Z",
+      "mastery": 12,
+      "reviewPriority": 72,
+      "nextReviewAt": "2026-10-30T06:09:00.000Z",
+      "sourceGames": [
+        "dragon-hold"
+      ],
+      "errorTypes": {
+        "spelling": 1
+      },
+      "recentMistakes": [
+        {
+          "occurredAt": "2026-10-30T06:09:00.000Z",
+          "userAnswer": "mistake",
+          "expectedAnswer": "present.simple",
+          "errorType": "spelling",
+          "activityType": "meaning-recall",
+          "gameId": "dragon-hold"
+        }
+      ]
+    }
+  },
+  "sentences": {
+    "The lantern shines.": {
+      "sentenceId": "The lantern shines.",
+      "attempts": 1,
+      "correct": 0,
+      "wrong": 1,
+      "hints": 1,
+      "replays": 0,
+      "avgResponseMs": 2200,
+      "responseSamples": 1,
+      "correctStreak": 0,
+      "lastSeenAt": "2026-10-30T06:10:00.000Z",
+      "lastCorrectAt": null,
+      "lastWrongAt": "2026-10-30T06:10:00.000Z",
+      "mastery": 12,
+      "reviewPriority": 73,
+      "nextReviewAt": "2026-10-30T06:10:00.000Z",
+      "sourceGames": [
+        "recall-typing"
+      ],
+      "errorTypes": {
+        "spelling": 1
+      },
+      "recentMistakes": [
+        {
+          "occurredAt": "2026-10-30T06:10:00.000Z",
+          "userAnswer": "mistake",
+          "expectedAnswer": "The lantern shines.",
+          "errorType": "spelling",
+          "activityType": "review-card",
+          "gameId": "recall-typing"
+        }
+      ],
+      "recentAnswers": [
+        {
+          "occurredAt": "2026-10-30T06:10:00.000Z",
+          "answer": "mistake",
+          "result": "wrong"
+        }
+      ]
+    }
+  }
+}

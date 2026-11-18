@@ -1,0 +1,29 @@
+{
+  "game": "typing-survival",
+  "name": "slider-track",
+  "tryNumber": 1,
+  "sourceSize": [
+    1536,
+    1024
+  ],
+  "bboxAlphaGT16": [
+    58,
+    446,
+    1421,
+    128
+  ],
+  "bboxRatio": 11.1015625,
+  "ratioDeviationFrom16": 0.30615234375,
+  "scaleXY": [
+    0.7206192821956369,
+    0.5
+  ],
+  "processed": "games/typing-survival/tmp/codex-225/slider-track.try1.edge.processed.png",
+  "operations": [
+    "games/typing-survival/tmp/codex-225/slider-track.try1.edge.crop.png",
+    "-filter",
+    "Lanczos",
+    "-resize",
+    "1024x64!"
+  ]
+}

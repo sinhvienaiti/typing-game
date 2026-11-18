@@ -1,0 +1,22 @@
+"""Chạy pytest Audio Lab với mọi cache và fixture trong tmp/firefly-ingest."""
+import os
+import sys
+from pathlib import Path
+
+repo = Path(__file__).resolve().parents[3]
+lab = repo / 'tools/audio-lab'
+root = repo / 'tmp/firefly-ingest'
+cache = root / 'test-cache'
+sys.pycache_prefix = str(cache / 'pycache')
+sys.path.insert(0, str(lab))
+os.environ.update(AUDIOLAB_HOME=str(root / 'home'), MPLCONFIGDIR=str(cache / 'matplotlib'),
+                  NUMBA_CACHE_DIR=str(cache / 'numba'), XDG_CACHE_HOME=str(cache))
+from common import env
+env.CACHE = cache
+env.apply()
+import pytest
+os.chdir(lab)
+args = sys.argv[1:]
+raise SystemExit(pytest.main(['-c', str(lab / 'pytest.ini'), '--rootdir', str(lab),
+                             '--basetemp', str(root / 'pytest-tmp'), '-o', f'cache_dir={cache / "pytest"}',
+                             '-q', *args]))
