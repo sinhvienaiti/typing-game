@@ -285,7 +285,8 @@ Mỗi câu ≤ 12 từ, có phụ đề, có giọng đọc (mục 6). Bước s
 
 | Luật | Chi tiết |
 |---|---|
-| Tua nhanh × 2 | Alt + → (bật, tắt). Chỉ khi đang nghỉ, hoặc khi không còn chữ sống và không quái nào trong Vùng Chữ. Sim chạy hai bước mỗi khung, vẫn tất định |
+| Tự tua × 1,75 | Chỉ trong đợt, khi hết chữ sống và không quái nào ở hay sẽ vào Vùng Chữ trong 1,5 giây tới. Đủ điều kiện liên tục 0,3 giây thì bật dấu » cùng số ×1.75. Về ×1 ngay khi có chữ hoặc mất điều kiện. Không tua khi mở bảng, đặt/sửa món, dừng hay đếm 3-2-1. Alt + → thắng tự tua. Chỉ đổi số bước mỗi khung, không đổi sim, nhạc hay đồng hồ VFX. Chủ dự án đồng ý 28/10 (MAP1 §5.3, bước 0) |
+| Tua nhanh × 2 | Alt + → (bật, tắt). Chỉ khi đang nghỉ, hoặc khi không còn chữ sống và không quái nào trong Vùng Chữ. Sim chạy hai bước mỗi khung, vẫn tất định; thắng tự tua |
 | Chơi lại ải | Menu dừng và Màn thua. Không mất gì ngoài Vàng của ải |
 | Thử lại từ đợt trước | 1 lần mỗi lần chơi ải (01 §5), dùng ảnh chụp mục 1.3 |
 | Gợi ý hạ mức khó | Sau 2 lần thua liền một ải (00 §4.10). Không ép |

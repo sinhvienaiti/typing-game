@@ -38,6 +38,7 @@ tripo generate image-to-model <ảnh nguồn> -p texture_quality=detailed -p pbr
 | 7 | Last Line | Nữ xạ thủ (Lightbearer) | Firefly, 4 góc khớp `results-lose-bg.png` (`QUALITY_RESCUE` §4.4) | Chưa có, Claude làm | 50.000 | 40 (multiview) | — |
 | 8 | Last Line | Drone hỗ trợ | Firefly, 4 góc | Chưa có | 25.000 | 40 | — |
 | 9–13 | Last Line | 5 súng cầm tay: Pulse, Heat Beam, Scatter, Rail, Star Mortar | Firefly, ba phần tư | Chưa có | 15.000 mỗi súng | 5 × 40 | — |
+| 14 | Tu Tiên | Kiếm tu nữ (nhân vật chính) | `art-src/heroine/r4-view-{front,back,left}.v1-try*.png` + phải lật gương (vòng 4, phiếu 350) | **Chưa đạt** (giám khảo mù 7,5 / 7,2, sức hút 7,9–8,2) | 50.000 | multiview v3.1, texture detailed, PBR (dry-run 12/11 10:2x: hợp lệ, 0 cảnh báo; ví API 850) | — |
 | 14 | Tu Tiên | Kiếm Clear Wind `clear-wind` | `games/immortality-cultivation/art-src/weapons/clearwind-src3q.v4-try1-pad.png` | **Ngoại lệ của chủ dự án** (02/11 khuya, "Dựng thử bản 4"): nguồn chững ở 8,2–8,3 / 8–8,2 / 7,9–8,2 sau vòng 18–22 (`docs/games/tu-tien/art-requests/weapons/JUDGING.md`); model phải qua 8,5 trong lab | 15.000 | 40 | **Đã dựng** 02/11 23:12, task `0038a002-69f4-46e6-8ebc-3d1cd584a22c`, 40 credit (số dư 970 → 930). 14.728 tam giác, map màu, normal và ORM 4096. Gốc ở `games/immortality-cultivation/art-src/3d/weapons/clear-wind.glb`. Chờ đưa vào lab và chấm 8,5 |
 
 Tổng dự kiến 13 × 40 = **520 credit**. Còn khoảng 450 credit cho làm lại, hoặc nâng geometry `detailed` cho nhân vật.
@@ -106,3 +107,56 @@ Các ứng viên tốt nhất không thành một bộ: đá, thời kỳ và á
 Bị loại vì giấy phép: BlenderKit "Royalty Free", ShareTextures "Custom CC0", RenderCrate (điều khoản cấm AI), các mục gắn NoAI, NC, ND, SA, GPL.
 
 **Kết luận:** hướng này không qua được mốc. Hướng kế tiếp: thử nhờ ChatGPT (chế độ Chat) vẽ ảnh nguồn cho cả bộ theo một chuẩn chung, vì tranh ý tưởng nó vẽ có chất liệu tốt hơn Firefly.
+
+## Tu Tiên, mẫu Tripo cho ult Kim (16/11/2026)
+
+Chủ dự án đồng ý "Dùng Tripo từ ảnh thành phần". Một mẫu duy nhất, chưa làm loạt.
+
+| Mẫu | Ảnh nguồn | Cấu hình | Credit (trước → sau) | Kết quả |
+|---|---|---|---|---|
+| `tt-metal-blade-v1` (task `9745f72b`) | `games/immortality-cultivation/art-src/concept/ult-metal/ult-metal-blade-src.v1.png` | v3.1, detailed, pbr, face_limit 6000 | 850 → 810 (40) | 5.377 tam giác, Color/ORM/Normal 4096; GLB ở `games/.wt-ic-lab-all/art-src/lab/vfx/metal-ult/models3d/tripo/ult-metal-blade.tripo.v1.glb` |
+
+Nhận xét: ba kiếm và chuôi đọc đúng, nhưng thân kiếm hơi méo, chất liệu vàng mờ (không còn pha lê), dải sáng thành dây mảnh lủng củng. Chờ chủ dự án xem.
+
+### Tu Tiên, hai mẫu từ ảnh sạch (16/11/2026)
+
+Chủ dự án duyệt "chạy Tripo cả hai". v3.1, detailed, pbr, face_limit 6000.
+
+| Mẫu | Ảnh nguồn | Credit (trước → sau) | Kết quả |
+|---|---|---|---|
+| `tt-metal-clean-v1` (task `3720afc3`) | `art-src/concept/ult-metal/tripo-src/ult-metal-clean.v1-try1.png` | 810 → 770 (40) | 5.824 tam giác; `games/.wt-ic-lab-all/art-src/lab/vfx/metal-ult/models3d/tripo/ult-metal-clean.tripo.v1.glb` |
+| `tt-void-clean-v1` (task `f55e08c4`) | `art-src/concept/ult-void/tripo-src/ult-void-clean.v1-try1.png` | 770 → 730 (40) | 5.930 tam giác; `games/.wt-ic-lab-all/art-src/lab/vfx/void-ult/models3d/tripo/ult-void-clean.tripo.v1.glb` |
+| tt-metal-sword-v1 (task 65935807) | art-src/concept/ult-metal/tripo-src/ult-metal-sword.v1-try1.png | v3.1, detailed, pbr, face_limit 6000 | 730 -> 690 (40) | 5.570 tam giac; GLB games/.wt-ic-lab-all/art-src/lab/vfx/metal-ult/models3d/tripo/ult-metal-sword.tripo.v1.glb |
+
+### Tu Tiên, thân gốc nữ chính v5B và gương Nhật Luân Kính (18/11/2026)
+
+Chủ dự án duyệt hai ảnh nguồn cho Tripo (18/11). multiview-to-model (front/left/back), v3.1, detailed, pbr, không rig.
+
+| Mẫu | Ảnh nguồn | face_limit | Credit (trước → sau) | Kết quả |
+|---|---|---|---|---|
+| Task mồ côi `3fd23159` (thân gốc v4, agent trước bị dừng giữa chừng) | `art-src/heroine/models3d/src/base-body.v4.*.png` | 50.000 | 690 → 650 (40) | Không tải, không dùng |
+| `tt-base-body-v5B` (task `ec7ed4aa`) | `art-src/heroine/fashion/base-body.v5B-turn.v2-try1.png` | 50.000 | 650 → 610 (40) | 47.784 tam giác, Color/NormalGL/ORM 4096; `games/immortality-cultivation/art-src/heroine/models3d/base-body.v5B.tripo-try1.glb` |
+| `tt-light-relic-mirror-v1` (task `b747cbd4`) | `art-src/lab/vfx/light/stills/light-relic-mirror-a.v2-try2.png` | 12.000 | 610 → 570 (40) | 11.676 tam giác, Color/NormalGL/ORM 4096; `games/.wt-ic-lab-all/art-src/lab/vfx/light/models3d/tripo/light-relic-mirror.tripo.v1.glb` |
+
+Ảnh xoay: `typing-game-review/owner-review/2026-11-18/tu-tien/tripo-v5b-mirror/`. Chờ chủ dự án xem.
+
+### Tu Tiên, nữ chính v6B: thân và đầu tách riêng (18/11/2026)
+
+Chủ dự án chọn nguồn 2D v6B (`art-src/heroine/fashion/base-body.v6B-turn.v1-try2.png`); chỉ dùng công cụ miễn phí và credit Tripo sẵn có. Dry-run cả hai: hợp lệ, 0 cảnh báo.
+
+| Việc | Nguồn | face_limit | Credit | Kết quả |
+|---|---|---|---|---|
+| `tt-base-body-v6B` (task `bc5311fa`) | `models3d/v6b/src/{front,left,back}.png` (cắt từ tờ v6B, mặt nghiêng lật gương cho ô trái) | 50.000 | 570 → 530 (40) | 49.074 tam giác, Color/NormalGL/ORM 4096 |
+| `tt-head-v6B` (task `9075e48d`) | `models3d/v6b/src/head-{front,left}.png` (phóng to Lanczos từ ảnh mặt v6B) | 30.000 | 530 → 490 (40) | 29.295 tam giác, Color/NormalGL/ORM 4096 |
+
+Ghép trong Blender (đầu thay đầu thân, cổ cắm vào cổ áo): `models3d/v6b/heroine-v6b.assembled.glb`, `heroine-v6b.assembled-proj.blend`. Ảnh: `typing-game-review/owner-review/2026-11-18/tu-tien/heroine-v6b-3d/`. Chờ chủ dự án xem.
+
+### Tu Tiên, nữ chính v8: đầu từ ảnh mặt Firefly (18/11/2026)
+
+Nguồn: ảnh mặt Firefly chủ dự án chọn (`art-src/heroine/face/head-front.v1-try2.png`, `head-side.v1-try1.png` lật gương làm ô trái), chép vào `models3d/v8/src/`. Dry-run hợp lệ, 0 cảnh báo. Thiết lập: multiview front+left, `v3.1-20260211`, `texture_version=v3.5-20260815`, `delight=true`, `texture_quality=detailed`, `pbr=true`, geometry standard, `face_limit=40000`.
+
+| Việc | Nguồn | face_limit | Credit | Kết quả |
+|---|---|---|---|---|
+| `tt-head-v8` (task `a97ea184`) | `models3d/v8/src/head-{front,left}.png` | 40.000 | 490 → 450 (40) | `models3d/v8/out/tripo-out/tt-head-v8-a97ea184/model.glb`; ghép thân v6B (cùng thông số ghép v6B): `models3d/v8/heroine-v8.assembled.glb` |
+
+Ảnh: `typing-game-review/owner-review/2026-11-18/tu-tien/heroine-head-firefly-tripo/`. Chờ chủ dự án xem.

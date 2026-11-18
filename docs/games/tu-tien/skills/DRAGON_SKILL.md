@@ -1166,3 +1166,58 @@ Cột so "hai hành lang" (2,0 W là `twin-pearl+pool200`, 2,5 W là `twin-pearl
 | 3,75 W | 19 | 81,5 % | 95 % | 54,1 % |
 
 Mục này chỉ ghi số. Việc chỉnh cân bằng (ngân sách, cách chia hai bên, phần sửa tầm của SKILL_REACH) do Claude điều phối chốt ở bước sau.
+
+## 10. Bầy rồng khí (05/11/2026): sim tự vạch đường, chạm là trúng, nổ ngọc cả sân
+
+**Anh duyệt (05/11 16:00):** "rồng lướt qua quái nào thì gây sát thương quái đó, và khi rồng tới ngọc, sẽ gây ra 1 vụ nổ mạnh cả map". Hình rồng khí giữ như lab (`claude/dragon-swarm-lab`), không vẽ lại (15:35). Nguồn thiết kế: ChatGPT (Chat, High, tự duyệt 2 PASS), nguyên văn `docs/games/tu-tien/source/key2-qi-swarm-chatgpt-2026-11-05.md`; đọc mã: `docs/work/consult/key2-qi-swarm-wiring-study.md`. Claude chốt; chỗ Claude khác ChatGPT ghi **[Claude]**.
+
+### 10.1 Bất biến
+- 5 rồng, 5 vùng, 1 ngọc. Sim vạch đường, view chỉ vẽ đúng đường sim gửi (không tự tìm đích, không làm trơn lại, không đổi đường).
+- Chỉ thân rồng thật chạm mới gây sát thương; mỗi quái **một** đòn chạm mỗi lần tung (con rồng chạm đầu tiên giữ đòn). Mỗi quái tối đa 3 đòn mỗi lần tung: sóng thả, chạm, nổ ngọc.
+- Luật không phụ thuộc map: chỉ dùng biên sân, người ra chiêu, vị trí và mật độ quái. Toàn số nguyên, không float, không lượng giác lúc chạy, không ngẫu nhiên, không duyệt không thứ tự.
+- Giữ hồi chiêu 8 s, chờ tung 3 s, trần boss, trần cụm 60 %.
+
+### 10.2 Vạch đường (số nguyên)
+- **Vùng:** chia sân thành 5 dải bằng nhau theo trục dài (bằng nhau thì trục X), biên nửa mở, dải cuối gồm biên max. Rồng i giữ dải i. Vùng chỉ quyết chọn đích; rồng bay qua vùng khác vẫn chạm được.
+- **Chọn đám quái:** chụp quái đủ điều kiện (đất, trời, boss) ở F0; mỗi vùng chia ô 4 m; điểm = đất + trời + 2 × boss; xếp điểm giảm, rồi chi phí đường tăng, rồi tọa độ ô; lấy tối đa 2 đám tách rời mỗi rồng; đích lái = medoid vị trí quái của đám (hòa thì theo id quái).
+- **Ngọc P:** cùng tỉ lệ với 271 nhưng không dùng điểm tim của map: H = medoid của ô 4 m điểm cao nhất toàn sân, G = trọng tâm quái đất (không có thì mọi quái); đi từ H về G 3/5 quãng, tối đa 12 m; kẹp trong sân lùi 2 m; trong 60 m quanh người ra chiêu; sân hẹp hơn 4 m thì lấy tâm sân.
+- **Lái:** tọa độ nguyên (cm hay `u` của sim), bước 0,25 m, 4096 hướng lượng tử, rẽ tối đa 36 đơn vị hướng mỗi bước (bán kính ≥ 4,5 m), dài tối đa 75 m, tối đa 301 mẫu. Thử [2 đích, 1 đích, không đích] tới khi đường hợp lệ (trong sân, đúng bán kính, ≤ 75 m, tới kịp). Bảng hướng có phiên bản; phép nhân chia qua `mulDiv` hay số nguyên rộng có kiểm.
+- **[Claude] Đường cong cuối:** làm trơn B-spline bậc hai (như lab, phiếu 289) rồi **nướng thành mẫu nguyên**; kiểm lại bán kính sau làm trơn, sai thì giữ đường lái. Mẫu nướng là nguồn duy nhất cho cả va chạm và hình.
+- **[Claude] Đường xoắn khóa theo quỹ đạo:** xoắn ngang 1,8 m, nâng 0,8 m, bước sóng 15 m, pha theo độ dài đường (không trôi theo thời gian, khác lab `drift 0.1`). Thân rồng vì vậy luôn nằm trên **đường xoắn cố định** = đường nướng + độ lệch xoắn tại mỗi mẫu (tính bằng bảng sin nguyên). Sim lưu đường xoắn này; view vẽ thân bám đúng nó.
+- **Độ cao:** đám đất bay thấp, đám trời bay ở độ cao của đám; nội suy dọc bằng số nguyên; độ cao không tới được thì bỏ đích. Bán kính 4,5 m chỉ tính theo mặt ngang.
+- **Trường hợp biên:** 1–2 quái: rồng liên quan nhắm chúng, rồng khác tuần tra vùng mình; mọi quái một vùng: một rồng dồn vào đó, bốn rồng tuần tra, nổ ngọc vẫn trúng hết; vùng trống: bay cảnh về ngọc, không bịa sát thương; chỉ quái trời: mật độ trời quyết đường; quái tới muộn: không vạch lại, vẫn trúng chạm thật và nổ; quái chết trước khi chạm: không trúng; không quái đủ điều kiện: giữ luật chờ tung như cũ.
+
+### 10.3 Nhịp (tick sau khi giải chiêu, 60 tick = 1 s) **[Claude: nhanh hơn bản ChatGPT 6,5 s]**
+- F0 giải chiêu, chốt đường, phát sự kiện đường. F1 sóng thả. Thả rồng F2, F8, F14, F20, F26.
+- Bay tới lúc lao: đầu rồng i vào ngọc ở F180 + 12i (F180…F228). Tốc độ rồng = độ dài đường tới điểm 2 m trước ngọc / thời gian có; kẹp 13–20 m/s (gần mức 1,3× anh chọn); nhanh hơn 20 thì bỏ bớt đích; chậm hơn 13 thì chèn điểm lái trên vòng 6 m quanh ngọc, mỗi 90° (phiếu 293). Trong 7,8 m cuối, rồng lặn thẳng vào ngọc với bán kính rẽ giảm dần như lab; kiểm bán kính 4,4 m chỉ ở các mẫu cách ngọc hơn 8 m.
+- Sau khi đầu vào ngọc, thân rút vào ngọc dọc đường trong 30 tick; va chạm vẫn tính trên phần thân còn hiện.
+- **Nổ ngọc F260** (4,33 s). Dư âm tới F300. **Hết F300 (5 s)**, còn 180 tick trước hồi chiêu.
+
+### 10.4 Sát thương (số khởi điểm, bot chốt)
+| Kênh | Khởi điểm | Thời điểm | Khoảng quét |
+|---|---|---|---|
+| Sóng thả | quỹ chung 0,5 W, bán kính **6 m** [Claude: 4,5 → 6] | F1 | 0,3–0,7 W |
+| Chạm thân | **0,15 W** mỗi quái, một lần mỗi tung [Claude: 0,08 → 0,15] | khi chạm | 0,10–0,20 W |
+| Nổ ngọc | quỹ chung **2,5 W** [Claude: 3,0 → 2,5] | F260 | 2,0–3,5 W |
+- **[Claude] Va chạm chạm:** quái trúng khi khoảng cách tới **đoạn đường xoắn mà thân đang chiếm** (từ độ dài đuôi tới độ dài đầu ở tick đó) ≤ 0,85 m + hurtbox. Đầu đi ≤ 0,35 m mỗi tick < bán kính nên không lọt qua; không cần quét 41 trạm thân. Lưới ô cho pha rộng; thứ tự: tick, rồng, id quái.
+- **[Claude] Đòn đầu:** sóng thả 6 m ở F1. Không quái nào trong 6 m thì đích đầu của rồng 0 là đám quái gần người ra chiêu nhất (bất kể vùng), để đòn chạm đầu tới sớm nhất; hình và âm vẫn phát ngay ở F0–F1. Không bịa đòn từ xa.
+- **Nổ ngọc:** chụp mọi quái sống trong sân ở F260; q = khoảng cách tới ngọc / khoảng cách từ ngọc tới biên sân theo cùng tia, thang 0–1000; trọng số w = 1000 − ⌊400q/1000⌋ (ngọc 1000, biên 600); quỹ = max(round(2,5 W), N); mỗi quái giữ 1 đơn vị, phần còn lại chia theo trọng số, dư lớn nhất, hòa theo id.
+- **Trần:** quái thường tối đa 2,5 W mỗi tung, boss 1,5 W; cả 3 kênh chung một danh tính đòn diện rộng cho trần cụm 60 %; không chia lại phần bị trần cắt; đo sát thương thật sau trần, không tính dư máu.
+- **Nhận cân bằng:** phím 2 ≤ 45 % sát thương của bot Chuẩn; bot Chuẩn thắng rõ hơn 15 %; ghi theo lần tung: độ dài đường, số đám phủ, tick đòn đầu, số quái bị chạm, sát thương từng kênh, phần bị trần cắt. Nếu phím 2 vẫn lấn át mà bot Chuẩn vẫn thua thì sửa các chiêu khác hay cách bot dùng, không bắt riêng chiêu này gánh.
+
+### 10.5 Sự kiện sim → view
+- `skill-fx` giai đoạn mới ở F0, gói `SwarmCastV1`: castId, seat, slot, castTick; người ra chiêu, ngọc, biên sân (nguyên); 5 mảng mẫu đường xoắn đã nướng (số nguyên, xếp cố định); tick thả, tick lao; thời gian rút; phiên bản hình học và tham số xoắn; checksum. Trần 24 KiB.
+- Giai đoạn `swarm-burst` (F260) và `swarm-end` (F300). Sự kiện `hit` thêm `castId`, `phase` (release/touch/burst) và `dragon` (chỉ số, khi chạm).
+- Phiên bản người vạch đường, bảng hướng, va chạm, sát thương, lược đồ sự kiện vào rulesHash của biến thể; biến thể vẫn sau cờ header, cờ tắt thì băm replay không đổi.
+
+### 10.6 View (phiếu sau)
+- Presenter `src/view/skills/qi-dragon-swarm.ts` (từ module lab): đồng hồ = tick thế giới (dừng khi tạm dừng), vẽ thân theo đúng đường xoắn sim gửi, nội suy giữa hai tick; pool 2 bầy cho tung chồng; làm ấm trong `newMatch`; giảm chuyển động theo canon §24.
+- Tầng: High 5 rồng + tối đa 3 lượt depth prepass (≤ 8 lượt vẽ skinned); Medium 5 rồng một lượt, không prepass; Low 5 dải/bóng 2D theo đường chiếu, ngọc và nổ màn hình, không skinned, không bloom, giữ đúng nhịp và chỗ.
+- Model và texture: bản High/Medium của phiếu 292 qua manifest `public/assets/immortality-cultivation/`.
+
+### 10.7 Thứ tự làm và cổng
+1. Phiếu 293 (sim A): biến thể `swarm` sau cờ, mô-đun hình học nguyên, vùng, đám, ngọc, lái, nướng, đường xoắn, sự kiện `SwarmCastV1`; test tất định và biên. Cờ tắt: băm replay không đổi.
+2. Phiếu 294 (sim B): ba kênh sát thương, va chạm trên đường xoắn, trần, sự kiện `hit` mở rộng, giai đoạn nổ/hết; test bảo toàn quỹ, thứ tự, trần.
+3. Phiếu 295: bot đo cân bằng (khung 272) cho biến thể mới, quét quỹ.
+4. Phiếu 296: presenter view + tầng + lab chạy từ sim thật; video cho anh.
+5. Sau khi anh duyệt và cân bằng đạt: bật biến thể cho bản chơi (header, rulesHash, quyết định tương thích replay: cần anh duyệt).
