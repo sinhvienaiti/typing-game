@@ -1,0 +1,126 @@
+import json
+
+items = [
+  {"id": "lex.en.200k.063403", "hw": "amaranthus albus", "pos": "phrase", "ipa": "/ˌæməˈrænθəs ˈælbəs/", "vi": "cây rau dền gai trắng lăn thảo"},
+  {"id": "lex.en.200k.063404", "hw": "amnesic aphasia", "pos": "phrase", "ipa": "/æmˈniːzɪk əˈfeɪʒə/", "vi": "chứng mất ngôn ngữ quên từ vựng"},
+  {"id": "lex.en.200k.063405", "hw": "auditory agnosia", "pos": "phrase", "ipa": "/ˈɔːdɪtɔːri æɡˈnoʊʒə/", "vi": "chứng mất nhận thức âm thanh"},
+  {"id": "lex.en.200k.063406", "hw": "ballistic galvanometer", "pos": "phrase", "ipa": "/bəˈlɪstɪk ˌɡælvəˈnɑːmətər/", "vi": "điện kế xung đo điện lượng tức thì"},
+  {"id": "lex.en.200k.063407", "hw": "blue peafowl", "pos": "phrase", "ipa": "/bluː ˈpiːfaʊl/", "vi": "công lam Ấn Độ lông xanh sặc sỡ"},
+  {"id": "lex.en.200k.063408", "hw": "brassica oleracea", "pos": "phrase", "ipa": "/ˈbræsɪkə ˌɑːləˈreɪsiə/", "vi": "loài cải dại gốc bắp cải súp lơ"},
+  {"id": "lex.en.200k.063409", "hw": "cardiogenic shock", "pos": "phrase", "ipa": "/ˌkɑːrdioʊˈdʒɛnɪk ʃɑːk/", "vi": "sốc tim do suy giảm bơm máu cấp"},
+  {"id": "lex.en.200k.063410", "hw": "cebu maguey", "pos": "phrase", "ipa": "/səˈbuː ˈmæɡweɪ/", "vi": "sợi thùa Cebu Philippines làm dây"},
+  {"id": "lex.en.200k.063411", "hw": "class gastropoda", "pos": "phrase", "ipa": "/klæs ɡæˈstrɑːpədə/", "vi": "lớp động vật Chân bụng gồm ốc sên"},
+  {"id": "lex.en.200k.063412", "hw": "congo peafowl", "pos": "phrase", "ipa": "/ˈkɑːŋɡoʊ ˈpiːfaʊl/", "vi": "chim công rừng nhiệt đới Congo"},
+  {"id": "lex.en.200k.063413", "hw": "coxsackie virus", "pos": "phrase", "ipa": "/kɑːkˈsæki ˈvaɪrəs/", "vi": "virus Coxsackie gây tay chân miệng"},
+  {"id": "lex.en.200k.063414", "hw": "diaphragmatic pleurisy", "pos": "phrase", "ipa": "/ˌdaɪəfræɡˈmætɪk ˈplʊrəsi/", "vi": "viêm màng phổi vùng cơ hoành"},
+  {"id": "lex.en.200k.063415", "hw": "donato bramante", "pos": "phrase", "ipa": "/doʊˈnɑːtoʊ brəˈmɑːnteɪ/", "vi": "kiến trúc sư Phục Hưng Ý Bramante"},
+  {"id": "lex.en.200k.063416", "hw": "edward durell stone", "pos": "phrase", "ipa": "/ˈɛdwərd dʊˈrɛl stoʊn/", "vi": "kiến trúc sư hiện đại Mỹ Stone"},
+  {"id": "lex.en.200k.063417", "hw": "erik von willebrand", "pos": "phrase", "ipa": "/ˈɛrɪk vɑːn ˈvɪləbrænd/", "vi": "bác sĩ Phần Lan von Willebrand"},
+  {"id": "lex.en.200k.063418", "hw": "eucalypt grandis", "pos": "phrase", "ipa": "/ˈjuːkəlɪpt ˈɡrændɪs/", "vi": "cây bạch đàn trắng thân cao Grandis"},
+  {"id": "lex.en.200k.063419", "hw": "fraxinus americana", "pos": "phrase", "ipa": "/ˈfræksɪnəs əˌmɛrɪˈkænə/", "vi": "cây tần bì trắng gỗ cứng Bắc Mỹ"},
+  {"id": "lex.en.200k.063420", "hw": "fyodor mikhailovich dostoyevsky", "pos": "phrase", "ipa": "/ˈfjɔːdər mɪˈxaɪləvɪtʃ ˌdɔːstɔɪˈjɛfski/", "vi": "đại văn hào Nga Dostoyevsky"},
+  {"id": "lex.en.200k.063421", "hw": "gabriel tellez", "pos": "phrase", "ipa": "/ˈɡeɪbriəl ˈtɛlɛz/", "vi": "nhà soạn kịch Tây Ban Nha Tirso"},
+  {"id": "lex.en.200k.063422", "hw": "genus ananas", "pos": "phrase", "ipa": "/ˈdʒiːnəs əˈnænəs/", "vi": "chi thực vật cây dứa thơm Ananas"},
+  {"id": "lex.en.200k.063423", "hw": "genus arenaria", "pos": "phrase", "ipa": "/ˈdʒiːnəs ˌærəˈnɛriə/", "vi": "chi cỏ cát hoa trắng Arenaria"},
+  {"id": "lex.en.200k.063424", "hw": "genus convolvulus", "pos": "phrase", "ipa": "/ˈdʒiːnəs kənˈvɑːlvjələs/", "vi": "chi dây leo bìm bìm Convolvulus"},
+  {"id": "lex.en.200k.063425", "hw": "genus cymbidium", "pos": "phrase", "ipa": "/ˈdʒiːnəs sɪmˈbɪdiəm/", "vi": "chi địa lan hoàng vũ Cymbidium"},
+  {"id": "lex.en.200k.063426", "hw": "genus rubia", "pos": "phrase", "ipa": "/ˈdʒiːnəs ˈruːbiə/", "vi": "chi cây thiên thảo rễ nhuộm đỏ"},
+  {"id": "lex.en.200k.063427", "hw": "genus solidago", "pos": "phrase", "ipa": "/ˈdʒiːnəs ˌsɑːlɪˈdeɪɡoʊ/", "vi": "chi hoa cúc hoàng anh Solidago"},
+  {"id": "lex.en.200k.063428", "hw": "genus taenia", "pos": "phrase", "ipa": "/ˈdʒiːnəs ˈtiːniə/", "vi": "chi sán dây ký sinh đường ruột"},
+  {"id": "lex.en.200k.063429", "hw": "glenn theodore seaborg", "pos": "phrase", "ipa": "/ɡlɛn ˈθiːədɔːr ˈsiːbɔːrɡ/", "vi": "nhà hóa học hạt nhân Nobel Seaborg"},
+  {"id": "lex.en.200k.063430", "hw": "green peafowl", "pos": "phrase", "ipa": "/ɡriːn ˈpiːfaʊl/", "vi": "chim công xanh lục Đông Nam Á"},
+  {"id": "lex.en.200k.063431", "hw": "gussy up", "pos": "phrase", "ipa": "/ˈɡʌsi ʌp/", "vi": "trang điểm chải chuốt ăn diện đẹp"},
+  {"id": "lex.en.200k.063432", "hw": "hurdy gurdy", "pos": "phrase", "ipa": "/ˈhɜːrdi ˈɡɜːrdi/", "vi": "đàn dây quay tay cổ điển châu Âu"},
+  {"id": "lex.en.200k.063433", "hw": "indian grackle", "pos": "phrase", "ipa": "/ˈɪndiən ˈɡrækəl/", "vi": "chim sáo đen mỏ vàng Ấn Độ"},
+  {"id": "lex.en.200k.063434", "hw": "intercalary year", "pos": "phrase", "ipa": "/ɪnˈtɜːrkəˌlɛri jɪər/", "vi": "năm nhuận thêm một ngày hay tháng"},
+  {"id": "lex.en.200k.063435", "hw": "jan tinbergen", "pos": "phrase", "ipa": "/jɑːn ˈtɪnbɜːrɡən/", "vi": "nhà kinh tế lượng Nobel Tinbergen"},
+  {"id": "lex.en.200k.063436", "hw": "karen blixen", "pos": "phrase", "ipa": "/ˈkærən ˈblɪksən/", "vi": "nữ văn sĩ Đan Mạch Karen Blixen"},
+  {"id": "lex.en.200k.063437", "hw": "libidinal energy", "pos": "phrase", "ipa": "/lɪˈbɪdənəl ˈɛnərdʒi/", "vi": "năng lượng xung năng tình dục Freud"},
+  {"id": "lex.en.200k.063438", "hw": "luigi cherubini", "pos": "phrase", "ipa": "/luˈiːdʒi ˌkɛruːˈbiːni/", "vi": "nhà soạn nhạc cổ điển Cherubini"},
+  {"id": "lex.en.200k.063439", "hw": "marta brigit nilsson", "pos": "phrase", "ipa": "/ˈmɑːrtə ˈbɪrɡɪt ˈnɪlsən/", "vi": "nữ ca sĩ opera Birgit Nilsson"},
+  {"id": "lex.en.200k.063440", "hw": "menhaden oil", "pos": "phrase", "ipa": "/mɛnˈheɪdən ɔɪl/", "vi": "dầu cá trích menhaden công nghiệp"},
+  {"id": "lex.en.200k.063441", "hw": "morus alba", "pos": "phrase", "ipa": "/ˈmɔːrəs ˈælbə/", "vi": "cây dâu tằm trắng nuôi tằm ăn lá"},
+  {"id": "lex.en.200k.063442", "hw": "muriatic acid", "pos": "phrase", "ipa": "/ˌmjʊriˈætɪk ˈæsɪd/", "vi": "axit clohiđric công nghiệp"},
+  {"id": "lex.en.200k.063443", "hw": "nanga parbat", "pos": "phrase", "ipa": "/ˈnʌŋɡə ˈpɑːrbət/", "vi": "đỉnh núi Nanga Parbat dãy Himalaya"},
+  {"id": "lex.en.200k.063444", "hw": "nasogastric feeding", "pos": "phrase", "ipa": "/ˌneɪzoʊˈɡæstrɪk ˈfiːdɪŋ/", "vi": "nuôi ăn qua ống thông mũi dạ dày"},
+  {"id": "lex.en.200k.063445", "hw": "oblanceolate leaf", "pos": "phrase", "ipa": "/ɑːbˈlænsiəlɪt liːf/", "vi": "lá hình mác ngược phình ở đầu"},
+  {"id": "lex.en.200k.063446", "hw": "panchromatic film", "pos": "phrase", "ipa": "/ˌpænkrəˈmætɪk fɪlm/", "vi": "phim chụp nhạy mọi bước sóng sáng"},
+  {"id": "lex.en.200k.063447", "hw": "phaseolus aureus", "pos": "phrase", "ipa": "/fəˈsiːələs ˈɔːriəs/", "vi": "cây đậu xanh hạt nhỏ làm giá đỗ"},
+  {"id": "lex.en.200k.063448", "hw": "plumeria alba", "pos": "phrase", "ipa": "/pluːˈmɪriə ˈælbə/", "vi": "cây hoa sứ đại cánh trắng thơm"},
+  {"id": "lex.en.200k.063449", "hw": "pudendal cleavage", "pos": "phrase", "ipa": "/pjuːˈdɛndəl ˈkliːvɪdʒ/", "vi": "khe âm hộ (giải phẫu nữ)"},
+  {"id": "lex.en.200k.063450", "hw": "pudendal slit", "pos": "phrase", "ipa": "/pjuːˈdɛndəl slɪt/", "vi": "khe âm hộ (giải phẫu học nữ)"},
+  {"id": "lex.en.200k.063451", "hw": "purple grackle", "pos": "phrase", "ipa": "/ˈpɜːrpəl ˈɡrækəl/", "vi": "chim sáo đen lông ánh tím Bắc Mỹ"},
+  {"id": "lex.en.200k.063452", "hw": "salix blanda", "pos": "phrase", "ipa": "/ˈseɪlɪks ˈblændə/", "vi": "cây liễu rủ lai cành mềm rũ xuống"},
+  {"id": "lex.en.200k.063453", "hw": "salmonella typhimurium", "pos": "phrase", "ipa": "/ˌsælməˈnɛlə ˌtaɪfɪˈmjʊriəm/", "vi": "vi khuẩn Salmonella gây ngộ độc"},
+  {"id": "lex.en.200k.063454", "hw": "sanguinary ant", "pos": "phrase", "ipa": "/ˈsæŋɡwɪˌnɛri ænt/", "vi": "kiến đỏ bắt kiến khác làm nô lệ"},
+  {"id": "lex.en.200k.063455", "hw": "sedum rosea", "pos": "phrase", "ipa": "/ˈsiːdəm ˈroʊziə/", "vi": "cây rễ vàng vùng núi lạnh Rhodiola"},
+  {"id": "lex.en.200k.063456", "hw": "simon kuznets", "pos": "phrase", "ipa": "/ˈsaɪmən ˈkʌznɛts/", "vi": "nhà kinh tế học Nobel Simon Kuznets"},
+  {"id": "lex.en.200k.063457", "hw": "soyabean oil", "pos": "phrase", "ipa": "/ˈsɔɪəbiːn ɔɪl/", "vi": "dầu thực vật ép từ hạt đậu nành"},
+  {"id": "lex.en.200k.063458", "hw": "supraorbital ridge", "pos": "phrase", "ipa": "/ˌsuːprəˈɔːrbɪtəl rɪdʒ/", "vi": "gờ cung mày phía trên ổ mắt"},
+  {"id": "lex.en.200k.063459", "hw": "supraorbital vein", "pos": "phrase", "ipa": "/ˌsuːprəˈɔːrbɪtəl veɪn/", "vi": "tĩnh mạch trên ổ mắt vùng trán"},
+  {"id": "lex.en.200k.063460", "hw": "veronica arvensis", "pos": "phrase", "ipa": "/vəˈrɑːnɪkə ɑːrˈvɛnsɪs/", "vi": "cây cỏ thủy tiên đồng hoa lam nhỏ"},
+  {"id": "lex.en.200k.063461", "hw": "vesicular stomatitis", "pos": "phrase", "ipa": "/vəˈsɪkjələr ˌstoʊməˈtaɪtɪs/", "vi": "bệnh viêm miệng mụn nước ở gia súc"},
+  {"id": "lex.en.200k.063462", "hw": "viola arvensis", "pos": "phrase", "ipa": "/vaɪˈoʊlə ɑːrˈvɛnsɪs/", "vi": "hoa păng-xê dại đồng ruộng châu Âu"},
+  {"id": "lex.en.200k.063463", "hw": "william of occam", "pos": "phrase", "ipa": "/ˈwɪliəm əv ˈɑːkəm/", "vi": "triết gia Dao cạo William of Occam"},
+  {"id": "lex.en.200k.063464", "hw": "zombi spirit", "pos": "phrase", "ipa": "/ˈzɑːmbi ˈspɪrɪt/", "vi": "linh hồn nhập xác theo tín ngưỡng"},
+  {"id": "lex.en.200k.063465", "hw": "adrianoples", "pos": "noun", "ipa": "/ˌeɪdriəˈnoʊpəlz/", "vi": "thành phố cổ Adrianople (Edirne)"},
+  {"id": "lex.en.200k.063466", "hw": "alars", "pos": "noun", "ipa": "/ˈeɪlɑːrz/", "vi": "hóa chất điều hòa sinh trưởng Alar"},
+  {"id": "lex.en.200k.063467", "hw": "amias", "pos": "noun", "ipa": "/ˈeɪmiəz/", "vi": "chi cá vây cung nước ngọt cổ Amia"},
+  {"id": "lex.en.200k.063468", "hw": "angaras", "pos": "noun", "ipa": "/æŋˈɡɑːrəz/", "vi": "dòng sông Angara chảy từ hồ Baikal"},
+  {"id": "lex.en.200k.063469", "hw": "angelfishes", "pos": "noun", "ipa": "/ˈeɪndʒəlˌfɪʃɪz/", "vi": "cá thiên thần biển; cá ông tiên"},
+  {"id": "lex.en.200k.063470", "hw": "anglophiles", "pos": "noun", "ipa": "/ˈæŋɡləˌfaɪlz/", "vi": "người yêu mến văn hóa nước Anh"},
+  {"id": "lex.en.200k.063471", "hw": "aorists", "pos": "noun", "ipa": "/ˈeɪərɪsts/", "vi": "thời quá khứ bất định ngữ pháp cổ"},
+  {"id": "lex.en.200k.063472", "hw": "archbishoprics", "pos": "noun", "ipa": "/ˌɑːrtʃˈbɪʃəprɪks/", "vi": "tổng giáo phận; chức tổng giám mục"},
+  {"id": "lex.en.200k.063473", "hw": "armorers", "pos": "noun", "ipa": "/ˈɑːrmərərz/", "vi": "thợ rèn áo giáp; thợ sửa vũ khí"},
+  {"id": "lex.en.200k.063474", "hw": "asymptotes", "pos": "noun", "ipa": "/ˈæsəmptoʊts/", "vi": "đường tiệm cận trong toán học"},
+  {"id": "lex.en.200k.063475", "hw": "atomizations", "pos": "noun", "ipa": "/ˌætəmaɪˈzeɪʃənz/", "vi": "sự phun sương mịn; nguyên tử hóa"},
+  {"id": "lex.en.200k.063476", "hw": "babushkas", "pos": "noun", "ipa": "/bəˈbʊʃkəz/", "vi": "khăn trùm đầu phụ nữ Nga; bà ngoại"},
+  {"id": "lex.en.200k.063477", "hw": "ballyhooed", "pos": "verb", "ipa": "/ˌbæliˈhuːd/", "vi": "đã quảng cáo rùm beng giật gân"},
+  {"id": "lex.en.200k.063478", "hw": "ballyhooing", "pos": "verb", "ipa": "/ˌbæliˈhuːɪŋ/", "vi": "đang thổi phồng quảng cáo ồn ào"},
+  {"id": "lex.en.200k.063479", "hw": "ballyhoos", "pos": "noun", "ipa": "/ˌbæliˈhuːz/", "vi": "sự quảng cáo ồn ào thổi phồng"},
+  {"id": "lex.en.200k.063480", "hw": "belorussians", "pos": "noun", "ipa": "/ˌbɛloʊˈrʌʃənz/", "vi": "người dân quốc gia Belarus"},
+  {"id": "lex.en.200k.063481", "hw": "bilbies", "pos": "noun", "ipa": "/ˈbɪlbiz/", "vi": "thú có túi tai thỏ nhỏ của Úc"},
+  {"id": "lex.en.200k.063482", "hw": "bookplates", "pos": "noun", "ipa": "/ˈbʊkpleɪts/", "vi": "nhãn dán tên chủ sở hữu trong sách"},
+  {"id": "lex.en.200k.063483", "hw": "brahes", "pos": "noun", "ipa": "/ˈbrɑːhɪz/", "vi": "nhà thiên văn Đan Mạch Tycho Brahe"},
+  {"id": "lex.en.200k.063484", "hw": "bruches", "pos": "noun", "ipa": "/ˈbruːxɪz/", "vi": "nhà soạn nhạc Đức Max Bruch"},
+  {"id": "lex.en.200k.063485", "hw": "burgomasters", "pos": "noun", "ipa": "/ˈbɜːrɡəˌmæstərz/", "vi": "thị trưởng thành phố ở Hà Lan Đức"},
+  {"id": "lex.en.200k.063486", "hw": "cabbies", "pos": "noun", "ipa": "/ˈkæbiz/", "vi": "tài xế lái xe taxi (thân mật)"},
+  {"id": "lex.en.200k.063487", "hw": "cabinetmakers", "pos": "noun", "ipa": "/ˈkæbənətˌmeɪkərz/", "vi": "thợ mộc đóng tủ gỗ tinh xảo"},
+  {"id": "lex.en.200k.063488", "hw": "cantier", "pos": "adj", "ipa": "/ˈkæntiər/", "vi": "tươi tỉnh nhanh nhẹn hoạt bát hơn"},
+  {"id": "lex.en.200k.063489", "hw": "cantiest", "pos": "adj", "ipa": "/ˈkæntiɪst/", "vi": "tươi tỉnh nhanh nhẹn hoạt bát nhất"},
+  {"id": "lex.en.200k.063490", "hw": "caplins", "pos": "noun", "ipa": "/ˈkæplɪnz/", "vi": "cá ốt-me nhỏ biển lạnh Bắc Cực"},
+  {"id": "lex.en.200k.063491", "hw": "caroli", "pos": "noun", "ipa": "/ˈkærəlaɪ/", "vi": "hoàng đế Charlemagne; tiền Carolus"},
+  {"id": "lex.en.200k.063492", "hw": "caroluses", "pos": "noun", "ipa": "/ˈkærələsɪz/", "vi": "đồng tiền vàng cổ Anh thời Charles"},
+  {"id": "lex.en.200k.063493", "hw": "chiricos", "pos": "noun", "ipa": "/ˈkɪrəkoʊz/", "vi": "họa sĩ siêu thực Ý De Chirico"},
+  {"id": "lex.en.200k.063494", "hw": "comeniuses", "pos": "noun", "ipa": "/kəˈmiːniəsɪz/", "vi": "nhà giáo dục học Séc Comenius"},
+  {"id": "lex.en.200k.063495", "hw": "cornua", "pos": "noun", "ipa": "/ˈkɔːrnuːə/", "vi": "cấu trúc giải phẫu dạng sừng cong"},
+  {"id": "lex.en.200k.063496", "hw": "coumadins", "pos": "noun", "ipa": "/ˈkuːmədɪnz/", "vi": "thuốc chống đông máu warfarin"},
+  {"id": "lex.en.200k.063497", "hw": "decolonisations", "pos": "noun", "ipa": "/diːˌkɑːlənaɪˈzeɪʃənz/", "vi": "quá trình phi thực dân hóa (Anh)"},
+  {"id": "lex.en.200k.063498", "hw": "dodecahedrons", "pos": "noun", "ipa": "/ˌdoʊdɛkəˈhiːdrənz/", "vi": "khối đa diện đều mười hai mặt"},
+  {"id": "lex.en.200k.063499", "hw": "donees", "pos": "noun", "ipa": "/doʊˈniːz/", "vi": "người được tặng cho tài sản quà"},
+  {"id": "lex.en.200k.063500", "hw": "dullards", "pos": "noun", "ipa": "/ˈdʌlərdz/", "vi": "người đần độn chậm hiểu u tối"},
+  {"id": "lex.en.200k.063501", "hw": "eidoses", "pos": "noun", "ipa": "/ˈaɪdoʊsɪz/", "vi": "hình thái bản chất trong triết học"},
+  {"id": "lex.en.200k.063502", "hw": "fluoroscopies", "pos": "noun", "ipa": "/flʊəˈrɑːskəpiz/", "vi": "kỹ thuật chiếu X-quang huỳnh quang"}
+]
+
+with open('scratch/b33_r07_raw_p5.json') as f:
+    raw = json.load(f)
+
+assert len(items) == 100
+assert len(raw) == 100
+
+for i, (item, r) in enumerate(zip(items, raw)):
+    assert item['id'] == r['id'], f"Mismatch id at {i}: {item['id']} vs {r['id']}"
+    assert item['hw'] == r['hw'], f"Mismatch hw at {i}: {item['hw']} vs {r['hw']}"
+    assert len(item['vi']) <= 35, f"vi length > 35 at {i} ({item['hw']}): {len(item['vi'])}"
+    assert item['pos'] in ['noun', 'verb', 'adj', 'adv', 'num', 'intj', 'prep', 'pron', 'conj', 'det', 'phrase'], f"Invalid pos at {i}: {item['pos']}"
+    assert item['ipa'].startswith('/') and item['ipa'].endswith('/') and item['ipa'].count('/') == 2, f"Invalid ipa at {i}: {item['ipa']}"
+    assert not item['ipa'][1:-1].startswith(' ') and not item['ipa'][1:-1].endswith(' '), f"Space in ipa at {i}: {item['ipa']}"
+    r['pos'] = item['pos']
+    r['ipa'] = item['ipa']
+    r['vi'] = item['vi']
+    r['status'] = 'reviewed'
+
+with open('scratch/b33_r07_p5.json', 'w') as f:
+    json.dump(raw, f, ensure_ascii=False, indent=2)
+print("Saved scratch/b33_r07_p5.json OK")

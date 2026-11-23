@@ -1,0 +1,122 @@
+import json
+
+raw = json.load(open("scratch/b19_r01_raw_p2.json"))
+assert len(raw) == 100
+
+data = [
+    {"id": "lex.en.100k.090102", "hw": "lambdacism", "pos": "noun", "ipa": "/ˈlæmdəsɪzəm/", "vi": "tật nói ngọng âm L; ngọng âm L"},
+    {"id": "lex.en.100k.090103", "hw": "lambdagram", "pos": "noun", "ipa": "/ˈlæmdəɡræm/", "vi": "ký hiệu lambda; biểu đồ lambda"},
+    {"id": "lex.en.100k.090104", "hw": "lambed", "pos": "verb", "ipa": "/læmd/", "vi": "đã sinh cừu con; đã đẻ cừu con"},
+    {"id": "lex.en.100k.090105", "hw": "lambency", "pos": "noun", "ipa": "/ˈlæmbənsi/", "vi": "ánh sáng lấp lánh; ánh lung linh"},
+    {"id": "lex.en.100k.090106", "hw": "lambertia", "pos": "noun", "ipa": "/læmˈbɜːrʃiə/", "vi": "chi cây hoa Lambertia"},
+    {"id": "lex.en.100k.090107", "hw": "lambing", "pos": "noun", "ipa": "/ˈlæmɪŋ/", "vi": "mùa cừu đẻ; sự sinh cừu con"},
+    {"id": "lex.en.100k.090108", "hw": "lambis", "pos": "noun", "ipa": "/ˈlæmbɪs/", "vi": "chi ốc bàn tay Lambis"},
+    {"id": "lex.en.100k.090109", "hw": "lambkill", "pos": "noun", "ipa": "/ˈlæmkɪl/", "vi": "cây độc cừu gai Kalmia"},
+    {"id": "lex.en.100k.090110", "hw": "lamblike", "pos": "adj", "ipa": "/ˈlæmlaɪk/", "vi": "hiền như cừu; nhu mì ngoan ngoãn"},
+    {"id": "lex.en.100k.090111", "hw": "lambrequin", "pos": "noun", "ipa": "/ˈlæmbrəkɪn/", "vi": "khăn rèm diềm; khăn phủ mũ giáp"},
+    {"id": "lex.en.100k.090112", "hw": "lambrequins", "pos": "noun", "ipa": "/ˈlæmbrəkɪnz/", "vi": "những tấm rèm diềm trang trí"},
+    {"id": "lex.en.100k.090113", "hw": "lambs", "pos": "verb", "ipa": "/læmz/", "vi": "đẻ cừu con; sinh nở"},
+    {"id": "lex.en.100k.090114", "hw": "lamebrain", "pos": "noun", "ipa": "/ˈleɪmbreɪn/", "vi": "kẻ ngốc nghếch; kẻ đần độn"},
+    {"id": "lex.en.100k.090115", "hw": "lamed", "pos": "verb", "ipa": "/leɪmd/", "vi": "đã làm què; đã khiến tàn phế"},
+    {"id": "lex.en.100k.090116", "hw": "lamedh", "pos": "noun", "ipa": "/ˈlɑːmɛd/", "vi": "chữ lamedh (chữ cái Do Thái)"},
+    {"id": "lex.en.100k.090117", "hw": "lamellae", "pos": "noun", "ipa": "/ləˈmɛliː/", "vi": "các phiến mỏng; mang tấm mỏng"},
+    {"id": "lex.en.100k.090118", "hw": "lamellarly", "pos": "adv", "ipa": "/ləˈmɛlərli/", "vi": "thành từng phiến mỏng xếp lớp"},
+    {"id": "lex.en.100k.090119", "hw": "lamellation", "pos": "noun", "ipa": "/ˌlæməˈleɪʃən/", "vi": "cấu tạo phiến mỏng; phân tầng phiến"},
+    {"id": "lex.en.100k.090120", "hw": "lamellibranch", "pos": "noun", "ipa": "/ləˈmɛlɪbræŋk/", "vi": "thân mềm hai mảnh vỏ"},
+    {"id": "lex.en.100k.090121", "hw": "lamellibranchia", "pos": "noun", "ipa": "/ləˌmɛlɪˈbræŋkiə/", "vi": "lớp thân mềm hai mảnh vỏ"},
+    {"id": "lex.en.100k.090122", "hw": "lamellibranchiate", "pos": "adj", "ipa": "/ləˌmɛlɪˈbræŋkiɪt/", "vi": "thuộc lớp hai mảnh vỏ"},
+    {"id": "lex.en.100k.090123", "hw": "lamellicorn", "pos": "adj", "ipa": "/ləˈmɛlɪkɔːrn/", "vi": "có râu hình lá; râu tấm"},
+    {"id": "lex.en.100k.090124", "hw": "lamellicornia", "pos": "noun", "ipa": "/ˌlæməlɪˈkɔːrniə/", "vi": "nhóm bọ cánh cứng râu phiến"},
+    {"id": "lex.en.100k.090125", "hw": "lamelliform", "pos": "adj", "ipa": "/ləˈmɛlɪfɔːrm/", "vi": "dạng phiến mỏng; hình lá mỏng"},
+    {"id": "lex.en.100k.090126", "hw": "lamentableness", "pos": "noun", "ipa": "/ləˈmɛntəbəlnɪs/", "vi": "sự đáng thương; tình cảnh bi thảm"},
+    {"id": "lex.en.100k.090127", "hw": "lamenter", "pos": "noun", "ipa": "/ləˈmɛntər/", "vi": "người than khóc; người đưa tang"},
+    {"id": "lex.en.100k.090128", "hw": "laments", "pos": "verb", "ipa": "/ləˈmɛnts/", "vi": "than khóc; xót xa; thương tiếc"},
+    {"id": "lex.en.100k.090129", "hw": "lames", "pos": "verb", "ipa": "/leɪmz/", "vi": "làm què; làm tàn phế"},
+    {"id": "lex.en.100k.090130", "hw": "laminable", "pos": "adj", "ipa": "/ˈlæmɪnəbəl/", "vi": "có thể cán mỏng; dát mỏng được"},
+    {"id": "lex.en.100k.090131", "hw": "laminae", "pos": "noun", "ipa": "/ˈlæmɪniː/", "vi": "các phiến mỏng; các lớp mỏng"},
+    {"id": "lex.en.100k.090132", "hw": "laminariaceae", "pos": "noun", "ipa": "/ˌlæmɪˌnɛəriˈeɪsiː/", "vi": "họ tảo bẹ Laminariaceae"},
+    {"id": "lex.en.100k.090133", "hw": "laminariales", "pos": "noun", "ipa": "/ˌlæmɪˌnɛəriˈeɪliːz/", "vi": "bộ tảo bẹ Laminariales"},
+    {"id": "lex.en.100k.090134", "hw": "laminary", "pos": "adj", "ipa": "/ˈlæmɪnəri/", "vi": "dạng phiến mỏng; nhiều lớp mỏng"},
+    {"id": "lex.en.100k.090135", "hw": "laminated", "pos": "adj", "ipa": "/ˈlæmɪneɪtɪd/", "vi": "được ép nhiều lớp; cán mỏng"},
+    {"id": "lex.en.100k.090136", "hw": "laminates", "pos": "verb", "ipa": "/ˈlæmɪneɪts/", "vi": "ép nhiều lớp; dát thành tấm mỏng"},
+    {"id": "lex.en.100k.090137", "hw": "laminating", "pos": "verb", "ipa": "/ˈlæmɪneɪtɪŋ/", "vi": "đang ép lớp; quá trình dát mỏng"},
+    {"id": "lex.en.100k.090138", "hw": "laming", "pos": "verb", "ipa": "/ˈleɪmɪŋ/", "vi": "làm què; làm tật nguyền"},
+    {"id": "lex.en.100k.090139", "hw": "lamington", "pos": "noun", "ipa": "/ˈlæmɪŋtən/", "vi": "bánh xốp Lamington phủ dừa Úc"},
+    {"id": "lex.en.100k.090140", "hw": "lammastide", "pos": "noun", "ipa": "/ˈlæməstaɪd/", "vi": "mùa lễ hội mùa gặt Lammas"},
+    {"id": "lex.en.100k.090141", "hw": "lammed", "pos": "verb", "ipa": "/læmd/", "vi": "đã chạy trốn; đã đánh mạnh"},
+    {"id": "lex.en.100k.090142", "hw": "lammergeyer", "pos": "noun", "ipa": "/ˈlæmərɡaɪər/", "vi": "kền kền râu; chim ưng râu"},
+    {"id": "lex.en.100k.090143", "hw": "lamming", "pos": "noun", "ipa": "/ˈlæmɪŋ/", "vi": "sự tẩu thoát; trận đòn nhừ tử"},
+    {"id": "lex.en.100k.090144", "hw": "lamnidae", "pos": "noun", "ipa": "/ˈlæmnɪdiː/", "vi": "họ cá nhám thu; họ cá mập trắng"},
+    {"id": "lex.en.100k.090145", "hw": "lampas", "pos": "noun", "ipa": "/ˈlæmpəs/", "vi": "vải lụa hoa lampas; sưng vòm họng"},
+    {"id": "lex.en.100k.090146", "hw": "lampern", "pos": "noun", "ipa": "/ˈlæmpərn/", "vi": "cá mút đá sông châu Âu"},
+    {"id": "lex.en.100k.090147", "hw": "lamphouse", "pos": "noun", "ipa": "/ˈlæmphaʊs/", "vi": "buồng chứa đèn máy chiếu"},
+    {"id": "lex.en.100k.090148", "hw": "lampion", "pos": "noun", "ipa": "/ˈlæmpiən/", "vi": "đèn lồng nhỏ trang trí; đèn màu"},
+    {"id": "lex.en.100k.090149", "hw": "lamplit", "pos": "adj", "ipa": "/ˈlæmplɪt/", "vi": "được ánh đèn soi tỏ; sáng ánh đèn"},
+    {"id": "lex.en.100k.090150", "hw": "lampooner", "pos": "noun", "ipa": "/læmˈpuːnər/", "vi": "người viết bài châm biếm đả kích"},
+    {"id": "lex.en.100k.090151", "hw": "lampoonery", "pos": "noun", "ipa": "/læmˈpuːnəri/", "vi": "văn thơ châm biếm; sự đả kích"},
+    {"id": "lex.en.100k.090152", "hw": "lampoonist", "pos": "noun", "ipa": "/læmˈpuːnɪst/", "vi": "nhà thơ trào phúng; kẻ châm biếm"},
+    {"id": "lex.en.100k.090153", "hw": "lampridae", "pos": "noun", "ipa": "/ˈlæmprɪdiː/", "vi": "họ cá mặt trăng Lampridae"},
+    {"id": "lex.en.100k.090154", "hw": "lampris", "pos": "noun", "ipa": "/ˈlæmprɪs/", "vi": "chi cá mặt trăng Lampris"},
+    {"id": "lex.en.100k.090155", "hw": "lampropeltis", "pos": "noun", "ipa": "/ˌlæmprəˈpɛltɪs/", "vi": "chi rắn vua Lampropeltis"},
+    {"id": "lex.en.100k.090156", "hw": "lamps", "pos": "noun", "ipa": "/læmps/", "vi": "những ngọn đèn; các bóng đèn"},
+    {"id": "lex.en.100k.090157", "hw": "lampshaded", "pos": "adj", "ipa": "/ˈlæmpʃeɪdɪd/", "vi": "có chụp đèn; gắn chao đèn"},
+    {"id": "lex.en.100k.090158", "hw": "lampshades", "pos": "noun", "ipa": "/ˈlæmpʃeɪdz/", "vi": "các chụp đèn; chao đèn"},
+    {"id": "lex.en.100k.090159", "hw": "lampshading", "pos": "noun", "ipa": "/ˈlæmpʃeɪdɪŋ/", "vi": "thủ pháp thừa nhận điểm phi lý"},
+    {"id": "lex.en.100k.090160", "hw": "lampshell", "pos": "noun", "ipa": "/ˈlæmpʃɛl/", "vi": "con tay cuộn (vỏ hình đèn)"},
+    {"id": "lex.en.100k.090161", "hw": "lampyridae", "pos": "noun", "ipa": "/læmˈpɪrɪdiː/", "vi": "họ bọ đom đóm Lampyridae"},
+    {"id": "lex.en.100k.090162", "hw": "lams", "pos": "verb", "ipa": "/læmz/", "vi": "bỏ chạy tháo thân; đánh đòn"},
+    {"id": "lex.en.100k.090163", "hw": "lanate", "pos": "adj", "ipa": "/ˈleɪneɪt/", "vi": "có lông tơ như len; phủ lông dày"},
+    {"id": "lex.en.100k.090164", "hw": "lanced", "pos": "verb", "ipa": "/lænst/", "vi": "đã trích mủ bằng dao; đâm thương"},
+    {"id": "lex.en.100k.090165", "hw": "lancelate", "pos": "adj", "ipa": "/ˈlænsiəleɪt/", "vi": "có hình ngọn giáo; hình mũi mác"},
+    {"id": "lex.en.100k.090166", "hw": "lancelet", "pos": "noun", "ipa": "/ˈlænslɪt/", "vi": "cá lưỡng tiêm; cá mũi mác"},
+    {"id": "lex.en.100k.090167", "hw": "lancelets", "pos": "noun", "ipa": "/ˈlænslɪts/", "vi": "các con cá lưỡng tiêm"},
+    {"id": "lex.en.100k.090168", "hw": "lancelike", "pos": "adj", "ipa": "/ˈlænslaɪk/", "vi": "nhọn như giáo; như mũi mác"},
+    {"id": "lex.en.100k.090169", "hw": "lances", "pos": "verb", "ipa": "/ˈlænsɪz/", "vi": "trích rạch mủ; đâm bằng giáo"},
+    {"id": "lex.en.100k.090170", "hw": "lancetfish", "pos": "noun", "ipa": "/ˈlænsɪtfɪʃ/", "vi": "cá lưỡi mác (cá biển sâu)"},
+    {"id": "lex.en.100k.090171", "hw": "lancewood", "pos": "noun", "ipa": "/ˈlænswʊd/", "vi": "gỗ mũi mác; gỗ cây giáo"},
+    {"id": "lex.en.100k.090172", "hw": "lanchou", "pos": "noun", "ipa": "/ˈlɑːnˈdʒoʊ/", "vi": "thành phố Lan Châu"},
+    {"id": "lex.en.100k.090173", "hw": "lanchow", "pos": "noun", "ipa": "/ˈlɑːnˈdʒoʊ/", "vi": "thành phố Lan Châu"},
+    {"id": "lex.en.100k.090174", "hw": "lancinate", "pos": "verb", "ipa": "/ˈlænsɪneɪt/", "vi": "xé toạc; cào rách; làm đau nhói"},
+    {"id": "lex.en.100k.090175", "hw": "lancinating", "pos": "adj", "ipa": "/ˈlænsɪneɪtɪŋ/", "vi": "đau buốt buốt nhói; như dao cắt"},
+    {"id": "lex.en.100k.090176", "hw": "lancination", "pos": "noun", "ipa": "/ˌlænsɪˈneɪʃən/", "vi": "cơn đau nhói buốt; sự xé rách"},
+    {"id": "lex.en.100k.090177", "hw": "lancing", "pos": "verb", "ipa": "/ˈlænsɪŋ/", "vi": "trích rạch áp-xe; đâm ngọn giáo"},
+    {"id": "lex.en.100k.090178", "hw": "landaulet", "pos": "noun", "ipa": "/ˌlændɔːˈlɛt/", "vi": "xe mui gập phía sau landaulet"},
+    {"id": "lex.en.100k.090179", "hw": "landform", "pos": "noun", "ipa": "/ˈlændfɔːrm/", "vi": "dạng địa hình; địa mạo tự nhiên"},
+    {"id": "lex.en.100k.090180", "hw": "landholders", "pos": "noun", "ipa": "/ˈlændhoʊldərz/", "vi": "những người sở hữu đất đai"},
+    {"id": "lex.en.100k.090181", "hw": "landlessness", "pos": "noun", "ipa": "/ˈlændlɪsnɪs/", "vi": "tình trạng không có ruộng đất"},
+    {"id": "lex.en.100k.090182", "hw": "landloper", "pos": "noun", "ipa": "/ˈlændloʊpər/", "vi": "kẻ lang thang phiêu bạt; kẻ lưu lạc"},
+    {"id": "lex.en.100k.090183", "hw": "landlordism", "pos": "noun", "ipa": "/ˈlændlɔːrdɪzəm/", "vi": "chế độ địa chủ; giai cấp chủ đất"},
+    {"id": "lex.en.100k.090184", "hw": "landlords", "pos": "noun", "ipa": "/ˈlændlɔːrdz/", "vi": "những người chủ nhà; các địa chủ"},
+    {"id": "lex.en.100k.090185", "hw": "landlouper", "pos": "noun", "ipa": "/ˈlændlaʊpər/", "vi": "kẻ du thủ du thực; kẻ lang bạt"},
+    {"id": "lex.en.100k.090186", "hw": "landlubberly", "pos": "adj", "ipa": "/ˈlændlʌbərli/", "vi": "vụng về trên tàu; ngơ ngác đi biển"},
+    {"id": "lex.en.100k.090187", "hw": "landlubbing", "pos": "adj", "ipa": "/ˈlændlʌbɪŋ/", "vi": "chỉ quen sống trên cạn"},
+    {"id": "lex.en.100k.090188", "hw": "landmine", "pos": "noun", "ipa": "/ˈlændmaɪn/", "vi": "quả mìn trên bộ; địa lôi"},
+    {"id": "lex.en.100k.090189", "hw": "landocracies", "pos": "noun", "ipa": "/lænˈdɑːkrəsiz/", "vi": "những chế độ quý tộc ruộng đất"},
+    {"id": "lex.en.100k.090190", "hw": "landocracy", "pos": "noun", "ipa": "/lænˈdɑːkrəsi/", "vi": "tầng lớp quý tộc ruộng đất"},
+    {"id": "lex.en.100k.090191", "hw": "landownership", "pos": "noun", "ipa": "/ˈlændoʊnərʃɪp/", "vi": "quyền sở hữu đất đai; chủ quyền đất"},
+    {"id": "lex.en.100k.090192", "hw": "landowning", "pos": "adj", "ipa": "/ˈlændoʊnɪŋ/", "vi": "sở hữu đất ruộng; có đất đai"},
+    {"id": "lex.en.100k.090193", "hw": "landowska", "pos": "noun", "ipa": "/lænˈdɒfskə/", "vi": "Wanda Landowska (nghệ sĩ đàn)"},
+    {"id": "lex.en.100k.090194", "hw": "landrace", "pos": "noun", "ipa": "/ˈlændreɪs/", "vi": "giống lợn Landrace; giống nuôi"},
+    {"id": "lex.en.100k.090195", "hw": "lands", "pos": "verb", "ipa": "/lændz/", "vi": "hạ cánh; cập bến; bắt được"},
+    {"id": "lex.en.100k.090196", "hw": "landscapers", "pos": "noun", "ipa": "/ˈlændskeɪpərz/", "vi": "những người làm vườn cảnh quan"},
+    {"id": "lex.en.100k.090197", "hw": "landscapes", "pos": "verb", "ipa": "/ˈlændskeɪps/", "vi": "thiết kế cảnh quan; làm đẹp vườn"},
+    {"id": "lex.en.100k.090198", "hw": "landslips", "pos": "noun", "ipa": "/ˈlændslɪps/", "vi": "các vụ sạt lở đất; đất trượt"},
+    {"id": "lex.en.100k.090199", "hw": "landsmaal", "pos": "noun", "ipa": "/ˈlɑːnsmɔːl/", "vi": "tiếng Landsmål (tiếng Na Uy)"},
+    {"id": "lex.en.100k.090200", "hw": "landsmal", "pos": "noun", "ipa": "/ˈlɑːnsmɔːl/", "vi": "ngôn ngữ Landsmål Na Uy"},
+    {"id": "lex.en.100k.090201", "hw": "landwards", "pos": "adv", "ipa": "/ˈlændwərdz/", "vi": "về phía đất liền; hướng vào bờ"}
+]
+
+assert len(data) == 100
+for i, (r, rev) in enumerate(zip(raw, data)):
+    assert r['id'] == rev['id'] and r['hw'] == rev['hw'], f"Mismatch at {i}: {r['id']} vs {rev['id']}"
+    assert rev['vi'] and len(rev['vi']) <= 35, f"vi length > 35 at {i}: {rev['vi']}"
+    assert rev['pos'] in ["noun", "verb", "adj", "adv", "intj", "prep", "pron", "conj", "det", "num"], f"pos invalid at {i}: {rev['pos']}"
+    ipa = rev['ipa'].strip()
+    assert ipa.startswith('/') and ipa.endswith('/') and ipa.count('/') == 2, f"ipa format invalid at {i}: {ipa}"
+    rev['ipa'] = ipa
+    rev['status'] = "reviewed"
+    rev['cefr'] = r.get('cefr')
+    rev['tier'] = r.get('tier')
+    rev['notes'] = r.get('notes')
+
+print("Part 2 validated successfully!")

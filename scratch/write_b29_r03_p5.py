@@ -1,0 +1,125 @@
+import json
+import re
+
+items = [
+    {"id": "lex.en.200k.041402", "hw": "ascending aorta", "pos": "phrase", "ipa": "", "vi": "động mạch chủ lên", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041403", "hw": "attila the hun", "pos": "phrase", "ipa": "", "vi": "thủ lĩnh Hung Nô Attila", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041404", "hw": "au fait", "pos": "phrase", "ipa": "", "vi": "thông thạo; thành thạo", "cefr": "C1", "tier": "expanded", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041405", "hw": "babble out", "pos": "phrase", "ipa": "", "vi": "buột miệng nói ra; tiết lộ", "cefr": "C1", "tier": "expanded", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041406", "hw": "belted ammunition", "pos": "phrase", "ipa": "", "vi": "dây đạn súng máy; đạn nạp dây", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041407", "hw": "benin franc", "pos": "phrase", "ipa": "", "vi": "đồng franc Benin", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041408", "hw": "book of baruch", "pos": "phrase", "ipa": "", "vi": "sách Ba-rúc", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041409", "hw": "book of malachi", "pos": "phrase", "ipa": "", "vi": "sách Ma-la-chi", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041410", "hw": "bushel basket", "pos": "phrase", "ipa": "", "vi": "giỏ đong một bushel", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041411", "hw": "cacao moth", "pos": "phrase", "ipa": "", "vi": "bướm đêm hại ca cao", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041412", "hw": "capital of djibouti", "pos": "phrase", "ipa": "", "vi": "thủ đô Djibouti", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041413", "hw": "capital of liechtenstein", "pos": "phrase", "ipa": "", "vi": "thủ đô Vaduz Liechtenstein", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041414", "hw": "cartesian product", "pos": "phrase", "ipa": "", "vi": "tích Descartes; tích Đề-các", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041415", "hw": "castration anxiety", "pos": "phrase", "ipa": "", "vi": "nỗi sợ bị thiến; lo âu thiến", "cefr": "C1", "tier": "expanded", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041416", "hw": "charles farrar browne", "pos": "phrase", "ipa": "", "vi": "nhà văn Charles Farrar Browne", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041417", "hw": "charles lindbergh", "pos": "phrase", "ipa": "", "vi": "phi công Charles Lindbergh", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041418", "hw": "charles peirce", "pos": "phrase", "ipa": "", "vi": "triết gia Charles Peirce", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041419", "hw": "charlotte bronte", "pos": "phrase", "ipa": "", "vi": "nhà văn Charlotte Brontë", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041420", "hw": "clever clogs", "pos": "phrase", "ipa": "", "vi": "kẻ thích tỏ ra thông minh", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041421", "hw": "colonel blimp", "pos": "phrase", "ipa": "", "vi": "người thủ cựu cực đoan", "cefr": "C1", "tier": "expanded", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041422", "hw": "common wart", "pos": "phrase", "ipa": "", "vi": "mụn cóc thông thường", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041423", "hw": "conjugated protein", "pos": "phrase", "ipa": "", "vi": "protein liên hợp; phức hợp", "cefr": "C1", "tier": "expanded", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041424", "hw": "count alessandro volta", "pos": "phrase", "ipa": "", "vi": "nhà vật lý Alessandro Volta", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041425", "hw": "deadbeat dad", "pos": "phrase", "ipa": "", "vi": "ông bố trốn cấp dưỡng nuôi con", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041426", "hw": "diabetes mellitus", "pos": "phrase", "ipa": "", "vi": "bệnh tiểu đường; đái tháo đường", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041427", "hw": "dispersing medium", "pos": "phrase", "ipa": "", "vi": "môi trường phân tán", "cefr": "C1", "tier": "expanded", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041428", "hw": "dispersing phase", "pos": "phrase", "ipa": "", "vi": "pha phân tán", "cefr": "C1", "tier": "expanded", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041429", "hw": "double refraction", "pos": "phrase", "ipa": "", "vi": "hiện tượng lưỡng chiết", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041430", "hw": "el giza", "pos": "phrase", "ipa": "", "vi": "thành phố Giza Ai Cập", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041431", "hw": "emily bronte", "pos": "phrase", "ipa": "", "vi": "nhà văn Emily Brontë", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041432", "hw": "ex officio", "pos": "phrase", "ipa": "", "vi": "đương nhiên; do chức vụ", "cefr": "C1", "tier": "expanded", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041433", "hw": "false bracken", "pos": "phrase", "ipa": "", "vi": "dương xỉ diều hâu giả", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041434", "hw": "fat embolism", "pos": "phrase", "ipa": "", "vi": "thuyên tắc mỡ; tắc mạch mỡ", "cefr": "C1", "tier": "expanded", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041435", "hw": "field pansy", "pos": "phrase", "ipa": "", "vi": "hoa păng-xê đồng nội", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041436", "hw": "flue stop", "pos": "phrase", "ipa": "", "vi": "nút chặn ống sáo đại phong cầm", "cefr": "C1", "tier": "expanded", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041437", "hw": "frederick moore vinson", "pos": "phrase", "ipa": "", "vi": "thẩm phán Fred Vinson", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041438", "hw": "gas embolism", "pos": "phrase", "ipa": "", "vi": "thuyên tắc mạch do khí bọt", "cefr": "C1", "tier": "expanded", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041439", "hw": "genus chara", "pos": "phrase", "ipa": "", "vi": "chi tảo luân", "cefr": "C1", "tier": "expanded", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041440", "hw": "genus chlamydia", "pos": "phrase", "ipa": "", "vi": "chi vi khuẩn Chlamydia", "cefr": "C1", "tier": "expanded", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041441", "hw": "genus manta", "pos": "phrase", "ipa": "", "vi": "chi cá đuối Manta", "cefr": "C1", "tier": "expanded", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041442", "hw": "genus sequoia", "pos": "phrase", "ipa": "", "vi": "chi cự sam Sequoia", "cefr": "C1", "tier": "expanded", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041443", "hw": "gerard manley hopkins", "pos": "phrase", "ipa": "", "vi": "nhà thơ Gerard M. Hopkins", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041444", "hw": "gourd vine", "pos": "phrase", "ipa": "", "vi": "dây leo họ bầu bí; dây bầu", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041445", "hw": "graf zeppelin", "pos": "phrase", "ipa": "", "vi": "khí cầu Graf Zeppelin", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041446", "hw": "gray flounder", "pos": "phrase", "ipa": "", "vi": "cá bơn mắt xám", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041447", "hw": "grey flounder", "pos": "phrase", "ipa": "", "vi": "cá bơn mắt xám", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041448", "hw": "horned chameleon", "pos": "phrase", "ipa": "", "vi": "tắc kè hoa có sừng", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041449", "hw": "interstitial tissue", "pos": "phrase", "ipa": "", "vi": "mô kẽ liên kết", "cefr": "C1", "tier": "expanded", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041450", "hw": "james naismith", "pos": "phrase", "ipa": "", "vi": "nhà sáng lập James Naismith", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041451", "hw": "jane goodall", "pos": "phrase", "ipa": "", "vi": "nhà linh trưởng Jane Goodall", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041452", "hw": "litmus paper", "pos": "phrase", "ipa": "", "vi": "giấy quỳ tím; giấy thử quỳ", "cefr": "B1", "tier": "expanded", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041453", "hw": "litmus test", "pos": "phrase", "ipa": "", "vi": "phép thử quỳ tím; phép thử", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041454", "hw": "manna gum", "pos": "phrase", "ipa": "", "vi": "cây bạch đàn rỉ nhựa", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041455", "hw": "marcus aurelius", "pos": "phrase", "ipa": "", "vi": "hoàng đế Marcus Aurelius", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041456", "hw": "margaret higgins sanger", "pos": "phrase", "ipa": "", "vi": "nhà hoạt động Margaret Sanger", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041457", "hw": "misplaced modifier", "pos": "phrase", "ipa": "", "vi": "bổ ngữ đặt sai vị trí", "cefr": "C1", "tier": "expanded", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041458", "hw": "mount rushmore", "pos": "phrase", "ipa": "", "vi": "núi Rushmore nước Mỹ", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041459", "hw": "mount rushmore state", "pos": "phrase", "ipa": "", "vi": "bang Nam Dakota nước Mỹ", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041460", "hw": "muscular dystrophy", "pos": "phrase", "ipa": "", "vi": "chứng loạn dưỡng cơ", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041461", "hw": "mushroom pimple", "pos": "phrase", "ipa": "", "vi": "nấm đốm đỏ mục gỗ", "cefr": "C1", "tier": "expanded", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041462", "hw": "nerve plexus", "pos": "phrase", "ipa": "", "vi": "đám rối thần kinh", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041463", "hw": "new world warbler", "pos": "phrase", "ipa": "", "vi": "chim chích Tân Thế giới", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041464", "hw": "old world warbler", "pos": "phrase", "ipa": "", "vi": "chim chích Cựu Thế giới", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041465", "hw": "parietal bone", "pos": "phrase", "ipa": "", "vi": "xương đỉnh đầu", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041466", "hw": "pars anterior", "pos": "phrase", "ipa": "", "vi": "thùy trước tuyến yên", "cefr": "C1", "tier": "expanded", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041467", "hw": "pearly everlasting", "pos": "phrase", "ipa": "", "vi": "hoa cúc bất tử cánh ngọc", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041468", "hw": "peregrine falcon", "pos": "phrase", "ipa": "", "vi": "chim cắt lớn; chim cắt hỏa", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041469", "hw": "permissive waste", "pos": "phrase", "ipa": "", "vi": "sự hủy hoại do bỏ bê nhà đất", "cefr": "C1", "tier": "expanded", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041470", "hw": "prairie gourd", "pos": "phrase", "ipa": "", "vi": "cây bầu thảo nguyên dại", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041471", "hw": "punta arenas", "pos": "phrase", "ipa": "", "vi": "thành phố Punta Arenas", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041472", "hw": "republic of vanuatu", "pos": "phrase", "ipa": "", "vi": "Cộng hòa Vanuatu", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041473", "hw": "rhinoceros beetle", "pos": "phrase", "ipa": "", "vi": "bọ hung tê giác; bọ cánh cứng", "cefr": "B1", "tier": "expanded", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041474", "hw": "ringside seat", "pos": "phrase", "ipa": "", "vi": "ghế cạnh võ đài; vị trí đẹp", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041475", "hw": "robert abram bartlett", "pos": "phrase", "ipa": "", "vi": "nhà thám hiểm Robert Bartlett", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041476", "hw": "robert emmet sherwood", "pos": "phrase", "ipa": "", "vi": "nhà viết kịch Robert Sherwood", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041477", "hw": "sourdough bread", "pos": "phrase", "ipa": "", "vi": "bánh mì men chua", "cefr": "B1", "tier": "expanded", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041478", "hw": "speckled trout", "pos": "phrase", "ipa": "", "vi": "cá hồi chấm; cá hồi đốm", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041479", "hw": "sticky aster", "pos": "phrase", "ipa": "", "vi": "cây cúc sao hoa dính", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041480", "hw": "strait of malacca", "pos": "phrase", "ipa": "", "vi": "eo biển Malacca", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041481", "hw": "sussex spaniel", "pos": "phrase", "ipa": "", "vi": "giống chó Sussex Spaniel", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041482", "hw": "sweet nothings", "pos": "phrase", "ipa": "", "vi": "lời đường mật; lời thì thầm ngọt", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041483", "hw": "tabor pipe", "pos": "phrase", "ipa": "", "vi": "ống sáo tabor ba lỗ", "cefr": "C1", "tier": "expanded", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041484", "hw": "telescopic sight", "pos": "phrase", "ipa": "", "vi": "kính ngắm quang học gắn súng", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041485", "hw": "tigris river", "pos": "phrase", "ipa": "", "vi": "sông Tigris", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041486", "hw": "true warbler", "pos": "phrase", "ipa": "", "vi": "chim chích Cựu Thế giới", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041487", "hw": "urinary incontinence", "pos": "phrase", "ipa": "", "vi": "chứng tiểu tiện không tự chủ", "cefr": "C1", "tier": "expanded", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041488", "hw": "venous sinus", "pos": "phrase", "ipa": "", "vi": "xoang tĩnh mạch màng cứng", "cefr": "C1", "tier": "expanded", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041489", "hw": "viral hemorrhagic fever", "pos": "phrase", "ipa": "", "vi": "bệnh sốt xuất huyết do vi-rút", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041490", "hw": "wild pansy", "pos": "phrase", "ipa": "", "vi": "hoa bướm dại; hoa pansy dại", "cefr": "B1", "tier": "expanded", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041491", "hw": "wood warbler", "pos": "phrase", "ipa": "", "vi": "chim chích rừng phương Tây", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041492", "hw": "actins", "pos": "noun", "ipa": "/ˈæktɪnz/", "vi": "các vi sợi protein actin", "cefr": "C1", "tier": "expanded", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041493", "hw": "andeses", "pos": "noun", "ipa": "/ˈændiːzɪz/", "vi": "các rặng núi dãy Andes", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041494", "hw": "bayous", "pos": "noun", "ipa": "/ˈbaɪuːz/", "vi": "các nhánh sông lầy; kênh rạch", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041495", "hw": "berns", "pos": "noun", "ipa": "/bɜːrnz/", "vi": "các thành phố Bern Thụy Sĩ", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041496", "hw": "cantors", "pos": "noun", "ipa": "/ˈkæntərz/", "vi": "các ca viên xướng âm nhà thờ", "cefr": "C1", "tier": "expanded", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041497", "hw": "collectibles", "pos": "noun", "ipa": "/kəˈlɛktəbəlz/", "vi": "những đồ vật đáng sưu tầm", "cefr": "B1", "tier": "expanded", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041498", "hw": "cordons", "pos": "noun", "ipa": "/ˈkɔːrdənz/", "vi": "hàng rào cảnh sát phong tỏa", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041499", "hw": "coulters", "pos": "noun", "ipa": "/ˈkoʊltərz/", "vi": "các lưỡi dao trước của cày", "cefr": "C1", "tier": "expanded", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041500", "hw": "crosswords", "pos": "noun", "ipa": "/ˈkrɔːswɜːrdz/", "vi": "các ô chữ; những trò ô chữ", "cefr": "A2", "tier": "expanded", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041501", "hw": "cuckoos", "pos": "noun", "ipa": "/ˈkʊkuːz/", "vi": "các con chim tu hú; chim cúc cu", "cefr": "B1", "tier": "expanded", "status": "reviewed", "notes": ""}
+]
+
+with open('scratch/b29_r03_raw_p5.json') as f:
+    raw = json.load(f)
+
+assert len(items) == 100, f"Expected 100 items, got {len(items)}"
+allowed_pos = {'noun', 'verb', 'adj', 'adv', 'num', 'intj', 'prep', 'pron', 'conj', 'det', 'phrase'}
+
+for idx, (it, r) in enumerate(zip(items, raw)):
+    assert it['id'] == r['id'], f"ID mismatch: {it['id']} vs {r['id']}"
+    assert it['hw'] == r['hw'], f"HW mismatch: {it['hw']} vs {r['hw']}"
+    assert it['pos'] in allowed_pos, f"Invalid POS {it['pos']} for {it['id']}"
+    assert len(it['vi']) > 0, f"Empty VI for {it['id']}"
+    assert len(it['vi']) <= 35, f"Invalid VI length ({len(it['vi'])}) for {it['id']}: {it['vi']}"
+    if it['pos'] != 'phrase' and ' ' not in it['hw']:
+        assert it['ipa'].startswith('/') and it['ipa'].endswith('/') and it['ipa'].count('/') == 2, f"Invalid IPA for {it['id']}: {it['ipa']}"
+
+with open('scratch/b29_r03_p5.json', 'w', encoding='utf-8') as f:
+    json.dump(items, f, ensure_ascii=False, indent=2)
+
+print(f"Batch 29 Round 3 Part 5 validated and written successfully. Total items: {len(items)}")

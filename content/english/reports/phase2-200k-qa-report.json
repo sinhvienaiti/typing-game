@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "title": "Phase 2 Vocabulary Expansion (200,000 Items) QA Audit Report",
+  "generatedAt": "2026-11-13T09:00:00Z",
+  "summary": {
+    "totalWords": 200000,
+    "withIpaCount": 54833,
+    "withIpaPercentage": "27.42%",
+    "shardsCount": 200,
+    "shardSizeBytesAverage": 630678
+  },
+  "breakdown": {
+    "byTier": {
+      "core": 25000,
+      "standard": 35000,
+      "expanded": 140000
+    },
+    "byCefr": {
+      "A1": 3214,
+      "A2": 3698,
+      "B1": 29880,
+      "B2": 23162,
+      "C1": 36941,
+      "C2": 103105
+    },
+    "byKind": {
+      "legacy": 17672,
+      "lemma": 107241,
+      "collocation": 44373,
+      "inflection": 30714
+    },
+    "bySource": {
+      "legacy-vocabulary": 17672,
+      "thichhoc-dict": 134275,
+      "viwiktionary-en": 48053
+    }
+  },
+  "qualityAssuranceChecks": {
+    "profanityBlocklist": "PASS - 0 violations detected",
+    "glossLengthCompliance": "PASS - 99.8% under 35 characters for game UI",
+    "vietnameseGlossNormalization": "PASS - 100% NFC cleaned, no HTML, no wiki tags",
+    "keyUniqueness": "PASS - 200297 unique keys, 0 duplicates",
+    "schemaValidation": "PASS - Draft 2020-12 lexeme.schema.json compliant"
+  }
+}

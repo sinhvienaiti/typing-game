@@ -1,0 +1,122 @@
+import json
+
+raw = json.load(open("scratch/b19_r01_raw_p4.json"))
+assert len(raw) == 100
+
+data = [
+    {"id": "lex.en.100k.090302", "hw": "larrup", "pos": "verb", "ipa": "/ˈlærəp/", "vi": "đánh đòn; quất roi; tát mạnh"},
+    {"id": "lex.en.100k.090303", "hw": "larum", "pos": "noun", "ipa": "/ˈlærəm/", "vi": "tiếng còi báo động; hồi chuông báo"},
+    {"id": "lex.en.100k.090304", "hw": "larvacea", "pos": "noun", "ipa": "/lɑːrˈveɪʃiə/", "vi": "lớp đuôi sống Larvacea"},
+    {"id": "lex.en.100k.090305", "hw": "larvacean", "pos": "noun", "ipa": "/lɑːrˈveɪʃən/", "vi": "động vật lớp Larvacea"},
+    {"id": "lex.en.100k.090306", "hw": "larvacide", "pos": "noun", "ipa": "/ˈlɑːrvɪsaɪd/", "vi": "thuốc diệt ấu trùng; diệt bọ gậy"},
+    {"id": "lex.en.100k.090307", "hw": "larvae", "pos": "noun", "ipa": "/ˈlɑːrviː/", "vi": "các ấu trùng; sâu bọ non"},
+    {"id": "lex.en.100k.090308", "hw": "larviform", "pos": "adj", "ipa": "/ˈlɑːrvɪfɔːrm/", "vi": "dạng ấu trùng; có hình ấu trùng"},
+    {"id": "lex.en.100k.090309", "hw": "laryngectomee", "pos": "noun", "ipa": "/ləˌrɪndʒɛkˈtoʊmiː/", "vi": "người cắt thanh quản"},
+    {"id": "lex.en.100k.090310", "hw": "larynges", "pos": "noun", "ipa": "/ləˈrɪndʒiːz/", "vi": "các thanh quản"},
+    {"id": "lex.en.100k.090311", "hw": "laryngismus", "pos": "noun", "ipa": "/ˌlærɪnˈdʒɪzməs/", "vi": "chứng co thắt thanh quản"},
+    {"id": "lex.en.100k.090312", "hw": "laryngitic", "pos": "adj", "ipa": "/ˌlærɪnˈdʒɪtɪk/", "vi": "thuộc chứng viêm thanh quản"},
+    {"id": "lex.en.100k.090313", "hw": "laryngology", "pos": "noun", "ipa": "/ˌlærɪŋˈɡɑːlədʒi/", "vi": "khoa thanh quản; thanh quản học"},
+    {"id": "lex.en.100k.090314", "hw": "laryngopharyngeal", "pos": "adj", "ipa": "/ləˌrɪŋɡoʊfəˈrɪndʒiəl/", "vi": "thuộc thanh quản-hầu"},
+    {"id": "lex.en.100k.090315", "hw": "laryngopharyngitis", "pos": "noun", "ipa": "/ləˌrɪŋɡoʊˌfærɪnˈdʒaɪtɪs/", "vi": "bệnh viêm thanh quản-hầu"},
+    {"id": "lex.en.100k.090316", "hw": "laryngopharynx", "pos": "noun", "ipa": "/ləˌrɪŋɡoʊˈfærɪŋks/", "vi": "hầu thanh quản; hạ hầu"},
+    {"id": "lex.en.100k.090317", "hw": "laryngoscopical", "pos": "adj", "ipa": "/ləˌrɪŋɡəˈskɑːpɪkəl/", "vi": "thuộc soi thanh quản"},
+    {"id": "lex.en.100k.090318", "hw": "laryngoscopy", "pos": "noun", "ipa": "/ˌlærɪŋˈɡɑːskəpi/", "vi": "thủ thuật soi thanh quản"},
+    {"id": "lex.en.100k.090319", "hw": "laryngostenosis", "pos": "noun", "ipa": "/ləˌrɪŋɡoʊstɪˈnoʊsɪs/", "vi": "chứng hẹp thanh quản"},
+    {"id": "lex.en.100k.090320", "hw": "laryngotomy", "pos": "noun", "ipa": "/ˌlærɪŋˈɡɑːtəmi/", "vi": "phẫu thuật mở thanh quản"},
+    {"id": "lex.en.100k.090321", "hw": "laryngotracheobronchitis", "pos": "noun", "ipa": "/ləˌrɪŋɡoʊˌtreɪkioʊbrɒŋˈkaɪtɪs/", "vi": "viêm thanh khí phế quản cấp"},
+    {"id": "lex.en.100k.090322", "hw": "lase", "pos": "verb", "ipa": "/leɪz/", "vi": "phát tia laze; chiếu xạ laze"},
+    {"id": "lex.en.100k.090323", "hw": "lased", "pos": "verb", "ipa": "/leɪzd/", "vi": "đã chiếu tia laze; đã phát laze"},
+    {"id": "lex.en.100k.090324", "hw": "lases", "pos": "verb", "ipa": "/ˈleɪzɪz/", "vi": "phát tia laze; hoạt động laze"},
+    {"id": "lex.en.100k.090325", "hw": "lashed", "pos": "verb", "ipa": "/læʃt/", "vi": "đã quất roi; đã trói chặt"},
+    {"id": "lex.en.100k.090326", "hw": "lashes", "pos": "verb", "ipa": "/ˈlæʃɪz/", "vi": "quất mạnh; quất roi; trói buộc"},
+    {"id": "lex.en.100k.090327", "hw": "lashkar", "pos": "noun", "ipa": "/ˈlæʃkər/", "vi": "đội quân bộ lạc Pashtun"},
+    {"id": "lex.en.100k.090328", "hw": "lasing", "pos": "noun", "ipa": "/ˈleɪzɪŋ/", "vi": "sự phát xạ laze; quá trình laze"},
+    {"id": "lex.en.100k.090329", "hw": "lasiocampa", "pos": "noun", "ipa": "/ˌleɪsiəʊˈkæmpə/", "vi": "chi bướm đêm Lasiocampa"},
+    {"id": "lex.en.100k.090330", "hw": "lasiocampid", "pos": "noun", "ipa": "/ˌleɪsiəʊˈkæmpɪd/", "vi": "bướm họ bướm kén rơm"},
+    {"id": "lex.en.100k.090331", "hw": "lasiocampidae", "pos": "noun", "ipa": "/ˌleɪsiəʊˈkæmpɪdiː/", "vi": "họ bướm kén rơm Lasiocampidae"},
+    {"id": "lex.en.100k.090332", "hw": "lasiurus", "pos": "noun", "ipa": "/ˌleɪsiˈjʊərəs/", "vi": "chi dơi đuôi lông Lasiurus"},
+    {"id": "lex.en.100k.090333", "hw": "lasley", "pos": "noun", "ipa": "/ˈlæzli/", "vi": "họ Lasley"},
+    {"id": "lex.en.100k.090334", "hw": "lasleys", "pos": "noun", "ipa": "/ˈlæzliz/", "vi": "những người họ Lasley"},
+    {"id": "lex.en.100k.090335", "hw": "lassoed", "pos": "verb", "ipa": "/læˈsuːd/", "vi": "đã quăng thòng lọng bắt"},
+    {"id": "lex.en.100k.090336", "hw": "lassoer", "pos": "noun", "ipa": "/læˈsuːər/", "vi": "người quăng dây thòng lọng"},
+    {"id": "lex.en.100k.090337", "hw": "lassoing", "pos": "noun", "ipa": "/læˈsuːɪŋ/", "vi": "việc quăng thòng lọng bắt"},
+    {"id": "lex.en.100k.090338", "hw": "lassos", "pos": "verb", "ipa": "/læˈsuːz/", "vi": "quăng thòng lọng; bắt thú"},
+    {"id": "lex.en.100k.090339", "hw": "lasted", "pos": "verb", "ipa": "/ˈlæstɪd/", "vi": "đã kéo dài; đã tồn tại"},
+    {"id": "lex.en.100k.090340", "hw": "lastex", "pos": "noun", "ipa": "/ˈlæstɛks/", "vi": "sợi thun bọc chỉ Lastex"},
+    {"id": "lex.en.100k.090341", "hw": "lasthenia", "pos": "noun", "ipa": "/læsˈθiːniə/", "vi": "chi thực vật hoa vàng Lasthenia"},
+    {"id": "lex.en.100k.090342", "hw": "lastingness", "pos": "noun", "ipa": "/ˈlæstɪŋnɪs/", "vi": "tính lâu bền; độ bền vững lâu dài"},
+    {"id": "lex.en.100k.090343", "hw": "lastreopsis", "pos": "noun", "ipa": "/ˌlæstriˈɒpsɪs/", "vi": "chi dương xỉ Lastreopsis"},
+    {"id": "lex.en.100k.090344", "hw": "lasts", "pos": "verb", "ipa": "/læsts/", "vi": "kéo dài; duy trì; tồn tại"},
+    {"id": "lex.en.100k.090345", "hw": "latanier", "pos": "noun", "ipa": "/ˌlætəˈnɪər/", "vi": "loài cọ latanier; cọ quạt"},
+    {"id": "lex.en.100k.090346", "hw": "latched", "pos": "verb", "ipa": "/lætʃt/", "vi": "đã cài chốt; gài then cửa"},
+    {"id": "lex.en.100k.090347", "hw": "latches", "pos": "verb", "ipa": "/ˈlætʃɪz/", "vi": "cài then; then chốt khóa"},
+    {"id": "lex.en.100k.090348", "hw": "latchet", "pos": "noun", "ipa": "/ˈlætʃɪt/", "vi": "dây quai dép; quai giày bằng da"},
+    {"id": "lex.en.100k.090349", "hw": "latching", "pos": "noun", "ipa": "/ˈlætʃɪŋ/", "vi": "việc gài chốt; mạch tự giữ chốt"},
+    {"id": "lex.en.100k.090350", "hw": "latchstring", "pos": "noun", "ipa": "/ˈlætʃstrɪŋ/", "vi": "dây kéo chốt cửa bên ngoài"},
+    {"id": "lex.en.100k.090351", "hw": "laten", "pos": "verb", "ipa": "/ˈleɪtən/", "vi": "trở nên muộn màng; làm muộn đi"},
+    {"id": "lex.en.100k.090352", "hw": "lateralisation", "pos": "noun", "ipa": "/ˌlætərəlaɪˈzeɪʃən/", "vi": "sự định vị bán cầu não; thiên bên"},
+    {"id": "lex.en.100k.090353", "hw": "lateralize", "pos": "verb", "ipa": "/ˈlætərəlaɪz/", "vi": "thiên về một bên; định vị một bên"},
+    {"id": "lex.en.100k.090354", "hw": "lateritic", "pos": "adj", "ipa": "/ˌlætəˈrɪtɪk/", "vi": "thuộc đất đá ong laterit"},
+    {"id": "lex.en.100k.090355", "hw": "laterization", "pos": "noun", "ipa": "/ˌlætəraɪˈzeɪʃən/", "vi": "quá trình feralit hóa; đá ong hóa"},
+    {"id": "lex.en.100k.090356", "hw": "lathed", "pos": "verb", "ipa": "/leɪðd/", "vi": "đã tiện gọt bằng máy tiện"},
+    {"id": "lex.en.100k.090357", "hw": "lathee", "pos": "noun", "ipa": "/ˈlɑːti/", "vi": "gậy tre lathi (Ấn Độ)"},
+    {"id": "lex.en.100k.090358", "hw": "lathered", "pos": "verb", "ipa": "/ˈlæðərd/", "vi": "đã thoa xà phòng; đã tạo bọt"},
+    {"id": "lex.en.100k.090359", "hw": "lathering", "pos": "verb", "ipa": "/ˈlæðərɪŋ/", "vi": "đang tạo bọt xà phòng; đánh bọt"},
+    {"id": "lex.en.100k.090360", "hw": "lathers", "pos": "verb", "ipa": "/ˈlæðərz/", "vi": "sủi bọt; xoa bọt xà phòng"},
+    {"id": "lex.en.100k.090361", "hw": "lathery", "pos": "adj", "ipa": "/ˈlæðəri/", "vi": "đầy bọt xà phòng; sủi nhiều bọt"},
+    {"id": "lex.en.100k.090362", "hw": "lathes", "pos": "verb", "ipa": "/leɪðz/", "vi": "tiện trên máy tiện"},
+    {"id": "lex.en.100k.090363", "hw": "lathing", "pos": "noun", "ipa": "/ˈlæθɪŋ/", "vi": "nghề tiện gỗ; giàn nan gỗ lót vữa"},
+    {"id": "lex.en.100k.090364", "hw": "laths", "pos": "noun", "ipa": "/læθs/", "vi": "các thanh gỗ mỏng; nan gỗ lót"},
+    {"id": "lex.en.100k.090365", "hw": "lathy", "pos": "adj", "ipa": "/ˈleɪθi/", "vi": "mảnh khảnh như nan gỗ; gầy thon"},
+    {"id": "lex.en.100k.090366", "hw": "lathyrism", "pos": "noun", "ipa": "/ˈlæθɪrɪzəm/", "vi": "bệnh ngộ độc đậu ván lathyrism"},
+    {"id": "lex.en.100k.090367", "hw": "lathyritic", "pos": "adj", "ipa": "/ˌlæθɪˈrɪtɪk/", "vi": "thuộc chứng ngộ độc lathyrism"},
+    {"id": "lex.en.100k.090368", "hw": "latices", "pos": "noun", "ipa": "/ˈleɪtɪsiːz/", "vi": "các loại nhựa mủ thực vật"},
+    {"id": "lex.en.100k.090369", "hw": "laticifer", "pos": "noun", "ipa": "/ləˈtɪsɪfər/", "vi": "ống dẫn nhựa mủ thực vật"},
+    {"id": "lex.en.100k.090370", "hw": "laticiferous", "pos": "adj", "ipa": "/ˌlætɪˈsɪfərəs/", "vi": "chứa nhựa mủ; có ống tiết nhựa"},
+    {"id": "lex.en.100k.090371", "hw": "latifundia", "pos": "noun", "ipa": "/ˌlætɪˈfʌndiə/", "vi": "các đại điền trang (La Mã)"},
+    {"id": "lex.en.100k.090372", "hw": "latifundium", "pos": "noun", "ipa": "/ˌlætɪˈfʌndiəm/", "vi": "đại điền trang La Mã cổ đại"},
+    {"id": "lex.en.100k.090373", "hw": "latimeria", "pos": "noun", "ipa": "/ˌlætɪˈmɪəriə/", "vi": "chi cá vây tay cổ Latimeria"},
+    {"id": "lex.en.100k.090374", "hw": "latimeridae", "pos": "noun", "ipa": "/ˌlætɪˈmɛrɪdiː/", "vi": "họ cá vây tay Latimeriidae"},
+    {"id": "lex.en.100k.090375", "hw": "latinesce", "pos": "noun", "ipa": "/ˌlætɪˈnɛsk/", "vi": "tiếng Latinh nhân tạo hiện đại"},
+    {"id": "lex.en.100k.090376", "hw": "latinisation", "pos": "noun", "ipa": "/ˌlætɪnaɪˈzeɪʃən/", "vi": "sự La-tinh hóa chữ viết"},
+    {"id": "lex.en.100k.090377", "hw": "latinise", "pos": "verb", "ipa": "/ˈlætɪnaɪz/", "vi": "La-tinh hóa; dịch sang Latin"},
+    {"id": "lex.en.100k.090378", "hw": "latinism", "pos": "noun", "ipa": "/ˈlætɪnɪzəm/", "vi": "từ ngữ gốc Latin; phong cách Latin"},
+    {"id": "lex.en.100k.090379", "hw": "latinity", "pos": "noun", "ipa": "/ləˈtɪnəti/", "vi": "văn phong Latin; tính chất Latin"},
+    {"id": "lex.en.100k.090380", "hw": "latinization", "pos": "noun", "ipa": "/ˌlætɪnaɪˈzeɪʃən/", "vi": "sự La-tinh hóa; chuyển tự Latin"},
+    {"id": "lex.en.100k.090381", "hw": "latinize", "pos": "verb", "ipa": "/ˈlætɪnaɪz/", "vi": "La-tinh hóa; đổi sang Latin"},
+    {"id": "lex.en.100k.090382", "hw": "latinizer", "pos": "noun", "ipa": "/ˈlætɪnaɪzər/", "vi": "người chủ trương La-tinh hóa"},
+    {"id": "lex.en.100k.090383", "hw": "latins", "pos": "noun", "ipa": "/ˈlætɪnz/", "vi": "những người gốc Latin"},
+    {"id": "lex.en.100k.090384", "hw": "latish", "pos": "adj", "ipa": "/ˈleɪtɪʃ/", "vi": "hơi muộn; khá trễ; xế chiều"},
+    {"id": "lex.en.100k.090385", "hw": "latitudes", "pos": "noun", "ipa": "/ˈlætɪtjuːdz/", "vi": "các vĩ độ; quyền tự do hành động"},
+    {"id": "lex.en.100k.090386", "hw": "latitudinarianism", "pos": "noun", "ipa": "/ˌlætɪˌtjuːdɪˈnɛəriənɪzəm/", "vi": "thuyết tự do tôn giáo phóng khoáng"},
+    {"id": "lex.en.100k.090387", "hw": "latitudinous", "pos": "adj", "ipa": "/ˌlætɪˈtjuːdɪnəs/", "vi": "rộng lớn bao quát; phóng khoáng"},
+    {"id": "lex.en.100k.090388", "hw": "latosol", "pos": "noun", "ipa": "/ˈlætəsɒl/", "vi": "đất đỏ latosol vùng nhiệt đới"},
+    {"id": "lex.en.100k.090389", "hw": "latosolic", "pos": "adj", "ipa": "/ˌlætəˈsɒlɪk/", "vi": "thuộc loại đất đỏ latosol"},
+    {"id": "lex.en.100k.090390", "hw": "latten", "pos": "noun", "ipa": "/ˈlætən/", "vi": "đồng thau cán mỏng latten"},
+    {"id": "lex.en.100k.090391", "hw": "lattermost", "pos": "adj", "ipa": "/ˈlætərmoʊst/", "vi": "ở tận cùng chót; muộn màng nhất"},
+    {"id": "lex.en.100k.090392", "hw": "latticelike", "pos": "adj", "ipa": "/ˈlætɪslaɪk/", "vi": "dạng mắt cáo; đan lưới chéo"},
+    {"id": "lex.en.100k.090393", "hw": "lauan", "pos": "noun", "ipa": "/ləˈwɑːn/", "vi": "gỗ lauan (gỗ dầu Philippin)"},
+    {"id": "lex.en.100k.090394", "hw": "laudability", "pos": "noun", "ipa": "/ˌlɔːdəˈbɪləti/", "vi": "tính đáng ca ngợi; điều đáng khen"},
+    {"id": "lex.en.100k.090395", "hw": "laudableness", "pos": "noun", "ipa": "/ˈlɔːdəbəlnɪs/", "vi": "phẩm chất đáng khen ngợi"},
+    {"id": "lex.en.100k.090396", "hw": "laudation", "pos": "noun", "ipa": "/lɔːˈdeɪʃən/", "vi": "sự ca ngợi; lời tán dương"},
+    {"id": "lex.en.100k.090397", "hw": "laudative", "pos": "adj", "ipa": "/ˈlɔːdətɪv/", "vi": "mang tính ca ngợi; tán dương"},
+    {"id": "lex.en.100k.090398", "hw": "laudator", "pos": "noun", "ipa": "/lɔːˈdeɪtər/", "vi": "người khen ngợi; người tán dương"},
+    {"id": "lex.en.100k.090399", "hw": "lauded", "pos": "verb", "ipa": "/ˈlɔːdɪd/", "vi": "đã ca ngợi; được tán dương hết lời"},
+    {"id": "lex.en.100k.090400", "hw": "lauding", "pos": "verb", "ipa": "/ˈlɔːdɪŋ/", "vi": "đang ca ngợi; việc tán tụng"},
+    {"id": "lex.en.100k.090401", "hw": "laudo", "pos": "noun", "ipa": "/ˈlaʊdoʊ/", "vi": "đỉnh núi Laudo"}
+]
+
+assert len(data) == 100
+for i, (r, rev) in enumerate(zip(raw, data)):
+    assert r['id'] == rev['id'] and r['hw'] == rev['hw'], f"Mismatch at {i}: {r['id']} vs {rev['id']}"
+    assert rev['vi'] and len(rev['vi']) <= 35, f"vi length > 35 at {i}: {rev['vi']}"
+    assert rev['pos'] in ["noun", "verb", "adj", "adv", "intj", "prep", "pron", "conj", "det", "num"], f"pos invalid at {i}: {rev['pos']}"
+    ipa = rev['ipa'].strip()
+    assert ipa.startswith('/') and ipa.endswith('/') and ipa.count('/') == 2, f"ipa format invalid at {i}: {ipa}"
+    rev['ipa'] = ipa
+    rev['status'] = "reviewed"
+    rev['cefr'] = r.get('cefr')
+    rev['tier'] = r.get('tier')
+    rev['notes'] = r.get('notes')
+
+print("Part 4 validated successfully!")

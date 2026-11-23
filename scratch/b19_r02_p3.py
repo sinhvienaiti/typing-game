@@ -1,0 +1,122 @@
+import json
+
+raw = json.load(open("scratch/b19_r02_raw_p3.json"))
+assert len(raw) == 100
+
+data = [
+    {"id": "lex.en.100k.090702", "hw": "leprose", "pos": "adj", "ipa": "/ˈlɛproʊs/", "vi": "sần sùi có vảy; lở lói như phong"},
+    {"id": "lex.en.100k.090703", "hw": "leprotic", "pos": "adj", "ipa": "/lɪˈprɑːtɪk/", "vi": "thuộc bệnh phong cùi; bị hủi"},
+    {"id": "lex.en.100k.090704", "hw": "leptarrhena", "pos": "noun", "ipa": "/ˌlɛptəˈriːnə/", "vi": "chi cỏ thạch nam Leptarrhena"},
+    {"id": "lex.en.100k.090705", "hw": "leptinotarsa", "pos": "noun", "ipa": "/ˌlɛptɪnoʊˈtɑːrsə/", "vi": "chi bọ khoai tây Leptinotarsa"},
+    {"id": "lex.en.100k.090706", "hw": "leptocephalic", "pos": "adj", "ipa": "/ˌlɛptoʊsɪˈfælɪk/", "vi": "có đầu thon dài; sọ hẹp"},
+    {"id": "lex.en.100k.090707", "hw": "leptocephalus", "pos": "noun", "ipa": "/ˌlɛptoʊˈsɛfələs/", "vi": "ấu trùng cá chình dạng lá liễu"},
+    {"id": "lex.en.100k.090708", "hw": "leptodactyl", "pos": "adj", "ipa": "/ˌlɛptoʊˈdæktɪl/", "vi": "có ngón chân thon dài"},
+    {"id": "lex.en.100k.090709", "hw": "leptodactylid", "pos": "noun", "ipa": "/ˌlɛptoʊˈdæktɪlɪd/", "vi": "loài ếch ngón thon Nam Mỹ"},
+    {"id": "lex.en.100k.090710", "hw": "leptodactylidae", "pos": "noun", "ipa": "/ˌlɛptoʊdækˈtɪlɪdiː/", "vi": "họ ếch ngón thon Leptodactylidae"},
+    {"id": "lex.en.100k.090711", "hw": "leptodactylus", "pos": "noun", "ipa": "/ˌlɛptoʊˈdæktɪləs/", "vi": "chi ếch ngón thon Leptodactylus"},
+    {"id": "lex.en.100k.090712", "hw": "leptoglossus", "pos": "noun", "ipa": "/ˌlɛptoʊˈɡlɒsəs/", "vi": "chi bọ xít lá Leptoglossus"},
+    {"id": "lex.en.100k.090713", "hw": "leptokurtosis", "pos": "noun", "ipa": "/ˌlɛptoʊkɜːrˈtoʊsɪs/", "vi": "độ nhọn vượt chuẩn (thống kê)"},
+    {"id": "lex.en.100k.090714", "hw": "leptomeninges", "pos": "noun", "ipa": "/ˌlɛptoʊmɪˈnɪndʒiːz/", "vi": "màng não mềm và màng nhện"},
+    {"id": "lex.en.100k.090715", "hw": "leptomeningitis", "pos": "noun", "ipa": "/ˌlɛptoʊˌmɛnɪnˈdʒaɪtɪs/", "vi": "viêm màng mềm não tủy"},
+    {"id": "lex.en.100k.090716", "hw": "leptopteris", "pos": "noun", "ipa": "/lɛpˈtɒptərɪs/", "vi": "chi dương xỉ mềm Leptopteris"},
+    {"id": "lex.en.100k.090717", "hw": "leptoptilus", "pos": "noun", "ipa": "/lɛpˈtɒptɪləs/", "vi": "chi chim già đới Leptoptilos"},
+    {"id": "lex.en.100k.090718", "hw": "leptorhine", "pos": "adj", "ipa": "/ˈlɛptoʊraɪn/", "vi": "có mũi hẹp dài; sống mũi hẹp"},
+    {"id": "lex.en.100k.090719", "hw": "leptorrhine", "pos": "adj", "ipa": "/ˈlɛptoʊraɪn/", "vi": "có mũi hẹp dài; sống mũi nhọn"},
+    {"id": "lex.en.100k.090720", "hw": "leptorrhinian", "pos": "adj", "ipa": "/ˌlɛptoʊˈrɪniən/", "vi": "thuộc người có dáng mũi hẹp"},
+    {"id": "lex.en.100k.090721", "hw": "leptorrhinic", "pos": "adj", "ipa": "/ˌlɛptoʊˈrɪnɪk/", "vi": "có đặc điểm mũi hẹp dài"},
+    {"id": "lex.en.100k.090722", "hw": "leptosporangiate", "pos": "adj", "ipa": "/ˌlɛptoʊspəˈrændʒiɪt/", "vi": "có túi bào tử màng mỏng"},
+    {"id": "lex.en.100k.090723", "hw": "leptosporangium", "pos": "noun", "ipa": "/ˌlɛptoʊspəˈrændʒiəm/", "vi": "túi bào tử màng mỏng"},
+    {"id": "lex.en.100k.090724", "hw": "leptotene", "pos": "noun", "ipa": "/ˈlɛptoʊtiːn/", "vi": "kỳ sợi mảnh (giảm phân)"},
+    {"id": "lex.en.100k.090725", "hw": "leptotyphlopidae", "pos": "noun", "ipa": "/ˌlɛptoʊtɪfˈlɒpɪdiː/", "vi": "họ rắn mù chỉ Leptotyphlopidae"},
+    {"id": "lex.en.100k.090726", "hw": "leptotyphlops", "pos": "noun", "ipa": "/ˌlɛptoʊˈtɪflɒps/", "vi": "chi rắn mù chỉ Leptotyphlops"},
+    {"id": "lex.en.100k.090727", "hw": "leresis", "pos": "noun", "ipa": "/ləˈriːsɪs/", "vi": "thói nói lảm nhảm của người già"},
+    {"id": "lex.en.100k.090728", "hw": "lerot", "pos": "noun", "ipa": "/ˈlɛroʊ/", "vi": "chuột sóc vườn châu Âu"},
+    {"id": "lex.en.100k.090729", "hw": "lesbians", "pos": "noun", "ipa": "/ˈlɛzbiənz/", "vi": "những người nữ đồng tính"},
+    {"id": "lex.en.100k.090730", "hw": "lescol", "pos": "noun", "ipa": "/ˈlɛskɒl/", "vi": "thuốc hạ mỡ máu Lescol"},
+    {"id": "lex.en.100k.090731", "hw": "lesquerella", "pos": "noun", "ipa": "/ˌlɛskwəˈrɛlə/", "vi": "chi mù tạt dầu Lesquerella"},
+    {"id": "lex.en.100k.090732", "hw": "lessens", "pos": "verb", "ipa": "/ˈlɛsənz/", "vi": "giảm bớt; làm suy giảm"},
+    {"id": "lex.en.100k.090733", "hw": "lessors", "pos": "noun", "ipa": "/ˈlɛsɔːrz/", "vi": "những người cho thuê tài sản"},
+    {"id": "lex.en.100k.090734", "hw": "lest", "pos": "conj", "ipa": "/lɛst/", "vi": "kẻo mà; để phòng khi; e rằng"},
+    {"id": "lex.en.100k.090735", "hw": "lethally", "pos": "adv", "ipa": "/ˈliːθəli/", "vi": "gây tử vong; chí mạng"},
+    {"id": "lex.en.100k.090736", "hw": "lethargical", "pos": "adj", "ipa": "/lɪˈθɑːrdʒɪkəl/", "vi": "hôn mê li bì; uể oải đờ đẫn"},
+    {"id": "lex.en.100k.090737", "hw": "lethean", "pos": "adj", "ipa": "/lɪˈθiːən/", "vi": "lãng quên; thuộc dòng sông quên"},
+    {"id": "lex.en.100k.090738", "hw": "lett", "pos": "noun", "ipa": "/lɛt/", "vi": "người Latvia; người Lát-vi"},
+    {"id": "lex.en.100k.090739", "hw": "lettercard", "pos": "noun", "ipa": "/ˈlɛtərkɑːrd/", "vi": "phong thư gấp dán viền"},
+    {"id": "lex.en.100k.090740", "hw": "letterheads", "pos": "noun", "ipa": "/ˈlɛtərhɛdz/", "vi": "các tiêu đề thư in sẵn"},
+    {"id": "lex.en.100k.090741", "hw": "letterless", "pos": "adj", "ipa": "/ˈlɛtərlɪs/", "vi": "mù chữ; thất học; không biết chữ"},
+    {"id": "lex.en.100k.090742", "hw": "lettuces", "pos": "noun", "ipa": "/ˈlɛtɪsɪz/", "vi": "các loại rau xà lách"},
+    {"id": "lex.en.100k.090743", "hw": "leucadendron", "pos": "noun", "ipa": "/ˌluːkəˈdɛndrɒn/", "vi": "chi cây bạc lá Leucadendron"},
+    {"id": "lex.en.100k.090744", "hw": "leucaemia", "pos": "noun", "ipa": "/luːˈsiːmiə/", "vi": "bệnh bạch cầu; ung thư máu"},
+    {"id": "lex.en.100k.090745", "hw": "leucanthemum", "pos": "noun", "ipa": "/luːˈkænθəməm/", "vi": "chi cúc mắt bò cúc trắng"},
+    {"id": "lex.en.100k.090746", "hw": "leucite", "pos": "noun", "ipa": "/ˈluːsaɪt/", "vi": "khoáng vật leuxit silicat"},
+    {"id": "lex.en.100k.090747", "hw": "leucocythaemia", "pos": "noun", "ipa": "/ˌluːkoʊsaɪˈθiːmiə/", "vi": "bệnh bạch cầu tăng sản máu"},
+    {"id": "lex.en.100k.090748", "hw": "leucocythemia", "pos": "noun", "ipa": "/ˌluːkoʊsaɪˈθiːmiə/", "vi": "bệnh bạch cầu ung thư máu"},
+    {"id": "lex.en.100k.090749", "hw": "leucocytic", "pos": "adj", "ipa": "/ˌluːkəˈsɪtɪk/", "vi": "thuộc tế bào bạch cầu"},
+    {"id": "lex.en.100k.090750", "hw": "leucocytosis", "pos": "noun", "ipa": "/ˌluːkoʊsaɪˈtoʊsɪs/", "vi": "chứng tăng lượng bạch cầu"},
+    {"id": "lex.en.100k.090751", "hw": "leucocytozoan", "pos": "noun", "ipa": "/ˌluːkoʊsaɪtoʊˈzoʊən/", "vi": "ký sinh trùng Leucocytozoon"},
+    {"id": "lex.en.100k.090752", "hw": "leucocytozoon", "pos": "noun", "ipa": "/ˌluːkoʊsaɪtoʊˈzoʊɒn/", "vi": "chi ký sinh bào Leucocytozoon"},
+    {"id": "lex.en.100k.090753", "hw": "leucoderma", "pos": "noun", "ipa": "/ˌluːkoʊˈdɜːrmə/", "vi": "bệnh bạch biến; mất sắc tố da"},
+    {"id": "lex.en.100k.090754", "hw": "leucogenes", "pos": "noun", "ipa": "/luːˈkɒdʒɪniːz/", "vi": "hoa nhung tuyết New Zealand"},
+    {"id": "lex.en.100k.090755", "hw": "leucoma", "pos": "noun", "ipa": "/luːˈkoʊmə/", "vi": "vết sẹo đục giác mạc; bạch ban"},
+    {"id": "lex.en.100k.090756", "hw": "leucopenia", "pos": "noun", "ipa": "/ˌluːkoʊˈpiːniə/", "vi": "chứng giảm số lượng bạch cầu"},
+    {"id": "lex.en.100k.090757", "hw": "leucoplakia", "pos": "noun", "ipa": "/ˌluːkoʊˈpleɪkiə/", "vi": "chứng bạch sản niêm mạc miệng"},
+    {"id": "lex.en.100k.090758", "hw": "leucoplast", "pos": "noun", "ipa": "/ˈluːkoʊplæst/", "vi": "vô sắc lạp; lạp không màu"},
+    {"id": "lex.en.100k.090759", "hw": "leucoplastid", "pos": "noun", "ipa": "/ˌluːkoʊˈplæstɪd/", "vi": "lạp thể không màu tế bào"},
+    {"id": "lex.en.100k.090760", "hw": "leucopoiesis", "pos": "noun", "ipa": "/ˌluːkoʊpɔɪˈiːsɪs/", "vi": "quá trình sinh tạo bạch cầu"},
+    {"id": "lex.en.100k.090761", "hw": "leucopoietic", "pos": "adj", "ipa": "/ˌluːkoʊpɔɪˈɛtɪk/", "vi": "thuộc quá trình tạo bạch cầu"},
+    {"id": "lex.en.100k.090762", "hw": "leucorrhea", "pos": "noun", "ipa": "/ˌluːkəˈriːə/", "vi": "khí hư âm đạo; huyết trắng"},
+    {"id": "lex.en.100k.090763", "hw": "leucorrhoea", "pos": "noun", "ipa": "/ˌluːkəˈriːə/", "vi": "chứng bạch đới; bệnh huyết trắng"},
+    {"id": "lex.en.100k.090764", "hw": "leucothoe", "pos": "noun", "ipa": "/luːˈkɒθoʊiː/", "vi": "chi cây thạch nam Leucothoe"},
+    {"id": "lex.en.100k.090765", "hw": "leukeran", "pos": "noun", "ipa": "/ˈluːkəræn/", "vi": "thuốc điều trị ung thư Leukeran"},
+    {"id": "lex.en.100k.090766", "hw": "leukoderma", "pos": "noun", "ipa": "/ˌluːkoʊˈdɜːrmə/", "vi": "bệnh bạch biến mất sắc tố da"},
+    {"id": "lex.en.100k.090767", "hw": "leukoencephalitis", "pos": "noun", "ipa": "/ˌluːkoʊɛnˌsɛfəˈlaɪtɪs/", "vi": "viêm chất trắng não"},
+    {"id": "lex.en.100k.090768", "hw": "leukoma", "pos": "noun", "ipa": "/luːˈkoʊmə/", "vi": "vết đục giác mạc mờ mắt"},
+    {"id": "lex.en.100k.090769", "hw": "leukorrhea", "pos": "noun", "ipa": "/ˌluːkəˈriːə/", "vi": "khí hư âm đạo; bệnh huyết trắng"},
+    {"id": "lex.en.100k.090770", "hw": "leukotomy", "pos": "noun", "ipa": "/luːˈkɑːtəmi/", "vi": "phẫu thuật cắt chất trắng thùy não"},
+    {"id": "lex.en.100k.090771", "hw": "leuwenhoek", "pos": "noun", "ipa": "/ˈleɪvənhʊk/", "vi": "nhà vi sinh vật Leeuwenhoek"},
+    {"id": "lex.en.100k.090772", "hw": "leva", "pos": "noun", "ipa": "/ˈlɛvə/", "vi": "đồng tiền leva Bulgaria"},
+    {"id": "lex.en.100k.090773", "hw": "levallorphan", "pos": "noun", "ipa": "/ˌlɛvəˈlɔːrfæn/", "vi": "thuốc đối kháng Levallorphan"},
+    {"id": "lex.en.100k.090774", "hw": "levanter", "pos": "noun", "ipa": "/lɪˈvæntər/", "vi": "gió đông Địa Trung Hải; kẻ trốn nợ"},
+    {"id": "lex.en.100k.090775", "hw": "levees", "pos": "noun", "ipa": "/ˈlɛviːz/", "vi": "các con đê chắn lũ; buổi tiếp tân"},
+    {"id": "lex.en.100k.090776", "hw": "levelled", "pos": "verb", "ipa": "/ˈlɛvəld/", "vi": "đã san phẳng; san bằng mặt đất"},
+    {"id": "lex.en.100k.090777", "hw": "levelling", "pos": "verb", "ipa": "/ˈlɛvəlɪŋ/", "vi": "san phẳng; cân bằng mức độ"},
+    {"id": "lex.en.100k.090778", "hw": "levels", "pos": "verb", "ipa": "/ˈlɛvəlz/", "vi": "san bằng; hạ gục; chĩa súng ngắm"},
+    {"id": "lex.en.100k.090779", "hw": "levered", "pos": "verb", "ipa": "/ˈliːvərd/", "vi": "đã dùng đòn bẩy nâng lên"},
+    {"id": "lex.en.100k.090780", "hw": "levering", "pos": "verb", "ipa": "/ˈliːvərɪŋ/", "vi": "dùng đòn bẩy; bẩy vật nặng lên"},
+    {"id": "lex.en.100k.090781", "hw": "levers", "pos": "verb", "ipa": "/ˈliːvərz/", "vi": "dùng đòn bẩy nâng; bẩy lên"},
+    {"id": "lex.en.100k.090782", "hw": "leviable", "pos": "adj", "ipa": "/ˈlɛviəbəl/", "vi": "có thể đánh thuế; có thể thu thuế"},
+    {"id": "lex.en.100k.090783", "hw": "levied", "pos": "verb", "ipa": "/ˈlɛvid/", "vi": "đã đánh thuế; đã cưỡng chế nộp"},
+    {"id": "lex.en.100k.090784", "hw": "levies", "pos": "verb", "ipa": "/ˈlɛviz/", "vi": "đánh thuế; bắt đóng thuế"},
+    {"id": "lex.en.100k.090785", "hw": "levigate", "pos": "verb", "ipa": "/ˈlɛvɪɡeɪt/", "vi": "nghiền bột mịn; thủy phi bột"},
+    {"id": "lex.en.100k.090786", "hw": "levigation", "pos": "noun", "ipa": "/ˌlɛvɪˈɡeɪʃən/", "vi": "sự nghiền mịn; kỹ thuật thủy phi"},
+    {"id": "lex.en.100k.090787", "hw": "levin", "pos": "noun", "ipa": "/ˈlɛvɪn/", "vi": "tia chớp; ánh sét rạch trời"},
+    {"id": "lex.en.100k.090788", "hw": "levisticum", "pos": "noun", "ipa": "/lɪˈvɪstɪkəm/", "vi": "chi rau cần núi Lovage"},
+    {"id": "lex.en.100k.090789", "hw": "levitated", "pos": "verb", "ipa": "/ˈlɛvɪteɪtɪd/", "vi": "đã bay lơ lửng giữa không trung"},
+    {"id": "lex.en.100k.090790", "hw": "levitates", "pos": "verb", "ipa": "/ˈlɛvɪteɪts/", "vi": "bay lơ lửng; nâng bổng lên"},
+    {"id": "lex.en.100k.090791", "hw": "levitating", "pos": "verb", "ipa": "/ˈlɛvɪteɪtɪŋ/", "vi": "đang bay lơ lửng không trung"},
+    {"id": "lex.en.100k.090792", "hw": "levogyrate", "pos": "adj", "ipa": "/ˌliːvoʊˈdʒaɪreɪt/", "vi": "làm quay cực ánh sáng sang trái"},
+    {"id": "lex.en.100k.090793", "hw": "levorotary", "pos": "adj", "ipa": "/ˌliːvoʊˈroʊtəri/", "vi": "quay trái; làm quay cực sang trái"},
+    {"id": "lex.en.100k.090794", "hw": "levorotation", "pos": "noun", "ipa": "/ˌliːvoʊroʊˈteɪʃən/", "vi": "sự quay trái quang học"},
+    {"id": "lex.en.100k.090795", "hw": "levorotatory", "pos": "adj", "ipa": "/ˌliːvoʊˈroʊtətɔːri/", "vi": "làm quay cực sang trái"},
+    {"id": "lex.en.100k.090796", "hw": "levulose", "pos": "noun", "ipa": "/ˈlɛvjʊloʊs/", "vi": "đường hoa quả fructose; levulose"},
+    {"id": "lex.en.100k.090797", "hw": "levying", "pos": "noun", "ipa": "/ˈlɛviɪŋ/", "vi": "việc đánh thuế; việc chiêu mộ binh"},
+    {"id": "lex.en.100k.090798", "hw": "lew", "pos": "noun", "ipa": "/luː/", "vi": "đồng tiền leva Bulgaria"},
+    {"id": "lex.en.100k.090799", "hw": "lewises", "pos": "noun", "ipa": "/ˈluːɪsɪz/", "vi": "các móc nêm cẩu đá xây dựng"},
+    {"id": "lex.en.100k.090800", "hw": "lewisia", "pos": "noun", "ipa": "/luːˈɪziə/", "vi": "chi hoa mọng nước Lewisia"},
+    {"id": "lex.en.100k.090801", "hw": "lewisite", "pos": "noun", "ipa": "/ˈluːɪsaɪt/", "vi": "khí độc hơi cay phồng rộp lewisit"}
+]
+
+assert len(data) == 100
+for i, (r, rev) in enumerate(zip(raw, data)):
+    assert r['id'] == rev['id'] and r['hw'] == rev['hw'], f"Mismatch at {i}: {r['id']} vs {rev['id']}"
+    assert rev['vi'] and len(rev['vi']) <= 35, f"vi length > 35 at {i}: {rev['vi']}"
+    assert rev['pos'] in ["noun", "verb", "adj", "adv", "intj", "prep", "pron", "conj", "det", "num"], f"pos invalid at {i}: {rev['pos']}"
+    ipa = rev['ipa'].strip()
+    assert ipa.startswith('/') and ipa.endswith('/') and ipa.count('/') == 2, f"ipa format invalid at {i}: {ipa}"
+    rev['ipa'] = ipa
+    rev['status'] = "reviewed"
+    rev['cefr'] = r.get('cefr')
+    rev['tier'] = r.get('tier')
+    rev['notes'] = r.get('notes')
+
+print("Part 3 validated successfully!")

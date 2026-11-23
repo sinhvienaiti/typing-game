@@ -1,0 +1,122 @@
+import json
+
+raw = json.load(open("scratch/b19_r03_raw_p2.json"))
+assert len(raw) == 100
+
+data = [
+    {"id": "lex.en.100k.091102", "hw": "lipotropin", "pos": "noun", "ipa": "/ˌlɪpəˈtroʊpɪn/", "vi": "hoóc-môn mỡ lipotropin"},
+    {"id": "lex.en.100k.091103", "hw": "lipotropism", "pos": "noun", "ipa": "/lɪˈpɑːtrəpɪzəm/", "vi": "hiện tượng tiêu mỡ; tính hướng mỡ"},
+    {"id": "lex.en.100k.091104", "hw": "lipotyphla", "pos": "noun", "ipa": "/ˌlaɪpoʊˈtɪflə/", "vi": "bộ thú ăn sâu bọ Lipotyphla"},
+    {"id": "lex.en.100k.091105", "hw": "lipoxygenase", "pos": "noun", "ipa": "/laɪˈpɒksɪdʒəneɪs/", "vi": "enzym oxy hóa lipoxygenase"},
+    {"id": "lex.en.100k.091106", "hw": "lippizan", "pos": "noun", "ipa": "/ˌlɪpɪˈzæn/", "vi": "giống ngựa quý Lipizzan"},
+    {"id": "lex.en.100k.091107", "hw": "lippizaner", "pos": "noun", "ipa": "/ˌlɪpɪˈzɑːnər/", "vi": "ngựa biểu diễn Lipizzaner"},
+    {"id": "lex.en.100k.091108", "hw": "lipread", "pos": "verb", "ipa": "/ˈlɪpriːd/", "vi": "đọc khẩu hình môi; nhìn môi hiểu"},
+    {"id": "lex.en.100k.091109", "hw": "lipsalve", "pos": "noun", "ipa": "/ˈlɪpsæv/", "vi": "sáp dưỡng môi; son nẻ dưỡng ẩm"},
+    {"id": "lex.en.100k.091110", "hw": "liquaemin", "pos": "noun", "ipa": "/lɪˈkwiːmɪn/", "vi": "thuốc chống đông Liquaemin"},
+    {"id": "lex.en.100k.091111", "hw": "liquate", "pos": "verb", "ipa": "/ˈlaɪkweɪt/", "vi": "tách kim loại bằng nung chảy"},
+    {"id": "lex.en.100k.091112", "hw": "liquation", "pos": "noun", "ipa": "/laɪˈkweɪʃən/", "vi": "phương pháp luyện kim tách lỏng"},
+    {"id": "lex.en.100k.091113", "hw": "liquefacient", "pos": "adj", "ipa": "/ˌlɪkwɪˈfeɪʃənt/", "vi": "làm hóa lỏng; làm tan thành dịch"},
+    {"id": "lex.en.100k.091114", "hw": "liquefiable", "pos": "adj", "ipa": "/ˈlɪkwɪfaɪəbəl/", "vi": "có thể hóa lỏng; dễ ngưng tụ lỏng"},
+    {"id": "lex.en.100k.091115", "hw": "liquefies", "pos": "verb", "ipa": "/ˈlɪkwɪfaɪz/", "vi": "hóa lỏng; tan chảy thành nước"},
+    {"id": "lex.en.100k.091116", "hw": "liquefying", "pos": "verb", "ipa": "/ˈlɪkwɪfaɪɪŋ/", "vi": "đang hóa lỏng; quá trình tan chảy"},
+    {"id": "lex.en.100k.091117", "hw": "liquesce", "pos": "verb", "ipa": "/lɪˈkwɛs/", "vi": "tan chảy dần; chuyển sang thể lỏng"},
+    {"id": "lex.en.100k.091118", "hw": "liquescency", "pos": "noun", "ipa": "/lɪˈkwɛsənsi/", "vi": "tính dễ tan chảy; khả năng hóa lỏng"},
+    {"id": "lex.en.100k.091119", "hw": "liquescense", "pos": "noun", "ipa": "/lɪˈkwɛsəns/", "vi": "trạng thái tan chảy hóa lỏng"},
+    {"id": "lex.en.100k.091120", "hw": "liquescent", "pos": "adj", "ipa": "/lɪˈkwɛsənt/", "vi": "đang tan chảy; xu hướng hóa lỏng"},
+    {"id": "lex.en.100k.091121", "hw": "liquidated", "pos": "verb", "ipa": "/ˈlɪkwɪdeɪtɪd/", "vi": "đã thanh lý tài sản; đã tiêu diệt"},
+    {"id": "lex.en.100k.091122", "hw": "liquidates", "pos": "verb", "ipa": "/ˈlɪkwɪdeɪts/", "vi": "thanh lý tài sản; trả hết nợ nần"},
+    {"id": "lex.en.100k.091123", "hw": "liquidating", "pos": "verb", "ipa": "/ˈlɪkwɪdeɪtɪŋ/", "vi": "đang thanh lý; việc giải thể"},
+    {"id": "lex.en.100k.091124", "hw": "liquidise", "pos": "verb", "ipa": "/ˈlɪkwɪdaɪz/", "vi": "xay nhuyễn thức ăn; hóa lỏng"},
+    {"id": "lex.en.100k.091125", "hw": "liquidised", "pos": "verb", "ipa": "/ˈlɪkwɪdaɪzd/", "vi": "đã xay nhuyễn; đã nghiền nát"},
+    {"id": "lex.en.100k.091126", "hw": "liquidiser", "pos": "noun", "ipa": "/ˈlɪkwɪdaɪzər/", "vi": "máy xay sinh tố thực phẩm"},
+    {"id": "lex.en.100k.091127", "hw": "liquidises", "pos": "verb", "ipa": "/ˈlɪkwɪdaɪzɪz/", "vi": "xay nhuyễn; nghiền nát thức ăn"},
+    {"id": "lex.en.100k.091128", "hw": "liquidising", "pos": "verb", "ipa": "/ˈlɪkwɪdaɪzɪŋ/", "vi": "đang xay nhuyễn thực phẩm"},
+    {"id": "lex.en.100k.091129", "hw": "liquidize", "pos": "verb", "ipa": "/ˈlɪkwɪdaɪz/", "vi": "xay thành chất lỏng; thanh lý"},
+    {"id": "lex.en.100k.091130", "hw": "liquidized", "pos": "verb", "ipa": "/ˈlɪkwɪdaɪzd/", "vi": "đã xay nhuyễn thành dạng lỏng"},
+    {"id": "lex.en.100k.091131", "hw": "liquidizer", "pos": "noun", "ipa": "/ˈlɪkwɪdaɪzər/", "vi": "máy xay sinh tố; cối xay hoa quả"},
+    {"id": "lex.en.100k.091132", "hw": "liquidizes", "pos": "verb", "ipa": "/ˈlɪkwɪdaɪzɪz/", "vi": "xay nhuyễn hoa quả; thanh lý vốn"},
+    {"id": "lex.en.100k.091133", "hw": "liquidizing", "pos": "verb", "ipa": "/ˈlɪkwɪdaɪzɪŋ/", "vi": "đang xay sinh tố; việc hóa lỏng"},
+    {"id": "lex.en.100k.091134", "hw": "liquidness", "pos": "noun", "ipa": "/ˈlɪkwɪdnɪs/", "vi": "tính chất lỏng; trạng thái lỏng"},
+    {"id": "lex.en.100k.091135", "hw": "liquidometer", "pos": "noun", "ipa": "/ˌlɪkwɪˈdɑːmɪtər/", "vi": "đồng hồ đo mức chất lỏng"},
+    {"id": "lex.en.100k.091136", "hw": "liquids", "pos": "noun", "ipa": "/ˈlɪkwɪdz/", "vi": "các chất lỏng; thức uống lỏng"},
+    {"id": "lex.en.100k.091137", "hw": "liquidus", "pos": "noun", "ipa": "/ˈlɪkwɪdəs/", "vi": "đường lỏng trong giản đồ pha"},
+    {"id": "lex.en.100k.091138", "hw": "liquifiable", "pos": "adj", "ipa": "/ˈlɪkwɪfaɪəbəl/", "vi": "có thể hóa lỏng được"},
+    {"id": "lex.en.100k.091139", "hw": "liquility", "pos": "noun", "ipa": "/lɪˈkwɪləti/", "vi": "tính linh động thanh khoản vốn"},
+    {"id": "lex.en.100k.091140", "hw": "liquored", "pos": "verb", "ipa": "/ˈlɪkərd/", "vi": "đã chuốc rượu say; ngấm men say"},
+    {"id": "lex.en.100k.091141", "hw": "liquoring", "pos": "verb", "ipa": "/ˈlɪkərɪŋ/", "vi": "chuốc rượu say; ngâm nước rượu"},
+    {"id": "lex.en.100k.091142", "hw": "liquorish", "pos": "adj", "ipa": "/ˈlɪkərɪʃ/", "vi": "thích uống rượu ngon; thèm rượu"},
+    {"id": "lex.en.100k.091143", "hw": "liquors", "pos": "verb", "ipa": "/ˈlɪkərz/", "vi": "chuốc rượu say; uống rượu mạnh"},
+    {"id": "lex.en.100k.091144", "hw": "lire", "pos": "noun", "ipa": "/ˈlɪərə/", "vi": "đồng tiền lia Ý và Thổ Nhĩ Kỳ"},
+    {"id": "lex.en.100k.091145", "hw": "lisped", "pos": "verb", "ipa": "/lɪspt/", "vi": "đã nói ngọng; phát âm đớt"},
+    {"id": "lex.en.100k.091146", "hw": "lisper", "pos": "noun", "ipa": "/ˈlɪspər/", "vi": "người nói ngọng; người nói đớt"},
+    {"id": "lex.en.100k.091147", "hw": "lisping", "pos": "noun", "ipa": "/ˈlɪspɪŋ/", "vi": "tật nói ngọng đớt âm s và z"},
+    {"id": "lex.en.100k.091148", "hw": "lispingly", "pos": "adv", "ipa": "/ˈlɪspɪŋli/", "vi": "bằng giọng nói ngọng ngịu"},
+    {"id": "lex.en.100k.091149", "hw": "lisps", "pos": "verb", "ipa": "/lɪsps/", "vi": "nói ngọng phát âm s thành th"},
+    {"id": "lex.en.100k.091150", "hw": "lissomeness", "pos": "noun", "ipa": "/ˈlɪsəmnɪs/", "vi": "sự uyển chuyển mềm mại; dẻo dai"},
+    {"id": "lex.en.100k.091151", "hw": "lissomness", "pos": "noun", "ipa": "/ˈlɪsəmnɪs/", "vi": "nét thon thả mềm mại; sự dẻo dai"},
+    {"id": "lex.en.100k.091152", "hw": "listel", "pos": "noun", "ipa": "/ˈlɪstəl/", "vi": "gờ chỉ phẳng chạy quanh cột"},
+    {"id": "lex.en.100k.091153", "hw": "listenable", "pos": "adj", "ipa": "/ˈlɪsənəbəl/", "vi": "dễ nghe; âm nhạc êm tai cuốn hút"},
+    {"id": "lex.en.100k.091154", "hw": "listened", "pos": "verb", "ipa": "/ˈlɪsənd/", "vi": "đã lắng nghe; chú ý lắng nghe"},
+    {"id": "lex.en.100k.091155", "hw": "listens", "pos": "verb", "ipa": "/ˈlɪsənz/", "vi": "lắng nghe; nghe theo lời khuyên"},
+    {"id": "lex.en.100k.091156", "hw": "listera", "pos": "noun", "ipa": "/lɪˈstɪərə/", "vi": "chi phong lan đôi lá Listera"},
+    {"id": "lex.en.100k.091157", "hw": "listerine", "pos": "noun", "ipa": "/ˈlɪstəriːn/", "vi": "nước súc miệng diệt khuẩn"},
+    {"id": "lex.en.100k.091158", "hw": "lists", "pos": "verb", "ipa": "/lɪsts/", "vi": "lên danh sách; liệt kê; nghiêng"},
+    {"id": "lex.en.100k.091159", "hw": "litchee", "pos": "noun", "ipa": "/ˈliːtʃiː/", "vi": "trái vải thiều chín mọng"},
+    {"id": "lex.en.100k.091160", "hw": "literalise", "pos": "verb", "ipa": "/ˈlɪtərəlaɪz/", "vi": "hiểu theo nghĩa đen từng chữ"},
+    {"id": "lex.en.100k.091161", "hw": "literalist", "pos": "noun", "ipa": "/ˈlɪtərəlɪst/", "vi": "người câu nệ giải nghĩa đen"},
+    {"id": "lex.en.100k.091162", "hw": "literality", "pos": "noun", "ipa": "/ˌlɪtəˈræləti/", "vi": "tính đúng theo nghĩa đen từng từ"},
+    {"id": "lex.en.100k.091163", "hw": "literalize", "pos": "verb", "ipa": "/ˈlɪtərəlaɪz/", "vi": "diễn giải sát theo nghĩa đen"},
+    {"id": "lex.en.100k.091164", "hw": "literariness", "pos": "noun", "ipa": "/ˈlɪtərərɪnɪs/", "vi": "tính chất văn chương nghệ thuật"},
+    {"id": "lex.en.100k.091165", "hw": "literator", "pos": "noun", "ipa": "/ˈlɪtəreɪtər/", "vi": "nhà văn; học giả văn học cổ"},
+    {"id": "lex.en.100k.091166", "hw": "literators", "pos": "noun", "ipa": "/ˈlɪtəreɪtərz/", "vi": "các nhà văn giới cầm bút"},
+    {"id": "lex.en.100k.091167", "hw": "lithane", "pos": "noun", "ipa": "/ˈlɪθeɪn/", "vi": "thuốc lithium Lithane"},
+    {"id": "lex.en.100k.091168", "hw": "litharge", "pos": "noun", "ipa": "/ˈlɪθɑːrdʒ/", "vi": "khoáng vật oxit chì litharge"},
+    {"id": "lex.en.100k.091169", "hw": "litheness", "pos": "noun", "ipa": "/ˈlaɪðnɪs/", "vi": "sự dẻo dai uyển chuyển thanh thoát"},
+    {"id": "lex.en.100k.091170", "hw": "lithenesses", "pos": "noun", "ipa": "/ˈlaɪðnɪsɪz/", "vi": "những nét uyển chuyển dẻo dai"},
+    {"id": "lex.en.100k.091171", "hw": "lithesome", "pos": "adj", "ipa": "/ˈlaɪðsəm/", "vi": "mềm mại uyển chuyển; thanh thoát"},
+    {"id": "lex.en.100k.091172", "hw": "lithesomeness", "pos": "noun", "ipa": "/ˈlaɪðsəmnɪs/", "vi": "vẻ mềm mại dẻo dai uyển chuyển"},
+    {"id": "lex.en.100k.091173", "hw": "lithiasis", "pos": "noun", "ipa": "/lɪˈθaɪəsɪs/", "vi": "bệnh hình thành sỏi trong cơ thể"},
+    {"id": "lex.en.100k.091174", "hw": "lithification", "pos": "noun", "ipa": "/ˌlɪθɪfɪˈkeɪʃən/", "vi": "quá trình hóa đá trầm tích"},
+    {"id": "lex.en.100k.091175", "hw": "lithistid", "pos": "noun", "ipa": "/lɪˈθɪstɪd/", "vi": "loài bọt biển đá xương cứng"},
+    {"id": "lex.en.100k.091176", "hw": "litho", "pos": "noun", "ipa": "/ˈlaɪθoʊ/", "vi": "bản in thạch bản; kỹ thuật in đá"},
+    {"id": "lex.en.100k.091177", "hw": "lithocarpus", "pos": "noun", "ipa": "/ˌlɪθoʊˈkɑːrpəs/", "vi": "chi sồi đá Lithocarpus"},
+    {"id": "lex.en.100k.091178", "hw": "lithodidae", "pos": "noun", "ipa": "/lɪˈθɒdɪdiː/", "vi": "họ cua hoàng đế Lithodidae"},
+    {"id": "lex.en.100k.091179", "hw": "lithoglyptics", "pos": "noun", "ipa": "/ˌlɪθoʊˈɡlɪptɪks/", "vi": "nghệ thuật điêu khắc chạm đá quý"},
+    {"id": "lex.en.100k.091180", "hw": "lithographed", "pos": "verb", "ipa": "/ˈlɪθəɡræft/", "vi": "đã in bằng kỹ thuật thạch bản"},
+    {"id": "lex.en.100k.091181", "hw": "lithographers", "pos": "noun", "ipa": "/lɪˈθɑːɡrəfərz/", "vi": "những người thợ in thạch bản"},
+    {"id": "lex.en.100k.091182", "hw": "lithographing", "pos": "noun", "ipa": "/ˈlɪθəɡræfɪŋ/", "vi": "nghề in thạch bản trên phiến đá"},
+    {"id": "lex.en.100k.091183", "hw": "lithographs", "pos": "verb", "ipa": "/ˈlɪθəɡræfs/", "vi": "in bằng khuôn đá thạch bản"},
+    {"id": "lex.en.100k.091184", "hw": "lithoid", "pos": "adj", "ipa": "/ˈlɪθɔɪd/", "vi": "giống như đá; có cấu trúc tựa đá"},
+    {"id": "lex.en.100k.091185", "hw": "lithoidal", "pos": "adj", "ipa": "/lɪˈθɔɪdəl/", "vi": "có kết cấu dạng đá đặc sít"},
+    {"id": "lex.en.100k.091186", "hw": "lithologist", "pos": "noun", "ipa": "/lɪˈθɑːlədʒɪst/", "vi": "chuyên gia thạch học địa chất"},
+    {"id": "lex.en.100k.091187", "hw": "lithomancer", "pos": "noun", "ipa": "/ˈlɪθəmænsər/", "vi": "thầy bói toán bằng sỏi đá"},
+    {"id": "lex.en.100k.091188", "hw": "lithomancy", "pos": "noun", "ipa": "/ˈlɪθəmænsi/", "vi": "thuật bói toán bằng sỏi đá"},
+    {"id": "lex.en.100k.091189", "hw": "lithomantic", "pos": "adj", "ipa": "/ˌlɪθəˈmæntɪk/", "vi": "thuộc thuật bói toán bằng đá sỏi"},
+    {"id": "lex.en.100k.091190", "hw": "lithonate", "pos": "noun", "ipa": "/ˈlɪθəneɪt/", "vi": "thuốc muối lithium Lithonate"},
+    {"id": "lex.en.100k.091191", "hw": "lithophragma", "pos": "noun", "ipa": "/ˌlɪθoʊˈfræɡmə/", "vi": "chi hoa sao thạch mai"},
+    {"id": "lex.en.100k.091192", "hw": "lithophyte", "pos": "noun", "ipa": "/ˈlɪθəfaɪt/", "vi": "thực vật biểu sinh trên vách đá"},
+    {"id": "lex.en.100k.091193", "hw": "lithophytic", "pos": "adj", "ipa": "/ˌlɪθəˈfɪtɪk/", "vi": "mọc bám trên đá; sống trên đá"},
+    {"id": "lex.en.100k.091194", "hw": "lithopone", "pos": "noun", "ipa": "/ˈlɪθəpoʊn/", "vi": "chất màu trắng kẽm litopon"},
+    {"id": "lex.en.100k.091195", "hw": "lithoprint", "pos": "noun", "ipa": "/ˈlɪθəprɪnt/", "vi": "bản in bằng phương pháp thạch bản"},
+    {"id": "lex.en.100k.091196", "hw": "lithosol", "pos": "noun", "ipa": "/ˈlɪθəsɒl/", "vi": "đất nông sỏi đá mỏng"},
+    {"id": "lex.en.100k.091197", "hw": "lithospermum", "pos": "noun", "ipa": "/ˌlɪθoʊˈspɜːrməm/", "vi": "chi cỏ tử thảo hạt cứng"},
+    {"id": "lex.en.100k.091198", "hw": "lithotripter", "pos": "noun", "ipa": "/ˈlɪθətrɪptər/", "vi": "máy tán sỏi sóng xung kích"},
+    {"id": "lex.en.100k.091199", "hw": "lithotrity", "pos": "noun", "ipa": "/lɪˈθɑːtrəti/", "vi": "thủ thuật phẫu thuật tán sỏi"},
+    {"id": "lex.en.100k.091200", "hw": "lithuresis", "pos": "noun", "ipa": "/ˌlɪθjʊˈriːsɪs/", "vi": "chứng tiểu buốt ra sạn sỏi thận"},
+    {"id": "lex.en.100k.091201", "hw": "litigable", "pos": "adj", "ipa": "/ˈlɪtɪɡəbəl/", "vi": "có thể khởi kiện ra trước tòa"}
+]
+
+assert len(data) == 100
+for i, (r, rev) in enumerate(zip(raw, data)):
+    assert r['id'] == rev['id'] and r['hw'] == rev['hw'], f"Mismatch at {i}: {r['id']} vs {rev['id']}"
+    assert rev['vi'] and len(rev['vi']) <= 35, f"vi length > 35 at {i}: {rev['vi']}"
+    assert rev['pos'] in ["noun", "verb", "adj", "adv", "intj", "prep", "pron", "conj", "det", "num"], f"pos invalid at {i}: {rev['pos']}"
+    ipa = rev['ipa'].strip()
+    assert ipa.startswith('/') and ipa.endswith('/') and ipa.count('/') == 2, f"ipa format invalid at {i}: {ipa}"
+    rev['ipa'] = ipa
+    rev['status'] = "reviewed"
+    rev['cefr'] = r.get('cefr')
+    rev['tier'] = r.get('tier')
+    rev['notes'] = r.get('notes')
+
+print("Part 2 validated successfully!")

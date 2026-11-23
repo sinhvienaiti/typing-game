@@ -1,0 +1,127 @@
+import json
+
+# Manual QA review for Batch 20 Round 10 Part 5 (099902 to 200k.000001)
+part5_data = [
+  {"id": "lex.en.100k.099902", "hw": "pears", "pos": "noun", "ipa": "/pɛrz/", "vi": "những quả lê ngọt", "cefr": "A2", "tier": "core", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.099903", "hw": "peart", "pos": "adj", "ipa": "/pɪərt/", "vi": "hoạt bát; vui vẻ lanh lợi", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.099904", "hw": "peasanthood", "pos": "noun", "ipa": "/ˈpɛzntˌhʊd/", "vi": "thân phận giai cấp nông dân", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.099905", "hw": "pease", "pos": "noun", "ipa": "/piːz/", "vi": "hạt đậu Hà Lan cổ", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.099906", "hw": "peasecod", "pos": "noun", "ipa": "/ˈpiːzkɑːd/", "vi": "quả đậu Hà Lan; vỏ đậu hạt", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.099907", "hw": "peashooter", "pos": "noun", "ipa": "/ˈpiːˌʃuːtər/", "vi": "ống xì thổi bắn hạt đậu", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.099908", "hw": "peatbog", "pos": "noun", "ipa": "/ˈpiːtbɔːɡ/", "vi": "đầm lầy than bùn mục bở", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.099909", "hw": "peatery", "pos": "noun", "ipa": "/ˈpiːtəri/", "vi": "mỏ khai thác than bùn", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.099910", "hw": "peatman", "pos": "noun", "ipa": "/ˈpiːtmən/", "vi": "người đào xúc than bùn", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.099911", "hw": "peatmen", "pos": "noun", "ipa": "/ˈpiːtmən/", "vi": "những người đào than bùn", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.099912", "hw": "peatmoss", "pos": "noun", "ipa": "/ˈpiːtmɔːs/", "vi": "rêu than bùn bón cây", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.099913", "hw": "peatreek", "pos": "noun", "ipa": "/ˈpiːtriːk/", "vi": "mùi khói than bùn nồng", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.099914", "hw": "peatry", "pos": "adj", "ipa": "/ˈpiːtri/", "vi": "chứa than bùn; xốp đen", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.099915", "hw": "pebblestone", "pos": "noun", "ipa": "/ˈpɛbəlstoʊn/", "vi": "hòn đá cuội nhẵn tròn", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.099916", "hw": "pebibit", "pos": "noun", "ipa": "/ˈpɛbɪbɪt/", "vi": "đơn vị đo thông tin pebibit", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.099917", "hw": "pebibyte", "pos": "noun", "ipa": "/ˈpɛbɪbaɪt/", "vi": "đơn vị lưu trữ pebibyte", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.099918", "hw": "peccability", "pos": "noun", "ipa": "/ˌpɛkəˈbɪləti/", "vi": "bản tính dễ sa ngã tội lỗi", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.099919", "hw": "peccable", "pos": "adj", "ipa": "/ˈpɛkəbəl/", "vi": "dễ vấp phạm; dễ phạm tội", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.099920", "hw": "peccadilloes", "pos": "noun", "ipa": "/ˌpɛkəˈdɪloʊz/", "vi": "những lỗi lầm nhỏ nhặt thứ tha", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.099921", "hw": "peccadillos", "pos": "noun", "ipa": "/ˌpɛkəˈdɪloʊz/", "vi": "những sơ suất nhỏ không đáng kể", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.099922", "hw": "peccancy", "pos": "noun", "ipa": "/ˈpɛkənsi/", "vi": "tính chất sai trái; tội lỗi", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.099923", "hw": "peccant", "pos": "adj", "ipa": "/ˈpɛkənt/", "vi": "có tội lỗi; hư hỏng bệnh hoạn", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.099924", "hw": "peccantly", "pos": "adv", "ipa": "/ˈpɛkəntli/", "vi": "theo cách tội lỗi sai trái", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.099925", "hw": "pecked", "pos": "verb", "ipa": "/pɛkt/", "vi": "đã mổ thóc; đã hôn vội lên má", "cefr": "B2", "tier": "core", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.099926", "hw": "pecking", "pos": "noun", "ipa": "/ˈpɛkɪŋ/", "vi": "động tác mổ hạt; cú mổ nhanh", "cefr": "B2", "tier": "core", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.099927", "hw": "pecks", "pos": "verb", "ipa": "/pɛks/", "vi": "mổ thóc; hôn vội nhẹ lên má", "cefr": "B2", "tier": "core", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.099928", "hw": "pecksniff", "pos": "noun", "ipa": "/ˈpɛksnɪf/", "vi": "kẻ đạo đức giả vờ nhân từ", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.099929", "hw": "pecksniffian", "pos": "adj", "ipa": "/pɛkˈsnɪfiən/", "vi": "đạo đức giả; giả nhân giả nghĩa", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.099930", "hw": "pecopteris", "pos": "noun", "ipa": "/pəˈkɒptərɪs/", "vi": "chi dương xỉ hóa thạch Pecopteris", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.099931", "hw": "pectase", "pos": "noun", "ipa": "/ˈpɛkteɪs/", "vi": "men pectase thủy phân pectin", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.099932", "hw": "pecten", "pos": "noun", "ipa": "/ˈpɛktən/", "vi": "tấm lược răng cưa giải phẫu", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.099933", "hw": "pectinal", "pos": "adj", "ipa": "/ˈpɛktɪnəl/", "vi": "có dạng răng cưa như lược", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.099934", "hw": "pectinated", "pos": "adj", "ipa": "/ˈpɛktɪneɪtɪd/", "vi": "có khía rãnh như răng lược", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.099935", "hw": "pectination", "pos": "noun", "ipa": "/ˌpɛktɪˈneɪʃən/", "vi": "cấu tạo xếp khía hình răng lược", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.099936", "hw": "pectineal", "pos": "adj", "ipa": "/pɛkˈtɪniəl/", "vi": "thuộc cơ lược vùng đùi xương mu", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.099937", "hw": "pectines", "pos": "noun", "ipa": "/ˈpɛktɪniːz/", "vi": "các tấm lược thụ cảm (bọ cạp)", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.099938", "hw": "pectineus", "pos": "noun", "ipa": "/pɛkˈtɪniəs/", "vi": "cơ lược khép đùi trước", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.099939", "hw": "pectinibranchia", "pos": "noun", "ipa": "/ˌpɛktɪnɪˈbræŋkiə/", "vi": "bộ ốc mang lược Pectinibranchia", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.099940", "hw": "pectinidae", "pos": "noun", "ipa": "/pɛkˈtɪnɪdiː/", "vi": "họ sò điệp biển Pectinidae", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.099941", "hw": "pectinous", "pos": "adj", "ipa": "/ˈpɛktɪnəs/", "vi": "chứa chất pectin; đông thành thạch", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.099942", "hw": "pectise", "pos": "verb", "ipa": "/ˈpɛktaɪz/", "vi": "keo tụ thành dạng thạch đông", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.099943", "hw": "pectization", "pos": "noun", "ipa": "/ˌpɛktaɪˈzeɪʃən/", "vi": "quá trình đông tụ dạng thạch", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.099944", "hw": "pectize", "pos": "verb", "ipa": "/ˈpɛktaɪz/", "vi": "đông tụ thành dạng keo thạch", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.099945", "hw": "pectolase", "pos": "noun", "ipa": "/ˈpɛktəleɪs/", "vi": "men phân giải mạch pectin", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.099946", "hw": "pectoriloquism", "pos": "noun", "ipa": "/ˌpɛktəˈrɪləkwɪzəm/", "vi": "tiếng ngực vang qua ống nghe", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.099947", "hw": "pectose", "pos": "noun", "ipa": "/ˈpɛktoʊs/", "vi": "hợp chất tiền pectin protopectin", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.099948", "hw": "peculate", "pos": "verb", "ipa": "/ˈpɛkjəleɪt/", "vi": "biển thủ công quỹ; thụt két", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.099949", "hw": "peculated", "pos": "verb", "ipa": "/ˈpɛkjəleɪtɪd/", "vi": "đã biển thủ công quỹ; đã thụt két", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.099950", "hw": "peculates", "pos": "verb", "ipa": "/ˈpɛkjəleɪts/", "vi": "biển thủ công quỹ; thụt két", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.099951", "hw": "peculating", "pos": "verb", "ipa": "/ˈpɛkjəleɪtɪŋ/", "vi": "đang biển thủ tiền bạc công quỹ", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.099952", "hw": "peculation", "pos": "noun", "ipa": "/ˌpɛkjəˈleɪʃən/", "vi": "tội biển thủ công quỹ; sự thụt két", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.099953", "hw": "peculator", "pos": "noun", "ipa": "/ˈpɛkjəleɪtər/", "vi": "kẻ biển thủ công quỹ; kẻ thụt két", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.099954", "hw": "peculium", "pos": "noun", "ipa": "/pɪˈkjuːliəm/", "vi": "khoản tài sản riêng thời La Mã", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.099955", "hw": "ped", "pos": "noun", "ipa": "/pɛd/", "vi": "viên kết cấu đất tự nhiên", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.099956", "hw": "pedagog", "pos": "noun", "ipa": "/ˈpɛdəɡɒɡ/", "vi": "nhà giáo dục; thầy đồ mô phạm", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.099957", "hw": "pedagogies", "pos": "noun", "ipa": "/ˈpɛdəɡɒdʒiz/", "vi": "các phương pháp sư phạm giảng dạy", "cefr": "B2", "tier": "core", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.099958", "hw": "pedagogism", "pos": "noun", "ipa": "/ˈpɛdəɡɒdʒɪzəm/", "vi": "thói mô phạm giáo điều hủ lậu", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.099959", "hw": "pedaler", "pos": "noun", "ipa": "/ˈpɛdələr/", "vi": "người đạp xe đạp", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.099960", "hw": "pedaliaceae", "pos": "noun", "ipa": "/pɪˌdeɪliˈeɪsiːˌaɪ/", "vi": "họ thực vật Vừng mè Pedaliaceae", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.099961", "hw": "pedalled", "pos": "verb", "ipa": "/ˈpɛdəld/", "vi": "đã đạp xe; đã đạp bàn đạp", "cefr": "B1", "tier": "core", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.099962", "hw": "pedaller", "pos": "noun", "ipa": "/ˈpɛdələr/", "vi": "người đạp xe đạp", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.099963", "hw": "pedalling", "pos": "noun", "ipa": "/ˈpɛdəlɪŋ/", "vi": "động tác nhấn bàn đạp đạp xe", "cefr": "B1", "tier": "core", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.099964", "hw": "pedalo", "pos": "noun", "ipa": "/ˈpɛdəloʊ/", "vi": "thuyền đạp vịt đạp nước", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.099965", "hw": "pedals", "pos": "noun", "ipa": "/ˈpɛdəlz/", "vi": "các bàn đạp xe; cần đạp đàn", "cefr": "A2", "tier": "core", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.099966", "hw": "pedantize", "pos": "verb", "ipa": "/ˈpɛdəntaɪz/", "vi": "lên giọng thông thái rởm đời", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.099967", "hw": "pedate", "pos": "adj", "ipa": "/ˈpɛdeɪt/", "vi": "có dạng hình bàn chân chim", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.099968", "hw": "pedatifid", "pos": "adj", "ipa": "/pɪˈdætɪfɪd/", "vi": "xẻ thùy sâu dạng chân vịt", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.099969", "hw": "peddled", "pos": "verb", "ipa": "/ˈpɛdəld/", "vi": "đã bán dạo; đã rêu rao tin đồn", "cefr": "C1", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.099970", "hw": "peddlers", "pos": "noun", "ipa": "/ˈpɛdlərz/", "vi": "những người đi bán hàng rong", "cefr": "C1", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.099971", "hw": "peddles", "pos": "verb", "ipa": "/ˈpɛdəlz/", "vi": "bán dạo hàng rong; rêu rao", "cefr": "C1", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.099972", "hw": "pederastic", "pos": "adj", "ipa": "/ˌpɛdəˈræstɪk/", "vi": "thuộc về mối quan hệ thiếu niên nam", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.099973", "hw": "pedes", "pos": "noun", "ipa": "/ˈpiːdiːz/", "vi": "các bàn chân sinh vật", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.099974", "hw": "pedesis", "pos": "noun", "ipa": "/pɪˈdiːsɪs/", "vi": "chuyển động nhiệt Brown vi hạt", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.099975", "hw": "pedestals", "pos": "noun", "ipa": "/ˈpɛdəstəlz/", "vi": "các bệ đỡ cột; chân đế tượng", "cefr": "B2", "tier": "core", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.099976", "hw": "pedestrial", "pos": "adj", "ipa": "/pɪˈdɛstriəl/", "vi": "thuộc người đi bộ dạo bước", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.099977", "hw": "pedestrianise", "pos": "verb", "ipa": "/pəˈdɛstriənaɪz/", "vi": "quy hoạch thành khu phố đi bộ", "cefr": "C1", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.099978", "hw": "pedestrianised", "pos": "adj", "ipa": "/pəˈdɛstriənaɪzd/", "vi": "dành riêng cho người đi bộ cấm xe", "cefr": "C1", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.099979", "hw": "pedestrianises", "pos": "verb", "ipa": "/pəˈdɛstriənaɪzɪz/", "vi": "chuyển đổi thành đường đi bộ", "cefr": "C1", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.099980", "hw": "pedestrianising", "pos": "verb", "ipa": "/pəˈdɛstriənaɪzɪŋ/", "vi": "đang chuyển thành phố đi bộ", "cefr": "C1", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.099981", "hw": "pedestrianism", "pos": "noun", "ipa": "/pəˈdɛstriənɪzəm/", "vi": "thói quen đi bộ; môn thể thao đi bộ", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.099982", "hw": "pedestrianization", "pos": "noun", "ipa": "/pəˌdɛstriənaɪˈzeɪʃən/", "vi": "việc quy hoạch thành phố đi bộ", "cefr": "C1", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.099983", "hw": "pedestrianize", "pos": "verb", "ipa": "/pəˈdɛstriənaɪz/", "vi": "chuyển thành tuyến phố đi bộ", "cefr": "C1", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.099984", "hw": "pedestrianized", "pos": "adj", "ipa": "/pəˈdɛstriənaɪzd/", "vi": "được quy hoạch thành phố đi bộ", "cefr": "C1", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.099985", "hw": "pedestrianizes", "pos": "verb", "ipa": "/pəˈdɛstriənaɪzɪz/", "vi": "chuyển thành khu dành cho đi bộ", "cefr": "C1", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.099986", "hw": "pedestrianizing", "pos": "verb", "ipa": "/pəˈdɛstriənaɪzɪŋ/", "vi": "đang quy hoạch tuyến phố đi bộ", "cefr": "C1", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.099987", "hw": "pediamycin", "pos": "noun", "ipa": "/ˌpɛdiəˈmaɪsɪn/", "vi": "kháng sinh siro erythromycin", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.099988", "hw": "pediapred", "pos": "noun", "ipa": "/ˈpɛdiəprɛd/", "vi": "siro chống viêm prednisolone", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.099989", "hw": "pediatrist", "pos": "noun", "ipa": "/ˌpiːdiˈætrɪst/", "vi": "bác sĩ chuyên khoa nhi", "cefr": "C1", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.099990", "hw": "pedicellaria", "pos": "noun", "ipa": "/ˌpɛdɪsəˈlɛəriə/", "vi": "chân kìm nhỏ vỏ cầu gai", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.099991", "hw": "pedicellariae", "pos": "noun", "ipa": "/ˌpɛdɪsəˈlɛəriiː/", "vi": "các chân kìm nhỏ ở nhím biển", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.099992", "hw": "pedicellate", "pos": "adj", "ipa": "/ˈpɛdɪsəleɪt/", "vi": "có cuống nhỏ nâng đỡ", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.099993", "hw": "pedicular", "pos": "adj", "ipa": "/pɪˈdɪkjələr/", "vi": "thuộc về bệnh chấy rận ký sinh", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.099994", "hw": "pediculate", "pos": "adj", "ipa": "/pɪˈdɪkjəleɪt/", "vi": "có cấu trúc vây dạng cuống chân", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.099995", "hw": "pediculati", "pos": "noun", "ipa": "/pɪˌdɪkjʊˈleɪtaɪ/", "vi": "bộ cá vây chân Pediculati", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.099996", "hw": "pediculicide", "pos": "noun", "ipa": "/pɪˈdɪkjələsaɪd/", "vi": "thuốc diệt trừ chấy rận ký sinh", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.099997", "hw": "pediculidae", "pos": "noun", "ipa": "/ˌpɛdɪˈkjuːlɪdiː/", "vi": "họ côn trùng chấy rận người", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.099998", "hw": "pediculous", "pos": "adj", "ipa": "/pɪˈdɪkjələs/", "vi": "bị nhiễm bám đầy chấy rận", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.099999", "hw": "pedicurist", "pos": "noun", "ipa": "/ˈpɛdɪkjʊrɪst/", "vi": "thợ chăm sóc làm móng chân", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.100000", "hw": "pedilanthus", "pos": "noun", "ipa": "/ˌpɛdɪˈlænθəs/", "vi": "chi cây hồng tước Pedilanthus", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.000001", "hw": "to that", "pos": "phrase", "ipa": "/tuː ðæt/", "vi": "đến điều đó; tới việc đó", "cefr": "A2", "tier": "core", "status": "reviewed", "notes": ""}
+]
+
+# Validation
+raw_items = json.load(open('scratch/b20_r10_raw_p5.json', 'r', encoding='utf-8'))
+assert len(part5_data) == 100
+assert len(raw_items) == 100
+
+for i, item in enumerate(part5_data):
+    raw = raw_items[i]
+    assert item["id"] == raw["id"], f"ID mismatch at {i}: {item['id']} vs {raw['id']}"
+    assert item["hw"] == raw["hw"], f"HW mismatch at {i}: {item['hw']} vs {raw['hw']}"
+    assert len(item["vi"]) <= 35, f"vi too long at {i} ({item['hw']}): {item['vi']} ({len(item['vi'])} chars)"
+    assert item["pos"] in ["noun", "verb", "adj", "adv", "intj", "prep", "conj", "pron", "det", "num", "phrase"], f"Invalid pos at {i}: {item['pos']}"
+    assert item["ipa"].startswith("/") and item["ipa"].endswith("/") and item["ipa"].count("/") == 2, f"Invalid ipa at {i}: {item['ipa']}"
+    assert item["status"] == "reviewed"
+    item["cefr"] = raw.get("cefr", "C2")
+    item["tier"] = raw.get("tier", "expanded")
+    item["notes"] = raw.get("notes", "")
+
+with open('scratch/b20_r10_p5.json', 'w', encoding='utf-8') as f:
+    json.dump(part5_data, f, ensure_ascii=False, indent=2)
+
+print("b20_r10_p5.json created successfully and validated!")

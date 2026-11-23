@@ -1,0 +1,1124 @@
+import json
+
+# Batch 26 Round 5 Part 1 (lex.en.200k.027002 to lex.en.200k.027101)
+records = [
+    {
+        "id": "lex.en.200k.027002",
+        "hw": "motives",
+        "pos": "noun",
+        "ipa": "/ˈmoʊ.t̬ɪvz/",
+        "vi": "động cơ; mục đích hành động",
+        "cefr": "B2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.200k.027003",
+        "hw": "neighbourhoods",
+        "pos": "noun",
+        "ipa": "/ˈneɪ.bɚ.hʊdz/",
+        "vi": "các khu phố; vùng lân cận",
+        "cefr": "B2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.200k.027004",
+        "hw": "newtons",
+        "pos": "noun",
+        "ipa": "/ˈnuː.tənz/",
+        "vi": "đơn vị lực niu-tơn; các newton",
+        "cefr": "B2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.200k.027005",
+        "hw": "overtimes",
+        "pos": "noun",
+        "ipa": "/ˈoʊ.vɚ.taɪmz/",
+        "vi": "các hiệp phụ; giờ làm thêm",
+        "cefr": "B2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.200k.027006",
+        "hw": "preps",
+        "pos": "noun",
+        "ipa": "/preps/",
+        "vi": "sự chuẩn bị; học sinh dự bị",
+        "cefr": "B2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.200k.027007",
+        "hw": "profounder",
+        "pos": "adj",
+        "ipa": "/prəˈfaʊn.dɚ/",
+        "vi": "sâu sắc hơn; uyên thâm hơn",
+        "cefr": "B2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.200k.027008",
+        "hw": "profoundest",
+        "pos": "adj",
+        "ipa": "/prəˈfaʊn.dɪst/",
+        "vi": "sâu sắc nhất; thâm thúy nhất",
+        "cefr": "B2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.200k.027009",
+        "hw": "prosecutors",
+        "pos": "noun",
+        "ipa": "/ˈprɑː.sɪ.kjuː.t̬ɚz/",
+        "vi": "các kiểm sát viên; công tố viên",
+        "cefr": "B2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.200k.027010",
+        "hw": "rebellions",
+        "pos": "noun",
+        "ipa": "/rɪˈbel.jənz/",
+        "vi": "các cuộc nổi dậy; cuộc bạo loạn",
+        "cefr": "B2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.200k.027011",
+        "hw": "recipients",
+        "pos": "noun",
+        "ipa": "/rɪˈsɪp.i.ənts/",
+        "vi": "những người nhận thư hoặc quà",
+        "cefr": "B2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.200k.027012",
+        "hw": "riskier",
+        "pos": "adj",
+        "ipa": "/ˈrɪs.ki.ɚ/",
+        "vi": "mạo hiểm hơn; nhiều rủi ro hơn",
+        "cefr": "B2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.200k.027013",
+        "hw": "riskiest",
+        "pos": "adj",
+        "ipa": "/ˈrɪs.ki.ɪst/",
+        "vi": "mạo hiểm nhất; rủi ro nhất",
+        "cefr": "B2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.200k.027014",
+        "hw": "robuster",
+        "pos": "adj",
+        "ipa": "/roʊˈbʌs.tɚ/",
+        "vi": "mạnh mẽ hơn; tráng kiện hơn",
+        "cefr": "B2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.200k.027015",
+        "hw": "robustest",
+        "pos": "adj",
+        "ipa": "/roʊˈbʌs.tɪst/",
+        "vi": "mạnh mẽ nhất; bền bỉ nhất",
+        "cefr": "B2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.200k.027016",
+        "hw": "scammed",
+        "pos": "verb",
+        "ipa": "/skæmd/",
+        "vi": "đã lừa gạt tiền; đã bị lừa đảo",
+        "cefr": "B2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.200k.027017",
+        "hw": "scamming",
+        "pos": "verb",
+        "ipa": "/ˈskæm.ɪŋ/",
+        "vi": "hành vi lừa đảo; việc gạt tiền",
+        "cefr": "B2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.200k.027018",
+        "hw": "scams",
+        "pos": "noun",
+        "ipa": "/skæmz/",
+        "vi": "các vụ lừa đảo chiếm đoạt tài sản",
+        "cefr": "B2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.200k.027019",
+        "hw": "simulations",
+        "pos": "noun",
+        "ipa": "/ˌsɪm.jəˈleɪ.ʃənz/",
+        "vi": "các mô hình mô phỏng máy tính",
+        "cefr": "B2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.200k.027020",
+        "hw": "soberer",
+        "pos": "adj",
+        "ipa": "/ˈsoʊ.bɚ.ɚ/",
+        "vi": "tỉnh rượu hơn; điềm tĩnh hơn",
+        "cefr": "B2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.200k.027021",
+        "hw": "soberest",
+        "pos": "adj",
+        "ipa": "/ˈsoʊ.bɚ.ɪst/",
+        "vi": "tỉnh rượu nhất; điềm đạm nhất",
+        "cefr": "B2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.200k.027022",
+        "hw": "supervisions",
+        "pos": "noun",
+        "ipa": "/ˌsuː.pɚˈvɪʒ.ənz/",
+        "vi": "các công tác giám sát điều hành",
+        "cefr": "B2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.200k.027023",
+        "hw": "swopped",
+        "pos": "verb",
+        "ipa": "/swɑːpt/",
+        "vi": "đã hoán đổi; đã trao đổi hàng",
+        "cefr": "B2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.200k.027024",
+        "hw": "swopping",
+        "pos": "verb",
+        "ipa": "/ˈswɑː.pɪŋ/",
+        "vi": "việc hoán đổi; đang trao đổi vật",
+        "cefr": "B2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.200k.027025",
+        "hw": "swops",
+        "pos": "verb",
+        "ipa": "/swɑːps/",
+        "vi": "đổi chác; hoán đổi vị trí",
+        "cefr": "B2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.200k.027026",
+        "hw": "toweled",
+        "pos": "verb",
+        "ipa": "/ˈtaʊ.əld/",
+        "vi": "đã lau khô bằng khăn tắm",
+        "cefr": "B2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.200k.027027",
+        "hw": "trios",
+        "pos": "noun",
+        "ipa": "/ˈtriː.oʊz/",
+        "vi": "các bộ ba; ban nhạc ba người",
+        "cefr": "B2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.200k.027028",
+        "hw": "wifis",
+        "pos": "noun",
+        "ipa": "/ˈwaɪ.faɪz/",
+        "vi": "các điểm phát mạng Wi-Fi không dây",
+        "cefr": "B2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.200k.027029",
+        "hw": "american chestnut",
+        "pos": "phrase",
+        "ipa": "/əˈmer.ɪ.kən ˈtʃes.nʌt/",
+        "vi": "cây dẻ hạt Bắc Mỹ",
+        "cefr": "B2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.200k.027030",
+        "hw": "anterior root",
+        "pos": "phrase",
+        "ipa": "/ænˈtɪr.i.ɚ ruːt/",
+        "vi": "rễ trước tủy gai thần kinh",
+        "cefr": "B2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.200k.027031",
+        "hw": "arabian gulf",
+        "pos": "phrase",
+        "ipa": "/əˈreɪ.bi.ən ɡʌlf/",
+        "vi": "Vịnh Ả Rập; Vịnh Ba Tư biển",
+        "cefr": "B2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.200k.027032",
+        "hw": "asian crocodile",
+        "pos": "phrase",
+        "ipa": "/ˈeɪ.ʒən ˈkrɑː.kə.daɪl/",
+        "vi": "cá sấu hoa cà châu Á",
+        "cefr": "B2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.200k.027033",
+        "hw": "attractive nuisance",
+        "pos": "phrase",
+        "ipa": "/əˈtræk.tɪv ˈnuː.səns/",
+        "vi": "mối nguy hiểm thu hút trẻ em",
+        "cefr": "B2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.200k.027034",
+        "hw": "baby buster",
+        "pos": "phrase",
+        "ipa": "/ˈbeɪ.bi ˌbʌs.tɚ/",
+        "vi": "thế hệ Gen X sinh sau bùng nổ dân",
+        "cefr": "B2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.200k.027035",
+        "hw": "barbados pride",
+        "pos": "phrase",
+        "ipa": "/bɑːrˈbeɪ.doʊs praɪd/",
+        "vi": "cây hoa điệp tây Barbados",
+        "cefr": "B2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.200k.027036",
+        "hw": "basil mint",
+        "pos": "phrase",
+        "ipa": "/ˈbæz.əl mɪnt/",
+        "vi": "cây húng tây bạc hà thơm",
+        "cefr": "B2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.200k.027037",
+        "hw": "bathing tub",
+        "pos": "phrase",
+        "ipa": "/ˈbeɪ.ðɪŋ tʌb/",
+        "vi": "bồn tắm ngâm mình",
+        "cefr": "B2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.200k.027038",
+        "hw": "bear cub",
+        "pos": "phrase",
+        "ipa": "/ber kʌb/",
+        "vi": "con gấu con",
+        "cefr": "B2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.200k.027039",
+        "hw": "berkshire hills",
+        "pos": "phrase",
+        "ipa": "/ˈbɑːrk.ʃɚ hɪlz/",
+        "vi": "vùng đồi đồi núi Berkshire",
+        "cefr": "B2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.200k.027040",
+        "hw": "bermuda grass",
+        "pos": "phrase",
+        "ipa": "/bɚˈmjuː.də ɡræs/",
+        "vi": "cỏ chỉ; cỏ bò Bermuda",
+        "cefr": "B2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.200k.027041",
+        "hw": "biomedical science",
+        "pos": "phrase",
+        "ipa": "/ˌbaɪ.oʊˈmed.ɪ.kəl ˈsaɪ.əns/",
+        "vi": "ngành khoa học y sinh học",
+        "cefr": "B2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.200k.027042",
+        "hw": "bitter pea",
+        "pos": "phrase",
+        "ipa": "/ˈbɪt̬.ɚ piː/",
+        "vi": "cây bụi đậu đắng chi Daviesia",
+        "cefr": "B2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.200k.027043",
+        "hw": "bland diet",
+        "pos": "phrase",
+        "ipa": "/blænd ˈdaɪ.ət/",
+        "vi": "chế độ ăn thanh đạm dễ tiêu",
+        "cefr": "B2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.200k.027044",
+        "hw": "boat paddle",
+        "pos": "phrase",
+        "ipa": "/boʊt ˈpæd.əl/",
+        "vi": "mái chèo xuồng; chèo thuyền",
+        "cefr": "B2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.200k.027045",
+        "hw": "brent goose",
+        "pos": "phrase",
+        "ipa": "/brent ɡuːs/",
+        "vi": "ngỗng đen Bắc cực Brent",
+        "cefr": "B2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.200k.027046",
+        "hw": "brook trout",
+        "pos": "phrase",
+        "ipa": "/brʊk traʊt/",
+        "vi": "cá hồi suối nước ngọt",
+        "cefr": "B2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.200k.027047",
+        "hw": "business deduction",
+        "pos": "phrase",
+        "ipa": "/ˈbɪz.nɪs dɪˈdʌk.ʃən/",
+        "vi": "khoản giảm trừ thuế kinh doanh",
+        "cefr": "B2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.200k.027048",
+        "hw": "california white fir",
+        "pos": "phrase",
+        "ipa": "/ˌkæl.əˈfɔːr.njə waɪt fɝː/",
+        "vi": "cây linh sam trắng California",
+        "cefr": "B2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.200k.027049",
+        "hw": "calvin klein",
+        "pos": "phrase",
+        "ipa": "/ˌkæl.vɪn ˈklaɪn/",
+        "vi": "Calvin Klein; nhà thiết kế Mỹ",
+        "cefr": "B2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.200k.027050",
+        "hw": "caramel apple",
+        "pos": "phrase",
+        "ipa": "/ˈker.ə.mel ˈæp.əl/",
+        "vi": "quả táo nhúng kẹo caramen",
+        "cefr": "B2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.200k.027051",
+        "hw": "carving knife",
+        "pos": "phrase",
+        "ipa": "/ˈkɑːr.vɪŋ naɪf/",
+        "vi": "dao lạng thịt quay; dao khắc",
+        "cefr": "B2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.200k.027052",
+        "hw": "cascade range",
+        "pos": "phrase",
+        "ipa": "/kæsˈkeɪd reɪndʒ/",
+        "vi": "dãy núi Cascade ở Bắc Mỹ",
+        "cefr": "B2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.200k.027053",
+        "hw": "celestial globe",
+        "pos": "phrase",
+        "ipa": "/səˈles.tʃəl ɡloʊb/",
+        "vi": "quả địa cầu thiên thể bầu trời",
+        "cefr": "B2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.200k.027054",
+        "hw": "center of immersion",
+        "pos": "phrase",
+        "ipa": "/ˈsen.t̬ɚ əv ɪˈmɝː.ʒən/",
+        "vi": "tâm nổi thể tích choán nước",
+        "cefr": "B2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.200k.027055",
+        "hw": "centre of immersion",
+        "pos": "phrase",
+        "ipa": "/ˈsen.t̬ɚ əv ɪˈmɝː.ʒən/",
+        "vi": "tâm nổi phần tàu chìm dưới nước",
+        "cefr": "B2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.200k.027056",
+        "hw": "cherry plum",
+        "pos": "phrase",
+        "ipa": "/ˈtʃer.i plʌm/",
+        "vi": "mận mộc anh đào Myrobalan",
+        "cefr": "B2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.200k.027057",
+        "hw": "chewing gum",
+        "pos": "phrase",
+        "ipa": "/ˈtʃuː.ɪŋ ɡʌm/",
+        "vi": "kẹo cao su; kẹo cao su nhai",
+        "cefr": "B2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.200k.027058",
+        "hw": "christ thorn",
+        "pos": "phrase",
+        "ipa": "/kraɪst θɔːrn/",
+        "vi": "cây gai gai Chúa; cây hoa mè gai",
+        "cefr": "B2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.200k.027059",
+        "hw": "claude shannon",
+        "pos": "phrase",
+        "ipa": "/klɔːd ˈʃæn.ən/",
+        "vi": "Claude Shannon; cha đẻ thuyết tin",
+        "cefr": "B2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.200k.027060",
+        "hw": "coal shovel",
+        "pos": "phrase",
+        "ipa": "/koʊl ˈʃʌv.əl/",
+        "vi": "xẻng xúc than đá lưỡi rộng",
+        "cefr": "B2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.200k.027061",
+        "hw": "coughing up",
+        "pos": "phrase",
+        "ipa": "/ˈkɑː.fɪŋ ʌp/",
+        "vi": "hành động ho khạc đờm ra",
+        "cefr": "B2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.200k.027062",
+        "hw": "cradle cap",
+        "pos": "phrase",
+        "ipa": "/ˈkreɪ.dəl kæp/",
+        "vi": "viêm da tiết bã ở trẻ sơ sinh",
+        "cefr": "B2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.200k.027063",
+        "hw": "creeping soft grass",
+        "pos": "phrase",
+        "ipa": "/ˈkriː.pɪŋ sɑːft ɡræs/",
+        "vi": "cỏ mềm bò Holcus mollis",
+        "cefr": "B2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.200k.027064",
+        "hw": "crocodile bird",
+        "pos": "phrase",
+        "ipa": "/ˈkrɑː.kə.daɪl bɝːd/",
+        "vi": "chim choắt ri rỉa răng cá sấu",
+        "cefr": "B2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.200k.027065",
+        "hw": "dale carnegie",
+        "pos": "phrase",
+        "ipa": "/deɪl ˈkɑːr.nə.ɡi/",
+        "vi": "Dale Carnegie; tác giả Đắc Nhân Tâm",
+        "cefr": "B2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.200k.027066",
+        "hw": "digestive system",
+        "pos": "phrase",
+        "ipa": "/daɪˈdʒes.tɪv ˈsɪs.təm/",
+        "vi": "hệ tiêu hóa của cơ thể người",
+        "cefr": "B2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.200k.027067",
+        "hw": "disc jockey",
+        "pos": "phrase",
+        "ipa": "/ˈdɪsk ˌdʒɑː.ki/",
+        "vi": "người chỉnh nhạc; DJ quán bar",
+        "cefr": "B2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.200k.027068",
+        "hw": "dom pedro",
+        "pos": "phrase",
+        "ipa": "/dɑːm ˈpeɪ.droʊ/",
+        "vi": "Hoàng đế Dom Pedro của Brazil",
+        "cefr": "B2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.200k.027069",
+        "hw": "donkey cart",
+        "pos": "phrase",
+        "ipa": "/ˈdɑːŋ.ki kɑːrt/",
+        "vi": "xe lừa kéo; cỗ xe thô sơ",
+        "cefr": "B2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.200k.027070",
+        "hw": "dwarf daisy",
+        "pos": "phrase",
+        "ipa": "/dwɔːrf ˈdeɪ.zi/",
+        "vi": "cây cúc lùn; hoa cúc dại nhỏ",
+        "cefr": "B2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.200k.027071",
+        "hw": "ecclesiastical mode",
+        "pos": "phrase",
+        "ipa": "/ɪˌkliː.ziˈæs.tɪk moʊd/",
+        "vi": "điệu thức âm nhạc nhà thờ Trung Cổ",
+        "cefr": "B2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.200k.027072",
+        "hw": "egyptian deity",
+        "pos": "phrase",
+        "ipa": "/iˈdʒɪp.ʃən ˈdiː.ə.t̬i/",
+        "vi": "vị thần Ai Cập cổ đại",
+        "cefr": "B2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.200k.027073",
+        "hw": "egyptian pea",
+        "pos": "phrase",
+        "ipa": "/iˈdʒɪp.ʃən piː/",
+        "vi": "đậu gà Ai Cập; đậu chickpea",
+        "cefr": "B2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.200k.027074",
+        "hw": "espionage network",
+        "pos": "phrase",
+        "ipa": "/ˈes.pi.ə.nɑːʒ ˈnet.wɝːk/",
+        "vi": "mạng lưới điệp viên gián điệp",
+        "cefr": "B2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.200k.027075",
+        "hw": "feeder line",
+        "pos": "phrase",
+        "ipa": "/ˈfiː.dɚ laɪn/",
+        "vi": "tuyến đường gom; đường cấp nhánh",
+        "cefr": "B2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.200k.027076",
+        "hw": "fiber optics",
+        "pos": "phrase",
+        "ipa": "/ˌfaɪ.bɚ ˈɑːp.tɪks/",
+        "vi": "quang học sợi; kỹ thuật cáp quang",
+        "cefr": "B2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.200k.027077",
+        "hw": "fir tree",
+        "pos": "phrase",
+        "ipa": "/fɝː triː/",
+        "vi": "cây linh sam xanh quanh năm",
+        "cefr": "B2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.200k.027078",
+        "hw": "fish stew",
+        "pos": "phrase",
+        "ipa": "/fɪʃ stuː/",
+        "vi": "món canh cá hầm; cá kho nước",
+        "cefr": "B2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.200k.027079",
+        "hw": "friedman test",
+        "pos": "phrase",
+        "ipa": "/ˈfriːd.mən test/",
+        "vi": "phép kiểm định thống kê Friedman",
+        "cefr": "B2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.200k.027080",
+        "hw": "genetic endowment",
+        "pos": "phrase",
+        "ipa": "/dʒəˈnet̬.ɪk ɪnˈdaʊ.mənt/",
+        "vi": "vốn gen di truyền bẩm sinh",
+        "cefr": "B2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.200k.027081",
+        "hw": "genus rosa",
+        "pos": "phrase",
+        "ipa": "/ˈdʒiː.nəs ˈroʊ.zə/",
+        "vi": "chi Hoa hồng; thực vật họ Rosaceae",
+        "cefr": "B2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.200k.027082",
+        "hw": "giant timber bamboo",
+        "pos": "phrase",
+        "ipa": "/ˈdʒaɪ.ənt ˈtɪm.bɚ bæmˈbuː/",
+        "vi": "tre gai khổng lồ lấy gỗ măng",
+        "cefr": "B2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.200k.027083",
+        "hw": "glove puppet",
+        "pos": "phrase",
+        "ipa": "/ˈɡlʌv ˌpʌp.ɪt/",
+        "vi": "con rối bao tay biểu diễn",
+        "cefr": "B2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.200k.027084",
+        "hw": "golden fairy lantern",
+        "pos": "phrase",
+        "ipa": "/ˈɡoʊl.dən ˈfer.i ˈlæn.tɚn/",
+        "vi": "hoa đèn tiên vàng Calochortus",
+        "cefr": "B2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.200k.027085",
+        "hw": "gordon howe",
+        "pos": "phrase",
+        "ipa": "/ˈɡɔːr.dən haʊ/",
+        "vi": "Gordie Howe; ngôi sao khúc côn cầu",
+        "cefr": "B2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.200k.027086",
+        "hw": "grand fir",
+        "pos": "phrase",
+        "ipa": "/ɡrænd fɝː/",
+        "vi": "cây linh sam khổng lồ Tây Bắc Mỹ",
+        "cefr": "B2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.200k.027087",
+        "hw": "grand lama",
+        "pos": "phrase",
+        "ipa": "/ɡrænd ˈlɑː.mə/",
+        "vi": "Đạt Lai Lạt Ma; Đại Lạt Ma",
+        "cefr": "B2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.200k.027088",
+        "hw": "grey birch",
+        "pos": "phrase",
+        "ipa": "/ɡreɪ bɝːtʃ/",
+        "vi": "cây bạch dương xám Bắc Mỹ",
+        "cefr": "B2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.200k.027089",
+        "hw": "herbert marx",
+        "pos": "phrase",
+        "ipa": "/ˈhɝː.bɚt mɑːrks/",
+        "vi": "Zeppo Marx; diễn viên hài Mỹ",
+        "cefr": "B2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.200k.027090",
+        "hw": "hue and cry",
+        "pos": "phrase",
+        "ipa": "/ˌhjuː ən ˈkraɪ/",
+        "vi": "tiếng hò la bắt trộm; sự la ó",
+        "cefr": "B2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.200k.027091",
+        "hw": "icing sugar",
+        "pos": "phrase",
+        "ipa": "/ˈaɪ.sɪŋ ˌʃʊɡ.ɚ/",
+        "vi": "đường bột mịn làm bánh kem",
+        "cefr": "B2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.200k.027092",
+        "hw": "james neville mason",
+        "pos": "phrase",
+        "ipa": "/dʒeɪmz ˈnev.əl ˈmeɪ.sən/",
+        "vi": "James Mason; tài tử điện ảnh Anh",
+        "cefr": "B2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.200k.027093",
+        "hw": "keynote address",
+        "pos": "phrase",
+        "ipa": "/ˈkiː.noʊt əˌdres/",
+        "vi": "bài diễn văn định hướng chính",
+        "cefr": "B2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.200k.027094",
+        "hw": "keynote speech",
+        "pos": "phrase",
+        "ipa": "/ˈkiː.noʊt spiːtʃ/",
+        "vi": "bài phát biểu chủ đạo hội nghị",
+        "cefr": "B2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.200k.027095",
+        "hw": "lake herring",
+        "pos": "phrase",
+        "ipa": "/leɪk ˈher.ɪŋ/",
+        "vi": "cá trắng cisco hồ Bắc Mỹ",
+        "cefr": "B2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.200k.027096",
+        "hw": "lantern jaw",
+        "pos": "phrase",
+        "ipa": "/ˈlæn.tɚn dʒɑː/",
+        "vi": "quai hàm bạnh nhô ra ngoài",
+        "cefr": "B2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.200k.027097",
+        "hw": "ledger entry",
+        "pos": "phrase",
+        "ipa": "/ˈledʒ.ɚ ˈen.tri/",
+        "vi": "khoản mục ghi sổ cái kế toán",
+        "cefr": "B2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.200k.027098",
+        "hw": "life raft",
+        "pos": "phrase",
+        "ipa": "/ˈlaɪf ˌræft/",
+        "vi": "bè cứu sinh khẩn cấp trên biển",
+        "cefr": "B2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.200k.027099",
+        "hw": "lightly armored",
+        "pos": "phrase",
+        "ipa": "/ˈlaɪt.li ˈɑːr.mɚd/",
+        "vi": "được trang bị giáp bọc nhẹ",
+        "cefr": "B2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.200k.027100",
+        "hw": "liquid bleach",
+        "pos": "phrase",
+        "ipa": "/ˈlɪk.wɪd bliːtʃ/",
+        "vi": "nước tẩy javel dạng lỏng",
+        "cefr": "B2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.200k.027101",
+        "hw": "loaf sugar",
+        "pos": "phrase",
+        "ipa": "/loʊf ˈʃʊɡ.ɚ/",
+        "vi": "đường tảng đúc hình nón",
+        "cefr": "B2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    }
+]
+
+# Validation
+ALLOWED_POS = {'noun', 'verb', 'adj', 'adv', 'num', 'intj', 'prep', 'pron', 'conj', 'det', 'phrase'}
+EXPECTED_KEYS = ['id', 'hw', 'pos', 'ipa', 'vi', 'cefr', 'tier', 'status', 'notes']
+
+assert len(records) == 100, f"Expected 100 records, got {len(records)}"
+
+for r in records:
+    assert list(r.keys()) == EXPECTED_KEYS, f"Keys mismatch in {r['id']}"
+    assert r['pos'] in ALLOWED_POS, f"Invalid POS {r['pos']} in {r['id']}"
+    assert r['ipa'].startswith('/') and r['ipa'].endswith('/') and len(r['ipa']) > 2, f"Invalid IPA in {r['id']}"
+    assert r['ipa'].count('/') == 2, f"IPA slashes count error in {r['id']}: {r['ipa']}"
+    assert len(r['vi']) <= 35, f"VI too long ({len(r['vi'])} chars): {r['vi']} in {r['id']}"
+    assert r['status'] == 'reviewed', f"Status not reviewed in {r['id']}"
+
+with open('scratch/b26_r05_p1.json', 'w', encoding='utf-8') as f:
+    json.dump(records, f, ensure_ascii=False, indent=2)
+
+print("Wrote scratch/b26_r05_p1.json successfully")

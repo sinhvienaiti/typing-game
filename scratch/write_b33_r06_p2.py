@@ -1,0 +1,126 @@
+import json
+
+items = [
+  {"id": "lex.en.200k.062603", "hw": "emmers", "pos": "noun", "ipa": "/ˈɛmərz/", "vi": "lúa mì emmer cổ đại"},
+  {"id": "lex.en.200k.062604", "hw": "eugene ormandy", "pos": "phrase", "ipa": "/juːˈdʒiːn ˈɔːrməndi/", "vi": "nhạc trưởng Eugene Ormandy"},
+  {"id": "lex.en.200k.062605", "hw": "evening grosbeak", "pos": "phrase", "ipa": "/ˈiːvnɪŋ ˈɡroʊsbiːk/", "vi": "chim mỏ dày vàng Bắc Mỹ"},
+  {"id": "lex.en.200k.062606", "hw": "feedlots", "pos": "noun", "ipa": "/ˈfiːdlɑːts/", "vi": "khu trại vỗ béo gia súc"},
+  {"id": "lex.en.200k.062607", "hw": "flagellated cell", "pos": "phrase", "ipa": "/ˈflædʒəˌleɪtɪd sɛl/", "vi": "tế bào có roi chuyển động"},
+  {"id": "lex.en.200k.062608", "hw": "floatations", "pos": "noun", "ipa": "/floʊˈteɪʃənz/", "vi": "sự nổi; tuyển nổi quặng; phát hành"},
+  {"id": "lex.en.200k.062609", "hw": "floodgates", "pos": "noun", "ipa": "/ˈflʌdɡeɪts/", "vi": "cửa cống xả lũ; đập ngăn lũ"},
+  {"id": "lex.en.200k.062610", "hw": "fossil copal", "pos": "phrase", "ipa": "/ˈfɑːsəl ˈkoʊpəl/", "vi": "nhựa cây bán hóa thạch copal"},
+  {"id": "lex.en.200k.062611", "hw": "frederick soddy", "pos": "phrase", "ipa": "/ˈfrɛdərɪk ˈsɑːdi/", "vi": "nhà hóa phóng xạ Frederick Soddy"},
+  {"id": "lex.en.200k.062612", "hw": "galatias", "pos": "noun", "ipa": "/ɡəˈleɪʃəz/", "vi": "vùng cổ Ga-la-ti; thư Ga-la-ti"},
+  {"id": "lex.en.200k.062613", "hw": "gastropods", "pos": "noun", "ipa": "/ˈɡæstrəpɑːdz/", "vi": "động vật lớp chân bụng; loài ốc"},
+  {"id": "lex.en.200k.062614", "hw": "gearshifts", "pos": "noun", "ipa": "/ˈɡɪərʃɪfts/", "vi": "cần sang số xe; hộp chuyển số"},
+  {"id": "lex.en.200k.062615", "hw": "gemaras", "pos": "noun", "ipa": "/ɡəˈmɑːrəz/", "vi": "bình chú kinh Talmud Gemara"},
+  {"id": "lex.en.200k.062616", "hw": "genus agaricus", "pos": "phrase", "ipa": "/ˈdʒiːnəs əˈɡærɪkəs/", "vi": "chi nấm tán Agaricus"},
+  {"id": "lex.en.200k.062617", "hw": "genus agrobacterium", "pos": "phrase", "ipa": "/ˈdʒiːnəs ˌæɡroʊbækˈtɪriəm/", "vi": "chi vi khuẩn đất Agrobacterium"},
+  {"id": "lex.en.200k.062618", "hw": "genus berberis", "pos": "phrase", "ipa": "/ˈdʒiːnəs ˈbɜːrbərɪs/", "vi": "chi thực vật Hoàng liên gai"},
+  {"id": "lex.en.200k.062619", "hw": "genus campanula", "pos": "phrase", "ipa": "/ˈdʒiːnəs kæmˈpænjʊlə/", "vi": "chi cây hoa chuông Campanula"},
+  {"id": "lex.en.200k.062620", "hw": "genus gerbera", "pos": "phrase", "ipa": "/ˈdʒiːnəs ˈdʒɜːrbərə/", "vi": "chi cây hoa đồng tiền Gerbera"},
+  {"id": "lex.en.200k.062621", "hw": "genus musca", "pos": "phrase", "ipa": "/ˈdʒiːnəs ˈmʌskə/", "vi": "chi ruồi nhà thực sự Musca"},
+  {"id": "lex.en.200k.062622", "hw": "genus phaseolus", "pos": "phrase", "ipa": "/ˈdʒiːnəs fəˈsiːələs/", "vi": "chi cây đậu cô ve Phaseolus"},
+  {"id": "lex.en.200k.062623", "hw": "genus pieris", "pos": "phrase", "ipa": "/ˈdʒiːnəs ˈpaɪərɪs/", "vi": "chi bướm trắng; chi cây thạch nam"},
+  {"id": "lex.en.200k.062624", "hw": "genus plantago", "pos": "phrase", "ipa": "/ˈdʒiːnəs plænˈteɪɡoʊ/", "vi": "chi thực vật mã đề Plantago"},
+  {"id": "lex.en.200k.062625", "hw": "genus procyon", "pos": "phrase", "ipa": "/ˈdʒiːnəs ˈproʊsiɑːn/", "vi": "chi gấu mèo Bắc Mỹ Procyon"},
+  {"id": "lex.en.200k.062626", "hw": "genus strymon", "pos": "phrase", "ipa": "/ˈdʒiːnəs ˈstraɪmən/", "vi": "chi bướm vằn đuôi dài Strymon"},
+  {"id": "lex.en.200k.062627", "hw": "genus triticum", "pos": "phrase", "ipa": "/ˈdʒiːnəs ˈtrɪtɪkəm/", "vi": "chi thực vật lúa mì Triticum"},
+  {"id": "lex.en.200k.062628", "hw": "genus tsuga", "pos": "phrase", "ipa": "/ˈdʒiːnəs ˈtsuːɡə/", "vi": "chi thông thiết sam Tsuga"},
+  {"id": "lex.en.200k.062629", "hw": "gibbeted", "pos": "verb", "ipa": "/ˈdʒɪbətɪd/", "vi": "đã treo cổ thị chúng; đã chế giễu"},
+  {"id": "lex.en.200k.062630", "hw": "gibbeting", "pos": "verb", "ipa": "/ˈdʒɪbətɪŋ/", "vi": "đang treo xác thị chúng trên giá"},
+  {"id": "lex.en.200k.062631", "hw": "gibbets", "pos": "noun", "ipa": "/ˈdʒɪbəts/", "vi": "giá treo cổ thị chúng thời xưa"},
+  {"id": "lex.en.200k.062632", "hw": "gouty arthritis", "pos": "phrase", "ipa": "/ˈɡaʊti ɑːrˈθraɪtɪs/", "vi": "bệnh viêm khớp gút; thống phong"},
+  {"id": "lex.en.200k.062633", "hw": "graving dock", "pos": "phrase", "ipa": "/ˈɡreɪvɪŋ dɑːk/", "vi": "ụ sửa chữa tàu cạn; âu tàu khô"},
+  {"id": "lex.en.200k.062634", "hw": "graving tool", "pos": "phrase", "ipa": "/ˈɡreɪvɪŋ tuːl/", "vi": "dụng cụ chạm khắc kim loại; dao trổ"},
+  {"id": "lex.en.200k.062635", "hw": "guesstimated", "pos": "verb", "ipa": "/ˈɡɛstɪmeɪtɪd/", "vi": "đã ước lượng phỏng đoán sơ bộ"},
+  {"id": "lex.en.200k.062636", "hw": "guesstimates", "pos": "noun", "ipa": "/ˈɡɛstɪmɪts/", "vi": "số liệu ước lượng theo phỏng đoán"},
+  {"id": "lex.en.200k.062637", "hw": "guesstimating", "pos": "verb", "ipa": "/ˈɡɛstɪmeɪtɪŋ/", "vi": "đang ước chừng qua phỏng đoán"},
+  {"id": "lex.en.200k.062638", "hw": "gymkhanas", "pos": "noun", "ipa": "/dʒɪmˈkɑːnəz/", "vi": "hội thi cưỡi ngựa; đua xe khéo léo"},
+  {"id": "lex.en.200k.062639", "hw": "haloperidols", "pos": "noun", "ipa": "/ˌhæloʊˈpɛrɪdɔːlz/", "vi": "thuốc an thần trị loạn thần"},
+  {"id": "lex.en.200k.062640", "hw": "hebraic alphabet", "pos": "phrase", "ipa": "/hɪˈbreɪɪk ˈælfəbɛt/", "vi": "bảng chữ cái tiếng Do Thái cổ"},
+  {"id": "lex.en.200k.062641", "hw": "homestretches", "pos": "noun", "ipa": "/ˈhoʊmstrɛtʃɪz/", "vi": "chặng nước rút; đoạn đường về đích"},
+  {"id": "lex.en.200k.062642", "hw": "hooded merganser", "pos": "phrase", "ipa": "/ˈhʊdɪd mɜːrˈɡænsər/", "vi": "vịt mỏ nhọn có mào Bắc Mỹ"},
+  {"id": "lex.en.200k.062643", "hw": "hyman george rickover", "pos": "phrase", "ipa": "/ˈhaɪmən dʒɔːrdʒ ˈrɪkoʊvər/", "vi": "đô đốc hải quân Hyman Rickover"},
+  {"id": "lex.en.200k.062644", "hw": "hyman rickover", "pos": "phrase", "ipa": "/ˈhaɪmən ˈrɪkoʊvər/", "vi": "đô đốc tàu ngầm hạt nhân Rickover"},
+  {"id": "lex.en.200k.062645", "hw": "hypoplastic dwarf", "pos": "phrase", "ipa": "/ˌhaɪpəˈplæstɪk dwɔːrf/", "vi": "người lùn do thiểu sản xương sụn"},
+  {"id": "lex.en.200k.062646", "hw": "icehouses", "pos": "noun", "ipa": "/ˈaɪshaʊzɪz/", "vi": "nhà kho bảo quản nước đá lạnh"},
+  {"id": "lex.en.200k.062647", "hw": "installed", "pos": "verb", "ipa": "/ɪnˈstɔːld/", "vi": "đã lắp đặt; đã cài đặt; bổ nhiệm"},
+  {"id": "lex.en.200k.062648", "hw": "installs", "pos": "verb", "ipa": "/ɪnˈstɔːlz/", "vi": "lắp đặt; cài đặt; trao chức vụ"},
+  {"id": "lex.en.200k.062649", "hw": "instals", "pos": "verb", "ipa": "/ɪnˈstɔːlz/", "vi": "cài đặt; lắp đặt thiết bị (Anh)"},
+  {"id": "lex.en.200k.062650", "hw": "ionisations", "pos": "noun", "ipa": "/ˌaɪənaɪˈzeɪʃənz/", "vi": "quá trình ion hóa nguyên tử (Anh)"},
+  {"id": "lex.en.200k.062651", "hw": "japheths", "pos": "noun", "ipa": "/ˈdʒeɪfəθs/", "vi": "Gia-phết con trai Nô-ê (Kinh Thánh)"},
+  {"id": "lex.en.200k.062652", "hw": "khedives", "pos": "/kəˈdiːvz/", "pos": "noun", "ipa": "/kəˈdiːvz/", "vi": "phó vương Ai Cập thời Ottoman"},
+  {"id": "lex.en.200k.062653", "hw": "kurt godel", "pos": "phrase", "ipa": "/kʊrt ˈɡɜːrdəl/", "vi": "nhà logic toán học Kurt Gödel"},
+  {"id": "lex.en.200k.062654", "hw": "lapins", "pos": "noun", "ipa": "/ˈlæpɪnz/", "vi": "lông thỏ xén giả lông quý; thịt thỏ"},
+  {"id": "lex.en.200k.062655", "hw": "leacocks", "pos": "noun", "ipa": "/ˈliːkɑːks/", "vi": "nhà văn châm biếm Stephen Leacock"},
+  {"id": "lex.en.200k.062656", "hw": "leguminous plant", "pos": "phrase", "ipa": "/ləˈɡjuːmənəs plænt/", "vi": "cây thuộc họ Đậu cố định đạm"},
+  {"id": "lex.en.200k.062657", "hw": "leptospiroses", "pos": "noun", "ipa": "/ˌlɛptəspaɪˈroʊsiːz/", "vi": "bệnh xoắn khuẩn vàng da Leptospira"},
+  {"id": "lex.en.200k.062658", "hw": "lodestars", "pos": "noun", "ipa": "/ˈloʊdstɑːrz/", "vi": "sao Bắc Đẩu; kim chỉ nam dẫn đường"},
+  {"id": "lex.en.200k.062659", "hw": "lubavitch movement", "pos": "phrase", "ipa": "/lʊˈbɑːvɪtʃ ˈmuːvmənt/", "vi": "phong trào Do Thái giáo Chabad"},
+  {"id": "lex.en.200k.062660", "hw": "lynchpins", "pos": "noun", "ipa": "/ˈlɪntʃpɪnz/", "vi": "chốt trục xe; nhân tố trụ cột"},
+  {"id": "lex.en.200k.062661", "hw": "madonna louise ciccone", "pos": "phrase", "ipa": "/məˈdɑːnə luˈiːz tʃɪˈkoʊni/", "vi": "ca sĩ nhạc pop Madonna (tên thật)"},
+  {"id": "lex.en.200k.062662", "hw": "mahomets", "pos": "noun", "ipa": "/məˈhɑːmɪts/", "vi": "tiên tri Muhammad (cách viết cũ)"},
+  {"id": "lex.en.200k.062663", "hw": "malnourishments", "pos": "noun", "ipa": "/ˌmælˈnɜːrɪʃmənts/", "vi": "tình trạng suy dinh dưỡng kéo dài"},
+  {"id": "lex.en.200k.062664", "hw": "mendeleevs", "pos": "noun", "ipa": "/ˌmɛndəˈleɪəfs/", "vi": "nhà hóa học Dmitri Mendeleev"},
+  {"id": "lex.en.200k.062665", "hw": "merrimacs", "pos": "noun", "ipa": "/ˈmɛrəmæks/", "vi": "tàu chiến bọc sắt Merrimac lịch sử"},
+  {"id": "lex.en.200k.062666", "hw": "minamata bay", "pos": "phrase", "ipa": "/ˌmiːnəˈmɑːtə beɪ/", "vi": "vịnh Minamata ở Nhật Bản"},
+  {"id": "lex.en.200k.062667", "hw": "minamata disease", "pos": "phrase", "ipa": "/ˌmiːnəˈmɑːtə dɪˈziːz/", "vi": "bệnh nhiễm độc thủy ngân Minamata"},
+  {"id": "lex.en.200k.062668", "hw": "misch metal", "pos": "phrase", "ipa": "/ˈmɪʃ ˌmɛtəl/", "vi": "hợp kim xeri-lantan làm đá bật lửa"},
+  {"id": "lex.en.200k.062669", "hw": "mitogens", "pos": "noun", "ipa": "/ˈmaɪtədʒənz/", "vi": "chất kích thích tế bào nguyên phân"},
+  {"id": "lex.en.200k.062670", "hw": "monel metal", "pos": "phrase", "ipa": "/moʊˈnɛl ˈmɛtəl/", "vi": "hợp kim niken đồng chống gỉ Monel"},
+  {"id": "lex.en.200k.062671", "hw": "money cowrie", "pos": "phrase", "ipa": "/ˈmʌni ˈkaʊri/", "vi": "ốc tiền dùng làm tiền tệ cổ xưa"},
+  {"id": "lex.en.200k.062672", "hw": "monozygotic twin", "pos": "phrase", "ipa": "/ˌmɑːnoʊzaɪˈɡɑːtɪk twɪn/", "vi": "anh chị em sinh đôi cùng một trứng"},
+  {"id": "lex.en.200k.062673", "hw": "morrison remick waite", "pos": "phrase", "ipa": "/ˈmɔːrɪsən ˈrɛmɪk weɪt/", "vi": "chánh án Mỹ Morrison Remick Waite"},
+  {"id": "lex.en.200k.062674", "hw": "muckles", "pos": "noun", "ipa": "/ˈmʌkəlz/", "vi": "số lượng lớn; khối tài sản đáng kể"},
+  {"id": "lex.en.200k.062675", "hw": "musculus adductor magnus", "pos": "phrase", "ipa": "/ˈmʌskjʊləs əˈdʌktər ˈmæɡnəs/", "vi": "cơ khép lớn ở mặt trong vùng đùi"},
+  {"id": "lex.en.200k.062676", "hw": "muzzier", "pos": "adj", "ipa": "/ˈmʌziər/", "vi": "mờ mịt hơn; choáng váng mơ hồ hơn"},
+  {"id": "lex.en.200k.062677", "hw": "muzziest", "pos": "adj", "ipa": "/ˈmʌziɪst/", "vi": "mơ hồ mịt mù nhất; choáng váng nhất"},
+  {"id": "lex.en.200k.062678", "hw": "nandus", "pos": "noun", "ipa": "/ˈnænduːz/", "vi": "chim đà điểu nhỏ Nam Mỹ (rhea)"},
+  {"id": "lex.en.200k.062679", "hw": "nasopharyngeal leishmaniasis", "pos": "phrase", "ipa": "/ˌneɪzoʊfəˈrɪndʒiəl ˌliːʃməˈnaɪəsɪs/", "vi": "bệnh trùng roi niêm mạc mũi họng"},
+  {"id": "lex.en.200k.062680", "hw": "naviculars", "pos": "noun", "ipa": "/nəˈvɪkjʊlərz/", "vi": "xương thuyền ở bàn chân và cổ tay"},
+  {"id": "lex.en.200k.062681", "hw": "novations", "pos": "noun", "ipa": "/noʊˈveɪʃənz/", "vi": "sự chuyển đổi nghĩa vụ hợp đồng mới"},
+  {"id": "lex.en.200k.062682", "hw": "nucleases", "pos": "noun", "ipa": "/ˈnuːkliˌeɪsɪz/", "vi": "enzym phân cắt axit nucleic tế bào"},
+  {"id": "lex.en.200k.062683", "hw": "nuthatches", "pos": "noun", "ipa": "/ˈnʌthætʃɪz/", "vi": "chim trèo cây mỏ nhọn ăn hạt cứng"},
+  {"id": "lex.en.200k.062684", "hw": "omeprazoles", "pos": "noun", "ipa": "/oʊˈmɛprəzɔːlz/", "vi": "thuốc ức chế axit dạ dày omeprazole"},
+  {"id": "lex.en.200k.062685", "hw": "order odonata", "pos": "phrase", "ipa": "/ˈɔːrdər oʊˈdɑːnətə/", "vi": "bộ côn trùng chuồn chuồn Odonata"},
+  {"id": "lex.en.200k.062686", "hw": "otto jespersen", "pos": "phrase", "ipa": "/ˈɑːtoʊ ˈjɛspərsən/", "vi": "nhà ngôn ngữ học Otto Jespersen"},
+  {"id": "lex.en.200k.062687", "hw": "otus asio", "pos": "phrase", "ipa": "/ˈoʊtəs ˈeɪzioʊ/", "vi": "cú mèo tai nhỏ vùng đông Bắc Mỹ"},
+  {"id": "lex.en.200k.062688", "hw": "ovis ammon", "pos": "phrase", "ipa": "/ˈoʊvɪs ˈæmɑːn/", "vi": "cừu hoang sừng xoắn lớn Argali"},
+  {"id": "lex.en.200k.062689", "hw": "ovis canadensis", "pos": "phrase", "ipa": "/ˈoʊvɪs ˌkænəˈdɛnsɪs/", "vi": "cừu sừng lớn núi đá Bắc Mỹ"},
+  {"id": "lex.en.200k.062690", "hw": "owen glendower", "pos": "phrase", "ipa": "/ˈoʊən ˈɡlɛndaʊər/", "vi": "thủ lĩnh xứ Wales Owen Glendower"},
+  {"id": "lex.en.200k.062691", "hw": "panegyrics", "pos": "noun", "ipa": "/ˌpænəˈdʒɪrɪks/", "vi": "bài văn tán dương ca tụng công đức"},
+  {"id": "lex.en.200k.062692", "hw": "panniers", "pos": "noun", "ipa": "/ˈpæniərz/", "vi": "giỏ thồ đôi treo hông ngựa hoặc xe"},
+  {"id": "lex.en.200k.062693", "hw": "parachutists", "pos": "noun", "ipa": "/ˈpærəʃuːtɪsts/", "vi": "người nhảy dù thể thao hoặc quân sự"},
+  {"id": "lex.en.200k.062694", "hw": "passer montanus", "pos": "phrase", "ipa": "/ˈpæsər mɑːnˈteɪnəs/", "vi": "chim sẻ đồng Á-Âu Passer montanus"},
+  {"id": "lex.en.200k.062695", "hw": "pepperidges", "pos": "noun", "ipa": "/ˈpɛpərɪdʒɪz/", "vi": "cây gỗ cứng Bắc Mỹ lá đỏ mùa thu"},
+  {"id": "lex.en.200k.062696", "hw": "peroneal vein", "pos": "phrase", "ipa": "/pəˈroʊniəl veɪn/", "vi": "tĩnh mạch mác sâu vùng cẳng chân"},
+  {"id": "lex.en.200k.062697", "hw": "persecutors", "pos": "noun", "ipa": "/ˈpɜːrsəkjutərz/", "vi": "kẻ bức hại đàn áp; kẻ hành hạ"},
+  {"id": "lex.en.200k.062698", "hw": "picadors", "pos": "noun", "ipa": "/ˈpɪkədɔːrz/", "vi": "kỵ sĩ đâm giáo mở màn đấu bò tót"},
+  {"id": "lex.en.200k.062699", "hw": "picea glauca", "pos": "phrase", "ipa": "/ˈpaɪsiə ˈɡlɔːkə/", "vi": "cây vân sam trắng bản địa Bắc Mỹ"},
+  {"id": "lex.en.200k.062700", "hw": "pine grosbeak", "pos": "phrase", "ipa": "/paɪn ˈɡroʊsbiːk/", "vi": "chim mỏ dày đỏ ăn hạt thông"},
+  {"id": "lex.en.200k.062701", "hw": "platens", "pos": "noun", "ipa": "/ˈplætənz/", "vi": "trục lăn máy chữ; mặt ép máy in"},
+  {"id": "lex.en.200k.062702", "hw": "pneumaticses", "pos": "noun", "ipa": "/nuːˈmætɪksɪz/", "vi": "ngành kỹ thuật khí nén học"}
+]
+
+with open('scratch/b33_r06_raw_p2.json') as f:
+    raw = json.load(f)
+
+assert len(items) == 100
+assert len(raw) == 100
+
+for i, (item, r) in enumerate(zip(items, raw)):
+    assert item['id'] == r['id'], f"Mismatch id at {i}: {item['id']} vs {r['id']}"
+    assert item['hw'] == r['hw'], f"Mismatch hw at {i}: {item['hw']} vs {r['hw']}"
+    assert len(item['vi']) <= 35, f"vi length > 35 at {i} ({item['hw']}): {len(item['vi'])}"
+    assert item['pos'] in ['noun', 'verb', 'adj', 'adv', 'num', 'intj', 'prep', 'pron', 'conj', 'det', 'phrase'], f"Invalid pos at {i}: {item['pos']}"
+    assert item['ipa'].startswith('/') and item['ipa'].endswith('/') and item['ipa'].count('/') == 2, f"Invalid ipa at {i}: {item['ipa']}"
+    assert not item['ipa'][1:-1].startswith(' ') and not item['ipa'][1:-1].endswith(' '), f"Space in ipa at {i}: {item['ipa']}"
+    r['pos'] = item['pos']
+    r['ipa'] = item['ipa']
+    r['vi'] = item['vi']
+    r['status'] = 'reviewed'
+
+with open('scratch/b33_r06_p2.json', 'w') as f:
+    json.dump(raw, f, ensure_ascii=False, indent=2)
+print("Saved scratch/b33_r06_p2.json OK")

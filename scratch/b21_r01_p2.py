@@ -1,0 +1,127 @@
+import json
+
+# Manual QA review for Batch 21 Round 1 Part 2 (000102 to 000201)
+part2_data = [
+  {"id": "lex.en.200k.000102", "hw": "at the most", "pos": "phrase", "ipa": "/æt ðə moʊst/", "vi": "nhiều nhất; tối đa", "cefr": "B1", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.000103", "hw": "just then", "pos": "phrase", "ipa": "/dʒʌst ðɛn/", "vi": "ngay lúc đó; vừa đúng khi ấy", "cefr": "B1", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.000104", "hw": "make up", "pos": "phrase", "ipa": "/meɪk ʌp/", "vi": "trang điểm; bịa chuyện; làm hòa", "cefr": "A2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.000105", "hw": "right on", "pos": "phrase", "ipa": "/raɪt ɑːn/", "vi": "chuẩn xác!; tuyệt vời!", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.000106", "hw": "take to", "pos": "phrase", "ipa": "/teɪk tuː/", "vi": "bắt đầu thích; có thói quen làm", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.000107", "hw": "think about", "pos": "phrase", "ipa": "/θɪŋk əˈbaʊt/", "vi": "suy nghĩ về; cân nhắc điều gì", "cefr": "A2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.000108", "hw": "think up", "pos": "phrase", "ipa": "/θɪŋk ʌp/", "vi": "nghĩ ra; sáng chế ra mưu mẹo", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.000109", "hw": "work on", "pos": "phrase", "ipa": "/wɜːrk ɑːn/", "vi": "tác động lên; đang nghiên cứu", "cefr": "B1", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.000110", "hw": "having", "pos": "verb", "ipa": "/ˈhævɪŋ/", "vi": "đang có; sở hữu", "cefr": "A1", "tier": "core", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.000111", "hw": "good time", "pos": "phrase", "ipa": "/ɡʊd taɪm/", "vi": "thời gian vui vẻ; cuộc vui", "cefr": "A2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.000112", "hw": "make out", "pos": "phrase", "ipa": "/meɪk aʊt/", "vi": "nhìn ra; hiểu được; ôm hôn âu yếm", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.000113", "hw": "take in", "pos": "phrase", "ipa": "/teɪk ɪn/", "vi": "tiếp thu; lừa gạt; thu nhỏ áo", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.000114", "hw": "think out", "pos": "phrase", "ipa": "/θɪŋk aʊt/", "vi": "suy nghĩ thấu đáo; tính toán kỹ", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.000115", "hw": "all the way", "pos": "phrase", "ipa": "/ɔːl ðə weɪ/", "vi": "suốt dọc đường; hoàn toàn hết mình", "cefr": "B1", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.000116", "hw": "at work", "pos": "phrase", "ipa": "/æt wɜːrk/", "vi": "đang làm việc; tại nơi làm việc", "cefr": "A1", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.000117", "hw": "get into", "pos": "phrase", "ipa": "/ɡɛt ˈɪntuː/", "vi": "đi vào trong; say mê tìm hiểu", "cefr": "B1", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.000118", "hw": "make do", "pos": "phrase", "ipa": "/meɪk duː/", "vi": "xoay xở tạm với cái sẵn có", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.000119", "hw": "take for", "pos": "phrase", "ipa": "/teɪk fɔːr/", "vi": "coi như là; lầm tưởng là", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.000120", "hw": "work at", "pos": "phrase", "ipa": "/wɜːrk æt/", "vi": "chăm chỉ rèn luyện; nỗ lực làm", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.000121", "hw": "hes", "pos": "noun", "ipa": "/hiːz/", "vi": "các con đực; những người nam", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.000122", "hw": "back out", "pos": "phrase", "ipa": "/bæk aʊt/", "vi": "rút lui khỏi cam kết; nuốt lời", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.000123", "hw": "back up", "pos": "phrase", "ipa": "/bæk ʌp/", "vi": "sao lưu dữ liệu; ủng hộ; lùi xe", "cefr": "B1", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.000124", "hw": "even so", "pos": "phrase", "ipa": "/ˈiːvən soʊ/", "vi": "dẫu vậy; mặc dù như thế", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.000125", "hw": "go about", "pos": "phrase", "ipa": "/ɡoʊ əˈbaʊt/", "vi": "bắt tay vào làm; đi lại tự do", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.000126", "hw": "in good time", "pos": "phrase", "ipa": "/ɪn ɡʊd taɪm/", "vi": "đúng lúc; kịp thời; sớm sủa", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.000127", "hw": "now now", "pos": "phrase", "ipa": "/naʊ naʊ/", "vi": "thôi nào!; hãy bình tĩnh lại!", "cefr": "C1", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.000128", "hw": "some other", "pos": "phrase", "ipa": "/sʌm ˈʌðər/", "vi": "một thứ khác; người khác nào đó", "cefr": "A2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.000129", "hw": "take on", "pos": "phrase", "ipa": "/teɪk ɑːn/", "vi": "đảm nhận việc; tuyển dụng; đấu lại", "cefr": "B1", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.000130", "hw": "by the day", "pos": "phrase", "ipa": "/baɪ ðə deɪ/", "vi": "theo từng ngày; ngày qua ngày", "cefr": "B1", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.000131", "hw": "get over", "pos": "phrase", "ipa": "/ɡɛt ˈoʊvər/", "vi": "vượt qua cú sốc; bình phục lại", "cefr": "B1", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.000132", "hw": "go out", "pos": "phrase", "ipa": "/ɡoʊ aʊt/", "vi": "đi ra ngoài; tắt đèn; hẹn hò", "cefr": "A1", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.000133", "hw": "go up", "pos": "phrase", "ipa": "/ɡoʊ ʌp/", "vi": "tăng giá; đi lên; bốc cháy", "cefr": "A2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.000134", "hw": "make as if", "pos": "phrase", "ipa": "/meɪk æz ɪf/", "vi": "làm như thể; vờ như sắp sửa", "cefr": "C1", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.000135", "hw": "off and on", "pos": "phrase", "ipa": "/ɔːf ænd ɑːn/", "vi": "thỉnh thoảng; chập chờn ngắt quãng", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.000136", "hw": "on and off", "pos": "phrase", "ipa": "/ɑːn ænd ɔːf/", "vi": "thỉnh thoảng; từng đợt ngắt quãng", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.000137", "hw": "well out", "pos": "phrase", "ipa": "/wɛl aʊt/", "vi": "tuôn trào ra ngoài", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.000138", "hw": "well up", "pos": "phrase", "ipa": "/wɛl ʌp/", "vi": "trào dâng nước mắt; trào lên", "cefr": "C1", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.000139", "hw": "do well", "pos": "phrase", "ipa": "/duː wɛl/", "vi": "làm tốt; thành đạt; hồi phục tốt", "cefr": "B1", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.000140", "hw": "way out", "pos": "phrase", "ipa": "/weɪ aʊt/", "vi": "lối thoát thân; giải pháp tháo gỡ", "cefr": "A2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.000141", "hw": "all right", "pos": "phrase", "ipa": "/ɔːl raɪt/", "vi": "ổn thỏa; đồng ý; bình an vô sự", "cefr": "A1", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.000142", "hw": "all too", "pos": "phrase", "ipa": "/ɔːl tuː/", "vi": "quá mức; rất đỗi", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.000143", "hw": "have got", "pos": "phrase", "ipa": "/hæv ɡɑːt/", "vi": "có; sở hữu; phải làm gì", "cefr": "A1", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.000144", "hw": "take to be", "pos": "phrase", "ipa": "/teɪk tuː biː/", "vi": "coi như là; lầm tưởng là", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.000145", "hw": "even out", "pos": "phrase", "ipa": "/ˈiːvən aʊt/", "vi": "cân bằng lại; san đều phẳng", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.000146", "hw": "even up", "pos": "phrase", "ipa": "/ˈiːvən ʌp/", "vi": "điều chỉnh cho đều; san bằng điểm", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.000147", "hw": "get back", "pos": "phrase", "ipa": "/ɡɛt bæk/", "vi": "quay trở về; lấy lại được", "cefr": "A2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.000148", "hw": "get well", "pos": "phrase", "ipa": "/ɡɛt wɛl/", "vi": "bình phục; mau khỏi ốm", "cefr": "A2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.000149", "hw": "have it off", "pos": "phrase", "ipa": "/hæv ɪt ɔːf/", "vi": "quan hệ tình dục", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.000150", "hw": "just right", "pos": "phrase", "ipa": "/dʒʌst raɪt/", "vi": "vừa vặn; chuẩn xác từng ly", "cefr": "B1", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.000151", "hw": "through with", "pos": "phrase", "ipa": "/θruː wɪð/", "vi": "làm xong việc; cắt đứt quan hệ", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.000152", "hw": "up here", "pos": "phrase", "ipa": "/ʌp hɪər/", "vi": "ở trên này; nơi vùng cao này", "cefr": "A2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.000153", "hw": "and then some", "pos": "phrase", "ipa": "/ænd ðɛn sʌm/", "vi": "và còn nhiều hơn thế nữa", "cefr": "C1", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.000154", "hw": "have down", "pos": "phrase", "ipa": "/hæv daʊn/", "vi": "ghi chép lại; nắm vững lòng bàn tay", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.000155", "hw": "many an", "pos": "phrase", "ipa": "/ˈmɛni æn/", "vi": "biết bao nhiêu là; nhiều", "cefr": "C1", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.000156", "hw": "work out", "pos": "phrase", "ipa": "/wɜːrk aʊt/", "vi": "tập thể dục; giải quyết êm xuôi", "cefr": "A2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.000157", "hw": "work up", "pos": "phrase", "ipa": "/wɜːrk ʌp/", "vi": "kích động; gây dựng dần từng bước", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.000158", "hw": "do work", "pos": "phrase", "ipa": "/duː wɜːrk/", "vi": "làm việc; phát huy hiệu quả", "cefr": "A2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.000159", "hw": "get even", "pos": "phrase", "ipa": "/ɡɛt ˈiːvən/", "vi": "trả đũa trả thù; gỡ hòa điểm", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.000160", "hw": "now and then", "pos": "phrase", "ipa": "/naʊ ænd ðɛn/", "vi": "thỉnh thoảng; đôi khi", "cefr": "B1", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.000161", "hw": "out of work", "pos": "phrase", "ipa": "/aʊt əv wɜːrk/", "vi": "thất nghiệp; không có việc làm", "cefr": "B1", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.000162", "hw": "at last", "pos": "phrase", "ipa": "/æt læst/", "vi": "cuối cùng; rốt cuộc thì", "cefr": "A2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.000163", "hw": "do well by", "pos": "phrase", "ipa": "/duː wɛl baɪ/", "vi": "đối đãi tử tế với; hậu đãi", "cefr": "C1", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.000164", "hw": "here and there", "pos": "phrase", "ipa": "/hɪər ænd ðɛr/", "vi": "đây đó; rải rác chỗ này chỗ kia", "cefr": "B1", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.000165", "hw": "home in", "pos": "phrase", "ipa": "/hoʊm ɪn/", "vi": "nhắm trúng đích; hướng mũi nhọn vào", "cefr": "C1", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.000166", "hw": "in love", "pos": "phrase", "ipa": "/ɪn lʌv/", "vi": "đang yêu; say đắm trong tình yêu", "cefr": "A2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.000167", "hw": "in use", "pos": "phrase", "ipa": "/ɪn juːs/", "vi": "đang được sử dụng", "cefr": "B1", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.000168", "hw": "look to", "pos": "phrase", "ipa": "/lʊk tuː/", "vi": "trông cậy vào; hướng mắt về", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.000169", "hw": "make good", "pos": "phrase", "ipa": "/meɪk ɡʊd/", "vi": "giữ trọn lời hứa; bồi thường", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.000170", "hw": "take out", "pos": "phrase", "ipa": "/teɪk aʊt/", "vi": "rút tiền; đưa đi chơi; trừ khử", "cefr": "A2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.000171", "hw": "take up", "pos": "phrase", "ipa": "/teɪk ʌp/", "vi": "bắt đầu sở thích; chiếm chỗ", "cefr": "B1", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.000172", "hw": "time being", "pos": "phrase", "ipa": "/taɪm ˈbiːɪŋ/", "vi": "thời điểm hiện tại; tạm thời", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.000173", "hw": "used to", "pos": "phrase", "ipa": "/juːst tuː/", "vi": "đã từng thường làm; quen với", "cefr": "A2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.000174", "hw": "work time", "pos": "phrase", "ipa": "/wɜːrk taɪm/", "vi": "giờ làm việc; thời gian công tác", "cefr": "B1", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.000175", "hw": "at best", "pos": "phrase", "ipa": "/æt bɛst/", "vi": "cùng lắm là; khả dĩ nhất là", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.000176", "hw": "at the best", "pos": "phrase", "ipa": "/æt ðə bɛst/", "vi": "trong trường hợp tốt đẹp nhất", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.000177", "hw": "get going", "pos": "phrase", "ipa": "/ɡɛt ˈɡoʊɪŋ/", "vi": "bắt đầu lên đường; khởi hành", "cefr": "B1", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.000178", "hw": "go all out", "pos": "phrase", "ipa": "/ɡoʊ ɔːl aʊt/", "vi": "dốc toàn tâm toàn lực làm", "cefr": "C1", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.000179", "hw": "have the best", "pos": "phrase", "ipa": "/hæv ðə bɛst/", "vi": "giành phần thắng; chiếm ưu thế lớn", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.000180", "hw": "look for", "pos": "phrase", "ipa": "/lʊk fɔːr/", "vi": "tìm kiếm; trông đợi điều gì", "cefr": "A1", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.000181", "hw": "look on", "pos": "phrase", "ipa": "/lʊk ɑːn/", "vi": "đứng ngoài quan sát; nhìn vào", "cefr": "B1", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.000182", "hw": "make over", "pos": "phrase", "ipa": "/meɪk ˈoʊvər/", "vi": "cải tạo diện mạo; sang tên nhà cửa", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.000183", "hw": "new year", "pos": "phrase", "ipa": "/nuː jɪər/", "vi": "năm mới; dịp tết", "cefr": "A1", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.000184", "hw": "think over", "pos": "phrase", "ipa": "/θɪŋk ˈoʊvər/", "vi": "suy nghĩ cân nhắc kỹ càng", "cefr": "B1", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.000185", "hw": "time of day", "pos": "phrase", "ipa": "/taɪm əv deɪ/", "vi": "thời điểm trong ngày; mấy giờ", "cefr": "B1", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.000186", "hw": "time of year", "pos": "phrase", "ipa": "/taɪm əv jɪər/", "vi": "thời điểm trong năm; mùa vụ", "cefr": "B1", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.000187", "hw": "come in", "pos": "phrase", "ipa": "/kʌm ɪn/", "vi": "bước vào trong; về đích; triều lên", "cefr": "A1", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.000188", "hw": "come to", "pos": "phrase", "ipa": "/kʌm tuː/", "vi": "hồi tỉnh; lên tới số tiền; chạm đến", "cefr": "B1", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.000189", "hw": "get off", "pos": "phrase", "ipa": "/ɡɛt ɔːf/", "vi": "xuống tàu xe; tan làm; thoát tội", "cefr": "A2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.000190", "hw": "go after", "pos": "phrase", "ipa": "/ɡoʊ ˈæftər/", "vi": "đuổi bắt; theo đuổi mục tiêu", "cefr": "B1", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.000191", "hw": "go into", "pos": "phrase", "ipa": "/ɡoʊ ˈɪntuː/", "vi": "đi sâu tìm hiểu; gia nhập; đi vào", "cefr": "B1", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.000192", "hw": "in part", "pos": "phrase", "ipa": "/ɪn pɑːrt/", "vi": "một phần; phần nào đó", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.000193", "hw": "over and over", "pos": "phrase", "ipa": "/ˈoʊvər ænd ˈoʊvər/", "vi": "lặp đi lặp lại nhiều lần", "cefr": "B1", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.000194", "hw": "time off", "pos": "phrase", "ipa": "/taɪm ɔːf/", "vi": "thời gian nghỉ phép; ngày nghỉ", "cefr": "B1", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.000195", "hw": "as we say", "pos": "phrase", "ipa": "/æz wiː seɪ/", "vi": "như người ta vẫn thường nói", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.000196", "hw": "at home", "pos": "phrase", "ipa": "/æt hoʊm/", "vi": "ở tại nhà; tự nhiên thoải mái", "cefr": "A1", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.000197", "hw": "look at", "pos": "phrase", "ipa": "/lʊk æt/", "vi": "nhìn vào; xem xét kiểm tra", "cefr": "A1", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.000198", "hw": "think back", "pos": "phrase", "ipa": "/θɪŋk bæk/", "vi": "hồi tưởng lại; nhớ lại chuyện xưa", "cefr": "B1", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.000199", "hw": "best of all", "pos": "phrase", "ipa": "/bɛst əv ɔːl/", "vi": "điều tuyệt nhất là; hay nhất là", "cefr": "B1", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.000200", "hw": "come on", "pos": "phrase", "ipa": "/kʌm ɑːn/", "vi": "thôi nào!; tiến lên; xuất hiện", "cefr": "A1", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.000201", "hw": "go over", "pos": "phrase", "ipa": "/ɡoʊ ˈoʊvər/", "vi": "kiểm tra lại kỹ; xem xét; đi qua", "cefr": "B1", "tier": "expanded", "status": "reviewed", "notes": ""}
+]
+
+# Validation
+raw_items = json.load(open('scratch/b21_r01_raw_p2.json', 'r', encoding='utf-8'))
+assert len(part2_data) == 100
+assert len(raw_items) == 100
+
+for i, item in enumerate(part2_data):
+    raw = raw_items[i]
+    assert item["id"] == raw["id"], f"ID mismatch at {i}: {item['id']} vs {raw['id']}"
+    assert item["hw"] == raw["hw"], f"HW mismatch at {i}: {item['hw']} vs {raw['hw']}"
+    assert len(item["vi"]) <= 35, f"vi too long at {i} ({item['hw']}): {item['vi']} ({len(item['vi'])} chars)"
+    assert item["pos"] in ["noun", "verb", "adj", "adv", "intj", "prep", "conj", "pron", "det", "num", "phrase"], f"Invalid pos at {i}: {item['pos']}"
+    assert item["ipa"].startswith("/") and item["ipa"].endswith("/") and item["ipa"].count("/") == 2, f"Invalid ipa at {i}: {item['ipa']}"
+    assert item["status"] == "reviewed"
+    item["cefr"] = raw.get("cefr", "C2")
+    item["tier"] = raw.get("tier", "expanded")
+    item["notes"] = raw.get("notes", "")
+
+with open('scratch/b21_r01_p2.json', 'w', encoding='utf-8') as f:
+    json.dump(part2_data, f, ensure_ascii=False, indent=2)
+
+print("b21_r01_p2.json created successfully and validated!")

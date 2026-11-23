@@ -1,0 +1,126 @@
+import json
+
+items = [
+  {"id": "lex.en.200k.063803", "hw": "false asphodel", "pos": "phrase", "ipa": "/fɔːls ˈæsfəˌdɛl/", "vi": "cây cỏ hoa sao đầm lầy Tofieldia"},
+  {"id": "lex.en.200k.063804", "hw": "fedayeen saddam", "pos": "phrase", "ipa": "/ˌfɛdəˈjiːn səˈdɑːm/", "vi": "dân quân Fedayeen thời Saddam Iraq"},
+  {"id": "lex.en.200k.063805", "hw": "fibrous astrocyte", "pos": "phrase", "ipa": "/ˈfaɪbrəs ˈæstrəˌsaɪt/", "vi": "tế bào thần kinh đệm hình sao sợi"},
+  {"id": "lex.en.200k.063806", "hw": "francois couperin", "pos": "phrase", "ipa": "/frɑːnˈswɑː kuːpəˈræn/", "vi": "nhạc sĩ Baroque Pháp Couperin"},
+  {"id": "lex.en.200k.063807", "hw": "fraxinus excelsior", "pos": "phrase", "ipa": "/ˈfræksɪnəs ɛkˈsɛlsiɔːr/", "vi": "cây tần bì cao gỗ tốt châu Âu"},
+  {"id": "lex.en.200k.063808", "hw": "genus aplysia", "pos": "phrase", "ipa": "/ˈdʒiːnəs əˈpliːʒə/", "vi": "chi sên thỏ biển ăn tảo Aplysia"},
+  {"id": "lex.en.200k.063809", "hw": "genus ardea", "pos": "phrase", "ipa": "/ˈdʒiːnəs ˈɑːrdiə/", "vi": "chi chim diệc chân dài Ardea"},
+  {"id": "lex.en.200k.063810", "hw": "genus bromus", "pos": "phrase", "ipa": "/ˈdʒiːnəs ˈbroʊməs/", "vi": "chi cỏ thảo nguyên bông rủ Bromus"},
+  {"id": "lex.en.200k.063811", "hw": "genus castanea", "pos": "phrase", "ipa": "/ˈdʒiːnəs kæˈsteɪniə/", "vi": "chi cây hạt dẻ ăn quả Castanea"},
+  {"id": "lex.en.200k.063812", "hw": "genus coffea", "pos": "phrase", "ipa": "/ˈdʒiːnəs ˈkɔːfiə/", "vi": "chi thực vật cây cà phê Coffea"},
+  {"id": "lex.en.200k.063813", "hw": "genus taxus", "pos": "phrase", "ipa": "/ˈdʒiːnəs ˈtæksəs/", "vi": "chi cây thông đỏ thủy tùng Taxus"},
+  {"id": "lex.en.200k.063814", "hw": "genus unio", "pos": "phrase", "ipa": "/ˈdʒiːnəs ˈjuːnioʊ/", "vi": "chi trai nước ngọt vỏ dày Unio"},
+  {"id": "lex.en.200k.063815", "hw": "giulio natta", "pos": "phrase", "ipa": "/ˈdʒuːlioʊ ˈnɑːtə/", "vi": "nhà hóa học polyme Nobel Natta"},
+  {"id": "lex.en.200k.063816", "hw": "gluteus medius", "pos": "phrase", "ipa": "/ˈɡluːtiəs ˈmiːdiəs/", "vi": "cơ mông nhỡ giữ thăng bằng hông"},
+  {"id": "lex.en.200k.063817", "hw": "hyperkinetic syndrome", "pos": "phrase", "ipa": "/ˌhaɪpərkɪˈnɛtɪk ˈsɪndroʊm/", "vi": "hội chứng rối loạn tăng động ở trẻ"},
+  {"id": "lex.en.200k.063818", "hw": "inferior colliculus", "pos": "phrase", "ipa": "/ɪnˈfɪriər kəˈlɪkjələs/", "vi": "gò não dưới xử lý thính giác"},
+  {"id": "lex.en.200k.063819", "hw": "john heming", "pos": "phrase", "ipa": "/dʒɑːn ˈhɛmɪŋ/", "vi": "diễn viên biên tập kịch Shakespeare"},
+  {"id": "lex.en.200k.063820", "hw": "khoisan language", "pos": "phrase", "ipa": "/ˈkɔɪsɑːn ˈlæŋɡwɪdʒ/", "vi": "nhóm ngôn ngữ âm chép môi Khoisan"},
+  {"id": "lex.en.200k.063821", "hw": "lesser galangal", "pos": "phrase", "ipa": "/ˈlɛsər ɡəˈlæŋɡəl/", "vi": "cây riềng thuốc nhỏ vị cay ấm"},
+  {"id": "lex.en.200k.063822", "hw": "licinius lucullus", "pos": "phrase", "ipa": "/lɪˈsɪniəs luːˈkʌləs/", "vi": "tướng La Mã sành ăn Lucullus"},
+  {"id": "lex.en.200k.063823", "hw": "maleic acid", "pos": "phrase", "ipa": "/məˈliːɪk ˈæsɪd/", "vi": "axit hữu cơ maleic sản xuất nhựa"},
+  {"id": "lex.en.200k.063824", "hw": "mefloquine hydrochloride", "pos": "phrase", "ipa": "/ˈmɛfləkwɪn ˌhaɪdrəˈklɔːraɪd/", "vi": "thuốc chống sốt rét mefloquine"},
+  {"id": "lex.en.200k.063825", "hw": "monell metal", "pos": "phrase", "ipa": "/moʊˈnɛl ˈmɛtəl/", "vi": "hợp kim niken đồng chống ăn mòn"},
+  {"id": "lex.en.200k.063826", "hw": "nikita sergeyevich khrushchev", "pos": "phrase", "ipa": "/nɪˈkiːtə sərˈɡeɪəvɪtʃ ˈkruːʃtʃɛf/", "vi": "nhà lãnh đạo Liên Xô Khrushchev"},
+  {"id": "lex.en.200k.063827", "hw": "nitta tree", "pos": "phrase", "ipa": "/ˈnɪtə triː/", "vi": "cây đậu châu chấu châu Phi Parkia"},
+  {"id": "lex.en.200k.063828", "hw": "northern bobwhite", "pos": "phrase", "ipa": "/ˈnɔːrðərn ˈbɑːbwaɪt/", "vi": "chim cút đồng cỏ cổ trắng Bắc Mỹ"},
+  {"id": "lex.en.200k.063829", "hw": "oast house", "pos": "phrase", "ipa": "/oʊst haʊs/", "vi": "lò hình nón sấy hoa bia nấu rượu"},
+  {"id": "lex.en.200k.063830", "hw": "pan troglodytes verus", "pos": "phrase", "ipa": "/pæn ˌtrɑːɡləˈdaɪtiːz ˈvɪrəs/", "vi": "tinh tinh Tây Phi quý hiếm"},
+  {"id": "lex.en.200k.063831", "hw": "poa pratensis", "pos": "phrase", "ipa": "/ˈpoʊə prəˈtɛnsɪs/", "vi": "cỏ mượt đồng cỏ xanh Kentucky"},
+  {"id": "lex.en.200k.063832", "hw": "prunus angustifolia", "pos": "phrase", "ipa": "/ˈpruːnəs æŋˌɡʌstɪˈfoʊliə/", "vi": "cây mận dại bụi rậm Chickasaw Mỹ"},
+  {"id": "lex.en.200k.063833", "hw": "pudendal cleft", "pos": "phrase", "ipa": "/pjuːˈdɛndəl klɛft/", "vi": "khe âm hộ (giải phẫu học nữ)"},
+  {"id": "lex.en.200k.063834", "hw": "reductio ad absurdum", "pos": "phrase", "ipa": "/rɪˈdʌkʃioʊ æd əbˈsɜːrdəm/", "vi": "phép lập luận chứng minh phản chứng"},
+  {"id": "lex.en.200k.063835", "hw": "scotch asphodel", "pos": "phrase", "ipa": "/skɑːtʃ ˈæsfəˌdɛl/", "vi": "cây hoa sao đầm lầy nhỏ phương Bắc"},
+  {"id": "lex.en.200k.063836", "hw": "seborrheic dermatitis", "pos": "phrase", "ipa": "/ˌsɛbəˈriːɪk ˌdɜːrməˈtaɪtɪs/", "vi": "bệnh viêm da tiết bã tróc vảy"},
+  {"id": "lex.en.200k.063837", "hw": "sir yehudi menuhin", "pos": "phrase", "ipa": "/sɜːr jəˈhuːdi ˈmɛnjʊɪn/", "vi": "nghệ sĩ vĩ cầm lừng danh Menuhin"},
+  {"id": "lex.en.200k.063838", "hw": "superior colliculus", "pos": "phrase", "ipa": "/suˈpɪriər kəˈlɪkjələs/", "vi": "gò não trên phản xạ định hướng mắt"},
+  {"id": "lex.en.200k.063839", "hw": "thrombolytic agent", "pos": "phrase", "ipa": "/ˌθrɑːmbəˈlɪtɪk ˈeɪdʒənt/", "vi": "thuốc làm tan huyết khối mạch máu"},
+  {"id": "lex.en.200k.063840", "hw": "thrombolytic therapy", "pos": "phrase", "ipa": "/ˌθrɑːmbəˈlɪtɪk ˈθɛrəpi/", "vi": "liệu pháp làm tan cục huyết khối"},
+  {"id": "lex.en.200k.063841", "hw": "trifolium repens", "pos": "phrase", "ipa": "/traɪˈfoʊliəm ˈriːpɛnz/", "vi": "cây cỏ ba lá trắng mọc bò mặt đất"},
+  {"id": "lex.en.200k.063842", "hw": "turfing daisy", "pos": "phrase", "ipa": "/ˈtɜːrfɪŋ ˈdeɪzi/", "vi": "cúc thảm mọc lan chịu giẫm đạp"},
+  {"id": "lex.en.200k.063843", "hw": "whorled aster", "pos": "phrase", "ipa": "/wɜːrld ˈæstər/", "vi": "cây cúc sao lá mọc vòng gỗ Bắc Mỹ"},
+  {"id": "lex.en.200k.063844", "hw": "wood widgeon", "pos": "phrase", "ipa": "/wʊd ˈwɪdʒən/", "vi": "loài vịt gỗ sặc sỡ Bắc Mỹ"},
+  {"id": "lex.en.200k.063845", "hw": "yehudi menuhin", "pos": "phrase", "ipa": "/jəˈhuːdi ˈmɛnjʊɪn/", "vi": "nhạc trưởng nghệ sĩ vĩ cầm Menuhin"},
+  {"id": "lex.en.200k.063846", "hw": "yellow asphodel", "pos": "phrase", "ipa": "/ˈjɛloʊ ˈæsfəˌdɛl/", "vi": "cây hoa tiên vàng Địa Trung Hải"},
+  {"id": "lex.en.200k.063847", "hw": "adiges", "pos": "noun", "ipa": "/ˈɑːdɪdʒɪz/", "vi": "sông Adige ở miền bắc nước Ý"},
+  {"id": "lex.en.200k.063848", "hw": "ahuras", "pos": "noun", "ipa": "/əˈhʊrəz/", "vi": "các thiện thần Ahura Bái Hỏa giáo"},
+  {"id": "lex.en.200k.063849", "hw": "alexandrines", "pos": "noun", "ipa": "/ˌælɪɡˈzændrɪnz/", "vi": "câu thơ mười hai âm tiết cổ điển"},
+  {"id": "lex.en.200k.063850", "hw": "anhedonias", "pos": "noun", "ipa": "/ˌænhiːˈdoʊniəz/", "vi": "chứng mất cảm giác vui thích tâm lý"},
+  {"id": "lex.en.200k.063851", "hw": "antiperspirants", "pos": "noun", "ipa": "/ˌæntiˈpɜːrspərənts/", "vi": "chất lăn khử ngăn tiết mồ hôi"},
+  {"id": "lex.en.200k.063852", "hw": "appaloosas", "pos": "noun", "ipa": "/ˌæpəˈluːsəz/", "vi": "giống ngựa đốm Mỹ Appaloosa"},
+  {"id": "lex.en.200k.063853", "hw": "architraves", "pos": "noun", "ipa": "/ˈɑːrkəˌtreɪvz/", "vi": "thanh ngang đầu cột; nẹp khuôn cửa"},
+  {"id": "lex.en.200k.063854", "hw": "arecas", "pos": "noun", "ipa": "/ˈærəkəz/", "vi": "chi cây cau ăn trầu cảnh nhiệt đới"},
+  {"id": "lex.en.200k.063855", "hw": "asbestoses", "pos": "noun", "ipa": "/ˌæsbɛsˈtoʊsiːz/", "vi": "bệnh xơ hóa phổi do hít bụi amiăng"},
+  {"id": "lex.en.200k.063856", "hw": "asparagines", "pos": "noun", "ipa": "/əˈspærədʒiːnz/", "vi": "axit amin tự nhiên asparagin"},
+  {"id": "lex.en.200k.063857", "hw": "atorvastatins", "pos": "noun", "ipa": "/əˌtɔːrvəˈstætɪnz/", "vi": "thuốc hạ mỡ máu atorvastatin"},
+  {"id": "lex.en.200k.063858", "hw": "backlightings", "pos": "noun", "ipa": "/ˈbækˌlaɪtɪŋz/", "vi": "hệ thống đèn chiếu sáng nền từ sau"},
+  {"id": "lex.en.200k.063859", "hw": "baptisteries", "pos": "noun", "ipa": "/ˈbæptɪstriz/", "vi": "nhà nguyện hoặc bể làm lễ rửa tội"},
+  {"id": "lex.en.200k.063860", "hw": "bathymetries", "pos": "noun", "ipa": "/bəˈθɪmətrɪz/", "vi": "phép đo đạc độ sâu đáy biển hồ"},
+  {"id": "lex.en.200k.063861", "hw": "benchleys", "pos": "noun", "ipa": "/ˈbɛntʃliz/", "vi": "nhà văn hài hước Robert Benchley"},
+  {"id": "lex.en.200k.063862", "hw": "bloodstains", "pos": "noun", "ipa": "/ˈblʌdsteɪnz/", "vi": "vết máu khô dính trên vải bề mặt"},
+  {"id": "lex.en.200k.063863", "hw": "boreases", "pos": "noun", "ipa": "/ˈbɔːriˌæz/", "vi": "thần gió bắc rét buốt Boreas"},
+  {"id": "lex.en.200k.063864", "hw": "breastbones", "pos": "noun", "ipa": "/ˈbrɛstboʊnz/", "vi": "xương ức nối khung xương sườn trước"},
+  {"id": "lex.en.200k.063865", "hw": "burthened", "pos": "verb", "ipa": "/ˈbɜːrðənd/", "vi": "đã chất gánh nặng lên (từ cổ)"},
+  {"id": "lex.en.200k.063866", "hw": "burthening", "pos": "verb", "ipa": "/ˈbɜːrðənɪŋ/", "vi": "đang chất gánh nặng lên (cổ)"},
+  {"id": "lex.en.200k.063867", "hw": "burthens", "pos": "noun", "ipa": "/ˈbɜːrðənz/", "vi": "gánh nặng trách nhiệm (cổ)"},
+  {"id": "lex.en.200k.063868", "hw": "bybloses", "pos": "noun", "ipa": "/ˈbɪblɑːsɪz/", "vi": "thành phố cảng cổ Byblos ở Lebanon"},
+  {"id": "lex.en.200k.063869", "hw": "cachexias", "pos": "noun", "ipa": "/kəˈkɛksiəz/", "vi": "hội chứng suy kiệt gầy mòn nặng"},
+  {"id": "lex.en.200k.063870", "hw": "castrieses", "pos": "noun", "ipa": "/ˈkæstrizɪz/", "vi": "thủ đô Castries của Saint Lucia"},
+  {"id": "lex.en.200k.063871", "hw": "catecheses", "pos": "noun", "ipa": "/ˌkætəˈkiːsiːz/", "vi": "giáo trình dạy giáo lý truyền khẩu"},
+  {"id": "lex.en.200k.063872", "hw": "caudas", "pos": "noun", "ipa": "/ˈkɔːdəz/", "vi": "phần đuôi thon cơ quan giải phẫu"},
+  {"id": "lex.en.200k.063873", "hw": "cftrs", "pos": "noun", "ipa": "/ˌsiːˌɛfˌtiːˈɑːrz/", "vi": "protein gen điều hòa CFTR xơ nang"},
+  {"id": "lex.en.200k.063874", "hw": "codicils", "pos": "noun", "ipa": "/ˈkɑːdəsəlz/", "vi": "phụ lục sửa đổi bổ sung bản di chúc"},
+  {"id": "lex.en.200k.063875", "hw": "congregationalists", "pos": "noun", "ipa": "/ˌkɑːŋɡrɪˈɡeɪʃənəlɪsts/", "vi": "tín đồ Tin Lành Giáo hội Tự trị"},
+  {"id": "lex.en.200k.063876", "hw": "contestations", "pos": "noun", "ipa": "/ˌkɑːntɛsˈteɪʃənz/", "vi": "sự tranh chấp phản đối tranh luận"},
+  {"id": "lex.en.200k.063877", "hw": "cratons", "pos": "noun", "ipa": "/ˈkreɪtɑːnz/", "vi": "nền cổ địa chất lục địa ổn định"},
+  {"id": "lex.en.200k.063878", "hw": "cuirasses", "pos": "noun", "ipa": "/kwɪˈræsɪz/", "vi": "áo giáp bảo vệ phần ngực và lưng"},
+  {"id": "lex.en.200k.063879", "hw": "diorites", "pos": "noun", "ipa": "/ˈdaɪəraɪts/", "vi": "đá mácma xâm nhập hạt thô diorit"},
+  {"id": "lex.en.200k.063880", "hw": "dissimilarities", "pos": "noun", "ipa": "/ˌdɪsɪməˈlærətiz/", "vi": "điểm khác biệt không tương đồng"},
+  {"id": "lex.en.200k.063881", "hw": "draughtier", "pos": "adj", "ipa": "/ˈdræftiər/", "vi": "nhiều gió lùa lạnh buốt hơn (Anh)"},
+  {"id": "lex.en.200k.063882", "hw": "draughtiest", "pos": "adj", "ipa": "/ˈdræftiɪst/", "vi": "nhiều gió lùa lạnh lẽo nhất (Anh)"},
+  {"id": "lex.en.200k.063883", "hw": "ecosocs", "pos": "noun", "ipa": "/ˈɛkəsɑːks/", "vi": "Hội đồng Kinh tế Xã hội LHQ ECOSOC"},
+  {"id": "lex.en.200k.063884", "hw": "evacuees", "pos": "noun", "ipa": "/ɪˌvækjuˈiːz/", "vi": "người dân được sơ tán tránh nạn"},
+  {"id": "lex.en.200k.063885", "hw": "extortionists", "pos": "noun", "ipa": "/ɪkˈstɔːrʃənɪsts/", "vi": "kẻ tống tiền uy hiếp cưỡng đoạt"},
+  {"id": "lex.en.200k.063886", "hw": "flyleaves", "pos": "noun", "ipa": "/ˈflaɪliːvz/", "vi": "tờ giấy trắng lót đầu cuối sách"},
+  {"id": "lex.en.200k.063887", "hw": "formalises", "pos": "verb", "ipa": "/ˈfɔːrməˌlaɪzɪz/", "vi": "chính thức hóa; nghi thức hóa (Anh)"},
+  {"id": "lex.en.200k.063888", "hw": "formalising", "pos": "verb", "ipa": "/ˈfɔːrməˌlaɪzɪŋ/", "vi": "đang hợp thức chính thức hóa (Anh)"},
+  {"id": "lex.en.200k.063889", "hw": "galsworthies", "pos": "noun", "ipa": "/ˈɡɔːlzwɜːrðiz/", "vi": "nhà văn Nobel Anh John Galsworthy"},
+  {"id": "lex.en.200k.063890", "hw": "gounods", "pos": "noun", "ipa": "/ɡuˈnoʊz/", "vi": "nhà soạn nhạc opera Pháp Gounod"},
+  {"id": "lex.en.200k.063891", "hw": "graphemes", "pos": "noun", "ipa": "/ˈɡræfiːmz/", "vi": "đơn vị chữ viết cơ bản tự vị"},
+  {"id": "lex.en.200k.063892", "hw": "habituses", "pos": "noun", "ipa": "/ˈhæbətəsɪz/", "vi": "thể tạng cơ thể; thói quen xã hội"},
+  {"id": "lex.en.200k.063893", "hw": "hawalas", "pos": "noun", "ipa": "/həˈwɑːləz/", "vi": "cách chuyển tiền tín chấp hawala"},
+  {"id": "lex.en.200k.063894", "hw": "hematurias", "pos": "noun", "ipa": "/ˌhiːməˈtʊriəz/", "vi": "chứng tiểu ra máu hồng cầu bệnh lý"},
+  {"id": "lex.en.200k.063895", "hw": "hizballahs", "pos": "noun", "ipa": "/ˌhɪzbəˈlɑːz/", "vi": "tổ chức Hồi giáo Hezbollah Liban"},
+  {"id": "lex.en.200k.063896", "hw": "hosiers", "pos": "noun", "ipa": "/ˈhoʊʒərz/", "vi": "người sản xuất bán tất đồ dệt kim"},
+  {"id": "lex.en.200k.063897", "hw": "illyrians", "pos": "noun", "ipa": "/ɪˈlɪriənz/", "vi": "người và ngôn ngữ cổ Illyria Balkan"},
+  {"id": "lex.en.200k.063898", "hw": "isoleucines", "pos": "noun", "ipa": "/ˌaɪsoʊˈluːsiːnz/", "vi": "axit amin thiết yếu isoleucine"},
+  {"id": "lex.en.200k.063899", "hw": "jackknifed", "pos": "verb", "ipa": "/ˈdʒæknaɪft/", "vi": "đã gập ngang xe moóc; gập người lặn"},
+  {"id": "lex.en.200k.063900", "hw": "jackknifes", "pos": "verb", "ipa": "/ˈdʒæknaɪfs/", "vi": "gập ngang xe kéo; nhảy gập người"},
+  {"id": "lex.en.200k.063901", "hw": "jackknifing", "pos": "verb", "ipa": "/ˈdʒæknaɪfɪŋ/", "vi": "đang gập ngang xe kéo; nhảy gập"},
+  {"id": "lex.en.200k.063902", "hw": "jackknives", "pos": "noun", "ipa": "/ˈdʒæknaɪvz/", "vi": "dao nhíp gấp lớn; kiểu nhảy gập"}
+]
+
+with open('scratch/b33_r08_raw_p4.json') as f:
+    raw = json.load(f)
+
+assert len(items) == 100
+assert len(raw) == 100
+
+for i, (item, r) in enumerate(zip(items, raw)):
+    assert item['id'] == r['id'], f"Mismatch id at {i}: {item['id']} vs {r['id']}"
+    assert item['hw'] == r['hw'], f"Mismatch hw at {i}: {item['hw']} vs {r['hw']}"
+    assert len(item['vi']) <= 35, f"vi length > 35 at {i} ({item['hw']}): {len(item['vi'])}"
+    assert item['pos'] in ['noun', 'verb', 'adj', 'adv', 'num', 'intj', 'prep', 'pron', 'conj', 'det', 'phrase'], f"Invalid pos at {i}: {item['pos']}"
+    assert item['ipa'].startswith('/') and item['ipa'].endswith('/') and item['ipa'].count('/') == 2, f"Invalid ipa at {i}: {item['ipa']}"
+    assert not item['ipa'][1:-1].startswith(' ') and not item['ipa'][1:-1].endswith(' '), f"Space in ipa at {i}: {item['ipa']}"
+    r['pos'] = item['pos']
+    r['ipa'] = item['ipa']
+    r['vi'] = item['vi']
+    r['status'] = 'reviewed'
+
+with open('scratch/b33_r08_p4.json', 'w') as f:
+    json.dump(raw, f, ensure_ascii=False, indent=2)
+print("Saved scratch/b33_r08_p4.json OK")

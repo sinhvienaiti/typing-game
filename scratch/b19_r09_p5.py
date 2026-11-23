@@ -1,0 +1,1122 @@
+# -*- coding: utf-8 -*-
+import json
+import re
+
+p5_data = [
+    {
+        "id": "lex.en.100k.094402",
+        "hw": "mooncakes",
+        "pos": "noun",
+        "ipa": "/ˈmunˌkeɪks/",
+        "vi": "những chiếc bánh trung thu",
+        "cefr": "C2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.100k.094403",
+        "hw": "mooncalf",
+        "pos": "noun",
+        "ipa": "/ˈmunˌkæf/",
+        "vi": "kẻ ngốc nghếch; kẻ khờ khạo",
+        "cefr": "C2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.100k.094404",
+        "hw": "mooned",
+        "pos": "verb",
+        "ipa": "/ˈmund/",
+        "vi": "đã mơ màng thẫn thờ; đã vạch mông",
+        "cefr": "C2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.100k.094405",
+        "hw": "mooneye",
+        "pos": "noun",
+        "ipa": "/ˈmunˌaɪ/",
+        "vi": "cá mắt trăng; bệnh mắt ngựa",
+        "cefr": "C2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.100k.094406",
+        "hw": "moonfaced",
+        "pos": "adj",
+        "ipa": "/ˈmunˌfeɪst/",
+        "vi": "có khuôn mặt tròn trịa",
+        "cefr": "C2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.100k.094407",
+        "hw": "moonily",
+        "pos": "adv",
+        "ipa": "/ˈmunəli/",
+        "vi": "một cách mơ màng; lơ đãng",
+        "cefr": "C2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.100k.094408",
+        "hw": "mooniness",
+        "pos": "noun",
+        "ipa": "/ˈmuninəs/",
+        "vi": "sự mơ màng; vẻ lơ đãng",
+        "cefr": "C2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.100k.094409",
+        "hw": "mooning",
+        "pos": "verb",
+        "ipa": "/ˈmunɪŋ/",
+        "vi": "đang mơ màng; vạch mông trêu",
+        "cefr": "C2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.100k.094410",
+        "hw": "moonish",
+        "pos": "adj",
+        "ipa": "/ˈmunɪʃ/",
+        "vi": "đồng bóng; hay thay đổi",
+        "cefr": "C2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.100k.094411",
+        "hw": "moonlighted",
+        "pos": "verb",
+        "ipa": "/ˈmunˌlaɪtɪd/",
+        "vi": "đã làm thêm việc phụ buổi tối",
+        "cefr": "C2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.100k.094412",
+        "hw": "moonlighting",
+        "pos": "verb",
+        "ipa": "/ˈmunˌlaɪtɪŋ/",
+        "vi": "làm thêm nghề phụ; việc làm thêm",
+        "cefr": "C2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.100k.094413",
+        "hw": "moonlights",
+        "pos": "verb",
+        "ipa": "/ˈmunˌlaɪts/",
+        "vi": "làm thêm việc phụ vào ban đêm",
+        "cefr": "C2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.100k.094414",
+        "hw": "moonlike",
+        "pos": "adj",
+        "ipa": "/ˈmunˌlaɪk/",
+        "vi": "giống mặt trăng; như trăng",
+        "cefr": "C2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.100k.094415",
+        "hw": "moonrise",
+        "pos": "noun",
+        "ipa": "/ˈmunˌraɪz/",
+        "vi": "lúc trăng lên; cảnh trăng mọc",
+        "cefr": "C2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.100k.094416",
+        "hw": "moons",
+        "pos": "verb",
+        "ipa": "/ˈmunz/",
+        "vi": "ngắm trăng; vạch mông trêu",
+        "cefr": "C2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.100k.094417",
+        "hw": "moonscape",
+        "pos": "noun",
+        "ipa": "/ˈmunˌskeɪp/",
+        "vi": "quang cảnh mặt trăng; cảnh hoang vu",
+        "cefr": "C2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.100k.094418",
+        "hw": "moonseed",
+        "pos": "noun",
+        "ipa": "/ˈmunˌsid/",
+        "vi": "cây dây leo họ tiết dê",
+        "cefr": "C2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.100k.094419",
+        "hw": "moonset",
+        "pos": "noun",
+        "ipa": "/ˈmunˌsɛt/",
+        "vi": "lúc trăng lặn; cảnh trăng tà",
+        "cefr": "C2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.100k.094420",
+        "hw": "moonshell",
+        "pos": "noun",
+        "ipa": "/ˈmunˌʃɛl/",
+        "vi": "loài ốc mặt trăng",
+        "cefr": "C2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.100k.094421",
+        "hw": "moonshiny",
+        "pos": "adj",
+        "ipa": "/ˈmunˌʃaɪni/",
+        "vi": "ngập ánh trăng; viển vông",
+        "cefr": "C2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.100k.094422",
+        "hw": "moonshot",
+        "pos": "noun",
+        "ipa": "/ˈmunˌʃɑt/",
+        "vi": "phóng tàu lên trăng; dự án táo bạo",
+        "cefr": "C2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.100k.094423",
+        "hw": "moonwort",
+        "pos": "noun",
+        "ipa": "/ˈmunˌwɜrt/",
+        "vi": "cây dương xỉ lưỡi trăng",
+        "cefr": "C2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.100k.094424",
+        "hw": "moorbird",
+        "pos": "noun",
+        "ipa": "/ˈmʊrˌbɜrd/",
+        "vi": "chim gà gô đỏ",
+        "cefr": "C2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.100k.094425",
+        "hw": "moored",
+        "pos": "verb",
+        "ipa": "/ˈmʊrd/",
+        "vi": "đã neo thuyền; đã buộc tàu",
+        "cefr": "C2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.100k.094426",
+        "hw": "moorfowl",
+        "pos": "noun",
+        "ipa": "/ˈmʊrˌfaʊl/",
+        "vi": "loài gà gô đỏ",
+        "cefr": "C2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.100k.094427",
+        "hw": "moorgame",
+        "pos": "noun",
+        "ipa": "/ˈmʊrˌɡeɪm/",
+        "vi": "thú săn gà gô đỏ",
+        "cefr": "C2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.100k.094428",
+        "hw": "moorings",
+        "pos": "noun",
+        "ipa": "/ˈmʊrɪŋz/",
+        "vi": "nơi neo tàu; dây neo cố định",
+        "cefr": "C2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.100k.094429",
+        "hw": "moorman",
+        "pos": "noun",
+        "ipa": "/ˈmʊrmən/",
+        "vi": "người trông đồng hoang",
+        "cefr": "C2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.100k.094430",
+        "hw": "moors",
+        "pos": "verb",
+        "ipa": "/ˈmʊrz/",
+        "vi": "neo thuyền; cột tàu vào bờ",
+        "cefr": "C2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.100k.094431",
+        "hw": "moorwort",
+        "pos": "noun",
+        "ipa": "/ˈmʊrˌwɜrt/",
+        "vi": "cây thạch nam đồng lầy",
+        "cefr": "C2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.100k.094432",
+        "hw": "mooseberry",
+        "pos": "noun",
+        "ipa": "/ˈmusˌbɛri/",
+        "vi": "cây nham lê tuyết lộc",
+        "cefr": "C2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.100k.094433",
+        "hw": "mooselings",
+        "pos": "noun",
+        "ipa": "/ˈmuslɪŋz/",
+        "vi": "những chú nai sừng tấm con",
+        "cefr": "C2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.100k.094434",
+        "hw": "mooted",
+        "pos": "verb",
+        "ipa": "/ˈmutɪd/",
+        "vi": "đã đưa ra thảo luận; đã bàn cãi",
+        "cefr": "C2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.100k.094435",
+        "hw": "mooting",
+        "pos": "verb",
+        "ipa": "/ˈmutɪŋ/",
+        "vi": "đang đưa ra thảo luận; bàn bạc",
+        "cefr": "C2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.100k.094436",
+        "hw": "moots",
+        "pos": "verb",
+        "ipa": "/ˈmuts/",
+        "vi": "đưa ra thảo luận; gợi ý bàn cãi",
+        "cefr": "C2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.100k.094437",
+        "hw": "mopboard",
+        "pos": "noun",
+        "ipa": "/ˈmɑpˌbɔrd/",
+        "vi": "ván ốp chân tường",
+        "cefr": "C2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.100k.094438",
+        "hw": "mophead",
+        "pos": "noun",
+        "ipa": "/ˈmɑpˌhɛd/",
+        "vi": "đầu giẻ lau; đầu tóc bù xù",
+        "cefr": "C2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.100k.094439",
+        "hw": "mopish",
+        "pos": "adj",
+        "ipa": "/ˈmoʊpɪʃ/",
+        "vi": "ủ rũ; buồn bã thẫn thờ",
+        "cefr": "C2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.100k.094440",
+        "hw": "mopishness",
+        "pos": "noun",
+        "ipa": "/ˈmoʊpɪʃnəs/",
+        "vi": "sự ủ rũ; trạng thái buồn bã",
+        "cefr": "C2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.100k.094441",
+        "hw": "mopped",
+        "pos": "verb",
+        "ipa": "/ˈmɑpt/",
+        "vi": "đã lau chùi; đã lau sạch",
+        "cefr": "C2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.100k.094442",
+        "hw": "moppy",
+        "pos": "adj",
+        "ipa": "/ˈmɑpi/",
+        "vi": "bù xù như giẻ lau; say mèm",
+        "cefr": "C2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.100k.094443",
+        "hw": "mops",
+        "pos": "verb",
+        "ipa": "/ˈmɑps/",
+        "vi": "lau chùi; chùi sạch mồ hôi",
+        "cefr": "C2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.100k.094444",
+        "hw": "moquelumnan",
+        "pos": "noun",
+        "ipa": "/moʊkəˈlʌmnən/",
+        "vi": "nhóm ngôn ngữ Moquelumnan",
+        "cefr": "C2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.100k.094445",
+        "hw": "moraceous",
+        "pos": "adj",
+        "ipa": "/məˈreɪʃəs/",
+        "vi": "thuộc họ thực vật dâu tằm",
+        "cefr": "C2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.100k.094446",
+        "hw": "moraines",
+        "pos": "noun",
+        "ipa": "/məˈreɪnz/",
+        "vi": "những tích tụ băng tích",
+        "cefr": "C2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.100k.094447",
+        "hw": "moralisation",
+        "pos": "noun",
+        "ipa": "/ˌmɔrələˈzeɪʃən/",
+        "vi": "sự giáo huấn đạo đức; răn dạy",
+        "cefr": "C2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.100k.094448",
+        "hw": "moralised",
+        "pos": "verb",
+        "ipa": "/ˈmɔrəlaɪzd/",
+        "vi": "đã luận bàn đạo đức; đã răn dạy",
+        "cefr": "C2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.100k.094449",
+        "hw": "moralises",
+        "pos": "verb",
+        "ipa": "/ˈmɔrəlaɪzɪz/",
+        "vi": "luận bàn đạo đức; răn dạy đạo lý",
+        "cefr": "C2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.100k.094450",
+        "hw": "moralising",
+        "pos": "verb",
+        "ipa": "/ˈmɔrəlaɪzɪŋ/",
+        "vi": "đang luận giải đạo đức; răn dạy",
+        "cefr": "C2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.100k.094451",
+        "hw": "moralists",
+        "pos": "noun",
+        "ipa": "/ˈmɔrəlɪsts/",
+        "vi": "những nhà đạo đức học",
+        "cefr": "C2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.100k.094452",
+        "hw": "moralized",
+        "pos": "verb",
+        "ipa": "/ˈmɔrəlaɪzd/",
+        "vi": "đã luận bàn đạo đức; đã răn dạy",
+        "cefr": "C2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.100k.094453",
+        "hw": "moralizes",
+        "pos": "verb",
+        "ipa": "/ˈmɔrəlaɪzɪz/",
+        "vi": "luận bàn đạo đức; răn dạy đạo lý",
+        "cefr": "C2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.100k.094454",
+        "hw": "moratoria",
+        "pos": "noun",
+        "ipa": "/ˌmɔrəˈtɔriə/",
+        "vi": "lệnh tạm hoãn thi hành; đình nợ",
+        "cefr": "C2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.100k.094455",
+        "hw": "moratory",
+        "pos": "adj",
+        "ipa": "/ˈmɔrətɔri/",
+        "vi": "có tính tạm hoãn trả nợ",
+        "cefr": "C2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.100k.094456",
+        "hw": "morbidness",
+        "pos": "noun",
+        "ipa": "/ˈmɔrbɪdnəs/",
+        "vi": "tính bệnh hoạn; sự u ám quái gở",
+        "cefr": "C2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.100k.094457",
+        "hw": "morbific",
+        "pos": "adj",
+        "ipa": "/mɔrˈbɪfɪk/",
+        "vi": "gây bệnh; sinh bệnh tật",
+        "cefr": "C2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.100k.094458",
+        "hw": "morbifical",
+        "pos": "adj",
+        "ipa": "/mɔrˈbɪfɪkəl/",
+        "vi": "có tính gây bệnh; sinh bệnh",
+        "cefr": "C2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.100k.094459",
+        "hw": "morbilli",
+        "pos": "noun",
+        "ipa": "/mɔrˈbɪlaɪ/",
+        "vi": "bệnh sởi (y học)",
+        "cefr": "C2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.100k.094460",
+        "hw": "morbilliform",
+        "pos": "adj",
+        "ipa": "/mɔrˈbɪləfɔrm/",
+        "vi": "có dạng như phát ban sởi",
+        "cefr": "C2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.100k.094461",
+        "hw": "morbillous",
+        "pos": "adj",
+        "ipa": "/mɔrˈbɪləs/",
+        "vi": "thuộc bệnh sởi; liên quan đến sởi",
+        "cefr": "C2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.100k.094462",
+        "hw": "morchellaceae",
+        "pos": "noun",
+        "ipa": "/ˌmɔrkɛˈleɪsiˌi/",
+        "vi": "họ nấm bụng dê; nấm mồng gà",
+        "cefr": "C2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.100k.094463",
+        "hw": "mordacious",
+        "pos": "adj",
+        "ipa": "/mɔrˈdeɪʃəs/",
+        "vi": "châm chọc cay độc; hay cắn xé",
+        "cefr": "C2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.100k.094464",
+        "hw": "mordaciously",
+        "pos": "adv",
+        "ipa": "/mɔrˈdeɪʃəsli/",
+        "vi": "một cách cay độc; đầy châm chọc",
+        "cefr": "C2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.100k.094465",
+        "hw": "mordacity",
+        "pos": "noun",
+        "ipa": "/mɔrˈdæsəti/",
+        "vi": "tính châm chọc cay độc; thói cắn xé",
+        "cefr": "C2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.100k.094466",
+        "hw": "mordancy",
+        "pos": "noun",
+        "ipa": "/ˈmɔrdənsi/",
+        "vi": "tính châm biếm sâu cay; tính ăn mòn",
+        "cefr": "C2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.100k.094467",
+        "hw": "mordent",
+        "pos": "noun",
+        "ipa": "/ˈmɔrdnt/",
+        "vi": "nốt thêu nhấn; dấu láy rền âm nhạc",
+        "cefr": "C2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.100k.094468",
+        "hw": "mordva",
+        "pos": "noun",
+        "ipa": "/ˈmɔrdvə/",
+        "vi": "người Mordva; dân tộc Mordva",
+        "cefr": "C2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.100k.094469",
+        "hw": "mordvin",
+        "pos": "noun",
+        "ipa": "/ˈmɔrdvɪn/",
+        "vi": "người Mordvin; tiếng Mordvin",
+        "cefr": "C2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.100k.094470",
+        "hw": "mordvinian",
+        "pos": "noun",
+        "ipa": "/mɔrdˈvɪniən/",
+        "vi": "người Mordvinia; nhánh Mordvinia",
+        "cefr": "C2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.100k.094471",
+        "hw": "morinaga",
+        "pos": "noun",
+        "ipa": "/ˌmɔriˈnɑɡə/",
+        "vi": "họ người Nhật Bản; hãng Morinaga",
+        "cefr": "C2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.100k.094472",
+        "hw": "mornings",
+        "pos": "noun",
+        "ipa": "/ˈmɔrnɪŋz/",
+        "vi": "các buổi sáng; những buổi sớm",
+        "cefr": "C2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.100k.094473",
+        "hw": "moronism",
+        "pos": "noun",
+        "ipa": "/ˈmɔrɑnɪzəm/",
+        "vi": "chứng đần độn nhẹ; sự ngu ngơ",
+        "cefr": "C2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.100k.094474",
+        "hw": "moronity",
+        "pos": "noun",
+        "ipa": "/məˈrɑnəti/",
+        "vi": "chứng thiểu năng trí tuệ nhẹ",
+        "cefr": "C2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.100k.094475",
+        "hw": "moroseness",
+        "pos": "noun",
+        "ipa": "/məˈroʊsnəs/",
+        "vi": "tính rầu rĩ u ám; thói cáu kỉnh",
+        "cefr": "C2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.100k.094476",
+        "hw": "morosity",
+        "pos": "noun",
+        "ipa": "/məˈrɑsəti/",
+        "vi": "tính rầu rĩ u uất; sự gắt gỏng",
+        "cefr": "C2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.100k.094477",
+        "hw": "morosoph",
+        "pos": "noun",
+        "ipa": "/ˈmɔroʊsɑf/",
+        "vi": "kẻ học rộng nhưng ngớ ngẩn",
+        "cefr": "C2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.100k.094478",
+        "hw": "morphallaxis",
+        "pos": "noun",
+        "ipa": "/ˌmɔrfəˈlæksɪs/",
+        "vi": "sự biến hóa hình thái tái sinh",
+        "cefr": "C2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.100k.094479",
+        "hw": "morphetic",
+        "pos": "adj",
+        "ipa": "/mɔrˈfɛtɪk/",
+        "vi": "thuộc giấc mộng; thuộc giấc ngủ",
+        "cefr": "C2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.100k.094480",
+        "hw": "morphic",
+        "pos": "adj",
+        "ipa": "/ˈmɔrfɪk/",
+        "vi": "thuộc hình thái; thuộc hình dáng",
+        "cefr": "C2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.100k.094481",
+        "hw": "morphing",
+        "pos": "noun",
+        "ipa": "/ˈmɔrfɪŋ/",
+        "vi": "kỹ thuật biến hình ảnh đồ họa",
+        "cefr": "C2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.100k.094482",
+        "hw": "morphinism",
+        "pos": "noun",
+        "ipa": "/ˈmɔrfənɪzəm/",
+        "vi": "chứng nghiện móc-phin mạn tính",
+        "cefr": "C2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.100k.094483",
+        "hw": "morphinize",
+        "pos": "verb",
+        "ipa": "/ˈmɔrfənaɪz/",
+        "vi": "tiêm móc-phin giảm đau cho ai",
+        "cefr": "C2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.100k.094484",
+        "hw": "morphism",
+        "pos": "noun",
+        "ipa": "/ˈmɔrfɪzəm/",
+        "vi": "cấu xạ; tính đa hình toán học",
+        "cefr": "C2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.100k.094485",
+        "hw": "morphography",
+        "pos": "noun",
+        "ipa": "/mɔrˈfɑɡrəfi/",
+        "vi": "hình thái học miêu tả",
+        "cefr": "C2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.100k.094486",
+        "hw": "morphophoneme",
+        "pos": "noun",
+        "ipa": "/ˌmɔrfoʊˈfoʊnim/",
+        "vi": "hình thái âm vị học",
+        "cefr": "C2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.100k.094487",
+        "hw": "morphophonemics",
+        "pos": "noun",
+        "ipa": "/ˌmɔrfoʊfoʊˈnimɪks/",
+        "vi": "môn hình thái âm vị học",
+        "cefr": "C2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.100k.094488",
+        "hw": "morphophysiology",
+        "pos": "noun",
+        "ipa": "/ˌmɔrfoʊˌfɪziˈɑlədʒi/",
+        "vi": "môn hình thái sinh lý học",
+        "cefr": "C2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.100k.094489",
+        "hw": "morrigu",
+        "pos": "noun",
+        "ipa": "/ˈmɔrɪɡu/",
+        "vi": "nữ thần chiến tranh Morrigan",
+        "cefr": "C2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.100k.094490",
+        "hw": "mort",
+        "pos": "noun",
+        "ipa": "/ˈmɔrt/",
+        "vi": "tiếng tù và báo săn thú chết",
+        "cefr": "C2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.100k.094491",
+        "hw": "mortage",
+        "pos": "noun",
+        "ipa": "/ˈmɔrɡɪdʒ/",
+        "vi": "sự cầm cố; khoản thế chấp tài sản",
+        "cefr": "C2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.100k.094492",
+        "hw": "mortageable",
+        "pos": "adj",
+        "ipa": "/ˈmɔrɡɪdʒəbl/",
+        "vi": "có thể thế chấp ngân hàng",
+        "cefr": "C2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.100k.094493",
+        "hw": "mortared",
+        "pos": "verb",
+        "ipa": "/ˈmɔrtərd/",
+        "vi": "đã trát vữa; đã bắn pháo cối",
+        "cefr": "C2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.100k.094494",
+        "hw": "mortaring",
+        "pos": "verb",
+        "ipa": "/ˈmɔrtərɪŋ/",
+        "vi": "đang trát vữa; việc bắn súng cối",
+        "cefr": "C2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.100k.094495",
+        "hw": "mortars",
+        "pos": "verb",
+        "ipa": "/ˈmɔrtərz/",
+        "vi": "trát vữa gắn gạch; bắn pháo cối",
+        "cefr": "C2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.100k.094496",
+        "hw": "mortgager",
+        "pos": "noun",
+        "ipa": "/ˈmɔrɡədʒər/",
+        "vi": "người đem thế chấp tài sản",
+        "cefr": "C2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.100k.094497",
+        "hw": "mortgagers",
+        "pos": "noun",
+        "ipa": "/ˈmɔrɡədʒərz/",
+        "vi": "những người đem thế chấp tài sản",
+        "cefr": "C2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.100k.094498",
+        "hw": "mortgages",
+        "pos": "verb",
+        "ipa": "/ˈmɔrɡədʒɪz/",
+        "vi": "thế chấp bất động sản; gán nợ",
+        "cefr": "C2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.100k.094499",
+        "hw": "mortgaging",
+        "pos": "verb",
+        "ipa": "/ˈmɔrɡɪdʒɪŋ/",
+        "vi": "đang thế chấp tài sản; sự gán nợ",
+        "cefr": "C2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.100k.094500",
+        "hw": "mortifies",
+        "pos": "verb",
+        "ipa": "/ˈmɔrtəfaɪz/",
+        "vi": "làm xấu hổ bẽ mặt; làm hoại tử",
+        "cefr": "C2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    },
+    {
+        "id": "lex.en.100k.094501",
+        "hw": "mortised",
+        "pos": "verb",
+        "ipa": "/ˈmɔrtɪst/",
+        "vi": "đã đục lỗ mộng; đã ghép mộng gỗ",
+        "cefr": "C2",
+        "tier": "expanded",
+        "status": "reviewed",
+        "notes": ""
+    }
+]
+
+if __name__ == "__main__":
+    assert len(p5_data) == 100, f"Expected 100 items, got {len(p5_data)}"
+    with open("scratch/b19_r09_raw_p5.json") as f:
+        raw_p5 = json.load(f)
+    for i, item in enumerate(p5_data):
+        assert item["id"] == raw_p5[i]["id"], f"ID mismatch at {i}: {item['id']} vs {raw_p5[i]['id']}"
+        assert item["hw"] == raw_p5[i]["hw"], f"HW mismatch at {i}: {item['hw']} vs {raw_p5[i]['hw']}"
+        assert len(item["vi"]) <= 35, f"VI too long at {item['id']} ({item['hw']}): {len(item['vi'])} chars: {item['vi']}"
+        assert item["ipa"].startswith("/") and item["ipa"].endswith("/"), f"Invalid IPA format: {item['ipa']}"
+        assert item["ipa"].count("/") == 2, f"IPA slashes count error: {item['ipa']}"
+        assert not item["ipa"][1:].startswith(" "), f"IPA starts with space: {item['ipa']}"
+        assert not item["ipa"][:-1].endswith(" "), f"IPA ends with space: {item['ipa']}"
+        assert item["pos"] in ["noun", "verb", "adj", "adv", "prep", "conj", "pron", "intj", "num", "det"], f"Invalid pos: {item['pos']}"
+        assert item["status"] == "reviewed", f"Status not reviewed: {item['id']}"
+    print("Batch 19 Round 9 Part 5 validated successfully!")

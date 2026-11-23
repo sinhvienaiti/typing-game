@@ -1,0 +1,122 @@
+import json
+
+raw = json.load(open("scratch/b19_r03_raw_p1.json"))
+assert len(raw) == 100
+
+data = [
+    {"id": "lex.en.100k.091002", "hw": "limpidness", "pos": "noun", "ipa": "/ˈlɪmpɪdnɪs/", "vi": "độ trong suốt; sự sáng rõ"},
+    {"id": "lex.en.100k.091003", "hw": "limpingly", "pos": "adv", "ipa": "/ˈlɪmpɪŋli/", "vi": "một cách khập khiễng; tập tễnh"},
+    {"id": "lex.en.100k.091004", "hw": "limpkin", "pos": "noun", "ipa": "/ˈlɪmpkɪn/", "vi": "chim sếu rào limpkin"},
+    {"id": "lex.en.100k.091005", "hw": "limps", "pos": "verb", "ipa": "/lɪmps/", "vi": "đi khập khiễng; đi cà nhắc"},
+    {"id": "lex.en.100k.091006", "hw": "lims", "pos": "noun", "ipa": "/lɪmz/", "vi": "các giới hạn toán học lim"},
+    {"id": "lex.en.100k.091007", "hw": "limulidae", "pos": "noun", "ipa": "/lɪˈmjuːlɪdiː/", "vi": "họ sam biển Limulidae"},
+    {"id": "lex.en.100k.091008", "hw": "limy", "pos": "adj", "ipa": "/ˈlaɪmi/", "vi": "chứa nhiều vôi; dính keo vôi"},
+    {"id": "lex.en.100k.091009", "hw": "linaceae", "pos": "noun", "ipa": "/lɪˈneɪsiː/", "vi": "họ thực vật hoa lanh Linaceae"},
+    {"id": "lex.en.100k.091010", "hw": "linacs", "pos": "noun", "ipa": "/ˈlaɪnæks/", "vi": "máy gia tốc hạt thẳng linac"},
+    {"id": "lex.en.100k.091011", "hw": "linanthus", "pos": "noun", "ipa": "/laɪˈnænθəs/", "vi": "chi thực vật hoa lanh Linanthus"},
+    {"id": "lex.en.100k.091012", "hw": "lincocin", "pos": "noun", "ipa": "/ˈlɪŋkəsɪn/", "vi": "kháng sinh lincomycin Lincocin"},
+    {"id": "lex.en.100k.091013", "hw": "lincolnesque", "pos": "adj", "ipa": "/ˌlɪŋkənˈɛsk/", "vi": "mang phong thái Abraham Lincoln"},
+    {"id": "lex.en.100k.091014", "hw": "lincolnian", "pos": "adj", "ipa": "/lɪŋˈkoʊniən/", "vi": "thuộc về Tổng thống Lincoln"},
+    {"id": "lex.en.100k.091015", "hw": "lincomycin", "pos": "noun", "ipa": "/ˌlɪŋkəˈmaɪsɪn/", "vi": "kháng sinh lincomycin"},
+    {"id": "lex.en.100k.091016", "hw": "linctus", "pos": "noun", "ipa": "/ˈlɪŋktəs/", "vi": "si-rô ho đặc; thuốc ho dạng si-rô"},
+    {"id": "lex.en.100k.091017", "hw": "linctuses", "pos": "noun", "ipa": "/ˈlɪŋktəsɪz/", "vi": "các loại si-rô ho"},
+    {"id": "lex.en.100k.091018", "hw": "lindera", "pos": "noun", "ipa": "/lɪnˈdɪərə/", "vi": "chi cây ô dược Lindera"},
+    {"id": "lex.en.100k.091019", "hw": "lindesnes", "pos": "noun", "ipa": "/ˈlɪndɪsneɪs/", "vi": "mũi đất Lindesnes ở Na Uy"},
+    {"id": "lex.en.100k.091020", "hw": "lindheimera", "pos": "noun", "ipa": "/lɪndˈhaɪmərə/", "vi": "chi cúc hoa sao Lindheimera"},
+    {"id": "lex.en.100k.091021", "hw": "linearise", "pos": "verb", "ipa": "/ˈlɪniəraɪz/", "vi": "tuyến tính hóa"},
+    {"id": "lex.en.100k.091022", "hw": "linearization", "pos": "noun", "ipa": "/ˌlɪniəraɪˈzeɪʃən/", "vi": "sự tuyến tính hóa mô hình"},
+    {"id": "lex.en.100k.091023", "hw": "linearizations", "pos": "noun", "ipa": "/ˌlɪniəraɪˈzeɪʃənz/", "vi": "các phép tuyến tính hóa"},
+    {"id": "lex.en.100k.091024", "hw": "linearizing", "pos": "verb", "ipa": "/ˈlɪniəraɪzɪŋ/", "vi": "đang tuyến tính hóa"},
+    {"id": "lex.en.100k.091025", "hw": "linebreed", "pos": "verb", "ipa": "/ˈlaɪnbriːd/", "vi": "nhân giống theo dòng; lai dòng"},
+    {"id": "lex.en.100k.091026", "hw": "linecut", "pos": "noun", "ipa": "/ˈlaɪnkʌt/", "vi": "bản kẽm in hình nét vẽ"},
+    {"id": "lex.en.100k.091027", "hw": "linefold", "pos": "noun", "ipa": "/ˈlaɪnfoʊld/", "vi": "họa tiết chạm nếp gấp vải"},
+    {"id": "lex.en.100k.091028", "hw": "linelike", "pos": "adj", "ipa": "/ˈlaɪnlaɪk/", "vi": "thẳng như đường kẻ; dạng vạch"},
+    {"id": "lex.en.100k.091029", "hw": "linendraper", "pos": "noun", "ipa": "/ˈlɪnɪnˌdreɪpər/", "vi": "người bán vải lanh và vải sợi"},
+    {"id": "lex.en.100k.091030", "hw": "lines", "pos": "verb", "ipa": "/laɪnz/", "vi": "kẻ hàng; xếp hàng; lót vải đệm"},
+    {"id": "lex.en.100k.091031", "hw": "linesmen", "pos": "noun", "ipa": "/ˈlaɪnzmən/", "vi": "các trọng tài biên; thợ đường dây"},
+    {"id": "lex.en.100k.091032", "hw": "linet", "pos": "noun", "ipa": "/ˈlɪnɪt/", "vi": "chim sẻ đồng ngực đỏ; sẻ lanh"},
+    {"id": "lex.en.100k.091033", "hw": "lineups", "pos": "noun", "ipa": "/ˈlaɪnʌps/", "vi": "các đội hình xuất phát; danh sách"},
+    {"id": "lex.en.100k.091034", "hw": "linga", "pos": "noun", "ipa": "/ˈlɪŋɡə/", "vi": "tượng linga biểu tượng sinh thực"},
+    {"id": "lex.en.100k.091035", "hw": "lingala", "pos": "noun", "ipa": "/lɪŋˈɡɑːlə/", "vi": "ngôn ngữ Lingala ở Congo"},
+    {"id": "lex.en.100k.091036", "hw": "lingberry", "pos": "noun", "ipa": "/ˈlɪŋbɛri/", "vi": "quả nam việt quất lingonberry"},
+    {"id": "lex.en.100k.091037", "hw": "lingel", "pos": "noun", "ipa": "/ˈlɪŋɡəl/", "vi": "sợi chỉ sáp khâu giày ủng"},
+    {"id": "lex.en.100k.091038", "hw": "lingenberry", "pos": "noun", "ipa": "/ˈlɪŋɡənbɛri/", "vi": "quả lingonberry mọng đỏ"},
+    {"id": "lex.en.100k.091039", "hw": "lingered", "pos": "verb", "ipa": "/ˈlɪŋɡərd/", "vi": "đã nán lại; kéo dài dai dẳng"},
+    {"id": "lex.en.100k.091040", "hw": "lingerer", "pos": "noun", "ipa": "/ˈlɪŋɡərər/", "vi": "người chần chừ; kẻ la cà nán lại"},
+    {"id": "lex.en.100k.091041", "hw": "lingerers", "pos": "noun", "ipa": "/ˈlɪŋɡərərz/", "vi": "những người nán lại; kẻ nán chân"},
+    {"id": "lex.en.100k.091042", "hw": "lingers", "pos": "verb", "ipa": "/ˈlɪŋɡərz/", "vi": "nán lại; vương vấn; chần chừ"},
+    {"id": "lex.en.100k.091043", "hw": "lingualumina", "pos": "noun", "ipa": "/ˌlɪŋɡwəluːˈmɪnə/", "vi": "ngôn ngữ nhân tạo Lingualumina"},
+    {"id": "lex.en.100k.091044", "hw": "linguica", "pos": "noun", "ipa": "/lɪŋˈɡwiːsə/", "vi": "xúc xích hun khói Linguica"},
+    {"id": "lex.en.100k.091045", "hw": "linguiform", "pos": "adj", "ipa": "/ˈlɪŋɡwɪfɔːrm/", "vi": "có hình chiếc lưỡi; dạng lưỡi"},
+    {"id": "lex.en.100k.091046", "hw": "linguistician", "pos": "noun", "ipa": "/ˌlɪŋɡwɪˈstɪʃən/", "vi": "nhà nghiên cứu ngôn ngữ học"},
+    {"id": "lex.en.100k.091047", "hw": "linguisticians", "pos": "noun", "ipa": "/ˌlɪŋɡwɪˈstɪʃənz/", "vi": "các nhà nghiên cứu ngôn ngữ"},
+    {"id": "lex.en.100k.091048", "hw": "linguists", "pos": "noun", "ipa": "/ˈlɪŋɡwɪsts/", "vi": "những nhà ngôn ngữ học; dịch giả"},
+    {"id": "lex.en.100k.091049", "hw": "lingulate", "pos": "adj", "ipa": "/ˈlɪŋɡjʊleɪt/", "vi": "có hình lưỡi; dạng lưỡi dẹt"},
+    {"id": "lex.en.100k.091050", "hw": "linkboy", "pos": "noun", "ipa": "/ˈlɪŋkbɔɪ/", "vi": "cậu bé cầm đuốc dẫn đường đêm"},
+    {"id": "lex.en.100k.091051", "hw": "linker", "pos": "noun", "ipa": "/ˈlɪŋkər/", "vi": "trình liên kết phần mềm; cầu nối"},
+    {"id": "lex.en.100k.091052", "hw": "linking", "pos": "verb", "ipa": "/ˈlɪŋkɪŋ/", "vi": "liên kết; kết nối mối nối"},
+    {"id": "lex.en.100k.091053", "hw": "linkings", "pos": "noun", "ipa": "/ˈlɪŋkɪŋz/", "vi": "các mối liên kết; sự móc nối"},
+    {"id": "lex.en.100k.091054", "hw": "linksman", "pos": "noun", "ipa": "/ˈlɪŋksmən/", "vi": "người chơi gôn trên bãi biển"},
+    {"id": "lex.en.100k.091055", "hw": "linsang", "pos": "noun", "ipa": "/ˈlɪnsæŋ/", "vi": "cầy linsang; cầy gấm đốm hoa"},
+    {"id": "lex.en.100k.091056", "hw": "linstock", "pos": "noun", "ipa": "/ˈlɪnstɒk/", "vi": "cán kẹp dây cháy châm ngòi pháo"},
+    {"id": "lex.en.100k.091057", "hw": "linter", "pos": "noun", "ipa": "/ˈlɪntər/", "vi": "xơ bông vụn ngắn; máy tách xơ"},
+    {"id": "lex.en.100k.091058", "hw": "lintwhite", "pos": "noun", "ipa": "/ˈlɪntwaɪt/", "vi": "chim sẻ lanh; chim hót rừng"},
+    {"id": "lex.en.100k.091059", "hw": "linuron", "pos": "noun", "ipa": "/ˈlɪnjʊrɒn/", "vi": "thuốc trừ cỏ chọn lọc linuron"},
+    {"id": "lex.en.100k.091060", "hw": "liny", "pos": "adj", "ipa": "/ˈlaɪni/", "vi": "có nhiều đường nét; đầy nếp nhăn"},
+    {"id": "lex.en.100k.091061", "hw": "liomys", "pos": "noun", "ipa": "/ˈlaɪoʊmɪs/", "vi": "chi chuột gai má Liomys"},
+    {"id": "lex.en.100k.091062", "hw": "lioncel", "pos": "noun", "ipa": "/ˈlaɪənsəl/", "vi": "hình sư tử con trên huy hiệu"},
+    {"id": "lex.en.100k.091063", "hw": "lionesses", "pos": "noun", "ipa": "/ˈlaɪənəsɪz/", "vi": "những con sư tử cái"},
+    {"id": "lex.en.100k.091064", "hw": "lionet", "pos": "noun", "ipa": "/ˈlaɪənɪt/", "vi": "chú sư tử con; sư tử nhỏ"},
+    {"id": "lex.en.100k.091065", "hw": "lionised", "pos": "verb", "ipa": "/ˈlaɪənaɪzd/", "vi": "đã tâng bốc; tôn sùng như sao"},
+    {"id": "lex.en.100k.091066", "hw": "lionises", "pos": "verb", "ipa": "/ˈlaɪənaɪzɪz/", "vi": "tôn sùng; đón rước nồng nhiệt"},
+    {"id": "lex.en.100k.091067", "hw": "lionising", "pos": "verb", "ipa": "/ˈlaɪənaɪzɪŋ/", "vi": "đang tâng bốc; việc tôn sùng"},
+    {"id": "lex.en.100k.091068", "hw": "lionization", "pos": "noun", "ipa": "/ˌlaɪənaɪˈzeɪʃən/", "vi": "sự tung hô; sự tôn sùng thái quá"},
+    {"id": "lex.en.100k.091069", "hw": "lionized", "pos": "verb", "ipa": "/ˈlaɪənaɪzd/", "vi": "đã tôn vinh; tung hô như ngôi sao"},
+    {"id": "lex.en.100k.091070", "hw": "lionizes", "pos": "verb", "ipa": "/ˈlaɪənaɪzɪz/", "vi": "tôn vinh; tung hô như ngôi sao"},
+    {"id": "lex.en.100k.091071", "hw": "lionizing", "pos": "verb", "ipa": "/ˈlaɪənaɪzɪŋ/", "vi": "tung hô như ngôi sao nổi tiếng"},
+    {"id": "lex.en.100k.091072", "hw": "liopelma", "pos": "noun", "ipa": "/ˌlaɪoʊˈpɛlmə/", "vi": "chi ếch nguyên thủy Liopelma"},
+    {"id": "lex.en.100k.091073", "hw": "liopelmidae", "pos": "noun", "ipa": "/ˌlaɪoʊˈpɛlmɪdiː/", "vi": "họ ếch nguyên thủy Liopelmidae"},
+    {"id": "lex.en.100k.091074", "hw": "liothyronine", "pos": "noun", "ipa": "/ˌlaɪoʊˈθaɪrəniːn/", "vi": "hoóc-môn tuyến giáp liothyronine"},
+    {"id": "lex.en.100k.091075", "hw": "lipaemia", "pos": "noun", "ipa": "/lɪˈpiːmiə/", "vi": "chứng mỡ máu cao; tăng lipid máu"},
+    {"id": "lex.en.100k.091076", "hw": "liparidae", "pos": "noun", "ipa": "/lɪˈpærɪdiː/", "vi": "họ cá ốc mỡ biển sâu Liparidae"},
+    {"id": "lex.en.100k.091077", "hw": "liparididae", "pos": "noun", "ipa": "/ˌlɪpəˈrɪdɪdiː/", "vi": "họ cá mỡ biển Liparidae"},
+    {"id": "lex.en.100k.091078", "hw": "liparis", "pos": "noun", "ipa": "/ˈlɪpərɪs/", "vi": "chi lan nhẵn Liparis"},
+    {"id": "lex.en.100k.091079", "hw": "liparite", "pos": "noun", "ipa": "/ˈlɪpəraɪt/", "vi": "đá riolit macma liparit"},
+    {"id": "lex.en.100k.091080", "hw": "lipbrush", "pos": "noun", "ipa": "/ˈlɪpbrʌʃ/", "vi": "cọ đánh son môi; chổi thoa môi"},
+    {"id": "lex.en.100k.091081", "hw": "lipectomy", "pos": "noun", "ipa": "/lɪˈpɛktəmi/", "vi": "phẫu thuật cắt bỏ mỡ thừa"},
+    {"id": "lex.en.100k.091082", "hw": "lipemia", "pos": "noun", "ipa": "/lɪˈpiːmiə/", "vi": "chứng mỡ máu cao; tăng lipid máu"},
+    {"id": "lex.en.100k.091083", "hw": "lipfern", "pos": "noun", "ipa": "/ˈlɪpfɜːrn/", "vi": "chi dương xỉ môi Cheilanthes"},
+    {"id": "lex.en.100k.091084", "hw": "lipgloss", "pos": "noun", "ipa": "/ˈlɪpɡlɒs/", "vi": "son bóng môi; son làm bóng môi"},
+    {"id": "lex.en.100k.091085", "hw": "lipidaemia", "pos": "noun", "ipa": "/ˌlɪpɪˈdiːmiə/", "vi": "chứng tăng mỡ máu lipid"},
+    {"id": "lex.en.100k.091086", "hw": "lipide", "pos": "noun", "ipa": "/ˈlɪpaɪd/", "vi": "chất béo lipid"},
+    {"id": "lex.en.100k.091087", "hw": "lipidemia", "pos": "noun", "ipa": "/ˌlɪpɪˈdiːmiə/", "vi": "chứng mỡ máu cao; lipid máu"},
+    {"id": "lex.en.100k.091088", "hw": "lipidosis", "pos": "noun", "ipa": "/ˌlɪpɪˈdoʊsɪs/", "vi": "bệnh tích tụ lipid mỡ mô bào"},
+    {"id": "lex.en.100k.091089", "hw": "lipin", "pos": "noun", "ipa": "/ˈlɪpɪn/", "vi": "hợp chất chất béo lipin"},
+    {"id": "lex.en.100k.091090", "hw": "lipizzan", "pos": "noun", "ipa": "/ˌlɪpɪˈzæn/", "vi": "ngựa cưỡi biểu diễn Lipizzan"},
+    {"id": "lex.en.100k.091091", "hw": "liplike", "pos": "adj", "ipa": "/ˈlɪplaɪk/", "vi": "có hình dạng như vành môi"},
+    {"id": "lex.en.100k.091092", "hw": "lipochondrodystrophy", "pos": "noun", "ipa": "/ˌlɪpoʊˌkɒndroʊˈdɪstrəfi/", "vi": "loạn dưỡng sụn xương do mỡ"},
+    {"id": "lex.en.100k.091093", "hw": "lipogenesis", "pos": "noun", "ipa": "/ˌlɪpoʊˈdʒɛnɪsɪs/", "vi": "quá trình sinh tổng hợp chất béo"},
+    {"id": "lex.en.100k.091094", "hw": "lipogram", "pos": "noun", "ipa": "/ˈlɪpəɡræm/", "vi": "văn bản kiêng kỵ một chữ cái"},
+    {"id": "lex.en.100k.091095", "hw": "lipoidaemia", "pos": "noun", "ipa": "/ˌlɪpɔɪˈdiːmiə/", "vi": "chứng nhiễm chất mỡ trong máu"},
+    {"id": "lex.en.100k.091096", "hw": "lipoidemia", "pos": "noun", "ipa": "/ˌlɪpɔɪˈdiːmiə/", "vi": "chứng tăng nồng độ mỡ trong máu"},
+    {"id": "lex.en.100k.091097", "hw": "lipolysis", "pos": "noun", "ipa": "/lɪˈpɑːləsɪs/", "vi": "sự phân giải chất béo lipid"},
+    {"id": "lex.en.100k.091098", "hw": "lipomatosis", "pos": "noun", "ipa": "/ˌlɪpəməˈtoʊsɪs/", "vi": "bệnh đa u mỡ dưới da"},
+    {"id": "lex.en.100k.091099", "hw": "lipomatous", "pos": "adj", "ipa": "/lɪˈpɒmətəs/", "vi": "thuộc về u mỡ; chứa mô mỡ"},
+    {"id": "lex.en.100k.091100", "hw": "lipophilicity", "pos": "noun", "ipa": "/ˌlɪpoʊfɪˈlɪsɪti/", "vi": "tính ưa mỡ; độ tan trong dầu"},
+    {"id": "lex.en.100k.091101", "hw": "liposcelis", "pos": "noun", "ipa": "/lɪˈpɒsəlɪs/", "vi": "chi bọ rận sách không cánh"}
+]
+
+assert len(data) == 100
+for i, (r, rev) in enumerate(zip(raw, data)):
+    assert r['id'] == rev['id'] and r['hw'] == rev['hw'], f"Mismatch at {i}: {r['id']} vs {rev['id']}"
+    assert rev['vi'] and len(rev['vi']) <= 35, f"vi length > 35 at {i}: {rev['vi']}"
+    assert rev['pos'] in ["noun", "verb", "adj", "adv", "intj", "prep", "pron", "conj", "det", "num"], f"pos invalid at {i}: {rev['pos']}"
+    ipa = rev['ipa'].strip()
+    assert ipa.startswith('/') and ipa.endswith('/') and ipa.count('/') == 2, f"ipa format invalid at {i}: {ipa}"
+    rev['ipa'] = ipa
+    rev['status'] = "reviewed"
+    rev['cefr'] = r.get('cefr')
+    rev['tier'] = r.get('tier')
+    rev['notes'] = r.get('notes')
+
+print("Part 1 validated successfully!")

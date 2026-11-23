@@ -1,0 +1,125 @@
+import json
+
+# Manual cognitive QA review for Batch 29 Round 3 Part 1 (IDs 041002 to 041101)
+reviewed_items = [
+    {"id": "lex.en.200k.041002", "hw": "swaziland monetary unit", "pos": "phrase", "ipa": "", "vi": "tiền tệ Eswatini Swaziland", "cefr": "C2", "tier": "specialized", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041003", "hw": "tabby cat", "pos": "phrase", "ipa": "", "vi": "mèo mướp vằn; mèo lông vằn", "cefr": "A2", "tier": "general", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041004", "hw": "triassic period", "pos": "phrase", "ipa": "", "vi": "kỷ Tam Điệp; kỷ Trias địa chất", "cefr": "B2", "tier": "science", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041005", "hw": "tumour necrosis factor", "pos": "phrase", "ipa": "", "vi": "yếu tố gây hoại tử khối u TNF", "cefr": "C2", "tier": "medical", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041006", "hw": "vertebral canal", "pos": "phrase", "ipa": "", "vi": "ống tủy sống bên trong cột sống", "cefr": "C1", "tier": "medical", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041007", "hw": "walrus moustache", "pos": "phrase", "ipa": "", "vi": "ria mép rậm rủ dài hải mã", "cefr": "C1", "tier": "general", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041008", "hw": "water buttercup", "pos": "phrase", "ipa": "", "vi": "cây mao lương hoa trắng dưới nước", "cefr": "C2", "tier": "specialized", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041009", "hw": "wayne gretzky", "pos": "phrase", "ipa": "", "vi": "huyền thoại khúc côn cầu Gretzky", "cefr": "B2", "tier": "sports", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041010", "hw": "western buttercup", "pos": "phrase", "ipa": "", "vi": "cây mao lương hoa vàng miền Tây", "cefr": "C2", "tier": "specialized", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041011", "hw": "whistling buoy", "pos": "phrase", "ipa": "", "vi": "phao biển phát tiếng còi báo hiệu", "cefr": "C2", "tier": "specialized", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041012", "hw": "wild buckwheat", "pos": "phrase", "ipa": "", "vi": "cây kiều mạch hoang dại", "cefr": "C2", "tier": "specialized", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041013", "hw": "windward side", "pos": "phrase", "ipa": "", "vi": "phía đón gió; mạn hứng gió", "cefr": "B2", "tier": "general", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041014", "hw": "wiper blade", "pos": "phrase", "ipa": "", "vi": "lưỡi cao su gạt nước ô tô", "cefr": "B1", "tier": "general", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041015", "hw": "wood vise", "pos": "phrase", "ipa": "", "vi": "ê-tô kẹp gỗ bàn thợ mộc", "cefr": "C2", "tier": "specialized", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041016", "hw": "absentees", "pos": "noun", "ipa": "/ˌæbsənˈtiːz/", "vi": "người vắng mặt; người nghỉ phép", "cefr": "C1", "tier": "general", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041017", "hw": "animosities", "pos": "noun", "ipa": "/ˌænɪˈmɑːsətiz/", "vi": "lòng căm thù; sự thù oán hằn học", "cefr": "C1", "tier": "general", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041018", "hw": "bismarcks", "pos": "noun", "ipa": "/ˈbɪzmɑːrks/", "vi": "thủ tướng Bismarck; bánh rán ngọt", "cefr": "B2", "tier": "history", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041019", "hw": "bouncier", "pos": "adj", "ipa": "/ˈbaʊnsiər/", "vi": "nảy hơn; giàu sức sống hơn", "cefr": "B1", "tier": "general", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041020", "hw": "bounciest", "pos": "adj", "ipa": "/ˈbaʊnsiɪst/", "vi": "độ nảy cao nhất; hoạt bát nhất", "cefr": "B1", "tier": "general", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041021", "hw": "burbanks", "pos": "noun", "ipa": "/ˈbɜːrbæŋks/", "vi": "nhà lai tạo Burbank; thành phố Mỹ", "cefr": "C2", "tier": "specialized", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041022", "hw": "carbohydrates", "pos": "noun", "ipa": "/ˌkɑːrboʊˈhaɪdreɪts/", "vi": "chất bột đường; cacbonhydrat", "cefr": "B1", "tier": "science", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041023", "hw": "centrists", "pos": "noun", "ipa": "/ˈsɛntrɪsts/", "vi": "chính khách ôn hòa trung dung", "cefr": "C1", "tier": "academic", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041024", "hw": "chauffeured", "pos": "verb", "ipa": "/ˈʃoʊfərd/", "vi": "đã lái xe riêng đưa đón khách", "cefr": "B2", "tier": "general", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041025", "hw": "chauffeuring", "pos": "verb", "ipa": "/ˈʃoʊfərɪŋ/", "vi": "việc lái xe riêng chở yếu nhân", "cefr": "B2", "tier": "general", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041026", "hw": "chauffeurs", "pos": "noun", "ipa": "/ˈʃoʊfərz/", "vi": "tài xế lái xe riêng phục vụ", "cefr": "B1", "tier": "general", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041027", "hw": "circulated", "pos": "verb", "ipa": "/ˈsɜːrkjəleɪtɪd/", "vi": "đã lưu hành; đã tuần hoàn máu", "cefr": "B2", "tier": "general", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041028", "hw": "circulates", "pos": "verb", "ipa": "/ˈsɜːrkjəleɪts/", "vi": "lưu hành rộng rãi; luân chuyển", "cefr": "B2", "tier": "general", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041029", "hw": "climbers", "pos": "noun", "ipa": "/ˈklaɪmərz/", "vi": "người leo núi; cây dây leo", "cefr": "A2", "tier": "general", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041030", "hw": "coliseums", "pos": "noun", "ipa": "/ˌkɑːləˈsiːəmz/", "vi": "đấu trường lớn; nhà hát tròn", "cefr": "B2", "tier": "general", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041031", "hw": "councilmen", "pos": "noun", "ipa": "/ˈkaʊnsəlmən/", "vi": "ủy viên hội đồng thành phố", "cefr": "B2", "tier": "general", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041032", "hw": "cranberries", "pos": "noun", "ipa": "/ˈkrænbɛriz/", "vi": "quả nam việt quất đỏ tươi", "cefr": "B1", "tier": "general", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041033", "hw": "crofts", "pos": "noun", "ipa": "/krɔːfts/", "vi": "trang trại nhỏ gia đình thuê", "cefr": "C2", "tier": "general", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041034", "hw": "divergences", "pos": "noun", "ipa": "/daɪˈvɜːrdʒənsɪz/", "vi": "sự phân kỳ; điểm sai khác", "cefr": "C1", "tier": "academic", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041035", "hw": "dorians", "pos": "noun", "ipa": "/ˈdɔːriənz/", "vi": "bộ tộc người Dorian Hy Lạp", "cefr": "C2", "tier": "history", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041036", "hw": "doughnuts", "pos": "noun", "ipa": "/ˈdoʊnʌts/", "vi": "bánh rán vòng ngọt phủ đường", "cefr": "A1", "tier": "general", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041037", "hw": "douglasses", "pos": "noun", "ipa": "/ˈdʌɡləsɪz/", "vi": "gia tộc Douglass; người Douglass", "cefr": "C2", "tier": "specialized", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041038", "hw": "duluths", "pos": "noun", "ipa": "/dəˈluːθs/", "vi": "thành phố cảng Duluth ven hồ", "cefr": "C2", "tier": "geography", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041039", "hw": "fabians", "pos": "noun", "ipa": "/ˈfeɪbiənz/", "vi": "người theo phái chủ nghĩa Fabian", "cefr": "C2", "tier": "academic", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041040", "hw": "felons", "pos": "noun", "ipa": "/ˈfɛlənz/", "vi": "tội phạm hình sự; kẻ phạm trọng tội", "cefr": "C1", "tier": "legal", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041041", "hw": "garnets", "pos": "noun", "ipa": "/ˈɡɑːrnɪts/", "vi": "ngọc hồng lựu; đá quý granat", "cefr": "C1", "tier": "general", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041042", "hw": "greyhounds", "pos": "noun", "ipa": "/ˈɡreɪhaʊndz/", "vi": "giống chó săn thỏ chạy nhanh", "cefr": "B2", "tier": "general", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041043", "hw": "hahns", "pos": "noun", "ipa": "/hɑːnz/", "vi": "nhà hóa học hạt nhân Otto Hahn", "cefr": "C2", "tier": "specialized", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041044", "hw": "hairdressers", "pos": "noun", "ipa": "/ˈhɛrˌdrɛsərz/", "vi": "thợ tạo mẫu tóc nữ uốn nhuộm", "cefr": "A2", "tier": "general", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041045", "hw": "hesses", "pos": "noun", "ipa": "/ˈhɛsɪz/", "vi": "tiểu bang Hesse ở nước Đức", "cefr": "B2", "tier": "geography", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041046", "hw": "hillier", "pos": "adj", "ipa": "/ˈhɪliər/", "vi": "nhiều đồi dốc hơn; nhấp nhô hơn", "cefr": "B1", "tier": "general", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041047", "hw": "hilliest", "pos": "adj", "ipa": "/ˈhɪliɪst/", "vi": "nhiều đồi dốc nhất; gập ghềnh nhất", "cefr": "B1", "tier": "general", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041048", "hw": "hornes", "pos": "noun", "ipa": "/hɔːrnz/", "vi": "nữ danh ca Lena Horne; họ Horne", "cefr": "C2", "tier": "specialized", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041049", "hw": "hotspots", "pos": "noun", "ipa": "/ˈhɑːtspɑːts/", "vi": "điểm phát wifi; điểm nóng chiến sự", "cefr": "B1", "tier": "general", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041050", "hw": "hurons", "pos": "noun", "ipa": "/ˈhjʊərɑːnz/", "vi": "người da đỏ Huron; hồ Huron", "cefr": "B2", "tier": "geography", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041051", "hw": "infestations", "pos": "noun", "ipa": "/ˌɪnfɛˈsteɪʃənz/", "vi": "sự tràn lan tàn phá của sâu bọ", "cefr": "C1", "tier": "science", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041052", "hw": "insurrections", "pos": "noun", "ipa": "/ˌɪnsəˈrɛkʃənz/", "vi": "cuộc khởi nghĩa; phong trào nổi dậy", "cefr": "C1", "tier": "history", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041053", "hw": "ironmans", "pos": "noun", "ipa": "/ˈaɪərnmænz/", "vi": "vận động viên 3 môn phối hợp thép", "cefr": "B1", "tier": "sports", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041054", "hw": "jordanians", "pos": "noun", "ipa": "/dʒɔːrˈdeɪniənz/", "vi": "người dân vương quốc Jordan", "cefr": "B1", "tier": "geography", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041055", "hw": "junos", "pos": "noun", "ipa": "/ˈdʒuːnoʊz/", "vi": "nữ thần hôn nhân Juno La Mã", "cefr": "B2", "tier": "history", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041056", "hw": "leis", "pos": "noun", "ipa": "/leɪz/", "vi": "vòng hoa tươi quàng cổ Hawaii", "cefr": "B2", "tier": "general", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041057", "hw": "milanos", "pos": "noun", "ipa": "/mɪˈlɑːnoʊz/", "vi": "bánh quy sô-cô-la Milan; vùng Milan", "cefr": "B2", "tier": "general", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041058", "hw": "moldovas", "pos": "noun", "ipa": "/mɔːlˈdoʊvəz/", "vi": "quốc gia Moldova Đông Âu", "cefr": "B2", "tier": "geography", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041059", "hw": "mutilations", "pos": "noun", "ipa": "/ˌmjuːtəˈleɪʃənz/", "vi": "hành vi cắt xẻo tàn sát thân thể", "cefr": "C2", "tier": "general", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041060", "hw": "niftier", "pos": "adj", "ipa": "/ˈnɪftiər/", "vi": "tiện lợi khéo léo hơn; bảnh hơn", "cefr": "C1", "tier": "general", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041061", "hw": "niftiest", "pos": "adj", "ipa": "/ˈnɪftiɪst/", "vi": "khéo léo tiện dụng nhất; hay nhất", "cefr": "C1", "tier": "general", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041062", "hw": "paines", "pos": "noun", "ipa": "/peɪnz/", "vi": "nhà tư tưởng Thomas Paine", "cefr": "C2", "tier": "history", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041063", "hw": "parmesans", "pos": "noun", "ipa": "/ˈpɑːrməzænz/", "vi": "phô mai cứng bào rắc Parmesan", "cefr": "B1", "tier": "general", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041064", "hw": "passers", "pos": "noun", "ipa": "/ˈpæsərz/", "vi": "người chuyền bóng; người đi ngang", "cefr": "B1", "tier": "general", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041065", "hw": "pathogens", "pos": "noun", "ipa": "/ˈpæθədʒənz/", "vi": "mầm bệnh sinh học; vi khuẩn gây hại", "cefr": "B2", "tier": "science", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041066", "hw": "piazzas", "pos": "noun", "ipa": "/piˈætsəz/", "vi": "quảng trường lát đá kiểu Ý", "cefr": "C1", "tier": "architecture", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041067", "hw": "poms", "pos": "noun", "ipa": "/pɑːmz/", "vi": "người gốc Anh di cư sang Úc", "cefr": "C2", "tier": "general", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041068", "hw": "possessives", "pos": "noun", "ipa": "/pəˈzɛsɪvz/", "vi": "sở hữu cách; từ chỉ quyền sở hữu", "cefr": "B1", "tier": "academic", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041069", "hw": "pronouns", "pos": "noun", "ipa": "/ˈproʊnaʊnz/", "vi": "đại từ xưng hô trong ngữ pháp", "cefr": "A1", "tier": "academic", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041070", "hw": "rapports", "pos": "noun", "ipa": "/ræˈpɔːrz/", "vi": "mối quan hệ gắn bó thân tình", "cefr": "C1", "tier": "general", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041071", "hw": "raptures", "pos": "noun", "ipa": "/ˈræptʃərz/", "vi": "niềm sung sướng ngất ngây mê hồn", "cefr": "C2", "tier": "general", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041072", "hw": "screenwriters", "pos": "noun", "ipa": "/ˈskriːnraɪtərz/", "vi": "nhà biên kịch phim điện ảnh", "cefr": "B2", "tier": "arts", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041073", "hw": "selectors", "pos": "noun", "ipa": "/sɪˈlɛktərz/", "vi": "người tuyển chọn nhân sự; bộ chọn", "cefr": "B2", "tier": "technology", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041074", "hw": "shillings", "pos": "noun", "ipa": "/ˈʃɪlɪŋz/", "vi": "đồng tiền shilling kim loại Anh", "cefr": "B1", "tier": "history", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041075", "hw": "slovaks", "pos": "noun", "ipa": "/ˈsloʊvæks/", "vi": "người dân Slovakia Đông Âu", "cefr": "B1", "tier": "geography", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041076", "hw": "sns", "pos": "noun", "ipa": "/ˌɛsˈɛnz/", "vi": "nguyên tố thiếc hóa học Sn", "cefr": "C2", "tier": "science", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041077", "hw": "solicitations", "pos": "noun", "ipa": "/səˌlɪsɪˈteɪʃənz/", "vi": "lời khẩn khoản; sự chào mời mua", "cefr": "C1", "tier": "business", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041078", "hw": "tarzans", "pos": "noun", "ipa": "/ˈtɑːrzænz/", "vi": "người rừng Tarzan khỏe khoắn", "cefr": "B2", "tier": "general", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041079", "hw": "telugus", "pos": "noun", "ipa": "/ˈtɛlʊɡuːz/", "vi": "người dân Telugu miền Nam Ấn Độ", "cefr": "B2", "tier": "general", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041080", "hw": "tynes", "pos": "noun", "ipa": "/taɪnz/", "vi": "sông Tyne ở miền Bắc nước Anh", "cefr": "B2", "tier": "geography", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041081", "hw": "vendettas", "pos": "noun", "ipa": "/vɛnˈdɛtəz/", "vi": "mối thù huyết tộc truyền kiếp", "cefr": "C2", "tier": "general", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041082", "hw": "weaklier", "pos": "adj", "ipa": "/ˈwiːkliər/", "vi": "yếu ớt hơn; gầy gò mảnh khảnh hơn", "cefr": "B2", "tier": "general", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041083", "hw": "weakliest", "pos": "adj", "ipa": "/ˈwiːkliɪst/", "vi": "ốm yếu nhất; mỏng manh nhất", "cefr": "B2", "tier": "general", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041084", "hw": "wieners", "pos": "noun", "ipa": "/ˈwiːnərz/", "vi": "xúc xích luộc kiểu Viên Áo", "cefr": "B1", "tier": "general", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041085", "hw": "aladdins", "pos": "noun", "ipa": "/əˈlædɪnz/", "vi": "chàng Aladdin cây đèn thần", "cefr": "A2", "tier": "general", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041086", "hw": "aldermen", "pos": "noun", "ipa": "/ˈɔːldərmən/", "vi": "ủy viên hội đồng thị chính", "cefr": "C1", "tier": "general", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041087", "hw": "anthropologists", "pos": "noun", "ipa": "/ˌænθrəˈpɑːlədʒɪsts/", "vi": "các nhà nhân chủng học văn hóa", "cefr": "B2", "tier": "academic", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041088", "hw": "astronomers", "pos": "noun", "ipa": "/əˈstrɑːnəmərz/", "vi": "các nhà thiên văn học vũ trụ", "cefr": "B1", "tier": "science", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041089", "hw": "autopilots", "pos": "noun", "ipa": "/ˈɔːtoʊpaɪləts/", "vi": "hệ thống lái tự động máy bay", "cefr": "B2", "tier": "technology", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041090", "hw": "baggiest", "pos": "adj", "ipa": "/ˈbæɡiɪst/", "vi": "rộng thùng thình nhất; thụng nhất", "cefr": "B1", "tier": "general", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041091", "hw": "balfours", "pos": "noun", "ipa": "/ˈbælfʊərz/", "vi": "tuyên bố Balfour; người Balfour", "cefr": "C2", "tier": "history", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041092", "hw": "bigfoots", "pos": "noun", "ipa": "/ˈbɪɡfʊts/", "vi": "quái vật người tuyết chân to", "cefr": "B2", "tier": "general", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041093", "hw": "blackjacked", "pos": "verb", "ipa": "/ˈblækdʒækt/", "vi": "đã đánh bằng dùi cui; đã ép buộc", "cefr": "C2", "tier": "general", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041094", "hw": "blackjacking", "pos": "verb", "ipa": "/ˈblækdʒækɪŋ/", "vi": "đánh dùi cui; dùng vũ lực ép buộc", "cefr": "C2", "tier": "general", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041095", "hw": "brasils", "pos": "noun", "ipa": "/brəˈzɪlz/", "vi": "nước Brazil; gỗ vang Brazil đỏ", "cefr": "B1", "tier": "general", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041096", "hw": "camos", "pos": "noun", "ipa": "/ˈkæmoʊz/", "vi": "vải rằn ri ngụy trang quân đội", "cefr": "B2", "tier": "general", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041097", "hw": "cartes", "pos": "noun", "ipa": "/kɑːrts/", "vi": "thực đơn món ăn theo yêu cầu", "cefr": "B2", "tier": "general", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041098", "hw": "cavendishes", "pos": "noun", "ipa": "/ˈkævəndɪʃɪz/", "vi": "giống chuối tiêu lùn Cavendish", "cefr": "C2", "tier": "specialized", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041099", "hw": "cliches", "pos": "noun", "ipa": "/kliːˈʃeɪz/", "vi": "lời lẽ sáo rỗng sáo mòn lặp lại", "cefr": "C1", "tier": "general", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041100", "hw": "collaborators", "pos": "noun", "ipa": "/kəˈlæbəreɪtərz/", "vi": "người cộng tác; kẻ tiếp tay giặc", "cefr": "B2", "tier": "general", "status": "reviewed", "notes": ""},
+    {"id": "lex.en.200k.041101", "hw": "cortezes", "pos": "noun", "ipa": "/kɔːrˈtɛzɪz/", "vi": "nhà chinh phục Hernán Cortés", "cefr": "C2", "tier": "history", "status": "reviewed", "notes": ""}
+]
+
+# Validation
+ALLOWED_POS = {"noun", "verb", "adj", "adv", "intj", "prep", "conj", "pron", "det", "num", "phrase"}
+with open('scratch/b29_r03_raw_p1.json', 'r', encoding='utf-8') as f:
+    raw_items = json.load(f)
+
+assert len(reviewed_items) == 100, f"Expected 100 items, got {len(reviewed_items)}"
+for r, rev in zip(raw_items, reviewed_items):
+    assert r["id"] == rev["id"], f"ID mismatch: {r['id']} vs {rev['id']}"
+    assert r["hw"] == rev["hw"], f"HW mismatch: {r['hw']} vs {rev['hw']}"
+    assert rev["pos"] in ALLOWED_POS, f"Invalid POS for {rev['id']}: {rev['pos']}"
+    assert 0 < len(rev["vi"]) <= 35, f"Invalid VI length ({len(rev['vi'])}) for {rev['id']}: {rev['vi']}"
+    assert rev["status"] == "reviewed", f"Status must be reviewed: {rev['id']}"
+    if " " not in rev["hw"]:
+        assert rev["ipa"].startswith("/") and rev["ipa"].endswith("/") and rev["ipa"].count("/") == 2, f"Invalid single-word IPA: {rev['id']}: {rev['ipa']}"
+
+with open('scratch/b29_r03_p1.json', 'w', encoding='utf-8') as f:
+    json.dump(reviewed_items, f, ensure_ascii=False, indent=2)
+
+print("Batch 29 Round 3 Part 1 validated and written successfully. Total items:", len(reviewed_items))

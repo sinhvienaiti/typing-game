@@ -10,13 +10,21 @@ for (const source of manifest.sources??[]) {
   if (source.publishAllowed&&source.status==="blocked") errors.push(source.id+": blocked source cannot be publishAllowed");
   if (!source.publishAllowed&&source.status==="import-enabled") errors.push(source.id+": non-publishable source cannot be import-enabled");
 }
-for (const id of ["verbnet","cambridge-profile","viwiktionary-en","simplewiktionary-en"]) {
+for (const id of ["verbnet","cambridge-profile","viwiktionary-en","simplewiktionary-en","wiktionary"]) {
   const source=manifest.sources.find(item=>item.id===id);
   if (!source||source.publishAllowed!==false) errors.push(id+": publish gate must be false");
 }
 const multiwozSource=manifest.sources.find(item=>item.id==="multiwoz");
 if (!multiwozSource||multiwozSource.license!=="MIT"||multiwozSource.publishAllowed!==true||multiwozSource.attributionRequired!==true||!multiwozSource.sourceCommit) {
   errors.push("multiwoz: pinned MIT source with attribution is required");
+}
+const thichhocSource=manifest.sources.find(item=>item.id==="thichhoc-dict");
+if (!thichhocSource||thichhocSource.license!=="CC-BY-SA-4.0"||thichhocSource.publishAllowed!==true||thichhocSource.attributionRequired!==true||!thichhocSource.sourceCommit) {
+  errors.push("thichhoc-dict: pinned CC-BY-SA-4.0 source with attribution and sourceCommit is required");
+}
+const cmuSource=manifest.sources.find(item=>item.id==="cmudict");
+if (!cmuSource||cmuSource.license!=="BSD-2-Clause"||cmuSource.publishAllowed!==true||cmuSource.attributionRequired!==true||!cmuSource.sourceCommit) {
+  errors.push("cmudict: pinned BSD-2-Clause source with attribution and sourceCommit is required");
 }
 const tatoebaSource=manifest.sources.find(item=>item.id==="tatoeba");
 if (!tatoebaSource||tatoebaSource.publishAllowed!==true||tatoebaSource.attributionRequired!==true) {

@@ -1,0 +1,1127 @@
+import json
+
+reviewed_items = [
+    {
+        "id": "lex.en.200k.044502",
+        "hw": "aire river",
+        "pos": "phrase",
+        "ipa": "/ˈɛər ˈrɪvər/",
+        "vi": "dòng sông Aire ở Yorkshire nước Anh",
+        "cefr": "C2",
+        "tier": "rare",
+        "status": "reviewed",
+        "notes": None
+    },
+    {
+        "id": "lex.en.200k.044503",
+        "hw": "alan hodgkin",
+        "pos": "phrase",
+        "ipa": "/ˈælən ˈhɑːdʒkɪn/",
+        "vi": "nhà sinh lý học Alan Hodgkin Anh",
+        "cefr": "C2",
+        "tier": "rare",
+        "status": "reviewed",
+        "notes": None
+    },
+    {
+        "id": "lex.en.200k.044504",
+        "hw": "alveolar consonant",
+        "pos": "phrase",
+        "ipa": "/ælˈviːələr ˈkɑːnsənənt/",
+        "vi": "phụ âm chân răng; âm chân lợi",
+        "cefr": "C1",
+        "tier": "specialized",
+        "status": "reviewed",
+        "notes": None
+    },
+    {
+        "id": "lex.en.200k.044505",
+        "hw": "andaman redwood",
+        "pos": "phrase",
+        "ipa": "/ˈændəmən ˈrɛdwʊd/",
+        "vi": "loài gỗ cẩm lai đảo Andaman Ấn Độ",
+        "cefr": "C2",
+        "tier": "specialized",
+        "status": "reviewed",
+        "notes": None
+    },
+    {
+        "id": "lex.en.200k.044506",
+        "hw": "applesauce cake",
+        "pos": "phrase",
+        "ipa": "/ˈæplˌsɔːs keɪk/",
+        "vi": "món bánh bông lan sốt táo quế ngọt",
+        "cefr": "B2",
+        "tier": "general",
+        "status": "reviewed",
+        "notes": None
+    },
+    {
+        "id": "lex.en.200k.044507",
+        "hw": "assertiveness training",
+        "pos": "phrase",
+        "ipa": "/əˈsɜːrtɪvnəs ˈtreɪnɪŋ/",
+        "vi": "rèn luyện tính tự tin quyết đoán",
+        "cefr": "C1",
+        "tier": "advanced",
+        "status": "reviewed",
+        "notes": None
+    },
+    {
+        "id": "lex.en.200k.044508",
+        "hw": "balmoral castle",
+        "pos": "phrase",
+        "ipa": "/bælˈmɔːrəl ˈkæsl/",
+        "vi": "lâu đài Balmoral của hoàng gia Anh",
+        "cefr": "B2",
+        "tier": "general",
+        "status": "reviewed",
+        "notes": None
+    },
+    {
+        "id": "lex.en.200k.044509",
+        "hw": "balsam herb",
+        "pos": "phrase",
+        "ipa": "/ˈbɔːlsəm hɜːrb/",
+        "vi": "loài cây cỏ thơm balsam mùi bạc hà",
+        "cefr": "C2",
+        "tier": "specialized",
+        "status": "reviewed",
+        "notes": None
+    },
+    {
+        "id": "lex.en.200k.044510",
+        "hw": "beta vulgaris",
+        "pos": "phrase",
+        "ipa": "/ˈbeɪtə vʌlˈɡærɪs/",
+        "vi": "loài cây củ dền củ cải đường đỏ",
+        "cefr": "C2",
+        "tier": "specialized",
+        "status": "reviewed",
+        "notes": None
+    },
+    {
+        "id": "lex.en.200k.044511",
+        "hw": "bighorn sheep",
+        "pos": "phrase",
+        "ipa": "/ˈbɪɡhɔːrn ʃiːp/",
+        "vi": "loài cừu sừng lớn núi Rocky Bắc Mỹ",
+        "cefr": "C1",
+        "tier": "advanced",
+        "status": "reviewed",
+        "notes": None
+    },
+    {
+        "id": "lex.en.200k.044512",
+        "hw": "black morel",
+        "pos": "phrase",
+        "ipa": "/blæk məˈrɛl/",
+        "vi": "loài nấm morel mũ đen ăn ngon",
+        "cefr": "C2",
+        "tier": "specialized",
+        "status": "reviewed",
+        "notes": None
+    },
+    {
+        "id": "lex.en.200k.044513",
+        "hw": "bren gun",
+        "pos": "phrase",
+        "ipa": "/brɛn ɡʌn/",
+        "vi": "khẩu súng máy hạng nhẹ Bren",
+        "cefr": "C2",
+        "tier": "rare",
+        "status": "reviewed",
+        "notes": None
+    },
+    {
+        "id": "lex.en.200k.044514",
+        "hw": "butternut squash",
+        "pos": "phrase",
+        "ipa": "/ˈbʌtərnʌt skwɑːʃ/",
+        "vi": "quả bí đỏ hồ lô; bí đỏ hạt đậu",
+        "cefr": "B1",
+        "tier": "general",
+        "status": "reviewed",
+        "notes": None
+    },
+    {
+        "id": "lex.en.200k.044515",
+        "hw": "candied apple",
+        "pos": "phrase",
+        "ipa": "/ˈkændid ˈæpl/",
+        "vi": "quả táo bọc đường đỏ giòn ngọt",
+        "cefr": "B1",
+        "tier": "general",
+        "status": "reviewed",
+        "notes": None
+    },
+    {
+        "id": "lex.en.200k.044516",
+        "hw": "capital of suriname",
+        "pos": "phrase",
+        "ipa": "/ˈkæpɪtl əv ˌsʊrɪˈnɑːm/",
+        "vi": "thủ đô Paramaribo của Suriname",
+        "cefr": "C2",
+        "tier": "rare",
+        "status": "reviewed",
+        "notes": None
+    },
+    {
+        "id": "lex.en.200k.044517",
+        "hw": "closeup lens",
+        "pos": "phrase",
+        "ipa": "/ˈkloʊsʌp lɛnz/",
+        "vi": "ống kính chụp cận cảnh macro",
+        "cefr": "B2",
+        "tier": "general",
+        "status": "reviewed",
+        "notes": None
+    },
+    {
+        "id": "lex.en.200k.044518",
+        "hw": "cognate word",
+        "pos": "phrase",
+        "ipa": "/ˈkɑːɡneɪt wɜːrd/",
+        "vi": "từ đồng nguyên cùng gốc lịch sử",
+        "cefr": "C1",
+        "tier": "specialized",
+        "status": "reviewed",
+        "notes": None
+    },
+    {
+        "id": "lex.en.200k.044519",
+        "hw": "colic vein",
+        "pos": "phrase",
+        "ipa": "/ˈkɑːlɪk veɪn/",
+        "vi": "tĩnh mạch đại tràng kết tràng",
+        "cefr": "C2",
+        "tier": "specialized",
+        "status": "reviewed",
+        "notes": None
+    },
+    {
+        "id": "lex.en.200k.044520",
+        "hw": "common morel",
+        "pos": "phrase",
+        "ipa": "/ˈkɑːmən məˈrɛl/",
+        "vi": "loài nấm morel vàng ăn ngon quý",
+        "cefr": "C2",
+        "tier": "specialized",
+        "status": "reviewed",
+        "notes": None
+    },
+    {
+        "id": "lex.en.200k.044521",
+        "hw": "conning tower",
+        "pos": "phrase",
+        "ipa": "/ˈkɑːnɪŋ ˈtaʊər/",
+        "vi": "tháp chỉ huy nhô lên của tàu ngầm",
+        "cefr": "C2",
+        "tier": "specialized",
+        "status": "reviewed",
+        "notes": None
+    },
+    {
+        "id": "lex.en.200k.044522",
+        "hw": "corned beef",
+        "pos": "phrase",
+        "ipa": "/kɔːrnd biːf/",
+        "vi": "thịt bò ướp muối hạt đóng hộp",
+        "cefr": "B1",
+        "tier": "general",
+        "status": "reviewed",
+        "notes": None
+    },
+    {
+        "id": "lex.en.200k.044523",
+        "hw": "cup morel",
+        "pos": "phrase",
+        "ipa": "/kʌp məˈrɛl/",
+        "vi": "nấm hình chén morel quả xòe lõm",
+        "cefr": "C2",
+        "tier": "specialized",
+        "status": "reviewed",
+        "notes": None
+    },
+    {
+        "id": "lex.en.200k.044524",
+        "hw": "declarative mood",
+        "pos": "phrase",
+        "ipa": "/dɪˈklærətɪv muːd/",
+        "vi": "thức trần thuật trong ngữ pháp",
+        "cefr": "C1",
+        "tier": "specialized",
+        "status": "reviewed",
+        "notes": None
+    },
+    {
+        "id": "lex.en.200k.044525",
+        "hw": "denali fault",
+        "pos": "phrase",
+        "ipa": "/dəˈnɑːli fɔːlt/",
+        "vi": "vết đứt gãy kiến tạo Denali Alaska",
+        "cefr": "C2",
+        "tier": "specialized",
+        "status": "reviewed",
+        "notes": None
+    },
+    {
+        "id": "lex.en.200k.044526",
+        "hw": "denali national park",
+        "pos": "phrase",
+        "ipa": "/dəˈnɑːli ˈnæʃnəl pɑːrk/",
+        "vi": "vườn quốc gia hoang dã Denali Mỹ",
+        "cefr": "B2",
+        "tier": "general",
+        "status": "reviewed",
+        "notes": None
+    },
+    {
+        "id": "lex.en.200k.044527",
+        "hw": "deuterium oxide",
+        "pos": "phrase",
+        "ipa": "/duːˈtɪriəm ˈɑːksaɪd/",
+        "vi": "nước nặng ôxit đơ-tê-ri trong lò",
+        "cefr": "C2",
+        "tier": "specialized",
+        "status": "reviewed",
+        "notes": None
+    },
+    {
+        "id": "lex.en.200k.044528",
+        "hw": "dura mater",
+        "pos": "phrase",
+        "ipa": "/ˈdʊərə ˈmeɪtər/",
+        "vi": "lớp màng não cứng bao bọc tủy sống",
+        "cefr": "C2",
+        "tier": "specialized",
+        "status": "reviewed",
+        "notes": None
+    },
+    {
+        "id": "lex.en.200k.044529",
+        "hw": "dynamic headroom",
+        "pos": "phrase",
+        "ipa": "/daɪˈnæmɪk ˈhɛdruːm/",
+        "vi": "khoảng dự trữ động âm thanh âm ly",
+        "cefr": "C2",
+        "tier": "specialized",
+        "status": "reviewed",
+        "notes": None
+    },
+    {
+        "id": "lex.en.200k.044530",
+        "hw": "early morel",
+        "pos": "phrase",
+        "ipa": "/ˈɜːrli məˈrɛl/",
+        "vi": "loài nấm morel nở sớm đầu xuân",
+        "cefr": "C2",
+        "tier": "specialized",
+        "status": "reviewed",
+        "notes": None
+    },
+    {
+        "id": "lex.en.200k.044531",
+        "hw": "erwin rommel",
+        "pos": "phrase",
+        "ipa": "/ˈɛrvɪn ˈrɑːməl/",
+        "vi": "thống chế Erwin Rommel quân đội Đức",
+        "cefr": "C1",
+        "tier": "advanced",
+        "status": "reviewed",
+        "notes": None
+    },
+    {
+        "id": "lex.en.200k.044532",
+        "hw": "express mirth",
+        "pos": "phrase",
+        "ipa": "/ɪkˈsprɛs mɜːrθ/",
+        "vi": "bật cười vui sướng; tỏ vẻ hân hoan",
+        "cefr": "C1",
+        "tier": "advanced",
+        "status": "reviewed",
+        "notes": None
+    },
+    {
+        "id": "lex.en.200k.044533",
+        "hw": "false chamomile",
+        "pos": "phrase",
+        "ipa": "/fɔːls ˈkæməmɪl/",
+        "vi": "cây hoa cúc giả hoa trắng nhỏ",
+        "cefr": "C2",
+        "tier": "specialized",
+        "status": "reviewed",
+        "notes": None
+    },
+    {
+        "id": "lex.en.200k.044534",
+        "hw": "false morel",
+        "pos": "phrase",
+        "ipa": "/fɔːls məˈrɛl/",
+        "vi": "nấm morel giả chứa độc gyromitrin",
+        "cefr": "C2",
+        "tier": "specialized",
+        "status": "reviewed",
+        "notes": None
+    },
+    {
+        "id": "lex.en.200k.044535",
+        "hw": "field chamomile",
+        "pos": "phrase",
+        "ipa": "/fiːld ˈkæməmɪl/",
+        "vi": "hoa cúc La Mã dại mọc trên đồng cỏ",
+        "cefr": "C2",
+        "tier": "specialized",
+        "status": "reviewed",
+        "notes": None
+    },
+    {
+        "id": "lex.en.200k.044536",
+        "hw": "franz liszt",
+        "pos": "phrase",
+        "ipa": "/frɑːnts lɪst/",
+        "vi": "nhà soạn nhạc piano Franz Liszt",
+        "cefr": "B2",
+        "tier": "general",
+        "status": "reviewed",
+        "notes": None
+    },
+    {
+        "id": "lex.en.200k.044537",
+        "hw": "german chamomile",
+        "pos": "phrase",
+        "ipa": "/ˈdʒɜːrmən ˈkæməmɪl/",
+        "vi": "hoa cúc La Mã Đức làm trà thảo mộc",
+        "cefr": "C1",
+        "tier": "advanced",
+        "status": "reviewed",
+        "notes": None
+    },
+    {
+        "id": "lex.en.200k.044538",
+        "hw": "glandular labrador tea",
+        "pos": "phrase",
+        "ipa": "/ˈɡlændʒələr ˈlæbrədɔːr tiː/",
+        "vi": "cây trà tuyến Labrador đầm lầy",
+        "cefr": "C2",
+        "tier": "specialized",
+        "status": "reviewed",
+        "notes": None
+    },
+    {
+        "id": "lex.en.200k.044539",
+        "hw": "glenn curtiss",
+        "pos": "phrase",
+        "ipa": "/ɡlɛn ˈkɜːrtɪs/",
+        "vi": "nhà chế tạo máy bay Glenn Curtiss",
+        "cefr": "C2",
+        "tier": "rare",
+        "status": "reviewed",
+        "notes": None
+    },
+    {
+        "id": "lex.en.200k.044540",
+        "hw": "grayish brown",
+        "pos": "phrase",
+        "ipa": "/ˈɡreɪɪʃ braʊn/",
+        "vi": "màu nâu xám tro; sắc nâu pha xám",
+        "cefr": "B2",
+        "tier": "general",
+        "status": "reviewed",
+        "notes": None
+    },
+    {
+        "id": "lex.en.200k.044541",
+        "hw": "gros point",
+        "pos": "phrase",
+        "ipa": "/ɡroʊ pwæ̃/",
+        "vi": "mũi thêu chữ thập thô gros point",
+        "cefr": "C2",
+        "tier": "specialized",
+        "status": "reviewed",
+        "notes": None
+    },
+    {
+        "id": "lex.en.200k.044542",
+        "hw": "gymnastic exercise",
+        "pos": "phrase",
+        "ipa": "/dʒɪmˈnæstɪk ˈɛksərsaɪz/",
+        "vi": "bài tập thể dục dụng cụ rèn luyện",
+        "cefr": "B1",
+        "tier": "general",
+        "status": "reviewed",
+        "notes": None
+    },
+    {
+        "id": "lex.en.200k.044543",
+        "hw": "gymnastic horse",
+        "pos": "phrase",
+        "ipa": "/dʒɪmˈnæstɪk hɔːrs/",
+        "vi": "ngựa gỗ thể dục dụng cụ có tay cầm",
+        "cefr": "B2",
+        "tier": "general",
+        "status": "reviewed",
+        "notes": None
+    },
+    {
+        "id": "lex.en.200k.044544",
+        "hw": "herman northrop frye",
+        "pos": "phrase",
+        "ipa": "/ˈhɜːrmən ˈnɔːrθrəp fraɪ/",
+        "vi": "nhà phê bình văn học Northrop Frye",
+        "cefr": "C2",
+        "tier": "rare",
+        "status": "reviewed",
+        "notes": None
+    },
+    {
+        "id": "lex.en.200k.044545",
+        "hw": "histamine headache",
+        "pos": "phrase",
+        "ipa": "/ˈhɪstəmiːn ˈhɛdeɪk/",
+        "vi": "chứng đau nửa đầu chùm do histamin",
+        "cefr": "C2",
+        "tier": "specialized",
+        "status": "reviewed",
+        "notes": None
+    },
+    {
+        "id": "lex.en.200k.044546",
+        "hw": "homo sapiens sapiens",
+        "pos": "phrase",
+        "ipa": "/ˈhoʊmoʊ ˈseɪpiənz ˈseɪpiənz/",
+        "vi": "phân loài người hiện đại tinh khôn",
+        "cefr": "C1",
+        "tier": "specialized",
+        "status": "reviewed",
+        "notes": None
+    },
+    {
+        "id": "lex.en.200k.044547",
+        "hw": "horned pout",
+        "pos": "phrase",
+        "ipa": "/hɔːrnd paʊt/",
+        "vi": "loài cá trê đen nước ngọt Bắc Mỹ",
+        "cefr": "C2",
+        "tier": "specialized",
+        "status": "reviewed",
+        "notes": None
+    },
+    {
+        "id": "lex.en.200k.044548",
+        "hw": "indian paintbrush",
+        "pos": "phrase",
+        "ipa": "/ˈɪndiən ˈpeɪntbrʌʃ/",
+        "vi": "cây cọ sơn hoa đỏ chói Bắc Mỹ",
+        "cefr": "C2",
+        "tier": "specialized",
+        "status": "reviewed",
+        "notes": None
+    },
+    {
+        "id": "lex.en.200k.044549",
+        "hw": "inferior ophthalmic vein",
+        "pos": "phrase",
+        "ipa": "/ɪnˈfɪriər ɑːfˈθælmɪk veɪn/",
+        "vi": "tĩnh mạch mắt dưới hốc mắt",
+        "cefr": "C2",
+        "tier": "specialized",
+        "status": "reviewed",
+        "notes": None
+    },
+    {
+        "id": "lex.en.200k.044550",
+        "hw": "ionian order",
+        "pos": "phrase",
+        "ipa": "/aɪˈoʊniən ˈɔːrdər/",
+        "vi": "thức cột Ionia kiến trúc Hy Lạp cổ",
+        "cefr": "C1",
+        "tier": "specialized",
+        "status": "reviewed",
+        "notes": None
+    },
+    {
+        "id": "lex.en.200k.044551",
+        "hw": "ionian sea",
+        "pos": "phrase",
+        "ipa": "/aɪˈoʊniən siː/",
+        "vi": "vùng biển Ionia giữa Hy Lạp và Ý",
+        "cefr": "B2",
+        "tier": "general",
+        "status": "reviewed",
+        "notes": None
+    },
+    {
+        "id": "lex.en.200k.044552",
+        "hw": "jack kerouac",
+        "pos": "phrase",
+        "ipa": "/dʒæk ˈkɛruæk/",
+        "vi": "nhà văn Mỹ Jack Kerouac phái Beat",
+        "cefr": "C1",
+        "tier": "advanced",
+        "status": "reviewed",
+        "notes": None
+    },
+    {
+        "id": "lex.en.200k.044553",
+        "hw": "jan vermeer",
+        "pos": "phrase",
+        "ipa": "/jɑːn vərˈmɪər/",
+        "vi": "danh họa Jan Vermeer người Hà Lan",
+        "cefr": "C1",
+        "tier": "advanced",
+        "status": "reviewed",
+        "notes": None
+    },
+    {
+        "id": "lex.en.200k.044554",
+        "hw": "johann maier",
+        "pos": "phrase",
+        "ipa": "/ˈjoʊhæn ˈmaɪər/",
+        "vi": "nhà thần học Johann Maier người Đức",
+        "cefr": "C2",
+        "tier": "rare",
+        "status": "reviewed",
+        "notes": None
+    },
+    {
+        "id": "lex.en.200k.044555",
+        "hw": "lev ivanov",
+        "pos": "phrase",
+        "ipa": "/lɛv ɪˈvɑːnəf/",
+        "vi": "biên đạo múa ba-lê Lev Ivanov Nga",
+        "cefr": "C2",
+        "tier": "rare",
+        "status": "reviewed",
+        "notes": None
+    },
+    {
+        "id": "lex.en.200k.044556",
+        "hw": "lord rayleigh",
+        "pos": "phrase",
+        "ipa": "/lɔːrd ˈreɪli/",
+        "vi": "nhà vật lý Lord Rayleigh nước Anh",
+        "cefr": "C1",
+        "tier": "advanced",
+        "status": "reviewed",
+        "notes": None
+    },
+    {
+        "id": "lex.en.200k.044557",
+        "hw": "malagasy republic",
+        "pos": "phrase",
+        "ipa": "/ˌmæləˈɡæsi rɪˈpʌblɪk/",
+        "vi": "Cộng hòa Malagasy ở Madagascar",
+        "cefr": "C2",
+        "tier": "rare",
+        "status": "reviewed",
+        "notes": None
+    },
+    {
+        "id": "lex.en.200k.044558",
+        "hw": "nand circuit",
+        "pos": "phrase",
+        "ipa": "/nænd ˈsɜːrkɪt/",
+        "vi": "mạch điện tử logic không và NAND",
+        "cefr": "C1",
+        "tier": "specialized",
+        "status": "reviewed",
+        "notes": None
+    },
+    {
+        "id": "lex.en.200k.044559",
+        "hw": "nand gate",
+        "pos": "phrase",
+        "ipa": "/nænd ɡeɪt/",
+        "vi": "cổng logic NAND đảo của cổng AND",
+        "cefr": "C1",
+        "tier": "specialized",
+        "status": "reviewed",
+        "notes": None
+    },
+    {
+        "id": "lex.en.200k.044560",
+        "hw": "nubian desert",
+        "pos": "phrase",
+        "ipa": "/ˈnuːbiən ˈdɛzərt/",
+        "vi": "sa mạc Nubia cát đỏ ở đông Sudan",
+        "cefr": "B2",
+        "tier": "general",
+        "status": "reviewed",
+        "notes": None
+    },
+    {
+        "id": "lex.en.200k.044561",
+        "hw": "omelet pan",
+        "pos": "phrase",
+        "ipa": "/ˈɑːmlət pæn/",
+        "vi": "chảo chuyên dụng tráng trứng cuộn",
+        "cefr": "B1",
+        "tier": "general",
+        "status": "reviewed",
+        "notes": None
+    },
+    {
+        "id": "lex.en.200k.044562",
+        "hw": "pembroke welsh corgi",
+        "pos": "phrase",
+        "ipa": "/ˈpɛmbroʊk wɛlʃ ˈkɔːrɡi/",
+        "vi": "chó Corgi giống Pembroke cụt đuôi",
+        "cefr": "C1",
+        "tier": "advanced",
+        "status": "reviewed",
+        "notes": None
+    },
+    {
+        "id": "lex.en.200k.044563",
+        "hw": "pivoting window",
+        "pos": "phrase",
+        "ipa": "/ˈpɪvətɪŋ ˈwɪndoʊ/",
+        "vi": "cửa sổ xoay quanh trục đứng ngang",
+        "cefr": "C1",
+        "tier": "advanced",
+        "status": "reviewed",
+        "notes": None
+    },
+    {
+        "id": "lex.en.200k.044564",
+        "hw": "quaternary ammonium compound",
+        "pos": "phrase",
+        "ipa": "/kwəˈtɜːrnəri əˈmoʊniəm ˈkɑːmpaʊnd/",
+        "vi": "hợp chất amoni bậc bốn sát trùng",
+        "cefr": "C2",
+        "tier": "specialized",
+        "status": "reviewed",
+        "notes": None
+    },
+    {
+        "id": "lex.en.200k.044565",
+        "hw": "racing skiff",
+        "pos": "phrase",
+        "ipa": "/ˈreɪsɪŋ skɪf/",
+        "vi": "thuyền nan nhỏ đua một người chèo",
+        "cefr": "C2",
+        "tier": "specialized",
+        "status": "reviewed",
+        "notes": None
+    },
+    {
+        "id": "lex.en.200k.044566",
+        "hw": "rattan palm",
+        "pos": "phrase",
+        "ipa": "/ræˈtæn pɑːm/",
+        "vi": "loài cây cọ mây leo rừng nhiệt đới",
+        "cefr": "C1",
+        "tier": "advanced",
+        "status": "reviewed",
+        "notes": None
+    },
+    {
+        "id": "lex.en.200k.044567",
+        "hw": "reflux condenser",
+        "pos": "phrase",
+        "ipa": "/ˈriːflʌks kənˈdɛnsər/",
+        "vi": "ống sinh hàn ngưng tụ hồi lưu hơi",
+        "cefr": "C2",
+        "tier": "specialized",
+        "status": "reviewed",
+        "notes": None
+    },
+    {
+        "id": "lex.en.200k.044568",
+        "hw": "remittance man",
+        "pos": "phrase",
+        "ipa": "/rɪˈmɪtəns mæn/",
+        "vi": "kẻ sống nhờ tiền gia đình trợ cấp",
+        "cefr": "C2",
+        "tier": "rare",
+        "status": "reviewed",
+        "notes": None
+    },
+    {
+        "id": "lex.en.200k.044569",
+        "hw": "renal insufficiency",
+        "pos": "phrase",
+        "ipa": "/ˈriːnl ˌɪnsəˈfɪʃənsi/",
+        "vi": "chứng suy giảm chức năng thận mạn",
+        "cefr": "C2",
+        "tier": "specialized",
+        "status": "reviewed",
+        "notes": None
+    },
+    {
+        "id": "lex.en.200k.044570",
+        "hw": "republic of suriname",
+        "pos": "phrase",
+        "ipa": "/rɪˈpʌblɪk əv ˌsʊrɪˈnɑːm/",
+        "vi": "quốc gia Cộng hòa Suriname Nam Mỹ",
+        "cefr": "B2",
+        "tier": "general",
+        "status": "reviewed",
+        "notes": None
+    },
+    {
+        "id": "lex.en.200k.044571",
+        "hw": "richardson vole",
+        "pos": "phrase",
+        "ipa": "/ˈrɪtʃərdsn voʊl/",
+        "vi": "chuột đồng nước lớn Richardson ở Mỹ",
+        "cefr": "C2",
+        "tier": "specialized",
+        "status": "reviewed",
+        "notes": None
+    },
+    {
+        "id": "lex.en.200k.044572",
+        "hw": "river aire",
+        "pos": "phrase",
+        "ipa": "/ˈrɪvər ˈɛər/",
+        "vi": "dòng sông Aire vùng Yorkshire ở Anh",
+        "cefr": "C2",
+        "tier": "rare",
+        "status": "reviewed",
+        "notes": None
+    },
+    {
+        "id": "lex.en.200k.044573",
+        "hw": "romanesque architecture",
+        "pos": "phrase",
+        "ipa": "/ˌroʊməˈnɛsk ˈɑːrkətɛktʃər/",
+        "vi": "trường phái kiến trúc Romanesque cổ",
+        "cefr": "C1",
+        "tier": "specialized",
+        "status": "reviewed",
+        "notes": None
+    },
+    {
+        "id": "lex.en.200k.044574",
+        "hw": "saint crispin",
+        "pos": "phrase",
+        "ipa": "/seɪnt ˈkrɪspɪn/",
+        "vi": "thánh Crispin hộ mệnh thợ giày",
+        "cefr": "C2",
+        "tier": "rare",
+        "status": "reviewed",
+        "notes": None
+    },
+    {
+        "id": "lex.en.200k.044575",
+        "hw": "scribbling block",
+        "pos": "phrase",
+        "ipa": "/ˈskrɪblɪŋ blɑːk/",
+        "vi": "tập giấy nháp ghi nhanh ý tưởng",
+        "cefr": "B1",
+        "tier": "general",
+        "status": "reviewed",
+        "notes": None
+    },
+    {
+        "id": "lex.en.200k.044576",
+        "hw": "shakespearean sonnet",
+        "pos": "phrase",
+        "ipa": "/ʃeɪkˈspɪriən ˈsɑːnɪt/",
+        "vi": "thể thơ sonnet kiểu Shakespeare",
+        "cefr": "C1",
+        "tier": "specialized",
+        "status": "reviewed",
+        "notes": None
+    },
+    {
+        "id": "lex.en.200k.044577",
+        "hw": "sir alan hodgkin",
+        "pos": "phrase",
+        "ipa": "/sɜːr ˈælən ˈhɑːdʒkɪn/",
+        "vi": "nhà thần kinh học Alan Hodgkin Anh",
+        "cefr": "C2",
+        "tier": "rare",
+        "status": "reviewed",
+        "notes": None
+    },
+    {
+        "id": "lex.en.200k.044578",
+        "hw": "sistine chapel",
+        "pos": "phrase",
+        "ipa": "/ˌsɪstiːn ˈtʃæpl/",
+        "vi": "nhà nguyện Sistine tại tòa Vatican",
+        "cefr": "B2",
+        "tier": "general",
+        "status": "reviewed",
+        "notes": None
+    },
+    {
+        "id": "lex.en.200k.044579",
+        "hw": "sluice valve",
+        "pos": "phrase",
+        "ipa": "/sluːs vælv/",
+        "vi": "van cửa cống ngăn nước xả cống",
+        "cefr": "C2",
+        "tier": "specialized",
+        "status": "reviewed",
+        "notes": None
+    },
+    {
+        "id": "lex.en.200k.044580",
+        "hw": "smokeless powder",
+        "pos": "phrase",
+        "ipa": "/ˈsmoʊkləs ˈpaʊdər/",
+        "vi": "thuốc súng không khói nạp đạn bắn",
+        "cefr": "C1",
+        "tier": "advanced",
+        "status": "reviewed",
+        "notes": None
+    },
+    {
+        "id": "lex.en.200k.044581",
+        "hw": "snarl up",
+        "pos": "phrase",
+        "ipa": "/snɑːrl ʌp/",
+        "vi": "làm ùn tắc kẹt xe; gây rối rắm",
+        "cefr": "B2",
+        "tier": "general",
+        "status": "reviewed",
+        "notes": None
+    },
+    {
+        "id": "lex.en.200k.044582",
+        "hw": "sonny liston",
+        "pos": "phrase",
+        "ipa": "/ˈsɑːni ˈlɪstən/",
+        "vi": "võ sĩ quyền Anh Sonny Liston ở Mỹ",
+        "cefr": "C2",
+        "tier": "rare",
+        "status": "reviewed",
+        "notes": None
+    },
+    {
+        "id": "lex.en.200k.044583",
+        "hw": "spastic bladder",
+        "pos": "phrase",
+        "ipa": "/ˈspæstɪk ˈblædər/",
+        "vi": "chứng bàng quang co cứng thần kinh",
+        "cefr": "C2",
+        "tier": "specialized",
+        "status": "reviewed",
+        "notes": None
+    },
+    {
+        "id": "lex.en.200k.044584",
+        "hw": "spastic colon",
+        "pos": "phrase",
+        "ipa": "/ˈspæstɪk ˈkoʊlən/",
+        "vi": "hội chứng ruột kích thích co thắt",
+        "cefr": "C1",
+        "tier": "specialized",
+        "status": "reviewed",
+        "notes": None
+    },
+    {
+        "id": "lex.en.200k.044585",
+        "hw": "startle reflex",
+        "pos": "phrase",
+        "ipa": "/ˈstɑːrtl ˈriːflɛks/",
+        "vi": "phản xạ giật mình co rút tự nhiên",
+        "cefr": "C1",
+        "tier": "advanced",
+        "status": "reviewed",
+        "notes": None
+    },
+    {
+        "id": "lex.en.200k.044586",
+        "hw": "stockholder of record",
+        "pos": "phrase",
+        "ipa": "/ˈstɑːkhoʊldər əv ˈrɛkərd/",
+        "vi": "cổ đông có tên trong sổ đăng ký",
+        "cefr": "C1",
+        "tier": "specialized",
+        "status": "reviewed",
+        "notes": None
+    },
+    {
+        "id": "lex.en.200k.044587",
+        "hw": "stone mimicry plant",
+        "pos": "phrase",
+        "ipa": "/stoʊn ˈmɪmɪkri plænt/",
+        "vi": "cây thạch lan giả sỏi đá sa mạc",
+        "cefr": "C2",
+        "tier": "specialized",
+        "status": "reviewed",
+        "notes": None
+    },
+    {
+        "id": "lex.en.200k.044588",
+        "hw": "stump spud",
+        "pos": "phrase",
+        "ipa": "/stʌmp spʌd/",
+        "vi": "chiếc mai đào bẩy gốc rễ cây đốn",
+        "cefr": "C2",
+        "tier": "specialized",
+        "status": "reviewed",
+        "notes": None
+    },
+    {
+        "id": "lex.en.200k.044589",
+        "hw": "suriname river",
+        "pos": "phrase",
+        "ipa": "/ˌsʊrɪˈnɑːm ˈrɪvər/",
+        "vi": "dòng sông Suriname ở Nam Mỹ",
+        "cefr": "C2",
+        "tier": "rare",
+        "status": "reviewed",
+        "notes": None
+    },
+    {
+        "id": "lex.en.200k.044590",
+        "hw": "tabasco pepper",
+        "pos": "phrase",
+        "ipa": "/təˈbæskoʊ ˈpɛpər/",
+        "vi": "quả ớt cay nồng Tabasco quả đứng",
+        "cefr": "B2",
+        "tier": "general",
+        "status": "reviewed",
+        "notes": None
+    },
+    {
+        "id": "lex.en.200k.044591",
+        "hw": "tabasco sauce",
+        "pos": "phrase",
+        "ipa": "/təˈbæskoʊ sɔːs/",
+        "vi": "nước xốt tương ớt chua cay Tabasco",
+        "cefr": "B1",
+        "tier": "general",
+        "status": "reviewed",
+        "notes": None
+    },
+    {
+        "id": "lex.en.200k.044592",
+        "hw": "tapioca plant",
+        "pos": "phrase",
+        "ipa": "/ˌtæpiˈoʊkə plænt/",
+        "vi": "cây khoai mì sắn lấy củ ăn bột",
+        "cefr": "B1",
+        "tier": "general",
+        "status": "reviewed",
+        "notes": None
+    },
+    {
+        "id": "lex.en.200k.044593",
+        "hw": "thickly settled",
+        "pos": "phrase",
+        "ipa": "/ˈθɪkli ˈsɛtld/",
+        "vi": "khu vực dân cư tập trung đông đúc",
+        "cefr": "B2",
+        "tier": "general",
+        "status": "reviewed",
+        "notes": None
+    },
+    {
+        "id": "lex.en.200k.044594",
+        "hw": "trumpet honeysuckle",
+        "pos": "phrase",
+        "ipa": "/ˈtrʌmpɪt ˈhʌnisʌkl/",
+        "vi": "cây kim ngân hoa kèn đỏ rực rỡ",
+        "cefr": "C2",
+        "tier": "specialized",
+        "status": "reviewed",
+        "notes": None
+    },
+    {
+        "id": "lex.en.200k.044595",
+        "hw": "unabridged dictionary",
+        "pos": "phrase",
+        "ipa": "/ˌʌnəˈbrɪdʒd ˈdɪkʃənɛri/",
+        "vi": "cuốn từ điển toàn bản không rút gọn",
+        "cefr": "C1",
+        "tier": "advanced",
+        "status": "reviewed",
+        "notes": None
+    },
+    {
+        "id": "lex.en.200k.044596",
+        "hw": "upland white aster",
+        "pos": "phrase",
+        "ipa": "/ˈʌplənd waɪt ˈæstər/",
+        "vi": "loài cúc cánh sao trắng đồi cao",
+        "cefr": "C2",
+        "tier": "specialized",
+        "status": "reviewed",
+        "notes": None
+    },
+    {
+        "id": "lex.en.200k.044597",
+        "hw": "ursa major",
+        "pos": "phrase",
+        "ipa": "/ˌɜːrsə ˈmeɪdʒər/",
+        "vi": "chòm sao Đại Hùng; chòm Gấu Lớn",
+        "cefr": "B2",
+        "tier": "general",
+        "status": "reviewed",
+        "notes": None
+    },
+    {
+        "id": "lex.en.200k.044598",
+        "hw": "ursa minor",
+        "pos": "phrase",
+        "ipa": "/ˌɜːrsə ˈmaɪnər/",
+        "vi": "chòm sao Tiểu Hùng; chòm Gấu Nhỏ",
+        "cefr": "B2",
+        "tier": "general",
+        "status": "reviewed",
+        "notes": None
+    },
+    {
+        "id": "lex.en.200k.044599",
+        "hw": "walla walla",
+        "pos": "phrase",
+        "ipa": "/ˌwɑːlə ˈwɑːlə/",
+        "vi": "thành phố Walla Walla ở Washington",
+        "cefr": "C2",
+        "tier": "rare",
+        "status": "reviewed",
+        "notes": None
+    },
+    {
+        "id": "lex.en.200k.044600",
+        "hw": "wild chamomile",
+        "pos": "phrase",
+        "ipa": "/waɪld ˈkæməmɪl/",
+        "vi": "hoa cúc La Mã hoang dã thảo dược",
+        "cefr": "C1",
+        "tier": "advanced",
+        "status": "reviewed",
+        "notes": None
+    },
+    {
+        "id": "lex.en.200k.044601",
+        "hw": "yellow chamomile",
+        "pos": "phrase",
+        "ipa": "/ˈjɛloʊ ˈkæməmɪl/",
+        "vi": "loài hoa cúc nhuộm vàng rực rỡ",
+        "cefr": "C2",
+        "tier": "specialized",
+        "status": "reviewed",
+        "notes": None
+    }
+]
+
+# Validation
+with open('scratch/b29_r10_raw_p1.json') as f:
+    raw = json.load(f)
+
+assert len(reviewed_items) == 100, f"Expected 100 items, got {len(reviewed_items)}"
+assert len(raw) == 100, f"Expected 100 raw items, got {len(raw)}"
+
+valid_pos = {"noun", "verb", "adj", "adv", "intj", "prep", "conj", "pron", "det", "num", "phrase"}
+
+for i, (rev, orig) in enumerate(zip(reviewed_items, raw)):
+    assert rev["id"] == orig["id"], f"ID mismatch at {i}: {rev['id']} vs {orig['id']}"
+    assert rev["hw"] == orig["hw"], f"HW mismatch at {i}: {rev['hw']} vs {orig['hw']}"
+    assert rev["pos"] in valid_pos, f"Invalid POS at {i}: {rev['pos']}"
+    assert len(rev["vi"]) <= 35, f"VI too long ({len(rev['vi'])}) at {i}: {rev['vi']}"
+    assert rev["status"] == "reviewed", f"Invalid status at {i}"
+    assert rev["ipa"].startswith("/") and rev["ipa"].endswith("/"), f"Invalid IPA at {i}: {rev['ipa']}"
+    assert rev["ipa"].count("/") == 2, f"IPA slashes count != 2 at {i}: {rev['ipa']}"
+
+with open('scratch/b29_r10_p1.json', 'w', encoding='utf-8') as f:
+    json.dump(reviewed_items, f, ensure_ascii=False, indent=2)
+
+print("Batch 29 Round 10 Part 1 verified and written successfully.")

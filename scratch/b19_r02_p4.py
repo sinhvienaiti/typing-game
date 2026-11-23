@@ -1,0 +1,122 @@
+import json
+
+raw = json.load(open("scratch/b19_r02_raw_p4.json"))
+assert len(raw) == 100
+
+data = [
+    {"id": "lex.en.100k.090802", "hw": "lewisson", "pos": "noun", "ipa": "/ˈluːɪsən/", "vi": "móc nêm nâng khối đá cẩu"},
+    {"id": "lex.en.100k.090803", "hw": "lexicalisation", "pos": "noun", "ipa": "/ˌlɛksɪkəlaɪˈzeɪʃən/", "vi": "sự từ vựng hóa; tạo từ mới"},
+    {"id": "lex.en.100k.090804", "hw": "lexicalise", "pos": "verb", "ipa": "/ˈlɛksɪkəlaɪz/", "vi": "từ vựng hóa; tạo từ mới"},
+    {"id": "lex.en.100k.090805", "hw": "lexicalised", "pos": "adj", "ipa": "/ˈlɛksɪkəlaɪzd/", "vi": "đã được từ vựng hóa"},
+    {"id": "lex.en.100k.090806", "hw": "lexicalization", "pos": "noun", "ipa": "/ˌlɛksɪkəlaɪˈzeɪʃən/", "vi": "sự từ vựng hóa"},
+    {"id": "lex.en.100k.090807", "hw": "lexicalize", "pos": "verb", "ipa": "/ˈlɛksɪkəlaɪz/", "vi": "từ vựng hóa; biểu đạt thành từ"},
+    {"id": "lex.en.100k.090808", "hw": "lexicographers", "pos": "noun", "ipa": "/ˌlɛksɪˈkɑːɡrəfərz/", "vi": "những nhà biên soạn từ điển"},
+    {"id": "lex.en.100k.090809", "hw": "lexicological", "pos": "adj", "ipa": "/ˌlɛksɪkəˈlɑːdʒɪkəl/", "vi": "thuộc khoa từ vựng học"},
+    {"id": "lex.en.100k.090810", "hw": "lexicologist", "pos": "noun", "ipa": "/ˌlɛksɪˈkɑːlədʒɪst/", "vi": "chuyên gia từ vựng học"},
+    {"id": "lex.en.100k.090811", "hw": "lexicostatistic", "pos": "adj", "ipa": "/ˌlɛksɪkoʊstəˈtɪstɪk/", "vi": "thuộc thống kê từ vựng"},
+    {"id": "lex.en.100k.090812", "hw": "lexicostatistics", "pos": "noun", "ipa": "/ˌlɛksɪkoʊstəˈtɪstɪks/", "vi": "phương pháp thống kê từ vựng"},
+    {"id": "lex.en.100k.090813", "hw": "lexigraphy", "pos": "noun", "ipa": "/lɛkˈsɪɡrəfi/", "vi": "hệ thống chữ ghi từ"},
+    {"id": "lex.en.100k.090814", "hw": "leycesteria", "pos": "noun", "ipa": "/ˌleɪsɛsˈtɪəriə/", "vi": "chi hoa kim ngân lồng"},
+    {"id": "lex.en.100k.090815", "hw": "leymus", "pos": "noun", "ipa": "/ˈleɪməs/", "vi": "chi cỏ lúa dại Leymus"},
+    {"id": "lex.en.100k.090816", "hw": "lezhes", "pos": "noun", "ipa": "/ˈlɛʒəz/", "vi": "thành phố Lezhë ở Albania"},
+    {"id": "lex.en.100k.090817", "hw": "lgbt", "pos": "noun", "ipa": "/ˌɛl.dʒiː.biːˈtiː/", "vi": "cộng đồng người LGBT"},
+    {"id": "lex.en.100k.090818", "hw": "liaised", "pos": "verb", "ipa": "/liˈeɪzd/", "vi": "đã liên lạc; phối hợp làm việc"},
+    {"id": "lex.en.100k.090819", "hw": "liaises", "pos": "verb", "ipa": "/liˈeɪzɪz/", "vi": "liên lạc; cầu nối phối hợp"},
+    {"id": "lex.en.100k.090820", "hw": "liaising", "pos": "verb", "ipa": "/liˈeɪzɪŋ/", "vi": "đang giữ liên lạc; việc liên lạc"},
+    {"id": "lex.en.100k.090821", "hw": "liakoura", "pos": "noun", "ipa": "/liˈækʊrə/", "vi": "đỉnh núi Liakoura Hy Lạp"},
+    {"id": "lex.en.100k.090822", "hw": "liane", "pos": "noun", "ipa": "/liˈɑːn/", "vi": "dây leo thân gỗ nhiệt đới"},
+    {"id": "lex.en.100k.090823", "hw": "lianoid", "pos": "adj", "ipa": "/liˈænɔɪd/", "vi": "dạng dây leo rừng nhiệt đới"},
+    {"id": "lex.en.100k.090824", "hw": "liars", "pos": "noun", "ipa": "/ˈlaɪərz/", "vi": "những kẻ nói dối; người nói dối"},
+    {"id": "lex.en.100k.090825", "hw": "lias", "pos": "noun", "ipa": "/ˈlaɪəs/", "vi": "tầng đá vôi Lias đầu kỷ Jura"},
+    {"id": "lex.en.100k.090826", "hw": "liason", "pos": "noun", "ipa": "/liˈeɪzɒn/", "vi": "sự liên lạc; mối tình vụng trộm"},
+    {"id": "lex.en.100k.090827", "hw": "liassic", "pos": "adj", "ipa": "/laɪˈæsɪk/", "vi": "thuộc tầng đá Lias đầu kỷ Jura"},
+    {"id": "lex.en.100k.090828", "hw": "lib", "pos": "noun", "ipa": "/lɪb/", "vi": "phong trào giải phóng nữ quyền"},
+    {"id": "lex.en.100k.090829", "hw": "libational", "pos": "adj", "ipa": "/laɪˈbeɪʃənəl/", "vi": "thuộc nghi thức tưới rượu cúng tế"},
+    {"id": "lex.en.100k.090830", "hw": "libationary", "pos": "adj", "ipa": "/laɪˈbeɪʃənɛri/", "vi": "dùng để tế lễ tưới rượu"},
+    {"id": "lex.en.100k.090831", "hw": "libelant", "pos": "noun", "ipa": "/ˈlaɪbələnt/", "vi": "nguyên đơn trong vụ kiện phỉ báng"},
+    {"id": "lex.en.100k.090832", "hw": "libelee", "pos": "noun", "ipa": "/ˌlaɪbəˈliː/", "vi": "bị đơn kiện tòa án biển"},
+    {"id": "lex.en.100k.090833", "hw": "libeler", "pos": "noun", "ipa": "/ˈlaɪbələr/", "vi": "kẻ vu khống; kẻ bôi nhọ danh dự"},
+    {"id": "lex.en.100k.090834", "hw": "libelist", "pos": "noun", "ipa": "/ˈlaɪbəlɪst/", "vi": "người viết bài vu khống bôi nhọ"},
+    {"id": "lex.en.100k.090835", "hw": "libellant", "pos": "noun", "ipa": "/ˈlaɪbələnt/", "vi": "nguyên đơn kiện hàng hải"},
+    {"id": "lex.en.100k.090836", "hw": "libelled", "pos": "verb", "ipa": "/ˈlaɪbəld/", "vi": "đã bôi nhọ; đã phỉ báng bằng văn tự"},
+    {"id": "lex.en.100k.090837", "hw": "libeller", "pos": "noun", "ipa": "/ˈlaɪbələr/", "vi": "kẻ bôi nhọ; kẻ viết văn vu khống"},
+    {"id": "lex.en.100k.090838", "hw": "libelling", "pos": "verb", "ipa": "/ˈlaɪbəlɪŋ/", "vi": "hành vi phỉ báng; vu khống"},
+    {"id": "lex.en.100k.090839", "hw": "libellist", "pos": "noun", "ipa": "/ˈlaɪbəlɪst/", "vi": "tác giả bài báo bôi nhọ xúc phạm"},
+    {"id": "lex.en.100k.090840", "hw": "libels", "pos": "verb", "ipa": "/ˈlaɪbəlz/", "vi": "phỉ báng; bôi nhọ danh dự"},
+    {"id": "lex.en.100k.090841", "hw": "liber", "pos": "noun", "ipa": "/ˈlaɪbər/", "vi": "mô libe vỏ trong thực vật"},
+    {"id": "lex.en.100k.090842", "hw": "liberalisms", "pos": "noun", "ipa": "/ˈlɪbərəlɪzəmz/", "vi": "các trào lưu chủ nghĩa tự do"},
+    {"id": "lex.en.100k.090843", "hw": "liberalistic", "pos": "adj", "ipa": "/ˌlɪbərəˈlɪstɪk/", "vi": "theo khuynh hướng tự do"},
+    {"id": "lex.en.100k.090844", "hw": "liberalized", "pos": "verb", "ipa": "/ˈlɪbərəlaɪzd/", "vi": "đã tự do hóa thương mại"},
+    {"id": "lex.en.100k.090845", "hw": "liberalizes", "pos": "verb", "ipa": "/ˈlɪbərəlaɪzɪz/", "vi": "tự do hóa; nới lỏng kiểm soát"},
+    {"id": "lex.en.100k.090846", "hw": "liberalizing", "pos": "verb", "ipa": "/ˈlɪbərəlaɪzɪŋ/", "vi": "đang tự do hóa nền kinh tế"},
+    {"id": "lex.en.100k.090847", "hw": "liberalness", "pos": "noun", "ipa": "/ˈlɪbərəlnɪs/", "vi": "tính rộng rãi; tính phóng khoáng"},
+    {"id": "lex.en.100k.090848", "hw": "liberates", "pos": "verb", "ipa": "/ˈlɪbəreɪts/", "vi": "giải phóng; phóng thích tự do"},
+    {"id": "lex.en.100k.090849", "hw": "liberating", "pos": "adj", "ipa": "/ˈlɪbəreɪtɪŋ/", "vi": "mang lại tự do; giải thoát"},
+    {"id": "lex.en.100k.090850", "hw": "liberations", "pos": "noun", "ipa": "/ˌlɪbəˈreɪʃənz/", "vi": "các cuộc giải phóng; sự giải thoát"},
+    {"id": "lex.en.100k.090851", "hw": "liberticide", "pos": "noun", "ipa": "/lɪˈbɜːrtɪsaɪd/", "vi": "sự hủy diệt tự do; kẻ bóp nghẹt"},
+    {"id": "lex.en.100k.090852", "hw": "liberties", "pos": "noun", "ipa": "/ˈlɪbərtiz/", "vi": "các quyền tự do công dân"},
+    {"id": "lex.en.100k.090853", "hw": "libertinage", "pos": "noun", "ipa": "/ˈlɪbərtiːnɪdʒ/", "vi": "lối sống phóng đãng trụy lạc"},
+    {"id": "lex.en.100k.090854", "hw": "libidinousness", "pos": "noun", "ipa": "/lɪˈbɪdɪnəsnɪs/", "vi": "thói dâm đãng; dục vọng bản năng"},
+    {"id": "lex.en.100k.090855", "hw": "libocedrus", "pos": "noun", "ipa": "/ˌlaɪboʊˈsiːdrəs/", "vi": "chi trắc bách Libocedrus"},
+    {"id": "lex.en.100k.090856", "hw": "libran", "pos": "noun", "ipa": "/ˈliːbrən/", "vi": "người thuộc cung Thiên Bình"},
+    {"id": "lex.en.100k.090857", "hw": "librarians", "pos": "noun", "ipa": "/laɪˈbrɛəriənz/", "vi": "các thủ thư; cán bộ thư viện"},
+    {"id": "lex.en.100k.090858", "hw": "librarianships", "pos": "noun", "ipa": "/laɪˈbrɛəriənʃɪps/", "vi": "nghề thủ thư; nghiệp vụ thư viện"},
+    {"id": "lex.en.100k.090859", "hw": "libraries", "pos": "noun", "ipa": "/ˈlaɪbrɛriz/", "vi": "các thư viện; bộ sưu tập sách"},
+    {"id": "lex.en.100k.090860", "hw": "librate", "pos": "verb", "ipa": "/ˈlaɪbreɪt/", "vi": "dao động lắc lư; giữ thăng bằng"},
+    {"id": "lex.en.100k.090861", "hw": "libratory", "pos": "adj", "ipa": "/ˈlaɪbrətɔːri/", "vi": "chuyển động lắc lư; dao động quang"},
+    {"id": "lex.en.100k.090862", "hw": "libretti", "pos": "noun", "ipa": "/lɪˈbrɛti/", "vi": "các lời thoại kịch bản opera"},
+    {"id": "lex.en.100k.090863", "hw": "librettists", "pos": "noun", "ipa": "/lɪˈbrɛtɪsts/", "vi": "những người viết lời nhạc kịch"},
+    {"id": "lex.en.100k.090864", "hw": "libritabs", "pos": "noun", "ipa": "/ˈlɪbrɪtæbz/", "vi": "thuốc an thần Libritabs"},
+    {"id": "lex.en.100k.090865", "hw": "lice", "pos": "noun", "ipa": "/laɪs/", "vi": "các con chấy rận"},
+    {"id": "lex.en.100k.090866", "hw": "licences", "pos": "verb", "ipa": "/ˈlaɪsənsɪz/", "vi": "cấp phép; phê duyệt bản quyền"},
+    {"id": "lex.en.100k.090867", "hw": "licencing", "pos": "noun", "ipa": "/ˈlaɪsənsɪŋ/", "vi": "việc cấp giấy phép; nhượng quyền"},
+    {"id": "lex.en.100k.090868", "hw": "licensable", "pos": "adj", "ipa": "/ˈlaɪsənsəbəl/", "vi": "có thể cấp phép; nhượng quyền được"},
+    {"id": "lex.en.100k.090869", "hw": "licensor", "pos": "noun", "ipa": "/ˈlaɪsənsɔːr/", "vi": "bên cấp phép; người cấp bản quyền"},
+    {"id": "lex.en.100k.090870", "hw": "licentiates", "pos": "noun", "ipa": "/laɪˈsɛnʃiɪts/", "vi": "những người có bằng cấp hành nghề"},
+    {"id": "lex.en.100k.090871", "hw": "licentiateship", "pos": "noun", "ipa": "/laɪˈsɛnʃiɪtʃɪp/", "vi": "chứng chỉ hành nghề; văn bằng"},
+    {"id": "lex.en.100k.090872", "hw": "licentiously", "pos": "adv", "ipa": "/laɪˈsɛnʃəsli/", "vi": "một cách buông thả; dâm loạn"},
+    {"id": "lex.en.100k.090873", "hw": "lich", "pos": "noun", "ipa": "/lɪtʃ/", "vi": "xác chết; pháp sư xác sống lich"},
+    {"id": "lex.en.100k.090874", "hw": "lichanura", "pos": "noun", "ipa": "/ˌlɪkəˈnjʊərə/", "vi": "chi trăn hồng Lichanura"},
+    {"id": "lex.en.100k.090875", "hw": "lichee", "pos": "noun", "ipa": "/ˈliːtʃiː/", "vi": "trái vải; cây vải thiều"},
+    {"id": "lex.en.100k.090876", "hw": "lichenales", "pos": "noun", "ipa": "/ˌlaɪkəˈneɪliːz/", "vi": "bộ địa y Lichenales"},
+    {"id": "lex.en.100k.090877", "hw": "lichened", "pos": "adj", "ipa": "/ˈlaɪkənd/", "vi": "phủ đầy địa y rêu mốc"},
+    {"id": "lex.en.100k.090878", "hw": "lichenes", "pos": "noun", "ipa": "/laɪˈkiːniːz/", "vi": "nhóm sinh vật địa y"},
+    {"id": "lex.en.100k.090879", "hw": "lichenise", "pos": "verb", "ipa": "/ˈlaɪkənaɪz/", "vi": "phủ đầy địa y; biến thành địa y"},
+    {"id": "lex.en.100k.090880", "hw": "lichenize", "pos": "verb", "ipa": "/ˈlaɪkənaɪz/", "vi": "phủ địa y; chuyển dạng địa y"},
+    {"id": "lex.en.100k.090881", "hw": "lichenology", "pos": "noun", "ipa": "/ˌlaɪkəˈnɑːlədʒi/", "vi": "ngành nghiên cứu địa y học"},
+    {"id": "lex.en.100k.090882", "hw": "lichenous", "pos": "adj", "ipa": "/ˈlaɪkənəs/", "vi": "thuộc địa y; có dạng như địa y"},
+    {"id": "lex.en.100k.090883", "hw": "lichgate", "pos": "noun", "ipa": "/ˈlɪtʃɡeɪt/", "vi": "cổng nghĩa trang có mái che"},
+    {"id": "lex.en.100k.090884", "hw": "lichi", "pos": "noun", "ipa": "/ˈliːtʃiː/", "vi": "trái vải thiều"},
+    {"id": "lex.en.100k.090885", "hw": "licitly", "pos": "adv", "ipa": "/ˈlɪsɪtli/", "vi": "một cách hợp pháp; đúng phép"},
+    {"id": "lex.en.100k.090886", "hw": "licitness", "pos": "noun", "ipa": "/ˈlɪsɪtnɪs/", "vi": "tính hợp pháp; tính chính đáng"},
+    {"id": "lex.en.100k.090887", "hw": "lickerish", "pos": "adj", "ipa": "/ˈlɪkərɪʃ/", "vi": "thèm ăn ngon; ham mê sắc dục"},
+    {"id": "lex.en.100k.090888", "hw": "lickerishness", "pos": "noun", "ipa": "/ˈlɪkərɪʃnɪs/", "vi": "thói thèm ăn ngon; tính dâm ô"},
+    {"id": "lex.en.100k.090889", "hw": "licks", "pos": "verb", "ipa": "/lɪks/", "vi": "liếm láp; đánh bại đối thủ"},
+    {"id": "lex.en.100k.090890", "hw": "lickspittle", "pos": "noun", "ipa": "/ˈlɪkˌspɪtəl/", "vi": "kẻ bợ đỡ nịnh bợ; kẻ quỵ lụy"},
+    {"id": "lex.en.100k.090891", "hw": "lictor", "pos": "noun", "ipa": "/ˈlɪktɔːr/", "vi": "thị vệ bảo vệ quan La Mã"},
+    {"id": "lex.en.100k.090892", "hw": "liechtensteiner", "pos": "noun", "ipa": "/ˈlɪktənˌʃtaɪnər/", "vi": "người dân công quốc Liechtenstein"},
+    {"id": "lex.en.100k.090893", "hw": "lieder", "pos": "noun", "ipa": "/ˈliːdər/", "vi": "các bài hát nghệ thuật Lieder"},
+    {"id": "lex.en.100k.090894", "hw": "liederkranz", "pos": "noun", "ipa": "/ˈliːdərkrænts/", "vi": "phô mai Liederkranz của Mỹ"},
+    {"id": "lex.en.100k.090895", "hw": "liegeman", "pos": "noun", "ipa": "/ˈliːdʒmən/", "vi": "bề tôi trung thành; người chư hầu"},
+    {"id": "lex.en.100k.090896", "hw": "lienable", "pos": "adj", "ipa": "/ˈliːənəbəl/", "vi": "có thể giữ làm vật bảo đảm nợ"},
+    {"id": "lex.en.100k.090897", "hw": "lienal", "pos": "adj", "ipa": "/laɪˈiːnəl/", "vi": "thuộc về lá lách"},
+    {"id": "lex.en.100k.090898", "hw": "liens", "pos": "noun", "ipa": "/ˈliːənz/", "vi": "các quyền giữ tài sản trừ nợ"},
+    {"id": "lex.en.100k.090899", "hw": "lierne", "pos": "noun", "ipa": "/liˈɜːrn/", "vi": "gân vòm phụ gothic lierne"},
+    {"id": "lex.en.100k.090900", "hw": "lies", "pos": "noun", "ipa": "/laɪz/", "vi": "những lời dối trá; sự gian dối"},
+    {"id": "lex.en.100k.090901", "hw": "lieutenants", "pos": "noun", "ipa": "/luːˈtɛnənts/", "vi": "các trung úy; cấp phó chỉ huy"}
+]
+
+assert len(data) == 100
+for i, (r, rev) in enumerate(zip(raw, data)):
+    assert r['id'] == rev['id'] and r['hw'] == rev['hw'], f"Mismatch at {i}: {r['id']} vs {rev['id']}"
+    assert rev['vi'] and len(rev['vi']) <= 35, f"vi length > 35 at {i}: {rev['vi']}"
+    assert rev['pos'] in ["noun", "verb", "adj", "adv", "intj", "prep", "pron", "conj", "det", "num"], f"pos invalid at {i}: {rev['pos']}"
+    ipa = rev['ipa'].strip()
+    assert ipa.startswith('/') and ipa.endswith('/') and ipa.count('/') == 2, f"ipa format invalid at {i}: {ipa}"
+    rev['ipa'] = ipa
+    rev['status'] = "reviewed"
+    rev['cefr'] = r.get('cefr')
+    rev['tier'] = r.get('tier')
+    rev['notes'] = r.get('notes')
+
+print("Part 4 validated successfully!")

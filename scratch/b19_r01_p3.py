@@ -1,0 +1,122 @@
+import json
+
+raw = json.load(open("scratch/b19_r01_raw_p3.json"))
+assert len(raw) == 100
+
+data = [
+    {"id": "lex.en.100k.090202", "hw": "laneway", "pos": "noun", "ipa": "/ˈleɪnweɪ/", "vi": "ngõ hẻm nhỏ; đường ngõ"},
+    {"id": "lex.en.100k.090203", "hw": "langbeineite", "pos": "noun", "ipa": "/ˈlæŋbaɪnaɪt/", "vi": "khoáng vật langbeinite"},
+    {"id": "lex.en.100k.090204", "hw": "langbeinite", "pos": "noun", "ipa": "/ˈlæŋbaɪnaɪt/", "vi": "khoáng vật kali sunfat"},
+    {"id": "lex.en.100k.090205", "hw": "langlauf", "pos": "noun", "ipa": "/ˈlɑːŋlaʊf/", "vi": "môn trượt tuyết băng đồng"},
+    {"id": "lex.en.100k.090206", "hw": "langlaufer", "pos": "noun", "ipa": "/ˈlɑːŋlaʊfər/", "vi": "vận động viên trượt tuyết"},
+    {"id": "lex.en.100k.090207", "hw": "langobard", "pos": "noun", "ipa": "/ˈlæŋɡəbɑːrd/", "vi": "người Lombard; người Langobard"},
+    {"id": "lex.en.100k.090208", "hw": "langobardic", "pos": "adj", "ipa": "/ˌlæŋɡəˈbɑːrdɪk/", "vi": "thuộc người Lombard"},
+    {"id": "lex.en.100k.090209", "hw": "langouste", "pos": "noun", "ipa": "/lɒŋˈɡuːst/", "vi": "tôm hùm gai; tôm rồng không càng"},
+    {"id": "lex.en.100k.090210", "hw": "langsat", "pos": "noun", "ipa": "/ˈlæŋsæt/", "vi": "trái bòn bon; quả lòn bon"},
+    {"id": "lex.en.100k.090211", "hw": "langset", "pos": "noun", "ipa": "/ˈlæŋsɛt/", "vi": "cây bòn bon; trái bòn bon"},
+    {"id": "lex.en.100k.090212", "hw": "langsyne", "pos": "adv", "ipa": "/læŋˈsaɪn/", "vi": "thuở xưa; những ngày xa xưa"},
+    {"id": "lex.en.100k.090213", "hw": "languages", "pos": "noun", "ipa": "/ˈlæŋɡwɪdʒɪz/", "vi": "các ngôn ngữ; tiếng nói"},
+    {"id": "lex.en.100k.090214", "hw": "langue", "pos": "noun", "ipa": "/lɑːŋɡ/", "vi": "hệ thống ngôn ngữ; tiếng nói"},
+    {"id": "lex.en.100k.090215", "hw": "languet", "pos": "noun", "ipa": "/ˈlæŋɡwɪt/", "vi": "lưỡi gà nhạc cụ; vật hình lưỡi"},
+    {"id": "lex.en.100k.090216", "hw": "languidness", "pos": "noun", "ipa": "/ˈlæŋɡwɪdnɪs/", "vi": "sự uể oải; vẻ lừ đừ chậm chạp"},
+    {"id": "lex.en.100k.090217", "hw": "languished", "pos": "verb", "ipa": "/ˈlæŋɡwɪʃt/", "vi": "đã suy yếu; đã mòn mỏi héo hon"},
+    {"id": "lex.en.100k.090218", "hw": "languisher", "pos": "noun", "ipa": "/ˈlæŋɡwɪʃər/", "vi": "người sống mòn mỏi; người héo hon"},
+    {"id": "lex.en.100k.090219", "hw": "languishes", "pos": "verb", "ipa": "/ˈlæŋɡwɪʃɪz/", "vi": "suy yếu dần; mòn mỏi; héo tàn"},
+    {"id": "lex.en.100k.090220", "hw": "languishing", "pos": "adj", "ipa": "/ˈlæŋɡwɪʃɪŋ/", "vi": "mòn mỏi; tiều tụy; đắm đuối"},
+    {"id": "lex.en.100k.090221", "hw": "languishment", "pos": "noun", "ipa": "/ˈlæŋɡwɪʃmənt/", "vi": "tình trạng mòn mỏi; sự tiều tụy"},
+    {"id": "lex.en.100k.090222", "hw": "laniard", "pos": "noun", "ipa": "/ˈlænjərd/", "vi": "dây quàng cổ; dây buộc thiết bị"},
+    {"id": "lex.en.100k.090223", "hw": "laniary", "pos": "adj", "ipa": "/ˈleɪniəri/", "vi": "để xé thịt; thuộc răng nanh"},
+    {"id": "lex.en.100k.090224", "hw": "laniferous", "pos": "adj", "ipa": "/læˈnɪfərəs/", "vi": "sinh lông len; có phủ lông len"},
+    {"id": "lex.en.100k.090225", "hw": "lanigerous", "pos": "adj", "ipa": "/ləˈnɪdʒərəs/", "vi": "mang lông cừu; có lớp lông len"},
+    {"id": "lex.en.100k.090226", "hw": "laniidae", "pos": "noun", "ipa": "/ləˈnaɪɪdiː/", "vi": "họ chim bách thanh"},
+    {"id": "lex.en.100k.090227", "hw": "lankiness", "pos": "noun", "ipa": "/ˈlæŋkinɪs/", "vi": "dáng cao gầy nghều ngào"},
+    {"id": "lex.en.100k.090228", "hw": "lanoline", "pos": "noun", "ipa": "/ˈlænəlɪn/", "vi": "mỡ lông cừu; sáp mỡ lanolin"},
+    {"id": "lex.en.100k.090229", "hw": "lansa", "pos": "noun", "ipa": "/ˈlɑːnsə/", "vi": "trái bòn bon; trái lansa"},
+    {"id": "lex.en.100k.090230", "hw": "lansat", "pos": "noun", "ipa": "/ˈlɑːnsæt/", "vi": "trái bòn bon Nam Á"},
+    {"id": "lex.en.100k.090231", "hw": "lanseh", "pos": "noun", "ipa": "/ˈlɑːnsɛ/", "vi": "trái bòn bon Mã Lai"},
+    {"id": "lex.en.100k.090232", "hw": "lanset", "pos": "noun", "ipa": "/ˈlɑːnsɛt/", "vi": "trái bòn bon; quả lòn bon"},
+    {"id": "lex.en.100k.090233", "hw": "lansquenet", "pos": "noun", "ipa": "/ˈlænskənɛt/", "vi": "trò bài lansquenet; lính đánh thuê"},
+    {"id": "lex.en.100k.090234", "hw": "lanternfish", "pos": "noun", "ipa": "/ˈlæntərnfɪʃ/", "vi": "cá đèn lồng; cá phát sáng"},
+    {"id": "lex.en.100k.090235", "hw": "lanthanoid", "pos": "noun", "ipa": "/ˈlænθənɔɪd/", "vi": "nguyên tố nhóm lantan; lantanit"},
+    {"id": "lex.en.100k.090236", "hw": "lanthanon", "pos": "noun", "ipa": "/ˈlænθənɒn/", "vi": "nguyên tố đất hiếm nhóm lantan"},
+    {"id": "lex.en.100k.090237", "hw": "lanthanotidae", "pos": "noun", "ipa": "/ˌlænθəˈnɒtɪdiː/", "vi": "họ kỳ đà không tai Lanthanotidae"},
+    {"id": "lex.en.100k.090238", "hw": "lanthanotus", "pos": "noun", "ipa": "/ˌlænθəˈnoʊtəs/", "vi": "chi kỳ đà không tai Lanthanotus"},
+    {"id": "lex.en.100k.090239", "hw": "lanthorn", "pos": "noun", "ipa": "/ˈlæntərn/", "vi": "đèn lồng cổ kính; đèn bọc sừng"},
+    {"id": "lex.en.100k.090240", "hw": "lanyards", "pos": "noun", "ipa": "/ˈlænjərdz/", "vi": "những dây đeo thẻ; dây thừng nhỏ"},
+    {"id": "lex.en.100k.090241", "hw": "laodicean", "pos": "adj", "ipa": "/ˌleɪoʊdɪˈsiːən/", "vi": "thờ ơ lãnh đạm; nửa vời tôn giáo"},
+    {"id": "lex.en.100k.090242", "hw": "laoighis", "pos": "noun", "ipa": "/ˈliːʃ/", "vi": "hạt Laois ở Ireland"},
+    {"id": "lex.en.100k.090243", "hw": "laparocele", "pos": "noun", "ipa": "/ˈlæpəroʊsiːl/", "vi": "thoát vị thành bụng"},
+    {"id": "lex.en.100k.090244", "hw": "lapas", "pos": "noun", "ipa": "/ˈlɑːpəz/", "vi": "nhà lợp rơm lapa (châu Phi)"},
+    {"id": "lex.en.100k.090245", "hw": "lapboard", "pos": "noun", "ipa": "/ˈlæpbɔːrd/", "vi": "bảng đặt trên đùi; bàn kê đùi"},
+    {"id": "lex.en.100k.090246", "hw": "lapful", "pos": "noun", "ipa": "/ˈlæpfʊl/", "vi": "vạt áo đầy; lòng đầy đồ vật"},
+    {"id": "lex.en.100k.090247", "hw": "lapicide", "pos": "noun", "ipa": "/ˈlæpɪsaɪd/", "vi": "thợ đẽo đá; thợ khắc bia đá"},
+    {"id": "lex.en.100k.090248", "hw": "lapidarian", "pos": "adj", "ipa": "/ˌlæpɪˈdɛəriən/", "vi": "khắc vào bia đá; thuộc khắc đá"},
+    {"id": "lex.en.100k.090249", "hw": "lapidarist", "pos": "noun", "ipa": "/ˈlæpɪdərɪst/", "vi": "chuyên gia chế tác đá quý"},
+    {"id": "lex.en.100k.090250", "hw": "lapidate", "pos": "verb", "ipa": "/ˈlæpɪdeɪt/", "vi": "ném đá trừng phạt; ném đá giết"},
+    {"id": "lex.en.100k.090251", "hw": "lapidation", "pos": "noun", "ipa": "/ˌlæpɪˈdeɪʃən/", "vi": "hình phạt ném đá; sự ném đá"},
+    {"id": "lex.en.100k.090252", "hw": "lapidator", "pos": "noun", "ipa": "/ˈlæpɪdeɪtər/", "vi": "kẻ ném đá tử hình"},
+    {"id": "lex.en.100k.090253", "hw": "lapidify", "pos": "verb", "ipa": "/ləˈpɪdɪfaɪ/", "vi": "hóa đá; biến thành đá"},
+    {"id": "lex.en.100k.090254", "hw": "lapidist", "pos": "noun", "ipa": "/ˈlæpɪdɪst/", "vi": "thợ mài ngọc; thợ cắt đá quý"},
+    {"id": "lex.en.100k.090255", "hw": "lapidodendron", "pos": "noun", "ipa": "/ˌlæpɪdoʊˈdɛndrɒn/", "vi": "cây hóa thạch vảy Lepidodendron"},
+    {"id": "lex.en.100k.090256", "hw": "lapilus", "pos": "noun", "ipa": "/ləˈpɪləs/", "vi": "sỏi núi lửa; mảnh dung nham nhỏ"},
+    {"id": "lex.en.100k.090257", "hw": "laplander", "pos": "noun", "ipa": "/ˈlæplændər/", "vi": "người bản địa Lapland"},
+    {"id": "lex.en.100k.090258", "hw": "laportea", "pos": "noun", "ipa": "/ləˈpɔːrtiə/", "vi": "chi cây nàng hai Laportea"},
+    {"id": "lex.en.100k.090259", "hw": "lapped", "pos": "verb", "ipa": "/læpt/", "vi": "đã liếm láp; đã quấn phủ"},
+    {"id": "lex.en.100k.090260", "hw": "lappic", "pos": "noun", "ipa": "/ˈlæpɪk/", "vi": "ngôn ngữ Sami; tiếng Lapland"},
+    {"id": "lex.en.100k.090261", "hw": "lapplander", "pos": "noun", "ipa": "/ˈlæplændər/", "vi": "người vùng Lapland; người Sami"},
+    {"id": "lex.en.100k.090262", "hw": "lappula", "pos": "noun", "ipa": "/ˈlæpjʊlə/", "vi": "chi cây ké chó Lappula"},
+    {"id": "lex.en.100k.090263", "hw": "laps", "pos": "verb", "ipa": "/læps/", "vi": "liếm láp; vỗ bập bùng"},
+    {"id": "lex.en.100k.090264", "hw": "lapsable", "pos": "adj", "ipa": "/ˈlæpsəbəl/", "vi": "có thể hết hiệu lực; dễ sa ngã"},
+    {"id": "lex.en.100k.090265", "hw": "lapses", "pos": "verb", "ipa": "/ˈlæpsɪz/", "vi": "mất hiệu lực; rơi vào thoái hóa"},
+    {"id": "lex.en.100k.090266", "hw": "lapstrake", "pos": "adj", "ipa": "/ˈlæpstreɪk/", "vi": "ván ghép chồng mép đóng thuyền"},
+    {"id": "lex.en.100k.090267", "hw": "lapstreak", "pos": "adj", "ipa": "/ˈlæpstriːk/", "vi": "ghép chồng mép vỏ thuyền"},
+    {"id": "lex.en.100k.090268", "hw": "lapsus", "pos": "noun", "ipa": "/ˈlæpsəs/", "vi": "sự lỡ lời; sơ suất vô ý"},
+    {"id": "lex.en.100k.090269", "hw": "laputan", "pos": "adj", "ipa": "/ləˈpjuːtən/", "vi": "viển vông; hoang tưởng phi thực tế"},
+    {"id": "lex.en.100k.090270", "hw": "lar", "pos": "noun", "ipa": "/lɑːr/", "vi": "thần hộ mệnh gia đình La Mã"},
+    {"id": "lex.en.100k.090271", "hw": "larcener", "pos": "noun", "ipa": "/ˈlɑːrsənər/", "vi": "kẻ trộm cắp tài sản"},
+    {"id": "lex.en.100k.090272", "hw": "larcenist", "pos": "noun", "ipa": "/ˈlɑːrsənɪst/", "vi": "kẻ trộm cắp; tên trộm"},
+    {"id": "lex.en.100k.090273", "hw": "lardaceous", "pos": "adj", "ipa": "/lɑːrˈdeɪʃəs/", "vi": "dạng mỡ; giống mỡ động vật"},
+    {"id": "lex.en.100k.090274", "hw": "larded", "pos": "verb", "ipa": "/ˈlɑːrdɪd/", "vi": "đã nhồi mỡ; chêm xen từ ngữ"},
+    {"id": "lex.en.100k.090275", "hw": "larding", "pos": "noun", "ipa": "/ˈlɑːrdɪŋ/", "vi": "sự nhồi mỡ vào thịt; sự chêm xen"},
+    {"id": "lex.en.100k.090276", "hw": "lardizabala", "pos": "noun", "ipa": "/ˌlɑːrdɪzəˈbɑːlə/", "vi": "chi dây leo Lardizabala"},
+    {"id": "lex.en.100k.090277", "hw": "lardizabalaceae", "pos": "noun", "ipa": "/ˌlɑːrdɪˌzæbəˈleɪsiː/", "vi": "họ dây mộc thông Lardizabalaceae"},
+    {"id": "lex.en.100k.090278", "hw": "lardon", "pos": "noun", "ipa": "/ˈlɑːrdɒn/", "vi": "thỏi mỡ lợn rán; dải mỡ lợn"},
+    {"id": "lex.en.100k.090279", "hw": "lardoon", "pos": "noun", "ipa": "/lɑːrˈduːn/", "vi": "dải mỡ lợn lách vào thịt"},
+    {"id": "lex.en.100k.090280", "hw": "lards", "pos": "verb", "ipa": "/lɑːrdz/", "vi": "nhồi mỡ; chêm thêm vào"},
+    {"id": "lex.en.100k.090281", "hw": "lardy", "pos": "adj", "ipa": "/ˈlɑːrdi/", "vi": "béo ngậy; chứa nhiều mỡ lợn"},
+    {"id": "lex.en.100k.090282", "hw": "lares", "pos": "noun", "ipa": "/ˈlɛəriːz/", "vi": "các vị thần giữ nhà La Mã"},
+    {"id": "lex.en.100k.090283", "hw": "largest", "pos": "adj", "ipa": "/ˈlɑːrdʒɪst/", "vi": "lớn nhất; rộng lớn nhất"},
+    {"id": "lex.en.100k.090284", "hw": "larghissimo", "pos": "adj", "ipa": "/lɑːrˈɡɪsɪmoʊ/", "vi": "rất chậm và trang nghiêm"},
+    {"id": "lex.en.100k.090285", "hw": "lariated", "pos": "verb", "ipa": "/ˈlærieɪtɪd/", "vi": "đã quăng thòng lọng bắt"},
+    {"id": "lex.en.100k.090286", "hw": "lariating", "pos": "verb", "ipa": "/ˈlærieɪtɪŋ/", "vi": "quăng dây thòng lọng bắt"},
+    {"id": "lex.en.100k.090287", "hw": "lariats", "pos": "verb", "ipa": "/ˈlærieɪts/", "vi": "quăng dây thòng lọng; bắt thú"},
+    {"id": "lex.en.100k.090288", "hw": "laricariidae", "pos": "noun", "ipa": "/ˌlɔːrɪkəˈraɪɪdiː/", "vi": "họ cá lau kính da giáp"},
+    {"id": "lex.en.100k.090289", "hw": "larid", "pos": "noun", "ipa": "/ˈlærɪd/", "vi": "chim họ mòng biển"},
+    {"id": "lex.en.100k.090290", "hw": "laridae", "pos": "noun", "ipa": "/ˈlærɪdiː/", "vi": "họ chim mòng biển"},
+    {"id": "lex.en.100k.090291", "hw": "larium", "pos": "noun", "ipa": "/ˈlɛəriəm/", "vi": "thuốc trị sốt rét Larium"},
+    {"id": "lex.en.100k.090292", "hw": "larked", "pos": "verb", "ipa": "/lɑːrkt/", "vi": "đã vui đùa; đã trêu chọc"},
+    {"id": "lex.en.100k.090293", "hw": "larkiness", "pos": "noun", "ipa": "/ˈlɑːrkinɪs/", "vi": "tính tinh nghịch; thói thích đùa"},
+    {"id": "lex.en.100k.090294", "hw": "larking", "pos": "verb", "ipa": "/ˈlɑːrkɪŋ/", "vi": "đùa nghịch tinh quái; vui chơi"},
+    {"id": "lex.en.100k.090295", "hw": "larkingly", "pos": "adv", "ipa": "/ˈlɑːrkɪŋli/", "vi": "một cách tinh nghịch; bông đùa"},
+    {"id": "lex.en.100k.090296", "hw": "larks", "pos": "verb", "ipa": "/lɑːrks/", "vi": "đùa cợt; trêu chọc tinh nghịch"},
+    {"id": "lex.en.100k.090297", "hw": "larky", "pos": "adj", "ipa": "/ˈlɑːrki/", "vi": "thích bông đùa; nghịch ngợm"},
+    {"id": "lex.en.100k.090298", "hw": "larodopa", "pos": "noun", "ipa": "/ˌlærəˈdoʊpə/", "vi": "thuốc Larodopa trị Parkinson"},
+    {"id": "lex.en.100k.090299", "hw": "larotid", "pos": "noun", "ipa": "/ləˈroʊtɪd/", "vi": "kháng sinh amoxicillin Larotid"},
+    {"id": "lex.en.100k.090300", "hw": "larrikin", "pos": "noun", "ipa": "/ˈlærɪkɪn/", "vi": "kẻ côn đồ đường phố; gã quậy phá"},
+    {"id": "lex.en.100k.090301", "hw": "larrikinism", "pos": "noun", "ipa": "/ˈlærɪkɪnɪzəm/", "vi": "hành vi côn đồ; thói quậy phá ồn ào"}
+]
+
+assert len(data) == 100
+for i, (r, rev) in enumerate(zip(raw, data)):
+    assert r['id'] == rev['id'] and r['hw'] == rev['hw'], f"Mismatch at {i}: {r['id']} vs {rev['id']}"
+    assert rev['vi'] and len(rev['vi']) <= 35, f"vi length > 35 at {i}: {rev['vi']}"
+    assert rev['pos'] in ["noun", "verb", "adj", "adv", "intj", "prep", "pron", "conj", "det", "num"], f"pos invalid at {i}: {rev['pos']}"
+    ipa = rev['ipa'].strip()
+    assert ipa.startswith('/') and ipa.endswith('/') and ipa.count('/') == 2, f"ipa format invalid at {i}: {ipa}"
+    rev['ipa'] = ipa
+    rev['status'] = "reviewed"
+    rev['cefr'] = r.get('cefr')
+    rev['tier'] = r.get('tier')
+    rev['notes'] = r.get('notes')
+
+print("Part 3 validated successfully!")

@@ -1,0 +1,126 @@
+import json
+
+reviewed_items = [
+  {"id": "lex.en.200k.032302", "hw": "four horsemen", "pos": "phrase", "ipa": "/fɔːr ˈhɔːrsmən/", "vi": "bốn kỵ sĩ Khải Huyền Kinh Thánh", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.032303", "hw": "fragmentation bomb", "pos": "phrase", "ipa": "/ˌfræɡmənˈteɪʃən bɑːm/", "vi": "bom phân mảnh sát thương cao", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.032304", "hw": "galley proof", "pos": "phrase", "ipa": "/ˈɡæli pruːf/", "vi": "bản in thử bông chữ trước xuất bản", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.032305", "hw": "galway bay", "pos": "phrase", "ipa": "/ˈɡɔːlweɪ beɪ/", "vi": "vịnh Galway danh thắng Ireland", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.032306", "hw": "gas gage", "pos": "phrase", "ipa": "/ɡæs ɡeɪdʒ/", "vi": "đồng hồ báo mức xăng xe cộ", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.032307", "hw": "gas thermometer", "pos": "phrase", "ipa": "/ɡæs θərˈmɑːmɪtər/", "vi": "nhiệt kế thể tích khí chuẩn xác", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.032308", "hw": "gin and tonic", "pos": "phrase", "ipa": "/dʒɪn ænd ˈtɑːnɪk/", "vi": "cocktail rượu gin pha nước tonic", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.032309", "hw": "golden horde", "pos": "phrase", "ipa": "/ˈɡoʊldən hɔːrd/", "vi": "Kim Trướng hãn quốc Mông Cổ", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.032310", "hw": "gracie allen", "pos": "phrase", "ipa": "/ˈɡreɪsi ˈælən/", "vi": "Gracie Allen (danh hài kịch Mỹ)", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.032311", "hw": "grappling iron", "pos": "phrase", "ipa": "/ˈɡræplɪŋ ˈaɪərn/", "vi": "móc sắt leo tường; móc neo bám", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.032312", "hw": "head lice", "pos": "phrase", "ipa": "/hɛd laɪs/", "vi": "chấy rận trên da đầu; bệnh chấy", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.032313", "hw": "hierarchical classification system", "pos": "phrase", "ipa": "/ˌhaɪəˈrɑːrkɪkəl ˌklæsəfəˈkeɪʃən ˈsɪstəm/", "vi": "hệ thống phân loại phân cấp bậc", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.032314", "hw": "immersion heater", "pos": "phrase", "ipa": "/ɪˈmɜːrʒən ˈhiːtər/", "vi": "cây đun nước nhúng; thanh nhiệt", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.032315", "hw": "inferior thyroid vein", "pos": "phrase", "ipa": "/ɪnˈfɪəriər ˈθaɪrɔɪd veɪn/", "vi": "tĩnh mạch tuyến giáp dưới", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.032316", "hw": "ionic order", "pos": "phrase", "ipa": "/aɪˈɑːnɪk ˈɔːrdər/", "vi": "thức cột Ionic kiến trúc Hy Lạp", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.032317", "hw": "jackson pollock", "pos": "phrase", "ipa": "/ˈdʒæksən ˈpɑːlək/", "vi": "J. Pollock (danh họa trừu tượng)", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.032318", "hw": "jerking off", "pos": "phrase", "ipa": "/ˈdʒɜːrkɪŋ ɔːf/", "vi": "lãng phí thì giờ; tự kích dục", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.032319", "hw": "john macleod", "pos": "phrase", "ipa": "/dʒɑːn məˈklaʊd/", "vi": "John Macleod (Nobel Y học Insulin)", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.032320", "hw": "john wilkes booth", "pos": "phrase", "ipa": "/dʒɑːn wɪlks buːθ/", "vi": "John Wilkes Booth (ám sát Lincoln)", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.032321", "hw": "king lear", "pos": "phrase", "ipa": "/kɪŋ lɪər/", "vi": "vở bi kịch Vua Lear Shakespeare", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.032322", "hw": "kink up", "pos": "phrase", "ipa": "/kɪŋk ʌp/", "vi": "bị xoắn gập lại; làm quăn quéo", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.032323", "hw": "knuckle joint", "pos": "phrase", "ipa": "/ˈnʌkəl dʒɔɪnt/", "vi": "khớp nối then cơ khí; khớp ngón", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.032324", "hw": "lac wax", "pos": "phrase", "ipa": "/læk wæks/", "vi": "chất sáp tách từ cánh kiến đỏ", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.032325", "hw": "lead carbonate", "pos": "phrase", "ipa": "/lɛd ˈkɑːrbəneɪt/", "vi": "chì cacbonat PbCO3 chất màu trắng", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.032326", "hw": "leafy vegetable", "pos": "phrase", "ipa": "/ˈliːfi ˈvɛdʒtəbəl/", "vi": "các loại rau ăn lá xanh tốt", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.032327", "hw": "left coronary artery", "pos": "phrase", "ipa": "/lɛft ˈkɔːrənɛri ˈɑːrtəri/", "vi": "động mạch vành trái nuôi tim", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.032328", "hw": "lip fern", "pos": "phrase", "ipa": "/lɪp fɜːrn/", "vi": "loài dương xỉ môi Cheilanthes", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.032329", "hw": "machine readable dictionary", "pos": "phrase", "ipa": "/məˈʃiːn ˈriːdəbəl ˈdɪkʃənɛri/", "vi": "từ điển đọc được bằng máy tính", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.032330", "hw": "magnetic equator", "pos": "phrase", "ipa": "/mæɡˈnɛtɪk ɪˈkweɪtər/", "vi": "đường xích đạo từ trường Trái Đất", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.032331", "hw": "magnolia family", "pos": "phrase", "ipa": "/mæɡˈnoʊliə ˈfæməli/", "vi": "họ thực vật hoa mộc lan", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.032332", "hw": "magnolia state", "pos": "phrase", "ipa": "/mæɡˈnoʊliə steɪt/", "vi": "biệt danh bang Mississippi Mỹ", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.032333", "hw": "marsh buggy", "pos": "phrase", "ipa": "/mɑːrʃ ˈbʌɡi/", "vi": "xe bánh lớn chạy đầm lầy lội", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.032334", "hw": "melvin calvin", "pos": "phrase", "ipa": "/ˈmɛlvɪn ˈkælvɪn/", "vi": "Melvin Calvin (Nobel chu trình C)", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.032335", "hw": "menstrual blood", "pos": "phrase", "ipa": "/ˈmɛnstruəl blʌd/", "vi": "kinh nguyệt; máu hành kinh phụ nữ", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.032336", "hw": "mercantile law", "pos": "phrase", "ipa": "/ˈmɜːrkəntaɪl lɔː/", "vi": "ngành luật thương mại buôn bán", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.032337", "hw": "mercantile system", "pos": "phrase", "ipa": "/ˈmɜːrkəntaɪl ˈsɪstəm/", "vi": "chủ nghĩa trọng thương kinh tế", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.032338", "hw": "microwave linear accelerator", "pos": "phrase", "ipa": "/ˈmaɪkroʊweɪv ˈlɪniər ækˈsɛləreɪtər/", "vi": "máy gia tốc tuyến tính vi sóng", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.032339", "hw": "mm hg", "pos": "phrase", "ipa": "/ˈmɪləˌmiːtər əv ˈmɜːrkjəri/", "vi": "milimét thủy ngân mmHg đo áp lực", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.032340", "hw": "mud midget", "pos": "phrase", "ipa": "/mʌd ˈmɪdʒɪt/", "vi": "cây cỏ lùn đầm lầy Wolffiella", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.032341", "hw": "muzzle velocity", "pos": "phrase", "ipa": "/ˈmʌzəl vəˈlɑːsəti/", "vi": "vận tốc đầu nòng súng đạn đạo", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.032342", "hw": "negative reinforcing stimulus", "pos": "phrase", "ipa": "/ˈnɛɡətɪv ˌriːɪnˈfɔːrsɪŋ ˈstɪmjələs/", "vi": "kích thích củng cố tiêu cực", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.032343", "hw": "northern oak fern", "pos": "phrase", "ipa": "/ˈnɔːrðərn oʊk fɜːrn/", "vi": "dương xỉ sồi xứ lạnh Gymnocarpium", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.032344", "hw": "nucleus niger", "pos": "phrase", "ipa": "/ˈnuːkliəs ˈnaɪdʒər/", "vi": "vùng chất đen não trung thất y học", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.032345", "hw": "on the qt", "pos": "phrase", "ipa": "/ɑːn ðə ˌkjuːˈtiː/", "vi": "bí mật lén lút; hoàn toàn kín đáo", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.032346", "hw": "oyster stew", "pos": "phrase", "ipa": "/ˈɔɪstər stuː/", "vi": "món súp hàu sữa hầm kem béo ngậy", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.032347", "hw": "pacific newt", "pos": "phrase", "ipa": "/pəˈsɪfɪk nuːt/", "vi": "sa giông bờ Thái Bình Dương Taricha", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.032348", "hw": "panoramic view", "pos": "phrase", "ipa": "/ˌpænəˈræmɪk vjuː/", "vi": "tầm nhìn toàn cảnh bao quát 360 độ", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.032349", "hw": "pharaoh ant", "pos": "phrase", "ipa": "/ˈfɛroʊ ænt/", "vi": "loài kiến vàng Pharaon Monomorium", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.032350", "hw": "pine fern", "pos": "phrase", "ipa": "/paɪn fɜːrn/", "vi": "loài dương xỉ thông Anemia", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.032351", "hw": "poison parsley", "pos": "phrase", "ipa": "/ˈpɔɪzən ˈpɑːrsli/", "vi": "cây độc cần tây Conium maculatum", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.032352", "hw": "positive reinforcing stimulus", "pos": "phrase", "ipa": "/ˈpɑːzətɪv ˌriːɪnˈfɔːrsɪŋ ˈstɪmjələs/", "vi": "kích thích củng cố tích cực tâm lý", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.032353", "hw": "posterior facial vein", "pos": "phrase", "ipa": "/pɑːˈstɪəriər ˈfeɪʃəl veɪn/", "vi": "tĩnh mạch sau hàm mặt giải phẫu", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.032354", "hw": "potato fern", "pos": "phrase", "ipa": "/pəˈteɪtoʊ fɜːrn/", "vi": "loài dương xỉ củ Solanopteris", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.032355", "hw": "president lyndon johnson", "pos": "phrase", "ipa": "/ˈprɛzɪdənt ˈlɪndən ˈdʒɑːnsən/", "vi": "Tổng thống Mỹ Lyndon B. Johnson", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.032356", "hw": "pressure gage", "pos": "phrase", "ipa": "/ˈprɛʃər ɡeɪdʒ/", "vi": "áp kế; đồng hồ đo áp suất khí thủy", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.032357", "hw": "profit taker", "pos": "phrase", "ipa": "/ˈprɑːfɪt ˈteɪkər/", "vi": "nhà đầu tư chốt lời cổ phiếu", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.032358", "hw": "public mover", "pos": "phrase", "ipa": "/ˈpʌblɪk ˈmuːvər/", "vi": "công ty dịch vụ chuyển dọn nhà cửa", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.032359", "hw": "rain gage", "pos": "phrase", "ipa": "/reɪn ɡeɪdʒ/", "vi": "vũ lượng kế; dụng cụ đo lượng mưa", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.032360", "hw": "reciprocal cross", "pos": "phrase", "ipa": "/rɪˈsɪprəkəl krɔːs/", "vi": "phép lai thuận nghịch di truyền học", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.032361", "hw": "redwood national park", "pos": "phrase", "ipa": "/ˈrɛdwʊd ˈnæʃənəl pɑːrk/", "vi": "Vườn quốc gia Cự sam Redwood Mỹ", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.032362", "hw": "removable disk", "pos": "phrase", "ipa": "/rɪˈmuːvəbəl dɪsk/", "vi": "ổ đĩa cứng di động tháo rời", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.032363", "hw": "renal calculus", "pos": "phrase", "ipa": "/ˈriːnl ˈkælkjələs/", "vi": "chứng sỏi thận; sạn thận y học", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.032364", "hw": "renal cortex", "pos": "phrase", "ipa": "/ˈriːnl ˈkɔːrtɛks/", "vi": "vỏ thận phần ngoài giải phẫu", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.032365", "hw": "republic of paraguay", "pos": "phrase", "ipa": "/rɪˈpʌblɪk əv ˈpærəɡwaɪ/", "vi": "Cộng hòa Paraguay tại Nam Mỹ", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.032366", "hw": "republic of uzbekistan", "pos": "phrase", "ipa": "/rɪˈpʌblɪk əv ʊzˌbɛkɪˈstæn/", "vi": "Cộng hòa Uzbekistan ở Trung Á", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.032367", "hw": "reusable program", "pos": "phrase", "ipa": "/riːˈjuːzəbəl ˈproʊɡræm/", "vi": "chương trình máy tính tái sử dụng", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.032368", "hw": "richter scale", "pos": "phrase", "ipa": "/ˈrɪktər skeɪl/", "vi": "thang đo địa chấn động đất Richter", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.032369", "hw": "right coronary artery", "pos": "phrase", "ipa": "/raɪt ˈkɔːrənɛri ˈɑːrtəri/", "vi": "động mạch vành phải tim giải phẫu", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.032370", "hw": "round clam", "pos": "phrase", "ipa": "/raʊnd klæm/", "vi": "loài nghêu tròn Mercenaria", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.032371", "hw": "rutherford atom", "pos": "phrase", "ipa": "/ˈrʌðərfərd ˈætəm/", "vi": "mô hình nguyên tử Rutherford", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.032372", "hw": "sabine river", "pos": "phrase", "ipa": "/səˈbiːn ˈrɪvər/", "vi": "sông Sabine biên giới Texas", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.032373", "hw": "salt shaker", "pos": "phrase", "ipa": "/sɔːlt ˈʃeɪkər/", "vi": "lọ rắc muối nhỏ trên bàn ăn", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.032374", "hw": "sash lock", "pos": "phrase", "ipa": "/sæʃ lɑːk/", "vi": "khóa chốt cửa sổ trượt đứng", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.032375", "hw": "scotch broth", "pos": "phrase", "ipa": "/skɑːtʃ brɔːθ/", "vi": "món súp thịt cừu lúa mạch Scotland", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.032376", "hw": "sea squirt", "pos": "phrase", "ipa": "/siː skwɜːrt/", "vi": "loài hải tiêu thân mềm hình túi", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.032377", "hw": "selective jamming", "pos": "phrase", "ipa": "/səˈlɛktɪv ˈdʒæmɪŋ/", "vi": "gây nhiễu sóng vô tuyến có chọn lọc", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.032378", "hw": "silky oak", "pos": "phrase", "ipa": "/ˈsɪlki oʊk/", "vi": "cây sồi tơ Grevillea robusta Úc", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.032379", "hw": "soft shield fern", "pos": "phrase", "ipa": "/sɔːft ʃiːld fɜːrn/", "vi": "loài dương xỉ khiên mềm Polystichum", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.032380", "hw": "spruce squirrel", "pos": "phrase", "ipa": "/spruːs ˈskwɜːrəl/", "vi": "loài sóc đỏ rừng thông vân sam", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.032381", "hw": "squirt gun", "pos": "phrase", "ipa": "/skwɜːrt ɡʌn/", "vi": "khẩu súng phun nước đồ chơi", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.032382", "hw": "staggered head", "pos": "phrase", "ipa": "/ˈstæɡərd hɛd/", "vi": "dòng tiêu đề in so le lệch hàng", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.032383", "hw": "star magnolia", "pos": "phrase", "ipa": "/stɑːr mæɡˈnoʊliə/", "vi": "cây hoa mộc lan hình sao trắng", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.032384", "hw": "stationery seller", "pos": "phrase", "ipa": "/ˈsteɪʃənɛri ˈsɛlər/", "vi": "người bán đồ văn phòng phẩm", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.032385", "hw": "stephen william hawking", "pos": "phrase", "ipa": "/ˈstiːvən ˈwɪljəm ˈhɔːkɪŋ/", "vi": "Stephen Hawking (nhà vũ trụ học)", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.032386", "hw": "steroid hormone", "pos": "phrase", "ipa": "/ˈstɪərɔɪd ˈhɔːrmoʊn/", "vi": "hoóc-môn steroid điều hòa sinh học", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.032387", "hw": "storm sash", "pos": "phrase", "ipa": "/stɔːrm sæʃ/", "vi": "khung cửa sổ chắn gió bão lắp ngoài", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.032388", "hw": "surface gage", "pos": "phrase", "ipa": "/ˈsɜːrfɪs ɡeɪdʒ/", "vi": "thước vạch dấu mặt phẳng cơ khí", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.032389", "hw": "taurus the bull", "pos": "phrase", "ipa": "/ˈtɔːrəs ðə bʊl/", "vi": "chòm sao Kim Ngưu hoàng đạo", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.032390", "hw": "thomas carlyle", "pos": "phrase", "ipa": "/ˈtɑːməs kɑːrˈlaɪl/", "vi": "Thomas Carlyle (sử gia triết gia)", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.032391", "hw": "thread blight", "pos": "phrase", "ipa": "/θrɛd blaɪt/", "vi": "bệnh nấm chỉ trắng lá cây trồng", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.032392", "hw": "ticket taker", "pos": "phrase", "ipa": "/ˈtɪkɪt ˈteɪkər/", "vi": "nhân viên kiểm soát thu vé", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.032393", "hw": "tom hanks", "pos": "phrase", "ipa": "/tɑːm hæŋks/", "vi": "Tom Hanks (nam tài tử gạo cội Mỹ)", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.032394", "hw": "torque converter", "pos": "phrase", "ipa": "/ˈtɔːrk kənˈvɜːrtər/", "vi": "bộ biến mô thủy lực ô tô tự động", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.032395", "hw": "totalitarian state", "pos": "phrase", "ipa": "/toʊˌtæləˈtɛəriən steɪt/ ", "vi": "nhà nước độc tài toàn trị", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.032396", "hw": "trade stoppage", "pos": "phrase", "ipa": "/treɪd ˈstɑːpɪdʒ/", "vi": "lệnh đình chỉ giao thương cấm vận", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.032397", "hw": "tramp down", "pos": "phrase", "ipa": "/træmp daʊn/", "vi": "giẫm đạp mạnh xuống đất; nén chặt", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.032398", "hw": "trinidad and tobago", "pos": "phrase", "ipa": "/ˈtrɪnɪdæd ænd təˈbeɪɡoʊ/", "vi": "quốc đảo Trinidad và Tobago", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.032399", "hw": "trot out", "pos": "phrase", "ipa": "/trɑːt aʊt/", "vi": "lặp lại sáo rỗng; lôi ra khoe", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.032400", "hw": "unfavorable position", "pos": "phrase", "ipa": "/ʌnˈfeɪvərəbəl pəˈzɪʃən/", "vi": "vị thế bất lợi; thế yếu trong cuộc", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.032401", "hw": "wiggle nail", "pos": "phrase", "ipa": "/ˈwɪɡəl neɪl/", "vi": "chiếc đinh dập sóng ghép mộng gỗ", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+]
+
+# Note: check boundary space in item 93 (totalitarian state): "/toʊˌtæləˈtɛəriən steɪt/ " -> "/toʊˌtæləˈtɛəriən steɪt/"
+reviewed_items[93]["ipa"] = "/toʊˌtæləˈtɛəriən steɪt/"
+
+with open('scratch/b27_r05_raw_p4.json') as f:
+    raw_p4 = json.load(f)
+
+assert len(reviewed_items) == 100
+for i, (item, raw_item) in enumerate(zip(reviewed_items, raw_p4)):
+    assert item['id'] == raw_item['id'], f"ID mismatch at {i}: {item['id']} vs {raw_item['id']}"
+    assert item['hw'] == raw_item['hw'], f"HW mismatch at {i}: {item['hw']} vs {raw_item['hw']}"
+    assert len(item['vi']) <= 35, f"Vietnamese too long at {i} ({item['hw']}): {len(item['vi'])} chars: {item['vi']}"
+    assert item['pos'] in ['noun', 'verb', 'adj', 'adv', 'phrase', 'intj', 'prep', 'conj', 'pron', 'det', 'num'], f"Invalid pos: {item['pos']}"
+    if item['ipa']:
+        assert item['ipa'].startswith('/') and item['ipa'].endswith('/'), f"Invalid IPA format: {item['ipa']}"
+        assert item['ipa'].count('/') == 2, f"IPA slashes count != 2: {item['ipa']}"
+        assert not item['ipa'].startswith('/ ') and not item['ipa'].endswith(' /'), f"Boundary space in IPA: {item['ipa']}"
+
+with open('scratch/b27_r05_p4.json', 'w', encoding='utf-8') as f:
+    json.dump(reviewed_items, f, ensure_ascii=False, indent=2)
+
+print("Successfully validated and wrote 100 items to scratch/b27_r05_p4.json")

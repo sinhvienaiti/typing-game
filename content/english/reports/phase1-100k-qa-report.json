@@ -1,0 +1,161 @@
+{
+  "schemaVersion": 1,
+  "title": "Phase 1 Vocabulary Expansion (100,000 Words) QA Audit Report",
+  "generatedAt": "2026-11-12T10:20:00Z",
+  "summary": {
+    "totalWords": 100000,
+    "withIpaCount": 43064,
+    "withIpaPercentage": "43.06%",
+    "shardsCount": 100,
+    "shardSizeBytesAverage": 632226
+  },
+  "breakdown": {
+    "byTier": {
+      "core": 25000,
+      "standard": 35000,
+      "expanded": 40000
+    },
+    "byCefr": {
+      "A1": 3214,
+      "A2": 3698,
+      "B1": 4979,
+      "B2": 5613,
+      "C1": 20232,
+      "C2": 62264
+    },
+    "bySource": {
+      "legacy-vocabulary": 17672,
+      "thichhoc-dict": 52414,
+      "viwiktionary-en": 29914
+    },
+    "byPartOfSpeech": {
+      "noun": 61188,
+      "adj": 21553,
+      "verb": 12938,
+      "adv": 4284,
+      "prep": 23,
+      "conj": 7,
+      "pron": 7
+    }
+  },
+  "qualityAssuranceChecks": {
+    "profanityBlocklist": "PASS - 0 violations detected",
+    "tokenShape": "PASS - 100% strictly matched ^[a-z]{2,24}$",
+    "vietnameseGlossNormalization": "PASS - 100% NFC cleaned, no HTML, no template tags",
+    "keyUniqueness": "PASS - 100,000 unique keys, 0 duplicates",
+    "schemaValidation": "PASS - Draft 2020-12 lexeme.schema.json compliant"
+  },
+  "stratifiedSamples": {
+    "core": [
+      {
+        "id": "lex.en.100k.000001",
+        "hw": "account",
+        "cefr": "A1",
+        "ipa": "/əˈkaʊnt/",
+        "vi": "tài khoản"
+      },
+      {
+        "id": "lex.en.100k.005001",
+        "hw": "satellite",
+        "cefr": "A2",
+        "ipa": "/ˈsætəˌlaɪt/",
+        "vi": "vệ tinh"
+      },
+      {
+        "id": "lex.en.100k.010001",
+        "hw": "sloppy",
+        "cefr": "B1",
+        "ipa": "/ˈslɑpi/",
+        "vi": "luộm thuộm, cẩu thả"
+      },
+      {
+        "id": "lex.en.100k.015001",
+        "hw": "penchant",
+        "cefr": "B2",
+        "ipa": "/ˈpɛntʃənt/",
+        "vi": "sự yêu thích; khuynh hướng"
+      },
+      {
+        "id": "lex.en.100k.025000",
+        "hw": "vermeer",
+        "cefr": "C1",
+        "ipa": "/ˈvɝmɪɹ/",
+        "vi": "Vermeer"
+      }
+    ],
+    "standard": [
+      {
+        "id": "lex.en.100k.025001",
+        "hw": "virology",
+        "cefr": "C1",
+        "ipa": "/vɪˈɹɑlədʒi/",
+        "vi": "virus học; vi-rút học; siêu vi học"
+      },
+      {
+        "id": "lex.en.100k.035001",
+        "hw": "preschooler",
+        "cefr": "C1",
+        "ipa": "/ˈpɹiˌskulɚ/",
+        "vi": "trẻ mẫu giáo"
+      },
+      {
+        "id": "lex.en.100k.045001",
+        "hw": "gimcrack",
+        "cefr": "C2",
+        "ipa": null,
+        "vi": "hào nhoáng, loè loẹt"
+      },
+      {
+        "id": "lex.en.100k.055001",
+        "hw": "celestite",
+        "cefr": "C2",
+        "ipa": null,
+        "vi": "khoáng vật celestit"
+      },
+      {
+        "id": "lex.en.100k.060000",
+        "hw": "apodosis",
+        "cefr": "C2",
+        "ipa": null,
+        "vi": "Vế chính của một câu chỉ điều kiện."
+      }
+    ],
+    "expanded": [
+      {
+        "id": "lex.en.100k.060001",
+        "hw": "apodous",
+        "cefr": "C2",
+        "ipa": null,
+        "vi": "không chân"
+      },
+      {
+        "id": "lex.en.100k.070001",
+        "hw": "cowedly",
+        "cefr": "C2",
+        "ipa": null,
+        "vi": "Xem cow"
+      },
+      {
+        "id": "lex.en.100k.080001",
+        "hw": "footballers",
+        "cefr": "C2",
+        "ipa": null,
+        "vi": "Số nhiều của footballer"
+      },
+      {
+        "id": "lex.en.100k.090001",
+        "hw": "lambdagram",
+        "cefr": "C2",
+        "ipa": null,
+        "vi": "Biểu đồ lamđa."
+      },
+      {
+        "id": "lex.en.100k.100000",
+        "hw": "peltasts",
+        "cefr": "C2",
+        "ipa": null,
+        "vi": "Số nhiều của peltast"
+      }
+    ]
+  }
+}

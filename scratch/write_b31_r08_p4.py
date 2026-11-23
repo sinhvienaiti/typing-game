@@ -1,0 +1,135 @@
+# -*- coding: utf-8 -*-
+import json
+
+part4_data = [
+  {"id": "lex.en.200k.053802", "hw": "minxes", "pos": "noun", "ipa": "/ˈmɪŋksɪz/", "vi": "những ả lẳng lơ ranh mãnh", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.053803", "hw": "mipses", "pos": "noun", "ipa": "/mɪpsɪz/", "vi": "đơn vị triệu lệnh trên một giây", "cefr": "C1", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.053804", "hw": "mountieses", "pos": "noun", "ipa": "/ˈmaʊntizɪz/", "vi": "cảnh sát kỵ binh hoàng gia Canada", "cefr": "C1", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.053805", "hw": "nebuchadnezzars", "pos": "noun", "ipa": "/ˌnɛbjʊkədˈnɛzərz/", "vi": "vua Nebuchadnezzar của Babylon", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.053806", "hw": "oriels", "pos": "noun", "ipa": "/ˈɔːriəlz/", "vi": "các cửa sổ nhô lồi tường nhà", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.053807", "hw": "ouses", "pos": "noun", "ipa": "/ˈuːzɪz/", "vi": "dòng sông Ouse ở nước Anh", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.053808", "hw": "pimlicos", "pos": "noun", "ipa": "/ˈpɪmlɪkoʊz/", "vi": "trường đua ngựa Pimlico nổi tiếng", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.053809", "hw": "pinholes", "pos": "noun", "ipa": "/ˈpɪnhoʊlz/", "vi": "những lỗ kim châm nhỏ li ti", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.053810", "hw": "reiters", "pos": "noun", "ipa": "/ˈraɪtərz/", "vi": "hội chứng viêm khớp Reiter", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.053811", "hw": "roasters", "pos": "noun", "ipa": "/ˈroʊstərz/", "vi": "lò rang cà phê; người tham gia giễu", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.053812", "hw": "roomies", "pos": "noun", "ipa": "/ˈruːmiz/", "vi": "những người bạn cùng phòng", "cefr": "B1", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.053813", "hw": "sabins", "pos": "noun", "ipa": "/ˈseɪbɪnz/", "vi": "đơn vị đo độ hấp thụ âm thanh sabin", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.053814", "hw": "spigots", "pos": "noun", "ipa": "/ˈspɪɡəts/", "vi": "vòi nước; nút vòi thùng rượu", "cefr": "C1", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.053815", "hw": "sprightlier", "pos": "adj", "ipa": "/ˈspraɪtliər/", "vi": "nhanh nhẹn hoạt bát linh hoạt hơn", "cefr": "C1", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.053816", "hw": "sprightliest", "pos": "adj", "ipa": "/ˈspraɪtliɪst/", "vi": "nhanh nhẹn linh hoạt hoạt bát nhất", "cefr": "C1", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.053817", "hw": "stiffens", "pos": "verb", "ipa": "/ˈstɪfənz/", "vi": "trở nên cứng đờ; căng thẳng lên", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.053818", "hw": "subwoofers", "pos": "noun", "ipa": "/ˈsʌbwuːfərz/", "vi": "loa siêu trầm âm bass trầm ấm", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.053819", "hw": "sullas", "pos": "noun", "ipa": "/ˈsʌləz/", "vi": "cây họ đậu sulla làm thức ăn cỏ", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.053820", "hw": "tahitians", "pos": "noun", "ipa": "/tɑːˈhiːʃənz/", "vi": "người dân bản địa đảo Tahiti", "cefr": "C1", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.053821", "hw": "taoisms", "pos": "noun", "ipa": "/ˈdaʊɪzəmz/", "vi": "các tông phái của Đạo giáo Lão giáo", "cefr": "C1", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.053822", "hw": "trajans", "pos": "noun", "ipa": "/ˈtreɪdʒənz/", "vi": "hoàng đế Trajan La Mã cổ đại", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.053823", "hw": "tricolors", "pos": "noun", "ipa": "/ˈtraɪkʌlərz/", "vi": "cờ tam tài ba dải màu sắc", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.053824", "hw": "triennials", "pos": "noun", "ipa": "/traɪˈɛniəlz/", "vi": "sự kiện ba năm một lần triển lãm", "cefr": "C1", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.053825", "hw": "trondheims", "pos": "noun", "ipa": "/ˈtrɒndheɪmz/", "vi": "thành phố lịch sử Trondheim Na Uy", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.053826", "hw": "ummahs", "pos": "noun", "ipa": "/ˈʊməz/", "vi": "cộng đồng Hồi giáo toàn thế giới", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.053827", "hw": "venas", "pos": "noun", "ipa": "/ˈviːnəz/", "vi": "các tĩnh mạch trong cơ thể", "cefr": "C1", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.053828", "hw": "warthogs", "pos": "noun", "ipa": "/ˈwɔːrt.hɑːɡz/", "vi": "loài lợn rừng bướu châu Phi", "cefr": "B1", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.053829", "hw": "wigglier", "pos": "adj", "ipa": "/ˈwɪɡliər/", "vi": "uốn éo ngo ngoe nhiều hơn", "cefr": "C1", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.053830", "hw": "wiggliest", "pos": "adj", "ipa": "/ˈwɪɡliɪst/", "vi": "uốn éo ngo ngoe nhiều nhất", "cefr": "C1", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.053831", "hw": "woolier", "pos": "adj", "ipa": "/ˈwʊliər/", "vi": "nhiều lông len hơn; mơ hồ hơn", "cefr": "C1", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.053832", "hw": "wooliest", "pos": "adj", "ipa": "/ˈwʊliɪst/", "vi": "nhiều lông len nhất; rối rắm nhất", "cefr": "C1", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.053833", "hw": "wusses", "pos": "noun", "ipa": "/ˈwʊsɪz/", "vi": "những kẻ yếu bóng vía hèn nhát", "cefr": "C1", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.053834", "hw": "appetite suppressant", "pos": "phrase", "ipa": "/ˈæpɪtaɪt səˈprɛsənt/", "vi": "thuốc kiềm chế sự thèm ăn giảm béo", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.053835", "hw": "azo group", "pos": "phrase", "ipa": "/ˈeɪzoʊ ɡruːp/", "vi": "nhóm chức azo trong hóa học hữu cơ", "cefr": "C1", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.053836", "hw": "azo radical", "pos": "phrase", "ipa": "/ˈeɪzoʊ ˈrædɪkəl/", "vi": "gốc hóa học tự do azo", "cefr": "C1", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.053837", "hw": "baling wire", "pos": "phrase", "ipa": "/ˈbeɪlɪŋ waɪər/", "vi": "dây kẽm buộc kiện hàng rơm khô", "cefr": "C1", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.053838", "hw": "beef goulash", "pos": "phrase", "ipa": "/biːf ˈɡuːlæʃ/", "vi": "món súp thịt bò hầm goulash cay", "cefr": "B1", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.053839", "hw": "box pleat", "pos": "phrase", "ipa": "/bɑːks pliːt/ ", "vi": "nếp gấp xếp li dạng hộp may mặc", "cefr": "C1", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.053840", "hw": "caesium clock", "pos": "phrase", "ipa": "/ˈsiːziəm klɑːk/", "vi": "đồng hồ nguyên tử caesi siêu chuẩn", "cefr": "C1", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.053841", "hw": "caiman lizard", "pos": "phrase", "ipa": "/ˈkeɪmən ˈlɪzərd/", "vi": "loài thằn lằn cá sấu Caiman Nam Mỹ", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.053842", "hw": "casey stengel", "pos": "phrase", "ipa": "/ˈkeɪsi ˈstɛŋɡəl/", "vi": "huấn luyện viên bóng chày Stengel", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.053843", "hw": "charles dodgson", "pos": "phrase", "ipa": "/tʃɑːrlz ˈdɑːdʒsən/", "vi": "nhà văn Lewis Carroll tên thật", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.053844", "hw": "ciliary veins", "pos": "phrase", "ipa": "/ˈsɪliɛri veɪnz/", "vi": "các tĩnh mạch thể mi của nhãn cầu", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.053845", "hw": "diethyl ether", "pos": "phrase", "ipa": "/daɪˌɛθəl ˈiːθər/", "vi": "dung môi ete dietyl gây mê y tế", "cefr": "C1", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.053846", "hw": "dorsal scapular vein", "pos": "phrase", "ipa": "/ˈdɔːrsəl ˈskæpjələr veɪn/", "vi": "tĩnh mạch lưng xương bả vai", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.053847", "hw": "efferent fiber", "pos": "phrase", "ipa": "/ˈɛfərənt ˈfaɪbər/", "vi": "sợi thần kinh ly tâm dẫn truyền", "cefr": "C1", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.053848", "hw": "fait accompli", "pos": "phrase", "ipa": "/ˌfɛt əkɑːmˈpliː/", "vi": "sự việc đã rồi; chuyện đã an bài", "cefr": "C1", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.053849", "hw": "frederick loewe", "pos": "phrase", "ipa": "/ˈfrɛdərɪk ˈloʊv/", "vi": "nhạc sĩ Frederick Loewe nhạc kịch", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.053850", "hw": "genus solanum", "pos": "phrase", "ipa": "/ˈdʒiːnəs soʊˈleɪnəm/", "vi": "chi Cà gồm khoai tây cà chua", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.053851", "hw": "genus tinea", "pos": "phrase", "ipa": "/ˈdʒiːnəs ˈtɪniə/", "vi": "chi bướm đêm cắn sợi vải Tinea", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.053852", "hw": "glomerular capsule", "pos": "phrase", "ipa": "/ɡloʊˈmɛrjələr ˈkæpsəl/", "vi": "bao Bowman bọc cầu thận lọc nước", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.053853", "hw": "hipped tile", "pos": "phrase", "ipa": "/hɪpt taɪl/", "vi": "ngói bò lợp bờ nóc chóp mái nhà", "cefr": "C1", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.053854", "hw": "hugo devries", "pos": "phrase", "ipa": "/ˈhjuːɡoʊ dəˈvriːz/", "vi": "nhà di truyền học Hugo de Vries", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.053855", "hw": "immune suppressant drug", "pos": "phrase", "ipa": "/ɪˈmjuːn səˈprɛsənt drʌɡ/", "vi": "thuốc ức chế hệ miễn dịch trị liệu", "cefr": "C1", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.053856", "hw": "irving langmuir", "pos": "phrase", "ipa": "/ˈɜːrvɪŋ ˈlæŋmjʊər/", "vi": "nhà hóa học Nobel Irving Langmuir", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.053857", "hw": "ivan lendl", "pos": "phrase", "ipa": "/ˈiːvɑːn ˈlɛndəl/", "vi": "huyền thoại quần vợt Ivan Lendl", "cefr": "C1", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.053858", "hw": "ivan petrovich pavlov", "pos": "phrase", "ipa": "/ˈiːvɑːn pɪˈtroʊvɪtʃ ˈpævlɒv/", "vi": "nhà sinh lý học Ivan Pavlov", "cefr": "C1", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.053859", "hw": "john le carre", "pos": "phrase", "ipa": "/dʒɑːn lə kɑːˈreɪ/", "vi": "nhà văn trinh thám John le Carré", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.053860", "hw": "jovian planet", "pos": "phrase", "ipa": "/ˈdʒoʊviən ˈplænɪt/", "vi": "hành tinh khí khổng lồ kiểu Mộc", "cefr": "C1", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.053861", "hw": "kick pleat", "pos": "phrase", "ipa": "/kɪk pliːt/", "vi": "nếp gấp xẻ tà sau chân váy tiện đi", "cefr": "C1", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.053862", "hw": "knife pleat", "pos": "phrase", "ipa": "/naɪf pliːt/", "vi": "nếp gấp xếp li mỏng dạng lưỡi dao", "cefr": "C1", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.053863", "hw": "lake chelan", "pos": "phrase", "ipa": "/leɪk ʃəˈlæn/", "vi": "hồ nước Chelan bang Washington Mỹ", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.053864", "hw": "le carre", "pos": "phrase", "ipa": "/lə kɑːˈreɪ/", "vi": "nhà văn tình báo John le Carré", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.053865", "hw": "lieder singer", "pos": "phrase", "ipa": "/ˈliːdər ˈsɪŋər/", "vi": "ca sĩ chuyên hát dòng ca khúc Đức", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.053866", "hw": "mack sennett", "pos": "phrase", "ipa": "/mæk ˈsɛnɪt/", "vi": "đạo diễn phim câm Mack Sennett", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.053867", "hw": "mackinaw boat", "pos": "phrase", "ipa": "/ˈmækɪnɔː boʊt/", "vi": "thuyền buồm mackinaw hồ lớn Bắc Mỹ", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.053868", "hw": "mackinaw coat", "pos": "phrase", "ipa": "/ˈmækɪnɔː koʊt/", "vi": "áo khoác len ấm dày họa tiết ca-rô", "cefr": "C1", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.053869", "hw": "mary wollstonecraft godwin", "pos": "phrase", "ipa": "/ˈmɛri ˈwʊlstənkræft ˈɡɑːdwɪn/", "vi": "nữ văn sĩ Mary Shelley tác giả", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.053870", "hw": "oleic acid", "pos": "phrase", "ipa": "/oʊˈliːɪk ˈæsɪd/", "vi": "axit béo oleic trong dầu thực vật", "cefr": "C1", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.053871", "hw": "patagonian desert", "pos": "phrase", "ipa": "/ˌpætəˈɡoʊniən ˈdɛzərt/", "vi": "hoang mạc Patagonia rộng lớn Nam Mỹ", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.053872", "hw": "paul cezanne", "pos": "phrase", "ipa": "/pɔːl seɪˈzæn/", "vi": "danh họa hậu ấn tượng Paul Cézanne", "cefr": "C1", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.053873", "hw": "pierre abelard", "pos": "phrase", "ipa": "/piˈɛər ˈæbəlɑːrd/", "vi": "triết gia kinh viện Pierre Abélard", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.053874", "hw": "prince peter kropotkin", "pos": "phrase", "ipa": "/prɪns ˈpiːtər kroʊˈpɑːtkɪn/", "vi": "hoàng thân Peter Kropotkin vô chính", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.053875", "hw": "prix fixe", "pos": "phrase", "ipa": "/ˌpriː ˈfiːks/", "vi": "bữa ăn trọn gói một mức giá cố định", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.053876", "hw": "proscenium wall", "pos": "phrase", "ipa": "/proʊˈsiːniəm wɔːl/", "vi": "tường vòm sân khấu ngăn khán phòng", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.053877", "hw": "quercus nigra", "pos": "phrase", "ipa": "/ˈkwɜːrkəs ˈnaɪɡrə/", "vi": "loài sồi đen vùng đầm lầy Bắc Mỹ", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.053878", "hw": "rectus superior", "pos": "phrase", "ipa": "/ˈrɛktəs suːˈpɪəriər/", "vi": "cơ thẳng trên của nhãn cầu mắt", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.053879", "hw": "repressor gene", "pos": "phrase", "ipa": "/rɪˈprɛsər dʒiːn/", "vi": "gen ức chế phiên mã di truyền", "cefr": "C1", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.053880", "hw": "res publica", "pos": "phrase", "ipa": "/reɪz ˈpʌblɪkə/", "vi": "việc công; nhà nước; nền cộng hòa", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.053881", "hw": "samuel langhorne clemens", "pos": "phrase", "ipa": "/ˈsæmjuəl ˈlæŋhɔːrn ˈklɛmənz/", "vi": "đại văn hào Mark Twain tên thật", "cefr": "C1", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.053882", "hw": "shah pahlavi", "pos": "phrase", "ipa": "/ʃɑː ˌpæhləˈviː/", "vi": "vua Shah Pahlavi cuối cùng xứ Ba Tư", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.053883", "hw": "sisal family", "pos": "phrase", "ipa": "/ˈsaɪsəl ˈfæməli/", "vi": "họ thực vật dứa sợi thùa gai", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.053884", "hw": "stormy petrel", "pos": "phrase", "ipa": "/ˈstɔːrmi ˈpɛtrəl/", "vi": "chim hải yến báo bão; kẻ khuấy động", "cefr": "C1", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.053885", "hw": "sui generis", "pos": "phrase", "ipa": "/ˌsuːi ˈdʒɛnərɪs/", "vi": "độc nhất vô nhị; loài riêng biệt", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.053886", "hw": "superior rectus", "pos": "phrase", "ipa": "/suːˈpɪəriər ˈrɛktəs/", "vi": "cơ thẳng trên vận động nhãn cầu", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.053887", "hw": "sword of damocles", "pos": "phrase", "ipa": "/sɔːrd əv ˈdæməkliːz/", "vi": "mối hiểm họa thường trực rình rập", "cefr": "C1", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.053888", "hw": "tuberous plant", "pos": "phrase", "ipa": "/ˈtuːbərəs plænt/", "vi": "loài thực vật tạo củ dưới mặt đất", "cefr": "C1", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.053889", "hw": "vibrio comma", "pos": "phrase", "ipa": "/ˈvɪbrioʊ ˈkɑːmə/", "vi": "phẩy khuẩn tả hình dấu phẩy", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.053890", "hw": "acquiesced", "pos": "verb", "ipa": "/ˌækwiˈɛst/", "vi": "đã miễn cưỡng chấp nhận bằng lòng", "cefr": "C1", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.053891", "hw": "acquiesces", "pos": "verb", "ipa": "/ˌækwiˈɛsɪz/", "vi": "bằng lòng ngầm; đồng thuận ngầm", "cefr": "C1", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.053892", "hw": "acquiescing", "pos": "verb", "ipa": "/ˌækwiˈɛsɪŋ/", "vi": "đang bằng lòng miễn cưỡng", "cefr": "C1", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.053893", "hw": "aditis", "pos": "noun", "ipa": "/ˈɑːdɪtiz/", "vi": "nữ thần mẹ Aditi trong Ấn Độ giáo", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.053894", "hw": "afghanis", "pos": "noun", "ipa": "/æfˈɡæniz/", "vi": "đồng tiền afghani của Afghanistan", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.053895", "hw": "agricolas", "pos": "noun", "ipa": "/əˈɡrɪkələz/", "vi": "tướng lĩnh Agricola thời La Mã", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.053896", "hw": "altimeters", "pos": "noun", "ipa": "/ælˈtɪmɪtərz/", "vi": "máy đo cao độ hàng không và leo núi", "cefr": "B2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.053897", "hw": "ameers", "pos": "noun", "ipa": "/əˈmɪərz/", "vi": "các tiểu vương thống đốc Hồi giáo", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.053898", "hw": "amurs", "pos": "noun", "ipa": "/ɑːˈmʊərz/", "vi": "dòng sông Amur biên giới Nga Trung", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.053899", "hw": "antareses", "pos": "noun", "ipa": "/ænˈtɑːriːzɪz/", "vi": "ngôi sao đỏ Antares chòm Bọ Cạp", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.053900", "hw": "attlees", "pos": "noun", "ipa": "/ˈætliz/", "vi": "Thủ tướng Anh Clement Attlee", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.200k.053901", "hw": "autocrats", "pos": "noun", "ipa": "/ˈɔːtəkræts/", "vi": "những kẻ độc tài chuyên chế", "cefr": "C1", "tier": "expanded", "status": "reviewed", "notes": ""},
+]
+
+for it in part4_data:
+    it['ipa'] = it['ipa'].strip()
+
+# Validation
+allowed_pos = {'noun', 'verb', 'adj', 'adv', 'num', 'intj', 'prep', 'pron', 'conj', 'det', 'phrase'}
+expected_keys = ['id', 'hw', 'pos', 'ipa', 'vi', 'cefr', 'tier', 'status', 'notes']
+
+assert len(part4_data) == 100, f"Length is {len(part4_data)}"
+
+with open('scratch/b31_r08_raw_p4.json') as f:
+    raw = json.load(f)
+
+for i, (item, raw_item) in enumerate(zip(part4_data, raw)):
+    assert item['id'] == raw_item['id'], f"ID mismatch at {i}: {item['id']} vs {raw_item['id']}"
+    assert item['hw'] == raw_item['hw'], f"HW mismatch at {i}: {item['hw']} vs {raw_item['hw']}"
+    assert list(item.keys()) == expected_keys, f"Keys mismatch at {i}: {list(item.keys())}"
+    assert item['pos'] in allowed_pos, f"pos invalid at {i}: {item['pos']}"
+    assert len(item['vi']) <= 35, f"vi too long ({len(item['vi'])} chars) at {i}: {item['vi']}"
+    assert item['status'] == 'reviewed'
+    if ' ' not in item['hw']:
+        assert item['ipa'].startswith('/') and item['ipa'].endswith('/') and len(item['ipa']) > 2, f"invalid ipa at {i}: {item['ipa']}"
+    if ';' in item['vi']:
+        for seg in item['vi'].split(';')[1:]:
+            assert seg.startswith(' '), f"missing space after semicolon at {i}: {item['vi']}"
+
+with open('scratch/b31_r08_p4.json', 'w', encoding='utf-8') as f:
+    json.dump(part4_data, f, ensure_ascii=False, indent=2)
+
+print("Validated and saved 100 items for Part 4")

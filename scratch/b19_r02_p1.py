@@ -1,0 +1,122 @@
+import json
+
+raw = json.load(open("scratch/b19_r02_raw_p1.json"))
+assert len(raw) == 100
+
+data = [
+    {"id": "lex.en.100k.090502", "hw": "leasing", "pos": "noun", "ipa": "/ˈliːsɪŋ/", "vi": "việc cho thuê tài chính; thuê mướn"},
+    {"id": "lex.en.100k.090503", "hw": "leat", "pos": "noun", "ipa": "/liːt/", "vi": "máng dẫn nước cối xay; mương nhỏ"},
+    {"id": "lex.en.100k.090504", "hw": "leatherfish", "pos": "noun", "ipa": "/ˈlɛðərfɪʃ/", "vi": "cá nóc gai da bò; cá bò da"},
+    {"id": "lex.en.100k.090505", "hw": "leatherjack", "pos": "noun", "ipa": "/ˈlɛðərdʒæk/", "vi": "cá da bò; ấu trùng ruồi chân dài"},
+    {"id": "lex.en.100k.090506", "hw": "leatherleaf", "pos": "noun", "ipa": "/ˈlɛðərliːf/", "vi": "cây lá dai Chamaedaphne"},
+    {"id": "lex.en.100k.090507", "hw": "leatherlike", "pos": "adj", "ipa": "/ˈlɛðərlaɪk/", "vi": "dai như da; giống như chất da"},
+    {"id": "lex.en.100k.090508", "hw": "leathern", "pos": "adj", "ipa": "/ˈlɛðərn/", "vi": "làm bằng da thuộc; giống da thuộc"},
+    {"id": "lex.en.100k.090509", "hw": "leatheroid", "pos": "noun", "ipa": "/ˈlɛðərɔɪd/", "vi": "giấy giả da; vật liệu giả da"},
+    {"id": "lex.en.100k.090510", "hw": "leathers", "pos": "noun", "ipa": "/ˈlɛðərz/", "vi": "quần áo da bảo hộ mô tô; đồ da"},
+    {"id": "lex.en.100k.090511", "hw": "leavens", "pos": "verb", "ipa": "/ˈlɛvənz/", "vi": "làm dậy men; làm phong phú thêm"},
+    {"id": "lex.en.100k.090512", "hw": "leaves", "pos": "noun", "ipa": "/liːvz/", "vi": "những chiếc lá; các trang giấy"},
+    {"id": "lex.en.100k.090513", "hw": "leavings", "pos": "noun", "ipa": "/ˈliːvɪŋz/", "vi": "đồ ăn thừa; những mảnh sót lại"},
+    {"id": "lex.en.100k.090514", "hw": "lebistes", "pos": "noun", "ipa": "/ləˈbɪstiːz/", "vi": "chi cá bảy màu Lebistes"},
+    {"id": "lex.en.100k.090515", "hw": "lecanopteris", "pos": "noun", "ipa": "/ˌlɛkəˈnɒptərɪs/", "vi": "chi dương xỉ kiến Lecanopteris"},
+    {"id": "lex.en.100k.090516", "hw": "lecanoraceae", "pos": "noun", "ipa": "/ˌlɛkənəˈreɪsiː/", "vi": "họ địa y đĩa Lecanoraceae"},
+    {"id": "lex.en.100k.090517", "hw": "leccinum", "pos": "noun", "ipa": "/ˈlɛksɪnəm/", "vi": "chi nấm xốp Leccinum"},
+    {"id": "lex.en.100k.090518", "hw": "lechanorales", "pos": "noun", "ipa": "/ˌlɛkənəˈreɪliːz/", "vi": "bộ địa y đĩa Lecanorales"},
+    {"id": "lex.en.100k.090519", "hw": "lechatelierite", "pos": "noun", "ipa": "/ləˌʃætəliˈɛraɪt/", "vi": "thủy tinh silica lechatelierit"},
+    {"id": "lex.en.100k.090520", "hw": "lecherously", "pos": "adv", "ipa": "/ˈlɛtʃərəsli/", "vi": "một cách dâm dục; dâm đãng"},
+    {"id": "lex.en.100k.090521", "hw": "lecherousness", "pos": "noun", "ipa": "/ˈlɛtʃərəsnɪs/", "vi": "tính dâm đãng; thói dâm ô háo sắc"},
+    {"id": "lex.en.100k.090522", "hw": "lechry", "pos": "noun", "ipa": "/ˈlɛtʃəri/", "vi": "thói dâm ô; sự dâm đãng trụy lạc"},
+    {"id": "lex.en.100k.090523", "hw": "lection", "pos": "noun", "ipa": "/ˈlɛkʃən/", "vi": "bài đọc kinh thánh; bài phụng vụ"},
+    {"id": "lex.en.100k.090524", "hw": "lectionary", "pos": "noun", "ipa": "/ˈlɛkʃənɛri/", "vi": "sách bài đọc kinh thánh phụng vụ"},
+    {"id": "lex.en.100k.090525", "hw": "lectured", "pos": "verb", "ipa": "/ˈlɛktʃərd/", "vi": "đã giảng bài; đã lên lớp dạy"},
+    {"id": "lex.en.100k.090526", "hw": "lecturers", "pos": "noun", "ipa": "/ˈlɛktʃərərz/", "vi": "các giảng viên; người thuyết trình"},
+    {"id": "lex.en.100k.090527", "hw": "lectures", "pos": "verb", "ipa": "/ˈlɛktʃərz/", "vi": "giảng bài; lên lớp; thuyết giảng"},
+    {"id": "lex.en.100k.090528", "hw": "lecythidaceae", "pos": "noun", "ipa": "/ˌlɛsɪθɪˈdeɪsiː/", "vi": "họ thực vật lộc vừng"},
+    {"id": "lex.en.100k.090529", "hw": "ledgeman", "pos": "noun", "ipa": "/ˈlɛdʒmən/", "vi": "thợ khai thác đá vỉa mỏ"},
+    {"id": "lex.en.100k.090530", "hw": "leeboard", "pos": "noun", "ipa": "/ˈliːbɔːrd/", "vi": "tấm ván cản dạt gió trên thuyền"},
+    {"id": "lex.en.100k.090531", "hw": "leeched", "pos": "verb", "ipa": "/liːtʃt/", "vi": "đã dùng đỉa hút máu; đã bòn rút"},
+    {"id": "lex.en.100k.090532", "hw": "leechee", "pos": "noun", "ipa": "/ˈliːtʃiː/", "vi": "trái vải; quả vải thiều"},
+    {"id": "lex.en.100k.090533", "hw": "leeches", "pos": "verb", "ipa": "/ˈliːtʃɪz/", "vi": "dùng đỉa hút máu; bòn rút của cải"},
+    {"id": "lex.en.100k.090534", "hw": "leeching", "pos": "noun", "ipa": "/ˈliːtʃɪŋ/", "vi": "thủ thuật đỉa hút máu; sự bòn rút"},
+    {"id": "lex.en.100k.090535", "hw": "leechlike", "pos": "adj", "ipa": "/ˈliːtʃlaɪk/", "vi": "bám dai như đỉa; ăn bám bòn rút"},
+    {"id": "lex.en.100k.090536", "hw": "leered", "pos": "verb", "ipa": "/lɪərd/", "vi": "đã liếc nhìn dâm đãng; trừng mắt"},
+    {"id": "lex.en.100k.090537", "hw": "leeriness", "pos": "noun", "ipa": "/ˈlɪərinɪs/", "vi": "sự cảnh giác dè chừng; tính láu cá"},
+    {"id": "lex.en.100k.090538", "hw": "leers", "pos": "verb", "ipa": "/lɪərz/", "vi": "liếc nhìn dâm đãng; cười nham hiểm"},
+    {"id": "lex.en.100k.090539", "hw": "leftward", "pos": "adv", "ipa": "/ˈlɛftwərd/", "vi": "về phía bên trái; hướng sang trái"},
+    {"id": "lex.en.100k.090540", "hw": "leftwards", "pos": "adv", "ipa": "/ˈlɛftwərdz/", "vi": "hướng sang bên trái; về cánh tả"},
+    {"id": "lex.en.100k.090541", "hw": "legacies", "pos": "noun", "ipa": "/ˈlɛɡəsiz/", "vi": "những di sản; tài sản thừa kế"},
+    {"id": "lex.en.100k.090542", "hw": "legalised", "pos": "verb", "ipa": "/ˈliːɡəlaɪzd/", "vi": "đã hợp pháp hóa; đã hợp thức hóa"},
+    {"id": "lex.en.100k.090543", "hw": "legalises", "pos": "verb", "ipa": "/ˈliːɡəlaɪzɪz/", "vi": "hợp pháp hóa; công nhận theo luật"},
+    {"id": "lex.en.100k.090544", "hw": "legalising", "pos": "verb", "ipa": "/ˈliːɡəlaɪzɪŋ/", "vi": "đang hợp pháp hóa; việc hợp thức"},
+    {"id": "lex.en.100k.090545", "hw": "legalisms", "pos": "noun", "ipa": "/ˈliːɡəlɪzəmz/", "vi": "các biểu hiện câu nệ luật pháp"},
+    {"id": "lex.en.100k.090546", "hw": "legalist", "pos": "noun", "ipa": "/ˈliːɡəlɪst/", "vi": "người theo pháp gia; câu nệ luật"},
+    {"id": "lex.en.100k.090547", "hw": "legalistic", "pos": "adj", "ipa": "/ˌliːɡəˈlɪstɪk/", "vi": "câu nệ luật pháp; giáo điều luật lệ"},
+    {"id": "lex.en.100k.090548", "hw": "legalists", "pos": "noun", "ipa": "/ˈliːɡəlɪsts/", "vi": "những người theo chủ nghĩa pháp trị"},
+    {"id": "lex.en.100k.090549", "hw": "legalized", "pos": "verb", "ipa": "/ˈliːɡəlaɪzd/", "vi": "đã hợp pháp hóa; đã chuẩn y luật"},
+    {"id": "lex.en.100k.090550", "hw": "legalizes", "pos": "verb", "ipa": "/ˈliːɡəlaɪzɪz/", "vi": "hợp pháp hóa; hợp thức hóa"},
+    {"id": "lex.en.100k.090551", "hw": "legalizing", "pos": "verb", "ipa": "/ˈliːɡəlaɪzɪŋ/", "vi": "hợp pháp hóa; tiến trình hợp pháp"},
+    {"id": "lex.en.100k.090552", "hw": "legasism", "pos": "noun", "ipa": "/ˈlɛɡəsɪzəm/", "vi": "thuyết pháp trị; sự tuân thủ luật"},
+    {"id": "lex.en.100k.090553", "hw": "legated", "pos": "verb", "ipa": "/ˈlɛɡeɪtɪd/", "vi": "đã để lại di sản bằng di chúc"},
+    {"id": "lex.en.100k.090554", "hw": "legates", "pos": "verb", "ipa": "/ˈlɛɡeɪts/", "vi": "di tặng; để lại tài sản thừa kế"},
+    {"id": "lex.en.100k.090555", "hw": "legateship", "pos": "noun", "ipa": "/ˈlɛɡətʃɪp/", "vi": "chức vụ sứ thần Tòa Thánh"},
+    {"id": "lex.en.100k.090556", "hw": "legating", "pos": "verb", "ipa": "/ˈlɛɡeɪtɪŋ/", "vi": "đang lập di chúc để lại di sản"},
+    {"id": "lex.en.100k.090557", "hw": "legator", "pos": "noun", "ipa": "/ləˈɡeɪtər/", "vi": "người lập di chúc chia tài sản"},
+    {"id": "lex.en.100k.090558", "hw": "legendist", "pos": "noun", "ipa": "/ˈlɛdʒəndɪst/", "vi": "người sưu tầm truyền thuyết"},
+    {"id": "lex.en.100k.090559", "hw": "legendize", "pos": "verb", "ipa": "/ˈlɛdʒəndaɪz/", "vi": "huyền thoại hóa; biến thành cổ tích"},
+    {"id": "lex.en.100k.090560", "hw": "legendry", "pos": "noun", "ipa": "/ˈlɛdʒəndri/", "vi": "kho tàng truyền thuyết; huyền thoại"},
+    {"id": "lex.en.100k.090561", "hw": "legerity", "pos": "noun", "ipa": "/lɪˈdʒɛrəti/", "vi": "sự thoăn thoắt; tính nhanh nhẹn"},
+    {"id": "lex.en.100k.090562", "hw": "leggings", "pos": "noun", "ipa": "/ˈlɛɡɪŋz/", "vi": "quần legging; ống xà cạp bọc chân"},
+    {"id": "lex.en.100k.090563", "hw": "leging", "pos": "noun", "ipa": "/ˈlɛɡɪŋ/", "vi": "xà cạp bảo hộ; ống bọc bắp chân"},
+    {"id": "lex.en.100k.090564", "hw": "legionaries", "pos": "noun", "ipa": "/ˈliːdʒənɛriz/", "vi": "những lính lê dương La Mã"},
+    {"id": "lex.en.100k.090565", "hw": "legislated", "pos": "verb", "ipa": "/ˈlɛdʒɪsleɪtɪd/", "vi": "đã ban hành luật pháp; lập pháp"},
+    {"id": "lex.en.100k.090566", "hw": "legislates", "pos": "verb", "ipa": "/ˈlɛdʒɪsleɪts/", "vi": "ban hành luật; làm luật lập pháp"},
+    {"id": "lex.en.100k.090567", "hw": "legislatorial", "pos": "adj", "ipa": "/ˌlɛdʒɪsləˈtɔːriəl/", "vi": "thuộc về cơ quan lập pháp"},
+    {"id": "lex.en.100k.090568", "hw": "legislatorship", "pos": "noun", "ipa": "/ˈlɛdʒɪsleɪtərʃɪp/", "vi": "vai trò nghị sĩ; cương vị lập pháp"},
+    {"id": "lex.en.100k.090569", "hw": "legist", "pos": "noun", "ipa": "/ˈliːdʒɪst/", "vi": "nhà làm luật; chuyên gia cổ luật"},
+    {"id": "lex.en.100k.090570", "hw": "legists", "pos": "noun", "ipa": "/ˈliːdʒɪsts/", "vi": "các nhà luật học; chuyên gia luật"},
+    {"id": "lex.en.100k.090571", "hw": "legit", "pos": "adj", "ipa": "/lɪˈdʒɪt/", "vi": "hợp pháp; chính đáng; chuẩn mực xịn"},
+    {"id": "lex.en.100k.090572", "hw": "legitimacies", "pos": "noun", "ipa": "/lɪˈdʒɪtɪmæsiz/", "vi": "tính hợp pháp; sự chính thống"},
+    {"id": "lex.en.100k.090573", "hw": "legitimated", "pos": "verb", "ipa": "/lɪˈdʒɪtɪmeɪtɪd/", "vi": "đã hợp pháp hóa; công nhận con đẻ"},
+    {"id": "lex.en.100k.090574", "hw": "legitimates", "pos": "verb", "ipa": "/lɪˈdʒɪtɪmeɪts/", "vi": "hợp pháp hóa; công nhận chính thức"},
+    {"id": "lex.en.100k.090575", "hw": "legitimating", "pos": "verb", "ipa": "/lɪˈdʒɪtɪmeɪtɪŋ/", "vi": "đang hợp pháp hóa; việc chính thức"},
+    {"id": "lex.en.100k.090576", "hw": "legitimatise", "pos": "verb", "ipa": "/lɪˈdʒɪtɪmətaɪz/", "vi": "hợp pháp hóa; công nhận hợp pháp"},
+    {"id": "lex.en.100k.090577", "hw": "legitimatised", "pos": "verb", "ipa": "/lɪˈdʒɪtɪmətaɪzd/", "vi": "đã hợp pháp hóa; đã hợp thức hóa"},
+    {"id": "lex.en.100k.090578", "hw": "legitimatises", "pos": "verb", "ipa": "/lɪˈdʒɪtɪmətaɪzɪz/", "vi": "hợp pháp hóa; công nhận theo luật"},
+    {"id": "lex.en.100k.090579", "hw": "legitimatising", "pos": "verb", "ipa": "/lɪˈdʒɪtɪmətaɪzɪŋ/", "vi": "việc công nhận hợp pháp"},
+    {"id": "lex.en.100k.090580", "hw": "legitimatize", "pos": "verb", "ipa": "/lɪˈdʒɪtɪmətaɪz/", "vi": "hợp pháp hóa; công nhận chính thức"},
+    {"id": "lex.en.100k.090581", "hw": "legitimatized", "pos": "verb", "ipa": "/lɪˈdʒɪtɪmətaɪzd/", "vi": "đã hợp pháp hóa; chính danh hóa"},
+    {"id": "lex.en.100k.090582", "hw": "legitimatizes", "pos": "verb", "ipa": "/lɪˈdʒɪtɪmətaɪzɪz/", "vi": "chính danh hóa; hợp pháp hóa"},
+    {"id": "lex.en.100k.090583", "hw": "legitimatizing", "pos": "verb", "ipa": "/lɪˈdʒɪtɪmətaɪzɪŋ/", "vi": "quá trình hợp pháp hóa"},
+    {"id": "lex.en.100k.090584", "hw": "legitimised", "pos": "verb", "ipa": "/lɪˈdʒɪtɪmaɪzd/", "vi": "đã hợp pháp hóa; đã chính thức hóa"},
+    {"id": "lex.en.100k.090585", "hw": "legitimises", "pos": "verb", "ipa": "/lɪˈdʒɪtɪmaɪzɪz/", "vi": "hợp pháp hóa; biến thành hợp lệ"},
+    {"id": "lex.en.100k.090586", "hw": "legitimising", "pos": "verb", "ipa": "/lɪˈdʒɪtɪmaɪzɪŋ/", "vi": "đang hợp pháp hóa; việc hợp thức"},
+    {"id": "lex.en.100k.090587", "hw": "legitimism", "pos": "noun", "ipa": "/lɪˈdʒɪtɪmɪzəm/", "vi": "chủ nghĩa chính thống quân chủ"},
+    {"id": "lex.en.100k.090588", "hw": "legitimisms", "pos": "noun", "ipa": "/lɪˈdʒɪtɪmɪzəmz/", "vi": "thuyết chính thống hoàng gia"},
+    {"id": "lex.en.100k.090589", "hw": "legitimist", "pos": "noun", "ipa": "/lɪˈdʒɪtɪmɪst/", "vi": "người theo phái chính thống"},
+    {"id": "lex.en.100k.090590", "hw": "legitimized", "pos": "verb", "ipa": "/lɪˈdʒɪtɪmaɪzd/", "vi": "đã hợp pháp hóa; công nhận hợp lệ"},
+    {"id": "lex.en.100k.090591", "hw": "legitimizes", "pos": "verb", "ipa": "/lɪˈdʒɪtɪmaɪzɪz/", "vi": "hợp thức hóa; hợp pháp hóa"},
+    {"id": "lex.en.100k.090592", "hw": "legitimizing", "pos": "verb", "ipa": "/lɪˈdʒɪtɪmaɪzɪŋ/", "vi": "đang hợp pháp hóa; việc chính danh"},
+    {"id": "lex.en.100k.090593", "hw": "leglike", "pos": "adj", "ipa": "/ˈlɛɡlaɪk/", "vi": "có dạng giống chân; hình như chân"},
+    {"id": "lex.en.100k.090594", "hw": "legman", "pos": "noun", "ipa": "/ˈlɛɡmæn/", "vi": "phóng viên săn tin hiện trường"},
+    {"id": "lex.en.100k.090595", "hw": "legroom", "pos": "noun", "ipa": "/ˈlɛɡruːm/", "vi": "khoang để chân; chỗ duỗi chân"},
+    {"id": "lex.en.100k.090596", "hw": "legumin", "pos": "noun", "ipa": "/ləˈɡjuːmɪn/", "vi": "protein hạt đậu legumin"},
+    {"id": "lex.en.100k.090597", "hw": "legwork", "pos": "noun", "ipa": "/ˈlɛɡwɜːrk/", "vi": "công việc chạy vạy thu thập tin tức"},
+    {"id": "lex.en.100k.090598", "hw": "lehr", "pos": "noun", "ipa": "/lɛər/", "vi": "lò ủ nhiệt thủy tinh lehr"},
+    {"id": "lex.en.100k.090599", "hw": "leibnitzian", "pos": "adj", "ipa": "/laɪbˈnɪtsiən/", "vi": "thuộc triết gia Leibniz"},
+    {"id": "lex.en.100k.090600", "hw": "leiopelma", "pos": "noun", "ipa": "/ˌlaɪoʊˈpɛlmə/", "vi": "chi ếch nguyên thủy New Zealand"},
+    {"id": "lex.en.100k.090601", "hw": "leiopelmatidae", "pos": "noun", "ipa": "/ˌlaɪoʊpɛlˈmætɪdiː/", "vi": "họ ếch nguyên thủy Leiopelmatidae"}
+]
+
+assert len(data) == 100
+for i, (r, rev) in enumerate(zip(raw, data)):
+    assert r['id'] == rev['id'] and r['hw'] == rev['hw'], f"Mismatch at {i}: {r['id']} vs {rev['id']}"
+    assert rev['vi'] and len(rev['vi']) <= 35, f"vi length > 35 at {i}: {rev['vi']}"
+    assert rev['pos'] in ["noun", "verb", "adj", "adv", "intj", "prep", "pron", "conj", "det", "num"], f"pos invalid at {i}: {rev['pos']}"
+    ipa = rev['ipa'].strip()
+    assert ipa.startswith('/') and ipa.endswith('/') and ipa.count('/') == 2, f"ipa format invalid at {i}: {ipa}"
+    rev['ipa'] = ipa
+    rev['status'] = "reviewed"
+    rev['cefr'] = r.get('cefr')
+    rev['tier'] = r.get('tier')
+    rev['notes'] = r.get('notes')
+
+print("Part 1 validated successfully!")

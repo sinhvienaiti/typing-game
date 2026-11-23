@@ -1,0 +1,122 @@
+import json
+
+raw = json.load(open("scratch/b19_r02_raw_p2.json"))
+assert len(raw) == 100
+
+data = [
+    {"id": "lex.en.100k.090602", "hw": "leiophyllum", "pos": "noun", "ipa": "/ˌlaɪoʊˈfɪləm/", "vi": "chi cây lá bóng Leiophyllum"},
+    {"id": "lex.en.100k.090603", "hw": "leipoa", "pos": "noun", "ipa": "/leɪˈpoʊə/", "vi": "chim gà ấp trứng gò Leipoa"},
+    {"id": "lex.en.100k.090604", "hw": "leishmaniosis", "pos": "noun", "ipa": "/liːʃˌmeɪniˈoʊsɪs/", "vi": "bệnh nhiễm trùng Leishmania"},
+    {"id": "lex.en.100k.090605", "hw": "leisureliness", "pos": "noun", "ipa": "/ˈlɛʒərlinɪs/", "vi": "sự ung dung; phong thái thong dong"},
+    {"id": "lex.en.100k.090606", "hw": "leitmotifs", "pos": "noun", "ipa": "/ˈlaɪtmoʊtiːfs/", "vi": "chủ đề chủ đạo; nét lặp lại"},
+    {"id": "lex.en.100k.090607", "hw": "leitneria", "pos": "noun", "ipa": "/laɪtˈnɪəriə/", "vi": "cây gỗ bần suối Leitneria"},
+    {"id": "lex.en.100k.090608", "hw": "leitneriaceae", "pos": "noun", "ipa": "/ˌlaɪtnɪriˈeɪsiː/", "vi": "họ thực vật gỗ bần"},
+    {"id": "lex.en.100k.090609", "hw": "lekker", "pos": "adj", "ipa": "/ˈlɛkər/", "vi": "tuyệt vời; ngon lành dễ chịu"},
+    {"id": "lex.en.100k.090610", "hw": "lekvar", "pos": "noun", "ipa": "/ˈlɛkvɑːr/", "vi": "mứt mận quánh Đông Âu"},
+    {"id": "lex.en.100k.090611", "hw": "lemaireocereus", "pos": "noun", "ipa": "/ləˌmɛərioʊˈsɪəriəs/", "vi": "chi xương rồng Lemaireocereus"},
+    {"id": "lex.en.100k.090612", "hw": "leman", "pos": "noun", "ipa": "/ˈlɛmən/", "vi": "người tình nhân; nhân ngãi"},
+    {"id": "lex.en.100k.090613", "hw": "lemanderin", "pos": "noun", "ipa": "/ləˈmændərɪn/", "vi": "hợp chất thơm lemanderin"},
+    {"id": "lex.en.100k.090614", "hw": "lemmas", "pos": "noun", "ipa": "/ˈlɛməz/", "vi": "các bổ đề; mục từ từ điển"},
+    {"id": "lex.en.100k.090615", "hw": "lemmata", "pos": "noun", "ipa": "/ˈlɛmətə/", "vi": "các bổ đề; đầu mục từ khóa"},
+    {"id": "lex.en.100k.090616", "hw": "lemmus", "pos": "noun", "ipa": "/ˈlɛməs/", "vi": "chi chuột lemming phương bắc"},
+    {"id": "lex.en.100k.090617", "hw": "lemnaceae", "pos": "noun", "ipa": "/lɛmˈneɪsiː/", "vi": "họ bèo tấm Lemnaceae"},
+    {"id": "lex.en.100k.090618", "hw": "lemonades", "pos": "noun", "ipa": "/ˌlɛməˈneɪdz/", "vi": "các loại nước chanh giải khát"},
+    {"id": "lex.en.100k.090619", "hw": "lemonlike", "pos": "adj", "ipa": "/ˈlɛmənlaɪk/", "vi": "có vị chua chanh; mùi hương chanh"},
+    {"id": "lex.en.100k.090620", "hw": "lemons", "pos": "noun", "ipa": "/ˈlɛmənz/", "vi": "những quả chanh; đồ vật lỗi hỏng"},
+    {"id": "lex.en.100k.090621", "hw": "lemonwood", "pos": "noun", "ipa": "/ˈlɛmənwʊd/", "vi": "gỗ chanh; gỗ cây gôm chanh"},
+    {"id": "lex.en.100k.090622", "hw": "lemures", "pos": "noun", "ipa": "/ˈlɛmjʊriːz/", "vi": "vong hồn lang thang ác quỷ"},
+    {"id": "lex.en.100k.090623", "hw": "lemuridae", "pos": "noun", "ipa": "/lɪˈmjʊərɪdiː/", "vi": "họ vượn cáo Lemuridae"},
+    {"id": "lex.en.100k.090624", "hw": "lemuroidea", "pos": "noun", "ipa": "/ˌlɛmjʊˈrɔɪdiə/", "vi": "phân bộ vượn cáo Lemuroidea"},
+    {"id": "lex.en.100k.090625", "hw": "lendable", "pos": "adj", "ipa": "/ˈlɛndəbəl/", "vi": "có thể cho vay; có thể cho mượn"},
+    {"id": "lex.en.100k.090626", "hw": "lengthens", "pos": "verb", "ipa": "/ˈlɛŋkθənz/", "vi": "kéo dài ra; dài thêm"},
+    {"id": "lex.en.100k.090627", "hw": "lengthiness", "pos": "noun", "ipa": "/ˈlɛŋkθinɪs/", "vi": "tính dài dòng; sự kéo dài lê thê"},
+    {"id": "lex.en.100k.090628", "hw": "lengths", "pos": "noun", "ipa": "/lɛŋkθs/", "vi": "các chiều dài; những đoạn cự ly"},
+    {"id": "lex.en.100k.090629", "hw": "leniencies", "pos": "noun", "ipa": "/ˈliːniənsiz/", "vi": "những hành động khoan dung"},
+    {"id": "lex.en.100k.090630", "hw": "lenify", "pos": "verb", "ipa": "/ˈlɛnɪfaɪ/", "vi": "làm dịu bớt; xoa dịu nỗi đau"},
+    {"id": "lex.en.100k.090631", "hw": "leninist", "pos": "noun", "ipa": "/ˈlɛnɪnɪst/", "vi": "người theo chủ nghĩa Lênin"},
+    {"id": "lex.en.100k.090632", "hw": "leninite", "pos": "noun", "ipa": "/ˈlɛnɪnaɪt/", "vi": "người trung kiên phái Lênin"},
+    {"id": "lex.en.100k.090633", "hw": "lenis", "pos": "adj", "ipa": "/ˈliːnɪs/", "vi": "phát âm yếu; âm nhẹ không bật hơi"},
+    {"id": "lex.en.100k.090634", "hw": "lenities", "pos": "noun", "ipa": "/ˈlɛnɪtiz/", "vi": "những biểu hiện nhân hậu ôn hòa"},
+    {"id": "lex.en.100k.090635", "hw": "lenition", "pos": "noun", "ipa": "/lɪˈnɪʃən/", "vi": "hiện tượng nhược hóa phụ âm"},
+    {"id": "lex.en.100k.090636", "hw": "lenitions", "pos": "noun", "ipa": "/lɪˈnɪʃənz/", "vi": "các biến đổi nhược hóa âm"},
+    {"id": "lex.en.100k.090637", "hw": "lenitive", "pos": "adj", "ipa": "/ˈlɛnɪtɪv/", "vi": "có tính xoa dịu; làm bớt đau"},
+    {"id": "lex.en.100k.090638", "hw": "lennoaceae", "pos": "noun", "ipa": "/ˌlɛnoʊˈeɪsiː/", "vi": "họ thực vật ký sinh Lennoaceae"},
+    {"id": "lex.en.100k.090639", "hw": "lensed", "pos": "adj", "ipa": "/lɛnzd/", "vi": "được trang bị thấu kính"},
+    {"id": "lex.en.100k.090640", "hw": "lenses", "pos": "noun", "ipa": "/ˈlɛnzɪz/", "vi": "các thấu kính; kính áp tròng"},
+    {"id": "lex.en.100k.090641", "hw": "lensless", "pos": "adj", "ipa": "/ˈlɛnzlɪs/", "vi": "không có thấu kính"},
+    {"id": "lex.en.100k.090642", "hw": "lententide", "pos": "noun", "ipa": "/ˈlɛntəntaɪd/", "vi": "mùa Chay Kitô giáo"},
+    {"id": "lex.en.100k.090643", "hw": "lentia", "pos": "noun", "ipa": "/ˈlɛnʃiə/", "vi": "thành cổ Lentia (thành Linz Áo)"},
+    {"id": "lex.en.100k.090644", "hw": "lentibulariaceae", "pos": "noun", "ipa": "/ˌlɛntɪˌbjuːləriˈeɪsiː/", "vi": "họ thực vật bèo đất bắt mồi"},
+    {"id": "lex.en.100k.090645", "hw": "lenticel", "pos": "noun", "ipa": "/ˈlɛntɪsɛl/", "vi": "lỗ vỏ; bì khổng trên vỏ cây"},
+    {"id": "lex.en.100k.090646", "hw": "lentics", "pos": "noun", "ipa": "/ˈlɛntɪks/", "vi": "hệ sinh thái vùng nước tĩnh"},
+    {"id": "lex.en.100k.090647", "hw": "lenticulated", "pos": "adj", "ipa": "/lɛnˈtɪkjʊleɪtɪd/", "vi": "hình hạt đậu lăng; dạng thấu kính"},
+    {"id": "lex.en.100k.090648", "hw": "lentiform", "pos": "adj", "ipa": "/ˈlɛntɪfɔːrm/", "vi": "hình thấu kính; hình hạt đậu lăng"},
+    {"id": "lex.en.100k.090649", "hw": "lentiginose", "pos": "adj", "ipa": "/lɛnˈtɪdʒɪnoʊs/", "vi": "có đốm tàn nhang; lấm tấm tàn nhang"},
+    {"id": "lex.en.100k.090650", "hw": "lentiginous", "pos": "adj", "ipa": "/lɛnˈtɪdʒɪnəs/", "vi": "có nhiều đốm tàn nhang lấm tấm"},
+    {"id": "lex.en.100k.090651", "hw": "lentisk", "pos": "noun", "ipa": "/ˈlɛntɪsk/", "vi": "cây nhũ hương Địa Trung Hải"},
+    {"id": "lex.en.100k.090652", "hw": "lentissimo", "pos": "adj", "ipa": "/lɛnˈtɪsɪmoʊ/", "vi": "rất chậm rãi (âm nhạc)"},
+    {"id": "lex.en.100k.090653", "hw": "lentitude", "pos": "noun", "ipa": "/ˈlɛntɪtjuːd/", "vi": "sự chậm chạp; tính chần chừ"},
+    {"id": "lex.en.100k.090654", "hw": "lentoid", "pos": "adj", "ipa": "/ˈlɛntɔɪd/", "vi": "có hình thấu kính hai mặt lồi"},
+    {"id": "lex.en.100k.090655", "hw": "lentoil", "pos": "adj", "ipa": "/ˈlɛntɔɪl/", "vi": "dạng thấu kính lồi"},
+    {"id": "lex.en.100k.090656", "hw": "leonardeschi", "pos": "noun", "ipa": "/ˌleɪənɑːrˈdɛskiː/", "vi": "môn đồ của Leonardo da Vinci"},
+    {"id": "lex.en.100k.090657", "hw": "leonardesque", "pos": "adj", "ipa": "/ˌleɪənɑːrˈdɛsk/", "vi": "theo phong cách Leonardo da Vinci"},
+    {"id": "lex.en.100k.090658", "hw": "leonberg", "pos": "noun", "ipa": "/ˈleɪənbɜːrɡ/", "vi": "giống chó lông xù Leonberger"},
+    {"id": "lex.en.100k.090659", "hw": "leoncita", "pos": "noun", "ipa": "/ˌleɪənˈsiːtə/", "vi": "loài khỉ sư tử nhỏ Nam Mỹ"},
+    {"id": "lex.en.100k.090660", "hw": "leonotis", "pos": "noun", "ipa": "/ˌliːəˈnoʊtɪs/", "vi": "chi cây đuôi sư tử Leonotis"},
+    {"id": "lex.en.100k.090661", "hw": "leontocebus", "pos": "noun", "ipa": "/ˌliːɒntoʊˈsiːbəs/", "vi": "chi khỉ tamarins Leontocebus"},
+    {"id": "lex.en.100k.090662", "hw": "leontodon", "pos": "noun", "ipa": "/liːˈɒntədɒn/", "vi": "chi bồ công anh râu Leontodon"},
+    {"id": "lex.en.100k.090663", "hw": "leontopodium", "pos": "noun", "ipa": "/ˌliːɒntəˈpoʊdiəm/", "vi": "chi hoa nhung tuyết Edelweiss"},
+    {"id": "lex.en.100k.090664", "hw": "leonurus", "pos": "noun", "ipa": "/ˌliːəˈnjʊərəs/", "vi": "chi cây ích mẫu Leonurus"},
+    {"id": "lex.en.100k.090665", "hw": "leopardbane", "pos": "noun", "ipa": "/ˈlɛpərdeɪn/", "vi": "cây cúc huệ vàng Doronicum"},
+    {"id": "lex.en.100k.090666", "hw": "leopardess", "pos": "noun", "ipa": "/ˈlɛpərdəs/", "vi": "con báo gấm cái; con báo cái"},
+    {"id": "lex.en.100k.090667", "hw": "lepadidae", "pos": "noun", "ipa": "/lɪˈpædɪdiː/", "vi": "họ hà cổ ngỗng Lepadidae"},
+    {"id": "lex.en.100k.090668", "hw": "lepcha", "pos": "noun", "ipa": "/ˈlɛptʃə/", "vi": "người Lepcha vùng Sikkim"},
+    {"id": "lex.en.100k.090669", "hw": "lepechinia", "pos": "noun", "ipa": "/ˌlɛpɪˈkɪniə/", "vi": "chi cây bụi thơm Lepechinia"},
+    {"id": "lex.en.100k.090670", "hw": "lepidobotryaceae", "pos": "noun", "ipa": "/ˌlɛpɪdoʊbɒtrɪˈeɪsiː/", "vi": "họ thực vật Lepidobotryaceae"},
+    {"id": "lex.en.100k.090671", "hw": "lepidobotrys", "pos": "noun", "ipa": "/ˌlɛpɪdoʊˈbɒtrɪs/", "vi": "chi thực vật Lepidobotrys"},
+    {"id": "lex.en.100k.090672", "hw": "lepidochelys", "pos": "noun", "ipa": "/ˌlɛpɪˈdɒkəlɪs/", "vi": "chi rùa vích Lepidochelys"},
+    {"id": "lex.en.100k.090673", "hw": "lepidocrocite", "pos": "noun", "ipa": "/ˌlɛpɪdoʊˈkroʊsaɪt/", "vi": "khoáng vật sắt vảy lepidocrocit"},
+    {"id": "lex.en.100k.090674", "hw": "lepidocybium", "pos": "noun", "ipa": "/ˌlɛpɪdoʊˈsɪbiəm/", "vi": "chi cá tràng Lepidocybium"},
+    {"id": "lex.en.100k.090675", "hw": "lepidodendraceae", "pos": "noun", "ipa": "/ˌlɛpɪdoʊdɛnˈdreɪsiː/", "vi": "họ cây vảy Lepidodendraceae"},
+    {"id": "lex.en.100k.090676", "hw": "lepidodendrales", "pos": "noun", "ipa": "/ˌlɛpɪdoʊdɛnˈdreɪliːz/", "vi": "bộ cây vảy hóa thạch cổ đại"},
+    {"id": "lex.en.100k.090677", "hw": "lepidomelane", "pos": "noun", "ipa": "/ˌlɛpɪˈdɒməleɪn/", "vi": "khoáng vật mica đen giàu sắt"},
+    {"id": "lex.en.100k.090678", "hw": "lepidophobia", "pos": "noun", "ipa": "/ˌlɛpɪdoʊˈfoʊbiə/", "vi": "hội chứng sợ bò sát có vảy"},
+    {"id": "lex.en.100k.090679", "hw": "lepidopteral", "pos": "adj", "ipa": "/ˌlɛpɪˈdɒptərəl/", "vi": "thuộc bộ cánh vảy; loài bướm"},
+    {"id": "lex.en.100k.090680", "hw": "lepidopterists", "pos": "noun", "ipa": "/ˌlɛpɪˈdɒptərɪsts/", "vi": "những nhà nghiên cứu loài bướm"},
+    {"id": "lex.en.100k.090681", "hw": "lepidopterologist", "pos": "noun", "ipa": "/ˌlɛpɪˌdɒptəˈrɑːlədʒɪst/", "vi": "chuyên gia côn trùng cánh vảy"},
+    {"id": "lex.en.100k.090682", "hw": "lepidopterology", "pos": "noun", "ipa": "/ˌlɛpɪˌdɒptəˈrɑːlədʒi/", "vi": "khoa côn trùng cánh vảy bướm"},
+    {"id": "lex.en.100k.090683", "hw": "lepidopteron", "pos": "noun", "ipa": "/ˌlɛpɪˈdɒptərɒn/", "vi": "côn trùng bộ cánh vảy; loài bướm"},
+    {"id": "lex.en.100k.090684", "hw": "lepidopterous", "pos": "adj", "ipa": "/ˌlɛpɪˈdɒptərəs/", "vi": "thuộc bộ cánh vảy; có cánh vảy"},
+    {"id": "lex.en.100k.090685", "hw": "lepidoptery", "pos": "noun", "ipa": "/ˌlɛpɪˈdɒptəri/", "vi": "ngành nghiên cứu loài bướm"},
+    {"id": "lex.en.100k.090686", "hw": "lepidosauria", "pos": "noun", "ipa": "/ˌlɛpɪdoʊˈsɔːriə/", "vi": "phân lớp bò sát có vảy"},
+    {"id": "lex.en.100k.090687", "hw": "lepidosis", "pos": "noun", "ipa": "/ˌlɛpɪˈdoʊsɪs/", "vi": "chứng bệnh vảy da; sự tạo vảy"},
+    {"id": "lex.en.100k.090688", "hw": "lepidote", "pos": "adj", "ipa": "/ˈlɛpɪdoʊt/", "vi": "phủ lớp vảy nhỏ li ti; có vảy sần"},
+    {"id": "lex.en.100k.090689", "hw": "lepidothamnus", "pos": "noun", "ipa": "/ˌlɛpɪdoʊˈθæmnəs/", "vi": "chi thông bụi Lepidothamnus"},
+    {"id": "lex.en.100k.090690", "hw": "lepiota", "pos": "noun", "ipa": "/ˌlɛpiˈoʊtə/", "vi": "chi nấm tán dù nhỏ Lepiota"},
+    {"id": "lex.en.100k.090691", "hw": "lepiotaceae", "pos": "noun", "ipa": "/ˌlɛpiəˈteɪsiː/", "vi": "họ nấm tán dù Lepiotaceae"},
+    {"id": "lex.en.100k.090692", "hw": "lepisma", "pos": "noun", "ipa": "/ləˈpɪzmə/", "vi": "chi con nhậy cắn sách Lepisma"},
+    {"id": "lex.en.100k.090693", "hw": "lepismatidae", "pos": "noun", "ipa": "/ˌlɛpɪzˈmætɪdiː/", "vi": "họ nhậy bạc Lepismatidae"},
+    {"id": "lex.en.100k.090694", "hw": "lepisosteidae", "pos": "noun", "ipa": "/ˌlɛpɪsɒˈstiːɪdiː/", "vi": "họ cá láng mõm dài"},
+    {"id": "lex.en.100k.090695", "hw": "lepisosteus", "pos": "noun", "ipa": "/ˌlɛpɪˈsɒstiəs/", "vi": "chi cá nhái mõm dài Lepisosteus"},
+    {"id": "lex.en.100k.090696", "hw": "leporid", "pos": "noun", "ipa": "/ˈlɛpərɪd/", "vi": "động vật thuộc họ thỏ"},
+    {"id": "lex.en.100k.090697", "hw": "leporidae", "pos": "noun", "ipa": "/lɪˈpɔːrɪdiː/", "vi": "họ thỏ và thỏ rừng Leporidae"},
+    {"id": "lex.en.100k.090698", "hw": "leporide", "pos": "noun", "ipa": "/ˈlɛpəraɪd/", "vi": "con thỏ lai thỏ rừng"},
+    {"id": "lex.en.100k.090699", "hw": "leporine", "pos": "adj", "ipa": "/ˈlɛpəraɪn/", "vi": "thuộc loài thỏ; giống thỏ rừng"},
+    {"id": "lex.en.100k.090700", "hw": "leppy", "pos": "noun", "ipa": "/ˈlɛpi/", "vi": "bê con mồ côi mẹ; gia súc côi cút"},
+    {"id": "lex.en.100k.090701", "hw": "leprosarium", "pos": "noun", "ipa": "/ˌlɛprəˈsɛəriəm/", "vi": "trại phong; bệnh viện chữa phong"}
+]
+
+assert len(data) == 100
+for i, (r, rev) in enumerate(zip(raw, data)):
+    assert r['id'] == rev['id'] and r['hw'] == rev['hw'], f"Mismatch at {i}: {r['id']} vs {rev['id']}"
+    assert rev['vi'] and len(rev['vi']) <= 35, f"vi length > 35 at {i}: {rev['vi']}"
+    assert rev['pos'] in ["noun", "verb", "adj", "adv", "intj", "prep", "pron", "conj", "det", "num"], f"pos invalid at {i}: {rev['pos']}"
+    ipa = rev['ipa'].strip()
+    assert ipa.startswith('/') and ipa.endswith('/') and ipa.count('/') == 2, f"ipa format invalid at {i}: {ipa}"
+    rev['ipa'] = ipa
+    rev['status'] = "reviewed"
+    rev['cefr'] = r.get('cefr')
+    rev['tier'] = r.get('tier')
+    rev['notes'] = r.get('notes')
+
+print("Part 2 validated successfully!")

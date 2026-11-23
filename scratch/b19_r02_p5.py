@@ -1,0 +1,122 @@
+import json
+
+raw = json.load(open("scratch/b19_r02_raw_p5.json"))
+assert len(raw) == 100
+
+data = [
+    {"id": "lex.en.100k.090902", "hw": "lifebelt", "pos": "noun", "ipa": "/ˈlaɪfbɛlt/", "vi": "phao cứu sinh dạng đai; đai cứu nạn"},
+    {"id": "lex.en.100k.090903", "hw": "lifebuoy", "pos": "noun", "ipa": "/ˈlaɪfbɔɪ/", "vi": "phao tròn cứu sinh; phao cứu đắm"},
+    {"id": "lex.en.100k.090904", "hw": "lifeclass", "pos": "noun", "ipa": "/ˈlaɪfklæs/", "vi": "lớp vẽ người mẫu khỏa thân"},
+    {"id": "lex.en.100k.090905", "hw": "lifeful", "pos": "adj", "ipa": "/ˈlaɪffʊl/", "vi": "tràn đầy sức sống; đầy sinh khí"},
+    {"id": "lex.en.100k.090906", "hw": "lifelikeness", "pos": "noun", "ipa": "/ˈlaɪflaɪknɪs/", "vi": "độ chân thực; sự sống động như thật"},
+    {"id": "lex.en.100k.090907", "hw": "liferent", "pos": "noun", "ipa": "/ˈlaɪfrɛnt/", "vi": "quyền hưởng dụng tài sản trọn đời"},
+    {"id": "lex.en.100k.090908", "hw": "lifting", "pos": "noun", "ipa": "/ˈlɪftɪŋ/", "vi": "sự nâng lên; cử tạ; nâng bổng"},
+    {"id": "lex.en.100k.090909", "hw": "liftman", "pos": "noun", "ipa": "/ˈlɪftmən/", "vi": "người vận hành thang máy"},
+    {"id": "lex.en.100k.090910", "hw": "lifts", "pos": "verb", "ipa": "/lɪfts/", "vi": "nâng lên; nhấc bổng; tan biến"},
+    {"id": "lex.en.100k.090911", "hw": "ligamental", "pos": "adj", "ipa": "/ˌlɪɡəˈmɛntəl/", "vi": "thuộc về dây chằng khớp"},
+    {"id": "lex.en.100k.090912", "hw": "ligamentous", "pos": "adj", "ipa": "/ˌlɪɡəˈmɛntəs/", "vi": "có tính chất dây chằng"},
+    {"id": "lex.en.100k.090913", "hw": "ligan", "pos": "noun", "ipa": "/ˈlaɪɡən/", "vi": "hàng hóa đắm buộc phao đánh dấu"},
+    {"id": "lex.en.100k.090914", "hw": "ligated", "pos": "verb", "ipa": "/ˈlaɪɡeɪtɪd/", "vi": "đã thắt nút mạch máu; đã buộc chặt"},
+    {"id": "lex.en.100k.090915", "hw": "ligates", "pos": "verb", "ipa": "/ˈlaɪɡeɪts/", "vi": "thắt mạch máu; buộc thắt nút"},
+    {"id": "lex.en.100k.090916", "hw": "ligating", "pos": "verb", "ipa": "/ˈlaɪɡeɪtɪŋ/", "vi": "đang thắt nút mạch; việc thắt mạch"},
+    {"id": "lex.en.100k.090917", "hw": "ligatured", "pos": "verb", "ipa": "/ˈlɪɡətʃərd/", "vi": "đã buộc thắt nút chỉ y khoa"},
+    {"id": "lex.en.100k.090918", "hw": "ligatures", "pos": "verb", "ipa": "/ˈlɪɡətʃərz/", "vi": "thắt mạch; buộc bằng chỉ y tế"},
+    {"id": "lex.en.100k.090919", "hw": "ligaturing", "pos": "verb", "ipa": "/ˈlɪɡətʃərɪŋ/", "vi": "đang thắt nút chỉ phẫu thuật"},
+    {"id": "lex.en.100k.090920", "hw": "lightened", "pos": "verb", "ipa": "/ˈlaɪtənd/", "vi": "đã bớt nặng nề; nhẹ nhõm hơn"},
+    {"id": "lex.en.100k.090921", "hw": "lightens", "pos": "verb", "ipa": "/ˈlaɪtənz/", "vi": "làm sáng lên; làm nhẹ nhõm bớt"},
+    {"id": "lex.en.100k.090922", "hw": "lighterman", "pos": "noun", "ipa": "/ˈlaɪtərmən/", "vi": "thuyền phu lái sà lan trung chuyển"},
+    {"id": "lex.en.100k.090923", "hw": "lightest", "pos": "adj", "ipa": "/ˈlaɪtɪst/", "vi": "nhẹ nhất; sáng nhất"},
+    {"id": "lex.en.100k.090924", "hw": "lightfast", "pos": "adj", "ipa": "/ˈlaɪtfæst/", "vi": "bền màu dưới ánh sáng; không phai"},
+    {"id": "lex.en.100k.090925", "hw": "lighthouses", "pos": "noun", "ipa": "/ˈlaɪthaʊzɪz/", "vi": "các ngọn hải đăng biển"},
+    {"id": "lex.en.100k.090926", "hw": "lightish", "pos": "adj", "ipa": "/ˈlaɪtɪʃ/", "vi": "hơi nhẹ; màu hơi nhạt phơn phớt"},
+    {"id": "lex.en.100k.090927", "hw": "lightlessness", "pos": "noun", "ipa": "/ˈlaɪtlɪsnɪs/", "vi": "bóng tối mịt mù; cảnh tối tăm"},
+    {"id": "lex.en.100k.090928", "hw": "lightproof", "pos": "adj", "ipa": "/ˈlaɪtpruːf/", "vi": "chắn sáng; không lọt ánh sáng"},
+    {"id": "lex.en.100k.090929", "hw": "lights", "pos": "verb", "ipa": "/laɪts/", "vi": "thắp sáng; soi sáng; đáp xuống"},
+    {"id": "lex.en.100k.090930", "hw": "lightsome", "pos": "adj", "ipa": "/ˈlaɪtsəm/", "vi": "nhẹ nhàng thanh thoát; vui tươi"},
+    {"id": "lex.en.100k.090931", "hw": "lightsomely", "pos": "adv", "ipa": "/ˈlaɪtsəmli/", "vi": "một cách thanh thoát nhẹ nhàng"},
+    {"id": "lex.en.100k.090932", "hw": "lightsomeness", "pos": "noun", "ipa": "/ˈlaɪtsəmnɪs/", "vi": "sự thanh thoát; nét vui vẻ nhẹ nhõm"},
+    {"id": "lex.en.100k.090933", "hw": "ligible", "pos": "adj", "ipa": "/ˈlɛdʒɪbəl/", "vi": "dễ đọc; chữ viết rõ ràng"},
+    {"id": "lex.en.100k.090934", "hw": "lignification", "pos": "noun", "ipa": "/ˌlɪɡnɪfɪˈkeɪʃən/", "vi": "quá trình hóa gỗ mô thực vật"},
+    {"id": "lex.en.100k.090935", "hw": "lignify", "pos": "verb", "ipa": "/ˈlɪɡnɪfaɪ/", "vi": "hóa gỗ; biến thành mô gỗ"},
+    {"id": "lex.en.100k.090936", "hw": "lignitic", "pos": "adj", "ipa": "/lɪɡˈnɪtɪk/", "vi": "thuộc loại than non lignit"},
+    {"id": "lex.en.100k.090937", "hw": "lignivorous", "pos": "adj", "ipa": "/lɪɡˈnɪvərəs/", "vi": "ăn gỗ; chuyên đục ăn gỗ mục"},
+    {"id": "lex.en.100k.090938", "hw": "lignolytic", "pos": "adj", "ipa": "/ˌlɪɡnəˈlɪtɪk/", "vi": "phân giải lignin gỗ; tiêu mộc"},
+    {"id": "lex.en.100k.090939", "hw": "lignosae", "pos": "noun", "ipa": "/lɪɡˈnoʊsiː/", "vi": "nhóm thực vật thân gỗ Lignosae"},
+    {"id": "lex.en.100k.090940", "hw": "ligroin", "pos": "noun", "ipa": "/ˈlɪɡroʊɪn/", "vi": "dung môi ête dầu hỏa ligroin"},
+    {"id": "lex.en.100k.090941", "hw": "ligula", "pos": "noun", "ipa": "/ˈlɪɡjʊlə/", "vi": "lưỡi bẹ lá cỏ; phiến hình dải"},
+    {"id": "lex.en.100k.090942", "hw": "ligularia", "pos": "noun", "ipa": "/ˌlɪɡjʊˈlɛəriə/", "vi": "chi cúc tai tượng Ligularia"},
+    {"id": "lex.en.100k.090943", "hw": "likability", "pos": "noun", "ipa": "/ˌlaɪkəˈbɪləti/", "vi": "tính dễ mến; sự đáng yêu"},
+    {"id": "lex.en.100k.090944", "hw": "likableness", "pos": "noun", "ipa": "/ˈlaɪkəbəlnɪs/", "vi": "sự dễ thương; nét dễ mến"},
+    {"id": "lex.en.100k.090945", "hw": "likelihoods", "pos": "noun", "ipa": "/ˈlaɪklihʊdz/", "vi": "các khả năng có thể xảy ra"},
+    {"id": "lex.en.100k.090946", "hw": "likened", "pos": "verb", "ipa": "/ˈlaɪkənd/", "vi": "đã ví von; đã so sánh với"},
+    {"id": "lex.en.100k.090947", "hw": "likenesses", "pos": "noun", "ipa": "/ˈlaɪknɪsɪz/", "vi": "những nét tương đồng; chân dung"},
+    {"id": "lex.en.100k.090948", "hw": "likens", "pos": "verb", "ipa": "/ˈlaɪkənz/", "vi": "ví như; so sánh với"},
+    {"id": "lex.en.100k.090949", "hw": "likes", "pos": "verb", "ipa": "/laɪks/", "vi": "thích; ưa chuộng; yêu mến"},
+    {"id": "lex.en.100k.090950", "hw": "likuta", "pos": "noun", "ipa": "/lɪˈkuːtə/", "vi": "tiền xu likuta của Zaire"},
+    {"id": "lex.en.100k.090951", "hw": "lilangeni", "pos": "noun", "ipa": "/ˌlɪləŋˈɡeɪni/", "vi": "đồng tiền lilangeni của Eswatini"},
+    {"id": "lex.en.100k.090952", "hw": "liliaceous", "pos": "adj", "ipa": "/ˌlɪliˈeɪʃəs/", "vi": "thuộc họ loa kèn Liliaceae"},
+    {"id": "lex.en.100k.090953", "hw": "liliales", "pos": "noun", "ipa": "/ˌlɪliˈeɪliːz/", "vi": "bộ hoa loa kèn Liliales"},
+    {"id": "lex.en.100k.090954", "hw": "lilied", "pos": "adj", "ipa": "/ˈlɪlid/", "vi": "phủ đầy hoa loa kèn huệ tây"},
+    {"id": "lex.en.100k.090955", "hw": "liliidae", "pos": "noun", "ipa": "/lɪˈlaɪɪdiː/", "vi": "phân lớp hoa loa kèn Liliidae"},
+    {"id": "lex.en.100k.090956", "hw": "liliopsid", "pos": "noun", "ipa": "/ˌlɪliˈɒpsɪd/", "vi": "thực vật lớp một lá mầm"},
+    {"id": "lex.en.100k.090957", "hw": "liliopsida", "pos": "noun", "ipa": "/ˌlɪliˈɒpsɪdə/", "vi": "lớp một lá mầm Liliopsida"},
+    {"id": "lex.en.100k.090958", "hw": "liliputian", "pos": "adj", "ipa": "/ˌlɪlɪˈpjuːʃən/", "vi": "tí hon bé xíu; người lùn tí hon"},
+    {"id": "lex.en.100k.090959", "hw": "lilted", "pos": "verb", "ipa": "/ˈlɪltɪd/", "vi": "đã hát nhịp nhàng vui tươi"},
+    {"id": "lex.en.100k.090960", "hw": "lilts", "pos": "verb", "ipa": "/lɪlts/", "vi": "cất giọng vui tươi; hát nhịp nhàng"},
+    {"id": "lex.en.100k.090961", "hw": "lilyturf", "pos": "noun", "ipa": "/ˈlɪlitɜːrf/", "vi": "cỏ mạch môn; cỏ lan chi viền lá"},
+    {"id": "lex.en.100k.090962", "hw": "limacidae", "pos": "noun", "ipa": "/lɪˈmæsɪdiː/", "vi": "họ sên trần Limacidae"},
+    {"id": "lex.en.100k.090963", "hw": "limacine", "pos": "adj", "ipa": "/ˈlɪmɪsaɪn/", "vi": "như sên trần; nhớt nháp như sên"},
+    {"id": "lex.en.100k.090964", "hw": "limacoid", "pos": "adj", "ipa": "/ˈlɪməkɔɪd/", "vi": "dạng sên trần; hình thù như sên"},
+    {"id": "lex.en.100k.090965", "hw": "limanda", "pos": "noun", "ipa": "/lɪˈmændə/", "vi": "chi cá bơn cát Limanda"},
+    {"id": "lex.en.100k.090966", "hw": "limbate", "pos": "adj", "ipa": "/ˈlɪmbeɪt/", "vi": "có viền mép khác màu sắc"},
+    {"id": "lex.en.100k.090967", "hw": "limbec", "pos": "noun", "ipa": "/ˈlɪmbɛk/", "vi": "nồi chưng cất cổ alembic"},
+    {"id": "lex.en.100k.090968", "hw": "limeades", "pos": "noun", "ipa": "/ˈlaɪmeɪdz/", "vi": "các thức uống nước chanh đá"},
+    {"id": "lex.en.100k.090969", "hw": "limed", "pos": "verb", "ipa": "/laɪmd/", "vi": "đã rải vôi bón đất; quét vôi"},
+    {"id": "lex.en.100k.090970", "hw": "limeira", "pos": "noun", "ipa": "/liːˈmeɪrə/", "vi": "thành phố Limeira ở Brasil"},
+    {"id": "lex.en.100k.090971", "hw": "limenitis", "pos": "noun", "ipa": "/ˌlɪmɪˈnaɪtɪs/", "vi": "chi bướm đô đốc Limenitis"},
+    {"id": "lex.en.100k.090972", "hw": "limes", "pos": "verb", "ipa": "/laɪmz/", "vi": "rải vôi bón đất; quét vôi tường"},
+    {"id": "lex.en.100k.090973", "hw": "limewater", "pos": "noun", "ipa": "/ˈlaɪmˌwɔːtər/", "vi": "nước vôi trong dung dịch canxi"},
+    {"id": "lex.en.100k.090974", "hw": "limicolae", "pos": "noun", "ipa": "/lɪˈmɪkəliː/", "vi": "phân bộ chim lội bãi bùn lầy"},
+    {"id": "lex.en.100k.090975", "hw": "limicoline", "pos": "adj", "ipa": "/lɪˈmɪkəlaɪn/", "vi": "thuộc nhóm chim lội bãi triều"},
+    {"id": "lex.en.100k.090976", "hw": "limicolous", "pos": "adj", "ipa": "/lɪˈmɪkələs/", "vi": "sống vùi trong bùn; ở bãi bùn"},
+    {"id": "lex.en.100k.090977", "hw": "liminal", "pos": "adj", "ipa": "/ˈlɪmɪnəl/", "vi": "thuộc ranh giới chuyển tiếp; ngưỡng"},
+    {"id": "lex.en.100k.090978", "hw": "liming", "pos": "noun", "ipa": "/ˈlaɪmɪŋ/", "vi": "việc rải vôi khử chua đất ruộng"},
+    {"id": "lex.en.100k.090979", "hw": "limitary", "pos": "adj", "ipa": "/ˈlɪmɪtɛri/", "vi": "có tính giới hạn; định ranh giới"},
+    {"id": "lex.en.100k.090980", "hw": "limitations", "pos": "noun", "ipa": "/ˌlɪmɪˈteɪʃənz/", "vi": "những sự hạn chế; các giới hạn"},
+    {"id": "lex.en.100k.090981", "hw": "limitative", "pos": "adj", "ipa": "/ˈlɪmɪtətɪv/", "vi": "mang tính chất giới hạn thu hẹp"},
+    {"id": "lex.en.100k.090982", "hw": "limitlessnesses", "pos": "noun", "ipa": "/ˈlɪmɪtlɪsnɪsɪz/", "vi": "sự vô tận vô cùng không đáy"},
+    {"id": "lex.en.100k.090983", "hw": "limitrophe", "pos": "adj", "ipa": "/ˈlɪmɪtroʊf/", "vi": "giáp biên giới; nằm sát đường biên"},
+    {"id": "lex.en.100k.090984", "hw": "limits", "pos": "verb", "ipa": "/ˈlɪmɪts/", "vi": "giới hạn; hạn chế mức độ"},
+    {"id": "lex.en.100k.090985", "hw": "limmer", "pos": "noun", "ipa": "/ˈlɪmər/", "vi": "kẻ vô lại đê tiện; người lẳng lơ"},
+    {"id": "lex.en.100k.090986", "hw": "limnetic", "pos": "adj", "ipa": "/lɪmˈnɛtɪk/", "vi": "thuộc vùng nước thoáng mặt hồ sâu"},
+    {"id": "lex.en.100k.090987", "hw": "limnimeter", "pos": "noun", "ipa": "/lɪmˈnɪmɪtər/", "vi": "thước đo dao động mực nước hồ"},
+    {"id": "lex.en.100k.090988", "hw": "limnimeters", "pos": "noun", "ipa": "/lɪmˈnɪmɪtərz/", "vi": "các dụng cụ đo mức nước hồ"},
+    {"id": "lex.en.100k.090989", "hw": "limnobium", "pos": "noun", "ipa": "/lɪmˈnoʊbiəm/", "vi": "chi bèo thủy sinh Limnobium"},
+    {"id": "lex.en.100k.090990", "hw": "limnocryptes", "pos": "noun", "ipa": "/lɪmˈnɒkrɪptiːz/", "vi": "chi chim dẽ giun lùn"},
+    {"id": "lex.en.100k.090991", "hw": "limnodromus", "pos": "noun", "ipa": "/lɪmˈnɒdrəməs/", "vi": "chi chim choắt mỏ dài bãi bùn"},
+    {"id": "lex.en.100k.090992", "hw": "limnologic", "pos": "adj", "ipa": "/ˌlɪmnəˈlɑːdʒɪk/", "vi": "thuộc ngành hồ học thủy văn"},
+    {"id": "lex.en.100k.090993", "hw": "limnologically", "pos": "adv", "ipa": "/ˌlɪmnəˈlɑːdʒɪkli/", "vi": "về phương diện hồ học tự nhiên"},
+    {"id": "lex.en.100k.090994", "hw": "limnologist", "pos": "noun", "ipa": "/lɪmˈnɑːlədʒɪst/", "vi": "chuyên gia nghiên cứu hồ nước ngọt"},
+    {"id": "lex.en.100k.090995", "hw": "limnophilous", "pos": "adj", "ipa": "/lɪmˈnɒfɪləs/", "vi": "ưa sống ở vùng đầm lầy hồ nước"},
+    {"id": "lex.en.100k.090996", "hw": "limnos", "pos": "noun", "ipa": "/ˈlɛmnɒs/", "vi": "hòn đảo Lemnos ở biển Aegea"},
+    {"id": "lex.en.100k.090997", "hw": "limoncello", "pos": "noun", "ipa": "/ˌliːmoʊnˈtʃɛloʊ/", "vi": "rượu mùi vỏ chanh ngọt Ý"},
+    {"id": "lex.en.100k.090998", "hw": "limoncellos", "pos": "noun", "ipa": "/ˌliːmoʊnˈtʃɛloʊz/", "vi": "các chai rượu chanh Ý Limoncello"},
+    {"id": "lex.en.100k.090999", "hw": "limped", "pos": "verb", "ipa": "/lɪmpt/", "vi": "đã đi khập khiễng; lết chân đi"},
+    {"id": "lex.en.100k.091000", "hw": "limpidity", "pos": "noun", "ipa": "/lɪmˈpɪdəti/", "vi": "độ trong suốt; sự sáng sủa rõ ràng"},
+    {"id": "lex.en.100k.091001", "hw": "limpidly", "pos": "adv", "ipa": "/ˈlɪmpɪdli/", "vi": "một cách trong trẻo; sáng tỏ"}
+]
+
+assert len(data) == 100
+for i, (r, rev) in enumerate(zip(raw, data)):
+    assert r['id'] == rev['id'] and r['hw'] == rev['hw'], f"Mismatch at {i}: {r['id']} vs {rev['id']}"
+    assert rev['vi'] and len(rev['vi']) <= 35, f"vi length > 35 at {i}: {rev['vi']}"
+    assert rev['pos'] in ["noun", "verb", "adj", "adv", "intj", "prep", "pron", "conj", "det", "num"], f"pos invalid at {i}: {rev['pos']}"
+    ipa = rev['ipa'].strip()
+    assert ipa.startswith('/') and ipa.endswith('/') and ipa.count('/') == 2, f"ipa format invalid at {i}: {ipa}"
+    rev['ipa'] = ipa
+    rev['status'] = "reviewed"
+    rev['cefr'] = r.get('cefr')
+    rev['tier'] = r.get('tier')
+    rev['notes'] = r.get('notes')
+
+print("Part 5 validated successfully!")

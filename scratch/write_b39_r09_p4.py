@@ -1,0 +1,126 @@
+import json
+
+items = [
+    ("094303", "triskaidekaphobic", "adj", "/ˌtrɪskaɪˌdɛkəˈfoʊbɪk/", "sợ hãi con số 13 một cách vô lý"),
+    ("094304", "trisoctahedron", "noun", "/ˌtrɪsɑktəˈhidrən/", "khối 24 mặt tam giác đều"),
+    ("094305", "trisomic", "adj", "/traɪˈsoʊmɪk/", "thuộc thể ba nhiễm (di truyền)"),
+    ("094306", "trispermous", "adj", "/traɪˈspɜːrməs/", "có ba hạt (quả thực vật)"),
+    ("094307", "trisporous", "adj", "/traɪˈspɔrəs/", "tạo ra ba bào tử"),
+    ("094308", "triste", "adj", "/ˈtrist/", "buồn bã; ủ dột (từ mượn Pháp)"),
+    ("094309", "tristearin", "noun", "/traɪˈstɪrɪn/", "chất béo rắn tristearin"),
+    ("094310", "trisubstituted", "adj", "/traɪˈsʌbstəˌtutɪd/", "đã thế ba nhóm nguyên tử"),
+    ("094311", "trisyllabic", "adj", "/ˌtraɪsəˈlæbɪk/", "gồm ba âm tiết"),
+    ("094312", "trisyllable", "noun", "/traɪˈsɪləbəl/", "từ có ba âm tiết"),
+    ("094313", "tritanopia", "noun", "/ˌtraɪtəˈnoʊpiə/", "chứng mù màu xanh lam vàng"),
+    ("094314", "tritanopic", "adj", "/ˌtraɪtəˈnɑpɪk/", "bị mù màu xanh lam vàng"),
+    ("094315", "tritely", "adv", "/ˈtraɪtli/", "sáo rỗng; nhàm chán rập khuôn"),
+    ("094316", "tritheist", "noun", "/ˈtraɪθiɪst/", "người theo thuyết ba ngôi tách biệt"),
+    ("094317", "tritheistic", "adj", "/ˌtraɪθiˈɪstɪk/", "thuộc thuyết ba thần tách biệt"),
+    ("094318", "tritoma", "noun", "/ˈtraɪtəmə/", "cây hoa đuôi chồn ngọn đuốc"),
+    ("094319", "tritomite", "noun", "/ˈtraɪtəˌmaɪt/", "khoáng vật đất hiếm tritomit"),
+    ("094320", "tritone", "noun", "/ˈtraɪˌtoʊn/", "quãng ba cung nguyên (nhạc lý)"),
+    ("094321", "triturable", "adj", "/ˈtrɪtʃɚəbəl/", "có thể nghiền thành bột mịn"),
+    ("094322", "triturate", "verb", "/ˈtrɪtʃəˌreɪt/", "nghiền tán thành bột mịn"),
+    ("094323", "trituration", "noun", "/ˌtrɪtʃəˈreɪʃən/", "sự nghiền mịn; bột thuốc nghiền"),
+    ("094324", "triturator", "noun", "/ˈtrɪtʃəˌreɪtɚ/", "máy nghiền tán bột mịn"),
+    ("094325", "triumphalism", "noun", "/traɪˈʌmfəˌlɪzəm/", "thái độ tự mãn hả hê chiến thắng"),
+    ("094326", "triumphed", "verb", "/ˈtraɪəmft/", "đã đại thắng; đã thành công vang"),
+    ("094327", "triumpher", "noun", "/ˈtraɪəmfɚ/", "người chiến thắng khải hoàn"),
+    ("094328", "triumphing", "verb", "/ˈtraɪəmfɪŋ/", "đang đại thắng; đang vui mừng thắng"),
+    ("094329", "triumphs", "verb", "/ˈtraɪəmfs/", "chiến thắng vang dội; vượt qua"),
+    ("094330", "triumviri", "noun", "/traɪˈʌmvəˌraɪ/", "nhóm tam đầu chế La Mã (số nhiều)"),
+    ("094331", "trivalence", "noun", "/traɪˈveɪləns/", "tính hóa trị ba (hóa học)"),
+    ("094332", "trivalency", "noun", "/traɪˈveɪlənsi/", "tính hóa trị ba (hóa học)"),
+    ("094333", "trivalvular", "adj", "/traɪˈvælvjəlɚ/", "có ba van; có ba mảnh vỏ"),
+    ("094334", "trivialisation", "noun", "/ˌtrɪviəlaɪˈzeɪʃən/", "sự tầm thường hóa vấn đề"),
+    ("094335", "trivialised", "verb", "/ˈtrɪviəˌlaɪzd/", "đã tầm thường hóa; đã coi nhẹ"),
+    ("094336", "trivialises", "verb", "/ˈtrɪviəˌlaɪzɪz/", "tầm thường hóa; coi nhẹ vấn đề"),
+    ("094337", "trivialising", "verb", "/ˈtrɪviəˌlaɪzɪŋ/", "đang tầm thường hóa; đang coi nhẹ"),
+    ("094338", "trivialism", "noun", "/ˈtrɪviəˌlɪzəm/", "tính tầm thường vụn vặt"),
+    ("094339", "trivialization", "noun", "/ˌtrɪviələˈzeɪʃən/", "sự tầm thường hóa vấn đề"),
+    ("094340", "trivialized", "verb", "/ˈtrɪviəˌlaɪzd/", "đã tầm thường hóa; đã coi nhẹ"),
+    ("094341", "trivializes", "verb", "/ˈtrɪviəˌlaɪzɪz/", "tầm thường hóa; coi nhẹ vấn đề"),
+    ("094342", "trivializing", "verb", "/ˈtrɪviəˌlaɪzɪŋ/", "đang tầm thường hóa; đang coi nhẹ"),
+    ("094343", "triweekly", "adj", "/traɪˈwikli/", "ba tuần một lần; ba lần mỗi tuần"),
+    ("094344", "troat", "verb", "/ˈtroʊt/", "rống tiếng gọi bạn tình (hươu đực)"),
+    ("094345", "troats", "noun", "/ˈtroʊts/", "tiếng rống mùa động dục của hươu"),
+    ("094346", "trocar", "noun", "/ˈtroʊˌkɑr/", "ống thông mũi nhọn chọc dò y tế"),
+    ("094347", "trochal", "adj", "/ˈtroʊkəl/", "có hình dạng giống bánh xe"),
+    ("094348", "trochanteral", "adj", "/troʊˈkæntɚəl/", "thuộc mấu chuyển xương đùi"),
+    ("094349", "trochilidae", "noun", "/troʊˈkɪlɪˌdi/", "họ Chim ruồi"),
+    ("094350", "trochlea", "noun", "/ˈtrɑkliə/", "ròng rọc khớp xương (giải phẫu)"),
+    ("094351", "trochleae", "noun", "/ˈtrɑkliˌi/", "ròng rọc khớp xương (số nhiều)"),
+    ("094352", "trochlearis", "noun", "/ˌtrɑkliˈɛrɪs/", "dây thần kinh ròng rọc (số IV)"),
+    ("094353", "trochoid", "noun", "/ˈtroʊˌkɔɪd/", "đường cong trocoit (hình học)"),
+    ("094354", "trochoidal", "adj", "/troʊˈkɔɪdəl/", "thuộc đường trocoit; chuyển xoay"),
+    ("094355", "trochophore", "noun", "/ˈtrɑkəˌfɔr/", "ấu trùng luân cầu (giun đốt, sò)"),
+    ("094356", "trod", "verb", "/ˈtrɑd/", "đã giẫm lên; đã bước đi (quá khứ)"),
+    ("094357", "trodden", "verb", "/ˈtrɑdən/", "đã giẫm lên; đã chà đạp (phân từ)"),
+    ("094358", "trogium", "noun", "/ˈtroʊdʒiəm/", "chi rệp sách không cánh Trogium"),
+    ("094359", "troglodytidae", "noun", "/ˌtrɑɡləˈdɪtɪˌdi/", "họ Chim tiêu liêu"),
+    ("094360", "trogonidae", "noun", "/troʊˈɡɑnɪˌdi/", "họ Chim nuốc"),
+    ("094361", "trogoniformes", "noun", "/troʊˌɡɑnɪˈfɔrmiz/", "bộ Chim nuốc"),
+    ("094362", "troilite", "noun", "/ˈtrɔɪˌlaɪt/", "khoáng vật sắt sunfua troilit"),
+    ("094363", "trolled", "verb", "/ˈtroʊld/", "đã khiêu khích trên mạng; câu rê"),
+    ("094364", "trolleys", "noun", "/ˈtrɑliz/", "xe đẩy hàng; tàu điện (số nhiều)"),
+    ("094365", "trollius", "noun", "/ˈtrɑliəs/", "chi hoa mao lương cầu vàng"),
+    ("094366", "trollopy", "adj", "/ˈtrɑləpi/", "luộm thuộm nhếch nhác; lẳng lơ"),
+    ("094367", "trolls", "verb", "/ˈtroʊlz/", "khiêu khích gây war trên mạng; câu rê"),
+    ("094368", "trolly", "noun", "/ˈtrɑli/", "xe đẩy hàng; tàu điện bánh hơi"),
+    ("094369", "trombicula", "noun", "/trɑmˈbɪkjələ/", "chi ve mò đỏ Trombicula"),
+    ("094370", "trombiculiasis", "noun", "/trɑmˌbɪkjəˈlaɪəsɪs/", "bệnh viêm da do ve mò đỏ đốt"),
+    ("094371", "trombiculid", "noun", "/trɑmˈbɪkjəlɪd/", "ve mò đỏ (họ Trombiculidae)"),
+    ("094372", "trombiculidae", "noun", "/ˌtrɑmbɪˈkjulɪˌdi/", "họ Ve mò đỏ"),
+    ("094373", "trombidiid", "noun", "/trɑmˈbɪdiɪd/", "ve nhung đỏ (họ Trombidiidae)"),
+    ("094374", "trombidiidae", "noun", "/ˌtrɑmbəˈdaɪɪˌdi/", "họ Ve nhung đỏ"),
+    ("094375", "trommel", "noun", "/ˈtrɑməl/", "trống sàng quay phân loại quặng"),
+    ("094376", "tromometer", "noun", "/trəˈmɑmɪtɚ/", "máy đo vi địa chấn"),
+    ("094377", "trompillo", "noun", "/trɑmˈpijoʊ/", "cây cà dại lá bạc châu Mỹ"),
+    ("094378", "tron", "noun", "/ˈtrɑn/", "cân công cộng thời trung cổ (Scotland)"),
+    ("094379", "trona", "noun", "/ˈtroʊnə/", "khoáng vật muối natri trona"),
+    ("094380", "troncs", "noun", "/ˈtrɑŋks/", "quỹ tiền boa chia chung (số nhiều)"),
+    ("094381", "trone", "noun", "/ˈtroʊn/", "cân công cộng thời trung cổ (Scotland)"),
+    ("094382", "trooped", "verb", "/ˈtrupt/", "đã kéo đi thành đoàn; diễu hành"),
+    ("094383", "trooping", "verb", "/ˈtrupɪŋ/", "đang kéo đi thành đoàn; diễu hành"),
+    ("094384", "troostite", "noun", "/ˈtrustˌaɪt/", "khoáng vật silicat; tổ chức thép"),
+    ("094385", "tropaeolaceae", "noun", "/troʊˌpiəˈleɪsiˌi/", "họ Sen cạn"),
+    ("094386", "tropanes", "noun", "/ˈtroʊˌpeɪnz/", "hợp chất ancaloit tropan (số nhiều)"),
+    ("094387", "trophallactic", "adj", "/ˌtrɑfəˈlæktɪk/", "thuộc trao đổi thức ăn giữa kiến ong"),
+    ("094388", "trophallaxis", "noun", "/ˌtrɑfəˈlæksɪs/", "tập tính mớm truyền thức ăn bầy đàn"),
+    ("094389", "trophies", "noun", "/ˈtroʊfiz/", "cúp giải thưởng; chiến lợi phẩm"),
+    ("094390", "trophobiosis", "noun", "/ˌtrɑfoʊbaɪˈoʊsɪs/", "cộng sinh dinh dưỡng (kiến và rệp)"),
+    ("094391", "trophotropic", "adj", "/ˌtrɑfəˈtrɑpɪk/", "hướng dinh dưỡng (sinh học)"),
+    ("094392", "trophotropism", "noun", "/trəˈfɑtrəˌpɪzəm/", "tính hướng nguồn dinh dưỡng"),
+    ("094393", "tropicalise", "verb", "/ˈtrɑpəkəˌlaɪz/", "nhiệt đới hóa (thiết bị, giống cây)"),
+    ("094394", "tropicbird", "noun", "/ˈtrɑpɪkˌbɜːrd/", "chim nhiệt đới đuôi dài trắng"),
+    ("094395", "tropidoclonion", "noun", "/ˌtrɑpədoʊˈkloʊniɑn/", "chi rắn sọc Bắc Mỹ không độc"),
+    ("094396", "tropine", "noun", "/ˈtroʊˌpin/", "hợp chất hóa học tropin"),
+    ("094397", "tropist", "noun", "/ˈtroʊpɪst/", "nhà ẩn dụ học; người chuộng phép ẩn"),
+    ("094398", "tropistic", "adj", "/troʊˈpɪstɪk/", "thuộc tính hướng động kích thích"),
+    ("094399", "tropocollagen", "noun", "/ˌtrɑpoʊˈkɑlədʒən/", "đơn vị phân tử tropocollagen"),
+    ("094400", "tropologic", "adj", "/ˌtrɑpəˈlɑdʒɪk/", "mang nghĩa ẩn dụ chuyển nghĩa"),
+    ("094401", "tropological", "adj", "/ˌtrɑpəˈlɑdʒɪkəl/", "mang nghĩa ẩn dụ chuyển nghĩa"),
+    ("094402", "tropology", "noun", "/trəˈpɑlədʒi/", "phép dùng từ chuyển nghĩa ẩn dụ"),
+]
+
+# Trim <=35:
+items[13] = ("094316", "tritheist", "noun", "/ˈtraɪθiɪst/", "người theo thuyết ba thần tách biệt")
+# Check 094316: 36 -> "tín đồ thuyết ba ngôi tách biệt" = 32
+items[13] = ("094316", "tritheist", "noun", "/ˈtraɪθiɪst/", "tín đồ thuyết ba ngôi tách biệt")
+items[25] = ("094328", "triumphing", "verb", "/ˈtraɪəmfɪŋ/", "đang đại thắng; hân hoan thắng lợi")
+items[64] = ("094367", "trolls", "verb", "/ˈtroʊlz/", "khiêu khích trên mạng; câu cá rê")
+items[75] = ("094378", "tron", "noun", "/ˈtrɑn/", "cân công cộng cổ (Scotland)")
+items[78] = ("094381", "trone", "noun", "/ˈtroʊn/", "cân công cộng cổ (Scotland)")
+items[84] = ("094387", "trophallactic", "adj", "/ˌtrɑfəˈlæktɪk/", "thuộc tập tính mớm thức ăn bầy đàn")
+# Check 094387: 36 -> "thuộc tập tính mớm ăn bầy đàn" = 31
+items[84] = ("094387", "trophallactic", "adj", "/ˌtrɑfəˈlæktɪk/", "thuộc tập tính mớm ăn bầy đàn")
+items[85] = ("094388", "trophallaxis", "noun", "/ˌtrɑfəˈlæksɪs/", "tập tính mớm thức ăn trong bầy đàn")
+# Check 094388: 36 -> "tập tính mớm truyền thức ăn bầy" = 32
+items[85] = ("094388", "trophallaxis", "noun", "/ˌtrɑfəˈlæksɪs/", "tập tính mớm truyền thức ăn bầy")
+items[94] = ("094397", "tropist", "noun", "/ˈtroʊpɪst/", "người chuộng phép ẩn dụ chuyển nghĩa")
+# Check 094397: 38 -> "người chuộng phép tu từ ẩn dụ" = 30
+items[94] = ("094397", "tropist", "noun", "/ˈtroʊpɪst/", "người chuộng phép tu từ ẩn dụ")
+
+with open("scratch/b39_r09_p4.json", "w") as f:
+    json.dump(items, f, ensure_ascii=False, indent=2)
+print("Wrote p4:", len(items))

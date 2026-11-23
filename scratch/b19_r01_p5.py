@@ -1,0 +1,122 @@
+import json
+
+raw = json.load(open("scratch/b19_r01_raw_p5.json"))
+assert len(raw) == 100
+
+data = [
+    {"id": "lex.en.100k.090402", "hw": "lauds", "pos": "verb", "ipa": "/lɔːdz/", "vi": "ca ngợi; tán dương nhiệt liệt"},
+    {"id": "lex.en.100k.090403", "hw": "laughableness", "pos": "noun", "ipa": "/ˈlæfəbəlnɪs/", "vi": "tính khôi hài; tính tức cười"},
+    {"id": "lex.en.100k.090404", "hw": "laughed", "pos": "verb", "ipa": "/læft/", "vi": "đã cười; bật cười vui vẻ"},
+    {"id": "lex.en.100k.090405", "hw": "laughs", "pos": "verb", "ipa": "/læfs/", "vi": "cười; bật cười"},
+    {"id": "lex.en.100k.090406", "hw": "lauhala", "pos": "noun", "ipa": "/laʊˈhɑːlə/", "vi": "lá dứa dại Hawaii (dệt chiếu)"},
+    {"id": "lex.en.100k.090407", "hw": "laukkai", "pos": "noun", "ipa": "/laʊˈkaɪ/", "vi": "thành phố Laukkaing ở Myanmar"},
+    {"id": "lex.en.100k.090408", "hw": "launce", "pos": "noun", "ipa": "/lɔːns/", "vi": "cá lươn cát; cá chạch cát"},
+    {"id": "lex.en.100k.090409", "hw": "launched", "pos": "verb", "ipa": "/lɔːntʃt/", "vi": "đã phóng; đã phát động; ra mắt"},
+    {"id": "lex.en.100k.090410", "hw": "launches", "pos": "verb", "ipa": "/ˈlɔːntʃɪz/", "vi": "phóng tên lửa; phát động; mở bán"},
+    {"id": "lex.en.100k.090411", "hw": "laundered", "pos": "verb", "ipa": "/ˈlɔːndərd/", "vi": "đã giặt ủi; đã rửa tiền bẩn"},
+    {"id": "lex.en.100k.090412", "hw": "launders", "pos": "verb", "ipa": "/ˈlɔːndərz/", "vi": "giặt là; rửa tiền phi pháp"},
+    {"id": "lex.en.100k.090413", "hw": "laundrette", "pos": "noun", "ipa": "/lɔːnˈdrɛt/", "vi": "hiệu giặt là tự động"},
+    {"id": "lex.en.100k.090414", "hw": "laundrywoman", "pos": "noun", "ipa": "/ˈlɔːndriˌwʊmən/", "vi": "thợ giặt nữ; người giặt thuê"},
+    {"id": "lex.en.100k.090415", "hw": "laura", "pos": "noun", "ipa": "/ˈlaʊrə/", "vi": "tu viện Chính thống giáo laura"},
+    {"id": "lex.en.100k.090416", "hw": "lauraceous", "pos": "adj", "ipa": "/lɔːˈreɪʃəs/", "vi": "thuộc họ long não Lauraceae"},
+    {"id": "lex.en.100k.090417", "hw": "laureateship", "pos": "noun", "ipa": "/ˈlɔːriətʃɪp/", "vi": "danh hiệu thi hào; chức thủ khoa"},
+    {"id": "lex.en.100k.090418", "hw": "laureled", "pos": "adj", "ipa": "/ˈlɔːrəld/", "vi": "đội vòng nguyệt quế; được vinh danh"},
+    {"id": "lex.en.100k.090419", "hw": "laurelled", "pos": "adj", "ipa": "/ˈlɔːrəld/", "vi": "đội vòng nguyệt quế; rạng rỡ"},
+    {"id": "lex.en.100k.090420", "hw": "lavaflows", "pos": "noun", "ipa": "/ˈlɑːvəfloʊz/", "vi": "các dòng dung nham núi lửa"},
+    {"id": "lex.en.100k.090421", "hw": "lavalava", "pos": "noun", "ipa": "/ˌlɑːvəˈlɑːvə/", "vi": "váy quấn truyền thống Polynesia"},
+    {"id": "lex.en.100k.090422", "hw": "lavalliere", "pos": "noun", "ipa": "/ˌlævəˈlɪər/", "vi": "mặt dây chuyền ngọc; mic cài áo"},
+    {"id": "lex.en.100k.090423", "hw": "lavatera", "pos": "noun", "ipa": "/ˌlævəˈtɪərə/", "vi": "chi cẩm quỳ Lavatera"},
+    {"id": "lex.en.100k.090424", "hw": "lavation", "pos": "noun", "ipa": "/ləˈveɪʃən/", "vi": "sự tắm rửa; sự gột rửa bụi bẩn"},
+    {"id": "lex.en.100k.090425", "hw": "lavational", "pos": "adj", "ipa": "/ləˈveɪʃənəl/", "vi": "dùng để tắm rửa; để gột rửa"},
+    {"id": "lex.en.100k.090426", "hw": "lavatories", "pos": "noun", "ipa": "/ˈlævətɔːriz/", "vi": "các nhà vệ sinh; buồng vệ sinh"},
+    {"id": "lex.en.100k.090427", "hw": "laved", "pos": "verb", "ipa": "/leɪvd/", "vi": "đã vỗ bờ; đã tắm rửa sạch sẽ"},
+    {"id": "lex.en.100k.090428", "hw": "lavement", "pos": "noun", "ipa": "/ˈleɪvmənt/", "vi": "sự thụt rửa đại tràng; tắm rửa"},
+    {"id": "lex.en.100k.090429", "hw": "lavendered", "pos": "verb", "ipa": "/ˈlævəndərd/", "vi": "đã ướp hương hoa oải hương"},
+    {"id": "lex.en.100k.090430", "hw": "lavenders", "pos": "verb", "ipa": "/ˈlævəndərz/", "vi": "ướp hương hoa oải hương"},
+    {"id": "lex.en.100k.090431", "hw": "laverock", "pos": "noun", "ipa": "/ˈleɪvrɒk/", "vi": "chim sơn ca; chim chiền chiện"},
+    {"id": "lex.en.100k.090432", "hw": "laves", "pos": "verb", "ipa": "/leɪvz/", "vi": "vỗ sóng vào bờ; rửa gội nhẹ"},
+    {"id": "lex.en.100k.090433", "hw": "laving", "pos": "verb", "ipa": "/ˈleɪvɪŋ/", "vi": "đang vỗ sóng; đang tắm gội"},
+    {"id": "lex.en.100k.090434", "hw": "lavished", "pos": "verb", "ipa": "/ˈlævɪʃt/", "vi": "đã hào phóng ban tặng; tiêu xài"},
+    {"id": "lex.en.100k.090435", "hw": "lavishes", "pos": "verb", "ipa": "/ˈlævɪʃɪz/", "vi": "hào phóng ban cho; phung phí"},
+    {"id": "lex.en.100k.090436", "hw": "lavishing", "pos": "verb", "ipa": "/ˈlævɪʃɪŋ/", "vi": "hào phóng chi tiêu; ban phát nhiều"},
+    {"id": "lex.en.100k.090437", "hw": "lavishment", "pos": "noun", "ipa": "/ˈlævɪʃmənt/", "vi": "sự tiêu xài hoang phí; ban tặng"},
+    {"id": "lex.en.100k.090438", "hw": "lavolta", "pos": "noun", "ipa": "/ləˈvɒltə/", "vi": "điệu múa la volta thời Phục Hưng"},
+    {"id": "lex.en.100k.090439", "hw": "lavvie", "pos": "noun", "ipa": "/ˈlævi/", "vi": "nhà vệ sinh; bồn cầu vệ sinh"},
+    {"id": "lex.en.100k.090440", "hw": "lawcourt", "pos": "noun", "ipa": "/ˈlɔːkɔːrt/", "vi": "tòa án xét xử; pháp đình"},
+    {"id": "lex.en.100k.090441", "hw": "lawgivers", "pos": "noun", "ipa": "/ˈlɔːˌɡɪvərz/", "vi": "những nhà làm luật; nhà lập pháp"},
+    {"id": "lex.en.100k.090442", "hw": "lawny", "pos": "adj", "ipa": "/ˈlɔːni/", "vi": "phủ bãi cỏ; bằng vải mỏng mịn"},
+    {"id": "lex.en.100k.090443", "hw": "lawsuits", "pos": "noun", "ipa": "/ˈlɔːsuːts/", "vi": "các vụ kiện tụng; đơn khởi kiện"},
+    {"id": "lex.en.100k.090444", "hw": "lawyerbush", "pos": "noun", "ipa": "/ˈlɔːjərbʊʃ/", "vi": "bụi mâm xôi leo có gai nhọn"},
+    {"id": "lex.en.100k.090445", "hw": "laxation", "pos": "noun", "ipa": "/lækˈseɪʃən/", "vi": "sự nhuận tràng; sự giãn cơ"},
+    {"id": "lex.en.100k.090446", "hw": "laxities", "pos": "noun", "ipa": "/ˈlæksɪtiz/", "vi": "những sự lỏng lẻo; thói buông thả"},
+    {"id": "lex.en.100k.090447", "hw": "layerage", "pos": "noun", "ipa": "/ˈleɪərɪdʒ/", "vi": "phương pháp nhân giống chiết cành"},
+    {"id": "lex.en.100k.090448", "hw": "layering", "pos": "noun", "ipa": "/ˈleɪərɪŋ/", "vi": "kỹ thuật chiết cành; xếp nhiều lớp"},
+    {"id": "lex.en.100k.090449", "hw": "layers", "pos": "verb", "ipa": "/ˈleɪərz/", "vi": "xếp thành nhiều lớp; chiết cành"},
+    {"id": "lex.en.100k.090450", "hw": "layoffs", "pos": "noun", "ipa": "/ˈleɪɒfs/", "vi": "các đợt sa thải; cắt giảm nhân sự"},
+    {"id": "lex.en.100k.090451", "hw": "laystall", "pos": "noun", "ipa": "/ˈleɪstɔːl/", "vi": "bãi tập kết rác thải; đống phân"},
+    {"id": "lex.en.100k.090452", "hw": "lazed", "pos": "verb", "ipa": "/leɪzd/", "vi": "đã nằm lười nhác; nghỉ uể oải"},
+    {"id": "lex.en.100k.090453", "hw": "lazes", "pos": "verb", "ipa": "/ˈleɪzɪz/", "vi": "nằm lười nhác; sống lười biếng"},
+    {"id": "lex.en.100k.090454", "hw": "lazier", "pos": "adj", "ipa": "/ˈleɪziər/", "vi": "lười biếng hơn; biếng nhác hơn"},
+    {"id": "lex.en.100k.090455", "hw": "laziest", "pos": "adj", "ipa": "/ˈleɪziɪst/", "vi": "lười biếng nhất; biếng nhác nhất"},
+    {"id": "lex.en.100k.090456", "hw": "lazing", "pos": "verb", "ipa": "/ˈleɪzɪŋ/", "vi": "đang nằm lười nhác; nghỉ xả hơi"},
+    {"id": "lex.en.100k.090457", "hw": "lazuline", "pos": "adj", "ipa": "/ˈlæzjʊlaɪn/", "vi": "màu xanh ngọc lưu ly; xanh biếc"},
+    {"id": "lex.en.100k.090458", "hw": "lazurite", "pos": "noun", "ipa": "/ˈlæzjʊraɪt/", "vi": "khoáng vật ngọc lưu ly lazurit"},
+    {"id": "lex.en.100k.090459", "hw": "lbw", "pos": "noun", "ipa": "/ˌɛl.biːˈdʌbəl.juː/", "vi": "lỗi cản bóng bằng chân cricket"},
+    {"id": "lex.en.100k.090460", "hw": "lc", "pos": "noun", "ipa": "/ˌɛlˈsiː/", "vi": "mức ít quan tâm (bảo tồn LC)"},
+    {"id": "lex.en.100k.090461", "hw": "leachability", "pos": "noun", "ipa": "/ˌliːtʃəˈbɪləti/", "vi": "khả năng bị rửa trôi; độ hòa tan"},
+    {"id": "lex.en.100k.090462", "hw": "leachable", "pos": "adj", "ipa": "/ˈliːtʃəbəl/", "vi": "dễ bị rửa trôi; có thể lọc chiết"},
+    {"id": "lex.en.100k.090463", "hw": "leached", "pos": "verb", "ipa": "/liːtʃt/", "vi": "đã bị rửa trôi chất dinh dưỡng"},
+    {"id": "lex.en.100k.090464", "hw": "leaches", "pos": "verb", "ipa": "/ˈliːtʃɪz/", "vi": "rửa trôi khoáng chất; lọc chiết"},
+    {"id": "lex.en.100k.090465", "hw": "leaderette", "pos": "noun", "ipa": "/ˌliːdəˈrɛt/", "vi": "bài xã luận ngắn trên báo"},
+    {"id": "lex.en.100k.090466", "hw": "leaderless", "pos": "adj", "ipa": "/ˈliːdərlɪs/", "vi": "không có người lãnh đạo chỉ huy"},
+    {"id": "lex.en.100k.090467", "hw": "leadline", "pos": "noun", "ipa": "/ˈlɛdlaɪn/", "vi": "dây dọi chì đo độ sâu đáy biển"},
+    {"id": "lex.en.100k.090468", "hw": "leadplant", "pos": "noun", "ipa": "/ˈlɛdplænt/", "vi": "cây bụi đậu chì lá bạc Amorpha"},
+    {"id": "lex.en.100k.090469", "hw": "leads", "pos": "verb", "ipa": "/liːdz/", "vi": "dẫn đầu; chỉ huy; dẫn dắt lối đi"},
+    {"id": "lex.en.100k.090470", "hw": "leadsman", "pos": "noun", "ipa": "/ˈlɛdzmən/", "vi": "thủy thủ thả dọi chì đo nước"},
+    {"id": "lex.en.100k.090471", "hw": "leadups", "pos": "noun", "ipa": "/ˈliːdʌps/", "vi": "giai đoạn chuẩn bị tiến tới"},
+    {"id": "lex.en.100k.090472", "hw": "leadwork", "pos": "noun", "ipa": "/ˈlɛdwɜːrk/", "vi": "đồ chì; kết cấu mái lợp chì"},
+    {"id": "lex.en.100k.090473", "hw": "leadwort", "pos": "noun", "ipa": "/ˈlɛdwɜːrt/", "vi": "cây đuôi công hoa xanh Plumbago"},
+    {"id": "lex.en.100k.090474", "hw": "leafage", "pos": "noun", "ipa": "/ˈliːfɪdʒ/", "vi": "tán lá cây; toàn bộ vòm lá"},
+    {"id": "lex.en.100k.090475", "hw": "leafiness", "pos": "noun", "ipa": "/ˈliːfinɪs/", "vi": "tính xum xuê rậm rạp; nhiều lá"},
+    {"id": "lex.en.100k.090476", "hw": "leafs", "pos": "verb", "ipa": "/liːfs/", "vi": "lật giở từng trang; đâm chồi"},
+    {"id": "lex.en.100k.090477", "hw": "leafstalk", "pos": "noun", "ipa": "/ˈliːfstɔːk/", "vi": "cuống lá cây"},
+    {"id": "lex.en.100k.090478", "hw": "leagued", "pos": "verb", "ipa": "/liːɡd/", "vi": "đã liên kết; gia nhập liên minh"},
+    {"id": "lex.en.100k.090479", "hw": "leaguer", "pos": "noun", "ipa": "/ˈliːɡər/", "vi": "thành viên liên minh; hội viên"},
+    {"id": "lex.en.100k.090480", "hw": "leagues", "pos": "verb", "ipa": "/liːɡz/", "vi": "kết đồng minh; liên kết chặt chẽ"},
+    {"id": "lex.en.100k.090481", "hw": "leaguing", "pos": "verb", "ipa": "/ˈliːɡɪŋ/", "vi": "đang liên minh; việc liên minh"},
+    {"id": "lex.en.100k.090482", "hw": "leakages", "pos": "noun", "ipa": "/ˈliːkɪdʒɪz/", "vi": "những vụ rò rỉ thông tin; rò rỉ"},
+    {"id": "lex.en.100k.090483", "hw": "leaked", "pos": "verb", "ipa": "/liːkt/", "vi": "đã bị rò rỉ; đã để lộ bí mật"},
+    {"id": "lex.en.100k.090484", "hw": "leaking", "pos": "verb", "ipa": "/ˈliːkɪŋ/", "vi": "đang rò rỉ; để rỉ nước ra ngoài"},
+    {"id": "lex.en.100k.090485", "hw": "leakless", "pos": "adj", "ipa": "/ˈliːklɪs/", "vi": "kín khít hoàn toàn; không rò rỉ"},
+    {"id": "lex.en.100k.090486", "hw": "leaks", "pos": "verb", "ipa": "/liːks/", "vi": "rò rỉ ra ngoài; để lộ thông tin"},
+    {"id": "lex.en.100k.090487", "hw": "leaned", "pos": "verb", "ipa": "/liːnd/", "vi": "đã nghiêng mình; đã tựa lưng vào"},
+    {"id": "lex.en.100k.090488", "hw": "leans", "pos": "verb", "ipa": "/liːnz/", "vi": "nghiêng mình; tựa vào; nghiêng về"},
+    {"id": "lex.en.100k.090489", "hw": "leant", "pos": "verb", "ipa": "/lɛnt/", "vi": "đã nghiêng; đã dựa vào"},
+    {"id": "lex.en.100k.090490", "hw": "leaped", "pos": "verb", "ipa": "/liːpt/", "vi": "đã nhảy phắt qua; nhảy bổ tới"},
+    {"id": "lex.en.100k.090491", "hw": "leapfrogging", "pos": "noun", "ipa": "/ˈliːpfrɒɡɪŋ/", "vi": "chiến lược nhảy cóc; trò nhảy cóc"},
+    {"id": "lex.en.100k.090492", "hw": "leaps", "pos": "verb", "ipa": "/liːps/", "vi": "nhảy vọt; phóng mình qua"},
+    {"id": "lex.en.100k.090493", "hw": "leapt", "pos": "verb", "ipa": "/lɛpt/", "vi": "đã nhảy bật lên; lao mình tới"},
+    {"id": "lex.en.100k.090494", "hw": "learnable", "pos": "adj", "ipa": "/ˈlɜːrnəbəl/", "vi": "có thể học hỏi được; dễ tiếp thu"},
+    {"id": "lex.en.100k.090495", "hw": "learnedly", "pos": "adv", "ipa": "/ˈlɜːrnɪdli/", "vi": "một cách uyên bác; thông thái"},
+    {"id": "lex.en.100k.090496", "hw": "learnedness", "pos": "noun", "ipa": "/ˈlɜːrnɪdnɪs/", "vi": "sự uyên bác; học vấn sâu rộng"},
+    {"id": "lex.en.100k.090497", "hw": "learnt", "pos": "verb", "ipa": "/lɜːrnt/", "vi": "đã học được; đã tiếp thu"},
+    {"id": "lex.en.100k.090498", "hw": "leases", "pos": "verb", "ipa": "/ˈliːsɪz/", "vi": "cho thuê; thuê mướn tài sản"},
+    {"id": "lex.en.100k.090499", "hw": "leashed", "pos": "verb", "ipa": "/liːʃt/", "vi": "đã đeo xích dắt; đã kìm giữ lại"},
+    {"id": "lex.en.100k.090500", "hw": "leashes", "pos": "verb", "ipa": "/ˈliːʃɪz/", "vi": "buộc xích dắt; kiềm tỏa kiềm chế"},
+    {"id": "lex.en.100k.090501", "hw": "leashing", "pos": "verb", "ipa": "/ˈliːʃɪŋ/", "vi": "đang buộc xích dắt; kiềm giữ lại"}
+]
+
+assert len(data) == 100
+for i, (r, rev) in enumerate(zip(raw, data)):
+    assert r['id'] == rev['id'] and r['hw'] == rev['hw'], f"Mismatch at {i}: {r['id']} vs {rev['id']}"
+    assert rev['vi'] and len(rev['vi']) <= 35, f"vi length > 35 at {i}: {rev['vi']}"
+    assert rev['pos'] in ["noun", "verb", "adj", "adv", "intj", "prep", "pron", "conj", "det", "num"], f"pos invalid at {i}: {rev['pos']}"
+    ipa = rev['ipa'].strip()
+    assert ipa.startswith('/') and ipa.endswith('/') and ipa.count('/') == 2, f"ipa format invalid at {i}: {ipa}"
+    rev['ipa'] = ipa
+    rev['status'] = "reviewed"
+    rev['cefr'] = r.get('cefr')
+    rev['tier'] = r.get('tier')
+    rev['notes'] = r.get('notes')
+
+print("Part 5 validated successfully!")

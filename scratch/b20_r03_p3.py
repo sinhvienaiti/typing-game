@@ -1,0 +1,128 @@
+import json
+
+part3_data = [
+  {"id": "lex.en.100k.096202", "hw": "nspcc", "pos": "noun", "ipa": "/ˌɛnɛspiːsiːˈsiː/", "vi": "hội bảo vệ trẻ em NSPCC Anh", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.096203", "hw": "nubbiness", "pos": "noun", "ipa": "/ˈnʌbinəs/", "vi": "độ sần sùi; bề mặt nổi mấu nhỏ", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.096204", "hw": "nubble", "pos": "noun", "ipa": "/ˈnʌbəl/", "vi": "mấu nhỏ; cục u nhỏ sần sùi", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.096205", "hw": "nubcake", "pos": "noun", "ipa": "/ˈnʌbkeɪk/", "vi": "tay mơ; kẻ ngốc nghếch vụng về", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.096206", "hw": "nubility", "pos": "noun", "ipa": "/njuːˈbɪləti/", "vi": "tuổi cập kê; tuổi có thể lấy chồng", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.096207", "hw": "nucellus", "pos": "noun", "ipa": "/njuːˈsɛləs/", "vi": "phôi châu; mô dinh dưỡng noãn", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.096208", "hw": "nucha", "pos": "noun", "ipa": "/ˈnuːkə/", "vi": "vùng gáy; phần sau cổ", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.096209", "hw": "nuchal", "pos": "adj", "ipa": "/ˈnuːkəl/", "vi": "thuộc vùng gáy; ở phần gáy", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.096210", "hw": "nuciferous", "pos": "adj", "ipa": "/njuːˈsɪfərəs/", "vi": "mang quả hạch; sinh quả hạt cứng", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.096211", "hw": "nucifraga", "pos": "noun", "ipa": "/njuːˈsɪfrəɡə/", "vi": "chi chim bổ hạt Nucifraga", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.096212", "hw": "nucivorous", "pos": "adj", "ipa": "/njuːˈsɪvərəs/", "vi": "ăn các loại hạt; ăn quả hạch", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.096213", "hw": "nucleale", "pos": "noun", "ipa": "/ˌnjuːkliˈeɪli/", "vi": "vùng quanh nhân tế bào", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.096214", "hw": "nucleates", "pos": "verb", "ipa": "/ˈnuːklieɪts/", "vi": "tạo mầm kết tinh; hình thành nhân", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.096215", "hw": "nucleating", "pos": "verb", "ipa": "/ˈnuːklieɪtɪŋ/", "vi": "tạo mầm; ngưng tụ tạo hạt nhân", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.096216", "hw": "nucleation", "pos": "noun", "ipa": "/ˌnuːkliˈeɪʃən/", "vi": "sự tạo mầm kết tinh; sự tạo nhân", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.096217", "hw": "nuclei", "pos": "noun", "ipa": "/ˈnuːkliaɪ/", "vi": "các hạt nhân; những nhân tế bào", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.096218", "hw": "nucleole", "pos": "noun", "ipa": "/ˈnuːklioʊl/", "vi": "hạch nhân; nhân con của tế bào", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.096219", "hw": "nucleonics", "pos": "noun", "ipa": "/ˌnuːkliˈɑːnɪks/", "vi": "khoa học công nghệ hạt nhân", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.096220", "hw": "nucleophile", "pos": "noun", "ipa": "/ˈnuːklioʊfaɪl/", "vi": "tác nhân thân hạt nhân", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.096221", "hw": "nucule", "pos": "noun", "ipa": "/ˈnuːkjuːl/", "vi": "quả hạch nhỏ; túi noãn tảo", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.096222", "hw": "nudeness", "pos": "noun", "ipa": "/ˈnuːdnəs/", "vi": "trạng thái khỏa thân; sự trần trụi", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.096223", "hw": "nudes", "pos": "noun", "ipa": "/nuːdz/", "vi": "ảnh khỏa thân; tranh khỏa thân", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.096224", "hw": "nudger", "pos": "noun", "ipa": "/ˈnʌdʒɚ/", "vi": "người hích nhẹ; người nhắc khéo", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.096225", "hw": "nudibranchia", "pos": "noun", "ipa": "/ˌnuːdəˈbræŋkiə/", "vi": "bộ sên biển trần Nudibranchia", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.096226", "hw": "nudie", "pos": "noun", "ipa": "/ˈnuːdi/", "vi": "phim khỏa thân; tạp chí khiêu dâm", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.096227", "hw": "nudis", "pos": "noun", "ipa": "/ˈnuːdaɪz/", "vi": "các loài sên biển trần", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.096228", "hw": "nudnick", "pos": "noun", "ipa": "/ˈnʊdnɪk/", "vi": "kẻ quấy rầy; người phiền phức", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.096229", "hw": "nudnik", "pos": "noun", "ipa": "/ˈnʊdnɪk/", "vi": "kẻ quấy rầy; người phiền phức", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.096230", "hw": "nuf", "pos": "adj", "ipa": "/nʌf/", "vi": "đủ rồi; thôi đủ rồi", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.096231", "hw": "nuggar", "pos": "noun", "ipa": "/ˈnʌɡɚ/", "vi": "thuyền buồm chở hàng sông Nin", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.096232", "hw": "nuggbuds", "pos": "noun", "ipa": "/ˈnʌɡbʌdz/", "vi": "búp hoa cần sa chất lượng cao", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.096233", "hw": "nuggets", "pos": "noun", "ipa": "/ˈnʌɡɪts/", "vi": "những cục vàng cốm; miếng gà viên", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.096234", "hw": "nukes", "pos": "noun", "ipa": "/nuːks/", "vi": "vũ khí hạt nhân; nhà máy hạt nhân", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.096235", "hw": "nuks", "pos": "verb", "ipa": "/nuːks/", "vi": "tấn công bằng vũ khí hạt nhân", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.096236", "hw": "nulhomotopic", "pos": "adj", "ipa": "/ˌnʌlhoʊməˈtɑːpɪk/", "vi": "đồng luân không; co rút được", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.096237", "hw": "nullges", "pos": "noun", "ipa": "/ˈnʌlɡeɪdʒɪz/", "vi": "các thước đo độ sâu rỗng", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.096238", "hw": "nullifies", "pos": "verb", "ipa": "/ˈnʌləfaɪz/", "vi": "vô hiệu hóa; bãi bỏ hiệu lực", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.096239", "hw": "nullifying", "pos": "verb", "ipa": "/ˈnʌləfaɪɪŋ/", "vi": "vô hiệu hóa; làm mất hiệu lực", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.096240", "hw": "nullipara", "pos": "noun", "ipa": "/nʌˈlɪpərə/", "vi": "sản phụ chưa từng sinh con", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.096241", "hw": "nullptr", "pos": "noun", "ipa": "/ˈnʌlˌpɔɪntɚ/", "vi": "con trỏ rỗng trong lập trình C++", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.096242", "hw": "nullptrs", "pos": "noun", "ipa": "/ˈnʌlˌpɔɪntɚz/", "vi": "các giá trị con trỏ rỗng C++", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.096243", "hw": "numary", "pos": "adj", "ipa": "/ˈnjuːməri/", "vi": "thuộc tiền tệ; liên quan tiền xu", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.096244", "hw": "numbed", "pos": "verb", "ipa": "/nʌmd/", "vi": "đã làm tê cóng; làm đờ đẫn", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.096245", "hw": "numbered", "pos": "verb", "ipa": "/ˈnʌmbɚd/", "vi": "đã đánh số; bị giới hạn số ngày", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.096246", "hw": "numbfish", "pos": "noun", "ipa": "/ˈnʌmfɪʃ/", "vi": "cá đuối điện gây tê", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.096247", "hw": "numbs", "pos": "verb", "ipa": "/nʌmz/", "vi": "làm tê liệt; làm mất cảm giác", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.096248", "hw": "numbskull", "pos": "noun", "ipa": "/ˈnʌmskʌl/", "vi": "kẻ đần độn; kẻ ngốc nghếch", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.096249", "hw": "numdah", "pos": "noun", "ipa": "/ˈnʌmdə/", "vi": "thảm len thêu numdah Ấn Độ", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.096250", "hw": "numenrable", "pos": "adj", "ipa": "/ˈnjuːmərəbəl/", "vi": "có thể đếm được; đếm xuể", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.096251", "hw": "numeraire", "pos": "noun", "ipa": "/ˌnuːmərˈɛr/", "vi": "đơn vị tiền tệ chuẩn đo lường", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.096252", "hw": "numerals", "pos": "noun", "ipa": "/ˈnuːmərəlz/", "vi": "các chữ số; các ký tự số", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.096253", "hw": "numerously", "pos": "adv", "ipa": "/ˈnuːmərəsli/", "vi": "với số lượng lớn; đông đảo", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.096254", "hw": "numerousness", "pos": "noun", "ipa": "/ˈnuːmərəsnəs/", "vi": "số lượng đông đảo; sự nhiều vô kể", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.096255", "hw": "numida", "pos": "noun", "ipa": "/ˈnjuːmɪdə/", "vi": "chi gà sao Numida", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.096256", "hw": "numididae", "pos": "noun", "ipa": "/njuːˈmɪdɪdiː/", "vi": "họ gà sao Numididae", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.096257", "hw": "numidinae", "pos": "noun", "ipa": "/njuːˈmɪdɪniː/", "vi": "phân họ gà sao Numidinae", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.096258", "hw": "numina", "pos": "noun", "ipa": "/ˈnuːmɪnə/", "vi": "các vị thần linh; linh khí hộ trì", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.096259", "hw": "numismatic", "pos": "adj", "ipa": "/ˌnuːmɪzˈmætɪk/", "vi": "thuộc ngành nghiên cứu tiền cổ", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.096260", "hw": "numismatologist", "pos": "noun", "ipa": "/ˌnuːmɪzməˈtɑːlədʒɪst/", "vi": "nhà nghiên cứu tiền cổ", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.096261", "hw": "numismatology", "pos": "noun", "ipa": "/ˌnuːmɪzməˈtɑːlədʒi/", "vi": "ngành nghiên cứu tiền cổ", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.096262", "hw": "nummary", "pos": "adj", "ipa": "/ˈnʌməri/", "vi": "thuộc tiền đúc; liên quan tiền tệ", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.096263", "hw": "nummulary", "pos": "adj", "ipa": "/ˈnʌmjələri/", "vi": "có hình đồng xu tròn", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.096264", "hw": "nummulite", "pos": "noun", "ipa": "/ˈnʌmjəlaɪt/", "vi": "hóa thạch trùng lỗ đồng tiền", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.096265", "hw": "nummulites", "pos": "noun", "ipa": "/ˈnʌmjəlaɪts/", "vi": "các trùng lỗ hình đồng tiền", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.096266", "hw": "nummulitidae", "pos": "noun", "ipa": "/ˌnʌmjəˈlɪtɪdiː/", "vi": "họ trùng lỗ đồng tiền Nummulitidae", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.096267", "hw": "numnah", "pos": "noun", "ipa": "/ˈnʌmnə/", "vi": "tấm nệm lót dưới yên ngựa", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.096268", "hw": "nunavummiut", "pos": "noun", "ipa": "/nuːˌnɑːvʊmmiˈuːt/", "vi": "người dân lãnh thổ Nunavut", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.096269", "hw": "nunciature", "pos": "noun", "ipa": "/ˈnʌnʃiətʃʊr/", "vi": "tòa khâm sứ Tòa thánh Vatican", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.096270", "hw": "nuncius", "pos": "noun", "ipa": "/ˈnʌnʃiəs/", "vi": "khâm sứ Vatican; sứ giả giáo hoàng", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.096271", "hw": "nuncle", "pos": "noun", "ipa": "/ˈnʌŋkəl/", "vi": "chú ruột; bác trai tiếng cổ", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.096272", "hw": "nunnish", "pos": "adj", "ipa": "/ˈnʌnɪʃ/", "vi": "như nữ tu; mang nét nữ tu sĩ", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.096273", "hw": "nuprin", "pos": "noun", "ipa": "/ˈnuːprɪn/", "vi": "thuốc giảm đau Nuprin ibuprofen", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.096274", "hw": "nurseling", "pos": "noun", "ipa": "/ˈnɜːrslɪŋ/", "vi": "trẻ còn bú mẹ; trẻ sơ sinh", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.096275", "hw": "nurserymaid", "pos": "noun", "ipa": "/ˈnɜːrsərimeɪd/", "vi": "cô giữ trẻ; chị bảo mẫu gia đình", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.096276", "hw": "nurses", "pos": "verb", "ipa": "/ˈnɜːrsɪz/", "vi": "chăm sóc bệnh; nuôi dưỡng; ôm ấp", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.096277", "hw": "nurslings", "pos": "noun", "ipa": "/ˈnɜːrslɪŋz/", "vi": "những đứa trẻ còn bú mẹ", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.096278", "hw": "nurtural", "pos": "adj", "ipa": "/ˈnɜːrtʃərəl/", "vi": "do nuôi dưỡng giáo dục; dưỡng dục", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.096279", "hw": "nurtured", "pos": "verb", "ipa": "/ˈnɜːrtʃɚd/", "vi": "đã nuôi nấng; đã bồi dưỡng", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.096280", "hw": "nurtures", "pos": "verb", "ipa": "/ˈnɜːrtʃɚz/", "vi": "nuôi dưỡng; ươm mầm; vun đắp", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.096281", "hw": "nurturing", "pos": "verb", "ipa": "/ˈnɜːrtʃərɪŋ/", "vi": "nuôi dưỡng; chăm bẵm; vun trồng", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.096282", "hw": "nusku", "pos": "noun", "ipa": "/ˈnʌskuː/", "vi": "thần lửa Nusku Lưỡng Hà cổ đại", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.096283", "hw": "nutate", "pos": "verb", "ipa": "/ˈnuːteɪt/", "vi": "gật đầu; lắc lư trục tự quay", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.096284", "hw": "nutgrass", "pos": "noun", "ipa": "/ˈnʌtɡræs/", "vi": "cỏ gấu; cỏ củ gấu thảo dược", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.096285", "hw": "nutlet", "pos": "noun", "ipa": "/ˈnʌtlət/", "vi": "quả hạch nhỏ; hạt hạch tí hon", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.096286", "hw": "nutlike", "pos": "adj", "ipa": "/ˈnʌtlaɪk/", "vi": "có vị bùi như hạt; giống hạt dẻ", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.096287", "hw": "nutmeat", "pos": "noun", "ipa": "/ˈnʌtmiːt/", "vi": "nhân hạt ăn được; cùi hạt bùi", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.096288", "hw": "nutrify", "pos": "verb", "ipa": "/ˈnuːtrəfaɪ/", "vi": "cung cấp dinh dưỡng; tẩm bổ chất", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.096289", "hw": "nutritionary", "pos": "adj", "ipa": "/nuːˈtrɪʃənɛri/", "vi": "thuộc về dinh dưỡng; bổ dưỡng", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.096290", "hw": "nutritionists", "pos": "noun", "ipa": "/nuːˈtrɪʃənɪsts/", "vi": "các chuyên gia dinh dưỡng", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.096291", "hw": "nutritiousness", "pos": "noun", "ipa": "/nuːˈtrɪʃəsnəs/", "vi": "tính bổ dưỡng; giá trị dinh dưỡng", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.096292", "hw": "nutritiveness", "pos": "noun", "ipa": "/ˈnuːtrətɪvnəs/", "vi": "giá trị bổ dưỡng chất dinh dưỡng", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.096293", "hw": "nutted", "pos": "verb", "ipa": "/ˈnʌtɪd/", "vi": "đã húc đầu vào; đã hái hạt", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.096294", "hw": "nutters", "pos": "noun", "ipa": "/ˈnʌtɚz/", "vi": "những kẻ gàn dở; người lập dị", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.096295", "hw": "nuttily", "pos": "adv", "ipa": "/ˈnʌtɪli/", "vi": "một cách gàn dở; ngớ ngẩn kì cục", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.096296", "hw": "nuttiness", "pos": "noun", "ipa": "/ˈnʌtinəs/", "vi": "tính gàn dở; vị bùi béo ngậy", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.096297", "hw": "nutting", "pos": "noun", "ipa": "/ˈnʌtɪŋ/", "vi": "chuyến đi hái hạt dẻ quả hạch", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.096298", "hw": "nuwc", "pos": "noun", "ipa": "/ˌɛnjuːdʌbəljuːˈsiː/", "vi": "trung tâm tác chiến ngầm NUWC Mỹ", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.096299", "hw": "nuytsia", "pos": "noun", "ipa": "/naɪtˈsiːə/", "vi": "cây thông giáng sinh Úc Nuytsia", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.096300", "hw": "nuzzled", "pos": "verb", "ipa": "/ˈnʌzəld/", "vi": "đã rúc đầu âu yếm; đã nép vào", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+  {"id": "lex.en.100k.096301", "hw": "nuzzles", "pos": "verb", "ipa": "/ˈnʌzəlz/", "vi": "rúc đầu âu yếm; dụi mũi nép vào", "cefr": "C2", "tier": "expanded", "status": "reviewed", "notes": ""},
+]
+
+assert len(part3_data) == 100, f"Expected 100 items, got {len(part3_data)}"
+
+valid_pos = {"noun", "verb", "adj", "adv", "num", "intj", "prep", "pron", "conj", "det"}
+
+with open("scratch/b20_r03_raw_p3.json") as f:
+    raw_p3 = json.load(f)
+
+for i, (item, raw) in enumerate(zip(part3_data, raw_p3)):
+    assert item["id"] == raw["id"], f"ID mismatch at {i}: {item['id']} vs {raw['id']}"
+    assert item["hw"] == raw["hw"], f"HW mismatch at {i}: {item['hw']} vs {raw['hw']}"
+    assert item["pos"] in valid_pos, f"Invalid POS at {i}: {item['pos']}"
+    assert item["ipa"].startswith("/") and item["ipa"].endswith("/"), f"Invalid IPA slashes at {i}: {item['ipa']}"
+    assert item["ipa"].count("/") == 2, f"IPA does not have exactly 2 slashes at {i}: {item['ipa']}"
+    assert not item["ipa"].startswith("/ ") and not item["ipa"].endswith(" /"), f"IPA boundary spaces at {i}: {item['ipa']}"
+    assert len(item["vi"]) <= 35, f"vi too long at {i} ({item['hw']}): {item['vi']} (len={len(item['vi'])})"
+    assert len(item["vi"]) > 0, f"Empty vi at {i}"
+    assert not any(art in item["vi"] for art in ["Số nhiều", "Xem ", "Dạng ", "Viết tắt", "Động từ chia", "%%"]), f"Crawler artifact in vi at {i}: {item['vi']}"
+    assert item["status"] == "reviewed", f"Status not reviewed at {i}"
+
+with open("scratch/b20_r03_p3.json", "w") as f:
+    json.dump(part3_data, f, ensure_ascii=False, indent=2)
+
+print("Batch 20 Round 3 Part 3 validated and saved successfully!")

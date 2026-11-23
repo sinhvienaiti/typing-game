@@ -1,0 +1,122 @@
+import json
+
+raw = json.load(open("scratch/b19_r01_raw_p1.json"))
+assert len(raw) == 100
+
+data = [
+    {"id": "lex.en.100k.090002", "hw": "laconical", "pos": "adj", "ipa": "/ləˈkɑːnɪkəl/", "vi": "vắn tắt; súc tích; cô đọng"},
+    {"id": "lex.en.100k.090003", "hw": "laconicism", "pos": "noun", "ipa": "/ləˈkɑːnɪsɪzəm/", "vi": "lối nói vắn tắt; sự cô đọng"},
+    {"id": "lex.en.100k.090004", "hw": "laconicum", "pos": "noun", "ipa": "/ləˈkɒnɪkəm/", "vi": "phòng xông hơi La Mã; buồng tắm hơi"},
+    {"id": "lex.en.100k.090005", "hw": "laconism", "pos": "noun", "ipa": "/ˈlækənɪzəm/", "vi": "lối nói ngắn gọn; cách nói súc tích"},
+    {"id": "lex.en.100k.090006", "hw": "lacquered", "pos": "verb", "ipa": "/ˈlækərd/", "vi": "đã sơn mài; quét sơn bóng"},
+    {"id": "lex.en.100k.090007", "hw": "lacquerer", "pos": "noun", "ipa": "/ˈlækərər/", "vi": "thợ sơn mài; người quét sơn"},
+    {"id": "lex.en.100k.090008", "hw": "lacquering", "pos": "verb", "ipa": "/ˈlækərɪŋ/", "vi": "đang sơn mài; việc quét sơn"},
+    {"id": "lex.en.100k.090009", "hw": "lacquers", "pos": "verb", "ipa": "/ˈlækərz/", "vi": "quét sơn mài; phủ sơn bóng"},
+    {"id": "lex.en.100k.090010", "hw": "lacquey", "pos": "noun", "ipa": "/ˈlæki/", "vi": "kẻ hầu cận; tay sai; người hầu"},
+    {"id": "lex.en.100k.090011", "hw": "lacrimator", "pos": "noun", "ipa": "/ˈlækrɪmeɪtər/", "vi": "chất làm cay mắt; hơi cay"},
+    {"id": "lex.en.100k.090012", "hw": "lacrimatory", "pos": "adj", "ipa": "/ˈlækrɪmətɔːri/", "vi": "gây cay mắt; làm chảy nước mắt"},
+    {"id": "lex.en.100k.090013", "hw": "lactasion", "pos": "noun", "ipa": "/lækˈteɪʃən/", "vi": "sự tiết sữa; thời kỳ cho con bú"},
+    {"id": "lex.en.100k.090014", "hw": "lactasional", "pos": "adj", "ipa": "/lækˈteɪʃənəl/", "vi": "thuộc thời kỳ tiết sữa"},
+    {"id": "lex.en.100k.090015", "hw": "lactated", "pos": "verb", "ipa": "/ˈlækteɪtɪd/", "vi": "đã tiết sữa; từng tiết sữa"},
+    {"id": "lex.en.100k.090016", "hw": "lactates", "pos": "verb", "ipa": "/ˈlækteɪts/", "vi": "tiết sữa; cho sữa"},
+    {"id": "lex.en.100k.090017", "hw": "lactational", "pos": "adj", "ipa": "/lækˈteɪʃənəl/", "vi": "thuộc thời kỳ tiết sữa"},
+    {"id": "lex.en.100k.090018", "hw": "lacteal", "pos": "adj", "ipa": "/ˈlæktiəl/", "vi": "thuộc về sữa; dẫn nhũ trấp"},
+    {"id": "lex.en.100k.090019", "hw": "lacteous", "pos": "adj", "ipa": "/ˈlæktiəs/", "vi": "như sữa; đục như sữa"},
+    {"id": "lex.en.100k.090020", "hw": "lactescence", "pos": "noun", "ipa": "/lækˈtɛsəns/", "vi": "tính đục như sữa; nhựa trắng đục"},
+    {"id": "lex.en.100k.090021", "hw": "lactescency", "pos": "noun", "ipa": "/lækˈtɛsənsi/", "vi": "tính đục như sữa; tính chất sữa"},
+    {"id": "lex.en.100k.090022", "hw": "lactescent", "pos": "adj", "ipa": "/lækˈtɛsənt/", "vi": "tiết nhựa sữa; đục như sữa"},
+    {"id": "lex.en.100k.090023", "hw": "lactiferous", "pos": "adj", "ipa": "/lækˈtɪfərəs/", "vi": "tiết sữa; dẫn sữa; chứa nhựa mủ"},
+    {"id": "lex.en.100k.090024", "hw": "lactiferousness", "pos": "noun", "ipa": "/lækˈtɪfərəsnɪs/", "vi": "khả năng tiết sữa; sự dẫn sữa"},
+    {"id": "lex.en.100k.090025", "hw": "lactifuge", "pos": "noun", "ipa": "/ˈlæktɪfjuːdʒ/", "vi": "thuốc làm giảm tiết sữa; hãm sữa"},
+    {"id": "lex.en.100k.090026", "hw": "lactobacillaceae", "pos": "noun", "ipa": "/ˌlæktoʊbæsɪˈleɪsiː/", "vi": "họ vi khuẩn lactic"},
+    {"id": "lex.en.100k.090027", "hw": "lactobacteriaceae", "pos": "noun", "ipa": "/ˌlæktoʊbækˌtɪəriˈeɪsiː/", "vi": "họ vi khuẩn lên men lactic"},
+    {"id": "lex.en.100k.090028", "hw": "lactoflavin", "pos": "noun", "ipa": "/ˌlæktoʊˈfleɪvɪn/", "vi": "lactoflavin; vitamin B2"},
+    {"id": "lex.en.100k.090029", "hw": "lactogen", "pos": "noun", "ipa": "/ˈlæktoʊdʒən/", "vi": "hoóc-môn kích thích tiết sữa"},
+    {"id": "lex.en.100k.090030", "hw": "lactogenic", "pos": "adj", "ipa": "/ˌlæktoʊˈdʒɛnɪk/", "vi": "kích thích tiết sữa; tạo sữa"},
+    {"id": "lex.en.100k.090031", "hw": "lactoglobulin", "pos": "noun", "ipa": "/ˌlæktoʊˈɡlɒbjʊlɪn/", "vi": "protein lactoglobulin trong sữa"},
+    {"id": "lex.en.100k.090032", "hw": "lactometer", "pos": "noun", "ipa": "/lækˈtɒmɪtər/", "vi": "sữa kế; phù kế đo độ sữa"},
+    {"id": "lex.en.100k.090033", "hw": "lactophrys", "pos": "noun", "ipa": "/lækˈtɒfrɪs/", "vi": "chi cá nóc hòm Lactophrys"},
+    {"id": "lex.en.100k.090034", "hw": "lactosuria", "pos": "noun", "ipa": "/ˌlæktoʊˈsjʊəriə/", "vi": "chứng có lactose trong nước tiểu"},
+    {"id": "lex.en.100k.090035", "hw": "lacunae", "pos": "noun", "ipa": "/ləˈkjuːniː/", "vi": "kẽ hở; khoảng trống; lỗ khuyết"},
+    {"id": "lex.en.100k.090036", "hw": "lacunal", "pos": "adj", "ipa": "/ləˈkjuːnəl/", "vi": "thuộc kẽ hở; có lỗ khuyết"},
+    {"id": "lex.en.100k.090037", "hw": "lacunarity", "pos": "noun", "ipa": "/ˌlækjʊˈnærɪti/", "vi": "tính rỗng kẽ; độ xốp rỗng"},
+    {"id": "lex.en.100k.090038", "hw": "lacunose", "pos": "adj", "ipa": "/ləˈkjuːnoʊs/", "vi": "có nhiều kẽ hở; rỗ lõm"},
+    {"id": "lex.en.100k.090039", "hw": "lacunosity", "pos": "noun", "ipa": "/ˌlækjʊˈnɒsɪti/", "vi": "trạng thái nhiều kẽ hở rỗ"},
+    {"id": "lex.en.100k.090040", "hw": "ladanum", "pos": "noun", "ipa": "/ˈlædənəm/", "vi": "nhựa thơm ladanum; nhựa dầu cistus"},
+    {"id": "lex.en.100k.090041", "hw": "laddish", "pos": "adj", "ipa": "/ˈlædɪʃ/", "vi": "thô lỗ bỗ bã; nghịch ngợm kiểu trai"},
+    {"id": "lex.en.100k.090042", "hw": "laded", "pos": "verb", "ipa": "/ˈleɪdɪd/", "vi": "đã chất hàng lên tàu; múc dỡ hàng"},
+    {"id": "lex.en.100k.090043", "hw": "lades", "pos": "verb", "ipa": "/leɪdz/", "vi": "chất hàng lên tàu; múc rót"},
+    {"id": "lex.en.100k.090044", "hw": "ladida", "pos": "adj", "ipa": "/ˌlɑːdiːˈdɑː/", "vi": "điệu bộ; kiểu cách; màu mè"},
+    {"id": "lex.en.100k.090045", "hw": "ladies", "pos": "noun", "ipa": "/ˈleɪdiz/", "vi": "các quý bà; nhà vệ sinh nữ"},
+    {"id": "lex.en.100k.090046", "hw": "ladings", "pos": "noun", "ipa": "/ˈleɪdɪŋz/", "vi": "hàng hóa bốc dỡ; các kiện hàng"},
+    {"id": "lex.en.100k.090047", "hw": "ladled", "pos": "verb", "ipa": "/ˈleɪdəld/", "vi": "đã múc bằng muôi; múc rót"},
+    {"id": "lex.en.100k.090048", "hw": "ladleful", "pos": "noun", "ipa": "/ˈleɪdəlfʊl/", "vi": "muôi đầy; lượng múc một muôi"},
+    {"id": "lex.en.100k.090049", "hw": "ladles", "pos": "verb", "ipa": "/ˈleɪdəlz/", "vi": "múc bằng muôi; rót canh"},
+    {"id": "lex.en.100k.090050", "hw": "ladling", "pos": "verb", "ipa": "/ˈleɪdlɪŋ/", "vi": "đang múc bằng muôi; việc múc"},
+    {"id": "lex.en.100k.090051", "hw": "ladrone", "pos": "noun", "ipa": "/ləˈdroʊn/", "vi": "tên cướp đường; thảo khấu"},
+    {"id": "lex.en.100k.090052", "hw": "ladybeetle", "pos": "noun", "ipa": "/ˈleɪdibitəl/", "vi": "con bọ rùa; bọ cánh cam"},
+    {"id": "lex.en.100k.090053", "hw": "ladyish", "pos": "adj", "ipa": "/ˈleɪdiiʃ/", "vi": "điệu đà tiểu thư; như quý bà"},
+    {"id": "lex.en.100k.090054", "hw": "ladyishness", "pos": "noun", "ipa": "/ˈleɪdiɪʃnɪs/", "vi": "vẻ điệu đà tiểu thư; tính quý bà"},
+    {"id": "lex.en.100k.090055", "hw": "ladylikeness", "pos": "noun", "ipa": "/ˈleɪdilaɪknɪs/", "vi": "phong thái quý phái lịch thiệp"},
+    {"id": "lex.en.100k.090056", "hw": "ladyling", "pos": "noun", "ipa": "/ˈleɪdilɪŋ/", "vi": "tiểu thư quý tộc trẻ; quý bà nhỏ"},
+    {"id": "lex.en.100k.090057", "hw": "laevo", "pos": "adj", "ipa": "/ˈliːvoʊ/", "vi": "quay trái; tả tuyền"},
+    {"id": "lex.en.100k.090058", "hw": "laevodopa", "pos": "noun", "ipa": "/ˌliːvoʊˈdoʊpə/", "vi": "thuốc levodopa; chất dẫn truyền"},
+    {"id": "lex.en.100k.090059", "hw": "laevogyrate", "pos": "adj", "ipa": "/ˌliːvoʊˈdʒaɪreɪt/", "vi": "làm quay cực sang trái"},
+    {"id": "lex.en.100k.090060", "hw": "laevorotation", "pos": "noun", "ipa": "/ˌliːvoʊroʊˈteɪʃən/", "vi": "sự quay trái quang học"},
+    {"id": "lex.en.100k.090061", "hw": "laevorotatory", "pos": "adj", "ipa": "/ˌliːvoʊˈroʊtətɔːri/", "vi": "làm quay cực sang trái"},
+    {"id": "lex.en.100k.090062", "hw": "laevulose", "pos": "noun", "ipa": "/ˈlɛvjʊloʊs/", "vi": "đường fructoza; đường hoa quả"},
+    {"id": "lex.en.100k.090063", "hw": "lafonds", "pos": "noun", "ipa": "/ləˈfɒndz/", "vi": "những người họ Lafond"},
+    {"id": "lex.en.100k.090064", "hw": "lagarostrobus", "pos": "noun", "ipa": "/ˌlæɡərəˈstroʊbəs/", "vi": "chi thông tùng Lagarostrobus"},
+    {"id": "lex.en.100k.090065", "hw": "lagator", "pos": "noun", "ipa": "/ləˈɡeɪtər/", "vi": "người lập di chúc để lại tài sản"},
+    {"id": "lex.en.100k.090066", "hw": "lagenaria", "pos": "noun", "ipa": "/ˌlædʒɪˈnɛəriə/", "vi": "chi quả bầu Lagenaria"},
+    {"id": "lex.en.100k.090067", "hw": "lagend", "pos": "noun", "ipa": "/ˈleɪɡənd/", "vi": "hàng hóa đắm có phao đánh dấu"},
+    {"id": "lex.en.100k.090068", "hw": "lagenophera", "pos": "noun", "ipa": "/ˌlædʒɪˈnɒfərə/", "vi": "chi cúc dại Lagenophora"},
+    {"id": "lex.en.100k.090069", "hw": "lagerbeer", "pos": "noun", "ipa": "/ˈlɑːɡərbɪər/", "vi": "bia lager; bia lên men chìm"},
+    {"id": "lex.en.100k.090070", "hw": "lagerphone", "pos": "noun", "ipa": "/ˈlɑːɡərfoʊn/", "vi": "nhạc cụ gõ nắp chai lagerphone"},
+    {"id": "lex.en.100k.090071", "hw": "lagerstroemia", "pos": "noun", "ipa": "/ˌleɪɡərˈstriːmiə/", "vi": "chi bằng lăng"},
+    {"id": "lex.en.100k.090072", "hw": "laggardly", "pos": "adv", "ipa": "/ˈlæɡərdli/", "vi": "chậm chạp; chần chừ; trễ nải"},
+    {"id": "lex.en.100k.090073", "hw": "laggardness", "pos": "noun", "ipa": "/ˈlæɡərdnɪs/", "vi": "tính chậm trễ; thói lề mề trễ nải"},
+    {"id": "lex.en.100k.090074", "hw": "lagged", "pos": "verb", "ipa": "/læɡd/", "vi": "đã tụt hậu; đã bọc cách nhiệt"},
+    {"id": "lex.en.100k.090075", "hw": "lagidium", "pos": "noun", "ipa": "/ləˈdʒɪdiəm/", "vi": "chi sóc sin-sin Lagidium"},
+    {"id": "lex.en.100k.090076", "hw": "lagodon", "pos": "noun", "ipa": "/ˈlæɡədɒn/", "vi": "chi cá tráp răng cưa Lagodon"},
+    {"id": "lex.en.100k.090077", "hw": "lagomorpha", "pos": "noun", "ipa": "/ˌlæɡəˈmɔːrfə/", "vi": "bộ thỏ; các loài thuộc bộ thỏ"},
+    {"id": "lex.en.100k.090078", "hw": "lagomorphic", "pos": "adj", "ipa": "/ˌlæɡəˈmɔːrfɪk/", "vi": "thuộc dạng thỏ; giống loài thỏ"},
+    {"id": "lex.en.100k.090079", "hw": "lagophthalmos", "pos": "noun", "ipa": "/ˌlæɡɒfˈθælməs/", "vi": "chứng mắt thỏ; tật hở mi mắt"},
+    {"id": "lex.en.100k.090080", "hw": "lagorchestes", "pos": "noun", "ipa": "/ˌlæɡɔːrˈkɛstiːz/", "vi": "chi chuột túi thỏ Lagorchestes"},
+    {"id": "lex.en.100k.090081", "hw": "lagostomus", "pos": "noun", "ipa": "/ləˈɡɒstəməs/", "vi": "chi sóc chuột Viscacha đồng cỏ"},
+    {"id": "lex.en.100k.090082", "hw": "lagothrix", "pos": "noun", "ipa": "/ˈlæɡəθrɪks/", "vi": "chi khỉ lông len Lagothrix"},
+    {"id": "lex.en.100k.090083", "hw": "lags", "pos": "verb", "ipa": "/læɡz/", "vi": "tụt lại phía sau; bọc cách nhiệt"},
+    {"id": "lex.en.100k.090084", "hw": "laguncularia", "pos": "noun", "ipa": "/ləˌɡʌŋkjʊˈlɛəriə/", "vi": "chi cóc màng đước Laguncularia"},
+    {"id": "lex.en.100k.090085", "hw": "lahnda", "pos": "noun", "ipa": "/ˈlɑːndə/", "vi": "tiếng Lahnda (tiếng Tây Punjab)"},
+    {"id": "lex.en.100k.090086", "hw": "laicisation", "pos": "noun", "ipa": "/ˌleɪɪsaɪˈzeɪʃən/", "vi": "sự thế tục hóa; sự tách tôn giáo"},
+    {"id": "lex.en.100k.090087", "hw": "laicise", "pos": "verb", "ipa": "/ˈleɪɪsaɪz/", "vi": "thế tục hóa; tách khỏi giáo hội"},
+    {"id": "lex.en.100k.090088", "hw": "laicism", "pos": "noun", "ipa": "/ˈleɪɪsɪzəm/", "vi": "chủ nghĩa thế tục; tính thế tục"},
+    {"id": "lex.en.100k.090089", "hw": "laicization", "pos": "noun", "ipa": "/ˌleɪɪzaɪˈzeɪʃən/", "vi": "sự thế tục hóa; hoàn tục"},
+    {"id": "lex.en.100k.090090", "hw": "laicize", "pos": "verb", "ipa": "/ˈleɪɪsaɪz/", "vi": "thế tục hóa; cho hoàn tục"},
+    {"id": "lex.en.100k.090091", "hw": "lairy", "pos": "adj", "ipa": "/ˈlɛəri/", "vi": "lòe loẹt; thô lỗ láo xược"},
+    {"id": "lex.en.100k.090092", "hw": "laitance", "pos": "noun", "ipa": "/ˈleɪtəns/", "vi": "màng váng vữa xi măng; váng hồ"},
+    {"id": "lex.en.100k.090093", "hw": "lakelet", "pos": "noun", "ipa": "/ˈleɪklɪt/", "vi": "hồ nhỏ; mặt hồ tí hon"},
+    {"id": "lex.en.100k.090094", "hw": "lalani", "pos": "noun", "ipa": "/ləˈlɑːni/", "vi": "họ Lalani"},
+    {"id": "lex.en.100k.090095", "hw": "lalanis", "pos": "noun", "ipa": "/ləˈlɑːniz/", "vi": "những người mang họ Lalani"},
+    {"id": "lex.en.100k.090096", "hw": "lallan", "pos": "adj", "ipa": "/ˈlælən/", "vi": "thuộc vùng đồng bằng Scotland"},
+    {"id": "lex.en.100k.090097", "hw": "lallans", "pos": "noun", "ipa": "/ˈlælənz/", "vi": "tiếng thổ ngữ Lallans Scotland"},
+    {"id": "lex.en.100k.090098", "hw": "lallation", "pos": "noun", "ipa": "/læˈleɪʃən/", "vi": "tật phát âm r thành l; nói ngọng"},
+    {"id": "lex.en.100k.090099", "hw": "lallygag", "pos": "verb", "ipa": "/ˈlæliɡæɡ/", "vi": "la cà lêu lổng; lãng phí thời gian"},
+    {"id": "lex.en.100k.090100", "hw": "lamaist", "pos": "noun", "ipa": "/ˈlɑːməɪst/", "vi": "tín đồ Lạt-ma giáo"},
+    {"id": "lex.en.100k.090101", "hw": "lamaistic", "pos": "adj", "ipa": "/ˌlɑːməˈɪstɪk/", "vi": "thuộc về Lạt-ma giáo Tây Tạng"}
+]
+
+assert len(data) == 100
+for i, (r, rev) in enumerate(zip(raw, data)):
+    assert r['id'] == rev['id'] and r['hw'] == rev['hw'], f"Mismatch at {i}: {r['id']} vs {rev['id']}"
+    assert rev['vi'] and len(rev['vi']) <= 35, f"vi length > 35 at {i}: {rev['vi']}"
+    assert rev['pos'] in ["noun", "verb", "adj", "adv", "intj", "prep", "pron", "conj", "det", "num"], f"pos invalid at {i}: {rev['pos']}"
+    ipa = rev['ipa'].strip()
+    assert ipa.startswith('/') and ipa.endswith('/') and ipa.count('/') == 2, f"ipa format invalid at {i}: {ipa}"
+    rev['ipa'] = ipa
+    rev['status'] = "reviewed"
+    rev['cefr'] = r.get('cefr')
+    rev['tier'] = r.get('tier')
+    rev['notes'] = r.get('notes')
+
+print("Part 1 validated successfully!")

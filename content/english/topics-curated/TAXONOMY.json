@@ -1,0 +1,694 @@
+{
+  "version": 1,
+  "title": "Curated English Topics Taxonomy",
+  "description": "Hệ thống phân loại từ vựng tiếng Anh theo chủ đề trực quan, gắn liền đời sống hàng ngày, giao tiếp thực tế và nhu cầu học tập của người Việt.",
+  "totalGroups": 18,
+  "groups": [
+    {
+      "id": "everyday-life",
+      "label": "Everyday Life",
+      "labelVi": "Đời sống hàng ngày",
+      "topics": [
+        {
+          "id": "everyday.greetings",
+          "label": "Greetings & Politeness",
+          "labelVi": "Chào hỏi & Phép lịch sự"
+        },
+        {
+          "id": "everyday.routine",
+          "label": "Daily Routine",
+          "labelVi": "Thói quen sinh hoạt hàng ngày"
+        },
+        {
+          "id": "everyday.time-calendar",
+          "label": "Time, Dates & Calendar",
+          "labelVi": "Thời gian, Giờ giấc & Lịch biểu"
+        },
+        {
+          "id": "everyday.personal-belongings",
+          "label": "Personal Belongings",
+          "labelVi": "Đồ dùng cá nhân mang theo"
+        },
+        {
+          "id": "everyday.cleaning-chores",
+          "label": "Cleaning & House Chores",
+          "labelVi": "Dọn dẹp & Việc vặt trong nhà"
+        },
+        {
+          "id": "everyday.hygiene-grooming",
+          "label": "Personal Hygiene & Grooming",
+          "labelVi": "Vệ sinh cá nhân & Chăm sóc bản thân"
+        },
+        {
+          "id": "everyday.hobbies-pastimes",
+          "label": "Hobbies & Free Time",
+          "labelVi": "Sở thích & Giải trí lúc rảnh"
+        }
+      ]
+    },
+    {
+      "id": "food-drink",
+      "label": "Food & Drink",
+      "labelVi": "Ẩm thực & Đồ uống",
+      "topics": [
+        {
+          "id": "food.fruits",
+          "label": "Fruits",
+          "labelVi": "Hoa quả & Trái cây"
+        },
+        {
+          "id": "food.vegetables-herbs",
+          "label": "Vegetables & Herbs",
+          "labelVi": "Rau củ & Rau thơm gia vị"
+        },
+        {
+          "id": "food.meat-poultry",
+          "label": "Meat & Poultry",
+          "labelVi": "Thịt gia súc & Gia cầm"
+        },
+        {
+          "id": "food.seafood",
+          "label": "Seafood & Fish",
+          "labelVi": "Hải sản & Cá"
+        },
+        {
+          "id": "food.staples-grains",
+          "label": "Grains, Bread & Staples",
+          "labelVi": "Lương thực, Ngũ cốc, Cơm & Bánh mì"
+        },
+        {
+          "id": "food.dairy-eggs",
+          "label": "Dairy & Eggs",
+          "labelVi": "Sữa, Phô mai & Trứng"
+        },
+        {
+          "id": "food.spices-condiments",
+          "label": "Spices, Sauces & Condiments",
+          "labelVi": "Gia vị, Nước sốt & Dầu ăn"
+        },
+        {
+          "id": "food.beverages",
+          "label": "Beverages & Drinks",
+          "labelVi": "Đồ uống & Nước giải khát"
+        },
+        {
+          "id": "food.snacks-sweets",
+          "label": "Snacks, Desserts & Sweets",
+          "labelVi": "Đồ ăn vặt, Bánh ngọt & Tráng miệng"
+        },
+        {
+          "id": "food.cooking-methods",
+          "label": "Cooking Methods & Preparation",
+          "labelVi": "Nấu nướng, Chế biến & Sơ chế"
+        },
+        {
+          "id": "food.restaurant-dining",
+          "label": "Restaurant, Ordering & Dining",
+          "labelVi": "Nhà hàng, Quán ăn & Gọi món"
+        }
+      ]
+    },
+    {
+      "id": "home-living",
+      "label": "Home & Living",
+      "labelVi": "Nhà cửa & Đời sống gia đình",
+      "topics": [
+        {
+          "id": "home.rooms-spaces",
+          "label": "Rooms & Living Spaces",
+          "labelVi": "Các phòng & Không gian trong nhà"
+        },
+        {
+          "id": "home.furniture",
+          "label": "Furniture & Interior",
+          "labelVi": "Đồ đạc nội thất"
+        },
+        {
+          "id": "home.appliances",
+          "label": "Home Appliances",
+          "labelVi": "Thiết bị điện máy gia dụng"
+        },
+        {
+          "id": "home.kitchenware",
+          "label": "Kitchenware & Cookware",
+          "labelVi": "Dụng cụ nhà bếp & Nồi niêu xoong chảo"
+        },
+        {
+          "id": "home.tableware",
+          "label": "Tableware & Cutlery",
+          "labelVi": "Bát đĩa, Ly tách & Dụng cụ bàn ăn"
+        },
+        {
+          "id": "home.bed-bath",
+          "label": "Bedding & Bathroom Essentials",
+          "labelVi": "Chăn ga gối đệm & Đồ dùng phòng tắm"
+        },
+        {
+          "id": "home.repairs-maintenance",
+          "label": "Home Repairs & Utilities",
+          "labelVi": "Sửa chữa, Bảo trì & Tiện ích điện nước"
+        },
+        {
+          "id": "home.garden-balcony",
+          "label": "Garden, Balcony & Plants",
+          "labelVi": "Vườn tược, Ban công & Cây cảnh"
+        }
+      ]
+    },
+    {
+      "id": "clothing-fashion",
+      "label": "Clothing & Fashion",
+      "labelVi": "Trang phục & Thời trang",
+      "topics": [
+        {
+          "id": "clothing.everyday-wear",
+          "label": "Everyday Clothes",
+          "labelVi": "Quần áo thường ngày"
+        },
+        {
+          "id": "clothing.formal-workwear",
+          "label": "Formal & Work Clothes",
+          "labelVi": "Trang phục công sở & Dự tiệc"
+        },
+        {
+          "id": "clothing.outerwear-winter",
+          "label": "Jackets & Winter Wear",
+          "labelVi": "Áo khoác & Đồ mùa đông"
+        },
+        {
+          "id": "clothing.footwear",
+          "label": "Shoes & Footwear",
+          "labelVi": "Giày dép & Tất vớ"
+        },
+        {
+          "id": "clothing.accessories",
+          "label": "Fashion Accessories",
+          "labelVi": "Phụ kiện thời trang (Túi xách, Thắt lưng, Khăn...)"
+        },
+        {
+          "id": "clothing.jewelry-watches",
+          "label": "Jewelry & Watches",
+          "labelVi": "Trang sức & Đồng hồ"
+        },
+        {
+          "id": "clothing.materials-patterns",
+          "label": "Fabrics, Materials & Patterns",
+          "labelVi": "Chất liệu vải & Họa tiết may mặc"
+        }
+      ]
+    },
+    {
+      "id": "body-health",
+      "label": "Body & Health",
+      "labelVi": "Cơ thể & Sức khỏe",
+      "topics": [
+        {
+          "id": "health.body-parts",
+          "label": "External Body Parts",
+          "labelVi": "Các bộ phận cơ thể bên ngoài"
+        },
+        {
+          "id": "health.internal-organs",
+          "label": "Internal Organs & Systems",
+          "labelVi": "Cơ quan nội tạng & Hệ cơ quan"
+        },
+        {
+          "id": "health.symptoms-illness",
+          "label": "Symptoms, Sickness & Pain",
+          "labelVi": "Triệu chứng, Cảm sốt & Bệnh thông thường"
+        },
+        {
+          "id": "health.medical-care",
+          "label": "Medical Care & Hospitals",
+          "labelVi": "Khám chữa bệnh, Bệnh viện & Y tế"
+        },
+        {
+          "id": "health.medicine-pharmacy",
+          "label": "Medication & Pharmacy",
+          "labelVi": "Thuốc men & Hiệu thuốc"
+        },
+        {
+          "id": "health.fitness-exercise",
+          "label": "Fitness, Exercise & Wellness",
+          "labelVi": "Thể dục, Thể hình & Rèn luyện sức khỏe"
+        },
+        {
+          "id": "health.mental-wellbeing",
+          "label": "Mental Health & Emotions",
+          "labelVi": "Sức khỏe tinh thần & Cảm xúc tâm lý"
+        }
+      ]
+    },
+    {
+      "id": "people-family",
+      "label": "People & Relationships",
+      "labelVi": "Con người & Mối quan hệ",
+      "topics": [
+        {
+          "id": "people.family-relatives",
+          "label": "Family & Relatives",
+          "labelVi": "Gia đình & Người thân họ hàng"
+        },
+        {
+          "id": "people.friends-social",
+          "label": "Friends & Social Interactions",
+          "labelVi": "Bạn bè & Mối quan hệ xã hội"
+        },
+        {
+          "id": "people.romance-marriage",
+          "label": "Romance & Marriage",
+          "labelVi": "Tình yêu, Hẹn hò & Hôn nhân"
+        },
+        {
+          "id": "people.appearance",
+          "label": "Physical Appearance",
+          "labelVi": "Ngoại hình & Diện mạo"
+        },
+        {
+          "id": "people.personality-traits",
+          "label": "Personality & Character Traits",
+          "labelVi": "Tính cách & Phẩm chất con người"
+        },
+        {
+          "id": "people.feelings-emotions",
+          "label": "Feelings & Moods",
+          "labelVi": "Cảm xúc & Tâm trạng"
+        }
+      ]
+    },
+    {
+      "id": "travel-transport",
+      "label": "Travel & Transportation",
+      "labelVi": "Giao thông & Du lịch",
+      "topics": [
+        {
+          "id": "travel.vehicles-modes",
+          "label": "Vehicles & Road Transport",
+          "labelVi": "Phương tiện giao thông đường bộ (Ô tô, Xe máy...)"
+        },
+        {
+          "id": "travel.public-transit",
+          "label": "Public Transit & Commuting",
+          "labelVi": "Xe buýt, Tàu điện & Giao thông công cộng"
+        },
+        {
+          "id": "travel.aviation-airports",
+          "label": "Aviation, Flights & Airports",
+          "labelVi": "Hàng không, Chuyến bay & Sân bay"
+        },
+        {
+          "id": "travel.rail-trains",
+          "label": "Trains & Railway Stations",
+          "labelVi": "Tàu hỏa & Ga đường sắt"
+        },
+        {
+          "id": "travel.driving-traffic",
+          "label": "Driving & Traffic Rules",
+          "labelVi": "Lái xe, Biển báo & Luật giao thông"
+        },
+        {
+          "id": "travel.accommodations",
+          "label": "Hotels & Accommodations",
+          "labelVi": "Khách sạn, Nhà nghỉ & Đặt phòng"
+        },
+        {
+          "id": "travel.tourism-sightseeing",
+          "label": "Tourism, Attractions & Sightseeing",
+          "labelVi": "Du lịch, Thắng cảnh & Trải nghiệm văn hóa"
+        },
+        {
+          "id": "travel.luggage-preparation",
+          "label": "Luggage & Trip Preparation",
+          "labelVi": "Hành lý & Chuẩn bị chuyến đi"
+        }
+      ]
+    },
+    {
+      "id": "education-learning",
+      "label": "Education & Learning",
+      "labelVi": "Giáo dục & Học tập",
+      "topics": [
+        {
+          "id": "education.school-levels",
+          "label": "Schools & Institutions",
+          "labelVi": "Trường học & Các cấp học"
+        },
+        {
+          "id": "education.classroom-supplies",
+          "label": "Classroom & Stationery",
+          "labelVi": "Lớp học, Bàn ghế & Đồ dùng học tập"
+        },
+        {
+          "id": "education.subjects-fields",
+          "label": "Academic Subjects & Courses",
+          "labelVi": "Môn học & Khóa học"
+        },
+        {
+          "id": "education.exams-grades",
+          "label": "Exams, Tests & Grading",
+          "labelVi": "Thi cử, Điểm số & Bài tập về nhà"
+        },
+        {
+          "id": "education.university-academic",
+          "label": "Higher Education & Research",
+          "labelVi": "Đại học, Bằng cấp & Nghiên cứu học thuật"
+        },
+        {
+          "id": "education.language-learning",
+          "label": "Language Learning & Skills",
+          "labelVi": "Học ngoại ngữ & Kỹ năng ngôn ngữ"
+        }
+      ]
+    },
+    {
+      "id": "work-career",
+      "label": "Work & Career",
+      "labelVi": "Công việc & Sự nghiệp",
+      "topics": [
+        {
+          "id": "work.professions-jobs",
+          "label": "Jobs & Professions",
+          "labelVi": "Nghề nghiệp & Vị trí công việc"
+        },
+        {
+          "id": "work.office-workspace",
+          "label": "Office Environment & Equipment",
+          "labelVi": "Văn phòng & Môi trường làm việc"
+        },
+        {
+          "id": "work.tools-equipment",
+          "label": "Tools, Hardware & Work Equipment",
+          "labelVi": "Công cụ, Dụng cụ cầm tay & Thiết bị nghề"
+        },
+        {
+          "id": "work.employment-hiring",
+          "label": "Recruitment, Resumes & Hiring",
+          "labelVi": "Tuyển dụng, Hồ sơ, Phỏng vấn & Hợp đồng"
+        },
+        {
+          "id": "work.business-operations",
+          "label": "Business & Company Operations",
+          "labelVi": "Kinh doanh, Doanh nghiệp & Vận hành"
+        },
+        {
+          "id": "work.meetings-communication",
+          "label": "Meetings, Presentations & Emails",
+          "labelVi": "Họp hành, Thuyết trình & Trao đổi công việc"
+        },
+        {
+          "id": "work.projects-tasks",
+          "label": "Projects, Tasks & Deadlines",
+          "labelVi": "Dự án, Nhiệm vụ & Tiến độ"
+        }
+      ]
+    },
+    {
+      "id": "finance-shopping",
+      "label": "Finance & Shopping",
+      "labelVi": "Tài chính & Mua sắm",
+      "topics": [
+        {
+          "id": "finance.money-currency",
+          "label": "Money, Cash & Payment",
+          "labelVi": "Tiền tệ, Tiền mặt & Thanh toán"
+        },
+        {
+          "id": "finance.banking-accounts",
+          "label": "Banking, Cards & Accounts",
+          "labelVi": "Ngân hàng, Thẻ & Tài khoản"
+        },
+        {
+          "id": "finance.shopping-stores",
+          "label": "Shops, Supermarkets & Retail",
+          "labelVi": "Chợ, Siêu thị & Cửa hàng mua sắm"
+        },
+        {
+          "id": "finance.online-shopping",
+          "label": "E-Commerce & Parcel Delivery",
+          "labelVi": "Mua sắm trực tuyến & Giao nhận hàng"
+        },
+        {
+          "id": "finance.budget-saving",
+          "label": "Budgeting, Savings & Prices",
+          "labelVi": "Giá cả, Tiết kiệm & Ngân sách chi tiêu"
+        },
+        {
+          "id": "finance.investment-trade",
+          "label": "Investment, Stocks & Commerce",
+          "labelVi": "Đầu tư, Cổ phiếu & Thương mại"
+        }
+      ]
+    },
+    {
+      "id": "technology-digital",
+      "label": "Technology & Digital Life",
+      "labelVi": "Công nghệ & Đời sống số",
+      "topics": [
+        {
+          "id": "tech.devices-hardware",
+          "label": "Digital Devices & Hardware",
+          "labelVi": "Thiết bị số, Máy tính & Điện thoại"
+        },
+        {
+          "id": "tech.software-apps",
+          "label": "Software & Applications",
+          "labelVi": "Phần mềm, Ứng dụng & Hệ điều hành"
+        },
+        {
+          "id": "tech.internet-web",
+          "label": "Internet, Websites & Online Services",
+          "labelVi": "Internet, Trang web & Dịch vụ trực tuyến"
+        },
+        {
+          "id": "tech.social-media",
+          "label": "Social Media & Online Communities",
+          "labelVi": "Mạng xã hội & Cộng đồng mạng"
+        },
+        {
+          "id": "tech.communication",
+          "label": "Messaging, Calls & Email",
+          "labelVi": "Tin nhắn, Gọi điện thoại & Email"
+        },
+        {
+          "id": "tech.security-privacy",
+          "label": "Cybersecurity & Privacy",
+          "labelVi": "An toàn thông tin, Mật khẩu & Quyền riêng tư"
+        }
+      ]
+    },
+    {
+      "id": "nature-environment",
+      "label": "Nature & Environment",
+      "labelVi": "Tự nhiên & Môi trường",
+      "topics": [
+        {
+          "id": "nature.weather-climate",
+          "label": "Weather, Temperature & Climate",
+          "labelVi": "Thời tiết, Nhiệt độ & Khí hậu"
+        },
+        {
+          "id": "nature.seasons",
+          "label": "Seasons & Natural Phenomena",
+          "labelVi": "Bốn mùa & Hiện tượng tự nhiên"
+        },
+        {
+          "id": "nature.landscapes-geography",
+          "label": "Geography, Oceans & Mountains",
+          "labelVi": "Địa lý, Núi sông, Biển cả & Rừng núi"
+        },
+        {
+          "id": "nature.plants-trees",
+          "label": "Trees, Flowers & Plants",
+          "labelVi": "Cây cối, Hoa lá & Thực vật"
+        },
+        {
+          "id": "nature.environmental-care",
+          "label": "Ecology, Recycling & Conservation",
+          "labelVi": "Bảo vệ môi trường, Rác thải & Tái chế"
+        }
+      ]
+    },
+    {
+      "id": "animals-wildlife",
+      "label": "Animals & Wildlife",
+      "labelVi": "Động vật & Thế giới muông thú",
+      "topics": [
+        {
+          "id": "animals.pets",
+          "label": "Pets & Domestic Animals",
+          "labelVi": "Thú cưng nuôi trong nhà (Chó, Mèo...)"
+        },
+        {
+          "id": "animals.farm",
+          "label": "Farm & Livestock Animals",
+          "labelVi": "Gia súc & Vật nuôi nông trại"
+        },
+        {
+          "id": "animals.wildlife",
+          "label": "Wild Animals & Habitats",
+          "labelVi": "Động vật hoang dã"
+        },
+        {
+          "id": "animals.marine",
+          "label": "Marine Animals & Sea Creatures",
+          "labelVi": "Sinh vật biển & Thủy sinh"
+        },
+        {
+          "id": "animals.birds-insects",
+          "label": "Birds, Insects & Small Creatures",
+          "labelVi": "Chim chóc, Côn trùng & Bò sát"
+        }
+      ]
+    },
+    {
+      "id": "sports-fitness",
+      "label": "Sports & Recreation",
+      "labelVi": "Thể thao & Vận động",
+      "topics": [
+        {
+          "id": "sports.ball-team",
+          "label": "Team Sports & Ball Games",
+          "labelVi": "Thể thao đồng đội & Bóng (Bóng đá, Bóng rổ...)"
+        },
+        {
+          "id": "sports.individual",
+          "label": "Individual Sports & Athletics",
+          "labelVi": "Thể thao cá nhân (Bơi lội, Điền kinh, Xe đạp...)"
+        },
+        {
+          "id": "sports.equipment-gear",
+          "label": "Sports Equipment & Gear",
+          "labelVi": "Dụng cụ & Đồ dùng thi đấu thể thao"
+        },
+        {
+          "id": "sports.matches-competition",
+          "label": "Competitions, Rules & Scores",
+          "labelVi": "Giải đấu, Trận đấu & Tỉ số"
+        }
+      ]
+    },
+    {
+      "id": "arts-culture",
+      "label": "Arts & Culture",
+      "labelVi": "Nghệ thuật & Văn hóa",
+      "topics": [
+        {
+          "id": "arts.music-instruments",
+          "label": "Music, Songs & Instruments",
+          "labelVi": "Âm nhạc, Bài hát & Nhạc cụ"
+        },
+        {
+          "id": "arts.visual-arts",
+          "label": "Painting, Drawing & Sculpture",
+          "labelVi": "Hội họa, Điêu khắc & Mỹ thuật"
+        },
+        {
+          "id": "arts.cinema-theatre",
+          "label": "Cinema, Theater & Acting",
+          "labelVi": "Điện ảnh, Phim truyện & Sân khấu kịch"
+        },
+        {
+          "id": "arts.literature-books",
+          "label": "Literature, Stories & Books",
+          "labelVi": "Văn học, Sách truyện & Thơ ca"
+        },
+        {
+          "id": "arts.festivals-traditions",
+          "label": "Festivals, Holidays & Traditions",
+          "labelVi": "Lễ hội, Phong tục & Ngày lễ truyền thống"
+        }
+      ]
+    },
+    {
+      "id": "society-law",
+      "label": "Society & Public Life",
+      "labelVi": "Xã hội & Đời sống công cộng",
+      "topics": [
+        {
+          "id": "society.city-infrastructure",
+          "label": "City Infrastructure & Streets",
+          "labelVi": "Đô thị, Đường phố & Cơ sở hạ tầng"
+        },
+        {
+          "id": "society.public-services",
+          "label": "Public Services & Facilities",
+          "labelVi": "Dịch vụ công cộng (Bưu điện, Thư viện, Cứu hỏa...)"
+        },
+        {
+          "id": "society.law-rules",
+          "label": "Law, Rules & Justice",
+          "labelVi": "Luật pháp, Quy định & Công lý"
+        },
+        {
+          "id": "society.community-civics",
+          "label": "Community, Charity & Citizenship",
+          "labelVi": "Cộng đồng, Từ thiện & Đời sống công dân"
+        }
+      ]
+    },
+    {
+      "id": "communication-speech",
+      "label": "Communication & Speech Acts",
+      "labelVi": "Giao tiếp & Tư duy ngôn ngữ",
+      "topics": [
+        {
+          "id": "comm.opinions-agreement",
+          "label": "Expressing Opinions & Agreement",
+          "labelVi": "Bày tỏ ý kiến, Quan điểm & Đồng ý"
+        },
+        {
+          "id": "comm.discussion-debate",
+          "label": "Discussion, Reasoning & Debate",
+          "labelVi": "Thảo luận, Tranh luận & Thuyết phục"
+        },
+        {
+          "id": "comm.causes-effects",
+          "label": "Causes, Effects & Logic",
+          "labelVi": "Nguyên nhân, Kết quả & Suy luận"
+        },
+        {
+          "id": "comm.descriptions-qualities",
+          "label": "Descriptions, States & Comparison",
+          "labelVi": "Miêu tả tính chất, Mức độ & So sánh"
+        }
+      ]
+    },
+    {
+      "id": "abstract-core",
+      "label": "Core Concepts & Essential Functional Words",
+      "labelVi": "Khái niệm cốt lõi & Từ vựng chức năng thiết yếu",
+      "topics": [
+        {
+          "id": "abstract.shapes-dimensions",
+          "label": "Shapes, Sizes & Dimensions",
+          "labelVi": "Hình khối, Kích thước & Không gian"
+        },
+        {
+          "id": "abstract.colors-tones",
+          "label": "Colors, Shades & Visual Qualities",
+          "labelVi": "Màu sắc & Sắc thái thị giác"
+        },
+        {
+          "id": "abstract.numbers-quantities",
+          "label": "Numbers, Counting & Quantities",
+          "labelVi": "Số đếm, Số lượng & Đo lường"
+        },
+        {
+          "id": "abstract.directions-positions",
+          "label": "Directions & Spatial Positions",
+          "labelVi": "Phương hướng & Vị trí không gian"
+        },
+        {
+          "id": "abstract.common-verbs",
+          "label": "High-Frequency Action Verbs",
+          "labelVi": "Động từ hành động thông dụng"
+        },
+        {
+          "id": "abstract.common-descriptors",
+          "label": "High-Frequency Adjectives",
+          "labelVi": "Tính từ miêu tả thông dụng"
+        }
+      ]
+    }
+  ]
+}
