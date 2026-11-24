@@ -10,6 +10,7 @@
       "headword": "park",
       "pos": "noun",
       "cefr": "A1",
+      "priority": "core",
       "ipaUs": "/pɑːrk/",
       "syllables": [
         "park"
@@ -17,7 +18,6 @@
       "stressedIndex": 0,
       "vi": "công viên",
       "senseNote": "Khu vực công cộng trồng cây xanh và bãi cỏ dành cho người dân thư giãn, tập thể dục",
-      "priority": "core",
       "examples": [
         {
           "en": "Many families enjoy walking and cycling in the central city park on weekends.",
@@ -57,6 +57,7 @@
       "headword": "street",
       "pos": "noun",
       "cefr": "A1",
+      "priority": "core",
       "ipaUs": "/striːt/",
       "syllables": [
         "street"
@@ -64,7 +65,6 @@
       "stressedIndex": 0,
       "vi": "đường phố, con phố",
       "senseNote": "Tuyến đường trong thành phố hoặc thị trấn có nhà cửa và cửa tiệm hai bên",
-      "priority": "core",
       "examples": [
         {
           "en": "Always look left and right carefully before crossing the busy street.",
@@ -102,6 +102,7 @@
       "headword": "building",
       "pos": "noun",
       "cefr": "A1",
+      "priority": "core",
       "ipaUs": "/ˈbɪl.dɪŋ/",
       "syllables": [
         "build",
@@ -110,7 +111,6 @@
       "stressedIndex": 0,
       "vi": "tòa nhà, cao ốc",
       "senseNote": "Công trình kiến trúc kiên cố có mái che và tường vững chắc như tòa nhà văn phòng hoặc chung cư",
-      "priority": "core",
       "examples": [
         {
           "en": "That modern glass office building has forty-five floors and a rooftop observatory.",
@@ -148,6 +148,7 @@
       "headword": "plaza",
       "pos": "noun",
       "cefr": "A1",
+      "priority": "core",
       "ipaUs": "/ˈplɑː.zə/",
       "syllables": [
         "pla",
@@ -156,7 +157,6 @@
       "stressedIndex": 0,
       "vi": "quảng trường; khu thương xá ngoài trời",
       "senseNote": "quảng trường công cộng rộng rãi nơi người dân tụ họp, dạo bộ hoặc khu phức hợp mua sắm",
-      "priority": "core",
       "examples": [
         {
           "en": "Citizens gathered at the central town plaza to enjoy a live musical concert and evening fireworks.",
@@ -199,6 +199,7 @@
       "headword": "alley",
       "pos": "noun",
       "cefr": "A1",
+      "priority": "core",
       "ipaUs": "/ˈæl.i/",
       "syllables": [
         "al",
@@ -207,7 +208,6 @@
       "stressedIndex": 0,
       "vi": "hẻm nhỏ; ngõ ngách trong phố",
       "senseNote": "con đường hẹp nằm giữa hoặc phía sau các tòa nhà trong khu dân cư thành phố",
-      "priority": "core",
       "examples": [
         {
           "en": "The historic cobblestone alley behind the cathedral was lined with charming artisan bakeries and flower pots.",
@@ -252,6 +252,7 @@
       "headword": "borough",
       "pos": "noun",
       "cefr": "A2",
+      "priority": "core",
       "ipaUs": "/ˈbɝː.oʊ/",
       "syllables": [
         "bor",
@@ -260,7 +261,6 @@
       "stressedIndex": 0,
       "vi": "quận nội thành; thị trấn tự trị",
       "senseNote": "đơn vị hành chính cấp quận trong một thành phố lớn (như các quận của New York hay London) hoặc thị trấn tự quản",
-      "priority": "core",
       "examples": [
         {
           "en": "Brooklyn is the most populous borough of New York City, renowned for its historic brownstone neighborhoods.",
@@ -306,6 +306,7 @@
       "headword": "curb",
       "pos": "noun",
       "cefr": "A2",
+      "priority": "core",
       "ipaUs": "/kɝːb/",
       "syllables": [
         "curb"
@@ -313,7 +314,6 @@
       "stressedIndex": 0,
       "vi": "gờ vỉa hè; lề đường lát đá",
       "senseNote": "mép đá hoặc bê tông nâng cao ngăn cách giữa lòng đường xe chạy và vỉa hè dành cho người đi bộ",
-      "priority": "core",
       "examples": [
         {
           "en": "The city installed accessibility ramps along the concrete sidewalk curb to accommodate wheelchair users and baby strollers.",
@@ -361,6 +361,7 @@
       "headword": "drainage",
       "pos": "noun",
       "cefr": "A2",
+      "priority": "core",
       "ipaUs": "/ˈdreɪ.nɪdʒ/",
       "syllables": [
         "drain",
@@ -369,7 +370,6 @@
       "stressedIndex": 0,
       "vi": "hệ thống thoát nước; sự tiêu nước đô thị",
       "senseNote": "hệ thống cống rãnh ngầm hoặc rãnh thoát nước mặt giúp dẫn nước mưa và nước thải khỏi đường phố và khu dân cư tránh ngập úng",
-      "priority": "core",
       "examples": [
         {
           "en": "The municipal engineering department upgraded underground storm drainage systems to prevent severe street flooding during torrential rains.",
@@ -420,18 +420,14 @@
       "pos": "noun",
       "cefr": "A2",
       "priority": "core",
-      "phonetics": {
-        "ipaUs": "/ˈhʌs.əl/",
-        "syllables": [
-          "hus",
-          "tle"
-        ],
-        "stressedIndex": 0
-      },
-      "translation": {
-        "vi": "sự hối hả; cảnh tấp nập xô bồ; nhịp sống năng nổ",
-        "senseNote": "nhịp sống và không khí chuyển động khẩn trương, ồn ào và nhộn nhịp của trung tâm đô thị"
-      },
+      "ipaUs": "/ˈhʌs.əl/",
+      "syllables": [
+        "hus",
+        "tle"
+      ],
+      "stressedIndex": 0,
+      "vi": "sự hối hả; cảnh tấp nập xô bồ; nhịp sống năng nổ",
+      "senseNote": "nhịp sống và không khí chuyển động khẩn trương, ồn ào và nhộn nhịp của trung tâm đô thị",
       "examples": [
         {
           "en": "Commuters immerse themselves in the morning hustle of the central railway interchange concourse.",
@@ -474,17 +470,13 @@
       "pos": "noun",
       "cefr": "A2",
       "priority": "core",
-      "phonetics": {
-        "ipaUs": "/kwɑːd/",
-        "syllables": [
-          "quad"
-        ],
-        "stressedIndex": 0
-      },
-      "translation": {
-        "vi": "sân trong hình vuông; khuôn viên trung tâm tòa nhà",
-        "senseNote": "khoảng sân mở hình chữ nhật hoặc hình vuông được bao bọc bởi các tòa nhà trong trường học hoặc khu phức hợp đô thị"
-      },
+      "ipaUs": "/kwɑːd/",
+      "syllables": [
+        "quad"
+      ],
+      "stressedIndex": 0,
+      "vi": "sân trong hình vuông; khuôn viên trung tâm tòa nhà",
+      "senseNote": "khoảng sân mở hình chữ nhật hoặc hình vuông được bao bọc bởi các tòa nhà trong trường học hoặc khu phức hợp đô thị",
       "examples": [
         {
           "en": "Students relaxed on green benches in the sunny university quad between morning lectures.",
@@ -526,6 +518,7 @@
       "headword": "facility",
       "pos": "noun",
       "cefr": "A2",
+      "priority": "core",
       "ipaUs": "/fəˈsɪl.ə.t̬i/",
       "syllables": [
         "fa",
@@ -536,7 +529,6 @@
       "stressedIndex": 1,
       "vi": "cơ sở vật chất, tiện ích, công trình dịch vụ",
       "senseNote": "tòa nhà hoặc khu phức hợp được trang bị để phục vụ một mục đích hoặc dịch vụ công cộng cụ thể",
-      "priority": "core",
       "examples": [
         {
           "en": "The city invested in a modern sports facility to encourage regular athletic exercise among teenagers.",
@@ -577,6 +569,7 @@
       "headword": "lift",
       "pos": "noun",
       "cefr": "A2",
+      "priority": "core",
       "ipaUs": "/lɪft/",
       "syllables": [
         "lift"
@@ -584,7 +577,6 @@
       "stressedIndex": 0,
       "vi": "thang máy (chở người/hàng)",
       "senseNote": "thiết bị nâng hạ di chuyển người hoặc hàng hóa giữa các tầng của tòa nhà",
-      "priority": "core",
       "examples": [
         {
           "en": "The transit station installed a modern passenger lift to assist elderly travelers and wheelchair users.",
@@ -627,6 +619,7 @@
       "headword": "avenue",
       "pos": "noun",
       "cefr": "A2",
+      "priority": "core",
       "ipaUs": "/ˈæv.ə.nuː/",
       "syllables": [
         "av",
@@ -636,7 +629,6 @@
       "stressedIndex": 0,
       "vi": "đại lộ, đường lớn",
       "senseNote": "con đường lớn rộng rãi trong thành phố, thường có cây trồng hai bên",
-      "priority": "core",
       "examples": [
         {
           "en": "Lined with historic oak trees, the central avenue features vibrant cafes and pedestrian plazas.",
@@ -678,6 +670,7 @@
       "headword": "boulevard",
       "pos": "noun",
       "cefr": "A2",
+      "priority": "core",
       "ipaUs": "/ˈbʊl.ə.vɑːrd/",
       "syllables": [
         "bou",
@@ -687,7 +680,6 @@
       "stressedIndex": 0,
       "vi": "đại lộ rợp bóng cây",
       "senseNote": "đường phố lớn và rộng với dải phân cách trồng cây hoặc cỏ ở giữa",
-      "priority": "core",
       "examples": [
         {
           "en": "Electric trams glide smoothly along the landscaped median of the seaside boulevard.",
@@ -726,6 +718,7 @@
       "headword": "exit",
       "pos": "noun",
       "cefr": "A2",
+      "priority": "core",
       "ipaUs": "/ˈek.sɪt/",
       "syllables": [
         "ex",
@@ -734,7 +727,6 @@
       "stressedIndex": 0,
       "vi": "lối ra, cửa thoát hiểm",
       "senseNote": "cửa ra hoặc con đường dùng để rời khỏi tòa nhà, đường cao tốc hay phương tiện",
-      "priority": "core",
       "examples": [
         {
           "en": "Bright green illuminated signs clearly directed passengers toward the nearest emergency exit.",
@@ -776,6 +768,7 @@
       "headword": "municipality",
       "pos": "noun",
       "cefr": "A2",
+      "priority": "core",
       "ipaUs": "/mjuːˌnɪs.əˈpæl.ə.t̬i/",
       "syllables": [
         "mu",
@@ -788,7 +781,6 @@
       "stressedIndex": 3,
       "vi": "chính quyền đô thị, thành phố tự trị",
       "senseNote": "thành phố, thị trấn hoặc quận có chính quyền địa phương riêng để quản lý các tiện ích công cộng",
-      "priority": "core",
       "examples": [
         {
           "en": "The municipality allocated additional funding to repave roads and install energy-efficient street lamps.",
@@ -831,6 +823,7 @@
       "headword": "observatory",
       "pos": "noun",
       "cefr": "A2",
+      "priority": "core",
       "ipaUs": "/əbˈzɝː.və.tɔːr.i/",
       "syllables": [
         "ob",
@@ -842,7 +835,6 @@
       "stressedIndex": 1,
       "vi": "đài thiên văn, trạm quan sát bầu trời",
       "senseNote": "tòa nhà được trang bị kính thiên văn lớn để nghiên cứu các vì sao và các hiện tượng thiên văn",
-      "priority": "core",
       "examples": [
         {
           "en": "School children visited the mountain observatory to view Saturn's rings through a powerful telescope.",
@@ -886,6 +878,7 @@
       "headword": "parking",
       "pos": "noun",
       "cefr": "A2",
+      "priority": "core",
       "ipaUs": "/ˈpɑːr.kɪŋ/",
       "syllables": [
         "park",
@@ -894,7 +887,6 @@
       "stressedIndex": 0,
       "vi": "bãi đỗ xe, việc đậu xe",
       "senseNote": "khu vực được chỉ định để đỗ các phương tiện giao thông hoặc hành động dừng đỗ xe",
-      "priority": "core",
       "examples": [
         {
           "en": "Finding vacant parking spaces downtown becomes extremely difficult during busy weekday morning hours.",
@@ -939,6 +931,7 @@
       "headword": "trash",
       "pos": "noun",
       "cefr": "A2",
+      "priority": "core",
       "ipaUs": "/træʃ/",
       "syllables": [
         "trash"
@@ -946,7 +939,6 @@
       "stressedIndex": 0,
       "vi": "rác rưởi, thùng rác công cộng",
       "senseNote": "những đồ vật bỏ đi, phế phẩm hoặc thùng chứa rác đặt nơi công cộng",
-      "priority": "core",
       "examples": [
         {
           "en": "Sanitation workers collect roadside trash cans every Tuesday morning to keep neighborhood streets clean.",
@@ -1435,7 +1427,8 @@
           "answerIndex": 0,
           "explanationVi": "Đoạn văn viết: 'At the highest point of the hill stands a historic astronomical observatory, offering panoramic views across the entire skyline'."
         }
-      ]
+      ],
+      "id": "PASSAGE_society.city-infrastructure_A2_01"
     }
   ]
 }
