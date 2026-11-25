@@ -4588,6 +4588,53 @@
           ]
         }
       ]
+    },
+    {
+      "lexemeId": "lex.en.100k.014871",
+      "headword": "mb",
+      "pos": "noun",
+      "cefr": "B2",
+      "priority": "core",
+      "ipaUs": "/ˌɛmˈbi/",
+      "syllables": [
+        "m",
+        "b"
+      ],
+      "stressedIndex": 1,
+      "vi": "mê-ga-bai (MB); đơn vị dung lượng dữ liệu",
+      "senseNote": "Viết tắt của megabyte (tương đương khoảng 1.000 KB, thường dùng đo kích thước tệp ảnh, PDF hoặc tệp đính kèm email).",
+      "examples": [
+        {
+          "en": "Shrink holiday photos below two MB so web forms upload quickly on slow signals.",
+          "vi": "Nén ảnh kỳ nghỉ xuống dưới hai MB để biểu mẫu web tải lên nhanh trên mạng yếu.",
+          "ipaUs": "/ʃrɪŋk ˈhɑ.ləˌdeɪ ˈfoʊˌtoʊz bɪˈloʊ tu ˌɛmˈbi soʊ wɛb fɔrmz ˈʌpˌloʊd ˈkwɪ.kli ɑn sloʊ ˈsɪɡ.nəlz/",
+          "stressWords": [
+            "shrink",
+            "holiday",
+            "photos",
+            "below",
+            "mb",
+            "web",
+            "upload",
+            "quickly"
+          ]
+        },
+        {
+          "en": "The scanned passport PDF measured just one MB and cleared verification cleanly.",
+          "vi": "Tệp PDF hộ chiếu quét chỉ nặng đúng một MB và vượt qua khâu kiểm tra ngon lành.",
+          "ipaUs": "/ðə skænd ˈpæsˌpɔrt ˌpi.diˈɛf ˈmɛ.ʒɚd dʒʌst wʌn ˌɛmˈbi ænd klɪrd ˌvɛr.ə.fəˈkeɪ.ʃən ˈklin.li/",
+          "stressWords": [
+            "scanned",
+            "passport",
+            "pdf",
+            "measured",
+            "one",
+            "mb",
+            "cleared",
+            "verification"
+          ]
+        }
+      ]
     }
   ],
   "passages": [
@@ -5012,6 +5059,69 @@
           ],
           "answerIndex": 0,
           "explanationVi": "Đoạn cuối khuyên đặt mật khẩu riêng mạnh và khởi động lại bộ phát 30 giây mỗi tháng để giữ băng thông ổn định."
+        }
+      ]
+    },
+    {
+      "id": "PASSAGE_tech.internet-web_B1_01",
+      "passageId": "PASSAGE_tech.internet-web_B1_01",
+      "title": "Trimming Bloated Web Pages So Slow Connections Load Cleanly",
+      "level": "B1",
+      "topicId": "tech.internet-web",
+      "wordCount": 251,
+      "text": "Many neighborhood shops upload enormous raw camera files directly onto their website homepage, unaware that rural commuters waiting on crowded buses face sluggish loading screens. Front-end developer Vy helps small local dental clinics and neighborhood bakeries speed up web pages in one focused afternoon without losing crisp visual warmth. Lighter web pages respect every visitor’s phone battery life, monthly mobile data cap, and precious morning time.\n\nVy starts by inspecting image file sizes inside the browser network panel. Recently, a family bookshop uploaded three glossy shelf photos totaling twelve MB just for one narrow header banner that barely spans half a small phone screen. Resizing photographs to exact display dimensions and compressing them neatly cuts download weight by eighty percent immediately, while removing antiquated font packs keeps headings clean without stalling older handheld phones.\n\nNext, Vy clears out heavy pop-up widgets and unlicensed tracking scripts quietly slowing down checkout links behind the scenes. She swaps bulky video loops for clean still previews, checks login forms that send quick verifying text codes safely, and fixes shared calendar synchronization buttons so community event times match accurately across mobile browsers. Turning on a simple browser image lazy-load toggle also stops hidden footer pictures from draining mobile signal while readers scroll top menus.\n\nFast, respectful web design starts with calm restraint rather than flashy visual clutter. Testing real pages on an average mobile connection, trimming idle megabytes, and keeping navigation buttons predictable help neighborhood websites serve every reader swiftly, calmly, and reliably anywhere in town.",
+      "textVi": "Nhiều cửa hàng trong khu phố tải trực tiếp những tệp ảnh gốc máy ảnh khổng lồ lên trang chủ trang web, không hề biết rằng người đi làm ở vùng quê đang đợi xe buýt đông đúc phải chịu màn hình tải chậm chạp. Lập trình viên giao diện Vy giúp các phòng khám nhỏ và tiệm bánh khu phố tăng tốc trang web chỉ trong một buổi chiều tập trung mà vẫn giữ nguyên nét ấm áp sắc nét. Trang web nhẹ hơn tôn trọng thời lượng pin điện thoại, dung lượng mạng di động và quỹ thời gian buổi sáng quý giá của mỗi người đọc.\n\nVy bắt đầu bằng cách kiểm tra kích thước tệp ảnh trong bảng theo dõi mạng của trình duyệt. Mới đây, một hiệu sách gia đình tải ba bức ảnh kệ sách bóng bẩy nặng tổng cộng mười hai MB chỉ cho một thanh biểu ngữ hẹp trên đầu trang vốn chỉ rộng nửa màn hình điện thoại nhỏ. Thu phóng ảnh về đúng kích thước hiển thị và nén gọn gàng lập tức giảm tám mươi phần trăm dung lượng tải về, đồng thời gỡ bỏ các gói phông chữ lỗi thời giữ tiêu đề gọn mắt mà không làm đơ máy cầm tay đời cũ.\n\nTiếp đó, Vy dọn sạch các tiện ích bật lên nặng nề và đoạn mã theo dõi không bản quyền âm thầm làm chậm đường dẫn thanh toán phía sau. Cô thay video lặp cồng kềnh bằng ảnh xem trước tĩnh sắc nét, kiểm tra biểu mẫu đăng nhập gửi mã xác minh tin nhắn nhanh an toàn và sửa nút đồng bộ hóa lịch dùng chung để giờ sự kiện cộng đồng khớp chính xác trên các trình duyệt di động. Bật thêm nút gạt tải ảnh theo nhu cầu trong trình duyệt cũng giúp các bức ảnh ở cuối trang chưa nhìn tới không ngốn sóng di động khi người đọc đang lướt menu đầu.\n\nThiết kế web nhanh và tử tế bắt đầu từ sự tiết chế điềm tĩnh thay vì bày biện rườm rà. Kiểm tra trang thật trên kết nối di động bình thường, cắt giảm những mê-ga-bai dư thừa và giữ nút điều hướng dễ đoán giúp website khu phố phục vụ mọi độc giả nhanh chóng, nhẹ nhàng và tin cậy ở bất cứ đâu trong thành phố.",
+      "pronunciationNotesVi": [
+        "Từ \"mb\" (/ˌɛmˈbi/) đọc nối từng chữ cái M-B với trọng âm chính rơi vào âm tiết thứ hai \"B\".",
+        "Từ \"antiquated\" (/ˈæn.təˌkweɪ.tɪd/) nhấn trọng âm chính ở âm đầu \"an\", tổ hợp \"qu\" đọc là /kw/.",
+        "Từ \"verifying\" (/ˈvɛr.əˌfaɪ.ɪŋ/) nhấn âm đầu \"ver\" và phát âm đủ âm giữa /-faɪ.ɪŋ/.",
+        "Từ \"synchronization\" (/ˌsɪŋ.krə.nəˈzeɪ.ʃən/) đọc chữ \"ch\" như /k/, trọng âm chính đặt ở âm tiết thứ tư \"za\".",
+        "Từ \"browser\" (/ˈbraʊ.zɚ/) có nguyên âm đôi /aʊ/ rõ nét và phụ âm giữa hữu thanh /z/."
+      ],
+      "comprehensionQuestions": [
+        {
+          "question": "Why did the family bookshop homepage load slowly on mobile connections?",
+          "options": [
+            "It uploaded three oversized banner photos totaling twelve megabytes onto a narrow header",
+            "It blocked rural readers from opening calendar forms after business hours",
+            "It required users to install three extra office spreadsheet programs first",
+            "It switched off all wireless signals inside neighborhood coffee shops"
+          ],
+          "answerIndex": 0,
+          "explanationVi": "Đoạn hai nêu rõ hiệu sách đã tải ba ảnh kệ sách nặng tổng 12 MB chỉ cho thanh tiêu đề hẹp."
+        },
+        {
+          "question": "How does Vy cut image download weight by roughly eighty percent?",
+          "options": [
+            "By resizing photos to match real display dimensions and compressing them neatly",
+            "By deleting every product picture across bakery and clinic pages",
+            "By converting bright color menus into plain handwritten scans",
+            "By limiting website access to desktop computers inside offices"
+          ],
+          "answerIndex": 0,
+          "explanationVi": "Đoạn hai giải thích Vy thu phóng ảnh đúng kích thước hiển thị và nén gọn, giúp giảm 80% dung lượng tải."
+        },
+        {
+          "question": "What items does Vy remove behind the scenes in paragraph three?",
+          "options": [
+            "Heavy pop-up widgets and unlicensed tracking scripts slowing down checkout links",
+            "Mobile calendar reminders showing local holiday market dates",
+            "Text verification forms protecting customer account passwords",
+            "Clean still preview photos replacing bulky video loops"
+          ],
+          "answerIndex": 0,
+          "explanationVi": "Đoạn ba nói Vy dọn bỏ các tiện ích bật lên nặng nề và mã theo dõi không bản quyền làm chậm liên kết thanh toán."
+        },
+        {
+          "question": "What benefit does an image lazy-load toggle bring to readers?",
+          "options": [
+            "Hidden footer images stop draining data and signal while users browse top menus",
+            "Antique font packs double text brightness under sunny outdoor screens",
+            "Video loops automatically replay at higher speeds during bus commutes",
+            "Phone batteries charge faster whenever tracking scripts stay paused"
+          ],
+          "answerIndex": 0,
+          "explanationVi": "Cuối đoạn ba cho biết nút tải ảnh theo nhu cầu ngăn ảnh ẩn ở cuối trang ngốn sóng khi người đọc mới xem phần đầu."
         }
       ]
     }
